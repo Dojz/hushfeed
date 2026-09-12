@@ -1753,8 +1753,7 @@
       "description": "Adds the Hushfeed settings screen to TikTok.",
       "use": true,
       "dependencies": [
-        "BytecodePatch",
-        "RawResourcePatch"
+        "BytecodePatch"
       ],
       "compatiblePackages": {
         "com.zhiliaoapp.musically": [

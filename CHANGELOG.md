@@ -1,5 +1,7 @@
 ## 0.30.0
 
+* Settings no longer unpacks the APK just to find the Hushfeed row's gear icon. The patch reads the icon from TikTok's own Ad Browser settings action, following the method that the stable icon renderer calls. Ordinary patch jobs can now stay in bytecode-only mode. The full resource rewrite still runs when the optional AMOLED theme is selected.
+
 * Feed filtering follows TikTok's rebuilt cache delivery on 46.7.3 and 46.8.3. Cached videos now pass through the same filters before either new callback wrapper sees them, including the local seen-video history. The older 46.2.3 chain stays supported. A rejected reach-bottom cache result is also marked unsuccessful, so TikTok asks the next source for a video instead of treating the rejected one as delivered. The friend recommendation-card selector now tolerates TikTok swapping its String and List parameters, and the Tako button selector follows stable view behavior instead of its changing method name.
 
 * Hide quick comment reactions works on TikTok 46.8.3 after TikTok removed the experiment the patch used to change. The reaction row still exists, but an Aweme check now decides whether to show it. The patch follows the row itself and applies the setting to every native visibility change, which also keeps 46.2.3 and 46.7.3 working without their old experiment name.
