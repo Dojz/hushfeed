@@ -166,7 +166,7 @@ val feedFilterPatch = bytecodePatch(
                 "Feed filter: the Friends feed response constructor does not return."
             }
             returns.asReversed().forEach { index ->
-                addInstruction(
+                addInstructionsAtControlFlowLabel(
                     index,
                     "invoke-static/range {p0 .. p0}, " +
                         "$EXTENSION_CLASS_DESCRIPTOR->filterFriendsFeed(Ljava/lang/Object;)V",
@@ -458,7 +458,7 @@ val feedFilterPatch = bytecodePatch(
             // only one of them filtered, silently.
             findInstructionIndicesReversedOrThrow { opcode == Opcode.RETURN }.forEach { dramaReturnIndex ->
                 val dramaRegister = getInstruction<OneRegisterInstruction>(dramaReturnIndex).registerA
-                addInstructions(
+                addInstructionsAtControlFlowLabel(
                     dramaReturnIndex,
                     """
                         invoke-static/range {v$dramaRegister .. v$dramaRegister}, $CARD_FILTERS_CLASS_DESCRIPTOR->shouldBlockForDramaAd(Z)Z
