@@ -1,5 +1,7 @@
 ## 0.30.0
 
+* Feature Gate Lab saves now confirm when they finish, and disabled values have a visible muted state. Its custom actions are announced as buttons, source tabs report the selected tab from the focused control, and filtered lists in the Lab and settings announce their result count. Creator removal says which entry was removed and moves focus to the next action. Number fields now carry a hint, and custom dialog titles are marked as headings for screen readers.
+
 * Hooks that change a value as TikTok returns it now keep the return's branch label on the hook. A direct jump to that return can no longer skip Hushfeed's filter, setting override, diagnostic callback or UI attachment. The same rule now covers every current return hook, including ones added after the original audit.
 
 * Settings no longer unpacks the APK just to find the Hushfeed row's gear icon. The patch reads the icon from TikTok's own Ad Browser settings action, following the method that the stable icon renderer calls. Ordinary patch jobs can now stay in bytecode-only mode. The full resource rewrite still runs when the optional AMOLED theme is selected.

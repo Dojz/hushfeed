@@ -5,6 +5,9 @@ import static org.junit.Assert.assertNull;
 
 import android.content.Context;
 import android.preference.PreferenceActivity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.settings.IntegerSetting;
@@ -35,6 +38,10 @@ public class NumberInputPreferenceTest {
         void save() {
             onDialogClosed(true);
         }
+
+        View dialogView() {
+            return onCreateDialogView();
+        }
     }
 
     // Before as well as after. The settings registry needs a context the first time anything
@@ -59,6 +66,22 @@ public class NumberInputPreferenceTest {
             assertUnits(context, "day", "days", "Current", "to", "day", "days");
             assertUnits(context, "view per like", "views per like", "Current", "to",
                     "view per like", "views per like");
+        }
+    }
+
+    @Test
+    public void theNumberFieldNamesItsExpectedInputAndTheDialogTitleIsAHeading() {
+        try (var controller = Robolectric.buildActivity(TestActivity.class).setup()) {
+            Context context = controller.get();
+            IntegerSetting setting = new IntegerSetting("unit_test_number_hint", 3)
+                    .withRange(0, 10);
+            Row preference = new Row(context, setting);
+            assertEquals("Enter a number", preference.getEditText().getHint().toString());
+
+            View dialog = preference.dialogView();
+            TextView title = (TextView) ((ViewGroup) dialog).getChildAt(0);
+            assertEquals("Daily time budget", title.getText().toString());
+            assertEquals(true, title.isAccessibilityHeading());
         }
     }
 

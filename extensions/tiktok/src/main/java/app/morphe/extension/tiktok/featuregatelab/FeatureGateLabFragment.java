@@ -141,6 +141,7 @@ public final class FeatureGateLabFragment extends Fragment {
     private View clearSearch;
     private LinearLayout viewTabs;
     private final TextView[] viewTabLabels = new TextView[VIEW_LABELS.length];
+    private final View[] sourceTabContainers = new View[SOURCE_LABELS.length];
     private final TextView[] sourceTabLabels = new TextView[SOURCE_LABELS.length];
     private final View[] sourceTabIndicators = new View[SOURCE_LABELS.length];
     private TextView filterButton;
@@ -313,11 +314,14 @@ public final class FeatureGateLabFragment extends Fragment {
             tabContainer.setOrientation(LinearLayout.VERTICAL);
             tabContainer.setGravity(Gravity.CENTER);
             tabContainer.setFocusable(true);
+            tabContainer.setTag("feature_gate_source_" + i);
+            tabContainer.setContentDescription(L10n.t(context, SOURCE_LABELS[i]));
+            SettingsUi.markAsButton(tabContainer);
             tabContainer.setOnClickListener(view -> onSourceSelected(position));
 
             TextView tab = FeatureGateLabUi.text(
                     context,
-                    SOURCE_LABELS[i],
+                    L10n.t(context, SOURCE_LABELS[i]),
                     14,
                     SettingsUi.textSecondary(),
                     Typeface.BOLD
@@ -332,6 +336,7 @@ public final class FeatureGateLabFragment extends Fragment {
                     0
             );
             View indicator = new View(context);
+            sourceTabContainers[i] = tabContainer;
             sourceTabLabels[i] = tab;
             sourceTabIndicators[i] = indicator;
             tabContainer.addView(tab, FeatureGateLabUi.matchWrap());
@@ -363,7 +368,11 @@ public final class FeatureGateLabFragment extends Fragment {
         viewTabs.setBackground(SettingsUi.borderedSurface(context, 6, false));
         for (int i = 0; i < VIEW_LABELS.length; i++) {
             final int position = i;
-            TextView tab = FeatureGateLabUi.text(context, VIEW_LABELS[i], 14, SettingsUi.textSecondary(), Typeface.BOLD);
+            TextView tab = FeatureGateLabUi.text(context, L10n.t(context, VIEW_LABELS[i]), 14,
+                    SettingsUi.textSecondary(), Typeface.BOLD);
+            tab.setTag("feature_gate_view_" + i);
+            SettingsUi.styleTextAction(tab, false);
+            tab.setTypeface(tab.getTypeface(), Typeface.BOLD);
             tab.setGravity(Gravity.CENTER);
             tab.setMinHeight(FeatureGateLabUi.dp(context, 48));
             tab.setFocusable(true);
@@ -376,10 +385,14 @@ public final class FeatureGateLabFragment extends Fragment {
         LinearLayout resultRow = new LinearLayout(context);
         resultRow.setOrientation(LinearLayout.HORIZONTAL);
         resultRow.setGravity(Gravity.CENTER_VERTICAL);
-        count = FeatureGateLabUi.label(context, L10n.t(context, "Loading gates..."));
+        count = SettingsUi.resultCount(context, "feature_gate_result_count");
+        count.setText(L10n.t(context, "Loading gates..."));
         count.setGravity(Gravity.CENTER_VERTICAL);
         resultRow.addView(count, new LinearLayout.LayoutParams(0, FeatureGateLabUi.dp(context, 44), 1f));
         filterButton = FeatureGateLabUi.text(context, "", 14, SettingsUi.textPrimary(), Typeface.BOLD);
+        filterButton.setTag("feature_gate_filter");
+        SettingsUi.styleTextAction(filterButton, false);
+        filterButton.setTypeface(filterButton.getTypeface(), Typeface.BOLD);
         filterButton.setGravity(Gravity.CENTER);
         filterButton.setPadding(
                 FeatureGateLabUi.dp(context, 12),
@@ -523,6 +536,7 @@ public final class FeatureGateLabFragment extends Fragment {
         selectionCount = null;
         for (int i = 0; i < viewTabLabels.length; i++) viewTabLabels[i] = null;
         for (int i = 0; i < sourceTabLabels.length; i++) {
+            sourceTabContainers[i] = null;
             sourceTabLabels[i] = null;
             sourceTabIndicators[i] = null;
         }
@@ -646,7 +660,7 @@ public final class FeatureGateLabFragment extends Fragment {
             });
         }
 
-        count.setText(visible.size() + (visible.size() == 1 ? " result" : " results"));
+        SettingsUi.setResultCount(count, visible.size());
         adapter.notifyDataSetChanged();
         if (restoreListPosition && list != null) {
             int position = listPosition;
@@ -724,11 +738,12 @@ public final class FeatureGateLabFragment extends Fragment {
             }
         }
         for (int i = 0; i < sourceTabLabels.length; i++) {
+            View container = sourceTabContainers[i];
             TextView tab = sourceTabLabels[i];
             View indicator = sourceTabIndicators[i];
-            if (tab == null || indicator == null) continue;
+            if (container == null || tab == null || indicator == null) continue;
             boolean selected = i == selectedSource;
-            tab.setSelected(selected);
+            container.setSelected(selected);
             tab.setTextColor(selected ? SettingsUi.accent() : SettingsUi.textSecondary());
             tab.setTypeface(Typeface.DEFAULT, selected ? Typeface.BOLD : Typeface.NORMAL);
             indicator.setBackgroundColor(selected ? SettingsUi.accent() : Color.TRANSPARENT);
@@ -818,21 +833,13 @@ public final class FeatureGateLabFragment extends Fragment {
 
     private TextView selectionAction(Context context, String label, Runnable action) {
         TextView button = FeatureGateLabUi.text(context, label, 14, SettingsUi.accent(), Typeface.BOLD);
+        SettingsUi.styleTextAction(button, true);
         button.setMinimumHeight(FeatureGateLabUi.dp(context, 48));
         button.setMinimumWidth(FeatureGateLabUi.dp(context, 48));
         button.setGravity(Gravity.CENTER);
         int side = FeatureGateLabUi.dp(context, 12);
         button.setPadding(side, 0, side, 0);
         button.setContentDescription(label);
-        // A TextView with a click listener is read as text, and these are the whole of what a
-        // selection can do.
-        button.setAccessibilityDelegate(new View.AccessibilityDelegate() {
-            @Override public void onInitializeAccessibilityNodeInfo(
-                    View host, android.view.accessibility.AccessibilityNodeInfo info) {
-                super.onInitializeAccessibilityNodeInfo(host, info);
-                info.setClassName(android.widget.Button.class.getName());
-            }
-        });
         button.setOnClickListener(view -> action.run());
         return button;
     }

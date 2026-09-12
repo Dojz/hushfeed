@@ -204,6 +204,8 @@ public final class FeatureGateDetailFragment extends Fragment {
                     SettingsUi.accent(),
                     Typeface.BOLD
             );
+            saveObject.setTag("feature_gate_save_fields");
+            SettingsUi.styleTextAction(saveObject, true);
             saveObject.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
             saveObject.setMinimumHeight(FeatureGateLabUi.dp(context, 48));
             saveObject.setPadding(0, FeatureGateLabUi.dp(context, 10), 0, FeatureGateLabUi.dp(context, 10));
@@ -249,8 +251,9 @@ public final class FeatureGateDetailFragment extends Fragment {
             valueRow.addView(valueLabel, FeatureGateLabUi.matchWrap());
             options = buildOptions(entry, rule);
             values = new Spinner(context);
-            applyOptionsAdapter();
+            values.setTag("feature_gate_value");
             values.setEnabled(editable);
+            applyOptionsAdapter();
             values.setBackgroundColor(android.graphics.Color.TRANSPARENT);
             values.setContentDescription(L10n.t(context, "Value to return"));
             values.setMinimumHeight(FeatureGateLabUi.dp(context, 48));
@@ -261,6 +264,8 @@ public final class FeatureGateDetailFragment extends Fragment {
         }
 
         reset = FeatureGateLabUi.text(context, L10n.t(context, "Reset override"), 14, SettingsUi.accent(), Typeface.BOLD);
+        reset.setTag("feature_gate_reset");
+        SettingsUi.styleTextAction(reset, true);
         reset.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
         reset.setMinimumHeight(FeatureGateLabUi.dp(context, 48));
         reset.setPadding(0, FeatureGateLabUi.dp(context, 10), 0, FeatureGateLabUi.dp(context, 10));
@@ -431,6 +436,8 @@ public final class FeatureGateDetailFragment extends Fragment {
                     rule = (FeatureGateLabStore.Rule) saved[0];
                     reset.setVisibility(View.VISIBLE);
                     updateStatus();
+                    Utils.showToastShort(L10n.t(Utils.getContext(),
+                            "Feature gate override saved"));
                 },
                 L10n.t(Utils.getContext(), "Could not save this override."));
     }
@@ -550,22 +557,23 @@ public final class FeatureGateDetailFragment extends Fragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            return valueView(position, false);
+            return valueView(position, false, parent.isEnabled());
         }
 
         @Override
         public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            return valueView(position, true);
+            return valueView(position, true, parent.isEnabled());
         }
 
-        private TextView valueView(int position, boolean dropdown) {
+        private TextView valueView(int position, boolean dropdown, boolean enabled) {
             Context context = getContext();
             TextView view = FeatureGateLabUi.body(context, getItem(position));
+            view.setEnabled(enabled);
             view.setGravity(Gravity.CENTER_VERTICAL);
             view.setSingleLine(false);
             view.setEllipsize(null);
             view.setMinimumHeight(FeatureGateLabUi.dp(context, 48));
-            view.setTextColor(SettingsUi.accent());
+            view.setTextColor(SettingsUi.enabledTextColors(SettingsUi.accent()));
             if (!dropdown) {
                 android.graphics.drawable.Drawable arrow =
                         new app.morphe.extension.tiktok.settings.preference.SettingsMenuPreference
@@ -856,6 +864,8 @@ public final class FeatureGateDetailFragment extends Fragment {
         heading.addView(title, new LinearLayout.LayoutParams(0, FeatureGateLabUi.dp(context, 48), 1f));
         technicalToggle = FeatureGateLabUi.text(context, L10n.t(context, "Show"), 14,
                 SettingsUi.accent(), Typeface.BOLD);
+        technicalToggle.setTag("feature_gate_technical_toggle");
+        SettingsUi.styleTextAction(technicalToggle, true);
         technicalToggle.setGravity(Gravity.CENTER);
         technicalToggle.setPadding(
                 FeatureGateLabUi.dp(context, 12),
@@ -865,7 +875,7 @@ public final class FeatureGateDetailFragment extends Fragment {
         );
         heading.addView(technicalToggle, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
-                FeatureGateLabUi.dp(context, 40)
+                FeatureGateLabUi.dp(context, 48)
         ));
         LinearLayout.LayoutParams headingParams = FeatureGateLabUi.matchWrap();
         headingParams.setMargins(0, FeatureGateLabUi.dp(context, 12), 0, 0);

@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.view.View;
+import android.widget.TextView;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.tiktok.settings.preference.TikTokPreferenceFragment;
 import java.lang.reflect.Field;
@@ -76,6 +78,27 @@ public class SettingsSearchQueryTest {
         // with the empty query only proved the word produced two rows rather than one.
         assertTrue("the query matched the whole catalogue: " + matches + " rows of " + indexed,
                 matches < indexed);
+    }
+
+    @Test public void filteredSettingsExposeAndAnnounceTheirResultCount() throws Exception {
+        TikTokPreferenceFragment search = attachSearch();
+        search(search, "comment");
+        TextView count = search.getView().findViewWithTag("settings_search_result_count");
+        assertNotNull("the search field has no result status", count);
+        int rows = dynamicRows(search);
+        assertEquals(rows == 1 ? "1 result" : rows + " results",
+                count.getText().toString());
+        assertEquals(View.ACCESSIBILITY_LIVE_REGION_POLITE,
+                count.getAccessibilityLiveRegion());
+
+        search(search, "nothing-could-match-this-query");
+        assertEquals("0 results", count.getText().toString());
+    }
+
+    private static int dynamicRows(TikTokPreferenceFragment fragment) throws Exception {
+        Field field = TikTokPreferenceFragment.class.getDeclaredField("searchRows");
+        field.setAccessible(true);
+        return ((java.util.List<?>) field.get(fragment)).size();
     }
 
     private static int indexSize(TikTokPreferenceFragment fragment) throws Exception {

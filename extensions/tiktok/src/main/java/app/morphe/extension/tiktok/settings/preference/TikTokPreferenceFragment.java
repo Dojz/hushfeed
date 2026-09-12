@@ -72,6 +72,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
     private PreferenceScreen searchScreen;
     private List<SearchResult> searchIndex;
     private final List<Preference> searchRows = new ArrayList<>();
+    private SettingsSearchInputPreference searchInput;
 
     /**
      * Each section carries one sentence, used both as the subtitle on the home row and as the
@@ -423,7 +424,8 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         screen.addPreference(SettingsHeaderPreference.section(context, "Search settings", this::navigateBack));
         screen.addPreference(SettingsHeaderPreference.caption(context,
                 "Search translated titles and descriptions, then open the original setting."));
-        screen.addPreference(new SettingsSearchInputPreference(context, this::updateSearchResults));
+        searchInput = new SettingsSearchInputPreference(context, this::updateSearchResults);
+        screen.addPreference(searchInput);
         searchIndex = buildSearchIndex(context);
         updateSearchResults("");
     }
@@ -441,6 +443,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         // empty as typed but folds away to nothing, and every setting contains "".
         String normalizedQuery = normalizeSearchText(query == null ? "" : query.trim());
         if (normalizedQuery.isEmpty()) {
+            if (searchInput != null) searchInput.hideResultCount();
             addSearchState("Type to search settings", "Search a title, description or category.");
             return;
         }
@@ -451,6 +454,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
                 matches.add(result);
             }
         }
+        if (searchInput != null) searchInput.showResultCount(matches.size());
         if (matches.isEmpty()) {
             addSearchState("No matching settings", "Try a different word or clear the search.");
             return;

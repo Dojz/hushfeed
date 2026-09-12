@@ -59,6 +59,7 @@ public class NumberInputPreference extends EditTextPreference {
         setKey(setting.key);
         setValue(String.valueOf(clamp(setting.get())));
         getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
+        getEditText().setHint(L10n.t(context, "Enter a number"));
     }
 
     /**
@@ -142,6 +143,7 @@ public class NumberInputPreference extends EditTextPreference {
                 SettingsUi.textPrimary(),
                 android.graphics.Typeface.BOLD
         );
+        SettingsUi.markDialogHeading(title);
         dialogView.addView(title, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT

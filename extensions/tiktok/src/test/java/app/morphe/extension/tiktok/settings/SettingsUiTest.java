@@ -12,7 +12,9 @@ import android.os.Looper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.tiktok.UiCapture;
@@ -48,6 +50,51 @@ public class SettingsUiTest {
     @After
     public void restoreDarkMode() {
         Utils.setIsDarkModeEnabled(true);
+    }
+
+    @Test
+    public void sharedTextControlsExposeTheirDisabledStateAndActionRole() {
+        try (var owner = Robolectric.buildActivity(DialogActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+
+            TextView label = SettingsUi.text(
+                    activity, "Save", 14, SettingsUi.accent(), android.graphics.Typeface.BOLD);
+            assertEquals(SettingsUi.accent(), label.getCurrentTextColor());
+            label.setEnabled(false);
+            assertEquals("a disabled text control kept its active colour",
+                    SettingsUi.textDisabled(), label.getCurrentTextColor());
+
+            TextView action = SettingsUi.text(
+                    activity, "Save", 14, SettingsUi.accent(), android.graphics.Typeface.BOLD);
+            SettingsUi.styleTextAction(action, true);
+            assertEquals(android.widget.Button.class.getName(),
+                    action.createAccessibilityNodeInfo().getClassName());
+
+            EditText field = new EditText(activity);
+            SettingsUi.styleEditText(field);
+            field.setEnabled(false);
+            assertEquals("a disabled field kept its active text colour",
+                    SettingsUi.textDisabled(), field.getCurrentTextColor());
+        }
+    }
+
+    @Test
+    public void sharedDialogHeadingAndResultStatusCarryAccessibilitySemantics() {
+        try (var owner = Robolectric.buildActivity(DialogActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            TextView heading = SettingsUi.text(
+                    activity, "Dialog title", 20, SettingsUi.textPrimary(), 1);
+            SettingsUi.markDialogHeading(heading);
+            assertTrue(heading.isAccessibilityHeading());
+
+            TextView count = SettingsUi.resultCount(activity, "test_result_count");
+            SettingsUi.setResultCount(count, 2);
+            assertEquals("2 results", count.getText().toString());
+            assertEquals(View.ACCESSIBILITY_LIVE_REGION_POLITE,
+                    count.getAccessibilityLiveRegion());
+        }
     }
 
     @Test
