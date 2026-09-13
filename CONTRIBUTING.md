@@ -29,7 +29,7 @@ the local artifact hash and the hosted checksum entry. The local release helpers
 Run `scripts/test-script-contracts.ps1` after changing a PowerShell helper. The local pre-push
 hook runs it automatically for files under `scripts/`.
 The jar runs on JDK 21 or newer, so set `HUSHFEED_JAVA` or `JAVA_HOME` if that is not the `java`
-first on your PATH.
+first on your PATH. An explicit `-Java` directory must contain `bin/java.exe` or `bin/java`.
 
 Commit and push the new source version while `patches-bundle.json` still names the previous
 working release. Build from that exact commit, publish its bundle and checksum, then update the

@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Exercise the shared patch-target and guarded device replacement contracts.
+    Exercise shared patch-target, Java-resolution and device replacement contracts.
 #>
 [CmdletBinding()]
 param([string]$Root)
@@ -9,6 +9,7 @@ $ErrorActionPreference = 'Stop'
 if (-not $Root) { $Root = Split-Path -Parent $PSScriptRoot }
 . (Join-Path $PSScriptRoot 'patch-target.ps1')
 . (Join-Path $PSScriptRoot 'device-install.ps1')
+. (Join-Path $PSScriptRoot 'Resolve-Java.ps1')
 
 function Assert-True {
     param([bool]$Condition, [string]$Message)
@@ -117,6 +118,19 @@ exit /b 19
     } '*uninstall failed*' 'An uninstall failure was accepted.'
     $calls = @(Get-Content -LiteralPath $log)
     Assert-True ($calls.Count -eq 2) 'The uninstall-failure path did not perform exactly a check and uninstall.'
+
+    $emptyJdk = Join-Path $caseRoot 'empty-jdk'
+    New-Item -ItemType Directory -Path $emptyJdk | Out-Null
+    Assert-Throws {
+        Resolve-Java -Explicit $emptyJdk
+    } "*$emptyJdk*" 'An explicit directory without bin/java fell through to the PATH Java.'
+
+    $pathJava = Resolve-Java
+    $jdkRoot = Split-Path -Parent (Split-Path -Parent $pathJava)
+    $resolvedJava = Resolve-Java -Explicit $jdkRoot
+    Assert-True ([System.IO.Path]::GetFullPath($resolvedJava).Equals(
+        [System.IO.Path]::GetFullPath($pathJava), [System.StringComparison]::OrdinalIgnoreCase)) `
+        'A valid explicit JDK directory did not resolve its bin/java executable.'
 } finally {
     if ($caseRoot.StartsWith($requiredPrefix, [System.StringComparison]::OrdinalIgnoreCase) -and
         (Test-Path -LiteralPath $caseRoot)) {
@@ -133,4 +147,4 @@ foreach ($name in $consumerScripts) {
 }
 
 $global:LASTEXITCODE = 0
-Write-Host '[scripts] patch target and guarded replacement contracts passed'
+Write-Host '[scripts] target, Java and guarded replacement contracts passed'
