@@ -5,7 +5,9 @@
 .DESCRIPTION
     The generated patches-list.json is the local source for the release version, target
     package, target version and patch count. This check makes README.md, patches-bundle.json
-    and the recorded runtime test count agree before a release is published.
+    and the recorded runtime test count agree before a release is published. A guarded
+    preparation mode lets the source commit reach GitHub while the public index still points
+    at the previous working bundle. Published-asset verification remains strict.
 #>
 [CmdletBinding()]
 param(
@@ -29,7 +31,12 @@ param(
     # a README edit, which runs no tests) is not held to a run it had no reason to make; any
     # results that are there are still checked for age, completeness, failures and skips. A
     # release and a run by hand check everything.
-    [switch]$SkipDescriptionTestCount
+    [switch]$SkipDescriptionTestCount,
+    # A release source commit has to reach GitHub before its tag and bundle can be published.
+    # During that first push, the source version is newer while patches-bundle.json must still
+    # name the previous working release. The pre-push gate uses this only when the index itself
+    # did not change. Asset verification is refused until the index catches up.
+    [switch]$AllowPublishedIndexLag
 )
 
 $ErrorActionPreference = 'Stop'
@@ -162,10 +169,26 @@ if ($targetVersions.Count -ne 1) {
 }
 $targetVersion = $targetVersions[0]
 
-if ([string]$bundle.version -ne $releaseVersion) {
-    throw "patches-bundle.json version does not match $sourceVersion."
+$bundleVersion = [string]$bundle.version
+$indexLagsSource = $bundleVersion -ne $releaseVersion
+if ($indexLagsSource) {
+    if (-not $AllowPublishedIndexLag) {
+        throw "patches-bundle.json version does not match $sourceVersion."
+    }
+    if ($bundleVersion -notmatch '^\d+\.\d+\.\d+$') {
+        throw "patches-bundle.json has an invalid published version: $bundleVersion"
+    }
+    if ([version]$releaseVersion -le [version]$bundleVersion) {
+        throw ("patches-bundle.json may lag only while a newer release is being prepared. " +
+            "Source is $releaseVersion and the published index is $bundleVersion.")
+    }
+    if ($VerifyPublishedAsset) {
+        throw 'A source artifact cannot be checked against the previous published index. Publish the new release and update patches-bundle.json first.'
+    }
+    Write-Host ("[release] source $releaseVersion is being prepared while the working index remains on $bundleVersion")
 }
-Require-Match -Text ([string]$bundle.download_url) -Pattern "/v$([regex]::Escape($releaseVersion))/patches-$([regex]::Escape($releaseVersion))\.mpp$" -Description 'patches-bundle.json download URL'
+$publishedVersion = if ($indexLagsSource) { $bundleVersion } else { $releaseVersion }
+Require-Match -Text ([string]$bundle.download_url) -Pattern "/v$([regex]::Escape($publishedVersion))/patches-$([regex]::Escape($publishedVersion))\.mpp$" -Description 'patches-bundle.json download URL'
 
 # Matching the pattern only proves the index spells the version right. Reaching the address is
 # what catches an index pointed at a tag nobody published, which is how the bundle went missing
@@ -176,8 +199,8 @@ if ($assetUri.Scheme -ne 'https') {
     throw "The published bundle URL must use HTTPS: $($bundle.download_url)"
 }
 $assetName = [IO.Path]::GetFileName($assetUri.AbsolutePath)
-if ($assetName -ne "patches-$releaseVersion.mpp") {
-    throw "The published bundle URL names $assetName instead of patches-$releaseVersion.mpp."
+if ($assetName -ne "patches-$publishedVersion.mpp") {
+    throw "The published bundle URL names $assetName instead of patches-$publishedVersion.mpp."
 }
 if ($SkipUrlCheck) {
     Write-Host '[release] the indexed URL was not fetched because -SkipUrlCheck was given'
@@ -187,8 +210,23 @@ if ($SkipUrlCheck) {
 Require-Match -Text $readme -Pattern "\b$patchCount patches\b" -Description 'README patch count'
 Require-Match -Text $readme -Pattern ([regex]::Escape($targetPackage)) -Description 'README package name'
 Require-Match -Text $readme -Pattern "TikTok\s+$([regex]::Escape($targetVersion))(?!\d)" -Description 'README target version'
-Require-Match -Text ([string]$bundle.description) -Pattern "\b$patchCount patches\b" -Description 'bundle description patch count'
-Require-Match -Text ([string]$bundle.description) -Pattern "$([regex]::Escape($targetVersion))(?!\d)" -Description 'bundle description target version'
+$descriptionVersion = $sourceVersion
+$descriptionPatchCount = $patchCount
+$descriptionTargetVersion = $targetVersion
+if ($indexLagsSource) {
+    $publishedPatchMatch = [regex]::Match([string]$bundle.description, '\b(\d+) patches\b')
+    $publishedTargetMatch = [regex]::Match([string]$bundle.description, 'TikTok\s+(\d+(?:\.\d+)+)')
+    if (-not $publishedPatchMatch.Success -or -not $publishedTargetMatch.Success) {
+        throw 'The published bundle description does not name its patch count and TikTok target.'
+    }
+    Require-Match -Text ([string]$bundle.description) -Pattern "\bv$([regex]::Escape($publishedVersion))\b" -Description 'published bundle description version'
+    $descriptionVersion = "v$publishedVersion"
+    $descriptionPatchCount = [int]$publishedPatchMatch.Groups[1].Value
+    $descriptionTargetVersion = $publishedTargetMatch.Groups[1].Value
+} else {
+    Require-Match -Text ([string]$bundle.description) -Pattern "\b$patchCount patches\b" -Description 'bundle description patch count'
+    Require-Match -Text ([string]$bundle.description) -Pattern "$([regex]::Escape($targetVersion))(?!\d)" -Description 'bundle description target version'
+}
 
 # The one line GitHub shows above the README, which is also what search results, the awesome
 # lists and the Manager's community button repeat. Nothing here read it until now, and it had
@@ -218,19 +256,19 @@ if ($SkipUrlCheck) {
     $description = $description.Trim()
 
     $wanted = @(
-        @{ Pattern = "\b$([regex]::Escape($sourceVersion))\b";  Wanted = $sourceVersion }
-        @{ Pattern = "\b$patchCount patches\b";                 Wanted = "$patchCount patches" }
-        @{ Pattern = "TikTok\s+$([regex]::Escape($targetVersion))(?!\d)"; Wanted = "TikTok $targetVersion" }
+        @{ Pattern = "\b$([regex]::Escape($descriptionVersion))\b"; Wanted = $descriptionVersion }
+        @{ Pattern = "\b$descriptionPatchCount patches\b"; Wanted = "$descriptionPatchCount patches" }
+        @{ Pattern = "TikTok\s+$([regex]::Escape($descriptionTargetVersion))(?!\d)"; Wanted = "TikTok $descriptionTargetVersion" }
     )
     $missing = @($wanted | Where-Object { $description -notmatch $_.Pattern } | ForEach-Object { $_.Wanted })
     if ($missing.Count -gt 0) {
         throw ("The GitHub description of $slug does not say " + ($missing -join ', ') + '. It reads: ' +
             $description + [Environment]::NewLine +
-            'Set it with: gh repo edit ' + $slug + ' --description "Hushfeed ' + $sourceVersion +
-            ': ... ' + $patchCount + ' patches for TikTok ' + $targetVersion + '."')
+            'Set it with: gh repo edit ' + $slug + ' --description "Hushfeed ' + $descriptionVersion +
+            ': ... ' + $descriptionPatchCount + ' patches for TikTok ' + $descriptionTargetVersion + '."')
     }
-    Write-Host ("[release] the GitHub description of " + $slug + " names " + $sourceVersion +
-        ", " + $patchCount + " patches and TikTok " + $targetVersion)
+    Write-Host ("[release] the GitHub description of " + $slug + " names " + $descriptionVersion +
+        ", " + $descriptionPatchCount + " patches and TikTok " + $descriptionTargetVersion)
 }
 
 $testRoot = Join-Path $rootPath 'extensions/tiktok/build/test-results/testDebugUnitTest'

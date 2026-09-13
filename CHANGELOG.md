@@ -1,4 +1,4 @@
-## 0.30.0
+## 0.30.1
 
 * TikTok's own Photo Mode save now gives every image its own `{index}` number instead of naming the whole slideshow as image 1. This also prevents later photos replacing the first one on Android 6 through 9. Animated WebP to GIF conversion now budgets the canvas and decoded frame alongside the stored frame pixels, which cuts the worst pixel allocation from about 100 MiB to 32 MiB before encoder overhead. Turning off Keep captions in clear display removes its overlay and layout observer immediately. Media jobs keep their two minute deadline without carrying a cancel path that no shipped control could call.
 
@@ -21,6 +21,14 @@
 * Feed filtering follows TikTok's rebuilt cache delivery on 46.7.3 and 46.8.3. Cached videos now pass through the same filters before either new callback wrapper sees them, including the local seen-video history. The older 46.2.3 chain stays supported. A rejected reach-bottom cache result is also marked unsuccessful, so TikTok asks the next source for a video instead of treating the rejected one as delivered. The friend recommendation-card selector now tolerates TikTok swapping its String and List parameters, and the Tako button selector follows stable view behavior instead of its changing method name.
 
 * Hide quick comment reactions works on TikTok 46.8.3 after TikTok removed the experiment the patch used to change. The reaction row still exists, but an Aweme check now decides whether to show it. The patch follows the row itself and applies the setting to every native visibility change, which also keeps 46.2.3 and 46.7.3 working without their old experiment name.
+
+* The project page now opens with a 1600 by 900 hero built around the approved H and current native settings screens. The artwork carries no release number, so a routine version bump cannot make it stale.
+
+* The README puts the Morphe source link, latest bundle, settings tour and patch list near the top. Its feature overview is shorter, the exact supported TikTok build is harder to miss, and the release link points at the current bundle.
+
+* The previous header, both finished hero layouts, README-width previews, fresh offscreen screenshots and rejected mark studies now live in the marketing concept archive. A regression test keeps the selected hero first, prevents a second copy, checks its dimensions and locks the approved H to the supplied file.
+
+## 0.30.0
 
 * Fit the video to the screen now works on the For You feed. The feed cell never sized its video through the method the patch hooked; it hands the size to a helper of its own, and that helper is what the patch reaches now, on every build seen. A fitted video is handed back as a copy of TikTok's own answer, so the size the feed applies and the size it checks against are the same one. The story cell's own path is still covered, and the copy it keeps is looked up by the object rather than by its numbers, which a size change had moved out from under.
 
