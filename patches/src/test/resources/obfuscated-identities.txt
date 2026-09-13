@@ -29,12 +29,15 @@ extensions/tiktok/src/main/java/app/morphe/extension/tiktok/featuregatelab/Featu
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/featuregatelab/SettingsManagerObservationRecorder.java|X.0BZ5
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/featuregatelab/SettingsManagerObservationRecorder.java|X.0Bb9
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|cn
+extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|ecp
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|ecq
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|ehl
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|ezp
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|fb
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|fws
+extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|fwt
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|fwu
+extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|ht8
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|ht9
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|hu9
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|hvo
@@ -42,6 +45,7 @@ extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHid
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|kzj
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|p2l
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|twc
+extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|v5w
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|v5x
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|v9o
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/follow/FollowDiagnostics.java|LIZ

@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Right-column counts now follow both parts of TikTok's feed layout: the outer count row and the numeric text inside it. Layout variants that replace the row can no longer leave like, comment, favorite or share counts visible, and turning the switch off restores only the views Hushfeed hid.
+
 * Hide inbox stories now responds without restarting TikTok. It hides only the story tray, restores recycled rows when they change purpose, and shares one live Inbox observer with Hide inbox items when both patches are selected.
 
 * Remove feed ads now recognizes TikTok's raw auction metadata even when both native Boolean ad flags are false. The shared check covers response, cache, Following, Friends, profile, search and late-insertion feeds while leaving ordinary paid-partnership posts alone.
