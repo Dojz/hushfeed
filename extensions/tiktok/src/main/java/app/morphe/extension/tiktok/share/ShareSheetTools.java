@@ -251,12 +251,24 @@ public final class ShareSheetTools {
      * invoke it. Nothing here synthesizes another click.
      */
     public static boolean allowRecipientClick(View touched) {
+        final boolean confirmationEnabled;
         try {
-            if (!Settings.SHARE_CONFIRM_SEND.get()) {
-                disarm();
-                return true;
-            }
+            confirmationEnabled = Settings.SHARE_CONFIRM_SEND.get();
+        } catch (Throwable ex) {
+            Logger.printException(() -> "Could not read share confirmation setting", ex);
+            return false;
+        }
 
+        if (!confirmationEnabled) {
+            try {
+                disarm();
+            } catch (Throwable ex) {
+                Logger.printException(() -> "Could not clear disabled share confirmation", ex);
+            }
+            return true;
+        }
+
+        try {
             View cell = boundCellOf(touched);
             RecipientBinding binding = RECIPIENTS.get(cell);
             String recipientId = binding == null
@@ -330,16 +342,18 @@ public final class ShareSheetTools {
     }
 
     private static void disarm() {
+        View cell = armedCell.get();
+        Drawable ring = armedRing;
+        Drawable previousForeground = armedPreviousForeground;
         armedRecipientId = null;
         armedAtMs = 0;
-        View cell = armedCell.get();
         armedCell = new WeakReference<>(null);
-        if (cell != null && cell.getForeground() == armedRing) {
-            cell.setForeground(armedPreviousForeground);
-        }
         armedPreviousForeground = null;
         armedRing = null;
         armGeneration++;
+        if (cell != null && cell.getForeground() == ring) {
+            cell.setForeground(previousForeground);
+        }
     }
 
     private static View itemViewOf(Object holder) throws ReflectiveOperationException {

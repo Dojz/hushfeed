@@ -199,6 +199,30 @@ public class ShareSheetToolsTest {
                 cell.getForeground());
     }
 
+    @Test public void disabledConfirmationStillSendsWhenArmedStateCleanupFails() {
+        Settings.SHARE_CONFIRM_SEND.save(true);
+        AtomicInteger sends = new AtomicInteger();
+        FailingRestoreRecipient cell = new FailingRestoreRecipient(context);
+        cell.setContentDescription("Alice");
+        cell.setClickable(true);
+        cell.layout(0, 0, 100, 100);
+        cell.setOnClickListener(view -> {
+            if (ShareSheetTools.allowRecipientClick(view)) {
+                sends.incrementAndGet();
+            }
+        });
+        ShareSheetTools.bindRecipient(new TestHolder(cell), new UserRecipient("user-a"));
+
+        assertTrue(cell.performClick());
+        assertEquals(0, sends.get());
+
+        Settings.SHARE_CONFIRM_SEND.save(false);
+        cell.failNextForegroundChange();
+        assertTrue(cell.performClick());
+        assertEquals("disabled confirmation must always reach TikTok's native handler", 1,
+                sends.get());
+    }
+
     @Test public void nestedClickTargetsResolveTheModelBoundCell() {
         Settings.SHARE_CONFIRM_SEND.save(true);
         FrameLayout cell = new FrameLayout(context);
@@ -258,6 +282,26 @@ public class ShareSheetToolsTest {
 
         @Override public boolean performHapticFeedback(int feedbackConstant) {
             throw new IllegalStateException("simulated confirmation setup failure");
+        }
+    }
+
+    private static final class FailingRestoreRecipient extends FrameLayout {
+        private boolean failNextForegroundChange;
+
+        FailingRestoreRecipient(Context context) {
+            super(context);
+        }
+
+        void failNextForegroundChange() {
+            failNextForegroundChange = true;
+        }
+
+        @Override public void setForeground(Drawable foreground) {
+            if (failNextForegroundChange) {
+                failNextForegroundChange = false;
+                throw new IllegalStateException("simulated row restoration failure");
+            }
+            super.setForeground(foreground);
         }
     }
 
