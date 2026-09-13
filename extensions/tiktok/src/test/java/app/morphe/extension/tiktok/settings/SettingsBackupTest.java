@@ -727,18 +727,35 @@ public class SettingsBackupTest {
 
     @Test public void aJournalThatCannotBeAppliedIsSetAsideAndTheNextChangeStarts() throws Exception {
         var app = Utils.getContext();
-        // A well formed record whose Lab snapshot names another TikTok, which is what an
-        // install over an older Hushfeed leaves behind when the journal was written by the
-        // version before the retarget. parseSettings refuses it, so it can never be applied.
-        JSONObject foreign = new JSONObject(FeatureGateLabStore.exportSettings().toString());
-        foreign.put("tiktok_version", "0.0.0");
-        writeJournal("lab", foreign.toString(), foreign.toString());
+        Settings.MAX_VIDEO_SECONDS.save(51);
+        String before = SettingsBackup.create(false);
+        Settings.MAX_VIDEO_SECONDS.save(52);
+        String after = SettingsBackup.create(false);
+        Settings.MAX_VIDEO_SECONDS.save(53);
+        writeJournal("settings", before, after);
         File journal = new File(app.getFilesDir(), SettingsOperationJournal.FILE_NAME);
         File damaged = new File(journal.getPath() + SettingsOperationJournal.DAMAGED_SUFFIX);
 
-        SettingsOperationJournal.Recovery result = SettingsOperationJournal.initialize(app);
-        assertTrue("was " + result, result == SettingsOperationJournal.Recovery.MALFORMED
-                || result == SettingsOperationJournal.Recovery.FAILED);
+        var original = Setting.preferences.preferences;
+        var attempts = new java.util.concurrent.atomic.AtomicInteger();
+        var unwritable = failingCommitsWithoutApply(original, () -> true, attempts::incrementAndGet);
+        var field = app.morphe.extension.shared.settings.preference.SharedPrefCategory.class
+                .getDeclaredField("preferences");
+        field.setAccessible(true);
+        field.set(Setting.preferences, unwritable);
+        SettingsOperationJournal.Recovery result;
+        try {
+            result = SettingsOperationJournal.initialize(app);
+        } finally {
+            field.set(Setting.preferences, original);
+        }
+
+        assertEquals(2, attempts.get());
+        assertEquals(SettingsOperationJournal.Recovery.FAILED, result);
+        assertEquals(SettingsOperationJournal.Recovery.FAILED,
+                SettingsOperationJournal.consumeRecoveryNotice());
+        assertEquals(SettingsOperationJournal.Recovery.NONE,
+                SettingsOperationJournal.consumeRecoveryNotice());
         assertFalse(journal.isFile());
         assertTrue(damaged.isFile());
         SettingsOperationJournal.Operation operation = SettingsOperationJournal.acquire(app);
