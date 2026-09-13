@@ -1,5 +1,7 @@
 ## 0.30.1
 
+* The release check now ties the README's minimum Morphe Manager version to a `manager-floor` value beside the patcher pin. Device-only signing helpers read their password from `HUSHFEED_SIDELOAD_KEYSTORE_PASSWORD`, retain `sideload` as the documented local test-key fallback, and keep the value out of child process command lines.
+
 * The README patch table now uses the same descriptions Morphe Manager reads from the shipped catalog. A regression checks every name and description, so changing either side cannot leave the project page describing a different feature.
 
 * TikTok's own Photo Mode save now gives every image its own `{index}` number instead of naming the whole slideshow as image 1. This also prevents later photos replacing the first one on Android 6 through 9. Animated WebP to GIF conversion now budgets the canvas and decoded frame alongside the stored frame pixels, which cuts the worst pixel allocation from about 100 MiB to 32 MiB before encoder overhead. Turning off Keep captions in clear display removes its overlay and layout observer immediately. Media jobs keep their two minute deadline without carrying a cancel path that no shipped control could call.

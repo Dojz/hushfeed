@@ -530,6 +530,17 @@ if (-not $catalogMatch.Success) {
     throw 'gradle/libs.versions.toml does not pin morphe-patcher.'
 }
 $pinnedPatcher = $catalogMatch.Groups[1].Value
+$managerFloorMatch = [regex]::Match($catalogText, '(?m)^\s*manager-floor\s*=\s*"([^"]+)"')
+if (-not $managerFloorMatch.Success) {
+    throw 'gradle/libs.versions.toml does not pin manager-floor beside morphe-patcher.'
+}
+$managerFloor = $managerFloorMatch.Groups[1].Value
+if ($managerFloor -notmatch '^\d+\.\d+\.\d+$') {
+    throw "gradle/libs.versions.toml has an invalid manager-floor: $managerFloor"
+}
+$managerFloorPattern = "\bMorphe Manager\s+$([regex]::Escape($managerFloor))\s+or newer\b"
+Require-Match -Text $readme -Pattern $managerFloorPattern -Description 'README Manager floor'
+Write-Host "[release] README requires Morphe Manager $managerFloor or newer for patcher $pinnedPatcher"
 
 $bundlePath = if ($ArtifactPath) { $ArtifactPath } else {
     Join-Path $rootPath "patches/build/libs/patches-$releaseVersion.mpp"
@@ -567,8 +578,8 @@ if (-not $stampMatch.Success) {
 }
 if ($stampMatch.Groups[1].Value -ne $pinnedPatcher) {
     throw ("The bundle stamps Patcher-Version " + $stampMatch.Groups[1].Value + " but the catalog " +
-        "pins morphe-patcher " + $pinnedPatcher + ". The README's Manager floor is written from " +
-        'the pin, so one of the two is now wrong.')
+        "pins morphe-patcher " + $pinnedPatcher + ". The README floor is held separately to " +
+        "Morphe Manager $managerFloor, so the patcher pin or built bundle is now wrong.")
 }
 Write-Host "[release] the bundle stamps patcher $pinnedPatcher, as the catalog pins"
 

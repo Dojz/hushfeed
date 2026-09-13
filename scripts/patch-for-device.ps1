@@ -9,6 +9,11 @@
     it has to be uninstalled first; that is what -Replace does, and it wipes TikTok's data on
     that phone.
 
+    The signing password comes from HUSHFEED_SIDELOAD_KEYSTORE_PASSWORD. When it is unset, the
+    local test keystore's documented password, sideload, is used. The Morphe arguments travel
+    through a temporary Java argument file so the password value is not in the child process
+    command line. The file is deleted when patching exits.
+
 .EXAMPLE
     scripts/patch-for-device.ps1 -Serial R5CT139QJ5F -Replace
 #>
@@ -20,7 +25,6 @@ param(
     [string]$DesktopJar = (Get-ChildItem 'C:\_claude-backups\morphe-tools' -Filter 'morphe-desktop*.jar' -File | Sort-Object LastWriteTime -Descending | Select-Object -First 1).FullName,
     [string]$Java = 'C:\Program Files\Eclipse Adoptium\jdk-21.0.12.101-hotspot\bin\java.exe',
     [string]$Keystore = "$HOME\.android\sideload-release.jks",
-    [string]$KeystorePassword = 'sideload',
     [string]$KeyAlias = 'sideload',
     [string]$OutDir = (Join-Path $env:TEMP 'hushfeed-device')
 )
@@ -30,6 +34,13 @@ $ErrorActionPreference = 'Stop'
 # and the failure would surface later as a confusing Split-Path error.
 if (-not $Apk -or -not (Test-Path -LiteralPath $Apk -PathType Leaf)) { throw "No vendor APK. Pass -Apk with the 46.2.3 build." }
 if (-not $DesktopJar -or -not (Test-Path -LiteralPath $DesktopJar -PathType Leaf)) { throw 'No Morphe desktop CLI jar. Pass -DesktopJar.' }
+$passwordVariable = 'HUSHFEED_SIDELOAD_KEYSTORE_PASSWORD'
+$keystorePassword = [Environment]::GetEnvironmentVariable(
+    $passwordVariable, [EnvironmentVariableTarget]::Process)
+if ([string]::IsNullOrEmpty($keystorePassword)) {
+    $keystorePassword = 'sideload'
+    Write-Host "[device] $passwordVariable is unset; using the documented local test-key fallback"
+}
 $root = Split-Path -Parent $PSScriptRoot
 $version = ((Get-Content (Join-Path $root 'gradle.properties')) -match '^version\s*=' | Select-Object -First 1) -replace '^version\s*=\s*', ''
 $bundle = Join-Path $root "patches\build\libs\patches-$version.mpp"
@@ -46,15 +57,28 @@ Write-Host "[device] $($names.Count) patches from $(Split-Path -Leaf $bundle) on
 $enable = @()
 foreach ($name in $names) { $enable += '-e'; $enable += $name }
 $arguments = @('patch', '--exclusive', '-p', $bundle, '-o', $out, '-t', $temp, '-r', $result,
-    '--keystore', $Keystore, '--keystore-password', $KeystorePassword,
-    '--keystore-entry-alias', $KeyAlias, '--keystore-entry-password', $KeystorePassword) + $enable + @($Apk)
+    '--keystore', $Keystore, '--keystore-password', $keystorePassword,
+    '--keystore-entry-alias', $KeyAlias, '--keystore-entry-password', $keystorePassword) + $enable + @($Apk)
+$argumentFile = Join-Path $OutDir 'morphe-patch.args'
+$argumentFileLines = @($arguments | ForEach-Object {
+    $value = [string]$_
+    if ($value.IndexOfAny([char[]]"`r`n") -ge 0) {
+        throw 'A Morphe command argument contains a newline and cannot be written safely.'
+    }
+    '"' + $value.Replace('\', '\\').Replace('"', '\"') + '"'
+})
+[System.IO.File]::WriteAllLines(
+    $argumentFile,
+    $argumentFileLines,
+    (New-Object System.Text.UTF8Encoding($false)))
 try {
-    & $Java -jar $DesktopJar @arguments 2>&1 | ForEach-Object {
+    & $Java -jar $DesktopJar "@$argumentFile" 2>&1 | ForEach-Object {
         $line = [string]$_
         if ($line -match 'SEVERE|ERROR|Exception|Saved to') { Write-Host "[device] $line" }
     }
     if ($LASTEXITCODE -ne 0) { throw "The desktop CLI exited with $LASTEXITCODE" }
 } finally {
+    Remove-Item -LiteralPath $argumentFile -Force -ErrorAction SilentlyContinue
     # The CLI unpacks the whole APK here and a run against TikTok leaves gigabytes behind.
     if (Test-Path -LiteralPath $temp) { Remove-Item -LiteralPath $temp -Recurse -Force -ErrorAction SilentlyContinue }
 }
