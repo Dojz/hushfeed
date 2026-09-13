@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Looper;
 import android.preference.Preference;
@@ -12,6 +13,7 @@ import android.preference.PreferenceScreen;
 import android.view.View;
 import android.widget.TextView;
 import app.morphe.extension.shared.Utils;
+import app.morphe.extension.tiktok.featuregatelab.FeatureGateLabFragment;
 import app.morphe.extension.tiktok.settings.preference.TikTokPreferenceFragment;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -111,6 +113,35 @@ public class SettingsSearchQueryTest {
         TikTokPreferenceFragment search = attachSearch();
         assertEquals("folding stopped matching the word it is there for",
                 search(search, "comment").size(), search(search, "cómment").size());
+    }
+
+    @Test public void theInstalledFeatureGateLabCanBeFoundAndOpened() throws Exception {
+        TikTokPreferenceFragment search = attachSearch();
+        Method build = TikTokPreferenceFragment.class
+                .getDeclaredMethod("buildSearchIndex", Context.class, boolean.class);
+        build.setAccessible(true);
+        Field index = TikTokPreferenceFragment.class.getDeclaredField("searchIndex");
+        index.setAccessible(true);
+        index.set(search, build.invoke(search, search.getActivity(), true));
+
+        java.util.List<String> titles = search(search, "override gate flags");
+        assertTrue("the installed Lab was absent from settings search: " + titles,
+                titles.contains("Feature Gate Lab"));
+        Preference result = null;
+        for (int position = 0; position < search.getPreferenceScreen().getPreferenceCount(); position++) {
+            Preference candidate = search.getPreferenceScreen().getPreference(position);
+            if (candidate.getTitle() != null
+                    && "Feature Gate Lab".contentEquals(candidate.getTitle())) {
+                result = candidate;
+                break;
+            }
+        }
+        assertNotNull(result);
+        assertTrue(result.getOnPreferenceClickListener().onPreferenceClick(result));
+        search.getActivity().getFragmentManager().executePendingTransactions();
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+        assertTrue(search.getActivity().getFragmentManager().findFragmentById(android.R.id.content)
+                instanceof FeatureGateLabFragment);
     }
 
     /** The rows the search page is showing for a query, by title. */

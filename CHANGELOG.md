@@ -1,6 +1,6 @@
 ## 0.30.0
 
-* The Feature Gate Lab filter now uses the same themed radio rows as the other settings pickers. Rows stay fully readable while selecting several gates. Exporting before values have loaded says why it cannot start, and a selected import keeps going if the Lab closes while its file is being read.
+* The Feature Gate Lab filter now uses the same themed radio rows as the other settings pickers. Rows stay fully readable while selecting several gates. Exporting before values have loaded says why it cannot start, and a selected import keeps going if the Lab closes while its file is being read. The Lab itself now appears when its title or description is entered in Settings search.
 
 * Numeric dialogs let long descriptions scroll without squeezing out the field, and an empty number stays open with a clear explanation. The sticker save button follows the current text colors when TikTok gives it no text button to copy. Clearing diagnostic data can be undone with the next tap, including buffered events, saved crashes and hook findings.
 

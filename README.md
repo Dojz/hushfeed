@@ -125,7 +125,7 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 
 ## Settings tour
 
-The settings pages use grouped controls on an AMOLED background. Light mode follows TikTok's theme, including the space behind the system bars, and larger text wraps across lines without clipping headers, captions or editor labels. Changing font size or navigation mode keeps the settings page you were using and its Back history. Use Search settings at the top to find translated titles or descriptions and jump to the original control. These screenshots come from native Android views rendered by the local test suite. Enabled controls and values are test fixtures.
+The settings pages use grouped controls on an AMOLED background. Light mode follows TikTok's theme, including the space behind the system bars, and larger text wraps across lines without clipping headers, captions or editor labels. Changing font size or navigation mode keeps the settings page you were using and its Back history. Use Search settings at the top to find translated titles or descriptions and jump to the original control, including Feature Gate Lab. These screenshots come from native Android views rendered by the local test suite. Enabled controls and values are test fixtures.
 
 <img src="assets/settings/settings.png" alt="Hushfeed settings home" width="260" /> <img src="assets/settings/playback.png" alt="Playback settings" width="260" /> <img src="assets/settings/playback-light.png" alt="Playback settings in light mode" width="260" />
 

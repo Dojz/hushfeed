@@ -56,6 +56,7 @@ import app.morphe.extension.tiktok.settings.preference.categories.SimSpoofPrefer
 
 @SuppressWarnings("deprecation")
 public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
+    private static final String FEATURE_GATE_LAB_KEY = "action_feature_gate_lab";
     private static final int REQUEST_DOWNLOAD_PATH_FOLDER = 8841;
     private static final String ARG_SECTION = "morphe_settings_section";
     private static final String ARG_SEARCH = "morphe_settings_search";
@@ -434,7 +435,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
                 "Search translated titles and descriptions, then open the original setting."));
         searchInput = new SettingsSearchInputPreference(context, this::updateSearchResults);
         screen.addPreference(searchInput);
-        searchIndex = buildSearchIndex(context);
+        searchIndex = buildSearchIndex(context, FeatureGateLabRuntime.isInstalled());
         updateSearchResults("");
     }
 
@@ -475,7 +476,11 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
             row.setSummary(result.displaySummary());
             row.setOrder(order++);
             row.setOnPreferenceClickListener(preference -> {
-                openSection(result.section, result.key);
+                if (FEATURE_GATE_LAB_KEY.equals(result.key)) {
+                    FeatureGateLabFragment.open(getActivity());
+                } else {
+                    openSection(result.section, result.key);
+                }
                 return true;
             });
             searchRows.add(row);
@@ -587,7 +592,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
                 || SettingsStatus.refreshRateEnabled;
     }
 
-    private List<SearchResult> buildSearchIndex(Context context) {
+    private List<SearchResult> buildSearchIndex(Context context, boolean featureGateLabInstalled) {
         List<SearchResult> results = new ArrayList<>();
         PreferenceScreen scratch = getPreferenceManager().createPreferenceScreen(context);
         for (Section section : Section.values()) {
@@ -607,6 +612,18 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
                 indexRows(results, backupRows, section, categoryTitle);
             }
             scratch.removePreference(category);
+        }
+        // This row opens its own fragment from the master menu rather than living in one of the
+        // section categories walked above. Without an explicit entry, both its title and its
+        // summary returned zero results on a patched phone even though the row was visible.
+        if (featureGateLabInstalled) {
+            results.add(new SearchResult(
+                    null,
+                    FEATURE_GATE_LAB_KEY,
+                    L10n.t(context, "Feature Gate Lab"),
+                    L10n.t(context, "Search and override gate flags"),
+                    L10n.t(context, "Settings")
+            ));
         }
         return results;
     }
@@ -739,17 +756,20 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         }
 
         if (FeatureGateLabRuntime.isInstalled()) {
-            screen.addPreference(new SettingsMenuPreference(
+            SettingsMenuPreference featureGateLab = new SettingsMenuPreference(
                     context,
-                    "Feature Gate Lab",
-                    "Search and override gate flags",
+                    L10n.t(context, "Feature Gate Lab"),
+                    L10n.t(context, "Search and override gate flags"),
                     SettingsMenuPreference.Icon.LAB,
                     0,
                     preference -> {
                         FeatureGateLabFragment.open(getActivity());
                         return true;
                     }
-            ));
+            );
+            // Stable key for settings search, UI automation and accessibility inspection.
+            featureGateLab.setKey(FEATURE_GATE_LAB_KEY);
+            screen.addPreference(featureGateLab);
         }
 
         if (SettingsStatus.featureGateRecorderEnabled) {
