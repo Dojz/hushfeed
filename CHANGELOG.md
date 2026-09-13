@@ -1,5 +1,7 @@
 ## 0.30.1
 
+* Logger keeps a failed message builder contained even when the thrown object also breaks its own `toString()` or `getMessage()`. The emergency line falls back to fixed text and the original hook can keep running.
+
 * Comment tools now resolves every native anchor, reply model, field and register before it changes the APK. If a later TikTok build makes the reply row ambiguous, patching fails without leaving the settings flag or dislike redirect behind.
 
 * The obfuscated identity audit now records Java binary class names such as `X.0GSy`, as well as smali descriptors. Exact token boundaries keep longer names and ordinary Java text from being counted, and a regression proves a new `Class.forName` literal stops the build.
