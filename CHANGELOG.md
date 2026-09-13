@@ -1,5 +1,7 @@
 ## 0.30.1
 
+* Lazy AB gate discovery now follows one integer register move back to the factory number, including a second four-instruction lookback. A merged-lambda entry point must switch on its own integer `$t` field, so an unrelated field and switch cannot make a decoy class look like the requested gate.
+
 * Passing a Java directory without `bin/java.exe` or `bin/java` now stops with that directory in the error. It can no longer ignore the explicit choice and run a different Java from `PATH`. Java discovery also works in Windows PowerShell, where the normal `java -version` banner arrives on the error stream.
 
 * Device replacement now checks whether TikTok is installed before trying to remove it, so a clean phone proceeds to installation. Device patching, fixture verification, heap checks and release validation all read the target package and version from the generated patch catalog.
