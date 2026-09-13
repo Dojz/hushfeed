@@ -697,6 +697,34 @@ public class SettingsBackupTest {
         assertTrue(damaged.delete());
     }
 
+    @Test public void eachUnreadableJournalPublishesItsOwnNoticeInOneProcess() throws Exception {
+        var app = Utils.getContext();
+        File journal = new File(app.getFilesDir(), SettingsOperationJournal.FILE_NAME);
+        File damaged = new File(journal.getPath() + SettingsOperationJournal.DAMAGED_SUFFIX);
+        if (damaged.exists()) assertTrue(damaged.delete());
+
+        try (var output = new FileOutputStream(journal)) {
+            output.write(new byte[] {(byte) 0xc3, 0x28});
+        }
+        assertEquals(SettingsOperationJournal.Recovery.MALFORMED,
+                SettingsOperationJournal.initialize(app));
+        assertEquals(SettingsOperationJournal.Recovery.MALFORMED,
+                SettingsOperationJournal.consumeRecoveryNotice());
+
+        try (var output = new FileOutputStream(journal)) {
+            output.write(new byte[] {(byte) 0xe2, 0x28, (byte) 0xa1});
+        }
+        assertEquals(SettingsOperationJournal.Recovery.MALFORMED,
+                SettingsOperationJournal.initialize(app));
+        assertEquals(SettingsOperationJournal.Recovery.MALFORMED,
+                SettingsOperationJournal.consumeRecoveryNotice());
+        assertEquals(SettingsOperationJournal.Recovery.NONE,
+                SettingsOperationJournal.consumeRecoveryNotice());
+        assertFalse(journal.isFile());
+        assertTrue(damaged.isFile());
+        assertTrue(damaged.delete());
+    }
+
     @Test public void aJournalThatCannotBeAppliedIsSetAsideAndTheNextChangeStarts() throws Exception {
         var app = Utils.getContext();
         // A well formed record whose Lab snapshot names another TikTok, which is what an

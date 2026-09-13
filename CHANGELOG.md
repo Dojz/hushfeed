@@ -1,5 +1,7 @@
 ## 0.30.1
 
+* Each unreadable settings journal now gets its own recovery notice. Its fallback identity includes the actual file path, length and modification time, so another damaged record at the same path is not hidden for the rest of that process.
+
 * A settings journal that was recovered successfully keeps that result when only deletion of the journal fails. The record is set aside for diagnostics, while the notice still reports recovered or already completed settings.
 
 * The release check now ties the README's minimum Morphe Manager version to a `manager-floor` value beside the patcher pin. Device-only signing helpers read their password from `HUSHFEED_SIDELOAD_KEYSTORE_PASSWORD`, retain `sideload` as the documented local test-key fallback, and keep the value out of child process command lines.

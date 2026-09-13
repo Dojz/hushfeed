@@ -224,8 +224,9 @@ public final class SettingsOperationJournal {
             text = read(file);
             fingerprint = fingerprint(text);
         } catch (Exception error) {
+            String unreadableFingerprint = unreadableFingerprint(file);
             setAside(file);
-            publish(Recovery.MALFORMED, file.getBaseFile().getAbsolutePath());
+            publish(Recovery.MALFORMED, unreadableFingerprint);
             return Recovery.MALFORMED;
         }
 
@@ -435,6 +436,13 @@ public final class SettingsOperationJournal {
 
     private static String fingerprint(String text) {
         return text.length() + ":" + text.hashCode();
+    }
+
+    /** Identity for bytes that could not be decoded and therefore have no content fingerprint. */
+    private static String unreadableFingerprint(AtomicFile file) {
+        File base = file.getBaseFile();
+        File source = base.isFile() ? base : new File(base.getPath() + ".bak");
+        return source.getAbsolutePath() + ":" + source.length() + ":" + source.lastModified();
     }
 
     private static final class JournalEntry {
