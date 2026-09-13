@@ -1,5 +1,7 @@
 ## 0.30.1
 
+* The obfuscated identity audit now records Java binary class names such as `X.0GSy`, as well as smali descriptors. Exact token boundaries keep longer names and ordinary Java text from being counted, and a regression proves a new `Class.forName` literal stops the build.
+
 * Patch result checks now accept dependency rows declared by a selected patch while still rejecting a missing root or any duplicate or unrelated row. Device patching and fixture checks use the rule, as does heap measurement.
 
 * Cached model reflection now finds public methods inherited from interfaces. Follow diagnostics uses the required lookup for a request path, so a future TikTok rename appears in Hook status instead of making every path look unknown.
