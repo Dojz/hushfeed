@@ -4,6 +4,8 @@
 
 * Creator identity now uses the same canonical value for equality and hash collections. Fire-and-forget background and main-thread callbacks report every failure instead of letting an Error escape into TikTok. Android API checks now cover the full shared and settings source rather than being disabled for two whole files, the TikTok stub matches the app's API 23 floor and has its own namespace, and artifact verification rejects any DEX payload with no classes.
 
+* Patch failures now name the selector or method contract that changed instead of ending in a collection or null crash. The offline option hook requires the exact six-register enum constructor it reads. Story downloads require both bind methods, and the settings row reserves low registers for its plain invokes. Region spoof keeps the getter's documented first-field rule. Screen-capture patching no longer writes a count to standard output.
+
 * Silent reflection failures now reach Hook status for CAPTCHA account checks, external browser handoff, sticker source adapters and story saves. Each feature keeps its existing fallback, while a renamed required class, method or field identifies the affected family and member in Diagnostics.
 
 * The dark and light Included diagnostics screenshots now come from the shipped preference. Both show its eight real choices and Apply and Cancel actions. The capture test rejects a missing choice or the return of the invented Done button.
@@ -230,7 +232,7 @@
 
 * The hold panel offers a way to your messages. It always said messages, profiles and search still work, and then covered the screen, so you had to already know the Inbox tab was underneath. There is an "Open messages" action under the countdown now. It opens the Inbox tab exactly as tapping it would, the hold stays up behind it, and it comes back when you return to the feed. If you have hidden Inbox in Feed navigation, the action is not there.
 
-* The install steps say what Android now asks for. From 2026-09-30, phones in Brazil, Indonesia, Singapore and Thailand put an app from an unverified developer through an extra flow: Developer options, a screen unlock, a restart, then a 24 hour wait before it installs, and after that a window of 7 days or indefinitely. Every release is an update, so it comes round again once that window closes. The README says so, and says that installing over adb skips it. It also now says that 640 MB is the manager's default rather than a measured minimum.
+* The install steps say what Android now asks for. From 2026-09-30, phones in Brazil, Indonesia, Singapore and Thailand put an app from an unverified developer through an extra flow: Developer options, confirmation of the device lock, a restart, then a 24 hour wait before it installs, and after that a window of 7 days or indefinitely. Every release is an update, so it comes round again once that window closes. The README says so, and says that installing over adb skips it. It also now says that 640 MB is the manager's default rather than a measured minimum.
 
 * You can cap how many times a day the hold lets you through. Until now the way out on the countdown was either always there or, with Lock today's budget on, gone entirely. The new row sits between the two: pick a number and the control counts down, saying how many are left, then goes once they are spent. Zero, the default, changes nothing. The count survives the app being killed and comes back when the day starts over.
 
