@@ -38,7 +38,7 @@ The block, local hide, sound and Not interested controls, rendered in a local UI
 
 1. Get the TikTok 46.2.3 APK. Google Play only offers the newest build, so take it from [APKMirror](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-46-2-3-release/tiktok-46-2-3-android-apk-download/).
 2. Use Morphe Manager 1.29.0 or newer. Manager refuses a bundle built against a patcher newer than its own, and this one is built against patcher 1.12.0, which Manager 1.29.0 was the first to ship. On anything older the bundle simply will not load.
-3. Add Hushfeed as a source in Morphe Manager. The quickest way is this link on the phone: [Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc/hushfeed). You can also download `patches-0.29.0.mpp` from the [latest release](https://github.com/SysAdminDoc/hushfeed/releases/latest) and load it as a local bundle.
+3. Add Hushfeed as a source in Morphe Manager. The quickest way is this link on the phone: [Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc/hushfeed). You can also download `patches-0.30.0.mpp` from the [latest release](https://github.com/SysAdminDoc/hushfeed/releases/latest) and load it as a local bundle.
 4. Pick the patches you want and patch the APK. Keep the manager's existing signing key so TikTok stays logged in across updates. Every patch here fits the manager's 640 MB memory default except AMOLED dark theme, which rewrites TikTok's color resources and needs the limit raised to 768 MB. That 640 is the manager's default and not a measured minimum: the whole set apart from AMOLED fits in 576 MB. If patching stops with an out of memory error, that setting is the one to raise.
 5. Install the patched APK. From 2026-09-30, phones in Brazil, Indonesia, Singapore and Thailand ask for more before they will install an app from a developer Google has not verified. The flow is the same every time: turn on the option in Developer options, unlock the screen, restart the phone, then wait 24 hours before the install goes through. After that it stays open for 7 days, or indefinitely if you chose that. This is not a one-off. Every Hushfeed release is an update, and an update goes through it again once the window closes. `adb install` from a computer skips the whole thing.
 6. Open TikTok, go to Settings and privacy, and tap Hushfeed. Every patch you selected has its switches there.
@@ -53,7 +53,7 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 |---|---|
 | `Automatic video advance` | Keeps native automatic advance enabled, and shows TikTok's own Auto scroll action in the video panel for accounts that never had it. TikTok still checks pauses, dialogs, gestures and whether another video is available. Turn it off in Playback to stop advance started by this option. An optional session limit stops Hushfeed-owned advance after a chosen number of visible videos while manual and native-only scrolling remain independent. |
 | `Foldable split comment view` | Enables comments beside the video from a configurable window width (600 dp by default). Off by default, with multi-window and picture-in-picture restrictions preserved. Restart after changing its settings or unfolding if TikTok keeps the old layout. |
-| `Subtitle tools` | Saves captions as SRT files beside downloaded videos. Choose original, device or all available languages, adjust caption size and background, and keep the current caption visible in clear display. |
+| `Subtitle tools` | Saves captions as SRT files beside downloaded videos. Choose original, device or all available languages, adjust caption size and background, and keep the current caption visible in clear display. Turning clear-display captions off removes the extra caption immediately. |
 | `Playback quality` | Chooses the lowest, highest or a target video quality for regular and adaptive playback. A second choice caps quality on mobile data, and only ever lowers it. Download quality has its own setting. |
 | `Advanced downloads` | Selects a video quality or target resolution and combines separate audio tracks when needed. Optional extras save Photo Mode images straight from their source URLs, keep a video's sound as its own .m4a, save a video without its sound, hand the link to a downloader you already use, and save a profile picture at full size or a story from a long press. Both gestures use the pressed view's current media, including individual stories inside a creator's collection. Profile pictures use the largest available image, with smaller sizes as fallbacks. When the target is [YTDLnis](https://github.com/deniscerri/ytdlnis), choose its audio or video mode and whether the handoff runs in the background. Other package names receive only the sanitized link. |
 | `Allow Duet and Stitch` | Ignores the creator's Duet and Stitch setting so the entries appear. Every other check the app makes still applies, and whether the upload is accepted is the server's decision. |
@@ -77,7 +77,7 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 | `Disable screen capture detection` | Prevents TikTok from detecting screenshots and screen recordings. |
 | `Allow screenshots and Circle to Search` | Removes secure window flags and the native Circle to Search block. Off by default. Restart after changing the setting. |
 | `Diagnostic tools` | Adds optional structured Morphe logs, TikTok crash capture, and clipboard or file report export. Clearing the stored diagnostic data can be undone with the next tap. |
-| `Downloads` | Adds watermark-free downloads, filename templates, and comment sticker saving. An animated sticker is written as MP4, GIF, or the WebP TikTok sent, whichever you pick. |
+| `Downloads` | Adds watermark-free downloads, filename templates, and comment sticker saving. `{index}` numbers each image when TikTok saves a Photo Mode post. An animated sticker is written as MP4, GIF, or the WebP TikTok sent, whichever you pick. |
 | `Show LIVE search` | Shows TikTok's search entry in the LIVE drawer where supported. |
 | `Use non-personalized search` | Uses TikTok's non-personalized search mode instead of its saved account choice. |
 | `Hide search suggestions` | Hides the searches TikTok offers before you type, including cached recommendations and those shown when you return to Search. It stops new suggestions from loading while keeping your own search history. |
@@ -174,6 +174,8 @@ Select `Subtitle tools` in the patcher, then enable subtitle downloads in Downlo
 
 Caption appearance and the clear display option are in Interface:
 
+The clear-display caption is removed as soon as you turn its switch off. Turning it back on restores the current cue when its video is still on screen.
+
 <img src="assets/settings/interface.png" alt="Caption appearance settings" width="300" /> <img src="assets/settings/downloads.png" alt="Subtitle download settings" width="300" />
 
 Inbox category switches identify New followers, Activity, Archive, Tako and Shop from native row data. They work with translated labels. Turning a switch off restores an already loaded row on the next layout.
@@ -187,6 +189,8 @@ Select `Automatic video advance` in the patcher, then enable Advance when a vide
 Auto-advance session limit is zero by default. A positive value counts videos that finish while Hushfeed started scrolling, not prefetches or manual swipes. Recreating the feed or changing the limit starts a new count. Saving the same number, changing another setting or returning from the background keeps the existing count, including a reached limit. Hushfeed shows a brief notice when it stops.
 
 Advanced downloads can send a sanitized TikTok link to another installed app. Enter its package name in `Send links to another app`; an empty value keeps TikTok's own save. The [YTDLnis](https://github.com/deniscerri/ytdlnis) package is recognized explicitly as `com.deniscerri.ytdl`, so its documented audio or video type and optional background mode are available. The profile controls stay disabled for every other package, and an uninstalled target falls back to TikTok's save.
+
+Photo filename templates can use `{index}`. TikTok's own Photo Mode saver numbers each image from 1 and starts over when the post has finished saving, including on Android versions that write straight to a shared folder.
 
 Foldable controls are in App behavior. Settings save immediately, including when an older settings page is still open. A notification tells you when to restart TikTok.
 

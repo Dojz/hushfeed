@@ -185,7 +185,7 @@ public class StickerGallerySaverTest {
 
         Runnable work = StickerGallerySaver.stickerSaveWork(
                 RuntimeEnvironment.getApplication(), asset, anchor);
-        Runnable cancelled = StickerGallerySaver.handBackLater(anchor);
+        Runnable rejected = StickerGallerySaver.handBackLater(anchor);
 
         // The control: a closure that does capture the button has to be found, or the walk below
         // proves nothing about the two that should not.
@@ -195,8 +195,8 @@ public class StickerGallerySaverTest {
 
         assertFalse("a queued sticker save holds the button, and through it the Activity",
                 reaches(work, button));
-        assertFalse("a cancelled sticker save holds the button",
-                reaches(cancelled, button));
+        assertFalse("a rejected sticker save holds the button",
+                reaches(rejected, button));
     }
 
     @Test public void aSaveThatNeverRanStillHandsTheButtonBack() {

@@ -195,7 +195,7 @@ public final class StoryDownloads {
         Utils.showToastShort(L10n.t("Saving the story"));
         try {
             String capturedAudioName = audioName;
-            MediaJobScheduler.JobHandle job = MediaJobScheduler.submit("story", () -> {
+            boolean submitted = MediaJobScheduler.submit("story", () -> {
                 try {
                     if (photoSnapshot.isEmpty()) {
                         saveVideo(app, aweme, videoSnapshot, capturedAudioName);
@@ -203,15 +203,13 @@ public final class StoryDownloads {
                         savePhotos(app, aweme, photoSnapshot);
                     }
                 } catch (IOException | RuntimeException exception) {
-                    if (!MediaBudget.isCancellation(exception)) {
-                        Logger.printException(() -> "Story download failed", exception);
-                        Utils.showToastLong(L10n.t("The story couldn't be saved."));
-                    }
+                    Logger.printException(() -> "Story download failed", exception);
+                    Utils.showToastLong(L10n.t("The story couldn't be saved."));
                 } finally {
                     ACTIVE.remove(id);
                 }
-            }, () -> ACTIVE.remove(id));
-            if (job == null) {
+            });
+            if (!submitted) {
                 ACTIVE.remove(id);
                 return false;
             }

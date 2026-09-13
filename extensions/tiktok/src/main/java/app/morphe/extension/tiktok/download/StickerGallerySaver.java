@@ -51,7 +51,6 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.InterruptedIOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
@@ -209,14 +208,13 @@ public final class StickerGallerySaver {
         button.setEnabled(false);
         Utils.showToastShort(L10n.t("Saving sticker"));
 
-        // A submitted job stays in the scheduler's static map until it finishes, which is up to
-        // the two minute deadline with eight more queued behind it. Capturing the button held
-        // the sheet's Activity for that whole window after the sheet itself was gone. Every
-        // other view this file keeps hold of is already weak.
+        // A submitted job can wait behind eight others, then run up to the two minute deadline.
+        // Capturing the button would hold the sheet's Activity for that whole window after the
+        // sheet itself was gone. Every other view this file keeps hold of is already weak.
         WeakReference<View> anchor = new WeakReference<>(button);
-        MediaJobScheduler.JobHandle job = MediaJobScheduler.submit(
-                "sticker", stickerSaveWork(context, asset, anchor), handBackLater(anchor));
-        if (job == null) handBackLater(anchor).run();
+        boolean submitted = MediaJobScheduler.submit(
+                "sticker", stickerSaveWork(context, asset, anchor));
+        if (!submitted) handBackLater(anchor).run();
     }
 
     /** The work one sticker save does, holding the sheet by nothing stronger than {@code anchor}. */
@@ -259,12 +257,6 @@ public final class StickerGallerySaver {
                 if (!result.success) throw new IOException(result.message);
                 return result;
             } catch (Throwable error) {
-                if (MediaBudget.isCancellation(error)) {
-                    if (BaseSettings.DEBUG.get()) {
-                        Logger.printException(() -> "[Morphe Stickers] saveSticker cancelled", error);
-                    }
-                    return SaveResult.failure(L10n.t("The sticker couldn't be saved. Try again."));
-                }
                 failure.addSuppressed(new IOException(
                         "Sticker mirror failed (" + error.getClass().getSimpleName() + "): "
                                 + summarizeUrl(url), error));
@@ -314,10 +306,6 @@ public final class StickerGallerySaver {
                 }
                 return connection.getContentType();
             } catch (IOException | RuntimeException error) {
-                if (MediaBudget.isCancellation(error)) {
-                    if (error instanceof InterruptedIOException) throw (InterruptedIOException) error;
-                    throw new InterruptedIOException("Media job cancelled");
-                }
                 boolean retryable = MediaBudget.isRetryableTransport(error);
                 if (retryable && attempt + 1 < MediaBudget.MAX_ATTEMPTS_PER_MIRROR) {
                     MediaBudget.waitBeforeRetry(null, attempt, deadline);
