@@ -1,4 +1,4 @@
-## 0.30.1
+## 0.30.2
 
 * GIF conversion now has separate deadline regressions for its colour-precision, palette and frame-encoding passes. Each check has to stop before the second frame, so losing one cannot hide behind an earlier pass.
 
@@ -32,11 +32,15 @@
 
 * The README patch table now uses the same descriptions Morphe Manager reads from the shipped catalog. A regression checks every name and description, so changing either side cannot leave the project page describing a different feature.
 
+* Patch failures now name the selector or method contract that changed instead of ending in a collection or null crash. The offline option hook requires the exact six-register enum constructor it reads. Story downloads require both bind methods, and the settings row reserves low registers for its plain invokes. Region spoof keeps the getter's documented first-field rule. Screen-capture patching no longer writes a count to standard output.
+
+* The release gate now checks the published bundle against the version tag during the final index push. The index is committed after the artifact exists, so comparing the bundle to that later commit rejected a correct release.
+
+## 0.30.1
+
 * TikTok's own Photo Mode save now gives every image its own `{index}` number instead of naming the whole slideshow as image 1. This also prevents later photos replacing the first one on Android 6 through 9. Animated WebP to GIF conversion now budgets the canvas and decoded frame alongside the stored frame pixels, which cuts the worst pixel allocation from about 100 MiB to 32 MiB before encoder overhead. Turning off Keep captions in clear display removes its overlay and layout observer immediately. Media jobs keep their two minute deadline without carrying a cancel path that no shipped control could call.
 
 * Creator identity now uses the same canonical value for equality and hash collections. Fire-and-forget background and main-thread callbacks report every failure instead of letting an Error escape into TikTok. Android API checks now cover the full shared and settings source rather than being disabled for two whole files, the TikTok stub matches the app's API 23 floor and has its own namespace, and artifact verification rejects any DEX payload with no classes.
-
-* Patch failures now name the selector or method contract that changed instead of ending in a collection or null crash. The offline option hook requires the exact six-register enum constructor it reads. Story downloads require both bind methods, and the settings row reserves low registers for its plain invokes. Region spoof keeps the getter's documented first-field rule. Screen-capture patching no longer writes a count to standard output.
 
 * Silent reflection failures now reach Hook status for CAPTCHA account checks, external browser handoff, sticker source adapters and story saves. Each feature keeps its existing fallback, while a renamed required class, method or field identifies the affected family and member in Diagnostics.
 
@@ -61,8 +65,6 @@
 * The README puts the Morphe source link, latest bundle, settings tour and patch list near the top. Its feature overview is shorter, the exact supported TikTok build is harder to miss, and the release link points at the current bundle.
 
 * The previous header, both finished hero layouts, README-width previews, fresh offscreen screenshots and rejected mark studies now live in the marketing concept archive. A regression test keeps the selected hero first, prevents a second copy, checks its dimensions and locks the approved H to the supplied file.
-
-* The release gate now checks the published bundle against the version tag during the final index push. The index is committed after the artifact exists, so comparing the bundle to that later commit rejected a correct release.
 
 ## 0.30.0
 
