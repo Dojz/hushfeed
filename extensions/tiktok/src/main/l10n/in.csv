@@ -870,3 +870,5 @@ Loaded values are still being read. Try again in a moment.,Nilai yang dimuat mas
 The selected loaded-values file could not be read. Try again.,Berkas nilai yang dimuat dan dipilih tidak dapat dibaca. Coba lagi.
 Enter a number. The previous value was kept.,Masukkan angka. Nilai sebelumnya dipertahankan.
 There is no diagnostic data to clear.,Tidak ada data diagnostik yang perlu dihapus.
+"Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok.","Data Lab melebihi batas aturan, jadi data dihapus tanpa salinan untuk dibatalkan. Mulai ulang TikTok."
+"The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.","Lab menyimpan paling banyak %1$s aturan. Perubahan ini akan membuat jumlahnya %2$s, jadi tidak ada yang diubah."

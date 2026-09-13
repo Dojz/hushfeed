@@ -4,6 +4,8 @@
 
 * Share sheet confirmation now handles every click path, including accessibility actions and keyboard input. It follows the recipient's account or conversation ID. Reusing a row or letting the timer expire resets the check, and TikTok's original row highlight comes back.
 
+* Feature Gate Lab now checks its 1,024-rule limit before writing a change or importing a file. Reset all Lab data can recover an older oversized store without clearing other Hushfeed settings.
+
 ## 0.30.2
 
 * GIF conversion now has separate deadline regressions for its colour-precision, palette and frame-encoding passes. Each check has to stop before the second frame, so losing one cannot hide behind an earlier pass.
