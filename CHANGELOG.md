@@ -28,6 +28,8 @@
 
 * The previous header, both finished hero layouts, README-width previews, fresh offscreen screenshots and rejected mark studies now live in the marketing concept archive. A regression test keeps the selected hero first, prevents a second copy, checks its dimensions and locks the approved H to the supplied file.
 
+* The release gate now checks the published bundle against the version tag during the final index push. The index is committed after the artifact exists, so comparing the bundle to that later commit rejected a correct release.
+
 ## 0.30.0
 
 * Fit the video to the screen now works on the For You feed. The feed cell never sized its video through the method the patch hooked; it hands the size to a helper of its own, and that helper is what the patch reaches now, on every build seen. A fitted video is handed back as a copy of TikTok's own answer, so the size the feed applies and the size it checks against are the same one. The story cell's own path is still covered, and the copy it keeps is looked up by the object rather than by its numbers, which a size change had moved out from under.

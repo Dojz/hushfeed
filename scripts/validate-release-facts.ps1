@@ -202,6 +202,14 @@ $assetName = [IO.Path]::GetFileName($assetUri.AbsolutePath)
 if ($assetName -ne "patches-$publishedVersion.mpp") {
     throw "The published bundle URL names $assetName instead of patches-$publishedVersion.mpp."
 }
+if ($assetUri.Host -ne 'github.com') {
+    throw "The indexed bundle URL must be on github.com: $assetUri"
+}
+$segments = @($assetUri.AbsolutePath.Trim('/') -split '/')
+if ($segments.Count -lt 2) {
+    throw "Could not read an owner and repository out of the indexed bundle URL: $assetUri"
+}
+$slug = $segments[0] + '/' + $segments[1]
 if ($SkipUrlCheck) {
     Write-Host '[release] the indexed URL was not fetched because -SkipUrlCheck was given'
 } else {
@@ -235,15 +243,6 @@ if ($indexLagsSource) {
 if ($SkipUrlCheck) {
     Write-Host '[release] the repository description was not read because -SkipUrlCheck was given'
 } else {
-    if ($assetUri.Host -ne 'github.com') {
-        throw "The indexed bundle URL is not on github.com, so the repository description cannot be checked: $assetUri"
-    }
-    $segments = @($assetUri.AbsolutePath.Trim('/') -split '/')
-    if ($segments.Count -lt 2) {
-        throw "Could not read an owner and repository out of the indexed bundle URL: $assetUri"
-    }
-    $slug = $segments[0] + '/' + $segments[1]
-
     if (-not (Get-Command gh -ErrorAction SilentlyContinue)) {
         throw ('The gh CLI is needed to read the repository description of ' + $slug +
             '. Install it, or pass -SkipUrlCheck to run the rest with no network.')
@@ -410,23 +409,43 @@ if ($VerifyPublishedAsset) {
         # then the release commit was made. The hashes agreed at the time and the README's offer
         # to rebuild the bundle and compare checksums was false for the rest of the release.
         #
-        # Checked against the local artifact and HEAD rather than against the published file and
-        # the tag, because the tag cannot be the answer here. It only points at the release commit
-        # once that commit is on the remote, and the push that puts it there is the push this
-        # check gates, so a tag comparison could never pass at the one moment it matters. Held
-        # together with the hash comparison above, which says published and local are the same
-        # bytes, this gives the whole claim: the published bundle is pinned to the commit being
-        # released.
+        # A release is built from the source commit, then its public index is updated in a later
+        # commit. HEAD is therefore the wrong comparison during that index push. Resolve the
+        # published version's remote tag and hold the local artifact to that commit instead.
+        # Held together with the hash comparison above, this gives the whole claim: the hosted
+        # bundle is byte-for-byte local and reproducible from the release tag.
         #
         # SOURCE_DATE_EPOCH is deliberately not consulted. It is the same variable the build
         # reads, so accepting it as the expected value would compare the builder's own input
         # against itself and agree whichever commit the bundle came from.
-        $headEpoch = (& git -C $rootPath log -1 --format=%ct 2>$null | Select-Object -First 1)
-        $headEpoch = "$headEpoch".Trim()
-        if ($headEpoch -notmatch '^\d+$') {
-            throw 'Could not read the commit being released, so the bundle cannot be held to it.'
+        $releaseTagRef = "refs/tags/v$publishedVersion"
+        $peeledTagRef = "$releaseTagRef^{}"
+        $remoteUrl = "https://github.com/$slug.git"
+        $remoteTags = @(& git ls-remote $remoteUrl $releaseTagRef $peeledTagRef 2>$null)
+        $remoteStatus = $LASTEXITCODE
+        if ($remoteStatus -ne 0) {
+            throw "Could not read v$publishedVersion from $remoteUrl."
         }
-        $expectedStamp = [long]$headEpoch * 1000
+        $tagLine = $remoteTags |
+            Where-Object { $_ -match "\s+$([regex]::Escape($peeledTagRef))$" } |
+            Select-Object -First 1
+        if (-not $tagLine) {
+            $tagLine = $remoteTags |
+                Where-Object { $_ -match "\s+$([regex]::Escape($releaseTagRef))$" } |
+                Select-Object -First 1
+        }
+        $tagCommitMatch = [regex]::Match([string]$tagLine, '^([0-9a-fA-F]{40,64})\s+')
+        if (-not $tagCommitMatch.Success) {
+            throw "The published release tag v$publishedVersion does not exist on $remoteUrl."
+        }
+        $releaseCommit = $tagCommitMatch.Groups[1].Value.ToLowerInvariant()
+        $releaseEpoch = (& git -C $rootPath log -1 --format=%ct $releaseCommit 2>$null |
+            Select-Object -First 1)
+        $releaseEpoch = "$releaseEpoch".Trim()
+        if ($releaseEpoch -notmatch '^\d+$') {
+            throw "Could not read tagged release commit $releaseCommit in this checkout."
+        }
+        $expectedStamp = [long]$releaseEpoch * 1000
         Add-Type -AssemblyName System.IO.Compression.FileSystem -ErrorAction SilentlyContinue
         $localStamp = $null
         $zip = [System.IO.Compression.ZipFile]::OpenRead($ArtifactPath)
@@ -440,12 +459,13 @@ if ($VerifyPublishedAsset) {
             $localStamp = [long]$stampMatch.Groups[1].Value
         } finally { $zip.Dispose() }
         if ($localStamp -ne $expectedStamp) {
-            throw ("The bundle in patches/build/libs is pinned to $localStamp but the commit being " +
-                "released is $expectedStamp. Build the bundle after making the release commit, so " +
-                'that rebuilding from the tag reproduces the published hash.')
+            throw ("The bundle in patches/build/libs is pinned to $localStamp but release tag " +
+                "v$publishedVersion ($releaseCommit) is $expectedStamp. Build the bundle from " +
+                'the tagged commit so rebuilding from the tag reproduces the published hash.')
         }
         $publishedStamp = $localStamp
-        Write-Host ("[release] published bundle is pinned to the released commit; timestamp=" + $publishedStamp)
+        Write-Host ("[release] published bundle is pinned to v$publishedVersion ($releaseCommit); timestamp=" +
+            $publishedStamp)
         Write-Host ("[release] verified " + $assetName + " from the indexed URL; sha256=" + $publishedHash)
         # No caller passed -DesktopJar and nothing in the repo set the variable, so this check
         # printed "NOT COUNTED" and passed on every run it has ever had. A switch named
