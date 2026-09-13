@@ -12,6 +12,8 @@
 
 * Device verification now removes each uploaded APK and its generated ART files after every result, including failed uploads and disconnected runs. Cleanup errors are reported without replacing the verification failure that caused them.
 
+* Session budget recovery now validates the whole persisted record before making any of it live. Damaged fields and invalid shapes reset to clean current-day values and are rewritten, while historical five-field records and the current nine-field format keep their exact meaning.
+
 ## 0.30.2
 
 * GIF conversion now has separate deadline regressions for its colour-precision, palette and frame-encoding passes. Each check has to stop before the second frame, so losing one cannot hide behind an earlier pass.
