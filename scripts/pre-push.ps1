@@ -101,6 +101,16 @@ try {
 
     $touchesCode = @($paths | Where-Object { $_ -like 'extensions/*' -or $_ -like 'patches/*' }).Count -gt 0
     $touchesScripts = @($paths | Where-Object { $_ -like 'scripts/*' }).Count -gt 0
+    $injectedRegisterVerifierPaths = @(
+        'scripts/DexDiff.java',
+        'scripts/injected-register-contracts.ps1',
+        'scripts/injected-register-removal-allowlist.txt',
+        'scripts/test-injected-registers.ps1',
+        'scripts/verify-injected-registers.ps1'
+    )
+    $touchesInjectedRegisterVerifier = @($paths | Where-Object {
+        $_ -in $injectedRegisterVerifierPaths
+    }).Count -gt 0
     $touchesRelease = @($paths | Where-Object {
         $_ -eq 'patches-bundle.json' -or $_ -eq 'patches-list.json' -or
         $_ -eq 'gradle.properties' -or $_ -eq 'README.md' -or
@@ -115,6 +125,12 @@ try {
         Write-Step 'scripts changed, running their contract tests'
         & (Join-Path $Root 'scripts/test-script-contracts.ps1') -Root $Root
         if ($LASTEXITCODE -ne 0) { throw 'The script contract tests did not pass.' }
+    }
+
+    if ($touchesInjectedRegisterVerifier) {
+        Write-Step 'injected-register verifier changed, running its fixture tests'
+        & (Join-Path $Root 'scripts/test-injected-registers.ps1') -Root $Root
+        if ($LASTEXITCODE -ne 0) { throw 'The injected-register verifier fixture tests did not pass.' }
     }
 
     if ($touchesCode) {

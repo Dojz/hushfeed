@@ -8,6 +8,8 @@
 
 * Settings Undo now recognizes an interrupted current or legacy undo write when only its recovery file remains. It always prefers the current Hushfeed copy, and the next verified snapshot moves storage off the old Metra filename.
 
+* Injected-register verification now requires identical Android verifier message counts from clean and patched APKs. Its static check also rejects removed host methods and DEX files unless an exact reviewed removal is listed beside the verifier.
+
 ## 0.30.2
 
 * GIF conversion now has separate deadline regressions for its colour-precision, palette and frame-encoding passes. Each check has to stop before the second frame, so losing one cannot hide behind an earlier pass.
