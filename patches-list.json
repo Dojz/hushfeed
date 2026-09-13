@@ -1167,7 +1167,7 @@
     },
     {
       "name": "Hide inbox stories",
-      "description": "Stops the stories tray at the top of the Inbox from being built. Shares its switch with Hide inbox items.",
+      "description": "Hides the stories tray at the top of the Inbox and restores it immediately when the switch is turned off. Shares its switch with Hide inbox items.",
       "use": false,
       "dependencies": [
         "Settings",

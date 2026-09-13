@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Hide inbox stories now responds without restarting TikTok. It hides only the story tray, restores recycled rows when they change purpose, and shares one live Inbox observer with Hide inbox items when both patches are selected.
+
 * Remove feed ads now recognizes TikTok's raw auction metadata even when both native Boolean ad flags are false. The shared check covers response, cache, Following, Friends, profile, search and late-insertion feeds while leaving ordinary paid-partnership posts alone.
 
 * Share sheet confirmation now handles every click path, including accessibility actions and keyboard input. It follows the recipient's account or conversation ID. Reusing a row or letting the timer expire resets the check, and TikTok's original row highlight comes back. If the confirmation setup or setting read fails, the tap is stopped and an older confirmation is forgotten. Turning confirmation off restores normal sending even if an old row highlight cannot be cleared.
