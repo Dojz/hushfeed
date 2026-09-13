@@ -277,9 +277,13 @@ public final class ShareSheetTools {
             return false;
         } catch (Throwable ex) {
             Logger.printException(() -> "Share confirm step failed", ex);
-            // A failed protection step must not make the native share sheet unusable.
-            disarm();
-            return true;
+            // Confirmation failures must consume the activation instead of reaching native send.
+            try {
+                disarm();
+            } catch (Throwable cleanupEx) {
+                Logger.printException(() -> "Could not clear failed share confirmation", cleanupEx);
+            }
+            return false;
         }
     }
 

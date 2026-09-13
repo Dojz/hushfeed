@@ -176,6 +176,29 @@ public class ShareSheetToolsTest {
         assertEquals(1, sends.get());
     }
 
+    @Test public void firstActivationFailureCannotReachTheNativeSendHandler() {
+        Settings.SHARE_CONFIRM_SEND.save(true);
+        AtomicInteger sends = new AtomicInteger();
+        FrameLayout cell = new FailingHapticRecipient(context);
+        Drawable nativeForeground = new ColorDrawable(Color.BLUE);
+        cell.setForeground(nativeForeground);
+        cell.setContentDescription("Alice");
+        cell.setClickable(true);
+        cell.layout(0, 0, 100, 100);
+        cell.setOnClickListener(view -> {
+            if (ShareSheetTools.allowRecipientClick(view)) {
+                sends.incrementAndGet();
+            }
+        });
+        ShareSheetTools.bindRecipient(new TestHolder(cell), new UserRecipient("user-a"));
+
+        assertTrue(cell.performClick());
+        assertEquals("a failed confirmation must still consume the first activation", 0,
+                sends.get());
+        assertSame("a failed confirmation restores TikTok's original row state", nativeForeground,
+                cell.getForeground());
+    }
+
     @Test public void nestedClickTargetsResolveTheModelBoundCell() {
         Settings.SHARE_CONFIRM_SEND.save(true);
         FrameLayout cell = new FrameLayout(context);
@@ -226,6 +249,16 @@ public class ShareSheetToolsTest {
     }
 
     public static final class TestActivity extends Activity {
+    }
+
+    private static final class FailingHapticRecipient extends FrameLayout {
+        FailingHapticRecipient(Context context) {
+            super(context);
+        }
+
+        @Override public boolean performHapticFeedback(int feedbackConstant) {
+            throw new IllegalStateException("simulated confirmation setup failure");
+        }
     }
 
     public static final class TestHolder extends BaseTestHolder {
