@@ -158,12 +158,13 @@ The settings pages use grouped controls on an AMOLED background. Light mode foll
 </details>
 
 The native choice dialogs keep one indicator at the leading edge. These renders cover selected and
-unselected rows in both themes:
+unselected rows in both themes. The Included diagnostics images come from the shipped eight-choice
+picker with its real Apply and Cancel actions:
 
 | Dialog | Dark | Light |
 |---|---|---|
 | Single choice | [View](assets/settings/dialog-single-dark.png) | [View](assets/settings/dialog-single-light.png) |
-| Multiple choice | [View](assets/settings/dialog-multi-dark.png) | [View](assets/settings/dialog-multi-light.png) |
+| Included diagnostics | [View](assets/settings/dialog-multi-dark.png) | [View](assets/settings/dialog-multi-light.png) |
 
 
 Hushfeed saves what the app already has. The download reads the addresses TikTok itself fetched for the video you are watching, on the session you are already signed in with, so there is no separate request pretending to be a browser and nothing to keep in step with the site. That is the difference between this and a scraper. Through August 2026 yt-dlp had to rewrite its TikTok extractor twice and re-implement browser impersonation, and it broke again on 1 September. Cobalt has not shipped since April. None of that is a promise that saving always works. TikTok can change what it hands the app, and when it does the saver changes with the patches. It just means the thing most likely to break in a scraper is not part of how this works.
