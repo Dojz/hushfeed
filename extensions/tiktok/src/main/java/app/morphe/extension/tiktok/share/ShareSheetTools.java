@@ -64,6 +64,15 @@ public final class ShareSheetTools {
     /** How long a first tap stays armed before a second tap is needed again. */
     private static final long ARM_WINDOW_MS = 4000;
 
+    interface ConfirmationSettingReader {
+        boolean enabled();
+    }
+
+    private static final ConfirmationSettingReader DEFAULT_CONFIRMATION_SETTING_READER =
+            () -> Settings.SHARE_CONFIRM_SEND.get();
+    private static ConfirmationSettingReader confirmationSettingReader =
+            DEFAULT_CONFIRMATION_SETTING_READER;
+
     private static final ResourceIdCache RESOURCE_IDS = new ResourceIdCache();
 
     /** Original layout width of each cell this class has shrunk, so it can be restored. */
@@ -253,8 +262,13 @@ public final class ShareSheetTools {
     public static boolean allowRecipientClick(View touched) {
         final boolean confirmationEnabled;
         try {
-            confirmationEnabled = Settings.SHARE_CONFIRM_SEND.get();
+            confirmationEnabled = confirmationSettingReader.enabled();
         } catch (Throwable ex) {
+            try {
+                disarm();
+            } catch (Throwable cleanupEx) {
+                Logger.printException(() -> "Could not clear unread share confirmation", cleanupEx);
+            }
             Logger.printException(() -> "Could not read share confirmation setting", ex);
             return false;
         }
@@ -416,6 +430,13 @@ public final class ShareSheetTools {
     static void resetForTests() {
         disarm();
         RECIPIENTS.clear();
+        confirmationSettingReader = DEFAULT_CONFIRMATION_SETTING_READER;
+    }
+
+    static void setConfirmationSettingReaderForTests(ConfirmationSettingReader reader) {
+        confirmationSettingReader = reader == null
+                ? DEFAULT_CONFIRMATION_SETTING_READER
+                : reader;
     }
 
     private static final class RecipientBinding {

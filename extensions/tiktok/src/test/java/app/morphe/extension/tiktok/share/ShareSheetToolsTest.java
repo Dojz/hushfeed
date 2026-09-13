@@ -223,6 +223,28 @@ public class ShareSheetToolsTest {
                 sends.get());
     }
 
+    @Test public void settingReadFailureClearsArmBeforeTheNextActivation() {
+        Settings.SHARE_CONFIRM_SEND.save(true);
+        AtomicInteger sends = new AtomicInteger();
+        FrameLayout cell = recipient("Alice", new UserRecipient("user-a"), sends);
+
+        assertTrue(cell.performClick());
+        assertEquals(0, sends.get());
+
+        ShareSheetTools.setConfirmationSettingReaderForTests(() -> {
+            throw new IllegalStateException("simulated setting read failure");
+        });
+        assertTrue(cell.performClick());
+        assertEquals(0, sends.get());
+
+        ShareSheetTools.setConfirmationSettingReaderForTests(null);
+        assertTrue(cell.performClick());
+        assertEquals("the stale first activation cannot confirm after a failed setting read", 0,
+                sends.get());
+        assertTrue(cell.performClick());
+        assertEquals(1, sends.get());
+    }
+
     @Test public void nestedClickTargetsResolveTheModelBoundCell() {
         Settings.SHARE_CONFIRM_SEND.save(true);
         FrameLayout cell = new FrameLayout(context);

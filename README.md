@@ -20,7 +20,7 @@ Hushfeed is a [Morphe](https://github.com/MorpheApp/morphe-manager) patch bundle
 ## Pick what changes
 
 - **Feed:** Hide ads, Shop, livestreams, stories, photo posts, unwanted creators and videos matching your own rules.
-- **Touch controls:** Add second-tap protection to Follow and Like. Share confirmation also covers accessibility actions and keyboard input. If Hushfeed cannot prepare the first confirmation, it stops that tap instead of sending. Turning it off immediately restores normal sending. Remap or disable long press and double tap.
+- **Touch controls:** Add second-tap protection to Follow and Like. Share confirmation also covers accessibility actions and keyboard input. If Hushfeed cannot prepare the first confirmation, it stops that tap instead of sending and forgets any older confirmation. Turning it off immediately restores normal sending. Remap or disable long press and double tap.
 - **Playback:** Choose speed and quality, stop loops, resume a video after scrolling or move to the next one automatically.
 - **Downloads:** Save watermark-free video, original photos, separate audio and SRT subtitles with filenames and folders you control.
 - **Comments and inbox:** Filter comment text or accounts, translate comments and decide which Inbox rows appear.

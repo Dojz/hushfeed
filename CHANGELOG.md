@@ -2,7 +2,7 @@
 
 * Remove feed ads now recognizes TikTok's raw auction metadata even when both native Boolean ad flags are false. The shared check covers response, cache, Following, Friends, profile, search and late-insertion feeds while leaving ordinary paid-partnership posts alone.
 
-* Share sheet confirmation now handles every click path, including accessibility actions and keyboard input. It follows the recipient's account or conversation ID. Reusing a row or letting the timer expire resets the check, and TikTok's original row highlight comes back. If the confirmation setup fails, the first tap is stopped instead of sent. Turning confirmation off restores normal sending even if an old row highlight cannot be cleared.
+* Share sheet confirmation now handles every click path, including accessibility actions and keyboard input. It follows the recipient's account or conversation ID. Reusing a row or letting the timer expire resets the check, and TikTok's original row highlight comes back. If the confirmation setup or setting read fails, the tap is stopped and an older confirmation is forgotten. Turning confirmation off restores normal sending even if an old row highlight cannot be cleared.
 
 * Feature Gate Lab now checks its 1,024-rule limit before writing a change or importing a file. Reset all Lab data can recover an older oversized store without clearing other Hushfeed settings.
 
