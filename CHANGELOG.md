@@ -1,5 +1,7 @@
 ## 0.30.1
 
+* Cached model reflection now finds public methods inherited from interfaces. Follow diagnostics uses the required lookup for a request path, so a future TikTok rename appears in Hook status instead of making every path look unknown.
+
 * Video fitting now hands a changed center gravity back to Android so the view is laid out again. The story path forgets its fitted result after both offset reads, and its tests now prove the feed and story paths independently read an uncopyable result.
 
 * Lazy AB gate discovery now follows one integer register move back to the factory number, including a second four-instruction lookback. A merged-lambda entry point must switch on its own integer `$t` field, so an unrelated field and switch cannot make a decoy class look like the requested gate.
