@@ -20,7 +20,7 @@ Hushfeed is a [Morphe](https://github.com/MorpheApp/morphe-manager) patch bundle
 ## Pick what changes
 
 - **Feed:** Hide ads, Shop, livestreams, stories, photo posts, unwanted creators and videos matching your own rules.
-- **Touch controls:** Add second-tap protection to Follow, Like and share actions. Remap or disable long press and double tap.
+- **Touch controls:** Add second-tap protection to Follow and Like. Share confirmation also covers accessibility actions and keyboard input. Remap or disable long press and double tap.
 - **Playback:** Choose speed and quality, stop loops, resume a video after scrolling or move to the next one automatically.
 - **Downloads:** Save watermark-free video, original photos, separate audio and SRT subtitles with filenames and folders you control.
 - **Comments and inbox:** Filter comment text or accounts, translate comments and decide which Inbox rows appear.
@@ -92,7 +92,7 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 | `Hide CAPTCHA popups` | Adds a default-off setting to hide browsing and LIVE puzzle dialogs. Login and account verification stay visible, and so does any puzzle the server raised over a follow, like, comment or repost, because hiding one of those makes the action fail with no message. |
 | `Hide floating promotions` | Removes floating promotional badges, coin icons, and timer banners from the Home feed. |
 | `Hide video overlays` | Hides the visual search prompt TikTok lays over videos, the Live entrance in the top left corner, the caption, the music line, the action column on the right, the survey cards and the status bar, each with its own switch. |
-| `Share sheet tools` | Asks for a second tap before a video is sent to a friend from the share sheet, and hides chosen people or share options, or the whole Send to row. |
+| `Share sheet tools` | Asks twice before a video is sent to a friend from the share sheet. The check follows the account or conversation instead of the visible name and covers accessibility actions and keyboard input. It can also hide chosen people, share options or the whole Send to row. |
 | `Hide feed LIVE button` | Adds an option to hide the LIVE button at the top left of video feeds. Shares its switch with the Live entrance option of Hide video overlays, and stops the button before it is built rather than hiding it once it is on screen. |
 | `Hide feed follow button` | Adds an option to hide the + follow button below creator avatars in video feeds. |
 | `Hide feed save button` | Adds an option to hide the save/favourites button from video feeds. |

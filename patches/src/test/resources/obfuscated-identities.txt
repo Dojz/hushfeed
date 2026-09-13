@@ -62,10 +62,8 @@ extensions/tiktok/src/main/java/app/morphe/extension/tiktok/inbox/InboxFilter.ja
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/inbox/InboxFilter.java|vid
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/inbox/InboxFilter.java|vpj
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/share/ShareSheetTools.java|a59
-extensions/tiktok/src/main/java/app/morphe/extension/tiktok/share/ShareSheetTools.java|bku
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/share/ShareSheetTools.java|dqr
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/share/ShareSheetTools.java|ibc
-extensions/tiktok/src/main/java/app/morphe/extension/tiktok/share/ShareSheetTools.java|p78
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/share/ShareSheetTools.java|u3t
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/translation/CommentBatchTranslator.java|LIZ
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/translation/CommentBatchTranslator.java|LIZIZ

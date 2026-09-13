@@ -48,7 +48,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildDe() {
-        Map<String, String> table = new HashMap<>(1740);
+        Map<String, String> table = new HashMap<>(1742);
         fillDe0(table);
         fillDe1(table);
         fillDe2(table);
@@ -1525,6 +1525,8 @@ public final class L10nTranslations {
                 "Noch einmal tippen zum Folgen");
         table.put("Tap again to like",
                 "Noch einmal tippen zum Liken");
+        table.put("Tap again to send",
+                "Zum Senden noch einmal tippen");
         table.put("Tap the feed Follow button twice within four seconds.",
                 "Tippe die Folgen-Schaltfläche im Feed innerhalb von vier Sekunden zweimal an.");
         table.put("Tap the like heart twice within four seconds. Removing a like stays immediate.",
@@ -1539,11 +1541,11 @@ public final class L10nTranslations {
                 "Dieser Creator ist bereits in der Liste");
         table.put("That creator pattern is too long to use, so it was skipped: %1$s",
                 "Dieses Kreator-Muster ist zu lang und wurde übersprungen: %1$s");
-        table.put("That creator pattern is too long, so it was not added: %1$s",
-                "Dieses Kreator-Muster ist zu lang und wurde nicht hinzugefügt: %1$s");
     }
 
     private static void fillDe12(Map<String, String> table) {
+        table.put("That creator pattern is too long, so it was not added: %1$s",
+                "Dieses Kreator-Muster ist zu lang und wurde nicht hinzugefügt: %1$s");
         table.put("That file is not readable text, so it may have been damaged in transit. Nothing was altered.",
                 "Diese Datei ist kein lesbarer Text und wurde womöglich bei der Übertragung beschädigt. Es wurde nichts geändert.");
         table.put("That file is too large to be a settings backup. Nothing was altered.",
@@ -1662,11 +1664,11 @@ public final class L10nTranslations {
                 "Dieses Video hat keinen eigenen Sound");
         table.put("Thumbs down blocks the commenter",
                 "Daumen runter blockiert den Kommentierenden");
-        table.put("TikTok cached value",
-                "Von TikTok zwischengespeicherter Wert");
     }
 
     private static void fillDe13(Map<String, String> table) {
+        table.put("TikTok cached value",
+                "Von TikTok zwischengespeicherter Wert");
         table.put("TikTok default",
                 "TikTok-Standard");
         table.put("TikTok default (2x hold, quick share)",
@@ -1785,11 +1787,11 @@ public final class L10nTranslations {
                 "Qualität für Video-Downloads");
         table.put("Video filename",
                 "Dateiname für Videos");
-        table.put("Video playback quality",
-                "Wiedergabequalität");
     }
 
     private static void fillDe14(Map<String, String> table) {
+        table.put("Video playback quality",
+                "Wiedergabequalität");
         table.put("Video saved",
                 "Video gespeichert");
         table.put("Video saved in %1$s, but only %2$s of %3$s subtitles came with it",
@@ -1853,7 +1855,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildEs() {
-        Map<String, String> table = new HashMap<>(1740);
+        Map<String, String> table = new HashMap<>(1742);
         fillEs0(table);
         fillEs1(table);
         fillEs2(table);
@@ -3330,6 +3332,8 @@ public final class L10nTranslations {
                 "Toca otra vez para seguir");
         table.put("Tap again to like",
                 "Toca otra vez para dar me gusta");
+        table.put("Tap again to send",
+                "Toca otra vez para enviar");
         table.put("Tap the feed Follow button twice within four seconds.",
                 "Toca el botón Seguir del feed dos veces en menos de cuatro segundos.");
         table.put("Tap the like heart twice within four seconds. Removing a like stays immediate.",
@@ -3344,11 +3348,11 @@ public final class L10nTranslations {
                 "Ese creador ya está en la lista");
         table.put("That creator pattern is too long to use, so it was skipped: %1$s",
                 "Ese patrón de creador es demasiado largo, así que se omitió: %1$s");
-        table.put("That creator pattern is too long, so it was not added: %1$s",
-                "Ese patrón de creador es demasiado largo, así que no se añadió: %1$s");
     }
 
     private static void fillEs12(Map<String, String> table) {
+        table.put("That creator pattern is too long, so it was not added: %1$s",
+                "Ese patrón de creador es demasiado largo, así que no se añadió: %1$s");
         table.put("That file is not readable text, so it may have been damaged in transit. Nothing was altered.",
                 "Ese archivo no es texto legible, así que puede haberse dañado por el camino. No se ha cambiado nada.");
         table.put("That file is too large to be a settings backup. Nothing was altered.",
@@ -3467,11 +3471,11 @@ public final class L10nTranslations {
                 "Este vídeo no tiene sonido propio");
         table.put("Thumbs down blocks the commenter",
                 "El pulgar hacia abajo bloquea a quien comenta");
-        table.put("TikTok cached value",
-                "Valor guardado en caché por TikTok");
     }
 
     private static void fillEs13(Map<String, String> table) {
+        table.put("TikTok cached value",
+                "Valor guardado en caché por TikTok");
         table.put("TikTok default",
                 "Predeterminado de TikTok");
         table.put("TikTok default (2x hold, quick share)",
@@ -3590,11 +3594,11 @@ public final class L10nTranslations {
                 "Calidad de descarga del vídeo");
         table.put("Video filename",
                 "Nombre de archivo del vídeo");
-        table.put("Video playback quality",
-                "Calidad de reproducción del vídeo");
     }
 
     private static void fillEs14(Map<String, String> table) {
+        table.put("Video playback quality",
+                "Calidad de reproducción del vídeo");
         table.put("Video saved",
                 "Vídeo guardado");
         table.put("Video saved in %1$s, but only %2$s of %3$s subtitles came with it",
@@ -3658,7 +3662,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIn() {
-        Map<String, String> table = new HashMap<>(1740);
+        Map<String, String> table = new HashMap<>(1742);
         fillIn0(table);
         fillIn1(table);
         fillIn2(table);
@@ -5135,6 +5139,8 @@ public final class L10nTranslations {
                 "Ketuk lagi untuk mengikuti");
         table.put("Tap again to like",
                 "Ketuk lagi untuk menyukai");
+        table.put("Tap again to send",
+                "Ketuk lagi untuk mengirim");
         table.put("Tap the feed Follow button twice within four seconds.",
                 "Ketuk tombol Ikuti di feed dua kali dalam empat detik.");
         table.put("Tap the like heart twice within four seconds. Removing a like stays immediate.",
@@ -5149,11 +5155,11 @@ public final class L10nTranslations {
                 "Kreator itu sudah ada di daftar");
         table.put("That creator pattern is too long to use, so it was skipped: %1$s",
                 "Pola kreator itu terlalu panjang, jadi dilewati: %1$s");
-        table.put("That creator pattern is too long, so it was not added: %1$s",
-                "Pola kreator itu terlalu panjang, jadi tidak ditambahkan: %1$s");
     }
 
     private static void fillIn12(Map<String, String> table) {
+        table.put("That creator pattern is too long, so it was not added: %1$s",
+                "Pola kreator itu terlalu panjang, jadi tidak ditambahkan: %1$s");
         table.put("That file is not readable text, so it may have been damaged in transit. Nothing was altered.",
                 "Berkas itu bukan teks yang dapat dibaca, jadi mungkin rusak saat dikirim. Tidak ada yang diubah.");
         table.put("That file is too large to be a settings backup. Nothing was altered.",
@@ -5272,11 +5278,11 @@ public final class L10nTranslations {
                 "Video ini tidak punya suara sendiri");
         table.put("Thumbs down blocks the commenter",
                 "Jempol ke bawah memblokir pengomentar");
-        table.put("TikTok cached value",
-                "Nilai yang di-cache TikTok");
     }
 
     private static void fillIn13(Map<String, String> table) {
+        table.put("TikTok cached value",
+                "Nilai yang di-cache TikTok");
         table.put("TikTok default",
                 "Bawaan TikTok");
         table.put("TikTok default (2x hold, quick share)",
@@ -5395,11 +5401,11 @@ public final class L10nTranslations {
                 "Kualitas unduhan video");
         table.put("Video filename",
                 "Nama berkas video");
-        table.put("Video playback quality",
-                "Kualitas pemutaran video");
     }
 
     private static void fillIn14(Map<String, String> table) {
+        table.put("Video playback quality",
+                "Kualitas pemutaran video");
         table.put("Video saved",
                 "Video disimpan");
         table.put("Video saved in %1$s, but only %2$s of %3$s subtitles came with it",
@@ -5463,7 +5469,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildPt_rBR() {
-        Map<String, String> table = new HashMap<>(1740);
+        Map<String, String> table = new HashMap<>(1742);
         fillPt_rBR0(table);
         fillPt_rBR1(table);
         fillPt_rBR2(table);
@@ -6940,6 +6946,8 @@ public final class L10nTranslations {
                 "Toque de novo para seguir");
         table.put("Tap again to like",
                 "Toque de novo para curtir");
+        table.put("Tap again to send",
+                "Toque de novo para enviar");
         table.put("Tap the feed Follow button twice within four seconds.",
                 "Toque no botão Seguir do feed duas vezes dentro de quatro segundos.");
         table.put("Tap the like heart twice within four seconds. Removing a like stays immediate.",
@@ -6954,11 +6962,11 @@ public final class L10nTranslations {
                 "Esse criador já está na lista");
         table.put("That creator pattern is too long to use, so it was skipped: %1$s",
                 "Esse padrão de criador é longo demais, então foi ignorado: %1$s");
-        table.put("That creator pattern is too long, so it was not added: %1$s",
-                "Esse padrão de criador é longo demais, então não foi adicionado: %1$s");
     }
 
     private static void fillPt_rBR12(Map<String, String> table) {
+        table.put("That creator pattern is too long, so it was not added: %1$s",
+                "Esse padrão de criador é longo demais, então não foi adicionado: %1$s");
         table.put("That file is not readable text, so it may have been damaged in transit. Nothing was altered.",
                 "Esse arquivo não é texto legível, então pode ter se danificado no caminho. Nada foi alterado.");
         table.put("That file is too large to be a settings backup. Nothing was altered.",
@@ -7077,11 +7085,11 @@ public final class L10nTranslations {
                 "Este vídeo não tem som próprio");
         table.put("Thumbs down blocks the commenter",
                 "O joinha para baixo bloqueia quem comentou");
-        table.put("TikTok cached value",
-                "Valor em cache do TikTok");
     }
 
     private static void fillPt_rBR13(Map<String, String> table) {
+        table.put("TikTok cached value",
+                "Valor em cache do TikTok");
         table.put("TikTok default",
                 "Padrão do TikTok");
         table.put("TikTok default (2x hold, quick share)",
@@ -7200,11 +7208,11 @@ public final class L10nTranslations {
                 "Qualidade de download do vídeo");
         table.put("Video filename",
                 "Nome do arquivo do vídeo");
-        table.put("Video playback quality",
-                "Qualidade de reprodução do vídeo");
     }
 
     private static void fillPt_rBR14(Map<String, String> table) {
+        table.put("Video playback quality",
+                "Qualidade de reprodução do vídeo");
         table.put("Video saved",
                 "Vídeo salvo");
         table.put("Video saved in %1$s, but only %2$s of %3$s subtitles came with it",
