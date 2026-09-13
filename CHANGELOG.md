@@ -1,5 +1,7 @@
 ## 0.30.1
 
+* CAPTCHA patch validation now follows request and callback methods inherited from superclasses or interfaces. The risk-control hook also refuses a static `execute` method because its injected parameter registers require an instance receiver.
+
 * Settings journal recovery now has direct regression coverage for a valid record that storage refuses to apply. The test requires the failed recovery notice, retains the record for diagnostics and confirms that the next settings change can start.
 
 * Each unreadable settings journal now gets its own recovery notice. Its fallback identity includes the actual file path, length and modification time, so another damaged record at the same path is not hidden for the rest of that process.
