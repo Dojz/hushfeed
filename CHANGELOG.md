@@ -1,3 +1,7 @@
+## Unreleased
+
+* Remove feed ads now recognizes TikTok's raw auction metadata even when both native Boolean ad flags are false. The shared check covers response, cache, Following, Friends, profile, search and late-insertion feeds while leaving ordinary paid-partnership posts alone.
+
 ## 0.30.2
 
 * GIF conversion now has separate deadline regressions for its colour-precision, palette and frame-encoding passes. Each check has to stop before the second frame, so losing one cannot hide behind an earlier pass.
