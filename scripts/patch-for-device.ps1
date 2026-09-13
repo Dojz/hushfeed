@@ -21,7 +21,7 @@
 param(
     [string]$Serial,
     [switch]$Replace,
-    [string]$Apk = (Get-ChildItem 'C:\_claude-backups\tiktok-fixture' -Filter '*46.2.3*.apk' -File | Select-Object -First 1).FullName,
+    [string]$Apk,
     [string]$DesktopJar = (Get-ChildItem 'C:\_claude-backups\morphe-tools' -Filter 'morphe-desktop*.jar' -File | Sort-Object LastWriteTime -Descending | Select-Object -First 1).FullName,
     [string]$Java = 'C:\Program Files\Eclipse Adoptium\jdk-21.0.12.101-hotspot\bin\java.exe',
     [string]$Keystore = "$HOME\.android\sideload-release.jks",
@@ -30,9 +30,20 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+$root = Split-Path -Parent $PSScriptRoot
+. (Join-Path $PSScriptRoot 'patch-target.ps1')
+$catalogPath = Join-Path $root 'patches-list.json'
+if (-not (Test-Path -LiteralPath $catalogPath -PathType Leaf)) { throw "No patch list found: $catalogPath" }
+try { $catalog = Get-Content -LiteralPath $catalogPath -Raw | ConvertFrom-Json }
+catch { throw "Could not read patch list ${catalogPath}: $($_.Exception.Message)" }
+$target = Get-PatchTarget -PatchList $catalog
+if (-not $Apk) {
+    $Apk = (Get-ChildItem 'C:\_claude-backups\tiktok-fixture' `
+        -Filter "*$($target.PackageVersion)*.apk" -File | Select-Object -First 1).FullName
+}
 # The defaults above are evaluated before this line, so a missing folder leaves them empty
 # and the failure would surface later as a confusing Split-Path error.
-if (-not $Apk -or -not (Test-Path -LiteralPath $Apk -PathType Leaf)) { throw "No vendor APK. Pass -Apk with the 46.2.3 build." }
+if (-not $Apk -or -not (Test-Path -LiteralPath $Apk -PathType Leaf)) { throw "No vendor APK. Pass -Apk with the $($target.PackageVersion) build." }
 if (-not $DesktopJar -or -not (Test-Path -LiteralPath $DesktopJar -PathType Leaf)) { throw 'No Morphe desktop CLI jar. Pass -DesktopJar.' }
 $passwordVariable = 'HUSHFEED_SIDELOAD_KEYSTORE_PASSWORD'
 $keystorePassword = [Environment]::GetEnvironmentVariable(
@@ -41,11 +52,10 @@ if ([string]::IsNullOrEmpty($keystorePassword)) {
     $keystorePassword = 'sideload'
     Write-Host "[device] $passwordVariable is unset; using the documented local test-key fallback"
 }
-$root = Split-Path -Parent $PSScriptRoot
 $version = ((Get-Content (Join-Path $root 'gradle.properties')) -match '^version\s*=' | Select-Object -First 1) -replace '^version\s*=\s*', ''
 $bundle = Join-Path $root "patches\build\libs\patches-$version.mpp"
 if (-not (Test-Path $bundle)) { throw "No bundle at $bundle. Build it first: :patches:generatePatchesList then :patches:buildAndroid, through the governor." }
-$names = (Get-Content (Join-Path $root 'patches-list.json') -Raw | ConvertFrom-Json).patches | ForEach-Object { $_.name }
+$names = $catalog.patches | ForEach-Object { $_.name }
 
 New-Item -ItemType Directory -Force $OutDir | Out-Null
 $out = Join-Path $OutDir "hushfeed-$version-signed.apk"
@@ -88,7 +98,7 @@ try {
 $report = $null
 if (Test-Path -LiteralPath $result -PathType Leaf) { $report = Get-Content -LiteralPath $result -Raw | ConvertFrom-Json }
 $validation = Test-PatchingReport -Report $report -ExpectedNames $names -OutputPath $out `
-    -ExpectedPackageName 'com.zhiliaoapp.musically' -ExpectedPackageVersion '46.2.3'
+    -ExpectedPackageName $target.PackageName -ExpectedPackageVersion $target.PackageVersion
 if (-not $validation.Valid) { throw "Patching did not produce a complete APK: $($validation.Reason)" }
 Write-Host "[device] applied $(@($report.appliedPatches).Count), failed $(@($report.failedPatches).Count), target $($report.packageName) $($report.packageVersion)"
 Write-Host "[device] $out"
@@ -98,13 +108,12 @@ $adb = (Get-Command adb -ErrorAction SilentlyContinue).Source
 if (-not $adb) { $adb = Get-ChildItem "$env:LOCALAPPDATA\Microsoft\WinGet\Packages" -Recurse -Filter adb.exe -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName }
 if (-not $adb) { throw 'No adb found. Put it on the PATH or install the platform tools.' }
 if ($Replace) {
-    Write-Host "[device] uninstalling com.zhiliaoapp.musically on $Serial"
-    & $adb -s $Serial uninstall com.zhiliaoapp.musically | Out-Host
-    if ($LASTEXITCODE -ne 0) { throw "adb uninstall failed on $Serial." }
+    . (Join-Path $PSScriptRoot 'device-install.ps1')
+    [void](Remove-AndroidPackageIfInstalled -Adb $adb -Serial $Serial -PackageName $target.PackageName)
 }
 Write-Host "[device] installing on $Serial"
 # adb prints Failure [...] and exits non-zero on a refused install; without this the script
 # went on to print the version of whatever was already on the phone, as if it were this build.
 & $adb -s $Serial install -r -g $out | Out-Host
 if ($LASTEXITCODE -ne 0) { throw "adb install failed on $Serial. The output above says why." }
-& $adb -s $Serial shell dumpsys package com.zhiliaoapp.musically | Select-String 'versionName' | Out-Host
+& $adb -s $Serial shell dumpsys package $target.PackageName | Select-String 'versionName' | Out-Host

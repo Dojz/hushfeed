@@ -48,6 +48,7 @@ $ErrorActionPreference = 'Stop'
 if (-not $Root) { $Root = Split-Path -Parent $PSScriptRoot }
 
 . (Join-Path $PSScriptRoot 'Resolve-Java.ps1')
+. (Join-Path $PSScriptRoot 'patch-target.ps1')
 
 function Resolve-DesktopCli {
     <#
@@ -150,24 +151,9 @@ $patches = @($patchList.patches)
 if ($patches.Count -eq 0) { throw 'patches-list.json contains no patches.' }
 $patchCount = $patches.Count
 
-$targets = @{}
-foreach ($patch in $patches) {
-    foreach ($property in $patch.compatiblePackages.PSObject.Properties) {
-        $versions = @($property.Value | ForEach-Object { [string]$_ })
-        if (-not $targets.ContainsKey($property.Name)) { $targets[$property.Name] = @() }
-        $targets[$property.Name] += $versions
-    }
-}
-$targetPackages = @($targets.Keys | Sort-Object)
-if ($targetPackages.Count -ne 1) {
-    throw "Expected one compatible package, found $($targetPackages -join ', ')."
-}
-$targetPackage = $targetPackages[0]
-$targetVersions = @($targets[$targetPackage] | Sort-Object -Unique)
-if ($targetVersions.Count -ne 1) {
-    throw "Expected one compatible version for $targetPackage, found $($targetVersions -join ', ')."
-}
-$targetVersion = $targetVersions[0]
+$target = Get-PatchTarget -PatchList $patchList
+$targetPackage = $target.PackageName
+$targetVersion = $target.PackageVersion
 
 $bundleVersion = [string]$bundle.version
 $indexLagsSource = $bundleVersion -ne $releaseVersion

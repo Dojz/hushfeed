@@ -28,10 +28,8 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
-$expectedPackageName = 'com.zhiliaoapp.musically'
-$expectedPackageVersion = '46.2.3'
-
 . (Join-Path $PSScriptRoot 'patch-report.ps1')
+. (Join-Path $PSScriptRoot 'patch-target.ps1')
 
 function Resolve-WithinRoot {
     param([string]$Path, [string]$Root)
@@ -88,11 +86,12 @@ if (-not (Test-Path -LiteralPath $jar -PathType Leaf)) { throw "Desktop CLI jar 
 if (-not (Test-Path -LiteralPath $apk -PathType Leaf)) { throw "APK not found: $apk" }
 
 try {
-    $all = @((Get-Content -LiteralPath (Join-Path $root 'patches-list.json') -Raw | ConvertFrom-Json).patches |
-        ForEach-Object { $_.name })
+    $catalog = Get-Content -LiteralPath (Join-Path $root 'patches-list.json') -Raw | ConvertFrom-Json
+    $all = @($catalog.patches | ForEach-Object { $_.name })
 } catch {
     throw "Could not read patches-list.json: $($_.Exception.Message)"
 }
+$target = Get-PatchTarget -PatchList $catalog
 if ($all.Count -eq 0) { throw 'No patches listed in patches-list.json.' }
 if (@($Cases).Count -eq 0) { throw 'Provide at least one case such as settings:640m.' }
 
@@ -132,7 +131,7 @@ foreach ($case in @($Cases)) {
         $validation = Test-PatchingReport -Report $report `
             -ExpectedNames $(if ($which -eq 'settings') { @('Settings') } else { $all }) `
             -OutputPath $out `
-            -ExpectedPackageName $expectedPackageName -ExpectedPackageVersion $expectedPackageVersion
+            -ExpectedPackageName $target.PackageName -ExpectedPackageVersion $target.PackageVersion
         if ($outOfMemory) {
             $verdict = 'OUT OF MEMORY'
             $invalidCases++
