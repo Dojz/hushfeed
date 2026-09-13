@@ -75,6 +75,7 @@ $expectedTarget = Get-PatchTarget -PatchList $catalog
 if ($names.Count -eq 0 -or @($names | Where-Object { [string]::IsNullOrWhiteSpace($_) }).Count -ne 0) {
     throw "No valid patches listed in $PatchList."
 }
+$dependencyNames = @(Get-PatchDependencyNames -PatchList $catalog -RequestedNames $names)
 Write-Host "[verify] $($names.Count) patches from $(Split-Path -Leaf $Bundle)"
 
 New-Item -ItemType Directory -Force -Path $WorkDir | Out-Null
@@ -104,7 +105,8 @@ try {
         try { $report = Get-Content -LiteralPath $result -Raw | ConvertFrom-Json }
         catch { Write-Warning "Could not parse result JSON: $($_.Exception.Message)" }
     }
-    $validation = Test-PatchingReport -Report $report -ExpectedNames $names -OutputPath $out `
+    $validation = Test-PatchingReport -Report $report -ExpectedNames $names `
+        -AllowedDependencyNames $dependencyNames -OutputPath $out `
         -ExpectedPackageName $expectedTarget.PackageName -ExpectedPackageVersion $expectedTarget.PackageVersion
     $reportApplied = if ($null -ne $report) { @($report.appliedPatches).Count } else { 0 }
     $reportFailed = if ($null -ne $report) { @($report.failedPatches).Count } else { 0 }

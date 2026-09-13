@@ -1,5 +1,7 @@
 ## 0.30.1
 
+* Patch result checks now accept dependency rows declared by a selected patch while still rejecting a missing root or any duplicate or unrelated row. Device patching and fixture checks use the rule, as does heap measurement.
+
 * Cached model reflection now finds public methods inherited from interfaces. Follow diagnostics uses the required lookup for a request path, so a future TikTok rename appears in Hook status instead of making every path look unknown.
 
 * Video fitting now hands a changed center gravity back to Android so the view is laid out again. The story path forgets its fitted result after both offset reads, and its tests now prove the feed and story paths independently read an uncopyable result.

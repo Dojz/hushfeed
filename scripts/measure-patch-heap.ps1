@@ -106,6 +106,8 @@ foreach ($case in @($Cases)) {
     }
     $which = $parts[0]
     $mx = $parts[1]
+    $expectedNames = if ($which -eq 'settings') { @('Settings') } else { $all }
+    $dependencyNames = @(Get-PatchDependencyNames -PatchList $catalog -RequestedNames $expectedNames)
     $runId = [guid]::NewGuid().ToString('N')
     $runDir = Join-Path $workRoot "heap-$runId"
     New-Item -ItemType Directory -Force -Path $runDir | Out-Null
@@ -129,7 +131,7 @@ foreach ($case in @($Cases)) {
             catch { Write-Warning "[$which @ -Xmx$mx] could not parse result JSON: $($_.Exception.Message)" }
         }
         $validation = Test-PatchingReport -Report $report `
-            -ExpectedNames $(if ($which -eq 'settings') { @('Settings') } else { $all }) `
+            -ExpectedNames $expectedNames -AllowedDependencyNames $dependencyNames `
             -OutputPath $out `
             -ExpectedPackageName $target.PackageName -ExpectedPackageVersion $target.PackageVersion
         if ($outOfMemory) {

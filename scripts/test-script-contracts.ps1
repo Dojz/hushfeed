@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Exercise shared patch-target, Java-resolution and device replacement contracts.
+    Exercise shared patch-report, patch-target, Java-resolution and device replacement contracts.
 #>
 [CmdletBinding()]
 param([string]$Root)
@@ -8,6 +8,7 @@ param([string]$Root)
 $ErrorActionPreference = 'Stop'
 if (-not $Root) { $Root = Split-Path -Parent $PSScriptRoot }
 . (Join-Path $PSScriptRoot 'patch-target.ps1')
+. (Join-Path $PSScriptRoot 'patch-report.ps1')
 . (Join-Path $PSScriptRoot 'device-install.ps1')
 . (Join-Path $PSScriptRoot 'Resolve-Java.ps1')
 
@@ -31,6 +32,37 @@ $catalog = Get-Content -LiteralPath (Join-Path $Root 'patches-list.json') -Raw |
 $target = Get-PatchTarget -PatchList $catalog
 Assert-True ($target.PackageName -eq 'com.zhiliaoapp.musically') 'The catalog package was not resolved.'
 Assert-True ($target.PackageVersion -eq '46.2.3') 'The catalog version was not resolved.'
+
+$allNames = @($catalog.patches | ForEach-Object { $_.name })
+$allDependencies = @(Get-PatchDependencyNames -PatchList $catalog -RequestedNames $allNames)
+Assert-True ($allDependencies.Count -eq 1 -and $allDependencies[0] -eq 'BytecodePatch') `
+    'The real catalog dependency closure did not isolate the internal BytecodePatch.'
+Assert-True (Test-ReportedPatchNames -Expected $allNames `
+    -Actual @($allNames + $allDependencies) -AllowedDependencies $allDependencies) `
+    'A result that included the real internal dependency was rejected.'
+
+$dependencyCatalog = [pscustomobject]@{
+    patches = @(
+        [pscustomobject]@{ name = 'Root'; dependencies = @('Helper') },
+        [pscustomobject]@{ name = 'Helper'; dependencies = @('Internal') },
+        [pscustomobject]@{ name = 'Unrelated'; dependencies = @() }
+    )
+}
+$dependencies = @(Get-PatchDependencyNames -PatchList $dependencyCatalog -RequestedNames @('Root'))
+Assert-True ($dependencies.Count -eq 2 -and $dependencies -contains 'Helper' -and
+    $dependencies -contains 'Internal') 'The transitive dependency closure was incomplete.'
+Assert-True (Test-ReportedPatchNames -Expected @('Root') -Actual @('Root') `
+    -AllowedDependencies $dependencies) 'A report that omitted optional dependency rows was rejected.'
+Assert-True (Test-ReportedPatchNames -Expected @('Root') -Actual @('Internal', 'Root', 'Helper') `
+    -AllowedDependencies $dependencies) 'Declared dependency rows were rejected or order mattered.'
+Assert-True (-not (Test-ReportedPatchNames -Expected @('Root') -Actual @('Helper', 'Internal') `
+    -AllowedDependencies $dependencies)) 'A report missing its requested root was accepted.'
+Assert-True (-not (Test-ReportedPatchNames -Expected @('Root') -Actual @('Root', 'Unrelated') `
+    -AllowedDependencies $dependencies)) 'An unrelated extra patch was accepted as a dependency.'
+Assert-True (-not (Test-ReportedPatchNames -Expected @('Root') -Actual @('Root', 'Root') `
+    -AllowedDependencies $dependencies)) 'A duplicated requested patch was accepted.'
+Assert-True (-not (Test-ReportedPatchNames -Expected @('Root') -Actual @('Root', 'Helper', 'Helper') `
+    -AllowedDependencies $dependencies)) 'A duplicated dependency patch was accepted.'
 
 $futureCatalog = [pscustomobject]@{
     patches = @([pscustomobject]@{
@@ -62,6 +94,34 @@ if (-not $caseRoot.StartsWith($requiredPrefix, [System.StringComparison]::Ordina
 }
 try {
     New-Item -ItemType Directory -Path $caseRoot | Out-Null
+    $reportApk = Join-Path $caseRoot 'report.apk'
+    Add-Type -AssemblyName System.IO.Compression
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $archive = [System.IO.Compression.ZipFile]::Open(
+        $reportApk, [System.IO.Compression.ZipArchiveMode]::Create)
+    try {
+        foreach ($entryName in @('AndroidManifest.xml', 'classes.dex')) {
+            $stream = $archive.CreateEntry($entryName).Open()
+            try { $stream.WriteByte(0) } finally { $stream.Dispose() }
+        }
+    } finally {
+        $archive.Dispose()
+    }
+    $dependencyReport = [pscustomobject]@{
+        patchingSteps = @([pscustomobject]@{ success = $true })
+        appliedPatches = @($allNames + $allDependencies | ForEach-Object {
+            [pscustomobject]@{ name = $_ }
+        })
+        failedPatches = @()
+        packageName = $target.PackageName
+        packageVersion = $target.PackageVersion
+    }
+    $reportValidation = Test-PatchingReport -Report $dependencyReport -ExpectedNames $allNames `
+        -AllowedDependencyNames $allDependencies -OutputPath $reportApk `
+        -ExpectedPackageName $target.PackageName -ExpectedPackageVersion $target.PackageVersion
+    Assert-True $reportValidation.Valid `
+        "A complete result with a declared dependency was rejected: $($reportValidation.Reason)"
+
     $fakeAdb = Join-Path $caseRoot 'adb.cmd'
     $log = Join-Path $caseRoot 'adb.log'
     $mode = Join-Path $caseRoot 'mode.txt'
@@ -144,7 +204,11 @@ foreach ($name in $consumerScripts) {
     Assert-True ($text -notmatch '(?m)expectedPackageVersion\s*=\s*[''\"]') `
         "$name pins an expected package version instead of reading the catalog."
     Assert-True ($text -match 'Get-PatchTarget') "$name does not read its target through Get-PatchTarget."
+    Assert-True ($text -match 'Get-PatchDependencyNames') `
+        "$name does not derive the selected patches' dependency closure."
+    Assert-True ($text -match 'AllowedDependencyNames') `
+        "$name does not pass declared dependency names into result validation."
 }
 
 $global:LASTEXITCODE = 0
-Write-Host '[scripts] target, Java and guarded replacement contracts passed'
+Write-Host '[scripts] report, target, Java and guarded replacement contracts passed'
