@@ -491,7 +491,6 @@ Feed and navigation	Feed y navegación
 Errors	Errores
 Other	Otros
 Saved. Restart TikTok to apply this.	Guardado. Reinicia TikTok para que se aplique.
-Diagnostic data cleared.	Datos de diagnóstico borrados.
 Includes these events: %1$s	Incluye estos eventos: %1$s
 Gate details	Detalles del interruptor
 This catalog entry is no longer available. Refresh the Lab and try again.	Esta entrada del catálogo ya no está disponible. Actualiza el Laboratorio e inténtalo otra vez.
@@ -861,3 +860,11 @@ Full report saved to %1$s	Informe completo guardado en %1$s
 Could not start the report export. Try again shortly.	No se pudo iniciar la exportación del informe. Inténtalo de nuevo en breve.
 Copy quick report	Copiar informe rápido
 Save full report	Guardar informe completo
+Diagnostic data cleared. Tap again to put it back.	Se borraron los datos de diagnóstico. Toca de nuevo para restaurarlos.
+Diagnostic data put back.	Se restauraron los datos de diagnóstico.
+There is no diagnostic data to put back.	No hay datos de diagnóstico que restaurar.
+Could not put back the diagnostic data. Try again.	No se pudieron restaurar los datos de diagnóstico. Inténtalo de nuevo.
+Loaded values are still being read. Try again in a moment.	Los valores cargados aún se están leyendo. Inténtalo de nuevo en un momento.
+The selected loaded-values file could not be read. Try again.	No se pudo leer el archivo de valores cargados seleccionado. Inténtalo de nuevo.
+Enter a number. The previous value was kept.	Introduce un número. Se conservó el valor anterior.
+There is no diagnostic data to clear.	No hay datos de diagnóstico que borrar.

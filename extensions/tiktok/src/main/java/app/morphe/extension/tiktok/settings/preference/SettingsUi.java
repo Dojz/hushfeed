@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -317,7 +318,24 @@ public final class SettingsUi {
 
     /** Marks a title in a hand-built dialog as a heading for accessibility services. */
     public static void markDialogHeading(TextView title) {
-        if (Build.VERSION.SDK_INT >= 28) title.setAccessibilityHeading(true);
+        if (Build.VERSION.SDK_INT >= 28) {
+            title.setAccessibilityHeading(true);
+            return;
+        }
+        // Before API 28, accessibility services recognize the heading bit carried by a
+        // CollectionItemInfo. These titles are newly created for hand-built dialogs and have no
+        // delegate to preserve.
+        title.setAccessibilityDelegate(new View.AccessibilityDelegate() {
+            @Override
+            public void onInitializeAccessibilityNodeInfo(
+                    View host,
+                    AccessibilityNodeInfo info
+            ) {
+                super.onInitializeAccessibilityNodeInfo(host, info);
+                info.setCollectionItemInfo(AccessibilityNodeInfo.CollectionItemInfo.obtain(
+                        0, 1, 0, 1, true));
+            }
+        });
     }
 
     /** A visible status line that politely announces a filtered list's result count. */

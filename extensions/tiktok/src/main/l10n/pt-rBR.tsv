@@ -491,7 +491,6 @@ Feed and navigation	Feed e navegação
 Errors	Erros
 Other	Outros
 Saved. Restart TikTok to apply this.	Salvo. Reinicie o TikTok para aplicar.
-Diagnostic data cleared.	Dados de diagnóstico apagados.
 Includes these events: %1$s	Inclui estes eventos: %1$s
 Gate details	Detalhes do gate
 This catalog entry is no longer available. Refresh the Lab and try again.	Esta entrada do catálogo não está mais disponível. Atualize o Laboratório e tente de novo.
@@ -861,3 +860,11 @@ Full report saved to %1$s	Relatório completo salvo em %1$s
 Could not start the report export. Try again shortly.	Não foi possível iniciar a exportação do relatório. Tente de novo em breve.
 Copy quick report	Copiar relatório rápido
 Save full report	Salvar relatório completo
+Diagnostic data cleared. Tap again to put it back.	Dados de diagnóstico apagados. Toque novamente para restaurá-los.
+Diagnostic data put back.	Dados de diagnóstico restaurados.
+There is no diagnostic data to put back.	Não há dados de diagnóstico para restaurar.
+Could not put back the diagnostic data. Try again.	Não foi possível restaurar os dados de diagnóstico. Tente novamente.
+Loaded values are still being read. Try again in a moment.	Os valores carregados ainda estão sendo lidos. Tente novamente em instantes.
+The selected loaded-values file could not be read. Try again.	Não foi possível ler o arquivo de valores carregados selecionado. Tente novamente.
+Enter a number. The previous value was kept.	Digite um número. O valor anterior foi mantido.
+There is no diagnostic data to clear.	Não há dados de diagnóstico para apagar.

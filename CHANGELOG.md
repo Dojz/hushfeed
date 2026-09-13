@@ -1,5 +1,9 @@
 ## 0.30.0
 
+* The Feature Gate Lab filter now uses the same themed radio rows as the other settings pickers. Rows stay fully readable while selecting several gates. Exporting before values have loaded says why it cannot start, and a selected import keeps going if the Lab closes while its file is being read.
+
+* Numeric dialogs let long descriptions scroll without squeezing out the field, and an empty number stays open with a clear explanation. The sticker save button follows the current text colors when TikTok gives it no text button to copy. Clearing diagnostic data can be undone with the next tap, including buffered events, saved crashes and hook findings.
+
 * Feature Gate Lab saves now confirm when they finish, and disabled values have a visible muted state. Its custom actions are announced as buttons, source tabs report the selected tab from the focused control, and filtered lists in the Lab and settings announce their result count. Creator removal says which entry was removed and moves focus to the next action. Number fields now carry a hint, and custom dialog titles are marked as headings for screen readers.
 
 * Hooks that change a value as TikTok returns it now keep the return's branch label on the hook. A direct jump to that return can no longer skip Hushfeed's filter, setting override, diagnostic callback or UI attachment. The same rule now covers every current return hook, including ones added after the original audit.

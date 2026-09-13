@@ -11,7 +11,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
@@ -29,11 +28,11 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
 import app.morphe.extension.shared.Logger;
+import app.morphe.extension.shared.Utils;
 
 import app.morphe.extension.tiktok.settings.L10n;
 import app.morphe.extension.shared.settings.BaseSettings;
@@ -182,7 +181,7 @@ public final class StickerGallerySaver {
                     textTemplate.getPaddingBottom()
             );
         } else {
-            button.setTextColor(Color.WHITE);
+            button.setTextColor(SettingsUi.enabledTextColors(SettingsUi.textPrimary()));
             button.setTextSize(16);
             int paddingHorizontal = SettingsUi.dp(context, 16);
             int paddingVertical = SettingsUi.dp(context, 10);
@@ -206,7 +205,7 @@ public final class StickerGallerySaver {
     private static void saveStickerFromButton(View button, StickerAsset asset) {
         Context context = button.getContext().getApplicationContext();
         button.setEnabled(false);
-        toast(context, L10n.t("Saving sticker"));
+        Utils.showToastShort(L10n.t("Saving sticker"));
 
         // A submitted job stays in the scheduler's static map until it finishes, which is up to
         // the two minute deadline with eight more queued behind it. Capturing the button held
@@ -224,7 +223,7 @@ public final class StickerGallerySaver {
             SaveResult result = saveSticker(context, asset);
             MAIN_HANDLER.post(() -> {
                 handBack(anchor);
-                toast(context, result.message);
+                Utils.showToastShort(result.message);
                 if (result.success) {
                     debugLog("[Morphe Stickers] saved sticker path=" + result.path);
                 } else if (BaseSettings.DEBUG.get()) {
@@ -1123,10 +1122,6 @@ public final class StickerGallerySaver {
             String withoutQuery = queryIndex >= 0 ? url.substring(0, queryIndex) : url;
             return withoutQuery.length() <= 96 ? withoutQuery : withoutQuery.substring(0, 96) + "...";
         }
-    }
-
-    private static void toast(Context context, String message) {
-        MAIN_HANDLER.post(() -> Toast.makeText(context, message, Toast.LENGTH_SHORT).show());
     }
 
     private static void debugLog(String message) {

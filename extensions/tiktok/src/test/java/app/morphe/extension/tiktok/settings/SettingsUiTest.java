@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Looper;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -94,6 +95,24 @@ public class SettingsUiTest {
             assertEquals("2 results", count.getText().toString());
             assertEquals(View.ACCESSIBILITY_LIVE_REGION_POLITE,
                     count.getAccessibilityLiveRegion());
+        }
+    }
+
+    @Test
+    @Config(sdk = 23, qualifiers = "w480dp-h960dp-night-mdpi")
+    public void dialogHeadingKeepsItsSemanticsBeforeThePlatformHeadingApi() {
+        try (var owner = Robolectric.buildActivity(DialogActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            TextView heading = SettingsUi.text(
+                    activity, "Dialog title", 20, SettingsUi.textPrimary(), 1);
+            SettingsUi.markDialogHeading(heading);
+            activity.setContentView(heading);
+
+            AccessibilityNodeInfo info = heading.createAccessibilityNodeInfo();
+            assertNotNull("the legacy heading has no collection item metadata",
+                    info.getCollectionItemInfo());
+            assertTrue("the legacy collection item is not marked as a heading",
+                    info.getCollectionItemInfo().isHeading());
         }
     }
 

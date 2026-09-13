@@ -436,9 +436,8 @@ public final class FeatureGateDetailFragment extends Fragment {
                     rule = (FeatureGateLabStore.Rule) saved[0];
                     reset.setVisibility(View.VISIBLE);
                     updateStatus();
-                    Utils.showToastShort(L10n.t(Utils.getContext(),
-                            "Feature gate override saved"));
                 },
+                L10n.t(Utils.getContext(), "Feature gate override saved"),
                 L10n.t(Utils.getContext(), "Could not save this override."));
     }
 
@@ -457,8 +456,8 @@ public final class FeatureGateDetailFragment extends Fragment {
                     suppress = false;
                     reset.setVisibility(View.GONE);
                     updateStatus();
-                    Utils.showToastShort(L10n.t(Utils.getContext(), "Feature gate override reset"));
                 },
+                L10n.t(Utils.getContext(), "Feature gate override reset"),
                 L10n.t(Utils.getContext(), "Could not reset this override."));
     }
 
@@ -468,14 +467,14 @@ public final class FeatureGateDetailFragment extends Fragment {
     }
 
     /**
-     * Runs {@code change} off the main thread, then {@code onDone} back on it.
+     * Runs {@code change} off the main thread, then reports completion on the main thread.
      *
      * <p>{@code onDone} touches the views, so it is skipped when the screen has gone in the
-     * meantime. A failure is reported either way: the user pressed a button and is owed an
-     * answer even if they have already left.
+     * meantime. The notice is independent of those views: the user pressed a button and is owed
+     * an answer even if they have already left.
      */
     private void runDetailChange(DetailChange change, Runnable onDone,
-                                 String translatedFailurePrefix) {
+                                 String translatedSuccess, String translatedFailurePrefix) {
         Utils.runOnBackgroundThread(() -> {
             String failure = null;
             try {
@@ -489,6 +488,7 @@ public final class FeatureGateDetailFragment extends Fragment {
                     Utils.showToastLong(notice);
                     return;
                 }
+                Utils.showToastShort(translatedSuccess);
                 if (getActivity() == null || reset == null) return;
                 onDone.run();
             });

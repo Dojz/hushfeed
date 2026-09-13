@@ -39,6 +39,10 @@ public class NumberInputPreferenceTest {
             onDialogClosed(true);
         }
 
+        void open() {
+            showDialog(null);
+        }
+
         View dialogView() {
             return onCreateDialogView();
         }
@@ -82,6 +86,9 @@ public class NumberInputPreferenceTest {
             TextView title = (TextView) ((ViewGroup) dialog).getChildAt(0);
             assertEquals("Daily time budget", title.getText().toString());
             assertEquals(true, title.isAccessibilityHeading());
+            assertEquals("a long numeric summary cannot scroll out of the field's way",
+                    android.widget.ScrollView.class,
+                    ((ViewGroup) dialog).getChildAt(1).getClass());
         }
     }
 
@@ -164,15 +171,44 @@ public class NumberInputPreferenceTest {
             assertEquals("Summary\n0 to 600\nCurrent: 45 minutes",
                     preference.getSummary().toString());
 
-            // Nor for an empty box. That falls back to the stored setting, 30 here, rather than
-            // to the smallest value: on several of these rows the smallest value means off, so
-            // clearing the field would have quietly turned the feature off.
+            // An empty box keeps the last stored value, 45 here, rather than falling to the
+            // smallest value. It also says what happened instead of appearing to save nothing.
             ShadowToast.reset();
             preference.getEditText().setText("");
             preference.save();
-            assertNull(ShadowToast.getTextOfLatestToast());
+            assertEquals("Enter a number. The previous value was kept.",
+                    ShadowToast.getTextOfLatestToast());
+            assertEquals("Summary\n0 to 600\nCurrent: 45 minutes",
+                    preference.getSummary().toString());
+        }
+    }
+
+    @Test
+    public void anEmptyNumberKeepsTheDialogOpenWithItsReasonUnderTheField() {
+        try (var controller = Robolectric.buildActivity(TestActivity.class).setup().visible()) {
+            TestActivity activity = controller.get();
+            Context context = activity;
+            IntegerSetting setting = new IntegerSetting("unit_test_empty_number", 30)
+                    .withRange(0, 600);
+            Row preference = new Row(context, setting);
+            android.preference.PreferenceScreen screen = activity.getPreferenceManager()
+                    .createPreferenceScreen(context);
+            activity.setPreferenceScreen(screen);
+            screen.addPreference(preference);
+            preference.open();
+            android.app.AlertDialog dialog = (android.app.AlertDialog) preference.getDialog();
+            assertEquals(true, dialog.isShowing());
+            preference.getEditText().setText("");
+
+            dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE).performClick();
+
+            assertEquals("the dialog closed after refusing the empty value", true,
+                    dialog.isShowing());
+            assertEquals("Enter a number. The previous value was kept.",
+                    preference.getEditText().getError().toString());
             assertEquals("Summary\n0 to 600\nCurrent: 30 minutes",
                     preference.getSummary().toString());
+            dialog.dismiss();
         }
     }
 

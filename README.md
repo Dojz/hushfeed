@@ -76,7 +76,7 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 | `Disable the long press repost` | Keeps holding Like from opening TikTok's repost action without disabling TikTok's wider repost and upvote systems. |
 | `Disable screen capture detection` | Prevents TikTok from detecting screenshots and screen recordings. |
 | `Allow screenshots and Circle to Search` | Removes secure window flags and the native Circle to Search block. Off by default. Restart after changing the setting. |
-| `Diagnostic tools` | Adds optional structured Morphe logs, TikTok crash capture, and clipboard or file report export. |
+| `Diagnostic tools` | Adds optional structured Morphe logs, TikTok crash capture, and clipboard or file report export. Clearing the stored diagnostic data can be undone with the next tap. |
 | `Downloads` | Adds watermark-free downloads, filename templates, and comment sticker saving. An animated sticker is written as MP4, GIF, or the WebP TikTok sent, whichever you pick. |
 | `Show LIVE search` | Shows TikTok's search entry in the LIVE drawer where supported. |
 | `Use non-personalized search` | Uses TikTok's non-personalized search mode instead of its saved account choice. |

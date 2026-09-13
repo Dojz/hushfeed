@@ -150,6 +150,7 @@ Could not open settings search,Could not open settings search
 Could not open settings section,Could not open settings section
 Could not open the export file picker,Could not open the export file picker
 Could not open the import file picker,Could not open the import file picker
+Could not put back the diagnostic data. Try again.,Could not put back the diagnostic data. Try again.
 Could not put back the seen video history. Try again.,Could not put back the seen video history. Try again.
 Could not read who posted this comment,Could not read who posted this comment
 Could not reset this override.,Could not reset this override.
@@ -179,7 +180,8 @@ Dark,Dark
 Default playback speed,Default playback speed
 Delete the local record of the videos you have watched.,Delete the local record of the videos you have watched.
 "Device language, then original","Device language, then original"
-Diagnostic data cleared.,Diagnostic data cleared.
+Diagnostic data cleared. Tap again to put it back.,Diagnostic data cleared. Tap again to put it back.
+Diagnostic data put back.,Diagnostic data put back.
 Diagnostic report copied to the clipboard.,Diagnostic report copied to the clipboard.
 Diagnostics,Diagnostics
 Disable,Disable
@@ -208,6 +210,7 @@ Enable overrides,Enable overrides
 Enabled,Enabled
 Enter a creator handle or id,Enter a creator handle or id
 Enter a number,Enter a number
+Enter a number. The previous value was kept.,Enter a number. The previous value was kept.
 Enter a valid two-letter country code,Enter a valid two-letter country code
 "Enter a whole number, or one like 20K, 1.5M or 2B","Enter a whole number, or one like 20K, 1.5M or 2B"
 Enter up to 8 comma-separated speeds from 0.5 to 3,Enter up to 8 comma-separated speeds from 0.5 to 3
@@ -414,6 +417,7 @@ Live,Live
 Loaded,Loaded
 Loaded current values. Loading all known gates...,Loaded current values. Loading all known gates...
 Loaded for this account,Loaded for this account
+Loaded values are still being read. Try again in a moment.,Loaded values are still being read. Try again in a moment.
 Loaded-value file export failed,Loaded-value file export failed
 Loaded-value file export failed; cleanup also failed,Loaded-value file export failed; cleanup also failed
 Loaded-value file is invalid or too large,Loaded-value file is invalid or too large
@@ -745,6 +749,7 @@ The minimum or maximum views of a video to show.,The minimum or maximum views of
 The profile picture couldn't be saved.,The profile picture couldn't be saved.
 "The record of an interrupted settings change could not be read, so it was set aside. Check your settings.","The record of an interrupted settings change could not be read, so it was set aside. Check your settings."
 The report couldn't be saved. Try again.,The report couldn't be saved. Try again.
+The selected loaded-values file could not be read. Try again.,The selected loaded-values file could not be read. Try again.
 The settings backup was rejected. Nothing was altered.,The settings backup was rejected. Nothing was altered.
 The smallest value is above the largest,The smallest value is above the largest
 The sound couldn't be saved. Try again.,The sound couldn't be saved. Try again.
@@ -753,6 +758,8 @@ The story couldn't be saved.,The story couldn't be saved.
 "The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.","The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks."
 "The video couldn't be saved. Try again, or choose Automatic.","The video couldn't be saved. Try again, or choose Automatic."
 There is no Lab change to undo.,There is no Lab change to undo.
+There is no diagnostic data to clear.,There is no diagnostic data to clear.
+There is no diagnostic data to put back.,There is no diagnostic data to put back.
 There was nothing to put back,There was nothing to put back
 These loaded values are for a different TikTok version.,These loaded values are for a different TikTok version.
 This catalog entry is no longer available. Refresh the Lab and try again.,This catalog entry is no longer available. Refresh the Lab and try again.

@@ -264,7 +264,15 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         // settings screen is being built and a context is at hand.
         savedMessage = L10n.t(context, "Saved. Restart TikTok to apply this.");
         app.morphe.extension.shared.settings.preference.LogBufferManager.clearedMessage =
-                L10n.t(context, "Diagnostic data cleared.");
+                L10n.t(context, "Diagnostic data cleared. Tap again to put it back.");
+        app.morphe.extension.shared.settings.preference.LogBufferManager.nothingToClearMessage =
+                L10n.t(context, "There is no diagnostic data to clear.");
+        app.morphe.extension.shared.settings.preference.LogBufferManager.restoredMessage =
+                L10n.t(context, "Diagnostic data put back.");
+        app.morphe.extension.shared.settings.preference.LogBufferManager.nothingToRestoreMessage =
+                L10n.t(context, "There is no diagnostic data to put back.");
+        app.morphe.extension.shared.settings.preference.LogBufferManager.restoreFailedMessage =
+                L10n.t(context, "Could not put back the diagnostic data. Try again.");
         // The rest of what the shared export path says, on a German phone in German. Every one
         // of these reached the reader in English, branded for the library rather than the
         // bundle, and two of them carried an exception's text.

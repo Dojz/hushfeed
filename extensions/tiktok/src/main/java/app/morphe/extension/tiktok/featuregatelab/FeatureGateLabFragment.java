@@ -763,7 +763,10 @@ public final class FeatureGateLabFragment extends Fragment {
                 })
                 .setNegativeButton(L10n.t(getContext(), "Cancel"), null)
                 .create();
-        showStyled(dialog);
+        // This is a platform single-choice list, so use the same radio indicator, text colours
+        // and scroll-time restyling as every other platform picker in settings.
+        dialog.setOnShowListener(ignored -> SettingsUi.styleStandardAlertDialog(dialog));
+        dialog.show();
     }
 
     /**
@@ -987,7 +990,15 @@ public final class FeatureGateLabFragment extends Fragment {
 
     private void exportLoadedValues() {
         try {
-            if (getActivity() == null || snapshot == null) return;
+            if (getActivity() == null) {
+                postToast(L10n.t(Utils.getContext(), "Could not open the export file picker"));
+                return;
+            }
+            if (snapshot == null) {
+                postToast(L10n.t(Utils.getContext(),
+                        "Loaded values are still being read. Try again in a moment."));
+                return;
+            }
             String timestamp = new SimpleDateFormat("yyyyMMdd-HHmmss", Locale.US).format(new Date());
             Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT)
                     .addCategory(Intent.CATEGORY_OPENABLE)
@@ -1040,12 +1051,17 @@ public final class FeatureGateLabFragment extends Fragment {
     }
 
     private void readLoadedValuesFile(Uri uri) {
+        Activity activity = getActivity();
+        ContentResolver resolver = activity == null ? null : activity.getContentResolver();
+        if (resolver == null) {
+            postToast(L10n.t(Utils.getContext(),
+                    "The selected loaded-values file could not be read. Try again."));
+            return;
+        }
         FILE_IO_EXECUTOR.execute(() -> {
             try {
-                Activity activity = getActivity();
-                if (activity == null) return;
                 byte[] encoded;
-                try (InputStream input = activity.getContentResolver().openInputStream(uri)) {
+                try (InputStream input = resolver.openInputStream(uri)) {
                     if (input == null) throw new IllegalStateException("Document provider returned no input stream");
                     encoded = readLimited(input, MAX_COMPRESSED_IMPORT_BYTES);
                 }
@@ -1069,14 +1085,18 @@ public final class FeatureGateLabFragment extends Fragment {
     }
 
     private void reviewLoadedImport(JSONObject imported) throws Exception {
-        Activity activity = getActivity();
+        Context context = getActivity();
+        if (context == null) context = Utils.getContext();
         FeatureGateCatalog.Snapshot currentSnapshot = snapshot;
-        if (activity == null || currentSnapshot == null) return;
+        if (currentSnapshot == null) {
+            throw new ImportRefused(L10n.t(context,
+                    "Loaded values are still being read. Try again in a moment."));
+        }
         if (!"loaded_values".equals(imported.optString("payload_kind"))) {
-            throw new ImportRefused(L10n.t(activity, "This file isn't a loaded-values export from the Feature Gate Lab."));
+            throw new ImportRefused(L10n.t(context, "This file isn't a loaded-values export from the Feature Gate Lab."));
         }
         if (!FeatureGateLabStore.TARGET_VERSION.equals(imported.optString("tiktok_version"))) {
-            throw new ImportRefused(L10n.t(activity, "These loaded values are for a different TikTok version."));
+            throw new ImportRefused(L10n.t(context, "These loaded values are for a different TikTok version."));
         }
 
         Map<String, FeatureGateLabStore.Rule> existingRules = rulesByIdentity();
@@ -1085,9 +1105,9 @@ public final class FeatureGateLabFragment extends Fragment {
         int same = 0;
         int unavailable = 0;
         int malformed = 0;
-        if (sourceRules == null) throw new ImportRefused(L10n.t(activity, "This file has no loaded values in it."));
+        if (sourceRules == null) throw new ImportRefused(L10n.t(context, "This file has no loaded values in it."));
         if (sourceRules.length() > MAX_IMPORT_RULES) {
-            throw new ImportRefused(L10n.t(activity, "This file has more loaded values than the Lab takes at once."));
+            throw new ImportRefused(L10n.t(context, "This file has more loaded values than the Lab takes at once."));
         }
         {
             for (int i = 0; i < sourceRules.length(); i++) {
@@ -1551,7 +1571,9 @@ public final class FeatureGateLabFragment extends Fragment {
             // selection you cannot see is a selection you act on by accident.
             boolean chosen = selection.containsKey(entry.identity());
             convertView.setActivated(chosen);
-            convertView.setAlpha(!selection.isEmpty() && !chosen ? 0.55f : 1f);
+            // Every row remains actionable in selection mode. The activated surface and spoken
+            // selected state carry the distinction without reducing 12sp labels below contrast.
+            convertView.setAlpha(1f);
 
             String state;
             int stateColor;

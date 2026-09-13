@@ -286,6 +286,32 @@ public class StickerGallerySaverTest {
                 (Boolean) has.invoke(null, parent));
     }
 
+    @Test public void aSheetWithoutATextTemplateUsesTheSettingsThemeColours() throws Exception {
+        android.content.Context context = RuntimeEnvironment.getApplication();
+        app.morphe.extension.shared.Utils.setContext(context);
+        Method create = StickerGallerySaver.class.getDeclaredMethod(
+                "createActionButton", View.class, View.class);
+        create.setAccessible(true);
+
+        app.morphe.extension.shared.Utils.setIsDarkModeEnabled(true);
+        android.widget.TextView dark = (android.widget.TextView) create.invoke(
+                null, new View(context), new View(context));
+        assertEquals(app.morphe.extension.tiktok.settings.preference.SettingsUi.textPrimary(),
+                dark.getCurrentTextColor());
+        dark.setEnabled(false);
+        assertEquals(app.morphe.extension.tiktok.settings.preference.SettingsUi.textDisabled(),
+                dark.getCurrentTextColor());
+
+        app.morphe.extension.shared.Utils.setIsDarkModeEnabled(false);
+        android.widget.TextView light = (android.widget.TextView) create.invoke(
+                null, new View(context), new View(context));
+        assertEquals(app.morphe.extension.tiktok.settings.preference.SettingsUi.textPrimary(),
+                light.getCurrentTextColor());
+        assertNotEquals("the fallback colour stayed fixed across themes",
+                dark.getTextColors().getColorForState(new int[]{android.R.attr.state_enabled}, 0),
+                light.getCurrentTextColor());
+    }
+
     @Test public void aCleartextStickerMirrorIsNotFetchedFrom() {
         // The bytes behind these addresses reach a native WebP decoder, so an unauthenticated
         // mirror is a body anyone on the network can choose, handed to a parser written in C.

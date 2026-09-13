@@ -559,7 +559,6 @@ Feed and navigation	Feed und Navigation
 Errors	Fehler
 Other	Sonstiges
 Saved. Restart TikTok to apply this.	Gespeichert. TikTok neu starten, damit das gilt.
-Diagnostic data cleared.	Diagnosedaten gelöscht.
 Includes these events: %1$s	Enthält diese Ereignisse: %1$s
 Gate details	Schalterdetails
 This catalog entry is no longer available. Refresh the Lab and try again.	Dieser Katalogeintrag ist nicht mehr verfügbar. Das Labor aktualisieren und es erneut versuchen.
@@ -864,3 +863,11 @@ Full report saved to %1$s	Vollständiger Bericht gespeichert unter %1$s
 Could not start the report export. Try again shortly.	Der Export des Berichts ließ sich nicht starten. Versuche es gleich noch einmal.
 Copy quick report	Kurzbericht kopieren
 Save full report	Vollständigen Bericht speichern
+Diagnostic data cleared. Tap again to put it back.	Diagnosedaten gelöscht. Tippe erneut, um sie wiederherzustellen.
+Diagnostic data put back.	Diagnosedaten wiederhergestellt.
+There is no diagnostic data to put back.	Es gibt keine Diagnosedaten zum Wiederherstellen.
+Could not put back the diagnostic data. Try again.	Die Diagnosedaten konnten nicht wiederhergestellt werden. Versuche es erneut.
+Loaded values are still being read. Try again in a moment.	Die geladenen Werte werden noch gelesen. Versuche es gleich noch einmal.
+The selected loaded-values file could not be read. Try again.	Die ausgewählte Datei mit geladenen Werten konnte nicht gelesen werden. Versuche es erneut.
+Enter a number. The previous value was kept.	Gib eine Zahl ein. Der vorherige Wert wurde beibehalten.
+There is no diagnostic data to clear.	Es gibt keine Diagnosedaten zum Löschen.

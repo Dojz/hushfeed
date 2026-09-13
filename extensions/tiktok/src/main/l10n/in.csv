@@ -557,7 +557,6 @@ Feed and navigation,Feed dan navigasi
 Errors,Kesalahan
 Other,Lainnya
 Saved. Restart TikTok to apply this.,Tersimpan. Mulai ulang TikTok agar berlaku.
-Diagnostic data cleared.,Data diagnostik dihapus.
 Includes these events: %1$s,Termasuk peristiwa berikut: %1$s
 Gate details,Detail gate
 This catalog entry is no longer available. Refresh the Lab and try again.,Entri katalog ini sudah tidak tersedia. Segarkan Lab dan coba lagi.
@@ -862,3 +861,11 @@ Full report saved to %1$s,Laporan lengkap disimpan ke %1$s
 Could not start the report export. Try again shortly.,Ekspor laporan tidak bisa dimulai. Coba lagi sebentar.
 Copy quick report,Salin laporan singkat
 Save full report,Simpan laporan lengkap
+Diagnostic data cleared. Tap again to put it back.,Data diagnostik dihapus. Ketuk lagi untuk mengembalikannya.
+Diagnostic data put back.,Data diagnostik dikembalikan.
+There is no diagnostic data to put back.,Tidak ada data diagnostik yang dapat dikembalikan.
+Could not put back the diagnostic data. Try again.,Data diagnostik tidak dapat dikembalikan. Coba lagi.
+Loaded values are still being read. Try again in a moment.,Nilai yang dimuat masih dibaca. Coba lagi sebentar lagi.
+The selected loaded-values file could not be read. Try again.,Berkas nilai yang dimuat dan dipilih tidak dapat dibaca. Coba lagi.
+Enter a number. The previous value was kept.,Masukkan angka. Nilai sebelumnya dipertahankan.
+There is no diagnostic data to clear.,Tidak ada data diagnostik yang perlu dihapus.
