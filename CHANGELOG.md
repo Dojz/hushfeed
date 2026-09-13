@@ -2,6 +2,8 @@
 
 * TikTok's own Photo Mode save now gives every image its own `{index}` number instead of naming the whole slideshow as image 1. This also prevents later photos replacing the first one on Android 6 through 9. Animated WebP to GIF conversion now budgets the canvas and decoded frame alongside the stored frame pixels, which cuts the worst pixel allocation from about 100 MiB to 32 MiB before encoder overhead. Turning off Keep captions in clear display removes its overlay and layout observer immediately. Media jobs keep their two minute deadline without carrying a cancel path that no shipped control could call.
 
+* Creator identity now uses the same canonical value for equality and hash collections. Fire-and-forget background and main-thread callbacks report every failure instead of letting an Error escape into TikTok. Android API checks now cover the full shared and settings source rather than being disabled for two whole files, the TikTok stub matches the app's API 23 floor and has its own namespace, and artifact verification rejects any DEX payload with no classes.
+
 * Silent reflection failures now reach Hook status for CAPTCHA account checks, external browser handoff, sticker source adapters and story saves. Each feature keeps its existing fallback, while a renamed required class, method or field identifies the affected family and member in Diagnostics.
 
 * The dark and light Included diagnostics screenshots now come from the shipped preference. Both show its eight real choices and Apply and Cancel actions. The capture test rejects a missing choice or the return of the invented Done button.
