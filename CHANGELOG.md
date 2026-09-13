@@ -10,6 +10,8 @@
 
 * Injected-register verification now requires identical Android verifier message counts from clean and patched APKs. Its static check also rejects removed host methods and DEX files unless an exact reviewed removal is listed beside the verifier.
 
+* Device verification now removes each uploaded APK and its generated ART files after every result, including failed uploads and disconnected runs. Cleanup errors are reported without replacing the verification failure that caused them.
+
 ## 0.30.2
 
 * GIF conversion now has separate deadline regressions for its colour-precision, palette and frame-encoding passes. Each check has to stop before the second frame, so losing one cannot hide behind an earlier pass.
