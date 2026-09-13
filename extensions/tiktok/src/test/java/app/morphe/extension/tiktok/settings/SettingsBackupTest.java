@@ -21,6 +21,7 @@ import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -621,6 +622,34 @@ public class SettingsBackupTest {
         assertTrue(Settings.REGION_SPOOF.get());
         assertTrue(FeatureGateLabStore.masterEnabled());
         assertFalse(new File(app.getFilesDir(), SettingsOperationJournal.FILE_NAME).isFile());
+    }
+
+    @Test public void aCleanupFailureDoesNotRelabelAnAppliedJournalAsFailed() throws Exception {
+        var app = Utils.getContext();
+        String before = SettingsBackup.create(false);
+        Settings.REGION_SPOOF.save(true);
+        Settings.MAX_VIDEO_SECONDS.save(73);
+        String after = SettingsBackup.create(false);
+        writeJournal("settings", before, after);
+        File journal = new File(app.getFilesDir(), SettingsOperationJournal.FILE_NAME);
+        File damaged = new File(journal.getPath() + SettingsOperationJournal.DAMAGED_SUFFIX);
+        if (damaged.exists()) assertTrue(damaged.delete());
+        AtomicInteger deletes = new AtomicInteger();
+
+        SettingsOperationJournal.Recovery result = SettingsOperationJournal.initialize(app, file -> {
+            deletes.incrementAndGet();
+            throw new java.io.IOException("forced journal cleanup failure");
+        });
+
+        assertEquals(1, deletes.get());
+        assertEquals(SettingsOperationJournal.Recovery.ALREADY_COMMITTED, result);
+        assertEquals(SettingsOperationJournal.Recovery.ALREADY_COMMITTED,
+                SettingsOperationJournal.consumeRecoveryNotice());
+        assertFalse(journal.isFile());
+        assertTrue(damaged.isFile());
+        assertEquals(SettingsOperationJournal.Recovery.NONE,
+                SettingsOperationJournal.consumeRecoveryNotice());
+        assertTrue(damaged.delete());
     }
 
     @Test public void interruptedLabJournalRestoresPriorRulesAndKeepsTheUndoCopy() throws Exception {
