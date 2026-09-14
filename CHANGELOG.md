@@ -1,5 +1,8 @@
 ## Unreleased
 
+* Playback quality stops complaining about a model it cannot read. On some builds and accounts TikTok's video model getter hands back an empty string, and the quality picker parsed it anyway, failed, and put "Could not read the playback quality model" on screen once per video. It now hands back whatever it was given and leaves the quality to the app, which is what it did all along, without the message. The Hook status row names the getter that supplied the unusable model, so a diagnostic report says which one it was instead of the feed saying so repeatedly.
+
+
 * Error messages from inside Hushfeed no longer appear over the feed unless diagnostic logging is on. They carry the name of the class that failed and the exception's own English text, past every translation the bundle ships, and on a path the feed runs one of them fired once per video. They still reach the log, the diagnostic buffer and the exported report, which is what a bug report needs, and the same message now shows at most once per run rather than queueing behind itself.
 
 * A switch that needs TikTok restarted says so. Fifty settings do nothing until the app starts again and only thirty-four of them mentioned it, so sixteen switches moved and nothing happened, with nothing on screen explaining the gap. The sentence comes from the setting itself now, so it is on all fifty and cannot be forgotten on the next one added.
