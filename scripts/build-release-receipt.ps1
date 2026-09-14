@@ -76,7 +76,14 @@ if (-not $patcherMatch.Success -or -not $floorMatch.Success) {
 $commit = (& git -C $Root rev-parse HEAD).Trim()
 if ($commit -notmatch '^[0-9a-f]{40}$') { throw "git did not answer with a commit: $commit" }
 $commitTimestamp = [long](& git -C $Root log -1 --format=%ct).Trim()
+
+# The bundle is read once, here, before any fixture is patched. Measuring it at the end instead
+# would describe whatever is in build/libs when the run finishes, which is not necessarily what
+# the patch runs used: any Gradle task that reaches `:patches:jar` rewrites that same path with
+# the plain jar, and a run takes long enough for that to happen alongside it.
 $bundleManifest = Get-BundleManifestFacts -BundlePath $Bundle
+$bundleSize = (Get-Item -LiteralPath $Bundle).Length
+$bundleHash = Get-Sha256Hex -Path $Bundle
 
 # Refused here rather than reported, because a receipt that records the mismatch would be a
 # document saying its own subject cannot be rebuilt from the source it names.
@@ -176,6 +183,9 @@ function Get-PatchVerdicts {
     return $verdicts.ToArray()
 }
 
+# Read with the hash and size above, and for the same reason.
+$extensionPayloads = Get-ExtensionPayloads -BundlePath $Bundle
+
 New-Item -ItemType Directory -Force -Path $WorkDir | Out-Null
 $workRoot = (Resolve-Path -LiteralPath $WorkDir).Path
 $targets = New-Object System.Collections.Generic.List[object]
@@ -268,15 +278,15 @@ $receipt = [ordered]@{
     }
     bundle        = [ordered]@{
         file      = Split-Path -Leaf $Bundle
-        sizeBytes = (Get-Item -LiteralPath $Bundle).Length
-        sha256    = Get-Sha256Hex -Path $Bundle
+        sizeBytes = $bundleSize
+        sha256    = $bundleHash
         timestamp = $bundleManifest.timestamp
     }
     toolchain     = [ordered]@{
         patcherVersion = $patcherMatch.Groups[1].Value
         managerFloor   = $floorMatch.Groups[1].Value
     }
-    extension     = [ordered]@{ dexPayloads = Get-ExtensionPayloads -BundlePath $Bundle }
+    extension     = [ordered]@{ dexPayloads = $extensionPayloads }
     targets       = $targets.ToArray()
 }
 
