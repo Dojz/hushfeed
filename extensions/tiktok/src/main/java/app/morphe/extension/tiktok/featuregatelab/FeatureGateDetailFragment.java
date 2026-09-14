@@ -779,6 +779,12 @@ public final class FeatureGateDetailFragment extends Fragment {
                         kind.startsWith("LIST_") || "JSON".equals(kind) ? 96 : 48
                 ));
                 SettingsUi.styleEditText(input);
+                SettingsUi.labelEditor(
+                        title,
+                        input,
+                        title.getText() + " (" + rawName.getText() + ")"
+                );
+                rawName.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
                 fieldRoot.addView(input, FeatureGateLabUi.matchWrap());
                 objectEditors.add(ObjectFieldEditor.input(fieldName, kind, input));
             }

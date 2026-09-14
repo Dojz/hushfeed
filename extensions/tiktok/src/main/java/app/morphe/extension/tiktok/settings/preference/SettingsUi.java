@@ -608,6 +608,44 @@ public final class SettingsUi {
         ));
     }
 
+    /**
+     * Connects a visible field label to its editor and makes the editor the one spoken stop.
+     *
+     * <p>A content description on an EditText replaces or competes with what was typed. The
+     * node hint carries the stable field name instead, while the platform text, input type and
+     * enabled state remain separate node properties. The label stays on screen but is removed
+     * from accessibility traversal because the editor now says it itself.
+     */
+    public static void labelEditor(TextView label, EditText editor) {
+        labelEditor(label, editor, label.getText());
+    }
+
+    /** Same contract with a more precise spoken name for generated fields. */
+    public static void labelEditor(TextView label, EditText editor, CharSequence spokenName) {
+        if (editor.getId() == View.NO_ID) editor.setId(View.generateViewId());
+        label.setLabelFor(editor.getId());
+        label.setFocusable(false);
+        label.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+        final CharSequence fieldName = spokenName == null ? "" : spokenName.toString();
+        editor.setAccessibilityDelegate(new View.AccessibilityDelegate() {
+            @Override public void onInitializeAccessibilityNodeInfo(
+                    View host, AccessibilityNodeInfo info) {
+                super.onInitializeAccessibilityNodeInfo(host, info);
+                EditText input = (EditText) host;
+                // Keep these explicit. Dynamic fields can be disabled after construction, and
+                // their current value and required keyboard must survive that state change.
+                info.setText(input.getText());
+                info.setEditable(true);
+                info.setEnabled(input.isEnabled());
+                info.setInputType(input.getInputType());
+                if (Build.VERSION.SDK_INT >= 26) {
+                    info.setHintText(fieldName);
+                    info.setShowingHintText(input.length() == 0);
+                }
+            }
+        });
+    }
+
     public static void styleCheckBox(CompoundButton button) {
         int[][] states = new int[][]{
                 new int[]{android.R.attr.state_checked},

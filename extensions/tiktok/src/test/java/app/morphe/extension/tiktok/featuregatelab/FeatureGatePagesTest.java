@@ -507,6 +507,98 @@ public class FeatureGatePagesTest {
         }
     }
 
+    @Test @Config(fontScale = 1f)
+    public void structuredEditorsHaveOneUniqueNamedInputAtNormalTextSize() throws Exception {
+        assertStructuredEditorsAreNamed(1f);
+    }
+
+    @Test @Config(fontScale = 2f)
+    public void structuredEditorsHaveOneUniqueNamedInputAtDoubleTextSize() throws Exception {
+        assertStructuredEditorsAreNamed(2f);
+    }
+
+    private static void assertStructuredEditorsAreNamed(float expectedScale) throws Exception {
+        try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            assertEquals(expectedScale,
+                    activity.getResources().getConfiguration().fontScale, 0.01f);
+            FeatureGateLabStore.resetAllLabData();
+            FeatureGateLabSession.begin();
+            FeatureGateLabStore.setMasterEnabled(true);
+            var entry = new FeatureGateCatalog.Entry("object_gate", "Object gate",
+                    FeatureGateLabStore.MANAGER_SETTINGS_MANAGER, "OBJECT", true, true,
+                    List.of(), List.of(), List.of(), "", "", false, null, null,
+                    StructuredConfigControllerTest.Config.class.getName());
+            var cached = FeatureGateCatalog.class.getDeclaredField("cachedSnapshot");
+            cached.setAccessible(true);
+            cached.set(null, new FeatureGateCatalog.Snapshot(
+                    List.of(entry), Map.of(entry.identity(), entry), 0, 0, true));
+
+            FeatureGateDetailFragment detail = FeatureGateDetailFragment.forEntry(
+                    FeatureGateLabStore.MANAGER_SETTINGS_MANAGER, "object_gate", "OBJECT");
+            attach(activity, detail);
+            java.util.List<EditText> inputs = new java.util.ArrayList<>();
+            collect(detail.getView(), inputs);
+            assertTrue("the fixture built no structured text inputs", inputs.size() > 1);
+            java.util.Set<Integer> ids = new java.util.HashSet<>();
+
+            for (EditText input : inputs) {
+                ViewGroup field = (ViewGroup) input.getParent();
+                TextView label = (TextView) field.getChildAt(0);
+                TextView technical = (TextView) field.getChildAt(1);
+                assertNotEquals("a structured input has no address for its label",
+                        View.NO_ID, input.getId());
+                assertTrue("two structured inputs share the same view id", ids.add(input.getId()));
+                assertEquals("the field label is not connected to its input",
+                        input.getId(), label.getLabelFor());
+                assertEquals("the field label is a second accessibility stop",
+                        View.IMPORTANT_FOR_ACCESSIBILITY_NO,
+                        label.getImportantForAccessibility());
+                assertEquals("the technical field label is a second accessibility stop",
+                        View.IMPORTANT_FOR_ACCESSIBILITY_NO,
+                        technical.getImportantForAccessibility());
+                assertFalse(label.isFocusable());
+                assertFalse(technical.isFocusable());
+                assertTrue(input.isFocusable());
+                assertNull("the accessible name replaced the structured value",
+                        input.getContentDescription());
+
+                android.view.accessibility.AccessibilityNodeInfo node =
+                        input.createAccessibilityNodeInfo();
+                String spokenName = String.valueOf(node.getHintText());
+                assertTrue("the node omits the readable field name",
+                        spokenName.contains(label.getText()));
+                assertTrue("the node omits the exact field identifier or required type",
+                        spokenName.contains(technical.getText()));
+                assertEquals(input.getText().toString(), String.valueOf(node.getText()));
+                assertEquals(input.getInputType(), node.getInputType());
+                assertTrue(node.isEditable());
+                assertTrue(node.isEnabled());
+                assertNull(node.getContentDescription());
+
+                input.setEnabled(false);
+                android.view.accessibility.AccessibilityNodeInfo disabled =
+                        input.createAccessibilityNodeInfo();
+                assertFalse(disabled.isEnabled());
+                assertEquals(input.getText().toString(), String.valueOf(disabled.getText()));
+                assertEquals(input.getInputType(), disabled.getInputType());
+                assertEquals(spokenName, String.valueOf(disabled.getHintText()));
+            }
+        }
+    }
+
+    private static void collect(View view, java.util.List<EditText> found) {
+        if (view instanceof EditText) {
+            found.add((EditText) view);
+        } else if (view instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) view;
+            for (int index = 0; index < group.getChildCount(); index++) {
+                collect(group.getChildAt(index), found);
+            }
+        }
+    }
+
     @Test public void enablingAnArrayOverrideKeepsItsGeneratedValues() throws Exception {
         try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
             FeatureGateDetailFragment detail = arrayDetail(owner.get(), false, null);

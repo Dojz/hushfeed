@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Text and number settings, download destination dialogs and Feature Gate object fields now give screen readers one named editor. The spoken node keeps the current value, required keyboard and disabled state without repeating the visible label.
+
 * Caption and creator filters now parse unchanged lists once per stored value instead of once per video. Feed-rule lists accept up to 10,000 entries or 256 KB, and oversized dialog edits or imports stay out of storage with a translated explanation.
 
 * Downloads with a missing or malformed size header now recheck free space while streaming. They stop and remove partial media before reaching the 32 MB floor, with another 8 MB kept for publication.
