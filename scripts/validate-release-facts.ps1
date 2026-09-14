@@ -5,7 +5,8 @@
 .DESCRIPTION
     The generated patches-list.json is the local source for the release version, target
     package, target version and patch count. This check makes README.md, patches-bundle.json
-    and the recorded runtime test count agree before a release is published. A guarded
+    and the recorded runtime test count agree before a release is published. It also checks
+    the canonical Morphe add-source link in the README and verifies that its landing page is live. A guarded
     preparation mode lets the source commit reach GitHub while the public index still points
     at the previous working bundle. Published-asset verification remains strict.
 #>
@@ -98,8 +99,12 @@ function Require-Match {
     }
 }
 
-function Assert-AssetReachable {
-    param([Uri]$Uri)
+function Assert-UrlReachable {
+    param(
+        [Uri]$Uri,
+        [string]$Description,
+        [string]$FailureHint
+    )
     # -SkipHttpErrorCheck is PowerShell 7 only, and the pre-push hook runs whichever shell it
     # found, so a 404 has to be read out of the thrown response instead. That is the answer this
     # check exists for: the index once named a tag that did not exist yet.
@@ -116,15 +121,14 @@ function Assert-AssetReachable {
         if ($failed -and $failed.StatusCode) {
             $status = [int]$failed.StatusCode
         } else {
-            throw ("Could not reach the indexed bundle URL ${Uri}: $($_.Exception.Message). " +
+            throw ("Could not reach the ${Description} ${Uri}: $($_.Exception.Message). " +
                 'If the network is down, push with HUSHFEED_SKIP_PRE_PUSH=1 and run this again later.')
         }
     }
     if ($status -ne 200) {
-        throw ("The indexed bundle URL ${Uri} answered HTTP ${status}. " +
-            'The Manager fetches that address, so the release it names has to exist first.')
+        throw ("The ${Description} ${Uri} answered HTTP ${status}. " + $FailureHint)
     }
-    Write-Host ("[release] indexed URL answers 200: " + $Uri)
+    Write-Host ("[release] ${Description} answers 200: " + $Uri)
 }
 
 $rootPath = (Resolve-Path -LiteralPath $Root).Path
@@ -192,7 +196,7 @@ Require-Match -Text ([string]$bundle.download_url) -Pattern "/v$([regex]::Escape
 # Matching the pattern only proves the index spells the version right. Reaching the address is
 # what catches an index pointed at a tag nobody published, which is how the bundle went missing
 # once already, and the hash comparison further down runs only when this checkout built a bundle.
-# So the URL is fetched on every run, not only on a release.
+# So the asset URL and the README's Morphe landing page are fetched on every run, not only on a release.
 $assetUri = [Uri]$bundle.download_url
 if ($assetUri.Scheme -ne 'https') {
     throw "The published bundle URL must use HTTPS: $($bundle.download_url)"
@@ -209,10 +213,16 @@ if ($segments.Count -lt 2) {
     throw "Could not read an owner and repository out of the indexed bundle URL: $assetUri"
 }
 $slug = $segments[0] + '/' + $segments[1]
+$encodedSlug = [Uri]::EscapeDataString($slug)
+$addSourceUrl = "https://morphe.software/add-source?github=$encodedSlug"
+Require-Match -Text $readme -Pattern ([regex]::Escape($addSourceUrl)) -Description 'README Morphe add-source link'
 if ($SkipUrlCheck) {
-    Write-Host '[release] the indexed URL was not fetched because -SkipUrlCheck was given'
+    Write-Host '[release] the indexed URL and Morphe add-source page were not fetched because -SkipUrlCheck was given'
 } else {
-    Assert-AssetReachable -Uri $assetUri
+    Assert-UrlReachable -Uri $assetUri -Description 'indexed bundle URL' `
+        -FailureHint 'The Manager fetches that address, so the release it names has to exist first.'
+    Assert-UrlReachable -Uri ([Uri]$addSourceUrl) -Description 'Morphe add-source page' `
+        -FailureHint 'The README sends Android users through that page, so it must be available before release.'
 }
 Require-Match -Text $readme -Pattern "\b$patchCount patches\b" -Description 'README patch count'
 Require-Match -Text $readme -Pattern ([regex]::Escape($targetPackage)) -Description 'README package name'

@@ -1,5 +1,7 @@
 ## Unreleased
 
+* The Add Hushfeed links now use the encoded repository slug. The install steps also include a manual Manager path for browsers that refuse to open other apps. The browser button, source download and Manager 1.29.0 and 1.30.0 flows were exercised on the S22.
+
 * Remove feed ads now catches videos carrying TikTok's Creator earns commission disclosure. It reads the structured anchor label rather than matching visible English text, and malformed or unrelated anchor data stays in the feed.
 
 * Comment tools can now remove TikTok's polls from the comment sheet before they are drawn. A missing or changed poll model leaves comments working and identifies the broken contract in Hook status.
