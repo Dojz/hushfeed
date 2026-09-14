@@ -102,15 +102,14 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment {
 
     private void onPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (destroyed || !isAdded()) return;
+        if (updatingPreference) {
+            Logger.printDebug(() -> "Ignoring preference change as sync is in progress");
+            return;
+        }
 
         Setting<?> setting = null;
         Preference pref = null;
         try {
-            if (updatingPreference) {
-                Logger.printDebug(() -> "Ignoring preference change as sync is in progress");
-                return;
-            }
-
             setting = Setting.getSettingFromPath(Objects.requireNonNull(key));
             if (setting == null) {
                 return;
@@ -122,31 +121,29 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment {
             Logger.printDebug(() -> "Preference changed: " + key);
 
             updatingPreference = true;
-            try {
-                if (!settingImportInProgress) {
-                    // Another live page may own the change. Its persisted value is authoritative;
-                    // reading this page's older control would overwrite it, including removing defaults.
-                    syncPreferenceWithStoredValue(pref, setting, sharedPreferences);
-                }
-
-                if (!settingImportInProgress && !showingUserDialogMessage) {
-                    if (setting.userDialogMessage != null && !prefIsSetToDefault(pref, setting)) {
-                        // Do not change the setting yet, to allow preserving whatever
-                        // list/text value was previously set if it needs to be reverted.
-                        showSettingUserDialogConfirmation(pref, setting);
-                        return;
-                    } else if (setting.rebootApp) {
-                        showRestartDialog(getContext());
-                    }
-                }
-
-                // Apply 'Setting <- Preference', unless importing already updated the Setting.
-                updatePreference(pref, setting, true, settingImportInProgress);
-                // Update any other preference availability that may now be different.
-                updateUIAvailability();
-            } finally {
-                updatingPreference = false;
+            if (!settingImportInProgress) {
+                // Another live page may own the change. Its persisted value is authoritative;
+                // reading this page's older control would overwrite it, including removing defaults.
+                syncPreferenceWithStoredValue(pref, setting, sharedPreferences);
             }
+
+            boolean showRestartAfterUpdate = false;
+            if (!settingImportInProgress && !showingUserDialogMessage) {
+                if (setting.userDialogMessage != null && !prefIsSetToDefault(pref, setting)) {
+                    // Do not change the setting yet, to allow preserving whatever
+                    // list/text value was previously set if it needs to be reverted.
+                    showSettingUserDialogConfirmation(pref, setting);
+                    return;
+                }
+                showRestartAfterUpdate = setting.rebootApp;
+            }
+
+            // Apply 'Setting <- Preference', unless importing already updated the Setting.
+            updatePreference(pref, setting, true, settingImportInProgress);
+            // Update any other preference availability that may now be different.
+            updateUIAvailability();
+            // Report success only after every operation that can still enter recovery succeeded.
+            if (showRestartAfterUpdate) showRestartDialog(getContext());
         } catch (Exception ex) {
             // This path owns a localized outcome below, so logging must not add a second toast.
             Logger.printInfo(() -> "OnSharedPreferenceChangeListener failure", ex);

@@ -61,6 +61,8 @@ public class PreferenceFailureRecoveryTest {
         private static int failures;
         private static boolean failureWasOnMainThread;
         private static boolean failRecoveryVerification;
+        private static boolean observeRecoveryGuard;
+        private static boolean recoveryGuardStayedRaised;
         private boolean creationFinished;
 
         static void failOnceAt(Stage next) {
@@ -68,6 +70,13 @@ public class PreferenceFailureRecoveryTest {
             failures = 1;
             failureWasOnMainThread = false;
             failRecoveryVerification = false;
+            observeRecoveryGuard = false;
+            recoveryGuardStayedRaised = false;
+        }
+
+        static void observeRecoveryGuard() {
+            observeRecoveryGuard = true;
+            recoveryGuardStayedRaised = false;
         }
 
         private static void fail(Stage current) {
@@ -98,6 +107,11 @@ public class PreferenceFailureRecoveryTest {
             toggle.setKey(BaseSettings.DEBUG.key);
             toggle.setTitle("Debug logging");
             screen.addPreference(toggle);
+
+            SwitchPreference restartToggle = new SwitchPreference(activity);
+            restartToggle.setKey(BaseSettings.CAPTURE_JAVA_CRASHES.key);
+            restartToggle.setTitle("Capture Java crashes");
+            screen.addPreference(restartToggle);
         }
 
         @Override protected void updateUIToSettingValues() {
@@ -116,6 +130,11 @@ public class PreferenceFailureRecoveryTest {
                 Preference preference, Setting setting, boolean applySettingToPreference) {
             if (creationFinished && !applySettingToPreference) fail(Stage.UPDATE);
             super.syncSettingWithPreference(preference, setting, applySettingToPreference);
+            if (creationFinished && applySettingToPreference && observeRecoveryGuard) {
+                recoveryGuardStayedRaised = ReflectionHelpers.getStaticField(
+                        AbstractPreferenceFragment.class, "updatingPreference");
+                observeRecoveryGuard = false;
+            }
         }
 
         @Override protected void updateUIAvailability() {
@@ -143,7 +162,11 @@ public class PreferenceFailureRecoveryTest {
     @Before public void resetState() {
         HarnessFragment.failOnceAt(Stage.NONE);
         BaseSettings.DEBUG.resetToDefault();
-        Setting.preferences.preferences.edit().remove(BaseSettings.DEBUG.key).commit();
+        BaseSettings.CAPTURE_JAVA_CRASHES.resetToDefault();
+        Setting.preferences.preferences.edit()
+                .remove(BaseSettings.DEBUG.key)
+                .remove(BaseSettings.CAPTURE_JAVA_CRASHES.key)
+                .commit();
         ReflectionHelpers.setStaticField(AbstractPreferenceFragment.class,
                 "updatingPreference", false);
         ShadowToast.reset();
@@ -152,6 +175,11 @@ public class PreferenceFailureRecoveryTest {
     @After public void restoreState() {
         HarnessFragment.failOnceAt(Stage.NONE);
         BaseSettings.DEBUG.resetToDefault();
+        BaseSettings.CAPTURE_JAVA_CRASHES.resetToDefault();
+        Setting.preferences.preferences.edit()
+                .remove(BaseSettings.DEBUG.key)
+                .remove(BaseSettings.CAPTURE_JAVA_CRASHES.key)
+                .commit();
         ReflectionHelpers.setStaticField(AbstractPreferenceFragment.class,
                 "updatingPreference", false);
         ShadowToast.reset();
@@ -231,6 +259,52 @@ public class PreferenceFailureRecoveryTest {
             assertEquals(1, ShadowToast.shownToastCount());
             assertEquals("Die Einstellungen konnten nicht vollständig aktualisiert werden. "
                             + "Öffne die Einstellungen erneut und versuche es noch einmal.",
+                    String.valueOf(ShadowToast.getTextOfLatestToast()));
+        }
+    }
+
+    @Test public void aNestedRecoveryCallbackCannotReleaseTheOuterUpdateGuard() {
+        try (var owner = Robolectric.buildActivity(TestActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            HarnessFragment page = attach(activity);
+            SwitchPreference toggle = (SwitchPreference) page.findPreference(BaseSettings.DEBUG.key);
+
+            HarnessFragment.failOnceAt(Stage.CHANGE_SYNC);
+            HarnessFragment.observeRecoveryGuard();
+            toggle.setChecked(true);
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+            assertTrue("a nested callback released the recovery guard",
+                    HarnessFragment.recoveryGuardStayedRaised);
+            assertFalse(ReflectionHelpers.getStaticField(
+                    AbstractPreferenceFragment.class, "updatingPreference"));
+            assertEquals(BaseSettings.DEBUG.get(), toggle.isChecked());
+            assertFalse(Setting.preferences.preferences.contains(BaseSettings.DEBUG.key));
+            assertEquals(1, ShadowToast.shownToastCount());
+        }
+    }
+
+    @Test public void aFailedRestartSettingShowsOnlyTheRecoveryOutcome() {
+        try (var owner = Robolectric.buildActivity(TestActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            HarnessFragment page = attach(activity);
+            SwitchPreference toggle = (SwitchPreference) page.findPreference(
+                    BaseSettings.CAPTURE_JAVA_CRASHES.key);
+
+            HarnessFragment.failOnceAt(Stage.UPDATE);
+            ShadowToast.reset();
+            toggle.setChecked(true);
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+            assertFalse(toggle.isChecked());
+            assertFalse(BaseSettings.CAPTURE_JAVA_CRASHES.get());
+            assertFalse(Setting.preferences.preferences.contains(
+                    BaseSettings.CAPTURE_JAVA_CRASHES.key));
+            assertEquals(1, ShadowToast.shownToastCount());
+            assertEquals("Die Einstellung konnte nicht vollständig aktualisiert werden. "
+                            + "Der gespeicherte Wert wird angezeigt.",
                     String.valueOf(ShadowToast.getTextOfLatestToast()));
         }
     }
