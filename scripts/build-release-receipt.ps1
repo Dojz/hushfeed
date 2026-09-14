@@ -15,8 +15,11 @@
     The patched APKs are working files and are deleted on the way out, including after a failure.
 
 .EXAMPLE
-    scripts/build-release-receipt.ps1 -Fixture C:\fixtures\tiktok-46.2.3.apk `
-        -Fixture C:\fixtures\tiktok-46.7.3.apk -WorkDir C:\scratch
+    One -Fixture taking a comma separated list, not the switch repeated: PowerShell binds a
+    parameter once and refuses the second.
+
+    scripts/build-release-receipt.ps1 -WorkDir C:\scratch `
+        -Fixture C:\fixtures\tiktok-46.2.3.apk,C:\fixtures\tiktok-46.7.3.apk
 #>
 [CmdletBinding()]
 param(
@@ -135,7 +138,7 @@ function Get-ExtensionPayloads {
     } finally { $archive.Dispose() }
 
     if ($payloads.Count -eq 0) { throw "The bundle carries no extension payload: $BundlePath" }
-    return @($payloads)
+    return $payloads.ToArray()
 }
 
 function Get-PatchVerdicts {
@@ -170,7 +173,7 @@ function Get-PatchVerdicts {
             throw "The result report decided nothing about patch $name."
         }
     }
-    return @($verdicts)
+    return $verdicts.ToArray()
 }
 
 New-Item -ItemType Directory -Force -Path $WorkDir | Out-Null
@@ -274,7 +277,7 @@ $receipt = [ordered]@{
         managerFloor   = $floorMatch.Groups[1].Value
     }
     extension     = [ordered]@{ dexPayloads = Get-ExtensionPayloads -BundlePath $Bundle }
-    targets       = @($targets)
+    targets       = $targets.ToArray()
 }
 
 # The receipt is checked before it is written. A file that fails the gate it exists to pass is
