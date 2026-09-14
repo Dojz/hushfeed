@@ -110,6 +110,12 @@ public class CommentsPreferenceCategory extends ConditionalPreferenceCategory {
             ));
             addPreference(new TogglePreference(
                     context,
+                    "Hide comment polls",
+                    "Remove polls from the comments before TikTok shows them.",
+                    Settings.HIDE_COMMENT_POLLS
+            ));
+            addPreference(new TogglePreference(
+                    context,
                     "Thumbs down blocks the commenter",
                     "The thumbs down on each comment blocks the account that posted it instead of "
                             + "disliking. The comment dims, an undo banner follows, and a second tap "

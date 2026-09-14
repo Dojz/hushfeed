@@ -183,6 +183,7 @@ Hide bottom tabs TikTok adds later unless you allow them.	Untere Tabs ausblenden
 Hide browsing and LIVE puzzle dialogs. Login, account verification and any puzzle raised over a follow, like, comment or repost stay visible.	Rätsel-Dialoge beim Stöbern und in LIVE ausblenden. Anmeldung, Kontobestätigung und jedes Rätsel, das bei Folgen, Liken, Kommentieren oder Reposten kommt, bleiben sichtbar.
 Hide CAPTCHA popups	CAPTCHA-Popups ausblenden
 Hide comment popup ads	Werbe-Popups in Kommentaren ausblenden
+Hide comment polls	Kommentarumfragen ausblenden
 Hide comments made of an image or a sticker instead of words.	Kommentare ausblenden, die aus einem Bild oder Sticker statt aus Worten bestehen.
 Hide comments that contain any of the words below, or that come from the accounts below.	Kommentare ausblenden, die eines der Wörter unten enthalten oder von den Konten unten stammen.
 Hide controls after each video starts. Tap to restore them.	Bedienelemente nach dem Start jedes Videos ausblenden. Tippe, um sie wieder einzublenden.
@@ -366,6 +367,7 @@ Recording gate reads. Use a feature, then return here to stop.	Gate-Zugriffe wer
 Recover the settings saved before the last restore or reset.	Die vor der letzten Wiederherstellung oder Zurücksetzung gespeicherten Einstellungen zurückholen.
 Region settings	Regionseinstellungen
 Remove feed ads	Werbung im Feed entfernen
+Remove polls from the comments before TikTok shows them.	Umfragen aus den Kommentaren entfernen, bevor TikTok sie anzeigt.
 Remove the actions row from the share sheet.	Die Aktionszeile aus dem Teilen-Menü entfernen.
 Remove the ads TikTok puts between videos.	Die Werbung entfernen, die TikTok zwischen die Videos setzt.
 Remove the row of friends from the top of the share sheet.	Die Freundesreihe oben im Teilen-Menü entfernen.

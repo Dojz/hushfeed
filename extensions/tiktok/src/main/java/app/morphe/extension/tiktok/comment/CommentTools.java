@@ -40,8 +40,8 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 /**
- * Comment list tools: a keyword filter on loaded comments, and TikTok's thumbs down control
- * on each comment repurposed to block the commenter in one tap.
+ * Comment list tools: keyword, media and poll filters on loaded comment pages, and TikTok's
+ * thumbs down control on each comment repurposed to block the commenter in one tap.
  *
  * Both entry points are called from the same places the comment translation patch hooks:
  * {@code BaseCommentCell} binding a cell, and the comment list response being handled.
@@ -69,6 +69,7 @@ public final class CommentTools {
     }
 
     private static final String APP_PACKAGE = "com.zhiliaoapp.musically";
+    private static final String POLL_HOOK_FAMILY = "comment polls";
     private static final String DISLIKE_BUTTON_ID = "jlk";
 
     /** One log line for a cell with no thumbs down, not a verdict on the build. */
@@ -190,16 +191,25 @@ public final class CommentTools {
 
     /**
      * Called with the {@code CommentItemList} once TikTok has parsed a page of comments,
-     * before they are shown. Matching comments are removed from the list in place.
+     * before they are shown. Matching comments are removed from the list in place, and optional
+     * page-level poll metadata is cleared before TikTok can build its row.
      */
     public static void onCommentListLoaded(Object commentItemList) {
         boolean byWord = Settings.COMMENT_KEYWORD_FILTER.get();
         boolean media = Settings.HIDE_COMMENT_MEDIA.get();
-        if ((!byWord && !media) || commentItemList == null) {
+        boolean polls = Settings.HIDE_COMMENT_POLLS.get();
+        if ((!byWord && !media && !polls) || commentItemList == null) {
             return;
         }
 
         try {
+            if (polls) {
+                clearPoll(commentItemList);
+            }
+            if (!byWord && !media) {
+                return;
+            }
+
             List<app.morphe.extension.tiktok.feedfilter.KeywordRules.Rule> keywords = byWord
                     ? app.morphe.extension.tiktok.feedfilter.KeywordRules.parse(
                             Settings.COMMENT_BLOCKED_KEYWORDS.get())
@@ -225,6 +235,28 @@ public final class CommentTools {
             }
         } catch (Throwable ex) {
             Logger.printException(() -> "Comment filter failed", ex);
+        }
+    }
+
+    /**
+     * A poll is page metadata, separate from the ordinary comment list. TikTok reads it after
+     * this hook to build the poll row, so clearing the model member prevents the row from being
+     * created and leaves the comments themselves untouched.
+     */
+    private static void clearPoll(Object commentItemList) {
+        Class<?> type = commentItemList.getClass();
+        Field pollInfo = Reflect.field(type, "pollInfo");
+        if (pollInfo == null) {
+            HookStatus.missingMember(POLL_HOOK_FAMILY, "field", type.getName(), "pollInfo");
+            return;
+        }
+        try {
+            pollInfo.set(commentItemList, null);
+            HookStatus.bound(POLL_HOOK_FAMILY, type.getName() + "#pollInfo");
+        } catch (Throwable ex) {
+            HookStatus.missingMember(
+                    POLL_HOOK_FAMILY, "writable field", type.getName(), "pollInfo");
+            Logger.printException(() -> "Could not hide the comment poll", ex);
         }
     }
 

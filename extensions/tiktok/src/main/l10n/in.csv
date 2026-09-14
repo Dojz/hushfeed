@@ -181,6 +181,7 @@ Hide bottom tabs TikTok adds later unless you allow them.,"Sembunyikan tab bawah
 "Hide browsing and LIVE puzzle dialogs. Login, account verification and any puzzle raised over a follow, like, comment or repost stay visible.","Sembunyikan dialog teka-teki saat menjelajah dan saat LIVE. Teka-teki untuk masuk, verifikasi akun, dan yang muncul saat mengikuti, menyukai, berkomentar, atau membagikan ulang tetap terlihat."
 Hide CAPTCHA popups,Sembunyikan popup CAPTCHA
 Hide comment popup ads,Sembunyikan iklan popup di komentar
+Hide comment polls,Sembunyikan jajak pendapat komentar
 Hide comments made of an image or a sticker instead of words.,"Sembunyikan komentar yang berupa gambar atau stiker, bukan kata-kata."
 "Hide comments that contain any of the words below, or that come from the accounts below.","Sembunyikan komentar yang memuat salah satu kata di bawah, atau yang berasal dari akun di bawah."
 Hide controls after each video starts. Tap to restore them.,Sembunyikan kontrol setelah tiap video mulai. Ketuk untuk memunculkannya lagi.
@@ -364,6 +365,7 @@ Recorded gate reads (%1$d),Pembacaan gate yang terekam (%1$d)
 Recover the settings saved before the last restore or reset.,Ambil kembali pengaturan yang tersimpan sebelum pemulihan atau penyetelan ulang terakhir.
 Region settings,Pengaturan wilayah
 Remove feed ads,Hapus iklan di feed
+Remove polls from the comments before TikTok shows them.,Hapus jajak pendapat dari komentar sebelum TikTok menampilkannya.
 Remove the actions row from the share sheet.,Hapus baris aksi dari menu bagikan.
 Remove the ads TikTok puts between videos.,Hapus iklan yang TikTok sisipkan di antara video.
 Remove the row of friends from the top of the share sheet.,Hapus baris teman dari bagian atas menu bagikan.
