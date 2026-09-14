@@ -137,6 +137,7 @@ public final class FeatureGateLabFragment extends Fragment {
     private TextView count;
     private TextView loading;
     private TextView empty;
+    private TextView emptyAction;
     private EditText search;
     private View clearSearch;
     private LinearLayout viewTabs;
@@ -448,17 +449,40 @@ public final class FeatureGateLabFragment extends Fragment {
         // has nothing, so "No gates match" sat under "Loading..." before anything was looked at.
         empty = FeatureGateLabUi.label(context, "");
         empty.setGravity(Gravity.CENTER);
-        empty.setPadding(
+
+        // The way out of an empty list, rather than a sentence on its own in the middle of a
+        // blank screen. It only appears when a search is what emptied it, because it is the only
+        // case this control can do anything about.
+        emptyAction = FeatureGateLabUi.label(context, L10n.t(context, "Clear search"));
+        emptyAction.setGravity(Gravity.CENTER);
+        emptyAction.setPadding(
+                FeatureGateLabUi.dp(context, 16),
+                FeatureGateLabUi.dp(context, 12),
+                FeatureGateLabUi.dp(context, 16),
+                FeatureGateLabUi.dp(context, 12)
+        );
+        SettingsUi.styleTextAction(emptyAction, true);
+        emptyAction.setVisibility(View.GONE);
+        emptyAction.setOnClickListener(view -> {
+            if (search != null) search.setText("");
+        });
+
+        LinearLayout emptyColumn = new LinearLayout(context);
+        emptyColumn.setOrientation(LinearLayout.VERTICAL);
+        emptyColumn.setGravity(Gravity.CENTER);
+        emptyColumn.setPadding(
                 FeatureGateLabUi.dp(context, 24),
                 FeatureGateLabUi.dp(context, 24),
                 FeatureGateLabUi.dp(context, 24),
                 FeatureGateLabUi.dp(context, 24)
         );
-        listContainer.addView(empty, new FrameLayout.LayoutParams(
+        emptyColumn.addView(empty, FeatureGateLabUi.wrapWrap());
+        emptyColumn.addView(emptyAction, FeatureGateLabUi.wrapWrap());
+        listContainer.addView(emptyColumn, new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
         ));
-        list.setEmptyView(empty);
+        list.setEmptyView(emptyColumn);
         root.addView(listContainer, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
 
         root.addView(buildSelectionBar(context), FeatureGateLabUi.matchWrap());
@@ -526,6 +550,7 @@ public final class FeatureGateLabFragment extends Fragment {
         count = null;
         loading = null;
         empty = null;
+        emptyAction = null;
         search = null;
         clearSearch = null;
         viewTabs = null;
@@ -600,7 +625,9 @@ public final class FeatureGateLabFragment extends Fragment {
                     loading.setText(L10n.t(getContext(),
                             "Loaded current values. Loading all known gates..."));
                 }
-                empty.setText(L10n.t(getContext(), "No gates match this search and filter."));
+                // The message is chosen in rebuild now, from whether a search or only the
+                // filter emptied the list. Setting it here as well meant a list narrowed by the
+                // view tabs still blamed a search box the reader had not typed in.
                 rebuild();
             }
 
@@ -661,6 +688,7 @@ public final class FeatureGateLabFragment extends Fragment {
         }
 
         SettingsUi.setResultCount(count, visible.size());
+        updateEmptyState(query);
         adapter.notifyDataSetChanged();
         if (restoreListPosition && list != null) {
             int position = listPosition;
@@ -670,6 +698,22 @@ public final class FeatureGateLabFragment extends Fragment {
                 if (list != null) list.setSelectionFromTop(position, offset);
             });
         }
+    }
+
+    /**
+     * Says why the list is empty and, when a search is the reason, offers to undo it.
+     *
+     * <p>The message used to be set once when the catalogue loaded, so a list emptied by the
+     * view tabs or the filter still blamed the search, and a reader looking at an empty screen
+     * was told what had happened but given nothing to do about it.
+     */
+    private void updateEmptyState(String query) {
+        if (empty == null || emptyAction == null || getContext() == null) return;
+        boolean searching = !query.isEmpty();
+        empty.setText(searching
+                ? L10n.t(getContext(), "No gates match this search and filter.")
+                : L10n.t(getContext(), "No gates match this filter."));
+        emptyAction.setVisibility(searching ? View.VISIBLE : View.GONE);
     }
 
     private Map<String, FeatureGateLabStore.Rule> rulesByIdentity() {

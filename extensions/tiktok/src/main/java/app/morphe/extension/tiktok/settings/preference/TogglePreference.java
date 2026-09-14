@@ -24,7 +24,7 @@ public class TogglePreference extends SwitchPreference {
      * silently does nothing is the hardest kind of bug to report, and two of the "this does not
      * work" reports on the tracker are about restart-gated switches.
      */
-    static final String RESTART_SENTENCE = "Restart TikTok to apply this.";
+    public static final String RESTART_SENTENCE = "Restart TikTok to apply this.";
 
     /** What an existing summary already says in its own words, so it is not said twice. */
     private static final String RESTART_MARKER = "Restart TikTok";

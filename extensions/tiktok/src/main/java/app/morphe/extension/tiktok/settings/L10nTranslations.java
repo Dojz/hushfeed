@@ -48,7 +48,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildDe() {
-        Map<String, String> table = new HashMap<>(1920);
+        Map<String, String> table = new HashMap<>(1922);
         fillDe0(table);
         fillDe1(table);
         fillDe2(table);
@@ -65,6 +65,7 @@ public final class L10nTranslations {
         fillDe13(table);
         fillDe14(table);
         fillDe15(table);
+        fillDe16(table);
         return table;
     }
 
@@ -1105,6 +1106,8 @@ public final class L10nTranslations {
                 "Kein aktueller Wert und keine aktive Überschreibung");
         table.put("No gate data is available. Refresh values from the menu to try again.",
                 "Es sind keine Schalterdaten verfügbar. Werte über das Menü aktualisieren und es erneut versuchen.");
+        table.put("No gates match this filter.",
+                "Keine Schalter passen zu diesem Filter.");
         table.put("No gates match this search and filter.",
                 "Keine Schalter passen zu dieser Suche und diesem Filter.");
         table.put("No hidden creators match this search",
@@ -1171,11 +1174,11 @@ public final class L10nTranslations {
                 "Standardmäßig aus. Eingeschaltet hat die Sperre, die beim Aufbrauchen des heutigen Budgets beginnt, keinen Ausweg, und die Budgets, die Rücksetzstunde und dieser Schalter lassen sich bis zum Tagesbeginn nicht mehr ändern. Vor dem Aufbrauchen des Budgets kann er jederzeit ausgeschaltet werden.");
         table.put("Off by default. The video behind the comment sheet keeps playing, with sound, while you read. Switched on, Hushfeed asks for the sound the moment a sheet opens and hands it back when it closes, which is how one app tells another to stop.",
                 "Standardmäßig aus. Das Video hinter den Kommentaren läuft mit Ton weiter, während du liest. Eingeschaltet fordert Hushfeed den Ton an, sobald die Kommentare aufgehen, und gibt ihn beim Schließen zurück. So sagt eine App einer anderen, dass sie aufhören soll.");
-        table.put("Off by default. TikTok plays again by itself every time you come back to the app. Switched on, the feed waits for one tap first. The tab bar is left alone, so messages, a profile and search are still one tap away.",
-                "Standardmäßig aus. TikTok spielt bei jeder Rückkehr von selbst weiter. Eingeschaltet wartet der Feed erst auf einen Tipp. Die Tab-Leiste bleibt frei, damit Nachrichten, ein Profil und die Suche einen Tipp entfernt bleiben.");
     }
 
     private static void fillDe9(Map<String, String> table) {
+        table.put("Off by default. TikTok plays again by itself every time you come back to the app. Switched on, the feed waits for one tap first. The tab bar is left alone, so messages, a profile and search are still one tap away.",
+                "Standardmäßig aus. TikTok spielt bei jeder Rückkehr von selbst weiter. Eingeschaltet wartet der Feed erst auf einen Tipp. Die Tab-Leiste bleibt frei, damit Nachrichten, ein Profil und die Suche einen Tipp entfernt bleiben.");
         table.put("Off forces false; on forces true. Reset returns control to TikTok",
                 "Aus erzwingt false, an erzwingt true. Zurücksetzen gibt TikTok die Kontrolle zurück");
         table.put("Offline videos limit",
@@ -1294,11 +1297,11 @@ public final class L10nTranslations {
                 "Vorschau gekürzt. JSON speichern enthält den vollständigen Bericht.");
         table.put("Profile picture saved to %1$s",
                 "Profilbild gespeichert unter %1$s");
-        table.put("Promotional music",
-                "Werbemusik");
     }
 
     private static void fillDe10(Map<String, String> table) {
+        table.put("Promotional music",
+                "Werbemusik");
         table.put("Proof",
                 "Beleg");
         table.put("Publication age",
@@ -1417,11 +1420,11 @@ public final class L10nTranslations {
                 "Teilen-Links bereinigen");
         table.put("Save",
                 "Speichern");
-        table.put("Save JSON",
-                "JSON speichern");
     }
 
     private static void fillDe11(Map<String, String> table) {
+        table.put("Save JSON",
+                "JSON speichern");
         table.put("Save SRT files with the video. Paired saves use Movies on Android 11+, Download on Android 10, and your video folder on older versions.",
                 "SRT-Dateien zusammen mit dem Video speichern. Gemeinsame Speicherungen nutzen Movies ab Android 11, Download auf Android 10 und deinen Videoordner auf älteren Versionen.");
         table.put("Save a profile picture on a long press",
@@ -1540,11 +1543,11 @@ public final class L10nTranslations {
                 "Links über einen anderen Host teilen");
         table.put("Share sheet",
                 "Teilen-Menü");
-        table.put("Shop posts",
-                "Shop-Beiträge");
     }
 
     private static void fillDe12(Map<String, String> table) {
+        table.put("Shop posts",
+                "Shop-Beiträge");
         table.put("Show",
                 "Anzeigen");
         table.put("Show @username beside a video instead of the display name the creator chose.",
@@ -1663,11 +1666,11 @@ public final class L10nTranslations {
                 "Zum Speichern eines Sounds wird die Speicherberechtigung gebraucht");
         table.put("Storage permission is needed to save a story",
                 "Zum Speichern einer Story wird die Speicherberechtigung gebraucht");
-        table.put("Stories",
-                "Storys");
     }
 
     private static void fillDe13(Map<String, String> table) {
+        table.put("Stories",
+                "Storys");
         table.put("Story saved to %1$s",
                 "Story gespeichert unter %1$s");
         table.put("Structured Config",
@@ -1786,11 +1789,11 @@ public final class L10nTranslations {
                 "Der Sticker konnte nicht gespeichert werden. Versuch es noch einmal.");
         table.put("The story couldn't be saved.",
                 "Die Story konnte nicht gespeichert werden.");
-        table.put("The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
-                "Der Daumen runter an jedem Kommentar blockiert das Konto dahinter, statt zu disliken. Der Kommentar wird blasser, ein Banner bietet den Weg zurück, und ein zweiter Tipp hebt die Blockierung auf.");
     }
 
     private static void fillDe14(Map<String, String> table) {
+        table.put("The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
+                "Der Daumen runter an jedem Kommentar blockiert das Konto dahinter, statt zu disliken. Der Kommentar wird blasser, ein Banner bietet den Weg zurück, und ein zweiter Tipp hebt die Blockierung auf.");
         table.put("The video couldn't be saved. Try again, or choose Automatic.",
                 "Das Video konnte nicht gespeichert werden. Versuche es noch einmal oder wähle Automatisch.");
         table.put("There is no Lab change to undo.",
@@ -1909,11 +1912,11 @@ public final class L10nTranslations {
                 "Typ");
         table.put("Type to search settings",
                 "Tippe, um Einstellungen zu durchsuchen");
-        table.put("Unavailable",
-                "Nicht verfügbar");
     }
 
     private static void fillDe15(Map<String, String> table) {
+        table.put("Unavailable",
+                "Nicht verfügbar");
         table.put("Unblock this commenter",
                 "Blockierung dieses Kommentierenden aufheben");
         table.put("Unblocked %1$s",
@@ -2032,12 +2035,15 @@ public final class L10nTranslations {
                 "Videos");
         table.put("view per like",
                 "Aufruf pro Like");
+    }
+
+    private static void fillDe16(Map<String, String> table) {
         table.put("views per like",
                 "Aufrufe pro Like");
     }
 
     private static Map<String, String> buildEs() {
-        Map<String, String> table = new HashMap<>(1920);
+        Map<String, String> table = new HashMap<>(1922);
         fillEs0(table);
         fillEs1(table);
         fillEs2(table);
@@ -2054,6 +2060,7 @@ public final class L10nTranslations {
         fillEs13(table);
         fillEs14(table);
         fillEs15(table);
+        fillEs16(table);
         return table;
     }
 
@@ -3094,6 +3101,8 @@ public final class L10nTranslations {
                 "No hay ningún valor actual ni una sobrescritura activa");
         table.put("No gate data is available. Refresh values from the menu to try again.",
                 "No hay datos de los interruptores. Actualiza los valores desde el menú para intentarlo otra vez.");
+        table.put("No gates match this filter.",
+                "Ningún interruptor coincide con este filtro.");
         table.put("No gates match this search and filter.",
                 "Ningún interruptor coincide con esta búsqueda y este filtro.");
         table.put("No hidden creators match this search",
@@ -3160,11 +3169,11 @@ public final class L10nTranslations {
                 "Desactivado de serie. Activado, la pausa que empieza cuando se acaba el presupuesto de hoy no tiene salida, y los presupuestos, la hora de reinicio y este propio interruptor no se pueden volver a cambiar hasta que empiece el día siguiente. Puedes desactivarlo en cualquier momento antes de que se acabe el presupuesto.");
         table.put("Off by default. The video behind the comment sheet keeps playing, with sound, while you read. Switched on, Hushfeed asks for the sound the moment a sheet opens and hands it back when it closes, which is how one app tells another to stop.",
                 "Desactivado de serie. El vídeo que hay detrás del panel de comentarios sigue reproduciéndose, con sonido, mientras lees. Activado, Hushfeed pide el sonido en cuanto se abre un panel y lo devuelve cuando se cierra, que es como una app le dice a otra que pare.");
-        table.put("Off by default. TikTok plays again by itself every time you come back to the app. Switched on, the feed waits for one tap first. The tab bar is left alone, so messages, a profile and search are still one tap away.",
-                "Desactivado de serie. TikTok se pone en marcha solo cada vez que vuelves a la app. Activado, el feed espera antes a un toque. La barra de pestañas se queda como está, así que los mensajes, un perfil y la búsqueda siguen a un toque.");
     }
 
     private static void fillEs9(Map<String, String> table) {
+        table.put("Off by default. TikTok plays again by itself every time you come back to the app. Switched on, the feed waits for one tap first. The tab bar is left alone, so messages, a profile and search are still one tap away.",
+                "Desactivado de serie. TikTok se pone en marcha solo cada vez que vuelves a la app. Activado, el feed espera antes a un toque. La barra de pestañas se queda como está, así que los mensajes, un perfil y la búsqueda siguen a un toque.");
         table.put("Off forces false; on forces true. Reset returns control to TikTok",
                 "Apagado fuerza false y encendido fuerza true. Restablecer devuelve el control a TikTok");
         table.put("Offline videos limit",
@@ -3283,11 +3292,11 @@ public final class L10nTranslations {
                 "Vista previa recortada. Guardar JSON incluye el informe completo.");
         table.put("Profile picture saved to %1$s",
                 "Foto de perfil guardada en %1$s");
-        table.put("Promotional music",
-                "Música promocional");
     }
 
     private static void fillEs10(Map<String, String> table) {
+        table.put("Promotional music",
+                "Música promocional");
         table.put("Proof",
                 "Prueba");
         table.put("Publication age",
@@ -3406,11 +3415,11 @@ public final class L10nTranslations {
                 "Limpiar los enlaces al compartir");
         table.put("Save",
                 "Guardar");
-        table.put("Save JSON",
-                "Guardar JSON");
     }
 
     private static void fillEs11(Map<String, String> table) {
+        table.put("Save JSON",
+                "Guardar JSON");
         table.put("Save SRT files with the video. Paired saves use Movies on Android 11+, Download on Android 10, and your video folder on older versions.",
                 "Guardar los archivos SRT junto al vídeo. Los guardados emparejados usan Movies en Android 11 y superior, Download en Android 10, y tu carpeta de vídeos en versiones anteriores.");
         table.put("Save a profile picture on a long press",
@@ -3529,11 +3538,11 @@ public final class L10nTranslations {
                 "Compartir los enlaces con otro host");
         table.put("Share sheet",
                 "Panel de compartir");
-        table.put("Shop posts",
-                "Publicaciones de la tienda");
     }
 
     private static void fillEs12(Map<String, String> table) {
+        table.put("Shop posts",
+                "Publicaciones de la tienda");
         table.put("Show",
                 "Mostrar");
         table.put("Show @username beside a video instead of the display name the creator chose.",
@@ -3652,11 +3661,11 @@ public final class L10nTranslations {
                 "Hace falta permiso de almacenamiento para guardar un sonido");
         table.put("Storage permission is needed to save a story",
                 "Hace falta permiso de almacenamiento para guardar una historia");
-        table.put("Stories",
-                "Historias");
     }
 
     private static void fillEs13(Map<String, String> table) {
+        table.put("Stories",
+                "Historias");
         table.put("Story saved to %1$s",
                 "Historia guardada en %1$s");
         table.put("Structured Config",
@@ -3775,11 +3784,11 @@ public final class L10nTranslations {
                 "No se pudo guardar el sticker. Inténtalo otra vez.");
         table.put("The story couldn't be saved.",
                 "No se pudo guardar la historia.");
-        table.put("The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
-                "El pulgar hacia abajo de cada comentario bloquea la cuenta que lo publicó en vez de darle un no me gusta. El comentario se atenúa, aparece un aviso para deshacerlo, y un segundo toque desbloquea.");
     }
 
     private static void fillEs14(Map<String, String> table) {
+        table.put("The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
+                "El pulgar hacia abajo de cada comentario bloquea la cuenta que lo publicó en vez de darle un no me gusta. El comentario se atenúa, aparece un aviso para deshacerlo, y un segundo toque desbloquea.");
         table.put("The video couldn't be saved. Try again, or choose Automatic.",
                 "No se pudo guardar el vídeo. Inténtalo otra vez, o elige Automático.");
         table.put("There is no Lab change to undo.",
@@ -3898,11 +3907,11 @@ public final class L10nTranslations {
                 "Tipo");
         table.put("Type to search settings",
                 "Escribe para buscar en los ajustes");
-        table.put("Unavailable",
-                "No disponible");
     }
 
     private static void fillEs15(Map<String, String> table) {
+        table.put("Unavailable",
+                "No disponible");
         table.put("Unblock this commenter",
                 "Desbloquear a quien comenta");
         table.put("Unblocked %1$s",
@@ -4021,12 +4030,15 @@ public final class L10nTranslations {
                 "vídeos");
         table.put("view per like",
                 "visualización por me gusta");
+    }
+
+    private static void fillEs16(Map<String, String> table) {
         table.put("views per like",
                 "visualizaciones por me gusta");
     }
 
     private static Map<String, String> buildIn() {
-        Map<String, String> table = new HashMap<>(1920);
+        Map<String, String> table = new HashMap<>(1922);
         fillIn0(table);
         fillIn1(table);
         fillIn2(table);
@@ -4043,6 +4055,7 @@ public final class L10nTranslations {
         fillIn13(table);
         fillIn14(table);
         fillIn15(table);
+        fillIn16(table);
         return table;
     }
 
@@ -5083,6 +5096,8 @@ public final class L10nTranslations {
                 "Tidak ada nilai saat ini dan tidak ada penimpaan aktif");
         table.put("No gate data is available. Refresh values from the menu to try again.",
                 "Tidak ada data gate. Segarkan nilai dari menu untuk mencoba lagi.");
+        table.put("No gates match this filter.",
+                "Tidak ada gate yang cocok dengan filter ini.");
         table.put("No gates match this search and filter.",
                 "Tidak ada gate yang cocok dengan pencarian dan filter ini.");
         table.put("No hidden creators match this search",
@@ -5149,11 +5164,11 @@ public final class L10nTranslations {
                 "Mati secara bawaan. Bila dinyalakan, penahanan yang dimulai saat anggaran hari ini habis tidak punya jalan keluar, dan anggaran, jam mulai hari serta sakelar ini tidak bisa diubah lagi sampai hari berganti. Matikan kapan saja sebelum anggaran habis.");
         table.put("Off by default. The video behind the comment sheet keeps playing, with sound, while you read. Switched on, Hushfeed asks for the sound the moment a sheet opens and hands it back when it closes, which is how one app tells another to stop.",
                 "Mati secara bawaan. Video di balik lembar komentar tetap berjalan, lengkap dengan suara, sementara Anda membaca. Saat aktif, Hushfeed meminta fokus audio begitu lembar komentar dibuka dan mengembalikannya saat ditutup. Begitulah satu aplikasi memberi tahu aplikasi lain untuk berhenti.");
-        table.put("Off by default. TikTok plays again by itself every time you come back to the app. Switched on, the feed waits for one tap first. The tab bar is left alone, so messages, a profile and search are still one tap away.",
-                "Mati secara bawaan. TikTok memutar sendiri setiap kali Anda kembali ke aplikasi. Saat aktif, feed menunggu satu ketukan lebih dulu. Bilah tab dibiarkan, jadi pesan, profil dan pencarian tetap sejauh satu ketukan.");
     }
 
     private static void fillIn9(Map<String, String> table) {
+        table.put("Off by default. TikTok plays again by itself every time you come back to the app. Switched on, the feed waits for one tap first. The tab bar is left alone, so messages, a profile and search are still one tap away.",
+                "Mati secara bawaan. TikTok memutar sendiri setiap kali Anda kembali ke aplikasi. Saat aktif, feed menunggu satu ketukan lebih dulu. Bilah tab dibiarkan, jadi pesan, profil dan pencarian tetap sejauh satu ketukan.");
         table.put("Off forces false; on forces true. Reset returns control to TikTok",
                 "Mati memaksa false, hidup memaksa true. Atur ulang mengembalikan kendali ke TikTok");
         table.put("Offline videos limit",
@@ -5272,11 +5287,11 @@ public final class L10nTranslations {
                 "Pratinjau dipendekkan. Simpan JSON memuat laporan lengkapnya.");
         table.put("Profile picture saved to %1$s",
                 "Foto profil disimpan ke %1$s");
-        table.put("Promotional music",
-                "Musik promosi");
     }
 
     private static void fillIn10(Map<String, String> table) {
+        table.put("Promotional music",
+                "Musik promosi");
         table.put("Proof",
                 "Bukti");
         table.put("Publication age",
@@ -5395,11 +5410,11 @@ public final class L10nTranslations {
                 "Bersihkan tautan berbagi");
         table.put("Save",
                 "Simpan");
-        table.put("Save JSON",
-                "Simpan JSON");
     }
 
     private static void fillIn11(Map<String, String> table) {
+        table.put("Save JSON",
+                "Simpan JSON");
         table.put("Save SRT files with the video. Paired saves use Movies on Android 11+, Download on Android 10, and your video folder on older versions.",
                 "Simpan berkas SRT bersama videonya. Penyimpanan berpasangan memakai Movies di Android 11+, Download di Android 10, dan folder videomu di versi lama.");
         table.put("Save a profile picture on a long press",
@@ -5518,11 +5533,11 @@ public final class L10nTranslations {
                 "Bagikan tautan lewat host lain");
         table.put("Share sheet",
                 "Menu bagikan");
-        table.put("Shop posts",
-                "Kiriman Shop");
     }
 
     private static void fillIn12(Map<String, String> table) {
+        table.put("Shop posts",
+                "Kiriman Shop");
         table.put("Show",
                 "Tampilkan");
         table.put("Show @username beside a video instead of the display name the creator chose.",
@@ -5641,11 +5656,11 @@ public final class L10nTranslations {
                 "Izin penyimpanan dibutuhkan untuk menyimpan suara");
         table.put("Storage permission is needed to save a story",
                 "Izin penyimpanan dibutuhkan untuk menyimpan Story");
-        table.put("Stories",
-                "Cerita");
     }
 
     private static void fillIn13(Map<String, String> table) {
+        table.put("Stories",
+                "Cerita");
         table.put("Story saved to %1$s",
                 "Story disimpan ke %1$s");
         table.put("Structured Config",
@@ -5764,11 +5779,11 @@ public final class L10nTranslations {
                 "Sticker tidak bisa disimpan. Coba lagi.");
         table.put("The story couldn't be saved.",
                 "Story-nya tidak bisa disimpan.");
-        table.put("The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
-                "Jempol ke bawah pada tiap komentar memblokir akun penulisnya, bukan memberi dislike. Komentarnya meredup, ada spanduk untuk membatalkan, dan ketukan kedua membuka blokirnya.");
     }
 
     private static void fillIn14(Map<String, String> table) {
+        table.put("The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
+                "Jempol ke bawah pada tiap komentar memblokir akun penulisnya, bukan memberi dislike. Komentarnya meredup, ada spanduk untuk membatalkan, dan ketukan kedua membuka blokirnya.");
         table.put("The video couldn't be saved. Try again, or choose Automatic.",
                 "Videonya tidak bisa disimpan. Coba lagi, atau pilih Otomatis.");
         table.put("There is no Lab change to undo.",
@@ -5887,11 +5902,11 @@ public final class L10nTranslations {
                 "Tipe");
         table.put("Type to search settings",
                 "Ketik untuk mencari setelan");
-        table.put("Unavailable",
-                "Tidak tersedia");
     }
 
     private static void fillIn15(Map<String, String> table) {
+        table.put("Unavailable",
+                "Tidak tersedia");
         table.put("Unblock this commenter",
                 "Buka blokir pengomentar ini");
         table.put("Unblocked %1$s",
@@ -6010,12 +6025,15 @@ public final class L10nTranslations {
                 "video");
         table.put("view per like",
                 "tayangan per like");
+    }
+
+    private static void fillIn16(Map<String, String> table) {
         table.put("views per like",
                 "tayangan per like");
     }
 
     private static Map<String, String> buildPt_rBR() {
-        Map<String, String> table = new HashMap<>(1920);
+        Map<String, String> table = new HashMap<>(1922);
         fillPt_rBR0(table);
         fillPt_rBR1(table);
         fillPt_rBR2(table);
@@ -6032,6 +6050,7 @@ public final class L10nTranslations {
         fillPt_rBR13(table);
         fillPt_rBR14(table);
         fillPt_rBR15(table);
+        fillPt_rBR16(table);
         return table;
     }
 
@@ -7072,6 +7091,8 @@ public final class L10nTranslations {
                 "Não há valor atual nem substituição ativa");
         table.put("No gate data is available. Refresh values from the menu to try again.",
                 "Não há dados dos gates. Atualize os valores pelo menu para tentar de novo.");
+        table.put("No gates match this filter.",
+                "Nenhum gate combina com este filtro.");
         table.put("No gates match this search and filter.",
                 "Nenhum gate combina com esta busca e este filtro.");
         table.put("No hidden creators match this search",
@@ -7138,11 +7159,11 @@ public final class L10nTranslations {
                 "Desligado por padrão. Ligado, a pausa que começa quando o limite de hoje acaba não tem saída, e os limites, a hora de reinício e esta própria chave não podem ser mudados de novo até o dia virar. Você pode desligar a qualquer momento antes de o limite acabar.");
         table.put("Off by default. The video behind the comment sheet keeps playing, with sound, while you read. Switched on, Hushfeed asks for the sound the moment a sheet opens and hands it back when it closes, which is how one app tells another to stop.",
                 "Desligado por padrão. O vídeo atrás da folha de comentários continua tocando, com som, enquanto você lê. Ligado, o Hushfeed pede o som assim que a folha abre e devolve quando ela fecha, que é como um app diz a outro para parar.");
-        table.put("Off by default. TikTok plays again by itself every time you come back to the app. Switched on, the feed waits for one tap first. The tab bar is left alone, so messages, a profile and search are still one tap away.",
-                "Desligado por padrão. O TikTok volta a tocar sozinho toda vez que você retorna ao app. Ligado, o feed espera um toque antes. A barra de abas fica como está, então mensagens, um perfil e a busca continuam a um toque.");
     }
 
     private static void fillPt_rBR9(Map<String, String> table) {
+        table.put("Off by default. TikTok plays again by itself every time you come back to the app. Switched on, the feed waits for one tap first. The tab bar is left alone, so messages, a profile and search are still one tap away.",
+                "Desligado por padrão. O TikTok volta a tocar sozinho toda vez que você retorna ao app. Ligado, o feed espera um toque antes. A barra de abas fica como está, então mensagens, um perfil e a busca continuam a um toque.");
         table.put("Off forces false; on forces true. Reset returns control to TikTok",
                 "Desligado força false e ligado força true. Redefinir devolve o controle ao TikTok");
         table.put("Offline videos limit",
@@ -7261,11 +7282,11 @@ public final class L10nTranslations {
                 "Prévia encurtada. Salvar JSON traz o relatório inteiro.");
         table.put("Profile picture saved to %1$s",
                 "Foto de perfil salva em %1$s");
-        table.put("Promotional music",
-                "Música promocional");
     }
 
     private static void fillPt_rBR10(Map<String, String> table) {
+        table.put("Promotional music",
+                "Música promocional");
         table.put("Proof",
                 "Comprovação");
         table.put("Publication age",
@@ -7384,11 +7405,11 @@ public final class L10nTranslations {
                 "Limpar os links ao compartilhar");
         table.put("Save",
                 "Salvar");
-        table.put("Save JSON",
-                "Salvar JSON");
     }
 
     private static void fillPt_rBR11(Map<String, String> table) {
+        table.put("Save JSON",
+                "Salvar JSON");
         table.put("Save SRT files with the video. Paired saves use Movies on Android 11+, Download on Android 10, and your video folder on older versions.",
                 "Salvar os arquivos SRT junto com o vídeo. Os salvamentos em par usam Movies no Android 11 ou superior, Download no Android 10, e sua pasta de vídeos em versões mais antigas.");
         table.put("Save a profile picture on a long press",
@@ -7507,11 +7528,11 @@ public final class L10nTranslations {
                 "Compartilhar os links por outro host");
         table.put("Share sheet",
                 "Folha de compartilhamento");
-        table.put("Shop posts",
-                "Publicações da loja");
     }
 
     private static void fillPt_rBR12(Map<String, String> table) {
+        table.put("Shop posts",
+                "Publicações da loja");
         table.put("Show",
                 "Mostrar");
         table.put("Show @username beside a video instead of the display name the creator chose.",
@@ -7630,11 +7651,11 @@ public final class L10nTranslations {
                 "É preciso permissão de armazenamento para salvar um som");
         table.put("Storage permission is needed to save a story",
                 "É preciso permissão de armazenamento para salvar um story");
-        table.put("Stories",
-                "Stories");
     }
 
     private static void fillPt_rBR13(Map<String, String> table) {
+        table.put("Stories",
+                "Stories");
         table.put("Story saved to %1$s",
                 "Story salvo em %1$s");
         table.put("Structured Config",
@@ -7753,11 +7774,11 @@ public final class L10nTranslations {
                 "Não foi possível salvar o sticker. Tente de novo.");
         table.put("The story couldn't be saved.",
                 "Não foi possível salvar o story.");
-        table.put("The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
-                "O joinha para baixo de cada comentário bloqueia a conta que o publicou em vez de descurtir. O comentário escurece, aparece um aviso para desfazer, e um segundo toque desbloqueia.");
     }
 
     private static void fillPt_rBR14(Map<String, String> table) {
+        table.put("The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
+                "O joinha para baixo de cada comentário bloqueia a conta que o publicou em vez de descurtir. O comentário escurece, aparece um aviso para desfazer, e um segundo toque desbloqueia.");
         table.put("The video couldn't be saved. Try again, or choose Automatic.",
                 "Não foi possível salvar o vídeo. Tente de novo, ou escolha Automático.");
         table.put("There is no Lab change to undo.",
@@ -7876,11 +7897,11 @@ public final class L10nTranslations {
                 "Tipo");
         table.put("Type to search settings",
                 "Digite para buscar nas configurações");
-        table.put("Unavailable",
-                "Indisponível");
     }
 
     private static void fillPt_rBR15(Map<String, String> table) {
+        table.put("Unavailable",
+                "Indisponível");
         table.put("Unblock this commenter",
                 "Desbloquear quem comentou");
         table.put("Unblocked %1$s",
@@ -7999,6 +8020,9 @@ public final class L10nTranslations {
                 "vídeos");
         table.put("view per like",
                 "visualização por curtida");
+    }
+
+    private static void fillPt_rBR16(Map<String, String> table) {
         table.put("views per like",
                 "visualizações por curtida");
     }

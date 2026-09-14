@@ -699,14 +699,30 @@ public class SettingsL10nTest {
         Set<String> english = new LinkedHashSet<>(GERMAN.keySet());
         Set<String> shown = collectEverything();
         List<String> missing = new ArrayList<>();
+
+        // A restart-gated row's summary is its own sentence plus the shared restart sentence,
+        // looked up separately and joined afterwards. Both halves still have to be entries, so
+        // the tail is taken off here and checked on its own rather than exempted.
+        assertTrue("the restart sentence itself is not in the table",
+                english.contains(TogglePreference.RESTART_SENTENCE));
+
         for (String text : shown) {
+            // Whole first. Plenty of summaries were written with the restart sentence in them
+            // and are one key including it, so splitting before looking would break those.
+            if (english.contains(text)) continue;
+
+            String body = text;
+            if (body.endsWith(" " + TogglePreference.RESTART_SENTENCE)) {
+                body = body.substring(0,
+                        body.length() - TogglePreference.RESTART_SENTENCE.length() - 1);
+            }
             // Text built at runtime from a placeholder, and text spanning lines, are assembled
             // from parts that are entries of their own. Exempting anything merely carrying a
             // digit or a slash let 63 of 619 strings through, including every message with a
             // value in it.
-            boolean composed = text.contains("\n") || text.matches("(?s).*%\\d\\$.*");
-            if (!composed && !isValueRatherThanProse(text) && !english.contains(text)) {
-                missing.add(text);
+            boolean composed = body.contains("\n") || body.matches("(?s).*%\\d\\$.*");
+            if (!composed && !isValueRatherThanProse(body) && !english.contains(body)) {
+                missing.add(body);
             }
         }
         assertEquals("settings text without a translation entry: " + missing, 0, missing.size());

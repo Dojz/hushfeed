@@ -168,6 +168,11 @@ final class FeatureGateLabUi {
         return new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
+    /** For a child that should be no wider than its own text, such as an empty state's action. */
+    static LinearLayout.LayoutParams wrapWrap() {
+        return new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    }
+
     static LinearLayout.LayoutParams weight() {
         return new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
     }
