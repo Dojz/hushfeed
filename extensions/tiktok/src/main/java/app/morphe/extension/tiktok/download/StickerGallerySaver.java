@@ -306,7 +306,8 @@ public final class StickerGallerySaver {
                 MediaBudget.checkDiskSpace(context.getCacheDir(), declaredLength, deadline);
                 try (InputStream input = response.inputStream();
                      OutputStream output = new FileOutputStream(target)) {
-                    MediaFileWriter.copy(input, output, MAX_STICKER_BYTES, deadline);
+                    MediaFileWriter.copy(input, output, MAX_STICKER_BYTES, deadline,
+                            target.getParentFile());
                 }
                 return response.contentType();
             } catch (IOException | RuntimeException error) {

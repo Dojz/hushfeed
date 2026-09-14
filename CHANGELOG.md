@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Downloads with a missing or malformed size header now recheck free space while streaming. They stop and remove partial media before reaching the 32 MB floor, with another 8 MB kept for publication.
+
 * Rapid Feature Gate detail edits now save in tap order. Only the newest result can update the screen, and one Undo returns the whole burst to the value that was present before the first tap.
 
 * Settings backup, restore, reset and Feature Gate Lab changes no longer stay locked when the shared worker queue is full. The action is left untouched and a translated message asks you to try again.

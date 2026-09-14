@@ -27,6 +27,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -261,6 +262,50 @@ public class MediaTransportSecurityTest {
             assertFalse("a broken response left media bytes on disk", target.exists());
         } finally {
             target.delete();
+        }
+    }
+
+    @Test public void aChunkedMediaBodyStopsBeforeUsingTheFreeSpaceFloor() throws Exception {
+        byte[] body = new byte[2 * 1024 * 1024];
+        System.arraycopy(PNG, 0, body, 0, PNG.length);
+        MediaTransport.Client client = publicClient(url -> new FakeConnection(
+                url, HTTP_OK, null, body));
+        File realTarget = File.createTempFile("shrinking-media", ".tmp");
+        AtomicInteger spaceReads = new AtomicInteger();
+        AtomicLong freeAtRejection = new AtomicLong(Long.MAX_VALUE);
+        long floor = MediaBudget.MIN_FREE_BYTES + MediaBudget.PUBLISH_OVERHEAD_BYTES;
+        File shrinkingDirectory = new File(realTarget.getParentFile(), "shrinking-volume") {
+            @Override public boolean exists() {
+                return true;
+            }
+
+            @Override public long getUsableSpace() {
+                int read = spaceReads.getAndIncrement();
+                if (read == 0) {
+                    return MediaBudget.UNKNOWN_TRANSFER_RESERVATION_BYTES + floor;
+                }
+                long remaining = floor + MediaBudget.STREAM_SPACE_CHECK_BYTES
+                        - (read == 1 ? 0 : 1);
+                freeAtRejection.set(remaining);
+                return remaining;
+            }
+        };
+        File target = new File(realTarget.getPath()) {
+            @Override public File getParentFile() {
+                return shrinkingDirectory;
+            }
+        };
+        try {
+            assertThrows(IOException.class, () -> RemoteMedia.fetch(
+                    List.of("https://v16.tiktokcdn.com/chunked"), target,
+                    RemoteMedia.Kind.IMAGE, client));
+            assertTrue("the copy never rechecked free space while streaming",
+                    spaceReads.get() >= 3);
+            assertTrue("the copy crossed the 32 MB plus publish reserve",
+                    freeAtRejection.get() >= floor);
+            assertFalse("a refused chunked download left partial media", target.exists());
+        } finally {
+            realTarget.delete();
         }
     }
 
