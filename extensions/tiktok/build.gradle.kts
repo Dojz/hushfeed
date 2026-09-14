@@ -66,6 +66,55 @@ val refreshingScreenshots = gradle.startParameter.taskNames.any {
     it == "refreshScreenshots" || it.endsWith(":refreshScreenshots")
 }
 
+// Robolectric 4.16.1 requests 1.81. Rewrite every Bouncy Castle request in this module so related
+// test libraries cannot resolve at mixed versions, then inspect the graph before any test runs.
+// No production configuration currently contains this group, so it never enters the MPE payload.
+val safeBouncyCastleVersion = libs.versions.bouncycastle.get()
+
+configurations.configureEach {
+    resolutionStrategy.eachDependency {
+        if (requested.group == "org.bouncycastle") {
+            useVersion(safeBouncyCastleVersion)
+            because("The Robolectric test graph must use the reviewed security release.")
+        }
+    }
+}
+
+val verifyBouncyCastleTestGraph = tasks.register("verifyBouncyCastleTestGraph") {
+    group = "verification"
+    description = "Checks the resolved debug test graph for the reviewed Bouncy Castle version."
+
+    doLast {
+        val modules = configurations.getByName("debugUnitTestRuntimeClasspath")
+            .incoming.resolutionResult.allComponents
+            .mapNotNull { component ->
+                component.moduleVersion?.takeIf { it.group == "org.bouncycastle" }
+            }
+            .distinctBy { "${it.group}:${it.name}:${it.version}" }
+            .sortedBy { it.name }
+
+        if (modules.isEmpty()) {
+            throw GradleException("The debug unit-test runtime contains no Bouncy Castle module.")
+        }
+        val unexpected = modules.filter { it.version != safeBouncyCastleVersion }
+        if (unexpected.isNotEmpty()) {
+            throw GradleException(
+                "The debug unit-test runtime resolved an unreviewed Bouncy Castle version: " +
+                    unexpected.joinToString(", ") { "${it.name}:${it.version}" } +
+                    ". Expected $safeBouncyCastleVersion."
+            )
+        }
+        logger.lifecycle(
+            "Bouncy Castle test graph: " +
+                modules.joinToString(", ") { "${it.name}:${it.version}" }
+        )
+    }
+}
+
+tasks.matching { it.name == "testDebugUnitTest" }.configureEach {
+    dependsOn(verifyBouncyCastleTestGraph)
+}
+
 dependencies {
     compileOnly(project(":extensions:shared:library"))
     compileOnly(project(":extensions:tiktok:stub"))

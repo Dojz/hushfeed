@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Robolectric tests now use Bouncy Castle 1.85.2 instead of 1.81. Every TikTok extension test inspects the resolved dependency graph first, and Gradle's reviewed checksums no longer accept the vulnerable jar.
+
 * Feature Gate Recorder copies now use Android's sensitive clipboard flag while keeping the existing success, large-report and failure messages. Empty reports remain safe to copy, and reports above 60,000 characters still require Save JSON without replacing the clipboard.
 
 * Settings pages now replace partial content with translated Back and Retry actions when loading fails. A failed preference update restores the typed saved value, dependent controls and default-value storage on the main thread, then reports one translated result. Nested recovery callbacks keep the outer update locked, and restart-required settings report success only after the complete update succeeds.
