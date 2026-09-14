@@ -38,8 +38,18 @@ public class DebugPreferenceCategory extends ConditionalPreferenceCategory {
         addPreference(new TogglePreference(
                 context,
                 "Enable diagnostic logging",
-                "Only enable when recording logs to report an issue. It also shows a message when something inside Hushfeed fails. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.",
+                "Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.",
                 BaseSettings.DEBUG
+        ));
+
+        // The switch behind the failure messages. It was read, persisted and backed up from the
+        // first release and had no row anywhere, so nobody could turn the messages off without
+        // turning the logging off with them.
+        addPreference(new TogglePreference(
+                context,
+                "Show failures on screen",
+                "While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.",
+                BaseSettings.DEBUG_TOAST_ON_ERROR
         ));
 
         addPreference(new TogglePreference(

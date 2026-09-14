@@ -329,7 +329,7 @@ Show the Not interested button	Knopf Kein Interesse anzeigen
 Nothing is playing to seek	Es läuft gerade nichts zum Springen
 Offline videos limit	Limit für Offline-Videos
 On mobile data	Bei mobilen Daten
-Only enable when recording logs to report an issue. It also shows a message when something inside Hushfeed fails. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.	Nur einschalten, wenn du Protokolle für eine Fehlermeldung aufzeichnest. Es zeigt außerdem eine Meldung an, wenn in Hushfeed etwas fehlschlägt. Bleibt es zu lange an, kann TikTok träge wirken und abstürzen.
+Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.	Nur einschalten, wenn du Protokolle für eine Fehlermeldung aufzeichnest. Bleibt es zu lange an, kann TikTok träge wirken und abstürzen.
 Only from these countries	Nur aus diesen Ländern
 Only internal storage folders are supported	Nur Ordner im internen Speicher werden unterstützt
 Open comments	Kommentare öffnen
@@ -963,3 +963,5 @@ Off by default. Switched on, a small label on the feed shows the minutes or vide
 Restart TikTok to apply this.	TikTok neu starten, damit das gilt.
 No gates match this filter.	Keine Schalter passen zu diesem Filter.
 Version %1$s	Version %1$s
+Show failures on screen	Fehler auf dem Bildschirm anzeigen
+While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.	Solange die Diagnoseprotokollierung läuft, nennt eine Meldung den Teil von Hushfeed, der fehlgeschlagen ist. Aus behält Fehler nur im Bericht.

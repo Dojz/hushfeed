@@ -379,7 +379,7 @@ On mobile data	Con datos móviles
 One minute left	Queda un minuto
 One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out.	Una de las comillas de esa lista no tiene con qué cerrarse, así que el resto de la línea se lee como una sola frase. Añade la comilla que falta o quita la que sobra.
 One area was checked and everything it needs is here.	Se comprobó un área y está todo lo que necesita.
-Only enable when recording logs to report an issue. It also shows a message when something inside Hushfeed fails. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.	Actívalo solo cuando estés grabando registros para informar de un problema. También muestra un mensaje cuando algo falla dentro de Hushfeed. Dejarlo activado mucho tiempo puede hacer que TikTok vaya lento y provocar fallos.
+Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.	Actívalo solo cuando estés grabando registros para informar de un problema. Dejarlo activado mucho tiempo puede hacer que TikTok vaya lento y provocar fallos.
 Only from these countries	Solo desde estos países
 Only internal storage folders are supported	Solo se admiten carpetas del almacenamiento interno
 Open TikTok home feed to detect loaded tabs.	Abre el feed de inicio de TikTok para detectar las pestañas cargadas.
@@ -960,3 +960,5 @@ Off by default. Switched on, a small label on the feed shows the minutes or vide
 Restart TikTok to apply this.	Reinicia TikTok para que se aplique.
 No gates match this filter.	Ningún interruptor coincide con este filtro.
 Version %1$s	Versión %1$s
+Show failures on screen	Mostrar fallos en pantalla
+While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.	Mientras el registro de diagnóstico está activado, un mensaje indica la parte de Hushfeed que falló. Desactivado, los fallos solo quedan en el informe.

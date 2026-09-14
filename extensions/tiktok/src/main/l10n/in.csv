@@ -327,7 +327,7 @@ Show the Not interested button,Tampilkan tombol Tidak tertarik
 Nothing is playing to seek,Tidak ada yang diputar untuk dilompati
 Offline videos limit,Batas video offline
 On mobile data,Saat memakai data seluler
-Only enable when recording logs to report an issue. It also shows a message when something inside Hushfeed fails. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.,Aktifkan hanya saat merekam log untuk melaporkan masalah. Ini juga menampilkan pesan saat ada yang gagal di dalam Hushfeed. Membiarkannya menyala terlalu lama bisa membuat TikTok terasa berat dan berpotensi mogok.
+Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.,Aktifkan hanya saat merekam log untuk melaporkan masalah. Membiarkannya menyala terlalu lama bisa membuat TikTok terasa berat dan berpotensi mogok.
 Only from these countries,Hanya dari negara ini
 Only internal storage folders are supported,Hanya folder penyimpanan internal yang didukung
 Open comments,Buka komentar
@@ -961,3 +961,5 @@ Show what is left of the budget,Tampilkan sisa batas harian
 Restart TikTok to apply this.,Mulai ulang TikTok agar berlaku.
 No gates match this filter.,Tidak ada gate yang cocok dengan filter ini.
 Version %1$s,Versi %1$s
+Show failures on screen,Tampilkan kegagalan di layar
+"While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.","Selama pencatatan diagnostik aktif, sebuah pesan menyebutkan bagian Hushfeed yang gagal. Jika nonaktif, kegagalan hanya tercatat di laporan."
