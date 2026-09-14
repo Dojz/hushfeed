@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Media downloads now validate the original address and every redirect. They allow only public HTTPS destinations with no embedded credentials, stop redirect loops after five hops, recheck DNS before connecting, and remove partial files when a destination or body is refused.
+
 * Right-column counts now follow both parts of TikTok's feed layout: the outer count row and the numeric text inside it. Layout variants that replace the row can no longer leave like, comment, favorite or share counts visible, and turning the switch off restores only the views Hushfeed hid.
 
 * Hide inbox stories now responds without restarting TikTok. It hides only the story tray, restores recycled rows when they change purpose, and shares one live Inbox observer with Hide inbox items when both patches are selected.
