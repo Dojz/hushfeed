@@ -549,6 +549,8 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
             row.setOnPreferenceClickListener(preference -> {
                 if (FEATURE_GATE_LAB_KEY.equals(result.key)) {
                     FeatureGateLabFragment.open(getActivity());
+                } else if (MorpheTikTokAboutPreference.KEY.equals(result.key)) {
+                    Utils.openLink(MorpheTikTokAboutPreference.SOURCE_URL);
                 } else {
                     openSection(result.section, result.key);
                 }
@@ -696,6 +698,15 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
                     L10n.t(context, "Settings")
             ));
         }
+        // The About row sits on the master menu beside the Lab, so it is indexed the same way.
+        // Its summary carries the bundle version, which is what a reporter searches for.
+        results.add(new SearchResult(
+                null,
+                MorpheTikTokAboutPreference.KEY,
+                "Hushfeed",
+                MorpheTikTokAboutPreference.currentSummary(context).toString(),
+                L10n.t(context, "Settings")
+        ));
         return results;
     }
 

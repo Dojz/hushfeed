@@ -1965,8 +1965,8 @@ public final class L10nTranslations {
                 "Zurückgegebener Wert");
         table.put("Verified creators",
                 "Verifizierte Creator");
-        table.put("Version %1$s",
-                "Version %1$s");
+        table.put("Version %1$s for TikTok %2$s",
+                "Version %1$s für TikTok %2$s");
         table.put("Video",
                 "Video");
         table.put("Video (MP4)",
@@ -3966,8 +3966,8 @@ public final class L10nTranslations {
                 "Valor que se devuelve");
         table.put("Verified creators",
                 "Creadores verificados");
-        table.put("Version %1$s",
-                "Versión %1$s");
+        table.put("Version %1$s for TikTok %2$s",
+                "Versión %1$s para TikTok %2$s");
         table.put("Video",
                 "Vídeo");
         table.put("Video (MP4)",
@@ -5967,8 +5967,8 @@ public final class L10nTranslations {
                 "Nilai yang dikembalikan");
         table.put("Verified creators",
                 "Kreator terverifikasi");
-        table.put("Version %1$s",
-                "Versi %1$s");
+        table.put("Version %1$s for TikTok %2$s",
+                "Versi %1$s untuk TikTok %2$s");
         table.put("Video",
                 "Video");
         table.put("Video (MP4)",
@@ -7968,8 +7968,8 @@ public final class L10nTranslations {
                 "Valor devolvido");
         table.put("Verified creators",
                 "Criadores verificados");
-        table.put("Version %1$s",
-                "Versão %1$s");
+        table.put("Version %1$s for TikTok %2$s",
+                "Versão %1$s para TikTok %2$s");
         table.put("Video",
                 "Vídeo");
         table.put("Video (MP4)",

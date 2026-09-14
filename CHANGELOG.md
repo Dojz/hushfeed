@@ -1,5 +1,7 @@
 ## Unreleased
 
+* The About row names the TikTok build as well as the Hushfeed version, and the settings search finds it. The row sat outside the search index with no key, so "version" and "hushfeed" both came back empty on the phones that showed it. Searching either now lands on the row, and the second question on every bug report, which TikTok the bundle was applied to, is answered on the same line.
+
 * Diagnostics has a row for the failure messages. The switch behind them was on from the first release and had no row anywhere, so the only way to stop a message was to turn diagnostic logging off with it. Show failures on screen now sits under the logging switch and decides on its own whether a failure is put in front of you while logging is on. Off keeps failures in the report alone.
 
 * The exported diagnostic report no longer names the creators you block, hide or follow. The block, hide and Not interested paths wrote the creator's display name into the log beside the toast that showed it, and every toast is written to the report as it is shown, so a report attached to a public bug had the names in it. Log lines now carry a pseudonym instead, the same one the follow report uses for the same account, and the name in a toast is marked so the export leaves it out in every language. Handles standing on their own are dropped too. Follow diagnostics phases are debug-level lines now; the refusal itself still reports at once.

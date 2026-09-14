@@ -960,6 +960,6 @@ Show what is left of the budget,Tampilkan sisa batas harian
 "Off by default. Switched on, a small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out. It changes at most once a minute, appears only on the feed, and is never read out on its own.","Nonaktif secara bawaan. Saat diaktifkan, label kecil di feed menampilkan sisa menit atau video dari batas hari ini, mana yang lebih dekat habis. Label itu berubah paling sering sekali per menit, hanya muncul di feed, dan tidak pernah dibacakan dengan sendirinya."
 Restart TikTok to apply this.,Mulai ulang TikTok agar berlaku.
 No gates match this filter.,Tidak ada gate yang cocok dengan filter ini.
-Version %1$s,Versi %1$s
+Version %1$s for TikTok %2$s,Versi %1$s untuk TikTok %2$s
 Show failures on screen,Tampilkan kegagalan di layar
 "While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.","Selama pencatatan diagnostik aktif, sebuah pesan menyebutkan bagian Hushfeed yang gagal. Jika nonaktif, kegagalan hanya tercatat di laporan."

@@ -962,6 +962,6 @@ Show what is left of the budget	Restliches Budget anzeigen
 Off by default. Switched on, a small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out. It changes at most once a minute, appears only on the feed, and is never read out on its own.	Standardmäßig aus. Eingeschaltet zeigt ein kleines Feld im Feed die verbleibenden Minuten oder Videos des heutigen Budgets an, je nachdem, was zuerst aufgebraucht ist. Es ändert sich höchstens einmal pro Minute, erscheint nur im Feed und wird nie von allein vorgelesen.
 Restart TikTok to apply this.	TikTok neu starten, damit das gilt.
 No gates match this filter.	Keine Schalter passen zu diesem Filter.
-Version %1$s	Version %1$s
+Version %1$s for TikTok %2$s	Version %1$s für TikTok %2$s
 Show failures on screen	Fehler auf dem Bildschirm anzeigen
 While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.	Solange die Diagnoseprotokollierung läuft, nennt eine Meldung den Teil von Hushfeed, der fehlgeschlagen ist. Aus behält Fehler nur im Bericht.

@@ -959,6 +959,6 @@ Show what is left of the budget	Mostrar lo que queda del límite
 Off by default. Switched on, a small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out. It changes at most once a minute, appears only on the feed, and is never read out on its own.	Desactivado de forma predeterminada. Al activarlo, una etiqueta pequeña en el feed muestra los minutos o los videos que quedan del límite de hoy, lo que esté más cerca de agotarse. Cambia como mucho una vez por minuto, solo aparece en el feed y nunca se lee en voz alta por sí misma.
 Restart TikTok to apply this.	Reinicia TikTok para que se aplique.
 No gates match this filter.	Ningún interruptor coincide con este filtro.
-Version %1$s	Versión %1$s
+Version %1$s for TikTok %2$s	Versión %1$s para TikTok %2$s
 Show failures on screen	Mostrar fallos en pantalla
 While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.	Mientras el registro de diagnóstico está activado, un mensaje indica la parte de Hushfeed que falló. Desactivado, los fallos solo quedan en el informe.
