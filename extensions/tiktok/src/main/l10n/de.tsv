@@ -119,15 +119,11 @@ Copy report	Bericht kopieren
 Could not save settings backup.	Sicherung der Einstellungen konnte nicht gespeichert werden.
 Could not restore settings.	Einstellungen konnten nicht wiederhergestellt werden.
 Could not tell which folder to update. Choose it again.	Nicht erkennbar, welcher Ordner geändert werden soll. Bitte erneut auswählen.
-Could not block %1$s	%1$s konnte nicht blockiert werden
-Could not block %1$s: %2$s	%1$s konnte nicht blockiert werden: %2$s
 Could not confirm block for %1$s	Die Blockierung von %1$s konnte nicht bestätigt werden
 Could not confirm unblock for %1$s	Die Aufhebung der Blockierung von %1$s konnte nicht bestätigt werden
 Could not copy report. Use Save JSON.	Bericht konnte nicht kopiert werden. Nutze „JSON speichern“.
 Could not open settings section	Einstellungsbereich konnte nicht geöffnet werden
 Could not read who posted this comment	Konnte nicht lesen, wer diesen Kommentar geschrieben hat
-Could not unblock %1$s	Die Blockierung von %1$s konnte nicht aufgehoben werden
-Could not unblock %1$s: %2$s	Die Blockierung von %1$s konnte nicht aufgehoben werden: %2$s
 Country and network preferences	Land und Netzwerkeinstellungen
 Country ISO	Länder-ISO
 Current: %1$s %2$s	Aktuell: %1$s %2$s
@@ -590,7 +586,6 @@ Custom value (unverified)	Eigener Wert (ungeprüft)
 Use value	Wert verwenden
 Using TikTok's value	TikToks Wert wird verwendet
 Override saved but off	Überschreibung gespeichert, aber aus
-Getter requested, override rejected: %1$s	Getter abgefragt, Überschreibung abgelehnt: %1$s
 Getter requested	Getter abgefragt
 Getter not requested yet	Getter noch nicht abgefragt
 One value per line	Ein Wert pro Zeile
@@ -814,7 +809,6 @@ Turned off 1 gate of %1$d; the rest do not take a true or false value. Restart T
 Turned off %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.	%1$d von %2$d Schaltern ausgeschaltet; die übrigen nehmen kein true oder false. TikTok neu starten, damit das gilt.
 Feature gate override reset	Überschreibung des Schalters zurückgesetzt
 Feature gate override saved	Überschreibung des Schalters gespeichert
-Invalid field value: %1$s	Ungültiger Feldwert: %1$s
 Could not save this override.	Diese Überschreibung konnte nicht gespeichert werden.
 Could not reset this override.	Diese Überschreibung konnte nicht zurückgesetzt werden.
 Feature Gate Lab could not find the settings container	Das Feature Gate Lab hat den Einstellungsbereich nicht gefunden
@@ -885,3 +879,62 @@ Show local hide button	Schaltfläche zum lokalen Ausblenden anzeigen
 That list is too large. Keep it to 256 KB or less.	Diese Liste ist zu groß. Begrenze sie auf höchstens 256 KB.
 That list has too many entries. Keep it to 10,000 or fewer.	Diese Liste enthält zu viele Einträge. Begrenze sie auf höchstens 10.000.
 That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.	Diese Einstellungssicherung enthält eine Feed-Regelliste, die größer ist, als Hushfeed zulässt. Es wurde nichts geändert.
+%1$d fields overridden	%1$d Felder überschrieben
+%1$d fields will be overridden when requested	%1$d Felder werden bei der Abfrage überschrieben
+%1$s (%2$s)	%1$s (%2$s)
+%1$s (TikTok value)	%1$s (TikTok-Wert)
+%1$s (custom, unverified)	%1$s (benutzerdefiniert, ungeprüft)
+%1$s (override returned)	%1$s (Überschreibung zurückgegeben)
+%1$s (will be returned when requested)	%1$s (wird bei der Abfrage zurückgegeben)
+%1$s / current cache only	%1$s / nur aktueller Cache
+%1$s / generated registry	%1$s / generiertes Register
+%1$s / generated registry and current cache	%1$s / generiertes Register und aktueller Cache
+%1$s / local catalog	%1$s / lokaler Katalog
+%1$s appears more than once in this file.	%1$s kommt in dieser Datei mehrmals vor.
+%1$s has an invalid value. %2$s	%1$s hat einen ungültigen Wert. %2$s
+%1$s has no supported override boundary in this Lab build.	%1$s hat in diesem Lab-Build keine unterstützte Überschreibungsgrenze.
+%1$s has type %2$s, but the file says %3$s.	%1$s hat den Typ %2$s, in der Datei steht %3$s.
+%1$s is not in this Lab catalog.	%1$s ist nicht in diesem Lab-Katalog enthalten.
+%1$s was rejected. %2$s	%1$s wurde abgelehnt. %2$s
+%1$s, %2$s, %3$s, %4$s, %5$s	%1$s, %2$s, %3$s, %4$s, %5$s
+1 field overridden	1 Feld überschrieben
+1 field will be overridden when requested	1 Feld wird bei der Abfrage überschrieben
+A field value could not be read. Check the values and try again.	Ein Feldwert konnte nicht gelesen werden. Prüfe die Werte und versuche es erneut.
+Activity Center	Aktivitätscenter
+Current	Aktuell
+Current %1$s	Aktuell %1$s
+Custom value...	Benutzerdefinierter Wert...
+Default	Standard
+Enter a JSON object or array.	Gib ein JSON-Objekt oder -Array ein.
+Enter a finite number.	Gib eine endliche Zahl ein.
+Enter a valid structured value.	Gib einen gültigen strukturierten Wert ein.
+Enter a valid value for %1$s.	Gib einen gültigen Wert für %1$s ein.
+Enter true or false.	Gib true oder false ein.
+Enter valid JSON.	Gib gültiges JSON ein.
+Entry %1$d has a field with the wrong data type.	Eintrag %1$d enthält ein Feld mit dem falschen Datentyp.
+Entry %1$d is not an object.	Eintrag %1$d ist kein Objekt.
+Getter requested, but the structured override could not be applied	Getter abgefragt, aber die strukturierte Überschreibung konnte nicht angewendet werden
+Getter used	Getter verwendet
+Historical	Historisch
+Imported %1$d disabled values. %2$d already matched, %3$d unavailable, %4$d rejected. First rejection: %5$s Undo last Lab change is in the menu.	Deaktivierte Werte importiert: %1$d. Bereits identisch: %2$d. Nicht verfügbar: %3$d. Abgelehnt: %4$d. Erste Ablehnung: %5$s Die letzte Lab-Änderung kann im Menü rückgängig gemacht werden.
+Keep this string to 4,096 characters or fewer.	Begrenze diese Zeichenfolge auf höchstens 4.096 Zeichen.
+Keep this structured value to 64 KB or less.	Begrenze diesen strukturierten Wert auf höchstens 64 KB.
+Live Settings	Live-Einstellungen
+Media Config	Medienkonfiguration
+No current value	Kein aktueller Wert
+No current value and no active override	Kein aktueller Wert und keine aktive Überschreibung
+Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected. First rejection: %4$s	Nichts Neues wurde importiert. Bereits identisch: %1$d. Nicht verfügbar: %2$d. Abgelehnt: %3$d. Erste Ablehnung: %4$s
+Override off	Überschreibung aus
+Player Config	Player-Konfiguration
+Researched	Recherchiert
+Returns %1$s	Gibt %1$s zurück
+Saved %1$s	Gespeichert: %1$s
+Select at least one field.	Wähle mindestens ein Feld aus.
+Selected	Ausgewählt
+Structured Config	Strukturierte Konfiguration
+This gate type is not supported.	Dieser Gate-Typ wird nicht unterstützt.
+This value is required.	Dieser Wert ist erforderlich.
+TikTok rejected the request to block %1$s	TikTok hat die Anfrage zum Blockieren von %1$s abgelehnt
+TikTok rejected the request to unblock %1$s	TikTok hat die Anfrage zum Entblocken von %1$s abgelehnt
+Unavailable	Nicht verfügbar
+Waiting	Wartet

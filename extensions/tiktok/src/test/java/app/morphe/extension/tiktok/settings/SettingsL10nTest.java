@@ -43,6 +43,7 @@ import java.util.Set;
 
 import org.junit.Rule;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -65,6 +66,11 @@ public class SettingsL10nTest {
     private static final Map<String, String> GERMAN = L10nTranslations.of("de");
     private static final Map<String, String> INDONESIAN = L10nTranslations.of("in");
 
+    @Before
+    public void clearStatusBeforeMountingSettings() throws Exception {
+        setEveryStatus(false);
+    }
+
     @After
     public void resetStatus() throws Exception {
         setEveryStatus(false);
@@ -81,9 +87,9 @@ public class SettingsL10nTest {
      * English, because {@code showToastShort(ok ? "a" : "b")} and a call wrapped across two
      * lines both slipped past it.
      *
-     * <p>Feature Gate Lab is left out on purpose. It is a developer tool and its screens are
-     * English by choice, which the row that opens it says. The shared extension module is not
-     * walked either: it is TikTok-independent code, and this table is TikTok's.
+     * <p>The Feature Gate Lab is included now that its runtime states and failures are localized.
+     * The shared extension module is not walked: it is TikTok-independent code, and this table
+     * is TikTok's.
      */
     @Test public void theGeneratedTableIsTheOneInTheTables() throws Exception {
         // Every other check here reads L10nTranslations, which is generated. A value edited in a
@@ -1430,6 +1436,7 @@ public class SettingsL10nTest {
 
     private Set<String> collectEverything() throws Exception {
         setEveryStatus(true);
+        app.morphe.extension.shared.diagnostics.HookStatus.clear();
         Set<String> strings = new LinkedHashSet<>();
         try (var controller = Robolectric.buildActivity(TestActivity.class).setup()) {
             var activity = controller.get();

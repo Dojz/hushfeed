@@ -1154,13 +1154,29 @@ public final class FeatureGateLabFragment extends Fragment {
 
         // An import that accepted nothing writes no undo copy, so a message offering Undo
         // would point at whatever the previous Lab change was.
-        String message = review.accepted.isEmpty()
-                ? L10n.f(Utils.getContext(),
-                        "Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected.",
-                        same, unavailable, review.rejected.size() + malformed)
-                : L10n.f(Utils.getContext(),
-                        "Imported %1$d disabled values. %2$d already matched, %3$d unavailable, %4$d rejected. Undo last Lab change is in the menu.",
-                        review.accepted.size(), same, unavailable, review.rejected.size() + malformed);
+        int rejected = review.rejected.size() + malformed;
+        String firstRejection = review.rejected.isEmpty()
+                ? null
+                : FeatureGateLabText.importRejection(
+                        Utils.getContext(), review.rejected.get(0));
+        String message;
+        if (review.accepted.isEmpty()) {
+            message = firstRejection == null
+                    ? L10n.f(Utils.getContext(),
+                            "Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected.",
+                            same, unavailable, rejected)
+                    : L10n.f(Utils.getContext(),
+                            "Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected. First rejection: %4$s",
+                            same, unavailable, rejected, firstRejection);
+        } else {
+            message = firstRejection == null
+                    ? L10n.f(Utils.getContext(),
+                            "Imported %1$d disabled values. %2$d already matched, %3$d unavailable, %4$d rejected. Undo last Lab change is in the menu.",
+                            review.accepted.size(), same, unavailable, rejected)
+                    : L10n.f(Utils.getContext(),
+                            "Imported %1$d disabled values. %2$d already matched, %3$d unavailable, %4$d rejected. First rejection: %5$s Undo last Lab change is in the menu.",
+                            review.accepted.size(), same, unavailable, rejected, firstRejection);
+        }
         runLabChange(() -> FeatureGateLabUndo.importRules(review), message);
     }
 
@@ -1323,10 +1339,7 @@ public final class FeatureGateLabFragment extends Fragment {
                 result = change.run();
             } catch (Exception error) {
                 Logger.printException(() -> "Lab change failed", error);
-                // The sentence is translated; what the failure itself said is not ours
-                // to translate, and dropping it would take the only clue with it.
-                result = L10n.t(Utils.getContext(), "Could not change Lab settings.")
-                        + " " + error.getMessage();
+                result = L10n.t(Utils.getContext(), "Could not change Lab settings.");
             }
             String notice = result;
             new Handler(Looper.getMainLooper()).post(() -> {
@@ -1575,13 +1588,13 @@ public final class FeatureGateLabFragment extends Fragment {
             holder.type.setText(entry.shortSourceName() + " " + entry.type);
             String shownValue;
             if (rule != null && rule.enabled && FeatureGateLabStore.masterEnabled()) {
-                shownValue = "Returns " + rule.value;
+                shownValue = L10n.f(getContext(), "Returns %1$s", rule.value);
             } else if (entry.loaded) {
-                shownValue = "Current " + entry.currentValue;
+                shownValue = L10n.f(getContext(), "Current %1$s", entry.currentValue);
             } else if (rule != null) {
-                shownValue = "Saved " + rule.value;
+                shownValue = L10n.f(getContext(), "Saved %1$s", rule.value);
             } else {
-                shownValue = "No current value";
+                shownValue = L10n.t(getContext(), "No current value");
             }
             holder.value.setText(shownValue);
             holder.value.setVisibility(entry.loaded || rule != null ? View.VISIBLE : View.GONE);
@@ -1597,24 +1610,24 @@ public final class FeatureGateLabFragment extends Fragment {
             String state;
             int stateColor;
             if (rule != null && rule.enabled && FeatureGateLabRuntime.isTriggered(entry.manager, entry.key, entry.type)) {
-                state = "Getter used";
+                state = L10n.t(getContext(), "Getter used");
                 stateColor = SettingsUi.accent();
             } else if (rule != null && rule.enabled) {
-                state = "Waiting";
+                state = L10n.t(getContext(), "Waiting");
                 stateColor = FeatureGateLabUi.warningColor(context);
             } else if (rule != null) {
-                state = "Override off";
+                state = L10n.t(getContext(), "Override off");
                 stateColor = SettingsUi.textSecondary();
             } else {
-                state = entry.loaded ? "Loaded" : "Unloaded";
+                state = L10n.t(getContext(), entry.loaded ? "Loaded" : "Unloaded");
                 stateColor = entry.loaded ? SettingsUi.textSecondary() : SettingsUi.textDisabled();
             }
             holder.state.setText(state);
             holder.state.setTextColor(stateColor);
             // The row read out as one sentence. The parts are the gate's own words, and
             // only the last piece is ours, so only that one is a key.
-            String spoken = entry.title + ", " + entry.key + ", " + entry.type
-                    + ", " + shownValue + ", " + state;
+            String spoken = L10n.f(getContext(), "%1$s, %2$s, %3$s, %4$s, %5$s",
+                    entry.title, entry.key, entry.type, shownValue, state);
             convertView.setContentDescription(chosen
                     ? L10n.f(getContext(), "%1$s, selected", spoken)
                     : spoken);

@@ -110,8 +110,6 @@ Copy only the comment text when using TikTok's copy comment action.	Copiar solo 
 Copy report	Copiar el informe
 Copy the sound link	Copiar el enlace del sonido
 Copy the video link	Copiar el enlace del vídeo
-Could not block %1$s	No se pudo bloquear a %1$s
-Could not block %1$s: %2$s	No se pudo bloquear a %1$s: %2$s
 Could not confirm block for %1$s	No se pudo confirmar el bloqueo de %1$s
 Could not confirm unblock for %1$s	No se pudo confirmar el desbloqueo de %1$s
 Could not copy report. Use Save JSON.	No se pudo copiar el informe. Usa Guardar JSON.
@@ -122,8 +120,6 @@ Could not read who posted this comment	No se pudo leer quién publicó este come
 Could not restore settings.	No se pudieron restaurar los ajustes.
 Could not save settings backup.	No se pudo guardar la copia de seguridad de los ajustes.
 Could not tell which folder to update. Choose it again.	No se pudo saber qué carpeta actualizar. Vuelve a elegirla.
-Could not unblock %1$s	No se pudo desbloquear a %1$s
-Could not unblock %1$s: %2$s	No se pudo desbloquear a %1$s: %2$s
 Country ISO	ISO del país
 Country and network preferences	Preferencias de país y de red
 Creator handle or id	Nombre de usuario o id del creador
@@ -521,7 +517,6 @@ Custom value (unverified)	Valor propio (sin verificar)
 Use value	Usar el valor
 Using TikTok's value	Se usa el valor de TikTok
 Override saved but off	Sustitución guardada pero desactivada
-Getter requested, override rejected: %1$s	Se pidió el valor y se rechazó la sustitución: %1$s
 Getter requested	Se pidió el valor
 Getter not requested yet	Todavía no se ha pedido el valor
 One value per line	Un valor por línea
@@ -811,7 +806,6 @@ Turned off 1 gate of %1$d; the rest do not take a true or false value. Restart T
 Turned off %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.	%1$d interruptores de %2$d apagados; los demás no aceptan un valor true o false. Reinicia TikTok para aplicar esto.
 Feature gate override reset	Sustitución del interruptor restablecida
 Feature gate override saved	Sustitución del interruptor guardada
-Invalid field value: %1$s	Valor de campo no válido: %1$s
 Could not save this override.	No se ha podido guardar esta sustitución.
 Could not reset this override.	No se ha podido restablecer esta sustitución.
 Feature Gate Lab could not find the settings container	El Feature Gate Lab no ha encontrado el contenedor de los ajustes
@@ -882,3 +876,62 @@ Show local hide button	Mostrar el botón de ocultar localmente
 That list is too large. Keep it to 256 KB or less.	Esa lista es demasiado grande. Limítala a 256 KB o menos.
 That list has too many entries. Keep it to 10,000 or fewer.	Esa lista tiene demasiadas entradas. Limítala a 10.000 o menos.
 That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.	Esa copia de seguridad contiene una lista de reglas del feed mayor de lo que Hushfeed admite. No se ha cambiado nada.
+%1$d fields overridden	%1$d campos sobrescritos
+%1$d fields will be overridden when requested	%1$d campos se sobrescribirán cuando se soliciten
+%1$s (%2$s)	%1$s (%2$s)
+%1$s (TikTok value)	%1$s (valor de TikTok)
+%1$s (custom, unverified)	%1$s (personalizado, sin verificar)
+%1$s (override returned)	%1$s (se devolvió la sobrescritura)
+%1$s (will be returned when requested)	%1$s (se devolverá cuando se solicite)
+%1$s / current cache only	%1$s / solo caché actual
+%1$s / generated registry	%1$s / registro generado
+%1$s / generated registry and current cache	%1$s / registro generado y caché actual
+%1$s / local catalog	%1$s / catálogo local
+%1$s appears more than once in this file.	%1$s aparece más de una vez en este archivo.
+%1$s has an invalid value. %2$s	%1$s tiene un valor no válido. %2$s
+%1$s has no supported override boundary in this Lab build.	%1$s no tiene un límite de sobrescritura compatible en esta compilación del Lab.
+%1$s has type %2$s, but the file says %3$s.	%1$s tiene el tipo %2$s, pero el archivo indica %3$s.
+%1$s is not in this Lab catalog.	%1$s no está en este catálogo del Lab.
+%1$s was rejected. %2$s	%1$s fue rechazado. %2$s
+%1$s, %2$s, %3$s, %4$s, %5$s	%1$s, %2$s, %3$s, %4$s, %5$s
+1 field overridden	1 campo sobrescrito
+1 field will be overridden when requested	1 campo se sobrescribirá cuando se solicite
+A field value could not be read. Check the values and try again.	No se pudo leer el valor de un campo. Revisa los valores e inténtalo de nuevo.
+Activity Center	Centro de actividad
+Current	Actual
+Current %1$s	Actual: %1$s
+Custom value...	Valor personalizado...
+Default	Predeterminado
+Enter a JSON object or array.	Introduce un objeto o una matriz JSON.
+Enter a finite number.	Introduce un número finito.
+Enter a valid structured value.	Introduce un valor estructurado válido.
+Enter a valid value for %1$s.	Introduce un valor válido para %1$s.
+Enter true or false.	Introduce true o false.
+Enter valid JSON.	Introduce JSON válido.
+Entry %1$d has a field with the wrong data type.	La entrada %1$d tiene un campo con un tipo de datos incorrecto.
+Entry %1$d is not an object.	La entrada %1$d no es un objeto.
+Getter requested, but the structured override could not be applied	Se solicitó el getter, pero no se pudo aplicar la sobrescritura estructurada
+Getter used	Getter usado
+Historical	Histórico
+Imported %1$d disabled values. %2$d already matched, %3$d unavailable, %4$d rejected. First rejection: %5$s Undo last Lab change is in the menu.	Se importaron %1$d valores desactivados. %2$d ya coincidían, %3$d no estaban disponibles y %4$d fueron rechazados. Primer rechazo: %5$s La última modificación del Lab se puede deshacer desde el menú.
+Keep this string to 4,096 characters or fewer.	Limita esta cadena a 4096 caracteres o menos.
+Keep this structured value to 64 KB or less.	Limita este valor estructurado a 64 KB o menos.
+Live Settings	Ajustes de Live
+Media Config	Configuración multimedia
+No current value	Sin valor actual
+No current value and no active override	No hay ningún valor actual ni una sobrescritura activa
+Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected. First rejection: %4$s	No se importó nada nuevo. %1$d ya coincidían, %2$d no estaban disponibles y %3$d fueron rechazados. Primer rechazo: %4$s
+Override off	Sobrescritura desactivada
+Player Config	Configuración del reproductor
+Researched	Investigado
+Returns %1$s	Devuelve %1$s
+Saved %1$s	Guardado: %1$s
+Select at least one field.	Selecciona al menos un campo.
+Selected	Seleccionado
+Structured Config	Configuración estructurada
+This gate type is not supported.	Este tipo de gate no es compatible.
+This value is required.	Este valor es obligatorio.
+TikTok rejected the request to block %1$s	TikTok rechazó la solicitud de bloquear a %1$s
+TikTok rejected the request to unblock %1$s	TikTok rechazó la solicitud de desbloquear a %1$s
+Unavailable	No disponible
+Waiting	En espera

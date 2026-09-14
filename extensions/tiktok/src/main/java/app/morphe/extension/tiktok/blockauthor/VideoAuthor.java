@@ -42,6 +42,9 @@ public final class VideoAuthor {
         if (uid != null && !uid.isEmpty()) {
             return uid;
         }
+        if (secUid != null && !secUid.isEmpty()) {
+            return secUid;
+        }
         return "this account";
     }
 

@@ -19,6 +19,7 @@ import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.ResourceIdCache;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.tiktok.blockauthor.BlockAuthorOverlay;
+import app.morphe.extension.tiktok.blockauthor.BlockAuthorMessages;
 import app.morphe.extension.tiktok.blockauthor.BlockAuthorService;
 import app.morphe.extension.tiktok.blockauthor.Reflect;
 import app.morphe.extension.tiktok.blockauthor.VideoAuthor;
@@ -637,16 +638,11 @@ public final class CommentTools {
 
     private static void block(View cell, VideoAuthor author) {
         blockInFlight = true;
-        BlockAuthorService.block(author, (result, message) -> {
+        BlockAuthorService.block(author, result -> {
             blockInFlight = false;
             if (result != BlockAuthorService.Result.CONFIRMED) {
-                if (result == BlockAuthorService.Result.UNCONFIRMED) {
-                    Utils.showToastLong(L10n.f("Could not confirm block for %1$s", author.label()));
-                    return;
-                }
-                Utils.showToastLong(message == null || message.isEmpty()
-                        ? L10n.f("Could not block %1$s", author.label())
-                        : L10n.f("Could not block %1$s: %2$s", author.label(), message));
+                Utils.showToastLong(BlockAuthorMessages.blockFailure(
+                        Utils.getContext(), result, author.label()));
                 return;
             }
 
@@ -659,42 +655,35 @@ public final class CommentTools {
             View root = cell.getRootView();
             BlockAuthorOverlay.showUndoBanner(root instanceof ViewGroup ? (ViewGroup) root : null,
                     L10n.f("Blocked %1$s", author.label()), () -> {
-                        BlockAuthorService.unblock(author, (undoResult, undoMessage) -> {
+                        BlockAuthorService.unblock(author, undoResult -> {
                             if (undoResult == BlockAuthorService.Result.CONFIRMED) {
                                 if (author.uid != null) {
                                     BLOCKED_UIDS.remove(author.uid);
                                 }
                                 applyBlockedEverywhere();
                             }
-                            Utils.showToastShort(undoResult == BlockAuthorService.Result.CONFIRMED
-                                        ? L10n.f("Unblocked %1$s", author.label())
-                                        : undoResult == BlockAuthorService.Result.UNCONFIRMED
-                                        ? L10n.f("Could not confirm unblock for %1$s", author.label())
-                                        : L10n.f("Could not unblock %1$s", author.label()));
-                    });
+                            Utils.showToastShort(BlockAuthorMessages.unblockResult(
+                                    Utils.getContext(), undoResult, author.label()));
+                        });
                     });
         });
     }
 
     private static void unblock(View cell, VideoAuthor author) {
         blockInFlight = true;
-        BlockAuthorService.unblock(author, (result, message) -> {
+        BlockAuthorService.unblock(author, result -> {
             blockInFlight = false;
             if (result != BlockAuthorService.Result.CONFIRMED) {
-                if (result == BlockAuthorService.Result.UNCONFIRMED) {
-                    Utils.showToastLong(L10n.f("Could not confirm unblock for %1$s", author.label()));
-                    return;
-                }
-                Utils.showToastLong(message == null || message.isEmpty()
-                        ? L10n.f("Could not unblock %1$s", author.label())
-                        : L10n.f("Could not unblock %1$s: %2$s", author.label(), message));
+                Utils.showToastLong(BlockAuthorMessages.unblockResult(
+                        Utils.getContext(), result, author.label()));
                 return;
             }
             if (author.uid != null) {
                 BLOCKED_UIDS.remove(author.uid);
             }
             applyBlockedEverywhere();
-            Utils.showToastShort(L10n.f("Unblocked %1$s", author.label()));
+            Utils.showToastShort(BlockAuthorMessages.unblockResult(
+                    Utils.getContext(), result, author.label()));
         });
     }
 
