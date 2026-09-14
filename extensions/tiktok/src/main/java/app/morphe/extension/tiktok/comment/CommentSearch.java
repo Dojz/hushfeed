@@ -12,6 +12,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.inputmethod.EditorInfo;
@@ -22,6 +23,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.tiktok.blockauthor.Reflect;
@@ -50,8 +52,24 @@ public final class CommentSearch {
     private static final Map<View, Object> ROW_COMMENTS = new WeakHashMap<>();
     /** A reply control can also be collapsed by TikTok after all replies have been loaded. */
     private static final Map<View, Boolean> COLLAPSED_REPLY_ROWS = new WeakHashMap<>();
+    /** Bound rows report attach and detach so the visible count follows scrolling. */
+    private static final Map<View, Boolean> ROW_ATTACH_LISTENERS = new WeakHashMap<>();
     /** The list owns its decoration through its listener; neither map side retains that tree. */
     private static final Map<ViewGroup, WeakReference<SearchField>> DECORATED = new WeakHashMap<>();
+
+    static final String FIELD_TAG = "comment_search_field";
+    static final String STATUS_TAG = "comment_search_status";
+
+    private static final View.OnAttachStateChangeListener ROW_ATTACH_LISTENER =
+            new View.OnAttachStateChangeListener() {
+                @Override public void onViewAttachedToWindow(View view) {
+                    scheduleCountRefresh();
+                }
+
+                @Override public void onViewDetachedFromWindow(View view) {
+                    scheduleCountRefresh();
+                }
+            };
 
     /** How far above the list to look for something that stacks its children. */
     private static final int MAX_COLUMN_LEVELS = 4;
@@ -81,6 +99,9 @@ public final class CommentSearch {
             for (WeakReference<SearchField> reference : new ArrayList<>(DECORATED.values())) {
                 SearchField field = reference.get();
                 if (field != null) field.remove(false);
+            }
+            for (View row : new ArrayList<>(ROW_ATTACH_LISTENERS.keySet())) {
+                untrackRowAttachments(row);
             }
             // Retain bound models for re-enabling on the same sheet without another native bind.
             for (View row : ROW_COMMENTS.keySet()) setRowHidden(row, false);
@@ -123,6 +144,7 @@ public final class CommentSearch {
         if (itemView == null) return;
         try {
             if (!enabled()) {
+                untrackRowAttachments(itemView);
                 if (ROW_COMMENTS.containsKey(itemView)) {
                     // Body binding leaves the root height that search collapsed in place.
                     setRowHidden(itemView, false);
@@ -131,6 +153,7 @@ public final class CommentSearch {
                 }
                 return;
             }
+            trackRowAttachments(itemView);
             ROW_COMMENTS.put(itemView, comment);
             setRowHidden(itemView, !matches(comment, query));
             // A list binds a row before putting it in place, and detaches one it is about to
@@ -146,6 +169,7 @@ public final class CommentSearch {
     public static void onReplyControlBound(View itemView, Object parentComment, int nativeState) {
         if (itemView == null) return;
         if (!enabled()) {
+            untrackRowAttachments(itemView);
             if (COLLAPSED_REPLY_ROWS.remove(itemView) != null) {
                 ROW_COMMENTS.remove(itemView);
                 ORIGINAL_HEIGHTS.remove(itemView);
@@ -169,8 +193,10 @@ public final class CommentSearch {
             if (shown.get() != listView) {
                 // A different sheet. Whatever was typed into the last one was about that
                 // video's comments, so it does not follow the reader to this one.
+                SearchField previous = searchFieldFor(shown.get());
                 shown = new WeakReference<>(listView);
                 setQuery("");
+                if (previous != null) previous.clearForSheetChange();
             }
             addSearchField(listView);
             narrowShownRows();
@@ -254,6 +280,7 @@ public final class CommentSearch {
 
         Context context = column.getContext();
         EditText box = new EditText(context);
+        box.setTag(FIELD_TAG);
         box.setHint(L10n.t(context, "Search these comments"));
         // No content description on a search box. On an editable view it replaces what was
         // typed in the announcement, so "cats" came back as the label. The hint names it.
@@ -277,6 +304,17 @@ public final class CommentSearch {
         box.setLayoutParams(new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
+        TextView status = SettingsUi.resultCount(context, STATUS_TAG);
+        status.setTextColor(dark ? 0xFFA8A8B3 : 0xFF575762);
+        status.setFocusable(false);
+        status.setClickable(false);
+        status.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
+        status.setVisibility(View.GONE);
+        status.setPadding(padding, 0, padding, Math.round(
+                4 * context.getResources().getDisplayMetrics().density));
+        status.setLayoutParams(new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
         box.setText(query);
         box.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -297,10 +335,12 @@ public final class CommentSearch {
             view.clearFocus();
             return true;
         });
-        column.addView(box, column.indexOfChild(anchor));
+        int insertionIndex = column.indexOfChild(anchor);
+        column.addView(box, insertionIndex);
+        column.addView(status, insertionIndex + 1);
         // Only once it is really in. Marking the column first would blacklist it for good if
         // anything above threw, and the sheet would never get a box again.
-        SearchField field = new SearchField(column, listView, box);
+        SearchField field = new SearchField(column, listView, box, status);
         DECORATED.put(column, new WeakReference<>(field));
 
         // The column can be further up than the sheet and outlive it, so the box leaves with
@@ -312,11 +352,13 @@ public final class CommentSearch {
         private final LinearLayout column;
         private final ViewGroup listView;
         private final EditText box;
+        private final TextView status;
 
-        SearchField(LinearLayout column, ViewGroup listView, EditText box) {
+        SearchField(LinearLayout column, ViewGroup listView, EditText box, TextView status) {
             this.column = column;
             this.listView = listView;
             this.box = box;
+            this.status = status;
         }
 
         void remove(boolean detaching) {
@@ -324,8 +366,40 @@ public final class CommentSearch {
             WeakReference<SearchField> current = DECORATED.get(column);
             if (current != null && current.get() == this) DECORATED.remove(column);
             // Detach runs during native child removal; don't alter a second child mid-dispatch.
-            if (detaching) column.post(() -> column.removeView(box));
-            else column.removeView(box);
+            if (detaching) {
+                column.post(() -> {
+                    column.removeView(box);
+                    column.removeView(status);
+                });
+            } else {
+                column.removeView(box);
+                column.removeView(status);
+            }
+        }
+
+        void updateResult(String wanted, int count) {
+            if (wanted.isEmpty()) {
+                clearStatus();
+                return;
+            }
+            status.setVisibility(View.VISIBLE);
+            if (count == 0) {
+                String next = L10n.t(status.getContext(),
+                        "No matching comments. Try a different word or clear the search.");
+                if (!TextUtils.equals(status.getText(), next)) status.setText(next);
+            } else {
+                SettingsUi.setResultCount(status, count);
+            }
+        }
+
+        void clearForSheetChange() {
+            if (box.length() != 0) box.setText("");
+            clearStatus();
+        }
+
+        private void clearStatus() {
+            if (status.length() != 0) status.setText("");
+            if (status.getVisibility() != View.GONE) status.setVisibility(View.GONE);
         }
 
         @Override public void onViewAttachedToWindow(View view) {}
@@ -345,11 +419,43 @@ public final class CommentSearch {
         ViewGroup listView = shown.get();
         if (listView == null) return;
         boolean filtering = enabled();
+        String wanted = query;
+        int matchingComments = 0;
         for (int index = 0; index < listView.getChildCount(); index++) {
             View row = listView.getChildAt(index);
             if (!ROW_COMMENTS.containsKey(row)) continue;
-            setRowHidden(row, filtering && !matches(ROW_COMMENTS.get(row), query));
+            boolean rowMatches = !filtering || matches(ROW_COMMENTS.get(row), wanted);
+            setRowHidden(row, filtering && !rowMatches);
+            if (rowMatches && !COLLAPSED_REPLY_ROWS.containsKey(row)) matchingComments++;
         }
+        SearchField field = searchFieldFor(listView);
+        if (field != null) field.updateResult(filtering ? wanted : "", matchingComments);
+    }
+
+    private static SearchField searchFieldFor(ViewGroup listView) {
+        if (listView == null) return null;
+        for (WeakReference<SearchField> reference : new ArrayList<>(DECORATED.values())) {
+            SearchField field = reference.get();
+            if (field != null && field.listView == listView) return field;
+        }
+        return null;
+    }
+
+    private static void trackRowAttachments(View row) {
+        if (ROW_ATTACH_LISTENERS.put(row, Boolean.TRUE) == null) {
+            row.addOnAttachStateChangeListener(ROW_ATTACH_LISTENER);
+        }
+    }
+
+    private static void untrackRowAttachments(View row) {
+        if (ROW_ATTACH_LISTENERS.remove(row) != null) {
+            row.removeOnAttachStateChangeListener(ROW_ATTACH_LISTENER);
+        }
+    }
+
+    private static void scheduleCountRefresh() {
+        ViewGroup listView = shown.get();
+        if (listView != null) listView.post(CommentSearch::narrowShownRows);
     }
 
     /**

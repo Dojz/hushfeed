@@ -142,7 +142,7 @@ public class CommentSearchSettingsTest {
             assertNotNull("re-enabling search did not decorate the retained list", enabledBox);
             assertNotSame("the old search field was retained across off/on", originalBox, enabledBox);
             assertEquals("re-enabling search restored an old query", "", enabledText);
-            assertEquals("the cached sheet received duplicate fields", 2, column.getChildCount());
+            assertEquals("the cached sheet received duplicate fields", 3, column.getChildCount());
             assertArrayEquals("the new field did not filter its retained body and reply rows",
                     new int[]{0, 0, 0, 120}, heights(body, replies, nativeReply, matching));
             enabledBox.setText("");

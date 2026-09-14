@@ -17,6 +17,7 @@ val trackedScreenshots = mapOf(
     "capture-settings.png" to "capture-settings.png",
     "clear-display-captions.png" to "clear-display-captions.png",
     "clear-display-settings.png" to "clear-display-settings.png",
+    "comment-search-no-results.png" to "comment-search-no-results.png",
     "confirmation-control.png" to "confirmation-control.png",
     "download-settings.png" to "download-settings.png",
     "foldable-settings.png" to "foldable-settings.png",

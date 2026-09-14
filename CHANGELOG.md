@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Comment search now shows a translated result count below the field and explains when nothing matches. The polite status follows scrolling and recycled rows without moving focus, and clears with the search or comment sheet.
+
 * Feature Gate Lab messages now stay in the selected language, including errors and current state text. Block and unblock results do too. Gate keys, raw type spelling, values and creator identifiers remain unchanged.
 
 * Text and number settings, download destination dialogs and Feature Gate object fields now give screen readers one named editor. The spoken node keeps the current value, required keyboard and disabled state without repeating the visible label.
