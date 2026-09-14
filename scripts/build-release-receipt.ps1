@@ -89,9 +89,12 @@ $bundleHash = Get-Sha256Hex -Path $Bundle
 # document saying its own subject cannot be rebuilt from the source it names.
 $dirty = @(& git -C $Root status --porcelain)
 if ($dirty.Count -gt 0) {
+    # -join, not Join-String: the pre-push hook prefers pwsh and falls back to Windows
+    # PowerShell 5.1, which has no Join-String, so a dirty tree would have stopped the run with
+    # a command-not-found instead of the reason it stopped.
+    $shown = @($dirty | Select-Object -First 5 | ForEach-Object { $_.Trim() }) -join '; '
     throw ("The working tree has uncommitted changes, so the commit this receipt would name is " +
-        "not what was built: " + ($dirty | Select-Object -First 5 | ForEach-Object { $_.Trim() } |
-            Join-String -Separator '; '))
+        "not what was built: $shown")
 }
 
 function Resolve-WithinRoot {
@@ -145,7 +148,7 @@ function Get-ExtensionPayloads {
     } finally { $archive.Dispose() }
 
     if ($payloads.Count -eq 0) { throw "The bundle carries no extension payload: $BundlePath" }
-    return $payloads.ToArray()
+    return ,$payloads.ToArray()
 }
 
 function Get-PatchVerdicts {
@@ -180,7 +183,7 @@ function Get-PatchVerdicts {
             throw "The result report decided nothing about patch $name."
         }
     }
-    return $verdicts.ToArray()
+    return ,$verdicts.ToArray()
 }
 
 # Read with the hash and size above, and for the same reason.

@@ -553,6 +553,73 @@ $managerFloorPattern = "\bMorphe Manager\s+$([regex]::Escape($managerFloor))\s+o
 Require-Match -Text $readme -Pattern $managerFloorPattern -Description 'README Manager floor'
 Write-Host "[release] README requires Morphe Manager $managerFloor or newer for patcher $pinnedPatcher"
 
+function Test-ReleaseReceiptHere {
+    <#
+    .SYNOPSIS
+        Checks the provenance receipt this checkout has, if it has one.
+    .DESCRIPTION
+        A function so both exits run it. It used to sit after the bundle stamp check, which
+        returns early when there is no built bundle, so on a clean checkout or any push that did
+        not build one, none of the receipt was checked at all: exactly the case the early return
+        exists to serve.
+    #>
+    param([string]$BundleForComparison)
+
+    $receiptPath = if ($Receipt) { $Receipt } else {
+        Join-Path $rootPath "release-receipt-$releaseVersion.json"
+    }
+    if (-not (Test-Path -LiteralPath $receiptPath -PathType Leaf)) {
+        if ($VerifyPublishedAsset) {
+            throw ("There is no release provenance receipt at $receiptPath. Run " +
+                "scripts/build-release-receipt.ps1 against the retained fixtures first.")
+        }
+        Write-Host "[release] no receipt at $receiptPath, so its facts are not compared"
+        return
+    }
+
+    # Not $receipt: PowerShell variable names are case-insensitive, so that is the -Receipt
+    # parameter, and it is typed [string]. Assigning the parsed document to it coerces the whole
+    # object to its string form, and every field then reads as empty.
+    $receiptDocument = Read-JsonFile $receiptPath
+    $approvedDelta = Read-ManifestDeltaAllowlist -Path (Join-Path $PSScriptRoot 'manifest-delta-allowlist.txt')
+
+    # The commit the receipt names, checked against git rather than against the receipt's own
+    # other field. Its timestamp and the bundle stamp both come out of the same document, so on
+    # their own they prove only that the document agrees with itself; a receipt kept from an
+    # earlier release satisfies that and names the wrong commit in the summary line below.
+    $receiptCommit = [string]$receiptDocument.release.commit
+    $actualEpoch = 0L
+    if ($receiptCommit -match '^[0-9a-f]{40}$') {
+        $known = (& git -C $rootPath cat-file -t $receiptCommit 2>$null | Select-Object -First 1)
+        if ("$known".Trim() -ne 'commit') {
+            throw ("The release provenance receipt names commit $receiptCommit, which is not in " +
+                "this repository.")
+        }
+        $epochText = (& git -C $rootPath log -1 --format=%ct $receiptCommit 2>$null |
+            Select-Object -First 1)
+        if ("$epochText".Trim() -match '^\d+$') { $actualEpoch = [long]"$epochText".Trim() }
+    }
+    # Only a release is held to the receipt describing HEAD. On an ordinary push the receipt
+    # legitimately describes the commit it was generated at.
+    $expectedCommit = if ($VerifyPublishedAsset) {
+        "$(& git -C $rootPath rev-parse HEAD)".Trim()
+    } else { $null }
+
+    $receiptCheck = Test-ReleaseReceipt -Receipt $receiptDocument -ExpectedVersion $releaseVersion `
+        -ExpectedPatchNames @($patches | ForEach-Object { [string]$_.name }) `
+        -ExpectedPatcherVersion $pinnedPatcher -ExpectedManagerFloor $managerFloor `
+        -BundlePath $BundleForComparison -ApprovedManifestDelta $approvedDelta `
+        -ActualCommitTimestamp $actualEpoch -ExpectedCommit $expectedCommit
+    if (-not $receiptCheck.Valid) {
+        throw "The release provenance receipt does not describe this release: $($receiptCheck.Reason)"
+    }
+    $proved = @($receiptDocument.targets | ForEach-Object { "$($_.source.versionName)" })
+    Write-Host ("[release] the receipt proves $($receiptDocument.release.patchCount) patches on " +
+        ($proved -join ', ') + " from commit " + $receiptCommit.Substring(0, 8) +
+        ", with no unreviewed manifest change")
+}
+
+
 $bundlePath = if ($ArtifactPath) { $ArtifactPath } else {
     Join-Path $rootPath "patches/build/libs/patches-$releaseVersion.mpp"
 }
@@ -567,6 +634,9 @@ if (-not (Test-Path -LiteralPath $bundlePath -PathType Leaf)) {
     }
     Write-Host ("[release] no built bundle at $bundlePath, so its patcher stamp is not compared " +
         "against the catalog pin $pinnedPatcher")
+    # No bundle to compare bytes against, but everything else the receipt says is
+    # still checked.
+    Test-ReleaseReceiptHere
     Write-Host ("[facts] " + $sourceVersion + ": " + $patchCount + " patches for " + $targetPackage + " " + $targetVersion + "; " + $testFacts)
     exit 0
 }
@@ -594,44 +664,7 @@ if ($stampMatch.Groups[1].Value -ne $pinnedPatcher) {
 }
 Write-Host "[release] the bundle stamps patcher $pinnedPatcher, as the catalog pins"
 
-# The provenance receipt, when this checkout has one. It is the only artifact that ties the
-# source commit, the bundle bytes, the APKs the patches were proved against and the Android
-# manifest delta together; everything above checks one of those in isolation. A release run is
-# held to having one, because publishing the bundle without it publishes a checksum and a claim.
-$receiptPath = if ($Receipt) { $Receipt } else {
-    Join-Path $rootPath "release-receipt-$releaseVersion.json"
-}
-if (-not (Test-Path -LiteralPath $receiptPath -PathType Leaf)) {
-    if ($VerifyPublishedAsset) {
-        throw ("There is no release provenance receipt at $receiptPath. Run " +
-            "scripts/build-release-receipt.ps1 against the retained fixtures first.")
-    }
-    Write-Host "[release] no receipt at $receiptPath, so its facts are not compared"
-} else {
-    # Not $receipt: PowerShell variable names are case-insensitive, so that is the -Receipt
-    # parameter, and it is typed [string]. Assigning the parsed document to it coerces the whole
-    # object to its string form, and every field then reads as empty.
-    $receiptDocument = Read-JsonFile $receiptPath
-    $approvedDelta = Read-ManifestDeltaAllowlist -Path (Join-Path $PSScriptRoot 'manifest-delta-allowlist.txt')
-    # The bundle bytes are compared on a release run only, for the same reason the published
-    # asset is. patches/build/libs holds whatever the last Gradle task left there, and this gate
-    # itself runs `:patches:test`, which reaches `:patches:jar` and rewrites that exact path with
-    # the plain jar. Comparing there would fail every push by construction. Everything the
-    # receipt says about itself, its commit, its verdicts and its manifest delta is checked on
-    # every run.
-    $receiptBundle = if ($VerifyPublishedAsset) { $bundlePath } else { $null }
-    $receiptCheck = Test-ReleaseReceipt -Receipt $receiptDocument -ExpectedVersion $releaseVersion `
-        -ExpectedPatchNames @($patches | ForEach-Object { [string]$_.name }) `
-        -ExpectedPatcherVersion $pinnedPatcher -ExpectedManagerFloor $managerFloor `
-        -BundlePath $receiptBundle -ApprovedManifestDelta $approvedDelta
-    if (-not $receiptCheck.Valid) {
-        throw "The release provenance receipt does not describe this release: $($receiptCheck.Reason)"
-    }
-    $proved = @($receiptDocument.targets | ForEach-Object { "$($_.source.versionName)" })
-    Write-Host ("[release] the receipt proves $($receiptDocument.release.patchCount) patches on " +
-        ($proved -join ', ') + " from commit " + $receiptDocument.release.commit.Substring(0, 8) +
-        ", with no unreviewed manifest change")
-}
+Test-ReleaseReceiptHere -BundleForComparison $(if ($VerifyPublishedAsset) { $bundlePath } else { $null })
 
 Write-Host ("[facts] " + $sourceVersion + ": " + $patchCount + " patches for " + $targetPackage + " " + $targetVersion + "; " + $testFacts)
 

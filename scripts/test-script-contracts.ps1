@@ -442,6 +442,46 @@ try {
             "$($wrong.Name) was refused for the wrong reason: $($oddResult.Reason)"
     }
 
+    # The commit the receipt names, checked against something outside the receipt. Its own
+    # timestamp field and the bundle stamp both come from the same document, so a receipt kept
+    # from an earlier release agrees with itself and passes on that pair alone.
+    $sameCommit = Test-ReleaseReceipt -Receipt (New-TestReceipt) -ExpectedVersion '9.9.9' `
+        -ExpectedPatchNames @('Alpha', 'Beta') -ExpectedPatcherVersion '1.12.0' `
+        -ExpectedManagerFloor '1.29.0' -BundlePath $bundle `
+        -ActualCommitTimestamp $commitSeconds
+    Assert-True $sameCommit.Valid "A receipt matching git was refused: $($sameCommit.Reason)"
+
+    $movedCommit = Test-ReleaseReceipt -Receipt (New-TestReceipt) -ExpectedVersion '9.9.9' `
+        -ExpectedPatchNames @('Alpha', 'Beta') -ExpectedPatcherVersion '1.12.0' `
+        -ExpectedManagerFloor '1.29.0' -BundlePath $bundle `
+        -ActualCommitTimestamp ($commitSeconds + 60)
+    Assert-True (-not $movedCommit.Valid) `
+        'A receipt whose commit time git disagrees with was accepted.'
+    Assert-True ($movedCommit.Reason -like '*git says*') `
+        "The stale receipt was refused for the wrong reason: $($movedCommit.Reason)"
+
+    $otherCommit = Test-ReleaseReceipt -Receipt (New-TestReceipt) -ExpectedVersion '9.9.9' `
+        -ExpectedPatchNames @('Alpha', 'Beta') -ExpectedPatcherVersion '1.12.0' `
+        -ExpectedManagerFloor '1.29.0' -BundlePath $bundle `
+        -ExpectedCommit ('f' * 40)
+    Assert-True (-not $otherCommit.Valid) 'A receipt for another commit was accepted on a release.'
+    Assert-True ($otherCommit.Reason -like '*this release is*') `
+        "The wrong-commit receipt was refused for the wrong reason: $($otherCommit.Reason)"
+
+    # A truncated document, which is the shape @($null) turns into one null entry.
+    foreach ($missing in @('targets', 'dexPayloads')) {
+        $truncated = $templateJson | ConvertFrom-Json
+        if ($missing -eq 'targets') {
+            $truncated.PSObject.Properties.Remove('targets')
+        } else {
+            $truncated.extension.PSObject.Properties.Remove('dexPayloads')
+        }
+        $result = Test-TestReceipt -Receipt $truncated
+        Assert-True (-not $result.Valid) "A receipt with no $missing was accepted."
+        Assert-True ($result.Reason -like '*no target*' -or $result.Reason -like '*no extension*') `
+            "A receipt with no $missing was refused for the wrong reason: $($result.Reason)"
+    }
+
     $withDelta = New-TestReceipt -Mutate {
         param($r) $r.targets[0].manifestDelta.permissionsAdded = @('android.permission.VIBRATE')
     }

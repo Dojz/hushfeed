@@ -255,8 +255,8 @@ function ConvertFrom-ManifestXmlTree {
         package     = $packageName
         versionName = $versionName
         versionCode = $versionCode
-        permissions = @($permissions | Sort-Object -Unique)
-        exported    = @($qualified | Sort-Object -Unique)
+        permissions = @($permissions | Sort-Object -Unique -CaseSensitive)
+        exported    = @($qualified | Sort-Object -Unique -CaseSensitive)
     }
 }
 
@@ -284,7 +284,7 @@ function Compare-Sets {
 
     $other = [System.Collections.Generic.HashSet[string]]::new(
         [string[]]@($Right), [System.StringComparer]::Ordinal)
-    return @(@($Left) | Where-Object { -not $other.Contains($_) } | Sort-Object -Unique)
+    return @(@($Left) | Where-Object { -not $other.Contains($_) } | Sort-Object -Unique -CaseSensitive)
 }
 
 function ConvertTo-ManifestDeltaEntries {
@@ -299,7 +299,7 @@ function ConvertTo-ManifestDeltaEntries {
     foreach ($value in @($Delta.permissionsRemoved)) { $entries.Add("permission-removed $value") }
     foreach ($value in @($Delta.exportedComponentsAdded)) { $entries.Add("exported-added $value") }
     foreach ($value in @($Delta.exportedComponentsRemoved)) { $entries.Add("exported-removed $value") }
-    return @($entries | Sort-Object -Unique)
+    return @($entries | Sort-Object -Unique -CaseSensitive)
 }
 
 function Read-ManifestDeltaAllowlist {
@@ -325,7 +325,7 @@ function Read-ManifestDeltaAllowlist {
     # returning @() hands back nothing. Comma wrapping it would fix that and break every
     # `@(Read-ManifestDeltaAllowlist ...)` call site instead, which would then see one array
     # inside an array. Test-ReleaseReceipt drops the null on the way in.
-    return @($entries | Sort-Object -Unique)
+    return @($entries | Sort-Object -Unique -CaseSensitive)
 }
 
 function Test-ReleaseReceipt {
@@ -344,7 +344,14 @@ function Test-ReleaseReceipt {
         [Parameter(Mandatory = $true)][string]$ExpectedPatcherVersion,
         [Parameter(Mandatory = $true)][string]$ExpectedManagerFloor,
         [string]$BundlePath,
-        [string[]]$ApprovedManifestDelta = @()
+        [string[]]$ApprovedManifestDelta = @(),
+        # When the commit the receipt names was made, read out of git by the caller. Without it
+        # the receipt's commit and its timestamp are only checked against each other, which any
+        # receipt agrees with, including one left over from an earlier release.
+        [long]$ActualCommitTimestamp = 0,
+        # The commit this run is about. Only a release is held to it: on an ordinary push the
+        # receipt legitimately describes the commit it was generated at, not HEAD.
+        [string]$ExpectedCommit
     )
 
     function Fail { param([string]$Reason) return [pscustomobject]@{ Valid = $false; Reason = $Reason } }
@@ -365,6 +372,18 @@ function Test-ReleaseReceipt {
     }
     if ([long]$Receipt.release.commitTimestamp -le 0) {
         return Fail 'The receipt does not say when the commit it names was made.'
+    }
+    if ($ExpectedCommit -and $Receipt.release.commit -ne $ExpectedCommit) {
+        return Fail ("The receipt describes commit $($Receipt.release.commit); this release is " +
+            "$ExpectedCommit.")
+    }
+    # Against git, not against the receipt's own other field. The bundle stamp check below
+    # compares two numbers that both came out of this document, so on its own it proves only
+    # that the document agrees with itself.
+    if ($ActualCommitTimestamp -gt 0 -and
+            [long]$Receipt.release.commitTimestamp -ne $ActualCommitTimestamp) {
+        return Fail ("The receipt says commit $($Receipt.release.commit) was made at " +
+            "$($Receipt.release.commitTimestamp); git says $ActualCommitTimestamp.")
     }
     if ([int]$Receipt.release.patchCount -ne $ExpectedPatchNames.Count) {
         return Fail ("The receipt counts $($Receipt.release.patchCount) patches; the catalog " +
@@ -418,10 +437,14 @@ function Test-ReleaseReceipt {
         }
     }
 
-    if (@($Receipt.extension.dexPayloads).Count -eq 0) {
+    # Nulls dropped first. A receipt with the key missing altogether gives $null here, and
+    # @($null) is an array holding one null, so the count guard below would walk past a truncated
+    # document and then blame the nameless entry it found instead of the missing section.
+    $payloads = @(@($Receipt.extension.dexPayloads) | Where-Object { $null -ne $_ })
+    if ($payloads.Count -eq 0) {
         return Fail 'The receipt records no extension DEX payload, so it identifies no extension.'
     }
-    foreach ($payload in @($Receipt.extension.dexPayloads)) {
+    foreach ($payload in $payloads) {
         if (-not $payload.name) { return Fail 'A recorded DEX payload has no name.' }
         if ([long]$payload.sizeBytes -le 0) {
             return Fail "The recorded DEX payload $($payload.name) is empty."
@@ -431,7 +454,7 @@ function Test-ReleaseReceipt {
         }
     }
 
-    $targets = @($Receipt.targets)
+    $targets = @(@($Receipt.targets) | Where-Object { $null -ne $_ })
     if ($targets.Count -eq 0) { return Fail 'The receipt records no target, so nothing was proved.' }
 
     $expected = [System.Collections.Generic.HashSet[string]]::new(
@@ -471,7 +494,7 @@ function Test-ReleaseReceipt {
     $approvedEntries = @(@($ApprovedManifestDelta) | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
     $approved = [System.Collections.Generic.HashSet[string]]::new(
         [string[]]$approvedEntries, [System.StringComparer]::Ordinal)
-    $unapproved = @(@($produced | Sort-Object -Unique) | Where-Object { -not $approved.Contains($_) })
+    $unapproved = @(@($produced | Sort-Object -Unique -CaseSensitive) | Where-Object { -not $approved.Contains($_) })
     if ($unapproved.Count -gt 0) {
         return Fail ('The patched manifest changed in ways nobody reviewed: ' +
             ($unapproved -join ', '))
