@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Restored the Ko-fi support link removed during the optimizer documentation update. The marketing contract now checks the canonical URL so later README rewrites cannot silently drop it again.
+
 * Eight optional TikTok optimizer patches from Kveld are now built into Hushfeed. The four resource patches validate complete path and SHA-256 profiles before emptying language, creator, LIVE, C2PA or card-scanner assets. The startup, network, Fresco and update patches use exact reviewed method contracts, stay off by default and describe their feature tradeoffs. Disable telemetry also covers TikTok's two Npth startup tasks behind its existing switch. The pre-push preparation check can keep the published 71-patch index intact while this unreleased catalog grows at the same version. Strict publication checks still reject the mismatch.
 
 * Media downloads now validate the original address and every redirect. They allow only public HTTPS destinations with no embedded credentials, stop redirect loops after five hops, recheck DNS before connecting, and remove partial files when a destination or body is refused.

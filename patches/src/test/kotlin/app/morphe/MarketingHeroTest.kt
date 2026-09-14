@@ -32,6 +32,16 @@ class MarketingHeroTest {
     }
 
     @Test
+    fun `the README keeps the canonical Ko-fi support link`() {
+        val readme = File(root, "README.md").readText()
+
+        assertTrue(
+            "the README must keep the project support link",
+            readme.contains("https://ko-fi.com/X8K126YVER"),
+        )
+    }
+
+    @Test
     fun `the hero keeps its review size and version-free source`() {
         val hero = ImageIO.read(File(root, "assets/readme-hero.png"))
         assertEquals(1600, hero.width)
