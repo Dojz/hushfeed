@@ -157,7 +157,9 @@ public final class CurrentVideoAuthor {
         if (author == null) {
             Logger.printDebug(() -> "Current item has no blockable author");
         } else {
-            Logger.printDebug(() -> "Current video author: " + author.label()
+            // "Current video:" rather than "author:", which the export's credential rule reads
+            // as a name to omit the value of, taking the pseudonym's first word with it.
+            Logger.printDebug(() -> "Current video: " + author.reference()
                     + " aweme=" + author.awemeId);
         }
         BlockAuthorOverlay.onAuthorChanged(author);

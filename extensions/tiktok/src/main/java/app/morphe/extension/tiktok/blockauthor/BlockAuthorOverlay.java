@@ -224,7 +224,7 @@ public final class BlockAuthorOverlay {
             installVisibilityListener(root);
             syncVisibility();
 
-            Logger.printDebug(() -> "Block button attached for " + author.label());
+            Logger.printDebug(() -> "Block button attached for " + author.reference());
         } catch (Throwable ex) {
             Logger.printException(() -> "Could not attach the block button", ex);
         }
@@ -401,7 +401,8 @@ public final class BlockAuthorOverlay {
         } else {
             Settings.BLOCKED_SOUND_NAMES.save(SoundIdentity.withEntry(Settings.BLOCKED_SOUND_NAMES.get(), sound.name));
         }
-        Logger.printDebug(() -> "Blocked sound " + sound.label() + (byId ? " by id" : " by name"));
+        // The sound's author is a creator, so the line says how the sound was recorded, not which.
+        Logger.printDebug(() -> "Blocked sound " + (byId ? "by id" : "by name"));
 
         showUndoBanner(L10n.f("Skipping videos with %1$s", sound.label()), () -> {
             if (byId) {

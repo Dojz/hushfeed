@@ -31,6 +31,18 @@ public class BlockAuthorLocalizationTest {
     private static final VideoAuthor AUTHOR = new VideoAuthor(
             "raw_uid_23", "raw_sec_uid_23", "raw_creator_23", "raw_aweme_23");
 
+    /**
+     * The creator's name as every one of these messages carries it: between Unicode's
+     * first-strong isolate and its pop.
+     *
+     * <p>A name is the one part of these sentences that is not ours and not translated, and in a
+     * right-to-left script it used to reorder the words around it. The pair is also how the
+     * exported diagnostic report finds a name to leave out, in a language it cannot read. It is
+     * spelled out here rather than hidden behind a helper so that a change to either mark shows
+     * up as a change to what these six messages say.
+     */
+    private static final String NAME = "⁨raw_creator_23⁩";
+
     @Before public void resetState() {
         Utils.setContext(RuntimeEnvironment.getApplication());
         CurrentVideoAuthor.resetForTests();
@@ -49,24 +61,24 @@ public class BlockAuthorLocalizationTest {
     @Test @Config(sdk = 28, qualifiers = "de")
     public void germanOwnsEveryBlockAndUnblockResult() {
         verify(new Expected(
-                "raw_creator_23 blockiert",
-                "TikTok hat die Anfrage zum Blockieren von raw_creator_23 abgelehnt",
-                "Die Blockierung von raw_creator_23 konnte nicht bestätigt werden",
-                "raw_creator_23 entblockt",
-                "TikTok hat die Anfrage zum Entblocken von raw_creator_23 abgelehnt",
-                "Die Aufhebung der Blockierung von raw_creator_23 konnte nicht bestätigt werden"
+                NAME + " blockiert",
+                "TikTok hat die Anfrage zum Blockieren von " + NAME + " abgelehnt",
+                "Die Blockierung von " + NAME + " konnte nicht bestätigt werden",
+                NAME + " entblockt",
+                "TikTok hat die Anfrage zum Entblocken von " + NAME + " abgelehnt",
+                "Die Aufhebung der Blockierung von " + NAME + " konnte nicht bestätigt werden"
         ));
     }
 
     @Test @Config(sdk = 28, qualifiers = "in-rID")
     public void indonesianOwnsEveryBlockAndUnblockResult() {
         verify(new Expected(
-                "raw_creator_23 diblokir",
-                "TikTok menolak permintaan untuk memblokir raw_creator_23",
-                "Pemblokiran raw_creator_23 tidak dapat dikonfirmasi",
-                "raw_creator_23 dibuka blokirnya",
-                "TikTok menolak permintaan untuk membuka blokir raw_creator_23",
-                "Pembukaan blokir raw_creator_23 tidak dapat dikonfirmasi"
+                NAME + " diblokir",
+                "TikTok menolak permintaan untuk memblokir " + NAME,
+                "Pemblokiran " + NAME + " tidak dapat dikonfirmasi",
+                NAME + " dibuka blokirnya",
+                "TikTok menolak permintaan untuk membuka blokir " + NAME,
+                "Pembukaan blokir " + NAME + " tidak dapat dikonfirmasi"
         ));
     }
 

@@ -120,7 +120,7 @@ public final class BlockAuthorService {
         String uid = author.uid == null ? "" : author.uid;
         String secUid = author.secUid == null ? "" : author.secUid;
 
-        Logger.printDebug(() -> "Sending block_type=" + blockType + " for " + author.label());
+        Logger.printDebug(() -> "Sending block_type=" + blockType + " for " + author.reference());
 
         Object call = block.invoke(service, uid, secUid, blockType, SOURCE_UNSPECIFIED);
         if (call == null) {

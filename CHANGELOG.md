@@ -1,5 +1,7 @@
 ## Unreleased
 
+* The exported diagnostic report no longer names the creators you block, hide or follow. The block, hide and Not interested paths wrote the creator's display name into the log beside the toast that showed it, and every toast is written to the report as it is shown, so a report attached to a public bug had the names in it. Log lines now carry a pseudonym instead, the same one the follow report uses for the same account, and the name in a toast is marked so the export leaves it out in every language. Handles standing on their own are dropped too. Follow diagnostics phases are debug-level lines now; the refusal itself still reports at once.
+
 * Double tap set to open comments now opens them. It pressed the comment button's click listener, which on the current app is a placeholder that does nothing while the real press is handled as a touch, so the double tap returned true and nothing opened. The press now goes through the comment assem's own icon-press method, the one TikTok's keyboard shortcut uses, with all of TikTok's own checks in front of it. Confirmed on the S22 on 46.2.3: do nothing leaves the like and the video alone, comments opens the sheet with the like untouched, and the default still likes.
 
 

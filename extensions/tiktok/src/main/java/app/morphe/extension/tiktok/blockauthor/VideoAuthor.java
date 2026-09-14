@@ -35,17 +35,46 @@ public final class VideoAuthor {
         return secUid;
     }
 
+    /**
+     * How the account is named on screen: in a toast, an undo banner or a failure message.
+     *
+     * <p>Wrapped in Unicode's first-strong isolate, U+2068 to U+2069. Two things are bought with
+     * that. A name in a right-to-left script no longer bends the sentence it sits in, which is the
+     * pair's purpose. And every toast is written to the diagnostic buffer as it is shown, so the
+     * exported report can tell a creator's name from the words around it in any language, and
+     * leave the name out. See {@code DiagnosticRedactor}. Log lines take {@link #reference()}
+     * instead.
+     */
     public String label() {
         if (displayName != null && !displayName.isEmpty()) {
-            return displayName;
+            return isolate(displayName);
         }
         if (uid != null && !uid.isEmpty()) {
-            return uid;
+            return isolate(uid);
         }
         if (secUid != null && !secUid.isEmpty()) {
-            return secUid;
+            return isolate(secUid);
         }
-        return "this account";
+        return isolate("this account");
+    }
+
+    /**
+     * How the account is named in a log line: a pseudonym rather than the account.
+     *
+     * <p>The same keyed digest the follow report uses, so one creator reads the same in a block
+     * line as in a follow line, cut to twelve characters because the whole thing is sixty-four.
+     * Nothing in it names the account, and a report from another phone gives it another value.
+     */
+    public String reference() {
+        String id = stableId();
+        if (id == null || id.isEmpty()) return "creator unnamed";
+        String pseudonym = app.morphe.extension.tiktok.follow.FollowDiagnostics.pseudonym(id);
+        return "creator " + (pseudonym.length() > 12 ? pseudonym.substring(0, 12) : pseudonym);
+    }
+
+    /** The isolate pair the report's redactor looks for. Keep both ends. */
+    static String isolate(String text) {
+        return "⁨" + text + "⁩";
     }
 
     @Override
