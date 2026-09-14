@@ -599,11 +599,20 @@ function Test-ReleaseReceiptHere {
             Select-Object -First 1)
         if ("$epochText".Trim() -match '^\d+$') { $actualEpoch = [long]"$epochText".Trim() }
     }
-    # Only a release is held to the receipt describing HEAD. On an ordinary push the receipt
-    # legitimately describes the commit it was generated at.
-    $expectedCommit = if ($VerifyPublishedAsset) {
-        "$(& git -C $rootPath rev-parse HEAD)".Trim()
-    } else { $null }
+    # Only a release is held to the receipt describing a particular commit, and that commit is
+    # the one the published tag names, not HEAD. A release is built from its source commit and
+    # its index is pushed in a later commit, so on the push this runs for, HEAD is one past the
+    # commit the bundle and the receipt were made from. The tag's commit was resolved from the
+    # remote above, which is the same commit the local bundle's stamp is already held to. On an
+    # ordinary push the receipt legitimately describes the commit it was generated at.
+    $expectedCommit = $null
+    if ($VerifyPublishedAsset) {
+        if ([string]::IsNullOrWhiteSpace($releaseCommit)) {
+            throw ('The published tag was not resolved before the receipt check, so the receipt ' +
+                'cannot be held to the release commit.')
+        }
+        $expectedCommit = $releaseCommit
+    }
 
     $receiptCheck = Test-ReleaseReceipt -Receipt $receiptDocument -ExpectedVersion $releaseVersion `
         -ExpectedPatchNames @($patches | ForEach-Object { [string]$_.name }) `
