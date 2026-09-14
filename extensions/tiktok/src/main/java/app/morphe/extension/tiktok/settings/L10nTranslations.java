@@ -1194,8 +1194,8 @@ public final class L10nTranslations {
                 "Ein Wert pro Zeile");
         table.put("Only bottom tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.",
                 "Hier stehen nur die unteren Tabs, die TikTok auf diesem Gerät geladen hat. Nicht verfügbare Tabs erscheinen dadurch nicht.");
-        table.put("Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.",
-                "Nur einschalten, wenn du Protokolle für eine Fehlermeldung aufzeichnest. Bleibt es zu lange an, kann TikTok träge wirken und abstürzen.");
+        table.put("Only enable when recording logs to report an issue. It also shows a message when something inside Hushfeed fails. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.",
+                "Nur einschalten, wenn du Protokolle für eine Fehlermeldung aufzeichnest. Es zeigt außerdem eine Meldung an, wenn in Hushfeed etwas fehlschlägt. Bleibt es zu lange an, kann TikTok träge wirken und abstürzen.");
         table.put("Only fields that can be type-checked and applied to a copied configuration object are shown.",
                 "Es werden nur Felder gezeigt, deren Typ geprüft und die auf eine kopierte Konfiguration angewendet werden können.");
         table.put("Only from these countries",
@@ -3181,8 +3181,8 @@ public final class L10nTranslations {
                 "Un valor por línea");
         table.put("Only bottom tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.",
                 "Aquí solo están las pestañas inferiores que TikTok ha cargado en este dispositivo. Esto no hace aparecer las que no están disponibles.");
-        table.put("Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.",
-                "Actívalo solo cuando estés grabando registros para informar de un problema. Dejarlo activado mucho tiempo puede hacer que TikTok vaya lento y provocar fallos.");
+        table.put("Only enable when recording logs to report an issue. It also shows a message when something inside Hushfeed fails. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.",
+                "Actívalo solo cuando estés grabando registros para informar de un problema. También muestra un mensaje cuando algo falla dentro de Hushfeed. Dejarlo activado mucho tiempo puede hacer que TikTok vaya lento y provocar fallos.");
         table.put("Only fields that can be type-checked and applied to a copied configuration object are shown.",
                 "Solo se muestran los campos cuyo tipo se puede comprobar y aplicar a una copia de la configuración.");
         table.put("Only from these countries",
@@ -5168,8 +5168,8 @@ public final class L10nTranslations {
                 "Satu nilai per baris");
         table.put("Only bottom tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.",
                 "Hanya tab bawah yang sudah dimuat TikTok di perangkat ini yang muncul di sini. Ini tidak memaksa tab yang tidak tersedia untuk muncul.");
-        table.put("Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.",
-                "Aktifkan hanya saat merekam log untuk melaporkan masalah. Membiarkannya menyala terlalu lama bisa membuat TikTok terasa berat dan berpotensi mogok.");
+        table.put("Only enable when recording logs to report an issue. It also shows a message when something inside Hushfeed fails. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.",
+                "Aktifkan hanya saat merekam log untuk melaporkan masalah. Ini juga menampilkan pesan saat ada yang gagal di dalam Hushfeed. Membiarkannya menyala terlalu lama bisa membuat TikTok terasa berat dan berpotensi mogok.");
         table.put("Only fields that can be type-checked and applied to a copied configuration object are shown.",
                 "Hanya bidang yang tipenya bisa diperiksa dan diterapkan ke salinan objek konfigurasi yang ditampilkan.");
         table.put("Only from these countries",
@@ -7155,8 +7155,8 @@ public final class L10nTranslations {
                 "Um valor por linha");
         table.put("Only bottom tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.",
                 "Aqui só aparecem as abas de baixo que o TikTok carregou neste aparelho. Isto não faz aparecer as que não estão disponíveis.");
-        table.put("Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.",
-                "Ligue só quando estiver gravando registros para relatar um problema. Deixar ligado por muito tempo pode deixar o TikTok lento e causar falhas.");
+        table.put("Only enable when recording logs to report an issue. It also shows a message when something inside Hushfeed fails. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.",
+                "Ligue só quando estiver gravando registros para relatar um problema. Ele também mostra uma mensagem quando algo falha dentro do Hushfeed. Deixar ligado por muito tempo pode deixar o TikTok lento e causar falhas.");
         table.put("Only fields that can be type-checked and applied to a copied configuration object are shown.",
                 "Só aparecem os campos cujo tipo dá para verificar e aplicar a uma cópia da configuração.");
         table.put("Only from these countries",

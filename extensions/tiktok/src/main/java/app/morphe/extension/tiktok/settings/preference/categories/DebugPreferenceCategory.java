@@ -38,7 +38,7 @@ public class DebugPreferenceCategory extends ConditionalPreferenceCategory {
         addPreference(new TogglePreference(
                 context,
                 "Enable diagnostic logging",
-                "Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.",
+                "Only enable when recording logs to report an issue. It also shows a message when something inside Hushfeed fails. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.",
                 BaseSettings.DEBUG
         ));
 

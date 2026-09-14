@@ -329,7 +329,7 @@ Show the Not interested button	Knopf Kein Interesse anzeigen
 Nothing is playing to seek	Es läuft gerade nichts zum Springen
 Offline videos limit	Limit für Offline-Videos
 On mobile data	Bei mobilen Daten
-Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.	Nur einschalten, wenn du Protokolle für eine Fehlermeldung aufzeichnest. Bleibt es zu lange an, kann TikTok träge wirken und abstürzen.
+Only enable when recording logs to report an issue. It also shows a message when something inside Hushfeed fails. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.	Nur einschalten, wenn du Protokolle für eine Fehlermeldung aufzeichnest. Es zeigt außerdem eine Meldung an, wenn in Hushfeed etwas fehlschlägt. Bleibt es zu lange an, kann TikTok träge wirken und abstürzen.
 Only from these countries	Nur aus diesen Ländern
 Only internal storage folders are supported	Nur Ordner im internen Speicher werden unterstützt
 Open comments	Kommentare öffnen
