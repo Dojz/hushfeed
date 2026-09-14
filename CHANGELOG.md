@@ -1,5 +1,24 @@
 ## Unreleased
 
+* Error messages from inside Hushfeed no longer appear over the feed unless diagnostic logging is on. They carry the name of the class that failed and the exception's own English text, past every translation the bundle ships, and on a path the feed runs one of them fired once per video. They still reach the log, the diagnostic buffer and the exported report, which is what a bug report needs, and the same message now shows at most once per run rather than queueing behind itself.
+
+* A switch that needs TikTok restarted says so. Fifty settings do nothing until the app starts again and only thirty-four of them mentioned it, so sixteen switches moved and nothing happened, with nothing on screen explaining the gap. The sentence comes from the setting itself now, so it is on all fifty and cannot be forgotten on the next one added.
+
+* The four controls Hushfeed draws on the feed, the budget label and the hold's release control now share one backdrop and one corner radius. They were built five separate times from the same two colours and then rounded three different ways, so a column of controls sitting on the same video read as three unrelated add-ons.
+
+* The About row shows which version of Hushfeed is installed. It was only in the exported diagnostic report before, so there was no way to read it off the screen, and searching the settings for "version" found nothing.
+
+* The Feature Gate Lab says which of the search and the filter emptied the list, and offers to clear the search when that is what did it. It used to blame the search either way, because the message was written once when the catalogue loaded. The gate details page's "no longer available" state now offers a way back to the Lab it tells you to refresh.
+
+* When settings will not open, Try again comes first and is drawn in the accent. It was listed under Go back in the same weight and colour, so the first thing offered was the way out.
+
+* Save media on a sticker, the tap that starts the feed after a hold, and both actions on the settings recovery page are offered to a screen reader as buttons rather than as text. Save media also has a 48dp floor now, which it did not when the TikTok row it copies its size from was shorter.
+
+* Four places spaced a row from the physical left edge instead of the start edge, so in a right-to-left layout the gap between a menu icon and its label, the gap before the chevron, the indent under a share action and the inset in the Lab's search row all stayed on the wrong side.
+
+* Comment search takes its eight colours from the same palette as the rest of the settings screen instead of its own copies of them. It still works out the comment sheet's theme itself, because that is not always the system's.
+
+
 * Ghost mode no longer closes the app when a story is opened. The old guard returned early from TikTok's story and profile reporters with a made-up null where the caller expected the lazy request it was about to enqueue or subscribe to, and the caller fell over on it. The same null was handed to the profile page's view model halfway through building the page. The guard now sits at each place a reporter is called and steps over the whole send, so the reporter is never called and the caller carries on with what it was doing. A reporter whose caller only checks for a suspended coroutine completes with nothing instead, and the typing indicator, which returns nothing, keeps its early return. A patch test walks the four caller shapes shared by 46.2.3, 46.7.3 and 46.8.3 with the guard answering both ways, and the patch refuses to apply to any chain it cannot follow to its send rather than guessing.
 
 * New Playback setting, "Show what is left of the budget", off by default. A small label at the top of the feed shows the minutes or videos left of today's budget, whichever is closer to running out. Both budgets were previously only visible at their own edges: a reminder partway through, a notice when the day was spent, a hold if one was set. Between those you were guessing. The label appears only on the feed, goes away under the hold, changes at most once a minute, and is never read out on its own. A screen reader finds it in traversal and hears the value then.
