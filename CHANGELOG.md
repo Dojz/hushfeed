@@ -1,5 +1,8 @@
 ## Unreleased
 
+* The exported diagnostic report now says which feed filter route handled each list, whether or not diagnostic logging is on. Several routes can put a video on a profile page or in the feed, and an advert in a screenshot cannot say which one delivered it, so every ad report so far has needed a second round of questions. Each route now reports the lists it was handed, the videos in them and what it took out. A route that has never run has no line at all, which is the answer that was hardest to get before.
+
+
 * Double-tap controls now reach the feed the app actually uses. Setting it to "do nothing" still liked the video, because the guard sat on the older feed panel and the current one never goes through it: its gesture listener holds the like component and calls it directly. Every route from a double tap to a like was traced on the app itself, and there are four of them, including the landscape player and the Friends tab. All four are guarded now. Two more classes carry the same method and neither can like anything, so they are left alone.
 
 
