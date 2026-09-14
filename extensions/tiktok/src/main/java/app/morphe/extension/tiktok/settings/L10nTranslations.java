@@ -48,7 +48,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildDe() {
-        Map<String, String> table = new HashMap<>(1918);
+        Map<String, String> table = new HashMap<>(1920);
         fillDe0(table);
         fillDe1(table);
         fillDe2(table);
@@ -1383,6 +1383,8 @@ public final class L10nTranslations {
                 "Einstellungen zurücksetzen");
         table.put("Restart TikTok to apply the Feature Gate Lab changes.",
                 "TikTok neu starten, damit die Änderungen des Feature Gate Lab gelten.");
+        table.put("Restart TikTok to apply this.",
+                "TikTok neu starten, damit das gilt.");
         table.put("Restore defaults immediately. Your current settings are kept for Undo.",
                 "Standardwerte sofort wiederherstellen. Deine aktuellen Einstellungen bleiben zum Rückgängigmachen erhalten.");
         table.put("Restore failed. Some settings may still be changed.",
@@ -1417,11 +1419,11 @@ public final class L10nTranslations {
                 "Speichern");
         table.put("Save JSON",
                 "JSON speichern");
-        table.put("Save SRT files with the video. Paired saves use Movies on Android 11+, Download on Android 10, and your video folder on older versions.",
-                "SRT-Dateien zusammen mit dem Video speichern. Gemeinsame Speicherungen nutzen Movies ab Android 11, Download auf Android 10 und deinen Videoordner auf älteren Versionen.");
     }
 
     private static void fillDe11(Map<String, String> table) {
+        table.put("Save SRT files with the video. Paired saves use Movies on Android 11+, Download on Android 10, and your video folder on older versions.",
+                "SRT-Dateien zusammen mit dem Video speichern. Gemeinsame Speicherungen nutzen Movies ab Android 11, Download auf Android 10 und deinen Videoordner auf älteren Versionen.");
         table.put("Save a profile picture on a long press",
                 "Profilbild per langem Druck speichern");
         table.put("Save a story on a long press",
@@ -1540,11 +1542,11 @@ public final class L10nTranslations {
                 "Teilen-Menü");
         table.put("Shop posts",
                 "Shop-Beiträge");
-        table.put("Show",
-                "Anzeigen");
     }
 
     private static void fillDe12(Map<String, String> table) {
+        table.put("Show",
+                "Anzeigen");
         table.put("Show @username beside a video instead of the display name the creator chose.",
                 "Zeigt @Benutzername neben einem Video statt des Anzeigenamens, den die Person gewählt hat.");
         table.put("Show LIVE search",
@@ -1663,11 +1665,11 @@ public final class L10nTranslations {
                 "Zum Speichern einer Story wird die Speicherberechtigung gebraucht");
         table.put("Stories",
                 "Storys");
-        table.put("Story saved to %1$s",
-                "Story gespeichert unter %1$s");
     }
 
     private static void fillDe13(Map<String, String> table) {
+        table.put("Story saved to %1$s",
+                "Story gespeichert unter %1$s");
         table.put("Structured Config",
                 "Strukturierte Konfiguration");
         table.put("Structured value observed",
@@ -1786,11 +1788,11 @@ public final class L10nTranslations {
                 "Die Story konnte nicht gespeichert werden.");
         table.put("The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
                 "Der Daumen runter an jedem Kommentar blockiert das Konto dahinter, statt zu disliken. Der Kommentar wird blasser, ein Banner bietet den Weg zurück, und ein zweiter Tipp hebt die Blockierung auf.");
-        table.put("The video couldn't be saved. Try again, or choose Automatic.",
-                "Das Video konnte nicht gespeichert werden. Versuche es noch einmal oder wähle Automatisch.");
     }
 
     private static void fillDe14(Map<String, String> table) {
+        table.put("The video couldn't be saved. Try again, or choose Automatic.",
+                "Das Video konnte nicht gespeichert werden. Versuche es noch einmal oder wähle Automatisch.");
         table.put("There is no Lab change to undo.",
                 "Es gibt keine Lab-Änderung, die sich rückgängig machen ließe.");
         table.put("There is no diagnostic data to clear.",
@@ -1909,11 +1911,11 @@ public final class L10nTranslations {
                 "Tippe, um Einstellungen zu durchsuchen");
         table.put("Unavailable",
                 "Nicht verfügbar");
-        table.put("Unblock this commenter",
-                "Blockierung dieses Kommentierenden aufheben");
     }
 
     private static void fillDe15(Map<String, String> table) {
+        table.put("Unblock this commenter",
+                "Blockierung dieses Kommentierenden aufheben");
         table.put("Unblocked %1$s",
                 "%1$s entblockt");
         table.put("Undo",
@@ -2035,7 +2037,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildEs() {
-        Map<String, String> table = new HashMap<>(1918);
+        Map<String, String> table = new HashMap<>(1920);
         fillEs0(table);
         fillEs1(table);
         fillEs2(table);
@@ -3370,6 +3372,8 @@ public final class L10nTranslations {
                 "Reiniciar los ajustes");
         table.put("Restart TikTok to apply the Feature Gate Lab changes.",
                 "Reinicia TikTok para aplicar los cambios del Feature Gate Lab.");
+        table.put("Restart TikTok to apply this.",
+                "Reinicia TikTok para que se aplique.");
         table.put("Restore defaults immediately. Your current settings are kept for Undo.",
                 "Restaurar los valores de fábrica ahora mismo. Tus ajustes actuales se guardan para Deshacer.");
         table.put("Restore failed. Some settings may still be changed.",
@@ -3404,11 +3408,11 @@ public final class L10nTranslations {
                 "Guardar");
         table.put("Save JSON",
                 "Guardar JSON");
-        table.put("Save SRT files with the video. Paired saves use Movies on Android 11+, Download on Android 10, and your video folder on older versions.",
-                "Guardar los archivos SRT junto al vídeo. Los guardados emparejados usan Movies en Android 11 y superior, Download en Android 10, y tu carpeta de vídeos en versiones anteriores.");
     }
 
     private static void fillEs11(Map<String, String> table) {
+        table.put("Save SRT files with the video. Paired saves use Movies on Android 11+, Download on Android 10, and your video folder on older versions.",
+                "Guardar los archivos SRT junto al vídeo. Los guardados emparejados usan Movies en Android 11 y superior, Download en Android 10, y tu carpeta de vídeos en versiones anteriores.");
         table.put("Save a profile picture on a long press",
                 "Guardar una foto de perfil con una pulsación larga");
         table.put("Save a story on a long press",
@@ -3527,11 +3531,11 @@ public final class L10nTranslations {
                 "Panel de compartir");
         table.put("Shop posts",
                 "Publicaciones de la tienda");
-        table.put("Show",
-                "Mostrar");
     }
 
     private static void fillEs12(Map<String, String> table) {
+        table.put("Show",
+                "Mostrar");
         table.put("Show @username beside a video instead of the display name the creator chose.",
                 "Mostrar @usuario junto al vídeo en vez del nombre visible que eligió el creador.");
         table.put("Show LIVE search",
@@ -3650,11 +3654,11 @@ public final class L10nTranslations {
                 "Hace falta permiso de almacenamiento para guardar una historia");
         table.put("Stories",
                 "Historias");
-        table.put("Story saved to %1$s",
-                "Historia guardada en %1$s");
     }
 
     private static void fillEs13(Map<String, String> table) {
+        table.put("Story saved to %1$s",
+                "Historia guardada en %1$s");
         table.put("Structured Config",
                 "Configuración estructurada");
         table.put("Structured value observed",
@@ -3773,11 +3777,11 @@ public final class L10nTranslations {
                 "No se pudo guardar la historia.");
         table.put("The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
                 "El pulgar hacia abajo de cada comentario bloquea la cuenta que lo publicó en vez de darle un no me gusta. El comentario se atenúa, aparece un aviso para deshacerlo, y un segundo toque desbloquea.");
-        table.put("The video couldn't be saved. Try again, or choose Automatic.",
-                "No se pudo guardar el vídeo. Inténtalo otra vez, o elige Automático.");
     }
 
     private static void fillEs14(Map<String, String> table) {
+        table.put("The video couldn't be saved. Try again, or choose Automatic.",
+                "No se pudo guardar el vídeo. Inténtalo otra vez, o elige Automático.");
         table.put("There is no Lab change to undo.",
                 "No hay ningún cambio del Lab que deshacer.");
         table.put("There is no diagnostic data to clear.",
@@ -3896,11 +3900,11 @@ public final class L10nTranslations {
                 "Escribe para buscar en los ajustes");
         table.put("Unavailable",
                 "No disponible");
-        table.put("Unblock this commenter",
-                "Desbloquear a quien comenta");
     }
 
     private static void fillEs15(Map<String, String> table) {
+        table.put("Unblock this commenter",
+                "Desbloquear a quien comenta");
         table.put("Unblocked %1$s",
                 "%1$s desbloqueado");
         table.put("Undo",
@@ -4022,7 +4026,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIn() {
-        Map<String, String> table = new HashMap<>(1918);
+        Map<String, String> table = new HashMap<>(1920);
         fillIn0(table);
         fillIn1(table);
         fillIn2(table);
@@ -5357,6 +5361,8 @@ public final class L10nTranslations {
                 "Setel ulang pengaturan");
         table.put("Restart TikTok to apply the Feature Gate Lab changes.",
                 "Mulai ulang TikTok agar perubahan Feature Gate Lab berlaku.");
+        table.put("Restart TikTok to apply this.",
+                "Mulai ulang TikTok agar berlaku.");
         table.put("Restore defaults immediately. Your current settings are kept for Undo.",
                 "Kembalikan ke bawaan sekarang juga. Pengaturanmu yang sekarang disimpan untuk Urungkan.");
         table.put("Restore failed. Some settings may still be changed.",
@@ -5391,11 +5397,11 @@ public final class L10nTranslations {
                 "Simpan");
         table.put("Save JSON",
                 "Simpan JSON");
-        table.put("Save SRT files with the video. Paired saves use Movies on Android 11+, Download on Android 10, and your video folder on older versions.",
-                "Simpan berkas SRT bersama videonya. Penyimpanan berpasangan memakai Movies di Android 11+, Download di Android 10, dan folder videomu di versi lama.");
     }
 
     private static void fillIn11(Map<String, String> table) {
+        table.put("Save SRT files with the video. Paired saves use Movies on Android 11+, Download on Android 10, and your video folder on older versions.",
+                "Simpan berkas SRT bersama videonya. Penyimpanan berpasangan memakai Movies di Android 11+, Download di Android 10, dan folder videomu di versi lama.");
         table.put("Save a profile picture on a long press",
                 "Simpan foto profil dengan tekan lama");
         table.put("Save a story on a long press",
@@ -5514,11 +5520,11 @@ public final class L10nTranslations {
                 "Menu bagikan");
         table.put("Shop posts",
                 "Kiriman Shop");
-        table.put("Show",
-                "Tampilkan");
     }
 
     private static void fillIn12(Map<String, String> table) {
+        table.put("Show",
+                "Tampilkan");
         table.put("Show @username beside a video instead of the display name the creator chose.",
                 "Tampilkan @namapengguna di samping video, bukan nama tampilan pilihan kreator.");
         table.put("Show LIVE search",
@@ -5637,11 +5643,11 @@ public final class L10nTranslations {
                 "Izin penyimpanan dibutuhkan untuk menyimpan Story");
         table.put("Stories",
                 "Cerita");
-        table.put("Story saved to %1$s",
-                "Story disimpan ke %1$s");
     }
 
     private static void fillIn13(Map<String, String> table) {
+        table.put("Story saved to %1$s",
+                "Story disimpan ke %1$s");
         table.put("Structured Config",
                 "Konfigurasi Terstruktur");
         table.put("Structured value observed",
@@ -5760,11 +5766,11 @@ public final class L10nTranslations {
                 "Story-nya tidak bisa disimpan.");
         table.put("The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
                 "Jempol ke bawah pada tiap komentar memblokir akun penulisnya, bukan memberi dislike. Komentarnya meredup, ada spanduk untuk membatalkan, dan ketukan kedua membuka blokirnya.");
-        table.put("The video couldn't be saved. Try again, or choose Automatic.",
-                "Videonya tidak bisa disimpan. Coba lagi, atau pilih Otomatis.");
     }
 
     private static void fillIn14(Map<String, String> table) {
+        table.put("The video couldn't be saved. Try again, or choose Automatic.",
+                "Videonya tidak bisa disimpan. Coba lagi, atau pilih Otomatis.");
         table.put("There is no Lab change to undo.",
                 "Tidak ada perubahan Lab yang bisa dibatalkan.");
         table.put("There is no diagnostic data to clear.",
@@ -5883,11 +5889,11 @@ public final class L10nTranslations {
                 "Ketik untuk mencari setelan");
         table.put("Unavailable",
                 "Tidak tersedia");
-        table.put("Unblock this commenter",
-                "Buka blokir pengomentar ini");
     }
 
     private static void fillIn15(Map<String, String> table) {
+        table.put("Unblock this commenter",
+                "Buka blokir pengomentar ini");
         table.put("Unblocked %1$s",
                 "%1$s dibuka blokirnya");
         table.put("Undo",
@@ -6009,7 +6015,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildPt_rBR() {
-        Map<String, String> table = new HashMap<>(1918);
+        Map<String, String> table = new HashMap<>(1920);
         fillPt_rBR0(table);
         fillPt_rBR1(table);
         fillPt_rBR2(table);
@@ -7344,6 +7350,8 @@ public final class L10nTranslations {
                 "Redefinir as configurações");
         table.put("Restart TikTok to apply the Feature Gate Lab changes.",
                 "Reinicie o TikTok para aplicar as mudanças do Feature Gate Lab.");
+        table.put("Restart TikTok to apply this.",
+                "Reinicie o TikTok para aplicar.");
         table.put("Restore defaults immediately. Your current settings are kept for Undo.",
                 "Restaurar os padrões agora mesmo. Suas configurações atuais ficam guardadas para Desfazer.");
         table.put("Restore failed. Some settings may still be changed.",
@@ -7378,11 +7386,11 @@ public final class L10nTranslations {
                 "Salvar");
         table.put("Save JSON",
                 "Salvar JSON");
-        table.put("Save SRT files with the video. Paired saves use Movies on Android 11+, Download on Android 10, and your video folder on older versions.",
-                "Salvar os arquivos SRT junto com o vídeo. Os salvamentos em par usam Movies no Android 11 ou superior, Download no Android 10, e sua pasta de vídeos em versões mais antigas.");
     }
 
     private static void fillPt_rBR11(Map<String, String> table) {
+        table.put("Save SRT files with the video. Paired saves use Movies on Android 11+, Download on Android 10, and your video folder on older versions.",
+                "Salvar os arquivos SRT junto com o vídeo. Os salvamentos em par usam Movies no Android 11 ou superior, Download no Android 10, e sua pasta de vídeos em versões mais antigas.");
         table.put("Save a profile picture on a long press",
                 "Salvar uma foto de perfil com um toque longo");
         table.put("Save a story on a long press",
@@ -7501,11 +7509,11 @@ public final class L10nTranslations {
                 "Folha de compartilhamento");
         table.put("Shop posts",
                 "Publicações da loja");
-        table.put("Show",
-                "Mostrar");
     }
 
     private static void fillPt_rBR12(Map<String, String> table) {
+        table.put("Show",
+                "Mostrar");
         table.put("Show @username beside a video instead of the display name the creator chose.",
                 "Mostrar @usuário ao lado do vídeo em vez do nome de exibição que o criador escolheu.");
         table.put("Show LIVE search",
@@ -7624,11 +7632,11 @@ public final class L10nTranslations {
                 "É preciso permissão de armazenamento para salvar um story");
         table.put("Stories",
                 "Stories");
-        table.put("Story saved to %1$s",
-                "Story salvo em %1$s");
     }
 
     private static void fillPt_rBR13(Map<String, String> table) {
+        table.put("Story saved to %1$s",
+                "Story salvo em %1$s");
         table.put("Structured Config",
                 "Configuração estruturada");
         table.put("Structured value observed",
@@ -7747,11 +7755,11 @@ public final class L10nTranslations {
                 "Não foi possível salvar o story.");
         table.put("The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
                 "O joinha para baixo de cada comentário bloqueia a conta que o publicou em vez de descurtir. O comentário escurece, aparece um aviso para desfazer, e um segundo toque desbloqueia.");
-        table.put("The video couldn't be saved. Try again, or choose Automatic.",
-                "Não foi possível salvar o vídeo. Tente de novo, ou escolha Automático.");
     }
 
     private static void fillPt_rBR14(Map<String, String> table) {
+        table.put("The video couldn't be saved. Try again, or choose Automatic.",
+                "Não foi possível salvar o vídeo. Tente de novo, ou escolha Automático.");
         table.put("There is no Lab change to undo.",
                 "Não há nenhuma alteração do Lab para desfazer.");
         table.put("There is no diagnostic data to clear.",
@@ -7870,11 +7878,11 @@ public final class L10nTranslations {
                 "Digite para buscar nas configurações");
         table.put("Unavailable",
                 "Indisponível");
-        table.put("Unblock this commenter",
-                "Desbloquear quem comentou");
     }
 
     private static void fillPt_rBR15(Map<String, String> table) {
+        table.put("Unblock this commenter",
+                "Desbloquear quem comentou");
         table.put("Unblocked %1$s",
                 "%1$s desbloqueado");
         table.put("Undo",
