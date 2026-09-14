@@ -167,8 +167,9 @@ public class OverlayControlsTest {
     @Test public void allFourFeedButtonsAreOneSizeAndOneShape() throws Exception {
         // They sit in a column on the feed, where a miss is a like or a follow on somebody's
         // video, and 44dp is under Android's own guidance with no TouchDelegate to make up the
-        // difference. Not interested was also the only rounded rectangle of the four, over a
-        // darker scrim, which on a column of four reads as a mistake rather than a distinction.
+        // difference. The shape half of this used to accept any four discs; it now asks for the
+        // radius from the scale as well, because the four of them, the budget cue and the hold's
+        // release control all draw the same backdrop and had drifted to four radii between them.
         Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
         Utils.setContext(activity);
         Utils.setActivity(activity);
@@ -198,10 +199,16 @@ public class OverlayControlsTest {
                 background = ((android.graphics.drawable.LayerDrawable) background)
                         .getDrawable(0);
             }
-            android.graphics.drawable.GradientDrawable disc =
+            android.graphics.drawable.GradientDrawable chip =
                     (android.graphics.drawable.GradientDrawable) background;
-            assertEquals(name + " is not the round shape the others are",
-                    android.graphics.drawable.GradientDrawable.OVAL, disc.getShape());
+            assertEquals(name + " is not the shape the others are",
+                    android.graphics.drawable.GradientDrawable.RECTANGLE, chip.getShape());
+            assertEquals(name + " is not drawn with the overlay radius the others use",
+                    (float) app.morphe.extension.tiktok.settings.preference.SettingsUi.dp(
+                            activity,
+                            app.morphe.extension.tiktok.settings.preference.SettingsUi
+                                    .RADIUS_OVERLAY),
+                    chip.getCornerRadius(), 0.5f);
         }
     }
 

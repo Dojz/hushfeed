@@ -65,6 +65,35 @@ public final class SettingsUi {
 
     public static final int LIGHT_ACCENT = Color.rgb(184, 22, 77);
 
+    /**
+     * The corner radii this bundle draws with. Every rounded surface picks one of these rather
+     * than a number of its own, so a card, a field and a chip on the same screen agree.
+     *
+     * <p>They were not agreeing. The Lab's view tabs were 5, which is not a step at all, and the
+     * feed controls, the budget cue and the hold's release control were 24, a full circle and 12
+     * while sitting on the same video.
+     */
+    public static final int RADIUS_SQUARE = 0;
+    public static final int RADIUS_BADGE = 4;
+    public static final int RADIUS_CONTROL = 6;
+    public static final int RADIUS_FIELD = 8;
+    public static final int RADIUS_CARD = 10;
+    public static final int RADIUS_OVERLAY = 12;
+
+    /**
+     * The scrim behind anything this bundle draws on top of a video, and the hairline around it.
+     *
+     * <p>Five places built this same pair by hand with the same two argb literals, and then
+     * rounded it three different ways, so the four feed controls, the budget cue and the hold's
+     * release control read as three separate add-ons rather than one set. Fixed rather than
+     * themed on purpose: a video is dark whatever the phone's theme says, and away from the
+     * settings screen the shared theme flag answers for the system rather than for the feed.
+     */
+    public static final @ColorInt int OVERLAY_SCRIM = Color.argb(140, 0, 0, 0);
+    public static final @ColorInt int OVERLAY_HAIRLINE = Color.argb(90, 255, 255, 255);
+    /** Text and glyphs on {@link #OVERLAY_SCRIM}: white on it is 12.6:1. */
+    public static final @ColorInt int OVERLAY_TEXT = Color.WHITE;
+
     private SettingsUi() {
     }
 
@@ -242,36 +271,81 @@ public final class SettingsUi {
         return dpValue * context.getResources().getDisplayMetrics().density;
     }
 
+    /*
+     * Two accessors for every colour. The no-argument one reads the shared theme flag and is
+     * what the settings screen wants. The one taking a theme is for a surface that worked out
+     * its own: the comment sheet is drawn in TikTok's theme, which is not always the system's,
+     * so it decides for itself and then asks for the matching value. It used to carry its own
+     * copy of eight of these as hex literals, which is the same palette maintained twice.
+     */
+
     public static @ColorInt int background() {
-        return isDarkMode() ? DARK_BACKGROUND : LIGHT_BACKGROUND;
+        return backgroundOn(isDarkMode());
+    }
+
+    public static @ColorInt int backgroundOn(boolean dark) {
+        return dark ? DARK_BACKGROUND : LIGHT_BACKGROUND;
     }
 
     public static @ColorInt int surface() {
-        return isDarkMode() ? DARK_SURFACE : LIGHT_SURFACE;
+        return surfaceOn(isDarkMode());
+    }
+
+    public static @ColorInt int surfaceOn(boolean dark) {
+        return dark ? DARK_SURFACE : LIGHT_SURFACE;
     }
 
     public static @ColorInt int liftedSurface() {
-        return isDarkMode() ? DARK_SURFACE_LIFTED : LIGHT_SURFACE_LIFTED;
+        return liftedSurfaceOn(isDarkMode());
+    }
+
+    public static @ColorInt int liftedSurfaceOn(boolean dark) {
+        return dark ? DARK_SURFACE_LIFTED : LIGHT_SURFACE_LIFTED;
     }
 
     public static @ColorInt int border() {
-        return isDarkMode() ? DARK_BORDER : LIGHT_BORDER;
+        return borderOn(isDarkMode());
+    }
+
+    public static @ColorInt int borderOn(boolean dark) {
+        return dark ? DARK_BORDER : LIGHT_BORDER;
     }
 
     public static @ColorInt int divider() {
-        return isDarkMode() ? DARK_DIVIDER : LIGHT_DIVIDER;
+        return dividerOn(isDarkMode());
+    }
+
+    public static @ColorInt int dividerOn(boolean dark) {
+        return dark ? DARK_DIVIDER : LIGHT_DIVIDER;
     }
 
     public static @ColorInt int textPrimary() {
-        return isDarkMode() ? DARK_TEXT_PRIMARY : LIGHT_TEXT_PRIMARY;
+        return textPrimaryOn(isDarkMode());
+    }
+
+    public static @ColorInt int textPrimaryOn(boolean dark) {
+        return dark ? DARK_TEXT_PRIMARY : LIGHT_TEXT_PRIMARY;
     }
 
     public static @ColorInt int textSecondary() {
-        return isDarkMode() ? DARK_TEXT_SECONDARY : LIGHT_TEXT_SECONDARY;
+        return textSecondaryOn(isDarkMode());
+    }
+
+    public static @ColorInt int textSecondaryOn(boolean dark) {
+        return dark ? DARK_TEXT_SECONDARY : LIGHT_TEXT_SECONDARY;
     }
 
     public static @ColorInt int textDisabled() {
-        return isDarkMode() ? DARK_TEXT_DISABLED : LIGHT_TEXT_DISABLED;
+        return textDisabledOn(isDarkMode());
+    }
+
+    public static @ColorInt int textDisabledOn(boolean dark) {
+        return dark ? DARK_TEXT_DISABLED : LIGHT_TEXT_DISABLED;
+    }
+
+    /** The accent for a surface that worked out its own theme. */
+    public static @ColorInt int accentOn(boolean dark) {
+        return dark ? ACCENT : LIGHT_ACCENT;
     }
 
     /** Text that repaints itself when its control is enabled or disabled. */
@@ -366,6 +440,23 @@ public final class SettingsUi {
         GradientDrawable drawable = roundedSurface(context, radiusDp, lifted);
         drawable.setStroke(Math.max(1, dp(context, 1)), border());
         return drawable;
+    }
+
+    /**
+     * The backdrop for a control this bundle draws over a video: the shared scrim, the shared
+     * hairline, and one radius from the scale.
+     *
+     * <p>Every caller used to build this by hand, which is how four feed controls ended up as
+     * circles, the budget cue as a 12dp rectangle and the hold's release as a 24dp pill, all on
+     * the same screen and all meant to read as the same thing.
+     */
+    public static GradientDrawable overlayChip(Context context, int radiusDp) {
+        GradientDrawable chip = new GradientDrawable();
+        chip.setShape(GradientDrawable.RECTANGLE);
+        chip.setCornerRadius(dp(context, radiusDp));
+        chip.setColor(OVERLAY_SCRIM);
+        chip.setStroke(Math.max(1, dp(context, 1)), OVERLAY_HAIRLINE);
+        return chip;
     }
 
     public static void styleDialog(Dialog dialog) {
@@ -545,13 +636,28 @@ public final class SettingsUi {
         markAsButton(button);
     }
 
-    /** Gives a custom clickable view the platform button role. */
+    /**
+     * Gives a custom clickable view the platform button role, its action and its state.
+     *
+     * <p>The class name alone was not enough. A screen reader decides whether to offer "double
+     * tap to activate" from the node's click action, and whether to say "dimmed" from its
+     * enabled flag, and a hand built TextView hands over neither unless the view is actually
+     * marked clickable. Every action built this way announced as a button that could not be
+     * pressed, and a disabled one announced exactly like an enabled one.
+     */
     public static void markAsButton(View button) {
         button.setAccessibilityDelegate(new View.AccessibilityDelegate() {
             @Override public void onInitializeAccessibilityNodeInfo(
-                    View host, android.view.accessibility.AccessibilityNodeInfo info) {
+                    View host, AccessibilityNodeInfo info) {
                 super.onInitializeAccessibilityNodeInfo(host, info);
                 info.setClassName(android.widget.Button.class.getName());
+                info.setEnabled(host.isEnabled());
+                if (host.isClickable()) {
+                    info.setClickable(true);
+                    if (host.isEnabled()) {
+                        info.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_CLICK);
+                    }
+                }
             }
         });
     }

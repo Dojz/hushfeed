@@ -729,9 +729,13 @@ public final class FeatureGateLabFragment extends Fragment {
             tab.setSelected(selected);
             tab.setTextColor(selected ? SettingsUi.badgeText() : SettingsUi.textSecondary());
             if (selected) {
+                // One step under the 6 its container is drawn with, which is what a rounded
+                // shape nested inside another one needs to look concentric. It was 5, which is
+                // not a step on the scale at all.
                 GradientDrawable background = new GradientDrawable();
                 background.setColor(SettingsUi.badgeFill());
-                background.setCornerRadius(FeatureGateLabUi.dp(tab.getContext(), 5));
+                background.setCornerRadius(
+                        FeatureGateLabUi.dp(tab.getContext(), SettingsUi.RADIUS_BADGE));
                 tab.setBackground(background);
             } else {
                 tab.setBackgroundColor(Color.TRANSPARENT);

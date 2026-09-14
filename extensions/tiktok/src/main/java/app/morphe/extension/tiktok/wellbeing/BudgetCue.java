@@ -7,8 +7,6 @@
 package app.morphe.extension.tiktok.wellbeing;
 
 import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -173,23 +171,16 @@ public final class BudgetCue {
         detach();
 
         TextView cue = new TextView(activity);
-        cue.setTextColor(Color.WHITE);
+        cue.setTextColor(SettingsUi.OVERLAY_TEXT);
         cue.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         cue.setMaxLines(1);
         int paddingX = SettingsUi.dp(activity, 10);
         int paddingY = SettingsUi.dp(activity, 4);
         cue.setPadding(paddingX, paddingY, paddingX, paddingY);
 
-        // The same shade the feed's own controls use, so the two read as one set rather than as
-        // something the app grew overnight. Fixed rather than themed for the reason the feed
-        // controls are: the theme flag answers for the system away from the settings screen,
-        // not for the theme TikTok is drawing the feed in.
-        GradientDrawable background = new GradientDrawable();
-        background.setShape(GradientDrawable.RECTANGLE);
-        background.setCornerRadius(SettingsUi.dp(activity, 12));
-        background.setColor(Color.argb(140, 0, 0, 0));
-        background.setStroke(SettingsUi.dp(activity, 1), Color.argb(90, 255, 255, 255));
-        cue.setBackground(background);
+        // The same backdrop the feed's own controls use, from the one helper that builds it, so
+        // the two read as one set rather than as something the app grew overnight.
+        cue.setBackground(SettingsUi.overlayChip(activity, SettingsUi.RADIUS_OVERLAY));
 
         // Nothing about it is interactive: no listener, so the feed underneath scrolls, likes
         // and comments exactly as before.

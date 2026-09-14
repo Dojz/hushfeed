@@ -258,20 +258,25 @@ public final class CommentSearch {
      * what took the underline away in the first place.
      */
     private static StateListDrawable fieldBackground(Context context, boolean dark) {
-        float radius = 8 * context.getResources().getDisplayMetrics().density;
+        float radius = SettingsUi.dp(context, SettingsUi.RADIUS_FIELD);
         int stroke = Math.max(1, Math.round(context.getResources().getDisplayMetrics().density));
 
+        // The theme is worked out locally, because the comment sheet is drawn in TikTok's theme
+        // rather than the system's, and then the matching palette value is asked for by name.
+        // These eight colours used to be hex literals copied out of SettingsUi, which is the
+        // same palette maintained in two places and free to drift in one of them.
+        // Focus lifts the field off the sheet in dark, where there is somewhere to lift to. In
+        // light the resting fill is already the brightest surface, so the accent ring does that
+        // job alone, which is what the two hex literals here used to say.
         GradientDrawable focused = new GradientDrawable();
-        focused.setColor(dark ? 0xFF1B1B21 : 0xFFFFFFFF);
+        focused.setColor(dark ? SettingsUi.liftedSurfaceOn(true) : SettingsUi.surfaceOn(false));
         focused.setCornerRadius(radius);
-        // Not SettingsUi.accent(): that reads the shared dark mode flag, which is the
-        // one this class stopped trusting two lines up. TikTok's own pink carries on both.
-        focused.setStroke(stroke * 2, dark ? SettingsUi.ACCENT : SettingsUi.LIGHT_ACCENT);
+        focused.setStroke(stroke * 2, SettingsUi.accentOn(dark));
 
         GradientDrawable resting = new GradientDrawable();
-        resting.setColor(dark ? 0xFF111115 : 0xFFFFFFFF);
+        resting.setColor(SettingsUi.surfaceOn(dark));
         resting.setCornerRadius(radius);
-        resting.setStroke(stroke, dark ? 0xFF35353E : 0xFFD2D2D2);
+        resting.setStroke(stroke, SettingsUi.borderOn(dark));
 
         StateListDrawable states = new StateListDrawable();
         states.addState(new int[]{android.R.attr.state_focused}, focused);
@@ -297,21 +302,21 @@ public final class CommentSearch {
         box.setGravity(Gravity.CENTER_VERTICAL);
         box.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         boolean dark = isDarkSheet(context);
-        box.setTextColor(dark ? 0xFFF5F5F7 : 0xFF16161C);
-        box.setHintTextColor(dark ? 0xFFA8A8B3 : 0xFF575762);
+        box.setTextColor(SettingsUi.textPrimaryOn(dark));
+        box.setHintTextColor(SettingsUi.textSecondaryOn(dark));
         // A transparent background takes the focus underline with it, which left nothing
         // saying this was a field at all, so the border does that job instead.
         box.setBackground(fieldBackground(context, dark));
-        int padding = Math.round(12 * context.getResources().getDisplayMetrics().density);
+        int padding = SettingsUi.dp(context, 12);
         box.setPadding(padding, padding, padding, padding);
         // A minimum rather than a height: 48dp is the touch target, but at a large font scale
         // the text needs more than that and a fixed height would cut the letters off.
-        box.setMinimumHeight(Math.round(48 * context.getResources().getDisplayMetrics().density));
+        box.setMinimumHeight(SettingsUi.dp(context, 48));
         box.setLayoutParams(new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         TextView status = SettingsUi.resultCount(context, STATUS_TAG);
-        status.setTextColor(dark ? 0xFFA8A8B3 : 0xFF575762);
+        status.setTextColor(SettingsUi.textSecondaryOn(dark));
         status.setFocusable(false);
         status.setClickable(false);
         status.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);

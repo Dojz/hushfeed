@@ -331,13 +331,17 @@ public final class SessionLockOverlay {
                 info.setClassName(android.widget.Button.class.getName());
             }
         });
-        release.setTextColor(Color.WHITE);
+        release.setTextColor(SettingsUi.OVERLAY_TEXT);
         release.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         release.setGravity(Gravity.CENTER);
-        GradientDrawable pill = new GradientDrawable();
-        pill.setCornerRadius(SettingsUi.dp(activity, 24));
-        pill.setColor(Color.argb(70, 255, 255, 255));
-        release.setBackground(pill);
+        // A radius from the scale. It was 24 on a 48dp control, which is a pill, and it was the
+        // only pill in the bundle: the four feed controls and the budget cue it sits beside all
+        // read as rounded rectangles.
+        GradientDrawable releaseBackground = new GradientDrawable();
+        releaseBackground.setShape(GradientDrawable.RECTANGLE);
+        releaseBackground.setCornerRadius(SettingsUi.dp(activity, SettingsUi.RADIUS_OVERLAY));
+        releaseBackground.setColor(Color.argb(70, 255, 255, 255));
+        release.setBackground(releaseBackground);
         int padding = SettingsUi.dp(activity, 20);
         release.setPadding(padding, SettingsUi.dp(activity, 14), padding, SettingsUi.dp(activity, 14));
         release.setMinimumHeight(SettingsUi.dp(activity, 48));

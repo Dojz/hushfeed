@@ -339,16 +339,12 @@ public final class BlockAuthorOverlay {
     private static View createSoundButton(Activity activity) {
         TextView button = new TextView(activity);
         button.setText(SOUND_GLYPH);
-        button.setTextColor(Color.WHITE);
+        button.setTextColor(SettingsUi.OVERLAY_TEXT);
         button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         button.setGravity(Gravity.CENTER);
         button.setContentDescription(L10n.t(activity, "Block this sound"));
 
-        GradientDrawable background = new GradientDrawable();
-        background.setShape(GradientDrawable.OVAL);
-        background.setColor(Color.argb(140, 0, 0, 0));
-        background.setStroke(SettingsUi.dp(activity, 1), Color.argb(90, 255, 255, 255));
-        button.setBackground(background);
+        button.setBackground(SettingsUi.overlayChip(activity, SettingsUi.RADIUS_OVERLAY));
 
         button.setOnClickListener(view -> onBlockSoundTapped());
         installDrag(button);
@@ -358,16 +354,12 @@ public final class BlockAuthorOverlay {
     private static View createLocalHideButton(Activity activity) {
         TextView button = new TextView(activity);
         button.setText("×");
-        button.setTextColor(Color.WHITE);
+        button.setTextColor(SettingsUi.OVERLAY_TEXT);
         button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28);
         button.setGravity(Gravity.CENTER);
         button.setContentDescription(L10n.t(activity, "Hide this creator locally"));
 
-        GradientDrawable background = new GradientDrawable();
-        background.setShape(GradientDrawable.OVAL);
-        background.setColor(Color.argb(140, 0, 0, 0));
-        background.setStroke(SettingsUi.dp(activity, 1), Color.argb(90, 255, 255, 255));
-        button.setBackground(background);
+        button.setBackground(SettingsUi.overlayChip(activity, SettingsUi.RADIUS_OVERLAY));
         button.setOnClickListener(view -> onLocalHideTapped());
         installDrag(button);
         return button;
@@ -380,18 +372,13 @@ public final class BlockAuthorOverlay {
     private static View createNotInterestedButton(Activity activity) {
         TextView button = new TextView(activity);
         button.setText("-");
-        button.setTextColor(Color.WHITE);
+        button.setTextColor(SettingsUi.OVERLAY_TEXT);
         button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28);
         button.setGravity(Gravity.CENTER);
         button.setContentDescription(L10n.t(activity, "Not interested in this video"));
-        // The same round shape and the same scrim as the three it shares the rail with. It was
-        // a rounded rectangle over a darker scrim, which on a column of four reads as a mistake
-        // rather than as a distinction.
-        GradientDrawable background = new GradientDrawable();
-        background.setShape(GradientDrawable.OVAL);
-        background.setColor(Color.argb(140, 0, 0, 0));
-        background.setStroke(SettingsUi.dp(activity, 1), Color.argb(90, 255, 255, 255));
-        button.setBackground(background);
+        // The same shape and the same scrim as the three it shares the rail with. On a column of
+        // four, one control drawn differently reads as a mistake rather than as a distinction.
+        button.setBackground(SettingsUi.overlayChip(activity, SettingsUi.RADIUS_OVERLAY));
         button.setOnClickListener(view -> NotInterested.submit());
         installDrag(button);
         return button;
@@ -431,14 +418,11 @@ public final class BlockAuthorOverlay {
         button.setGravity(Gravity.CENTER);
         button.setContentDescription(L10n.t(activity, "Block this account"));
 
-        GradientDrawable background = new GradientDrawable();
-        background.setShape(GradientDrawable.OVAL);
-        background.setColor(Color.argb(140, 0, 0, 0));
-        background.setStroke(SettingsUi.dp(activity, 1), Color.argb(90, 255, 255, 255));
+        GradientDrawable background = SettingsUi.overlayChip(activity, SettingsUi.RADIUS_OVERLAY);
 
-        // The symbol is drawn over the disc instead of set as text, because the font
+        // The symbol is drawn over the backdrop instead of set as text, because the font
         // TikTok happens to be using may not carry it.
-        Drawable glyph = new BlockGlyphDrawable(Color.WHITE, SettingsUi.dp(activity, 2));
+        Drawable glyph = new BlockGlyphDrawable(SettingsUi.OVERLAY_TEXT, SettingsUi.dp(activity, 2));
         button.setBackground(new LayerDrawable(new Drawable[]{background, glyph}));
 
         button.setOnClickListener(view -> onBlockTapped());
@@ -843,7 +827,7 @@ public final class BlockAuthorOverlay {
 
                 TextView label = new TextView(activity);
                 label.setText(message);
-                label.setTextColor(Color.WHITE);
+                label.setTextColor(SettingsUi.OVERLAY_TEXT);
                 label.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
                 banner.addView(label, new LinearLayout.LayoutParams(0, -2, 1f));
 
