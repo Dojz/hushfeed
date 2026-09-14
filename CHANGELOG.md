@@ -1,5 +1,8 @@
 ## Unreleased
 
+* Double-tap controls now reach the feed the app actually uses. Setting it to "do nothing" still liked the video, because the guard sat on the older feed panel and the current one never goes through it: its gesture listener holds the like component and calls it directly. Every route from a double tap to a like was traced on the app itself, and there are four of them, including the landscape player and the Friends tab. All four are guarded now. Two more classes carry the same method and neither can like anything, so they are left alone.
+
+
 * Playback quality stops complaining about a model it cannot read. On some builds and accounts TikTok's video model getter hands back an empty string, and the quality picker parsed it anyway, failed, and put "Could not read the playback quality model" on screen once per video. It now hands back whatever it was given and leaves the quality to the app, which is what it did all along, without the message. The Hook status row names the getter that supplied the unusable model, so a diagnostic report says which one it was instead of the feed saying so repeatedly.
 
 
