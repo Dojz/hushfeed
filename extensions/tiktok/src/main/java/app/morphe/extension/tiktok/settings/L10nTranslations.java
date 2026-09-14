@@ -1221,14 +1221,14 @@ public final class L10nTranslations {
                 "%1$s entfernen");
         table.put("Remove feed ads",
                 "Werbung im Feed entfernen");
+        table.put("Remove feed ads, including videos with a creator commission disclosure.",
+                "Feed-Werbung entfernen, einschließlich Videos mit einer Provisionskennzeichnung für Creator.");
         table.put("Remove polls from the comments before TikTok shows them.",
                 "Umfragen aus den Kommentaren entfernen, bevor TikTok sie anzeigt.");
         table.put("Remove the Share via row.",
                 "Die Zeile „Teilen über“ entfernen.");
         table.put("Remove the actions row from the share sheet.",
                 "Die Aktionszeile aus dem Teilen-Menü entfernen.");
-        table.put("Remove the ads TikTok puts between videos.",
-                "Die Werbung entfernen, die TikTok zwischen die Videos setzt.");
         table.put("Remove the row of friends from the top of the share sheet.",
                 "Die Freundesreihe oben im Teilen-Menü entfernen.");
         table.put("Remove tracking parameters from shared links.",
@@ -3044,14 +3044,14 @@ public final class L10nTranslations {
                 "Quitar %1$s");
         table.put("Remove feed ads",
                 "Quitar los anuncios del feed");
+        table.put("Remove feed ads, including videos with a creator commission disclosure.",
+                "Quita los anuncios del feed, incluidos los vídeos con un aviso de comisión para creadores.");
         table.put("Remove polls from the comments before TikTok shows them.",
                 "Elimina las encuestas de los comentarios antes de que TikTok las muestre.");
         table.put("Remove the Share via row.",
                 "Quitar la fila Compartir con.");
         table.put("Remove the actions row from the share sheet.",
                 "Quitar la fila de acciones del panel de compartir.");
-        table.put("Remove the ads TikTok puts between videos.",
-                "Quitar los anuncios que TikTok pone entre vídeos.");
         table.put("Remove the row of friends from the top of the share sheet.",
                 "Quitar la fila de amigos de la parte de arriba del panel de compartir.");
         table.put("Remove tracking parameters from shared links.",
@@ -4867,14 +4867,14 @@ public final class L10nTranslations {
                 "Hapus %1$s");
         table.put("Remove feed ads",
                 "Hapus iklan di feed");
+        table.put("Remove feed ads, including videos with a creator commission disclosure.",
+                "Hapus iklan di feed, termasuk video dengan label komisi kreator.");
         table.put("Remove polls from the comments before TikTok shows them.",
                 "Hapus jajak pendapat dari komentar sebelum TikTok menampilkannya.");
         table.put("Remove the Share via row.",
                 "Hapus baris Bagikan lewat.");
         table.put("Remove the actions row from the share sheet.",
                 "Hapus baris aksi dari menu bagikan.");
-        table.put("Remove the ads TikTok puts between videos.",
-                "Hapus iklan yang TikTok sisipkan di antara video.");
         table.put("Remove the row of friends from the top of the share sheet.",
                 "Hapus baris teman dari bagian atas menu bagikan.");
         table.put("Remove tracking parameters from shared links.",
@@ -6690,14 +6690,14 @@ public final class L10nTranslations {
                 "Remover %1$s");
         table.put("Remove feed ads",
                 "Remover os anúncios do feed");
+        table.put("Remove feed ads, including videos with a creator commission disclosure.",
+                "Remover anúncios do feed, incluindo vídeos com um aviso de comissão do criador.");
         table.put("Remove polls from the comments before TikTok shows them.",
                 "Remover as enquetes dos comentários antes que o TikTok as exiba.");
         table.put("Remove the Share via row.",
                 "Remover a linha Compartilhar via.");
         table.put("Remove the actions row from the share sheet.",
                 "Remover a linha de ações da folha de compartilhamento.");
-        table.put("Remove the ads TikTok puts between videos.",
-                "Remover os anúncios que o TikTok coloca entre os vídeos.");
         table.put("Remove the row of friends from the top of the share sheet.",
                 "Remover a linha de amigos do topo da folha de compartilhamento.");
         table.put("Remove tracking parameters from shared links.",

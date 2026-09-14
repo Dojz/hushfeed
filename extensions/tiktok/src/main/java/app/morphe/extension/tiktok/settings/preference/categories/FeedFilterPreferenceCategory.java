@@ -70,7 +70,8 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
         addPreference(new TogglePreference(context, "Hide LIVE replays", "Skip recorded LIVE broadcasts in the feed.", Settings.HIDE_LIVE_REPLAYS));
         addPreference(new TogglePreference(
                 context,
-                "Remove feed ads", "Remove the ads TikTok puts between videos.",
+                "Remove feed ads",
+                "Remove feed ads, including videos with a creator commission disclosure.",
                 Settings.REMOVE_ADS
         ));
         addPreference(new TogglePreference(

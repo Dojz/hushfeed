@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Remove feed ads now catches videos carrying TikTok's Creator earns commission disclosure. It reads the structured anchor label rather than matching visible English text, and malformed or unrelated anchor data stays in the feed.
+
 * Comment tools can now remove TikTok's polls from the comment sheet before they are drawn. A missing or changed poll model leaves comments working and identifies the broken contract in Hook status.
 
 * The block, local-hide, sound and Not interested controls now disappear when TikTok's comment sheet covers the feed. The local-hide and sound buttons have their own switches, and each visible control can be moved and remembered on its own. Enabling local hide after the controls attach keeps it in its own slot instead of covering the sound button.
