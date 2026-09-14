@@ -73,6 +73,19 @@ public final class BlockAuthorOverlay {
     /** Guards against a double tap blocking, then unblocking, the same account. */
     private static volatile boolean requestInFlight;
 
+    /**
+     * Ids for the move and reset actions a screen reader gets instead of the pointer drag.
+     *
+     * <p>Above {@code ACTION_TYPE_MASK}, so none of them can be read as one of the platform's
+     * own action bits, and fixed rather than generated because a generated view id falls in the
+     * range the legacy standard actions use.
+     */
+    private static final int ACTION_MOVE_UP = 0x0F0A0001;
+    private static final int ACTION_MOVE_DOWN = 0x0F0A0002;
+    private static final int ACTION_MOVE_LEFT = 0x0F0A0003;
+    private static final int ACTION_MOVE_RIGHT = 0x0F0A0004;
+    private static final int ACTION_RESET_POSITION = 0x0F0A0005;
+
     /** True while the user is dragging the button, which suppresses the click. */
     private static boolean dragging;
     private static WeakReference<View> pressedControlReference = new WeakReference<>(null);
@@ -206,28 +219,7 @@ public final class BlockAuthorOverlay {
 
             // The root has no measured size until it lays out, so the saved fraction can
             // only be turned into margins once dimensions are known.
-            root.post(() -> {
-                if (root.getWidth() == 0 || root.getHeight() == 0) return;
-                applySavedPosition(button, root, size, Settings.BLOCK_AUTHOR_BUTTON_POSITION,
-                        DEFAULT_X_FRACTION, DEFAULT_Y_FRACTION);
-                int step = size + SettingsUi.dp(activity, BUTTON_GAP_DP);
-                FrameLayout.LayoutParams blockPosition =
-                        (FrameLayout.LayoutParams) button.getLayoutParams();
-                float blockX = blockPosition.leftMargin + size / 2f;
-                float blockY = blockPosition.topMargin + size / 2f;
-                int maxTop = Math.max(0, root.getHeight() - size);
-                float verticalDirection = maxTop - blockPosition.topMargin >= step * 2 ? 1f : -1f;
-                applySavedPosition(localHide, root, size, Settings.LOCAL_HIDE_BUTTON_POSITION,
-                        blockX / root.getWidth(),
-                        (blockY + step * verticalDirection) / root.getHeight());
-                applySavedPosition(soundButton, root, size, Settings.BLOCK_SOUND_BUTTON_POSITION,
-                        blockX / root.getWidth(),
-                        (blockY + step * 2f * verticalDirection) / root.getHeight());
-                float horizontalDirection = blockPosition.leftMargin >= step ? -1f : 1f;
-                applySavedPosition(feedback, root, size, Settings.NOT_INTERESTED_BUTTON_POSITION,
-                        (blockX + step * horizontalDirection) / root.getWidth(),
-                        blockY / root.getHeight());
-            });
+            root.post(() -> applyPositions(root));
 
             installVisibilityListener(root);
             syncVisibility();
@@ -236,6 +228,42 @@ public final class BlockAuthorOverlay {
         } catch (Throwable ex) {
             Logger.printException(() -> "Could not attach the block button", ex);
         }
+    }
+
+    /**
+     * Puts every control where its saved fraction says, and the ones with nothing saved where
+     * they sit relative to the block button. Reset uses it too: clearing one control's setting
+     * and running this again gives that one its default back and leaves the rest alone, because
+     * a control with a saved position is placed from that position either way.
+     */
+    private static void applyPositions(ViewGroup root) {
+        View button = buttonReference.get();
+        View localHide = localHideReference.get();
+        View soundButton = soundButtonReference.get();
+        View feedback = notInterestedReference.get();
+        if (button == null || localHide == null || soundButton == null || feedback == null) return;
+        if (root.getWidth() == 0 || root.getHeight() == 0) return;
+
+        int size = SettingsUi.dp(root.getContext(), BUTTON_SIZE_DP);
+        applySavedPosition(button, root, size, Settings.BLOCK_AUTHOR_BUTTON_POSITION,
+                DEFAULT_X_FRACTION, DEFAULT_Y_FRACTION);
+        int step = size + SettingsUi.dp(root.getContext(), BUTTON_GAP_DP);
+        FrameLayout.LayoutParams blockPosition =
+                (FrameLayout.LayoutParams) button.getLayoutParams();
+        float blockX = blockPosition.leftMargin + size / 2f;
+        float blockY = blockPosition.topMargin + size / 2f;
+        int maxTop = Math.max(0, root.getHeight() - size);
+        float verticalDirection = maxTop - blockPosition.topMargin >= step * 2 ? 1f : -1f;
+        applySavedPosition(localHide, root, size, Settings.LOCAL_HIDE_BUTTON_POSITION,
+                blockX / root.getWidth(),
+                (blockY + step * verticalDirection) / root.getHeight());
+        applySavedPosition(soundButton, root, size, Settings.BLOCK_SOUND_BUTTON_POSITION,
+                blockX / root.getWidth(),
+                (blockY + step * 2f * verticalDirection) / root.getHeight());
+        float horizontalDirection = blockPosition.leftMargin >= step ? -1f : 1f;
+        applySavedPosition(feedback, root, size, Settings.NOT_INTERESTED_BUTTON_POSITION,
+                (blockX + step * horizontalDirection) / root.getWidth(),
+                blockY / root.getHeight());
     }
 
     private static void installVisibilityListener(ViewGroup root) {
@@ -406,6 +434,13 @@ public final class BlockAuthorOverlay {
                 info.setLongClickable(false);
                 info.removeAction(android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction
                         .ACTION_LONG_CLICK);
+                // What the refused long-press owed a reader: a way to park the control, and a
+                // way back if it ends up somewhere useless.
+                info.addAction(moveAction(host, ACTION_MOVE_UP, "Move up"));
+                info.addAction(moveAction(host, ACTION_MOVE_DOWN, "Move down"));
+                info.addAction(moveAction(host, ACTION_MOVE_LEFT, "Move left"));
+                info.addAction(moveAction(host, ACTION_MOVE_RIGHT, "Move right"));
+                info.addAction(moveAction(host, ACTION_RESET_POSITION, "Reset position"));
             }
 
             @Override public boolean performAccessibilityAction(View host, int action,
@@ -413,6 +448,11 @@ public final class BlockAuthorOverlay {
                 if (action == android.view.accessibility.AccessibilityNodeInfo.ACTION_LONG_CLICK) {
                     return false;
                 }
+                if (action == ACTION_MOVE_UP) return nudge(host, 0, -1);
+                if (action == ACTION_MOVE_DOWN) return nudge(host, 0, 1);
+                if (action == ACTION_MOVE_LEFT) return nudge(host, -1, 0);
+                if (action == ACTION_MOVE_RIGHT) return nudge(host, 1, 0);
+                if (action == ACTION_RESET_POSITION) return resetPosition(host);
                 return super.performAccessibilityAction(host, action, arguments);
             }
         });
@@ -428,6 +468,44 @@ public final class BlockAuthorOverlay {
         });
 
         button.setOnTouchListener(BlockAuthorOverlay::onButtonTouch);
+    }
+
+    private static android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction moveAction(
+            View host, int id, String label) {
+        return new android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction(
+                id, L10n.t(host.getContext(), label));
+    }
+
+    /**
+     * One step of the control's own width, in the direction the action names. Clamped by
+     * {@link #moveTo}, so an action at an edge is still performed and simply stays put.
+     *
+     * @param stepsX -1 for left, 1 for right, 0 for neither
+     * @param stepsY -1 for up, 1 for down, 0 for neither
+     */
+    private static boolean nudge(View view, int stepsX, int stepsY) {
+        ViewGroup parent = view.getParent() instanceof ViewGroup
+                ? (ViewGroup) view.getParent()
+                : null;
+        if (parent == null || parent.getWidth() == 0 || parent.getHeight() == 0) return false;
+
+        int step = SettingsUi.dp(view.getContext(), BUTTON_SIZE_DP);
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+        moveTo(view, parent, params.leftMargin + stepsX * step, params.topMargin + stepsY * step);
+        savePosition(view, parent);
+        return true;
+    }
+
+    /** Gives one control its default position back and leaves every other control alone. */
+    private static boolean resetPosition(View view) {
+        ViewGroup parent = view.getParent() instanceof ViewGroup
+                ? (ViewGroup) view.getParent()
+                : null;
+        if (parent == null || parent.getWidth() == 0 || parent.getHeight() == 0) return false;
+
+        positionSetting(view).resetToDefault();
+        applyPositions(parent);
+        return true;
     }
 
     /**
@@ -558,8 +636,13 @@ public final class BlockAuthorOverlay {
         }
 
         ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
-        float x = (params.leftMargin + view.getWidth() / 2f) / parent.getWidth();
-        float y = (params.topMargin + view.getHeight() / 2f) / parent.getHeight();
+        // The same fallback moveTo uses. A control with nothing measured reports zero, and the
+        // centre would then be written down half a button off the position it was placed at,
+        // so reading the fraction back would move it.
+        float width = view.getWidth() > 0 ? view.getWidth() : params.width;
+        float height = view.getHeight() > 0 ? view.getHeight() : params.height;
+        float x = (params.leftMargin + width / 2f) / parent.getWidth();
+        float y = (params.topMargin + height / 2f) / parent.getHeight();
 
         StringSetting setting = positionSetting(view);
         String position = round(x) + "," + round(y);

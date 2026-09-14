@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.FrameLayout;
 import app.morphe.extension.shared.Utils;
@@ -28,6 +29,17 @@ import org.robolectric.annotation.GraphicsMode;
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 public class OverlayControlsTest {
     @Rule public final SettingsContextRule settingsContext = new SettingsContextRule();
+
+    /**
+     * A saved control position outlives its test, and the layout tests here read the defaults.
+     * Without this, whichever position test ran first decided what the others saw.
+     */
+    @org.junit.After public void clearSavedControlPositions() {
+        Settings.BLOCK_AUTHOR_BUTTON_POSITION.resetToDefault();
+        Settings.LOCAL_HIDE_BUTTON_POSITION.resetToDefault();
+        Settings.BLOCK_SOUND_BUTTON_POSITION.resetToDefault();
+        Settings.NOT_INTERESTED_BUTTON_POSITION.resetToDefault();
+    }
 
     @Test public void theInstalledBlockButtonDrawsBothTheRingAndTheSlash() throws Exception {
         Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
@@ -245,6 +257,180 @@ public class OverlayControlsTest {
             Settings.BLOCK_SOUND_BUTTON_POSITION.save(oldSound);
             Settings.NOT_INTERESTED_BUTTON_POSITION.save(oldFeedback);
         }
+    }
+
+    @Test public void everyControlOffersTheMoveAndResetActionsThePointerDragCannot() throws Exception {
+        // Pointer long-press parks each control independently. An accessibility long-click has
+        // no release, so it is refused, which left a screen reader with no way to move one at
+        // all.
+        ViewGroup root = attachedRoot();
+        int step = app.morphe.extension.tiktok.settings.preference.SettingsUi
+                .dp(root.getContext(), 48);
+
+        for (String name : CONTROLS) {
+            View view = held(name);
+            AccessibilityNodeInfo node = view.createAccessibilityNodeInfo();
+            java.util.Map<Integer, String> actions = new java.util.HashMap<>();
+            for (AccessibilityNodeInfo.AccessibilityAction action : node.getActionList()) {
+                if (action.getLabel() != null) actions.put(action.getId(), action.getLabel().toString());
+            }
+            assertEquals(name + " is missing a labelled move or reset action",
+                    java.util.Set.of("Move up", "Move down", "Move left", "Move right",
+                            "Reset position"),
+                    new java.util.HashSet<>(actions.values()));
+            assertFalse(name + " still advertises a long-click it refuses", node.isLongClickable());
+            node.recycle();
+        }
+
+        // Each direction, from a control parked where all four have room to move.
+        View sound = held("soundButtonReference");
+        Method move = declared("moveTo", View.class, ViewGroup.class, float.class, float.class);
+        move.invoke(null, sound, root, 500f, 500f);
+
+        assertTrue(sound.performAccessibilityAction(action("ACTION_MOVE_UP"), null));
+        assertEquals(500 - step, topOf(sound));
+        assertTrue(sound.performAccessibilityAction(action("ACTION_MOVE_DOWN"), null));
+        assertEquals(500, topOf(sound));
+        assertTrue(sound.performAccessibilityAction(action("ACTION_MOVE_LEFT"), null));
+        assertEquals(500 - step, leftOf(sound));
+        assertTrue(sound.performAccessibilityAction(action("ACTION_MOVE_RIGHT"), null));
+        assertEquals(500, leftOf(sound));
+    }
+
+    @Test public void aMoveActionSavesOnlyTheControlItWasPerformedOn() throws Exception {
+        ViewGroup root = attachedRoot();
+        View local = held("localHideReference");
+        declared("moveTo", View.class, ViewGroup.class, float.class, float.class)
+                .invoke(null, local, root, 400f, 400f);
+
+        int blockLeft = leftOf(held("buttonReference"));
+        int soundTop = topOf(held("soundButtonReference"));
+        int feedbackLeft = leftOf(held("notInterestedReference"));
+        String block = Settings.BLOCK_AUTHOR_BUTTON_POSITION.get();
+        String sound = Settings.BLOCK_SOUND_BUTTON_POSITION.get();
+        String feedback = Settings.NOT_INTERESTED_BUTTON_POSITION.get();
+
+        assertTrue(local.performAccessibilityAction(action("ACTION_MOVE_LEFT"), null));
+
+        assertEquals(400 - app.morphe.extension.tiktok.settings.preference.SettingsUi
+                .dp(root.getContext(), 48), leftOf(local));
+        assertFalse("the move saved nothing", Settings.LOCAL_HIDE_BUTTON_POSITION.get().isEmpty());
+        assertEquals(block, Settings.BLOCK_AUTHOR_BUTTON_POSITION.get());
+        assertEquals(sound, Settings.BLOCK_SOUND_BUTTON_POSITION.get());
+        assertEquals(feedback, Settings.NOT_INTERESTED_BUTTON_POSITION.get());
+        assertEquals(blockLeft, leftOf(held("buttonReference")));
+        assertEquals(soundTop, topOf(held("soundButtonReference")));
+        assertEquals(feedbackLeft, leftOf(held("notInterestedReference")));
+    }
+
+    @Test public void resetReturnsOneControlToItsDefaultAndLeavesTheRestWhereTheyWere()
+            throws Exception {
+        ViewGroup root = attachedRoot();
+        View local = held("localHideReference");
+        View sound = held("soundButtonReference");
+        int defaultLocalLeft = leftOf(local);
+        int defaultLocalTop = topOf(local);
+
+        Method move = declared("moveTo", View.class, ViewGroup.class, float.class, float.class);
+        Method save = declared("savePosition", View.class, ViewGroup.class);
+        move.invoke(null, local, root, 40f, 40f);
+        save.invoke(null, local, root);
+        move.invoke(null, sound, root, 700f, 700f);
+        save.invoke(null, sound, root);
+        assertNotEquals(defaultLocalLeft, leftOf(local));
+
+        assertTrue(local.performAccessibilityAction(action("ACTION_RESET_POSITION"), null));
+
+        assertEquals("", Settings.LOCAL_HIDE_BUTTON_POSITION.get());
+        assertEquals(defaultLocalLeft, leftOf(local));
+        assertEquals(defaultLocalTop, topOf(local));
+        assertEquals("the reset moved a control it was not performed on", 700, leftOf(sound));
+        assertEquals(700, topOf(sound));
+    }
+
+    @Test public void aMoveActionAtTheEdgeStaysInsideTheScreenAndIsStillPerformed()
+            throws Exception {
+        ViewGroup root = attachedRoot();
+        View feedback = held("notInterestedReference");
+        declared("moveTo", View.class, ViewGroup.class, float.class, float.class)
+                .invoke(null, feedback, root, 0f, 0f);
+
+        assertTrue("an action at the top edge reported failure",
+                feedback.performAccessibilityAction(action("ACTION_MOVE_UP"), null));
+        assertEquals(0, topOf(feedback));
+        assertTrue(feedback.performAccessibilityAction(action("ACTION_MOVE_LEFT"), null));
+        assertEquals(0, leftOf(feedback));
+        // The corner is a position like any other, so it is written down rather than refused.
+        assertFalse("a clamped move saved nothing",
+                Settings.NOT_INTERESTED_BUTTON_POSITION.get().isEmpty());
+
+        int maxLeft = 1080 - app.morphe.extension.tiktok.settings.preference.SettingsUi
+                .dp(root.getContext(), 48);
+        declared("moveTo", View.class, ViewGroup.class, float.class, float.class)
+                .invoke(null, feedback, root, (float) maxLeft, (float) maxLeft);
+        assertTrue(feedback.performAccessibilityAction(action("ACTION_MOVE_DOWN"), null));
+        assertTrue(feedback.performAccessibilityAction(action("ACTION_MOVE_RIGHT"), null));
+        assertEquals("a control was pushed off the bottom", maxLeft, topOf(feedback));
+        assertEquals("a control was pushed off the right", maxLeft, leftOf(feedback));
+    }
+
+    @Test public void aMoveActionNeverEntersPointerDragMode() throws Exception {
+        ViewGroup root = attachedRoot();
+        View block = held("buttonReference");
+        java.lang.reflect.Field dragging = BlockAuthorOverlay.class.getDeclaredField("dragging");
+        dragging.setAccessible(true);
+
+        assertTrue(block.performAccessibilityAction(action("ACTION_MOVE_DOWN"), null));
+        assertFalse("a move action left the control mid-drag", dragging.getBoolean(null));
+        java.util.concurrent.atomic.AtomicInteger clicks =
+                new java.util.concurrent.atomic.AtomicInteger();
+        block.setOnClickListener(view -> clicks.incrementAndGet());
+        assertTrue(block.performClick());
+        assertEquals("the click after a move was swallowed by drag mode", 1, clicks.get());
+
+        declared("detach").invoke(null);
+        assertFalse("detach left the overlay in drag mode", dragging.getBoolean(null));
+    }
+
+    private static final String[] CONTROLS = {"buttonReference", "localHideReference",
+            "soundButtonReference", "notInterestedReference"};
+
+    /** The content root with all four controls attached, laid out at a known size. */
+    private static ViewGroup attachedRoot() throws Exception {
+        Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
+        Utils.setContext(activity);
+        Utils.setActivity(activity);
+        ViewGroup root = activity.findViewById(android.R.id.content);
+        declared("attach", VideoAuthor.class)
+                .invoke(null, new VideoAuthor("1", "sec", "someone", "7712345"));
+        org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idle();
+        int spec = View.MeasureSpec.makeMeasureSpec(1080, View.MeasureSpec.EXACTLY);
+        root.measure(spec, spec);
+        root.layout(0, 0, 1080, 1080);
+        // attach posts the positioning pass before the root has a size, so the defaults these
+        // tests compare against have to be the ones for the size just laid out.
+        declared("applyPositions", ViewGroup.class).invoke(null, root);
+        return root;
+    }
+
+    private static Method declared(String name, Class<?>... parameters) throws Exception {
+        Method method = BlockAuthorOverlay.class.getDeclaredMethod(name, parameters);
+        method.setAccessible(true);
+        return method;
+    }
+
+    private static int action(String constant) throws Exception {
+        java.lang.reflect.Field field = BlockAuthorOverlay.class.getDeclaredField(constant);
+        field.setAccessible(true);
+        return field.getInt(null);
+    }
+
+    private static int leftOf(View view) {
+        return ((FrameLayout.LayoutParams) view.getLayoutParams()).leftMargin;
+    }
+
+    private static int topOf(View view) {
+        return ((FrameLayout.LayoutParams) view.getLayoutParams()).topMargin;
     }
 
     @SuppressWarnings("unchecked")
