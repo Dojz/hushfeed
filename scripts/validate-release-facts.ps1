@@ -613,10 +613,17 @@ if (-not (Test-Path -LiteralPath $receiptPath -PathType Leaf)) {
     # object to its string form, and every field then reads as empty.
     $receiptDocument = Read-JsonFile $receiptPath
     $approvedDelta = Read-ManifestDeltaAllowlist -Path (Join-Path $PSScriptRoot 'manifest-delta-allowlist.txt')
+    # The bundle bytes are compared on a release run only, for the same reason the published
+    # asset is. patches/build/libs holds whatever the last Gradle task left there, and this gate
+    # itself runs `:patches:test`, which reaches `:patches:jar` and rewrites that exact path with
+    # the plain jar. Comparing there would fail every push by construction. Everything the
+    # receipt says about itself, its commit, its verdicts and its manifest delta is checked on
+    # every run.
+    $receiptBundle = if ($VerifyPublishedAsset) { $bundlePath } else { $null }
     $receiptCheck = Test-ReleaseReceipt -Receipt $receiptDocument -ExpectedVersion $releaseVersion `
         -ExpectedPatchNames @($patches | ForEach-Object { [string]$_.name }) `
         -ExpectedPatcherVersion $pinnedPatcher -ExpectedManagerFloor $managerFloor `
-        -BundlePath $bundlePath -ApprovedManifestDelta $approvedDelta
+        -BundlePath $receiptBundle -ApprovedManifestDelta $approvedDelta
     if (-not $receiptCheck.Valid) {
         throw "The release provenance receipt does not describe this release: $($receiptCheck.Reason)"
     }
