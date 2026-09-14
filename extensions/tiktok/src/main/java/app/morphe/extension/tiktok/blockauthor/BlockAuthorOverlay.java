@@ -627,6 +627,11 @@ public final class BlockAuthorOverlay {
             Utils.showToastShort(L10n.t("That creator is already in the list"));
             return;
         }
+        String problem = app.morphe.extension.tiktok.feedfilter.FeedRuleLimits.creatorProblem(after);
+        if (problem != null) {
+            Utils.showToastLong(problem);
+            return;
+        }
         Settings.LOCAL_HIDDEN_CREATORS.save(after);
         showUndoBanner(L10n.f("Hidden %1$s locally", author.label()), () -> {
             Settings.LOCAL_HIDDEN_CREATORS.save(before);

@@ -20,6 +20,10 @@ import android.widget.TextView;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.tiktok.SettingsContextRule;
 import app.morphe.extension.tiktok.settings.Settings;
+import app.morphe.extension.tiktok.feedfilter.FeedRuleLimits;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Rule;
@@ -29,6 +33,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowToast;
+import org.robolectric.util.ReflectionHelpers;
 
 /**
  * The editor for locally hidden creators: one row per entry, a search box over them, an add
@@ -308,6 +313,44 @@ public class CreatorListTest {
             View view = open(activity).onCreateDialogView();
             assertEquals(java.util.List.of(), rows(view));
             assertEquals("No creators are hidden yet", emptyState(view));
+        }
+    }
+
+    @Test
+    public void addingPastTheCreatorLimitIsRefusedWithoutRenderingTenThousandRows() {
+        try (var owner = Robolectric.buildActivity(
+                app.morphe.extension.tiktok.captions.CaptionToolsTest.CaptionActivity.class)
+                .setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            CreatorListPreference preference = new CreatorListPreference(activity,
+                    "Locally hidden creators", "", Settings.LOCAL_HIDDEN_CREATORS);
+            List<String> pending = new ArrayList<>(FeedRuleLimits.MAX_ENTRIES);
+            for (int index = 0; index < FeedRuleLimits.MAX_ENTRIES; index++) {
+                pending.add("creator" + index);
+            }
+            EditText editor = new EditText(activity);
+            editor.setText("one-too-many");
+            ReflectionHelpers.setField(preference, "pendingEntries", pending);
+            ReflectionHelpers.setField(preference, "addEditText", editor);
+
+            ReflectionHelpers.callInstanceMethod(preference, "addEntry");
+
+            assertEquals(FeedRuleLimits.MAX_ENTRIES, pending.size());
+            assertEquals("one-too-many", editor.getText().toString());
+            assertEquals("That list has too many entries. Keep it to 10,000 or fewer.",
+                    ShadowToast.getTextOfLatestToast());
+            assertEquals("", Settings.LOCAL_HIDDEN_CREATORS.get());
+
+            pending.add("forced-over-limit");
+            editor.setText("");
+            ShadowToast.reset();
+            preference.onDialogClosed(true);
+
+            assertEquals("a final dialog save bypassed the list bound", "", preference.getValue());
+            assertEquals("That list has too many entries. Keep it to 10,000 or fewer.",
+                    ShadowToast.getTextOfLatestToast());
+            assertEquals("", Settings.LOCAL_HIDDEN_CREATORS.get());
         }
     }
 }

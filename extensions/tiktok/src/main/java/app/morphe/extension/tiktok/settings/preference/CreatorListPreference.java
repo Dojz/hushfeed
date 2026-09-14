@@ -27,6 +27,7 @@ import android.widget.TextView;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.settings.StringSetting;
 import app.morphe.extension.tiktok.feedfilter.AdvancedFeedRules;
+import app.morphe.extension.tiktok.feedfilter.FeedRuleLimits;
 import app.morphe.extension.tiktok.settings.L10n;
 
 import java.util.ArrayList;
@@ -221,6 +222,13 @@ public class CreatorListPreference extends DialogPreference {
             Utils.showToastShort(L10n.t("That creator is already in the list"));
             return;
         }
+        String combined = AdvancedFeedRules.addCreatorEntry(
+                AdvancedFeedRules.joinCreatorEntries(pendingEntries), candidate);
+        problem = FeedRuleLimits.creatorProblem(combined);
+        if (problem != null) {
+            Utils.showToastLong(problem);
+            return;
+        }
         pendingEntries.add(candidate);
         addEditText.setText("");
         refreshEntryRows();
@@ -335,7 +343,13 @@ public class CreatorListPreference extends DialogPreference {
             // without a word.
             String typed = addEditText == null ? "" : addEditText.getText().toString().trim();
             if (!typed.isEmpty()) addEntry();
-            setValue(AdvancedFeedRules.joinCreatorEntries(pendingEntries));
+            String next = AdvancedFeedRules.joinCreatorEntries(pendingEntries);
+            String problem = FeedRuleLimits.creatorProblem(next);
+            if (problem != null) {
+                Utils.showToastLong(problem);
+                return;
+            }
+            setValue(next);
         }
     }
 

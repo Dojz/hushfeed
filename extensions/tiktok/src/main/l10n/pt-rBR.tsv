@@ -879,3 +879,6 @@ Add a separate button that skips this account locally without blocking it.	Adici
 Add a separate button that skips videos using the current sound.	Adiciona um botão separado que ignora vídeos que usam o som atual.
 Show block sound button	Mostrar o botão de bloquear som
 Show local hide button	Mostrar o botão de ocultar localmente
+That list is too large. Keep it to 256 KB or less.	Essa lista é grande demais. Limite-a a 256 KB ou menos.
+That list has too many entries. Keep it to 10,000 or fewer.	Essa lista tem entradas demais. Limite-a a 10.000 ou menos.
+That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.	Esse backup de configurações contém uma lista de regras do feed maior do que o Hushfeed aceita. Nada foi alterado.

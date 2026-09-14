@@ -221,6 +221,9 @@ public final class SettingsBackupPreference extends Preference
                         case VALUE:
                             return "That settings backup holds a value Hushfeed cannot read. "
                                     + "Nothing was altered.";
+                        case RULE_LIST:
+                            return "That settings backup contains a feed rule list larger than "
+                                    + "Hushfeed accepts. Nothing was altered.";
                         case LAB_RULES:
                             return "That settings backup holds more Feature Gate Lab rules than "
                                     + "the Lab takes. Nothing was altered.";

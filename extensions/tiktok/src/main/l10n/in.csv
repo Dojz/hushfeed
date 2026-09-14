@@ -880,3 +880,6 @@ Add a separate button that skips this account locally without blocking it.,Tamba
 Add a separate button that skips videos using the current sound.,Tambahkan tombol terpisah yang melewati video yang menggunakan suara saat ini.
 Show block sound button,Tampilkan tombol blokir suara
 Show local hide button,Tampilkan tombol sembunyikan lokal
+That list is too large. Keep it to 256 KB or less.,Daftar itu terlalu besar. Batasi ukurannya hingga 256 KB atau kurang.
+"That list has too many entries. Keep it to 10,000 or fewer.","Daftar itu memiliki terlalu banyak entri. Batasi hingga 10.000 entri atau kurang."
+That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.,Cadangan pengaturan itu berisi daftar aturan feed yang lebih besar dari batas Hushfeed. Tidak ada yang diubah.

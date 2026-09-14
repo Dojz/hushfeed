@@ -16,12 +16,29 @@ import app.morphe.extension.shared.settings.Setting;
 
 import app.morphe.extension.tiktok.offline.CustomOfflineVideosLimitPatch;
 import app.morphe.extension.shared.settings.StringSetting;
+import app.morphe.extension.tiktok.feedfilter.FeedRuleLimits;
 import app.morphe.extension.tiktok.navigation.BottomNavigationTabOptions;
 import app.morphe.extension.tiktok.navigation.NavigationTabOptions;
 
 import java.util.Collections;
 
 public class Settings extends BaseSettings {
+    /** Backstop for direct writes and both settings-import formats. */
+    private static final class FeedRuleStringSetting extends StringSetting {
+        private final boolean creatorList;
+
+        FeedRuleStringSetting(String key, boolean creatorList) {
+            super(key, "");
+            this.creatorList = creatorList;
+        }
+
+        @Override
+        protected String coerce(String newValue) {
+            return creatorList ? FeedRuleLimits.requireCreators(newValue)
+                    : FeedRuleLimits.requireCaption(newValue);
+        }
+    }
+
     public static final BooleanSetting REGION_SPOOF = new BooleanSetting("region_spoof", FALSE, true);
     public static final BooleanSetting REGION_STORE_SPOOF = new BooleanSetting("region_store_spoof", FALSE, true);
     public static final BooleanSetting FOLDABLE_SPLIT_VIEW = new BooleanSetting("foldable_split_view", FALSE, true);
@@ -95,9 +112,12 @@ public class Settings extends BaseSettings {
             new IntegerSetting("edge_seek_seconds", 5).withRange(0, 60);
     public static final BooleanSetting CONFIRM_FOLLOW = new BooleanSetting("confirm_follow", FALSE);
     public static final BooleanSetting CONFIRM_LIKE = new BooleanSetting("confirm_like", FALSE);
-    public static final StringSetting BLOCKED_CAPTION_WORDS = new StringSetting("blocked_caption_words", "");
-    public static final StringSetting BLOCKED_CREATORS = new StringSetting("blocked_creators", "");
-    public static final StringSetting LOCAL_HIDDEN_CREATORS = new StringSetting("local_hidden_creators", "");
+    public static final StringSetting BLOCKED_CAPTION_WORDS =
+            new FeedRuleStringSetting("blocked_caption_words", false);
+    public static final StringSetting BLOCKED_CREATORS =
+            new FeedRuleStringSetting("blocked_creators", true);
+    public static final StringSetting LOCAL_HIDDEN_CREATORS =
+            new FeedRuleStringSetting("local_hidden_creators", true);
     public static final StringSetting REGION_ONLY_FROM = new StringSetting("region_only_from", "", true);
     public static final StringSetting REGION_NEVER_FROM = new StringSetting("region_never_from", "", true);
     public static final IntegerSetting MAX_VIDEO_SECONDS =

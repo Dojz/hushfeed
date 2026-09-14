@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Caption and creator filters now parse unchanged lists once per stored value instead of once per video. Feed-rule lists accept up to 10,000 entries or 256 KB, and oversized dialog edits or imports stay out of storage with a translated explanation.
+
 * Downloads with a missing or malformed size header now recheck free space while streaming. They stop and remove partial media before reaching the 32 MB floor, with another 8 MB kept for publication.
 
 * Rapid Feature Gate detail edits now save in tap order. Only the newest result can update the screen, and one Undo returns the whole burst to the value that was present before the first tap.

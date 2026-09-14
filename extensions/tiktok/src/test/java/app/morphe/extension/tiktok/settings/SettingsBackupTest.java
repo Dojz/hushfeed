@@ -15,6 +15,7 @@ import app.morphe.extension.shared.settings.Setting;
 import app.morphe.extension.shared.settings.preference.AbstractPreferenceFragment;
 import app.morphe.extension.tiktok.featuregatelab.FeatureGateLabRuntime;
 import app.morphe.extension.tiktok.featuregatelab.FeatureGateLabStore;
+import app.morphe.extension.tiktok.feedfilter.FeedRuleLimits;
 import app.morphe.extension.tiktok.settings.preference.SettingsBackupPreference;
 import app.morphe.extension.tiktok.settings.preference.TikTokPreferenceFragment;
 import java.io.ByteArrayInputStream;
@@ -186,6 +187,38 @@ public class SettingsBackupTest {
                 + "Nothing was altered.", sentenceFor(many.toString()));
         assertEquals(baseline, SettingsBackup.create(false));
         assertTrue(FeatureGateLabStore.rules().isEmpty());
+    }
+
+    @Test public void oversizedFeedRuleListsAreRejectedBeforeAnyBackupWrite() throws Exception {
+        String baseline = SettingsBackup.create(false);
+        String tooMany = ruleEntries(FeedRuleLimits.MAX_ENTRIES + 1);
+        StringBuilder tooLarge = new StringBuilder(FeedRuleLimits.MAX_UTF8_BYTES / 2 + 1);
+        for (int index = 0; index <= FeedRuleLimits.MAX_UTF8_BYTES / 2; index++) {
+            tooLarge.append('é');
+        }
+        for (String key : new String[]{Settings.BLOCKED_CAPTION_WORDS.key,
+                Settings.BLOCKED_CREATORS.key, Settings.LOCAL_HIDDEN_CREATORS.key}) {
+            for (String invalid : new String[]{tooMany, tooLarge.toString()}) {
+                JSONObject backup = new JSONObject(baseline);
+                backup.getJSONObject("settings").put(key, invalid);
+                assertEquals(key, SettingsBackup.Reason.RULE_LIST,
+                        reasonFor(backup.toString()));
+                assertEquals("That settings backup contains a feed rule list larger than "
+                                + "Hushfeed accepts. Nothing was altered.",
+                        sentenceFor(backup.toString()));
+                assertEquals("a rejected " + key + " value changed storage",
+                        baseline, SettingsBackup.create(false));
+            }
+        }
+    }
+
+    private static String ruleEntries(int count) {
+        StringBuilder value = new StringBuilder(count * 8);
+        for (int index = 0; index < count; index++) {
+            if (index > 0) value.append(',');
+            value.append("item").append(index);
+        }
+        return value.toString();
     }
 
     @Test public void aBackupFromAnotherTikTokVersionRestoresSettingsAndLeavesTheLabAlone() throws Exception {

@@ -882,3 +882,6 @@ Add a separate button that skips this account locally without blocking it.	Eine 
 Add a separate button that skips videos using the current sound.	Eine separate Schaltfläche hinzufügen, die Videos mit dem aktuellen Sound überspringt.
 Show block sound button	Schaltfläche zum Blockieren des Sounds anzeigen
 Show local hide button	Schaltfläche zum lokalen Ausblenden anzeigen
+That list is too large. Keep it to 256 KB or less.	Diese Liste ist zu groß. Begrenze sie auf höchstens 256 KB.
+That list has too many entries. Keep it to 10,000 or fewer.	Diese Liste enthält zu viele Einträge. Begrenze sie auf höchstens 10.000.
+That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.	Diese Einstellungssicherung enthält eine Feed-Regelliste, die größer ist, als Hushfeed zulässt. Es wurde nichts geändert.

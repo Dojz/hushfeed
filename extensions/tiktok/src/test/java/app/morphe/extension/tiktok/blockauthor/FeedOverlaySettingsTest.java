@@ -16,6 +16,7 @@ import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.settings.BooleanSetting;
 import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
+import app.morphe.extension.tiktok.feedfilter.FeedRuleLimits;
 import app.morphe.extension.tiktok.settings.preference.TikTokPreferenceFragment;
 import app.morphe.extension.tiktok.wellbeing.SessionBudget;
 import app.morphe.extension.tiktok.wellbeing.SessionLockOverlay;
@@ -29,6 +30,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
+import org.robolectric.shadows.ShadowToast;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
@@ -117,6 +119,30 @@ public class FeedOverlaySettingsTest {
         assertFalse(Settings.NOT_INTERESTED_BUTTON.get());
         assertVisible("Block this account");
         assertEquals(View.GONE, button("Not interested in this video").getVisibility());
+    }
+
+    @Test public void localHideRefusesTheTenThousandAndFirstEntryWithoutThrowing() {
+        String before = Settings.LOCAL_HIDDEN_CREATORS.get();
+        try {
+            StringBuilder full = new StringBuilder();
+            for (int index = 0; index < FeedRuleLimits.MAX_ENTRIES; index++) {
+                if (index > 0) full.append(',');
+                full.append("creator").append(index);
+            }
+            Settings.LOCAL_HIDDEN_CREATORS.save(full.toString());
+            showSettings(true, false);
+            bind("video-at-limit");
+            ShadowToast.reset();
+
+            button("Hide this creator locally").performClick();
+            idle();
+
+            assertEquals(full.toString(), Settings.LOCAL_HIDDEN_CREATORS.get());
+            assertEquals("That list has too many entries. Keep it to 10,000 or fewer.",
+                    ShadowToast.getTextOfLatestToast());
+        } finally {
+            Settings.LOCAL_HIDDEN_CREATORS.save(before);
+        }
     }
 
     @Test public void lastFeedbackRowOffDetachesTheInstalledControls() {
