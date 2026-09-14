@@ -741,11 +741,29 @@ public final class FeatureGateDetailFragment extends Fragment {
 
             if ("BOOLEAN".equals(kind)) {
                 Switch toggle = new Switch(root.getContext());
-                toggle.setContentDescription(fieldName);
+                toggle.setId(View.generateViewId());
                 toggle.setChecked(value instanceof Boolean
                         ? (Boolean) value
                         : Boolean.parseBoolean(String.valueOf(value)));
                 toggle.setEnabled(editable);
+                // Named the same way the text fields beside it are: the readable title owns the
+                // relationship and both labels leave traversal, so one field is one stop rather
+                // than a title, a raw name and a switch that repeats the raw name back.
+                final CharSequence spokenName = title.getText() + " (" + rawName.getText() + ")";
+                title.setLabelFor(toggle.getId());
+                title.setFocusable(false);
+                title.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+                rawName.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+                toggle.setAccessibilityDelegate(new View.AccessibilityDelegate() {
+                    @Override public void onInitializeAccessibilityNodeInfo(
+                            View host, android.view.accessibility.AccessibilityNodeInfo info) {
+                        super.onInitializeAccessibilityNodeInfo(host, info);
+                        // The name goes in the node's text, not in a content description: a
+                        // description replaces what the Switch reports about itself, and the
+                        // checked state and the class it announces are the point of using one.
+                        info.setText(spokenName);
+                    }
+                });
                 fieldRoot.addView(toggle, new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         FeatureGateLabUi.dp(root.getContext(), 48)

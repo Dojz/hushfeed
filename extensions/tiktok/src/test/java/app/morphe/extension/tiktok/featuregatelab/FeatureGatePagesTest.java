@@ -517,6 +517,126 @@ public class FeatureGatePagesTest {
         assertStructuredEditorsAreNamed(2f);
     }
 
+    @Test @Config(fontScale = 1f)
+    public void structuredBooleanFieldsHaveOneNamedSwitchAtNormalTextSize() throws Exception {
+        assertStructuredTogglesAreNamed(1f);
+    }
+
+    @Test @Config(fontScale = 2f)
+    public void structuredBooleanFieldsHaveOneNamedSwitchAtDoubleTextSize() throws Exception {
+        assertStructuredTogglesAreNamed(2f);
+    }
+
+    /**
+     * A generated Boolean field used to leave three labels in traversal for one value: the
+     * readable title, the raw field name, and the raw field name again as the Switch's content
+     * description. The text fields beside it had already been reduced to one named editor.
+     */
+    private static void assertStructuredTogglesAreNamed(float expectedScale) throws Exception {
+        try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            assertEquals(expectedScale,
+                    activity.getResources().getConfiguration().fontScale, 0.01f);
+            FeatureGateLabStore.resetAllLabData();
+            FeatureGateLabSession.begin();
+            FeatureGateLabStore.setMasterEnabled(true);
+            var entry = new FeatureGateCatalog.Entry("boolean_gate", "Boolean gate",
+                    FeatureGateLabStore.MANAGER_SETTINGS_MANAGER, "OBJECT", true, true,
+                    List.of(), List.of(), List.of(), "", "", false, null, null,
+                    StructuredConfigControllerTest.TwoBooleans.class.getName());
+            var cached = FeatureGateCatalog.class.getDeclaredField("cachedSnapshot");
+            cached.setAccessible(true);
+            cached.set(null, new FeatureGateCatalog.Snapshot(
+                    List.of(entry), Map.of(entry.identity(), entry), 0, 0, true));
+
+            FeatureGateDetailFragment detail = FeatureGateDetailFragment.forEntry(
+                    FeatureGateLabStore.MANAGER_SETTINGS_MANAGER, "boolean_gate", "OBJECT");
+            attach(activity, detail);
+            java.util.List<Switch> all = new java.util.ArrayList<>();
+            collectSwitches(detail.getView(), all);
+            // The page carries the gate's own master switch too. A generated field row is a
+            // title, a raw name and the control, in that order, which is what separates them.
+            java.util.List<Switch> toggles = new java.util.ArrayList<>();
+            for (Switch candidate : all) {
+                ViewGroup parent = (ViewGroup) candidate.getParent();
+                if (parent.getChildCount() >= 3
+                        && parent.getChildAt(0) instanceof TextView
+                        && parent.getChildAt(1) instanceof TextView
+                        && parent.getChildAt(2) == candidate) {
+                    toggles.add(candidate);
+                }
+            }
+            assertEquals("the fixture did not build one switch per Boolean field",
+                    2, toggles.size());
+
+            java.util.Set<Integer> ids = new java.util.HashSet<>();
+            java.util.Set<String> names = new java.util.HashSet<>();
+            for (Switch toggle : toggles) {
+                ViewGroup field = (ViewGroup) toggle.getParent();
+                TextView label = (TextView) field.getChildAt(0);
+                TextView technical = (TextView) field.getChildAt(1);
+
+                assertNotEquals("a generated switch has no address for its label",
+                        View.NO_ID, toggle.getId());
+                assertTrue("two generated switches share the same view id", ids.add(toggle.getId()));
+                assertEquals("the field label is not connected to its switch",
+                        toggle.getId(), label.getLabelFor());
+                assertEquals("the field label is a second accessibility stop",
+                        View.IMPORTANT_FOR_ACCESSIBILITY_NO,
+                        label.getImportantForAccessibility());
+                assertEquals("the technical field label is a second accessibility stop",
+                        View.IMPORTANT_FOR_ACCESSIBILITY_NO,
+                        technical.getImportantForAccessibility());
+                assertFalse(label.isFocusable());
+                assertFalse(technical.isFocusable());
+                assertNull("a content description replaced what the switch reports",
+                        toggle.getContentDescription());
+
+                android.view.accessibility.AccessibilityNodeInfo node =
+                        toggle.createAccessibilityNodeInfo();
+                assertEquals("the generated switch stopped announcing itself as a switch",
+                        Switch.class.getName(), node.getClassName());
+                assertNull(node.getContentDescription());
+                String spokenName = String.valueOf(node.getText());
+                assertTrue("the node omits the readable field name",
+                        spokenName.contains(label.getText()));
+                assertTrue("the node omits the exact field identifier or required type",
+                        spokenName.contains(technical.getText()));
+                assertTrue("two generated switches read the same", names.add(spokenName));
+                assertEquals(toggle.isChecked(), node.isChecked());
+                assertTrue(node.isEnabled());
+                assertEquals("the switch lost its click action", 1, node.getActionList().stream()
+                        .filter(action -> action.getId() == android.view.accessibility
+                                .AccessibilityNodeInfo.ACTION_CLICK)
+                        .count());
+
+                // The state has to survive being switched and being disabled, which is where a
+                // content description would have frozen the old value in place.
+                toggle.setChecked(!toggle.isChecked());
+                assertEquals(toggle.isChecked(),
+                        toggle.createAccessibilityNodeInfo().isChecked());
+                toggle.setEnabled(false);
+                android.view.accessibility.AccessibilityNodeInfo disabled =
+                        toggle.createAccessibilityNodeInfo();
+                assertFalse(disabled.isEnabled());
+                assertEquals(spokenName, String.valueOf(disabled.getText()));
+            }
+            assertEquals("the two Boolean fields do not read differently", 2, names.size());
+        }
+    }
+
+    private static void collectSwitches(View view, java.util.List<Switch> found) {
+        if (view instanceof Switch) {
+            found.add((Switch) view);
+        } else if (view instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) view;
+            for (int index = 0; index < group.getChildCount(); index++) {
+                collectSwitches(group.getChildAt(index), found);
+            }
+        }
+    }
+
     private static void assertStructuredEditorsAreNamed(float expectedScale) throws Exception {
         try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
             Activity activity = owner.get();
