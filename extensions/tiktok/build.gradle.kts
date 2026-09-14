@@ -52,6 +52,7 @@ val trackedScreenshots = mapOf(
     "settings/rtl-large-light.png" to "pages/light/rtl-large.png",
     "settings/rtl-large.png" to "pages/dark/rtl-large.png",
     "settings/search.png" to "pages/dark/search.png",
+    "settings/settings-error.png" to "settings-initialization-error.png",
     "settings/session-reminder.png" to "session-reminder.png",
     "settings/settings.png" to "pages/dark/settings.png",
     "settings/share.png" to "pages/dark/share.png",

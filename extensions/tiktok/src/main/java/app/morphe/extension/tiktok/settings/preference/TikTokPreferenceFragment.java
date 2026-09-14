@@ -256,6 +256,54 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
     }
 
     @Override
+    protected boolean preferenceShowsSettingValue(@NonNull Preference pref,
+                                                  @NonNull Setting<?> setting) {
+        String expected = setting.get() instanceof Enum<?>
+                ? ((Enum<?>) setting.get()).name() : String.valueOf(setting.get());
+        if (pref instanceof NumberInputPreference) {
+            return expected.equals(((NumberInputPreference) pref).getValue());
+        }
+        if (pref instanceof CreatorListPreference) {
+            return expected.equals(((CreatorListPreference) pref).getValue());
+        }
+        if (pref instanceof RangeValuePreference) {
+            return expected.equals(((RangeValuePreference) pref).getValue());
+        }
+        if (pref instanceof DownloadPathPreference) {
+            return expected.equals(((DownloadPathPreference) pref).getValue());
+        }
+        if (pref instanceof TabSelectionPreference) {
+            return expected.equals(((TabSelectionPreference) pref).getValue());
+        }
+        return super.preferenceShowsSettingValue(pref, setting);
+    }
+
+    @Override protected CharSequence initializationErrorTitle(Context context) {
+        return L10n.t(context, "Settings couldn't open");
+    }
+
+    @Override protected CharSequence initializationErrorSummary(Context context) {
+        return L10n.t(context, "Try again, or go back to TikTok.");
+    }
+
+    @Override protected CharSequence initializationBackLabel(Context context) {
+        return L10n.t(context, "Back");
+    }
+
+    @Override protected CharSequence initializationRetryLabel(Context context) {
+        return L10n.t(context, "Retry");
+    }
+
+    @Override protected CharSequence preferenceChangeRecoveredMessage(Context context) {
+        return L10n.t(context, "The setting couldn't finish updating. Its saved value is shown.");
+    }
+
+    @Override protected CharSequence preferenceChangeRecoveryFailedMessage(Context context) {
+        return L10n.t(context,
+                "Settings couldn't refresh completely. Reopen settings and try again.");
+    }
+
+    @Override
     protected void initialize() {
         final var context = getActivity();
         activeFragment = this;

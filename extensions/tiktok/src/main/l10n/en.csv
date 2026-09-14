@@ -635,6 +635,7 @@ Restore settings,Restore settings
 Restored the previous Lab settings. Restart TikTok.,Restored the previous Lab settings. Restart TikTok.
 Restoring your settings,Restoring your settings
 Resume videos after scrolling,Resume videos after scrolling
+Retry,Retry
 Return a copied object with the selected fields changed,Return a copied object with the selected fields changed
 Return after using a TikTok feature to see every gate read during the recording.,Return after using a TikTok feature to see every gate read during the recording.
 Returns %1$s,Returns %1$s
@@ -696,6 +697,8 @@ Series posts,Series posts
 Settings,Settings
 Settings are back to their defaults. Restart TikTok to apply all changes.,Settings are back to their defaults. Restart TikTok to apply all changes.
 Settings backup saved,Settings backup saved
+Settings couldn't open,Settings couldn't open
+Settings couldn't refresh completely. Reopen settings and try again.,Settings couldn't refresh completely. Reopen settings and try again.
 Settings restored. Restart TikTok to apply all changes.,Settings restored. Restart TikTok to apply all changes.
 Settings restored. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.,Settings restored. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.
 Share action checklist,Share action checklist
@@ -812,6 +815,7 @@ The profile picture couldn't be saved.,The profile picture couldn't be saved.
 "The record of an interrupted settings change could not be read, so it was set aside. Check your settings.","The record of an interrupted settings change could not be read, so it was set aside. Check your settings."
 The report couldn't be saved. Try again.,The report couldn't be saved. Try again.
 The selected loaded-values file could not be read. Try again.,The selected loaded-values file could not be read. Try again.
+The setting couldn't finish updating. Its saved value is shown.,The setting couldn't finish updating. Its saved value is shown.
 The settings backup was rejected. Nothing was altered.,The settings backup was rejected. Nothing was altered.
 The smallest value is above the largest,The smallest value is above the largest
 The sound couldn't be saved. Try again.,The sound couldn't be saved. Try again.
@@ -869,6 +873,7 @@ Too many media saves are already running. Try again shortly.,Too many media save
 Transparent,Transparent
 "Try a country name, or a two-letter code","Try a country name, or a two-letter code"
 Try a different word or clear the search.,Try a different word or clear the search.
+"Try again, or go back to TikTok.","Try again, or go back to TikTok."
 Turned off %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.,Turned off %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.
 Turned off %1$d gates. Restart TikTok to apply this.,Turned off %1$d gates. Restart TikTok to apply this.
 Turned off 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.,Turned off 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.
