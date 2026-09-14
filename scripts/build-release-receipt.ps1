@@ -72,6 +72,17 @@ if (-not $patcherMatch.Success -or -not $floorMatch.Success) {
 
 $commit = (& git -C $Root rev-parse HEAD).Trim()
 if ($commit -notmatch '^[0-9a-f]{40}$') { throw "git did not answer with a commit: $commit" }
+$commitTimestamp = [long](& git -C $Root log -1 --format=%ct).Trim()
+$bundleManifest = Get-BundleManifestFacts -BundlePath $Bundle
+
+# Refused here rather than reported, because a receipt that records the mismatch would be a
+# document saying its own subject cannot be rebuilt from the source it names.
+$dirty = @(& git -C $Root status --porcelain)
+if ($dirty.Count -gt 0) {
+    throw ("The working tree has uncommitted changes, so the commit this receipt would name is " +
+        "not what was built: " + ($dirty | Select-Object -First 5 | ForEach-Object { $_.Trim() } |
+            Join-String -Separator '; '))
+}
 
 function Resolve-WithinRoot {
     param([string]$Path, [string]$Root)
@@ -246,15 +257,17 @@ $receipt = [ordered]@{
     schemaVersion = Get-ReleaseReceiptSchemaVersion
     generatedAt   = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
     release       = [ordered]@{
-        version    = $releaseVersion
-        tag        = "v$releaseVersion"
-        commit     = $commit
-        patchCount = $patchNames.Count
+        version         = $releaseVersion
+        tag             = "v$releaseVersion"
+        commit          = $commit
+        commitTimestamp = $commitTimestamp
+        patchCount      = $patchNames.Count
     }
     bundle        = [ordered]@{
         file      = Split-Path -Leaf $Bundle
         sizeBytes = (Get-Item -LiteralPath $Bundle).Length
         sha256    = Get-Sha256Hex -Path $Bundle
+        timestamp = $bundleManifest.timestamp
     }
     toolchain     = [ordered]@{
         patcherVersion = $patcherMatch.Groups[1].Value

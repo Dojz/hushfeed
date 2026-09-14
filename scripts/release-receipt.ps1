@@ -46,6 +46,43 @@ function Get-Sha256Hex {
     return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToUpperInvariant()
 }
 
+function Get-BundleManifestFacts {
+    <#
+    .SYNOPSIS
+        Version, timestamp and patcher stamp out of a bundle's META-INF/MANIFEST.MF.
+    .DESCRIPTION
+        The Gradle plugin pins the timestamp to the release commit's time in milliseconds, which
+        is what makes a published hash reproducible from a tag. Read back here so a receipt
+        cannot describe a bundle that was built from something other than the commit it names.
+    #>
+    param([Parameter(Mandatory = $true)][string]$BundlePath)
+
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $text = $null
+    $archive = [System.IO.Compression.ZipFile]::OpenRead($BundlePath)
+    try {
+        $entry = $archive.Entries | Where-Object { $_.FullName -eq 'META-INF/MANIFEST.MF' }
+        if (-not $entry) { throw "The bundle has no META-INF/MANIFEST.MF: $BundlePath" }
+        $reader = New-Object System.IO.StreamReader($entry.Open())
+        try { $text = $reader.ReadToEnd() } finally { $reader.Dispose() }
+    } finally { $archive.Dispose() }
+
+    # Manifest lines wrap at 72 characters with a leading space on the continuation.
+    $text = $text -replace "\r?\n ", ''
+    $timestamp = [regex]::Match($text, '(?m)^Timestamp:\s*(\d+)\s*$')
+    $version = [regex]::Match($text, '(?m)^Version:\s*(\S+)\s*$')
+    $patcher = [regex]::Match($text, '(?m)^Patcher-Version:\s*(\S+)\s*$')
+    if (-not $timestamp.Success) { throw "The bundle manifest has no Timestamp: $BundlePath" }
+    if (-not $version.Success) { throw "The bundle manifest has no Version: $BundlePath" }
+    if (-not $patcher.Success) { throw "The bundle manifest has no Patcher-Version: $BundlePath" }
+
+    return [pscustomobject]@{
+        version        = $version.Groups[1].Value
+        timestamp      = [long]$timestamp.Groups[1].Value
+        patcherVersion = $patcher.Groups[1].Value
+    }
+}
+
 function Resolve-Aapt2 {
     <#
     .SYNOPSIS
@@ -322,6 +359,9 @@ function Test-ReleaseReceipt {
     if ($Receipt.release.commit -notmatch '^[0-9a-f]{40}$') {
         return Fail "The receipt has no full commit: $($Receipt.release.commit)"
     }
+    if ([long]$Receipt.release.commitTimestamp -le 0) {
+        return Fail 'The receipt does not say when the commit it names was made.'
+    }
     if ([int]$Receipt.release.patchCount -ne $ExpectedPatchNames.Count) {
         return Fail ("The receipt counts $($Receipt.release.patchCount) patches; the catalog " +
             "has $($ExpectedPatchNames.Count).")
@@ -348,6 +388,29 @@ function Test-ReleaseReceipt {
         if ([string]$Receipt.bundle.sha256 -ne $actualHash) {
             return Fail ("The receipt says the bundle hashes to $($Receipt.bundle.sha256); " +
                 "$BundlePath hashes to $actualHash.")
+        }
+
+        $manifest = Get-BundleManifestFacts -BundlePath $BundlePath
+        if ($manifest.version -ne $ExpectedVersion) {
+            return Fail "The bundle's manifest says version $($manifest.version), not $ExpectedVersion."
+        }
+        if ($manifest.patcherVersion -ne $ExpectedPatcherVersion) {
+            return Fail ("The bundle was stamped by patcher $($manifest.patcherVersion); the " +
+                "catalog pins $ExpectedPatcherVersion.")
+        }
+        if ([long]$Receipt.bundle.timestamp -ne $manifest.timestamp) {
+            return Fail ("The receipt says the bundle is stamped $($Receipt.bundle.timestamp); " +
+                "$BundlePath is stamped $($manifest.timestamp).")
+        }
+        # The one fact that makes a published hash reproducible from a tag. The plugin pins this
+        # to the release commit's time, so anything else means the bundle was built from a
+        # different commit, or from a tree with uncommitted changes in it, and nobody can rebuild
+        # it from the source the receipt names. v0.28.0 shipped exactly that way.
+        $expectedStamp = [long]$Receipt.release.commitTimestamp * 1000
+        if ($manifest.timestamp -ne $expectedStamp) {
+            return Fail ("The bundle is stamped $($manifest.timestamp) but the commit it is " +
+                "attributed to was made at $expectedStamp. It was built from a different " +
+                "commit, or from a tree that had uncommitted changes.")
         }
     }
 

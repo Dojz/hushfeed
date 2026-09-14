@@ -305,17 +305,42 @@ try {
     Assert-Throws { Read-ManifestDeltaAllowlist -Path (Join-Path $allowlistRoot 'absent.txt') } `
         '*allowlist is missing*' 'A missing allowlist was treated as an empty one.'
 
-    # A stand-in bundle, so the size and hash checks compare against real bytes.
+    # A stand-in bundle, so the size, hash and manifest checks compare against real bytes.
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $commitSeconds = 1700000000L
+    function New-TestBundle {
+        param([string]$Path, [string]$Version = '9.9.9', [long]$Timestamp = 1700000000000L,
+            [string]$Patcher = '1.12.0')
+        if (Test-Path -LiteralPath $Path) { Remove-Item -LiteralPath $Path -Force }
+        $archive = [System.IO.Compression.ZipFile]::Open(
+            $Path, [System.IO.Compression.ZipArchiveMode]::Create)
+        try {
+            $entry = $archive.CreateEntry('META-INF/MANIFEST.MF')
+            $writer = New-Object System.IO.StreamWriter($entry.Open())
+            try {
+                $writer.Write("Manifest-Version: 1.0`nVersion: $Version`n" +
+                    "Timestamp: $Timestamp`nPatcher-Version: $Patcher`n`n")
+            } finally { $writer.Dispose() }
+        } finally { $archive.Dispose() }
+    }
+
     $bundle = Join-Path $allowlistRoot 'patches-9.9.9.mpp'
-    [System.IO.File]::WriteAllBytes($bundle, [byte[]](1, 2, 3, 4, 5))
+    New-TestBundle -Path $bundle
     $bundleHash = Get-Sha256Hex -Path $bundle
     $bundleSize = (Get-Item -LiteralPath $bundle).Length
+
+    $manifestFacts = Get-BundleManifestFacts -BundlePath $bundle
+    Assert-True ($manifestFacts.version -eq '9.9.9') 'The bundle manifest version was not read.'
+    Assert-True ($manifestFacts.timestamp -eq 1700000000000L) 'The bundle timestamp was not read.'
+    Assert-True ($manifestFacts.patcherVersion -eq '1.12.0') 'The bundle patcher stamp was not read.'
 
     $template = [ordered]@{
         schemaVersion = Get-ReleaseReceiptSchemaVersion
         release   = [ordered]@{ version = '9.9.9'; tag = 'v9.9.9'
-            commit = '0123456789abcdef0123456789abcdef01234567'; patchCount = 2 }
-        bundle    = [ordered]@{ file = 'patches-9.9.9.mpp'; sizeBytes = $bundleSize; sha256 = $bundleHash }
+            commit = '0123456789abcdef0123456789abcdef01234567'
+            commitTimestamp = $commitSeconds; patchCount = 2 }
+        bundle    = [ordered]@{ file = 'patches-9.9.9.mpp'; sizeBytes = $bundleSize
+            sha256 = $bundleHash; timestamp = 1700000000000L }
         toolchain = [ordered]@{ patcherVersion = '1.12.0'; managerFloor = '1.29.0' }
         extension = [ordered]@{ dexPayloads = @([ordered]@{
             name = 'extensions/tiktok.rve'; sizeBytes = 10; sha256 = ('A' * 64) }) }
@@ -368,11 +393,51 @@ try {
         'a patch the catalog does not list'     = { param($r) $r.targets[0].patches[1].name = 'Gamma' }
         'the same patch reported twice'         = { param($r) $r.targets[0].patches[1].name = 'Alpha' }
         'a patch that did not apply'            = { param($r) $r.targets[0].patches[1].applied = $false }
+        'a receipt with no commit time'         = { param($r) $r.release.commitTimestamp = 0 }
+        'a stamp that is not the bundle stamp'  = { param($r) $r.bundle.timestamp = 1700000001000L }
     }
     foreach ($description in $mutations.Keys) {
         $result = Test-TestReceipt -Receipt (New-TestReceipt -Mutate $mutations[$description])
         Assert-True (-not $result.Valid) "Receipt validation accepted $description."
         Assert-True ([bool]$result.Reason) "Receipt validation refused $description without saying why."
+    }
+
+    # The bundle itself disagreeing with the receipt, which is the v0.28.0 failure: a bundle
+    # built before its release commit existed carries the previous commit's pin, and nobody can
+    # reproduce the published hash from the tag.
+    $strayBundle = Join-Path $allowlistRoot 'patches-stray.mpp'
+    New-TestBundle -Path $strayBundle -Timestamp 1699999999000L
+    $strayReceipt = New-TestReceipt -Mutate {
+        param($r)
+        $r.bundle.sizeBytes = (Get-Item -LiteralPath $strayBundle).Length
+        $r.bundle.sha256 = Get-Sha256Hex -Path $strayBundle
+        $r.bundle.timestamp = 1699999999000L
+    }
+    $strayResult = Test-ReleaseReceipt -Receipt $strayReceipt -ExpectedVersion '9.9.9' `
+        -ExpectedPatchNames @('Alpha', 'Beta') -ExpectedPatcherVersion '1.12.0' `
+        -ExpectedManagerFloor '1.29.0' -BundlePath $strayBundle
+    Assert-True (-not $strayResult.Valid) 'A bundle built from another commit was accepted.'
+    Assert-True ($strayResult.Reason -like '*different*commit*') `
+        "The stale bundle pin was refused for the wrong reason: $($strayResult.Reason)"
+
+    foreach ($wrong in @(
+        @{ Name = 'a bundle stamped with another version'; Version = '9.9.8'; Patcher = '1.12.0'
+            Pattern = '*manifest says version*' },
+        @{ Name = 'a bundle stamped by another patcher'; Version = '9.9.9'; Patcher = '1.13.0'
+            Pattern = '*stamped by patcher*' })) {
+        $odd = Join-Path $allowlistRoot 'patches-odd.mpp'
+        New-TestBundle -Path $odd -Version $wrong.Version -Patcher $wrong.Patcher
+        $oddReceipt = New-TestReceipt -Mutate {
+            param($r)
+            $r.bundle.sizeBytes = (Get-Item -LiteralPath $odd).Length
+            $r.bundle.sha256 = Get-Sha256Hex -Path $odd
+        }
+        $oddResult = Test-ReleaseReceipt -Receipt $oddReceipt -ExpectedVersion '9.9.9' `
+            -ExpectedPatchNames @('Alpha', 'Beta') -ExpectedPatcherVersion '1.12.0' `
+            -ExpectedManagerFloor '1.29.0' -BundlePath $odd
+        Assert-True (-not $oddResult.Valid) "Receipt validation accepted $($wrong.Name)."
+        Assert-True ($oddResult.Reason -like $wrong.Pattern) `
+            "$($wrong.Name) was refused for the wrong reason: $($oddResult.Reason)"
     }
 
     $withDelta = New-TestReceipt -Mutate {
