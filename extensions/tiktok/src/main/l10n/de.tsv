@@ -944,3 +944,7 @@ Settings couldn't open	Die Einstellungen konnten nicht geöffnet werden
 Try again, or go back to TikTok.	Versuche es erneut oder kehre zu TikTok zurück.
 The setting couldn't finish updating. Its saved value is shown.	Die Einstellung konnte nicht vollständig aktualisiert werden. Der gespeicherte Wert wird angezeigt.
 Settings couldn't refresh completely. Reopen settings and try again.	Die Einstellungen konnten nicht vollständig aktualisiert werden. Öffne die Einstellungen erneut und versuche es noch einmal.
+Clearing	Wird entfernt
+Could not clear suggested accounts	Kontovorschläge konnten nicht entfernt werden
+Stopped after dismissing one suggested account	Nach einem entfernten Kontovorschlag gestoppt
+Stopped after dismissing %1$s suggested accounts	Nach %1$s entfernten Kontovorschlägen gestoppt

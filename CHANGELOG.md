@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Inbox Clear all now shows what it is doing. Clearing up to 60 suggestions takes about eighteen seconds, and the control used to sit there looking pressable the whole time. It now reads as a button to screen readers, fades and refuses presses while a run is going, says "Clearing" as its state, and comes back on every ending: finished, nothing to clear, the 60 cap, the Inbox closing, or a dismissal that failed. A failure says how many accounts it got through before it stopped, and the run can be started again straight away. Every outcome is announced as well as shown.
+
 * Robolectric tests now use Bouncy Castle 1.85.2 instead of 1.81. Every TikTok extension test inspects the resolved dependency graph first, and Gradle's reviewed checksums no longer accept the vulnerable jar.
 
 * Feature Gate Recorder copies now use Android's sensitive clipboard flag while keeping the existing success, large-report and failure messages. Empty reports remain safe to copy, and reports above 60,000 characters still require Save JSON without replacing the clipboard.

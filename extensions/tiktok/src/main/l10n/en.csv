@@ -134,6 +134,7 @@ Clear display delay,Clear display delay
 Clear search,Clear search
 Clear the seen video history,Clear the seen video history
 Cleared. Tap again to put the record back.,Cleared. Tap again to put the record back.
+Clearing,Clearing
 Close,Close
 "Comma separated account handles or user ids. These accounts are always skipped. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.","Comma separated account handles or user ids. These accounts are always skipped. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name."
 "Comma separated country codes, like GB, IE. Videos posted from anywhere else are hidden. Leave empty for all countries.","Comma separated country codes, like GB, IE. Videos posted from anywhere else are hidden. Leave empty for all countries."
@@ -165,6 +166,7 @@ Copy report,Copy report
 Copy the sound link,Copy the sound link
 Copy the video link,Copy the video link
 Could not change Lab settings.,Could not change Lab settings.
+Could not clear suggested accounts,Could not clear suggested accounts
 Could not confirm block for %1$s,Could not confirm block for %1$s
 Could not confirm unblock for %1$s,Could not confirm unblock for %1$s
 Could not copy report. Use Save JSON.,Could not copy report. Use Save JSON.
@@ -758,6 +760,8 @@ Stop feature gate recording,Stop feature gate recording
 Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.,Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.
 Stop video looping,Stop video looping
 Stop videos at the end instead of replaying them.,Stop videos at the end instead of replaying them.
+Stopped after dismissing %1$s suggested accounts,Stopped after dismissing %1$s suggested accounts
+Stopped after dismissing one suggested account,Stopped after dismissing one suggested account
 Storage permission is needed to save a profile picture,Storage permission is needed to save a profile picture
 Storage permission is needed to save a sound,Storage permission is needed to save a sound
 Storage permission is needed to save a story,Storage permission is needed to save a story
