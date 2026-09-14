@@ -210,5 +210,191 @@ foreach ($name in $consumerScripts) {
         "$name does not pass declared dependency names into result validation."
 }
 
+# --- release receipt -------------------------------------------------------------------------
+
+. (Join-Path $PSScriptRoot 'release-receipt.ps1')
+
+$manifestLines = @(
+    'N: android=http://schemas.android.com/apk/res/android (line=1)',
+    '  E: manifest (line=1)',
+    '    A: http://schemas.android.com/apk/res/android:versionCode(0x0101021b)=2024607030',
+    '    A: http://schemas.android.com/apk/res/android:versionName(0x0101021c)="46.7.3" (Raw: "46.7.3")',
+    '    A: package="com.example.host" (Raw: "com.example.host")',
+    '    A: platformBuildVersionCode=36',
+    '      E: uses-permission (line=10)',
+    '        A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.permission.INTERNET" (Raw: "android.permission.INTERNET")',
+    '      E: uses-permission (line=11)',
+    '        A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.permission.CAMERA" (Raw: "android.permission.CAMERA")',
+    '      E: application (line=20)',
+    '        E: activity (line=21)',
+    '          A: http://schemas.android.com/apk/res/android:name(0x01010003)="com.example.host.Main" (Raw: "com.example.host.Main")',
+    '          A: http://schemas.android.com/apk/res/android:exported(0x01010010)=true',
+    '            E: intent-filter (line=22)',
+    '              E: action (line=23)',
+    '                A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.intent.action.MAIN" (Raw: "android.intent.action.MAIN")',
+    '        E: activity (line=30)',
+    '          A: http://schemas.android.com/apk/res/android:name(0x01010003)="com.example.host.Private" (Raw: "com.example.host.Private")',
+    '          A: http://schemas.android.com/apk/res/android:exported(0x01010010)=false',
+    '        E: service (line=40)',
+    '          A: http://schemas.android.com/apk/res/android:name(0x01010003)=".Sync" (Raw: ".Sync")',
+    '          A: http://schemas.android.com/apk/res/android:exported(0x01010010)=true'
+)
+
+$facts = ConvertFrom-ManifestXmlTree -Lines $manifestLines -Source 'fixture'
+Assert-True ($facts.package -eq 'com.example.host') 'The manifest package was not read.'
+Assert-True ($facts.versionName -eq '46.7.3') 'The manifest version name was not read.'
+Assert-True ($facts.versionCode -eq '2024607030') 'The manifest version code was not read.'
+Assert-True (($facts.permissions -join ',') -eq 'android.permission.CAMERA,android.permission.INTERNET') `
+    'The requested permissions were not read and sorted.'
+Assert-True (($facts.exported -join ',') -eq 'activity:com.example.host.Main,service:com.example.host.Sync') `
+    "Exported components were misread: $($facts.exported -join ',')"
+Assert-True ($facts.exported -notcontains 'activity:com.example.host.Private') `
+    'A component marked exported=false was reported as exported.'
+Assert-True ($facts.exported -notcontains 'action:android.intent.action.MAIN') `
+    'An intent-filter action was counted as an exported component.'
+
+Assert-Throws {
+    ConvertFrom-ManifestXmlTree -Lines @('  E: manifest (line=1)') -Source 'nameless'
+} '*no package name*' 'A manifest with no package was accepted.'
+
+$patchedFacts = ConvertFrom-ManifestXmlTree -Source 'patched' -Lines (
+    @($manifestLines | Where-Object { $_ -notlike '*android.permission.CAMERA*' }) + @(
+        '      E: uses-permission (line=12)',
+        '        A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.permission.VIBRATE" (Raw: "android.permission.VIBRATE")',
+        '      E: application (line=20)',
+        '        E: receiver (line=50)',
+        '          A: http://schemas.android.com/apk/res/android:name(0x01010003)="com.example.host.Probe" (Raw: "com.example.host.Probe")',
+        '          A: http://schemas.android.com/apk/res/android:exported(0x01010010)=true'))
+$delta = Get-ManifestDelta -Stock $facts -Patched $patchedFacts
+Assert-True (($delta.permissionsAdded -join ',') -eq 'android.permission.VIBRATE') `
+    'An added permission was not reported.'
+Assert-True (($delta.permissionsRemoved -join ',') -eq 'android.permission.CAMERA') `
+    'A removed permission was not reported.'
+Assert-True (($delta.exportedComponentsAdded -join ',') -eq 'receiver:com.example.host.Probe') `
+    'A newly exported component was not reported.'
+Assert-True (@($delta.exportedComponentsRemoved).Count -eq 0) `
+    'A component that stayed exported was reported as removed.'
+$entries = ConvertTo-ManifestDeltaEntries -Delta $delta
+Assert-True (($entries -join '; ') -eq (@(
+    'exported-added receiver:com.example.host.Probe',
+    'permission-added android.permission.VIBRATE',
+    'permission-removed android.permission.CAMERA') -join '; ')) `
+    "The delta did not flatten to allowlist lines: $($entries -join '; ')"
+
+$unchanged = Get-ManifestDelta -Stock $facts -Patched $facts
+Assert-True (@(ConvertTo-ManifestDeltaEntries -Delta $unchanged).Count -eq 0) `
+    'An unchanged manifest produced a delta.'
+
+Assert-True (@(Read-ManifestDeltaAllowlist -Path (Join-Path $PSScriptRoot 'manifest-delta-allowlist.txt')).Count -ge 0) `
+    'The checked-in manifest delta allowlist does not parse.'
+
+$allowlistRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("receipt-" + [guid]::NewGuid().ToString('N'))
+New-Item -ItemType Directory -Path $allowlistRoot | Out-Null
+try {
+    $good = Join-Path $allowlistRoot 'good.txt'
+    Set-Content -LiteralPath $good -Encoding UTF8 -Value @(
+        '# a comment', '', 'permission-added android.permission.VIBRATE',
+        'exported-added receiver:com.example.host.Probe')
+    Assert-True (@(Read-ManifestDeltaAllowlist -Path $good).Count -eq 2) `
+        'The allowlist reader did not skip comments and blank lines.'
+
+    $bad = Join-Path $allowlistRoot 'bad.txt'
+    Set-Content -LiteralPath $bad -Encoding UTF8 -Value @('permission-added')
+    Assert-Throws { Read-ManifestDeltaAllowlist -Path $bad } '*<kind> <value>*' `
+        'A malformed allowlist line was accepted.'
+    Assert-Throws { Read-ManifestDeltaAllowlist -Path (Join-Path $allowlistRoot 'absent.txt') } `
+        '*allowlist is missing*' 'A missing allowlist was treated as an empty one.'
+
+    # A stand-in bundle, so the size and hash checks compare against real bytes.
+    $bundle = Join-Path $allowlistRoot 'patches-9.9.9.mpp'
+    [System.IO.File]::WriteAllBytes($bundle, [byte[]](1, 2, 3, 4, 5))
+    $bundleHash = Get-Sha256Hex -Path $bundle
+    $bundleSize = (Get-Item -LiteralPath $bundle).Length
+
+    $template = [ordered]@{
+        schemaVersion = Get-ReleaseReceiptSchemaVersion
+        release   = [ordered]@{ version = '9.9.9'; tag = 'v9.9.9'
+            commit = '0123456789abcdef0123456789abcdef01234567'; patchCount = 2 }
+        bundle    = [ordered]@{ file = 'patches-9.9.9.mpp'; sizeBytes = $bundleSize; sha256 = $bundleHash }
+        toolchain = [ordered]@{ patcherVersion = '1.12.0'; managerFloor = '1.29.0' }
+        extension = [ordered]@{ dexPayloads = @([ordered]@{
+            name = 'extensions/tiktok.rve'; sizeBytes = 10; sha256 = ('A' * 64) }) }
+        targets   = @([ordered]@{
+            source = [ordered]@{ file = 'stock.apk'; package = 'com.example.host'
+                versionName = '46.7.3'; versionCode = '2024607030'; sha256 = ('B' * 64) }
+            patches = @([ordered]@{ name = 'Alpha'; applied = $true; reason = $null },
+                        [ordered]@{ name = 'Beta'; applied = $true; reason = $null })
+            manifestDelta = [ordered]@{ permissionsAdded = @(); permissionsRemoved = @()
+                exportedComponentsAdded = @(); exportedComponentsRemoved = @() }
+        })
+    }
+    $templateJson = $template | ConvertTo-Json -Depth 12
+
+    function New-TestReceipt {
+        param([scriptblock]$Mutate)
+        $copy = $templateJson | ConvertFrom-Json
+        if ($Mutate) { & $Mutate $copy }
+        return $copy
+    }
+
+    function Test-TestReceipt {
+        param($Receipt, [string[]]$Approved = @())
+        return Test-ReleaseReceipt -Receipt $Receipt -ExpectedVersion '9.9.9' `
+            -ExpectedPatchNames @('Alpha', 'Beta') -ExpectedPatcherVersion '1.12.0' `
+            -ExpectedManagerFloor '1.29.0' -BundlePath $bundle -ApprovedManifestDelta $Approved
+    }
+
+    $valid = Test-TestReceipt -Receipt (New-TestReceipt)
+    Assert-True $valid.Valid "A complete receipt was refused: $($valid.Reason)"
+
+    # Every fact the receipt exists to pin, put in front of the check one at a time. A gate that
+    # has never been shown to fail is a gate nobody has tested.
+    $mutations = [ordered]@{
+        'a receipt from a different schema'     = { param($r) $r.schemaVersion = 99 }
+        'a receipt for a different version'     = { param($r) $r.release.version = '9.9.8' }
+        'a tag that does not match the version' = { param($r) $r.release.tag = 'v9.9.8' }
+        'a short commit'                        = { param($r) $r.release.commit = '0123456' }
+        'a patch count that is not the catalog' = { param($r) $r.release.patchCount = 3 }
+        'a different patcher'                   = { param($r) $r.toolchain.patcherVersion = '1.13.0' }
+        'a different Manager floor'             = { param($r) $r.toolchain.managerFloor = '1.30.0' }
+        'a bundle size that is not the bundle'  = { param($r) $r.bundle.sizeBytes = 4 }
+        'a bundle hash that is not the bundle'  = { param($r) $r.bundle.sha256 = ('C' * 64) }
+        'an empty extension payload'            = { param($r) $r.extension.dexPayloads[0].sizeBytes = 0 }
+        'an unhashed extension payload'         = { param($r) $r.extension.dexPayloads[0].sha256 = 'nope' }
+        'no extension payload at all'           = { param($r) $r.extension.dexPayloads = @() }
+        'no target at all'                      = { param($r) $r.targets = @() }
+        'an unhashed source APK'                = { param($r) $r.targets[0].source.sha256 = '' }
+        'fewer verdicts than patches'           = { param($r) $r.targets[0].patches = @($r.targets[0].patches[0]) }
+        'a patch the catalog does not list'     = { param($r) $r.targets[0].patches[1].name = 'Gamma' }
+        'the same patch reported twice'         = { param($r) $r.targets[0].patches[1].name = 'Alpha' }
+        'a patch that did not apply'            = { param($r) $r.targets[0].patches[1].applied = $false }
+    }
+    foreach ($description in $mutations.Keys) {
+        $result = Test-TestReceipt -Receipt (New-TestReceipt -Mutate $mutations[$description])
+        Assert-True (-not $result.Valid) "Receipt validation accepted $description."
+        Assert-True ([bool]$result.Reason) "Receipt validation refused $description without saying why."
+    }
+
+    $withDelta = New-TestReceipt -Mutate {
+        param($r) $r.targets[0].manifestDelta.permissionsAdded = @('android.permission.VIBRATE')
+    }
+    $unreviewed = Test-TestReceipt -Receipt $withDelta
+    Assert-True (-not $unreviewed.Valid) 'An unreviewed manifest change was accepted.'
+    Assert-True ($unreviewed.Reason -like '*nobody reviewed*') `
+        "The unreviewed manifest change was refused for the wrong reason: $($unreviewed.Reason)"
+
+    $reviewed = Test-TestReceipt -Receipt $withDelta -Approved @('permission-added android.permission.VIBRATE')
+    Assert-True $reviewed.Valid "A reviewed manifest change was refused: $($reviewed.Reason)"
+
+    $stale = Test-TestReceipt -Receipt (New-TestReceipt) -Approved @('permission-added android.permission.VIBRATE')
+    Assert-True (-not $stale.Valid) 'An allowlist entry no patch produces was accepted.'
+    Assert-True ($stale.Reason -like '*any more*') `
+        "The stale allowlist entry was refused for the wrong reason: $($stale.Reason)"
+} finally {
+    Remove-Item -LiteralPath $allowlistRoot -Recurse -Force -ErrorAction SilentlyContinue
+}
+
+Write-Host '[scripts] release receipt schema, manifest reading and validation contracts passed'
+
 $global:LASTEXITCODE = 0
 Write-Host '[scripts] report, target, Java and guarded replacement contracts passed'
