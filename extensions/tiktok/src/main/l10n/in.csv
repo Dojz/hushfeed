@@ -872,3 +872,7 @@ Enter a number. The previous value was kept.,Masukkan angka. Nilai sebelumnya di
 There is no diagnostic data to clear.,Tidak ada data diagnostik yang perlu dihapus.
 "Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok.","Data Lab melebihi batas aturan, jadi data dihapus tanpa salinan untuk dibatalkan. Mulai ulang TikTok."
 "The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.","Lab menyimpan paling banyak %1$s aturan. Perubahan ini akan membuat jumlahnya %2$s, jadi tidak ada yang diubah."
+Add a separate button that skips this account locally without blocking it.,Tambahkan tombol terpisah yang melewati akun ini secara lokal tanpa memblokirnya.
+Add a separate button that skips videos using the current sound.,Tambahkan tombol terpisah yang melewati video yang menggunakan suara saat ini.
+Show block sound button,Tampilkan tombol blokir suara
+Show local hide button,Tampilkan tombol sembunyikan lokal

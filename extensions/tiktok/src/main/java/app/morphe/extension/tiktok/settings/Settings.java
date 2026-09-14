@@ -306,8 +306,18 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting SHOW_AUTHOR_HANDLE = new BooleanSetting("show_author_handle", FALSE);
     public static final BooleanSetting BLOCK_AUTHOR_BUTTON =
             new BooleanSetting("block_author_button", FALSE, true);
+    public static final BooleanSetting LOCAL_HIDE_BUTTON =
+            new BooleanSetting("local_hide_button", TRUE);
+    public static final BooleanSetting BLOCK_SOUND_BUTTON =
+            new BooleanSetting("block_sound_button", TRUE);
     public static final StringSetting BLOCK_AUTHOR_BUTTON_POSITION =
             new StringSetting("block_author_button_position", "");
+    public static final StringSetting LOCAL_HIDE_BUTTON_POSITION =
+            new StringSetting("local_hide_button_position", "");
+    public static final StringSetting BLOCK_SOUND_BUTTON_POSITION =
+            new StringSetting("block_sound_button_position", "");
+    public static final StringSetting NOT_INTERESTED_BUTTON_POSITION =
+            new StringSetting("not_interested_button_position", "");
     public static final BooleanSetting HIDE_INBOX_STORIES = new BooleanSetting("hide_inbox_stories", FALSE);
     public static final BooleanSetting HIDE_INBOX_NEW_FOLLOWERS = new BooleanSetting("hide_inbox_new_followers", FALSE);
     public static final BooleanSetting HIDE_INBOX_ACTIVITY = new BooleanSetting("hide_inbox_activity", FALSE);

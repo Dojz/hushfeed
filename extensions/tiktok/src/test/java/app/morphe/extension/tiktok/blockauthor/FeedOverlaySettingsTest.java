@@ -41,17 +41,24 @@ public class FeedOverlaySettingsTest {
     private ActivityController<Activity> controller;
     private Activity activity;
     private TikTokPreferenceFragment fragment;
-    private boolean oldBlock, oldFeedback, oldBlockStatus, oldFeedbackStatus;
+    private boolean oldBlock, oldLocal, oldSound, oldFeedback;
+    private boolean oldBlockStatus, oldFeedbackStatus, oldFeedFilterStatus;
 
     @Before public void setUp() {
         Utils.setContext(RuntimeEnvironment.getApplication());
         oldBlock = Settings.BLOCK_AUTHOR_BUTTON.get();
+        oldLocal = Settings.LOCAL_HIDE_BUTTON.get();
+        oldSound = Settings.BLOCK_SOUND_BUTTON.get();
         oldFeedback = Settings.NOT_INTERESTED_BUTTON.get();
         oldBlockStatus = SettingsStatus.blockAuthorEnabled;
         oldFeedbackStatus = SettingsStatus.notInterestedEnabled;
+        oldFeedFilterStatus = SettingsStatus.feedFilterEnabled;
         SettingsStatus.blockAuthorEnabled = true;
         SettingsStatus.notInterestedEnabled = true;
+        SettingsStatus.feedFilterEnabled = true;
         Settings.BLOCK_AUTHOR_BUTTON.save(false);
+        Settings.LOCAL_HIDE_BUTTON.save(true);
+        Settings.BLOCK_SOUND_BUTTON.save(true);
         Settings.NOT_INTERESTED_BUTTON.save(false);
         BlockAuthorOverlay.onAuthorChanged(null);
         CurrentVideoAuthor.resetForTests();
@@ -65,14 +72,19 @@ public class FeedOverlaySettingsTest {
     @After public void tearDown() {
         if (controller != null) controller.pause().stop().destroy();
         Settings.BLOCK_AUTHOR_BUTTON.save(false);
+        Settings.LOCAL_HIDE_BUTTON.save(true);
+        Settings.BLOCK_SOUND_BUTTON.save(true);
         Settings.NOT_INTERESTED_BUTTON.save(false);
         BlockAuthorOverlay.onAuthorChanged(null);
         CurrentVideoAuthor.resetForTests();
         idle();
         Settings.BLOCK_AUTHOR_BUTTON.save(oldBlock);
+        Settings.LOCAL_HIDE_BUTTON.save(oldLocal);
+        Settings.BLOCK_SOUND_BUTTON.save(oldSound);
         Settings.NOT_INTERESTED_BUTTON.save(oldFeedback);
         SettingsStatus.blockAuthorEnabled = oldBlockStatus;
         SettingsStatus.notInterestedEnabled = oldFeedbackStatus;
+        SettingsStatus.feedFilterEnabled = oldFeedFilterStatus;
         Utils.setActivity(null);
         Utils.setContext(RuntimeEnvironment.getApplication());
     }
@@ -145,6 +157,57 @@ public class FeedOverlaySettingsTest {
         assertEquals(View.GONE, feedback.getVisibility());
         assertSame(block, button("Block this account"));
         assertVisible("Block this account");
+    }
+
+    @Test public void theTwoSecondaryBlockControlsCanBeHiddenIndependently() {
+        showSettings(true, false);
+        bind("video-one");
+        assertVisible("Block this account");
+        assertVisible("Hide this creator locally");
+        assertVisible("Block this sound");
+
+        click(Settings.LOCAL_HIDE_BUTTON);
+        assertEquals(View.GONE, button("Hide this creator locally").getVisibility());
+        assertVisible("Block this account");
+        assertVisible("Block this sound");
+
+        click(Settings.BLOCK_SOUND_BUTTON);
+        assertEquals(View.GONE, button("Block this sound").getVisibility());
+        assertVisible("Block this account");
+    }
+
+    @Test public void openingCommentsHidesEveryCustomFeedControlUntilTheSheetCloses() {
+        showSettings(true, true);
+        bind("video-one");
+        for (String description : new String[] {"Block this account", "Hide this creator locally",
+                "Block this sound", "Not interested in this video"}) {
+            assertVisible(description);
+        }
+
+        ViewGroup content = activity.findViewById(android.R.id.content);
+        FrameLayout comments = new FrameLayout(activity);
+        comments.setId(0x7f0a2001);
+        View title = new View(activity);
+        title.setId(0x7f0a2002);
+        comments.addView(title, new FrameLayout.LayoutParams(400, 100));
+        content.addView(comments, new FrameLayout.LayoutParams(1080, 1200));
+        FeedVisibility.resolveForTests(activity.getPackageName(), "p_5", comments.getId());
+        FeedVisibility.resolveForTests(activity.getPackageName(), "vjb", title.getId());
+        layoutRoot(content);
+        content.getViewTreeObserver().dispatchOnGlobalLayout();
+
+        for (String description : new String[] {"Block this account", "Hide this creator locally",
+                "Block this sound", "Not interested in this video"}) {
+            assertEquals(description + " remained above comments", View.GONE,
+                    button(description).getVisibility());
+        }
+
+        comments.setVisibility(View.GONE);
+        content.getViewTreeObserver().dispatchOnGlobalLayout();
+        for (String description : new String[] {"Block this account", "Hide this creator locally",
+                "Block this sound", "Not interested in this video"}) {
+            assertVisible(description);
+        }
     }
 
     @Test public void feedbackRowCannotExposeControlsOverARetainedDailyHold() {
@@ -325,6 +388,13 @@ public class FeedOverlaySettingsTest {
         Aweme(String id) { this.id = id; }
         public String getAid() { return id; }
         public User getAuthor() { return new User(); }
+        public Music getMusic() { return new Music(); }
+    }
+
+    public static final class Music {
+        public String getId() { return "sound-1"; }
+        public String getTitle() { return "A sound"; }
+        public String getAuthorName() { return "An artist"; }
     }
 
     public static final class User {

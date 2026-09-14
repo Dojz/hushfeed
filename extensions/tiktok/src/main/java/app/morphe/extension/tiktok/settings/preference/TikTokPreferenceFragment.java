@@ -221,6 +221,8 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         }
         if (!applySettingToPreference
                 && (setting == Settings.BLOCK_AUTHOR_BUTTON
+                || setting == Settings.LOCAL_HIDE_BUTTON
+                || setting == Settings.BLOCK_SOUND_BUTTON
                 || setting == Settings.NOT_INTERESTED_BUTTON)) {
             BlockAuthorOverlay.refresh();
         }

@@ -7,12 +7,16 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.FrameLayout;
 import app.morphe.extension.shared.Utils;
+import app.morphe.extension.tiktok.SettingsContextRule;
+import app.morphe.extension.tiktok.settings.Settings;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.Method;
 import org.junit.Test;
+import org.junit.Rule;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
@@ -23,6 +27,8 @@ import org.robolectric.annotation.GraphicsMode;
 @Config(sdk = 28)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 public class OverlayControlsTest {
+    @Rule public final SettingsContextRule settingsContext = new SettingsContextRule();
+
     @Test public void theInstalledBlockButtonDrawsBothTheRingAndTheSlash() throws Exception {
         Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
         Utils.setContext(activity);
@@ -65,6 +71,10 @@ public class OverlayControlsTest {
             View view = (View) factory.invoke(null, activity);
             assertNotNull(view.getContentDescription());
             assertTrue(view.hasOnClickListeners());
+            assertTrue(view.isLongClickable());
+            AccessibilityNodeInfo node = view.createAccessibilityNodeInfo();
+            assertEquals(android.widget.Button.class.getName(), node.getClassName());
+            node.recycle();
             int size = View.MeasureSpec.makeMeasureSpec(56, View.MeasureSpec.EXACTLY);
             view.measure(size, size);
             view.layout(0, 0, 56, 56);
@@ -82,6 +92,25 @@ public class OverlayControlsTest {
             }
         }
         activity.finish();
+    }
+
+    @Test public void accessibilityLongClickCannotLeaveAControlInPointerDragMode() throws Exception {
+        Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
+        Utils.setContext(activity);
+        Method factory = BlockAuthorOverlay.class.getDeclaredMethod("createButton", Activity.class);
+        factory.setAccessible(true);
+        View button = (View) factory.invoke(null, activity);
+        activity.setContentView(button);
+        java.util.concurrent.atomic.AtomicInteger clicks = new java.util.concurrent.atomic.AtomicInteger();
+        button.setOnClickListener(view -> clicks.incrementAndGet());
+
+        assertFalse(button.performAccessibilityAction(AccessibilityNodeInfo.ACTION_LONG_CLICK, null));
+        java.lang.reflect.Field dragging = BlockAuthorOverlay.class.getDeclaredField("dragging");
+        dragging.setAccessible(true);
+        assertFalse(dragging.getBoolean(null));
+        assertTrue(button.performClick());
+        assertEquals(1, clicks.get());
+        assertFalse(dragging.getBoolean(null));
     }
 
     @Test public void theFeedButtonsAreLaidOutFromTheLeftInEitherDirection() throws Exception {
@@ -164,12 +193,7 @@ public class OverlayControlsTest {
         }
     }
 
-    @Test public void placingTheFeedButtonsTwiceOverDoesNotAskForAnotherLayout() throws Exception {
-        // placeSoundButton runs from an OnGlobalLayoutListener, which the framework dispatches
-        // after layout inside the same traversal. setLayoutParams calls requestLayout whatever
-        // it is handed, so writing the same margins back scheduled another traversal, whose
-        // layout called this again: the whole content root measured and laid out every frame for
-        // as long as the overlay was attached, including on screens where every button is GONE.
+    @Test public void movingAndSavingOneFeedButtonDoesNotMoveTheOthers() throws Exception {
         Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
         Utils.setContext(activity);
         Utils.setActivity(activity);
@@ -180,25 +204,56 @@ public class OverlayControlsTest {
         attach.invoke(null, new VideoAuthor("1", "sec", "someone", "7712345"));
         org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idle();
 
-        Method place = BlockAuthorOverlay.class.getDeclaredMethod(
-                "placeSoundButton", View.class, android.view.ViewGroup.class);
-        place.setAccessible(true);
-        java.lang.reflect.Field held = BlockAuthorOverlay.class.getDeclaredField("buttonReference");
-        held.setAccessible(true);
-        View button = ((java.lang.ref.WeakReference<View>) held.get(null)).get();
-        assertNotNull("attach never created the block button", button);
-
-        // Settle the tree the way a real traversal would, so the flag under test starts clear.
         int spec = View.MeasureSpec.makeMeasureSpec(1080, View.MeasureSpec.EXACTLY);
-        place.invoke(null, button, root);
         root.measure(spec, spec);
         root.layout(0, 0, 1080, 1080);
-        assertFalse("the tree did not settle, so this proves nothing", root.isLayoutRequested());
+        View block = held("buttonReference");
+        View local = held("localHideReference");
+        View sound = held("soundButtonReference");
+        View feedback = held("notInterestedReference");
+        Method move = BlockAuthorOverlay.class.getDeclaredMethod(
+                "moveTo", View.class, android.view.ViewGroup.class, float.class, float.class);
+        move.setAccessible(true);
+        Method save = BlockAuthorOverlay.class.getDeclaredMethod(
+                "savePosition", View.class, android.view.ViewGroup.class);
+        save.setAccessible(true);
 
-        // Nothing has moved, so this pass must write no margins and ask for no layout.
-        place.invoke(null, button, root);
-        assertFalse("placing the buttons again asked for another layout, which the layout"
-                + " callback would answer by placing them again", root.isLayoutRequested());
+        int blockLeft = ((FrameLayout.LayoutParams) block.getLayoutParams()).leftMargin;
+        int soundLeft = ((FrameLayout.LayoutParams) sound.getLayoutParams()).leftMargin;
+        int feedbackLeft = ((FrameLayout.LayoutParams) feedback.getLayoutParams()).leftMargin;
+        String oldBlock = Settings.BLOCK_AUTHOR_BUTTON_POSITION.get();
+        String oldLocal = Settings.LOCAL_HIDE_BUTTON_POSITION.get();
+        String oldSound = Settings.BLOCK_SOUND_BUTTON_POSITION.get();
+        String oldFeedback = Settings.NOT_INTERESTED_BUTTON_POSITION.get();
+        try {
+            move.invoke(null, local, root, 123f, 456f);
+            save.invoke(null, local, root);
+            FrameLayout.LayoutParams localParams = (FrameLayout.LayoutParams) local.getLayoutParams();
+            assertEquals(123, localParams.leftMargin);
+            assertEquals(456, localParams.topMargin);
+            assertEquals(blockLeft, ((FrameLayout.LayoutParams) block.getLayoutParams()).leftMargin);
+            assertEquals(soundLeft, ((FrameLayout.LayoutParams) sound.getLayoutParams()).leftMargin);
+            assertEquals(feedbackLeft,
+                    ((FrameLayout.LayoutParams) feedback.getLayoutParams()).leftMargin);
+            assertNotEquals(oldLocal, Settings.LOCAL_HIDE_BUTTON_POSITION.get());
+            assertEquals(oldBlock, Settings.BLOCK_AUTHOR_BUTTON_POSITION.get());
+            assertEquals(oldSound, Settings.BLOCK_SOUND_BUTTON_POSITION.get());
+            assertEquals(oldFeedback, Settings.NOT_INTERESTED_BUTTON_POSITION.get());
+        } finally {
+            Settings.BLOCK_AUTHOR_BUTTON_POSITION.save(oldBlock);
+            Settings.LOCAL_HIDE_BUTTON_POSITION.save(oldLocal);
+            Settings.BLOCK_SOUND_BUTTON_POSITION.save(oldSound);
+            Settings.NOT_INTERESTED_BUTTON_POSITION.save(oldFeedback);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static View held(String fieldName) throws Exception {
+        java.lang.reflect.Field field = BlockAuthorOverlay.class.getDeclaredField(fieldName);
+        field.setAccessible(true);
+        View view = ((java.lang.ref.WeakReference<View>) field.get(null)).get();
+        assertNotNull(fieldName + " was never attached", view);
+        return view;
     }
 
     @Test public void theOverlaysFollowTheActivityTheHostRecreated() {

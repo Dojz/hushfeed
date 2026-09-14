@@ -80,8 +80,8 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 | `Studio & Creation De-bloat` | Empties TikTok's reviewed editor, camera-effect and face-model assets. Recording, editing, effects and creator tools may stop working. Choose this patch to enable it. |
 | `Update Prompt Suppressor` | Skips TikTok's background and boot-finished device-ID update-check tasks. This may suppress some in-app update checks. Play Store updates are unaffected. Choose this patch to enable it. |
 | `Always show publish date` | Always shows the publish date in video author information. Thanks to lyyako for the original implementation. |
-| `Not interested button` | Adds a button beside the block control to tell TikTok you aren't interested in the current video. Off by default. |
-| `Block author button` | Adds a block button to the video player that blocks the account that posted the current video in one tap, with an undo action. |
+| `Not interested button` | Adds a movable button that tells TikTok you aren't interested in the current video. It hides while comments are open. Off by default. |
+| `Block author button` | Adds one-tap controls for blocking the uploader, hiding the uploader locally and blocking the current sound. The local-hide and sound controls have separate switches. Long press any visible control to move it, and all of them hide while comments are open. |
 | `Comment tools` | Hides comments that contain chosen words or come from chosen accounts, turns the thumbs down on each comment into a block button, hides comments made of an image or a sticker rather than words, and adds a box above the comments that narrows them by what they say or who said it. |
 | `Copy comments without username` | Copies only the comment text without including the creator's username. |
 | `Custom offline videos limit` | Adds a custom entry to TikTok's offline videos menu with a configurable limit from 1 to 1000 videos. |

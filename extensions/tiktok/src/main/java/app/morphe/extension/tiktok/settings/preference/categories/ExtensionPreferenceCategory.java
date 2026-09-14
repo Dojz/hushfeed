@@ -147,6 +147,18 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                             + "current video in one tap. An undo action is shown after each block.",
                     Settings.BLOCK_AUTHOR_BUTTON
             ));
+            addPreference(new TogglePreference(
+                    context,
+                    "Show local hide button",
+                    "Add a separate button that skips this account locally without blocking it.",
+                    Settings.LOCAL_HIDE_BUTTON
+            ));
+            addPreference(new TogglePreference(
+                    context,
+                    "Show block sound button",
+                    "Add a separate button that skips videos using the current sound.",
+                    Settings.BLOCK_SOUND_BUTTON
+            ));
         }
         if (SettingsStatus.notInterestedEnabled) {
             addPreference(new TogglePreference(context, "Show the Not interested button",

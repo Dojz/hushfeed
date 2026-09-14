@@ -871,3 +871,7 @@ Enter a number. The previous value was kept.	Introduce un número. Se conservó 
 There is no diagnostic data to clear.	No hay datos de diagnóstico que borrar.
 Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok.	Los datos del Lab superaban el límite de reglas, así que se borraron sin una copia para deshacer. Reinicia TikTok.
 The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.	El Lab admite como máximo %1$s reglas. Este cambio daría un total de %2$s, así que no se cambió nada.
+Add a separate button that skips this account locally without blocking it.	Añade un botón separado que omite esta cuenta localmente sin bloquearla.
+Add a separate button that skips videos using the current sound.	Añade un botón separado que omite los vídeos que usan el sonido actual.
+Show block sound button	Mostrar el botón de bloquear sonido
+Show local hide button	Mostrar el botón de ocultar localmente

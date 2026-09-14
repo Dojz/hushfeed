@@ -34,6 +34,8 @@ Activity,Activity
 Add,Add
 Add a block button to the video player that blocks the account that posted the current video in one tap. An undo action is shown after each block.,Add a block button to the video player that blocks the account that posted the current video in one tap. An undo action is shown after each block.
 Add a button beside the block control to send feedback about the current video.,Add a button beside the block control to send feedback about the current video.
+Add a separate button that skips this account locally without blocking it.,Add a separate button that skips this account locally without blocking it.
+Add a separate button that skips videos using the current sound.,Add a separate button that skips videos using the current sound.
 Add hidden creator,Add hidden creator
 Ads,Ads
 Advance when a video ends,Advance when a video ends
@@ -657,7 +659,9 @@ Show TikTok's own progress bar on videos where it is normally hidden.,Show TikTo
 Show TikTok's search entry in the LIVE drawer where supported.,Show TikTok's search entry in the LIVE drawer where supported.
 Show a video preview thumbnail while dragging the progress bar.,Show a video preview thumbnail while dragging the progress bar.
 Show block button on videos,Show block button on videos
+Show block sound button,Show block sound button
 Show gates,Show gates
+Show local hide button,Show local hide button
 Show the Not interested button,Show the Not interested button
 Show the country a video was posted from next to the creator's name.,Show the country a video was posted from next to the creator's name.
 Show the current spoken caption while the other controls are hidden.,Show the current spoken caption while the other controls are hidden.

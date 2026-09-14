@@ -48,7 +48,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildDe() {
-        Map<String, String> table = new HashMap<>(1746);
+        Map<String, String> table = new HashMap<>(1754);
         fillDe0(table);
         fillDe1(table);
         fillDe2(table);
@@ -138,6 +138,10 @@ public final class L10nTranslations {
                 "Dem Videoplayer eine Schaltfläche hinzufügen, die das Konto hinter dem aktuellen Video mit einem Tippen blockiert. Nach jeder Blockierung wird eine Rückgängig-Aktion angezeigt.");
         table.put("Add a button beside the block control to send feedback about the current video.",
                 "Neben der Blockieren-Schaltfläche eine Schaltfläche hinzufügen, um Feedback zum aktuellen Video zu senden.");
+        table.put("Add a separate button that skips this account locally without blocking it.",
+                "Eine separate Schaltfläche hinzufügen, die dieses Konto lokal überspringt, ohne es zu blockieren.");
+        table.put("Add a separate button that skips videos using the current sound.",
+                "Eine separate Schaltfläche hinzufügen, die Videos mit dem aktuellen Sound überspringt.");
         table.put("Add hidden creator",
                 "Ausgeblendeten Creator hinzufügen");
         table.put("Ads",
@@ -184,13 +188,13 @@ public final class L10nTranslations {
                 "Format animierter Sticker");
         table.put("App AB",
                 "App-AB");
+    }
+
+    private static void fillDe1(Map<String, String> table) {
         table.put("App behavior",
                 "App-Verhalten");
         table.put("Applies saved rules at supported getters",
                 "Wendet gespeicherte Regeln an unterstützten Gettern an");
-    }
-
-    private static void fillDe1(Map<String, String> table) {
         table.put("Applies to both video and photo downloads.",
                 "Gilt für Video- und Foto-Downloads.");
         table.put("Apply",
@@ -307,13 +311,13 @@ public final class L10nTranslations {
                 "Namen, durch Kommas getrennt, genau so, wie das Teilen-Menü sie zeigt: Freunde in der Zeile „Senden an“, Ziele wie Facebook und Aktionen wie „Gruppe erstellen“ oder „Reposten“. Feste Schlüssel wie copy, save und dislike funktionieren auch, bevor das Menü sich öffnet.");
         table.put("Comma separated sound ids recorded by the player's sound button. Remove one to unblock it.",
                 "Sound-IDs, durch Kommas getrennt, die über die Sound-Taste im Player erfasst wurden. Entferne eine, um sie freizugeben.");
+    }
+
+    private static void fillDe2(Map<String, String> table) {
         table.put("Comma separated usernames or display names whose comments are hidden.",
                 "Nutzernamen oder Anzeigenamen, durch Kommas getrennt, deren Kommentare ausgeblendet werden.");
         table.put("Comma separated words or phrases. Matching captions are skipped. Case does not matter. Two phrases in quotes can be joined: \"a\" & \"b\" needs both, \"a\" !& \"b\" needs the first without the second.",
                 "Wörter oder Wendungen, durch Kommas getrennt. Passende Beschreibungen werden übersprungen. Groß- und Kleinschreibung spielt keine Rolle. Zwei Wendungen in Anführungszeichen lassen sich verbinden: \"a\" & \"b\" verlangt beide, \"a\" !& \"b\" die erste ohne die zweite.");
-    }
-
-    private static void fillDe2(Map<String, String> table) {
         table.put("Comma separated words to match against a sound's name, like saxophone. Case does not matter.",
                 "Wörter, durch Kommas getrennt, die mit dem Namen eines Sounds verglichen werden, zum Beispiel Saxophon. Groß- und Kleinschreibung spielt keine Rolle.");
         table.put("Comma separated. A comment is hidden if its text contains any of them. Case does not matter. Two phrases in quotes can be joined: \"a\" & \"b\" needs both, \"a\" !& \"b\" needs the first without the second.",
@@ -430,13 +434,13 @@ public final class L10nTranslations {
                 "Tage, die ein Video gemerkt wird. Null hebt die Altersgrenze auf. Der Verlauf behält höchstens 10.000 Videos.");
         table.put("Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible.",
                 "Tage. Null lässt jedes Alter zu. Beiträge ohne brauchbaren Zeitstempel, auch zukünftige, bleiben sichtbar.");
+    }
+
+    private static void fillDe3(Map<String, String> table) {
         table.put("Default playback speed",
                 "Standard-Wiedergabegeschwindigkeit");
         table.put("Delete the local record of the videos you have watched.",
                 "Die lokale Aufzeichnung der Videos löschen, die du gesehen hast.");
-    }
-
-    private static void fillDe3(Map<String, String> table) {
         table.put("Device language, then original",
                 "Gerätesprache, dann Original");
         table.put("Diagnostic data cleared. Tap again to put it back.",
@@ -553,13 +557,13 @@ public final class L10nTranslations {
                 "Einstellung nach Titel oder Beschreibung finden");
         table.put("First caller",
                 "Erster Aufrufer");
+    }
+
+    private static void fillDe4(Map<String, String> table) {
         table.put("Fit the video to the screen",
                 "Video an den Bildschirm anpassen");
         table.put("Follow probe",
                 "Folgen-Prüfung");
-    }
-
-    private static void fillDe4(Map<String, String> table) {
         table.put("For You",
                 "Für dich");
         table.put("For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.",
@@ -676,13 +680,13 @@ public final class L10nTranslations {
                 "Personen und Optionen nach Name ausblenden");
         table.put("Hide photo posts",
                 "Fotobeiträge ausblenden");
+    }
+
+    private static void fillDe5(Map<String, String> table) {
         table.put("Hide picture comments",
                 "Bild-Kommentare ausblenden");
         table.put("Hide playlist videos",
                 "Playlist-Videos ausblenden");
-    }
-
-    private static void fillDe5(Map<String, String> table) {
         table.put("Hide promotional music",
                 "Werbemusik ausblenden");
         table.put("Hide quick comment reactions",
@@ -799,13 +803,13 @@ public final class L10nTranslations {
                 "Teilen-Button ausblenden");
         table.put("Hide the speech bubble and its count in the right column.",
                 "Sprechblase und Zähler in der rechten Spalte ausblenden.");
+    }
+
+    private static void fillDe6(Map<String, String> table) {
         table.put("Hide the spinning music cover and the track name beside the caption.",
                 "Das drehende Musik-Cover und den Titelnamen neben der Beschreibung ausblenden.");
         table.put("Hide the spinning record at the bottom of the right column.",
                 "Drehende Platte unten in der rechten Spalte ausblenden.");
-    }
-
-    private static void fillDe6(Map<String, String> table) {
         table.put("Hide the status bar",
                 "Statusleiste ausblenden");
         table.put("Hide the stories from the feed.",
@@ -922,13 +926,13 @@ public final class L10nTranslations {
                 "Geladen");
         table.put("Loaded current values. Loading all known gates...",
                 "Aktuelle Werte geladen. Alle bekannten Schalter werden geladen ...");
+    }
+
+    private static void fillDe7(Map<String, String> table) {
         table.put("Loaded for this account",
                 "Für dieses Konto geladen");
         table.put("Loaded values are still being read. Try again in a moment.",
                 "Die geladenen Werte werden noch gelesen. Versuche es gleich noch einmal.");
-    }
-
-    private static void fillDe7(Map<String, String> table) {
         table.put("Loaded-value file export failed",
                 "Der Export der geladenen Werte ist fehlgeschlagen");
         table.put("Loaded-value file export failed; cleanup also failed",
@@ -1045,13 +1049,13 @@ public final class L10nTranslations {
                 "Nichts Neues importiert. %1$d stimmten bereits überein, %2$d sind nicht verfügbar, %3$d wurden abgelehnt.");
         table.put("Nothing to undo yet.",
                 "Noch nichts rückgängig zu machen.");
+    }
+
+    private static void fillDe8(Map<String, String> table) {
         table.put("Off",
                 "Aus");
         table.put("Off by default. Switched on, the feed dims over the last three quarters of a minute of a time budget, most of it in the final half minute, so the hold is somewhere you arrive rather than somewhere you land. Needs a budget in minutes and a hold to arrive at: a budget counted in videos has no time left to follow, and with the hold switched off there is nothing to lead into. Nothing fades if you have turned animations off.",
                 "Standardmäßig aus. Eingeschaltet wird der Feed über die letzten drei Viertelminuten eines Zeitbudgets dunkler, das meiste davon in der letzten halben Minute, damit das Anhalten kein Sprung ist. Braucht ein Budget in Minuten und ein Anhalten, auf das es zuläuft: ein Budget in Videos hat keine verbleibende Zeit, und ohne Anhalten gibt es nichts, worauf es zuläuft. Es wird nichts ausgeblendet, wenn Animationen abgeschaltet sind.");
-    }
-
-    private static void fillDe8(Map<String, String> table) {
         table.put("Off by default. Switched on, the hold that starts when today's budget runs out has no way out, and the budgets, the reset hour and this switch cannot be changed again until the day starts over. Switch it off any time before the budget runs out.",
                 "Standardmäßig aus. Eingeschaltet hat die Sperre, die beim Aufbrauchen des heutigen Budgets beginnt, keinen Ausweg, und die Budgets, die Rücksetzstunde und dieser Schalter lassen sich bis zum Tagesbeginn nicht mehr ändern. Vor dem Aufbrauchen des Budgets kann er jederzeit ausgeschaltet werden.");
         table.put("Off by default. The video behind the comment sheet keeps playing, with sound, while you read. Switched on, Hushfeed asks for the sound the moment a sheet opens and hands it back when it closes, which is how one app tells another to stop.",
@@ -1168,13 +1172,13 @@ public final class L10nTranslations {
                 "Eine Story gedrückt halten, um sie zu speichern. Stories haben keinen eigenen Speicher-Button, und Halten pausiert bei TikTok, also übernimmt das diese Geste.");
         table.put("Press and hold the left or right third of the screen to jump back or forward. The middle third keeps the Long press action.",
                 "Halte das linke oder rechte Drittel des Bildschirms gedrückt, um zurück oder vorwärts zu springen. Im mittleren Drittel gilt weiterhin die Aktion für langes Drücken.");
+    }
+
+    private static void fillDe9(Map<String, String> table) {
         table.put("Preview shortened. Save JSON includes the full report.",
                 "Vorschau gekürzt. JSON speichern enthält den vollständigen Bericht.");
         table.put("Profile picture saved to %1$s",
                 "Profilbild gespeichert unter %1$s");
-    }
-
-    private static void fillDe9(Map<String, String> table) {
         table.put("Promotional music",
                 "Werbemusik");
         table.put("Proof",
@@ -1291,13 +1295,13 @@ public final class L10nTranslations {
                 "Profilbild per langem Druck speichern");
         table.put("Save a story on a long press",
                 "Story per langem Druck speichern");
+    }
+
+    private static void fillDe10(Map<String, String> table) {
         table.put("Save every photo in the post directly from its source URL, without rendering it again.",
                 "Jedes Foto des Beitrags direkt von seiner Quell-URL speichern, ohne es neu zu rendern.");
         table.put("Save field values",
                 "Feldwerte speichern");
-    }
-
-    private static void fillDe10(Map<String, String> table) {
         table.put("Save full report",
                 "Vollständigen Bericht speichern");
         table.put("Save media",
@@ -1414,13 +1418,17 @@ public final class L10nTranslations {
                 "Beim Ziehen des Fortschrittsbalkens ein Vorschaubild des Videos zeigen.");
         table.put("Show block button on videos",
                 "Blockieren-Schaltfläche auf Videos anzeigen");
-        table.put("Show gates",
-                "Schalter anzeigen");
-        table.put("Show the Not interested button",
-                "Knopf Kein Interesse anzeigen");
     }
 
     private static void fillDe11(Map<String, String> table) {
+        table.put("Show block sound button",
+                "Schaltfläche zum Blockieren des Sounds anzeigen");
+        table.put("Show gates",
+                "Schalter anzeigen");
+        table.put("Show local hide button",
+                "Schaltfläche zum lokalen Ausblenden anzeigen");
+        table.put("Show the Not interested button",
+                "Knopf Kein Interesse anzeigen");
         table.put("Show the country a video was posted from next to the creator's name.",
                 "Das Land, aus dem ein Video veröffentlicht wurde, neben dem Namen des Creators anzeigen.");
         table.put("Show the current spoken caption while the other controls are hidden.",
@@ -1533,6 +1541,9 @@ public final class L10nTranslations {
                 "Tippe die Folgen-Schaltfläche im Feed innerhalb von vier Sekunden zweimal an.");
         table.put("Tap the like heart twice within four seconds. Removing a like stays immediate.",
                 "Tippe das Like-Herz innerhalb von vier Sekunden zweimal an. Das Entfernen eines Likes bleibt sofort.");
+    }
+
+    private static void fillDe12(Map<String, String> table) {
         table.put("Tap to start the feed",
                 "Zum Starten des Feeds tippen");
         table.put("Technical details",
@@ -1541,9 +1552,6 @@ public final class L10nTranslations {
                 "Diese Sicherung stammt aus einem neueren Hushfeed als diesem. Es wurde nichts geändert.");
         table.put("That creator is already in the list",
                 "Dieser Creator ist bereits in der Liste");
-    }
-
-    private static void fillDe12(Map<String, String> table) {
         table.put("That creator pattern is too long to use, so it was skipped: %1$s",
                 "Dieses Kreator-Muster ist zu lang und wurde übersprungen: %1$s");
         table.put("That creator pattern is too long, so it was not added: %1$s",
@@ -1656,6 +1664,9 @@ public final class L10nTranslations {
                 "Dieses Profilbild lässt sich nicht speichern");
         table.put("This quality isn't available as a complete file, so TikTok's own save runs instead",
                 "Diese Qualität gibt es nicht als vollständige Datei, also speichert TikTok selbst");
+    }
+
+    private static void fillDe13(Map<String, String> table) {
         table.put("This story isn't available to save",
                 "Diese Story lässt sich nicht speichern");
         table.put("This video has no link to copy",
@@ -1664,9 +1675,6 @@ public final class L10nTranslations {
                 "Dieses Video hat keinen Link zum Senden, also speichert TikTok selbst");
         table.put("This video has no original sound to save",
                 "Dieses Video hat keinen Originalsound zum Speichern");
-    }
-
-    private static void fillDe13(Map<String, String> table) {
         table.put("This video has no sound of its own",
                 "Dieses Video hat keinen eigenen Sound");
         table.put("Thumbs down blocks the commenter",
@@ -1779,6 +1787,9 @@ public final class L10nTranslations {
                 "Wert");
         table.put("Value to return",
                 "Zurückgegebener Wert");
+    }
+
+    private static void fillDe14(Map<String, String> table) {
         table.put("Verified creators",
                 "Verifizierte Creator");
         table.put("Video",
@@ -1787,9 +1798,6 @@ public final class L10nTranslations {
                 "Video (MP4)");
         table.put("Video destination",
                 "Speicherort für Videos");
-    }
-
-    private static void fillDe14(Map<String, String> table) {
         table.put("Video download quality",
                 "Qualität für Video-Downloads");
         table.put("Video filename",
@@ -1859,7 +1867,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildEs() {
-        Map<String, String> table = new HashMap<>(1746);
+        Map<String, String> table = new HashMap<>(1754);
         fillEs0(table);
         fillEs1(table);
         fillEs2(table);
@@ -1949,6 +1957,10 @@ public final class L10nTranslations {
                 "Añade un botón de bloqueo al reproductor que bloquea en un toque la cuenta que publicó el vídeo actual. Después de cada bloqueo se muestra una acción para deshacerlo.");
         table.put("Add a button beside the block control to send feedback about the current video.",
                 "Añade un botón junto al control de bloqueo para enviar comentarios sobre el vídeo actual.");
+        table.put("Add a separate button that skips this account locally without blocking it.",
+                "Añade un botón separado que omite esta cuenta localmente sin bloquearla.");
+        table.put("Add a separate button that skips videos using the current sound.",
+                "Añade un botón separado que omite los vídeos que usan el sonido actual.");
         table.put("Add hidden creator",
                 "Añadir creador oculto");
         table.put("Ads",
@@ -1995,13 +2007,13 @@ public final class L10nTranslations {
                 "Formato de los stickers animados");
         table.put("App AB",
                 "AB de la aplicación");
+    }
+
+    private static void fillEs1(Map<String, String> table) {
         table.put("App behavior",
                 "Comportamiento de la app");
         table.put("Applies saved rules at supported getters",
                 "Aplica las reglas guardadas donde se puede");
-    }
-
-    private static void fillEs1(Map<String, String> table) {
         table.put("Applies to both video and photo downloads.",
                 "Se aplica tanto a las descargas de vídeo como a las de fotos.");
         table.put("Apply",
@@ -2118,13 +2130,13 @@ public final class L10nTranslations {
                 "Nombres separados por comas, exactamente como los muestra el panel de compartir: amigos de la fila Enviar a, destinos como Facebook y acciones como Crear grupo o Repostear. Las claves estables como copy, save y dislike también funcionan antes de que se abra el panel.");
         table.put("Comma separated sound ids recorded by the player's sound button. Remove one to unblock it.",
                 "Ids de sonido separados por comas, registrados por el botón de sonido del reproductor. Quita uno para desbloquearlo.");
+    }
+
+    private static void fillEs2(Map<String, String> table) {
         table.put("Comma separated usernames or display names whose comments are hidden.",
                 "Nombres de usuario o nombres visibles separados por comas cuyos comentarios se ocultan.");
         table.put("Comma separated words or phrases. Matching captions are skipped. Case does not matter. Two phrases in quotes can be joined: \"a\" & \"b\" needs both, \"a\" !& \"b\" needs the first without the second.",
                 "Palabras o frases separadas por comas. Las descripciones que coincidan se saltan. Da igual mayúsculas y minúsculas. Dos frases entre comillas se pueden unir: \"a\" & \"b\" pide las dos, \"a\" !& \"b\" pide la primera sin la segunda.");
-    }
-
-    private static void fillEs2(Map<String, String> table) {
         table.put("Comma separated words to match against a sound's name, like saxophone. Case does not matter.",
                 "Palabras separadas por comas para comparar con el nombre de un sonido, como saxofón. Da igual mayúsculas y minúsculas.");
         table.put("Comma separated. A comment is hidden if its text contains any of them. Case does not matter. Two phrases in quotes can be joined: \"a\" & \"b\" needs both, \"a\" !& \"b\" needs the first without the second.",
@@ -2241,13 +2253,13 @@ public final class L10nTranslations {
                 "Días que se recuerda un vídeo. Cero quita el límite de antigüedad. El historial guarda como mucho 10.000 vídeos.");
         table.put("Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible.",
                 "Días. Cero acepta cualquier antigüedad. Las publicaciones sin una fecha utilizable, incluidas las futuras, siguen visibles.");
+    }
+
+    private static void fillEs3(Map<String, String> table) {
         table.put("Default playback speed",
                 "Velocidad de reproducción predeterminada");
         table.put("Delete the local record of the videos you have watched.",
                 "Borra el registro local de los vídeos que has visto.");
-    }
-
-    private static void fillEs3(Map<String, String> table) {
         table.put("Device language, then original",
                 "Idioma del dispositivo, después el original");
         table.put("Diagnostic data cleared. Tap again to put it back.",
@@ -2364,13 +2376,13 @@ public final class L10nTranslations {
                 "Busca un ajuste por título o descripción");
         table.put("First caller",
                 "Primera llamada");
+    }
+
+    private static void fillEs4(Map<String, String> table) {
         table.put("Fit the video to the screen",
                 "Ajustar el vídeo a la pantalla");
         table.put("Follow probe",
                 "Comprobación de seguir");
-    }
-
-    private static void fillEs4(Map<String, String> table) {
         table.put("For You",
                 "Para ti");
         table.put("For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.",
@@ -2487,13 +2499,13 @@ public final class L10nTranslations {
                 "Ocultar personas y opciones por nombre");
         table.put("Hide photo posts",
                 "Ocultar las publicaciones de fotos");
+    }
+
+    private static void fillEs5(Map<String, String> table) {
         table.put("Hide picture comments",
                 "Ocultar los comentarios con imagen");
         table.put("Hide playlist videos",
                 "Ocultar los vídeos de listas de reproducción");
-    }
-
-    private static void fillEs5(Map<String, String> table) {
         table.put("Hide promotional music",
                 "Ocultar la música promocional");
         table.put("Hide quick comment reactions",
@@ -2610,13 +2622,13 @@ public final class L10nTranslations {
                 "Ocultar el botón de compartir");
         table.put("Hide the speech bubble and its count in the right column.",
                 "Ocultar el bocadillo y su número en la columna derecha.");
+    }
+
+    private static void fillEs6(Map<String, String> table) {
         table.put("Hide the spinning music cover and the track name beside the caption.",
                 "Ocultar la portada giratoria de la música y el nombre de la pista junto a la descripción.");
         table.put("Hide the spinning record at the bottom of the right column.",
                 "Ocultar el disco giratorio en la parte de abajo de la columna derecha.");
-    }
-
-    private static void fillEs6(Map<String, String> table) {
         table.put("Hide the status bar",
                 "Ocultar la barra de estado");
         table.put("Hide the stories from the feed.",
@@ -2733,13 +2745,13 @@ public final class L10nTranslations {
                 "Cargados");
         table.put("Loaded current values. Loading all known gates...",
                 "Valores actuales cargados. Cargando todos los interruptores conocidos...");
+    }
+
+    private static void fillEs7(Map<String, String> table) {
         table.put("Loaded for this account",
                 "Cargado para esta cuenta");
         table.put("Loaded values are still being read. Try again in a moment.",
                 "Los valores cargados aún se están leyendo. Inténtalo de nuevo en un momento.");
-    }
-
-    private static void fillEs7(Map<String, String> table) {
         table.put("Loaded-value file export failed",
                 "Ha fallado la exportación de los valores cargados");
         table.put("Loaded-value file export failed; cleanup also failed",
@@ -2856,13 +2868,13 @@ public final class L10nTranslations {
                 "No se importó nada nuevo. %1$d ya coincidían, %2$d no están disponibles, %3$d se rechazaron.");
         table.put("Nothing to undo yet.",
                 "Todavía no hay nada que deshacer.");
+    }
+
+    private static void fillEs8(Map<String, String> table) {
         table.put("Off",
                 "Desactivado");
         table.put("Off by default. Switched on, the feed dims over the last three quarters of a minute of a time budget, most of it in the final half minute, so the hold is somewhere you arrive rather than somewhere you land. Needs a budget in minutes and a hold to arrive at: a budget counted in videos has no time left to follow, and with the hold switched off there is nothing to lead into. Nothing fades if you have turned animations off.",
                 "Desactivado de serie. Activado, el feed se oscurece durante los últimos tres cuartos de minuto de un presupuesto de tiempo, la mayor parte en el último medio minuto, para que la pausa sea algo a lo que llegas y no algo que te cae encima. Necesita un presupuesto en minutos y una pausa a la que llegar: uno contado en vídeos no tiene tiempo restante que seguir, y sin pausa no hay nada a lo que llevar. No se atenúa nada si has desactivado las animaciones.");
-    }
-
-    private static void fillEs8(Map<String, String> table) {
         table.put("Off by default. Switched on, the hold that starts when today's budget runs out has no way out, and the budgets, the reset hour and this switch cannot be changed again until the day starts over. Switch it off any time before the budget runs out.",
                 "Desactivado de serie. Activado, la pausa que empieza cuando se acaba el presupuesto de hoy no tiene salida, y los presupuestos, la hora de reinicio y este propio interruptor no se pueden volver a cambiar hasta que empiece el día siguiente. Puedes desactivarlo en cualquier momento antes de que se acabe el presupuesto.");
         table.put("Off by default. The video behind the comment sheet keeps playing, with sound, while you read. Switched on, Hushfeed asks for the sound the moment a sheet opens and hands it back when it closes, which is how one app tells another to stop.",
@@ -2979,13 +2991,13 @@ public final class L10nTranslations {
                 "Mantén pulsada una historia para guardarla. Las historias no tienen botón de guardar propio, y mantenerlas pulsadas es como TikTok las pausa, así que esto se queda con ese gesto.");
         table.put("Press and hold the left or right third of the screen to jump back or forward. The middle third keeps the Long press action.",
                 "Mantén pulsado el tercio izquierdo o derecho de la pantalla para saltar atrás o adelante. El tercio central mantiene la acción de Pulsación larga.");
+    }
+
+    private static void fillEs9(Map<String, String> table) {
         table.put("Preview shortened. Save JSON includes the full report.",
                 "Vista previa recortada. Guardar JSON incluye el informe completo.");
         table.put("Profile picture saved to %1$s",
                 "Foto de perfil guardada en %1$s");
-    }
-
-    private static void fillEs9(Map<String, String> table) {
         table.put("Promotional music",
                 "Música promocional");
         table.put("Proof",
@@ -3102,13 +3114,13 @@ public final class L10nTranslations {
                 "Guardar una foto de perfil con una pulsación larga");
         table.put("Save a story on a long press",
                 "Guardar una historia con una pulsación larga");
+    }
+
+    private static void fillEs10(Map<String, String> table) {
         table.put("Save every photo in the post directly from its source URL, without rendering it again.",
                 "Guardar cada foto de la publicación directamente desde su URL de origen, sin volver a renderizarla.");
         table.put("Save field values",
                 "Guardar los valores de los campos");
-    }
-
-    private static void fillEs10(Map<String, String> table) {
         table.put("Save full report",
                 "Guardar informe completo");
         table.put("Save media",
@@ -3225,13 +3237,17 @@ public final class L10nTranslations {
                 "Mostrar una miniatura del vídeo mientras arrastras la barra de progreso.");
         table.put("Show block button on videos",
                 "Mostrar el botón de bloquear en los vídeos");
-        table.put("Show gates",
-                "Mostrar interruptores");
-        table.put("Show the Not interested button",
-                "Mostrar el botón de No me interesa");
     }
 
     private static void fillEs11(Map<String, String> table) {
+        table.put("Show block sound button",
+                "Mostrar el botón de bloquear sonido");
+        table.put("Show gates",
+                "Mostrar interruptores");
+        table.put("Show local hide button",
+                "Mostrar el botón de ocultar localmente");
+        table.put("Show the Not interested button",
+                "Mostrar el botón de No me interesa");
         table.put("Show the country a video was posted from next to the creator's name.",
                 "Mostrar el país desde el que se publicó un vídeo junto al nombre del creador.");
         table.put("Show the current spoken caption while the other controls are hidden.",
@@ -3344,6 +3360,9 @@ public final class L10nTranslations {
                 "Toca el botón Seguir del feed dos veces en menos de cuatro segundos.");
         table.put("Tap the like heart twice within four seconds. Removing a like stays immediate.",
                 "Toca el corazón de me gusta dos veces en menos de cuatro segundos. Quitar un me gusta sigue siendo inmediato.");
+    }
+
+    private static void fillEs12(Map<String, String> table) {
         table.put("Tap to start the feed",
                 "Toca para poner el feed en marcha");
         table.put("Technical details",
@@ -3352,9 +3371,6 @@ public final class L10nTranslations {
                 "Esa copia de seguridad la escribió un Hushfeed más nuevo que este. No se ha cambiado nada.");
         table.put("That creator is already in the list",
                 "Ese creador ya está en la lista");
-    }
-
-    private static void fillEs12(Map<String, String> table) {
         table.put("That creator pattern is too long to use, so it was skipped: %1$s",
                 "Ese patrón de creador es demasiado largo, así que se omitió: %1$s");
         table.put("That creator pattern is too long, so it was not added: %1$s",
@@ -3467,6 +3483,9 @@ public final class L10nTranslations {
                 "Esta foto de perfil no está disponible para guardarla");
         table.put("This quality isn't available as a complete file, so TikTok's own save runs instead",
                 "Esta calidad no está disponible como archivo completo, así que se usa el guardado propio de TikTok");
+    }
+
+    private static void fillEs13(Map<String, String> table) {
         table.put("This story isn't available to save",
                 "Esta historia no está disponible para guardarla");
         table.put("This video has no link to copy",
@@ -3475,9 +3494,6 @@ public final class L10nTranslations {
                 "Este vídeo no tiene ningún enlace que enviar, así que se usa el guardado propio de TikTok");
         table.put("This video has no original sound to save",
                 "Este vídeo no tiene sonido original que guardar");
-    }
-
-    private static void fillEs13(Map<String, String> table) {
         table.put("This video has no sound of its own",
                 "Este vídeo no tiene sonido propio");
         table.put("Thumbs down blocks the commenter",
@@ -3590,6 +3606,9 @@ public final class L10nTranslations {
                 "Valor");
         table.put("Value to return",
                 "Valor que se devuelve");
+    }
+
+    private static void fillEs14(Map<String, String> table) {
         table.put("Verified creators",
                 "Creadores verificados");
         table.put("Video",
@@ -3598,9 +3617,6 @@ public final class L10nTranslations {
                 "Vídeo (MP4)");
         table.put("Video destination",
                 "Destino de los vídeos");
-    }
-
-    private static void fillEs14(Map<String, String> table) {
         table.put("Video download quality",
                 "Calidad de descarga del vídeo");
         table.put("Video filename",
@@ -3670,7 +3686,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIn() {
-        Map<String, String> table = new HashMap<>(1746);
+        Map<String, String> table = new HashMap<>(1754);
         fillIn0(table);
         fillIn1(table);
         fillIn2(table);
@@ -3760,6 +3776,10 @@ public final class L10nTranslations {
                 "Tambahkan tombol blokir di pemutar video yang memblokir akun pengunggah video ini dalam satu ketukan. Aksi untuk mengurungkan muncul setelah tiap pemblokiran.");
         table.put("Add a button beside the block control to send feedback about the current video.",
                 "Tambahkan tombol di samping kontrol blokir untuk mengirim masukan tentang video ini.");
+        table.put("Add a separate button that skips this account locally without blocking it.",
+                "Tambahkan tombol terpisah yang melewati akun ini secara lokal tanpa memblokirnya.");
+        table.put("Add a separate button that skips videos using the current sound.",
+                "Tambahkan tombol terpisah yang melewati video yang menggunakan suara saat ini.");
         table.put("Add hidden creator",
                 "Tambah kreator tersembunyi");
         table.put("Ads",
@@ -3806,13 +3826,13 @@ public final class L10nTranslations {
                 "Format stiker animasi");
         table.put("App AB",
                 "AB aplikasi");
+    }
+
+    private static void fillIn1(Map<String, String> table) {
         table.put("App behavior",
                 "Perilaku aplikasi");
         table.put("Applies saved rules at supported getters",
                 "Menerapkan aturan tersimpan pada getter yang didukung");
-    }
-
-    private static void fillIn1(Map<String, String> table) {
         table.put("Applies to both video and photo downloads.",
                 "Berlaku untuk unduhan video dan foto.");
         table.put("Apply",
@@ -3929,13 +3949,13 @@ public final class L10nTranslations {
                 "Nama dipisahkan koma, persis seperti yang ditampilkan menu bagikan: teman di baris Kirim ke, tujuan berbagi seperti Facebook, dan aksi seperti Buat grup atau Bagikan ulang. Kunci tetap seperti copy, save, dan dislike juga berlaku sebelum menunya terbuka.");
         table.put("Comma separated sound ids recorded by the player's sound button. Remove one to unblock it.",
                 "Id suara dipisahkan koma yang direkam tombol suara di pemutar. Hapus salah satu untuk membuka blokirnya.");
+    }
+
+    private static void fillIn2(Map<String, String> table) {
         table.put("Comma separated usernames or display names whose comments are hidden.",
                 "Nama pengguna atau nama tampilan dipisahkan koma yang komentarnya disembunyikan.");
         table.put("Comma separated words or phrases. Matching captions are skipped. Case does not matter. Two phrases in quotes can be joined: \"a\" & \"b\" needs both, \"a\" !& \"b\" needs the first without the second.",
                 "Kata atau frasa dipisah koma. Keterangan yang cocok dilewati. Huruf besar kecil tidak berpengaruh. Dua frasa dalam tanda kutip bisa digabung: \"a\" & \"b\" butuh keduanya, \"a\" !& \"b\" butuh yang pertama tanpa yang kedua.");
-    }
-
-    private static void fillIn2(Map<String, String> table) {
         table.put("Comma separated words to match against a sound's name, like saxophone. Case does not matter.",
                 "Kata dipisahkan koma untuk dicocokkan dengan nama suara, misalnya saxophone. Huruf besar kecil tidak berpengaruh.");
         table.put("Comma separated. A comment is hidden if its text contains any of them. Case does not matter. Two phrases in quotes can be joined: \"a\" & \"b\" needs both, \"a\" !& \"b\" needs the first without the second.",
@@ -4052,13 +4072,13 @@ public final class L10nTranslations {
                 "Jumlah hari sebuah video diingat. Nol menghapus batas usia. Riwayat menyimpan paling banyak 10.000 video.");
         table.put("Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible.",
                 "Hari. Nol menampilkan semua umur. Kiriman tanpa stempel waktu yang bisa dipakai, termasuk kiriman mendatang, tetap ditampilkan.");
+    }
+
+    private static void fillIn3(Map<String, String> table) {
         table.put("Default playback speed",
                 "Kecepatan pemutaran bawaan");
         table.put("Delete the local record of the videos you have watched.",
                 "Hapus catatan di perangkat tentang video yang sudah kamu tonton.");
-    }
-
-    private static void fillIn3(Map<String, String> table) {
         table.put("Device language, then original",
                 "Bahasa perangkat, lalu bahasa asli");
         table.put("Diagnostic data cleared. Tap again to put it back.",
@@ -4175,13 +4195,13 @@ public final class L10nTranslations {
                 "Temukan setelan berdasarkan judul atau deskripsi");
         table.put("First caller",
                 "Pemanggil pertama");
+    }
+
+    private static void fillIn4(Map<String, String> table) {
         table.put("Fit the video to the screen",
                 "Sesuaikan video dengan layar");
         table.put("Follow probe",
                 "Uji ikuti");
-    }
-
-    private static void fillIn4(Map<String, String> table) {
         table.put("For You",
                 "Untuk Kamu");
         table.put("For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.",
@@ -4298,13 +4318,13 @@ public final class L10nTranslations {
                 "Sembunyikan orang dan opsi berdasarkan nama");
         table.put("Hide photo posts",
                 "Sembunyikan publikasi foto");
+    }
+
+    private static void fillIn5(Map<String, String> table) {
         table.put("Hide picture comments",
                 "Sembunyikan komentar bergambar");
         table.put("Hide playlist videos",
                 "Sembunyikan video playlist");
-    }
-
-    private static void fillIn5(Map<String, String> table) {
         table.put("Hide promotional music",
                 "Sembunyikan musik promosi");
         table.put("Hide quick comment reactions",
@@ -4421,13 +4441,13 @@ public final class L10nTranslations {
                 "Sembunyikan tombol bagikan");
         table.put("Hide the speech bubble and its count in the right column.",
                 "Sembunyikan gelembung komentar dan angkanya di kolom kanan.");
+    }
+
+    private static void fillIn6(Map<String, String> table) {
         table.put("Hide the spinning music cover and the track name beside the caption.",
                 "Sembunyikan sampul musik yang berputar dan nama lagu di samping keterangan.");
         table.put("Hide the spinning record at the bottom of the right column.",
                 "Sembunyikan piringan yang berputar di bagian bawah kolom kanan.");
-    }
-
-    private static void fillIn6(Map<String, String> table) {
         table.put("Hide the status bar",
                 "Sembunyikan bilah status");
         table.put("Hide the stories from the feed.",
@@ -4544,13 +4564,13 @@ public final class L10nTranslations {
                 "Dimuat");
         table.put("Loaded current values. Loading all known gates...",
                 "Nilai saat ini dimuat. Memuat semua gate yang diketahui...");
+    }
+
+    private static void fillIn7(Map<String, String> table) {
         table.put("Loaded for this account",
                 "Dimuat untuk akun ini");
         table.put("Loaded values are still being read. Try again in a moment.",
                 "Nilai yang dimuat masih dibaca. Coba lagi sebentar lagi.");
-    }
-
-    private static void fillIn7(Map<String, String> table) {
         table.put("Loaded-value file export failed",
                 "Ekspor berkas nilai yang dimuat gagal");
         table.put("Loaded-value file export failed; cleanup also failed",
@@ -4667,13 +4687,13 @@ public final class L10nTranslations {
                 "Tidak ada yang baru diimpor. %1$d sudah cocok, %2$d tidak tersedia, %3$d ditolak.");
         table.put("Nothing to undo yet.",
                 "Belum ada yang bisa dibatalkan.");
+    }
+
+    private static void fillIn8(Map<String, String> table) {
         table.put("Off",
                 "Mati");
         table.put("Off by default. Switched on, the feed dims over the last three quarters of a minute of a time budget, most of it in the final half minute, so the hold is somewhere you arrive rather than somewhere you land. Needs a budget in minutes and a hold to arrive at: a budget counted in videos has no time left to follow, and with the hold switched off there is nothing to lead into. Nothing fades if you have turned animations off.",
                 "Mati secara bawaan. Saat aktif, feed meredup selama tiga perempat menit terakhir dari anggaran waktu, sebagian besar pada setengah menit terakhir, sehingga feed yang ditahan bukan kejutan. Perlu anggaran dalam menit dan penahanan yang dituju: anggaran yang dihitung per video tidak punya sisa waktu untuk diikuti, dan tanpa penahanan tidak ada yang dituju. Tidak ada yang meredup jika animasi dimatikan.");
-    }
-
-    private static void fillIn8(Map<String, String> table) {
         table.put("Off by default. Switched on, the hold that starts when today's budget runs out has no way out, and the budgets, the reset hour and this switch cannot be changed again until the day starts over. Switch it off any time before the budget runs out.",
                 "Mati secara bawaan. Bila dinyalakan, penahanan yang dimulai saat anggaran hari ini habis tidak punya jalan keluar, dan anggaran, jam mulai hari serta sakelar ini tidak bisa diubah lagi sampai hari berganti. Matikan kapan saja sebelum anggaran habis.");
         table.put("Off by default. The video behind the comment sheet keeps playing, with sound, while you read. Switched on, Hushfeed asks for the sound the moment a sheet opens and hands it back when it closes, which is how one app tells another to stop.",
@@ -4790,13 +4810,13 @@ public final class L10nTranslations {
                 "Tekan dan tahan Story untuk menyimpannya. Story tidak punya tombol simpan sendiri, dan menahannya adalah cara TikTok menjeda, jadi gestur itu diambil alih.");
         table.put("Press and hold the left or right third of the screen to jump back or forward. The middle third keeps the Long press action.",
                 "Tekan dan tahan sepertiga kiri atau kanan layar untuk melompat mundur atau maju. Sepertiga bagian tengah tetap memakai aksi Tekan lama.");
+    }
+
+    private static void fillIn9(Map<String, String> table) {
         table.put("Preview shortened. Save JSON includes the full report.",
                 "Pratinjau dipendekkan. Simpan JSON memuat laporan lengkapnya.");
         table.put("Profile picture saved to %1$s",
                 "Foto profil disimpan ke %1$s");
-    }
-
-    private static void fillIn9(Map<String, String> table) {
         table.put("Promotional music",
                 "Musik promosi");
         table.put("Proof",
@@ -4913,13 +4933,13 @@ public final class L10nTranslations {
                 "Simpan foto profil dengan tekan lama");
         table.put("Save a story on a long press",
                 "Simpan Story dengan tekan lama");
+    }
+
+    private static void fillIn10(Map<String, String> table) {
         table.put("Save every photo in the post directly from its source URL, without rendering it again.",
                 "Simpan setiap foto dalam unggahan langsung dari URL sumbernya, tanpa dirender ulang.");
         table.put("Save field values",
                 "Simpan nilai bidang");
-    }
-
-    private static void fillIn10(Map<String, String> table) {
         table.put("Save full report",
                 "Simpan laporan lengkap");
         table.put("Save media",
@@ -5036,13 +5056,17 @@ public final class L10nTranslations {
                 "Tampilkan pratinjau video saat menggeser bilah progres.");
         table.put("Show block button on videos",
                 "Tampilkan tombol blokir di video");
-        table.put("Show gates",
-                "Tampilkan gate");
-        table.put("Show the Not interested button",
-                "Tampilkan tombol Tidak tertarik");
     }
 
     private static void fillIn11(Map<String, String> table) {
+        table.put("Show block sound button",
+                "Tampilkan tombol blokir suara");
+        table.put("Show gates",
+                "Tampilkan gate");
+        table.put("Show local hide button",
+                "Tampilkan tombol sembunyikan lokal");
+        table.put("Show the Not interested button",
+                "Tampilkan tombol Tidak tertarik");
         table.put("Show the country a video was posted from next to the creator's name.",
                 "Tampilkan negara asal unggahan video di sebelah nama kreator.");
         table.put("Show the current spoken caption while the other controls are hidden.",
@@ -5155,6 +5179,9 @@ public final class L10nTranslations {
                 "Ketuk tombol Ikuti di feed dua kali dalam empat detik.");
         table.put("Tap the like heart twice within four seconds. Removing a like stays immediate.",
                 "Ketuk ikon hati dua kali dalam empat detik. Membatalkan suka tetap langsung berlaku.");
+    }
+
+    private static void fillIn12(Map<String, String> table) {
         table.put("Tap to start the feed",
                 "Ketuk untuk memulai feed");
         table.put("Technical details",
@@ -5163,9 +5190,6 @@ public final class L10nTranslations {
                 "Cadangan itu dibuat oleh Hushfeed yang lebih baru dari ini. Tidak ada yang diubah.");
         table.put("That creator is already in the list",
                 "Kreator itu sudah ada di daftar");
-    }
-
-    private static void fillIn12(Map<String, String> table) {
         table.put("That creator pattern is too long to use, so it was skipped: %1$s",
                 "Pola kreator itu terlalu panjang, jadi dilewati: %1$s");
         table.put("That creator pattern is too long, so it was not added: %1$s",
@@ -5278,6 +5302,9 @@ public final class L10nTranslations {
                 "Foto profil ini tidak bisa disimpan");
         table.put("This quality isn't available as a complete file, so TikTok's own save runs instead",
                 "Kualitas ini tidak tersedia sebagai berkas utuh, jadi TikTok yang menyimpannya");
+    }
+
+    private static void fillIn13(Map<String, String> table) {
         table.put("This story isn't available to save",
                 "Story ini tidak bisa disimpan");
         table.put("This video has no link to copy",
@@ -5286,9 +5313,6 @@ public final class L10nTranslations {
                 "Video ini tidak punya tautan untuk dikirim, jadi TikTok yang menyimpannya");
         table.put("This video has no original sound to save",
                 "Video ini tidak punya suara asli untuk disimpan");
-    }
-
-    private static void fillIn13(Map<String, String> table) {
         table.put("This video has no sound of its own",
                 "Video ini tidak punya suara sendiri");
         table.put("Thumbs down blocks the commenter",
@@ -5401,6 +5425,9 @@ public final class L10nTranslations {
                 "Nilai");
         table.put("Value to return",
                 "Nilai yang dikembalikan");
+    }
+
+    private static void fillIn14(Map<String, String> table) {
         table.put("Verified creators",
                 "Kreator terverifikasi");
         table.put("Video",
@@ -5409,9 +5436,6 @@ public final class L10nTranslations {
                 "Video (MP4)");
         table.put("Video destination",
                 "Lokasi simpan video");
-    }
-
-    private static void fillIn14(Map<String, String> table) {
         table.put("Video download quality",
                 "Kualitas unduhan video");
         table.put("Video filename",
@@ -5481,7 +5505,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildPt_rBR() {
-        Map<String, String> table = new HashMap<>(1746);
+        Map<String, String> table = new HashMap<>(1754);
         fillPt_rBR0(table);
         fillPt_rBR1(table);
         fillPt_rBR2(table);
@@ -5571,6 +5595,10 @@ public final class L10nTranslations {
                 "Adiciona um botão de bloqueio ao player que bloqueia com um toque a conta que publicou o vídeo atual. Depois de cada bloqueio aparece uma ação para desfazer.");
         table.put("Add a button beside the block control to send feedback about the current video.",
                 "Adiciona um botão ao lado do controle de bloqueio para enviar feedback sobre o vídeo atual.");
+        table.put("Add a separate button that skips this account locally without blocking it.",
+                "Adiciona um botão separado que ignora esta conta localmente sem bloqueá-la.");
+        table.put("Add a separate button that skips videos using the current sound.",
+                "Adiciona um botão separado que ignora vídeos que usam o som atual.");
         table.put("Add hidden creator",
                 "Adicionar criador oculto");
         table.put("Ads",
@@ -5617,13 +5645,13 @@ public final class L10nTranslations {
                 "Formato dos stickers animados");
         table.put("App AB",
                 "AB do app");
+    }
+
+    private static void fillPt_rBR1(Map<String, String> table) {
         table.put("App behavior",
                 "Comportamento do app");
         table.put("Applies saved rules at supported getters",
                 "Aplica as regras salvas onde dá");
-    }
-
-    private static void fillPt_rBR1(Map<String, String> table) {
         table.put("Applies to both video and photo downloads.",
                 "Vale tanto para os downloads de vídeo quanto para os de fotos.");
         table.put("Apply",
@@ -5740,13 +5768,13 @@ public final class L10nTranslations {
                 "Nomes separados por vírgula, exatamente como a folha de compartilhamento mostra: amigos da linha Enviar para, destinos como Facebook e ações como Criar grupo ou Repostar. Chaves estáveis como copy, save e dislike também funcionam antes de a folha abrir.");
         table.put("Comma separated sound ids recorded by the player's sound button. Remove one to unblock it.",
                 "Ids de som separados por vírgula, registrados pelo botão de som do player. Tire um para desbloquear.");
+    }
+
+    private static void fillPt_rBR2(Map<String, String> table) {
         table.put("Comma separated usernames or display names whose comments are hidden.",
                 "Nomes de usuário ou nomes de exibição separados por vírgula cujos comentários ficam escondidos.");
         table.put("Comma separated words or phrases. Matching captions are skipped. Case does not matter. Two phrases in quotes can be joined: \"a\" & \"b\" needs both, \"a\" !& \"b\" needs the first without the second.",
                 "Palavras ou frases separadas por vírgula. Legendas que combinarem são puladas. Maiúsculas e minúsculas não importam. Duas frases entre aspas podem ser juntadas: \"a\" & \"b\" pede as duas, \"a\" !& \"b\" pede a primeira sem a segunda.");
-    }
-
-    private static void fillPt_rBR2(Map<String, String> table) {
         table.put("Comma separated words to match against a sound's name, like saxophone. Case does not matter.",
                 "Palavras separadas por vírgula para comparar com o nome de um som, como saxofone. Maiúsculas e minúsculas não importam.");
         table.put("Comma separated. A comment is hidden if its text contains any of them. Case does not matter. Two phrases in quotes can be joined: \"a\" & \"b\" needs both, \"a\" !& \"b\" needs the first without the second.",
@@ -5863,13 +5891,13 @@ public final class L10nTranslations {
                 "Dias para lembrar de um vídeo. Zero tira o limite de idade. O histórico guarda no máximo 10.000 vídeos.");
         table.put("Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible.",
                 "Dias. Zero aceita qualquer idade. Publicações sem uma data utilizável, inclusive as futuras, continuam visíveis.");
+    }
+
+    private static void fillPt_rBR3(Map<String, String> table) {
         table.put("Default playback speed",
                 "Velocidade de reprodução padrão");
         table.put("Delete the local record of the videos you have watched.",
                 "Apaga o registro local dos vídeos que você já viu.");
-    }
-
-    private static void fillPt_rBR3(Map<String, String> table) {
         table.put("Device language, then original",
                 "Idioma do aparelho, depois o original");
         table.put("Diagnostic data cleared. Tap again to put it back.",
@@ -5986,13 +6014,13 @@ public final class L10nTranslations {
                 "Ache uma configuração por título ou descrição");
         table.put("First caller",
                 "Primeira chamada");
+    }
+
+    private static void fillPt_rBR4(Map<String, String> table) {
         table.put("Fit the video to the screen",
                 "Ajustar o vídeo à tela");
         table.put("Follow probe",
                 "Verificação de seguir");
-    }
-
-    private static void fillPt_rBR4(Map<String, String> table) {
         table.put("For You",
                 "Para você");
         table.put("For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.",
@@ -6109,13 +6137,13 @@ public final class L10nTranslations {
                 "Esconder pessoas e opções por nome");
         table.put("Hide photo posts",
                 "Esconder as publicações de fotos");
+    }
+
+    private static void fillPt_rBR5(Map<String, String> table) {
         table.put("Hide picture comments",
                 "Esconder os comentários com imagem");
         table.put("Hide playlist videos",
                 "Esconder os vídeos de playlists");
-    }
-
-    private static void fillPt_rBR5(Map<String, String> table) {
         table.put("Hide promotional music",
                 "Esconder a música promocional");
         table.put("Hide quick comment reactions",
@@ -6232,13 +6260,13 @@ public final class L10nTranslations {
                 "Esconder o botão de compartilhar");
         table.put("Hide the speech bubble and its count in the right column.",
                 "Esconder o balão e o número dele na coluna da direita.");
+    }
+
+    private static void fillPt_rBR6(Map<String, String> table) {
         table.put("Hide the spinning music cover and the track name beside the caption.",
                 "Esconder a capa giratória da música e o nome da faixa ao lado da legenda.");
         table.put("Hide the spinning record at the bottom of the right column.",
                 "Esconder o disco giratório na parte de baixo da coluna da direita.");
-    }
-
-    private static void fillPt_rBR6(Map<String, String> table) {
         table.put("Hide the status bar",
                 "Esconder a barra de status");
         table.put("Hide the stories from the feed.",
@@ -6355,13 +6383,13 @@ public final class L10nTranslations {
                 "Carregados");
         table.put("Loaded current values. Loading all known gates...",
                 "Valores atuais carregados. Carregando todos os gates conhecidos...");
+    }
+
+    private static void fillPt_rBR7(Map<String, String> table) {
         table.put("Loaded for this account",
                 "Carregado para esta conta");
         table.put("Loaded values are still being read. Try again in a moment.",
                 "Os valores carregados ainda estão sendo lidos. Tente novamente em instantes.");
-    }
-
-    private static void fillPt_rBR7(Map<String, String> table) {
         table.put("Loaded-value file export failed",
                 "A exportação do arquivo de valores carregados falhou");
         table.put("Loaded-value file export failed; cleanup also failed",
@@ -6478,13 +6506,13 @@ public final class L10nTranslations {
                 "Nada de novo foi importado. %1$d já coincidiam, %2$d não estão disponíveis, %3$d foram rejeitados.");
         table.put("Nothing to undo yet.",
                 "Ainda não há nada para desfazer.");
+    }
+
+    private static void fillPt_rBR8(Map<String, String> table) {
         table.put("Off",
                 "Desligado");
         table.put("Off by default. Switched on, the feed dims over the last three quarters of a minute of a time budget, most of it in the final half minute, so the hold is somewhere you arrive rather than somewhere you land. Needs a budget in minutes and a hold to arrive at: a budget counted in videos has no time left to follow, and with the hold switched off there is nothing to lead into. Nothing fades if you have turned animations off.",
                 "Desligado por padrão. Ligado, o feed escurece ao longo dos últimos três quartos de minuto de um limite de tempo, a maior parte no último meio minuto, para a pausa ser algo a que você chega e não algo que cai em cima de você. Precisa de um limite em minutos e de uma pausa para chegar: um contado em vídeos não tem tempo restante para seguir, e sem pausa não há aonde chegar. Nada escurece se você desligou as animações.");
-    }
-
-    private static void fillPt_rBR8(Map<String, String> table) {
         table.put("Off by default. Switched on, the hold that starts when today's budget runs out has no way out, and the budgets, the reset hour and this switch cannot be changed again until the day starts over. Switch it off any time before the budget runs out.",
                 "Desligado por padrão. Ligado, a pausa que começa quando o limite de hoje acaba não tem saída, e os limites, a hora de reinício e esta própria chave não podem ser mudados de novo até o dia virar. Você pode desligar a qualquer momento antes de o limite acabar.");
         table.put("Off by default. The video behind the comment sheet keeps playing, with sound, while you read. Switched on, Hushfeed asks for the sound the moment a sheet opens and hands it back when it closes, which is how one app tells another to stop.",
@@ -6601,13 +6629,13 @@ public final class L10nTranslations {
                 "Segure um story para salvá-lo. Os stories não têm botão de salvar próprio, e segurar é como o TikTok os pausa, então isto assume esse gesto.");
         table.put("Press and hold the left or right third of the screen to jump back or forward. The middle third keeps the Long press action.",
                 "Segure o terço esquerdo ou direito da tela para pular para trás ou para frente. O terço do meio mantém a ação de Toque longo.");
+    }
+
+    private static void fillPt_rBR9(Map<String, String> table) {
         table.put("Preview shortened. Save JSON includes the full report.",
                 "Prévia encurtada. Salvar JSON traz o relatório inteiro.");
         table.put("Profile picture saved to %1$s",
                 "Foto de perfil salva em %1$s");
-    }
-
-    private static void fillPt_rBR9(Map<String, String> table) {
         table.put("Promotional music",
                 "Música promocional");
         table.put("Proof",
@@ -6724,13 +6752,13 @@ public final class L10nTranslations {
                 "Salvar uma foto de perfil com um toque longo");
         table.put("Save a story on a long press",
                 "Salvar um story com um toque longo");
+    }
+
+    private static void fillPt_rBR10(Map<String, String> table) {
         table.put("Save every photo in the post directly from its source URL, without rendering it again.",
                 "Salvar cada foto da publicação direto da URL de origem, sem renderizar de novo.");
         table.put("Save field values",
                 "Salvar os valores dos campos");
-    }
-
-    private static void fillPt_rBR10(Map<String, String> table) {
         table.put("Save full report",
                 "Salvar relatório completo");
         table.put("Save media",
@@ -6847,13 +6875,17 @@ public final class L10nTranslations {
                 "Mostrar uma miniatura do vídeo enquanto você arrasta a barra de progresso.");
         table.put("Show block button on videos",
                 "Mostrar o botão de bloquear nos vídeos");
-        table.put("Show gates",
-                "Mostrar gates");
-        table.put("Show the Not interested button",
-                "Mostrar o botão de Não tenho interesse");
     }
 
     private static void fillPt_rBR11(Map<String, String> table) {
+        table.put("Show block sound button",
+                "Mostrar o botão de bloquear som");
+        table.put("Show gates",
+                "Mostrar gates");
+        table.put("Show local hide button",
+                "Mostrar o botão de ocultar localmente");
+        table.put("Show the Not interested button",
+                "Mostrar o botão de Não tenho interesse");
         table.put("Show the country a video was posted from next to the creator's name.",
                 "Mostrar o país de onde o vídeo foi publicado ao lado do nome do criador.");
         table.put("Show the current spoken caption while the other controls are hidden.",
@@ -6966,6 +6998,9 @@ public final class L10nTranslations {
                 "Toque no botão Seguir do feed duas vezes dentro de quatro segundos.");
         table.put("Tap the like heart twice within four seconds. Removing a like stays immediate.",
                 "Toque no coração de curtir duas vezes dentro de quatro segundos. Tirar uma curtida continua sendo imediato.");
+    }
+
+    private static void fillPt_rBR12(Map<String, String> table) {
         table.put("Tap to start the feed",
                 "Toque para iniciar o feed");
         table.put("Technical details",
@@ -6974,9 +7009,6 @@ public final class L10nTranslations {
                 "Esse backup foi escrito por um Hushfeed mais novo que este. Nada foi alterado.");
         table.put("That creator is already in the list",
                 "Esse criador já está na lista");
-    }
-
-    private static void fillPt_rBR12(Map<String, String> table) {
         table.put("That creator pattern is too long to use, so it was skipped: %1$s",
                 "Esse padrão de criador é longo demais, então foi ignorado: %1$s");
         table.put("That creator pattern is too long, so it was not added: %1$s",
@@ -7089,6 +7121,9 @@ public final class L10nTranslations {
                 "Esta foto de perfil não está disponível para salvar");
         table.put("This quality isn't available as a complete file, so TikTok's own save runs instead",
                 "Esta qualidade não está disponível como arquivo completo, então o salvamento do próprio TikTok é usado");
+    }
+
+    private static void fillPt_rBR13(Map<String, String> table) {
         table.put("This story isn't available to save",
                 "Este story não está disponível para salvar");
         table.put("This video has no link to copy",
@@ -7097,9 +7132,6 @@ public final class L10nTranslations {
                 "Este vídeo não tem link para mandar, então o salvamento do próprio TikTok é usado");
         table.put("This video has no original sound to save",
                 "Este vídeo não tem som original para salvar");
-    }
-
-    private static void fillPt_rBR13(Map<String, String> table) {
         table.put("This video has no sound of its own",
                 "Este vídeo não tem som próprio");
         table.put("Thumbs down blocks the commenter",
@@ -7212,6 +7244,9 @@ public final class L10nTranslations {
                 "Valor");
         table.put("Value to return",
                 "Valor devolvido");
+    }
+
+    private static void fillPt_rBR14(Map<String, String> table) {
         table.put("Verified creators",
                 "Criadores verificados");
         table.put("Video",
@@ -7220,9 +7255,6 @@ public final class L10nTranslations {
                 "Vídeo (MP4)");
         table.put("Video destination",
                 "Destino dos vídeos");
-    }
-
-    private static void fillPt_rBR14(Map<String, String> table) {
         table.put("Video download quality",
                 "Qualidade de download do vídeo");
         table.put("Video filename",

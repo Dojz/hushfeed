@@ -1,5 +1,7 @@
 ## Unreleased
 
+* The block, local-hide, sound and Not interested controls now disappear when TikTok's comment sheet covers the feed. The local-hide and sound buttons have their own switches, and each visible control can be moved and remembered on its own.
+
 * Restored the Ko-fi support link removed during the optimizer documentation update. The marketing contract now checks the canonical URL so later README rewrites cannot silently drop it again.
 
 * Eight optional TikTok optimizer patches from Kveld are now built into Hushfeed. The four resource patches validate complete path and SHA-256 profiles before emptying language, creator, LIVE, C2PA or card-scanner assets. The startup, network, Fresco and update patches use exact reviewed method contracts, stay off by default and describe their feature tradeoffs. Disable telemetry also covers TikTok's two Npth startup tasks behind its existing switch. The pre-push preparation check can keep the published 71-patch index intact while this unreleased catalog grows at the same version. Strict publication checks still reject the mismatch.
