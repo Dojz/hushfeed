@@ -35,8 +35,11 @@ import org.robolectric.shadows.ShadowToast;
 public class FeatureGatePagesTest {
     @Before public void resetSharedState() throws Exception {
         Utils.setContext(RuntimeEnvironment.getApplication());
+        Utils.awaitBackgroundTasksForTests();
+        FeatureGateDetailFragment.awaitChangesForTests();
         FeatureGateCatalog.awaitForTests();
         Shadows.shadowOf(Looper.getMainLooper()).idle();
+        FeatureGateDetailFragment.setDetailChangeTestHookForTests(null);
         FeatureGateCatalog.resetForTests();
         FeatureGateLabSession.resetForTests();
         FeatureGateLabUndo.resetForTests();
@@ -341,7 +344,7 @@ public class FeatureGatePagesTest {
             ShadowToast.reset();
             control.performClick();
             // Saving an override goes through the journal now, off this thread and back.
-            Utils.awaitBackgroundTasksForTests();
+            FeatureGateDetailFragment.awaitChangesForTests();
             Shadows.shadowOf(Looper.getMainLooper()).idle();
             assertTrue(FeatureGateLabStore.rule("abmock", entry.key, "INT").enabled);
             assertEquals("Feature gate override saved", ShadowToast.getTextOfLatestToast());
@@ -381,11 +384,87 @@ public class FeatureGatePagesTest {
                 activity.getFragmentManager().executePendingTransactions();
                 assertNull(detail.getActivity());
             }
-            Utils.awaitBackgroundTasksForTests();
+            FeatureGateDetailFragment.awaitChangesForTests();
             Shadows.shadowOf(Looper.getMainLooper()).idle();
 
             assertTrue(FeatureGateLabStore.rule("abmock", entry.key, "INT").enabled);
             assertEquals("Feature gate override saved", ShadowToast.getTextOfLatestToast());
+        }
+    }
+
+    @Test public void rapidDetailChangesStayOrderedAndShareOneUndoPoint() throws Exception {
+        for (boolean firstFails : new boolean[]{false, true, false}) {
+            try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
+                Activity activity = owner.get();
+                Utils.setContext(activity);
+                FeatureGateLabStore.resetAllLabData();
+                FeatureGateLabStore.setMasterEnabled(true);
+                var entry = new FeatureGateCatalog.Entry("ordered_gate", "Ordered gate", "abmock",
+                        "INT", true, true, List.of("0", "1", "2"), List.of(), List.of(), "", "",
+                        true, "0", "INT");
+                var cached = FeatureGateCatalog.class.getDeclaredField("cachedSnapshot");
+                cached.setAccessible(true);
+                cached.set(null, new FeatureGateCatalog.Snapshot(
+                        List.of(entry), Map.of(entry.identity(), entry), 0, 0, true));
+                FeatureGateLabUndo.saveRule("abmock", entry.key, entry.type, "0", true);
+
+                FeatureGateDetailFragment detail = FeatureGateDetailFragment.forEntry(
+                        entry.manager, entry.key, entry.type);
+                attach(activity, detail);
+                Spinner values = find(detail.getView(), Spinner.class);
+                assertNotNull(values);
+                var firstStarted = new java.util.concurrent.CountDownLatch(1);
+                var releaseFirst = new java.util.concurrent.CountDownLatch(1);
+                var secondFinished = new java.util.concurrent.CountDownLatch(1);
+                FeatureGateDetailFragment.setDetailChangeTestHookForTests(
+                        new FeatureGateDetailFragment.DetailChangeTestHook() {
+                            @Override public void before(long generation) throws Exception {
+                                if (generation != 1) return;
+                                firstStarted.countDown();
+                                if (!releaseFirst.await(2, java.util.concurrent.TimeUnit.SECONDS)) {
+                                    throw new AssertionError("the delayed save was not released");
+                                }
+                                if (firstFails) throw new java.io.IOException("delayed first save failed");
+                            }
+
+                            @Override public void after(long generation) {
+                                if (generation == 2) secondFinished.countDown();
+                            }
+                        });
+
+                boolean secondOvertookFirst = false;
+                try {
+                    ShadowToast.reset();
+                    values.setSelection(1);
+                    assertTrue("the first save did not reach its delay",
+                            firstStarted.await(2, java.util.concurrent.TimeUnit.SECONDS));
+                    values.setSelection(2);
+                    secondOvertookFirst = secondFinished.await(
+                            300, java.util.concurrent.TimeUnit.MILLISECONDS);
+                } finally {
+                    releaseFirst.countDown();
+                    FeatureGateDetailFragment.awaitChangesForTests();
+                    Shadows.shadowOf(Looper.getMainLooper()).idle();
+                    FeatureGateDetailFragment.setDetailChangeTestHookForTests(null);
+                }
+
+                assertFalse("the second save ran around the delayed first save",
+                        secondOvertookFirst);
+                FeatureGateLabStore.Rule stored = FeatureGateLabStore.rule(
+                        "abmock", entry.key, entry.type);
+                assertNotNull(stored);
+                assertEquals("the last tap did not win in storage", "2", stored.value);
+                var ruleField = FeatureGateDetailFragment.class.getDeclaredField("rule");
+                ruleField.setAccessible(true);
+                assertEquals("a stale callback repainted the detail screen", "2",
+                        ((FeatureGateLabStore.Rule) ruleField.get(detail)).value);
+                assertEquals(2, values.getSelectedItemPosition());
+                assertEquals("Feature gate override saved", ShadowToast.getTextOfLatestToast());
+
+                FeatureGateLabUndo.undo();
+                assertEquals("Undo did not restore the value from before both taps", "0",
+                        FeatureGateLabStore.rule("abmock", entry.key, entry.type).value);
+            }
         }
     }
 
@@ -438,7 +517,7 @@ public class FeatureGatePagesTest {
             Switch force = find(detail.getView(), Switch.class);
             assertFalse(force.isChecked());
             force.performClick();
-            Utils.awaitBackgroundTasksForTests();
+            FeatureGateDetailFragment.awaitChangesForTests();
             Shadows.shadowOf(Looper.getMainLooper()).idle();
 
             FeatureGateLabStore.Rule saved = FeatureGateLabStore.rule(
@@ -464,7 +543,7 @@ public class FeatureGatePagesTest {
             assertButtonRole(save);
             ShadowToast.reset();
             save.performClick();
-            Utils.awaitBackgroundTasksForTests();
+            FeatureGateDetailFragment.awaitChangesForTests();
             Shadows.shadowOf(Looper.getMainLooper()).idle();
 
             FeatureGateLabStore.Rule saved = FeatureGateLabStore.rule(

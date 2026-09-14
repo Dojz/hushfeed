@@ -34,7 +34,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.TimeUnit;
 
+import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.tiktok.settings.preference.SettingsUi;
 
@@ -43,6 +48,12 @@ public final class FeatureGateDetailFragment extends Fragment {
     private static final String ARG_MANAGER = "manager";
     private static final String ARG_KEY = "key";
     private static final String ARG_TYPE = "type";
+    private static final ExecutorService DETAIL_CHANGE_EXECUTOR =
+            Executors.newSingleThreadExecutor(runnable -> {
+                Thread thread = new Thread(runnable, "MorpheGateDetail");
+                thread.setDaemon(true);
+                return thread;
+            });
 
     private final app.morphe.extension.tiktok.settings.SystemBackHandler systemBack =
             new app.morphe.extension.tiktok.settings.SystemBackHandler("FeatureGateDetailBackCallback");
@@ -64,6 +75,25 @@ public final class FeatureGateDetailFragment extends Fragment {
     private AlertDialog customValueDialog;
     private boolean suppress;
     private int lastConcreteSelection;
+    private long detailChangeGeneration;
+    private final Object detailChangeState = new Object();
+    private int detailChangesPending;
+    private FeatureGateLabUndo.UndoBaseline detailUndoBaseline;
+
+    interface DetailChangeTestHook {
+        void before(long generation) throws Exception;
+        void after(long generation);
+    }
+
+    private static volatile DetailChangeTestHook detailChangeTestHook;
+
+    static void setDetailChangeTestHookForTests(DetailChangeTestHook hook) {
+        detailChangeTestHook = hook;
+    }
+
+    static void awaitChangesForTests() throws Exception {
+        DETAIL_CHANGE_EXECUTOR.submit(() -> { }).get(5, TimeUnit.SECONDS);
+    }
 
     public static FeatureGateDetailFragment forEntry(String manager, String key, String type) {
         FeatureGateDetailFragment fragment = new FeatureGateDetailFragment();
@@ -428,8 +458,9 @@ public final class FeatureGateDetailFragment extends Fragment {
         // screen's own changes, which have run off the main thread since they were written.
         Object[] saved = new Object[1];
         runDetailChange(
-                () -> {
-                    FeatureGateLabUndo.saveRule(entry.manager, entry.key, entry.type, value, enabled);
+                undoBaseline -> {
+                    FeatureGateLabUndo.saveRule(
+                            entry.manager, entry.key, entry.type, value, enabled, undoBaseline);
                     saved[0] = FeatureGateLabStore.rule(entry.manager, entry.key, entry.type);
                 },
                 () -> {
@@ -443,7 +474,8 @@ public final class FeatureGateDetailFragment extends Fragment {
 
     private void resetRule() {
         runDetailChange(
-                () -> FeatureGateLabUndo.deleteRule(entry.manager, entry.key, entry.type),
+                undoBaseline -> FeatureGateLabUndo.deleteRule(
+                        entry.manager, entry.key, entry.type, undoBaseline),
                 () -> {
                     rule = null;
                     suppress = true;
@@ -463,36 +495,67 @@ public final class FeatureGateDetailFragment extends Fragment {
 
     /** A change that touches storage, so it does not belong on the thread drawing the screen. */
     private interface DetailChange {
-        void run() throws Exception;
+        void run(FeatureGateLabUndo.UndoBaseline undoBaseline) throws Exception;
     }
 
     /**
      * Runs {@code change} off the main thread, then reports completion on the main thread.
      *
-     * <p>{@code onDone} touches the views, so it is skipped when the screen has gone in the
-     * meantime. The notice is independent of those views: the user pressed a button and is owed
-     * an answer even if they have already left.
+     * <p>Only the newest queued change may report or repaint the screen. This keeps an older
+     * success or failure from replacing the state selected by a later tap.
      */
     private void runDetailChange(DetailChange change, Runnable onDone,
                                  String translatedSuccess, String translatedFailurePrefix) {
-        Utils.runOnBackgroundThread(() -> {
-            String failure = null;
-            try {
-                change.run();
-            } catch (Exception error) {
-                failure = translatedFailurePrefix + " " + error.getMessage();
+        final long generation;
+        final FeatureGateLabUndo.UndoBaseline undoBaseline;
+        synchronized (detailChangeState) {
+            generation = ++detailChangeGeneration;
+            if (detailChangesPending++ == 0) {
+                detailUndoBaseline = new FeatureGateLabUndo.UndoBaseline();
             }
-            String notice = failure;
-            new Handler(Looper.getMainLooper()).post(() -> {
-                if (notice != null) {
-                    Utils.showToastLong(notice);
-                    return;
+            undoBaseline = detailUndoBaseline;
+        }
+        try {
+            DETAIL_CHANGE_EXECUTOR.execute(() -> {
+                String failure = null;
+                try {
+                    DetailChangeTestHook hook = detailChangeTestHook;
+                    if (hook != null) hook.before(generation);
+                    change.run(undoBaseline);
+                    if (hook != null) hook.after(generation);
+                } catch (Exception error) {
+                    failure = translatedFailurePrefix + " " + error.getMessage();
+                } finally {
+                    detailChangeFinished();
                 }
-                Utils.showToastShort(translatedSuccess);
-                if (getActivity() == null || reset == null) return;
-                onDone.run();
+                String notice = failure;
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    if (generation != detailChangeGeneration) return;
+                    if (notice != null) {
+                        Utils.showToastLong(notice);
+                        return;
+                    }
+                    Utils.showToastShort(translatedSuccess);
+                    if (getActivity() == null || reset == null) return;
+                    onDone.run();
+                });
             });
-        });
+        } catch (RejectedExecutionException error) {
+            detailChangeFinished();
+            Logger.printException(() -> "Could not schedule Feature Gate detail change", error);
+            new Handler(Looper.getMainLooper()).post(() -> {
+                if (generation == detailChangeGeneration) {
+                    Utils.showToastLong(translatedFailurePrefix);
+                }
+            });
+        }
+    }
+
+    private void detailChangeFinished() {
+        synchronized (detailChangeState) {
+            detailChangesPending--;
+            if (detailChangesPending == 0) detailUndoBaseline = null;
+        }
     }
 
     private void showCustomValue() {
