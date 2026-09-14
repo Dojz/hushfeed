@@ -88,6 +88,7 @@ public final class CommentSearch {
     public static void onSettingChanged() {
         try {
             if (enabled()) {
+                trackBoundRowAttachments();
                 ViewGroup listView = shown.get();
                 if (listView != null && listView.isAttachedToWindow()) {
                     addSearchField(listView);
@@ -108,6 +109,11 @@ public final class CommentSearch {
         } catch (Throwable exception) {
             Logger.printException(() -> "Could not update comment search after its setting changed", exception);
         }
+    }
+
+    /** Restores listeners removed while search was off, including rows retained by a cached sheet. */
+    private static void trackBoundRowAttachments() {
+        for (View row : new ArrayList<>(ROW_COMMENTS.keySet())) trackRowAttachments(row);
     }
 
     /** What is in the box, lower cased once so every comparison does not have to be. */
@@ -362,7 +368,9 @@ public final class CommentSearch {
         }
 
         void remove(boolean detaching) {
-            listView.removeOnAttachStateChangeListener(this);
+            // Keep one listener while the cached list is detached. It is owned by the list and
+            // can rebuild the decoration when that same native tree returns without another bind.
+            if (!detaching) listView.removeOnAttachStateChangeListener(this);
             WeakReference<SearchField> current = DECORATED.get(column);
             if (current != null && current.get() == this) DECORATED.remove(column);
             // Detach runs during native child removal; don't alter a second child mid-dispatch.
@@ -402,7 +410,18 @@ public final class CommentSearch {
             if (status.getVisibility() != View.GONE) status.setVisibility(View.GONE);
         }
 
-        @Override public void onViewAttachedToWindow(View view) {}
+        @Override public void onViewAttachedToWindow(View view) {
+            // Adding siblings while Android dispatches attach can upset the native parent. Post the
+            // remount, then replace this detached-field listener with the newly created field's.
+            listView.post(() -> {
+                if (!listView.isAttachedToWindow()) return;
+                listView.removeOnAttachStateChangeListener(this);
+                if (!enabled()) return;
+                trackBoundRowAttachments();
+                addSearchField(listView);
+                narrowShownRows();
+            });
+        }
 
         @Override public void onViewDetachedFromWindow(View view) {
             remove(true);

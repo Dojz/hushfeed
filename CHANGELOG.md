@@ -4,7 +4,7 @@
 
 * Settings pages now replace partial content with translated Back and Retry actions when loading fails. A failed preference update restores the typed saved value, dependent controls and default-value storage on the main thread, then reports one translated result.
 
-* Comment search now shows a translated result count below the field and explains when nothing matches. The polite status follows scrolling and recycled rows without moving focus, and clears with the search or comment sheet.
+* Comment search now shows a translated result count below the field and explains when nothing matches. The polite status follows scrolling, recycled rows and cached sheet reattachment without moving focus. Turning search back on restores row tracking even when TikTok does not bind the rows again.
 
 * Feature Gate Lab messages now stay in the selected language, including errors and current state text. Block and unblock results do too. Gate keys, raw type spelling, values and creator identifiers remain unchanged.
 
