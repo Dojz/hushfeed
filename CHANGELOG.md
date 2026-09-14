@@ -1,6 +1,6 @@
 ## Unreleased
 
-* Feature Gate Lab messages now stay in the selected language, including errors and current state text. Block and unblock results do too. Gate keys, types, raw values and creator identifiers remain unchanged.
+* Feature Gate Lab messages now stay in the selected language, including errors and current state text. Block and unblock results do too. Gate keys, raw type spelling, values and creator identifiers remain unchanged.
 
 * Text and number settings, download destination dialogs and Feature Gate object fields now give screen readers one named editor. The spoken node keeps the current value, required keyboard and disabled state without repeating the visible label.
 

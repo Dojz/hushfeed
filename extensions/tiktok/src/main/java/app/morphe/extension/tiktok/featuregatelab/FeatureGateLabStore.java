@@ -385,7 +385,8 @@ public final class FeatureGateLabStore {
             }
             String manager = item.optString("manager", "");
             String key = item.optString("key", "");
-            String type = normalizeType(item.optString("type", ""));
+            String importedType = item.optString("type", "");
+            String type = normalizeType(importedType);
             String value = item.optString("value", "");
             FeatureGateCatalog.Entry entry = catalog.get(manager + "\n" + key);
             if (entry == null) {
@@ -400,7 +401,7 @@ public final class FeatureGateLabStore {
             }
             if (!normalizeType(entry.type).equals(type)) {
                 rejected.add(ImportRejection.typeMismatch(
-                        i + 1, key, normalizeType(entry.type), type));
+                        i + 1, key, entry.type, importedType));
                 continue;
             }
             ValidationFailure error = validateValue(type, value);

@@ -84,7 +84,7 @@ public class FeatureGateLocalizationTest {
                 "payload hat einen ungültigen Wert. Gib ein JSON-Objekt oder -Array ein.",
                 "Nichts Neues wurde importiert. Bereits identisch: 0. Nicht verfügbar: 0. "
                         + "Abgelehnt: 2. Erste Ablehnung: raw_import_key hat "
-                        + "den Typ INT, in der Datei steht STRING."
+                        + "den Typ INT, in der Datei steht string."
         ));
     }
 
@@ -105,7 +105,7 @@ public class FeatureGateLocalizationTest {
                 "Nilai payload tidak valid. Masukkan objek atau larik JSON.",
                 "Tidak ada hal baru yang diimpor. 0 sudah cocok, 0 tidak tersedia, 2 ditolak. "
                         + "Penolakan pertama: raw_import_key bertipe INT, tetapi file "
-                        + "menyebutkan STRING."
+                        + "menyebutkan string."
         ));
     }
 
@@ -201,7 +201,7 @@ public class FeatureGateLocalizationTest {
                             .put(new JSONObject()
                                     .put("manager", FeatureGateLabStore.MANAGER_ABMOCK)
                                     .put("key", "raw_import_key")
-                                    .put("type", "STRING")
+                                    .put("type", "string")
                                     .put("value", "raw_value_21"))
                             .put(new JSONObject()
                                     .put("manager", FeatureGateLabStore.MANAGER_ABMOCK)
