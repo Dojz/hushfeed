@@ -1316,7 +1316,7 @@ public final class FeatureGateLabFragment extends Fragment {
             postToast(L10n.t(Utils.getContext(), "A Lab change is already running"));
             return false;
         }
-        Utils.runOnBackgroundThread(() -> {
+        boolean accepted = Utils.runOnBackgroundThread(() -> {
             lastChangeThreadForTests = Thread.currentThread().getName();
             String result;
             try {
@@ -1339,6 +1339,12 @@ public final class FeatureGateLabFragment extends Fragment {
                 Utils.showToastLong(notice);
             });
         });
+        if (!accepted) {
+            CHANGING.set(false);
+            postToast(L10n.t(Utils.getContext(),
+                    "Could not start the Lab change. Try again shortly."));
+            return false;
+        }
         return true;
     }
 

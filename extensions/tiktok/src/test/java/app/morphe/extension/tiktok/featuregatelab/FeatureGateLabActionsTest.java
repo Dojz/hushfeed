@@ -7,6 +7,7 @@ import android.os.Looper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
+import app.morphe.extension.shared.BackgroundPoolSaturation;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.tiktok.settings.Settings;
 import java.io.ByteArrayInputStream;
@@ -526,6 +527,40 @@ public class FeatureGateLabActionsTest {
             Utils.awaitBackgroundTasksForTests();
             Shadows.shadowOf(Looper.getMainLooper()).idle();
             assertNotEquals("A Lab change is already running", ShadowToast.getTextOfLatestToast());
+        }
+    }
+
+    @Test public void aFullWorkerQueueRejectsALabChangeWithoutLeavingItBusy() throws Exception {
+        try (var owner = Robolectric.buildActivity(TestActivity.class).setup().visible()) {
+            var fragment = attach(owner.get());
+            save("gate", "true", true);
+            var reset = FeatureGateLabFragment.class.getDeclaredMethod("reset", boolean.class);
+            reset.setAccessible(true);
+            var changingField = FeatureGateLabFragment.class.getDeclaredField("CHANGING");
+            changingField.setAccessible(true);
+            var changing = (java.util.concurrent.atomic.AtomicBoolean) changingField.get(null);
+
+            try (BackgroundPoolSaturation saturation = BackgroundPoolSaturation.fill()) {
+                ShadowToast.reset();
+                reset.invoke(fragment, false);
+                Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+                assertEquals("Could not start the Lab change. Try again shortly.",
+                        ShadowToast.getTextOfLatestToast());
+                assertFalse("the Lab remained busy after rejected scheduling", changing.get());
+                assertNotNull("the rejected reset changed Lab storage",
+                        FeatureGateLabStore.rule("abmock", "gate", "BOOLEAN"));
+
+                saturation.release();
+                ShadowToast.reset();
+                reset.invoke(fragment, false);
+                settle();
+                assertNull("the same reset could not be retried",
+                        FeatureGateLabStore.rule("abmock", "gate", "BOOLEAN"));
+                assertFalse(changing.get());
+                assertEquals("Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok.",
+                        ShadowToast.getTextOfLatestToast());
+            }
         }
     }
 

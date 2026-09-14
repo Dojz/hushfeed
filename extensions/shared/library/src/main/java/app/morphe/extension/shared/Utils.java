@@ -251,7 +251,11 @@ public class Utils {
     private static final java.util.concurrent.atomic.AtomicInteger backgroundTasksInFlight =
             new java.util.concurrent.atomic.AtomicInteger();
 
-    public static void runOnBackgroundThread(Runnable task) {
+    /**
+     * @return true when the task was accepted, or false when the bounded worker queue was full.
+     *         Stateful callers must unwind any busy state when this returns false.
+     */
+    public static boolean runOnBackgroundThread(Runnable task) {
         backgroundTasksInFlight.incrementAndGet();
         try {
             backgroundThreadPool.execute(() -> {
@@ -261,9 +265,11 @@ public class Utils {
                     backgroundTasksInFlight.decrementAndGet();
                 }
             });
+            return true;
         } catch (RejectedExecutionException error) {
             backgroundTasksInFlight.decrementAndGet();
             Logger.printException(() -> "Background task queue is full", error);
+            return false;
         }
     }
 

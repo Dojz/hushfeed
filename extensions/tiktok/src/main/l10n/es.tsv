@@ -861,6 +861,8 @@ The diagnostic report could not be saved yet. Try again in a moment.	Todavía no
 A diagnostic report is already being saved.	Ya se está guardando un informe de diagnóstico.
 Full report saved to %1$s	Informe completo guardado en %1$s
 Could not start the report export. Try again shortly.	No se pudo iniciar la exportación del informe. Inténtalo de nuevo en breve.
+Could not start the Lab change. Try again shortly.	No se pudo iniciar el cambio del Lab. Inténtalo de nuevo en breve.
+Could not start the settings operation. Try again shortly.	No se pudo iniciar la operación de ajustes. Inténtalo de nuevo en breve.
 Copy quick report	Copiar informe rápido
 Save full report	Guardar informe completo
 Diagnostic data cleared. Tap again to put it back.	Se borraron los datos de diagnóstico. Toca de nuevo para restaurarlos.

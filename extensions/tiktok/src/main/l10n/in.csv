@@ -862,6 +862,8 @@ The diagnostic report could not be saved yet. Try again in a moment.,Laporan dia
 A diagnostic report is already being saved.,Laporan diagnostik sedang disimpan.
 Full report saved to %1$s,Laporan lengkap disimpan ke %1$s
 Could not start the report export. Try again shortly.,Ekspor laporan tidak bisa dimulai. Coba lagi sebentar.
+Could not start the Lab change. Try again shortly.,Perubahan Lab tidak bisa dimulai. Coba lagi sebentar.
+Could not start the settings operation. Try again shortly.,Proses pengaturan tidak bisa dimulai. Coba lagi sebentar.
 Copy quick report,Salin laporan singkat
 Save full report,Simpan laporan lengkap
 Diagnostic data cleared. Tap again to put it back.,Data diagnostik dihapus. Ketuk lagi untuk mengembalikannya.
