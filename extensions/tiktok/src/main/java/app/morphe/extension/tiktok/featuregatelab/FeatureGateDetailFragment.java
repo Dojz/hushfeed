@@ -127,13 +127,33 @@ public final class FeatureGateDetailFragment extends Fragment {
         if (entry == null) {
             TextView error = FeatureGateLabUi.body(context, L10n.t(context, "This catalog entry is no longer available. Refresh the Lab and try again."));
             error.setGravity(Gravity.CENTER);
-            error.setPadding(
+
+            // The message names the Lab, and the Lab is one screen back, so the way there is
+            // offered rather than described. It was a sentence alone on a blank screen telling
+            // the reader to go somewhere with no way of going.
+            TextView back = FeatureGateLabUi.body(context, L10n.t(context, "Back"));
+            back.setGravity(Gravity.CENTER);
+            back.setPadding(
+                    FeatureGateLabUi.dp(context, 16),
+                    FeatureGateLabUi.dp(context, 12),
+                    FeatureGateLabUi.dp(context, 16),
+                    FeatureGateLabUi.dp(context, 12)
+            );
+            SettingsUi.styleTextAction(back, true);
+            back.setOnClickListener(view -> leaveDetail());
+
+            LinearLayout column = new LinearLayout(context);
+            column.setOrientation(LinearLayout.VERTICAL);
+            column.setGravity(Gravity.CENTER);
+            column.setPadding(
                     FeatureGateLabUi.dp(context, 24),
                     FeatureGateLabUi.dp(context, 24),
                     FeatureGateLabUi.dp(context, 24),
                     FeatureGateLabUi.dp(context, 24)
             );
-            screen.addView(error, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
+            column.addView(error, FeatureGateLabUi.matchWrap());
+            column.addView(back, FeatureGateLabUi.wrapWrap());
+            screen.addView(column, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
             return screen;
         }
         rule = FeatureGateLabStore.rule(entry.manager, entry.key, entry.type);

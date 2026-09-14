@@ -48,7 +48,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildDe() {
-        Map<String, String> table = new HashMap<>(1922);
+        Map<String, String> table = new HashMap<>(1924);
         fillDe0(table);
         fillDe1(table);
         fillDe2(table);
@@ -1963,6 +1963,8 @@ public final class L10nTranslations {
                 "Zurückgegebener Wert");
         table.put("Verified creators",
                 "Verifizierte Creator");
+        table.put("Version %1$s",
+                "Version %1$s");
         table.put("Video",
                 "Video");
         table.put("Video (MP4)",
@@ -2033,17 +2035,17 @@ public final class L10nTranslations {
                 "Sekunden");
         table.put("videos",
                 "Videos");
-        table.put("view per like",
-                "Aufruf pro Like");
     }
 
     private static void fillDe16(Map<String, String> table) {
+        table.put("view per like",
+                "Aufruf pro Like");
         table.put("views per like",
                 "Aufrufe pro Like");
     }
 
     private static Map<String, String> buildEs() {
-        Map<String, String> table = new HashMap<>(1922);
+        Map<String, String> table = new HashMap<>(1924);
         fillEs0(table);
         fillEs1(table);
         fillEs2(table);
@@ -3958,6 +3960,8 @@ public final class L10nTranslations {
                 "Valor que se devuelve");
         table.put("Verified creators",
                 "Creadores verificados");
+        table.put("Version %1$s",
+                "Versión %1$s");
         table.put("Video",
                 "Vídeo");
         table.put("Video (MP4)",
@@ -4028,17 +4032,17 @@ public final class L10nTranslations {
                 "segundos");
         table.put("videos",
                 "vídeos");
-        table.put("view per like",
-                "visualización por me gusta");
     }
 
     private static void fillEs16(Map<String, String> table) {
+        table.put("view per like",
+                "visualización por me gusta");
         table.put("views per like",
                 "visualizaciones por me gusta");
     }
 
     private static Map<String, String> buildIn() {
-        Map<String, String> table = new HashMap<>(1922);
+        Map<String, String> table = new HashMap<>(1924);
         fillIn0(table);
         fillIn1(table);
         fillIn2(table);
@@ -5953,6 +5957,8 @@ public final class L10nTranslations {
                 "Nilai yang dikembalikan");
         table.put("Verified creators",
                 "Kreator terverifikasi");
+        table.put("Version %1$s",
+                "Versi %1$s");
         table.put("Video",
                 "Video");
         table.put("Video (MP4)",
@@ -6023,17 +6029,17 @@ public final class L10nTranslations {
                 "detik");
         table.put("videos",
                 "video");
-        table.put("view per like",
-                "tayangan per like");
     }
 
     private static void fillIn16(Map<String, String> table) {
+        table.put("view per like",
+                "tayangan per like");
         table.put("views per like",
                 "tayangan per like");
     }
 
     private static Map<String, String> buildPt_rBR() {
-        Map<String, String> table = new HashMap<>(1922);
+        Map<String, String> table = new HashMap<>(1924);
         fillPt_rBR0(table);
         fillPt_rBR1(table);
         fillPt_rBR2(table);
@@ -7948,6 +7954,8 @@ public final class L10nTranslations {
                 "Valor devolvido");
         table.put("Verified creators",
                 "Criadores verificados");
+        table.put("Version %1$s",
+                "Versão %1$s");
         table.put("Video",
                 "Vídeo");
         table.put("Video (MP4)",
@@ -8018,11 +8026,11 @@ public final class L10nTranslations {
                 "segundos");
         table.put("videos",
                 "vídeos");
-        table.put("view per like",
-                "visualização por curtida");
     }
 
     private static void fillPt_rBR16(Map<String, String> table) {
+        table.put("view per like",
+                "visualização por curtida");
         table.put("views per like",
                 "visualizações por curtida");
     }
