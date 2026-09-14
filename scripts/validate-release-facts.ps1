@@ -38,7 +38,10 @@ param(
     # includes a newer source version and an unreleased catalog change held at the current version.
     # The pre-push gate uses this only when the index itself did not change. Asset verification is
     # refused until the index catches up.
-    [switch]$AllowPublishedIndexLag
+    [switch]$AllowPublishedIndexLag,
+    # The release provenance receipt. Defaults to release-receipt-<version>.json in the repo
+    # root; checked when it is there, and required for a release.
+    [string]$Receipt
 )
 
 $ErrorActionPreference = 'Stop'
@@ -51,6 +54,7 @@ if (-not $Root) { $Root = Split-Path -Parent $PSScriptRoot }
 
 . (Join-Path $PSScriptRoot 'Resolve-Java.ps1')
 . (Join-Path $PSScriptRoot 'patch-target.ps1')
+. (Join-Path $PSScriptRoot 'release-receipt.ps1')
 
 function Resolve-DesktopCli {
     <#
@@ -589,6 +593,35 @@ if ($stampMatch.Groups[1].Value -ne $pinnedPatcher) {
         "Morphe Manager $managerFloor, so the patcher pin or built bundle is now wrong.")
 }
 Write-Host "[release] the bundle stamps patcher $pinnedPatcher, as the catalog pins"
+
+# The provenance receipt, when this checkout has one. It is the only artifact that ties the
+# source commit, the bundle bytes, the APKs the patches were proved against and the Android
+# manifest delta together; everything above checks one of those in isolation. A release run is
+# held to having one, because publishing the bundle without it publishes a checksum and a claim.
+$receiptPath = if ($Receipt) { $Receipt } else {
+    Join-Path $rootPath "release-receipt-$releaseVersion.json"
+}
+if (-not (Test-Path -LiteralPath $receiptPath -PathType Leaf)) {
+    if ($VerifyPublishedAsset) {
+        throw ("There is no release provenance receipt at $receiptPath. Run " +
+            "scripts/build-release-receipt.ps1 against the retained fixtures first.")
+    }
+    Write-Host "[release] no receipt at $receiptPath, so its facts are not compared"
+} else {
+    $receipt = Read-JsonFile $receiptPath
+    $approvedDelta = Read-ManifestDeltaAllowlist -Path (Join-Path $PSScriptRoot 'manifest-delta-allowlist.txt')
+    $receiptCheck = Test-ReleaseReceipt -Receipt $receipt -ExpectedVersion $releaseVersion `
+        -ExpectedPatchNames @($patches | ForEach-Object { [string]$_.name }) `
+        -ExpectedPatcherVersion $pinnedPatcher -ExpectedManagerFloor $managerFloor `
+        -BundlePath $bundlePath -ApprovedManifestDelta $approvedDelta
+    if (-not $receiptCheck.Valid) {
+        throw "The release provenance receipt does not describe this release: $($receiptCheck.Reason)"
+    }
+    $proved = @($receipt.targets | ForEach-Object { "$($_.source.versionName)" })
+    Write-Host ("[release] the receipt proves $($receipt.release.patchCount) patches on " +
+        ($proved -join ', ') + " from commit " + $receipt.release.commit.Substring(0, 8) +
+        ", with no unreviewed manifest change")
+}
 
 Write-Host ("[facts] " + $sourceVersion + ": " + $patchCount + " patches for " + $targetPackage + " " + $targetVersion + "; " + $testFacts)
 
