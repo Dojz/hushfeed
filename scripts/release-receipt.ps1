@@ -321,6 +321,10 @@ function Read-ManifestDeltaAllowlist {
         }
         $entries.Add($text)
     }
+    # An allowlist with no entries comes back as $null, not an empty array: a PowerShell function
+    # returning @() hands back nothing. Comma wrapping it would fix that and break every
+    # `@(Read-ManifestDeltaAllowlist ...)` call site instead, which would then see one array
+    # inside an array. Test-ReleaseReceipt drops the null on the way in.
     return @($entries | Sort-Object -Unique)
 }
 
@@ -461,8 +465,12 @@ function Test-ReleaseReceipt {
         }
     }
 
+    # A PowerShell function that returns an empty array hands back nothing, so an allowlist with
+    # no entries arrives here as $null, and @($null) is an array holding one null. Left alone,
+    # that null is an approved entry no delta produces and every clean run fails on it.
+    $approvedEntries = @(@($ApprovedManifestDelta) | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
     $approved = [System.Collections.Generic.HashSet[string]]::new(
-        [string[]]@($ApprovedManifestDelta), [System.StringComparer]::Ordinal)
+        [string[]]$approvedEntries, [System.StringComparer]::Ordinal)
     $unapproved = @(@($produced | Sort-Object -Unique) | Where-Object { -not $approved.Contains($_) })
     if ($unapproved.Count -gt 0) {
         return Fail ('The patched manifest changed in ways nobody reviewed: ' +
@@ -470,7 +478,7 @@ function Test-ReleaseReceipt {
     }
     $seenEntries = [System.Collections.Generic.HashSet[string]]::new(
         [string[]]@($produced), [System.StringComparer]::Ordinal)
-    $stale = @(@($ApprovedManifestDelta) | Where-Object { -not $seenEntries.Contains($_) })
+    $stale = @($approvedEntries | Where-Object { -not $seenEntries.Contains($_) })
     if ($stale.Count -gt 0) {
         return Fail ('The manifest delta allowlist approves changes no patch makes any more: ' +
             ($stale -join ', '))

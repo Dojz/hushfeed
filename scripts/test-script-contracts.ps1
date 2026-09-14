@@ -285,8 +285,10 @@ $unchanged = Get-ManifestDelta -Stock $facts -Patched $facts
 Assert-True (@(ConvertTo-ManifestDeltaEntries -Delta $unchanged).Count -eq 0) `
     'An unchanged manifest produced a delta.'
 
-Assert-True (@(Read-ManifestDeltaAllowlist -Path (Join-Path $PSScriptRoot 'manifest-delta-allowlist.txt')).Count -ge 0) `
-    'The checked-in manifest delta allowlist does not parse.'
+$checkedInAllowlist = Read-ManifestDeltaAllowlist -Path (Join-Path $PSScriptRoot 'manifest-delta-allowlist.txt')
+Assert-True (@($checkedInAllowlist | Where-Object { $_ }).Count -eq 0) `
+    ('The checked-in manifest delta allowlist is no longer empty, so the patches now change the ' +
+     "Android manifest: $(@($checkedInAllowlist) -join ', ')")
 
 $allowlistRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("receipt-" + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $allowlistRoot | Out-Null
@@ -450,6 +452,19 @@ try {
 
     $reviewed = Test-TestReceipt -Receipt $withDelta -Approved @('permission-added android.permission.VIBRATE')
     Assert-True $reviewed.Valid "A reviewed manifest change was refused: $($reviewed.Reason)"
+
+    # The shape a real run hands over, rather than a literal @(). An allowlist file with no
+    # entries reaches the validator as $null, and treating that null as an approved entry failed
+    # every clean run with an empty list of changes nobody could read.
+    $emptyFromFile = Join-Path $allowlistRoot 'empty.txt'
+    Set-Content -LiteralPath $emptyFromFile -Encoding UTF8 -Value @('# nothing approved', '')
+    $fromFile = Read-ManifestDeltaAllowlist -Path $emptyFromFile
+    $clean = Test-TestReceipt -Receipt (New-TestReceipt) -Approved $fromFile
+    Assert-True $clean.Valid `
+        "A receipt with no manifest change failed against an empty allowlist: $($clean.Reason)"
+    $cleanNull = Test-TestReceipt -Receipt (New-TestReceipt) -Approved $null
+    Assert-True $cleanNull.Valid `
+        "A receipt with no manifest change failed against a null allowlist: $($cleanNull.Reason)"
 
     $stale = Test-TestReceipt -Receipt (New-TestReceipt) -Approved @('permission-added android.permission.VIBRATE')
     Assert-True (-not $stale.Valid) 'An allowlist entry no patch produces was accepted.'
