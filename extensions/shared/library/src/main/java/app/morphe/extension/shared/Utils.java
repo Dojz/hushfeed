@@ -507,9 +507,14 @@ public class Utils {
     }
 
     public static void setClipboard(CharSequence text) {
-        ClipboardManager clipboard = (ClipboardManager) context
+        setClipboard(context, "Morphe", text);
+    }
+
+    /** Copies a labeled clip through a caller-owned Context with the shared sensitive-data policy. */
+    public static void setClipboard(Context clipboardContext, CharSequence label, CharSequence text) {
+        ClipboardManager clipboard = (ClipboardManager) clipboardContext
                 .getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("Morphe", text);
+        ClipData clip = ClipData.newPlainText(label, text);
         if (Build.VERSION.SDK_INT >= 24) {
             PersistableBundle extras = new PersistableBundle();
             // Use the literal so API 24 through 32 can carry the flag before the constant

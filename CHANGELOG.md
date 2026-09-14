@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Feature Gate Recorder copies now use Android's sensitive clipboard flag while keeping the existing success, large-report and failure messages. Empty reports remain safe to copy, and reports above 60,000 characters still require Save JSON without replacing the clipboard.
+
 * Settings pages now replace partial content with translated Back and Retry actions when loading fails. A failed preference update restores the typed saved value, dependent controls and default-value storage on the main thread, then reports one translated result.
 
 * Comment search now shows a translated result count below the field and explains when nothing matches. The polite status follows scrolling and recycled rows without moving focus, and clears with the search or comment sheet.
