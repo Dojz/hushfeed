@@ -564,6 +564,35 @@ public class FeatureGateLabActionsTest {
         }
     }
 
+    @Test public void aRejectedMasterSwitchReturnsToStorageAndRetriesOnTheNextTap()
+            throws Exception {
+        try (var owner = Robolectric.buildActivity(TestActivity.class).setup().visible()) {
+            var fragment = attach(owner.get());
+            Switch master = findSwitch(fragment.getView());
+            assertFalse(FeatureGateLabStore.masterEnabled());
+            assertFalse(master.isChecked());
+
+            try (BackgroundPoolSaturation saturation = BackgroundPoolSaturation.fill()) {
+                ShadowToast.reset();
+                master.performClick();
+                Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+                assertEquals("Could not start the Lab change. Try again shortly.",
+                        ShadowToast.getTextOfLatestToast());
+                assertFalse("the rejected change altered storage",
+                        FeatureGateLabStore.masterEnabled());
+                assertFalse("the rejected switch stayed ahead of storage", master.isChecked());
+
+                saturation.release();
+                master.performClick();
+                settle();
+                assertTrue("the first retry tap was consumed repairing stale UI",
+                        FeatureGateLabStore.masterEnabled());
+                assertTrue(master.isChecked());
+            }
+        }
+    }
+
     @Test public void theMasterSwitchDoesItsStorageOffTheMainThread() throws Exception {
         // Turning overrides on takes the journal lock and does two write-and-verify cycles. On
         // the main thread that is a frozen screen for as long as a settings restore holds that

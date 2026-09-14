@@ -1341,6 +1341,10 @@ public final class FeatureGateLabFragment extends Fragment {
         });
         if (!accepted) {
             CHANGING.set(false);
+            // The platform switch has already moved before this callback runs. Put it back on
+            // the stored value now, otherwise the next tap only repairs the stale drawing and
+            // the reader has to tap a third time before the requested change is submitted.
+            syncMasterSwitch();
             postToast(L10n.t(Utils.getContext(),
                     "Could not start the Lab change. Try again shortly."));
             return false;

@@ -4,7 +4,7 @@
 
 * Rapid Feature Gate detail edits now save in tap order. Only the newest result can update the screen, and one Undo returns the whole burst to the value that was present before the first tap.
 
-* Settings backup, restore, reset and Feature Gate Lab changes no longer stay locked when the shared worker queue is full. The action is left untouched and a translated message asks you to try again.
+* Settings backup, restore, reset and Feature Gate Lab changes no longer stay locked when the shared worker queue is full. Rejected Lab switches return to their stored position so the next tap retries the change, and a translated message asks you to try again.
 
 * The Add Hushfeed links now use the encoded repository slug. The install steps also include a manual Manager path for browsers that refuse to open other apps. The browser button, source download and Manager 1.29.0 and 1.30.0 flows were exercised on the S22.
 

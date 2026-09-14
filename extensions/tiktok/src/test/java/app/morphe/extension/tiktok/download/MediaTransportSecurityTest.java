@@ -266,10 +266,19 @@ public class MediaTransportSecurityTest {
     }
 
     @Test public void aChunkedMediaBodyStopsBeforeUsingTheFreeSpaceFloor() throws Exception {
+        assertUnknownLengthStopsBeforeUsingTheFreeSpaceFloor(null);
+    }
+
+    @Test public void aMalformedMediaLengthStopsBeforeUsingTheFreeSpaceFloor() throws Exception {
+        assertUnknownLengthStopsBeforeUsingTheFreeSpaceFloor("not-a-length");
+    }
+
+    private static void assertUnknownLengthStopsBeforeUsingTheFreeSpaceFloor(String lengthHeader)
+            throws Exception {
         byte[] body = new byte[2 * 1024 * 1024];
         System.arraycopy(PNG, 0, body, 0, PNG.length);
         MediaTransport.Client client = publicClient(url -> new FakeConnection(
-                url, HTTP_OK, null, body));
+                url, HTTP_OK, null, lengthHeader, body));
         File realTarget = File.createTempFile("shrinking-media", ".tmp");
         AtomicInteger spaceReads = new AtomicInteger();
         AtomicLong freeAtRejection = new AtomicLong(Long.MAX_VALUE);
@@ -378,18 +387,30 @@ public class MediaTransportSecurityTest {
     private static final class FakeConnection extends HttpURLConnection {
         private final int responseCode;
         private final String location;
+        private final String contentLength;
         private final InputStream input;
         int responseReads;
         boolean disconnected;
 
         FakeConnection(URL url, int responseCode, String location, byte[] body) {
-            this(url, responseCode, location, new ByteArrayInputStream(body));
+            this(url, responseCode, location, null, new ByteArrayInputStream(body));
+        }
+
+        FakeConnection(URL url, int responseCode, String location, String contentLength,
+                byte[] body) {
+            this(url, responseCode, location, contentLength, new ByteArrayInputStream(body));
         }
 
         FakeConnection(URL url, int responseCode, String location, InputStream input) {
+            this(url, responseCode, location, null, input);
+        }
+
+        FakeConnection(URL url, int responseCode, String location, String contentLength,
+                InputStream input) {
             super(url);
             this.responseCode = responseCode;
             this.location = location;
+            this.contentLength = contentLength;
             this.input = input;
         }
 
@@ -400,6 +421,7 @@ public class MediaTransportSecurityTest {
 
         @Override public String getHeaderField(String name) {
             if ("Location".equalsIgnoreCase(name)) return location;
+            if ("Content-Length".equalsIgnoreCase(name)) return contentLength;
             return null;
         }
 
