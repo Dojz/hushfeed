@@ -7,6 +7,7 @@
 package app.morphe.extension.tiktok.settings.preference;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -100,5 +101,59 @@ public class OverlayChipTest {
         int pill = 24;
         assertTrue("a 24dp radius on a 48dp control is a pill and the check has to say so",
                 pill >= 16);
+    }
+
+    /**
+     * No source in the runtime tree rounds a corner with a number of its own.
+     *
+     * <p>Cleaning the radii up once is worth nothing if the next control written picks its own
+     * number, which is how the bundle ended up with 5, 10, 12, 24 and 1000 in the first place.
+     * A radius has to come from the scale, so this reads the source and says so.
+     */
+    @Test public void everyCornerRadiusComesFromTheScale() throws Exception {
+        java.io.File root = new java.io.File("src/main/java/app/morphe/extension/tiktok");
+        if (!root.isDirectory()) {
+            root = new java.io.File("extensions/tiktok/src/main/java/app/morphe/extension/tiktok");
+        }
+        assertTrue("could not find the source tree from "
+                + new java.io.File(".").getAbsolutePath(), root.isDirectory());
+
+        // setCornerRadius takes pixels, so every caller converts through dp() or density first.
+        // A bare number is the thing being looked for: setCornerRadius(24), setCornerRadius(1000).
+        java.util.regex.Pattern bare = java.util.regex.Pattern.compile(
+                "setCornerRadius\\s*\\(\\s*[0-9]");
+        java.util.List<String> offenders = new ArrayList<>();
+        int scanned = 0;
+        java.nio.file.Path base = root.toPath();
+        try (java.util.stream.Stream<java.nio.file.Path> files =
+                     java.nio.file.Files.walk(base)) {
+            for (java.nio.file.Path file : files
+                    .filter(path -> path.toString().endsWith(".java"))
+                    .collect(java.util.stream.Collectors.toList())) {
+                String text = new String(java.nio.file.Files.readAllBytes(file),
+                        java.nio.charset.StandardCharsets.UTF_8);
+                scanned++;
+                java.util.regex.Matcher matcher = bare.matcher(text);
+                while (matcher.find()) {
+                    offenders.add(base.relativize(file).toString());
+                }
+            }
+        }
+
+        assertTrue("the scan found no files to read", scanned > 20);
+        assertEquals("a corner radius written as a bare number rather than taken from the scale "
+                + "in SettingsUi: " + offenders, 0, offenders.size());
+    }
+
+    /** The mutation control for the scan: the pattern has to catch what it is looking for. */
+    @Test public void theSourceScanCanActuallyFail() {
+        java.util.regex.Pattern bare = java.util.regex.Pattern.compile(
+                "setCornerRadius\\s*\\(\\s*[0-9]");
+        assertTrue("the scan would not have caught the 1000 that was in TapConfirmation",
+                bare.matcher("ring.setCornerRadius(1000);").find());
+        assertTrue("the scan would not have caught a bare 24",
+                bare.matcher("pill.setCornerRadius( 24 );").find());
+        assertFalse("the scan flags a radius that does come from the scale",
+                bare.matcher("chip.setCornerRadius(dp(context, RADIUS_OVERLAY));").find());
     }
 }
