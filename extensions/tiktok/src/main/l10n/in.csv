@@ -952,3 +952,9 @@ Move left,Pindahkan ke kiri
 Move right,Pindahkan ke kanan
 Reset position,Atur ulang posisi
 Clearing suggested accounts,Menghapus akun yang disarankan
+1 min left,Sisa 1 mnt
+%1$s min left,Sisa %1$s mnt
+1 video left,Sisa 1 video
+%1$s videos left,Sisa %1$s video
+Show what is left of the budget,Tampilkan sisa batas harian
+"Off by default. Switched on, a small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out. It changes at most once a minute, appears only on the feed, and is never read out on its own.","Nonaktif secara bawaan. Saat diaktifkan, label kecil di feed menampilkan sisa menit atau video dari batas hari ini, mana yang lebih dekat habis. Label itu berubah paling sering sekali per menit, hanya muncul di feed, dan tidak pernah dibacakan dengan sendirinya."

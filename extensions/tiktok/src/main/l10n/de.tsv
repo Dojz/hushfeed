@@ -954,3 +954,9 @@ Move left	Nach links verschieben
 Move right	Nach rechts verschieben
 Reset position	Position zurücksetzen
 Clearing suggested accounts	Kontovorschläge werden entfernt
+1 min left	Noch 1 Min.
+%1$s min left	Noch %1$s Min.
+1 video left	Noch 1 Video
+%1$s videos left	Noch %1$s Videos
+Show what is left of the budget	Restliches Budget anzeigen
+Off by default. Switched on, a small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out. It changes at most once a minute, appears only on the feed, and is never read out on its own.	Standardmäßig aus. Eingeschaltet zeigt ein kleines Feld im Feed die verbleibenden Minuten oder Videos des heutigen Budgets an, je nachdem, was zuerst aufgebraucht ist. Es ändert sich höchstens einmal pro Minute, erscheint nur im Feed und wird nie von allein vorgelesen.

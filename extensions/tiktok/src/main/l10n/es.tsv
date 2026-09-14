@@ -951,3 +951,9 @@ Move left	Mover hacia la izquierda
 Move right	Mover hacia la derecha
 Reset position	Restablecer la posición
 Clearing suggested accounts	Borrando las cuentas sugeridas
+1 min left	Queda 1 min
+%1$s min left	Quedan %1$s min
+1 video left	Queda 1 video
+%1$s videos left	Quedan %1$s videos
+Show what is left of the budget	Mostrar lo que queda del límite
+Off by default. Switched on, a small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out. It changes at most once a minute, appears only on the feed, and is never read out on its own.	Desactivado de forma predeterminada. Al activarlo, una etiqueta pequeña en el feed muestra los minutos o los videos que quedan del límite de hoy, lo que esté más cerca de agotarse. Cambia como mucho una vez por minuto, solo aparece en el feed y nunca se lee en voz alta por sí misma.

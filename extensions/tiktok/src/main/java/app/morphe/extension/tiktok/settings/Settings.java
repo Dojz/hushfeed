@@ -291,6 +291,13 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting SESSION_BUDGET_RAMP = new BooleanSetting(
             "session_budget_ramp", FALSE, true);
     /**
+     * A small label on the feed saying what is left of today's budget. Off by default, and it
+     * has nothing to report unless {@link #SESSION_BUDGET_VIDEOS} or {@link #SESSION_BUDGET_MINUTES}
+     * is set. No restart: it is drawn from the same callback that measures the budget.
+     */
+    public static final BooleanSetting SESSION_BUDGET_CUE = new BooleanSetting(
+            "session_budget_cue", FALSE);
+    /**
      * Minutes of watching between the quiet reminders, or zero for none.
      *
      * <p>The hold only ever fires once the day's budget has gone. This is the earlier check the

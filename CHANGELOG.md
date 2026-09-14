@@ -1,5 +1,7 @@
 ## Unreleased
 
+* New Playback setting, "Show what is left of the budget", off by default. A small label at the top of the feed shows the minutes or videos left of today's budget, whichever is closer to running out. Both budgets were previously only visible at their own edges: a reminder partway through, a notice when the day was spent, a hold if one was set. Between those you were guessing. The label appears only on the feed, goes away under the hold, changes at most once a minute, and is never read out on its own. A screen reader finds it in traversal and hears the value then.
+
 * Reset position on a feed control now moves only that control. It used to re-place every control that had never been moved by hand, which meant resetting one of them could jump two others across the screen if the block button had been dragged since.
 
 * Inbox Clear all says it is working on Android 10 and older too. The control's description is what a screen reader is given instead of its label, so changing the label alone left the whole eighteen second run announced as an ordinary disabled button. A heading TikTok rebuilds mid-run now also comes up saying the run is still going, instead of looking pressable while silently refusing.

@@ -608,18 +608,21 @@ if (-not (Test-Path -LiteralPath $receiptPath -PathType Leaf)) {
     }
     Write-Host "[release] no receipt at $receiptPath, so its facts are not compared"
 } else {
-    $receipt = Read-JsonFile $receiptPath
+    # Not $receipt: PowerShell variable names are case-insensitive, so that is the -Receipt
+    # parameter, and it is typed [string]. Assigning the parsed document to it coerces the whole
+    # object to its string form, and every field then reads as empty.
+    $receiptDocument = Read-JsonFile $receiptPath
     $approvedDelta = Read-ManifestDeltaAllowlist -Path (Join-Path $PSScriptRoot 'manifest-delta-allowlist.txt')
-    $receiptCheck = Test-ReleaseReceipt -Receipt $receipt -ExpectedVersion $releaseVersion `
+    $receiptCheck = Test-ReleaseReceipt -Receipt $receiptDocument -ExpectedVersion $releaseVersion `
         -ExpectedPatchNames @($patches | ForEach-Object { [string]$_.name }) `
         -ExpectedPatcherVersion $pinnedPatcher -ExpectedManagerFloor $managerFloor `
         -BundlePath $bundlePath -ApprovedManifestDelta $approvedDelta
     if (-not $receiptCheck.Valid) {
         throw "The release provenance receipt does not describe this release: $($receiptCheck.Reason)"
     }
-    $proved = @($receipt.targets | ForEach-Object { "$($_.source.versionName)" })
-    Write-Host ("[release] the receipt proves $($receipt.release.patchCount) patches on " +
-        ($proved -join ', ') + " from commit " + $receipt.release.commit.Substring(0, 8) +
+    $proved = @($receiptDocument.targets | ForEach-Object { "$($_.source.versionName)" })
+    Write-Host ("[release] the receipt proves $($receiptDocument.release.patchCount) patches on " +
+        ($proved -join ', ') + " from commit " + $receiptDocument.release.commit.Substring(0, 8) +
         ", with no unreviewed manifest change")
 }
 
