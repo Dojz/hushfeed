@@ -50,6 +50,68 @@ public class FeatureGatePagesTest {
     @Test @Config(qualifiers = "w480dp-h960dp-notnight-mdpi")
     public void lightLabSearchAndOverrideEditorWork() throws Exception { exercise("light"); }
 
+    @Test public void theCustomValueDialogKeepsItsActionHierarchyInTheDark() throws Exception {
+        assertCustomValueActionsAreRanked();
+    }
+
+    @Test @Config(qualifiers = "w480dp-h960dp-notnight-mdpi")
+    public void theCustomValueDialogKeepsItsActionHierarchyInTheLight() throws Exception {
+        assertCustomValueActionsAreRanked();
+    }
+
+    /**
+     * The shared dialog styling ranks the actions, then the Lab's own tree walk used to repaint
+     * every Button with the accent, so Use value and Cancel came out looking equally primary on
+     * a dialog whose whole point is that one of the two is the unverified one.
+     */
+    private static void assertCustomValueActionsAreRanked() throws Exception {
+        try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            FeatureGateLabStore.resetAllLabData();
+            FeatureGateLabSession.begin();
+            FeatureGateLabStore.setMasterEnabled(true);
+            var entry = new FeatureGateCatalog.Entry("ranked_gate", "Ranked gate", "abmock",
+                    "INT", true, true, List.of("0", "1"), List.of(), List.of(), "", "",
+                    true, "1", "INT");
+            var cached = FeatureGateCatalog.class.getDeclaredField("cachedSnapshot");
+            cached.setAccessible(true);
+            cached.set(null, new FeatureGateCatalog.Snapshot(
+                    List.of(entry), Map.of(entry.identity(), entry), 0, 0, true));
+
+            FeatureGateDetailFragment detail =
+                    FeatureGateDetailFragment.forEntry("abmock", "ranked_gate", "INT");
+            attach(activity, detail);
+
+            java.lang.reflect.Method showCustom =
+                    FeatureGateDetailFragment.class.getDeclaredMethod("showCustomValue");
+            showCustom.setAccessible(true);
+            showCustom.invoke(detail);
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+            android.app.AlertDialog dialog =
+                    (android.app.AlertDialog) org.robolectric.shadows.ShadowDialog.getLatestDialog();
+            assertNotNull("the custom value dialog never opened", dialog);
+            android.widget.Button use = dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE);
+            android.widget.Button cancel = dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE);
+            assertNotNull(use);
+            assertNotNull(cancel);
+
+            assertEquals("Use value lost the accent", SettingsUi.accent(),
+                    use.getCurrentTextColor());
+            assertEquals("Cancel was promoted to a positive action", SettingsUi.textSecondary(),
+                    cancel.getCurrentTextColor());
+            assertNotEquals("both actions read as equally primary",
+                    use.getCurrentTextColor(), cancel.getCurrentTextColor());
+
+            // The state list has to survive too, or a disabled action stops looking disabled.
+            use.setEnabled(false);
+            assertNotEquals("the positive action kept its live colour while disabled",
+                    SettingsUi.accent(), use.getCurrentTextColor());
+            dialog.dismiss();
+        }
+    }
+
     @Test public void labFiltersExposeActionRolesCountsAndTheFocusedSourceSelection()
             throws Exception {
         try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {

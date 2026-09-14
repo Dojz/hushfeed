@@ -203,7 +203,17 @@ final class FeatureGateLabUi {
             radio.setTextColor(SettingsUi.textPrimary());
             radio.setButtonTintList(ColorStateList.valueOf(SettingsUi.accent()));
         } else if (view instanceof Button) {
-            ((Button) view).setTextColor(SettingsUi.accent());
+            // Everything except the dialog's own three actions. styleFramedDialog has already
+            // given the positive one the accent and the other two the secondary colour, and
+            // this walk runs after it: repainting them all one shade put Use value and Cancel
+            // on the same footing, which is the opposite of what a destructive-looking pair of
+            // actions needs. It also replaced their state lists with a flat colour, so a
+            // disabled action stopped looking disabled.
+            int id = view.getId();
+            if (id != android.R.id.button1 && id != android.R.id.button2
+                    && id != android.R.id.button3) {
+                ((Button) view).setTextColor(SettingsUi.accent());
+            }
         } else if (view instanceof TextView) {
             ((TextView) view).setTextColor(SettingsUi.textPrimary());
         }
