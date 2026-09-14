@@ -211,16 +211,22 @@ public final class BlockAuthorOverlay {
                 applySavedPosition(button, root, size, Settings.BLOCK_AUTHOR_BUTTON_POSITION,
                         DEFAULT_X_FRACTION, DEFAULT_Y_FRACTION);
                 int step = size + SettingsUi.dp(activity, BUTTON_GAP_DP);
-                float blockX = DEFAULT_X_FRACTION * root.getWidth();
-                float blockY = DEFAULT_Y_FRACTION * root.getHeight();
+                FrameLayout.LayoutParams blockPosition =
+                        (FrameLayout.LayoutParams) button.getLayoutParams();
+                float blockX = blockPosition.leftMargin + size / 2f;
+                float blockY = blockPosition.topMargin + size / 2f;
+                int maxTop = Math.max(0, root.getHeight() - size);
+                float verticalDirection = maxTop - blockPosition.topMargin >= step * 2 ? 1f : -1f;
                 applySavedPosition(localHide, root, size, Settings.LOCAL_HIDE_BUTTON_POSITION,
-                        blockX / root.getWidth(), (blockY + step) / root.getHeight());
+                        blockX / root.getWidth(),
+                        (blockY + step * verticalDirection) / root.getHeight());
                 applySavedPosition(soundButton, root, size, Settings.BLOCK_SOUND_BUTTON_POSITION,
                         blockX / root.getWidth(),
-                        (blockY + step * (Settings.LOCAL_HIDE_BUTTON.get() ? 2f : 1f))
-                                / root.getHeight());
+                        (blockY + step * 2f * verticalDirection) / root.getHeight());
+                float horizontalDirection = blockPosition.leftMargin >= step ? -1f : 1f;
                 applySavedPosition(feedback, root, size, Settings.NOT_INTERESTED_BUTTON_POSITION,
-                        (blockX - step) / root.getWidth(), blockY / root.getHeight());
+                        (blockX + step * horizontalDirection) / root.getWidth(),
+                        blockY / root.getHeight());
             });
 
             installVisibilityListener(root);

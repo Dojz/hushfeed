@@ -176,6 +176,46 @@ public class FeedOverlaySettingsTest {
         assertVisible("Block this account");
     }
 
+    @Test public void enablingLocalHideAfterAttachDoesNotOverlapTheSoundButton() {
+        String oldBlockPosition = Settings.BLOCK_AUTHOR_BUTTON_POSITION.get();
+        String oldLocalPosition = Settings.LOCAL_HIDE_BUTTON_POSITION.get();
+        String oldSoundPosition = Settings.BLOCK_SOUND_BUTTON_POSITION.get();
+        try {
+            // This is an upgrade-shaped state: older builds saved only the block/group position.
+            Settings.BLOCK_AUTHOR_BUTTON_POSITION.save("0.25,0.3");
+            Settings.LOCAL_HIDE_BUTTON_POSITION.save("");
+            Settings.BLOCK_SOUND_BUTTON_POSITION.save("");
+            Settings.LOCAL_HIDE_BUTTON.save(false);
+            showSettings(true, false);
+            bind("video-one");
+            layoutRoot(activity.findViewById(android.R.id.content));
+
+            View local = button("Hide this creator locally");
+            View sound = button("Block this sound");
+            assertEquals(View.GONE, local.getVisibility());
+            click(Settings.LOCAL_HIDE_BUTTON);
+
+            FrameLayout.LayoutParams localPosition =
+                    (FrameLayout.LayoutParams) local.getLayoutParams();
+            FrameLayout.LayoutParams soundPosition =
+                    (FrameLayout.LayoutParams) sound.getLayoutParams();
+            FrameLayout.LayoutParams blockPosition =
+                    (FrameLayout.LayoutParams) button("Block this account").getLayoutParams();
+            assertVisible("Hide this creator locally");
+            assertVisible("Block this sound");
+            assertEquals(blockPosition.leftMargin, localPosition.leftMargin);
+            assertEquals(blockPosition.leftMargin, soundPosition.leftMargin);
+            assertTrue("local hide did not retain the first slot beside the saved block position",
+                    localPosition.topMargin > blockPosition.topMargin);
+            assertTrue("enabling a hidden default control covered the sound control",
+                    soundPosition.topMargin > localPosition.topMargin);
+        } finally {
+            Settings.BLOCK_AUTHOR_BUTTON_POSITION.save(oldBlockPosition);
+            Settings.LOCAL_HIDE_BUTTON_POSITION.save(oldLocalPosition);
+            Settings.BLOCK_SOUND_BUTTON_POSITION.save(oldSoundPosition);
+        }
+    }
+
     @Test public void openingCommentsHidesEveryCustomFeedControlUntilTheSheetCloses() {
         showSettings(true, true);
         bind("video-one");
