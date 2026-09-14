@@ -198,6 +198,16 @@ public final class StickerGallerySaver {
         button.setClickable(true);
         button.setFocusable(true);
         button.setAlpha(template.getAlpha());
+        // A clickable TextView announces as text, so this was offered to a screen reader as a
+        // label rather than as something to press, and the same helper the settings screen's
+        // hand built actions use now gives it the role, the action and its enabled state.
+        SettingsUi.markAsButton(button);
+        // The template is one of TikTok's own row labels and can be shorter than a finger. The
+        // minimum is a floor, not a height, so a large font scale still grows the button rather
+        // than clipping it.
+        int minimum = SettingsUi.dp(context, 48);
+        button.setMinHeight(Math.max(button.getMinHeight(), minimum));
+        button.setMinWidth(Math.max(button.getMinWidth(), minimum));
         return button;
     }
 

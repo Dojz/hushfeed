@@ -46,8 +46,14 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment {
 
     /** A tap acts immediately, and assistive technology should hear the same Button role. */
     private static final class ErrorActionPreference extends Preference implements ImmediateAction {
-        ErrorActionPreference(Context context) {
+        /** The one the reader is meant to take, so the page can draw it as the way forward. */
+        private final boolean primary;
+        private final ErrorActionStyler styler;
+
+        ErrorActionPreference(Context context, boolean primary, ErrorActionStyler styler) {
             super(context);
+            this.primary = primary;
+            this.styler = styler;
         }
 
         @Override public boolean actsOnTap() {
@@ -65,9 +71,34 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment {
                         View host, AccessibilityNodeInfo info) {
                     super.onInitializeAccessibilityNodeInfo(host, info);
                     info.setClassName(Button.class.getName());
+                    // The class name alone leaves a screen reader with a button it will not
+                    // offer to press, which on the one screen whose whole purpose is a way out
+                    // is the worst place for it.
+                    info.setEnabled(host.isEnabled());
+                    info.setClickable(true);
+                    if (host.isEnabled()) {
+                        info.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_CLICK);
+                    }
                 }
             });
+            if (styler != null) styler.style(view, primary);
         }
+    }
+
+    /**
+     * Lets the app decide how the recovery page's two actions look.
+     *
+     * <p>The shared library has no palette of its own, and both actions were drawn identically,
+     * so Try again and Go back read as two rows of a list rather than as a way forward and a way
+     * out.
+     */
+    public interface ErrorActionStyler {
+        void style(View row, boolean primary);
+    }
+
+    /** Overridden by an app that wants its accent on the recovery action. Plain by default. */
+    protected ErrorActionStyler errorActionStyler() {
+        return null;
     }
 
     /**
@@ -532,17 +563,12 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment {
             message.setSelectable(false);
             screen.addPreference(message);
 
-            Preference back = new ErrorActionPreference(activity);
-            back.setKey(INITIALIZATION_BACK_KEY);
-            back.setTitle(initializationBackLabel(activity));
-            back.setPersistent(false);
-            back.setOnPreferenceClickListener(ignored -> {
-                leaveFailedPage();
-                return true;
-            });
-            screen.addPreference(back);
+            ErrorActionStyler styler = errorActionStyler();
 
-            Preference retry = new ErrorActionPreference(activity);
+            // Try again leads. It is the one that can actually fix this, and it used to sit
+            // underneath Go back, so the first thing offered to a reader whose settings would
+            // not open was the way out rather than the way through.
+            Preference retry = new ErrorActionPreference(activity, true, styler);
             retry.setKey(INITIALIZATION_RETRY_KEY);
             retry.setTitle(initializationRetryLabel(activity));
             retry.setPersistent(false);
@@ -551,6 +577,16 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment {
                 return true;
             });
             screen.addPreference(retry);
+
+            Preference back = new ErrorActionPreference(activity, false, styler);
+            back.setKey(INITIALIZATION_BACK_KEY);
+            back.setTitle(initializationBackLabel(activity));
+            back.setPersistent(false);
+            back.setOnPreferenceClickListener(ignored -> {
+                leaveFailedPage();
+                return true;
+            });
+            screen.addPreference(back);
         } catch (Exception renderFailure) {
             Logger.printException(() -> "Settings initialization error UI failure", renderFailure);
         }

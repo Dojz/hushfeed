@@ -294,6 +294,23 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         return L10n.t(context, "Retry");
     }
 
+    /**
+     * Draws Retry as the way forward and Back as the way out.
+     *
+     * <p>Both were plain rows in the same weight and colour, so the page that opens when settings
+     * will not load offered two identical looking choices and no sense of which one to take.
+     */
+    @Override protected ErrorActionStyler errorActionStyler() {
+        return (row, primary) -> {
+            android.widget.TextView title = row.findViewById(android.R.id.title);
+            if (title == null) return;
+            title.setTextColor(SettingsUi.enabledTextColors(
+                    primary ? SettingsUi.accent() : SettingsUi.textPrimary()));
+            title.setTypeface(title.getTypeface(),
+                    primary ? android.graphics.Typeface.BOLD : android.graphics.Typeface.NORMAL);
+        };
+    }
+
     @Override protected CharSequence preferenceChangeRecoveredMessage(Context context) {
         return L10n.t(context, "The setting couldn't finish updating. Its saved value is shown.");
     }
