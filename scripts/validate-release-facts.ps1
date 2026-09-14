@@ -32,10 +32,11 @@ param(
     # results that are there are still checked for age, completeness, failures and skips. A
     # release and a run by hand check everything.
     [switch]$SkipDescriptionTestCount,
-    # A release source commit has to reach GitHub before its tag and bundle can be published.
-    # During that first push, the source version is newer while patches-bundle.json must still
-    # name the previous working release. The pre-push gate uses this only when the index itself
-    # did not change. Asset verification is refused until the index catches up.
+    # Release source changes have to reach GitHub before their tag and bundle can be published.
+    # During that preparation, patches-bundle.json still describes the working release. This
+    # includes a newer source version and an unreleased catalog change held at the current version.
+    # The pre-push gate uses this only when the index itself did not change. Asset verification is
+    # refused until the index catches up.
     [switch]$AllowPublishedIndexLag
 )
 
@@ -156,7 +157,14 @@ $targetPackage = $target.PackageName
 $targetVersion = $target.PackageVersion
 
 $bundleVersion = [string]$bundle.version
-$indexLagsSource = $bundleVersion -ne $releaseVersion
+$publishedPatchMatch = [regex]::Match([string]$bundle.description, '\b(\d+) patches\b')
+$publishedTargetMatch = [regex]::Match([string]$bundle.description, 'TikTok\s+(\d+(?:\.\d+)+)')
+$publishedFactsDifferAtSameVersion = $AllowPublishedIndexLag -and
+    $bundleVersion -eq $releaseVersion -and
+    $publishedPatchMatch.Success -and $publishedTargetMatch.Success -and
+    ([int]$publishedPatchMatch.Groups[1].Value -ne $patchCount -or
+        $publishedTargetMatch.Groups[1].Value -ne $targetVersion)
+$indexLagsSource = $bundleVersion -ne $releaseVersion -or $publishedFactsDifferAtSameVersion
 if ($indexLagsSource) {
     if (-not $AllowPublishedIndexLag) {
         throw "patches-bundle.json version does not match $sourceVersion."
@@ -164,14 +172,19 @@ if ($indexLagsSource) {
     if ($bundleVersion -notmatch '^\d+\.\d+\.\d+$') {
         throw "patches-bundle.json has an invalid published version: $bundleVersion"
     }
-    if ([version]$releaseVersion -le [version]$bundleVersion) {
+    if ($bundleVersion -ne $releaseVersion -and [version]$releaseVersion -le [version]$bundleVersion) {
         throw ("patches-bundle.json may lag only while a newer release is being prepared. " +
             "Source is $releaseVersion and the published index is $bundleVersion.")
     }
     if ($VerifyPublishedAsset) {
         throw 'A source artifact cannot be checked against the previous published index. Publish the new release and update patches-bundle.json first.'
     }
-    Write-Host ("[release] source $releaseVersion is being prepared while the working index remains on $bundleVersion")
+    if ($publishedFactsDifferAtSameVersion) {
+        Write-Host ("[release] source $releaseVersion has an unreleased catalog while the working index " +
+            "remains on its published facts")
+    } else {
+        Write-Host ("[release] source $releaseVersion is being prepared while the working index remains on $bundleVersion")
+    }
 }
 $publishedVersion = if ($indexLagsSource) { $bundleVersion } else { $releaseVersion }
 Require-Match -Text ([string]$bundle.download_url) -Pattern "/v$([regex]::Escape($publishedVersion))/patches-$([regex]::Escape($publishedVersion))\.mpp$" -Description 'patches-bundle.json download URL'
@@ -208,8 +221,6 @@ $descriptionVersion = $sourceVersion
 $descriptionPatchCount = $patchCount
 $descriptionTargetVersion = $targetVersion
 if ($indexLagsSource) {
-    $publishedPatchMatch = [regex]::Match([string]$bundle.description, '\b(\d+) patches\b')
-    $publishedTargetMatch = [regex]::Match([string]$bundle.description, 'TikTok\s+(\d+(?:\.\d+)+)')
     if (-not $publishedPatchMatch.Success -or -not $publishedTargetMatch.Success) {
         throw 'The published bundle description does not name its patch count and TikTok target.'
     }

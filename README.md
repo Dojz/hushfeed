@@ -8,21 +8,11 @@
   <a href="https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-46-2-3-release/tiktok-46-2-3-android-apk-download/"><img alt="TikTok 46.2.3" src="https://img.shields.io/badge/TikTok-46.2.3-ff0050.svg" /></a>
 </p>
 
-<p align="center">
-  <a href="https://ko-fi.com/X8K126YVER">
-    <img height="42" src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" alt="Buy me a coffee on Ko-fi" />
-  </a>
-</p>
-
-<p align="center">
-  <sub><em>If Hushfeed makes TikTok better for you, a coffee helps me keep testing patches and maintaining them as TikTok changes.</em></sub>
-</p>
-
 # Hushfeed
 
 Hushfeed is a [Morphe](https://github.com/MorpheApp/morphe-manager) patch bundle for people who want TikTok to behave differently. It can cut feed clutter, guard risky taps, improve downloads and expose controls TikTok leaves buried or unavailable. Every selected patch is configured from one native settings screen inside the app.
 
-**[Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc/hushfeed)** | [Download the latest bundle](https://github.com/SysAdminDoc/hushfeed/releases/latest) | [Tour the settings](#settings-tour) | [Browse all 71 patches](#patches)
+**[Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc/hushfeed)** | [Download the latest bundle](https://github.com/SysAdminDoc/hushfeed/releases/latest) | [Tour the settings](#settings-tour) | [Browse all 79 patches](#patches)
 
 > [!IMPORTANT]
 > Hushfeed targets the global TikTok package, `com.zhiliaoapp.musically`, version [46.2.3](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-46-2-3-release/tiktok-46-2-3-android-apk-download/). Use that exact APK when patching. See [Supported target](#supported-target) for the verified build details.
@@ -71,6 +61,14 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 | `Double-tap controls` | Lets double taps do nothing or open the current video's comments. |
 | `Confirm feed interactions` | Adds optional second-tap protection to the feed Follow button and like heart. A red ring marks the armed button. |
 | `AMOLED dark theme` | Replaces TikTok's dark background palette with black or a chosen color. The light theme keeps its colors. Choose this patch to enable it. It is the one patch that rewrites resources, so patching with it on needs the memory limit raised to 768 MB. |
+| `Core Asset De-bloat` | Empties TikTok's bundled C2PA native libraries and Microblink payment-card OCR assets. Content credentials and card scanning may stop. Choose this patch to enable it. |
+| `Instant Launch & Splash Blocker` | Stops TikTok's splash-ad preload tasks and returns false from its reviewed splash and TopView gates. Other startup behavior is left in place. Choose this patch to enable it. |
+| `Language Pack Purger` | Empties unselected TikTok language bundles while always keeping English. Selected language codes are checked before any file changes. Choose this patch to enable it. |
+| `Live Stream Suite Optimizer` | Empties TikTok's link-mic and LIVE match or minigame assets, then skips its gift-effect widget setup. Co-hosting, games and animated gifts may stop. Choose this patch to enable it. |
+| `Network & Background Traffic Governor` | Turns off TikTok's buffer-preload gate and skips its push initialization task. Videos may start buffering later, and TikTok push notifications may stop. Choose this patch to enable it. |
+| `Runtime Memory Governor` | Makes TikTok's reviewed Fresco animated-frame cache lookups return no cached frame. This can increase decoding work or change animation playback. Choose this patch to enable it. |
+| `Studio & Creation De-bloat` | Empties TikTok's reviewed editor, camera-effect and face-model assets. Recording, editing, effects and creator tools may stop working. Choose this patch to enable it. |
+| `Update Prompt Suppressor` | Skips TikTok's background and boot-finished device-ID update-check tasks. This may suppress some in-app update checks. Play Store updates are unaffected. Choose this patch to enable it. |
 | `Always show publish date` | Always shows the publish date in video author information. Thanks to lyyako for the original implementation. |
 | `Not interested button` | Adds a button beside the block control to tell TikTok you aren't interested in the current video. Off by default. |
 | `Block author button` | Adds a block button to the video player that blocks the account that posted the current video in one tap, with an undo action. |
@@ -107,7 +105,7 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 | `Hide feed follow button` | Adds an option to hide the + follow button below creator avatars in video feeds. |
 | `Hide feed save button` | Adds an option to hide the save/favourites button from video feeds. |
 | `Hide feed search button` | Adds an option to hide the search button at the top right of video feeds. |
-| `Disable telemetry` | Adds an App behavior toggle that stops ByteDance AppLog analytics, AppsFlyer attribution, explicit Firebase screen reports and crash reporting. TikTok's own diagnostics go quiet with them. Off by default. |
+| `Disable telemetry` | Adds an App behavior toggle that stops ByteDance AppLog analytics, AppsFlyer attribution, explicit Firebase screen reports and TikTok's Npth or MonitorCrash startup reporting. TikTok's own diagnostics go quiet with them. Off by default. |
 | `Hide suggested accounts` | Stops the suggested accounts list from being built on the Activity, New followers and Inbox pages. Shares its switch with Hide inbox items. |
 | `Hide inbox stories` | Hides the stories tray at the top of the Inbox and restores it immediately when the switch is turned off. Shares its switch with Hide inbox items. |
 | `Expand activity list` | Adds an option to show the full Activity and New followers lists instead of collapsing them behind a View all button. |
@@ -314,6 +312,41 @@ Every patch here is tied to code TikTok does not name: the classes and methods a
 
 Only the global package is declared in the compatibility metadata.
 
+The four resource optimizers are off by default. Before changing the APK, they compare the complete target set with reviewed paths and SHA-256 digests from the retained fixtures. An exact group that is already completely empty is accepted. A missing, extra, altered or partly emptied set stops patching. The 46.2.3 checks cover both its arm64-v8a and armeabi-v7a native libraries; the retained 46.7.3 and 46.8.3 fixtures contain only arm64-v8a libraries. Language packs also require the reviewed 64-directory and 207-file inventory, keep English, and preserve both Android aliases for Hebrew and Indonesian when either one is selected.
+
+### Moving from Kveld
+
+Hushfeed now contains the eight Kveld TikTok optimizers that were not already here. Kveld's `Feed Ad Blocker` behavior is covered by `Feed filter`, and its Npth startup coverage is part of `Disable telemetry`. Remove or disable Kveld's TikTok patches after updating Hushfeed. Keeping both current sources at their defaults activates all eight shared optimizer names because Kveld marks them on by default, even though the Hushfeed copies are optional.
+
+| Bundle combination | Result on the reviewed 46.2.3 APK |
+| --- | --- |
+| Current Hushfeed source by itself | Supported. The eight optimizers stay off until selected. |
+| Released Hushfeed 0.30.2 plus Kveld 1.23.1 | Migration-tested. Each Kveld TikTok root passed beside Hushfeed's 34 defaults. All 44 roots also passed in both source orders. |
+| Current Hushfeed plus Kveld at defaults | Do not use this setup. Kveld's eight shared optimizers turn on automatically, and its separate feed and telemetry patches duplicate Hushfeed behavior. |
+| Current Hushfeed plus Kveld with all ten Kveld TikTok roots disabled | The desktop CLI returns to the exact 34 Hushfeed defaults, but keeping the duplicate source provides no TikTok benefit. |
+
+The migration matrix pinned Hushfeed 0.30.2 at `7645fb6dc8023ee445e623fa4ab83e9f76035916171fa00182a4e617a72101c4` and Kveld 1.23.1 at `28aa9a57c93b2e49482fd9b3f3bc359b0174c37ffb93cc9c5fc0155a8a65c7e1`. Both full-order outputs had 26,072 entries and the same uncompressed entry-content SHA-256, `2a9a786e86ad356985e795a99b1ca4f97962c4dad20b43c8c58aa6d0d6e5ab3d`. Neither order changed the 62 permissions, 648 named components or 66 exported components. Morphe desktop 1.15.0 applies an explicit duplicate name from the bundle supplied last, which is another reason to keep only one source for these patches.
+
+<details>
+<summary>Recorded one-at-a-time migration output hashes</summary>
+
+These whole-file SHA-256 values identify the recorded 2026-09-13 runs. ZIP metadata can make a repeat produce a different whole-file hash, so the entry-content hash above is the stable full-order comparison.
+
+| Kveld root beside Hushfeed defaults | Patched APK SHA-256 |
+| --- | --- |
+| Core Asset De-bloat | `849334dae2ec808ec75c718e382defa93608849d299abf07288c18e7886beb15` |
+| Feed Ad Blocker | `54a70673b12e00519e022e3a2e541f116a62b7b1a952d34e49058833a94c6a4e` |
+| Instant Launch & Splash Blocker | `3f3cf431d3193ae21c828de5c7aa5f4fdfe3223c64eff8954138120161e95d6d` |
+| Language Pack Purger | `5495eb30a61eaf5897d491c70286ff552c2d8f5513b7c908c13e955329687fb1` |
+| Live Stream Suite Optimizer | `c9795096850a8d4ad719511372553bbaf2726714b5bf170007be30849ad5a6b2` |
+| Network & Background Traffic Governor | `cc12a76919de78573789914d8033d40cee064325e334c1db7658e17175473357` |
+| Runtime Memory Governor | `dd78aae02796a33ec510f077c91a7e2a3dc947a17b5bb9288f888679f5a1710d` |
+| Studio & Creation De-bloat | `a0696fc12f49fc900b5eafdffd55992f09d1f0958e0ff5865180979d1eaff711` |
+| Unified Telemetry & Tracker Silencer | `a7b92689c1b31a71dee627ea1ff0a84b273995a3f4aa02af212aa7e6c6b477a2` |
+| Update Prompt Suppressor | `56031325e755f9c4523ee4c6330d3515beb0e20a108e21d7026147d025689e9c` |
+
+</details>
+
 <br>
 
 ## Project structure
@@ -330,6 +363,7 @@ Only the global package is declared in the compatibility metadata.
 Hushfeed stands on a lot of other people's work, and the licence asks that this stays visible.
 
 - [icysymmetra/tiktok-patches-for-morphe](https://github.com/icysymmetra/tiktok-patches-for-morphe), the Metra patches this project was forked from. Most of the original patch set, the settings framework and the Feature Gate Lab come from there, as does the release history below 0.8.0 in the changelog.
+- [kveld9/kveld-morphe-patches](https://github.com/kveld9/kveld-morphe-patches/tree/fcb1768620b8f98a6dd31e801074589ce9a63356) for the eight optional TikTok optimizer patches and the extra Npth telemetry coverage, adapted from v1.23.1 at commit `fcb1768620b8f98a6dd31e801074589ce9a63356`.
 - [ReVanced](https://gitlab.com/revanced/revanced-patches), whose TikTok patches the whole lineage continues, and [RookieEnough/De-Vanced](https://github.com/RookieEnough/De-Vanced), which upstream was built from.
 - [hxreborn/hxreborn-tiktok-patches](https://github.com/hxreborn/hxreborn-tiktok-patches) for the inbox injectors, the telemetry patch, the risk control CAPTCHA hook and several feed card filters.
 - [BlueDragon4251/tiktok-patches-for-morphe](https://github.com/BlueDragon4251/tiktok-patches-for-morphe) for the seen video filter, the gate recorder and the download quality ideas.
