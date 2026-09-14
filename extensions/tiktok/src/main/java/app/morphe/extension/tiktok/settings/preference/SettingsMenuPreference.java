@@ -125,8 +125,10 @@ public final class SettingsMenuPreference extends Preference {
         labels.addView(summary, new LinearLayout.LayoutParams(-1, -2));
 
         LinearLayout.LayoutParams labelParams = new LinearLayout.LayoutParams(0, -2, 1);
-        labelParams.leftMargin = SettingsUi.dp(context, 14);
-        labelParams.rightMargin = SettingsUi.dp(context, 10);
+        // Start and end rather than left and right: in an RTL layout the icon is on the right
+        // and this gap belongs between the icon and the text, not stranded on the far side.
+        labelParams.setMarginStart(SettingsUi.dp(context, 14));
+        labelParams.setMarginEnd(SettingsUi.dp(context, 10));
         row.addView(labels, labelParams);
 
         LinearLayout widget = new LinearLayout(context);
@@ -229,7 +231,7 @@ public final class SettingsMenuPreference extends Preference {
                 SettingsUi.dp(getContext(), 18),
                 SettingsUi.dp(getContext(), 18)
         );
-        chevronParams.leftMargin = SettingsUi.dp(getContext(), activeCount > 0 ? 9 : 0);
+        chevronParams.setMarginStart(SettingsUi.dp(getContext(), activeCount > 0 ? 9 : 0));
         accessory.addView(chevron, chevronParams);
         frame.addView(accessory);
     }

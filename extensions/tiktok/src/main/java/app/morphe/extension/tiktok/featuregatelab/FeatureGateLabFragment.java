@@ -260,7 +260,7 @@ public final class FeatureGateLabFragment extends Fragment {
         LinearLayout searchRow = new LinearLayout(context);
         searchRow.setOrientation(LinearLayout.HORIZONTAL);
         searchRow.setGravity(Gravity.CENTER_VERTICAL);
-        searchRow.setPadding(FeatureGateLabUi.dp(context, 8), 0, 0, 0);
+        searchRow.setPaddingRelative(FeatureGateLabUi.dp(context, 8), 0, 0, 0);
         searchRow.setBackground(SettingsUi.borderedSurface(context, 6, false));
         search = new EditText(context);
         search.setSingleLine(true);
