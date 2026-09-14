@@ -387,9 +387,84 @@ public class OverlayControlsTest {
         block.setOnClickListener(view -> clicks.incrementAndGet());
         assertTrue(block.performClick());
         assertEquals("the click after a move was swallowed by drag mode", 1, clicks.get());
+    }
+
+    @Test public void detachAndReattachStartOutsidePointerDragMode() throws Exception {
+        ViewGroup root = attachedRoot();
+        View block = held("buttonReference");
+        java.lang.reflect.Field dragging = BlockAuthorOverlay.class.getDeclaredField("dragging");
+        dragging.setAccessible(true);
+
+        // Through the real gesture, or the assertion after detach is about a flag that was
+        // already false and would stay green with the reset taken out.
+        pressDown(block, 10f, 10f);
+        assertTrue("the long press was refused", block.performLongClick());
+        assertTrue("the pointer gesture did not enter drag mode", dragging.getBoolean(null));
 
         declared("detach").invoke(null);
         assertFalse("detach left the overlay in drag mode", dragging.getBoolean(null));
+
+        ViewGroup next = attachedRoot();
+        View reattached = held("buttonReference");
+        assertNotSame("the reattach reused the detached control", block, reattached);
+        assertFalse("a reattached overlay started in drag mode", dragging.getBoolean(null));
+        java.util.concurrent.atomic.AtomicInteger clicks =
+                new java.util.concurrent.atomic.AtomicInteger();
+        reattached.setOnClickListener(view -> clicks.incrementAndGet());
+        assertTrue(reattached.performClick());
+        assertEquals("the reattached control's click was swallowed by stale drag state",
+                1, clicks.get());
+        assertNotNull(next);
+    }
+
+    @Test public void resettingOneControlDoesNotDragTheUnsavedOnesToTheBlockButton()
+            throws Exception {
+        // The other three default to positions relative to the block button. Re-running the whole
+        // positioning pass on a reset therefore moved every control with nothing saved to wherever
+        // the block button had since been dragged, from a reset performed on a different control.
+        ViewGroup root = attachedRoot();
+        View block = held("buttonReference");
+        View local = held("localHideReference");
+        View sound = held("soundButtonReference");
+        View feedback = held("notInterestedReference");
+
+        Method move = declared("moveTo", View.class, ViewGroup.class, float.class, float.class);
+        Method save = declared("savePosition", View.class, ViewGroup.class);
+        move.invoke(null, block, root, 0f, 0f);
+        save.invoke(null, block, root);
+        int localLeft = leftOf(local);
+        int localTop = topOf(local);
+        int feedbackLeft = leftOf(feedback);
+
+        assertTrue(sound.performAccessibilityAction(action("ACTION_RESET_POSITION"), null));
+
+        assertEquals("resetting the sound button moved the local hide button",
+                localLeft, leftOf(local));
+        assertEquals(localTop, topOf(local));
+        assertEquals("resetting the sound button moved the Not interested button",
+                feedbackLeft, leftOf(feedback));
+        assertEquals("the reset moved the block button it was not performed on", 0, leftOf(block));
+        assertEquals("", Settings.BLOCK_SOUND_BUTTON_POSITION.get());
+
+        // The sound button's own default: two steps below the block button, which is now at the
+        // top-left corner, so the reset does move the control it was performed on.
+        int size = app.morphe.extension.tiktok.settings.preference.SettingsUi
+                .dp(root.getContext(), 48);
+        int step = size + app.morphe.extension.tiktok.settings.preference.SettingsUi
+                .dp(root.getContext(), 8);
+        assertEquals("the control that was reset did not take its own default", 0, leftOf(sound));
+        assertEquals(2 * step, topOf(sound));
+    }
+
+    /** The pointer half of a long press: the listener refuses a gesture with no press behind it. */
+    private static void pressDown(View view, float x, float y) {
+        android.view.MotionEvent down = android.view.MotionEvent.obtain(
+                0L, 0L, android.view.MotionEvent.ACTION_DOWN, x, y, 0);
+        try {
+            view.dispatchTouchEvent(down);
+        } finally {
+            down.recycle();
+        }
     }
 
     private static final String[] CONTROLS = {"buttonReference", "localHideReference",

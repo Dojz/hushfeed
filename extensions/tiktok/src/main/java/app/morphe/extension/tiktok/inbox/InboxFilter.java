@@ -386,6 +386,10 @@ public final class InboxFilter {
         // said out loud or a reader is told the word "Clear all" and no way to press it.
         SettingsUi.markAsButton(clearAll);
         clearAllControl = new WeakReference<>(clearAll);
+        // Every dismissal relays out the list, and TikTok can rebuild this heading while a run is
+        // going. A control installed onto the new heading would otherwise come up saying "Clear
+        // all", enabled, while a run it silently refuses is still working through the list.
+        setClearAllBusy(clearingSuggested);
 
         // The heading is a horizontal LinearLayout on 46.2.3 (title at x 45 to 457, Learn
         // more at 470 to 501, of 1080), so zero width with weight takes the slack and the
@@ -421,7 +425,13 @@ public final class InboxFilter {
         control.setText(L10n.t(control.getContext(), busy ? "Clearing" : "Clear all"));
         if (android.os.Build.VERSION.SDK_INT >= 30) {
             control.setStateDescription(busy ? L10n.t(control.getContext(), "Clearing") : null);
+            return;
         }
+        // Below 30 there is no state to set, and the changed label is invisible to a reader
+        // because the content description replaces it. Without this the whole eighteen second
+        // wait is announced as "Clear all suggested accounts, disabled" and nothing else.
+        control.setContentDescription(L10n.t(control.getContext(),
+                busy ? "Clearing suggested accounts" : "Clear all suggested accounts"));
     }
 
     /**
@@ -429,6 +439,10 @@ public final class InboxFilter {
      * once, so TikTok sees the same pacing as a person tapping.
      */
     private static void clearNextSuggested(Activity activity, int cleared) {
+        // What the reader is told if this step throws. It goes up the moment the click returns,
+        // because a throw from the scheduling below it comes after an account really was
+        // dismissed and reporting the count from before the click would be one short.
+        int dismissed = cleared;
         try {
             if (cleared >= MAX_CLEARED_PER_RUN || activity.isFinishing()) {
                 report(cleared);
@@ -446,6 +460,7 @@ public final class InboxFilter {
 
             DISMISSED_LABELS.add(labelOf(button));
             button.performClick();
+            dismissed = cleared + 1;
 
             Utils.runOnMainThreadDelayed(
                     () -> clearNextSuggested(activity, cleared + 1), DISMISS_INTERVAL_MS);
@@ -453,9 +468,7 @@ public final class InboxFilter {
             // Logged first so the reader's outcome is the message left on screen: with
             // debugging on, printException puts the stack trace in a toast of its own.
             Logger.printException(() -> "Could not clear suggested accounts", ex);
-            // The count is what was dismissed before this one: the label is recorded ahead of
-            // the click, so the account that threw is not among them.
-            finishRun(failureMessage(cleared));
+            finishRun(failureMessage(dismissed));
         }
     }
 

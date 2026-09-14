@@ -1,5 +1,9 @@
 ## Unreleased
 
+* Reset position on a feed control now moves only that control. It used to re-place every control that had never been moved by hand, which meant resetting one of them could jump two others across the screen if the block button had been dragged since.
+
+* Inbox Clear all says it is working on Android 10 and older too. The control's description is what a screen reader is given instead of its label, so changing the label alone left the whole eighteen second run announced as an ordinary disabled button. A heading TikTok rebuilds mid-run now also comes up saying the run is still going, instead of looking pressable while silently refusing.
+
 * The four feed controls can now be moved with a screen reader. Each one offers Move up, Move down, Move left, Move right and Reset position, in the phone's language. A move shifts that control by its own width and stops at the screen edge, reset puts it back where it started, and neither touches the other three. The pointer long-press drag is unchanged, and an accessibility long-click is still refused because it has no release to end the gesture with.
 
 * Inbox Clear all now shows what it is doing. Clearing up to 60 suggestions takes about eighteen seconds, and the control used to sit there looking pressable the whole time. It now reads as a button to screen readers, fades and refuses presses while a run is going, says "Clearing" as its state, and comes back on every ending: finished, nothing to clear, the 60 cap, the Inbox closing, or a dismissal that failed. A failure says how many accounts it got through before it stopped, and the run can be started again straight away. Every outcome is announced as well as shown.

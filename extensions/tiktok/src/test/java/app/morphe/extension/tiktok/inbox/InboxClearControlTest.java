@@ -189,6 +189,57 @@ public class InboxClearControlTest {
         assertEquals(List.of("Could not clear suggested accounts"), header.announcements);
     }
 
+    @Test public void belowApiThirtyTheDescriptionCarriesTheProgressTheLabelCannot() {
+        // The content description replaces the label for a reader, so changing the label alone
+        // leaves the whole run announced as "Clear all suggested accounts, disabled".
+        addAccount("A", true);
+        TextView clear = clearControl();
+        assertEquals("Clear all suggested accounts",
+                String.valueOf(clear.getContentDescription()));
+
+        clear.performClick();
+        assertEquals("Clearing suggested accounts",
+                String.valueOf(clear.getContentDescription()));
+        assertEquals("Clearing suggested accounts",
+                String.valueOf(clear.createAccessibilityNodeInfo().getContentDescription()));
+
+        advance(300);
+        assertEquals("the busy description outlived the run", "Clear all suggested accounts",
+                String.valueOf(clear.getContentDescription()));
+    }
+
+    @Test public void aHeadingRebuiltMidRunGetsAControlThatSaysTheRunIsStillGoing() {
+        // Every dismissal relays out the list, and the suggested heading is a list item TikTok
+        // can rebuild. A fresh control on a fresh heading used to come up enabled and idle while
+        // the run it silently refuses was still working.
+        addAccount("A", true);
+        addAccount("B", true);
+        clearControl().performClick();
+
+        LinearLayout rebuilt = new LinearLayout(activity);
+        rebuilt.setId(header.getId());
+        TextView title = new TextView(activity);
+        title.setText("Suggested accounts");
+        title.setTextColor(Color.WHITE);
+        rebuilt.addView(title);
+        rows.removeView(header);
+        rows.addView(rebuilt, 0, new LinearLayout.LayoutParams(-1, 48));
+        layout();
+
+        TextView replacement = clearControlIn(rebuilt);
+        assertNotSame("the rebuilt heading kept the old control", clearControl(), replacement);
+        assertFalse("the replacement control came up pressable mid-run", replacement.isEnabled());
+        assertEquals("Clearing", replacement.getText().toString());
+        assertEquals("Clearing suggested accounts",
+                String.valueOf(replacement.getContentDescription()));
+
+        advance(300);
+        advance(300);
+        assertTrue("the replacement control was never handed back", replacement.isEnabled());
+        assertEquals("Clear all", replacement.getText().toString());
+        assertEquals("Dismissed 2 suggested accounts", ShadowToast.getTextOfLatestToast());
+    }
+
     private void assertIdle(TextView clear, String when) {
         assertTrue(when + ": the control was left disabled", clear.isEnabled());
         assertEquals(when + ": the control kept its progress label",
@@ -372,9 +423,20 @@ public class InboxClearControlTest {
     }
 
     private TextView clearControl() {
-        for (int index = 0; index < header.getChildCount(); index++) {
-            View child = header.getChildAt(index);
-            if ("Clear all suggested accounts".contentEquals(String.valueOf(child.getContentDescription()))) {
+        return clearControlIn(header);
+    }
+
+    /**
+     * Either description, because below API 30 the busy state is carried by the description
+     * itself: there is no state description to put it in, and the description is what a reader
+     * is given instead of the label.
+     */
+    private static TextView clearControlIn(LinearLayout suggestedHeader) {
+        for (int index = 0; index < suggestedHeader.getChildCount(); index++) {
+            View child = suggestedHeader.getChildAt(index);
+            String description = String.valueOf(child.getContentDescription());
+            if ("Clear all suggested accounts".equals(description)
+                    || "Clearing suggested accounts".equals(description)) {
                 return (TextView) child;
             }
         }

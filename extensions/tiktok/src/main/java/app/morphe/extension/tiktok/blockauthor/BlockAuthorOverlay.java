@@ -232,9 +232,7 @@ public final class BlockAuthorOverlay {
 
     /**
      * Puts every control where its saved fraction says, and the ones with nothing saved where
-     * they sit relative to the block button. Reset uses it too: clearing one control's setting
-     * and running this again gives that one its default back and leaves the rest alone, because
-     * a control with a saved position is placed from that position either way.
+     * they sit relative to the block button. Runs once per attach, after the root has a size.
      */
     private static void applyPositions(ViewGroup root) {
         View button = buttonReference.get();
@@ -242,28 +240,54 @@ public final class BlockAuthorOverlay {
         View soundButton = soundButtonReference.get();
         View feedback = notInterestedReference.get();
         if (button == null || localHide == null || soundButton == null || feedback == null) return;
+        // A second attach can swap these references to another activity's controls before this
+        // runs, since it is posted. Positioning those against this root would read the wrong
+        // width and cast layout params off a view that is not a child of it.
+        if (button.getParent() != root) return;
         if (root.getWidth() == 0 || root.getHeight() == 0) return;
 
         int size = SettingsUi.dp(root.getContext(), BUTTON_SIZE_DP);
+        int step = size + SettingsUi.dp(root.getContext(), BUTTON_GAP_DP);
+        // The block button first: the other three default to positions relative to wherever it
+        // ended up, so it has to be off its own saved fraction before they are worked out.
         applySavedPosition(button, root, size, Settings.BLOCK_AUTHOR_BUTTON_POSITION,
                 DEFAULT_X_FRACTION, DEFAULT_Y_FRACTION);
-        int step = size + SettingsUi.dp(root.getContext(), BUTTON_GAP_DP);
-        FrameLayout.LayoutParams blockPosition =
-                (FrameLayout.LayoutParams) button.getLayoutParams();
+        for (View view : new View[]{localHide, soundButton, feedback}) {
+            float[] fractions = defaultFractions(view, root, button, size, step);
+            applySavedPosition(view, root, size, positionSetting(view), fractions[0], fractions[1]);
+        }
+    }
+
+    /**
+     * Where one control sits when nothing has been saved for it.
+     *
+     * <p>The block button has a fixed corner of the screen. The other three are placed around
+     * wherever the block button actually is, turning away from the edge it is nearest so a
+     * column of four does not run off the bottom or a pair overlap on the right.
+     */
+    private static float[] defaultFractions(
+            View view, ViewGroup root, View button, int size, int step) {
+        if (view == button) {
+            return new float[]{DEFAULT_X_FRACTION, DEFAULT_Y_FRACTION};
+        }
+
+        FrameLayout.LayoutParams blockPosition = (FrameLayout.LayoutParams) button.getLayoutParams();
         float blockX = blockPosition.leftMargin + size / 2f;
         float blockY = blockPosition.topMargin + size / 2f;
         int maxTop = Math.max(0, root.getHeight() - size);
         float verticalDirection = maxTop - blockPosition.topMargin >= step * 2 ? 1f : -1f;
-        applySavedPosition(localHide, root, size, Settings.LOCAL_HIDE_BUTTON_POSITION,
-                blockX / root.getWidth(),
-                (blockY + step * verticalDirection) / root.getHeight());
-        applySavedPosition(soundButton, root, size, Settings.BLOCK_SOUND_BUTTON_POSITION,
-                blockX / root.getWidth(),
-                (blockY + step * 2f * verticalDirection) / root.getHeight());
+
+        if (view == localHideReference.get()) {
+            return new float[]{blockX / root.getWidth(),
+                    (blockY + step * verticalDirection) / root.getHeight()};
+        }
+        if (view == soundButtonReference.get()) {
+            return new float[]{blockX / root.getWidth(),
+                    (blockY + step * 2f * verticalDirection) / root.getHeight()};
+        }
         float horizontalDirection = blockPosition.leftMargin >= step ? -1f : 1f;
-        applySavedPosition(feedback, root, size, Settings.NOT_INTERESTED_BUTTON_POSITION,
-                (blockX + step * horizontalDirection) / root.getWidth(),
-                blockY / root.getHeight());
+        return new float[]{(blockX + step * horizontalDirection) / root.getWidth(),
+                blockY / root.getHeight()};
     }
 
     private static void installVisibilityListener(ViewGroup root) {
@@ -496,15 +520,28 @@ public final class BlockAuthorOverlay {
         return true;
     }
 
-    /** Gives one control its default position back and leaves every other control alone. */
+    /**
+     * Gives one control its default position back and moves nothing else.
+     *
+     * <p>Only this control is placed. Re-running the whole positioning pass would look
+     * equivalent and is not: the other three default to positions relative to the block button,
+     * so a pass would drag every control with nothing saved to wherever the block button has
+     * since been moved, from a reset performed on a different control.
+     */
     private static boolean resetPosition(View view) {
         ViewGroup parent = view.getParent() instanceof ViewGroup
                 ? (ViewGroup) view.getParent()
                 : null;
-        if (parent == null || parent.getWidth() == 0 || parent.getHeight() == 0) return false;
+        View button = buttonReference.get();
+        if (parent == null || button == null) return false;
+        if (parent.getWidth() == 0 || parent.getHeight() == 0) return false;
 
-        positionSetting(view).resetToDefault();
-        applyPositions(parent);
+        StringSetting setting = positionSetting(view);
+        setting.resetToDefault();
+        int size = SettingsUi.dp(parent.getContext(), BUTTON_SIZE_DP);
+        int step = size + SettingsUi.dp(parent.getContext(), BUTTON_GAP_DP);
+        float[] fractions = defaultFractions(view, parent, button, size, step);
+        applySavedPosition(view, parent, size, setting, fractions[0], fractions[1]);
         return true;
     }
 
