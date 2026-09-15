@@ -183,6 +183,9 @@ public final class Probe extends Instrumentation {
                     case "comments":
                         Log.i(TAG, "ok comments\n" + openCommentsReport());
                         break;
+                    case "feed":
+                        Log.i(TAG, "ok feed\n" + feedReport());
+                        break;
                     case "doubletap": {
                         // Two taps on TikTok's own window, timed inside the double-tap window.
                         // "input tap" twice from adb spawns a process per tap and lands inside or
@@ -380,6 +383,82 @@ public final class Probe extends Instrumentation {
          * <p>Loading the tiktok Settings class is what creates them: each is a static field on it,
          * so until the class is initialised the registry is empty and a lookup finds nothing.
          */
+        /**
+         * What FeedVisibility sees right now: the current activity, its answers, the Home tab's
+         * flags and whether any of it has pixels on screen, and the detail-page registry. The
+         * registry and its entries are read by field type rather than name, since the release
+         * extension is minified and only the hooked entry points keep their names.
+         */
+        private String feedReport() throws Exception {
+            Class<?> visibility = loader.loadClass("app.morphe.extension.tiktok.blockauthor.FeedVisibility");
+            android.app.Activity activity = (android.app.Activity) loader.loadClass(UTILS)
+                    .getMethod("getActivity").invoke(null);
+            StringBuilder out = new StringBuilder();
+            out.append("activity=").append(activity == null ? "null" : activity.getClass().getName());
+            if (activity != null) {
+                out.append("\nisOnFeed=").append(visibility.getMethod("isOnFeed", android.app.Activity.class)
+                        .invoke(null, activity));
+                out.append("\nonRecommendationFeed=").append(visibility
+                        .getMethod("onRecommendationFeed", android.app.Activity.class).invoke(null, activity));
+                out.append("\ncommentSheet=").append(visibility
+                        .getMethod("isCommentSheetVisible", android.app.Activity.class).invoke(null, activity));
+                android.view.View tab = (android.view.View) visibility
+                        .getMethod("homeTabView", android.app.Activity.class).invoke(null, activity);
+                if (tab == null) {
+                    out.append("\nhomeTab=null");
+                } else {
+                    android.graphics.Rect rect = new android.graphics.Rect();
+                    boolean onScreen = tab.getGlobalVisibleRect(rect);
+                    int[] where = new int[2];
+                    tab.getLocationOnScreen(where);
+                    out.append("\nhomeTab shown=").append(tab.isShown())
+                            .append(" selected=").append(tab.isSelected())
+                            .append(" attached=").append(tab.isAttachedToWindow())
+                            .append(" globalVisibleRect=").append(onScreen).append(' ').append(rect.toShortString())
+                            .append(" locationOnScreen=").append(where[0]).append(',').append(where[1]);
+                    android.view.ViewParent parent = tab.getParent();
+                    while (parent instanceof android.view.View) {
+                        android.view.View view = (android.view.View) parent;
+                        if (view.getScrollX() != 0 || view.getTranslationX() != 0f) {
+                            out.append("\n  ancestor ").append(view.getClass().getName())
+                                    .append(" scrollX=").append(view.getScrollX())
+                                    .append(" translationX=").append(view.getTranslationX())
+                                    .append(" left=").append(view.getLeft());
+                        }
+                        parent = view.getParent();
+                    }
+                }
+            }
+            for (java.lang.reflect.Method method : visibility.getDeclaredMethods()) {
+                if (method.getParameterTypes().length == 0 && method.getReturnType() == boolean.class
+                        && java.lang.reflect.Modifier.isStatic(method.getModifiers())) {
+                    method.setAccessible(true);
+                    out.append('\n').append(method.getName()).append("()=").append(method.invoke(null));
+                }
+            }
+            for (java.lang.reflect.Field field : visibility.getDeclaredFields()) {
+                if (!java.util.Map.class.isAssignableFrom(field.getType())) continue;
+                field.setAccessible(true);
+                java.util.Map<?, ?> pages = (java.util.Map<?, ?>) field.get(null);
+                out.append("\nregistry ").append(field.getName()).append(" size=").append(pages.size());
+                for (java.util.Map.Entry<?, ?> entry : pages.entrySet()) {
+                    out.append("\n  page ").append(entry.getKey().getClass().getName());
+                    Object state = entry.getValue();
+                    for (java.lang.reflect.Field part : state.getClass().getDeclaredFields()) {
+                        part.setAccessible(true);
+                        Object value = part.get(state);
+                        if (value instanceof java.lang.ref.Reference) {
+                            Object view = ((java.lang.ref.Reference<?>) value).get();
+                            value = view == null ? "null" : view.getClass().getName() + " shown="
+                                    + ((android.view.View) view).isShown();
+                        }
+                        out.append(' ').append(part.getName()).append('=').append(value);
+                    }
+                }
+            }
+            return out.toString();
+        }
+
         private String dump() throws Exception {
             List<?> all = (List<?>) registry().getMethod("allLoadedSettings").invoke(null);
             List<String> lines = new ArrayList<>();

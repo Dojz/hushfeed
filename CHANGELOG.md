@@ -4,6 +4,8 @@
 
 * The build classpath no longer carries a Bouncy Castle release with known advisories against it. Nothing here reaches the app on your phone, which is signed by your own Manager, but the version used to sign and assemble during a build sat inside two advisories and now does not.
 
+* The block, hide and sound chips no longer sit over a creator's profile opened from the feed. Tapping a name or an avatar slides the profile in beside the feed rather than over it, and the feed's bottom navigation, still laid out a screen width to the left, kept telling Hushfeed the feed was showing. The chips were live there too, so a press blocked the video underneath rather than the creator on screen. They hide while the profile is up and come back when you swipe back to the feed.
+
 ## 0.32.0
 
 * Every control Hushfeed draws over the video answers a press and shows where the focus is. The four feed controls, the two actions on the daily hold, Undo, Clear all in the inbox and the sticker Save button used to paint the same thing pressed, focused or at rest, so a keyboard, a d-pad or switch access moved through them with nothing on screen saying so. Each one ripples under a finger now and carries a white ring while it holds focus.

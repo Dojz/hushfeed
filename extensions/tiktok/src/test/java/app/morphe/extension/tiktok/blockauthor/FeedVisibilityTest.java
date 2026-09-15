@@ -3,7 +3,10 @@ package app.morphe.extension.tiktok.blockauthor;
 import static org.junit.Assert.*;
 
 import android.app.Activity;
+import android.os.Looper;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import app.morphe.extension.shared.diagnostics.HookStatus;
@@ -11,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
@@ -60,6 +64,47 @@ public class FeedVisibilityTest {
             video.setVisibility(View.VISIBLE);
             FeedVisibility.onDetailDestroyed(page);
             assertFalse(FeedVisibility.isDetailVisible());
+        }
+    }
+
+    /**
+     * A creator's profile opened from the feed by the name or the avatar is a page of the same
+     * horizontal pager as the feed. The pager scrolls the feed's page, bottom navigation and
+     * all, one screen width to the left, where the Home tab stays VISIBLE and selected: on
+     * 46.2.3 it answered shown and selected with a global visible rect of [-1080,2043][-864,2181]
+     * while the profile covered the feed, and the three chips stayed drawn over the profile's
+     * grid, live, for the video underneath. A tab has to have pixels on screen to count.
+     */
+    @Test public void aProfileScrolledOverTheFeedIsNotTheFeed() {
+        try (var controller = Robolectric.buildActivity(Activity.class).setup().visible()) {
+            Activity activity = controller.get();
+            FrameLayout pager = new FrameLayout(activity);
+            FrameLayout feedPage = new FrameLayout(activity);
+            View homeTab = new View(activity);
+            homeTab.setId(0x7f0a4b89);
+            homeTab.setSelected(true);
+            feedPage.addView(homeTab, new FrameLayout.LayoutParams(60, 40, Gravity.BOTTOM));
+            pager.addView(feedPage, new FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            activity.setContentView(pager);
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            assertTrue("the window never laid out", homeTab.getWidth() > 0 && pager.getWidth() > 0);
+            FeedVisibility.resolveForTests(activity.getPackageName(), "o1k", homeTab.getId());
+
+            assertTrue(FeedVisibility.isOnFeed(activity));
+            assertTrue(FeedVisibility.onRecommendationFeed(activity));
+
+            // The name tap: the pager scrolls to the profile page, one screen width to the right.
+            pager.scrollTo(pager.getWidth(), 0);
+            assertTrue("the tab still reads shown and selected", homeTab.isShown() && homeTab.isSelected());
+            assertFalse("a profile scrolled over the feed counted as the feed",
+                    FeedVisibility.isOnFeed(activity));
+            assertFalse(FeedVisibility.onRecommendationFeed(activity));
+
+            // Back: the feed's page returns under the finger.
+            pager.scrollTo(0, 0);
+            assertTrue(FeedVisibility.isOnFeed(activity));
+            assertTrue(FeedVisibility.onRecommendationFeed(activity));
         }
     }
 
