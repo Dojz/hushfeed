@@ -59,6 +59,13 @@ public final class QualitySelector {
         return lowest ? compare < 0 : compare > 0;
     }
 
+    /** A gear the way a report names it: its gear name and the height it plays at. */
+    public static String describe(Object gear) {
+        String name = Reflect.string(gear, "getGearName", "gearName");
+        int height = height(gear);
+        return (name == null || name.isEmpty() ? "unnamed" : name) + (height > 0 ? " " + height + "p" : "");
+    }
+
     private static int height(Object gear) {
         String name = Reflect.string(gear, "getGearName", "gearName");
         if (name != null) {
