@@ -630,5 +630,66 @@ try {
 
 Write-Host '[scripts] release facts contracts passed'
 
+# --- pre-push.ps1 ----------------------------------------------------------------------------
+#
+# Which files make the hook run the release check. The receipt is what the check holds a release
+# to and the allowlist is what it accepts manifest changes from, and a push that moved only one
+# of them ran no release check at all. Driven against a stub root whose validate script records
+# that it was called, so the case proves the routing and not the check.
+
+$prePushScript = Join-Path $PSScriptRoot 'pre-push.ps1'
+$hookRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("hushfeed-hook-" + [guid]::NewGuid().ToString('N'))
+$savedSkip = $env:HUSHFEED_SKIP_PRE_PUSH
+try {
+    $env:HUSHFEED_SKIP_PRE_PUSH = $null
+    New-Item -ItemType Directory -Path (Join-Path $hookRoot 'scripts') -Force | Out-Null
+    $factsMarker = Join-Path $hookRoot 'facts-ran.txt'
+    $contractsMarker = Join-Path $hookRoot 'contracts-ran.txt'
+    Set-Content -LiteralPath (Join-Path $hookRoot 'scripts/validate-release-facts.ps1') -Encoding UTF8 -Value @(
+        'param([string]$Root, [switch]$SkipDescriptionTestCount, [switch]$AllowPublishedIndexLag,',
+        '    [switch]$VerifyPublishedAsset, [string]$ArtifactPath)',
+        "Set-Content -LiteralPath '$factsMarker' -Value `"lag=`$AllowPublishedIndexLag`"",
+        'exit 0')
+    Set-Content -LiteralPath (Join-Path $hookRoot 'scripts/test-script-contracts.ps1') -Encoding UTF8 -Value @(
+        'param([string]$Root)',
+        "Set-Content -LiteralPath '$contractsMarker' -Value 'ran'",
+        'exit 0')
+
+    function Invoke-Hook {
+        param([string[]]$Paths)
+        Remove-Item -LiteralPath $factsMarker, $contractsMarker -Force -ErrorAction SilentlyContinue
+        $global:LASTEXITCODE = 0
+        & $prePushScript -Root $hookRoot -ChangedPaths $Paths 6> $null
+        if ($LASTEXITCODE -ne 0) { throw "pre-push exited $LASTEXITCODE for $($Paths -join ', ')" }
+    }
+
+    # The control: a file no gate reads runs no gate, so a marker below is the routing talking.
+    Invoke-Hook -Paths @('CONTRIBUTING.md')
+    Assert-True (-not (Test-Path -LiteralPath $factsMarker)) `
+        'The release check ran for a push that changed nothing it reads.'
+
+    Invoke-Hook -Paths @('release-receipt-0.31.0.json')
+    Assert-True (Test-Path -LiteralPath $factsMarker) `
+        'A push that changed only the release receipt ran no release check.'
+    Assert-True ((Get-Content -LiteralPath $factsMarker -Raw) -like 'lag=True*') `
+        'A receipt-only push took the strict published-index path.'
+
+    Invoke-Hook -Paths @('scripts/manifest-delta-allowlist.txt')
+    Assert-True (Test-Path -LiteralPath $factsMarker) `
+        'A push that changed only the manifest delta allowlist ran no release check.'
+    Assert-True (Test-Path -LiteralPath $contractsMarker) `
+        'A push that changed the manifest delta allowlist skipped the script contract tests.'
+
+    Invoke-Hook -Paths @('patches-bundle.json')
+    Assert-True (Test-Path -LiteralPath $factsMarker) 'An index change ran no release check.'
+    Assert-True ((Get-Content -LiteralPath $factsMarker -Raw) -like 'lag=False*') `
+        'An index change was allowed to lag behind the published release.'
+} finally {
+    $env:HUSHFEED_SKIP_PRE_PUSH = $savedSkip
+    Remove-Item -LiteralPath $hookRoot -Recurse -Force -ErrorAction SilentlyContinue
+}
+
+Write-Host '[scripts] pre-push routing contracts passed'
+
 $global:LASTEXITCODE = 0
 Write-Host '[scripts] report, target, Java and guarded replacement contracts passed'

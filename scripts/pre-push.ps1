@@ -126,7 +126,12 @@ try {
         # only one of these ran no gate at all.
         $_ -eq 'gradle/libs.versions.toml' -or $_ -eq 'settings.gradle.kts' -or
         $_ -eq 'gradle/verification-metadata.xml' -or
-        $_ -eq 'gradle/wrapper/gradle-wrapper.properties'
+        $_ -eq 'gradle/wrapper/gradle-wrapper.properties' -or
+        # The receipt is the file the release check holds a release to, and the allowlist is
+        # what decides which manifest changes it accepts. A push that moved only one of those
+        # ran the script contract tests at most, and never the check that reads them.
+        $_ -like 'release-receipt-*.json' -or
+        $_ -eq 'scripts/manifest-delta-allowlist.txt'
     }).Count -gt 0
 
     if ($touchesScripts) {
