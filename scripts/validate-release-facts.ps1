@@ -617,6 +617,7 @@ function Test-ReleaseReceiptHere {
     $receiptCheck = Test-ReleaseReceipt -Receipt $receiptDocument -ExpectedVersion $releaseVersion `
         -ExpectedPatchNames @($patches | ForEach-Object { [string]$_.name }) `
         -ExpectedPatcherVersion $pinnedPatcher -ExpectedManagerFloor $managerFloor `
+        -ExpectedPackageName $target.PackageName -ExpectedPackageVersion $target.PackageVersion `
         -BundlePath $BundleForComparison -ApprovedManifestDelta $approvedDelta `
         -ActualCommitTimestamp $actualEpoch -ExpectedCommit $expectedCommit
     if (-not $receiptCheck.Valid) {

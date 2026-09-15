@@ -348,7 +348,8 @@ try {
             name = 'extensions/tiktok.rve'; sizeBytes = 10; sha256 = ('A' * 64) }) }
         targets   = @([ordered]@{
             source = [ordered]@{ file = 'stock.apk'; package = 'com.example.host'
-                versionName = '46.7.3'; versionCode = '2024607030'; sha256 = ('B' * 64) }
+                versionName = '46.7.3'; versionCode = '2024607030'; sha256 = ('B' * 64)
+                forced = $false }
             patches = @([ordered]@{ name = 'Alpha'; applied = $true; reason = $null },
                         [ordered]@{ name = 'Beta'; applied = $true; reason = $null })
             manifestDelta = [ordered]@{ permissionsAdded = @(); permissionsRemoved = @()
@@ -368,7 +369,7 @@ try {
         param($Receipt, [string[]]$Approved = @())
         return Test-ReleaseReceipt -Receipt $Receipt -ExpectedVersion '9.9.9' `
             -ExpectedPatchNames @('Alpha', 'Beta') -ExpectedPatcherVersion '1.12.0' `
-            -ExpectedManagerFloor '1.29.0' -BundlePath $bundle -ApprovedManifestDelta $Approved
+            -ExpectedManagerFloor '1.29.0' -ExpectedPackageName 'com.example.host' -ExpectedPackageVersion '46.7.3' -BundlePath $bundle -ApprovedManifestDelta $Approved
     }
 
     $valid = Test-TestReceipt -Receipt (New-TestReceipt)
@@ -397,6 +398,13 @@ try {
         'a patch that did not apply'            = { param($r) $r.targets[0].patches[1].applied = $false }
         'a receipt with no commit time'         = { param($r) $r.release.commitTimestamp = 0 }
         'a stamp that is not the bundle stamp'  = { param($r) $r.bundle.timestamp = 1700000001000L }
+        'a run against another package'         = { param($r) $r.targets[0].source.package = 'com.example.other' }
+        'a run with no version name'            = { param($r) $r.targets[0].source.versionName = '' }
+        'a receipt that omits the forced flag'  = { param($r) $r.targets[0].source.PSObject.Properties.Remove('forced') }
+        'a forced flag that is not a boolean'   = { param($r) $r.targets[0].source.forced = 'false' }
+        'a declared-version run marked forced'  = { param($r) $r.targets[0].source.forced = $true }
+        'only forced runs past the target'      = { param($r) $r.targets[0].source.versionName = '46.8.3'; $r.targets[0].source.forced = $true }
+        'a newer build patched without -f'      = { param($r) $r.targets[0].source.versionName = '46.8.3' }
     }
     foreach ($description in $mutations.Keys) {
         $result = Test-TestReceipt -Receipt (New-TestReceipt -Mutate $mutations[$description])
@@ -404,12 +412,27 @@ try {
         Assert-True ([bool]$result.Reason) "Receipt validation refused $description without saying why."
     }
 
+    # A receipt built only from forced runs against newer builds has to be refused for that
+    # reason and name the target it is missing, not trip over some other field on the way.
+    $onlyForced = Test-TestReceipt -Receipt (New-TestReceipt -Mutate $mutations['only forced runs past the target'])
+    Assert-True ($onlyForced.Reason -like '*No target*46.7.3*without -f*46.8.3*') `
+        "A forced-only receipt was refused for the wrong reason: $($onlyForced.Reason)"
+    $secondTarget = New-TestReceipt -Mutate {
+        param($r)
+        $newer = $r.targets[0] | ConvertTo-Json -Depth 8 | ConvertFrom-Json
+        $newer.source.versionName = '46.8.3'
+        $newer.source.forced = $true
+        $r.targets = @($r.targets[0], $newer)
+    }
+    $twoTargets = Test-TestReceipt -Receipt $secondTarget
+    Assert-True $twoTargets.Valid "A receipt with the declared target beside a forced run was refused: $($twoTargets.Reason)"
+
     # The bundle the receipt is about, gone. Every fact above is checked against a file, and a
     # missing file is the one case where there is nothing to disagree with, so an unguarded
     # check would read it as agreement and pass the release.
     $absent = Test-ReleaseReceipt -Receipt (New-TestReceipt) -ExpectedVersion '9.9.9' `
         -ExpectedPatchNames @('Alpha', 'Beta') -ExpectedPatcherVersion '1.12.0' `
-        -ExpectedManagerFloor '1.29.0' -BundlePath (Join-Path $allowlistRoot 'not-built.mpp')
+        -ExpectedManagerFloor '1.29.0' -ExpectedPackageName 'com.example.host' -ExpectedPackageVersion '46.7.3' -BundlePath (Join-Path $allowlistRoot 'not-built.mpp')
     Assert-True (-not $absent.Valid) 'A receipt was accepted against a bundle that is not there.'
     Assert-True ($absent.Reason -like '*not there*') `
         "The missing bundle was refused for the wrong reason: $($absent.Reason)"
@@ -427,7 +450,7 @@ try {
     }
     $strayResult = Test-ReleaseReceipt -Receipt $strayReceipt -ExpectedVersion '9.9.9' `
         -ExpectedPatchNames @('Alpha', 'Beta') -ExpectedPatcherVersion '1.12.0' `
-        -ExpectedManagerFloor '1.29.0' -BundlePath $strayBundle
+        -ExpectedManagerFloor '1.29.0' -ExpectedPackageName 'com.example.host' -ExpectedPackageVersion '46.7.3' -BundlePath $strayBundle
     Assert-True (-not $strayResult.Valid) 'A bundle built from another commit was accepted.'
     Assert-True ($strayResult.Reason -like '*different*commit*') `
         "The stale bundle pin was refused for the wrong reason: $($strayResult.Reason)"
@@ -446,7 +469,7 @@ try {
         }
         $oddResult = Test-ReleaseReceipt -Receipt $oddReceipt -ExpectedVersion '9.9.9' `
             -ExpectedPatchNames @('Alpha', 'Beta') -ExpectedPatcherVersion '1.12.0' `
-            -ExpectedManagerFloor '1.29.0' -BundlePath $odd
+            -ExpectedManagerFloor '1.29.0' -ExpectedPackageName 'com.example.host' -ExpectedPackageVersion '46.7.3' -BundlePath $odd
         Assert-True (-not $oddResult.Valid) "Receipt validation accepted $($wrong.Name)."
         Assert-True ($oddResult.Reason -like $wrong.Pattern) `
             "$($wrong.Name) was refused for the wrong reason: $($oddResult.Reason)"
@@ -457,13 +480,13 @@ try {
     # from an earlier release agrees with itself and passes on that pair alone.
     $sameCommit = Test-ReleaseReceipt -Receipt (New-TestReceipt) -ExpectedVersion '9.9.9' `
         -ExpectedPatchNames @('Alpha', 'Beta') -ExpectedPatcherVersion '1.12.0' `
-        -ExpectedManagerFloor '1.29.0' -BundlePath $bundle `
+        -ExpectedManagerFloor '1.29.0' -ExpectedPackageName 'com.example.host' -ExpectedPackageVersion '46.7.3' -BundlePath $bundle `
         -ActualCommitTimestamp $commitSeconds
     Assert-True $sameCommit.Valid "A receipt matching git was refused: $($sameCommit.Reason)"
 
     $movedCommit = Test-ReleaseReceipt -Receipt (New-TestReceipt) -ExpectedVersion '9.9.9' `
         -ExpectedPatchNames @('Alpha', 'Beta') -ExpectedPatcherVersion '1.12.0' `
-        -ExpectedManagerFloor '1.29.0' -BundlePath $bundle `
+        -ExpectedManagerFloor '1.29.0' -ExpectedPackageName 'com.example.host' -ExpectedPackageVersion '46.7.3' -BundlePath $bundle `
         -ActualCommitTimestamp ($commitSeconds + 60)
     Assert-True (-not $movedCommit.Valid) `
         'A receipt whose commit time git disagrees with was accepted.'
@@ -472,7 +495,7 @@ try {
 
     $otherCommit = Test-ReleaseReceipt -Receipt (New-TestReceipt) -ExpectedVersion '9.9.9' `
         -ExpectedPatchNames @('Alpha', 'Beta') -ExpectedPatcherVersion '1.12.0' `
-        -ExpectedManagerFloor '1.29.0' -BundlePath $bundle `
+        -ExpectedManagerFloor '1.29.0' -ExpectedPackageName 'com.example.host' -ExpectedPackageVersion '46.7.3' -BundlePath $bundle `
         -ExpectedCommit ('f' * 40)
     Assert-True (-not $otherCommit.Valid) 'A receipt for another commit was accepted on a release.'
     Assert-True ($otherCommit.Reason -like '*this release is*') `

@@ -6,11 +6,16 @@
     Local patching puts three things together: the user's APK, this bundle, and a toolchain. A
     checksum can only say that one of them arrived unaltered. This writes down all of it as one
     JSON document: which commit and tag the bundle was built from, what the bundle weighs and
-    hashes to, which extension payloads it carries, which APK each proof was run against, how
-    every patch in the catalog fared on it, and what patching did to the Android manifest.
+    hashes to, which extension payloads it carries, which APK each proof was run against, that
+    every patch in the catalog applied to it, and what patching did to the Android manifest.
 
     Nothing here is asserted. Each fixture is patched with the real desktop CLI, the verdicts
-    come out of the CLI's own result report, and both manifests are read back with aapt2.
+    come out of the CLI's own result report, and both manifests are read back with aapt2. A
+    patch that fails on any fixture stops the run with its name and no receipt is written: the
+    receipt describes a bundle that fully applies, which is why the validator refuses any
+    verdict of applied = false rather than reading it as a recorded failure. At least one
+    fixture has to be the catalog's declared version patched without -f, or there is nothing
+    in the receipt a user's Manager run corresponds to.
 
     The patched APKs are working files and are deleted on the way out, including after a failure.
 
@@ -299,7 +304,9 @@ $approved = Read-ManifestDeltaAllowlist -Path (Join-Path $PSScriptRoot 'manifest
 $check = Test-ReleaseReceipt -Receipt ($receipt | ConvertTo-Json -Depth 12 | ConvertFrom-Json) `
     -ExpectedVersion $releaseVersion -ExpectedPatchNames $patchNames `
     -ExpectedPatcherVersion $patcherMatch.Groups[1].Value `
-    -ExpectedManagerFloor $floorMatch.Groups[1].Value -BundlePath $Bundle `
+    -ExpectedManagerFloor $floorMatch.Groups[1].Value `
+    -ExpectedPackageName $expectedTarget.PackageName `
+    -ExpectedPackageVersion $expectedTarget.PackageVersion -BundlePath $Bundle `
     -ApprovedManifestDelta $approved
 if (-not $check.Valid) { throw "The receipt this run produced does not pass validation: $($check.Reason)" }
 

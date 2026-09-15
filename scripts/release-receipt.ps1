@@ -343,6 +343,11 @@ function Test-ReleaseReceipt {
         [Parameter(Mandatory = $true)][string[]]$ExpectedPatchNames,
         [Parameter(Mandatory = $true)][string]$ExpectedPatcherVersion,
         [Parameter(Mandatory = $true)][string]$ExpectedManagerFloor,
+        # The package and version the catalog declares. Without them a receipt built only from
+        # forced runs against newer builds reads as proof of the release, when nothing in it was
+        # patched the way a user's Manager patches it.
+        [Parameter(Mandatory = $true)][string]$ExpectedPackageName,
+        [Parameter(Mandatory = $true)][string]$ExpectedPackageVersion,
         [string]$BundlePath,
         [string[]]$ApprovedManifestDelta = @(),
         # When the commit the receipt names was made, read out of git by the caller. Without it
@@ -460,11 +465,32 @@ function Test-ReleaseReceipt {
     $expected = [System.Collections.Generic.HashSet[string]]::new(
         [string[]]$ExpectedPatchNames, [System.StringComparer]::Ordinal)
     $produced = New-Object System.Collections.Generic.List[string]
+    $declaredTargetProved = $false
     foreach ($target in $targets) {
         $label = "$($target.source.package) $($target.source.versionName)"
         if ([string]$target.source.sha256 -notmatch '^[0-9A-F]{64}$') {
             return Fail "The receipt records no source APK hash for $label."
         }
+        if ([string]$target.source.package -ne $ExpectedPackageName) {
+            return Fail ("The receipt records a run against $($target.source.package); the " +
+                "catalog targets $ExpectedPackageName.")
+        }
+        if ([string]::IsNullOrWhiteSpace([string]$target.source.versionName)) {
+            return Fail "The receipt records a $ExpectedPackageName run with no version name."
+        }
+        # Whether the CLI was told to ignore the declared version. Recorded as a boolean by the
+        # builder; a receipt that leaves it out cannot say which of its runs were the real one.
+        $forcedProperty = $target.source.PSObject.Properties['forced']
+        if ($null -eq $forcedProperty -or $forcedProperty.Value -isnot [bool]) {
+            return Fail "The receipt does not say whether $label was patched under -f."
+        }
+        $atDeclaredVersion = [string]$target.source.versionName -eq $ExpectedPackageVersion
+        if ($forcedProperty.Value -eq $atDeclaredVersion) {
+            return Fail ("The receipt says $label was " +
+                $(if ($forcedProperty.Value) { 'forced past' } else { 'patched without -f at' }) +
+                " the declared version, but the catalog targets $ExpectedPackageVersion.")
+        }
+        if ($atDeclaredVersion) { $declaredTargetProved = $true }
         $verdicts = @($target.patches)
         if ($verdicts.Count -ne $ExpectedPatchNames.Count) {
             return Fail ("The receipt records $($verdicts.Count) patch verdicts for $label; " +
@@ -486,6 +512,11 @@ function Test-ReleaseReceipt {
         foreach ($entry in ConvertTo-ManifestDeltaEntries -Delta $target.manifestDelta) {
             $produced.Add($entry)
         }
+    }
+    if (-not $declaredTargetProved) {
+        $ran = @($targets | ForEach-Object { [string]$_.source.versionName }) -join ', '
+        return Fail ("No target in the receipt is the declared $ExpectedPackageName " +
+            "$ExpectedPackageVersion patched without -f; it only records $ran.")
     }
 
     # A PowerShell function that returns an empty array hands back nothing, so an allowlist with
