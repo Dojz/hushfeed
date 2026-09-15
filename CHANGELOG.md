@@ -1,5 +1,7 @@
 ## Unreleased
 
+* New patch, Keep the Favorites tab, on by default. Two people found the Favorites tab on their profile empty after patching (issue #4): the tab was there, the saved videos were not. TikTok's server can put an account into an experiment that skips building that tab's pages, and forcing either of the two gates behind it on the test phone produced the reporters' page exactly. The patch answers those two reads with the values that keep the tab, the diagnostic report says when it did, and the switch is in Settings, Interface if you'd rather see what the server sends.
+
 * AMOLED dark theme now rewrites the theme style values behind the comments sheet and the share sheet, and one more page background colour. Both sheets are painted from style values that never go through the colour table the patch rewrote, which is why they stayed TikTok's grey with the patch on. Only dark values are touched, so the light theme keeps its white sheets.
 
 * The feed filter table in the diagnostic report gives the profile detail pager's ad event a line of its own. It used to share the profile grid's line, so a report about an ad seen while watching videos from a profile (issue #2) couldn't say whether that route ran at all or what it took out.

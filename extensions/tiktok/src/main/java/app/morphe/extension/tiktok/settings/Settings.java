@@ -389,6 +389,8 @@ public class Settings extends BaseSettings {
             new BooleanSetting("hide_feed_follow_button", FALSE, true);
     public static final BooleanSetting HIDE_FEED_SAVE_BUTTON =
             new BooleanSetting("hide_feed_save_button", FALSE, true);
+    public static final BooleanSetting KEEP_FAVORITES_TAB =
+            new BooleanSetting("keep_favorites_tab", TRUE, true);
     public static final BooleanSetting HIDE_FEED_SEARCH_BUTTON =
             new BooleanSetting("hide_feed_search_button", FALSE, true);
     public static final BooleanSetting HIDE_VISUAL_SEARCH = new BooleanSetting("hide_visual_search", FALSE);

@@ -451,6 +451,7 @@ Invalid SIM preset,Invalid SIM preset
 Keep a local record of what you have watched and drop those videos from later feed pages.,Keep a local record of what you have watched and drop those videos from later feed pages.
 "Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this. Then use this switch to turn it off.","Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this. Then use this switch to turn it off."
 Keep captions in clear display,Keep captions in clear display
+Keep the Favorites tab,Keep the Favorites tab
 Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.,Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.
 Keep the screen's refresh rate,Keep the screen's refresh rate
 "Keep this string to 4,096 characters or fewer.","Keep this string to 4,096 characters or fewer."
@@ -900,6 +901,7 @@ TikTok didn't accept the feedback. Try again later.,TikTok didn't accept the fee
 TikTok refused the follow: %1$s,TikTok refused the follow: %1$s
 TikTok rejected the request to block %1$s,TikTok rejected the request to block %1$s
 TikTok rejected the request to unblock %1$s,TikTok rejected the request to unblock %1$s
+TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.,TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.
 Times you can open the feed anyway,Times you can open the feed anyway
 "Today has moved on, so there is nothing to put back","Today has moved on, so there is nothing to put back"
 Today is back where it was,Today is back where it was

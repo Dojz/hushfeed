@@ -48,7 +48,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildDe() {
-        Map<String, String> table = new HashMap<>(2008);
+        Map<String, String> table = new HashMap<>(2012);
         fillDe0(table);
         fillDe1(table);
         fillDe2(table);
@@ -995,6 +995,8 @@ public final class L10nTranslations {
                 "Den automatischen Weiterlauf aktiviert lassen und TikToks eigene Aktion Auto-Scrollen im Videomenü zeigen, auch wenn dein Konto sie nie hatte. Pausen und offene Dialoge stoppen das Scrollen weiterhin. TikTok neu starten, damit das gilt. Danach mit diesem Schalter wieder ausschalten.");
         table.put("Keep captions in clear display",
                 "Untertitel in der freien Ansicht behalten");
+        table.put("Keep the Favorites tab",
+                "Favoriten-Tab behalten");
         table.put("Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.",
                 "Uhr und Statussymbole ausblenden, solange TikTok geöffnet ist. Wische von oben nach unten, um sie kurz zu sehen.");
         table.put("Keep the screen's refresh rate",
@@ -1049,11 +1051,11 @@ public final class L10nTranslations {
                 "Für dieses Konto geladen");
         table.put("Loaded values are still being read. Try again in a moment.",
                 "Die geladenen Werte werden noch gelesen. Versuche es gleich noch einmal.");
-        table.put("Loaded-value file export failed",
-                "Der Export der geladenen Werte ist fehlgeschlagen");
     }
 
     private static void fillDe8(Map<String, String> table) {
+        table.put("Loaded-value file export failed",
+                "Der Export der geladenen Werte ist fehlgeschlagen");
         table.put("Loaded-value file export failed; cleanup also failed",
                 "Der Export der geladenen Werte ist fehlgeschlagen; auch das Aufräumen ist fehlgeschlagen");
         table.put("Loaded-value file is invalid or too large",
@@ -1172,11 +1174,11 @@ public final class L10nTranslations {
                 "Nichts aufgezeichnet");
         table.put("Not blocked",
                 "Nicht blockiert");
-        table.put("Not interested in this video",
-                "Kein Interesse an diesem Video");
     }
 
     private static void fillDe9(Map<String, String> table) {
+        table.put("Not interested in this video",
+                "Kein Interesse an diesem Video");
         table.put("Not present in the current cache",
                 "Nicht im aktuellen Zwischenspeicher");
         table.put("Not requested in this process yet",
@@ -1295,11 +1297,11 @@ public final class L10nTranslations {
                 "Überschreibungen aktiviert. TikTok neu starten, damit das gilt.");
         table.put("Paid partnerships",
                 "Bezahlte Partnerschaften");
-        table.put("People, shortcuts and sending controls",
-                "Kontakte, Verknüpfungen und Versandoptionen");
     }
 
     private static void fillDe10(Map<String, String> table) {
+        table.put("People, shortcuts and sending controls",
+                "Kontakte, Verknüpfungen und Versandoptionen");
         table.put("Photo",
                 "Foto");
         table.put("Photo and image posts",
@@ -1418,11 +1420,11 @@ public final class L10nTranslations {
                 "Einstellungen zurücksetzen");
         table.put("Restart TikTok to apply %1$d changes",
                 "TikTok neu starten, um %1$d Änderungen anzuwenden");
-        table.put("Restart TikTok to apply this change",
-                "TikTok neu starten, um diese Änderung anzuwenden");
     }
 
     private static void fillDe11(Map<String, String> table) {
+        table.put("Restart TikTok to apply this change",
+                "TikTok neu starten, um diese Änderung anzuwenden");
         table.put("Restart TikTok to apply this.",
                 "TikTok neu starten, damit das gilt.");
         table.put("Restart pending",
@@ -1541,11 +1543,11 @@ public final class L10nTranslations {
                 "Sekunden. Null behält jede Länge. Würde ein ganzer Schwung wegfallen, bleibt das Video, das deinem Limit am nächsten kommt, damit der Feed nicht leer ist.");
         table.put("Seek by",
                 "Sprungweite");
-        table.put("Seek from the edges",
-                "Von den Rändern springen");
     }
 
     private static void fillDe12(Map<String, String> table) {
+        table.put("Seek from the edges",
+                "Von den Rändern springen");
         table.put("Seen video history cleared. Tap again to put it back.",
                 "Verlauf gesehener Videos gelöscht. Tippe erneut, um ihn zurückzuholen.");
         table.put("Seen video history put back",
@@ -1664,11 +1666,11 @@ public final class L10nTranslations {
                 "Jedes neue Video mit deinem Standard starten. Eine manuelle Auswahl gilt, bis das Video wechselt.");
         table.put("Start feature gate recording",
                 "Feature-Gate-Aufzeichnung starten");
-        table.put("Start the day at",
-                "Tag beginnt um");
     }
 
     private static void fillDe13(Map<String, String> table) {
+        table.put("Start the day at",
+                "Tag beginnt um");
         table.put("Start today over",
                 "Heute neu beginnen");
         table.put("Sticker",
@@ -1787,11 +1789,11 @@ public final class L10nTranslations {
                 "Das Lab speichert höchstens %1$s Regeln. Diese Änderung würde %2$s ergeben, daher wurde nichts geändert.");
         table.put("The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.",
                 "Der Katalog nennt für diesen Schlüssel %1$s, diese Überschreibung ist %2$s. Setze die Überschreibung zurück und leg eine neue an.");
-        table.put("The destination contains an invalid folder name",
-                "Im Zielpfad steht ein unzulässiger Ordnername");
     }
 
     private static void fillDe14(Map<String, String> table) {
+        table.put("The destination contains an invalid folder name",
+                "Im Zielpfad steht ein unzulässiger Ordnername");
         table.put("The diagnostic report could not be exported.",
                 "Der Diagnosebericht ließ sich nicht exportieren.");
         table.put("The diagnostic report could not be saved yet. Try again in a moment.",
@@ -1910,13 +1912,15 @@ public final class L10nTranslations {
                 "TikTok hat dieser Einstellung noch kein Objekt zum Ändern übergeben. Öffne den Teil der App, der sie verwendet, und komm dann zurück.");
         table.put("TikTok refused the follow: %1$s",
                 "TikTok hat das Folgen abgelehnt: %1$s");
-        table.put("TikTok rejected the request to block %1$s",
-                "TikTok hat die Anfrage zum Blockieren von %1$s abgelehnt");
     }
 
     private static void fillDe15(Map<String, String> table) {
+        table.put("TikTok rejected the request to block %1$s",
+                "TikTok hat die Anfrage zum Blockieren von %1$s abgelehnt");
         table.put("TikTok rejected the request to unblock %1$s",
                 "TikTok hat die Anfrage zum Entblocken von %1$s abgelehnt");
+        table.put("TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.",
+                "TikToks Server kann ein Konto in ein Experiment stecken, das den Favoriten-Tab im Profil leert. Behält den Tab und seine gespeicherten Videos.");
         table.put("Times you can open the feed anyway",
                 "Wie oft du den Feed trotzdem öffnen kannst");
         table.put("Today has moved on, so there is nothing to put back",
@@ -2031,13 +2035,13 @@ public final class L10nTranslations {
                 "Video (MP4)");
         table.put("Video destination",
                 "Speicherort für Videos");
+    }
+
+    private static void fillDe16(Map<String, String> table) {
         table.put("Video download quality",
                 "Qualität für Video-Downloads");
         table.put("Video filename",
                 "Dateiname für Videos");
-    }
-
-    private static void fillDe16(Map<String, String> table) {
         table.put("Video playback quality",
                 "Wiedergabequalität");
         table.put("Video saved",
@@ -2129,7 +2133,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildEs() {
-        Map<String, String> table = new HashMap<>(2008);
+        Map<String, String> table = new HashMap<>(2012);
         fillEs0(table);
         fillEs1(table);
         fillEs2(table);
@@ -3076,6 +3080,8 @@ public final class L10nTranslations {
                 "Mantener el avance automático activado y mostrar la acción Desplazamiento automático de TikTok en el panel del vídeo aunque tu cuenta nunca la haya tenido. Las pausas y los diálogos abiertos siguen deteniendo el desplazamiento. Reinicia TikTok para que se aplique. Luego usa este interruptor para desactivarlo.");
         table.put("Keep captions in clear display",
                 "Mantener los subtítulos con los controles ocultos");
+        table.put("Keep the Favorites tab",
+                "Mantener la pestaña Favoritos");
         table.put("Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.",
                 "Mantener el reloj y los iconos de estado fuera de la pantalla mientras TikTok está abierto. Desliza desde arriba para verlos.");
         table.put("Keep the screen's refresh rate",
@@ -3130,11 +3136,11 @@ public final class L10nTranslations {
                 "Cargado para esta cuenta");
         table.put("Loaded values are still being read. Try again in a moment.",
                 "Los valores cargados aún se están leyendo. Inténtalo de nuevo en un momento.");
-        table.put("Loaded-value file export failed",
-                "Ha fallado la exportación de los valores cargados");
     }
 
     private static void fillEs8(Map<String, String> table) {
+        table.put("Loaded-value file export failed",
+                "Ha fallado la exportación de los valores cargados");
         table.put("Loaded-value file export failed; cleanup also failed",
                 "Ha fallado la exportación de los valores cargados y la limpieza también");
         table.put("Loaded-value file is invalid or too large",
@@ -3253,11 +3259,11 @@ public final class L10nTranslations {
                 "Nada registrado");
         table.put("Not blocked",
                 "Sin bloquear");
-        table.put("Not interested in this video",
-                "No me interesa este vídeo");
     }
 
     private static void fillEs9(Map<String, String> table) {
+        table.put("Not interested in this video",
+                "No me interesa este vídeo");
         table.put("Not present in the current cache",
                 "No está en la caché actual");
         table.put("Not requested in this process yet",
@@ -3376,11 +3382,11 @@ public final class L10nTranslations {
                 "Sustituciones activadas. Reinicia TikTok para que se aplique.");
         table.put("Paid partnerships",
                 "Colaboraciones pagadas");
-        table.put("People, shortcuts and sending controls",
-                "Personas, atajos y controles de envío");
     }
 
     private static void fillEs10(Map<String, String> table) {
+        table.put("People, shortcuts and sending controls",
+                "Personas, atajos y controles de envío");
         table.put("Photo",
                 "Foto");
         table.put("Photo and image posts",
@@ -3499,11 +3505,11 @@ public final class L10nTranslations {
                 "Reiniciar los ajustes");
         table.put("Restart TikTok to apply %1$d changes",
                 "Reinicia TikTok para aplicar %1$d cambios");
-        table.put("Restart TikTok to apply this change",
-                "Reinicia TikTok para aplicar este cambio");
     }
 
     private static void fillEs11(Map<String, String> table) {
+        table.put("Restart TikTok to apply this change",
+                "Reinicia TikTok para aplicar este cambio");
         table.put("Restart TikTok to apply this.",
                 "Reinicia TikTok para que se aplique.");
         table.put("Restart pending",
@@ -3622,11 +3628,11 @@ public final class L10nTranslations {
                 "Segundos. Cero acepta cualquier duración. Si un lote entero se fuera a filtrar, se deja el vídeo más cercano a tu límite para que el feed no quede vacío.");
         table.put("Seek by",
                 "Avanzar");
-        table.put("Seek from the edges",
-                "Avanzar desde los bordes");
     }
 
     private static void fillEs12(Map<String, String> table) {
+        table.put("Seek from the edges",
+                "Avanzar desde los bordes");
         table.put("Seen video history cleared. Tap again to put it back.",
                 "Historial de vídeos vistos borrado. Toca otra vez para recuperarlo.");
         table.put("Seen video history put back",
@@ -3745,11 +3751,11 @@ public final class L10nTranslations {
                 "Empezar cada vídeo nuevo con tu velocidad predeterminada. Una elección manual dura hasta que cambia el vídeo.");
         table.put("Start feature gate recording",
                 "Empezar a grabar los interruptores");
-        table.put("Start the day at",
-                "Empezar el día a las");
     }
 
     private static void fillEs13(Map<String, String> table) {
+        table.put("Start the day at",
+                "Empezar el día a las");
         table.put("Start today over",
                 "Empezar hoy de nuevo");
         table.put("Sticker",
@@ -3868,11 +3874,11 @@ public final class L10nTranslations {
                 "El Lab admite como máximo %1$s reglas. Este cambio daría un total de %2$s, así que no se cambió nada.");
         table.put("The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.",
                 "El catálogo dice que esta clave es %1$s y esta anulación es %2$s. Restablece la anulación y crea una nueva.");
-        table.put("The destination contains an invalid folder name",
-                "El destino contiene un nombre de carpeta no válido");
     }
 
     private static void fillEs14(Map<String, String> table) {
+        table.put("The destination contains an invalid folder name",
+                "El destino contiene un nombre de carpeta no válido");
         table.put("The diagnostic report could not be exported.",
                 "No se pudo exportar el informe de diagnóstico.");
         table.put("The diagnostic report could not be saved yet. Try again in a moment.",
@@ -3991,13 +3997,15 @@ public final class L10nTranslations {
                 "TikTok todavía no le ha dado a este ajuste un objeto que cambiar. Abre la parte de la app que lo usa y vuelve aquí.");
         table.put("TikTok refused the follow: %1$s",
                 "TikTok rechazó el seguimiento: %1$s");
-        table.put("TikTok rejected the request to block %1$s",
-                "TikTok rechazó la solicitud de bloquear a %1$s");
     }
 
     private static void fillEs15(Map<String, String> table) {
+        table.put("TikTok rejected the request to block %1$s",
+                "TikTok rechazó la solicitud de bloquear a %1$s");
         table.put("TikTok rejected the request to unblock %1$s",
                 "TikTok rechazó la solicitud de desbloquear a %1$s");
+        table.put("TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.",
+                "El servidor de TikTok puede meter una cuenta en un experimento que vacía la pestaña Favoritos de tu perfil. Mantiene la pestaña y sus vídeos guardados.");
         table.put("Times you can open the feed anyway",
                 "Veces que puedes abrir el feed de todas formas");
         table.put("Today has moved on, so there is nothing to put back",
@@ -4112,13 +4120,13 @@ public final class L10nTranslations {
                 "Vídeo (MP4)");
         table.put("Video destination",
                 "Destino de los vídeos");
+    }
+
+    private static void fillEs16(Map<String, String> table) {
         table.put("Video download quality",
                 "Calidad de descarga del vídeo");
         table.put("Video filename",
                 "Nombre de archivo del vídeo");
-    }
-
-    private static void fillEs16(Map<String, String> table) {
         table.put("Video playback quality",
                 "Calidad de reproducción del vídeo");
         table.put("Video saved",
@@ -4210,7 +4218,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIn() {
-        Map<String, String> table = new HashMap<>(2008);
+        Map<String, String> table = new HashMap<>(2012);
         fillIn0(table);
         fillIn1(table);
         fillIn2(table);
@@ -5157,6 +5165,8 @@ public final class L10nTranslations {
                 "Biarkan lanjut otomatis tetap aktif dan tampilkan aksi Auto scroll milik TikTok di panel video meski akun Anda tidak pernah punya. Jeda dan dialog terbuka tetap menghentikan guliran. Mulai ulang TikTok agar berlaku. Lalu pakai sakelar ini untuk mematikannya.");
         table.put("Keep captions in clear display",
                 "Pertahankan keterangan saat tampilan bersih");
+        table.put("Keep the Favorites tab",
+                "Pertahankan tab Favorit");
         table.put("Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.",
                 "Sembunyikan jam dan ikon status selama TikTok terbuka. Geser dari atas untuk mengintipnya.");
         table.put("Keep the screen's refresh rate",
@@ -5211,11 +5221,11 @@ public final class L10nTranslations {
                 "Dimuat untuk akun ini");
         table.put("Loaded values are still being read. Try again in a moment.",
                 "Nilai yang dimuat masih dibaca. Coba lagi sebentar lagi.");
-        table.put("Loaded-value file export failed",
-                "Ekspor berkas nilai yang dimuat gagal");
     }
 
     private static void fillIn8(Map<String, String> table) {
+        table.put("Loaded-value file export failed",
+                "Ekspor berkas nilai yang dimuat gagal");
         table.put("Loaded-value file export failed; cleanup also failed",
                 "Ekspor berkas nilai yang dimuat gagal; pembersihannya juga gagal");
         table.put("Loaded-value file is invalid or too large",
@@ -5334,11 +5344,11 @@ public final class L10nTranslations {
                 "Tidak ada yang tercatat");
         table.put("Not blocked",
                 "Tidak diblokir");
-        table.put("Not interested in this video",
-                "Tidak tertarik dengan video ini");
     }
 
     private static void fillIn9(Map<String, String> table) {
+        table.put("Not interested in this video",
+                "Tidak tertarik dengan video ini");
         table.put("Not present in the current cache",
                 "Tidak ada di cache saat ini");
         table.put("Not requested in this process yet",
@@ -5457,11 +5467,11 @@ public final class L10nTranslations {
                 "Penggantian diaktifkan. Mulai ulang TikTok agar berlaku.");
         table.put("Paid partnerships",
                 "Kemitraan berbayar");
-        table.put("People, shortcuts and sending controls",
-                "Orang, pintasan, dan kontrol pengiriman");
     }
 
     private static void fillIn10(Map<String, String> table) {
+        table.put("People, shortcuts and sending controls",
+                "Orang, pintasan, dan kontrol pengiriman");
         table.put("Photo",
                 "Foto");
         table.put("Photo and image posts",
@@ -5580,11 +5590,11 @@ public final class L10nTranslations {
                 "Setel ulang pengaturan");
         table.put("Restart TikTok to apply %1$d changes",
                 "Mulai ulang TikTok untuk menerapkan %1$d perubahan");
-        table.put("Restart TikTok to apply this change",
-                "Mulai ulang TikTok untuk menerapkan perubahan ini");
     }
 
     private static void fillIn11(Map<String, String> table) {
+        table.put("Restart TikTok to apply this change",
+                "Mulai ulang TikTok untuk menerapkan perubahan ini");
         table.put("Restart TikTok to apply this.",
                 "Mulai ulang TikTok agar berlaku.");
         table.put("Restart pending",
@@ -5703,11 +5713,11 @@ public final class L10nTranslations {
                 "Detik. Nol menyimpan semua durasi. Kalau satu batch penuh akan tersaring habis, video yang paling dekat dengan batasmu tetap ada agar feed tidak kosong.");
         table.put("Seek by",
                 "Jarak lompatan");
-        table.put("Seek from the edges",
-                "Lompat dari tepi layar");
     }
 
     private static void fillIn12(Map<String, String> table) {
+        table.put("Seek from the edges",
+                "Lompat dari tepi layar");
         table.put("Seen video history cleared. Tap again to put it back.",
                 "Riwayat video yang sudah ditonton dihapus. Ketuk lagi untuk mengembalikannya.");
         table.put("Seen video history put back",
@@ -5826,11 +5836,11 @@ public final class L10nTranslations {
                 "Mulai tiap video baru pada kecepatan pilihanmu. Pilihan manual bertahan sampai videonya berganti.");
         table.put("Start feature gate recording",
                 "Mulai merekam feature gate");
-        table.put("Start the day at",
-                "Hari dimulai pukul");
     }
 
     private static void fillIn13(Map<String, String> table) {
+        table.put("Start the day at",
+                "Hari dimulai pukul");
         table.put("Start today over",
                 "Mulai ulang hari ini");
         table.put("Sticker",
@@ -5949,11 +5959,11 @@ public final class L10nTranslations {
                 "Lab menyimpan paling banyak %1$s aturan. Perubahan ini akan membuat jumlahnya %2$s, jadi tidak ada yang diubah.");
         table.put("The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.",
                 "Katalog menyebut kunci ini %1$s dan penimpaan ini %2$s. Setel ulang penimpaan lalu buat yang baru.");
-        table.put("The destination contains an invalid folder name",
-                "Ada nama folder yang tidak sah di tujuannya");
     }
 
     private static void fillIn14(Map<String, String> table) {
+        table.put("The destination contains an invalid folder name",
+                "Ada nama folder yang tidak sah di tujuannya");
         table.put("The diagnostic report could not be exported.",
                 "Laporan diagnostik tidak bisa diekspor.");
         table.put("The diagnostic report could not be saved yet. Try again in a moment.",
@@ -6072,13 +6082,15 @@ public final class L10nTranslations {
                 "TikTok belum memberi setelan ini objek untuk diubah. Buka bagian aplikasi yang memakainya, lalu kembali ke sini.");
         table.put("TikTok refused the follow: %1$s",
                 "TikTok menolak permintaan mengikuti: %1$s");
-        table.put("TikTok rejected the request to block %1$s",
-                "TikTok menolak permintaan untuk memblokir %1$s");
     }
 
     private static void fillIn15(Map<String, String> table) {
+        table.put("TikTok rejected the request to block %1$s",
+                "TikTok menolak permintaan untuk memblokir %1$s");
         table.put("TikTok rejected the request to unblock %1$s",
                 "TikTok menolak permintaan untuk membuka blokir %1$s");
+        table.put("TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.",
+                "Server TikTok bisa memasukkan akun ke eksperimen yang mengosongkan tab Favorit di profil Anda. Pertahankan tab itu beserta video yang tersimpan.");
         table.put("Times you can open the feed anyway",
                 "Berapa kali kamu bisa tetap membuka feed");
         table.put("Today has moved on, so there is nothing to put back",
@@ -6193,13 +6205,13 @@ public final class L10nTranslations {
                 "Video (MP4)");
         table.put("Video destination",
                 "Lokasi simpan video");
+    }
+
+    private static void fillIn16(Map<String, String> table) {
         table.put("Video download quality",
                 "Kualitas unduhan video");
         table.put("Video filename",
                 "Nama berkas video");
-    }
-
-    private static void fillIn16(Map<String, String> table) {
         table.put("Video playback quality",
                 "Kualitas pemutaran video");
         table.put("Video saved",
@@ -6291,7 +6303,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildPt_rBR() {
-        Map<String, String> table = new HashMap<>(2008);
+        Map<String, String> table = new HashMap<>(2012);
         fillPt_rBR0(table);
         fillPt_rBR1(table);
         fillPt_rBR2(table);
@@ -7238,6 +7250,8 @@ public final class L10nTranslations {
                 "Manter o avanço automático ligado e mostrar a ação Rolagem automática do TikTok no painel do vídeo mesmo que sua conta nunca tenha tido. Pausas e diálogos abertos continuam parando a rolagem. Reinicie o TikTok para aplicar. Depois use esta chave para desligar.");
         table.put("Keep captions in clear display",
                 "Manter as legendas com a tela limpa");
+        table.put("Keep the Favorites tab",
+                "Manter a aba Favoritos");
         table.put("Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.",
                 "Manter o relógio e os ícones de status fora da tela enquanto o TikTok está aberto. Deslize de cima para dar uma olhada.");
         table.put("Keep the screen's refresh rate",
@@ -7292,11 +7306,11 @@ public final class L10nTranslations {
                 "Carregado para esta conta");
         table.put("Loaded values are still being read. Try again in a moment.",
                 "Os valores carregados ainda estão sendo lidos. Tente novamente em instantes.");
-        table.put("Loaded-value file export failed",
-                "A exportação do arquivo de valores carregados falhou");
     }
 
     private static void fillPt_rBR8(Map<String, String> table) {
+        table.put("Loaded-value file export failed",
+                "A exportação do arquivo de valores carregados falhou");
         table.put("Loaded-value file export failed; cleanup also failed",
                 "A exportação do arquivo de valores carregados falhou e a limpeza também");
         table.put("Loaded-value file is invalid or too large",
@@ -7415,11 +7429,11 @@ public final class L10nTranslations {
                 "Nada registrado");
         table.put("Not blocked",
                 "Não bloqueado");
-        table.put("Not interested in this video",
-                "Não tenho interesse neste vídeo");
     }
 
     private static void fillPt_rBR9(Map<String, String> table) {
+        table.put("Not interested in this video",
+                "Não tenho interesse neste vídeo");
         table.put("Not present in the current cache",
                 "Não está no cache atual");
         table.put("Not requested in this process yet",
@@ -7538,11 +7552,11 @@ public final class L10nTranslations {
                 "Substituições ativadas. Reinicie o TikTok para aplicar.");
         table.put("Paid partnerships",
                 "Parcerias pagas");
-        table.put("People, shortcuts and sending controls",
-                "Pessoas, atalhos e controles de envio");
     }
 
     private static void fillPt_rBR10(Map<String, String> table) {
+        table.put("People, shortcuts and sending controls",
+                "Pessoas, atalhos e controles de envio");
         table.put("Photo",
                 "Foto");
         table.put("Photo and image posts",
@@ -7661,11 +7675,11 @@ public final class L10nTranslations {
                 "Redefinir as configurações");
         table.put("Restart TikTok to apply %1$d changes",
                 "Reinicie o TikTok para aplicar %1$d alterações");
-        table.put("Restart TikTok to apply this change",
-                "Reinicie o TikTok para aplicar esta alteração");
     }
 
     private static void fillPt_rBR11(Map<String, String> table) {
+        table.put("Restart TikTok to apply this change",
+                "Reinicie o TikTok para aplicar esta alteração");
         table.put("Restart TikTok to apply this.",
                 "Reinicie o TikTok para aplicar.");
         table.put("Restart pending",
@@ -7784,11 +7798,11 @@ public final class L10nTranslations {
                 "Segundos. Zero aceita qualquer duração. Se um lote inteiro fosse filtrado, o vídeo mais perto do seu limite fica para o feed não ficar vazio.");
         table.put("Seek by",
                 "Avançar");
-        table.put("Seek from the edges",
-                "Avançar pelas bordas");
     }
 
     private static void fillPt_rBR12(Map<String, String> table) {
+        table.put("Seek from the edges",
+                "Avançar pelas bordas");
         table.put("Seen video history cleared. Tap again to put it back.",
                 "Histórico de vídeos vistos limpo. Toque de novo para trazer de volta.");
         table.put("Seen video history put back",
@@ -7907,11 +7921,11 @@ public final class L10nTranslations {
                 "Começar cada vídeo novo na sua velocidade padrão. Uma escolha manual dura até o vídeo mudar.");
         table.put("Start feature gate recording",
                 "Começar a gravar os gates");
-        table.put("Start the day at",
-                "Começar o dia às");
     }
 
     private static void fillPt_rBR13(Map<String, String> table) {
+        table.put("Start the day at",
+                "Começar o dia às");
         table.put("Start today over",
                 "Recomeçar o dia de hoje");
         table.put("Sticker",
@@ -8030,11 +8044,11 @@ public final class L10nTranslations {
                 "O Lab mantém no máximo %1$s regras. Esta alteração resultaria em %2$s, então nada foi alterado.");
         table.put("The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.",
                 "O catálogo diz que esta chave é %1$s e esta substituição é %2$s. Redefina a substituição e crie uma nova.");
-        table.put("The destination contains an invalid folder name",
-                "O destino tem um nome de pasta inválido");
     }
 
     private static void fillPt_rBR14(Map<String, String> table) {
+        table.put("The destination contains an invalid folder name",
+                "O destino tem um nome de pasta inválido");
         table.put("The diagnostic report could not be exported.",
                 "O relatório de diagnóstico não pôde ser exportado.");
         table.put("The diagnostic report could not be saved yet. Try again in a moment.",
@@ -8153,13 +8167,15 @@ public final class L10nTranslations {
                 "O TikTok ainda não entregou a esta configuração um objeto para alterar. Abra a parte do app que a usa e volte aqui.");
         table.put("TikTok refused the follow: %1$s",
                 "O TikTok recusou o seguir: %1$s");
-        table.put("TikTok rejected the request to block %1$s",
-                "O TikTok rejeitou a solicitação para bloquear %1$s");
     }
 
     private static void fillPt_rBR15(Map<String, String> table) {
+        table.put("TikTok rejected the request to block %1$s",
+                "O TikTok rejeitou a solicitação para bloquear %1$s");
         table.put("TikTok rejected the request to unblock %1$s",
                 "O TikTok rejeitou a solicitação para desbloquear %1$s");
+        table.put("TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.",
+                "O servidor do TikTok pode colocar uma conta em um experimento que esvazia a aba Favoritos do seu perfil. Mantém a aba e os vídeos salvos nela.");
         table.put("Times you can open the feed anyway",
                 "Vezes que você pode abrir o feed mesmo assim");
         table.put("Today has moved on, so there is nothing to put back",
@@ -8274,13 +8290,13 @@ public final class L10nTranslations {
                 "Vídeo (MP4)");
         table.put("Video destination",
                 "Destino dos vídeos");
+    }
+
+    private static void fillPt_rBR16(Map<String, String> table) {
         table.put("Video download quality",
                 "Qualidade de download do vídeo");
         table.put("Video filename",
                 "Nome do arquivo do vídeo");
-    }
-
-    private static void fillPt_rBR16(Map<String, String> table) {
         table.put("Video playback quality",
                 "Qualidade de reprodução do vídeo");
         table.put("Video saved",

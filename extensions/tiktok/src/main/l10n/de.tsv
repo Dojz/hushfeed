@@ -18,6 +18,7 @@ Current: %1$s	Aktuell: %1$s
 Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.	Das Menü leeren, das sich beim langen Drücken des TikTok-Symbols auf dem Startbildschirm öffnet. Wird dies ausgeschaltet, wird TikTok gebeten, sie wieder aufzubauen. Ein Tippen auf das Symbol öffnet die App weiterhin, und eine selbst angeheftete Verknüpfung bleibt dort, wo sie abgelegt wurde.
 Full comment sort options	Vollständige Sortieroptionen für Kommentare
 Hide the launcher shortcuts	Launcher-Verknüpfungen ausblenden
+Keep the Favorites tab	Favoriten-Tab behalten
 Link copied	Link kopiert
 No videos remained after Hushfeed applied your feed filters to one batch. Most matches: %1$s.	Nach Hushfeeds Feed-Filtern blieb in einem Stapel kein Video übrig. Häufigste Treffer: %1$s.
 Not blocked	Nicht blockiert
@@ -53,6 +54,7 @@ That is one minute today	Das ist eine Minute heute
 That is one video today	Das ist ein Video heute
 This video has no link to copy	Dieses Video hat keinen Link zum Kopieren
 This video has no sound of its own	Dieses Video hat keinen eigenen Sound
+TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.	TikToks Server kann ein Konto in ein Experiment stecken, das den Favoriten-Tab im Profil leert. Behält den Tab und seine gespeicherten Videos.
 Unblock this commenter	Blockierung dieses Kommentierenden aufheben
 Zero means no limit. Counts the videos Hushfeed advanced past for you, not the ones you swiped yourself, and starts again when the feed is rebuilt or you change this number.	Null bedeutet kein Limit. Zählt die Videos, die Hushfeed für dich weitergeschaltet hat, nicht die, die du selbst weggewischt hast, und beginnt neu, wenn der Feed neu aufgebaut wird oder du diese Zahl änderst.
 Auto translate comments	Kommentare automatisch übersetzen
