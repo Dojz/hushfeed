@@ -191,6 +191,15 @@ public final class FeedItemsFilter {
     }
 
     /**
+     * The ad event the profile detail pager raises for its own list. It used to share the
+     * profile line, so an ad reported from that pager (issue #2) could not be told from one on
+     * the grid; a line of its own says whether the pager's route ran and what it took out.
+     */
+    public static List filterProfileDetailAds(List items) {
+        return filterAdOnlyAwemeList("ProfileDetailAdEvent", items);
+    }
+
+    /**
      * The Top and Videos grids on the search page. Their cards are not Awemes, so the app's
      * own verdict on each one is the reliable test, with the wrapped video checked as well
      * for anything the card itself does not admit to.

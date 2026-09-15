@@ -1,5 +1,7 @@
 ## Unreleased
 
+* The feed filter table in the diagnostic report gives the profile detail pager's ad event a line of its own. It used to share the profile grid's line, so a report about an ad seen while watching videos from a profile (issue #2) couldn't say whether that route ran at all or what it took out.
+
 * The diagnostic report now says which playback quality gear was picked and from what. The gear-list path was silent, so a report from a phone whose model strings come back empty (issue #3) couldn't say whether a gear was chosen and then ignored or never offered at all. Hook status lists the gear list getter, and one line per distinct choice names the mode, the gear it settled on and every gear it had to choose from.
 
 * The diagnostic report's feed filter table now counts a profile list or a late insertion that arrived empty. A report from a phone showing an empty Favorites tab used to carry no profile line at all, which read the same as the hook never running, so it couldn't say whether TikTok asked for the list and got nothing back or never asked.

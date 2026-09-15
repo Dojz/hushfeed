@@ -100,6 +100,18 @@ public class FeedFilterCountersTest {
         assertEquals("FeedInsertion:top_view: 1 lists, 0 items, 0 removed", lineFor("FeedInsertion:top_view"));
     }
 
+    @Test public void theDetailPagersAdEventHasALineOfItsOwn() {
+        // Issue #2 is an ad seen while paging videos opened from a profile. That pager raises
+        // its own ad event, and while it shared the grid's line nothing in a report could say
+        // whether the pager's route ran at all.
+        FeedItemsFilter.filterProfileAds(profileList(3, 0));
+        FeedItemsFilter.filterProfileDetailAds(profileList(2, 1));
+
+        assertEquals("ProfileAwemeList: 1 lists, 3 items, 0 removed", lineFor("ProfileAwemeList"));
+        String detail = lineFor("ProfileDetailAdEvent");
+        assertTrue(detail, detail.startsWith("ProfileDetailAdEvent: 1 lists, 3 items, 1 removed"));
+    }
+
     @Test public void aRouteThatRemovesSomethingSaysSoAndNamesAReason() {
         FeedItemsFilter.filterProfileAds(profileList(2, 1));
 
