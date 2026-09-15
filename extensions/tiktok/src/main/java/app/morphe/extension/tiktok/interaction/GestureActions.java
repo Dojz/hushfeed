@@ -187,8 +187,15 @@ public final class GestureActions {
         if (text == null || text.isEmpty()) return false;
         Context context = Utils.getContext();
         if (context == null) return false;
+        // Asked once and used once. Checking one call and letting the helper make its own
+        // would be a guard over a different answer than the one that gets dereferenced.
         if (context.getSystemService(Context.CLIPBOARD_SERVICE) == null) return false;
-        Utils.setClipboard(context, label, text);
+        try {
+            Utils.setClipboard(context, label, text);
+        } catch (RuntimeException unavailable) {
+            Logger.printException(() -> "Could not put " + label + " on the clipboard", unavailable);
+            return false;
+        }
         return true;
     }
 
