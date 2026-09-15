@@ -8,7 +8,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
@@ -350,11 +349,10 @@ public final class SessionLockOverlay {
         // A radius from the scale. It was 24 on a 48dp control, which is a pill, and it was the
         // only pill in the bundle: the four feed controls and the budget cue it sits beside all
         // read as rounded rectangles.
-        GradientDrawable releaseBackground = new GradientDrawable();
-        releaseBackground.setShape(GradientDrawable.RECTANGLE);
-        releaseBackground.setCornerRadius(SettingsUi.dp(activity, SettingsUi.RADIUS_OVERLAY));
-        releaseBackground.setColor(Color.argb(70, 255, 255, 255));
-        release.setBackground(releaseBackground);
+        // The press and focus states every control this bundle draws now carries. It was a flat
+        // fill that looked the same before, during and after a press.
+        release.setBackground(SettingsUi.overlayControl(activity, SettingsUi.RADIUS_OVERLAY));
+        release.setFocusable(true);
         int padding = SettingsUi.dp(activity, 20);
         release.setPadding(padding, SettingsUi.dp(activity, 14), padding, SettingsUi.dp(activity, 14));
         release.setMinimumHeight(SettingsUi.dp(activity, 48));
@@ -395,6 +393,8 @@ public final class SessionLockOverlay {
         messages.setPadding(padding, SettingsUi.dp(activity, 12), padding,
                 SettingsUi.dp(activity, 12));
         messages.setMinimumHeight(SettingsUi.dp(activity, 48));
+        messages.setBackground(SettingsUi.overlayAction(activity, SettingsUi.RADIUS_OVERLAY));
+        messages.setFocusable(true);
         LinearLayout.LayoutParams messagesParams = new LinearLayout.LayoutParams(-2, -2);
         messagesParams.topMargin = SettingsUi.dp(activity, 8);
         messages.setLayoutParams(messagesParams);

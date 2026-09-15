@@ -19,6 +19,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
@@ -519,6 +520,59 @@ public final class SettingsUi {
         chip.setColor(OVERLAY_SCRIM);
         chip.setStroke(Math.max(1, dp(context, 1)), OVERLAY_HAIRLINE);
         return chip;
+    }
+
+    /**
+     * A control drawn over a video, with the press and focus states the settings rows have.
+     *
+     * <p>Every control this bundle draws inside TikTok looked identical before, during and after
+     * a press, and showed nothing at all to a reader moving with a keyboard, a d-pad or switch
+     * access. The block button was the only one that changed, and only by fading the whole chip
+     * to 40 percent while a request was in flight.
+     *
+     * <p>The ring is a stroke that is only coloured while the control has focus, so one drawable
+     * carries both states and there is no second copy of the chip to keep in step.
+     *
+     * @param glyph drawn over the backdrop, or null. The block button's ring is drawn rather than
+     *              typed, because the font TikTok is using may not carry the character.
+     */
+    public static Drawable overlayControl(Context context, int radiusDp, Drawable glyph) {
+        return overlayControl(context, radiusDp, glyph, overlayChip(context, radiusDp));
+    }
+
+    public static Drawable overlayControl(Context context, int radiusDp) {
+        return overlayControl(context, radiusDp, null);
+    }
+
+    /**
+     * The same press and focus states for a control that sits on TikTok's own surface.
+     *
+     * <p>Undo, Inbox Clear all and Save media are drawn on a sheet the host painted, so they take
+     * no scrim of their own: a backdrop would make them look like something dropped onto the
+     * page rather than part of it.
+     */
+    public static Drawable overlayAction(Context context, int radiusDp) {
+        return overlayControl(context, radiusDp, null, new ColorDrawable(Color.TRANSPARENT));
+    }
+
+    private static Drawable overlayControl(Context context, int radiusDp, Drawable glyph,
+            Drawable backdrop) {
+        GradientDrawable ring = new GradientDrawable();
+        ring.setShape(GradientDrawable.RECTANGLE);
+        ring.setCornerRadius(dp(context, radiusDp));
+        ring.setStroke(Math.max(2, dp(context, 2)), new ColorStateList(
+                new int[][]{new int[]{android.R.attr.state_focused}, new int[0]},
+                new int[]{OVERLAY_TEXT, Color.TRANSPARENT}));
+
+        Drawable content = glyph == null
+                ? new LayerDrawable(new Drawable[]{backdrop, ring})
+                : new LayerDrawable(new Drawable[]{backdrop, glyph, ring});
+
+        GradientDrawable mask = new GradientDrawable();
+        mask.setShape(GradientDrawable.RECTANGLE);
+        mask.setCornerRadius(dp(context, radiusDp));
+        mask.setColor(Color.WHITE);
+        return new RippleDrawable(ColorStateList.valueOf(OVERLAY_HAIRLINE), content, mask);
     }
 
     public static void styleDialog(Dialog dialog) {

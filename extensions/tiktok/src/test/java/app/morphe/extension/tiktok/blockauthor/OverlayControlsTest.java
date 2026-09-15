@@ -47,8 +47,8 @@ public class OverlayControlsTest {
         Method factory = BlockAuthorOverlay.class.getDeclaredMethod("createButton", Activity.class);
         factory.setAccessible(true);
         View button = (View) factory.invoke(null, activity);
-        android.graphics.drawable.LayerDrawable layers =
-                (android.graphics.drawable.LayerDrawable) button.getBackground();
+        // The backdrop, the glyph and the focus ring, under the ripple that carries the press.
+        android.graphics.drawable.LayerDrawable layers = contentOf(button.getBackground());
         assertTrue(layers.getDrawable(1) instanceof BlockGlyphDrawable);
         int size = View.MeasureSpec.makeMeasureSpec(100, View.MeasureSpec.EXACTLY);
         button.measure(size, size);
@@ -194,13 +194,9 @@ public class OverlayControlsTest {
             // The block button draws its symbol over the disc rather than setting it as text,
             // because the font TikTok is using may not carry it, so its background is a layer
             // list with the disc underneath.
-            android.graphics.drawable.Drawable background = view.getBackground();
-            if (background instanceof android.graphics.drawable.LayerDrawable) {
-                background = ((android.graphics.drawable.LayerDrawable) background)
-                        .getDrawable(0);
-            }
             android.graphics.drawable.GradientDrawable chip =
-                    (android.graphics.drawable.GradientDrawable) background;
+                    (android.graphics.drawable.GradientDrawable) contentOf(view.getBackground())
+                            .getDrawable(0);
             assertEquals(name + " is not the shape the others are",
                     android.graphics.drawable.GradientDrawable.RECTANGLE, chip.getShape());
             assertEquals(name + " is not drawn with the overlay radius the others use",
@@ -565,5 +561,69 @@ public class OverlayControlsTest {
         // And the second banner still goes away on its own time rather than staying forever.
         looper.idleFor(java.time.Duration.ofSeconds(4));
         assertTrue("the banner never went away", root.getChildCount() < withOne);
+    }
+    /**
+     * The part of a control's background that holds the backdrop, any glyph and the focus ring.
+     *
+     * <p>Every control this bundle draws is a RippleDrawable now, so the press is the ripple and
+     * the states live in the layers underneath it. RippleDrawable is itself a LayerDrawable, so
+     * this unwraps exactly one level rather than testing for the type.
+     */
+    private static android.graphics.drawable.LayerDrawable contentOf(
+            android.graphics.drawable.Drawable background) {
+        assertTrue("the control's background is not a ripple, so a press shows nothing: "
+                        + background.getClass().getSimpleName(),
+                background instanceof android.graphics.drawable.RippleDrawable);
+        return (android.graphics.drawable.LayerDrawable)
+                ((android.graphics.drawable.RippleDrawable) background).getDrawable(0);
+    }
+
+    /**
+     * Every control drawn inside TikTok answers a press and shows where the focus is.
+     *
+     * <p>They were flat: the same picture before, during and after a press, and nothing at all
+     * for a reader moving with a keyboard, a d-pad or switch access. The block button was the one
+     * exception and only faded itself to 40 percent while a request was in flight.
+     */
+    @Test public void everyControlDrawnInsideTikTokAnswersAPressAndShowsItsFocus() throws Exception {
+        Activity activity = Robolectric.buildActivity(Activity.class).setup().visible().get();
+        Utils.setContext(activity);
+        Settings.BLOCK_AUTHOR_BUTTON.save(true);
+        Settings.LOCAL_HIDE_BUTTON.save(true);
+        Settings.BLOCK_SOUND_BUTTON.save(true);
+        Settings.NOT_INTERESTED_BUTTON.save(true);
+
+        for (String factoryName : new String[]{"createButton", "createSoundButton",
+                "createLocalHideButton", "createNotInterestedButton"}) {
+            Method factory = BlockAuthorOverlay.class.getDeclaredMethod(factoryName, Activity.class);
+            factory.setAccessible(true);
+            View control = (View) factory.invoke(null, activity);
+            android.graphics.drawable.Drawable background = control.getBackground();
+            contentOf(background);
+
+            int resting = renderOf(background, new int[0]);
+            int focused = renderOf(background, new int[]{android.R.attr.state_focused});
+            assertNotEquals(factoryName + " looks the same focused as it does at rest",
+                    resting, focused);
+        }
+    }
+
+    /**
+     * What the background actually paints in the state given, as one number.
+     *
+     * <p>Every pixel rather than a sample: the difference a focus ring makes is a two pixel
+     * stroke at the edge, and which pixel that lands on depends on the radius and the density.
+     */
+    private static int renderOf(android.graphics.drawable.Drawable background, int[] state) {
+        background.setState(state);
+        background.setBounds(0, 0, 48, 48);
+        Bitmap bitmap = Bitmap.createBitmap(48, 48, Bitmap.Config.ARGB_8888);
+        background.draw(new Canvas(bitmap));
+        int hash = 17;
+        for (int x = 0; x < 48; x++) {
+            for (int y = 0; y < 48; y++) hash = hash * 31 + bitmap.getPixel(x, y);
+        }
+        bitmap.recycle();
+        return hash;
     }
 }

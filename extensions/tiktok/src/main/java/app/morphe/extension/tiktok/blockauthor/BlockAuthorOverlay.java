@@ -344,7 +344,7 @@ public final class BlockAuthorOverlay {
         button.setGravity(Gravity.CENTER);
         button.setContentDescription(L10n.t(activity, "Block this sound"));
 
-        button.setBackground(SettingsUi.overlayChip(activity, SettingsUi.RADIUS_OVERLAY));
+        button.setBackground(SettingsUi.overlayControl(activity, SettingsUi.RADIUS_OVERLAY));
 
         button.setOnClickListener(view -> onBlockSoundTapped());
         installDrag(button);
@@ -359,7 +359,7 @@ public final class BlockAuthorOverlay {
         button.setGravity(Gravity.CENTER);
         button.setContentDescription(L10n.t(activity, "Hide this creator locally"));
 
-        button.setBackground(SettingsUi.overlayChip(activity, SettingsUi.RADIUS_OVERLAY));
+        button.setBackground(SettingsUi.overlayControl(activity, SettingsUi.RADIUS_OVERLAY));
         button.setOnClickListener(view -> onLocalHideTapped());
         installDrag(button);
         return button;
@@ -378,7 +378,7 @@ public final class BlockAuthorOverlay {
         button.setContentDescription(L10n.t(activity, "Not interested in this video"));
         // The same shape and the same scrim as the three it shares the rail with. On a column of
         // four, one control drawn differently reads as a mistake rather than as a distinction.
-        button.setBackground(SettingsUi.overlayChip(activity, SettingsUi.RADIUS_OVERLAY));
+        button.setBackground(SettingsUi.overlayControl(activity, SettingsUi.RADIUS_OVERLAY));
         button.setOnClickListener(view -> NotInterested.submit());
         installDrag(button);
         return button;
@@ -419,12 +419,10 @@ public final class BlockAuthorOverlay {
         button.setGravity(Gravity.CENTER);
         button.setContentDescription(L10n.t(activity, "Block this account"));
 
-        GradientDrawable background = SettingsUi.overlayChip(activity, SettingsUi.RADIUS_OVERLAY);
-
         // The symbol is drawn over the backdrop instead of set as text, because the font
         // TikTok happens to be using may not carry it.
         Drawable glyph = new BlockGlyphDrawable(SettingsUi.OVERLAY_TEXT, SettingsUi.dp(activity, 2));
-        button.setBackground(new LayerDrawable(new Drawable[]{background, glyph}));
+        button.setBackground(SettingsUi.overlayControl(activity, SettingsUi.RADIUS_OVERLAY, glyph));
 
         button.setOnClickListener(view -> onBlockTapped());
         installDrag(button);
@@ -873,6 +871,10 @@ public final class BlockAuthorOverlay {
         undo.setMinimumHeight(SettingsUi.dp(activity, 48));
         undo.setMinimumWidth(SettingsUi.dp(activity, 48));
         undo.setGravity(Gravity.CENTER);
+        // The one way back from a block, on a banner that takes itself away after six seconds,
+        // and it gave no sign at all that it had been pressed or that focus had reached it.
+        undo.setBackground(SettingsUi.overlayAction(activity, SettingsUi.RADIUS_OVERLAY));
+        undo.setFocusable(true);
         SettingsUi.markAsButton(undo);
         undo.setOnClickListener(view -> {
             dismissUndo();
