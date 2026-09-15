@@ -262,11 +262,29 @@ public final class FeatureGateDetailFragment extends Fragment {
             saveObject.setEnabled(editable);
             content.addView(saveObject, FeatureGateLabUi.matchWrap());
         } else if (booleanEntry) {
+            // Two rows, the same as every other type. With one switch doing both jobs, a rule
+            // saved with its override off (which is how an import lands) could only be turned
+            // on by first forcing the opposite of the value it holds.
+            LinearLayout forceRow = settingRow(
+                    context,
+                    L10n.t(context, "Override this gate"),
+                    L10n.t(context, "When TikTok requests this key, return the selected value below")
+            );
+            force = new Switch(context);
+            force.setContentDescription(L10n.t(context, "Override this gate"));
+            forceRow.addView(force, new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    FeatureGateLabUi.dp(context, 48)
+            ));
+            forceRow.setBackground(SettingsUi.groupedRow(context, true, false));
+            content.addView(forceRow, FeatureGateLabUi.matchWrap());
+
             LinearLayout valueRow = settingRow(
                     context,
                     L10n.t(context, "Forced result"),
                     L10n.t(context, "Off forces false; on forces true. Reset returns control to TikTok")
             );
+            valueRow.setBackground(SettingsUi.groupedRow(context, false, true));
             booleanValue = new Switch(context);
             booleanValue.setContentDescription(L10n.t(context, "Forced result"));
             booleanValue.setChecked(Boolean.parseBoolean(rule == null ? bestInitialValue(entry) : rule.value));
@@ -365,11 +383,22 @@ public final class FeatureGateDetailFragment extends Fragment {
         if (booleanValue != null) {
             booleanValue.setOnCheckedChangeListener((button, checked) -> {
                 if (suppress || !FeatureGateLabStore.masterEnabled()) return;
-                persist(String.valueOf(checked), true);
+                String value = String.valueOf(checked);
+                // Landing on the value TikTok already returns, with nothing saved, is not a
+                // change worth writing a rule for. The spinner's listener says the same.
+                if (rule == null && value.equals(bestInitialValue(entry))) return;
+                persist(value, force.isChecked());
             });
         }
 
-        if (force != null && !objectEntry) {
+        if (force != null && booleanEntry) {
+            force.setOnCheckedChangeListener((button, enabled) -> {
+                if (suppress || !FeatureGateLabStore.masterEnabled()) return;
+                persist(String.valueOf(booleanValue.isChecked()), enabled);
+            });
+        }
+
+        if (force != null && !objectEntry && !booleanEntry) {
             force.setOnCheckedChangeListener((button, enabled) -> {
                 if (suppress || !FeatureGateLabStore.masterEnabled()) return;
                 ValueOption selectedOption = options.get(values.getSelectedItemPosition());

@@ -526,8 +526,7 @@ public class FeatureGatePagesTest {
             FeatureGateDetailFragment detail = FeatureGateDetailFragment.forEntry(
                     entry.manager, entry.key, entry.type);
             attach(activity, detail);
-            // A boolean gate's page has one switch, Forced result; the separate "override this
-            // gate" switch belongs to the pages that also carry a value picker.
+            // The result switch, not the override switch above it.
             Switch forced = fieldOf(detail, "booleanValue", Switch.class);
             assertNotNull("the detail page has no forced-result switch", forced);
             assertFalse("the fixture did not start from the stored value", forced.isChecked());
@@ -559,6 +558,85 @@ public class FeatureGatePagesTest {
             assertEquals("the status line moved for a save that did not happen",
                     statusBefore, status.getText().toString());
             assertEquals("the reader was not told the save failed", 1, ShadowToast.shownToastCount());
+        }
+    }
+
+    /**
+     * An imported boolean rule arrives with its override off, so one tap has to turn that rule
+     * on rather than force the opposite of what the file said.
+     *
+     * <p>The boolean page had a single switch, Forced result, whose listener always saved with
+     * the override enabled. Open an imported gate whose value is true and the switch shows on,
+     * so the first tap flips it off and writes ("false", true): the reader has to tap twice to
+     * get the file's own value, and what TikTok is handed in between is the opposite of it.
+     */
+    @Test public void anImportedBooleanOverrideTurnsOnWithOneTap() throws Exception {
+        try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            FeatureGateLabStore.resetAllLabData();
+            FeatureGateLabStore.setMasterEnabled(true);
+            // Loaded, and TikTok holds false, so the file's true is the value worth forcing.
+            var entry = new FeatureGateCatalog.Entry("imported_gate", "Imported gate", "abmock",
+                    "BOOLEAN", true, true, List.of(), List.of(), List.of(), "", "",
+                    true, "false", "BOOLEAN");
+            var cached = FeatureGateCatalog.class.getDeclaredField("cachedSnapshot");
+            cached.setAccessible(true);
+            cached.set(null, new FeatureGateCatalog.Snapshot(
+                    List.of(entry), Map.of(entry.identity(), entry), 0, 0, true));
+
+            String profile = new org.json.JSONObject()
+                    .put("schema", 1)
+                    .put("target", "TikTok global")
+                    .put("tiktok_version", FeatureGateLabStore.TARGET_VERSION)
+                    .put("rules", new org.json.JSONArray().put(new org.json.JSONObject()
+                            .put("manager", "abmock").put("key", entry.key)
+                            .put("type", "BOOLEAN").put("value", "true")))
+                    .toString();
+            FeatureGateLabStore.ImportReview review = FeatureGateLabStore.reviewProfile(
+                    profile, FeatureGateCatalog.cachedSnapshot().byIdentity);
+            assertEquals("the profile was not accepted", 1, review.accepted.size());
+            FeatureGateLabUndo.importRules(review);
+            var imported = FeatureGateLabStore.rule("abmock", entry.key, "BOOLEAN");
+            assertEquals("the import did not keep the file's value", "true", imported.value);
+            assertFalse("an import is supposed to land with its override off", imported.enabled);
+
+            FeatureGateDetailFragment detail = FeatureGateDetailFragment.forEntry(
+                    entry.manager, entry.key, entry.type);
+            attach(activity, detail);
+            Switch force = fieldOf(detail, "force", Switch.class);
+            Switch forced = fieldOf(detail, "booleanValue", Switch.class);
+            assertNotNull("a boolean page has no override switch", force);
+            assertNotNull("the detail page has no forced-result switch", forced);
+            assertFalse("the override switch does not show the saved rule is off", force.isChecked());
+            assertTrue("the result switch does not show the value the file asked for",
+                    forced.isChecked());
+
+            ShadowToast.reset();
+            force.performClick();
+            FeatureGateDetailFragment.awaitChangesForTests();
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+            var saved = FeatureGateLabStore.rule("abmock", entry.key, "BOOLEAN");
+            assertTrue("one tap did not turn the imported override on", saved.enabled);
+            assertEquals("one tap forced the opposite of what the file said", "true", saved.value);
+            assertTrue("the result switch moved under a tap that was not on it",
+                    forced.isChecked());
+            TextView status = fieldOf(detail, "status", TextView.class);
+            assertEquals("the status still reads as an override that is off",
+                    "Getter not requested yet", status.getText().toString());
+
+            // And the other half of the two-row shape: choosing a result while the override is
+            // off records the choice without turning anything on, the way the spinner page does.
+            force.performClick();
+            FeatureGateDetailFragment.awaitChangesForTests();
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            forced.performClick();
+            FeatureGateDetailFragment.awaitChangesForTests();
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            var parked = FeatureGateLabStore.rule("abmock", entry.key, "BOOLEAN");
+            assertEquals("the result switch did not record the choice", "false", parked.value);
+            assertFalse("picking a result turned the override on by itself", parked.enabled);
         }
     }
 
