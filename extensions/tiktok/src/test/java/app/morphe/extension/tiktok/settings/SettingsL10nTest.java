@@ -813,6 +813,86 @@ public class SettingsL10nTest {
     }
 
     /**
+     * Every word a settings row is built with is a key, read from the source rather than from
+     * the screen.
+     *
+     * <p>The rendered check two tests up cannot see these. A row's summary is built at runtime
+     * from its own wording plus a range line and a current-value line, and the joined text is
+     * exempted there as composed, because the lines below the first are numbers formatted from
+     * keys of their own. So the wording at the top of six Playback rows, and the unit words
+     * beside their numbers, had no entry in any table and reached German, Spanish, Indonesian
+     * and Brazilian phones in English under a translated title, with both gates passing.
+     *
+     * <p>Reading the constructor call instead sidesteps the formatting entirely: the literal
+     * handed to the row is the key, before anything is joined to it.
+     */
+    @Test
+    public void everyWordASettingsRowIsBuiltWithHasAnEntry() throws Exception {
+        java.io.File categories = new java.io.File(
+                "src/main/java/app/morphe/extension/tiktok/settings/preference/categories");
+        if (!categories.isDirectory()) categories = new java.io.File("extensions/tiktok/src/main/java"
+                + "/app/morphe/extension/tiktok/settings/preference/categories");
+        assertTrue("could not find the settings categories", categories.isDirectory());
+
+        java.util.regex.Pattern row = java.util.regex.Pattern.compile(
+                "new\\s+(?:[\\w.]+\\.)?(?:TogglePreference|NumberInputPreference"
+                        + "|ClockHourPreference|InputTextPreference|RangeValuePreference)\\s*\\(");
+        List<String> missing = new ArrayList<>();
+        int rows = 0;
+        java.io.File[] sources = categories.listFiles((dir, name) -> name.endsWith(".java"));
+        assertTrue("no category sources to read", sources != null && sources.length > 5);
+        for (java.io.File file : sources) {
+            String text = new String(java.nio.file.Files.readAllBytes(file.toPath()),
+                    java.nio.charset.StandardCharsets.UTF_8);
+            byte[] kind = classify(text);
+            java.util.regex.Matcher match = row.matcher(text);
+            while (match.find()) {
+                if (kind[match.start()] != CODE) continue;
+                int close = closingBracket(text, kind, match.end() - 1);
+                if (close < 0) continue;
+                rows++;
+                for (String argument : arguments(text, kind, match.end() - 1, close)) {
+                    if (argument.isEmpty() || GERMAN.containsKey(argument)) continue;
+                    missing.add(file.getName() + ": " + argument);
+                }
+            }
+        }
+
+        assertTrue("the scan found too few settings rows to mean anything: " + rows, rows > 100);
+        assertEquals("settings rows built from text with no entry in the tsv files, so it reaches "
+                + "a translated phone in English: " + missing, 0, missing.size());
+    }
+
+    /**
+     * One entry per argument of a call. Literals with nothing but a plus and whitespace between
+     * them are one string in the source and one key in the table; a new argument starts a new
+     * one. {@link #literalsIn} flattens both into a list, which cannot tell a summary written
+     * across five lines from five separate words.
+     */
+    private static List<String> arguments(String text, byte[] kind, int from, int to) {
+        List<String> found = new ArrayList<>();
+        int previousEnd = -1;
+        for (int at = from; at < to; at++) {
+            if (kind[at] != LITERAL || text.charAt(at) != '"') continue;
+            int end = at + 1;
+            while (end < to && kind[end] == LITERAL) end++;
+            int contentEnd = end > at + 1 && text.charAt(end - 1) == '"' ? end - 1 : end;
+            String piece = unescape(text.substring(at + 1, contentEnd));
+
+            String between = previousEnd < 0 ? null : text.substring(previousEnd, at);
+            if (between != null && between.indexOf('+') >= 0
+                    && between.replace("+", "").trim().isEmpty()) {
+                found.set(found.size() - 1, found.get(found.size() - 1) + piece);
+            } else {
+                found.add(piece);
+            }
+            previousEnd = end;
+            at = end - 1;
+        }
+        return found;
+    }
+
+    /**
      * The string literals inside one call, in order. A message too long for one line is written
      * as several literals with a plus between them and is one key; a choice between two messages
      * is written the same way and is two keys. The caller decides which reading fits.

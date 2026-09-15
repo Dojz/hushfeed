@@ -194,6 +194,7 @@ Could not start the settings operation. Try again shortly.,Could not start the s
 Could not tell which folder to update. Choose it again.,Could not tell which folder to update. Choose it again.
 Country ISO,Country ISO
 Country and network preferences,Country and network preferences
+Create,Create
 Creator handle or id,Creator handle or id
 Creators hidden from later feed batches by the player action. Search the list and remove one entry at a time.,Creators hidden from later feed batches by the player action. Search the list and remove one entry at a time.
 Current,Current
@@ -234,6 +235,7 @@ Download original photos,Download original photos
 Download path updated,Download path updated
 Downloads,Downloads
 "Drag to move, release to place","Drag to move, release to place"
+Drama and Series,Drama and Series
 "Drop the notification saying somebody new followed you before it reaches the drawer. Every other notification is left alone, and the follower still appears in the Inbox.","Drop the notification saying somebody new followed you before it reaches the drawer. Every other notification is left alone, and the follower still appears in the Inbox."
 "Each area, how many of the things it looks for are in this build and how many are not.","Each area, how many of the things it looks for are in this build and how many are not."
 Effective getter result,Effective getter result
@@ -259,6 +261,7 @@ Entry %1$d has a field with the wrong data type.,Entry %1$d has a field with the
 Entry %1$d is not an object.,Entry %1$d is not an object.
 Errors,Errors
 Expand activity list,Expand activity list
+Explore,Explore
 Export diagnostic report,Export diagnostic report
 Export loaded values,Export loaded values
 Exported %1$d loaded values,Exported %1$d loaded values
@@ -282,6 +285,7 @@ Find a setting by title or description,Find a setting by title or description
 First caller,First caller
 Fit the video to the screen,Fit the video to the screen
 Follow probe,Follow probe
+Following,Following
 For You,For You
 For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.,For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.
 For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.,For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.
@@ -292,6 +296,7 @@ Forced 1 gate. Restart TikTok to apply this.,Forced 1 gate. Restart TikTok to ap
 Forced result,Forced result
 Forget seen videos after,Forget seen videos after
 Forget what has been counted today and end any hold. The budgets themselves are left alone.,Forget what has been counted today and end any hold. The budgets themselves are left alone.
+Friends,Friends
 Full comment sort options,Full comment sort options
 Full report saved to %1$s,Full report saved to %1$s
 GIF,GIF
@@ -448,6 +453,7 @@ Keep the screen's refresh rate,Keep the screen's refresh rate
 "Keep this string to 4,096 characters or fewer.","Keep this string to 4,096 characters or fewer."
 Keep this structured value to 64 KB or less.,Keep this structured value to 64 KB or less.
 "Kept to %1$s, the nearest value this row allows","Kept to %1$s, the nearest value this row allows"
+LIVE,LIVE
 LIVE replays,LIVE replays
 LIVE videos,LIVE videos
 Lab data reset. Undo last Lab change is in the menu. Restart TikTok.,Lab data reset. Undo last Lab change is in the menu. Restart TikTok.
@@ -499,6 +505,7 @@ Move down,Move down
 Move left,Move left
 Move right,Move right
 Move up,Move up
+Nearby,Nearby
 Never from these countries,Never from these countries
 No,No
 No account to block on this video,No account to block on this video
@@ -596,10 +603,12 @@ Playback,Playback
 Player,Player
 Player Config,Player Config
 Playlist posts,Playlist posts
+Popular,Popular
 Press and hold a profile picture to save the full size original to your photo destination.,Press and hold a profile picture to save the full size original to your photo destination.
 "Press and hold a story to save it. Stories have no save button of their own, and holding one is how TikTok pauses it, so this takes that gesture over.","Press and hold a story to save it. Stories have no save button of their own, and holding one is how TikTok pauses it, so this takes that gesture over."
 Press and hold the left or right third of the screen to jump back or forward. The middle third keeps the Long press action.,Press and hold the left or right third of the screen to jump back or forward. The middle third keeps the Long press action.
 Preview shortened. Save JSON includes the full report.,Preview shortened. Save JSON includes the full report.
+Profile,Profile
 Profile picture saved to %1$s,Profile picture saved to %1$s
 Promotional music,Promotional music
 Proof,Proof
@@ -659,6 +668,7 @@ Returns %1$s,Returns %1$s
 SIM country preset,SIM country preset
 SIM preset saved,SIM preset saved
 SIM preset saved. Restart TikTok to apply it.,SIM preset saved. Restart TikTok to apply it.
+STEM,STEM
 Sanitize sharing links,Sanitize sharing links
 Save,Save
 Save JSON,Save JSON
@@ -721,6 +731,7 @@ Settings restored. The Feature Gate Lab rules were for another TikTok version an
 Share action checklist,Share action checklist
 Share links through another host,Share links through another host
 Share sheet,Share sheet
+Shop,Shop
 Shop posts,Shop posts
 Show,Show
 Show @username beside a video instead of the display name the creator chose.,Show @username beside a video instead of the display name the creator chose.
@@ -824,6 +835,7 @@ The diagnostic report could not be exported.,The diagnostic report could not be 
 The diagnostic report could not be saved yet. Try again in a moment.,The diagnostic report could not be saved yet. Try again in a moment.
 The feed does not end. This is a fine time to leave it.,The feed does not end. This is a fine time to leave it.
 The feed is open again,The feed is open again
+"The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.","The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night."
 The last change is undone. Restart TikTok to apply all changes.,The last change is undone. Restart TikTok to apply all changes.
 The last change is undone. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.,The last change is undone. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.
 The minimum or maximum comments on a video to show.,The minimum or maximum comments on a video to show.
@@ -949,19 +961,30 @@ YTDLnis download type,YTDLnis download type
 Yes,Yes
 "Your operator's name, like T-Mobile.","Your operator's name, like T-Mobile."
 "Your operator's numeric code, like 310260.","Your operator's numeric code, like 310260."
+"Zero leaves the way out of the hold there every time, which is what it has always done. Anything else is how many times a day it works, and once they are gone the hold stays up until the day starts over. Ignored while the budget is locked, which takes the way out away entirely.","Zero leaves the way out of the hold there every time, which is what it has always done. Anything else is how many times a day it works, and once they are gone the hold stays up until the day starts over. Ignored while the budget is locked, which takes the way out away entirely."
 "Zero means no limit. Counts the videos Hushfeed advanced past for you, not the ones you swiped yourself, and starts again when the feed is rebuilt or you change this number.","Zero means no limit. Counts the videos Hushfeed advanced past for you, not the ones you swiped yourself, and starts again when the feed is rebuilt or you change this number."
+"Zero shows the notice and leaves the feed alone. Anything else covers the feed for that many minutes once a budget is reached. Messages, profiles and search keep working, and nothing in the feed is thrown away.","Zero shows the notice and leaves the feed alone. Anything else covers the feed for that many minutes once a budget is reached. Messages, profiles and search keep working, and nothing in the feed is thrown away."
+"Zero switches this off. A short reminder after that many minutes of watching, and again after the same again. Time on messages, a profile or search does not count, and nothing is shown while the feed is on hold.","Zero switches this off. A short reminder after that many minutes of watching, and again after the same again. Time on messages, a profile or search does not count, and nothing is shown while the feed is on hold."
+"Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance limit above, which only counts videos Hushfeed itself advanced past.","Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance limit above, which only counts videos Hushfeed itself advanced past."
+"Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.","Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count."
 code %1$s,code %1$s
 day,day
 days,days
 dp,dp
 millisecond,millisecond
 milliseconds,milliseconds
+minute,minute
+minutes,minutes
 ms,ms
 or,or
 point,point
 points,points
+s,s
 second,second
 seconds,seconds
+time,time
+times,times
+video,video
 videos,videos
 view per like,view per like
 views per like,views per like

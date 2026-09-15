@@ -1,5 +1,7 @@
 ## Unreleased
 
+* The daily budget rows and the feed tab picker are translated. Six Playback descriptions, the unit words beside their numbers and every tab name in both pickers had no entry in any table, so a German, Spanish, Indonesian or Brazilian phone showed them in English under a translated title. Both translation checks were blind to it, because a row's text is joined with its range and current value before anything sees it. The check now reads the wording from the row itself, where nothing has been joined to it yet. The feed tab names also read the same way as their siblings now: Nearby, Friends, LIVE, STEM and Drama and Series.
+
 * The two country lists in the feed filter check what you type, and "UK" now works. Only from these countries took anything at all, and an entry that is not a country code matched no video, so one typo hid the whole feed with nothing on screen saying why. The row names the entry it cannot use before it saves, "UK" is read as the GB the videos carry, and a list saved before this check existed can no longer empty the feed either.
 
 * Copying a sound link now cleans it the way copying a video link already did. TikTok's share URL for a sound carries the parameters that say who sent it, and the long press put it on the clipboard exactly as written, so the identifiers travelled with every shared sound. The link is stripped now and takes the custom share domain like the video link does. Both copied links are also marked sensitive, which they were not: they were the only clips the bundle wrote without that flag.

@@ -967,3 +967,26 @@ Show failures on screen	Fehler auf dem Bildschirm anzeigen
 While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.	Solange die Diagnoseprotokollierung läuft, nennt eine Meldung den Teil von Hushfeed, der fehlgeschlagen ist. Aus behält Fehler nur im Bericht.
 Could not send the feedback. Try again shortly.	Die Rückmeldung konnte nicht gesendet werden. Versuche es gleich noch einmal.
 %1$s is not a country code, so no video would ever match it. Use two letters, like GB, IE or US.	%1$s ist kein Ländercode, also würde kein Video jemals dazu passen. Nimm zwei Buchstaben, etwa GB, IE oder US.
+Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance limit above, which only counts videos Hushfeed itself advanced past.	Null schaltet das aus. Zählt jedes Video, das im Feed auftaucht, egal wie du dort gelandet bist, und sagt Bescheid, sobald die Zahl erreicht ist. Das ist unabhängig vom Limit für automatisches Weiterblättern darüber, das nur Videos zählt, die Hushfeed selbst weitergeschaltet hat.
+Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.	Null schaltet das aus. Zählt die Minuten, die der Player im Feed läuft. Zeit in Nachrichten, auf einem Profil oder in der Suche zählt nicht.
+Zero switches this off. A short reminder after that many minutes of watching, and again after the same again. Time on messages, a profile or search does not count, and nothing is shown while the feed is on hold.	Null schaltet das aus. Eine kurze Erinnerung nach so vielen Minuten Zuschauen und danach jeweils wieder. Zeit in Nachrichten, auf einem Profil oder in der Suche zählt nicht, und während der Feed pausiert ist, wird nichts angezeigt.
+Zero shows the notice and leaves the feed alone. Anything else covers the feed for that many minutes once a budget is reached. Messages, profiles and search keep working, and nothing in the feed is thrown away.	Null zeigt den Hinweis und lässt den Feed in Ruhe. Alles andere legt sich für so viele Minuten über den Feed, sobald ein Limit erreicht ist. Nachrichten, Profile und Suche funktionieren weiter, und nichts im Feed geht verloren.
+The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.	Die Stunde, zu der beide Limits zurückgesetzt werden, im 24-Stunden-Format. Standardmäßig vier Uhr morgens, denn wer um eins noch scrollt, hat immer noch gestern Abend.
+Zero leaves the way out of the hold there every time, which is what it has always done. Anything else is how many times a day it works, and once they are gone the hold stays up until the day starts over. Ignored while the budget is locked, which takes the way out away entirely.	Null lässt den Ausweg aus der Pause jedes Mal stehen, so wie bisher. Alles andere ist die Anzahl der Male pro Tag, die er funktioniert, und wenn sie aufgebraucht sind, bleibt die Pause bestehen, bis der Tag neu beginnt. Wird ignoriert, solange das Limit gesperrt ist, denn das nimmt den Ausweg ganz weg.
+video	Video
+minute	Minute
+minutes	Minuten
+time	Mal
+times	Mal
+s	s
+Explore	Entdecken
+Following	Gefolgt
+Shop	Shop
+Nearby	In der Nähe
+Friends	Freunde
+LIVE	LIVE
+Popular	Beliebt
+STEM	STEM
+Drama and Series	Drama und Serien
+Create	Erstellen
+Profile	Profil

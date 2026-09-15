@@ -965,3 +965,26 @@ Show failures on screen,Tampilkan kegagalan di layar
 "While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.","Selama pencatatan diagnostik aktif, sebuah pesan menyebutkan bagian Hushfeed yang gagal. Jika nonaktif, kegagalan hanya tercatat di laporan."
 Could not send the feedback. Try again shortly.,Masukan tidak dapat dikirim. Coba lagi sebentar lagi.
 "%1$s is not a country code, so no video would ever match it. Use two letters, like GB, IE or US.","%1$s bukan kode negara, jadi tidak ada video yang akan cocok. Gunakan dua huruf, seperti GB, IE, atau US."
+"Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance limit above, which only counts videos Hushfeed itself advanced past.","Nol mematikan ini. Menghitung setiap video yang muncul di feed, bagaimanapun kamu sampai ke sana, dan memberi tahu begitu jumlahnya tercapai. Ini terpisah dari batas maju otomatis di atas, yang hanya menghitung video yang dilewati Hushfeed sendiri."
+"Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.","Nol mematikan ini. Menghitung menit saat pemutar berjalan di feed. Waktu di pesan, profil, atau pencarian tidak dihitung."
+"Zero switches this off. A short reminder after that many minutes of watching, and again after the same again. Time on messages, a profile or search does not count, and nothing is shown while the feed is on hold.","Nol mematikan ini. Pengingat singkat setelah sekian menit menonton, lalu lagi setelah selang yang sama. Waktu di pesan, profil, atau pencarian tidak dihitung, dan tidak ada yang muncul selama feed ditahan."
+"Zero shows the notice and leaves the feed alone. Anything else covers the feed for that many minutes once a budget is reached. Messages, profiles and search keep working, and nothing in the feed is thrown away.","Nol menampilkan pemberitahuan dan membiarkan feed apa adanya. Nilai lain menutupi feed selama sekian menit begitu batas tercapai. Pesan, profil, dan pencarian tetap berjalan, dan tidak ada isi feed yang dibuang."
+"The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.","Jam saat kedua batas disetel ulang, dalam format 24 jam. Pukul empat pagi secara bawaan, karena orang yang masih menggulir pukul satu sebenarnya masih di malam sebelumnya."
+"Zero leaves the way out of the hold there every time, which is what it has always done. Anything else is how many times a day it works, and once they are gone the hold stays up until the day starts over. Ignored while the budget is locked, which takes the way out away entirely.","Nol membiarkan jalan keluar dari penahanan selalu tersedia, seperti selama ini. Nilai lain adalah berapa kali sehari jalan itu bekerja, dan begitu habis, penahanan tetap berlaku sampai hari berganti. Diabaikan selama batas dikunci, karena itu menghilangkan jalan keluarnya sama sekali."
+video,video
+minute,menit
+minutes,menit
+time,kali
+times,kali
+s,d
+Explore,Jelajahi
+Following,Mengikuti
+Shop,Toko
+Nearby,Terdekat
+Friends,Teman
+LIVE,LIVE
+Popular,Populer
+STEM,STEM
+Drama and Series,Drama dan Serial
+Create,Buat
+Profile,Profil
