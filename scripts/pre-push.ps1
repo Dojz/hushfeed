@@ -99,7 +99,14 @@ try {
         exit 0
     }
 
-    $touchesCode = @($paths | Where-Object { $_ -like 'extensions/*' -or $_ -like 'patches/*' }).Count -gt 0
+    $touchesCode = @($paths | Where-Object {
+        $_ -like 'extensions/*' -or $_ -like 'patches/*' -or
+        # The pins and the reviewed checksums. Two Gradle tasks hold the Bouncy Castle graphs to
+        # the reviewed release, and they only run on the way to a test task; a push that moved
+        # the pin alone ran the release facts check, which knows nothing about them.
+        $_ -eq 'gradle/libs.versions.toml' -or $_ -eq 'gradle/verification-metadata.xml' -or
+        $_ -eq 'settings.gradle.kts' -or $_ -eq 'build.gradle.kts'
+    }).Count -gt 0
     $touchesScripts = @($paths | Where-Object { $_ -like 'scripts/*' }).Count -gt 0
     $injectedRegisterVerifierPaths = @(
         'scripts/DexDiff.java',

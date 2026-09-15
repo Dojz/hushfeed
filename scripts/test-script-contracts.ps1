@@ -719,6 +719,33 @@ try {
     Assert-True (Test-Path -LiteralPath $factsMarker) 'An index change ran no release check.'
     Assert-True ((Get-Content -LiteralPath $factsMarker -Raw) -like 'lag=False*') `
         'An index change was allowed to lag behind the published release.'
+
+    # The build branch, which runs the Gradle gates that hold the Bouncy Castle graphs to the
+    # reviewed release. Starting a real build from a contract test would be absurd, so the case
+    # reads the first thing that branch does instead: with no GitHub credentials and no gh on
+    # the path, it refuses by name, and nothing else in the hook says that. A push that moved
+    # only a pin used to take the release path and never reach this.
+    $savedPath = $env:PATH
+    $savedActor = $env:GITHUB_ACTOR
+    $savedToken = $env:GITHUB_TOKEN
+    try {
+        $env:PATH = $hookRoot
+        $env:GITHUB_ACTOR = $null
+        $env:GITHUB_TOKEN = $null
+        foreach ($pin in @('gradle/libs.versions.toml', 'gradle/verification-metadata.xml',
+                'settings.gradle.kts', 'build.gradle.kts', 'patches/build.gradle.kts')) {
+            Assert-Throws { & $prePushScript -Root $hookRoot -ChangedPaths @($pin) 6> $null } `
+                '*GITHUB_ACTOR*' "A push that changed $pin did not reach the build gates."
+        }
+        # And the control: a file the build branch has no interest in must not reach it.
+        & $prePushScript -Root $hookRoot -ChangedPaths @('CONTRIBUTING.md') 6> $null
+        Assert-True ($LASTEXITCODE -eq 0 -or $null -eq $LASTEXITCODE) `
+            'A file no gate reads was routed into the build gates.'
+    } finally {
+        $env:PATH = $savedPath
+        $env:GITHUB_ACTOR = $savedActor
+        $env:GITHUB_TOKEN = $savedToken
+    }
 } finally {
     $env:HUSHFEED_SKIP_PRE_PUSH = $savedSkip
     Remove-Item -LiteralPath $hookRoot -Recurse -Force -ErrorAction SilentlyContinue

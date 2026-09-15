@@ -19,7 +19,14 @@ smali = "d92701d947"
 annotation = "1.10.0"
 gson = "2.14.0"
 guava = "33.7.1-jre"
-bouncycastle = "1.85.2"
+# Every org.bouncycastle request in this build is rewritten to this, in :extensions:tiktok's
+# test graph and in :patches' build graph. It has to be a version that publishes all three
+# modules: 1.85.2 is a bcprov-only patch release, so forcing bcpkix and bcutil to it resolved
+# nothing and the dependency report said FAILED while the build still succeeded. 1.86
+# (2026-09-11) publishes bcprov, bcpkix and bcutil, and sits outside CVE-2025-8916 (1.44 to
+# 1.79) and CVE-2026-5588 (1.49 to 1.84), which the patcher's own 1.77 pin and the Android
+# build tools' 1.79 are both inside.
+bouncycastle = "1.86"
 
 [libraries]
 morphe-patcher = { module = "app.morphe:morphe-patcher", version.ref = "morphe-patcher" }
