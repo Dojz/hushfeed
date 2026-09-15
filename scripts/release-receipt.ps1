@@ -397,6 +397,91 @@ function Test-ChangelogVersions {
     return [pscustomobject]@{ Valid = $true; Reason = 'ok' }
 }
 
+function Read-CatalogToolchain {
+    <#
+    .SYNOPSIS
+        The patcher pin and Manager floor out of a version catalog's text.
+    .DESCRIPTION
+        Takes text rather than a path, so the same reading applies to the catalog in the working
+        tree and to the one at an older commit. Every failure names where the text came from,
+        because "does not pin morphe-patcher" means something different in the working tree than
+        at a commit from a release that shipped months ago.
+    #>
+    param(
+        [Parameter(Mandatory = $true)][string]$Text,
+        [Parameter(Mandatory = $true)][string]$Source
+    )
+
+    $patcherMatch = [regex]::Match($Text, '(?m)^\s*morphe-patcher\s*=\s*"([^"]+)"')
+    if (-not $patcherMatch.Success) { throw "$Source does not pin morphe-patcher." }
+    $floorMatch = [regex]::Match($Text, '(?m)^\s*manager-floor\s*=\s*"([^"]+)"')
+    if (-not $floorMatch.Success) {
+        throw "$Source does not pin manager-floor beside morphe-patcher."
+    }
+    $floor = $floorMatch.Groups[1].Value
+    if ($floor -notmatch '^\d+\.\d+\.\d+$') {
+        throw "$Source has an invalid manager-floor: $floor"
+    }
+    return [pscustomobject]@{
+        PatcherVersion = $patcherMatch.Groups[1].Value
+        ManagerFloor   = $floor
+    }
+}
+
+function Resolve-ReceiptToolchain {
+    <#
+    .SYNOPSIS
+        The toolchain a receipt should be held to: the one its own commit pinned.
+    .DESCRIPTION
+        A receipt describes a release that has already shipped. Moving the patcher pin afterwards
+        does not make it wrong, but holding it to the working catalog said it was: after the pin
+        moved to 1.13.0 while the tree still carried the receipt for the 0.32.0 release, every
+        source push failed with "The receipt was stamped by patcher 1.12.0; the catalog pins
+        1.13.0", with both files correct. Only the checkout that cut the release has a receipt at
+        all, so the gate stopped exactly the machine that had done the work, and the way through
+        was to move the receipt out of the tree, which turns the check off altogether.
+
+        On a release push the receipt's commit is the release commit, so this reads the same
+        catalog the working tree has and nothing is relaxed.
+
+        Answers @{ Toolchain; Note }, where Note is a line worth printing or $null when the
+        answer is simply the working catalog.
+    #>
+    param(
+        [Parameter(Mandatory = $true)][string]$Root,
+        [string]$Commit,
+        [Parameter(Mandatory = $true)]$WorkingToolchain
+    )
+
+    if ($Commit -notmatch '^[0-9a-f]{40}$') {
+        return [pscustomobject]@{ Toolchain = $WorkingToolchain; Note = $null }
+    }
+
+    # Two streams, because git writes "path does not exist in commit" to stderr and an empty
+    # result here has to mean "no catalog there", not "git said something".
+    $catalogAtCommit = (& git -C $Root show "${Commit}:gradle/libs.versions.toml" 2>$null) -join "`n"
+    $short = $Commit.Substring(0, 8)
+    if ([string]::IsNullOrWhiteSpace($catalogAtCommit)) {
+        return [pscustomobject]@{
+            Toolchain = $WorkingToolchain
+            Note = "commit $short has no version catalog, so the receipt is held to the working one"
+        }
+    }
+
+    $atCommit = Read-CatalogToolchain -Text $catalogAtCommit `
+        -Source "gradle/libs.versions.toml at $short"
+    if ($atCommit.PatcherVersion -eq $WorkingToolchain.PatcherVersion -and
+        $atCommit.ManagerFloor -eq $WorkingToolchain.ManagerFloor) {
+        return [pscustomobject]@{ Toolchain = $atCommit; Note = $null }
+    }
+    return [pscustomobject]@{
+        Toolchain = $atCommit
+        Note = ("the receipt is held to patcher $($atCommit.PatcherVersion) and Manager floor " +
+            "$($atCommit.ManagerFloor), which its own commit $short pinned; the catalog now pins " +
+            "$($WorkingToolchain.PatcherVersion) and $($WorkingToolchain.ManagerFloor)")
+    }
+}
+
 function Test-ReleaseReceipt {
     <#
     .SYNOPSIS

@@ -513,19 +513,9 @@ if (-not (Test-Path -LiteralPath $catalogPath -PathType Leaf)) {
     throw "The version catalog is missing: $catalogPath"
 }
 $catalogText = Get-Content -LiteralPath $catalogPath -Raw
-$catalogMatch = [regex]::Match($catalogText, '(?m)^\s*morphe-patcher\s*=\s*"([^"]+)"')
-if (-not $catalogMatch.Success) {
-    throw 'gradle/libs.versions.toml does not pin morphe-patcher.'
-}
-$pinnedPatcher = $catalogMatch.Groups[1].Value
-$managerFloorMatch = [regex]::Match($catalogText, '(?m)^\s*manager-floor\s*=\s*"([^"]+)"')
-if (-not $managerFloorMatch.Success) {
-    throw 'gradle/libs.versions.toml does not pin manager-floor beside morphe-patcher.'
-}
-$managerFloor = $managerFloorMatch.Groups[1].Value
-if ($managerFloor -notmatch '^\d+\.\d+\.\d+$') {
-    throw "gradle/libs.versions.toml has an invalid manager-floor: $managerFloor"
-}
+$workingToolchain = Read-CatalogToolchain -Text $catalogText -Source 'gradle/libs.versions.toml'
+$pinnedPatcher = $workingToolchain.PatcherVersion
+$managerFloor = $workingToolchain.ManagerFloor
 $managerFloorPattern = "\bMorphe Manager\s+$([regex]::Escape($managerFloor))\s+or newer\b"
 Require-Match -Text $readme -Pattern $managerFloorPattern -Description 'README Manager floor'
 Write-Host "[release] README requires Morphe Manager $managerFloor or newer for patcher $pinnedPatcher"
@@ -640,9 +630,23 @@ function Test-ReleaseReceiptHere {
         $expectedCommit = $releaseCommit
     }
 
+    # The toolchain a receipt is held to is the one its own commit pinned, not the one pinned
+    # now. A receipt describes a release that has already shipped; moving the patcher pin
+    # afterwards does not make that receipt wrong, and holding it to the working catalog made
+    # every later source push fail with "The receipt was stamped by patcher 1.12.0; the catalog
+    # pins 1.13.0" on a machine where the receipt and the catalog were each correct. The only
+    # checkout that has a receipt at all is the one that cut the release, so the gate was
+    # stopping exactly the machine that did the work. On a release push the receipt's commit is
+    # the release commit, so this reads the same catalog as before and nothing is relaxed.
+    $resolved = Resolve-ReceiptToolchain -Root $rootPath -Commit $receiptCommit `
+        -WorkingToolchain $workingToolchain
+    $expectedToolchain = $resolved.Toolchain
+    if ($resolved.Note) { Write-Host "[release] $($resolved.Note)" }
+
     $receiptCheck = Test-ReleaseReceipt -Receipt $receiptDocument -ExpectedVersion $releaseVersion `
         -ExpectedPatchNames @($patches | ForEach-Object { [string]$_.name }) `
-        -ExpectedPatcherVersion $pinnedPatcher -ExpectedManagerFloor $managerFloor `
+        -ExpectedPatcherVersion $expectedToolchain.PatcherVersion `
+        -ExpectedManagerFloor $expectedToolchain.ManagerFloor `
         -ExpectedPackageName $target.PackageName -ExpectedPackageVersion $target.PackageVersion `
         -BundlePath $BundleForComparison -ApprovedManifestDelta $approvedDelta `
         -ActualCommitTimestamp $actualEpoch -ExpectedCommit $expectedCommit

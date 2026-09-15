@@ -548,6 +548,83 @@ try {
     Remove-Item -LiteralPath $allowlistRoot -Recurse -Force -ErrorAction SilentlyContinue
 }
 
+# Which catalog a receipt is judged against. A receipt describes a release that has shipped, so
+# moving the patcher pin afterwards must not turn it into a failure; a release, whose receipt is
+# cut against the catalog it was built from, must still be held to that catalog exactly.
+#
+# Driven against a real two-commit repository, because the whole question is what `git show` says
+# at a commit and a fake cannot answer that.
+$toolchainRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("hushfeed-toolchain-" + [guid]::NewGuid().ToString('N'))
+try {
+    New-Item -ItemType Directory -Path (Join-Path $toolchainRoot 'gradle') -Force | Out-Null
+    $catalogFile = Join-Path $toolchainRoot 'gradle/libs.versions.toml'
+    & git -C $toolchainRoot init --quiet 2>&1 | Out-Null
+    & git -C $toolchainRoot config user.email 'contracts@example.invalid' 2>&1 | Out-Null
+    & git -C $toolchainRoot config user.name 'Contracts' 2>&1 | Out-Null
+
+    Set-Content -LiteralPath $catalogFile -Encoding UTF8 -Value @(
+        '[versions]', 'morphe-patcher = "1.12.0"', 'manager-floor = "1.29.0"')
+    & git -C $toolchainRoot add -A 2>&1 | Out-Null
+    & git -C $toolchainRoot commit -m 'release' --quiet 2>&1 | Out-Null
+    $releaseCommitSha = (& git -C $toolchainRoot rev-parse HEAD | Select-Object -First 1).Trim()
+
+    Set-Content -LiteralPath $catalogFile -Encoding UTF8 -Value @(
+        '[versions]', 'morphe-patcher = "1.13.0"', 'manager-floor = "1.30.0"')
+    & git -C $toolchainRoot add -A 2>&1 | Out-Null
+    & git -C $toolchainRoot commit -m 'move the pin' --quiet 2>&1 | Out-Null
+
+    $workingToolchain = Read-CatalogToolchain -Text (Get-Content -LiteralPath $catalogFile -Raw) `
+        -Source 'the working catalog'
+    Assert-True ($workingToolchain.PatcherVersion -eq '1.13.0' -and $workingToolchain.ManagerFloor -eq '1.30.0') `
+        "The working catalog was not read: $($workingToolchain.PatcherVersion), $($workingToolchain.ManagerFloor)"
+
+    # The source push after the pin moved: the receipt's own commit still pinned 1.12.0, so that
+    # is what it answers for, and the push this used to stop now goes through.
+    $atRelease = Resolve-ReceiptToolchain -Root $toolchainRoot -Commit $releaseCommitSha `
+        -WorkingToolchain $workingToolchain
+    Assert-True ($atRelease.Toolchain.PatcherVersion -eq '1.12.0') `
+        "The receipt was not held to the patcher its own commit pinned: $($atRelease.Toolchain.PatcherVersion)"
+    Assert-True ($atRelease.Toolchain.ManagerFloor -eq '1.29.0') `
+        "The receipt was not held to the Manager floor its own commit pinned: $($atRelease.Toolchain.ManagerFloor)"
+    Assert-True ($atRelease.Note -like '*1.12.0*' -and $atRelease.Note -like '*1.13.0*') `
+        "The difference between the two catalogs was not reported: $($atRelease.Note)"
+
+    # The release push: the receipt's commit is the commit being released, so the catalog it is
+    # held to is the working one and the strict comparison is unchanged. Without this case the
+    # one above would pass just as well if the check had been turned off.
+    $head = (& git -C $toolchainRoot rev-parse HEAD | Select-Object -First 1).Trim()
+    $atHead = Resolve-ReceiptToolchain -Root $toolchainRoot -Commit $head -WorkingToolchain $workingToolchain
+    Assert-True ($atHead.Toolchain.PatcherVersion -eq '1.13.0' -and $atHead.Toolchain.ManagerFloor -eq '1.30.0') `
+        "A receipt at the released commit was not held to that commit's catalog: $($atHead.Toolchain.PatcherVersion)"
+    Assert-True ($null -eq $atHead.Note) "An unchanged catalog still reported a difference: $($atHead.Note)"
+
+    # A commit with no catalog in it, and a receipt naming no commit at all. Both fall back to
+    # the working catalog rather than throwing, and the first says so.
+    & git -C $toolchainRoot rm --quiet -- 'gradle/libs.versions.toml' 2>&1 | Out-Null
+    & git -C $toolchainRoot commit -m 'no catalog' --quiet 2>&1 | Out-Null
+    $bare = (& git -C $toolchainRoot rev-parse HEAD | Select-Object -First 1).Trim()
+    $atBare = Resolve-ReceiptToolchain -Root $toolchainRoot -Commit $bare -WorkingToolchain $workingToolchain
+    Assert-True ($atBare.Toolchain.PatcherVersion -eq '1.13.0') `
+        'A commit with no catalog did not fall back to the working one.'
+    Assert-True ($atBare.Note -like '*no version catalog*') `
+        "The fallback was not reported: $($atBare.Note)"
+
+    $noCommit = Resolve-ReceiptToolchain -Root $toolchainRoot -Commit '' -WorkingToolchain $workingToolchain
+    Assert-True ($noCommit.Toolchain.PatcherVersion -eq '1.13.0' -and $null -eq $noCommit.Note) `
+        'A receipt naming no commit did not fall back quietly to the working catalog.'
+
+    # A catalog that pins nothing usable still stops the run, rather than being read as blank.
+    foreach ($broken in @(
+        @{ Name = 'no patcher pin'; Lines = @('[versions]', 'manager-floor = "1.29.0"') },
+        @{ Name = 'no Manager floor'; Lines = @('[versions]', 'morphe-patcher = "1.12.0"') },
+        @{ Name = 'an unusable Manager floor'; Lines = @('[versions]', 'morphe-patcher = "1.12.0"', 'manager-floor = "latest"') })) {
+        Assert-Throws { Read-CatalogToolchain -Text ($broken.Lines -join "`n") -Source 'the test catalog' } `
+            '*the test catalog*' "A catalog with $($broken.Name) was read without complaint."
+    }
+} finally {
+    Remove-Item -LiteralPath $toolchainRoot -Recurse -Force -ErrorAction SilentlyContinue
+}
+
 Write-Host '[scripts] release receipt schema, manifest reading and validation contracts passed'
 
 # --- validate-release-facts.ps1 -------------------------------------------------------------
@@ -628,8 +705,20 @@ try {
 
     # The Manager floor in the README is what stops somebody being told to use a Manager that
     # refuses the bundle, so it is held to the patcher the catalog pins.
+    #
+    # The floor is read out of the fixture rather than written here. It used to name 1.29.0, and
+    # when the catalog moved to Manager 1.30.0 the replacement below stopped matching: the README
+    # went in unchanged, the check passed as it should have, and this case failed with "No error
+    # was raised" while the gate it covers was working perfectly. A version literal in a test
+    # goes stale on the next bump, and does it silently until something reads the message.
+    $fixtureFloor = ([regex]::Match(
+        (Get-Content -LiteralPath (Join-Path $factsRoot 'gradle/libs.versions.toml') -Raw),
+        '(?m)^\s*manager-floor\s*=\s*"([^"]+)"')).Groups[1].Value
+    Assert-True ($fixtureFloor -match '^\d+\.\d+\.\d+$') `
+        "The fixture catalog does not pin a Manager floor, so this case would prove nothing: $fixtureFloor"
     Set-FactsFile 'README.md' {
-        param($text) $text -replace 'Morphe Manager 1\.29\.0 or newer', 'Morphe Manager 1.20.0 or newer'
+        param($text) $text -replace ('Morphe Manager ' + [regex]::Escape($fixtureFloor) + ' or newer'),
+            'Morphe Manager 1.20.0 or newer'
     }
     Assert-Throws { Invoke-Facts } '*' 'A README naming a Manager older than the patcher needs was accepted.'
     Reset-FactsFile 'README.md'
