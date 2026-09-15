@@ -554,24 +554,80 @@ try {
 #
 # Driven against a real two-commit repository, because the whole question is what `git show` says
 # at a commit and a fake cannot answer that.
+#
+# Every git call below goes through Invoke-FixtureGit, and that is not tidiness. On 2026-09-15
+# this block ran from inside the pre-push hook, which is a git child process, so GIT_DIR and
+# GIT_WORK_TREE were in its environment. `git -C <tempdir>` changes the working directory and
+# does not override GIT_DIR, so `init` reused the real repository, `add -A` read the two-file
+# temp tree through it and staged every other tracked file as deleted, and three fixture commits
+# authored by Contracts landed on the branch and were pushed to main, where the tip deleted all
+# 703 files. Clearing the environment is the fix; the assertion after init is what would have
+# stopped it in the second it happened.
 $toolchainRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("hushfeed-toolchain-" + [guid]::NewGuid().ToString('N'))
+
+function Invoke-FixtureGit {
+    <#
+    .SYNOPSIS
+        git against a fixture repository, with no inherited git environment.
+    .DESCRIPTION
+        Removes every GIT_* variable for the length of the call, so the repository git acts on is
+        the one -C names and nothing else. Run from a hook, GIT_DIR alone is enough to point all
+        of this at the real tree.
+    #>
+    param(
+        [Parameter(Mandatory = $true)][string]$Root,
+        [Parameter(Mandatory = $true)][string[]]$Arguments
+    )
+
+    $saved = @{}
+    foreach ($variable in @(Get-ChildItem Env: | Where-Object { $_.Name -like 'GIT_*' })) {
+        $saved[$variable.Name] = $variable.Value
+        Remove-Item -LiteralPath ('Env:\' + $variable.Name) -ErrorAction SilentlyContinue
+    }
+    try {
+        return & git -C $Root @Arguments 2>&1
+    } finally {
+        foreach ($name in $saved.Keys) { Set-Item -LiteralPath ('Env:\' + $name) -Value $saved[$name] }
+    }
+}
+
 try {
     New-Item -ItemType Directory -Path (Join-Path $toolchainRoot 'gradle') -Force | Out-Null
     $catalogFile = Join-Path $toolchainRoot 'gradle/libs.versions.toml'
-    & git -C $toolchainRoot init --quiet 2>&1 | Out-Null
-    & git -C $toolchainRoot config user.email 'contracts@example.invalid' 2>&1 | Out-Null
-    & git -C $toolchainRoot config user.name 'Contracts' 2>&1 | Out-Null
+    Invoke-FixtureGit -Root $toolchainRoot -Arguments @('init', '--quiet') | Out-Null
+
+    # Where git says it will write, asked before anything is written. A fixture that has taken
+    # hold of the real repository fails here instead of committing to it.
+    $fixtureGitDir = "$(Invoke-FixtureGit -Root $toolchainRoot -Arguments @('rev-parse', '--absolute-git-dir') |
+        Select-Object -First 1)".Trim()
+    $expectedGitDir = (Join-Path $toolchainRoot '.git')
+    Assert-True ($fixtureGitDir -and
+        ([IO.Path]::GetFullPath($fixtureGitDir).TrimEnd('\', '/') -ieq [IO.Path]::GetFullPath($expectedGitDir).TrimEnd('\', '/'))) `
+        ("The fixture repository resolved to $fixtureGitDir, not $expectedGitDir. Refusing to " +
+            'write: this is the shape that put three fixture commits on the real branch.')
+
+    Invoke-FixtureGit -Root $toolchainRoot -Arguments @('config', 'user.email', 'contracts@example.invalid') | Out-Null
+    Invoke-FixtureGit -Root $toolchainRoot -Arguments @('config', 'user.name', 'Contracts') | Out-Null
 
     Set-Content -LiteralPath $catalogFile -Encoding UTF8 -Value @(
         '[versions]', 'morphe-patcher = "1.12.0"', 'manager-floor = "1.29.0"')
-    & git -C $toolchainRoot add -A 2>&1 | Out-Null
-    & git -C $toolchainRoot commit -m 'release' --quiet 2>&1 | Out-Null
-    $releaseCommitSha = (& git -C $toolchainRoot rev-parse HEAD | Select-Object -First 1).Trim()
+    Invoke-FixtureGit -Root $toolchainRoot -Arguments @('add', '-A') | Out-Null
+    Invoke-FixtureGit -Root $toolchainRoot -Arguments @('commit', '-m', 'release', '--quiet') | Out-Null
+    $releaseCommitSha = "$(Invoke-FixtureGit -Root $toolchainRoot -Arguments @('rev-parse', 'HEAD') |
+        Select-Object -First 1)".Trim()
+
+    # One file in the fixture, so one file in its first commit. A commit that carries hundreds is
+    # a commit against somebody else's repository.
+    $firstCommitFiles = @(Invoke-FixtureGit -Root $toolchainRoot `
+        -Arguments @('show', '--name-only', '--format=', 'HEAD') | Where-Object { "$_".Trim() })
+    Assert-True ($firstCommitFiles.Count -eq 1 -and "$($firstCommitFiles[0])".Trim() -eq 'gradle/libs.versions.toml') `
+        ("The fixture's first commit touched $($firstCommitFiles.Count) files: " +
+            (($firstCommitFiles | Select-Object -First 5) -join ', '))
 
     Set-Content -LiteralPath $catalogFile -Encoding UTF8 -Value @(
         '[versions]', 'morphe-patcher = "1.13.0"', 'manager-floor = "1.30.0"')
-    & git -C $toolchainRoot add -A 2>&1 | Out-Null
-    & git -C $toolchainRoot commit -m 'move the pin' --quiet 2>&1 | Out-Null
+    Invoke-FixtureGit -Root $toolchainRoot -Arguments @('add', '-A') | Out-Null
+    Invoke-FixtureGit -Root $toolchainRoot -Arguments @('commit', '-m', 'move the pin', '--quiet') | Out-Null
 
     $workingToolchain = Read-CatalogToolchain -Text (Get-Content -LiteralPath $catalogFile -Raw) `
         -Source 'the working catalog'
@@ -592,7 +648,8 @@ try {
     # The release push: the receipt's commit is the commit being released, so the catalog it is
     # held to is the working one and the strict comparison is unchanged. Without this case the
     # one above would pass just as well if the check had been turned off.
-    $head = (& git -C $toolchainRoot rev-parse HEAD | Select-Object -First 1).Trim()
+    $head = "$(Invoke-FixtureGit -Root $toolchainRoot -Arguments @('rev-parse', 'HEAD') |
+        Select-Object -First 1)".Trim()
     $atHead = Resolve-ReceiptToolchain -Root $toolchainRoot -Commit $head -WorkingToolchain $workingToolchain
     Assert-True ($atHead.Toolchain.PatcherVersion -eq '1.13.0' -and $atHead.Toolchain.ManagerFloor -eq '1.30.0') `
         "A receipt at the released commit was not held to that commit's catalog: $($atHead.Toolchain.PatcherVersion)"
@@ -600,9 +657,10 @@ try {
 
     # A commit with no catalog in it, and a receipt naming no commit at all. Both fall back to
     # the working catalog rather than throwing, and the first says so.
-    & git -C $toolchainRoot rm --quiet -- 'gradle/libs.versions.toml' 2>&1 | Out-Null
-    & git -C $toolchainRoot commit -m 'no catalog' --quiet 2>&1 | Out-Null
-    $bare = (& git -C $toolchainRoot rev-parse HEAD | Select-Object -First 1).Trim()
+    Invoke-FixtureGit -Root $toolchainRoot -Arguments @('rm', '--quiet', '--', 'gradle/libs.versions.toml') | Out-Null
+    Invoke-FixtureGit -Root $toolchainRoot -Arguments @('commit', '-m', 'no catalog', '--quiet') | Out-Null
+    $bare = "$(Invoke-FixtureGit -Root $toolchainRoot -Arguments @('rev-parse', 'HEAD') |
+        Select-Object -First 1)".Trim()
     $atBare = Resolve-ReceiptToolchain -Root $toolchainRoot -Commit $bare -WorkingToolchain $workingToolchain
     Assert-True ($atBare.Toolchain.PatcherVersion -eq '1.13.0') `
         'A commit with no catalog did not fall back to the working one.'

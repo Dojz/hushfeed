@@ -397,6 +397,34 @@ function Test-ChangelogVersions {
     return [pscustomobject]@{ Valid = $true; Reason = 'ok' }
 }
 
+function Invoke-RepoGit {
+    <#
+    .SYNOPSIS
+        git against the repository a caller names, with no inherited git environment.
+    .DESCRIPTION
+        `git -C <path>` sets the working directory and does not override GIT_DIR. Every script
+        here runs from the pre-push hook, and a hook is a git child process with GIT_DIR and
+        GIT_WORK_TREE already in its environment, so without this a -Root parameter is a
+        suggestion rather than an instruction: git reads whichever repository the hook came from.
+        On 2026-09-15 that turned a temporary fixture into three commits on the real branch.
+    #>
+    param(
+        [Parameter(Mandatory = $true)][string]$Root,
+        [Parameter(Mandatory = $true)][string[]]$Arguments
+    )
+
+    $saved = @{}
+    foreach ($variable in @(Get-ChildItem Env: | Where-Object { $_.Name -like 'GIT_*' })) {
+        $saved[$variable.Name] = $variable.Value
+        Remove-Item -LiteralPath ('Env:\' + $variable.Name) -ErrorAction SilentlyContinue
+    }
+    try {
+        return & git -C $Root @Arguments 2>$null
+    } finally {
+        foreach ($name in $saved.Keys) { Set-Item -LiteralPath ('Env:\' + $name) -Value $saved[$name] }
+    }
+}
+
 function Read-CatalogToolchain {
     <#
     .SYNOPSIS
@@ -457,9 +485,10 @@ function Resolve-ReceiptToolchain {
         return [pscustomobject]@{ Toolchain = $WorkingToolchain; Note = $null }
     }
 
-    # Two streams, because git writes "path does not exist in commit" to stderr and an empty
-    # result here has to mean "no catalog there", not "git said something".
-    $catalogAtCommit = (& git -C $Root show "${Commit}:gradle/libs.versions.toml" 2>$null) -join "`n"
+    # Stderr is dropped inside the helper, because git writes "path does not exist in commit"
+    # there and an empty result here has to mean "no catalog at that commit", not "git said
+    # something".
+    $catalogAtCommit = (Invoke-RepoGit -Root $Root -Arguments @('show', "${Commit}:gradle/libs.versions.toml")) -join "`n"
     $short = $Commit.Substring(0, 8)
     if ([string]::IsNullOrWhiteSpace($catalogAtCommit)) {
         return [pscustomobject]@{

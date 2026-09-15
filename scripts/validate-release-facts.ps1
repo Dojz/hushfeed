@@ -427,7 +427,7 @@ if ($VerifyPublishedAsset) {
             throw "The published release tag v$publishedVersion does not exist on $remoteUrl."
         }
         $releaseCommit = $tagCommitMatch.Groups[1].Value.ToLowerInvariant()
-        $releaseEpoch = (& git -C $rootPath log -1 --format=%ct $releaseCommit 2>$null |
+        $releaseEpoch = (Invoke-RepoGit -Root $rootPath -Arguments @('log', '-1', '--format=%ct', $releaseCommit) |
             Select-Object -First 1)
         $releaseEpoch = "$releaseEpoch".Trim()
         if ($releaseEpoch -notmatch '^\d+$') {
@@ -538,12 +538,12 @@ function Test-ChangelogHere {
 
     $previous = $null
     $label = 'the last release'
-    $tag = (& git -C $rootPath describe --tags --abbrev=0 HEAD 2>$null | Select-Object -First 1)
+    $tag = (Invoke-RepoGit -Root $rootPath -Arguments @('describe', '--tags', '--abbrev=0', 'HEAD') | Select-Object -First 1)
     $tag = "$tag".Trim()
     if ($tag) {
         # 2>$null on its own leaves the error in $LASTEXITCODE, and a tag from before this file
         # existed is a legitimate miss rather than a failure, so the text is what decides.
-        $text = (& git -C $rootPath show "${tag}:CHANGELOG.md" 2>$null) -join "`n"
+        $text = (Invoke-RepoGit -Root $rootPath -Arguments @('show', "${tag}:CHANGELOG.md")) -join "`n"
         if (-not [string]::IsNullOrWhiteSpace($text)) {
             $previous = $text
             $label = "tag $tag"
@@ -606,12 +606,12 @@ function Test-ReleaseReceiptHere {
     $receiptCommit = [string]$receiptDocument.release.commit
     $actualEpoch = 0L
     if ($receiptCommit -match '^[0-9a-f]{40}$') {
-        $known = (& git -C $rootPath cat-file -t $receiptCommit 2>$null | Select-Object -First 1)
+        $known = (Invoke-RepoGit -Root $rootPath -Arguments @('cat-file', '-t', $receiptCommit) | Select-Object -First 1)
         if ("$known".Trim() -ne 'commit') {
             throw ("The release provenance receipt names commit $receiptCommit, which is not in " +
                 "this repository.")
         }
-        $epochText = (& git -C $rootPath log -1 --format=%ct $receiptCommit 2>$null |
+        $epochText = (Invoke-RepoGit -Root $rootPath -Arguments @('log', '-1', '--format=%ct', $receiptCommit) |
             Select-Object -First 1)
         if ("$epochText".Trim() -match '^\d+$') { $actualEpoch = [long]"$epochText".Trim() }
     }
