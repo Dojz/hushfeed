@@ -1,3 +1,9 @@
+## Unreleased
+
+* **Hushfeed now needs Morphe Manager 1.30.0 or newer.** The bundle is built against patcher 1.13.0, which Manager 1.30.0 was the first stable release to ship, and Manager refuses a bundle built against a patcher newer than its own. On 1.29.0 the bundle will not load at all, so update Manager before the next release.
+
+* The build classpath no longer carries a Bouncy Castle release with known advisories against it. Nothing here reaches the app on your phone, which is signed by your own Manager, but the version used to sign and assemble during a build sat inside two advisories and now does not.
+
 ## 0.32.0
 
 * Every control Hushfeed draws over the video answers a press and shows where the focus is. The four feed controls, the two actions on the daily hold, Undo, Clear all in the inbox and the sticker Save button used to paint the same thing pressed, focused or at rest, so a keyboard, a d-pad or switch access moved through them with nothing on screen saying so. Each one ripples under a finger now and carries a white ring while it holds focus.
