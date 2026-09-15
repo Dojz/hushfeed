@@ -23,6 +23,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -117,11 +118,27 @@ public final class CommentBatchTranslator {
      */
     private static final String FAMILY = "comment translation";
 
-    /** Set by the first cell that resolved, so a later miss is a race rather than a rename. */
-    private static volatile boolean cellAnchorEverResolved;
+    /**
+     * What each cell manager class has done, so a miss is judged against that class rather than
+     * against the first one that happened to work.
+     *
+     * <p>Kept per class for two reasons. A build that renames the members on one cell type and
+     * not another would otherwise be reported for neither, once any other type resolved. And a
+     * single bind that lands before a manager's fields are set is a race, so a class is only
+     * reported after it has missed twice running, which a renamed member does immediately and a
+     * race never does.
+     */
+    private static final Map<String, AnchorHistory> CELL_ANCHORS = new HashMap<>();
 
-    /** The cell anchor miss is worth saying once; every bind after it costs a boolean read. */
-    private static volatile boolean cellAnchorMissReported;
+    /** A cap, because the key is a host class name and this must not grow without bound. */
+    private static final int MAX_TRACKED_MANAGERS = 32;
+
+    private static final class AnchorHistory {
+        boolean resolved;
+        int missesRunning;
+        /** The row generation this class was last reported in, or -1. A clear starts a new one. */
+        long reportedGeneration = -1;
+    }
 
     private CommentBatchTranslator() {
     }
@@ -135,18 +152,11 @@ public final class CommentBatchTranslator {
             AnchorParts parts = resolveAnchorParts(manager);
             if (parts == null) {
                 // Nothing on the cell's manager looks like a comment plus a native translator,
-                // so every comment on this build takes this path and the feature does nothing.
-                // Once, and only while nothing has ever resolved: this runs for every comment on
-                // a scrolling list, and HookStatus builds a miss's key before it checks whether
-                // it already has it, so a report per bind would allocate for the session.
-                if (!cellAnchorEverResolved && !cellAnchorMissReported) {
-                    cellAnchorMissReported = true;
-                    HookStatus.missingMember(FAMILY, "field", manager.getClass().getName(),
-                            "comment and native translator");
-                }
+                // so every comment of this kind takes this path and the feature does nothing.
+                noteCellAnchorMiss(manager.getClass().getName());
                 return;
             }
-            cellAnchorEverResolved = true;
+            noteCellAnchorResolved(manager.getClass().getName());
             HookStatus.bound(FAMILY, "cell anchor");
             Object comment = parts.comment;
             Object context = parts.context;
@@ -165,6 +175,52 @@ public final class CommentBatchTranslator {
             itemView.postDelayed(() -> translateLoadedBatchIfReady(manager, true), 350);
         } catch (Throwable ex) {
             Logger.printDebug(() -> "[Morphe CommentBatchTranslator] register failed", asException(ex));
+        }
+    }
+
+    /**
+     * Remembers that a cell of this manager class could not be read, and reports it once the
+     * class has missed twice running in the current generation of the Diagnostics row.
+     *
+     * <p>Not reported on the first miss: the anchor is found by searching the manager's fields,
+     * so a bind that arrives before they are set misses on a host that works, and a miss is
+     * never retracted once the row has it. Not reported per bind either: this runs for every
+     * comment on a scrolling list, and {@code HookStatus} builds a miss's key before it checks
+     * whether it already has it.
+     */
+    private static void noteCellAnchorMiss(String manager) {
+        boolean report = false;
+        synchronized (CELL_ANCHORS) {
+            AnchorHistory history = CELL_ANCHORS.get(manager);
+            if (history == null) {
+                if (CELL_ANCHORS.size() >= MAX_TRACKED_MANAGERS) return;
+                history = new AnchorHistory();
+                CELL_ANCHORS.put(manager, history);
+            }
+            if (history.resolved) return;
+            history.missesRunning++;
+            long generation = HookStatus.generation();
+            if (history.missesRunning >= 2 && history.reportedGeneration != generation) {
+                history.reportedGeneration = generation;
+                report = true;
+            }
+        }
+        if (report) {
+            HookStatus.missingMember(FAMILY, "field", manager, "comment and native translator");
+        }
+    }
+
+    /** A cell of this manager class was read, so nothing about this class is a host failure. */
+    private static void noteCellAnchorResolved(String manager) {
+        synchronized (CELL_ANCHORS) {
+            AnchorHistory history = CELL_ANCHORS.get(manager);
+            if (history == null) {
+                if (CELL_ANCHORS.size() >= MAX_TRACKED_MANAGERS) return;
+                history = new AnchorHistory();
+                CELL_ANCHORS.put(manager, history);
+            }
+            history.resolved = true;
+            history.missesRunning = 0;
         }
     }
 

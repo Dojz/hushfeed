@@ -571,11 +571,9 @@ public class CommentBatchTranslatorTest {
                 if (value instanceof Map) ((Map<?, ?>) value).clear();
                 else ((java.util.Collection<?>) value).clear();
             }
-            for (String name : new String[]{"cellAnchorEverResolved", "cellAnchorMissReported"}) {
-                Field flag = CommentBatchTranslator.class.getDeclaredField(name);
-                flag.setAccessible(true);
-                flag.set(null, false);
-            }
+            Field anchors = CommentBatchTranslator.class.getDeclaredField("CELL_ANCHORS");
+            anchors.setAccessible(true);
+            ((Map<?, ?>) anchors.get(null)).clear();
             for (String name : new String[]{"outstandingRequests", "completionsHandledForTests"}) {
                 Field counter = CommentBatchTranslator.class.getDeclaredField(name);
                 counter.setAccessible(true);
@@ -623,6 +621,9 @@ public class CommentBatchTranslatorTest {
         HookStatus.clear();
         try {
             // The cell manager: nothing on it looks like a comment beside a native translator.
+            // Twice, which is what a build without the members does on every bind: one miss is
+            // a cell that arrived before its manager was filled in.
+            CommentBatchTranslator.registerCommentCell(new View(context), new StrangeManager());
             CommentBatchTranslator.registerCommentCell(new View(context), new StrangeManager());
             // The loaded list: no items field at all.
             CommentBatchTranslator.onCommentListLoaded(new ListWithoutItems());
@@ -642,6 +643,72 @@ public class CommentBatchTranslatorTest {
                             && line.endsWith("#l0")));
             assertTrue("the family is missing from the report",
                     HookStatus.familiesMissingSomething().contains("comment translation"));
+        } finally {
+            HookStatus.clear();
+        }
+    }
+
+    /**
+     * One miss is a race; two running is a build that does not have the members.
+     *
+     * <p>The anchor is found by searching the manager's fields, so a bind that lands before they
+     * are set misses on a host that works, and a miss is never retracted once the row has it.
+     */
+    @Test public void oneStrayCellIsNotEnoughToCallTheBuildBroken() {
+        HookStatus.clear();
+        try {
+            CommentBatchTranslator.registerCommentCell(new View(context), new StrangeManager());
+            assertEquals("one miss was reported as a broken build: "
+                    + HookStatus.missing("comment translation"),
+                    0, HookStatus.missing("comment translation").size());
+
+            CommentBatchTranslator.registerCommentCell(new View(context), new StrangeManager());
+            assertEquals("a second miss on the same class said nothing", 1,
+                    HookStatus.missing("comment translation").size());
+        } finally {
+            HookStatus.clear();
+        }
+    }
+
+    /** A rename that hits one cell type and not another names the one that broke. */
+    @Test public void aClassThatBreaksIsNamedEvenAfterAnotherOneWorked() {
+        HookStatus.clear();
+        try {
+            Anchor working = anchor("aid-mixed", "cid-mixed");
+            CommentBatchTranslator.registerCommentCell(new View(context), working);
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            for (int at = 0; at < 2; at++) {
+                CommentBatchTranslator.registerCommentCell(new View(context), new StrangeManager());
+            }
+
+            List<String> missing = HookStatus.missing("comment translation");
+            assertTrue("the broken cell type was hidden by the working one: " + missing,
+                    missing.stream().anyMatch(line -> line.contains(StrangeManager.class.getName())));
+        } finally {
+            HookStatus.clear();
+        }
+    }
+
+    /**
+     * Clearing the diagnostic data starts the row again, and a build that is still broken has to
+     * say so again. The report is suppressed per class, not once per process, so the state that
+     * suppresses it has to notice the clear.
+     */
+    @Test public void aBrokenBuildSaysSoAgainAfterTheRowIsCleared() {
+        HookStatus.clear();
+        try {
+            for (int at = 0; at < 2; at++) {
+                CommentBatchTranslator.registerCommentCell(new View(context), new StrangeManager());
+            }
+            assertEquals(1, HookStatus.missing("comment translation").size());
+
+            HookStatus.snapshotAndClear();
+            assertEquals("the clear did not empty the row", 0,
+                    HookStatus.missing("comment translation").size());
+
+            CommentBatchTranslator.registerCommentCell(new View(context), new StrangeManager());
+            assertEquals("a build that is still broken went quiet after a clear", 1,
+                    HookStatus.missing("comment translation").size());
         } finally {
             HookStatus.clear();
         }

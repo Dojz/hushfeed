@@ -360,10 +360,17 @@ public class SettingsUiTest {
      */
     @Test
     public void aFieldWithTheCursorInItIsUnderlinedDifferently() {
+        // One activity, then the flag. DialogActivity.onCreate reads the night qualifier and
+        // sets the flag itself, so building inside the loop put the dark theme back every time
+        // and the light pass compared the dark colours with themselves.
+        Activity activity = Robolectric.buildActivity(DialogActivity.class).setup().get();
+        Utils.setContext(activity);
         for (boolean dark : new boolean[]{true, false}) {
             Utils.setIsDarkModeEnabled(dark);
-            Activity activity = Robolectric.buildActivity(DialogActivity.class).setup().get();
-            Utils.setContext(activity);
+            String theme = dark ? "dark" : "light";
+            assertEquals("the fixture is not in the " + theme + " theme it claims",
+                    dark, SettingsUi.surface() == SettingsUi.DARK_SURFACE);
+
             EditText field = new EditText(activity);
             SettingsUi.styleEditText(field);
             android.content.res.ColorStateList tint = field.getBackgroundTintList();
@@ -373,13 +380,23 @@ public class SettingsUiTest {
                     new int[]{android.R.attr.state_enabled, android.R.attr.state_focused}, 0);
             int resting = tint.getColorForState(new int[]{android.R.attr.state_enabled}, 0);
             int disabled = tint.getColorForState(new int[]{-android.R.attr.state_enabled}, 0);
-            String theme = dark ? "dark" : "light";
             assertEquals("the focused underline is not the accent in " + theme,
                     SettingsUi.accent(), focused);
             assertNotEquals("a resting field is underlined like the focused one in " + theme,
                     focused, resting);
             assertEquals("a disabled field lost its border colour in " + theme,
                     SettingsUi.border(), disabled);
+
+            // Different is not enough: the field with the cursor has to be the louder of the
+            // two. The first version used the secondary text colour, which reads stronger
+            // against the surface than the accent does, so the resting field was the loud one.
+            double quiet = contrast(SettingsUi.surface(), resting);
+            double loud = contrast(SettingsUi.surface(), focused);
+            assertTrue("the resting underline is louder than the focused one in " + theme
+                            + ": " + quiet + ":1 against " + loud + ":1", loud > quiet);
+            assertTrue("the two underlines are too close to tell apart in " + theme + ": "
+                            + contrast(focused, resting) + ":1",
+                    contrast(focused, resting) >= 3.0);
         }
     }
 
@@ -416,11 +433,25 @@ public class SettingsUiTest {
                 ringIsDrawn(SettingsUi.groupedRow(activity, false, false),
                         new int[]{android.R.attr.state_enabled, android.R.attr.state_selected}));
 
-        // The header's back button, which carried the same ripple and nothing else.
+        // All four edges, not two. A middle row's card frame runs a radius past the top and the
+        // bottom of its own box, and the canvas is clipped to that box, so a ring drawn on the
+        // frame lost both horizontal strokes and the reader saw a pair of vertical bars. This
+        // also pins the order the row draws in: the Paint is shared, and a ring drawn before the
+        // divider leaves the divider at the ring's width, which then covers the bottom edge.
+        for (boolean[] shape : shapes) {
+            String which = shape[0] ? "first" : shape[1] ? "last" : "middle";
+            boolean[] edges = ringEdges(SettingsUi.groupedRow(activity, shape[0], shape[1]), focused);
+            assertTrue("a focused " + which + " row drew no top edge", edges[0]);
+            assertTrue("a focused " + which + " row drew no bottom edge", edges[1]);
+        }
+
+
+        // The header's back button, wrapped the way the header ships it: the ring is the
+        // ripple's content layer, which is where a mask or a lost state change would hide it.
         assertTrue("the back button drew no ring while focused",
-                ringIsDrawn(SettingsUi.focusRing(activity, 6), focused));
+                ringIsDrawn(backButtonBackground(activity), focused));
         assertFalse("the back button drew a ring while resting",
-                ringIsDrawn(SettingsUi.focusRing(activity, 6), resting));
+                ringIsDrawn(backButtonBackground(activity), resting));
 
         assertTrue("the ring is not readable against the surface it is drawn on: "
                         + contrast(SettingsUi.accent(), SettingsUi.surface()) + ":1",
@@ -458,6 +489,36 @@ public class SettingsUiTest {
         }
         bitmap.recycle();
         return found;
+    }
+
+    /** The header back button's background, built the way SettingsHeaderPreference builds it. */
+    private static Drawable backButtonBackground(Activity activity) {
+        return new android.graphics.drawable.RippleDrawable(
+                android.content.res.ColorStateList.valueOf(
+                        (SettingsUi.accent() & 0x00ffffff) | 0x26000000),
+                SettingsUi.focusRing(activity, 6),
+                SettingsUi.roundedSurface(activity, 6, false));
+    }
+
+    /** Whether the accent appears along the top and the bottom edge in the given state. */
+    private static boolean[] ringEdges(Drawable drawable, int[] state) {
+        int size = 120;
+        drawable.setState(state);
+        drawable.setBounds(0, 0, size, size);
+        android.graphics.Bitmap bitmap = android.graphics.Bitmap.createBitmap(
+                size, size, android.graphics.Bitmap.Config.ARGB_8888);
+        drawable.draw(new android.graphics.Canvas(bitmap));
+        int accent = SettingsUi.accent() | 0xff000000;
+        boolean top = false;
+        boolean bottom = false;
+        for (int x = size / 3; x < size * 2 / 3; x++) {
+            for (int y = 0; y < 4; y++) {
+                if ((bitmap.getPixel(x, y) | 0xff000000) == accent) top = true;
+                if ((bitmap.getPixel(x, size - 1 - y) | 0xff000000) == accent) bottom = true;
+            }
+        }
+        bitmap.recycle();
+        return new boolean[]{top, bottom};
     }
 
     /** WCAG contrast between two opaque colours. */

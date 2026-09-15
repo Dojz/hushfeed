@@ -201,13 +201,17 @@ public final class FeedVisibility {
             View group = (View) parent;
             rect.offset(child.getLeft() + Math.round(child.getTranslationX()) - group.getScrollX(),
                     child.getTop() + Math.round(child.getTranslationY()) - group.getScrollY());
-            // Only an ancestor that has been measured and clips its children can hide anything.
-            // A group with no size yet is one that has not laid out, and a group that draws
-            // outside itself is why FLAG_CLIP_CHILDREN exists: taking either as proof the tab is
-            // gone would answer "not the feed" on the feed, which is the answer that costs the
-            // reader the button and lifts the daily hold.
+            // Only an ancestor that has laid out and clips its children can hide anything. A
+            // group that draws outside itself is why FLAG_CLIP_CHILDREN exists, and a group
+            // that has not laid out has no box to judge against: taking either as proof the tab
+            // is gone would answer "not the feed" on the feed, which is the answer that costs
+            // the reader the button and lifts the daily hold.
+            //
+            // Laid out, not sized: a group collapsed to nothing has laid out and does hide its
+            // children, which is one of the ways TikTok puts a bar away without GONE, so a size
+            // test would have called that the feed as well.
             boolean clips = !(group instanceof ViewGroup) || ((ViewGroup) group).getClipChildren();
-            if (clips && group.getWidth() > 0 && group.getHeight() > 0
+            if (clips && group.isLaidOut()
                     && !rect.intersect(0, 0, group.getWidth(), group.getHeight())) {
                 return true;
             }

@@ -115,39 +115,50 @@ public class FeedVisibilityTest {
     }
 
     /**
-     * An ancestor that has not been measured, or that draws outside itself, cannot prove the tab
-     * is gone. Both used to answer "not the feed" on the feed, which costs the reader the button
-     * and lifts the daily hold: {@code SessionLockOverlay} hides its panel on the same question.
+     * An ancestor that has not laid out, or that draws outside itself, cannot prove the tab is
+     * gone; one that has laid out at nothing can. The first two used to answer "not the feed" on
+     * the feed, which costs the reader the button and lifts the daily hold, since
+     * {@code SessionLockOverlay} hides its panel on the same question.
      */
-    @Test public void anAncestorThatCannotHideTheTabDoesNotCountAgainstIt() {
+    @Test public void onlyAnAncestorThatCanHideTheTabCountsAgainstIt() {
         try (var controller = Robolectric.buildActivity(Activity.class).setup().visible()) {
             Activity activity = controller.get();
             FrameLayout outer = new FrameLayout(activity);
-            FrameLayout unmeasured = new FrameLayout(activity);
-            outer.addView(unmeasured, new FrameLayout.LayoutParams(0, 0));
+            activity.setContentView(outer);
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+            // Added after the last pass and never idled, so this group has not laid out.
+            FrameLayout fresh = new FrameLayout(activity);
             View homeTab = new View(activity);
             homeTab.setId(0x7f0a4b89);
             homeTab.setSelected(true);
-            unmeasured.addView(homeTab, new FrameLayout.LayoutParams(60, 40));
-            activity.setContentView(outer);
-            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            fresh.addView(homeTab, new FrameLayout.LayoutParams(60, 40));
+            outer.addView(fresh, new FrameLayout.LayoutParams(200, 200));
+            homeTab.layout(0, 0, 60, 40);
             FeedVisibility.resolveForTests(activity.getPackageName(), "o1k", homeTab.getId());
             try {
-                homeTab.layout(0, 0, 60, 40);
-                assertTrue("an ancestor with no size counted as hiding the tab",
+                assertFalse("the fixture's ancestor has laid out after all", fresh.isLaidOut());
+                assertTrue("an ancestor that has not laid out counted as hiding the tab",
                         FeedVisibility.isOnFeed(activity));
 
-                // The same group, measured, but drawing outside itself: a child beyond its box
-                // is on screen, which is the whole point of clipChildren being false.
-                unmeasured.layout(0, 0, 10, 10);
-                unmeasured.setClipChildren(false);
+                // Laid out, and drawing outside itself: a child beyond its box is on screen,
+                // which is the whole point of clipChildren being false.
+                fresh.layout(0, 0, 10, 10);
+                fresh.setClipChildren(false);
                 homeTab.layout(200, 200, 260, 240);
                 assertTrue("a group that does not clip counted as hiding the tab",
                         FeedVisibility.isOnFeed(activity));
 
-                // And with clipping on, the same geometry is genuinely out of sight.
-                unmeasured.setClipChildren(true);
+                // With clipping on, the same geometry is genuinely out of sight.
+                fresh.setClipChildren(true);
                 assertFalse("a clipped group did not hide a tab laid out outside it",
+                        FeedVisibility.isOnFeed(activity));
+
+                // And a group collapsed to nothing hides what is inside it, which is one of the
+                // ways a bar goes away without GONE.
+                fresh.layout(0, 0, 0, 0);
+                homeTab.layout(0, 0, 60, 40);
+                assertFalse("a group collapsed to nothing counted as showing the tab",
                         FeedVisibility.isOnFeed(activity));
             } finally {
                 FeedVisibility.resolveForTests(activity.getPackageName(), "o1k", 0);

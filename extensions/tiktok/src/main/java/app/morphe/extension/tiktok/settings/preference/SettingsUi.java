@@ -16,6 +16,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PixelFormat;
 import android.graphics.RectF;
 import android.graphics.Rect;
@@ -267,6 +268,7 @@ public final class SettingsUi {
             if (!lit) return;
             Rect bounds = getBounds();
             float inset = width / 2f;
+            if (bounds.width() <= width || bounds.height() <= width) return;
             paint.setColor(accent());
             canvas.drawRoundRect(new RectF(bounds.left + inset, bounds.top + inset,
                             bounds.right - inset, bounds.bottom - inset),
@@ -353,22 +355,32 @@ public final class SettingsUi {
             paint.setStrokeWidth(1);
             paint.setColor(activated ? accent() : border());
             canvas.drawRoundRect(frame, radius, radius, paint);
-            if (focused) {
-                // Inside the card's own edge, so the row below cannot cover half of it, and
-                // drawn here rather than in a layer above: a wrapped drawable reports its inset
-                // as padding and every row would grow by it.
-                float width = dp(context, FOCUS_RING_DP);
-                float inset = width / 2f;
-                paint.setStrokeWidth(width);
-                paint.setColor(accent());
-                RectF ring = new RectF(frame.left + inset, frame.top + inset,
-                        frame.right - inset, frame.bottom - inset);
-                canvas.drawRoundRect(ring, Math.max(0f, radius - inset),
-                        Math.max(0f, radius - inset), paint);
-            }
             if (!last) {
                 paint.setColor(divider());
                 canvas.drawLine(bounds.left + inset, bottom - 0.5f, bounds.right - inset, bottom - 0.5f, paint);
+            }
+            if (focused) {
+                // Last, and with its own stroke width: this Paint is shared, and a ring drawn
+                // before the divider left the divider at the ring's width, which on a 3x screen
+                // is a six pixel grey bar under every focused row of a card.
+                float width = dp(context, FOCUS_RING_DP);
+                float inset = width / 2f;
+                // Against the row's own box rather than the card frame. A middle row's frame
+                // runs a radius past the top and bottom of the clip, so a ring drawn on it kept
+                // only its two vertical edges and the reader saw a pair of bars, no ring.
+                RectF ring = new RectF(bounds.left + inset, top + inset,
+                        bounds.right - inset, bottom - inset);
+                float outer = Math.max(0f, radius - inset);
+                float head = first ? outer : 0f;
+                float foot = last ? outer : 0f;
+                // Clockwise from the top left, two values per corner: rounded only where the
+                // card is, square where this row meets its neighbour.
+                Path path = new Path();
+                path.addRoundRect(ring, new float[]{head, head, head, head,
+                        foot, foot, foot, foot}, Path.Direction.CW);
+                paint.setStrokeWidth(width);
+                paint.setColor(accent());
+                canvas.drawPath(path, paint);
             }
             canvas.restore();
         }
@@ -1002,6 +1014,15 @@ public final class SettingsUi {
      * accent underlines and one caret to tell them apart, and the same on the search box and
      * every other editor on this screen. Focused keeps the accent; at rest the line drops to the
      * quieter colour, which is still a line, just not a claim to have the keyboard.
+     *
+     * <p>The quieter colour is {@link #border()} rather than {@link #textSecondary()}, measured
+     * rather than chosen: against the surface the secondary text colour reads 8.0:1 in the dark
+     * theme and 7.1:1 in the light one, where the accent reads 6.0:1 and 6.4:1, so a resting
+     * field would have been the more prominent of the two, and the pair would differ by 1.33:1
+     * and 1.10:1, which in the light theme is no difference at all for a reader who cannot
+     * separate the hues. The border colour reads 1.5:1 against the surface and 3.9:1 against the
+     * accent in both themes, which is the order this is for: the field with the cursor is the
+     * loud one.
      */
     public static void styleEditText(EditText editText) {
         editText.setTextColor(enabledTextColors(textPrimary()));
@@ -1012,7 +1033,7 @@ public final class SettingsUi {
                         new int[]{android.R.attr.state_focused},
                         new int[]{}
                 },
-                new int[]{border(), accent(), textSecondary()}
+                new int[]{border(), accent(), border()}
         ));
     }
 
