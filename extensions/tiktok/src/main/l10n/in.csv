@@ -1000,3 +1000,6 @@ Licenses,Lisensi
 The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.,Katalog menyebut kunci ini %1$s dan penimpaan ini %2$s. Setel ulang penimpaan lalu buat yang baru.
 "The override couldn't be applied: %1$s. Edit the field values, or reset the override.","Penimpaan tidak bisa diterapkan: %1$s. Ubah nilai field, atau setel ulang penimpaan."
 Clearing %1$d of %2$d,Membersihkan %1$d dari %2$d
+Restart TikTok to apply %1$d changes,Mulai ulang TikTok untuk menerapkan %1$d perubahan
+Restart TikTok to apply this change,Mulai ulang TikTok untuk menerapkan perubahan ini
+Restart pending,Menunggu mulai ulang

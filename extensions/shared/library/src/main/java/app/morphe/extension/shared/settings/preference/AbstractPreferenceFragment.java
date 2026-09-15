@@ -35,6 +35,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Objects;
+import java.util.Set;
+import java.util.LinkedHashSet;
+import java.util.Collections;
 
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.ResourceType;
@@ -121,6 +124,28 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment {
     private static boolean updatingPreference;
 
     /**
+     * The keys of settings changed in this process that only take effect after a restart.
+     *
+     * <p>A toast said so once and vanished, and nothing afterwards said a restart was still
+     * owed, so a switch that "did nothing" was reported as broken. Process-wide, and cleared
+     * by the process ending, which is the only thing that clears the debt.
+     */
+    public static final Set<String> restartPending =
+            Collections.synchronizedSet(new LinkedHashSet<>());
+
+    /** Records a change that waits on a restart, then gives the page a chance to say so. */
+    protected void noteRestartPending(Setting<?> setting) {
+        if (setting == null || !setting.rebootApp) return;
+        restartPending.add(setting.key);
+        onRestartPendingChanged();
+
+    }
+
+    /** The page's chance to show that a restart is owed. */
+    protected void onRestartPendingChanged() {
+    }
+
+    /**
      * Used to prevent showing reboot dialog, if user cancels a setting user dialog.
      */
     private static boolean showingUserDialogMessage;
@@ -182,7 +207,10 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment {
             // Update any other preference availability that may now be different.
             updateUIAvailability();
             // Report success only after every operation that can still enter recovery succeeded.
-            if (showRestartAfterUpdate) showRestartDialog(getContext());
+            if (showRestartAfterUpdate) {
+                noteRestartPending(setting);
+                showRestartDialog(getContext());
+            }
         } catch (Exception ex) {
             // This path owns a localized outcome below, so logging must not add a second toast.
             Logger.printInfo(() -> "OnSharedPreferenceChangeListener failure", ex);
@@ -315,6 +343,7 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment {
                     updateUIAvailability();
 
                     if (setting.rebootApp) {
+                        noteRestartPending(setting);
                         showRestartDialog(context);
                     }
                 },

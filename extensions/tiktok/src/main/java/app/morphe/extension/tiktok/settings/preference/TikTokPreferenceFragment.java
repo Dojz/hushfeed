@@ -63,6 +63,8 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
     private static final String ARG_SEARCH = "morphe_settings_search";
     private static final String ARG_TARGET_KEY = "morphe_settings_target_key";
     private static TikTokPreferenceFragment activeFragment;
+    /** Pinned to the top of this page while a restart is owed; off the page otherwise. */
+    private RestartPendingPreference restartPending;
     /**
      * Which folder setting the picker was opened for, by key rather than by the preference
      * itself. The picker is a separate activity, so this one is routinely destroyed behind it
@@ -395,6 +397,44 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
             createMasterMenu(context, preferenceScreen);
         } else {
             createSectionMenu(context, preferenceScreen, section);
+        }
+        restartPending = new RestartPendingPreference(context);
+        refreshRestartPending();
+    }
+
+    @Override
+    protected void onRestartPendingChanged() {
+        refreshRestartPending();
+    }
+
+    /**
+     * Pins the restart row while a restart is owed and takes it away when nothing is, and lets
+     * the rows that owe it say "Restart pending" in place of the sentence every restart-gated
+     * row carries, so the reader can see which of their changes are still waiting.
+     */
+    private void refreshRestartPending() {
+        PreferenceScreen screen = getPreferenceScreen();
+        Context context = getActivity();
+        if (screen == null || restartPending == null || context == null) return;
+        boolean owed = !restartPendingKeys().isEmpty();
+        // Removed and added back rather than only added: the bound view keeps the count it
+        // was built with, and the list rebinds what it is handed afresh.
+        screen.removePreference(restartPending);
+        if (owed) screen.addPreference(restartPending);
+
+        String generic = L10n.t(context, TogglePreference.RESTART_SENTENCE);
+        String pending = L10n.t(context, "Restart pending");
+        for (String key : restartPendingKeys()) {
+            Preference row = findPreference(key);
+            CharSequence summary = row == null ? null : row.getSummary();
+            if (summary == null || !summary.toString().contains(generic)) continue;
+            row.setSummary(summary.toString().replace(generic, pending));
+        }
+    }
+
+    private static java.util.List<String> restartPendingKeys() {
+        synchronized (AbstractPreferenceFragment.restartPending) {
+            return new java.util.ArrayList<>(AbstractPreferenceFragment.restartPending);
         }
     }
 
@@ -987,6 +1027,8 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         super.onResume();
         activeFragment = this;
         refreshMenuBadges();
+        // Back from a section onto the master menu: whatever was changed there is owed here.
+        refreshRestartPending();
     }
 
     /**

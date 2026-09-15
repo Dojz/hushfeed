@@ -1129,6 +1129,81 @@ assertEquals(View.LAYOUT_DIRECTION_RTL, configuration.getLayoutDirection());
         throw new AssertionError("no row called " + title);
     }
 
+    /**
+     * A restart-gated change pins a row that restarts TikTok, on this page and on the master
+     * menu after Back, and the row is absent on a fresh open.
+     *
+     * <p>Three restart-gated switches gave three identical toasts and then nothing: come back
+     * later and nothing said a restart was still owed, and there was no way to do it although
+     * the app can relaunch itself. Two of the "this does not work" reports on the tracker are
+     * restart-gated switches.
+     */
+    @Test public void aRestartGatedChangePinsARowThatRestartsTikTok() throws Exception {
+        app.morphe.extension.shared.settings.preference.AbstractPreferenceFragment
+                .restartPending.clear();
+        java.util.List<android.content.Context> restarted = new java.util.ArrayList<>();
+        app.morphe.extension.tiktok.settings.preference.RestartPendingPreference
+                .setRestarterForTests(restarted::add);
+        try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            TikTokPreferenceFragment page = attachSection(activity, "BEHAVIOR");
+            String key = app.morphe.extension.tiktok.settings.preference
+                    .RestartPendingPreference.KEY;
+            assertNull("a fresh page owes a restart", page.findPreference(key));
+
+            android.preference.SwitchPreference toggle = (android.preference.SwitchPreference)
+                    page.findPreference(Settings.FOLDABLE_SPLIT_VIEW.key);
+            assertNotNull("the fixture switch is not on this page", toggle);
+            assertTrue("the fixture switch does not need a restart",
+                    Settings.FOLDABLE_SPLIT_VIEW.rebootApp);
+            toggle.setChecked(!toggle.isChecked());
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+            Preference pinned = page.findPreference(key);
+            assertNotNull("the change did not pin a restart row", pinned);
+            assertEquals("the row is not at the top of the page", -950, pinned.getOrder());
+            assertTrue("the toggled row does not say its change is waiting",
+                    String.valueOf(toggle.getSummary()).contains("Restart pending"));
+            assertFalse("the toggled row still carries the generic sentence",
+                    String.valueOf(toggle.getSummary()).contains("Restart TikTok to apply this."));
+
+            View row = pinned.getView(null, null).findViewWithTag("hushfeed_restart_pending_row");
+            assertNotNull("the pinned row draws no button", row);
+            assertEquals("Restart TikTok to apply this change",
+                    ((android.widget.TextView) row).getText().toString());
+            android.view.accessibility.AccessibilityNodeInfo node =
+                    row.createAccessibilityNodeInfo();
+            assertEquals("a screen reader would read the restart as text",
+                    android.widget.Button.class.getName(), String.valueOf(node.getClassName()));
+            assertTrue("the count is not what a screen reader hears",
+                    String.valueOf(node.getText()).contains("this change"));
+
+            // Back to the master menu: the debt is owed there as well.
+            TikTokPreferenceFragment home = attachHome(activity);
+            Preference onHome = home.findPreference(key);
+            assertNotNull("the master menu does not show the restart owed", onHome);
+
+            // Two changes: the count follows.
+            app.morphe.extension.shared.settings.preference.AbstractPreferenceFragment
+                    .restartPending.add(Settings.REGION_SPOOF.key);
+            home.onResume();
+            View homeRow = home.findPreference(key).getView(null, null)
+                    .findViewWithTag("hushfeed_restart_pending_row");
+            assertEquals("Restart TikTok to apply 2 changes",
+                    ((android.widget.TextView) homeRow).getText().toString());
+
+            assertTrue(homeRow.performClick());
+            assertEquals("the press did not restart TikTok", 1, restarted.size());
+        } finally {
+            app.morphe.extension.tiktok.settings.preference.RestartPendingPreference
+                    .setRestarterForTests(null);
+            app.morphe.extension.shared.settings.preference.AbstractPreferenceFragment
+                    .restartPending.clear();
+            Settings.FOLDABLE_SPLIT_VIEW.resetToDefault();
+        }
+    }
+
     private static TikTokPreferenceFragment attachSection(Activity activity, String section) {
         TikTokPreferenceFragment fragment = new TikTokPreferenceFragment();
         Bundle arguments = new Bundle();
