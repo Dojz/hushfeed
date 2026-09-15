@@ -28,6 +28,10 @@ public final class SettingsContextRule extends ExternalResource {
     @Override
     protected void before() {
         Utils.setContext(RuntimeEnvironment.getApplication());
+        // The restart debt is process-wide by design, and the test JVM is one process: a
+        // restart-gated toggle in one class would pin the row on every page captured after it.
+        app.morphe.extension.shared.settings.preference.AbstractPreferenceFragment
+                .restartPending.clear();
     }
 
     @Override

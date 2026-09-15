@@ -417,9 +417,12 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         Context context = getActivity();
         if (screen == null || restartPending == null || context == null) return;
         boolean owed = !restartPendingKeys().isEmpty();
-        // Removed and added back rather than only added: the bound view keeps the count it
-        // was built with, and the list rebinds what it is handed afresh.
-        screen.removePreference(restartPending);
+        boolean shown = screen.findPreference(RestartPendingPreference.KEY) != null;
+        // Only touched while something is owed or shown. removePreference notifies the
+        // hierarchy whether or not the row was there, which rebuilt every page's list once
+        // more at open and moved twenty captures by a switch frame. While owed, the row is
+        // taken out and put back so the list rebinds the count.
+        if (shown) screen.removePreference(restartPending);
         if (owed) screen.addPreference(restartPending);
 
         String generic = L10n.t(context, TogglePreference.RESTART_SENTENCE);
