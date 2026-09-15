@@ -66,22 +66,37 @@ val refreshingScreenshots = gradle.startParameter.taskNames.any {
     it == "refreshScreenshots" || it.endsWith(":refreshScreenshots")
 }
 
-// Robolectric 4.16.1 asks for Bouncy Castle 1.81. Every request in this module is rewritten to
-// the reviewed release so related test libraries cannot resolve at mixed versions. No production
-// configuration contains this group, so none of it reaches the MPE payload.
+// Robolectric 4.17 asks for Bouncy Castle 1.85 twice: by name, through the bc-jdk18on-bom it
+// imports, and with no version of its own for the bcprov module that BOM governs. Every request
+// in this module is rewritten to the reviewed release so related test libraries cannot resolve
+// at mixed versions. No production configuration contains this group, so none of it reaches
+// the MPE payload.
 //
 // Checking the resolved graph afterwards would prove nothing: the rewrite above guarantees the
 // answer, so a "wrong resolved version" branch could never run. What the rewrite hides, and what
 // is worth failing on, is the request underneath it. When Robolectric moves to a version nobody
 // has looked at, this build stops instead of quietly rewriting it away.
 val safeBouncyCastleVersion = libs.versions.bouncycastle.get()
-val reviewedBouncyCastleRequests = setOf("1.81", safeBouncyCastleVersion)
-// Stands in for a request that names no version. Deliberately not a version string, so it can
-// never be added to the reviewed set by someone pasting a number in.
-val UNVERSIONED_BOUNCY_CASTLE_REQUEST = "a request with no version of its own"
+// 1.85 was checked on 2026-09-15 against the two advisories the catalog names: CVE-2025-8916
+// ends at 1.79 and CVE-2026-5588 at 1.84, so the request sits outside both. It is rewritten
+// all the same, because one reviewed release in the graph is easier to hold than two.
+val reviewedBouncyCastleRequests = setOf("1.85", safeBouncyCastleVersion)
+// Modules Robolectric declares with no version of its own, because the BOM it imports carries
+// the version for them. Reviewing that BOM is what covers these, so they are named here rather
+// than by a version: the BOM's own request is reviewed above, and a module that turns up here
+// without one is a request nothing in this file chose the version for.
+//
+// Reading the constraint behind such a request instead was tried on 2026-09-15 and is worthless:
+// the rewrite has already moved the BOM to the reviewed release by then, so every constraint it
+// contributes names that release and the check can never fail. Same trap as the resolved-version
+// check described above.
+val reviewedVersionlessBouncyCastleModules = setOf("bcprov-jdk18on")
 // Guarded by hand rather than by a synchronized wrapper: in a Kotlin build script `java` is the
 // Java extension, so the java.util package cannot be named here.
 val requestedBouncyCastleVersions = sortedSetOf<String>()
+// Module names, kept apart from the versions above so a name can never end up in the reviewed
+// version set by someone pasting it in.
+val unversionedBouncyCastleRequests = sortedSetOf<String>()
 
 configurations.configureEach {
     resolutionStrategy.eachDependency {
@@ -90,15 +105,18 @@ configurations.configureEach {
             // A ?.let dropped those: one arriving through a platform or a BOM was rewritten to
             // the reviewed release like any other and then counted nowhere, so the unreviewed
             // set stayed empty for it and the gate below had nothing to fail on. A request with
-            // no version is the one most worth stopping on, because nothing in this file chose
+            // no version is the one most worth reading, because nothing in this file chose
             // what it would otherwise have resolved to.
             // Blank as well as null. A declaration with no version at all reports "" rather
-            // than null, so a plain ?: left the placeholder unused and the failure read "asks
-            // for Bouncy Castle , which nobody has reviewed": it stopped the build, which is
-            // the point, but said nothing a reader could act on.
+            // than null, so a plain null check counted it as a version and the failure read
+            // "asks for Bouncy Castle , which nobody has reviewed": it stopped the build, which
+            // is the point, but said nothing a reader could act on.
             val asked = requested.version?.takeIf { it.isNotBlank() }
-                ?: UNVERSIONED_BOUNCY_CASTLE_REQUEST
-            synchronized(requestedBouncyCastleVersions) { requestedBouncyCastleVersions.add(asked) }
+            if (asked != null) {
+                synchronized(requestedBouncyCastleVersions) { requestedBouncyCastleVersions.add(asked) }
+            } else {
+                synchronized(unversionedBouncyCastleRequests) { unversionedBouncyCastleRequests.add(requested.name) }
+            }
             useVersion(safeBouncyCastleVersion)
             because("The Robolectric test graph must use the reviewed security release.")
         }
@@ -139,13 +157,20 @@ val verifyBouncyCastleTestGraph = tasks.register("verifyBouncyCastleTestGraph") 
         val requested = synchronized(requestedBouncyCastleVersions) {
             requestedBouncyCastleVersions.toSet()
         }
-        val unreviewed = requested - reviewedBouncyCastleRequests
+        val unversioned = synchronized(unversionedBouncyCastleRequests) {
+            unversionedBouncyCastleRequests.toSet()
+        }
+        val unreviewed = (requested - reviewedBouncyCastleRequests).sorted() +
+            (unversioned - reviewedVersionlessBouncyCastleModules).sorted()
+                .map { "$it with no version of its own" }
         if (unreviewed.isNotEmpty()) {
             throw GradleException(
-                "The test graph now asks for Bouncy Castle " + unreviewed.sorted().joinToString(", ") +
+                "The test graph now asks for Bouncy Castle " + unreviewed.joinToString(", ") +
                     ", which nobody has reviewed. It is being rewritten to $safeBouncyCastleVersion. " +
-                    "Check the advisory for the requested release, then add it to " +
-                    "reviewedBouncyCastleRequests or move the pin."
+                    "Check the advisory for the requested release, then add a version to " +
+                    "reviewedBouncyCastleRequests, or a module asking for no version of its own " +
+                    "to reviewedVersionlessBouncyCastleModules once you have read what carries " +
+                    "its version, or move the pin."
             )
         }
     }
@@ -165,7 +190,7 @@ dependencies {
     testImplementation(project(":extensions:shared:library"))
     testImplementation(project(":extensions:tiktok:stub"))
     testImplementation("junit:junit:4.13.2")
-    testImplementation("org.robolectric:robolectric:4.16.1")
+    testImplementation("org.robolectric:robolectric:4.17")
 }
 
 extension {

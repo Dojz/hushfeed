@@ -814,6 +814,44 @@ public class SessionLockOverlayTest {
         }
     }
 
+    /**
+     * Android 17 replaced the queue behind the main Looper. The countdown is a runnable that
+     * posts itself back a second ahead, so on a queue that delivered nothing it would run once
+     * and never again, with nothing failing. The tick is started here and left to the queue: a
+     * minute goes by on the budget's clock with nothing calling sync, and only a delivered tick
+     * can move the label.
+     */
+    @Test @Config(sdk = 37)
+    public void onAndroidSeventeenTheTickStillComesRoundOnItsOwn() throws Exception {
+        Settings.SESSION_BUDGET_VIDEOS.save(1);
+        Settings.SESSION_BUDGET_LOCK_MINUTES.save(5);
+        SessionBudget.noteVideo("a");
+        assertTrue(SessionBudget.claimNotice());
+
+        try (var owner = Robolectric.buildActivity(HostActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setActivity(activity);
+            var looper = Shadows.shadowOf(android.os.Looper.getMainLooper());
+            SessionLockOverlay.ensureRunning();
+            looper.idle();
+
+            ViewGroup root = activity.findViewById(android.R.id.content);
+            ViewGroup panel = (ViewGroup) root.getChildAt(root.getChildCount() - 1);
+            android.widget.TextView remaining = (android.widget.TextView) panel.getChildAt(1);
+            AtomicInteger countdown = countWrites(remaining);
+            String first = remaining.getText().toString();
+
+            now.addAndGet(60_000L);
+            assertEquals("the countdown moved before a tick was delivered",
+                    first, remaining.getText().toString());
+
+            looper.idleFor(java.time.Duration.ofSeconds(1));
+            assertEquals("the tick did not come round", 1, countdown.get());
+            assertFalse("the countdown never moved, so this proves nothing",
+                    first.equals(remaining.getText().toString()));
+        }
+    }
+
     private static long at(int year, int month, int day, int hour, int minute) {
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
         calendar.clear();
