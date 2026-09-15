@@ -18,6 +18,7 @@ source,target
 %1$s / local catalog,%1$s / local catalog
 %1$s and above,%1$s and above
 %1$s appears more than once in this file.,%1$s appears more than once in this file.
+%1$s changed,%1$s changed
 %1$s destinations must start with %2$s,%1$s destinations must start with %2$s
 %1$s has an invalid value. %2$s,%1$s has an invalid value. %2$s
 %1$s has no supported override boundary in this Lab build.,%1$s has no supported override boundary in this Lab build.
@@ -27,7 +28,6 @@ source,target
 %1$s isn't installed or doesn't take links,%1$s isn't installed or doesn't take links
 %1$s left,%1$s left
 %1$s min left,%1$s min left
-%1$s on,%1$s on
 %1$s to %2$s,%1$s to %2$s
 %1$s videos left,%1$s videos left
 %1$s was rejected. %2$s,%1$s was rejected. %2$s

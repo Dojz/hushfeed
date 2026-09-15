@@ -205,7 +205,10 @@ public final class SettingsMenuPreference extends Preference {
         if (activeCount > 0) {
             TextView badge = SettingsUi.text(
                     getContext(),
-                    L10n.f(getContext(), "%1$s on", activeCount),
+                    // "changed", not "on". The number is how many settings on that page
+                    // are away from their default, and two of them default to on, so
+                    // turning one of those off used to read as having turned it on.
+                    L10n.f(getContext(), "%1$s changed", activeCount),
                     12,
                     SettingsUi.badgeText(),
                     1

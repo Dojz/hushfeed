@@ -108,6 +108,8 @@ public final class L10nTranslations {
                 "Ab %1$s");
         table.put("%1$s appears more than once in this file.",
                 "%1$s kommt in dieser Datei mehrmals vor.");
+        table.put("%1$s changed",
+                "%1$s geändert");
         table.put("%1$s destinations must start with %2$s",
                 "%1$s-Ziele müssen mit %2$s beginnen");
         table.put("%1$s has an invalid value. %2$s",
@@ -126,8 +128,6 @@ public final class L10nTranslations {
                 "Noch %1$s");
         table.put("%1$s min left",
                 "Noch %1$s Min.");
-        table.put("%1$s on",
-                "%1$s aktiv");
         table.put("%1$s to %2$s",
                 "%1$s bis %2$s");
         table.put("%1$s videos left",
@@ -2161,6 +2161,8 @@ public final class L10nTranslations {
                 "%1$s y superior");
         table.put("%1$s appears more than once in this file.",
                 "%1$s aparece más de una vez en este archivo.");
+        table.put("%1$s changed",
+                "%1$s cambiados");
         table.put("%1$s destinations must start with %2$s",
                 "Los destinos de %1$s deben empezar por %2$s");
         table.put("%1$s has an invalid value. %2$s",
@@ -2179,8 +2181,6 @@ public final class L10nTranslations {
                 "Queda %1$s");
         table.put("%1$s min left",
                 "Quedan %1$s min");
-        table.put("%1$s on",
-                "%1$s activados");
         table.put("%1$s to %2$s",
                 "De %1$s a %2$s");
         table.put("%1$s videos left",
@@ -4214,6 +4214,8 @@ public final class L10nTranslations {
                 "%1$s ke atas");
         table.put("%1$s appears more than once in this file.",
                 "%1$s muncul lebih dari sekali dalam file ini.");
+        table.put("%1$s changed",
+                "%1$s diubah");
         table.put("%1$s destinations must start with %2$s",
                 "Tujuan %1$s harus diawali %2$s");
         table.put("%1$s has an invalid value. %2$s",
@@ -4232,8 +4234,6 @@ public final class L10nTranslations {
                 "%1$s lagi");
         table.put("%1$s min left",
                 "Sisa %1$s mnt");
-        table.put("%1$s on",
-                "%1$s aktif");
         table.put("%1$s to %2$s",
                 "%1$s sampai %2$s");
         table.put("%1$s videos left",
@@ -6267,6 +6267,8 @@ public final class L10nTranslations {
                 "%1$s ou superior");
         table.put("%1$s appears more than once in this file.",
                 "%1$s aparece mais de uma vez neste arquivo.");
+        table.put("%1$s changed",
+                "%1$s alterados");
         table.put("%1$s destinations must start with %2$s",
                 "Os destinos de %1$s precisam começar com %2$s");
         table.put("%1$s has an invalid value. %2$s",
@@ -6285,8 +6287,6 @@ public final class L10nTranslations {
                 "Resta %1$s");
         table.put("%1$s min left",
                 "Restam %1$s min");
-        table.put("%1$s on",
-                "%1$s ativados");
         table.put("%1$s to %2$s",
                 "De %1$s a %2$s");
         table.put("%1$s videos left",
