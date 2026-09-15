@@ -106,7 +106,10 @@ public class RestartGatedRowsTest {
                 if (setting == null || !setting.rebootApp) continue;
                 gated++;
                 CharSequence summary = row.getSummary();
-                if (summary == null || !summary.toString().contains(TogglePreference.RESTART_MARKER)) {
+                // Its own literal rather than the production predicate: a predicate that always
+                // answered yes would leave every row silent and still pass a test that asked it.
+                if (summary == null
+                        || !summary.toString().toLowerCase(java.util.Locale.ROOT).contains("restart")) {
                     silent.add(section + " / " + row.getClass().getSimpleName() + " " + row.getKey()
                             + ": " + summary);
                 }
@@ -116,6 +119,39 @@ public class RestartGatedRowsTest {
         assertTrue("the walk saw too few restart-gated rows to mean anything: " + gated, gated >= 40);
         assertTrue("rows whose setting needs a restart and whose summary does not say so:\n"
                 + String.join("\n", silent), silent.isEmpty());
+    }
+
+    /**
+     * And no row says it twice.
+     *
+     * <p>The other half of the same walk. The sentence is appended to any summary that does not
+     * already ask for a restart, so a summary that asks in its own words used to collect a second
+     * copy: both Region rows shipped "and a restart. Restart TikTok to apply this." in every
+     * language, because the join happens after the summary is translated.
+     */
+    @Test public void noRowAsksForARestartTwice() {
+        List<String> doubled = new ArrayList<>();
+        for (String section : SECTIONS) {
+            TikTokPreferenceFragment page = attach(section);
+            for (Preference row : rows(page.getPreferenceScreen(), new ArrayList<>())) {
+                CharSequence summary = row.getSummary();
+                if (summary == null) continue;
+                String text = summary.toString();
+                int first = text.indexOf(TogglePreference.RESTART_SENTENCE);
+                if (first >= 0 && text.indexOf(TogglePreference.RESTART_SENTENCE, first + 1) >= 0) {
+                    doubled.add(section + " / " + row.getKey() + ": " + text);
+                    continue;
+                }
+                // The shape the two Region rows had: their own wording, then the sentence.
+                if (first > 0 && text.substring(0, first)
+                        .toLowerCase(java.util.Locale.ROOT).contains("restart")) {
+                    doubled.add(section + " / " + row.getKey() + ": " + text);
+                }
+            }
+        }
+
+        assertTrue("rows that ask for a restart twice:\n" + String.join("\n", doubled),
+                doubled.isEmpty());
     }
 
     private static List<Preference> rows(PreferenceGroup group, List<Preference> into) {

@@ -229,8 +229,8 @@ public final class L10nTranslations {
                 "Bereits als „nicht interessiert“ markiert");
         table.put("Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.",
                 "Diese Filter auch auf heruntergeladene Videos anwenden, die TikTok nutzt, wenn der Feed nicht genug neue Beiträge laden kann.");
-        table.put("Also change the region TikTok reports internally. Keeps your interface language. Needs Override SIM details and a restart; your IP address and your account's own rules still apply.",
-                "Ändert außerdem die Region, die TikTok intern meldet. Die Sprache der Oberfläche bleibt. Braucht SIM-Angaben überschreiben und einen Neustart; deine IP-Adresse und die Regeln deines Kontos gelten weiterhin.");
+        table.put("Also change the region TikTok reports internally. Keeps your interface language. Needs Override SIM details. Your IP address and your account's own rules still apply.",
+                "Ändert außerdem die Region, die TikTok intern meldet. Die Sprache der Oberfläche bleibt. Braucht SIM-Angaben überschreiben. Deine IP-Adresse und die Regeln deines Kontos gelten weiterhin.");
         table.put("Always show publish date",
                 "Veröffentlichungsdatum immer anzeigen");
         table.put("Always show the publish date in video author information. Restart TikTok to apply this.",
@@ -1971,8 +1971,8 @@ public final class L10nTranslations {
                 "Standardgeschwindigkeit verwenden");
         table.put("Use non-personalized search",
                 "Nicht personalisierte Suche verwenden");
-        table.put("Use the preset for the region TikTok reports for your account and its shop too. May affect search. Needs Override SIM details, Match locale and timezone to country, and a restart.",
-                "Die Vorlage auch für die Region verwenden, die TikTok für dein Konto und seinen Shop meldet. Kann die Suche beeinflussen. Braucht SIM-Details überschreiben, Sprache und Zeitzone ans Land anpassen und einen Neustart.");
+        table.put("Use the preset for the region TikTok reports for your account and its shop too. May affect search. Needs Override SIM details and Match locale and timezone to country.",
+                "Die Vorlage auch für die Region verwenden, die TikTok für dein Konto und seinen Shop meldet. Kann die Suche beeinflussen. Braucht SIM-Details überschreiben und Sprache und Zeitzone ans Land anpassen.");
         table.put("Use the selected country and operator values. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.",
                 "Das gewählte Land und die Anbieterwerte verwenden. Das ändert nur, was die SIM meldet: deine IP-Adresse, der Verlauf deines Kontos und die Sprache, in der du liest, bleiben gleich, und eines davon reicht TikTok schon, um bei der bisherigen Region zu bleiben. TikTok neu starten, damit das gilt.");
         table.put("Use the selected country. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.",
@@ -2280,8 +2280,8 @@ public final class L10nTranslations {
                 "Ya marcado como no me interesa");
         table.put("Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.",
                 "Aplicar también estos filtros a los vídeos descargados que TikTok usa cuando el feed no consigue cargar suficientes elementos nuevos.");
-        table.put("Also change the region TikTok reports internally. Keeps your interface language. Needs Override SIM details and a restart; your IP address and your account's own rules still apply.",
-                "Cambia también la región que TikTok informa internamente. Mantiene el idioma de la interfaz. Necesita Sustituir los datos de la SIM y reiniciar; tu dirección IP y las reglas de tu cuenta siguen aplicándose.");
+        table.put("Also change the region TikTok reports internally. Keeps your interface language. Needs Override SIM details. Your IP address and your account's own rules still apply.",
+                "Cambia también la región que TikTok informa internamente. Mantiene el idioma de la interfaz. Necesita Sustituir los datos de la SIM. Tu dirección IP y las reglas de tu cuenta siguen aplicándose.");
         table.put("Always show publish date",
                 "Mostrar siempre la fecha de publicación");
         table.put("Always show the publish date in video author information. Restart TikTok to apply this.",
@@ -4022,8 +4022,8 @@ public final class L10nTranslations {
                 "Usar una velocidad de reproducción predeterminada");
         table.put("Use non-personalized search",
                 "Usar la búsqueda sin personalizar");
-        table.put("Use the preset for the region TikTok reports for your account and its shop too. May affect search. Needs Override SIM details, Match locale and timezone to country, and a restart.",
-                "Usar el preajuste también para la región que TikTok informa de tu cuenta y su tienda. Puede afectar a la búsqueda. Necesita Sustituir los datos de la SIM, Ajustar idioma y zona horaria al país, y un reinicio.");
+        table.put("Use the preset for the region TikTok reports for your account and its shop too. May affect search. Needs Override SIM details and Match locale and timezone to country.",
+                "Usar el preajuste también para la región que TikTok informa de tu cuenta y su tienda. Puede afectar a la búsqueda. Necesita Sustituir los datos de la SIM y Ajustar idioma y zona horaria al país.");
         table.put("Use the selected country and operator values. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.",
                 "Usar el país y los valores de operador seleccionados. Esto solo cambia lo que dice la SIM: tu dirección IP, el historial de tu cuenta y el idioma en el que lees siguen igual, y con cualquiera de ellos le basta a TikTok para mantener la región que ya eligió. Reinicia TikTok para que se aplique.");
         table.put("Use the selected country. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.",
@@ -4331,8 +4331,8 @@ public final class L10nTranslations {
                 "Sudah ditandai sebagai tidak tertarik");
         table.put("Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.",
                 "Terapkan filter ini juga ke video terunduh yang TikTok pakai saat feed tidak bisa memuat cukup konten baru.");
-        table.put("Also change the region TikTok reports internally. Keeps your interface language. Needs Override SIM details and a restart; your IP address and your account's own rules still apply.",
-                "Juga mengubah wilayah yang dilaporkan TikTok secara internal. Bahasa antarmuka tetap. Perlu Timpa detail SIM dan mulai ulang; alamat IP dan aturan akun Anda tetap berlaku.");
+        table.put("Also change the region TikTok reports internally. Keeps your interface language. Needs Override SIM details. Your IP address and your account's own rules still apply.",
+                "Juga mengubah wilayah yang dilaporkan TikTok secara internal. Bahasa antarmuka tetap. Perlu Timpa detail SIM. Alamat IP dan aturan akun Anda tetap berlaku.");
         table.put("Always show publish date",
                 "Selalu tampilkan tanggal unggah");
         table.put("Always show the publish date in video author information. Restart TikTok to apply this.",
@@ -6073,8 +6073,8 @@ public final class L10nTranslations {
                 "Pakai kecepatan pemutaran bawaan");
         table.put("Use non-personalized search",
                 "Pakai pencarian nonpersonal");
-        table.put("Use the preset for the region TikTok reports for your account and its shop too. May affect search. Needs Override SIM details, Match locale and timezone to country, and a restart.",
-                "Gunakan preset juga untuk wilayah yang dilaporkan TikTok untuk akun Anda dan tokonya. Bisa memengaruhi pencarian. Perlu Ganti detail SIM, Sesuaikan bahasa dan zona waktu dengan negara, dan mulai ulang.");
+        table.put("Use the preset for the region TikTok reports for your account and its shop too. May affect search. Needs Override SIM details and Match locale and timezone to country.",
+                "Gunakan preset juga untuk wilayah yang dilaporkan TikTok untuk akun Anda dan tokonya. Bisa memengaruhi pencarian. Perlu Ganti detail SIM dan Sesuaikan bahasa dan zona waktu dengan negara.");
         table.put("Use the selected country and operator values. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.",
                 "Gunakan negara dan nilai operator yang dipilih. Ini hanya mengubah apa yang dilaporkan SIM: alamat IP, riwayat akun, dan bahasa yang kamu baca tetap sama, dan salah satunya saja sudah cukup bagi TikTok untuk mempertahankan wilayah yang sudah dipilihnya. Mulai ulang TikTok agar berlaku.");
         table.put("Use the selected country. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.",
@@ -6382,8 +6382,8 @@ public final class L10nTranslations {
                 "Já marcado como não tenho interesse");
         table.put("Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.",
                 "Aplicar esses filtros também aos vídeos baixados que o TikTok usa quando o feed não consegue carregar itens novos suficientes.");
-        table.put("Also change the region TikTok reports internally. Keeps your interface language. Needs Override SIM details and a restart; your IP address and your account's own rules still apply.",
-                "Também muda a região que o TikTok informa internamente. Mantém o idioma da interface. Precisa de Substituir os dados do SIM e de reiniciar; seu endereço IP e as regras da sua conta continuam valendo.");
+        table.put("Also change the region TikTok reports internally. Keeps your interface language. Needs Override SIM details. Your IP address and your account's own rules still apply.",
+                "Também muda a região que o TikTok informa internamente. Mantém o idioma da interface. Precisa de Substituir os dados do SIM. Seu endereço IP e as regras da sua conta continuam valendo.");
         table.put("Always show publish date",
                 "Sempre mostrar a data de publicação");
         table.put("Always show the publish date in video author information. Restart TikTok to apply this.",
@@ -8124,8 +8124,8 @@ public final class L10nTranslations {
                 "Usar uma velocidade de reprodução padrão");
         table.put("Use non-personalized search",
                 "Usar a busca sem personalização");
-        table.put("Use the preset for the region TikTok reports for your account and its shop too. May affect search. Needs Override SIM details, Match locale and timezone to country, and a restart.",
-                "Usar a predefinição também para a região que o TikTok informa para a sua conta e a loja dela. Pode afetar a busca. Precisa de Substituir os dados do chip, Ajustar idioma e fuso horário ao país, e de um reinício.");
+        table.put("Use the preset for the region TikTok reports for your account and its shop too. May affect search. Needs Override SIM details and Match locale and timezone to country.",
+                "Usar a predefinição também para a região que o TikTok informa para a sua conta e a loja dela. Pode afetar a busca. Precisa de Substituir os dados do chip e Ajustar idioma e fuso horário ao país.");
         table.put("Use the selected country and operator values. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.",
                 "Usar o país e os valores de operadora selecionados. Isso muda só o que o SIM informa: seu endereço IP, o histórico da sua conta e o idioma em que você lê continuam os mesmos, e qualquer um deles já basta para o TikTok manter a região que já escolheu. Reinicie o TikTok para aplicar.");
         table.put("Use the selected country. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.",

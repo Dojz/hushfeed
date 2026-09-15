@@ -77,6 +77,33 @@ public class RestartNoteTest {
     }
 
     /**
+     * A summary that asks for a restart in its own words is left alone too.
+     *
+     * <p>The check was the literal "Restart TikTok", and the two Region rows say "and a restart",
+     * so both shipped the sentence twice in all five languages: the join happens after the
+     * summary is translated, so no table could have caught it.
+     */
+    @Test public void aSummaryThatAsksForARestartInItsOwnWordsIsLeftAlone() {
+        TogglePreference row = new TogglePreference(context, "Some switch",
+                "What this switch does. Needs Override SIM details and a restart.",
+                setting("restart_note_own_words", true));
+
+        assertEquals("a summary that already asks for a restart was told to restart again",
+                "What this switch does. Needs Override SIM details and a restart.",
+                row.getSummary().toString());
+    }
+
+    /** Restarting is the word, not a word inside another one: "restarted" counts, "start" does not. */
+    @Test public void aSummaryThatMerelyStartsSomethingStillGetsTheSentence() {
+        TogglePreference row = new TogglePreference(context, "Some switch",
+                "Start the feed paused.", setting("restart_note_start", true));
+
+        assertTrue("a summary about starting was read as one about restarting: "
+                        + row.getSummary(),
+                row.getSummary().toString().contains("Restart TikTok to apply this."));
+    }
+
+    /**
      * The mutation control. Reading the flag is what decides this, so a row built from a setting
      * whose flag is off must not pick the sentence up from anywhere else.
      */

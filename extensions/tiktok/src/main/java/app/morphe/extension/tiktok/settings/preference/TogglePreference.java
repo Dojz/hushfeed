@@ -14,6 +14,8 @@ import app.morphe.extension.shared.settings.BooleanSetting;
 import app.morphe.extension.shared.settings.Setting;
 import app.morphe.extension.tiktok.Utils;
 
+import java.util.regex.Pattern;
+
 @SuppressWarnings("deprecation")
 public class TogglePreference extends SwitchPreference {
 
@@ -27,8 +29,17 @@ public class TogglePreference extends SwitchPreference {
      */
     public static final String RESTART_SENTENCE = "Restart TikTok to apply this.";
 
-    /** What an existing summary already says in its own words, so it is not said twice. */
-    static final String RESTART_MARKER = "Restart TikTok";
+    /**
+     * A summary that already asks for a restart, in whatever words it chose.
+     *
+     * <p>This was the literal "Restart TikTok". Two Region summaries said "and a restart"
+     * instead, so the check missed them and both rows shipped the sentence twice, in all five
+     * languages, because the join happens after translation. Matched on the word rather than on
+     * one spelling of it, and against the English, which is the key, so a translation that words
+     * it differently cannot fool this either way.
+     */
+    private static final Pattern SAYS_RESTART =
+            Pattern.compile("\\brestart", Pattern.CASE_INSENSITIVE);
 
     public TogglePreference(Context context, String title, String summary, BooleanSetting setting) {
         super(context);
@@ -63,9 +74,7 @@ public class TogglePreference extends SwitchPreference {
         // which works but reads as though the join were a phrase of its own.
         String translated = L10n.t(context, summary);
         if (setting == null || !setting.rebootApp) return translated;
-        // Against the English, which is the key, so a translation that words it differently
-        // cannot fool this into leaving the note off.
-        if (summary.contains(RESTART_MARKER)) return translated;
+        if (SAYS_RESTART.matcher(summary).find()) return translated;
 
         String note = L10n.t(context, RESTART_SENTENCE);
         String body = translated.trim();
