@@ -278,7 +278,7 @@ public class TabSelectionPreference extends Preference {
         LinearLayout row = new LinearLayout(context);
         row.setOrientation(LinearLayout.HORIZONTAL);
         row.setGravity(Gravity.CENTER_VERTICAL);
-        row.setBackgroundColor(getDialogBackgroundColor());
+        row.setBackground(SettingsUi.listRow(context, getDialogBackgroundColor()));
         row.setPadding(dpToPx(10), dpToPx(10), dpToPx(10), dpToPx(10));
 
         CheckBox checkBox = new CheckBox(context);

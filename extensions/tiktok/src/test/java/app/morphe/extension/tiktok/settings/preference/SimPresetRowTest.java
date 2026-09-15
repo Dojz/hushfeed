@@ -31,6 +31,7 @@ import org.robolectric.annotation.Config;
  */
 @RunWith(RobolectricTestRunner.class)
 @Config(sdk = 28)
+@org.robolectric.annotation.GraphicsMode(org.robolectric.annotation.GraphicsMode.Mode.NATIVE)
 @SuppressWarnings("deprecation")
 public class SimPresetRowTest {
     public static final class TestActivity extends PreferenceActivity {}
@@ -317,5 +318,52 @@ public class SimPresetRowTest {
                 new InputTextPreference(context, "ISO", "", Settings.SIM_SPOOF_ISO),
                 new InputTextPreference(context, "MCC/MNC", "", Settings.SIMSPOOF_MCCMNC),
                 new InputTextPreference(context, "Operator", "", Settings.SIMSPOOF_OP_NAME));
+    }
+    /**
+     * A preset row answers a press and shows when focus reaches it.
+     *
+     * <p>Each row was painted an opaque colour, and a ListView draws its selector underneath the
+     * item, so the one press highlight the row could have had was covered by its own fill.
+     */
+    @Test
+    public void aPresetRowAnswersAPressAndShowsItsFocus() throws Exception {
+        try (var controller = Robolectric.buildActivity(TestActivity.class).setup()) {
+            SimPresetPreference row = build(controller.get());
+            java.lang.reflect.Method show =
+                    SimPresetPreference.class.getDeclaredMethod("showPresetDialog");
+            show.setAccessible(true);
+            show.invoke(row);
+            org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idle();
+
+            android.app.AlertDialog dialog = (android.app.AlertDialog)
+                    org.robolectric.shadows.ShadowDialog.getLatestDialog();
+            android.widget.ListView list = findView(
+                    dialog.getWindow().getDecorView(), android.widget.ListView.class);
+            android.view.View presetRow = list.getAdapter().getView(0, null, list);
+
+            android.graphics.drawable.Drawable background = presetRow.getBackground();
+            assertTrue("a preset row is painted flat, so a press shows nothing: "
+                            + background.getClass().getSimpleName(),
+                    background instanceof android.graphics.drawable.RippleDrawable);
+            assertNotEquals("a preset row looks the same focused as it does at rest",
+                    renderOf(background, new int[0]),
+                    renderOf(background, new int[]{android.R.attr.state_focused}));
+            dialog.dismiss();
+        }
+    }
+
+    /** What a background actually paints in the state given, every pixel of it, as one number. */
+    private static int renderOf(android.graphics.drawable.Drawable background, int[] state) {
+        background.setState(state);
+        background.setBounds(0, 0, 64, 48);
+        android.graphics.Bitmap bitmap = android.graphics.Bitmap.createBitmap(
+                64, 48, android.graphics.Bitmap.Config.ARGB_8888);
+        background.draw(new android.graphics.Canvas(bitmap));
+        int hash = 17;
+        for (int x = 0; x < 64; x++) {
+            for (int y = 0; y < 48; y++) hash = hash * 31 + bitmap.getPixel(x, y);
+        }
+        bitmap.recycle();
+        return hash;
     }
 }

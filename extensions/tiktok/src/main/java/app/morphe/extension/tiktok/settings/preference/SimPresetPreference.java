@@ -326,7 +326,9 @@ public class SimPresetPreference extends Preference {
             summary.setText(preset.getSummary());
             view.setEnabled(true);
 
-            view.setBackgroundColor(getDialogBackgroundColor());
+            // The fill under the press and the focus. Set flat, it covered the ListView's
+            // own selector, so pressing a preset looked like nothing at all.
+            view.setBackground(SettingsUi.listRow(parent.getContext(), getDialogBackgroundColor()));
             title.setTextColor(getTitleTextColor());
             summary.setTextColor(getSummaryTextColor());
             return view;

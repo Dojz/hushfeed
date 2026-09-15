@@ -783,6 +783,19 @@ public final class SettingsUi {
         return pressAndFocus(context, radiusDp, content);
     }
 
+    /**
+     * A row in a hand-built list, with the press and focus the settings rows have.
+     *
+     * <p>The SIM preset list and the tab checklist painted each row an opaque colour, and a
+     * ListView draws its selector underneath the item, so the one press highlight those rows
+     * could have had was hidden by the fill covering it.
+     *
+     * @param fill the row's own colour, painted under the states.
+     */
+    public static Drawable listRow(Context context, @ColorInt int fill) {
+        return pressAndFocus(context, 0, new ColorDrawable(fill));
+    }
+
     private static Drawable pressAndFocus(Context context, int radiusDp, Drawable content) {
         GradientDrawable focus = new GradientDrawable();
         focus.setShape(GradientDrawable.RECTANGLE);
