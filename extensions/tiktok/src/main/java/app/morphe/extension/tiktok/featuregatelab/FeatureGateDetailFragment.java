@@ -304,7 +304,10 @@ public final class FeatureGateDetailFragment extends Fragment {
             values.setTag("feature_gate_value");
             values.setEnabled(editable);
             applyOptionsAdapter();
-            values.setBackgroundColor(android.graphics.Color.TRANSPARENT);
+            // Transparent, so the reader could not see it was a control at all, let alone
+            // that focus had reached it.
+            values.setBackground(SettingsUi.focusableSurface(
+                    context, SettingsUi.RADIUS_CONTROL, false));
             values.setContentDescription(L10n.t(context, "Value to return"));
             values.setMinimumHeight(FeatureGateLabUi.dp(context, 48));
             LinearLayout.LayoutParams valueParams = FeatureGateLabUi.matchWrap();

@@ -136,10 +136,16 @@ public class FeatureGatePagesTest {
                 TextView action = lab.getView().findViewWithTag(tag);
                 assertNotNull(tag, action);
                 assertButtonRole(action);
+                // Tabbing through the Lab used to show nothing moving at all: every one of
+                // these was flat, focused or not, in both themes.
+                assertShowsItsFocus(tag, action);
             }
+            assertShowsItsFocus("feature_gate_search_row",
+                    lab.getView().findViewWithTag("feature_gate_search_row"));
 
             View allSources = lab.getView().findViewWithTag("feature_gate_source_0");
             View appAb = lab.getView().findViewWithTag("feature_gate_source_1");
+            assertShowsItsFocus("feature_gate_source_0", allSources);
             assertEquals(android.widget.Button.class.getName(),
                     allSources.createAccessibilityNodeInfo().getClassName());
             assertTrue("the focused source container does not carry the selected state",
@@ -926,5 +932,35 @@ public class FeatureGatePagesTest {
             }
         }
         return null;
+    }
+    /**
+     * A control that shows where the focus is, by what it paints rather than by a flag.
+     *
+     * <p>Rendered at rest and focused and compared pixel for pixel: which pixel a focus ring or
+     * a wash lands on depends on the radius and the density, so a sample would pass a control
+     * that changed nothing the reader can see.
+     */
+    private static void assertShowsItsFocus(String name, View control) {
+        assertNotNull(name, control);
+        android.graphics.drawable.Drawable background = control.getBackground();
+        assertNotNull(name + " has no background at all, so it cannot show a press or a focus",
+                background);
+        assertNotEquals(name + " looks exactly the same focused as it does at rest",
+                renderOf(background, new int[0]),
+                renderOf(background, new int[]{android.R.attr.state_focused}));
+    }
+
+    private static int renderOf(android.graphics.drawable.Drawable background, int[] state) {
+        background.setState(state);
+        background.setBounds(0, 0, 64, 48);
+        android.graphics.Bitmap bitmap = android.graphics.Bitmap.createBitmap(
+                64, 48, android.graphics.Bitmap.Config.ARGB_8888);
+        background.draw(new android.graphics.Canvas(bitmap));
+        int hash = 17;
+        for (int x = 0; x < 64; x++) {
+            for (int y = 0; y < 48; y++) hash = hash * 31 + bitmap.getPixel(x, y);
+        }
+        bitmap.recycle();
+        return hash;
     }
 }

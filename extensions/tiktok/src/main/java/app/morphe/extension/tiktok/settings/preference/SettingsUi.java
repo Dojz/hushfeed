@@ -749,7 +749,54 @@ public final class SettingsUi {
         button.setMinimumHeight(dp(button.getContext(), 48));
         button.setMinimumWidth(dp(button.getContext(), 48));
         button.setGravity(android.view.Gravity.CENTER);
+        // Colour, weight, size and the button role, and until now nothing at all to show a press
+        // or say where the focus is. Add, Remove, Save, Cancel, Select every tab, the Lab's tabs
+        // and its four selection actions all went through here and all of them were flat.
+        button.setBackground(pressAndFocus(button.getContext(), RADIUS_CONTROL,
+                new ColorDrawable(Color.TRANSPARENT)));
+        button.setFocusable(true);
         markAsButton(button);
+    }
+
+    /**
+     * A bordered surface that answers a press and says when it holds focus.
+     *
+     * <p>For the controls that are a frame rather than a word: the Lab's search row, its filter
+     * button and the detail page's value spinner. The border is the one the resting surface has
+     * and the accent while the control has focus, so the shape does not move under the reader.
+     */
+    public static Drawable focusableSurface(Context context, int radiusDp, boolean lifted) {
+        GradientDrawable surface = roundedSurface(context, radiusDp, lifted);
+        surface.setStroke(Math.max(1, dp(context, 1)), new ColorStateList(
+                new int[][]{new int[]{android.R.attr.state_focused}, new int[0]},
+                new int[]{accent(), border()}));
+        return pressAndFocus(context, radiusDp, surface);
+    }
+
+    /**
+     * The shared press and focus pair: a ripple over the content, and an accent wash while the
+     * control holds focus. One drawable, so the two states cannot be given to one control and
+     * forgotten on the next.
+     */
+    /** The same pair over a fill the caller built, for a control that repaints itself. */
+    public static Drawable pressAndFocusOver(Context context, int radiusDp, Drawable content) {
+        return pressAndFocus(context, radiusDp, content);
+    }
+
+    private static Drawable pressAndFocus(Context context, int radiusDp, Drawable content) {
+        GradientDrawable focus = new GradientDrawable();
+        focus.setShape(GradientDrawable.RECTANGLE);
+        focus.setCornerRadius(dp(context, radiusDp));
+        focus.setColor(new ColorStateList(
+                new int[][]{new int[]{android.R.attr.state_focused}, new int[0]},
+                new int[]{activatedFill(), Color.TRANSPARENT}));
+
+        GradientDrawable mask = new GradientDrawable();
+        mask.setShape(GradientDrawable.RECTANGLE);
+        mask.setCornerRadius(dp(context, radiusDp));
+        mask.setColor(Color.WHITE);
+        return new RippleDrawable(ColorStateList.valueOf(activatedFill()),
+                new LayerDrawable(new Drawable[]{content, focus}), mask);
     }
 
     /**

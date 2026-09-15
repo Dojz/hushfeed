@@ -262,7 +262,8 @@ public final class FeatureGateLabFragment extends Fragment {
         searchRow.setOrientation(LinearLayout.HORIZONTAL);
         searchRow.setGravity(Gravity.CENTER_VERTICAL);
         searchRow.setPaddingRelative(FeatureGateLabUi.dp(context, 8), 0, 0, 0);
-        searchRow.setBackground(SettingsUi.borderedSurface(context, 6, false));
+        searchRow.setTag("feature_gate_search_row");
+        searchRow.setBackground(SettingsUi.focusableSurface(context, 6, false));
         search = new EditText(context);
         search.setSingleLine(true);
         search.setTextSize(16);
@@ -317,6 +318,11 @@ public final class FeatureGateLabFragment extends Fragment {
             tabContainer.setFocusable(true);
             tabContainer.setTag("feature_gate_source_" + i);
             tabContainer.setContentDescription(L10n.t(context, SOURCE_LABELS[i]));
+            // The whole tab is the target, so the press and the focus belong on the container
+            // rather than on the label inside it. It had neither.
+            tabContainer.setBackground(SettingsUi.pressAndFocusOver(
+                    context, SettingsUi.RADIUS_CONTROL,
+                    new android.graphics.drawable.ColorDrawable(Color.TRANSPARENT)));
             SettingsUi.markAsButton(tabContainer);
             tabContainer.setOnClickListener(view -> onSourceSelected(position));
 
@@ -401,7 +407,7 @@ public final class FeatureGateLabFragment extends Fragment {
                 FeatureGateLabUi.dp(context, 12),
                 0
         );
-        filterButton.setBackground(SettingsUi.borderedSurface(context, 6, false));
+        filterButton.setBackground(SettingsUi.focusableSurface(context, 6, false));
         filterButton.setFocusable(true);
         filterButton.setOnClickListener(view -> showFilterPicker());
         resultRow.addView(filterButton, new LinearLayout.LayoutParams(
@@ -780,9 +786,13 @@ public final class FeatureGateLabFragment extends Fragment {
                 background.setColor(SettingsUi.badgeFill());
                 background.setCornerRadius(
                         FeatureGateLabUi.dp(tab.getContext(), SettingsUi.RADIUS_BADGE));
-                tab.setBackground(background);
+                tab.setBackground(SettingsUi.pressAndFocusOver(
+                        tab.getContext(), SettingsUi.RADIUS_BADGE, background));
             } else {
-                tab.setBackgroundColor(Color.TRANSPARENT);
+                // Repainted on every selection change, so the press and focus states
+                // styleTextAction gave this tab have to be put back with the fill.
+                SettingsUi.styleTextAction(tab, false);
+                tab.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
             }
         }
         for (int i = 0; i < sourceTabLabels.length; i++) {
