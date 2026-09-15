@@ -40,25 +40,6 @@ function Resolve-DesktopJar {
     throw 'No Morphe desktop CLI. Pass -DesktopJar or set HUSHFEED_DESKTOP_JAR.'
 }
 
-function Resolve-D8 {
-    param([string]$Explicit)
-    if ($Explicit -and (Test-Path -LiteralPath $Explicit -PathType Leaf)) {
-        return [System.IO.Path]::GetFullPath($Explicit)
-    }
-    $properties = Join-Path $Root 'local.properties'
-    $sdkLine = Get-Content -LiteralPath $properties -ErrorAction SilentlyContinue |
-        Where-Object { $_ -match '^sdk\.dir=' } | Select-Object -First 1
-    if (-not $sdkLine) { throw 'No Android SDK path in local.properties. Pass -D8.' }
-    $sdk = ($sdkLine -replace '^sdk\.dir=', '') -replace '\\\\', '\'
-    $found = @(Get-ChildItem -LiteralPath (Join-Path $sdk 'build-tools') -Directory `
-        -ErrorAction SilentlyContinue | ForEach-Object {
-            $candidate = Join-Path $_.FullName 'd8.bat'
-            if (Test-Path -LiteralPath $candidate -PathType Leaf) { $candidate }
-        } | Sort-Object -Descending | Select-Object -First 1)
-    if ($found.Count -ne 1) { throw 'No d8.bat found in the configured Android SDK. Pass -D8.' }
-    return $found[0]
-}
-
 function Invoke-Checked {
     param([string]$Program, [string[]]$Arguments, [string]$Description)
     $output = @(& $Program @Arguments 2>&1 | ForEach-Object { "$_" })
@@ -141,7 +122,7 @@ Assert-True ($prePushText -match 'scripts/test-injected-registers\.ps1') `
 
 $Java = Resolve-Java -Explicit $Java
 $DesktopJar = Resolve-DesktopJar -Explicit $DesktopJar
-$D8 = Resolve-D8 -Explicit $D8
+$D8 = Resolve-D8 -Explicit $D8 -Root $Root
 $javaBin = Split-Path -Parent $Java
 $javac = Join-Path $javaBin 'javac.exe'
 $jar = Join-Path $javaBin 'jar.exe'

@@ -714,5 +714,45 @@ try {
 
 Write-Host '[scripts] pre-push routing contracts passed'
 
+# --- Resolve-D8 ------------------------------------------------------------------------------
+#
+# The build-tools directory is chosen by version number. Sorted as text, 9.0.0 wins over 37.0.0
+# and 100.0.0 loses to it; the installed set happens to be 34 through 37, which is why nobody
+# had seen it pick wrong.
+
+. (Join-Path $PSScriptRoot 'injected-register-contracts.ps1')
+$sdkRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("hushfeed-sdk-" + [guid]::NewGuid().ToString('N'))
+try {
+    $checkout = Join-Path $sdkRoot 'checkout'
+    $sdk = Join-Path $sdkRoot 'sdk'
+    foreach ($version in @('9.0.0', '37.0.0', '100.0.0', 'not-a-version')) {
+        $tools = Join-Path (Join-Path $sdk 'build-tools') $version
+        New-Item -ItemType Directory -Path $tools -Force | Out-Null
+        Set-Content -LiteralPath (Join-Path $tools 'd8.bat') -Value '@echo off' -Encoding ASCII
+    }
+    # 38.0.0 is there but carries no d8, so it must not be picked over 37.0.0.
+    New-Item -ItemType Directory -Path (Join-Path (Join-Path $sdk 'build-tools') '38.0.0') -Force | Out-Null
+    New-Item -ItemType Directory -Path $checkout -Force | Out-Null
+    Set-Content -LiteralPath (Join-Path $checkout 'local.properties') -Encoding ASCII `
+        -Value ('sdk.dir=' + ($sdk -replace '\\', '\\'))
+
+    $chosen = Resolve-D8 -Root $checkout
+    Assert-True ($chosen -like '*100.0.0*d8.bat') "Resolve-D8 chose $chosen, not the newest build-tools by version."
+
+    Remove-Item -LiteralPath (Join-Path (Join-Path $sdk 'build-tools') '100.0.0') -Recurse -Force
+    $chosen = Resolve-D8 -Root $checkout
+    Assert-True ($chosen -like '*37.0.0*d8.bat') "Resolve-D8 chose $chosen over 37.0.0; 9.0.0 sorts above it as text."
+
+    $explicit = Join-Path (Join-Path (Join-Path $sdk 'build-tools') '9.0.0') 'd8.bat'
+    Assert-True ((Resolve-D8 -Explicit $explicit -Root $checkout) -eq $explicit) `
+        'An explicit d8 path was not honoured.'
+    Assert-Throws { Resolve-D8 -Root (Join-Path $sdkRoot 'nowhere') } '*local.properties*' `
+        'A checkout with no local.properties resolved a d8 from somewhere.'
+} finally {
+    Remove-Item -LiteralPath $sdkRoot -Recurse -Force -ErrorAction SilentlyContinue
+}
+
+Write-Host '[scripts] d8 resolution contracts passed'
+
 $global:LASTEXITCODE = 0
 Write-Host '[scripts] report, target, Java and guarded replacement contracts passed'
