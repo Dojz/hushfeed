@@ -8,13 +8,16 @@ package app.morphe.extension.shared.diagnostics;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 import org.junit.Test;
 
 /**
@@ -22,8 +25,9 @@ import org.junit.Test;
  *
  * <p>Every logged line used to build a {@link java.text.SimpleDateFormat}, look up a time zone
  * and parse the pattern, and it did it more than once per event: appending asks for the line's
- * length, evicting asks again, and the export asks once more. The first two run while the buffer
- * lock is held, so the cost fell on whoever was logging and every other logging thread queued
+ * length, evicting asks again once the buffer is full, and the export, the crash snapshot and
+ * the clear and undo paths each ask again. The eviction is the one inside the buffer's lock, so
+ * that one is paid by whoever happened to be logging while every other logging thread queues
  * behind it.
  */
 public class DiagnosticEventFormatTest {
@@ -99,6 +103,30 @@ public class DiagnosticEventFormatTest {
         start.countDown();
         assertTrue("the threads did not finish", done.await(30, TimeUnit.SECONDS));
         assertEquals("a line came out malformed under concurrent formatting", List.of(), wrong);
+    }
+
+    /**
+     * The saving is the formatter, not the string.
+     *
+     * <p>Every other case here would pass just as happily against a fresh
+     * {@link java.text.SimpleDateFormat} built inside the constructor, and that allocation, with
+     * the time zone lookup and pattern parse behind it, is what this change is about. So this
+     * one reads the field: one formatter per thread, kept, and not shared across threads.
+     */
+    @Test
+    public void oneFormatterPerThreadIsKeptAndNotShared() throws Exception {
+        Field field = DiagnosticEvent.class.getDeclaredField("TIMESTAMP");
+        field.setAccessible(true);
+        ThreadLocal<?> timestamps = (ThreadLocal<?>) field.get(null);
+
+        Object mine = timestamps.get();
+        assertSame("a formatter is built per call rather than kept per thread", mine, timestamps.get());
+
+        AtomicReference<Object> theirs = new AtomicReference<>();
+        Thread other = new Thread(() -> theirs.set(timestamps.get()));
+        other.start();
+        other.join();
+        assertNotSame("two threads share one SimpleDateFormat", mine, theirs.get());
     }
 
     /** Two events a millisecond apart are two different lines, so nothing is over-shared. */

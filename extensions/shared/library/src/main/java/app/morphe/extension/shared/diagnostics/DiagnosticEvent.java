@@ -38,12 +38,14 @@ public final class DiagnosticEvent {
     /**
      * The line this event reads as, built once.
      *
-     * <p>It was built on demand, and demand is more than it sounds: appending an event asks for
-     * its length, evicting one asks again, the undo path asks twice more, and the export asks
-     * once more, so the same line was formatted at least three times over its life. Every one of
-     * those was a fresh formatter, and the first two happen while the buffer lock is held, so the
-     * cost landed on whichever thread was logging and every other logging thread waited behind
-     * it. Every event that is built is appended, so there is nothing to defer.
+     * <p>It was built on demand, and every build was a fresh {@link SimpleDateFormat}, a time
+     * zone lookup and a pattern parse. Demand is more than one: appending an event asks for its
+     * length, and evicting one asks again, which every event pays once the buffer is full. The
+     * export, the crash snapshot and the clear and undo paths each ask again on top of that.
+     * The eviction is the one that runs inside the buffer's lock, so it is paid by whichever
+     * thread happened to be logging while every other logging thread waits behind it; the
+     * append's own call is deliberately outside the lock. Every event that is built is appended,
+     * so there is nothing to defer.
      */
     private final String formatted;
 

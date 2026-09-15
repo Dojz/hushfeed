@@ -76,11 +76,24 @@ object BundleVerifier {
      * put in front of a crafted catalog without building a bundle to go with it.
      */
     fun requireCanonicalDependencies(metadata: com.google.gson.JsonObject) {
-        metadata.getAsJsonArray("patches").forEach { entry ->
+        val patches = metadata["patches"]
+        require(patches != null && patches.isJsonArray) { "Patch list has no patches array" }
+        patches.asJsonArray.forEachIndexed { index, entry ->
+            require(entry.isJsonObject) { "Patch list row $index is not an object: $entry" }
             val patch = entry.asJsonObject
-            val dependencies = patch.getAsJsonArray("dependencies")?.map { it.asString }
-                ?: return@forEach
-            val name = patch["name"]?.asString ?: "(unnamed)"
+            // A hand-edited catalog is what this exists for, so every shape it could be in has
+            // to come back as a sentence rather than as a cast failure from inside Gson.
+            val name = patch["name"]?.takeIf { it.isJsonPrimitive }?.asString ?: "(unnamed)"
+            val declared = patch["dependencies"] ?: return@forEachIndexed
+            require(declared.isJsonArray) {
+                "Patch \"$name\" declares dependencies that are not a list: $declared"
+            }
+            val dependencies = declared.asJsonArray.map { dependency ->
+                require(dependency.isJsonPrimitive && dependency.asJsonPrimitive.isString) {
+                    "Patch \"$name\" names a dependency that is not a string: $dependency"
+                }
+                dependency.asString
+            }
             require(dependencies.size == dependencies.toSet().size) {
                 "Patch \"$name\" names a dependency twice: $dependencies"
             }

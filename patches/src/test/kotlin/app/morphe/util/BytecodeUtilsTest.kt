@@ -38,14 +38,16 @@ class BytecodeUtilsTest {
         returnType,
         // Room for a few registers: a case that needs two of them should not have to build its
         // own method.
-        4,
-        *instructions,
+        registers = 4,
+        accessFlags = AccessFlags.PUBLIC.value,
+        instructions = instructions,
     )
 
     /** The same method, sized by the case, for the ones that are about the frame itself. */
     private fun methodWithRegisters(
         returnType: String,
         registers: Int,
+        accessFlags: Int = AccessFlags.PUBLIC.value,
         vararg instructions: Instruction = arrayOf(ImmutableInstruction10x(Opcode.RETURN_VOID)),
     ): MutableMethod = MutableMethod(
         ImmutableMethod(
@@ -53,7 +55,7 @@ class BytecodeUtilsTest {
             "value",
             emptyList(),
             returnType,
-            AccessFlags.PUBLIC.value,
+            accessFlags,
             null,
             null,
             ImmutableMethodImplementation(
@@ -64,6 +66,8 @@ class BytecodeUtilsTest {
             ),
         ),
     )
+
+    private val staticFlags = AccessFlags.PUBLIC.value or AccessFlags.STATIC.value
 
     /** A body that hands an object back, which is what returnLate needs to find. */
     private fun returnsAnObject(returnType: String): MutableMethod = method(
@@ -182,24 +186,49 @@ class BytecodeUtilsTest {
     }
 
     @Test
-    fun `a void override needs one register even though it writes none`() {
+    fun `a void override needs no register at all`() {
         // Without this the two cases above would pass just as happily against a check that
-        // refused every method. return-void writes into nothing, so one register is the floor
-        // rather than the value's own requirement, and the floor is the inline smali compiler's:
-        // handed a frame of no registers it parses nothing and throws "Collection is empty" out
-        // of its own first(), naming neither the method nor the reason.
-        val one = methodWithRegisters("V", 1)
-        one.returnEarly()
+        // refused every method. return-void writes into nothing, and a static method with no
+        // parameters and no locals really is `.registers 0`: RememberClearDisplayPatch selects
+        // static void methods by shape, so this is not a hypothetical frame.
+        val none = methodWithRegisters("V", 0, staticFlags)
+        none.returnEarly()
         assertEquals(
-            "one register frame held " + one.implementation!!.instructions.map { it.opcode },
+            "zero register frame held " + none.implementation!!.instructions.map { it.opcode },
             Opcode.RETURN_VOID,
-            one.implementation!!.instructions.firstOrNull()?.opcode,
+            none.implementation!!.instructions.firstOrNull()?.opcode,
         )
+    }
 
-        val none = assertThrows(IllegalStateException::class.java) {
+    @Test
+    fun `a frame too small for the method's own parameters is named rather than left to the assembler`() {
+        // An instance method cannot be `.registers 0`, because `this` is p0. Handed one, the
+        // patcher's smali compiler parses nothing and throws "Collection is empty" out of its
+        // own first(), naming neither the method nor the reason, and reading that refusal as a
+        // property of every override is what briefly put a register floor under the void case.
+        val instance = assertThrows(IllegalStateException::class.java) {
             methodWithRegisters("V", 0).returnEarly()
         }
-        assertTrue(none.message!!.contains("Lcom/example/Host;->value"))
+        assertTrue(instance.message!!.contains("its own parameters take 1"))
+        assertTrue(instance.message!!.contains("Lcom/example/Host;->value"))
+    }
+
+    @Test
+    fun `an override of a method with no body says so`() {
+        val abstract = MutableMethod(
+            ImmutableMethod(
+                "Lcom/example/Host;",
+                "value",
+                emptyList(),
+                "Z",
+                AccessFlags.PUBLIC.value or AccessFlags.ABSTRACT.value,
+                null,
+                null,
+                null,
+            ),
+        )
+        val refused = assertThrows(IllegalStateException::class.java) { abstract.returnEarly(false) }
+        assertTrue(refused.message!!.contains("has no body"))
     }
 
     @Test
