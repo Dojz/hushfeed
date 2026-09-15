@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Hook status speaks for the sensitive-warning switch. Turning those overlays off means writing one flag on a model TikTok owns, and if that model is renamed the switch still reads on while every warning stays exactly where it was, which looks the same as a video that was never flagged. The row now names the field and the model it looked in.
+
 * The README and the Region page answer the three questions people keep asking. Downloads has always ignored the flag TikTok sets when a creator turns downloading off, and nothing said so. Region settings now says plainly what spoofing cannot change, which is your IP address, your account's history and the language you read in. And a patch run that sits at 24 or 25 percent forever is a memory problem with a known way through it, which the install steps now give.
 
 * The daily budget rows and the feed tab picker are translated. Six Playback descriptions, the unit words beside their numbers and every tab name in both pickers had no entry in any table, so a German, Spanish, Indonesian or Brazilian phone showed them in English under a translated title. Both translation checks were blind to it, because a row's text is joined with its range and current value before anything sees it. The check now reads the wording from the row itself, where nothing has been joined to it yet. The feed tab names also read the same way as their siblings now: Nearby, Friends, LIVE, STEM and Drama and Series.
