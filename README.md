@@ -90,7 +90,7 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 | `Disable the long press repost` | Keeps holding Like from opening TikTok's repost action. |
 | `Disable screen capture detection` | Prevents TikTok from reacting to screenshots and screen recordings. |
 | `Allow screenshots and Circle to Search` | Removes secure window flags and disables the Circle to Search block. Off by default; restart after changing. |
-| `Diagnostic tools` | Adds optional Morphe diagnostic logging, filtered reports, and local TikTok crash capture. |
+| `Diagnostic tools` | Adds diagnostic logging, filtered reports and local TikTok crash capture. The switches are under Diagnostics in Hushfeed settings. |
 | `Downloads` | Adds watermark-free downloads, comment sticker saving, configurable folders, and filename templates. It ignores the flag TikTok sets when a creator turns downloading off, so those videos save too. Network fetches accept public HTTPS addresses and follow at most five checked redirects. |
 | `Show LIVE search` | Shows TikTok's search entry in the Live drawer where supported. |
 | `Use non-personalized search` | Uses TikTok's non-personalized search mode instead of its saved account choice. |
