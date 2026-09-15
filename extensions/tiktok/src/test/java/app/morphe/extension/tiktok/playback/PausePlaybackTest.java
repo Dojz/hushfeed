@@ -311,6 +311,38 @@ public class PausePlaybackTest {
         }
     }
 
+    /**
+     * Two curtains over one root: the later one lifting must not hand the feed back while the
+     * earlier one is still up. The hold panel and the tap catcher share the curtain.
+     */
+    @Test public void aLaterCurtainLiftingLeavesTheEarlierOnesCover() {
+        try (var owner = Robolectric.buildActivity(HostActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            ViewGroup root = activity.findViewById(android.R.id.content);
+            View feed = new View(activity);
+            View catcher = new View(activity);
+            View panel = new View(activity);
+            root.addView(feed);
+            root.addView(catcher);
+            root.addView(panel);
+
+            app.morphe.extension.tiktok.wellbeing.SessionLockOverlay.hideBehind(root, catcher, true);
+            app.morphe.extension.tiktok.wellbeing.SessionLockOverlay.hideBehind(root, panel, true);
+            assertEquals(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS,
+                    catcher.getImportantForAccessibility());
+
+            app.morphe.extension.tiktok.wellbeing.SessionLockOverlay.hideBehind(root, panel, false);
+            assertEquals("the hold lifting handed the feed back under the catcher",
+                    View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS,
+                    feed.getImportantForAccessibility());
+            assertEquals("the catcher itself was left curtained",
+                    View.IMPORTANT_FOR_ACCESSIBILITY_AUTO, catcher.getImportantForAccessibility());
+
+            app.morphe.extension.tiktok.wellbeing.SessionLockOverlay.hideBehind(root, catcher, false);
+            assertEquals(View.IMPORTANT_FOR_ACCESSIBILITY_AUTO, feed.getImportantForAccessibility());
+        }
+    }
+
     /** A resume that follows no stop is a dialog closing, not the reader coming back. */
     @Test public void aResumeWithoutHavingLeftIsNotAReturn() {
         Settings.NO_RESUME_ON_FOREGROUND.save(true);

@@ -74,6 +74,42 @@ public class SuggestedAccountCellsTest {
         }
     }
 
+    /**
+     * A cell TikTok had out of sight, with margins, comes back exactly that way. Forcing it
+     * VISIBLE would show what TikTok had hidden, and margins left standing hold space in
+     * every layout.
+     */
+    @Test public void aCellComesBackWithTheVisibilityAndMarginsItHad() {
+        try (var owner = Robolectric.buildActivity(Activity.class).setup()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            LinearLayout list = new LinearLayout(activity);
+            View item = new View(activity);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(300, 420);
+            params.setMargins(12, 8, 12, 8);
+            list.addView(item, params);
+            item.setVisibility(View.INVISIBLE);
+
+            Settings.HIDE_INBOX_SUGGESTED_ACCOUNTS.save(true);
+            SuggestedAccountCells.onBind(new Cell(item));
+            LinearLayout.LayoutParams collapsed = (LinearLayout.LayoutParams) item.getLayoutParams();
+            assertEquals(View.GONE, item.getVisibility());
+            assertEquals("the collapsed cell kept a margin", 0, collapsed.topMargin);
+            assertEquals(0, collapsed.leftMargin + collapsed.rightMargin + collapsed.bottomMargin);
+
+            Settings.HIDE_INBOX_SUGGESTED_ACCOUNTS.save(false);
+            SuggestedAccountCells.onBind(new Cell(item));
+            LinearLayout.LayoutParams restored = (LinearLayout.LayoutParams) item.getLayoutParams();
+            assertEquals("a cell TikTok had hidden was made visible", View.INVISIBLE, item.getVisibility());
+            assertEquals(12, restored.leftMargin);
+            assertEquals(8, restored.topMargin);
+            assertEquals(12, restored.rightMargin);
+            assertEquals(8, restored.bottomMargin);
+            assertEquals(300, restored.width);
+            assertEquals(420, restored.height);
+        }
+    }
+
     /** A cell that was never collapsed is left exactly as TikTok bound it. */
     @Test public void aCellNeverCollapsedIsNotTouchedWhenTheSwitchIsOff() {
         try (var owner = Robolectric.buildActivity(Activity.class).setup()) {

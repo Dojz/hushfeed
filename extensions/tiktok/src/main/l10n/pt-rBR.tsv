@@ -998,7 +998,7 @@ The override changes no fields. Edit the field values, or reset the override.	A 
 This key isn't in the local catalog, so its type can't be checked. Reset the override.	Esta chave não está no catálogo local, então o tipo dela não pode ser conferido. Redefina a substituição.
 The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.	O catálogo diz que esta chave é %1$s e esta substituição é %2$s. Redefina a substituição e crie uma nova.
 The override couldn't be applied: %1$s. Edit the field values, or reset the override.	Não foi possível aplicar a substituição: %1$s. Edite os valores dos campos ou redefina a substituição.
-Clearing %1$d of %2$d	Limpando %1$d de %2$d
 Restart TikTok to apply %1$d changes	Reinicie o TikTok para aplicar %1$d alterações
 Restart TikTok to apply this change	Reinicie o TikTok para aplicar esta alteração
 Restart pending	Reinício pendente
+Clearing, %1$d so far	Limpando, %1$d até agora

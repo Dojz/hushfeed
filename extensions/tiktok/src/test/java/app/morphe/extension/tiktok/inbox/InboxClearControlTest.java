@@ -134,7 +134,7 @@ public class InboxClearControlTest {
         // count and shown by the dimming, not by refusing the pointer.
         assertTrue("the control stopped taking the tap that ends a run", clear.isEnabled());
         assertEquals("the label does not say how far the run has got",
-                "Clearing 1 of 60", clear.getText().toString());
+                "Clearing, 1 so far", clear.getText().toString());
         assertTrue("the busy control still painted as idle", clear.getAlpha() < 1f);
         assertTrue(clear.createAccessibilityNodeInfo().isEnabled());
         assertEquals("the run announced something before it finished", List.of(),
@@ -142,7 +142,7 @@ public class InboxClearControlTest {
 
         advance(300);
         assertEquals("the label did not advance with the run",
-                "Clearing 2 of 60", clear.getText().toString());
+                "Clearing, 2 so far", clear.getText().toString());
         assertTrue("the control was taken away mid-run", clear.isEnabled());
         advance(300);
 
@@ -161,7 +161,7 @@ public class InboxClearControlTest {
         clear.performClick();
         // The content description names the action, so a reader never hears the changed label.
         // The state is the only place the wait, and how far it has got, can be said.
-        assertEquals("Clearing 1 of 60", String.valueOf(clear.getStateDescription()));
+        assertEquals("Clearing, 1 so far", String.valueOf(clear.getStateDescription()));
         advance(300);
         assertNull("the progress state outlived the run", clear.getStateDescription());
         assertEquals(List.of("Dismissed one suggested account"), header.announcements);
@@ -214,8 +214,8 @@ public class InboxClearControlTest {
                 String.valueOf(clear.getContentDescription()));
 
         clear.performClick();
-        assertEquals("Clearing 1 of 60", String.valueOf(clear.getContentDescription()));
-        assertEquals("Clearing 1 of 60",
+        assertEquals("Clearing, 1 so far", String.valueOf(clear.getContentDescription()));
+        assertEquals("Clearing, 1 so far",
                 String.valueOf(clear.createAccessibilityNodeInfo().getContentDescription()));
 
         advance(300);
@@ -246,8 +246,8 @@ public class InboxClearControlTest {
         assertTrue("the replacement control cannot take the tap that stops the run",
                 replacement.isEnabled());
         assertEquals("the replacement control lost the count the run is at",
-                "Clearing 1 of 60", replacement.getText().toString());
-        assertEquals("Clearing 1 of 60", String.valueOf(replacement.getContentDescription()));
+                "Clearing, 1 so far", replacement.getText().toString());
+        assertEquals("Clearing, 1 so far", String.valueOf(replacement.getContentDescription()));
         assertTrue("the replacement control came up looking idle mid-run",
                 replacement.getAlpha() < 1f);
 
@@ -468,7 +468,7 @@ public class InboxClearControlTest {
             // Idle, busy before the first dismissal, or busy with the count so far.
             if ("Clear all suggested accounts".equals(description)
                     || "Clearing suggested accounts".equals(description)
-                    || description.startsWith("Clearing ")) {
+                    || description.startsWith("Clearing")) {
                 return (TextView) child;
             }
         }

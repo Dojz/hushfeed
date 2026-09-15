@@ -358,10 +358,10 @@ public final class L10nTranslations {
                 "Gelöscht. Tippe erneut, um alles zurückzuholen.");
         table.put("Clearing",
                 "Wird entfernt");
-        table.put("Clearing %1$d of %2$d",
-                "Wird geleert, %1$d von %2$d");
         table.put("Clearing suggested accounts",
                 "Kontovorschläge werden entfernt");
+        table.put("Clearing, %1$d so far",
+                "Wird geleert, bisher %1$d");
         table.put("Close",
                 "Schließen");
         table.put("Comma separated account handles or user ids. These accounts are always skipped. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.",
@@ -2439,10 +2439,10 @@ public final class L10nTranslations {
                 "Borrado. Toca otra vez para recuperar el registro.");
         table.put("Clearing",
                 "Borrando");
-        table.put("Clearing %1$d of %2$d",
-                "Borrando %1$d de %2$d");
         table.put("Clearing suggested accounts",
                 "Borrando las cuentas sugeridas");
+        table.put("Clearing, %1$d so far",
+                "Borrando, %1$d hasta ahora");
         table.put("Close",
                 "Cerrar");
         table.put("Comma separated account handles or user ids. These accounts are always skipped. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.",
@@ -4520,10 +4520,10 @@ public final class L10nTranslations {
                 "Terhapus. Ketuk lagi untuk mengembalikan catatannya.");
         table.put("Clearing",
                 "Menghapus");
-        table.put("Clearing %1$d of %2$d",
-                "Membersihkan %1$d dari %2$d");
         table.put("Clearing suggested accounts",
                 "Menghapus akun yang disarankan");
+        table.put("Clearing, %1$d so far",
+                "Membersihkan, %1$d sejauh ini");
         table.put("Close",
                 "Tutup");
         table.put("Comma separated account handles or user ids. These accounts are always skipped. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.",
@@ -6601,10 +6601,10 @@ public final class L10nTranslations {
                 "Limpo. Toque de novo para trazer o registro de volta.");
         table.put("Clearing",
                 "Limpando");
-        table.put("Clearing %1$d of %2$d",
-                "Limpando %1$d de %2$d");
         table.put("Clearing suggested accounts",
                 "Limpando as contas sugeridas");
+        table.put("Clearing, %1$d so far",
+                "Limpando, %1$d até agora");
         table.put("Close",
                 "Fechar");
         table.put("Comma separated account handles or user ids. These accounts are always skipped. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.",

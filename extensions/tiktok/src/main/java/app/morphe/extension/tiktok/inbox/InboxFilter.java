@@ -465,8 +465,9 @@ public final class InboxFilter {
         dismissedSoFar = dismissed;
         TextView control = clearAllControl == null ? null : clearAllControl.get();
         if (control == null) return;
-        String progress = L10n.f(control.getContext(), "Clearing %1$d of %2$d",
-                dismissed, MAX_CLEARED_PER_RUN);
+        // A count so far, not "of 60": sixty is the run's cap, and a list of eight would have
+        // read "3 of 60" and ended at 8.
+        String progress = L10n.f(control.getContext(), "Clearing, %1$d so far", dismissed);
         control.setText(progress);
         if (android.os.Build.VERSION.SDK_INT >= 30) {
             control.setStateDescription(progress);
@@ -485,14 +486,15 @@ public final class InboxFilter {
         // dismissed and reporting the count from before the click would be one short.
         int dismissed = cleared;
         try {
-            if (stopRequested) {
-                // Never at zero: the first click is made before the first step can be
-                // stopped, and a run with nothing to click reports on its own.
-                finishRun(failureMessage(cleared));
-                return;
-            }
             if (cleared >= MAX_CLEARED_PER_RUN || activity.isFinishing()) {
                 report(cleared);
+                return;
+            }
+            if (stopRequested) {
+                // Never at zero: the first click is made before the first step can be
+                // stopped, and a run with nothing to click reports on its own. After the cap,
+                // so a tap landing on the sixtieth is reported as the run it completed.
+                finishRun(failureMessage(cleared));
                 return;
             }
 

@@ -11,6 +11,7 @@ import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
 import app.morphe.patcher.patch.BytecodePatchContext
 import app.morphe.patcher.patch.PatchException
 import app.morphe.util.findMutableMethodOf
+import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.ClassDef
 import com.android.tools.smali.dexlib2.iface.Method
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
@@ -101,12 +102,25 @@ internal fun BytecodePatchContext.collapseSuggestionCells(): Int {
     return binds.size
 }
 
-/** Hands the cell to the extension before TikTok binds it, so a collapsed cell stays collapsed. */
+/**
+ * Hands the cell to the extension as TikTok's bind returns, so what the bind did to the item
+ * view is what gets collapsed. The Rect cells write their own top margin inside the bind; a
+ * call ahead of it would have been undone. Every return is covered, in range form so a
+ * register above v15 on some later build assembles.
+ */
 internal fun MutableMethod.collapseSuggestionCellAtBind() {
-    addInstruction(
-        0,
-        "invoke-static {p0}, $CELLS_EXTENSION_CLASS_DESCRIPTOR->onBind(Ljava/lang/Object;)V",
-    )
+    val implementation = implementation ?: return
+    val self = implementation.registerCount - (parameters.size + 1)
+    val returns = implementation.instructions.withIndex()
+        .filter { (_, instruction) -> instruction.opcode == Opcode.RETURN_VOID }
+        .map { it.index }
+    returns.sortedDescending().forEach { index ->
+        addInstruction(
+            index,
+            "invoke-static/range {v$self .. v$self}, " +
+                "$CELLS_EXTENSION_CLASS_DESCRIPTOR->onBind(Ljava/lang/Object;)V",
+        )
+    }
 }
 
 /** A disabled hide switch must leave the native rollout and app-availability checks intact. */

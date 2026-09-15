@@ -205,6 +205,15 @@ public class CaptchaGateTest {
         assertTrue("a check that reached the gate is not in the export: " + HookStatus.report(),
                 String.join(" ", HookStatus.report())
                         .contains("CAPTCHA account state: 3 found, 0 missing"));
+
+        // A diagnostic clear drops every entry. The next write puts the family back, with
+        // itself, or an export taken after a clear would say this build has no gate.
+        HookStatus.clear();
+        assertFalse(String.join(" ", HookStatus.report()).contains("CAPTCHA account state"));
+        CaptchaGate.recordRequest(new Request("/aweme/v1/comment/publish/"));
+        assertTrue("the family did not come back after a clear: " + HookStatus.report(),
+                String.join(" ", HookStatus.report())
+                        .contains("CAPTCHA account state: 2 found, 0 missing"));
     }
 
     @Test

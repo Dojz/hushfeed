@@ -23,23 +23,29 @@ import java.util.WeakHashMap;
  * have injectors that {@link InboxControls} answers, but the profile header, the Friends tab
  * and the feed's account cards each build their own list, and every one of those lists is
  * made of cells that extend {@code AbsRecUserCell}. Its bind is the one place they all pass
- * through, and this is called from it with the cell. The cell is a RecyclerView ViewHolder,
- * so its view is the real-named {@code itemView}.
+ * through, and this is called at the end of it with the cell, after TikTok has laid the cell
+ * out: the Rect cells write their own top margin inside the bind, so a hook ahead of it would
+ * have been undone. The cell is a RecyclerView ViewHolder, so its view is the real-named
+ * {@code itemView}.
  *
  * <p>The cell is collapsed to nothing rather than only hidden: a GONE child of a horizontal
- * list still holds its width in some layouts. What it was is remembered so a cell recycled
- * after the switch goes off comes back at its own size.
+ * list still holds its width in some layouts, and its margins hold space in every layout.
+ * Size, margins and visibility are remembered so a cell recycled after the switch goes off
+ * comes back exactly as TikTok had it, invisible cells included.
  */
 public final class SuggestedAccountCells {
     private static final String HOOK_FAMILY = "suggested accounts";
 
-    /** Width and height, as a cell was laid out before it was collapsed. */
+    /**
+     * What a cell was before it was collapsed: width, height, visibility, then the four margins
+     * (or {@code -1} for a cell whose params carry none).
+     */
     private static final Map<View, int[]> COLLAPSED = new WeakHashMap<>();
 
     private SuggestedAccountCells() {
     }
 
-    /** Called at the start of every suggestion cell's bind, with the cell. */
+    /** Called at the end of every suggestion cell's bind, with the cell. */
     public static void onBind(Object cell) {
         try {
             Object view = Reflect.readField(cell, "itemView");
@@ -53,15 +59,22 @@ public final class SuggestedAccountCells {
     /** Collapses the view, or puts back what a collapse took, and says which it did. */
     static boolean apply(View view, boolean hide) {
         ViewGroup.LayoutParams params = view.getLayoutParams();
+        ViewGroup.MarginLayoutParams margins = params instanceof ViewGroup.MarginLayoutParams
+                ? (ViewGroup.MarginLayoutParams) params : null;
         synchronized (COLLAPSED) {
             int[] original = COLLAPSED.get(view);
             if (hide) {
                 if (original == null && params != null) {
-                    COLLAPSED.put(view, new int[]{params.width, params.height});
+                    COLLAPSED.put(view, new int[]{params.width, params.height, view.getVisibility(),
+                            margins == null ? -1 : margins.leftMargin,
+                            margins == null ? -1 : margins.topMargin,
+                            margins == null ? -1 : margins.rightMargin,
+                            margins == null ? -1 : margins.bottomMargin});
                 }
                 if (params != null) {
                     params.width = 0;
                     params.height = 0;
+                    if (margins != null) margins.setMargins(0, 0, 0, 0);
                     view.setLayoutParams(params);
                 }
                 view.setVisibility(View.GONE);
@@ -72,9 +85,12 @@ public final class SuggestedAccountCells {
             if (params != null) {
                 params.width = original[0];
                 params.height = original[1];
+                if (margins != null && original[3] >= 0) {
+                    margins.setMargins(original[3], original[4], original[5], original[6]);
+                }
                 view.setLayoutParams(params);
             }
-            view.setVisibility(View.VISIBLE);
+            view.setVisibility(original[2]);
             return false;
         }
     }

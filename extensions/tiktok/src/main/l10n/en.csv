@@ -140,8 +140,8 @@ Clear search,Clear search
 Clear the seen video history,Clear the seen video history
 Cleared. Tap again to put the record back.,Cleared. Tap again to put the record back.
 Clearing,Clearing
-Clearing %1$d of %2$d,Clearing %1$d of %2$d
 Clearing suggested accounts,Clearing suggested accounts
+"Clearing, %1$d so far","Clearing, %1$d so far"
 Close,Close
 "Comma separated account handles or user ids. These accounts are always skipped. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.","Comma separated account handles or user ids. These accounts are always skipped. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name."
 "Comma separated country codes, like GB, IE. Videos posted from anywhere else are hidden. Leave empty for all countries.","Comma separated country codes, like GB, IE. Videos posted from anywhere else are hidden. Leave empty for all countries."

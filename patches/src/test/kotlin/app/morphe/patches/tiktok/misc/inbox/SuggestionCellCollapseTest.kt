@@ -3,7 +3,7 @@ package app.morphe.patches.tiktok.misc.inbox
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
-import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.RegisterRangeInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethod
@@ -19,7 +19,7 @@ import org.junit.Test
 /** The hook at a suggestion cell's bind, on the bridge shape TikTok 46.2.3 gives it. */
 class SuggestionCellCollapseTest {
     @Test
-    fun `the cell is handed to the extension before TikTok binds it`() {
+    fun `the cell is handed to the extension as TikTok's bind returns`() {
         val method = bindBridge()
         val original = method.implementation!!.instructions.toList()
 
@@ -27,18 +27,22 @@ class SuggestionCellCollapseTest {
 
         val code = method.implementation!!.instructions.toList()
         assertEquals(original.size + 1, code.size)
-        assertEquals(Opcode.INVOKE_STATIC, code[0].opcode)
-        val call = code[0] as FiveRegisterInstruction
+        // TikTok's own bind first, untouched: the Rect cells write a margin inside it, and a
+        // call ahead of that would have been undone.
+        original.dropLast(1).forEachIndexed { index, instruction -> assertSame(instruction, code[index]) }
+        val call = code[code.size - 2]
+        assertEquals(Opcode.INVOKE_STATIC_RANGE, call.opcode)
+        val range = call as RegisterRangeInstruction
         // p0 is v0 on a two-register method with one parameter: the cell itself.
-        assertEquals(1, call.registerCount)
-        assertEquals(0, call.registerC)
-        val target = (code[0] as ReferenceInstruction).reference as MethodReference
+        assertEquals(1, range.registerCount)
+        assertEquals(0, range.startRegister)
+        val target = (call as ReferenceInstruction).reference as MethodReference
         assertEquals("Lapp/morphe/extension/tiktok/inbox/SuggestedAccountCells;", target.definingClass)
         assertEquals("onBind", target.name)
         assertEquals(listOf("Ljava/lang/Object;"), target.parameterTypes.map(CharSequence::toString))
         assertEquals("V", target.returnType)
-        // TikTok's own bind follows, untouched.
-        original.forEachIndexed { index, instruction -> assertSame(instruction, code[index + 1]) }
+        assertSame(original.last(), code.last())
+        assertEquals(Opcode.RETURN_VOID, code.last().opcode)
     }
 
     /** `AbsRecUserCell.onBindItemView(LX/0lOS;)V` on 46.2.3: a check-cast, the typed bind, return. */

@@ -40,6 +40,16 @@ public final class CaptchaGate {
     private static final String REQUEST_RECORDER = "request recorder";
     private static final String RISK_CHECK_HOOKS = "risk check hooks";
     /**
+     * The Hook status generation the family was last reported into. A diagnostic clear drops
+     * every bound entry, and a family that is then absent reads as "this build has no gate",
+     * so the next request or check puts it back. The two flags say which log lines this
+     * generation has already had: the report gives counts, not names, so the line is where the
+     * state is legible.
+     */
+    private static volatile long reportedGeneration = -1;
+    private static volatile boolean recorderReported;
+    private static volatile boolean hooksReported;
+    /**
      * How long a write request keeps a risk check attached to it. The server raises the
      * check in its response, so the request has always just been sent, but the puzzle can
      * take a moment to reach the UI thread.
@@ -87,7 +97,15 @@ public final class CaptchaGate {
      * installed}, the recorder having seen a write, and a check having reached the decision.
      */
     public static void installed() {
+        reportedGeneration = HookStatus.generation();
+        recorderReported = false;
+        hooksReported = false;
         HookStatus.bound(HOOK_FAMILY, INSTALLED);
+    }
+
+    /** Puts the family back after a clear, which is the only way it leaves the export. */
+    private static void ensureInstalled() {
+        if (HookStatus.generation() != reportedGeneration) installed();
     }
 
     // ---------------------------------------------------------------- what the check gates
@@ -106,7 +124,13 @@ public final class CaptchaGate {
             pendingWrite = new Stamped(action, now());
             // The recorder is what tells a puzzle over a write from a browsing one, so an
             // export has to say it is seeing writes at all. A repeat is one hash lookup.
+            ensureInstalled();
             HookStatus.bound(HOOK_FAMILY, REQUEST_RECORDER);
+            if (!recorderReported) {
+                recorderReported = true;
+                String first = action;
+                Logger.printInfo(() -> "CAPTCHA gate saw its first write go out: " + first);
+            }
         }
     }
 
@@ -196,7 +220,12 @@ public final class CaptchaGate {
 
     /** The whole decision for one check. True hides it. */
     public static boolean shouldHide(Activity activity, String checkId, String detail) {
+        ensureInstalled();
         HookStatus.bound(HOOK_FAMILY, RISK_CHECK_HOOKS);
+        if (!hooksReported) {
+            hooksReported = true;
+            Logger.printInfo(() -> "A risk check reached the CAPTCHA gate: " + checkId);
+        }
         String reason = showReason(activity, detail, now());
         if (reason != null) {
             // At the level the export keeps, the same as a hidden check: a report of a write

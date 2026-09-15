@@ -280,8 +280,16 @@ public class VideoOverlayHiderTest {
             assertEquals(View.VISIBLE, buttons[0].getVisibility());
             assertEquals("the like count did not come back with its button", View.VISIBLE, rows[0].getVisibility());
             assertEquals(View.VISIBLE, counts[0].getVisibility());
+
+            // The far end of the map as well: share is the sixth button and the fourth count.
+            Settings.HIDE_RAIL_SHARE.save(true);
+            VideoOverlayHider.applyTo(activity);
+            assertEquals("the share count stood under an empty space", View.GONE, rows[3].getVisibility());
+            assertEquals(View.GONE, counts[3].getVisibility());
+            assertEquals("the like count went with the share button", View.VISIBLE, rows[0].getVisibility());
         } finally {
             Settings.HIDE_RAIL_LIKE.save(false);
+            Settings.HIDE_RAIL_SHARE.save(false);
             Settings.HIDE_RAIL_COUNTS.save(false);
         }
     }

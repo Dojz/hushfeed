@@ -65,6 +65,8 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
     private static TikTokPreferenceFragment activeFragment;
     /** Pinned to the top of this page while a restart is owed; off the page otherwise. */
     private RestartPendingPreference restartPending;
+    /** Rows on this page whose sentence was swapped for "Restart pending.", to swap back. */
+    private final java.util.Set<String> pendingSummaries = new java.util.HashSet<>();
     /**
      * Which folder setting the picker was opened for, by key rather than by the preference
      * itself. The picker is a separate activity, so this one is routinely destroyed behind it
@@ -429,11 +431,22 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         // The sentence it replaces ends in a full stop and sits inside prose ("... Restart
         // pending. If the old layout is still there, unfold again."), so this keeps one.
         String pending = L10n.t(context, "Restart pending") + ".";
-        for (String key : restartPendingKeys()) {
+        java.util.List<String> owedKeys = restartPendingKeys();
+        for (String key : owedKeys) {
             Preference row = findPreference(key);
             CharSequence summary = row == null ? null : row.getSummary();
             if (summary == null || !summary.toString().contains(generic)) continue;
             row.setSummary(summary.toString().replace(generic, pending));
+            pendingSummaries.add(key);
+        }
+        // A switch flipped back owes nothing, so its row says what it said before.
+        for (String key : new java.util.ArrayList<>(pendingSummaries)) {
+            if (owedKeys.contains(key)) continue;
+            pendingSummaries.remove(key);
+            Preference row = findPreference(key);
+            CharSequence summary = row == null ? null : row.getSummary();
+            if (summary == null || !summary.toString().contains(pending)) continue;
+            row.setSummary(summary.toString().replace(pending, generic));
         }
     }
 

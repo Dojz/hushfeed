@@ -54,7 +54,18 @@ public final class SessionLockOverlay {
     private static final int[] ROOT_POSITION = new int[2];
     private static final int[] NAVIGATION_POSITION = new int[2];
     /** What each view behind the panel said about itself before the hold covered it. */
-    private static final java.util.WeakHashMap<View, Integer> previousAccessibilityImportance =
+    /** What a curtained child was, and which panels are over it. */
+    private static final class Curtained {
+        final int previous;
+        final java.util.Set<View> panels = java.util.Collections.newSetFromMap(
+                new java.util.WeakHashMap<>());
+
+        Curtained(int previous) {
+            this.previous = previous;
+        }
+    }
+
+    private static final java.util.WeakHashMap<View, Curtained> previousAccessibilityImportance =
             new java.util.WeakHashMap<>();
     private static WeakReference<TextView> remainingReference = new WeakReference<>(null);
     private static WeakReference<TextView> releaseReference = new WeakReference<>(null);
@@ -607,14 +618,24 @@ public final class SessionLockOverlay {
             View child = root.getChildAt(index);
             if (child == panel) continue;
             if (hidden) {
-                if (!previousAccessibilityImportance.containsKey(child)) {
-                    previousAccessibilityImportance.put(child, child.getImportantForAccessibility());
+                Curtained state = previousAccessibilityImportance.get(child);
+                if (state == null) {
+                    state = new Curtained(child.getImportantForAccessibility());
+                    previousAccessibilityImportance.put(child, state);
                 }
+                // Per panel, not a flag: the hold panel and the tap catcher share this, and
+                // the later one lifting must not hand the feed back while the earlier one is
+                // up. A panel curtaining twice, as the hold does on a relayout, counts once.
+                state.panels.add(panel);
                 child.setImportantForAccessibility(
                         View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
             } else {
-                Integer previous = previousAccessibilityImportance.remove(child);
-                if (previous != null) child.setImportantForAccessibility(previous);
+                Curtained state = previousAccessibilityImportance.get(child);
+                if (state == null) continue;
+                state.panels.remove(panel);
+                if (!state.panels.isEmpty()) continue;
+                previousAccessibilityImportance.remove(child);
+                child.setImportantForAccessibility(state.previous);
             }
         }
     }

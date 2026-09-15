@@ -1181,6 +1181,20 @@ assertEquals(View.LAYOUT_DIRECTION_RTL, configuration.getLayoutDirection());
             assertTrue("the count is not what a screen reader hears",
                     String.valueOf(node.getText()).contains("this change"));
 
+            // Flipped back: the process already runs the value the store holds, so nothing
+            // is owed, the row goes, and the switch says what it said before.
+            toggle.setChecked(!toggle.isChecked());
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            assertNull("a switch flipped back still owes a restart", page.findPreference(key));
+            assertTrue("the row kept saying its change was waiting",
+                    String.valueOf(toggle.getSummary()).contains("Restart TikTok to apply this."));
+            assertFalse(String.valueOf(toggle.getSummary()).contains("Restart pending."));
+
+            // And on: owed again.
+            toggle.setChecked(!toggle.isChecked());
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            assertNotNull(page.findPreference(key));
+
             // Back to the master menu: the debt is owed there as well.
             TikTokPreferenceFragment home = attachHome(activity);
             Preference onHome = home.findPreference(key);
