@@ -654,6 +654,20 @@ public class FeatureGateLabActionsTest {
                     1f, stillActionable.getAlpha(), 0.001f);
             assertTrue(stillActionable.isEnabled());
 
+            // The chosen row has to look chosen. Enable, Disable and Reset act on whatever is in
+            // the selection, so a selection nobody can see is a selection acted on by accident.
+            android.view.View picked = list.getAdapter().getView(0, null, list);
+            assertTrue("the chosen row is not marked as activated",
+                    contains(picked.getBackground().getState(), android.R.attr.state_activated));
+            assertFalse("a row nobody chose is marked as activated",
+                    contains(stillActionable.getBackground().getState(),
+                            android.R.attr.state_activated));
+            // And says so in a shape as well as a colour.
+            assertEquals("the chosen row carries no mark a colour-blind reader can see",
+                    android.view.View.VISIBLE, leadingMark(picked).getVisibility());
+            assertEquals("an unchosen row is marked as chosen",
+                    android.view.View.GONE, leadingMark(stillActionable).getVisibility());
+
             assertTrue(list.performItemClick(null, 1, list.getItemIdAtPosition(1)));
             assertEquals("2 gates selected", selectionCountText(fragment));
             assertTrue(list.performItemClick(null, 1, list.getItemIdAtPosition(1)));
@@ -673,6 +687,16 @@ public class FeatureGateLabActionsTest {
             FeatureGateLabUndo.undo();
             assertTrue(FeatureGateLabStore.rules().isEmpty());
         }
+    }
+
+    private static boolean contains(int[] states, int wanted) {
+        for (int state : states) if (state == wanted) return true;
+        return false;
+    }
+
+    /** The mark at the start of a Lab row, which is the first child whatever the layout. */
+    private static android.view.View leadingMark(android.view.View row) {
+        return ((android.view.ViewGroup) row).getChildAt(0);
     }
 
     private static android.widget.ListView listOf(FeatureGateLabFragment fragment) throws Exception {

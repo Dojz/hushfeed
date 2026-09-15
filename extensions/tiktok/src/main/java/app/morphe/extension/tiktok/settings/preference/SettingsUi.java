@@ -220,10 +220,34 @@ public final class SettingsUi {
         return mask;
     }
 
+    /**
+     * The check mark the dialogs draw, for a surface that has to show a choice without a dialog.
+     *
+     * <p>Drawn rather than typed, like every other glyph on this screen, so it keeps its weight
+     * at any font scale. Returned already checked: a caller that has nothing to mark hides it.
+     */
+    public static Drawable checkMark(Context context) {
+        DialogCheckMarkDrawable mark = new DialogCheckMarkDrawable(context, false);
+        mark.setState(new int[]{android.R.attr.state_checked});
+        return mark;
+    }
+
+    /**
+     * The fill a row takes while it is one of the chosen ones, over {@link #surface}.
+     *
+     * <p>The same accent and the same alpha the ripple uses, so a held selection reads as the
+     * press that made it rather than as a second idea.
+     */
+    public static int activatedFill() {
+        return (accent() & 0x00ffffff) | 0x26000000;
+    }
+
     private static final class GroupRowDrawable extends Drawable {
         private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         private final boolean first, last;
         private final float radius, inset;
+        /** Selected, as {@code View.setActivated} sets it. Repainted when it changes. */
+        private boolean activated;
         GroupRowDrawable(Context context, boolean first, boolean last) {
             this.first = first;
             this.last = last;
@@ -240,15 +264,40 @@ public final class SettingsUi {
             paint.setStyle(Paint.Style.FILL);
             paint.setColor(surface());
             canvas.drawRoundRect(frame, radius, radius, paint);
+            if (activated) {
+                // Over the surface rather than instead of it, so the tint is the same one the
+                // ripple leaves behind and the row keeps its own background underneath.
+                paint.setColor(activatedFill());
+                canvas.drawRoundRect(frame, radius, radius, paint);
+            }
             paint.setStyle(Paint.Style.STROKE);
             paint.setStrokeWidth(1);
-            paint.setColor(border());
+            paint.setColor(activated ? accent() : border());
             canvas.drawRoundRect(frame, radius, radius, paint);
             if (!last) {
                 paint.setColor(divider());
                 canvas.drawLine(bounds.left + inset, bottom - 0.5f, bounds.right - inset, bottom - 0.5f, paint);
             }
             canvas.restore();
+        }
+        /**
+         * The row is told it is selected with {@code setActivated}, and a drawable that is not
+         * stateful is never asked. The Lab's selection bar said "2 gates selected" over rows that
+         * looked exactly like the rest, and Enable, Disable and Reset then acted on them.
+         */
+        @Override public boolean isStateful() { return true; }
+        @Override protected boolean onStateChange(int[] stateSet) {
+            boolean next = false;
+            for (int state : stateSet) {
+                if (state == android.R.attr.state_activated) {
+                    next = true;
+                    break;
+                }
+            }
+            if (next == activated) return false;
+            activated = next;
+            invalidateSelf();
+            return true;
         }
         @Override public void setAlpha(int alpha) { paint.setAlpha(alpha); }
         @Override public void setColorFilter(ColorFilter filter) { paint.setColorFilter(filter); }

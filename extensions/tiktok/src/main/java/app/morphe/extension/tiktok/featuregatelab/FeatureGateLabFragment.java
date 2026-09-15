@@ -1575,6 +1575,18 @@ public final class FeatureGateLabFragment extends Fragment {
                         FeatureGateLabUi.dp(context, 16)
                 );
 
+                // Ahead of the text, and only there while the row is one of the chosen ones. The
+                // activated fill behind the row says the same thing in colour; this says it
+                // again in a shape, for a reader who cannot tell the two fills apart.
+                android.widget.ImageView chosenMark = new android.widget.ImageView(context);
+                chosenMark.setImageDrawable(SettingsUi.checkMark(context));
+                chosenMark.setVisibility(View.GONE);
+                chosenMark.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+                LinearLayout.LayoutParams markParams = new LinearLayout.LayoutParams(
+                        FeatureGateLabUi.dp(context, 24), FeatureGateLabUi.dp(context, 24));
+                markParams.setMarginEnd(FeatureGateLabUi.dp(context, 8));
+                row.addView(chosenMark, markParams);
+
                 LinearLayout textColumn = new LinearLayout(context);
                 textColumn.setOrientation(LinearLayout.VERTICAL);
                 TextView title = FeatureGateLabUi.text(context, "", 15, SettingsUi.textPrimary(), Typeface.BOLD);
@@ -1622,7 +1634,7 @@ public final class FeatureGateLabFragment extends Fragment {
                 if (stacked) stateParams.setMargins(0, FeatureGateLabUi.dp(context, 8), 0, 0);
                 row.addView(stateColumn, stateParams);
 
-                holder = new RowHolder(title, key, type, value, state);
+                holder = new RowHolder(title, key, type, value, state, chosenMark);
                 row.setTag(holder);
                 convertView = row;
             } else {
@@ -1651,6 +1663,7 @@ public final class FeatureGateLabFragment extends Fragment {
             // selection you cannot see is a selection you act on by accident.
             boolean chosen = selection.containsKey(entry.identity());
             convertView.setActivated(chosen);
+            holder.chosenMark.setVisibility(chosen ? View.VISIBLE : View.GONE);
             // Every row remains actionable in selection mode. The activated surface and spoken
             // selected state carry the distinction without reducing 12sp labels below contrast.
             convertView.setAlpha(1f);
@@ -1689,13 +1702,16 @@ public final class FeatureGateLabFragment extends Fragment {
         final TextView type;
         final TextView value;
         final TextView state;
+        final android.widget.ImageView chosenMark;
 
-        RowHolder(TextView title, TextView key, TextView type, TextView value, TextView state) {
+        RowHolder(TextView title, TextView key, TextView type, TextView value, TextView state,
+                android.widget.ImageView chosenMark) {
             this.title = title;
             this.key = key;
             this.type = type;
             this.value = value;
             this.state = state;
+            this.chosenMark = chosenMark;
         }
     }
 
