@@ -352,6 +352,100 @@ public class SettingsUiTest {
     }
 
     /**
+     * A row the keyboard, the d-pad or switch access has landed on wears a ring.
+     *
+     * <p>Every row's only stateful background was the ripple, and a RippleDrawable paints
+     * {@code state_focused} as its own tint at 60% of its opacity: the accent at 15% alpha came
+     * out around 9% over the surface, about 1.3:1, which nobody can see. The ring is the accent
+     * at full strength, inside the card's own corners, on the first row, a middle one and the
+     * last, and on the header's back button. A press still shows the ripple and no ring.
+     */
+    @Test
+    public void aFocusedRowWearsARingTheReaderCanSee() {
+        Utils.setIsDarkModeEnabled(true);
+        Activity activity = Robolectric.buildActivity(DialogActivity.class).setup().get();
+        Utils.setContext(activity);
+
+        int[] focused = {android.R.attr.state_enabled, android.R.attr.state_focused};
+        int[] resting = {android.R.attr.state_enabled};
+        int[] pressed = {android.R.attr.state_enabled, android.R.attr.state_pressed};
+        boolean[][] shapes = {{true, false}, {false, false}, {false, true}};
+        for (boolean[] shape : shapes) {
+            String which = shape[0] ? "first" : shape[1] ? "last" : "middle";
+            assertTrue("a " + which + " row drew no ring while focused",
+                    ringIsDrawn(SettingsUi.groupedRow(activity, shape[0], shape[1]), focused));
+            assertFalse("a " + which + " row drew a ring while resting",
+                    ringIsDrawn(SettingsUi.groupedRow(activity, shape[0], shape[1]), resting));
+            assertFalse("a " + which + " row drew a ring under a press",
+                    ringIsDrawn(SettingsUi.groupedRow(activity, shape[0], shape[1]), pressed));
+        }
+        // A list moves a d-pad by marking a row selected rather than focusing it.
+        assertTrue("a selected row drew no ring",
+                ringIsDrawn(SettingsUi.groupedRow(activity, false, false),
+                        new int[]{android.R.attr.state_enabled, android.R.attr.state_selected}));
+
+        // The header's back button, which carried the same ripple and nothing else.
+        assertTrue("the back button drew no ring while focused",
+                ringIsDrawn(SettingsUi.focusRing(activity, 6), focused));
+        assertFalse("the back button drew a ring while resting",
+                ringIsDrawn(SettingsUi.focusRing(activity, 6), resting));
+
+        assertTrue("the ring is not readable against the surface it is drawn on: "
+                        + contrast(SettingsUi.accent(), SettingsUi.surface()) + ":1",
+                contrast(SettingsUi.accent(), SettingsUi.surface()) >= 3.0);
+        Utils.setIsDarkModeEnabled(false);
+        assertTrue("the ring is not readable on the light surface: "
+                        + contrast(SettingsUi.accent(), SettingsUi.surface()) + ":1",
+                contrast(SettingsUi.accent(), SettingsUi.surface()) >= 3.0);
+        // Drawn in the light theme too: the accent differs between the two, so a ring that only
+        // painted in the dark one would pass every assertion above.
+        assertTrue("a focused row drew no ring in the light theme",
+                ringIsDrawn(SettingsUi.groupedRow(activity, false, false), focused));
+        assertFalse("a resting row drew a ring in the light theme",
+                ringIsDrawn(SettingsUi.groupedRow(activity, false, false), resting));
+    }
+
+    /** Whether the drawable paints the accent along its edge in the state it is given. */
+    private static boolean ringIsDrawn(Drawable drawable, int[] state) {
+        int size = 120;
+        drawable.setState(state);
+        drawable.setBounds(0, 0, size, size);
+        android.graphics.Bitmap bitmap = android.graphics.Bitmap.createBitmap(
+                size, size, android.graphics.Bitmap.Config.ARGB_8888);
+        drawable.draw(new android.graphics.Canvas(bitmap));
+        // Down the left edge, away from the corners, where only a ring can put the accent.
+        int accent = SettingsUi.accent() | 0xff000000;
+        boolean found = false;
+        for (int y = size / 3; y < size * 2 / 3; y++) {
+            for (int x = 0; x < 4; x++) {
+                if ((bitmap.getPixel(x, y) | 0xff000000) == accent) {
+                    found = true;
+                    break;
+                }
+            }
+        }
+        bitmap.recycle();
+        return found;
+    }
+
+    /** WCAG contrast between two opaque colours. */
+    private static double contrast(int first, int second) {
+        double one = luminance(first), two = luminance(second);
+        return (Math.max(one, two) + 0.05) / (Math.min(one, two) + 0.05);
+    }
+
+    private static double luminance(int colour) {
+        double[] parts = new double[3];
+        int[] raw = {android.graphics.Color.red(colour), android.graphics.Color.green(colour),
+                android.graphics.Color.blue(colour)};
+        for (int at = 0; at < 3; at++) {
+            double channel = raw[at] / 255.0;
+            parts[at] = channel <= 0.03928 ? channel / 12.92 : Math.pow((channel + 0.055) / 1.055, 2.4);
+        }
+        return 0.2126 * parts[0] + 0.7152 * parts[1] + 0.0722 * parts[2];
+    }
+
+    /**
      * An action drawn onto one of TikTok's own surfaces takes the ring and ripple in a tone that
      * shows on that surface.
      *
