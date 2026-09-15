@@ -1,5 +1,23 @@
 ## Unreleased
 
+* Every control Hushfeed draws over the video answers a press and shows where the focus is. The four feed controls, the two actions on the daily hold, Undo, Clear all in the inbox and the sticker Save button used to paint the same thing pressed, focused or at rest, so a keyboard, a d-pad or switch access moved through them with nothing on screen saying so. Each one ripples under a finger now and carries a white ring while it holds focus.
+
+* The settings screen's hand-built actions do the same. The Feature Gate Lab's view tabs, source tabs, Filter, its selection actions and the value picker, the creator editor's actions, the settings search box and the rows in the SIM preset and tab pickers were flat in every state. Tabbing through the Lab shows the focus moving now, a tap on a tab ripples, and the value picker has the frame that says it is a control. The preset and tab rows painted an opaque fill that covered the press highlight the list would have drawn; the fill sits under it now.
+
+* A gate you have chosen in the Feature Gate Lab looks chosen. Selecting rows for an action changed nothing about them, so the count in the action bar was the only sign anything was picked. A chosen row now carries a tinted fill, an accent edge and a check mark at its start.
+
+* The daily hold no longer reads itself out once a second. The whole panel was a live region and three of its lines were rewritten every tick, so TalkBack repeated the hold over the audio for as long as it stood. The panel is announced once when it appears, only the time remaining is live, and nothing is rewritten unless it changed.
+
+* The daily budget label stays on the feed. It asked the loose question the block button asks, which counts a video opened from a profile grid or a search result and says nothing about the comment sheet, so opening the comments took the feed controls away and left the label sitting on top of the sheet. It now shows only when the Home tab is on screen and selected and nothing is covering it.
+
+* The Region rows stop asking for a restart twice. Both summaries carried their own "and a restart" and then the shared restart sentence was added under it. Each says it once.
+
+* The Region summaries name the switches they depend on by the titles those switches actually carry in German, Spanish, Indonesian and Brazilian Portuguese. A German phone told you to turn on "SIM-Details überschreiben" while the row above it was titled "SIM-Angaben überschreiben", and the other three tables had the same drift. A check now holds every summary that names another row to that row's title in every language.
+
+* The Diagnostic tools description in Morphe Manager says Hushfeed rather than the project it was forked from, and says where the switches it adds live: under Diagnostics in Hushfeed settings.
+
+* The README's settings captures were re-taken after the recent changes, and the page that shows a settings failure is captured in English rather than in the language of whichever phone took it last.
+
 * The hidden creators editor keeps what you typed and says what is wrong under the box. Type a handle and press Save without pressing Add and the dialog used to close, then a message appeared over whatever was behind it, and the handle was gone. Adding an empty, duplicate or broken entry did the same thing over the open dialog. The reason now sits under the field it is about, the dialog stays open, and nothing is written until it can be.
 
 * One sentence asks you to restart TikTok, not nine. The same screen used to say it four or five different ways, sometimes twice in view of each other, and each wording was its own thing to translate. Every row summary and every single-change message now says "Restart TikTok to apply this." Restoring, resetting or undoing settings, where several moved at once, says "Restart TikTok to apply all changes." Nothing else.
