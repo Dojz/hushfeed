@@ -520,6 +520,33 @@ public final class FeatureGateDetailFragment extends Fragment {
                 L10n.t(Utils.getContext(), "Could not reset this override."));
     }
 
+    /**
+     * Puts the controls back on what the store actually holds.
+     *
+     * <p>A save that fails leaves the switch where the finger left it, so the page goes on
+     * claiming a value nothing has written: the toast says it did not save and the screen says
+     * it did. The Lab's own master switch has always put itself back; this is the same for the
+     * detail page. The rule is re-read rather than remembered, so the controls end up on what
+     * survived rather than on what this fragment last thought was there.
+     */
+    private void revertControlsToStore() {
+        if (getActivity() == null) return;
+        rule = FeatureGateLabStore.rule(entry.manager, entry.key, entry.type);
+        suppress = true;
+        if (force != null) force.setChecked(rule != null && rule.enabled);
+        String value = rule == null ? bestInitialValue(entry) : rule.value;
+        if (booleanValue != null) {
+            booleanValue.setChecked(Boolean.parseBoolean(value));
+        } else if (values != null) {
+            int selected = selectedIndex(options, value);
+            values.setSelection(selected);
+            lastConcreteSelection = selected;
+        }
+        suppress = false;
+        if (reset != null) reset.setVisibility(rule == null ? View.GONE : View.VISIBLE);
+        updateStatus();
+    }
+
     /** A change that touches storage, so it does not belong on the thread drawing the screen. */
     private interface DetailChange {
         void run(FeatureGateLabUndo.UndoBaseline undoBaseline) throws Exception;
@@ -561,6 +588,7 @@ public final class FeatureGateDetailFragment extends Fragment {
                     if (generation != detailChangeGeneration) return;
                     if (notice != null) {
                         Utils.showToastLong(notice);
+                        revertControlsToStore();
                         return;
                     }
                     Utils.showToastShort(translatedSuccess);
@@ -574,6 +602,7 @@ public final class FeatureGateDetailFragment extends Fragment {
             new Handler(Looper.getMainLooper()).post(() -> {
                 if (generation == detailChangeGeneration) {
                     Utils.showToastLong(translatedFailurePrefix);
+                    revertControlsToStore();
                 }
             });
         }
