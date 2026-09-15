@@ -558,7 +558,10 @@ public class FeatureGateLabActionsTest {
                 assertNull("the same reset could not be retried",
                         FeatureGateLabStore.rule("abmock", "gate", "BOOLEAN"));
                 assertFalse(changing.get());
-                assertEquals("Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok.",
+                // "Restart TikTok to apply this." is the one sentence the whole settings screen
+                // uses now; this message said it a ninth way.
+                assertEquals("Lab overrides reset. Undo last Lab change is in the menu."
+                                + " Restart TikTok to apply this.",
                         ShadowToast.getTextOfLatestToast());
             }
         }

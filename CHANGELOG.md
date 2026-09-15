@@ -1,5 +1,7 @@
 ## Unreleased
 
+* One sentence asks you to restart TikTok, not nine. The same screen used to say it four or five different ways, sometimes twice in view of each other, and each wording was its own thing to translate. Every row summary and every single-change message now says "Restart TikTok to apply this." Restoring, resetting or undoing settings, where several moved at once, says "Restart TikTok to apply all changes." Nothing else.
+
 * The section rows on the settings screen say how many settings you have changed, not how many are on. The number was always a count of settings away from their default, and two of them arrive switched on, so turning one of those off read as having turned something on.
 
 * Four patch descriptions in Morphe Manager no longer end in a stray space left behind when a sentence was cut, and two no longer carry a credit line in the text somebody reads while deciding whether to select the patch. The credit is in the README, where it has a link to follow.

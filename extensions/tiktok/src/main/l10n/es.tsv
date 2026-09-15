@@ -98,7 +98,7 @@ Comments and translation	Comentarios y traducción
 Comments aren't available for this video	Los comentarios no están disponibles para este vídeo
 Comments beside the video	Comentarios junto al vídeo
 Compare gate reads with their previous values. Last recording: %1$d gates.	Compara las lecturas de los interruptores con sus valores anteriores. Última grabación: %1$d interruptores.
-Completed an interrupted settings change. Restart TikTok to apply it.	Se completó un cambio de ajustes interrumpido. Reinicia TikTok para aplicarlo.
+Completed an interrupted settings change. Restart TikTok to apply this.	Se completó un cambio de ajustes interrumpido. Reinicia TikTok para que se aplique.
 Confirm before following	Confirmar antes de seguir
 Confirm before liking	Confirmar antes de dar me gusta
 Confirm before sending to a friend	Confirmar antes de enviar a un amigo
@@ -314,7 +314,7 @@ Inserted cards	Tarjetas insertadas
 Interface	Interfaz
 Invalid SIM preset	Ajuste preestablecido de SIM no válido
 Keep a local record of what you have watched and drop those videos from later feed pages.	Guardar en el dispositivo un registro de lo que has visto y quitar esos vídeos de las páginas siguientes del feed.
-Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this, then use this switch to turn it off.	Mantener el avance automático activado y mostrar la acción Desplazamiento automático de TikTok en el panel del vídeo aunque tu cuenta nunca la haya tenido. Las pausas y los diálogos abiertos siguen deteniendo el desplazamiento. Reinicia TikTok para que se aplique y luego usa este interruptor para desactivarlo.
+Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this. Then use this switch to turn it off.	Mantener el avance automático activado y mostrar la acción Desplazamiento automático de TikTok en el panel del vídeo aunque tu cuenta nunca la haya tenido. Las pausas y los diálogos abiertos siguen deteniendo el desplazamiento. Reinicia TikTok para que se aplique. Luego usa este interruptor para desactivarlo.
 Keep captions in clear display	Mantener los subtítulos con los controles ocultos
 Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.	Mantener el reloj y los iconos de estado fuera de la pantalla mientras TikTok está abierto. Desliza desde arriba para verlos.
 Keep the screen's refresh rate	Mantener la tasa de refresco de la pantalla
@@ -423,7 +423,7 @@ Quieten the feed while comments are open	Silenciar el feed mientras los comentar
 Recorded gate reads (%1$d)	Lecturas de interruptores registradas (%1$d)
 Recording gate reads. Use a feature, then return here to stop.	Registrando las lecturas de los interruptores. Usa una función y vuelve aquí para parar.
 Recover the settings saved before the last restore or reset.	Recuperar los ajustes guardados antes de la última restauración o reinicio.
-Recovered an interrupted settings change. Restart TikTok to apply it.	Se recuperó un cambio de ajustes interrumpido. Reinicia TikTok para aplicarlo.
+Recovered an interrupted settings change. Restart TikTok to apply this.	Se recuperó un cambio de ajustes interrumpido. Reinicia TikTok para que se aplique.
 Region rules	Reglas de la región
 Region settings	Ajustes de región
 Remind me every	Recordármelo cada
@@ -448,7 +448,7 @@ Resume videos after scrolling	Continuar los vídeos después de desplazarte
 Return after using a TikTok feature to see every gate read during the recording.	Vuelve después de usar una función de TikTok para ver cada lectura de interruptor durante la grabación.
 SIM country preset	País preestablecido de la SIM
 SIM preset saved	Ajuste preestablecido de SIM guardado
-SIM preset saved. Restart TikTok to apply it.	Ajuste preestablecido de SIM guardado. Reinicia TikTok para aplicarlo.
+SIM preset saved. Restart TikTok to apply this.	Ajuste preestablecido de SIM guardado. Reinicia TikTok para que se aplique.
 Sanitize sharing links	Limpiar los enlaces al compartir
 Save	Guardar
 Save JSON	Guardar JSON
@@ -578,7 +578,7 @@ Shop posts	Publicaciones de la tienda
 Show @username beside a video instead of the display name the creator chose.	Mostrar @usuario junto al vídeo en vez del nombre visible que eligió el creador.
 Show LIVE search	Mostrar la búsqueda de LIVE
 Show TikTok's own progress bar on videos where it is normally hidden.	Mostrar la barra de progreso de TikTok en los vídeos donde normalmente está oculta.
-Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this: it reads the style once per run and remembers it.	Mostrar el panel de orden de TikTok en todas las publicaciones, con sus opciones de populares, más recientes, contenido y creador, en vez de la fila recortada que le tocó a tu cuenta. Reinicia TikTok para que se aplique: lee el estilo una vez por ejecución y lo recuerda.
+Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this. It reads the style once per run and remembers it.	Mostrar el panel de orden de TikTok en todas las publicaciones, con sus opciones de populares, más recientes, contenido y creador, en vez de la fila recortada que le tocó a tu cuenta. Reinicia TikTok para que se aplique. Lee el estilo una vez por ejecución y lo recuerda.
 Show TikTok's search entry in the LIVE drawer where supported.	Mostrar la entrada de búsqueda de TikTok en el panel de LIVE donde esté disponible.
 Show a video preview thumbnail while dragging the progress bar.	Mostrar una miniatura del vídeo mientras arrastras la barra de progreso.
 Show block button on videos	Mostrar el botón de bloquear en los vídeos
@@ -717,7 +717,7 @@ Use a default playback speed	Usar una velocidad de reproducción predeterminada
 Use non-personalized search	Usar la búsqueda sin personalizar
 Use the selected country and operator values. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.	Usar el país y los valores de operador seleccionados. Esto solo cambia lo que dice la SIM: tu dirección IP, el historial de tu cuenta y el idioma en el que lees siguen igual, y con cualquiera de ellos le basta a TikTok para mantener la región que ya eligió. Reinicia TikTok para que se aplique.
 Use the selected country. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.	Usar el país seleccionado. Esto solo cambia lo que dice la SIM: tu dirección IP, el historial de tu cuenta y el idioma en el que lees siguen igual, y con cualquiera de ellos le basta a TikTok para mantener la región que ya eligió. Reinicia TikTok para que se aplique.
-Use the split layout on wider screens. Restart TikTok to apply this, or unfold again if the old layout is still there.	Usar el diseño dividido en pantallas más anchas. Reinicia TikTok para que se aplique, o vuelve a desplegar si sigue el diseño antiguo.
+Use the split layout on wider screens. Restart TikTok to apply this. If the old layout is still there, unfold again.	Usar el diseño dividido en pantallas más anchas. Reinicia TikTok para que se aplique. Si sigue el diseño antiguo, vuelve a desplegar.
 Verified creators	Creadores verificados
 Video	Vídeo
 Video (MP4)	Vídeo (MP4)
@@ -826,12 +826,11 @@ Imported %1$d disabled values. %2$d already matched, %3$d unavailable, %4$d reje
 Could not change Lab settings.	No se han podido cambiar los ajustes del Lab.
 None of these gates had an override to reset.	Ninguno de estos interruptores tenía una sustitución que restablecer.
 None of these gates takes a true or false value.	Ninguno de estos interruptores acepta un valor true o false.
-Restart TikTok to apply the Feature Gate Lab changes.	Reinicia TikTok para aplicar los cambios del Feature Gate Lab.
-Overrides enabled. Restart TikTok to apply saved values.	Sustituciones activadas. Reinicia TikTok para aplicar los valores guardados.
-Overrides disabled. Restart TikTok to restore native values.	Sustituciones desactivadas. Reinicia TikTok para volver a los valores nativos.
-Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok.	Sustituciones del Lab restablecidas. Deshacer el último cambio del Lab está en el menú. Reinicia TikTok.
-Lab data reset. Undo last Lab change is in the menu. Restart TikTok.	Datos del Lab restablecidos. Deshacer el último cambio del Lab está en el menú. Reinicia TikTok.
-Restored the previous Lab settings. Restart TikTok.	Se restauraron los ajustes anteriores del Lab. Reinicia TikTok.
+Overrides enabled. Restart TikTok to apply this.	Sustituciones activadas. Reinicia TikTok para que se aplique.
+Overrides disabled. Restart TikTok to apply this.	Sustituciones desactivadas. Reinicia TikTok para que se aplique.
+Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok to apply this.	Sustituciones del Lab restablecidas. Deshacer el último cambio del Lab está en el menú. Reinicia TikTok para que se aplique.
+Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.	Datos del Lab restablecidos. Deshacer el último cambio del Lab está en el menú. Reinicia TikTok para que se aplique.
+Restored the previous Lab settings. Restart TikTok to apply this.	Se restauraron los ajustes anteriores del Lab. Reinicia TikTok para que se aplique.
 Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected.	No se importó nada nuevo. %1$d ya coincidían, %2$d no están disponibles, %3$d se rechazaron.
 There is no Lab change to undo.	No hay ningún cambio del Lab que deshacer.
 The record of an interrupted settings change could not be read, so it was set aside. Check your settings.	No se pudo leer el registro de un cambio de ajustes interrumpido, así que se apartó. Revisa tus ajustes.
@@ -867,7 +866,7 @@ Loaded values are still being read. Try again in a moment.	Los valores cargados 
 The selected loaded-values file could not be read. Try again.	No se pudo leer el archivo de valores cargados seleccionado. Inténtalo de nuevo.
 Enter a number. The previous value was kept.	Introduce un número. Se conservó el valor anterior.
 There is no diagnostic data to clear.	No hay datos de diagnóstico que borrar.
-Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok.	Los datos del Lab superaban el límite de reglas, así que se borraron sin una copia para deshacer. Reinicia TikTok.
+Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this.	Los datos del Lab superaban el límite de reglas, así que se borraron sin una copia para deshacer. Reinicia TikTok para que se aplique.
 The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.	El Lab admite como máximo %1$s reglas. Este cambio daría un total de %2$s, así que no se cambió nada.
 Add a separate button that skips this account locally without blocking it.	Añade un botón separado que omite esta cuenta localmente sin bloquearla.
 Add a separate button that skips videos using the current sound.	Añade un botón separado que omite los vídeos que usan el sonido actual.

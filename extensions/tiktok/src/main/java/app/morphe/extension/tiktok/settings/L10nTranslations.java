@@ -48,7 +48,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildDe() {
-        Map<String, String> table = new HashMap<>(1980);
+        Map<String, String> table = new HashMap<>(1978);
         fillDe0(table);
         fillDe1(table);
         fillDe2(table);
@@ -392,8 +392,8 @@ public final class L10nTranslations {
                 "Kommentare neben dem Video");
         table.put("Compare gate reads with their previous values. Last recording: %1$d gates.",
                 "Gate-Zugriffe mit ihren vorherigen Werten vergleichen. Letzte Aufzeichnung: %1$d Gates.");
-        table.put("Completed an interrupted settings change. Restart TikTok to apply it.",
-                "Eine unterbrochene Einstellungsänderung wurde abgeschlossen. Starte TikTok neu, um sie anzuwenden.");
+        table.put("Completed an interrupted settings change. Restart TikTok to apply this.",
+                "Eine unterbrochene Einstellungsänderung wurde abgeschlossen. TikTok neu starten, damit das gilt.");
         table.put("Config",
                 "Konfiguration");
         table.put("Confirm before following",
@@ -985,8 +985,8 @@ public final class L10nTranslations {
                 "Ungültige SIM-Vorlage");
         table.put("Keep a local record of what you have watched and drop those videos from later feed pages.",
                 "Lokal festhalten, was du gesehen hast, und diese Videos aus späteren Feed-Seiten entfernen.");
-        table.put("Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this, then use this switch to turn it off.",
-                "Den automatischen Weiterlauf aktiviert lassen und TikToks eigene Aktion Auto-Scrollen im Videomenü zeigen, auch wenn dein Konto sie nie hatte. Pausen und offene Dialoge stoppen das Scrollen weiterhin. TikTok neu starten, damit das gilt, und danach mit diesem Schalter wieder ausschalten.");
+        table.put("Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this. Then use this switch to turn it off.",
+                "Den automatischen Weiterlauf aktiviert lassen und TikToks eigene Aktion Auto-Scrollen im Videomenü zeigen, auch wenn dein Konto sie nie hatte. Pausen und offene Dialoge stoppen das Scrollen weiterhin. TikTok neu starten, damit das gilt. Danach mit diesem Schalter wieder ausschalten.");
         table.put("Keep captions in clear display",
                 "Untertitel in der freien Ansicht behalten");
         table.put("Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.",
@@ -1005,12 +1005,12 @@ public final class L10nTranslations {
                 "LIVE-Wiederholungen");
         table.put("LIVE videos",
                 "LIVE-Videos");
-        table.put("Lab data reset. Undo last Lab change is in the menu. Restart TikTok.",
-                "Lab-Daten zurückgesetzt. Letzte Lab-Änderung rückgängig machen steht im Menü. TikTok neu starten.");
-        table.put("Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok.",
-                "Die Lab-Daten überschritten das Regellimit und wurden daher ohne Rückgängig-Kopie gelöscht. Starte TikTok neu.");
-        table.put("Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok.",
-                "Lab-Überschreibungen zurückgesetzt. Letzte Lab-Änderung rückgängig machen steht im Menü. TikTok neu starten.");
+        table.put("Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.",
+                "Lab-Daten zurückgesetzt. Letzte Lab-Änderung rückgängig machen steht im Menü. TikTok neu starten, damit das gilt.");
+        table.put("Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this.",
+                "Die Lab-Daten überschritten das Regellimit und wurden daher ohne Rückgängig-Kopie gelöscht. TikTok neu starten, damit das gilt.");
+        table.put("Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok to apply this.",
+                "Lab-Überschreibungen zurückgesetzt. Letzte Lab-Änderung rückgängig machen steht im Menü. TikTok neu starten, damit das gilt.");
         table.put("Last original value",
                 "Letzter Originalwert");
         table.put("Leave maximum empty to keep it unlimited.",
@@ -1279,10 +1279,10 @@ public final class L10nTranslations {
                 "Überschreibungen");
         table.put("Overrides are disabled in the Feature Gate Lab.",
                 "Überschreibungen sind im Feature Gate Lab abgeschaltet.");
-        table.put("Overrides disabled. Restart TikTok to restore native values.",
-                "Überschreibungen deaktiviert. TikTok neu starten, damit wieder die eigenen Werte gelten.");
-        table.put("Overrides enabled. Restart TikTok to apply saved values.",
-                "Überschreibungen aktiviert. TikTok neu starten, damit die gespeicherten Werte gelten.");
+        table.put("Overrides disabled. Restart TikTok to apply this.",
+                "Überschreibungen deaktiviert. TikTok neu starten, damit das gilt.");
+        table.put("Overrides enabled. Restart TikTok to apply this.",
+                "Überschreibungen aktiviert. TikTok neu starten, damit das gilt.");
         table.put("Paid partnerships",
                 "Bezahlte Partnerschaften");
         table.put("People, shortcuts and sending controls",
@@ -1344,8 +1344,8 @@ public final class L10nTranslations {
                 "Gate-Zugriffe werden aufgezeichnet. Nutze eine Funktion und komm zum Beenden zurück.");
         table.put("Recover the settings saved before the last restore or reset.",
                 "Die vor der letzten Wiederherstellung oder Zurücksetzung gespeicherten Einstellungen zurückholen.");
-        table.put("Recovered an interrupted settings change. Restart TikTok to apply it.",
-                "Eine unterbrochene Einstellungsänderung wurde wiederhergestellt. Starte TikTok neu, um sie anzuwenden.");
+        table.put("Recovered an interrupted settings change. Restart TikTok to apply this.",
+                "Eine unterbrochene Einstellungsänderung wurde wiederhergestellt. TikTok neu starten, damit das gilt.");
         table.put("Refresh values",
                 "Werte aktualisieren");
         table.put("Refreshing current TikTok cache...",
@@ -1406,8 +1406,6 @@ public final class L10nTranslations {
                 "Position zurücksetzen");
         table.put("Reset settings",
                 "Einstellungen zurücksetzen");
-        table.put("Restart TikTok to apply the Feature Gate Lab changes.",
-                "TikTok neu starten, damit die Änderungen des Feature Gate Lab gelten.");
         table.put("Restart TikTok to apply this.",
                 "TikTok neu starten, damit das gilt.");
         table.put("Restore defaults immediately. Your current settings are kept for Undo.",
@@ -1418,13 +1416,13 @@ public final class L10nTranslations {
                 "Wiederherstellung fehlgeschlagen. Einige Einstellungen können noch geändert sein. Nutze „Rückgängig“, um sie wiederherzustellen.");
         table.put("Restore settings",
                 "Einstellungen wiederherstellen");
-        table.put("Restored the previous Lab settings. Restart TikTok.",
-                "Die vorherigen Lab-Einstellungen sind wiederhergestellt. TikTok neu starten.");
+        table.put("Restored the previous Lab settings. Restart TikTok to apply this.",
+                "Die vorherigen Lab-Einstellungen sind wiederhergestellt. TikTok neu starten, damit das gilt.");
+        table.put("Restoring your settings",
+                "Einstellungen werden wiederhergestellt");
     }
 
     private static void fillDe11(Map<String, String> table) {
-        table.put("Restoring your settings",
-                "Einstellungen werden wiederhergestellt");
         table.put("Resume videos after scrolling",
                 "Videos nach dem Scrollen fortsetzen");
         table.put("Retry",
@@ -1439,8 +1437,8 @@ public final class L10nTranslations {
                 "SIM-Ländervorgabe");
         table.put("SIM preset saved",
                 "SIM-Vorlage gespeichert");
-        table.put("SIM preset saved. Restart TikTok to apply it.",
-                "SIM-Vorlage gespeichert. Starte TikTok neu, damit sie greift.");
+        table.put("SIM preset saved. Restart TikTok to apply this.",
+                "SIM-Vorlage gespeichert. TikTok neu starten, damit das gilt.");
         table.put("STEM",
                 "STEM");
         table.put("Sanitize sharing links",
@@ -1543,11 +1541,11 @@ public final class L10nTranslations {
                 "Ausgewählt");
         table.put("Send links to another app",
                 "Links an eine andere App senden");
+        table.put("Sending feedback",
+                "Rückmeldung wird gesendet");
     }
 
     private static void fillDe12(Map<String, String> table) {
-        table.put("Sending feedback",
-                "Rückmeldung wird gesendet");
         table.put("Series posts",
                 "Serienbeiträge");
         table.put("Settings",
@@ -1582,8 +1580,8 @@ public final class L10nTranslations {
                 "LIVE-Suche anzeigen");
         table.put("Show TikTok's own progress bar on videos where it is normally hidden.",
                 "TikToks eigene Fortschrittsleiste bei Videos zeigen, wo sie sonst versteckt ist.");
-        table.put("Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this: it reads the style once per run and remembers it.",
-                "TikToks eigenes Sortiermenü bei jedem Beitrag zeigen, mit Beliebt, Neueste, Medien und Ersteller, statt der gekürzten Zeile, die dein Konto bekommen hat. TikTok neu starten, damit das gilt: Es liest den Stil einmal pro Start und merkt ihn sich.");
+        table.put("Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this. It reads the style once per run and remembers it.",
+                "TikToks eigenes Sortiermenü bei jedem Beitrag zeigen, mit Beliebt, Neueste, Medien und Ersteller, statt der gekürzten Zeile, die dein Konto bekommen hat. TikTok neu starten, damit das gilt. Es liest den Stil einmal pro Start und merkt ihn sich.");
         table.put("Show TikTok's search entry in the LIVE drawer where supported.",
                 "TikToks Sucheinstieg im LIVE-Bereich zeigen, wo es geht.");
         table.put("Show a video preview thumbnail while dragging the progress bar.",
@@ -1666,11 +1664,11 @@ public final class L10nTranslations {
                 "Der Verlauf wird noch gelesen. Tippe gleich noch einmal.");
         table.put("Still saving the last one",
                 "Das letzte wird noch gespeichert");
+        table.put("Stop ByteDance AppLog events, AppsFlyer attribution, explicit Firebase screen reports and crash reporting from being sent. TikTok's own diagnostics go quiet with them.",
+                "ByteDance-AppLog-Ereignisse, AppsFlyer-Attribution, explizite Firebase-Bildschirmberichte und Absturzmeldungen nicht mehr senden. TikToks eigene Diagnose verstummt damit ebenfalls.");
     }
 
     private static void fillDe13(Map<String, String> table) {
-        table.put("Stop ByteDance AppLog events, AppsFlyer attribution, explicit Firebase screen reports and crash reporting from being sent. TikTok's own diagnostics go quiet with them.",
-                "ByteDance-AppLog-Ereignisse, AppsFlyer-Attribution, explizite Firebase-Bildschirmberichte und Absturzmeldungen nicht mehr senden. TikToks eigene Diagnose verstummt damit ebenfalls.");
         table.put("Stop TikTok asking the screen to run at the frame rate of the video it is playing. On a 90 or 120 Hz phone that ask slows the whole app down to the video's rate, scrolling included.",
                 "Verhindert, dass TikTok den Bildschirm auf die Bildrate des laufenden Videos herunterregelt. Auf einem 90 oder 120 Hz Telefon bremst diese Anfrage die ganze App auf die Rate des Videos aus, das Scrollen eingeschlossen.");
         table.put("Stop TikTok reporting that you viewed a story or a profile, or that you are typing. Online status is unchanged. It cannot undo what the server has already recorded.",
@@ -1789,11 +1787,11 @@ public final class L10nTranslations {
                 "Die letzte Änderung ist rückgängig gemacht. Die Regeln des Feature Gate Labs galten für eine andere TikTok-Version und wurden ausgelassen. TikTok neu starten, um alle Änderungen zu übernehmen.");
         table.put("The minimum or maximum comments on a video to show.",
                 "Mindest- oder Höchstzahl an Kommentaren, damit ein Video gezeigt wird.");
+        table.put("The minimum or maximum favorites of a video to show.",
+                "Das Minimum oder Maximum an Favoriten, das ein Video haben muss, um gezeigt zu werden.");
     }
 
     private static void fillDe14(Map<String, String> table) {
-        table.put("The minimum or maximum favorites of a video to show.",
-                "Das Minimum oder Maximum an Favoriten, das ein Video haben muss, um gezeigt zu werden.");
         table.put("The minimum or maximum likes of a video to show.",
                 "Die Mindest- oder Höchstzahl an Likes, damit ein Video gezeigt wird.");
         table.put("The minimum or maximum shares of a video to show.",
@@ -1912,11 +1910,11 @@ public final class L10nTranslations {
                 "Heute: %1$d Videos");
         table.put("Tokens: {creator}, {date}, {video_id}, {index}. {index} numbers the photos of a slideshow you save with Download original photos; anything saved through TikTok's own button is numbered by the folder instead. The file extension is kept automatically.",
                 "Platzhalter: {creator}, {date}, {video_id}, {index}. {index} nummeriert die Fotos einer Bilderfolge, die du mit Originalfotos herunterladen speicherst; alles über TikToks eigenen Knopf nummeriert stattdessen der Ordner. Die Dateiendung bleibt automatisch erhalten.");
+        table.put("Tokens: {creator}, {date}, {video_id}. The file extension is kept automatically.",
+                "Platzhalter: {creator}, {date}, {video_id}. Die Dateiendung bleibt automatisch erhalten.");
     }
 
     private static void fillDe15(Map<String, String> table) {
-        table.put("Tokens: {creator}, {date}, {video_id}. The file extension is kept automatically.",
-                "Platzhalter: {creator}, {date}, {video_id}. Die Dateiendung bleibt automatisch erhalten.");
         table.put("Tokens: {date}, {media_id}. Works for image and video stickers.",
                 "Platzhalter: {date}, {media_id}. Gilt für Bild- und Video-Sticker.");
         table.put("Too many media saves are already running. Try again shortly.",
@@ -1979,8 +1977,8 @@ public final class L10nTranslations {
                 "Das gewählte Land und die Anbieterwerte verwenden. Das ändert nur, was die SIM meldet: deine IP-Adresse, der Verlauf deines Kontos und die Sprache, in der du liest, bleiben gleich, und eines davon reicht TikTok schon, um bei der bisherigen Region zu bleiben. TikTok neu starten, damit das gilt.");
         table.put("Use the selected country. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.",
                 "Das gewählte Land verwenden. Das ändert nur, was die SIM meldet: deine IP-Adresse, der Verlauf deines Kontos und die Sprache, in der du liest, bleiben gleich, und eines davon reicht TikTok schon, um bei der bisherigen Region zu bleiben. TikTok neu starten, damit das gilt.");
-        table.put("Use the split layout on wider screens. Restart TikTok to apply this, or unfold again if the old layout is still there.",
-                "Auf breiteren Bildschirmen das geteilte Layout verwenden. TikTok neu starten, damit das gilt, oder erneut aufklappen, wenn das alte Layout noch da ist.");
+        table.put("Use the split layout on wider screens. Restart TikTok to apply this. If the old layout is still there, unfold again.",
+                "Auf breiteren Bildschirmen das geteilte Layout verwenden. TikTok neu starten, damit das gilt. Ist das alte Layout noch da, klapp erneut auf.");
         table.put("Use value",
                 "Wert verwenden");
         table.put("Use your own offline videos limit",
@@ -2035,11 +2033,11 @@ public final class L10nTranslations {
                 "YTDLnis-Hintergrundmodus");
         table.put("YTDLnis download type",
                 "YTDLnis-Downloadtyp");
+        table.put("Yes",
+                "Ja");
     }
 
     private static void fillDe16(Map<String, String> table) {
-        table.put("Yes",
-                "Ja");
         table.put("Your operator's name, like T-Mobile.",
                 "Der Name deines Anbieters, etwa T-Mobile.");
         table.put("Your operator's numeric code, like 310260.",
@@ -2101,7 +2099,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildEs() {
-        Map<String, String> table = new HashMap<>(1980);
+        Map<String, String> table = new HashMap<>(1978);
         fillEs0(table);
         fillEs1(table);
         fillEs2(table);
@@ -2445,8 +2443,8 @@ public final class L10nTranslations {
                 "Comentarios junto al vídeo");
         table.put("Compare gate reads with their previous values. Last recording: %1$d gates.",
                 "Compara las lecturas de los interruptores con sus valores anteriores. Última grabación: %1$d interruptores.");
-        table.put("Completed an interrupted settings change. Restart TikTok to apply it.",
-                "Se completó un cambio de ajustes interrumpido. Reinicia TikTok para aplicarlo.");
+        table.put("Completed an interrupted settings change. Restart TikTok to apply this.",
+                "Se completó un cambio de ajustes interrumpido. Reinicia TikTok para que se aplique.");
         table.put("Config",
                 "Configuración");
         table.put("Confirm before following",
@@ -3038,8 +3036,8 @@ public final class L10nTranslations {
                 "Ajuste preestablecido de SIM no válido");
         table.put("Keep a local record of what you have watched and drop those videos from later feed pages.",
                 "Guardar en el dispositivo un registro de lo que has visto y quitar esos vídeos de las páginas siguientes del feed.");
-        table.put("Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this, then use this switch to turn it off.",
-                "Mantener el avance automático activado y mostrar la acción Desplazamiento automático de TikTok en el panel del vídeo aunque tu cuenta nunca la haya tenido. Las pausas y los diálogos abiertos siguen deteniendo el desplazamiento. Reinicia TikTok para que se aplique y luego usa este interruptor para desactivarlo.");
+        table.put("Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this. Then use this switch to turn it off.",
+                "Mantener el avance automático activado y mostrar la acción Desplazamiento automático de TikTok en el panel del vídeo aunque tu cuenta nunca la haya tenido. Las pausas y los diálogos abiertos siguen deteniendo el desplazamiento. Reinicia TikTok para que se aplique. Luego usa este interruptor para desactivarlo.");
         table.put("Keep captions in clear display",
                 "Mantener los subtítulos con los controles ocultos");
         table.put("Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.",
@@ -3058,12 +3056,12 @@ public final class L10nTranslations {
                 "Repeticiones de LIVE");
         table.put("LIVE videos",
                 "Vídeos LIVE");
-        table.put("Lab data reset. Undo last Lab change is in the menu. Restart TikTok.",
-                "Datos del Lab restablecidos. Deshacer el último cambio del Lab está en el menú. Reinicia TikTok.");
-        table.put("Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok.",
-                "Los datos del Lab superaban el límite de reglas, así que se borraron sin una copia para deshacer. Reinicia TikTok.");
-        table.put("Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok.",
-                "Sustituciones del Lab restablecidas. Deshacer el último cambio del Lab está en el menú. Reinicia TikTok.");
+        table.put("Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.",
+                "Datos del Lab restablecidos. Deshacer el último cambio del Lab está en el menú. Reinicia TikTok para que se aplique.");
+        table.put("Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this.",
+                "Los datos del Lab superaban el límite de reglas, así que se borraron sin una copia para deshacer. Reinicia TikTok para que se aplique.");
+        table.put("Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok to apply this.",
+                "Sustituciones del Lab restablecidas. Deshacer el último cambio del Lab está en el menú. Reinicia TikTok para que se aplique.");
         table.put("Last original value",
                 "Último valor original");
         table.put("Leave maximum empty to keep it unlimited.",
@@ -3332,10 +3330,10 @@ public final class L10nTranslations {
                 "Sustituciones");
         table.put("Overrides are disabled in the Feature Gate Lab.",
                 "Las sustituciones están desactivadas en el Laboratorio de interruptores.");
-        table.put("Overrides disabled. Restart TikTok to restore native values.",
-                "Sustituciones desactivadas. Reinicia TikTok para volver a los valores nativos.");
-        table.put("Overrides enabled. Restart TikTok to apply saved values.",
-                "Sustituciones activadas. Reinicia TikTok para aplicar los valores guardados.");
+        table.put("Overrides disabled. Restart TikTok to apply this.",
+                "Sustituciones desactivadas. Reinicia TikTok para que se aplique.");
+        table.put("Overrides enabled. Restart TikTok to apply this.",
+                "Sustituciones activadas. Reinicia TikTok para que se aplique.");
         table.put("Paid partnerships",
                 "Colaboraciones pagadas");
         table.put("People, shortcuts and sending controls",
@@ -3397,8 +3395,8 @@ public final class L10nTranslations {
                 "Registrando las lecturas de los interruptores. Usa una función y vuelve aquí para parar.");
         table.put("Recover the settings saved before the last restore or reset.",
                 "Recuperar los ajustes guardados antes de la última restauración o reinicio.");
-        table.put("Recovered an interrupted settings change. Restart TikTok to apply it.",
-                "Se recuperó un cambio de ajustes interrumpido. Reinicia TikTok para aplicarlo.");
+        table.put("Recovered an interrupted settings change. Restart TikTok to apply this.",
+                "Se recuperó un cambio de ajustes interrumpido. Reinicia TikTok para que se aplique.");
         table.put("Refresh values",
                 "Actualizar los valores");
         table.put("Refreshing current TikTok cache...",
@@ -3459,8 +3457,6 @@ public final class L10nTranslations {
                 "Restablecer la posición");
         table.put("Reset settings",
                 "Reiniciar los ajustes");
-        table.put("Restart TikTok to apply the Feature Gate Lab changes.",
-                "Reinicia TikTok para aplicar los cambios del Feature Gate Lab.");
         table.put("Restart TikTok to apply this.",
                 "Reinicia TikTok para que se aplique.");
         table.put("Restore defaults immediately. Your current settings are kept for Undo.",
@@ -3471,13 +3467,13 @@ public final class L10nTranslations {
                 "La restauración falló. Puede que algunos ajustes hayan cambiado igualmente. Usa Deshacer para recuperarlos.");
         table.put("Restore settings",
                 "Restaurar los ajustes");
-        table.put("Restored the previous Lab settings. Restart TikTok.",
-                "Se restauraron los ajustes anteriores del Lab. Reinicia TikTok.");
+        table.put("Restored the previous Lab settings. Restart TikTok to apply this.",
+                "Se restauraron los ajustes anteriores del Lab. Reinicia TikTok para que se aplique.");
+        table.put("Restoring your settings",
+                "Restaurando tus ajustes");
     }
 
     private static void fillEs11(Map<String, String> table) {
-        table.put("Restoring your settings",
-                "Restaurando tus ajustes");
         table.put("Resume videos after scrolling",
                 "Continuar los vídeos después de desplazarte");
         table.put("Retry",
@@ -3492,8 +3488,8 @@ public final class L10nTranslations {
                 "País preestablecido de la SIM");
         table.put("SIM preset saved",
                 "Ajuste preestablecido de SIM guardado");
-        table.put("SIM preset saved. Restart TikTok to apply it.",
-                "Ajuste preestablecido de SIM guardado. Reinicia TikTok para aplicarlo.");
+        table.put("SIM preset saved. Restart TikTok to apply this.",
+                "Ajuste preestablecido de SIM guardado. Reinicia TikTok para que se aplique.");
         table.put("STEM",
                 "STEM");
         table.put("Sanitize sharing links",
@@ -3596,11 +3592,11 @@ public final class L10nTranslations {
                 "Seleccionado");
         table.put("Send links to another app",
                 "Enviar los enlaces a otra app");
+        table.put("Sending feedback",
+                "Enviando comentarios");
     }
 
     private static void fillEs12(Map<String, String> table) {
-        table.put("Sending feedback",
-                "Enviando comentarios");
         table.put("Series posts",
                 "Publicaciones de Series");
         table.put("Settings",
@@ -3635,8 +3631,8 @@ public final class L10nTranslations {
                 "Mostrar la búsqueda de LIVE");
         table.put("Show TikTok's own progress bar on videos where it is normally hidden.",
                 "Mostrar la barra de progreso de TikTok en los vídeos donde normalmente está oculta.");
-        table.put("Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this: it reads the style once per run and remembers it.",
-                "Mostrar el panel de orden de TikTok en todas las publicaciones, con sus opciones de populares, más recientes, contenido y creador, en vez de la fila recortada que le tocó a tu cuenta. Reinicia TikTok para que se aplique: lee el estilo una vez por ejecución y lo recuerda.");
+        table.put("Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this. It reads the style once per run and remembers it.",
+                "Mostrar el panel de orden de TikTok en todas las publicaciones, con sus opciones de populares, más recientes, contenido y creador, en vez de la fila recortada que le tocó a tu cuenta. Reinicia TikTok para que se aplique. Lee el estilo una vez por ejecución y lo recuerda.");
         table.put("Show TikTok's search entry in the LIVE drawer where supported.",
                 "Mostrar la entrada de búsqueda de TikTok en el panel de LIVE donde esté disponible.");
         table.put("Show a video preview thumbnail while dragging the progress bar.",
@@ -3719,11 +3715,11 @@ public final class L10nTranslations {
                 "Todavía se está leyendo el registro. Toca otra vez dentro de un momento.");
         table.put("Still saving the last one",
                 "Todavía se está guardando el anterior");
+        table.put("Stop ByteDance AppLog events, AppsFlyer attribution, explicit Firebase screen reports and crash reporting from being sent. TikTok's own diagnostics go quiet with them.",
+                "Impedir que se envíen los eventos AppLog de ByteDance, la atribución de AppsFlyer, los informes explícitos de pantalla de Firebase y los informes de fallos. Los diagnósticos propios de TikTok se callan con ellos.");
     }
 
     private static void fillEs13(Map<String, String> table) {
-        table.put("Stop ByteDance AppLog events, AppsFlyer attribution, explicit Firebase screen reports and crash reporting from being sent. TikTok's own diagnostics go quiet with them.",
-                "Impedir que se envíen los eventos AppLog de ByteDance, la atribución de AppsFlyer, los informes explícitos de pantalla de Firebase y los informes de fallos. Los diagnósticos propios de TikTok se callan con ellos.");
         table.put("Stop TikTok asking the screen to run at the frame rate of the video it is playing. On a 90 or 120 Hz phone that ask slows the whole app down to the video's rate, scrolling included.",
                 "Impedir que TikTok pida que la pantalla funcione a la tasa de fotogramas del vídeo que está reproduciendo. En un móvil de 90 o 120 Hz esa petición ralentiza toda la app hasta la tasa del vídeo, el desplazamiento incluido.");
         table.put("Stop TikTok reporting that you viewed a story or a profile, or that you are typing. Online status is unchanged. It cannot undo what the server has already recorded.",
@@ -3842,11 +3838,11 @@ public final class L10nTranslations {
                 "El último cambio está deshecho. Las reglas del Laboratorio de interruptores eran de otra versión de TikTok y se dejaron fuera. Reinicia TikTok para aplicar todos los cambios.");
         table.put("The minimum or maximum comments on a video to show.",
                 "El mínimo o el máximo de comentarios que ha de tener un vídeo para mostrarlo.");
+        table.put("The minimum or maximum favorites of a video to show.",
+                "El mínimo o el máximo de favoritos que ha de tener un vídeo para mostrarlo.");
     }
 
     private static void fillEs14(Map<String, String> table) {
-        table.put("The minimum or maximum favorites of a video to show.",
-                "El mínimo o el máximo de favoritos que ha de tener un vídeo para mostrarlo.");
         table.put("The minimum or maximum likes of a video to show.",
                 "El mínimo o el máximo de me gusta que ha de tener un vídeo para mostrarlo.");
         table.put("The minimum or maximum shares of a video to show.",
@@ -3965,11 +3961,11 @@ public final class L10nTranslations {
                 "Hoy: %1$d vídeos");
         table.put("Tokens: {creator}, {date}, {video_id}, {index}. {index} numbers the photos of a slideshow you save with Download original photos; anything saved through TikTok's own button is numbered by the folder instead. The file extension is kept automatically.",
                 "Comodines: {creator}, {date}, {video_id}, {index}. {index} numera las fotos de una presentación que guardes con Descargar las fotos originales; lo que se guarde con el botón propio de TikTok lo numera la carpeta. La extensión del archivo se mantiene automáticamente.");
+        table.put("Tokens: {creator}, {date}, {video_id}. The file extension is kept automatically.",
+                "Comodines: {creator}, {date}, {video_id}. La extensión del archivo se mantiene automáticamente.");
     }
 
     private static void fillEs15(Map<String, String> table) {
-        table.put("Tokens: {creator}, {date}, {video_id}. The file extension is kept automatically.",
-                "Comodines: {creator}, {date}, {video_id}. La extensión del archivo se mantiene automáticamente.");
         table.put("Tokens: {date}, {media_id}. Works for image and video stickers.",
                 "Comodines: {date}, {media_id}. Sirve para los stickers de imagen y de vídeo.");
         table.put("Too many media saves are already running. Try again shortly.",
@@ -4032,8 +4028,8 @@ public final class L10nTranslations {
                 "Usar el país y los valores de operador seleccionados. Esto solo cambia lo que dice la SIM: tu dirección IP, el historial de tu cuenta y el idioma en el que lees siguen igual, y con cualquiera de ellos le basta a TikTok para mantener la región que ya eligió. Reinicia TikTok para que se aplique.");
         table.put("Use the selected country. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.",
                 "Usar el país seleccionado. Esto solo cambia lo que dice la SIM: tu dirección IP, el historial de tu cuenta y el idioma en el que lees siguen igual, y con cualquiera de ellos le basta a TikTok para mantener la región que ya eligió. Reinicia TikTok para que se aplique.");
-        table.put("Use the split layout on wider screens. Restart TikTok to apply this, or unfold again if the old layout is still there.",
-                "Usar el diseño dividido en pantallas más anchas. Reinicia TikTok para que se aplique, o vuelve a desplegar si sigue el diseño antiguo.");
+        table.put("Use the split layout on wider screens. Restart TikTok to apply this. If the old layout is still there, unfold again.",
+                "Usar el diseño dividido en pantallas más anchas. Reinicia TikTok para que se aplique. Si sigue el diseño antiguo, vuelve a desplegar.");
         table.put("Use value",
                 "Usar el valor");
         table.put("Use your own offline videos limit",
@@ -4088,11 +4084,11 @@ public final class L10nTranslations {
                 "Modo en segundo plano de YTDLnis");
         table.put("YTDLnis download type",
                 "Tipo de descarga de YTDLnis");
+        table.put("Yes",
+                "Sí");
     }
 
     private static void fillEs16(Map<String, String> table) {
-        table.put("Yes",
-                "Sí");
         table.put("Your operator's name, like T-Mobile.",
                 "El nombre de tu operador, como T-Mobile.");
         table.put("Your operator's numeric code, like 310260.",
@@ -4154,7 +4150,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIn() {
-        Map<String, String> table = new HashMap<>(1980);
+        Map<String, String> table = new HashMap<>(1978);
         fillIn0(table);
         fillIn1(table);
         fillIn2(table);
@@ -4498,8 +4494,8 @@ public final class L10nTranslations {
                 "Komentar di samping video");
         table.put("Compare gate reads with their previous values. Last recording: %1$d gates.",
                 "Bandingkan pembacaan gate dengan nilai sebelumnya. Rekaman terakhir: %1$d gate.");
-        table.put("Completed an interrupted settings change. Restart TikTok to apply it.",
-                "Perubahan pengaturan yang terhenti telah diselesaikan. Mulai ulang TikTok untuk menerapkannya.");
+        table.put("Completed an interrupted settings change. Restart TikTok to apply this.",
+                "Perubahan pengaturan yang terhenti telah diselesaikan. Mulai ulang TikTok agar berlaku.");
         table.put("Config",
                 "Konfigurasi");
         table.put("Confirm before following",
@@ -5091,8 +5087,8 @@ public final class L10nTranslations {
                 "Pratata SIM tidak sah");
         table.put("Keep a local record of what you have watched and drop those videos from later feed pages.",
                 "Simpan catatan tontonanmu di perangkat dan buang video itu dari halaman feed berikutnya.");
-        table.put("Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this, then use this switch to turn it off.",
-                "Biarkan lanjut otomatis tetap aktif dan tampilkan aksi Auto scroll milik TikTok di panel video meski akun Anda tidak pernah punya. Jeda dan dialog terbuka tetap menghentikan guliran. Mulai ulang TikTok agar berlaku, lalu pakai sakelar ini untuk mematikannya.");
+        table.put("Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this. Then use this switch to turn it off.",
+                "Biarkan lanjut otomatis tetap aktif dan tampilkan aksi Auto scroll milik TikTok di panel video meski akun Anda tidak pernah punya. Jeda dan dialog terbuka tetap menghentikan guliran. Mulai ulang TikTok agar berlaku. Lalu pakai sakelar ini untuk mematikannya.");
         table.put("Keep captions in clear display",
                 "Pertahankan keterangan saat tampilan bersih");
         table.put("Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.",
@@ -5111,12 +5107,12 @@ public final class L10nTranslations {
                 "Putar ulang LIVE");
         table.put("LIVE videos",
                 "Video LIVE");
-        table.put("Lab data reset. Undo last Lab change is in the menu. Restart TikTok.",
-                "Data Lab disetel ulang. Batalkan perubahan Lab terakhir ada di menu. Mulai ulang TikTok.");
-        table.put("Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok.",
-                "Data Lab melebihi batas aturan, jadi data dihapus tanpa salinan untuk dibatalkan. Mulai ulang TikTok.");
-        table.put("Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok.",
-                "Penggantian Lab disetel ulang. Batalkan perubahan Lab terakhir ada di menu. Mulai ulang TikTok.");
+        table.put("Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.",
+                "Data Lab disetel ulang. Batalkan perubahan Lab terakhir ada di menu. Mulai ulang TikTok agar berlaku.");
+        table.put("Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this.",
+                "Data Lab melebihi batas aturan, jadi data dihapus tanpa salinan untuk dibatalkan. Mulai ulang TikTok agar berlaku.");
+        table.put("Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok to apply this.",
+                "Penggantian Lab disetel ulang. Batalkan perubahan Lab terakhir ada di menu. Mulai ulang TikTok agar berlaku.");
         table.put("Last original value",
                 "Nilai asli terakhir");
         table.put("Leave maximum empty to keep it unlimited.",
@@ -5385,10 +5381,10 @@ public final class L10nTranslations {
                 "Penggantian");
         table.put("Overrides are disabled in the Feature Gate Lab.",
                 "Penggantian dimatikan di Feature Gate Lab.");
-        table.put("Overrides disabled. Restart TikTok to restore native values.",
-                "Penggantian dinonaktifkan. Mulai ulang TikTok untuk mengembalikan nilai bawaan.");
-        table.put("Overrides enabled. Restart TikTok to apply saved values.",
-                "Penggantian diaktifkan. Mulai ulang TikTok agar nilai yang tersimpan berlaku.");
+        table.put("Overrides disabled. Restart TikTok to apply this.",
+                "Penggantian dinonaktifkan. Mulai ulang TikTok agar berlaku.");
+        table.put("Overrides enabled. Restart TikTok to apply this.",
+                "Penggantian diaktifkan. Mulai ulang TikTok agar berlaku.");
         table.put("Paid partnerships",
                 "Kemitraan berbayar");
         table.put("People, shortcuts and sending controls",
@@ -5450,8 +5446,8 @@ public final class L10nTranslations {
                 "Merekam pembacaan gate. Pakai sebuah fitur, lalu kembali ke sini untuk berhenti.");
         table.put("Recover the settings saved before the last restore or reset.",
                 "Ambil kembali pengaturan yang tersimpan sebelum pemulihan atau penyetelan ulang terakhir.");
-        table.put("Recovered an interrupted settings change. Restart TikTok to apply it.",
-                "Perubahan pengaturan yang terhenti telah dipulihkan. Mulai ulang TikTok untuk menerapkannya.");
+        table.put("Recovered an interrupted settings change. Restart TikTok to apply this.",
+                "Perubahan pengaturan yang terhenti telah dipulihkan. Mulai ulang TikTok agar berlaku.");
         table.put("Refresh values",
                 "Segarkan nilai");
         table.put("Refreshing current TikTok cache...",
@@ -5512,8 +5508,6 @@ public final class L10nTranslations {
                 "Atur ulang posisi");
         table.put("Reset settings",
                 "Setel ulang pengaturan");
-        table.put("Restart TikTok to apply the Feature Gate Lab changes.",
-                "Mulai ulang TikTok agar perubahan Feature Gate Lab berlaku.");
         table.put("Restart TikTok to apply this.",
                 "Mulai ulang TikTok agar berlaku.");
         table.put("Restore defaults immediately. Your current settings are kept for Undo.",
@@ -5524,13 +5518,13 @@ public final class L10nTranslations {
                 "Pemulihan gagal. Beberapa pengaturan mungkin masih berubah. Gunakan Urungkan untuk memulihkannya.");
         table.put("Restore settings",
                 "Pulihkan pengaturan");
-        table.put("Restored the previous Lab settings. Restart TikTok.",
-                "Pengaturan Lab sebelumnya dipulihkan. Mulai ulang TikTok.");
+        table.put("Restored the previous Lab settings. Restart TikTok to apply this.",
+                "Pengaturan Lab sebelumnya dipulihkan. Mulai ulang TikTok agar berlaku.");
+        table.put("Restoring your settings",
+                "Memulihkan pengaturan Anda");
     }
 
     private static void fillIn11(Map<String, String> table) {
-        table.put("Restoring your settings",
-                "Memulihkan pengaturan Anda");
         table.put("Resume videos after scrolling",
                 "Lanjutkan video setelah menggulir");
         table.put("Retry",
@@ -5545,7 +5539,7 @@ public final class L10nTranslations {
                 "Praset negara SIM");
         table.put("SIM preset saved",
                 "Pratata SIM disimpan");
-        table.put("SIM preset saved. Restart TikTok to apply it.",
+        table.put("SIM preset saved. Restart TikTok to apply this.",
                 "Pratata SIM disimpan. Mulai ulang TikTok agar berlaku.");
         table.put("STEM",
                 "STEM");
@@ -5649,11 +5643,11 @@ public final class L10nTranslations {
                 "Dipilih");
         table.put("Send links to another app",
                 "Kirim tautan ke aplikasi lain");
+        table.put("Sending feedback",
+                "Mengirim masukan");
     }
 
     private static void fillIn12(Map<String, String> table) {
-        table.put("Sending feedback",
-                "Mengirim masukan");
         table.put("Series posts",
                 "Kiriman serial");
         table.put("Settings",
@@ -5688,8 +5682,8 @@ public final class L10nTranslations {
                 "Tampilkan pencarian LIVE");
         table.put("Show TikTok's own progress bar on videos where it is normally hidden.",
                 "Tampilkan bilah progres TikTok pada video yang biasanya menyembunyikannya.");
-        table.put("Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this: it reads the style once per run and remembers it.",
-                "Tampilkan lembar pengurutan milik TikTok di setiap publikasi, dengan pilihan populer, terbaru, media dan kreator, bukan baris terpangkas yang didapat akun Anda. Mulai ulang TikTok agar berlaku: aplikasi membaca gayanya sekali per proses dan mengingatnya.");
+        table.put("Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this. It reads the style once per run and remembers it.",
+                "Tampilkan lembar pengurutan milik TikTok di setiap publikasi, dengan pilihan populer, terbaru, media dan kreator, bukan baris terpangkas yang didapat akun Anda. Mulai ulang TikTok agar berlaku. Aplikasi membaca gayanya sekali per proses dan mengingatnya.");
         table.put("Show TikTok's search entry in the LIVE drawer where supported.",
                 "Tampilkan entri pencarian TikTok di panel LIVE jika didukung.");
         table.put("Show a video preview thumbnail while dragging the progress bar.",
@@ -5772,11 +5766,11 @@ public final class L10nTranslations {
                 "Catatannya masih dibaca. Ketuk lagi sebentar lagi.");
         table.put("Still saving the last one",
                 "Yang sebelumnya masih disimpan");
+        table.put("Stop ByteDance AppLog events, AppsFlyer attribution, explicit Firebase screen reports and crash reporting from being sent. TikTok's own diagnostics go quiet with them.",
+                "Hentikan pengiriman peristiwa AppLog ByteDance, atribusi AppsFlyer, laporan layar Firebase, dan laporan mogok. Diagnostik milik TikTok ikut diam bersamanya.");
     }
 
     private static void fillIn13(Map<String, String> table) {
-        table.put("Stop ByteDance AppLog events, AppsFlyer attribution, explicit Firebase screen reports and crash reporting from being sent. TikTok's own diagnostics go quiet with them.",
-                "Hentikan pengiriman peristiwa AppLog ByteDance, atribusi AppsFlyer, laporan layar Firebase, dan laporan mogok. Diagnostik milik TikTok ikut diam bersamanya.");
         table.put("Stop TikTok asking the screen to run at the frame rate of the video it is playing. On a 90 or 120 Hz phone that ask slows the whole app down to the video's rate, scrolling included.",
                 "Hentikan TikTok meminta layar berjalan pada laju bingkai video yang sedang diputar. Di ponsel 90 atau 120 Hz, permintaan itu memperlambat seluruh aplikasi sampai ke laju videonya, termasuk saat menggulir.");
         table.put("Stop TikTok reporting that you viewed a story or a profile, or that you are typing. Online status is unchanged. It cannot undo what the server has already recorded.",
@@ -5895,11 +5889,11 @@ public final class L10nTranslations {
                 "Perubahan terakhir sudah dibatalkan. Aturan Feature Gate Lab dibuat untuk versi TikTok lain dan tidak disertakan. Mulai ulang TikTok untuk menerapkan semua perubahan.");
         table.put("The minimum or maximum comments on a video to show.",
                 "Jumlah komentar minimum atau maksimum agar video ditampilkan.");
+        table.put("The minimum or maximum favorites of a video to show.",
+                "Jumlah favorit minimum atau maksimum yang harus dimiliki video agar tampil.");
     }
 
     private static void fillIn14(Map<String, String> table) {
-        table.put("The minimum or maximum favorites of a video to show.",
-                "Jumlah favorit minimum atau maksimum yang harus dimiliki video agar tampil.");
         table.put("The minimum or maximum likes of a video to show.",
                 "Jumlah suka minimum atau maksimum agar video ditampilkan.");
         table.put("The minimum or maximum shares of a video to show.",
@@ -6018,11 +6012,11 @@ public final class L10nTranslations {
                 "Hari ini: %1$d video");
         table.put("Tokens: {creator}, {date}, {video_id}, {index}. {index} numbers the photos of a slideshow you save with Download original photos; anything saved through TikTok's own button is numbered by the folder instead. The file extension is kept automatically.",
                 "Token: {creator}, {date}, {video_id}, {index}. {index} menomori foto dari slideshow yang Anda simpan dengan Unduh foto asli; apa pun yang disimpan lewat tombol TikTok sendiri dinomori oleh foldernya. Ekstensi berkas dipertahankan otomatis.");
+        table.put("Tokens: {creator}, {date}, {video_id}. The file extension is kept automatically.",
+                "Token: {creator}, {date}, {video_id}. Ekstensi berkas dipertahankan otomatis.");
     }
 
     private static void fillIn15(Map<String, String> table) {
-        table.put("Tokens: {creator}, {date}, {video_id}. The file extension is kept automatically.",
-                "Token: {creator}, {date}, {video_id}. Ekstensi berkas dipertahankan otomatis.");
         table.put("Tokens: {date}, {media_id}. Works for image and video stickers.",
                 "Token: {date}, {media_id}. Berlaku untuk stiker gambar dan video.");
         table.put("Too many media saves are already running. Try again shortly.",
@@ -6085,8 +6079,8 @@ public final class L10nTranslations {
                 "Gunakan negara dan nilai operator yang dipilih. Ini hanya mengubah apa yang dilaporkan SIM: alamat IP, riwayat akun, dan bahasa yang kamu baca tetap sama, dan salah satunya saja sudah cukup bagi TikTok untuk mempertahankan wilayah yang sudah dipilihnya. Mulai ulang TikTok agar berlaku.");
         table.put("Use the selected country. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.",
                 "Gunakan negara yang dipilih. Ini hanya mengubah apa yang dilaporkan SIM: alamat IP, riwayat akun, dan bahasa yang kamu baca tetap sama, dan salah satunya saja sudah cukup bagi TikTok untuk mempertahankan wilayah yang sudah dipilihnya. Mulai ulang TikTok agar berlaku.");
-        table.put("Use the split layout on wider screens. Restart TikTok to apply this, or unfold again if the old layout is still there.",
-                "Gunakan tata letak terbagi di layar yang lebih lebar. Mulai ulang TikTok agar berlaku, atau buka lipatan lagi jika tata letak lama masih muncul.");
+        table.put("Use the split layout on wider screens. Restart TikTok to apply this. If the old layout is still there, unfold again.",
+                "Gunakan tata letak terbagi di layar yang lebih lebar. Mulai ulang TikTok agar berlaku. Jika tata letak lama masih muncul, buka lipatan lagi.");
         table.put("Use value",
                 "Gunakan nilai");
         table.put("Use your own offline videos limit",
@@ -6141,11 +6135,11 @@ public final class L10nTranslations {
                 "Mode latar belakang YTDLnis");
         table.put("YTDLnis download type",
                 "Jenis unduhan YTDLnis");
+        table.put("Yes",
+                "Ya");
     }
 
     private static void fillIn16(Map<String, String> table) {
-        table.put("Yes",
-                "Ya");
         table.put("Your operator's name, like T-Mobile.",
                 "Nama operatormu, misalnya T-Mobile.");
         table.put("Your operator's numeric code, like 310260.",
@@ -6207,7 +6201,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildPt_rBR() {
-        Map<String, String> table = new HashMap<>(1980);
+        Map<String, String> table = new HashMap<>(1978);
         fillPt_rBR0(table);
         fillPt_rBR1(table);
         fillPt_rBR2(table);
@@ -6551,8 +6545,8 @@ public final class L10nTranslations {
                 "Comentários ao lado do vídeo");
         table.put("Compare gate reads with their previous values. Last recording: %1$d gates.",
                 "Compara as leituras dos gates com os valores anteriores. Última gravação: %1$d gates.");
-        table.put("Completed an interrupted settings change. Restart TikTok to apply it.",
-                "Uma mudança de configuração interrompida foi concluída. Reinicie o TikTok para aplicá-la.");
+        table.put("Completed an interrupted settings change. Restart TikTok to apply this.",
+                "Uma mudança de configuração interrompida foi concluída. Reinicie o TikTok para aplicar.");
         table.put("Config",
                 "Configuração");
         table.put("Confirm before following",
@@ -7144,8 +7138,8 @@ public final class L10nTranslations {
                 "Predefinição de SIM inválida");
         table.put("Keep a local record of what you have watched and drop those videos from later feed pages.",
                 "Guardar no aparelho um registro do que você viu e tirar esses vídeos das próximas páginas do feed.");
-        table.put("Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this, then use this switch to turn it off.",
-                "Manter o avanço automático ligado e mostrar a ação Rolagem automática do TikTok no painel do vídeo mesmo que sua conta nunca tenha tido. Pausas e diálogos abertos continuam parando a rolagem. Reinicie o TikTok para aplicar e depois use esta chave para desligar.");
+        table.put("Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this. Then use this switch to turn it off.",
+                "Manter o avanço automático ligado e mostrar a ação Rolagem automática do TikTok no painel do vídeo mesmo que sua conta nunca tenha tido. Pausas e diálogos abertos continuam parando a rolagem. Reinicie o TikTok para aplicar. Depois use esta chave para desligar.");
         table.put("Keep captions in clear display",
                 "Manter as legendas com a tela limpa");
         table.put("Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.",
@@ -7164,12 +7158,12 @@ public final class L10nTranslations {
                 "Reprises de LIVE");
         table.put("LIVE videos",
                 "Vídeos LIVE");
-        table.put("Lab data reset. Undo last Lab change is in the menu. Restart TikTok.",
-                "Dados do Lab redefinidos. Desfazer a última alteração do Lab está no menu. Reinicie o TikTok.");
-        table.put("Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok.",
-                "Os dados do Lab ultrapassavam o limite de regras, então foram apagados sem uma cópia para desfazer. Reinicie o TikTok.");
-        table.put("Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok.",
-                "Substituições do Lab redefinidas. Desfazer a última alteração do Lab está no menu. Reinicie o TikTok.");
+        table.put("Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.",
+                "Dados do Lab redefinidos. Desfazer a última alteração do Lab está no menu. Reinicie o TikTok para aplicar.");
+        table.put("Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this.",
+                "Os dados do Lab ultrapassavam o limite de regras, então foram apagados sem uma cópia para desfazer. Reinicie o TikTok para aplicar.");
+        table.put("Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok to apply this.",
+                "Substituições do Lab redefinidas. Desfazer a última alteração do Lab está no menu. Reinicie o TikTok para aplicar.");
         table.put("Last original value",
                 "Último valor original");
         table.put("Leave maximum empty to keep it unlimited.",
@@ -7438,10 +7432,10 @@ public final class L10nTranslations {
                 "Substituições");
         table.put("Overrides are disabled in the Feature Gate Lab.",
                 "As substituições estão desligadas no Laboratório de gates.");
-        table.put("Overrides disabled. Restart TikTok to restore native values.",
-                "Substituições desativadas. Reinicie o TikTok para voltar aos valores nativos.");
-        table.put("Overrides enabled. Restart TikTok to apply saved values.",
-                "Substituições ativadas. Reinicie o TikTok para aplicar os valores salvos.");
+        table.put("Overrides disabled. Restart TikTok to apply this.",
+                "Substituições desativadas. Reinicie o TikTok para aplicar.");
+        table.put("Overrides enabled. Restart TikTok to apply this.",
+                "Substituições ativadas. Reinicie o TikTok para aplicar.");
         table.put("Paid partnerships",
                 "Parcerias pagas");
         table.put("People, shortcuts and sending controls",
@@ -7503,8 +7497,8 @@ public final class L10nTranslations {
                 "Gravando as leituras dos gates. Use um recurso e volte aqui para parar.");
         table.put("Recover the settings saved before the last restore or reset.",
                 "Recuperar as configurações salvas antes da última restauração ou redefinição.");
-        table.put("Recovered an interrupted settings change. Restart TikTok to apply it.",
-                "Uma mudança de configuração interrompida foi recuperada. Reinicie o TikTok para aplicá-la.");
+        table.put("Recovered an interrupted settings change. Restart TikTok to apply this.",
+                "Uma mudança de configuração interrompida foi recuperada. Reinicie o TikTok para aplicar.");
         table.put("Refresh values",
                 "Atualizar os valores");
         table.put("Refreshing current TikTok cache...",
@@ -7565,8 +7559,6 @@ public final class L10nTranslations {
                 "Redefinir a posição");
         table.put("Reset settings",
                 "Redefinir as configurações");
-        table.put("Restart TikTok to apply the Feature Gate Lab changes.",
-                "Reinicie o TikTok para aplicar as mudanças do Feature Gate Lab.");
         table.put("Restart TikTok to apply this.",
                 "Reinicie o TikTok para aplicar.");
         table.put("Restore defaults immediately. Your current settings are kept for Undo.",
@@ -7577,13 +7569,13 @@ public final class L10nTranslations {
                 "A restauração falhou. Algumas configurações podem ter mudado mesmo assim. Use Desfazer para recuperá-las.");
         table.put("Restore settings",
                 "Restaurar as configurações");
-        table.put("Restored the previous Lab settings. Restart TikTok.",
-                "As configurações anteriores do Lab foram restauradas. Reinicie o TikTok.");
+        table.put("Restored the previous Lab settings. Restart TikTok to apply this.",
+                "As configurações anteriores do Lab foram restauradas. Reinicie o TikTok para aplicar.");
+        table.put("Restoring your settings",
+                "Restaurando suas configurações");
     }
 
     private static void fillPt_rBR11(Map<String, String> table) {
-        table.put("Restoring your settings",
-                "Restaurando suas configurações");
         table.put("Resume videos after scrolling",
                 "Continuar os vídeos depois de rolar");
         table.put("Retry",
@@ -7598,8 +7590,8 @@ public final class L10nTranslations {
                 "País predefinido do SIM");
         table.put("SIM preset saved",
                 "Predefinição de SIM salva");
-        table.put("SIM preset saved. Restart TikTok to apply it.",
-                "Predefinição de SIM salva. Reinicie o TikTok para aplicá-la.");
+        table.put("SIM preset saved. Restart TikTok to apply this.",
+                "Predefinição de SIM salva. Reinicie o TikTok para aplicar.");
         table.put("STEM",
                 "STEM");
         table.put("Sanitize sharing links",
@@ -7702,11 +7694,11 @@ public final class L10nTranslations {
                 "Selecionado");
         table.put("Send links to another app",
                 "Mandar os links para outro app");
+        table.put("Sending feedback",
+                "Enviando feedback");
     }
 
     private static void fillPt_rBR12(Map<String, String> table) {
-        table.put("Sending feedback",
-                "Enviando feedback");
         table.put("Series posts",
                 "Publicações de Séries");
         table.put("Settings",
@@ -7741,8 +7733,8 @@ public final class L10nTranslations {
                 "Mostrar a busca do LIVE");
         table.put("Show TikTok's own progress bar on videos where it is normally hidden.",
                 "Mostrar a barra de progresso do TikTok nos vídeos onde ela normalmente fica escondida.");
-        table.put("Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this: it reads the style once per run and remembers it.",
-                "Mostrar a folha de ordenação do TikTok em todas as publicações, com as opções de populares, mais recentes, mídia e criador, em vez da linha reduzida que a sua conta recebeu. Reinicie o TikTok para aplicar: ele lê o estilo uma vez por execução e guarda.");
+        table.put("Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this. It reads the style once per run and remembers it.",
+                "Mostrar a folha de ordenação do TikTok em todas as publicações, com as opções de populares, mais recentes, mídia e criador, em vez da linha reduzida que a sua conta recebeu. Reinicie o TikTok para aplicar. Ele lê o estilo uma vez por execução e guarda.");
         table.put("Show TikTok's search entry in the LIVE drawer where supported.",
                 "Mostrar a entrada de busca do TikTok na gaveta do LIVE onde houver suporte.");
         table.put("Show a video preview thumbnail while dragging the progress bar.",
@@ -7825,11 +7817,11 @@ public final class L10nTranslations {
                 "O registro ainda está sendo lido. Toque de novo daqui a pouco.");
         table.put("Still saving the last one",
                 "O anterior ainda está sendo salvo");
+        table.put("Stop ByteDance AppLog events, AppsFlyer attribution, explicit Firebase screen reports and crash reporting from being sent. TikTok's own diagnostics go quiet with them.",
+                "Impedir o envio dos eventos AppLog da ByteDance, da atribuição do AppsFlyer, dos relatórios explícitos de tela do Firebase e dos relatórios de falha. Os diagnósticos do próprio TikTok se calam junto.");
     }
 
     private static void fillPt_rBR13(Map<String, String> table) {
-        table.put("Stop ByteDance AppLog events, AppsFlyer attribution, explicit Firebase screen reports and crash reporting from being sent. TikTok's own diagnostics go quiet with them.",
-                "Impedir o envio dos eventos AppLog da ByteDance, da atribuição do AppsFlyer, dos relatórios explícitos de tela do Firebase e dos relatórios de falha. Os diagnósticos do próprio TikTok se calam junto.");
         table.put("Stop TikTok asking the screen to run at the frame rate of the video it is playing. On a 90 or 120 Hz phone that ask slows the whole app down to the video's rate, scrolling included.",
                 "Impedir que o TikTok peça à tela para rodar na taxa de quadros do vídeo que está tocando. Num celular de 90 ou 120 Hz esse pedido derruba o app inteiro para a taxa do vídeo, inclusive a rolagem.");
         table.put("Stop TikTok reporting that you viewed a story or a profile, or that you are typing. Online status is unchanged. It cannot undo what the server has already recorded.",
@@ -7948,11 +7940,11 @@ public final class L10nTranslations {
                 "A última mudança foi desfeita. As regras do Laboratório de gates eram de outra versão do TikTok e ficaram de fora. Reinicie o TikTok para aplicar todas as mudanças.");
         table.put("The minimum or maximum comments on a video to show.",
                 "O mínimo ou o máximo de comentários que um vídeo precisa ter para aparecer.");
+        table.put("The minimum or maximum favorites of a video to show.",
+                "O mínimo ou o máximo de favoritos que um vídeo precisa ter para aparecer.");
     }
 
     private static void fillPt_rBR14(Map<String, String> table) {
-        table.put("The minimum or maximum favorites of a video to show.",
-                "O mínimo ou o máximo de favoritos que um vídeo precisa ter para aparecer.");
         table.put("The minimum or maximum likes of a video to show.",
                 "O mínimo ou o máximo de curtidas que um vídeo precisa ter para aparecer.");
         table.put("The minimum or maximum shares of a video to show.",
@@ -8071,11 +8063,11 @@ public final class L10nTranslations {
                 "Hoje: %1$d vídeos");
         table.put("Tokens: {creator}, {date}, {video_id}, {index}. {index} numbers the photos of a slideshow you save with Download original photos; anything saved through TikTok's own button is numbered by the folder instead. The file extension is kept automatically.",
                 "Curingas: {creator}, {date}, {video_id}, {index}. {index} numera as fotos de uma apresentação salva com Baixar as fotos originais; o que for salvo pelo botão do próprio TikTok é numerado pela pasta. A extensão do arquivo é mantida automaticamente.");
+        table.put("Tokens: {creator}, {date}, {video_id}. The file extension is kept automatically.",
+                "Curingas: {creator}, {date}, {video_id}. A extensão do arquivo é mantida automaticamente.");
     }
 
     private static void fillPt_rBR15(Map<String, String> table) {
-        table.put("Tokens: {creator}, {date}, {video_id}. The file extension is kept automatically.",
-                "Curingas: {creator}, {date}, {video_id}. A extensão do arquivo é mantida automaticamente.");
         table.put("Tokens: {date}, {media_id}. Works for image and video stickers.",
                 "Curingas: {date}, {media_id}. Serve para os stickers de imagem e de vídeo.");
         table.put("Too many media saves are already running. Try again shortly.",
@@ -8138,8 +8130,8 @@ public final class L10nTranslations {
                 "Usar o país e os valores de operadora selecionados. Isso muda só o que o SIM informa: seu endereço IP, o histórico da sua conta e o idioma em que você lê continuam os mesmos, e qualquer um deles já basta para o TikTok manter a região que já escolheu. Reinicie o TikTok para aplicar.");
         table.put("Use the selected country. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.",
                 "Usar o país selecionado. Isso muda só o que o SIM informa: seu endereço IP, o histórico da sua conta e o idioma em que você lê continuam os mesmos, e qualquer um deles já basta para o TikTok manter a região que já escolheu. Reinicie o TikTok para aplicar.");
-        table.put("Use the split layout on wider screens. Restart TikTok to apply this, or unfold again if the old layout is still there.",
-                "Usar o layout dividido em telas mais largas. Reinicie o TikTok para aplicar, ou desdobre de novo se o layout antigo ainda estiver lá.");
+        table.put("Use the split layout on wider screens. Restart TikTok to apply this. If the old layout is still there, unfold again.",
+                "Usar o layout dividido em telas mais largas. Reinicie o TikTok para aplicar. Se o layout antigo ainda estiver lá, desdobre de novo.");
         table.put("Use value",
                 "Usar o valor");
         table.put("Use your own offline videos limit",
@@ -8194,11 +8186,11 @@ public final class L10nTranslations {
                 "Modo em segundo plano do YTDLnis");
         table.put("YTDLnis download type",
                 "Tipo de download do YTDLnis");
+        table.put("Yes",
+                "Sim");
     }
 
     private static void fillPt_rBR16(Map<String, String> table) {
-        table.put("Yes",
-                "Sim");
         table.put("Your operator's name, like T-Mobile.",
                 "O nome da sua operadora, como T-Mobile.");
         table.put("Your operator's numeric code, like 310260.",

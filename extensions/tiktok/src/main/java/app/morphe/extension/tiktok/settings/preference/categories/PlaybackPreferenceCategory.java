@@ -45,7 +45,7 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
             addPreference(new TogglePreference(context, "Advance when a video ends",
                     "Keep automatic advance enabled, and show TikTok's own Auto scroll action in "
                             + "the video panel even if your account never had it. Pauses and open "
-                            + "dialogs still stop scrolling. Restart TikTok to apply this, then use "
+                            + "dialogs still stop scrolling. Restart TikTok to apply this. Then use "
                             + "this switch to turn it off.",
                     Settings.AUTO_ADVANCE));
             addPreference(new NumberInputPreference(context, "Auto-advance session limit",

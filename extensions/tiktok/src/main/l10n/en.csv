@@ -157,7 +157,7 @@ Comments and translation,Comments and translation
 Comments aren't available for this video,Comments aren't available for this video
 Comments beside the video,Comments beside the video
 Compare gate reads with their previous values. Last recording: %1$d gates.,Compare gate reads with their previous values. Last recording: %1$d gates.
-Completed an interrupted settings change. Restart TikTok to apply it.,Completed an interrupted settings change. Restart TikTok to apply it.
+Completed an interrupted settings change. Restart TikTok to apply this.,Completed an interrupted settings change. Restart TikTok to apply this.
 Config,Config
 Confirm before following,Confirm before following
 Confirm before liking,Confirm before liking
@@ -446,7 +446,7 @@ Inserted cards,Inserted cards
 Interface,Interface
 Invalid SIM preset,Invalid SIM preset
 Keep a local record of what you have watched and drop those videos from later feed pages.,Keep a local record of what you have watched and drop those videos from later feed pages.
-"Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this, then use this switch to turn it off.","Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this, then use this switch to turn it off."
+"Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this. Then use this switch to turn it off.","Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this. Then use this switch to turn it off."
 Keep captions in clear display,Keep captions in clear display
 Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.,Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.
 Keep the screen's refresh rate,Keep the screen's refresh rate
@@ -456,9 +456,9 @@ Keep this structured value to 64 KB or less.,Keep this structured value to 64 KB
 LIVE,LIVE
 LIVE replays,LIVE replays
 LIVE videos,LIVE videos
-Lab data reset. Undo last Lab change is in the menu. Restart TikTok.,Lab data reset. Undo last Lab change is in the menu. Restart TikTok.
-"Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok.","Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok."
-Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok.,Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok.
+Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.,Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.
+"Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this.","Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this."
+Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok to apply this.,Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok to apply this.
 Last original value,Last original value
 Leave maximum empty to keep it unlimited.,Leave maximum empty to keep it unlimited.
 Leave the sound out of the saved video. Save the sound as well still writes the .m4a beside it if you want both.,Leave the sound out of the saved video. Save the sound as well still writes the .m4a beside it if you want both.
@@ -590,8 +590,8 @@ Override this configuration,Override this configuration
 Override this gate,Override this gate
 Overrides,Overrides
 Overrides are disabled in the Feature Gate Lab.,Overrides are disabled in the Feature Gate Lab.
-Overrides disabled. Restart TikTok to restore native values.,Overrides disabled. Restart TikTok to restore native values.
-Overrides enabled. Restart TikTok to apply saved values.,Overrides enabled. Restart TikTok to apply saved values.
+Overrides disabled. Restart TikTok to apply this.,Overrides disabled. Restart TikTok to apply this.
+Overrides enabled. Restart TikTok to apply this.,Overrides enabled. Restart TikTok to apply this.
 Paid partnerships,Paid partnerships
 "People, shortcuts and sending controls","People, shortcuts and sending controls"
 Photo,Photo
@@ -621,7 +621,7 @@ Quieten the feed while comments are open,Quieten the feed while comments are ope
 Recorded gate reads (%1$d),Recorded gate reads (%1$d)
 "Recording gate reads. Use a feature, then return here to stop.","Recording gate reads. Use a feature, then return here to stop."
 Recover the settings saved before the last restore or reset.,Recover the settings saved before the last restore or reset.
-Recovered an interrupted settings change. Restart TikTok to apply it.,Recovered an interrupted settings change. Restart TikTok to apply it.
+Recovered an interrupted settings change. Restart TikTok to apply this.,Recovered an interrupted settings change. Restart TikTok to apply this.
 Refresh values,Refresh values
 Refreshing current TikTok cache...,Refreshing current TikTok cache...
 Region rules,Region rules
@@ -652,13 +652,12 @@ Reset all overrides,Reset all overrides
 Reset override,Reset override
 Reset position,Reset position
 Reset settings,Reset settings
-Restart TikTok to apply the Feature Gate Lab changes.,Restart TikTok to apply the Feature Gate Lab changes.
 Restart TikTok to apply this.,Restart TikTok to apply this.
 Restore defaults immediately. Your current settings are kept for Undo.,Restore defaults immediately. Your current settings are kept for Undo.
 Restore failed. Some settings may still be changed.,Restore failed. Some settings may still be changed.
 Restore failed. Some settings may still be changed. Use Undo to recover.,Restore failed. Some settings may still be changed. Use Undo to recover.
 Restore settings,Restore settings
-Restored the previous Lab settings. Restart TikTok.,Restored the previous Lab settings. Restart TikTok.
+Restored the previous Lab settings. Restart TikTok to apply this.,Restored the previous Lab settings. Restart TikTok to apply this.
 Restoring your settings,Restoring your settings
 Resume videos after scrolling,Resume videos after scrolling
 Retry,Retry
@@ -667,7 +666,7 @@ Return after using a TikTok feature to see every gate read during the recording.
 Returns %1$s,Returns %1$s
 SIM country preset,SIM country preset
 SIM preset saved,SIM preset saved
-SIM preset saved. Restart TikTok to apply it.,SIM preset saved. Restart TikTok to apply it.
+SIM preset saved. Restart TikTok to apply this.,SIM preset saved. Restart TikTok to apply this.
 STEM,STEM
 Sanitize sharing links,Sanitize sharing links
 Save,Save
@@ -737,7 +736,7 @@ Show,Show
 Show @username beside a video instead of the display name the creator chose.,Show @username beside a video instead of the display name the creator chose.
 Show LIVE search,Show LIVE search
 Show TikTok's own progress bar on videos where it is normally hidden.,Show TikTok's own progress bar on videos where it is normally hidden.
-"Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this: it reads the style once per run and remembers it.","Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this: it reads the style once per run and remembers it."
+"Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this. It reads the style once per run and remembers it.","Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this. It reads the style once per run and remembers it."
 Show TikTok's search entry in the LIVE drawer where supported.,Show TikTok's search entry in the LIVE drawer where supported.
 Show a video preview thumbnail while dragging the progress bar.,Show a video preview thumbnail while dragging the progress bar.
 Show block button on videos,Show block button on videos
@@ -931,7 +930,7 @@ Use non-personalized search,Use non-personalized search
 "Use the preset for the region TikTok reports for your account and its shop too. May affect search. Needs Override SIM details, Match locale and timezone to country, and a restart.","Use the preset for the region TikTok reports for your account and its shop too. May affect search. Needs Override SIM details, Match locale and timezone to country, and a restart."
 "Use the selected country and operator values. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.","Use the selected country and operator values. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this."
 "Use the selected country. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.","Use the selected country. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this."
-"Use the split layout on wider screens. Restart TikTok to apply this, or unfold again if the old layout is still there.","Use the split layout on wider screens. Restart TikTok to apply this, or unfold again if the old layout is still there."
+"Use the split layout on wider screens. Restart TikTok to apply this. If the old layout is still there, unfold again.","Use the split layout on wider screens. Restart TikTok to apply this. If the old layout is still there, unfold again."
 Use value,Use value
 Use your own offline videos limit,Use your own offline videos limit
 Using TikTok's value,Using TikTok's value

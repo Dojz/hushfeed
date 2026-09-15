@@ -248,7 +248,7 @@ public class SimPresetPreference extends Preference {
 
         if (Settings.SIM_SPOOF.get()) {
             app.morphe.extension.shared.Utils.showToastLong(
-                    app.morphe.extension.tiktok.settings.L10n.t("SIM preset saved. Restart TikTok to apply it."));
+                    app.morphe.extension.tiktok.settings.L10n.t("SIM preset saved. Restart TikTok to apply this."));
         } else {
             app.morphe.extension.shared.Utils.showToastShort(app.morphe.extension.tiktok.settings.L10n.t("SIM preset saved"));
         }

@@ -844,8 +844,8 @@ public final class FeatureGateLabFragment extends Fragment {
         // the main thread, and a settings restore holding the journal lock froze the screen
         // until it finished. runLabChange puts the switch back for us either way.
         runLabChange(() -> FeatureGateLabUndo.setMasterEnabled(checked),
-                checked ? L10n.t(getContext(), "Overrides enabled. Restart TikTok to apply saved values.")
-                        : L10n.t(getContext(), "Overrides disabled. Restart TikTok to restore native values."));
+                checked ? L10n.t(getContext(), "Overrides enabled. Restart TikTok to apply this.")
+                        : L10n.t(getContext(), "Overrides disabled. Restart TikTok to apply this."));
     }
 
     /**
@@ -1027,7 +1027,7 @@ public final class FeatureGateLabFragment extends Fragment {
                     return true;
                 case 6:
                     runLabChange(FeatureGateLabUndo::undo,
-                            L10n.t(getContext(), "Restored the previous Lab settings. Restart TikTok."));
+                            L10n.t(getContext(), "Restored the previous Lab settings. Restart TikTok to apply this."));
                     return true;
                 default:
                     return false;
@@ -1336,13 +1336,13 @@ public final class FeatureGateLabFragment extends Fragment {
             boolean undoAvailable = FeatureGateLabUndo.reset(allData);
             if (allData && !undoAvailable) {
                 return L10n.t(Utils.getContext(),
-                        "Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok.");
+                        "Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this.");
             }
             return allData
                     ? L10n.t(Utils.getContext(),
-                            "Lab data reset. Undo last Lab change is in the menu. Restart TikTok.")
+                            "Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.")
                     : L10n.t(Utils.getContext(),
-                            "Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok.");
+                            "Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok to apply this.");
         });
     }
 
