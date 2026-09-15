@@ -201,6 +201,36 @@ public class BudgetCueTest {
         }
     }
 
+    /**
+     * Android 17 replaced the queue behind the main Looper, and the shadow that came before it
+     * answered every question about the new one with an empty queue. The cue never reads the
+     * queue, but it lives on it: the player's callback posts the pass that moves the label, and
+     * nothing else runs it. So the pass is posted here and left alone, and the label is read
+     * before the queue delivers it and again after.
+     */
+    @Test @Config(sdk = 37)
+    public void onAndroidSeventeenThePostedPassStillReachesTheLabel() {
+        Settings.SESSION_BUDGET_CUE.save(true);
+        Settings.SESSION_BUDGET_MINUTES.save(10);
+        try (var owner = Robolectric.buildActivity(HostActivity.class).setup().visible()) {
+            Utils.setActivity(owner.get());
+            standOnTheFeed(owner.get());
+            sync();
+            TextView cue = BudgetCue.cueForTests();
+            assertNotNull("nothing appeared on the feed", cue);
+            assertEquals("10 min left", cue.getText().toString());
+
+            watch(60_000L);
+            BudgetCue.syncNowForTests();
+            assertEquals("the pass ran before the queue had delivered it",
+                    "10 min left", cue.getText().toString());
+
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            assertEquals("the queue never delivered the pass",
+                    "9 min left", BudgetCue.cueForTests().getText().toString());
+        }
+    }
+
     /** Nothing about it is announced, and nothing about it is in the way. */
     @Test public void theLabelIsSilentUntilARenderReachesIt() {
         Settings.SESSION_BUDGET_CUE.save(true);
