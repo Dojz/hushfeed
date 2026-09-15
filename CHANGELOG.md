@@ -1,4 +1,4 @@
-## Unreleased
+## 0.34.0
 
 * The SIM country preset list now marks the preset that is already chosen and opens scrolled to it, and a Clear preset action takes the row back to no preset. It used to be sixty identical rows with no sign of which one was on, and no way back short of retyping three fields.
 
