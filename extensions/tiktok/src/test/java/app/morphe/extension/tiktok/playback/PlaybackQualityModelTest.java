@@ -157,15 +157,18 @@ public class PlaybackQualityModelTest {
     }
 
     @Test public void aGearListWithNothingPlayableIsAMissNamedByItsGetter() {
-        assertTrue(PlaybackQuality.filterDashGears(new ArrayList<>()).isEmpty());
         List<?> unplayable = List.of(new AdvancedDownloadsTest.Gear("normal_720_0", 200, null));
+        assertSame(unplayable, PlaybackQuality.filterDashGears(unplayable));
         assertSame(unplayable, PlaybackQuality.filterVideoGears(unplayable));
-        // No gears at all is an ordinary item, not a broken getter.
+        // No gears at all, null or empty, is an ordinary item such as a photo post, not a
+        // broken getter: the S22 feed has some in every session and the family must not read
+        // as broken on a build where the path works.
         assertNull(PlaybackQuality.filterVideoGears(null));
+        assertTrue(PlaybackQuality.filterVideoGears(new ArrayList<>()).isEmpty());
 
         List<String> missing = HookStatus.missing(PlaybackQuality.FAMILY);
         assertEquals(missing.toString(), 2, missing.size());
-        assertTrue(missing.toString(), missing.get(0).contains("VideoUrlModel#getBitRate"));
-        assertTrue(missing.toString(), missing.get(1).contains("Video#getBitRate"));
+        assertTrue(missing.toString(), missing.get(0).contains("playable gear list from VideoUrlModel#getBitRate"));
+        assertTrue(missing.toString(), missing.get(1).contains("playable gear list from Video#getBitRate"));
     }
 }

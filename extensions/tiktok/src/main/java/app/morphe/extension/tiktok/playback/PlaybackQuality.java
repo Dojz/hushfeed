@@ -125,17 +125,22 @@ public final class PlaybackQuality {
      * there, and until now this path said nothing, so an export could not tell a list that was
      * never handed over from a gear that was chosen and then ignored by the player. A chosen
      * gear is a bound member of the Hook status family plus one report line per distinct
-     * choice, naming the gear, its height and everything it was picked from. A list with
-     * nothing playable in it is a miss, worded the way the model getters word theirs. A null
-     * list is an item with no gears at all and is left alone, like a model with one gear.
+     * choice, naming the gear, its height and everything it was picked from. A list with gears
+     * in it and nothing playable among them is a miss, named by its getter. A null or empty
+     * list is an item with no gears at all, a photo post for one, and is left alone like a
+     * model with one gear: on the S22 every feed has some, and a miss for each would leave the
+     * family reading as broken on a build where the path works.
      */
     private static List<?> filterGears(List<?> original, String owner) {
         String mode = mode();
-        if (original == null || "auto".equals(mode)) return original;
-        Object selected = original.isEmpty() ? null : QualitySelector.choose(original, mode);
+        if (original == null || original.isEmpty() || "auto".equals(mode)) return original;
+        Object selected = QualitySelector.choose(original, mode);
         if (selected == null) {
-            unusable(owner, GEARS_GETTER, original.isEmpty()
-                    ? "an empty gear list" : "a gear list with no playable address");
+            HookStatus.missingMember(FAMILY, "playable gear list from", owner, GEARS_GETTER);
+            if (DESCRIBED.add(owner + '#' + GEARS_GETTER)) {
+                Logger.printDebug(() -> owner + '.' + GEARS_GETTER
+                        + " returned gears with no playable address, so playback quality leaves it to the app");
+            }
             return original;
         }
         HookStatus.bound(FAMILY, owner + '#' + GEARS_GETTER);
