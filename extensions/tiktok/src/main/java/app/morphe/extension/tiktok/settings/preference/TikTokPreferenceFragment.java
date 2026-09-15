@@ -426,7 +426,9 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         if (owed) screen.addPreference(restartPending);
 
         String generic = L10n.t(context, TogglePreference.RESTART_SENTENCE);
-        String pending = L10n.t(context, "Restart pending");
+        // The sentence it replaces ends in a full stop and sits inside prose ("... Restart
+        // pending. If the old layout is still there, unfold again."), so this keeps one.
+        String pending = L10n.t(context, "Restart pending") + ".";
         for (String key : restartPendingKeys()) {
             Preference row = findPreference(key);
             CharSequence summary = row == null ? null : row.getSummary();

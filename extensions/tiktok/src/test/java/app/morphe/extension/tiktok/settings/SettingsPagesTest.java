@@ -1163,8 +1163,10 @@ assertEquals(View.LAYOUT_DIRECTION_RTL, configuration.getLayoutDirection());
             Preference pinned = page.findPreference(key);
             assertNotNull("the change did not pin a restart row", pinned);
             assertEquals("the row is not at the top of the page", -950, pinned.getOrder());
+            // With its full stop: the sentence it replaces sits inside prose on the S22's
+            // App behavior page, and without one it read "Restart pending If the old layout".
             assertTrue("the toggled row does not say its change is waiting",
-                    String.valueOf(toggle.getSummary()).contains("Restart pending"));
+                    String.valueOf(toggle.getSummary()).contains("Restart pending."));
             assertFalse("the toggled row still carries the generic sentence",
                     String.valueOf(toggle.getSummary()).contains("Restart TikTok to apply this."));
 
