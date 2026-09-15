@@ -20,9 +20,36 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
         setTitle("App behavior");
     }
 
-    /** Whether this page has anything on it. The row into it asks the same question. */
+    /**
+     * Whether this page has anything on it. The row into it asks the same question.
+     *
+     * <p>Every row below belongs to a patch, so with none of them in the bundle this page is its
+     * heading and nothing else. The home screen used to ask a copy of this question kept in
+     * {@code TikTokPreferenceFragment}, and the copy fell one flag behind: a bundle carrying
+     * Settings and Hide the launcher shortcuts and nothing else built the switch here and no row
+     * into the page, so the only way to that switch was the settings search. One list, here,
+     * next to the rows it is a list of.
+     */
     public static boolean isAvailable() {
-        return true;
+        return SettingsStatus.foldableSplitViewEnabled
+                || SettingsStatus.sanitizeShareUrlsEnabled
+                || SettingsStatus.externalBrowserEnabled
+                || SettingsStatus.showSeekbarEnabled
+                || SettingsStatus.seekbarThumbnailEnabled
+                || SettingsStatus.stopVideoLoopingEnabled
+                || SettingsStatus.resumeVideoAfterScrollEnabled
+                || SettingsStatus.longPressSpeedLockEnabled
+                || SettingsStatus.disableLongPressQuickShareEnabled
+                || SettingsStatus.disableLongPressRepostEnabled
+                || SettingsStatus.disableTelemetryEnabled
+                || SettingsStatus.ghostModeEnabled
+                || SettingsStatus.blockAuthorEnabled
+                || SettingsStatus.notInterestedEnabled
+                || SettingsStatus.nonPersonalizedSearchEnabled
+                || SettingsStatus.liveSearchEnabled
+                || SettingsStatus.duetStitchEnabled
+                || SettingsStatus.refreshRateEnabled
+                || SettingsStatus.launcherShortcutsEnabled;
     }
 
     @Override

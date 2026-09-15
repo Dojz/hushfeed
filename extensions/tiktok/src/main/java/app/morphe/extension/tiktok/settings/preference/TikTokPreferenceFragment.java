@@ -640,31 +640,6 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         }
     }
 
-    /**
-     * Whether App behavior has anything in it. Every row on that page belongs to a patch, so
-     * with none of them installed the row would open a page with nothing but its heading.
-     */
-    private static boolean hasBehaviorSettings() {
-        return SettingsStatus.foldableSplitViewEnabled
-                || SettingsStatus.sanitizeShareUrlsEnabled
-                || SettingsStatus.externalBrowserEnabled
-                || SettingsStatus.showSeekbarEnabled
-                || SettingsStatus.seekbarThumbnailEnabled
-                || SettingsStatus.stopVideoLoopingEnabled
-                || SettingsStatus.resumeVideoAfterScrollEnabled
-                || SettingsStatus.longPressSpeedLockEnabled
-                || SettingsStatus.disableLongPressQuickShareEnabled
-                || SettingsStatus.disableLongPressRepostEnabled
-                || SettingsStatus.disableTelemetryEnabled
-                || SettingsStatus.ghostModeEnabled
-                || SettingsStatus.blockAuthorEnabled
-                || SettingsStatus.notInterestedEnabled
-                || SettingsStatus.nonPersonalizedSearchEnabled
-                || SettingsStatus.liveSearchEnabled
-                || SettingsStatus.duetStitchEnabled
-                || SettingsStatus.refreshRateEnabled;
-    }
-
     private List<SearchResult> buildSearchIndex(Context context, boolean featureGateLabInstalled) {
         List<SearchResult> results = new ArrayList<>();
         PreferenceScreen scratch = getPreferenceManager().createPreferenceScreen(context);
@@ -828,12 +803,10 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
             addMenu(screen, Section.REGION, SettingsMenuPreference.Icon.REGION);
         }
 
-        // App behavior and Diagnostics keep their own conditions on purpose. The App
-        // behavior page is the fallback every unmatched section falls to, so it is always
-        // buildable and only the row is conditional; the Diagnostics row always shows,
-        // because settings backup and restore live on that page whether or not the
-        // diagnostics patch is in the bundle.
-        if (hasBehaviorSettings()) {
+        // The Diagnostics row always shows, because settings backup and restore live on that
+        // page whether or not the diagnostics patch is in the bundle. App behavior answers for
+        // itself, from the page, so the row and the page cannot drift apart again.
+        if (ExtensionPreferenceCategory.isAvailable()) {
             addMenu(screen, Section.BEHAVIOR, SettingsMenuPreference.Icon.BEHAVIOR);
         }
 
