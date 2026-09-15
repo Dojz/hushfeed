@@ -1,5 +1,7 @@
 ## Unreleased
 
+* The text, range and tab rows say when they need a restart, the way the switches already did. Nine of them carry restart-gated settings, the country lists, the five count filters and the two tab pickers, and said nothing about it, so a change that showed no effect looked like a hook that had stopped working. A test now walks every settings page and holds every row whose setting needs a restart to the sentence.
+
 * The About row names the TikTok build as well as the Hushfeed version, and the settings search finds it. The row sat outside the search index with no key, so "version" and "hushfeed" both came back empty on the phones that showed it. Searching either now lands on the row, and the second question on every bug report, which TikTok the bundle was applied to, is answered on the same line.
 
 * Diagnostics has a row for the failure messages. The switch behind them was on from the first release and had no row anywhere, so the only way to stop a message was to turn diagnostic logging off with it. Show failures on screen now sits under the logging switch and decides on its own whether a failure is put in front of you while logging is on. Off keeps failures in the report alone.

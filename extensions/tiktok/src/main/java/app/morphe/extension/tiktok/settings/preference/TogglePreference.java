@@ -11,6 +11,7 @@ import android.preference.SwitchPreference;
 import android.view.View;
 
 import app.morphe.extension.shared.settings.BooleanSetting;
+import app.morphe.extension.shared.settings.Setting;
 import app.morphe.extension.tiktok.Utils;
 
 @SuppressWarnings("deprecation")
@@ -27,7 +28,7 @@ public class TogglePreference extends SwitchPreference {
     public static final String RESTART_SENTENCE = "Restart TikTok to apply this.";
 
     /** What an existing summary already says in its own words, so it is not said twice. */
-    private static final String RESTART_MARKER = "Restart TikTok";
+    static final String RESTART_MARKER = "Restart TikTok";
 
     public TogglePreference(Context context, String title, String summary, BooleanSetting setting) {
         super(context);
@@ -44,14 +45,34 @@ public class TogglePreference extends SwitchPreference {
      * not a key in the table: translating it as one string would lose the translation of the
      * summary as well. The check is against the English, which is the key, so it cannot be
      * confused by a translation that words the sentence differently.
+     *
+     * <p>Shared with the text, range and tab rows, which carry restart-gated settings as well:
+     * nine of their rows said nothing about it while every switch did. A summary that is a list
+     * rather than a sentence, "Home" or "All loaded tabs", gets a full stop before the note.
+     *
+     * @return the summary as given when there is nothing to add, so the caller's own translation
+     *         still applies; otherwise the translated summary with the note after it.
      */
-    private static CharSequence withRestartNote(Context context, String summary,
-                                                BooleanSetting setting) {
-        if (setting == null || !setting.rebootApp || summary == null) return summary;
-        if (summary.contains(RESTART_MARKER)) return summary;
+    static String withRestartNote(Context context, String summary, Setting<?> setting) {
+        if (summary == null) return null;
+        // Translated here, once, so no caller has to look the joined text up again. Looking up
+        // a string that already carries the note finds nothing and hands back what it was given,
+        // which works but reads as though the join were a phrase of its own.
         String translated = L10n.t(context, summary);
+        if (setting == null || !setting.rebootApp) return translated;
+        // Against the English, which is the key, so a translation that words it differently
+        // cannot fool this into leaving the note off.
+        if (summary.contains(RESTART_MARKER)) return translated;
+
         String note = L10n.t(context, RESTART_SENTENCE);
-        return summary.isEmpty() ? note : translated + " " + note;
+        String body = translated.trim();
+        if (body.isEmpty()) return note;
+        char last = body.charAt(body.length() - 1);
+        // A summary that is a sentence takes the note after it. One that is a state line, "Home"
+        // or "All loaded tabs", takes it on the line below: bolting a full stop onto a fragment
+        // would make the pair a string that is in no translation table, and the row would then
+        // be the only one on the page whose text nobody could translate.
+        return body + (".!?:…".indexOf(last) >= 0 ? " " : "\n") + note;
     }
 
     @Override
