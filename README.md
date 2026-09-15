@@ -116,7 +116,7 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 | `Hide feed save button` | Adds an option to hide the save/favourites button from video feeds. |
 | `Hide feed search button` | Adds an option to hide the search button at the top right of video feeds. |
 | `Disable telemetry` | Adds an App behavior toggle that stops ByteDance AppLog analytics, AppsFlyer attribution, explicit Firebase screen reports and TikTok's Npth or MonitorCrash startup reporting. TikTok's own diagnostics go quiet with them. Off by default. |
-| `Hide suggested accounts` | Stops the suggested accounts list from being built on the Activity, New followers and Inbox pages. Shares its switch with Hide inbox items. |
+| `Hide suggested accounts` | Stops the suggested accounts list from being built on the Activity, New followers and Inbox pages, and collapses every other People you may like card: the profile header, the Friends tab and the feed. Shares its switch with Hide inbox items. |
 | `Hide inbox stories` | Hides the stories tray at the top of the Inbox and restores it immediately when the switch is turned off. Shares its switch with Hide inbox items. |
 | `Expand activity list` | Adds an option to show the full Activity and New followers lists instead of collapsing them behind a View all button. |
 | `Hide inbox items` | Adds a switch for each row and header control on the Inbox tab, so message requests, TikTok Tako, TikTok Shop, the stories tray and the rest can be hidden individually. |
