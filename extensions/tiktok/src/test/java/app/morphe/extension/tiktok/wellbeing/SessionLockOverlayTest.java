@@ -39,6 +39,9 @@ import org.robolectric.annotation.Config;
  */
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = Config.NONE, sdk = 28)
+// Every other class that captures a view declares this; this one did not, and its published
+// capture was a black rectangle. Without it a draw into a bitmap is a no-op that throws nothing.
+@org.robolectric.annotation.GraphicsMode(org.robolectric.annotation.GraphicsMode.Mode.NATIVE)
 public class SessionLockOverlayTest {
     private final AtomicLong now = new AtomicLong();
 
@@ -616,6 +619,34 @@ public class SessionLockOverlayTest {
             assertTrue("the reminder took the focus", !banner.isFocusable());
 
             layout(root, 480, 960);
+
+            // Measured and laid out here exactly as the capture is about to do it, so what is
+            // asserted below is what will be drawn. Asserting against the parent's earlier pass
+            // proves nothing: a child that has been hidden or sized to nothing keeps its last
+            // measurement until something re-measures it, so a size assertion on stale numbers
+            // passes happily while the picture comes out empty.
+            banner.measure(View.MeasureSpec.makeMeasureSpec(480, View.MeasureSpec.EXACTLY),
+                    View.MeasureSpec.makeMeasureSpec(96, View.MeasureSpec.EXACTLY));
+            banner.layout(0, 0, 480, 96);
+
+            // What the picture is supposed to show, asserted rather than assumed. The capture
+            // used to be taken without anyone checking that the banner had a label, a size or
+            // any text in it, so a blank one looked exactly like a good one.
+            assertTrue("the banner has no content to draw",
+                    ((ViewGroup) banner).getChildCount() > 0);
+            android.widget.TextView label = (android.widget.TextView) ((ViewGroup) banner).getChildAt(0);
+            assertEquals("the words are not in the picture at all",
+                    View.VISIBLE, label.getVisibility());
+            String shown = label.getText().toString();
+            assertTrue("the reminder is not one of the three wordings: " + shown,
+                    shown.equals(SessionBudgetNotice.intervalMessage(0))
+                            || shown.equals(SessionBudgetNotice.intervalMessage(1))
+                            || shown.equals(SessionBudgetNotice.intervalMessage(2)));
+            assertTrue("the banner measured to nothing, so the capture would be empty",
+                    banner.getMeasuredWidth() > 0 && banner.getMeasuredHeight() > 0);
+            assertTrue("the label measured to nothing, so the words would not be in the picture",
+                    label.getMeasuredWidth() > 0 && label.getMeasuredHeight() > 0);
+
             app.morphe.extension.tiktok.UiCapture.save(banner, "session-reminder.png", 480, 96);
 
             // And it takes itself away rather than waiting to be dismissed.
