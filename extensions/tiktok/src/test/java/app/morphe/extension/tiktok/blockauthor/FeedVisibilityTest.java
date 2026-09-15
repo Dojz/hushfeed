@@ -109,6 +109,61 @@ public class FeedVisibilityTest {
     }
 
     /**
+     * A story opened from a feed avatar looks exactly like a video detail page to the hooks: the
+     * main content is hidden rather than scrolled, so the Home tab is not shown, and the story
+     * registers a resumed, visible detail page. The chips were drawn over the story and acted on
+     * the video underneath. The viewer's own pager is what tells the two apart.
+     */
+    @Test public void aStoryIsNotTheDetailPageTheButtonIsKeptFor() {
+        try (var controller = Robolectric.buildActivity(Activity.class).setup().visible()) {
+            Activity activity = controller.get();
+            FrameLayout root = new FrameLayout(activity);
+            View detail = new View(activity);
+            root.addView(detail, new FrameLayout.LayoutParams(400, 600));
+            FrameLayout storyPager = new FrameLayout(activity);
+            storyPager.setId(0x7f0a7001);
+            root.addView(storyPager, new FrameLayout.LayoutParams(400, 600));
+            activity.setContentView(root);
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+            // No Home tab on this build's tree: the id resolves to nothing, which is the state
+            // a hidden bottom navigation leaves the lookup in.
+            FeedVisibility.resolveForTests(activity.getPackageName(), "o1k", 0);
+            FeedVisibility.resolveForTests(activity.getPackageName(), "vp_story_collection",
+                    storyPager.getId());
+            Object page = new Object();
+            FeedVisibility.onDetailView(page, detail);
+            FeedVisibility.onDetailResume(page);
+            try {
+                assertTrue("the fixture does not have a resumed detail page",
+                        FeedVisibility.isDetailVisible());
+                assertTrue(FeedVisibility.isStoryVisible(activity));
+
+                // The tab lookup answering null is the "assume the feed" case, so the story has
+                // to be read off a tree where the tab exists and is hidden, as it is on a phone.
+                View homeTab = new View(activity);
+                root.addView(homeTab, new FrameLayout.LayoutParams(60, 40));
+                homeTab.setId(0x7f0a4b89);
+                homeTab.setSelected(true);
+                homeTab.setVisibility(View.GONE);
+                FeedVisibility.resolveForTests(activity.getPackageName(), "o1k", homeTab.getId());
+                Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+                assertFalse("the chips stayed live over a story", FeedVisibility.isOnFeed(activity));
+
+                // The same shape without the story is the detail page the button is kept for.
+                storyPager.setVisibility(View.GONE);
+                assertFalse(FeedVisibility.isStoryVisible(activity));
+                assertTrue("a video detail page lost the button",
+                        FeedVisibility.isOnFeed(activity));
+            } finally {
+                FeedVisibility.onDetailDestroyed(page);
+                FeedVisibility.resolveForTests(activity.getPackageName(), "o1k", 0);
+            }
+        }
+    }
+
+    /**
      * What a reshuffled resource table looks like from here: the tab names resolve to nothing.
      * The block button then cannot tell the feed from any other screen, and the Hook status row
      * has to say so, the way the caption, comment, inbox and share sheet lookups do.

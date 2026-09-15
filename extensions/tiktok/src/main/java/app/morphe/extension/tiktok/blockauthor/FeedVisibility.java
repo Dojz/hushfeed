@@ -47,10 +47,18 @@ public final class FeedVisibility {
     private static final String COMMENT_SHEET_RESOURCE_NAME = "p_5";
     private static final String COMMENT_TITLE_RESOURCE_NAME = "vjb";
 
+    /**
+     * The story viewer's pager. One id rather than the comment sheet's two: this one is not
+     * obfuscated, so it cannot collide with an unrelated layout that happens to reuse a
+     * shortened name.
+     */
+    private static final String STORY_PAGER_RESOURCE_NAME = "vp_story_collection";
+
     private static WeakReference<View> homeTabReference = new WeakReference<>(null);
     private static WeakReference<View> inboxTabReference = new WeakReference<>(null);
     private static WeakReference<View> commentSheetReference = new WeakReference<>(null);
     private static WeakReference<View> commentTitleReference = new WeakReference<>(null);
+    private static WeakReference<View> storyPagerReference = new WeakReference<>(null);
 
     /**
      * Names resolved once each. The view lookup below has to run again whenever the cached view
@@ -130,7 +138,24 @@ public final class FeedVisibility {
             return true;
         }
         if (homeTab.isShown() && !isScrolledAway(homeTab)) return homeTab.isSelected();
-        return isDetailVisible();
+        return isDetailVisible() && !isStoryVisible(activity);
+    }
+
+    /**
+     * @return true while TikTok's story viewer is covering everything else.
+     *
+     * <p>A story opened from a feed avatar is a detail page like any other as far as the hooks
+     * can see: it hides the main content instead of scrolling it, so the Home tab fails
+     * {@link View#isShown}, and it registers a resumed, visible {@code DetailPageFragment}, so
+     * {@link #isDetailVisible} says yes. The chips were drawn over it and acted on the video
+     * underneath, which is not the creator whose story is on screen. The detail-page bargain is
+     * for a video opened from a profile grid or a search result, where the button is worth
+     * keeping; a story is not that.
+     */
+    public static boolean isStoryVisible(Activity activity) {
+        View pager = namedView(activity, STORY_PAGER_RESOURCE_NAME, storyPagerReference,
+                reference -> storyPagerReference = reference, "story viewer");
+        return pager != null && pager.isShown();
     }
 
     /**
