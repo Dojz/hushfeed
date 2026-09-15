@@ -1,5 +1,7 @@
 ## Unreleased
 
+* AMOLED dark theme now rewrites the theme style values behind the comments sheet and the share sheet, and one more page background colour. Both sheets are painted from style values that never go through the colour table the patch rewrote, which is why they stayed TikTok's grey with the patch on. Only dark values are touched, so the light theme keeps its white sheets.
+
 * The feed filter table in the diagnostic report gives the profile detail pager's ad event a line of its own. It used to share the profile grid's line, so a report about an ad seen while watching videos from a profile (issue #2) couldn't say whether that route ran at all or what it took out.
 
 * The diagnostic report now says which playback quality gear was picked and from what. The gear-list path was silent, so a report from a phone whose model strings come back empty (issue #3) couldn't say whether a gear was chosen and then ignored or never offered at all. Hook status lists the gear list getter, and one line per distinct choice names the mode, the gear it settled on and every gear it had to choose from.
