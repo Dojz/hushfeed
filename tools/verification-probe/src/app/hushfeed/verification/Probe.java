@@ -48,6 +48,8 @@ import java.util.List;
  *   adb -s S shell am instrument app.hushfeed.verification/.Probe
  *   adb -s S shell am broadcast -a app.hushfeed.verification.PROBE -p com.zhiliaoapp.musically \
  *       -e action dump
+ *       -e action labrule -e manager abmock -e key favorite_reverse -e type INT -e value 1
+ *       -e action labclear
  *   adb -s S logcat -d | grep HushfeedProbe
  * </pre>
  */
@@ -234,6 +236,33 @@ public final class Probe extends Instrumentation {
                         String before = valueOf(find(key));
                         write(key, value);
                         Log.i(TAG, "ok set " + key + " " + before + " -> " + valueOf(find(key)));
+                        break;
+                    }
+                    case "labrule": {
+                        // A Feature Gate Lab override, written the way the Lab's own detail page
+                        // writes it, with the Lab switched on. Lets a device check force a gate
+                        // without driving the Lab's screens: issue #4 was traced to two favourites
+                        // gates, and this is how the S22 reproduces them.
+                        Class<?> store = loader.loadClass(
+                                "app.morphe.extension.tiktok.featuregatelab.FeatureGateLabStore");
+                        String manager = required(intent, "manager");
+                        String key = required(intent, "key");
+                        String type = required(intent, "type");
+                        String value = required(intent, "value");
+                        boolean enabled = !"false".equals(intent.getStringExtra("enabled"));
+                        Object saved = store.getMethod("saveRule", String.class, String.class,
+                                String.class, String.class, boolean.class)
+                                .invoke(null, manager, key, type, value, enabled);
+                        store.getMethod("setMasterEnabled", boolean.class).invoke(null, true);
+                        Log.i(TAG, "ok labrule " + manager + " " + key + " " + type + "=" + value
+                                + " enabled=" + enabled + " saved=" + saved + " master=on");
+                        break;
+                    }
+                    case "labclear": {
+                        Class<?> store = loader.loadClass(
+                                "app.morphe.extension.tiktok.featuregatelab.FeatureGateLabStore");
+                        store.getMethod("resetAllLabData").invoke(null);
+                        Log.i(TAG, "ok labclear");
                         break;
                     }
                     default:
