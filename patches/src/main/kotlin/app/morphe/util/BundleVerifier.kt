@@ -54,10 +54,39 @@ object BundleVerifier {
         require(listed.isNotEmpty() && listed.size == listed.toSet().size) {
             "Patch list is empty or contains duplicate names"
         }
+        requireCanonicalDependencies(metadata)
         require(bundled.size == listed.size && bundled.toSet() == listed.toSet()) {
             "Patch list mismatch: bundle has ${bundled.size}, metadata has ${listed.size}; " +
                 "missing=${listed.toSet() - bundled.toSet()}, extra=${bundled.toSet() - listed.toSet()}"
         }
         println("Verified ${bundle.name}: ${bundled.size} patches and all three non-empty DEX payloads")
+    }
+
+    /**
+     * Every row's dependencies named once and in order.
+     *
+     * A dependency list is a set written down as a list, so a name appearing twice is a catalog
+     * that has lost track of what it is recording: two rows said `["Settings", "BytecodePatch",
+     * "BytecodePatch"]`, which reads as two dependencies and is one. Order matters for a
+     * different reason, that an unsorted list makes an edit to one patch reorder rows it has
+     * nothing to do with.
+     *
+     * The generator deduplicates and sorts. This is what stops a hand-edited or stale catalog
+     * getting past on a day the generator did not run, and it is separate from main so it can be
+     * put in front of a crafted catalog without building a bundle to go with it.
+     */
+    fun requireCanonicalDependencies(metadata: com.google.gson.JsonObject) {
+        metadata.getAsJsonArray("patches").forEach { entry ->
+            val patch = entry.asJsonObject
+            val dependencies = patch.getAsJsonArray("dependencies")?.map { it.asString }
+                ?: return@forEach
+            val name = patch["name"]?.asString ?: "(unnamed)"
+            require(dependencies.size == dependencies.toSet().size) {
+                "Patch \"$name\" names a dependency twice: $dependencies"
+            }
+            require(dependencies == dependencies.sorted()) {
+                "Patch \"$name\" lists its dependencies out of order: $dependencies"
+            }
+        }
     }
 }
