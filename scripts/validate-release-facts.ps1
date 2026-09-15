@@ -553,6 +553,55 @@ $managerFloorPattern = "\bMorphe Manager\s+$([regex]::Escape($managerFloor))\s+o
 Require-Match -Text $readme -Pattern $managerFloorPattern -Description 'README Manager floor'
 Write-Host "[release] README requires Morphe Manager $managerFloor or newer for patcher $pinnedPatcher"
 
+function Test-ChangelogHere {
+    <#
+    .SYNOPSIS
+        The CHANGELOG still describes what it described at the last tag, and describes this
+        version.
+    .DESCRIPTION
+        Held against the file as it stood at the most recent tag reachable from HEAD, which is
+        read with git. A checkout with no tag, or one where that tag carried no CHANGELOG, is
+        still held to naming the version it builds; there is simply nothing older to compare.
+    #>
+    $path = Join-Path $rootPath 'CHANGELOG.md'
+    if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
+        throw "There is no CHANGELOG.md at $path, so no release can be described."
+    }
+    $current = Get-Content -LiteralPath $path -Raw
+
+    $previous = $null
+    $label = 'the last release'
+    $tag = (& git -C $rootPath describe --tags --abbrev=0 HEAD 2>$null | Select-Object -First 1)
+    $tag = "$tag".Trim()
+    if ($tag) {
+        # 2>$null on its own leaves the error in $LASTEXITCODE, and a tag from before this file
+        # existed is a legitimate miss rather than a failure, so the text is what decides.
+        $text = (& git -C $rootPath show "${tag}:CHANGELOG.md" 2>$null) -join "`n"
+        if (-not [string]::IsNullOrWhiteSpace($text)) {
+            $previous = $text
+            $label = "tag $tag"
+        }
+    }
+
+    $arguments = @{ Current = $current; ExpectedVersion = $releaseVersion }
+    if ($null -ne $previous) {
+        $arguments['Previous'] = $previous
+        $arguments['PreviousLabel'] = $label
+    }
+    $check = Test-ChangelogVersions @arguments
+    if (-not $check.Valid) { throw "The CHANGELOG does not describe this release: $($check.Reason)" }
+
+    $described = @(Get-ChangelogVersions -Text $current)
+    if ($null -eq $previous) {
+        Write-Host ("[release] the CHANGELOG describes $releaseVersion and " +
+            "$($described.Count) versions in all; there is no earlier tag to compare with")
+    } else {
+        Write-Host ("[release] the CHANGELOG describes $releaseVersion and keeps every version " +
+            "$label described, $($described.Count) in all")
+    }
+}
+Test-ChangelogHere
+
 function Test-ReleaseReceiptHere {
     <#
     .SYNOPSIS

@@ -328,6 +328,75 @@ function Read-ManifestDeltaAllowlist {
     return @($entries | Sort-Object -Unique -CaseSensitive)
 }
 
+function Get-ChangelogVersions {
+    <#
+    .SYNOPSIS
+        The versions a CHANGELOG names, in the order it names them.
+    .DESCRIPTION
+        Both shapes this file carries: a bare "## 0.32.0", a dated "## 0.14.0 (2026-09-05)", and
+        the linked "## [0.1.5](compare/...) (2026-06-01)" the upstream generator wrote. Anything
+        else under a level-two heading, "Unreleased" among them, is not a version and is ignored
+        here; it is the absence of a version that this exists to notice.
+    #>
+    param([string]$Text)
+
+    $found = New-Object System.Collections.Generic.List[string]
+    foreach ($match in [regex]::Matches($Text, '(?m)^##\s+\[?v?(\d+\.\d+\.\d+(?:-[0-9A-Za-z.]+)?)')) {
+        $found.Add($match.Groups[1].Value)
+    }
+    # No comma wrap. Every caller writes @(Get-ChangelogVersions ...), and @(,$array) is an
+    # array holding one array: the membership test then finds nothing and the first element
+    # prints as the whole list.
+    return $found.ToArray()
+}
+
+function Test-ChangelogVersions {
+    <#
+    .SYNOPSIS
+        Whether the CHANGELOG still describes every version it described at the last release,
+        and describes the version being released now.
+    .DESCRIPTION
+        A released version's heading is the only record a reader has that it shipped. On
+        2026-09-14 a post-release commit renamed "## 0.31.0" to "## Unreleased", so the file
+        said that release never happened, and nothing noticed until the next release was cut by
+        hand. No gate read this file at all.
+
+        Held against the CHANGELOG as it stood at the last tag rather than against the tag list,
+        so it needs no list of exceptions for versions that never had an entry: whatever was
+        described then has to still be described now. Answers @{ Valid; Reason }.
+    #>
+    param(
+        [Parameter(Mandatory = $true)][string]$Current,
+        [Parameter(Mandatory = $true)][string]$ExpectedVersion,
+        # The same file at the last release tag. Absent on a checkout with no tag yet, in which
+        # case only the version being released is checked.
+        [string]$Previous,
+        [string]$PreviousLabel = 'the last release'
+    )
+
+    function Fail { param([string]$Reason) return [pscustomobject]@{ Valid = $false; Reason = $Reason } }
+
+    $now = @(Get-ChangelogVersions -Text $Current)
+    if ($now.Count -eq 0) { return Fail 'The CHANGELOG names no version at all.' }
+    if ($now -notcontains $ExpectedVersion) {
+        return Fail ("The CHANGELOG has no heading for $ExpectedVersion, the version this " +
+            "checkout builds. It names $($now[0]) first.")
+    }
+
+    if ($PSBoundParameters.ContainsKey('Previous') -and $null -ne $Previous) {
+        $then = @(Get-ChangelogVersions -Text $Previous)
+        $present = [System.Collections.Generic.HashSet[string]]::new(
+            [string[]]$now, [System.StringComparer]::Ordinal)
+        $lost = @($then | Where-Object { -not $present.Contains($_) })
+        if ($lost.Count -gt 0) {
+            return Fail ("The CHANGELOG described " + ($lost -join ', ') + " at $PreviousLabel " +
+                "and does not now. A shipped version cannot stop having an entry.")
+        }
+    }
+
+    return [pscustomobject]@{ Valid = $true; Reason = 'ok' }
+}
+
 function Test-ReleaseReceipt {
     <#
     .SYNOPSIS

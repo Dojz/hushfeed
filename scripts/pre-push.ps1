@@ -131,7 +131,10 @@ try {
         # what decides which manifest changes it accepts. A push that moved only one of those
         # ran the script contract tests at most, and never the check that reads them.
         $_ -like 'release-receipt-*.json' -or
-        $_ -eq 'scripts/manifest-delta-allowlist.txt'
+        $_ -eq 'scripts/manifest-delta-allowlist.txt' -or
+        # A released version's heading is the only record a reader has that it shipped, and one
+        # was renamed away by a post-release commit that no gate read.
+        $_ -eq 'CHANGELOG.md'
     }).Count -gt 0
 
     if ($touchesScripts) {

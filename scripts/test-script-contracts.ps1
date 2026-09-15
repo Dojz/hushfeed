@@ -564,7 +564,7 @@ $factsScript = Join-Path $PSScriptRoot 'validate-release-facts.ps1'
 $factsRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("hushfeed-facts-" + [guid]::NewGuid().ToString('N'))
 try {
     New-Item -ItemType Directory -Path $factsRoot -Force | Out-Null
-    foreach ($relative in @('patches-list.json', 'patches-bundle.json', 'gradle.properties', 'README.md')) {
+    foreach ($relative in @('patches-list.json', 'patches-bundle.json', 'gradle.properties', 'README.md', 'CHANGELOG.md')) {
         Copy-Item -LiteralPath (Join-Path $Root $relative) -Destination (Join-Path $factsRoot $relative)
     }
     New-Item -ItemType Directory -Path (Join-Path $factsRoot 'gradle') -Force | Out-Null
@@ -632,6 +632,14 @@ try {
     }
     Assert-Throws { Invoke-Facts } '*' 'A README naming a Manager older than the patcher needs was accepted.'
     Reset-FactsFile 'README.md'
+
+    # The heading that says this version shipped. Renaming it is what happened on 2026-09-14,
+    # and the file is read by this check and by nothing else.
+    Set-FactsFile 'CHANGELOG.md' {
+        param($text) $text -replace ('(?m)^##\s+' + [regex]::Escape($catalogVersion) + '\b.*$'), '## Unreleased'
+    }
+    Assert-Throws { Invoke-Facts } '*' 'A CHANGELOG with no heading for the built version was accepted.'
+    Reset-FactsFile 'CHANGELOG.md'
 
     # A dead link in the index, answered from this machine so the case needs no network of its
     # own: nothing listens on port 1, so the request is refused before it leaves the host.
@@ -703,6 +711,10 @@ try {
     Assert-True (Test-Path -LiteralPath $contractsMarker) `
         'A push that changed the manifest delta allowlist skipped the script contract tests.'
 
+    Invoke-Hook -Paths @('CHANGELOG.md')
+    Assert-True (Test-Path -LiteralPath $factsMarker) `
+        'A push that changed only the CHANGELOG ran no release check.'
+
     Invoke-Hook -Paths @('patches-bundle.json')
     Assert-True (Test-Path -LiteralPath $factsMarker) 'An index change ran no release check.'
     Assert-True ((Get-Content -LiteralPath $factsMarker -Raw) -like 'lag=False*') `
@@ -713,6 +725,74 @@ try {
 }
 
 Write-Host '[scripts] pre-push routing contracts passed'
+
+# --- Test-ChangelogVersions ------------------------------------------------------------------
+#
+# A released version's heading is the only record a reader has that it shipped. On 2026-09-14 a
+# post-release commit renamed "## 0.31.0" to "## Unreleased" and the file then said that release
+# never happened; nothing read this file at all. Both directions are exercised here, and the
+# real CHANGELOG is the control.
+
+$headingShapes = @"
+## 0.32.0
+some text
+## 0.31.0 (2026-09-14)
+more text
+## [0.1.5](https://example.invalid/compare/v0.1.4...v0.1.5) (2026-06-01)
+older text
+"@
+$shapes = @(Get-ChangelogVersions -Text $headingShapes)
+Assert-True (($shapes -join ',') -eq '0.32.0,0.31.0,0.1.5') `
+    "The heading shapes this file uses were not all read: $($shapes -join ',')"
+Assert-True (@(Get-ChangelogVersions -Text "## Unreleased`n## Notes").Count -eq 0) `
+    'A heading that names no version was read as one.'
+
+$previousChangelog = "## 0.31.0`nshipped`n## 0.30.2`nshipped"
+$goodChangelog = "## 0.32.0`nnew`n" + $previousChangelog
+$good = Test-ChangelogVersions -Current $goodChangelog -ExpectedVersion '0.32.0' `
+    -Previous $previousChangelog -PreviousLabel 'tag v0.31.0'
+Assert-True $good.Valid "A CHANGELOG that kept every shipped version was refused: $($good.Reason)"
+
+# The 2026-09-14 defect, exactly: the previous version's heading renamed to Unreleased.
+$renamed = Test-ChangelogVersions -Current ("## 0.32.0`nnew`n## Unreleased`nshipped`n## 0.30.2`nshipped") `
+    -ExpectedVersion '0.32.0' -Previous $previousChangelog -PreviousLabel 'tag v0.31.0'
+Assert-True (-not $renamed.Valid) 'A released version renamed to Unreleased was accepted.'
+Assert-True ($renamed.Reason -like '*0.31.0*tag v0.31.0*') `
+    "The renamed heading was refused for the wrong reason: $($renamed.Reason)"
+
+$dropped = Test-ChangelogVersions -Current "## 0.32.0`nnew`n## 0.31.0`nshipped" `
+    -ExpectedVersion '0.32.0' -Previous $previousChangelog
+Assert-True (-not $dropped.Valid) 'A shipped version deleted from the CHANGELOG was accepted.'
+
+$noHeading = Test-ChangelogVersions -Current $previousChangelog -ExpectedVersion '0.32.0' `
+    -Previous $previousChangelog
+Assert-True (-not $noHeading.Valid) 'A CHANGELOG with no heading for the built version was accepted.'
+Assert-True ($noHeading.Reason -like '*no heading for 0.32.0*') `
+    "The missing heading was refused for the wrong reason: $($noHeading.Reason)"
+
+Assert-True (-not (Test-ChangelogVersions -Current "# Changelog`nnothing here" -ExpectedVersion '0.32.0').Valid) `
+    'A CHANGELOG naming no version at all was accepted.'
+
+# With no earlier file to compare against, the version being built is still required and a
+# CHANGELOG that has it is still accepted. A first release has no tag behind it.
+Assert-True (Test-ChangelogVersions -Current $goodChangelog -ExpectedVersion '0.32.0').Valid `
+    'A checkout with no earlier tag was refused.'
+
+# The control. The real file, held to the real version, must pass: every case above is this
+# same shape with one heading moved.
+$realVersion = ((Get-Content -LiteralPath (Join-Path $Root 'gradle.properties')) -match '^version\s*=' |
+    Select-Object -First 1) -replace '^version\s*=\s*', ''
+$realChangelog = Get-Content -LiteralPath (Join-Path $Root 'CHANGELOG.md') -Raw
+$realTag = "$(& git -C $Root describe --tags --abbrev=0 HEAD 2>$null | Select-Object -First 1)".Trim()
+$realPrevious = if ($realTag) { (& git -C $Root show "${realTag}:CHANGELOG.md" 2>$null) -join "`n" } else { '' }
+$realCheck = if ([string]::IsNullOrWhiteSpace($realPrevious)) {
+    Test-ChangelogVersions -Current $realChangelog -ExpectedVersion $realVersion
+} else {
+    Test-ChangelogVersions -Current $realChangelog -ExpectedVersion $realVersion -Previous $realPrevious
+}
+Assert-True $realCheck.Valid "This repository's own CHANGELOG was refused: $($realCheck.Reason)"
+
+Write-Host '[scripts] changelog history contracts passed'
 
 # --- Resolve-D8 ------------------------------------------------------------------------------
 #
