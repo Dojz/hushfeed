@@ -1257,4 +1257,120 @@ public class FeatureGatePagesTest {
         bitmap.recycle();
         return hash;
     }
+
+    /**
+     * A structured page says a save is owed, offers a way to drop the edits, and says so when
+     * they are dropped by leaving.
+     *
+     * <p>"Save field values" looked the same before and after typing, and Back popped the page
+     * with every edit gone and nothing said, which is the one editor in the bundle that needs an
+     * explicit save.
+     */
+    @Test public void structuredEditsSayTheyArePendingAndCanBeDiscarded() throws Exception {
+        try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            FeatureGateDetailFragment detail = structuredDetail(activity, true);
+            View save = detail.getView().findViewWithTag("feature_gate_save_fields");
+            View discard = detail.getView().findViewWithTag("feature_gate_discard_fields");
+            assertNotNull("the structured page has no save action", save);
+            assertNotNull("the structured page offers no way to drop an edit", discard);
+            java.util.List<EditText> inputs = new java.util.ArrayList<>();
+            collect(detail.getView(), inputs);
+            assertTrue("the fixture built no structured text inputs", inputs.size() > 0);
+            EditText field = inputs.get(0);
+            String opened = field.getText().toString();
+
+            assertFalse("Save is offered before anything was typed", save.isEnabled());
+            assertEquals("Discard is offered before anything was typed",
+                    View.GONE, discard.getVisibility());
+
+            field.setText(opened + "x");
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            assertTrue("Save is not offered after typing", save.isEnabled());
+            assertEquals(View.VISIBLE, discard.getVisibility());
+            if (android.os.Build.VERSION.SDK_INT >= 30) {
+                assertEquals("Not saved yet", String.valueOf(save.getStateDescription()));
+            }
+
+            // Leaving with an edit pending says so rather than dropping it in silence.
+            ShadowToast.reset();
+            var leave = FeatureGateDetailFragment.class.getDeclaredMethod("leaveDetail");
+            leave.setAccessible(true);
+            leave.invoke(detail);
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            assertEquals("Field edits were not saved.", ShadowToast.getTextOfLatestToast());
+
+            // Discard puts the field back and stands the actions down.
+            discard.performClick();
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            assertEquals("Discard did not put the field back", opened, field.getText().toString());
+            assertFalse("Save is still offered after a discard", save.isEnabled());
+            assertEquals(View.GONE, discard.getVisibility());
+        }
+    }
+
+    /**
+     * With overrides off the page says so above the controls and offers to turn them on, rather
+     * than leaving a grey caption after the last row and the switch a screen back.
+     */
+    @Test public void theDisabledNoteSitsAboveTheControlsAndTurnsThemOn() throws Exception {
+        try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            FeatureGateDetailFragment detail = structuredDetail(activity, false);
+            View note = detail.getView().findViewWithTag("feature_gate_disabled_note");
+            View turnOn = detail.getView().findViewWithTag("feature_gate_enable_overrides");
+            assertNotNull("the page does not say overrides are off", note);
+            assertNotNull("the page offers no way to turn them on", turnOn);
+            assertTrue("the action is not offered as a button",
+                    turnOn.createAccessibilityNodeInfo().getClassName().toString()
+                            .contains("Button"));
+
+            java.util.List<EditText> inputs = new java.util.ArrayList<>();
+            collect(detail.getView(), inputs);
+            assertFalse("the fields are live while overrides are off", inputs.get(0).isEnabled());
+            // Above the controls: the note is drawn before the first field editor.
+            assertTrue("the note sits after the controls it explains",
+                    topOf(note, detail.getView()) < topOf(inputs.get(0), detail.getView()));
+
+            turnOn.performClick();
+            FeatureGateDetailFragment.awaitChangesForTests();
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+            assertTrue("the overrides were not turned on", FeatureGateLabStore.masterEnabled());
+            assertEquals("the note stayed after its action ran", View.GONE, note.getVisibility());
+            assertTrue("the fields are still greyed", inputs.get(0).isEnabled());
+        }
+    }
+
+    /** A structured detail page on a fixture gate, with overrides on or off. */
+    private static FeatureGateDetailFragment structuredDetail(Activity activity, boolean overrides)
+            throws Exception {
+        FeatureGateLabStore.resetAllLabData();
+        FeatureGateLabSession.begin();
+        FeatureGateLabStore.setMasterEnabled(overrides);
+        var entry = new FeatureGateCatalog.Entry("object_gate", "Object gate",
+                FeatureGateLabStore.MANAGER_SETTINGS_MANAGER, "OBJECT", true, true,
+                List.of(), List.of(), List.of(), "", "", false, null, null,
+                StructuredConfigControllerTest.Config.class.getName());
+        var cached = FeatureGateCatalog.class.getDeclaredField("cachedSnapshot");
+        cached.setAccessible(true);
+        cached.set(null, new FeatureGateCatalog.Snapshot(
+                List.of(entry), Map.of(entry.identity(), entry), 0, 0, true));
+        FeatureGateDetailFragment detail = FeatureGateDetailFragment.forEntry(
+                FeatureGateLabStore.MANAGER_SETTINGS_MANAGER, "object_gate", "OBJECT");
+        attach(activity, detail);
+        return detail;
+    }
+
+    /** A view's top edge in the page's own coordinates. */
+    private static int topOf(View view, View root) {
+        int top = 0;
+        for (View at = view; at != null && at != root; at = at.getParent() instanceof View
+                ? (View) at.getParent() : null) {
+            top += at.getTop();
+        }
+        return top;
+    }
 }

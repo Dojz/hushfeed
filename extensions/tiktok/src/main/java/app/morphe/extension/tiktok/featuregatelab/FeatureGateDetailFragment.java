@@ -68,6 +68,12 @@ public final class FeatureGateDetailFragment extends Fragment {
     private Switch booleanValue;
     private TextView reset;
     private TextView saveObject;
+    private TextView discardObject;
+    private LinearLayout disabledNote;
+    /** Whether a field has been typed in since the page opened or a save landed. */
+    private boolean fieldsDirty;
+    /** Raised while the page itself writes into the editors, which is not an edit. */
+    private boolean fillingFields;
     private LinearLayout technicalDetails;
     private TextView technicalToggle;
     private List<ValueOption> options;
@@ -227,6 +233,27 @@ public final class FeatureGateDetailFragment extends Fragment {
         }
 
         addSectionTitle(content, L10n.t(context, "Override"));
+        if (!FeatureGateLabStore.masterEnabled()) {
+            // It was a loose grey caption after the Reset row, so a reader met greyed controls
+            // first and the reason last, with nothing to do about it and the switch a screen
+            // back. Above the controls it explains them, and the action turns them on here.
+            disabledNote = settingRow(context,
+                    L10n.t(context, "Overrides are disabled in the Feature Gate Lab."),
+                    L10n.t(context, "Nothing on this page changes what TikTok does until they are on."));
+            disabledNote.setTag("feature_gate_disabled_note");
+            TextView turnOn = FeatureGateLabUi.text(context, L10n.t(context, "Turn on overrides"),
+                    14, SettingsUi.accent(), Typeface.BOLD);
+            turnOn.setTag("feature_gate_enable_overrides");
+            SettingsUi.styleTextAction(turnOn, true);
+            turnOn.setMinimumHeight(FeatureGateLabUi.dp(context, 48));
+            turnOn.setPadding(FeatureGateLabUi.dp(context, 12), FeatureGateLabUi.dp(context, 10),
+                    0, FeatureGateLabUi.dp(context, 10));
+            SettingsUi.markAsButton(turnOn);
+            turnOn.setOnClickListener(view -> enableOverrides());
+            disabledNote.addView(turnOn, new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            content.addView(disabledNote, FeatureGateLabUi.matchWrap());
+        }
         status = FeatureGateLabUi.text(context, "", 13, SettingsUi.textSecondary(), Typeface.BOLD);
         content.addView(status, FeatureGateLabUi.matchWrap());
 
@@ -271,8 +298,21 @@ public final class FeatureGateDetailFragment extends Fragment {
             saveObject.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
             saveObject.setMinimumHeight(FeatureGateLabUi.dp(context, 48));
             saveObject.setPadding(0, FeatureGateLabUi.dp(context, 10), 0, FeatureGateLabUi.dp(context, 10));
-            saveObject.setEnabled(editable);
+            saveObject.setEnabled(false);
             content.addView(saveObject, FeatureGateLabUi.matchWrap());
+            // Nothing said an edit was pending: Save looked the same before and after typing,
+            // and Back dropped every edit without a word. The action says which it is now, and
+            // Discard is the way to drop them on purpose.
+            discardObject = FeatureGateLabUi.text(context, L10n.t(context, "Discard edits"), 14,
+                    SettingsUi.textSecondary(), Typeface.NORMAL);
+            discardObject.setTag("feature_gate_discard_fields");
+            SettingsUi.styleTextAction(discardObject, false);
+            discardObject.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
+            discardObject.setMinimumHeight(FeatureGateLabUi.dp(context, 48));
+            discardObject.setPadding(0, FeatureGateLabUi.dp(context, 10), 0,
+                    FeatureGateLabUi.dp(context, 10));
+            discardObject.setVisibility(View.GONE);
+            content.addView(discardObject, FeatureGateLabUi.matchWrap());
         } else if (booleanEntry) {
             // Two rows, the same as every other type. With one switch doing both jobs, a rule
             // saved with its override off (which is how an import lands) could only be turned
@@ -356,10 +396,6 @@ public final class FeatureGateDetailFragment extends Fragment {
         content.addView(reset, FeatureGateLabUi.matchWrap());
 
         if (force != null) force.setEnabled(editable);
-        if (!editable) {
-            TextView disabled = FeatureGateLabUi.label(context, L10n.t(context, "Overrides are disabled in the Feature Gate Lab."));
-            content.addView(disabled, FeatureGateLabUi.matchWrap());
-        }
 
         suppress = true;
         if (!booleanEntry && !objectEntry) {
@@ -436,9 +472,24 @@ public final class FeatureGateDetailFragment extends Fragment {
         if (saveObject != null) {
             saveObject.setOnClickListener(view -> {
                 String value = objectPatchText();
-                if (value != null) persist(value, force.isChecked());
+                if (value == null) return;
+                persist(value, force.isChecked());
+                setFieldsDirty(false);
             });
         }
+        if (discardObject != null) {
+            discardObject.setOnClickListener(view -> {
+                fillingFields = true;
+                try {
+                    for (ObjectFieldEditor editor : objectEditors) editor.restore();
+                } finally {
+                    fillingFields = false;
+                }
+                setFieldsDirty(false);
+                Utils.showToastShort(L10n.t(getContext(), "Field edits were discarded."));
+            });
+        }
+        watchObjectEditors();
 
         reset.setOnClickListener(view -> resetRule());
         addTechnicalDetails(content);
@@ -497,7 +548,75 @@ public final class FeatureGateDetailFragment extends Fragment {
         return customValueDialog != null && customValueDialog.isShowing();
     }
 
+    /**
+     * Watches every field editor, so the page knows when something is waiting to be saved.
+     *
+     * <p>Only typing by a reader counts: the page writes into these editors itself when it
+     * opens and when Discard puts them back, and neither is a pending edit.
+     */
+    private void watchObjectEditors() {
+        for (ObjectFieldEditor editor : objectEditors) {
+            if (editor.input != null) {
+                editor.input.addTextChangedListener(new android.text.TextWatcher() {
+                    @Override public void beforeTextChanged(CharSequence text, int start, int count, int after) { }
+
+                    @Override public void onTextChanged(CharSequence text, int start, int before, int count) {
+                        if (!fillingFields) setFieldsDirty(true);
+                    }
+
+                    @Override public void afterTextChanged(android.text.Editable text) { }
+                });
+            } else if (editor.toggle != null) {
+                editor.toggle.setOnCheckedChangeListener((button, checked) -> {
+                    if (!fillingFields) setFieldsDirty(true);
+                });
+            }
+        }
+    }
+
+    /** Says whether a save is owed, on the action and to a screen reader. */
+    private void setFieldsDirty(boolean dirty) {
+        fieldsDirty = dirty;
+        if (saveObject == null) return;
+        boolean editable = FeatureGateLabStore.masterEnabled();
+        saveObject.setEnabled(editable && dirty);
+        if (android.os.Build.VERSION.SDK_INT >= 30) {
+            saveObject.setStateDescription(L10n.t(saveObject.getContext(),
+                    dirty ? "Not saved yet" : "Saved"));
+        }
+        if (discardObject != null) {
+            discardObject.setVisibility(dirty && editable ? View.VISIBLE : View.GONE);
+        }
+    }
+
+    /** Hands the page's controls over, or takes them back, without rebuilding it. */
+    private void setControlsEditable(boolean editable) {
+        if (values != null) values.setEnabled(editable);
+        if (force != null) force.setEnabled(editable);
+        for (ObjectFieldEditor editor : objectEditors) editor.setEditable(editable);
+        setFieldsDirty(fieldsDirty);
+    }
+
+    /**
+     * Turns overrides on from here, so a reader who has just been told they are off does not
+     * have to go back a screen to act on it.
+     */
+    private void enableOverrides() {
+        runDetailChange(
+                undoBaseline -> FeatureGateLabUndo.setMasterEnabled(true),
+                () -> {
+                    if (disabledNote != null) disabledNote.setVisibility(View.GONE);
+                    setControlsEditable(true);
+                    updateStatus();
+                },
+                L10n.t(Utils.getContext(), "Overrides enabled. Restart TikTok to apply this."),
+                L10n.t(Utils.getContext(), "Could not change Lab settings."));
+    }
+
     private void leaveDetail() {
+        // Not a confirmation dialog: the house rule is one line of feedback and the action goes
+        // through. What was typed is not saved, and now that is said rather than silent.
+        if (fieldsDirty) Utils.showToastShort(L10n.t(getContext(), "Field edits were not saved."));
         if (getFragmentManager() != null) getFragmentManager().popBackStack();
     }
 
@@ -1231,12 +1350,28 @@ public final class FeatureGateDetailFragment extends Fragment {
         final String kind;
         final Switch toggle;
         final EditText input;
+        /** What the field held when the page built it, which is what Discard puts back. */
+        private final String openedWithText;
+        private final boolean openedWithChecked;
 
         private ObjectFieldEditor(String name, String kind, Switch toggle, EditText input) {
             this.name = name;
             this.kind = kind;
             this.toggle = toggle;
             this.input = input;
+            this.openedWithText = input == null ? null : input.getText().toString();
+            this.openedWithChecked = toggle != null && toggle.isChecked();
+        }
+
+        /** Back to what the page opened with. */
+        void restore() {
+            if (toggle != null) toggle.setChecked(openedWithChecked);
+            if (input != null) input.setText(openedWithText);
+        }
+
+        void setEditable(boolean editable) {
+            if (toggle != null) toggle.setEnabled(editable);
+            if (input != null) input.setEnabled(editable);
         }
 
         static ObjectFieldEditor toggle(String name, String kind, Switch toggle) {

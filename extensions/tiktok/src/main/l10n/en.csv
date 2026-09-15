@@ -226,6 +226,7 @@ Disable analytics and tracking,Disable analytics and tracking
 Disable the long press quick share,Disable the long press quick share
 Disable the long press repost,Disable the long press repost
 Disabled,Disabled
+Discard edits,Discard edits
 Dismiss,Dismiss
 Dismissed %1$s suggested accounts,Dismissed %1$s suggested accounts
 Dismissed one suggested account,Dismissed one suggested account
@@ -276,6 +277,8 @@ Feed and navigation,Feed and navigation
 Feed filter,Feed filter
 Feed navigation,Feed navigation
 "Field %1$s can't be changed on this build. Take it out of the override, or reset the override.","Field %1$s can't be changed on this build. Take it out of the override, or reset the override."
+Field edits were discarded.,Field edits were discarded.
+Field edits were not saved.,Field edits were not saved.
 Filter bottom tabs,Filter bottom tabs
 Filter comments by keyword,Filter comments by keyword
 Filter feed tabs,Filter feed tabs
@@ -542,11 +545,13 @@ Not blocked,Not blocked
 Not interested in this video,Not interested in this video
 Not present in the current cache,Not present in the current cache
 Not requested in this process yet,Not requested in this process yet
+Not saved yet,Not saved yet
 "Nothing has been checked yet, so there is nothing to report.","Nothing has been checked yet, so there is nothing to report."
 "Nothing has been looked up yet. Use the app for a moment, then come back.","Nothing has been looked up yet. Use the app for a moment, then come back."
 Nothing is playing to seek,Nothing is playing to seek
 "Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected.","Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected."
 "Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected. First rejection: %4$s","Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected. First rejection: %4$s"
+Nothing on this page changes what TikTok does until they are on.,Nothing on this page changes what TikTok does until they are on.
 Nothing to undo yet.,Nothing to undo yet.
 Notices from this project and the ones it is built on,Notices from this project and the ones it is built on
 Off,Off
@@ -693,6 +698,7 @@ Save the latest available TikTok crash report for diagnostic export.,Save the la
 Save the original sound,Save the original sound
 Save the sound as well,Save the sound as well
 Save videos without sound,Save videos without sound
+Saved,Saved
 Saved %1$s,Saved %1$s
 Saved %1$s of %2$s photos before the story failed,Saved %1$s of %2$s photos before the story failed
 Saved %1$s original photos,Saved %1$s original photos
@@ -924,6 +930,7 @@ Transparent,Transparent
 Try a different word or clear the search.,Try a different word or clear the search.
 "Try again, or go back to TikTok.","Try again, or go back to TikTok."
 Turn on %1$s first.,Turn on %1$s first.
+Turn on overrides,Turn on overrides
 Turned off %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.,Turned off %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.
 Turned off %1$d gates. Restart TikTok to apply this.,Turned off %1$d gates. Restart TikTok to apply this.
 Turned off 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.,Turned off 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.
