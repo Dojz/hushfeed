@@ -1,5 +1,7 @@
 ## Unreleased
 
+* The block, hide and sound chips no longer start out on top of TikTok's own avatar, like and share column. Out of the box they sat right on it, so a tap on the creator's face hid the creator instead of opening the profile. They now sit a finger's width to the left of that column. If you have already dragged them somewhere, they stay where you put them.
+
 * When a structured override in the Feature Gate Lab can't be applied, the page now says why, and what to do about it. Before, the status stopped at "could not be applied" and the reason only went to the log. It now sits under the status as a warning line: the field this build doesn't have, the value that can't be copied, the list the override never named, or the type the catalog disagrees on, each with a next step. Translated into German, Spanish, Indonesian and Brazilian Portuguese alongside the English.
 
 * The actions that appear when you hold a gate in the Feature Gate Lab fit the screen now. Reset, Disable, Enable and Cancel sat in a row that couldn't wrap, so at larger text sizes the last of them were squeezed down to a box too small for the word and the labels were cut. In German they don't fit at ordinary size either. They wrap onto a second line instead. Cancel is also no longer painted like Enable, so the action that just puts the selection down doesn't look like the one that writes to every gate in it.

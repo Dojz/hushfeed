@@ -55,8 +55,16 @@ public final class BlockAuthorOverlay {
     private static final int BUTTON_GAP_DP = 8;
     private static final long UNDO_VISIBLE_MS = 6_000L;
 
-    /** Right edge, just above TikTok's own action rail. */
-    private static final float DEFAULT_X_FRACTION = 0.91f;
+    /**
+     * Left of TikTok's own action rail, level with the top of it.
+     *
+     * <p>At 0.91 the column of chips ran straight down the rail: on 46.2.3 at 1080 wide the
+     * avatar sits at x 932 to 1057 and the hide chip landed on it, so a tap meant for the
+     * creator's profile hid the creator instead. The rail starts at about 0.86 of the width, and
+     * a chip is 48dp wide, so its centre has to sit under 0.80 to clear it; 0.74 leaves a
+     * finger's width between. A position the reader has dragged to is honoured over this.
+     */
+    private static final float DEFAULT_X_FRACTION = 0.74f;
     private static final float DEFAULT_Y_FRACTION = 0.40f;
 
     private static WeakReference<View> buttonReference = new WeakReference<>(null);
