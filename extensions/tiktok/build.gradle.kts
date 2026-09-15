@@ -76,6 +76,9 @@ val refreshingScreenshots = gradle.startParameter.taskNames.any {
 // has looked at, this build stops instead of quietly rewriting it away.
 val safeBouncyCastleVersion = libs.versions.bouncycastle.get()
 val reviewedBouncyCastleRequests = setOf("1.81", safeBouncyCastleVersion)
+// Stands in for a request that names no version. Deliberately not a version string, so it can
+// never be added to the reviewed set by someone pasting a number in.
+val UNVERSIONED_BOUNCY_CASTLE_REQUEST = "a request with no version of its own"
 // Guarded by hand rather than by a synchronized wrapper: in a Kotlin build script `java` is the
 // Java extension, so the java.util package cannot be named here.
 val requestedBouncyCastleVersions = sortedSetOf<String>()
@@ -83,9 +86,19 @@ val requestedBouncyCastleVersions = sortedSetOf<String>()
 configurations.configureEach {
     resolutionStrategy.eachDependency {
         if (requested.group == "org.bouncycastle") {
-            requested.version?.let {
-                synchronized(requestedBouncyCastleVersions) { requestedBouncyCastleVersions.add(it) }
-            }
+            // Recorded whatever it is, including a request that carries no version of its own.
+            // A ?.let dropped those: one arriving through a platform or a BOM was rewritten to
+            // the reviewed release like any other and then counted nowhere, so the unreviewed
+            // set stayed empty for it and the gate below had nothing to fail on. A request with
+            // no version is the one most worth stopping on, because nothing in this file chose
+            // what it would otherwise have resolved to.
+            // Blank as well as null. A declaration with no version at all reports "" rather
+            // than null, so a plain ?: left the placeholder unused and the failure read "asks
+            // for Bouncy Castle , which nobody has reviewed": it stopped the build, which is
+            // the point, but said nothing a reader could act on.
+            val asked = requested.version?.takeIf { it.isNotBlank() }
+                ?: UNVERSIONED_BOUNCY_CASTLE_REQUEST
+            synchronized(requestedBouncyCastleVersions) { requestedBouncyCastleVersions.add(asked) }
             useVersion(safeBouncyCastleVersion)
             because("The Robolectric test graph must use the reviewed security release.")
         }
