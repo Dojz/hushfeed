@@ -34,7 +34,7 @@ Allow screenshots and Circle to Search,Izinkan tangkapan layar dan Circle to Sea
 Allowed bottom tabs,Tab bawah yang diizinkan
 Already marked as not interested,Sudah ditandai sebagai tidak tertarik
 Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.,Terapkan filter ini juga ke video terunduh yang TikTok pakai saat feed tidak bisa memuat cukup konten baru.
-Also change the region TikTok reports internally. Keeps your interface language. Needs Override SIM details. Your IP address and your account's own rules still apply.,Juga mengubah wilayah yang dilaporkan TikTok secara internal. Bahasa antarmuka tetap. Perlu Timpa detail SIM. Alamat IP dan aturan akun Anda tetap berlaku.
+Also change the region TikTok reports internally. Keeps your interface language. Your IP address and your account's own rules still apply.,Juga mengubah wilayah yang dilaporkan TikTok secara internal. Bahasa antarmuka tetap. Alamat IP dan aturan akun Anda tetap berlaku.
 Always show publish date,Selalu tampilkan tanggal unggah
 Always show the publish date in video author information. Restart TikTok to apply this.,Selalu tampilkan tanggal publikasi di informasi penulis video. Mulai ulang TikTok agar berlaku.
 "An app's package name, like com.dv.adm. The save button sends the video's link there instead of saving it here. Leave it empty to save here.","Nama paket sebuah aplikasi, misalnya com.dv.adm. Tombol simpan mengirim tautan video ke sana, bukan menyimpannya di sini. Kosongkan untuk menyimpan di sini."
@@ -54,6 +54,7 @@ That is one video today,Itu satu video hari ini
 This video has no link to copy,Video ini tidak punya tautan untuk disalin
 This video has no sound of its own,Video ini tidak punya suara sendiri
 TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.,Server TikTok bisa memasukkan akun ke eksperimen yang mengosongkan tab Favorit di profil Anda. Pertahankan tab itu beserta video yang tersimpan.
+Turn on %1$s first.,Nyalakan %1$s dulu.
 Unblock this commenter,Buka blokir pengomentar ini
 "Zero means no limit. Counts the videos Hushfeed advanced past for you, not the ones you swiped yourself, and starts again when the feed is rebuilt or you change this number.","Nol berarti tanpa batas. Menghitung video yang dilewati Hushfeed untuk Anda, bukan yang Anda geser sendiri, dan mulai lagi saat feed dibangun ulang atau angka ini diubah."
 Auto translate comments,Terjemahkan komentar otomatis
@@ -292,7 +293,7 @@ Includes all diagnostic events.,Termasuk semua peristiwa diagnostik.
 Interface,Tampilan
 Invalid SIM preset,Pratata SIM tidak sah
 Keep a local record of what you have watched and drop those videos from later feed pages.,Simpan catatan tontonanmu di perangkat dan buang video itu dari halaman feed berikutnya.
-"Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this. Then use this switch to turn it off.","Biarkan lanjut otomatis tetap aktif dan tampilkan aksi Auto scroll milik TikTok di panel video meski akun Anda tidak pernah punya. Jeda dan dialog terbuka tetap menghentikan guliran. Mulai ulang TikTok agar berlaku. Lalu pakai sakelar ini untuk mematikannya."
+"Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this. Then use this switch to turn it off.",Biarkan lanjut otomatis tetap aktif dan tampilkan aksi Auto scroll milik TikTok di panel video meski akun Anda tidak pernah punya. Jeda dan dialog terbuka tetap menghentikan guliran. Mulai ulang TikTok agar berlaku. Lalu pakai sakelar ini untuk mematikannya.
 Keep captions in clear display,Pertahankan keterangan saat tampilan bersih
 Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.,Sembunyikan jam dan ikon status selama TikTok terbuka. Geser dari atas untuk mengintipnya.
 Keep the screen's refresh rate,Pertahankan laju penyegaran layar
@@ -841,7 +842,7 @@ There is no Lab change to undo.,Tidak ada perubahan Lab yang bisa dibatalkan.
 "An interrupted settings change could not be recovered, so its record was set aside. Check your settings or restore a backup.","Perubahan pengaturan yang terputus tidak bisa dipulihkan, jadi catatannya disisihkan. Periksa pengaturan Anda atau pulihkan cadangan."
 A newer clear replaced that undo. Tap the row again to put it back.,Penghapusan yang lebih baru menggantikan pembatalan itu. Ketuk baris ini lagi untuk mengembalikannya.
 "That creator pattern is too long, so it was not added: %1$s","Pola kreator itu terlalu panjang, jadi tidak ditambahkan: %1$s"
-Use the preset for the region TikTok reports for your account and its shop too. May affect search. Needs Override SIM details and Match locale and timezone to country.,Gunakan preset juga untuk wilayah yang dilaporkan TikTok untuk akun Anda dan tokonya. Bisa memengaruhi pencarian. Perlu Timpa detail SIM dan Samakan lokal dan zona waktu dengan negara.
+Use the preset for the region TikTok reports for your account and its shop too. May affect search.,Gunakan preset juga untuk wilayah yang dilaporkan TikTok untuk akun Anda dan tokonya. Bisa memengaruhi pencarian.
 Saved one original photo,Satu foto asli disimpan
 Length and views per like,Durasi dan penayangan per suka
 Stop a long press on Share from opening TikTok's quick share action.,Cegah tekan lama pada Bagikan membuka aksi bagikan cepat TikTok.
@@ -877,7 +878,7 @@ Add a separate button that skips videos using the current sound.,Tambahkan tombo
 Show block sound button,Tampilkan tombol blokir suara
 Show local hide button,Tampilkan tombol sembunyikan lokal
 That list is too large. Keep it to 256 KB or less.,Daftar itu terlalu besar. Batasi ukurannya hingga 256 KB atau kurang.
-"That list has too many entries. Keep it to 10,000 or fewer.","Daftar itu memiliki terlalu banyak entri. Batasi hingga 10.000 entri atau kurang."
+"That list has too many entries. Keep it to 10,000 or fewer.",Daftar itu memiliki terlalu banyak entri. Batasi hingga 10.000 entri atau kurang.
 That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.,Cadangan pengaturan itu berisi daftar aturan feed yang lebih besar dari batas Hushfeed. Tidak ada yang diubah.
 %1$d fields overridden,%1$d kolom ditimpa
 %1$d fields will be overridden when requested,%1$d kolom akan ditimpa saat diminta

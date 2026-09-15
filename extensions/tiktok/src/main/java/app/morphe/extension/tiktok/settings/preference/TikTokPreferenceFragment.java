@@ -67,6 +67,8 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
     private RestartPendingPreference restartPending;
     /** Rows on this page whose sentence was swapped for "Restart pending.", to swap back. */
     private final java.util.Set<String> pendingSummaries = new java.util.HashSet<>();
+    /** Summaries a parent's reason was appended to, so it can be taken off again. */
+    private final java.util.Map<String, String> reasonSummaries = new java.util.HashMap<>();
     /**
      * Which folder setting the picker was opened for, by key rather than by the preference
      * itself. The picker is a separate activity, so this one is routinely destroyed behind it
@@ -414,6 +416,46 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
      * the rows that owe it say "Restart pending" in place of the sentence every restart-gated
      * row carries, so the reader can see which of their changes are still waiting.
      */
+    /**
+     * A row its parent has greyed says which switch would turn it on.
+     *
+     * <p>Four rows grey out when their parent is off and said nothing about it, so the row read
+     * as broken and a screen reader announced only "dimmed". The parent's own title is read off
+     * its row rather than kept in a second list, because both rows are always on the same page
+     * and a title kept twice is a title that drifts.
+     */
+    @Override
+    protected void updatePreferenceAvailability(Preference pref, Setting<?> setting) {
+        super.updatePreferenceAvailability(pref, setting);
+        Context context = getActivity();
+        if (context == null || pref.getKey() == null) return;
+        String key = pref.getKey();
+        String appended = reasonSummaries.remove(key);
+        if (appended != null) {
+            CharSequence current = pref.getSummary();
+            if (current != null && current.toString().endsWith(appended)) {
+                pref.setSummary(current.toString().substring(0, current.length() - appended.length()));
+            }
+        }
+        if (setting.isAvailable()) return;
+        String parentTitle = null;
+        for (Setting<?> parent : setting.getParentSettings()) {
+            Preference row = findPreference(parent.key);
+            CharSequence title = row == null ? null : row.getTitle();
+            if (title != null && title.length() > 0) {
+                parentTitle = title.toString();
+                break;
+            }
+        }
+        if (parentTitle == null) return;
+        String reason = " " + L10n.f(context, "Turn on %1$s first.", parentTitle);
+        CharSequence summary = pref.getSummary();
+        String body = summary == null ? "" : summary.toString();
+        if (body.endsWith(reason)) return;
+        pref.setSummary(body + reason);
+        reasonSummaries.put(key, reason);
+    }
+
     private void refreshRestartPending() {
         PreferenceScreen screen = getPreferenceScreen();
         Context context = getActivity();

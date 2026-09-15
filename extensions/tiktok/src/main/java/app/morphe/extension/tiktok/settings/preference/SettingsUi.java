@@ -186,6 +186,11 @@ public final class SettingsUi {
     public static void styleSwitch(Switch control) {
         Context context = control.getContext();
         StateListDrawable track = new StateListDrawable();
+        // Checked-and-disabled first, or the -state_enabled entry below answers for it and a
+        // greyed switch looks the same on as off: a reader cannot see what state it will come
+        // back in when the parent is turned on again.
+        track.addState(new int[]{-android.R.attr.state_enabled, android.R.attr.state_checked},
+                switchShape(context, (accent() & 0x00ffffff) | 0x66000000, 44, 26, 6));
         track.addState(new int[]{-android.R.attr.state_enabled}, switchShape(context, border(), 44, 26, 6));
         track.addState(new int[]{android.R.attr.state_checked}, switchShape(context, accent(), 44, 26, 6));
         track.addState(new int[]{}, switchShape(context, isDarkMode() ? Color.rgb(100, 100, 111) : Color.rgb(116, 116, 127), 44, 26, 6));
