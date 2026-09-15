@@ -122,6 +122,8 @@ public class SettingsStatus {
 
     public static void enableCaptchaPopupSuppression() {
         captchaPopupSuppressionEnabled = true;
+        // Injected where the settings load, so this is where the gate says it is in the build.
+        app.morphe.extension.tiktok.featurecontrols.CaptchaGate.installed();
     }
 
     public static void enablePromotionalBanners() {

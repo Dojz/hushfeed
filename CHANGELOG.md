@@ -1,5 +1,7 @@
 ## Unreleased
 
+* The diagnostic report now says what the CAPTCHA gate saw. A report of a comment or a follow that went nowhere used to carry no CAPTCHA line at all, so nobody could tell whether Hushfeed had seen the request, whether TikTok raised a puzzle, or whether the gate was in that build. The report now names the gate as installed, says when it has seen a write go out, says when a puzzle reached it, and keeps the reason a puzzle was shown next to the line it already kept for one it hid.
+
 * Coming back to TikTok with "Do not start the feed on returning" on now shows a "Tap to start the feed" label instead of a silent, frozen feed with nothing to say why. TalkBack announces it once and can no longer swipe through it to the like and comment buttons underneath. And if you tap Profile or Inbox instead, the stop goes away on its own: it used to stay up over the new page, eat your first tap there, and keep the sound held for a feed you had left.
 
 * The block, hide and sound chips no longer start out on top of TikTok's own avatar, like and share column. Out of the box they sat right on it, so a tap on the creator's face hid the creator instead of opening the profile. They now sit a finger's width to the left of that column. If you have already dragged them somewhere, they stay where you put them.
