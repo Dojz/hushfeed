@@ -1,5 +1,7 @@
 ## 0.34.0
 
+* While a settings backup, restore, reset or undo is running, the four rows on the Diagnostics page go out of reach and the one acting says what it is doing. Before, they looked exactly as they had a moment earlier, a second tap earned "A settings operation is already running", and a screen reader was told nothing at all.
+
 * A settings row greyed out by another switch now says which switch would turn it on, and a greyed switch shows whether it is on or off instead of looking the same either way. On the Region page the two rows that only said in prose that they need Override SIM details are now actually wired to it, so they grey out rather than letting you switch on something that does nothing.
 
 * The SIM country preset list now marks the preset that is already chosen and opens scrolled to it, and a Clear preset action takes the row back to no preset. It used to be sixty identical rows with no sign of which one was on, and no way back short of retyping three fields.
