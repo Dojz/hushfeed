@@ -347,7 +347,7 @@ public final class FeedVisibility {
     }
 
     /** Stands in for this build's resource table in tests. */
-    static void resolveForTests(String packageName, String name, int id) {
+    public static void resolveForTests(String packageName, String name, int id) {
         IDS.putForTests(packageName, name, id);
     }
 

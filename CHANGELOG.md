@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Coming back to TikTok with "Do not start the feed on returning" on now shows a "Tap to start the feed" label instead of a silent, frozen feed with nothing to say why. TalkBack announces it once and can no longer swipe through it to the like and comment buttons underneath. And if you tap Profile or Inbox instead, the stop goes away on its own: it used to stay up over the new page, eat your first tap there, and keep the sound held for a feed you had left.
+
 * The block, hide and sound chips no longer start out on top of TikTok's own avatar, like and share column. Out of the box they sat right on it, so a tap on the creator's face hid the creator instead of opening the profile. They now sit a finger's width to the left of that column. If you have already dragged them somewhere, they stay where you put them.
 
 * When a structured override in the Feature Gate Lab can't be applied, the page now says why, and what to do about it. Before, the status stopped at "could not be applied" and the reason only went to the log. It now sits under the status as a warning line: the field this build doesn't have, the value that can't be copied, the list the override never named, or the type the catalog disagrees on, each with a next step. Translated into German, Spanish, Indonesian and Brazilian Portuguese alongside the English.

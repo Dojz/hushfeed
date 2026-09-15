@@ -597,9 +597,11 @@ public final class SessionLockOverlay {
      *
      * <p>The panel covers the feed for anyone looking at it, and covers nothing at all for
      * anyone swiping through it with a screen reader. Each view's own setting is kept so that
-     * putting it back does not hand TikTok a value this project invented.
+     * putting it back does not hand TikTok a value this project invented. Shared with the
+     * catcher {@code PausePlayback} puts up on returning to the app, which is the same shape:
+     * one view over the content root that has to be the only thing on the page.
      */
-    private static void hideBehind(ViewGroup root, View panel, boolean hidden) {
+    public static void hideBehind(ViewGroup root, View panel, boolean hidden) {
         if (root == null) return;
         for (int index = 0; index < root.getChildCount(); index++) {
             View child = root.getChildAt(index);
