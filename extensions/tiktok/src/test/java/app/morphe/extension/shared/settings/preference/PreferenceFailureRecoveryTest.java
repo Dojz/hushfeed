@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -31,9 +32,11 @@ import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
@@ -45,6 +48,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 /** Recovery when Android or an injected settings row throws during synchronization. */
 @RunWith(RobolectricTestRunner.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @Config(sdk = {23, 35}, qualifiers = "de-night")
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @LooperMode(LooperMode.Mode.PAUSED)
@@ -345,6 +349,13 @@ public class PreferenceFailureRecoveryTest {
             Activity activity = owner.get();
             Utils.setContext(activity);
             HarnessFragment page = attach(activity);
+            // The fragment resolves its store from the activity; the Setting reads a static
+            // captured when its class loaded in this sandbox. Robolectric gives every method a
+            // fresh preference cache, so the two are one object only while the rule re-points
+            // the static one, and a recovery that writes to one and reads the other is the
+            // flake this class used to have.
+            assertSame("Setting and fragment stores differ", Setting.preferences.preferences,
+                    page.getPreferenceManager().getSharedPreferences());
             SwitchPreference toggle = (SwitchPreference) page.findPreference(BaseSettings.DEBUG.key);
             assertNotNull(toggle);
             assertFalse(BaseSettings.DEBUG.get());
