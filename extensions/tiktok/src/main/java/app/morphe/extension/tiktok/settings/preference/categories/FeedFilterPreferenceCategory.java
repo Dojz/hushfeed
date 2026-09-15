@@ -52,10 +52,12 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
                 .withCheck(app.morphe.extension.tiktok.feedfilter.KeywordRules::problem));
         addPreference(new InputTextPreference(context, "Only from these countries",
                 "Comma separated country codes, like GB, IE. Videos posted from anywhere else are hidden. Leave empty for all countries.",
-                Settings.REGION_ONLY_FROM));
+                Settings.REGION_ONLY_FROM)
+                .withCheck(app.morphe.extension.tiktok.feedfilter.RegionFilter::countryProblem));
         addPreference(new InputTextPreference(context, "Never from these countries",
                 "Comma separated country codes. Videos posted from these are hidden, whatever the list above says.",
-                Settings.REGION_NEVER_FROM));
+                Settings.REGION_NEVER_FROM)
+                .withCheck(app.morphe.extension.tiktok.feedfilter.RegionFilter::countryProblem));
         addPreference(new InputTextPreference(context, "Blocked creators", "Comma separated account handles or user ids. These accounts are always skipped. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.", Settings.BLOCKED_CREATORS)
                 .withCheck(AdvancedFeedRules::creatorEntryProblem));
         addPreference(new CreatorListPreference(context, "Locally hidden creators",

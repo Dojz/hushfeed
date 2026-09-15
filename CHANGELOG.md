@@ -1,5 +1,7 @@
 ## Unreleased
 
+* The two country lists in the feed filter check what you type, and "UK" now works. Only from these countries took anything at all, and an entry that is not a country code matched no video, so one typo hid the whole feed with nothing on screen saying why. The row names the entry it cannot use before it saves, "UK" is read as the GB the videos carry, and a list saved before this check existed can no longer empty the feed either.
+
 * Copying a sound link now cleans it the way copying a video link already did. TikTok's share URL for a sound carries the parameters that say who sent it, and the long press put it on the clipboard exactly as written, so the identifiers travelled with every shared sound. The link is stripped now and takes the custom share domain like the video link does. Both copied links are also marked sensitive, which they were not: they were the only clips the bundle wrote without that flag.
 
 * The Not interested button no longer goes dead for the rest of the session. It marks itself busy before handing the request to the shared worker pool, and when that pool is full the request is refused and never runs, so nothing ever cleared the busy mark. The reader got one "Sending feedback" that never resolved and then a button that did nothing at all. A refused request now says so and leaves the button ready for the next tap.
