@@ -352,6 +352,38 @@ public class SettingsUiTest {
     }
 
     /**
+     * A text field says whether typing will land in it.
+     *
+     * <p>The underline tint had two states, disabled and everything else, so the field holding
+     * the cursor looked exactly like the one beside it. The Min and Max dialog is where that
+     * shows worst: two accent underlines, one caret.
+     */
+    @Test
+    public void aFieldWithTheCursorInItIsUnderlinedDifferently() {
+        for (boolean dark : new boolean[]{true, false}) {
+            Utils.setIsDarkModeEnabled(dark);
+            Activity activity = Robolectric.buildActivity(DialogActivity.class).setup().get();
+            Utils.setContext(activity);
+            EditText field = new EditText(activity);
+            SettingsUi.styleEditText(field);
+            android.content.res.ColorStateList tint = field.getBackgroundTintList();
+            assertNotNull("the field was left without a tint", tint);
+
+            int focused = tint.getColorForState(
+                    new int[]{android.R.attr.state_enabled, android.R.attr.state_focused}, 0);
+            int resting = tint.getColorForState(new int[]{android.R.attr.state_enabled}, 0);
+            int disabled = tint.getColorForState(new int[]{-android.R.attr.state_enabled}, 0);
+            String theme = dark ? "dark" : "light";
+            assertEquals("the focused underline is not the accent in " + theme,
+                    SettingsUi.accent(), focused);
+            assertNotEquals("a resting field is underlined like the focused one in " + theme,
+                    focused, resting);
+            assertEquals("a disabled field lost its border colour in " + theme,
+                    SettingsUi.border(), disabled);
+        }
+    }
+
+    /**
      * A row the keyboard, the d-pad or switch access has landed on wears a ring.
      *
      * <p>Every row's only stateful background was the ripple, and a RippleDrawable paints

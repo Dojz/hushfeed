@@ -502,6 +502,66 @@ public class FeatureGatePagesTest {
         }
     }
 
+    /**
+     * A save that fails puts the switch back where the store is.
+     *
+     * <p>The toast said it could not save and the switch stayed where the finger left it, so the
+     * page claimed a value nothing held. The Lab's own master switch has always put itself back.
+     */
+    @Test public void aSaveThatFailsPutsTheControlBackOnWhatIsStored() throws Exception {
+        try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            FeatureGateLabStore.resetAllLabData();
+            FeatureGateLabStore.setMasterEnabled(true);
+            var entry = new FeatureGateCatalog.Entry("refused_gate", "Refused gate", "abmock",
+                    "BOOLEAN", true, true, List.of(), List.of(), List.of(), "", "",
+                    true, "false", "BOOLEAN");
+            var cached = FeatureGateCatalog.class.getDeclaredField("cachedSnapshot");
+            cached.setAccessible(true);
+            cached.set(null, new FeatureGateCatalog.Snapshot(
+                    List.of(entry), Map.of(entry.identity(), entry), 0, 0, true));
+            FeatureGateLabUndo.saveRule("abmock", entry.key, entry.type, "false", true);
+
+            FeatureGateDetailFragment detail = FeatureGateDetailFragment.forEntry(
+                    entry.manager, entry.key, entry.type);
+            attach(activity, detail);
+            // A boolean gate's page has one switch, Forced result; the separate "override this
+            // gate" switch belongs to the pages that also carry a value picker.
+            Switch forced = fieldOf(detail, "booleanValue", Switch.class);
+            assertNotNull("the detail page has no forced-result switch", forced);
+            assertFalse("the fixture did not start from the stored value", forced.isChecked());
+
+            TextView status = fieldOf(detail, "status", TextView.class);
+            assertNotNull("the detail page has no status line", status);
+            String statusBefore = status.getText().toString();
+            ShadowToast.reset();
+            FeatureGateDetailFragment.setDetailChangeTestHookForTests(
+                    new FeatureGateDetailFragment.DetailChangeTestHook() {
+                        @Override public void before(long generation) throws Exception {
+                            throw new java.io.IOException("storage refused the override");
+                        }
+
+                        @Override public void after(long generation) {
+                        }
+                    });
+            try {
+                forced.setChecked(true);
+                FeatureGateDetailFragment.awaitChangesForTests();
+                Shadows.shadowOf(Looper.getMainLooper()).idle();
+            } finally {
+                FeatureGateDetailFragment.setDetailChangeTestHookForTests(null);
+            }
+
+            assertFalse("the switch kept a value the store refused", forced.isChecked());
+            assertEquals("the store took a value it had refused", "false",
+                    FeatureGateLabStore.rule("abmock", entry.key, entry.type).value);
+            assertEquals("the status line moved for a save that did not happen",
+                    statusBefore, status.getText().toString());
+            assertEquals("the reader was not told the save failed", 1, ShadowToast.shownToastCount());
+        }
+    }
+
     @Test public void rapidDetailChangesStayOrderedAndShareOneUndoPoint() throws Exception {
         for (boolean firstFails : new boolean[]{false, true, false}) {
             try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
@@ -964,6 +1024,14 @@ public class FeatureGatePagesTest {
         activity.getFragmentManager().executePendingTransactions();
         Shadows.shadowOf(Looper.getMainLooper()).idle();
     }
+    /** A field of the detail fragment, which builds its controls without ids. */
+    private static <T> T fieldOf(Object owner, String name, Class<T> type) throws Exception {
+        var field = owner.getClass().getDeclaredField(name);
+        field.setAccessible(true);
+        Object value = field.get(owner);
+        return type.isInstance(value) ? type.cast(value) : null;
+    }
+
     private static <T extends View> T find(View view, Class<T> type) {
         if (type.isInstance(view)) return type.cast(view);
         if (view instanceof ViewGroup) {
