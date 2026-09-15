@@ -88,6 +88,18 @@ public class FeedFilterCountersTest {
                 + FeedFilterCounters.report(), "ProfileAwemeList: 4 lists, 12 items, 0 removed", line);
     }
 
+    @Test public void aRouteHandedNothingIsStillCountedAsARun() {
+        // Issue #4's export carried no profile line while the reporter sat on an empty
+        // Favorites tab. A delivery of nothing has to leave a line too, or an empty answer from
+        // the server reads the same as a hook that never fired.
+        FeedItemsFilter.filterProfileAds(new ArrayList<>());
+        FeedItemsFilter.filterProfileAds(null);
+        FeedItemsFilter.filterLateInsertedAds("top_view", new ArrayList<>());
+
+        assertEquals("ProfileAwemeList: 2 lists, 0 items, 0 removed", lineFor("ProfileAwemeList"));
+        assertEquals("FeedInsertion:top_view: 1 lists, 0 items, 0 removed", lineFor("FeedInsertion:top_view"));
+    }
+
     @Test public void aRouteThatRemovesSomethingSaysSoAndNamesAReason() {
         FeedItemsFilter.filterProfileAds(profileList(2, 1));
 

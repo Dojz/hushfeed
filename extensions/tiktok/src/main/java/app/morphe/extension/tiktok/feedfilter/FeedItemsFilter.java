@@ -324,10 +324,13 @@ public final class FeedItemsFilter {
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     private static List filterAdOnlyAwemeList(String source, List items) {
+        // Counted before the enablement check and before the empty check. A route that ran
+        // with the ad filter off still proves the hook is alive, which is the half every ad
+        // report so far has been missing, and a route handed nothing proves the page asked
+        // and got nothing back: issue #4's export had no profile line at all, and until now
+        // that read the same as a hook that never ran.
+        FeedFilterCounters.sawList(source, items == null ? 0 : items.size());
         if (items == null || items.isEmpty()) return items;
-        // Counted before the enablement check. A route that ran with the ad filter off still
-        // proves the hook is alive, which is the half every ad report so far has been missing.
-        FeedFilterCounters.sawList(source, items.size());
         if (!ADS_FILTER.getEnabled()) return items;
 
         boolean verbose = BaseSettings.DEBUG.get();
@@ -371,8 +374,8 @@ public final class FeedItemsFilter {
         String source,
         List items
     ) {
+        FeedFilterCounters.sawList(FINAL_INSERT_SOURCE + source, items == null ? 0 : items.size());
         if (items == null || items.isEmpty()) return items;
-        FeedFilterCounters.sawList(FINAL_INSERT_SOURCE + source, items.size());
         if (panel == null || !"homepage_hot".equals(panel.getEventType())) return items;
 
         List<IFilter> activeContentFilters = getActiveFilters(CONTENT_FILTERS);
