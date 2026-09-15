@@ -8,6 +8,7 @@ import android.os.SystemClock;
 import android.view.View;
 
 import app.morphe.extension.shared.Logger;
+import app.morphe.extension.shared.diagnostics.HookStatus;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.settings.BaseSettings;
 import app.morphe.extension.tiktok.settings.Settings;
@@ -96,6 +97,17 @@ public final class CommentBatchTranslator {
     private static volatile boolean nativeTargetLanguageLookedUp;
     private static volatile boolean nativeDoNotTranslateLookedUp;
 
+    /**
+     * The Hook status family for the four places TikTok calls into this.
+     *
+     * <p>Each of them reads a member of an object this code did not declare, and a build that
+     * renames one leaves the switch on with nothing happening behind it, which is the failure
+     * the Diagnostics row exists to name. The heuristics further in do not report: they walk
+     * whatever they are handed and take what is there, so a member that is absent is an answer
+     * rather than a miss.
+     */
+    private static final String FAMILY = "comment translation";
+
     private CommentBatchTranslator() {
     }
 
@@ -106,7 +118,14 @@ public final class CommentBatchTranslator {
 
         try {
             AnchorParts parts = resolveAnchorParts(manager);
-            if (parts == null) return;
+            if (parts == null) {
+                // Nothing on the cell's manager looks like a comment plus a native translator,
+                // so every comment on this build takes this path and the feature does nothing.
+                HookStatus.missingMember(FAMILY, "field", manager.getClass().getName(),
+                        "comment and native translator");
+                return;
+            }
+            HookStatus.bound(FAMILY, "cell anchor");
             Object comment = parts.comment;
             Object context = parts.context;
 
@@ -134,10 +153,13 @@ public final class CommentBatchTranslator {
         try {
             Object itemsObject = readField(commentItemList, "items");
             if (!(itemsObject instanceof List)) {
+                HookStatus.missingMember(FAMILY, "field", commentItemList.getClass().getName(),
+                        "items");
                 Logger.printDebug(() -> "[Morphe CommentBatchTranslator] loaded.batch ignored items="
                         + className(itemsObject));
                 return;
             }
+            HookStatus.bound(FAMILY, "comment list items");
 
             List<?> items = (List<?>) itemsObject;
             ArrayList<Object> comments = new ArrayList<>();
@@ -194,12 +216,21 @@ public final class CommentBatchTranslator {
             }
 
             translateLoadedBatchIfReady(lastManager.get(), false);
+        } catch (NoSuchFieldException ex) {
+            // The list this build hands over carries no items field at all, which is the same
+            // dead end as one holding something other than a list.
+            HookStatus.missingMember(FAMILY, "field", commentItemList.getClass().getName(), "items");
+            Logger.printDebug(() -> "[Morphe CommentBatchTranslator] loaded.batch has no items",
+                    asException(ex));
         } catch (Throwable ex) {
             Logger.printDebug(() -> "[Morphe CommentBatchTranslator] loaded.batch failed", asException(ex));
         }
     }
 
     public static void onNativeBatchStart(Object comments, Object context, boolean forceWithoutAweme) {
+        // Above the debug gate: this is the only sign that the patch's call site still exists,
+        // and a reader reporting a broken build has debug off.
+        HookStatus.bound(FAMILY, "native batch start");
         if (!BaseSettings.DEBUG.get()) return;
 
         Logger.printInfo(() -> "[Morphe CommentBatchTranslator] native.start"
@@ -217,12 +248,14 @@ public final class CommentBatchTranslator {
         
         completionsHandledForTests++;
         if (runner != null && findField(runner.getClass(), "l0") == null) {
+            HookStatus.missingMember(FAMILY, "field", runner.getClass().getName(), "l0");
             // The field holding the results is gone, which is what a host update looks like.
             // Every batch would read as a failure from here on, so the feature stands down for
             // the session instead of asking again three times for every batch on every list.
             disableForSession(runner);
             return;
         }
+        HookStatus.bound(FAMILY, "batch results");
         Object results = readFieldQuiet(runner, "l0");
         Object task = readFieldQuiet(runner, "l1");
         Object requested = readFieldQuiet(task, "LIZ");

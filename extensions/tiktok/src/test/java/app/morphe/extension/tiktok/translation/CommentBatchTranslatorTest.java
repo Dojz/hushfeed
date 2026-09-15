@@ -8,6 +8,7 @@ import android.os.SystemClock;
 import android.view.View;
 
 import app.morphe.extension.shared.Utils;
+import app.morphe.extension.shared.diagnostics.HookStatus;
 import app.morphe.extension.tiktok.settings.Settings;
 
 import java.lang.ref.WeakReference;
@@ -605,6 +606,74 @@ public class CommentBatchTranslatorTest {
         public String getCid() { return cid; }
         public boolean isTranslated() { return translated; }
         public String getCommentLanguage() { return "zh"; }
+    }
+
+    /**
+     * The four places TikTok calls into the translator read a member of an object this code did
+     * not declare. A build that renames one leaves the switch on with nothing behind it, which
+     * is what the Diagnostics row exists to say out loud. Each one is given a host that has lost
+     * the member, and the row has to name it.
+     */
+    @Test public void aHostThatRenamedAMemberIsNamedOnTheDiagnosticsRow() {
+        HookStatus.clear();
+        try {
+            // The cell manager: nothing on it looks like a comment beside a native translator.
+            CommentBatchTranslator.registerCommentCell(new View(context), new StrangeManager());
+            // The loaded list: no items field at all.
+            CommentBatchTranslator.onCommentListLoaded(new ListWithoutItems());
+            // The completion runner: the results field is gone.
+            CommentBatchTranslator.onNativeBatchComplete(
+                    new RunnerWithoutResults(new Comment("aid-renamed", "cid-renamed")));
+
+            List<String> missing = HookStatus.missing("comment translation");
+            assertTrue("the cell manager's shape was not reported: " + missing,
+                    missing.stream().anyMatch(line -> line.contains(StrangeManager.class.getName())
+                            && line.contains("comment and native translator")));
+            assertTrue("the comment list's items field was not reported: " + missing,
+                    missing.stream().anyMatch(line -> line.contains(ListWithoutItems.class.getName())
+                            && line.endsWith("#items")));
+            assertTrue("the runner's results field was not reported: " + missing,
+                    missing.stream().anyMatch(line -> line.contains(RunnerWithoutResults.class.getName())
+                            && line.endsWith("#l0")));
+            assertTrue("the family is missing from the report",
+                    HookStatus.familiesMissingSomething().contains("comment translation"));
+        } finally {
+            HookStatus.clear();
+        }
+    }
+
+    /** A build that still has all four says so, and says nothing is missing. */
+    @Test public void aHostThatStillHasItsMembersReportsNothingMissing() {
+        HookStatus.clear();
+        try {
+            Anchor anchor = anchor("aid-bound", "cid-bound");
+            CommentBatchTranslator.onCommentListLoaded(new CommentItemList(anchor.comment));
+            CommentBatchTranslator.registerCommentCell(new View(context), anchor);
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            CommentBatchTranslator.onNativeBatchStart(
+                    Arrays.asList(anchor.comment), anchor.context, false);
+            CommentBatchTranslator.onNativeBatchComplete(new Runner(new Object(), anchor.comment));
+
+            assertEquals("a healthy build reported a miss: "
+                    + HookStatus.missing("comment translation"),
+                    0, HookStatus.missing("comment translation").size());
+            String line = HookStatus.report().stream()
+                    .filter(each -> each.contains("comment translation"))
+                    .findFirst().orElse("");
+            assertTrue("the row does not count the four anchors: " + line, line.contains("4"));
+        } finally {
+            HookStatus.clear();
+        }
+    }
+
+    /** A cell manager carrying nothing the translator can work from. */
+    public static final class StrangeManager {
+        public final String label = "no comment here";
+    }
+
+    /** A loaded comment list from a build that renamed the field holding its rows. */
+    public static final class ListWithoutItems {
+        public final List<Comment> rows = new ArrayList<>();
     }
 
     public static final class CommentItemList {
