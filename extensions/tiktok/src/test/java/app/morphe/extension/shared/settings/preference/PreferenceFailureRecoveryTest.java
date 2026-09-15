@@ -195,10 +195,6 @@ public class PreferenceFailureRecoveryTest {
 
             assertErrorPage(failed);
             assertNull(failed.findPreference(PARTIAL));
-            if (Build.VERSION.SDK_INT == 35) {
-                UiCapture.save(activity.getWindow().getDecorView(),
-                        "settings-initialization-error.png");
-            }
             assertActionSemantics(failed, BACK);
             View retryRow = assertActionSemantics(failed, RETRY);
 
@@ -209,6 +205,38 @@ public class PreferenceFailureRecoveryTest {
             assertNotSame(failed, rebuilt);
             assertNull(rebuilt.findPreference(ERROR));
             assertNotNull(rebuilt.findPreference(BaseSettings.DEBUG.key));
+        }
+    }
+
+    /**
+     * The same page, rendered in English, because the README shows this one to everybody.
+     *
+     * <p>The capture used to be taken inside the case above, and this class runs under a German
+     * locale so that the error page is proven translated. That made the one error state the
+     * README shows a German screenshot on an English page. The translated render is still
+     * asserted above; only the picture moved here.
+     */
+    @Test
+    @Config(sdk = 35, qualifiers = "en-night")
+    public void theErrorPageIsCapturedInEnglishForTheReadme() throws Exception {
+        HarnessFragment.failOnceAt(Stage.INITIALIZE);
+        try (var owner = Robolectric.buildActivity(TestActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            Utils.setIsDarkModeEnabled(true);
+            HarnessFragment failed = attach(activity);
+
+            // Asserted before the capture, so the published picture cannot quietly become a
+            // render of some other locale the way the German one did.
+            Preference message = failed.findPreference(ERROR);
+            assertNotNull(message);
+            assertEquals("Settings couldn't open", String.valueOf(message.getTitle()));
+            assertEquals("Try again, or go back to TikTok.",
+                    String.valueOf(message.getSummary()));
+            assertEquals("Retry", String.valueOf(failed.findPreference(RETRY).getTitle()));
+
+            UiCapture.save(activity.getWindow().getDecorView(),
+                    "settings-initialization-error.png");
         }
     }
 
