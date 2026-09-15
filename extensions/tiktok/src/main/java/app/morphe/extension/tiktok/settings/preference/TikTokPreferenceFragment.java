@@ -549,6 +549,8 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
             row.setOnPreferenceClickListener(preference -> {
                 if (FEATURE_GATE_LAB_KEY.equals(result.key)) {
                     FeatureGateLabFragment.open(getActivity());
+                } else if (LicensesPreference.KEY.equals(result.key)) {
+                    LicensesPreference.show(getActivity());
                 } else if (MorpheTikTokAboutPreference.KEY.equals(result.key)) {
                     Utils.openLink(MorpheTikTokAboutPreference.SOURCE_URL);
                 } else {
@@ -680,6 +682,15 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
                 MorpheTikTokAboutPreference.KEY,
                 "Hushfeed",
                 MorpheTikTokAboutPreference.currentSummary(context).toString(),
+                L10n.t(context, "Settings")
+        ));
+        // Somebody looking for "licence" or "notice" is looking for exactly one thing, and it
+        // sits on the master menu beside About rather than inside a section.
+        results.add(new SearchResult(
+                null,
+                LicensesPreference.KEY,
+                LicensesPreference.title(context),
+                LicensesPreference.summary(context),
                 L10n.t(context, "Settings")
         ));
         return results;
@@ -834,6 +845,10 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         addMenu(screen, Section.DIAGNOSTICS, SettingsMenuPreference.Icon.DIAGNOSTICS);
 
         screen.addPreference(new MorpheTikTokAboutPreference(context));
+        // Under About, because that is where somebody looks for who wrote this. Morphe's
+        // Section 7b asks that its notice reach the person using the software, and a file in the
+        // repository does not reach them.
+        screen.addPreference(new LicensesPreference(context));
     }
 
     /** The master menu's rows and the section each one opens, for the badge refresh. */
