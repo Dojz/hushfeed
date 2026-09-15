@@ -1,5 +1,7 @@
 ## Unreleased
 
+* The diagnostic report now says what Ghost mode did. It stops TikTok telling other people you looked at a story or a profile, or that you are typing, and until now an export said nothing about any of that, so a report of missing follower counts could not be told from a page TikTok never asked about. The report names each of the three places it answered and what it answered, and says Ghost mode is in the build even on a run where none of them came up. It still names no creator.
+
 * Settings, About now has a Licenses row. It shows the notices Hushfeed and the projects it was built on ask to be passed along, with the full licence a tap away. They were only ever in the repository before, which is no use to anyone holding a patched phone, and the projects this is built on ask that the notices reach that person too. The settings search finds it.
 
 * **Hushfeed now needs Morphe Manager 1.30.0 or newer.** The bundle is built against patcher 1.13.0, which Manager 1.30.0 was the first stable release to ship, and Manager refuses a bundle built against a patcher newer than its own. On 1.29.0 the bundle will not load at all, so update Manager before the next release.
