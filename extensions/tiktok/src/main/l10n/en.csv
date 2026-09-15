@@ -274,6 +274,7 @@ Feature gate override saved,Feature gate override saved
 Feed and navigation,Feed and navigation
 Feed filter,Feed filter
 Feed navigation,Feed navigation
+"Field %1$s can't be changed on this build. Take it out of the override, or reset the override.","Field %1$s can't be changed on this build. Take it out of the override, or reset the override."
 Filter bottom tabs,Filter bottom tabs
 Filter comments by keyword,Filter comments by keyword
 Filter feed tabs,Filter feed tabs
@@ -832,6 +833,7 @@ That settings backup is damaged or only partly downloaded. Nothing was altered.,
 That settings change did not go through. Nothing was altered.,That settings change did not go through. Nothing was altered.
 That sticker is in a format Hushfeed cannot read,That sticker is in a format Hushfeed cannot read
 "The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.","The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed."
+The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.,The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.
 The destination contains an invalid folder name,The destination contains an invalid folder name
 The diagnostic report could not be exported.,The diagnostic report could not be exported.
 The diagnostic report could not be saved yet. Try again in a moment.,The diagnostic report could not be saved yet. Try again in a moment.
@@ -846,6 +848,9 @@ The minimum or maximum likes of a video to show.,The minimum or maximum likes of
 The minimum or maximum shares of a video to show.,The minimum or maximum shares of a video to show.
 The minimum or maximum views of a video to show.,The minimum or maximum views of a video to show.
 "The original photos aren't available, so TikTok's own save runs instead","The original photos aren't available, so TikTok's own save runs instead"
+"The override changes no fields. Edit the field values, or reset the override.","The override changes no fields. Edit the field values, or reset the override."
+"The override couldn't be applied: %1$s. Edit the field values, or reset the override.","The override couldn't be applied: %1$s. Edit the field values, or reset the override."
+"The override doesn't say what list to return. Edit the field values, or reset the override.","The override doesn't say what list to return. Edit the field values, or reset the override."
 The profile picture couldn't be saved.,The profile picture couldn't be saved.
 "The record of an interrupted settings change could not be read, so it was set aside. Check your settings.","The record of an interrupted settings change could not be read, so it was set aside. Check your settings."
 The report couldn't be saved. Try again.,The report couldn't be saved. Try again.
@@ -869,11 +874,13 @@ This file has more loaded values than the Lab takes at once.,This file has more 
 This file has no loaded values in it.,This file has no loaded values in it.
 This file isn't a loaded-values export from the Feature Gate Lab.,This file isn't a loaded-values export from the Feature Gate Lab.
 This gate type is not supported.,This gate type is not supported.
+"This key isn't in the local catalog, so its type can't be checked. Reset the override.","This key isn't in the local catalog, so its type can't be checked. Reset the override."
 "This line opens a rule and does not finish it: %1$s. Write two phrases as ""a"" & ""b"" for both, or ""a"" !& ""b"" for the first without the second.","This line opens a rule and does not finish it: %1$s. Write two phrases as ""a"" & ""b"" for both, or ""a"" !& ""b"" for the first without the second."
 "This phone has no file picker, so there is no way to choose a file here.","This phone has no file picker, so there is no way to choose a file here."
 This phone has no folder picker. Type the folder into the row instead.,This phone has no folder picker. Type the folder into the row instead.
 This profile picture isn't available to save,This profile picture isn't available to save
 "This quality isn't available as a complete file, so TikTok's own save runs instead","This quality isn't available as a complete file, so TikTok's own save runs instead"
+"This setting's value can't be copied on this build, so it can't be overridden. Reset the override.","This setting's value can't be copied on this build, so it can't be overridden. Reset the override."
 This story isn't available to save,This story isn't available to save
 This value is required.,This value is required.
 This video has no link to copy,This video has no link to copy
@@ -885,6 +892,7 @@ TikTok cached value,TikTok cached value
 TikTok default,TikTok default
 "TikTok default (2x hold, quick share)","TikTok default (2x hold, quick share)"
 TikTok didn't accept the feedback. Try again later.,TikTok didn't accept the feedback. Try again later.
+"TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.","TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back."
 TikTok refused the follow: %1$s,TikTok refused the follow: %1$s
 TikTok rejected the request to block %1$s,TikTok rejected the request to block %1$s
 TikTok rejected the request to unblock %1$s,TikTok rejected the request to unblock %1$s

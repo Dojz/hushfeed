@@ -61,6 +61,7 @@ public final class FeatureGateDetailFragment extends Fragment {
     private FeatureGateCatalog.Entry entry;
     private FeatureGateLabStore.Rule rule;
     private TextView status;
+    private TextView statusReason;
     private TextView effectiveValue;
     private Spinner values;
     private Switch force;
@@ -227,8 +228,19 @@ public final class FeatureGateDetailFragment extends Fragment {
 
         addSectionTitle(content, L10n.t(context, "Override"));
         status = FeatureGateLabUi.text(context, "", 13, SettingsUi.textSecondary(), Typeface.BOLD);
-        status.setPadding(0, 0, 0, FeatureGateLabUi.dp(context, 12));
         content.addView(status, FeatureGateLabUi.matchWrap());
+
+        // Under the status, and only there when something refused the override. The status
+        // could say it had not been applied and nothing more; the reason was in logcat.
+        statusReason = FeatureGateLabUi.label(context, "");
+        statusReason.setTextColor(FeatureGateLabUi.warningColor(context));
+        statusReason.setTag("feature_gate_status_reason");
+        statusReason.setVisibility(View.GONE);
+        content.addView(statusReason, FeatureGateLabUi.matchWrap());
+
+        View statusGap = new View(context);
+        content.addView(statusGap, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, FeatureGateLabUi.dp(context, 12)));
 
         boolean editable = FeatureGateLabStore.masterEnabled();
         boolean booleanEntry = "BOOLEAN".equals(entry.type);
@@ -464,6 +476,7 @@ public final class FeatureGateDetailFragment extends Fragment {
         }
         objectEditors.clear();
         status = null;
+        statusReason = null;
         effectiveValue = null;
         values = null;
         force = null;
@@ -758,24 +771,40 @@ public final class FeatureGateDetailFragment extends Fragment {
         if (rule == null) {
             status.setText(L10n.t(getContext(), "Using TikTok's value"));
             status.setTextColor(SettingsUi.textSecondary());
+            showFailureReason(null);
             if (effectiveValue != null) effectiveValue.setText(effectiveValueText());
             return;
         }
         if (!rule.enabled) {
             status.setText(L10n.t(getContext(), "Override saved but off"));
             status.setTextColor(SettingsUi.textSecondary());
+            showFailureReason(null);
             if (effectiveValue != null) effectiveValue.setText(effectiveValueText());
             return;
         }
         boolean triggered = FeatureGateLabRuntime.isTriggered(entry.manager, entry.key, entry.type);
-        String failure = FeatureGateLabRuntime.structuredFailure(entry.manager, entry.key, entry.type);
+        FeatureGateFailure failure = FeatureGateLabRuntime.structuredFailure(
+                entry.manager, entry.key, entry.type);
         status.setText(failure != null
                 ? L10n.t(getContext(),
                         "Getter requested, but the structured override could not be applied")
                 : L10n.t(getContext(), triggered
                         ? "Getter requested" : "Getter not requested yet"));
         status.setTextColor(triggered ? SettingsUi.accent() : FeatureGateLabUi.warningColor(getActivity()));
+        showFailureReason(failure);
         if (effectiveValue != null) effectiveValue.setText(effectiveValueText());
+    }
+
+    /** The reason under the status, which is there only while there is one. */
+    private void showFailureReason(FeatureGateFailure failure) {
+        if (statusReason == null) return;
+        if (failure == null) {
+            statusReason.setText("");
+            statusReason.setVisibility(View.GONE);
+            return;
+        }
+        statusReason.setText(FeatureGateLabText.structuredFailure(getContext(), failure));
+        statusReason.setVisibility(View.VISIBLE);
     }
 
     private String effectiveValueText() {

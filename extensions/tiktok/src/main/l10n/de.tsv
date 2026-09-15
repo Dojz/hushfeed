@@ -993,3 +993,11 @@ Version %1$s	Version %1$s
 Notices from this project and the ones it is built on	Hinweise aus diesem Projekt und aus den Projekten, auf denen es aufbaut
 Full license	Vollständige Lizenz
 Licenses	Lizenzen
+TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.	TikTok hat dieser Einstellung noch kein Objekt zum Ändern übergeben. Öffne den Teil der App, der sie verwendet, und komm dann zurück.
+This setting's value can't be copied on this build, so it can't be overridden. Reset the override.	Der Wert dieser Einstellung lässt sich in diesem Build nicht kopieren und deshalb nicht überschreiben. Setze die Überschreibung zurück.
+The override doesn't say what list to return. Edit the field values, or reset the override.	Die Überschreibung gibt nicht an, welche Liste zurückgegeben werden soll. Bearbeite die Feldwerte oder setze die Überschreibung zurück.
+Field %1$s can't be changed on this build. Take it out of the override, or reset the override.	Das Feld %1$s lässt sich in diesem Build nicht ändern. Nimm es aus der Überschreibung heraus oder setze die Überschreibung zurück.
+The override changes no fields. Edit the field values, or reset the override.	Die Überschreibung ändert keine Felder. Bearbeite die Feldwerte oder setze die Überschreibung zurück.
+This key isn't in the local catalog, so its type can't be checked. Reset the override.	Dieser Schlüssel steht nicht im lokalen Katalog, deshalb lässt sich sein Typ nicht prüfen. Setze die Überschreibung zurück.
+The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.	Der Katalog nennt für diesen Schlüssel %1$s, diese Überschreibung ist %2$s. Setze die Überschreibung zurück und leg eine neue an.
+The override couldn't be applied: %1$s. Edit the field values, or reset the override.	Die Überschreibung konnte nicht angewendet werden: %1$s. Bearbeite die Feldwerte oder setze die Überschreibung zurück.

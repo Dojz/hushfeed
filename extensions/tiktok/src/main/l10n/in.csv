@@ -991,3 +991,11 @@ Version %1$s,Versi %1$s
 Notices from this project and the ones it is built on,Pemberitahuan dari proyek ini dan proyek yang menjadinya
 Full license,Lisensi lengkap
 Licenses,Lisensi
+"TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.","TikTok belum memberi setelan ini objek untuk diubah. Buka bagian aplikasi yang memakainya, lalu kembali ke sini."
+"This setting's value can't be copied on this build, so it can't be overridden. Reset the override.","Nilai setelan ini tidak bisa disalin di build ini, jadi tidak bisa ditimpa. Setel ulang penimpaan."
+"The override doesn't say what list to return. Edit the field values, or reset the override.","Penimpaan tidak menyebutkan daftar mana yang harus dikembalikan. Ubah nilai field, atau setel ulang penimpaan."
+"Field %1$s can't be changed on this build. Take it out of the override, or reset the override.","Field %1$s tidak bisa diubah di build ini. Keluarkan dari penimpaan, atau setel ulang penimpaan."
+"The override changes no fields. Edit the field values, or reset the override.","Penimpaan tidak mengubah field apa pun. Ubah nilai field, atau setel ulang penimpaan."
+"This key isn't in the local catalog, so its type can't be checked. Reset the override.","Kunci ini tidak ada di katalog lokal, jadi tipenya tidak bisa diperiksa. Setel ulang penimpaan."
+The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.,Katalog menyebut kunci ini %1$s dan penimpaan ini %2$s. Setel ulang penimpaan lalu buat yang baru.
+"The override couldn't be applied: %1$s. Edit the field values, or reset the override.","Penimpaan tidak bisa diterapkan: %1$s. Ubah nilai field, atau setel ulang penimpaan."

@@ -640,6 +640,112 @@ public class FeatureGatePagesTest {
         }
     }
 
+    public static final class Payload {
+        public int count = 1;
+    }
+
+    /**
+     * A refused structured override says why, and what to do about it, under the status.
+     *
+     * <p>The status said "could not be applied" and stopped. The controller knew the reason
+     * (the field that does not exist on this build, the class that cannot be copied, the type
+     * the catalogue disagrees on) and put it in logcat, which nobody holding a phone reads.
+     * The one reason driven through the live path here is the field one, since that is the
+     * reason a reader can act on by editing; the rest are recorded the way the runtime records
+     * them and read back off the page.
+     */
+    @Test public void aRefusedStructuredOverrideSaysWhyUnderTheStatus() throws Exception {
+        try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            FeatureGateLabStore.resetAllLabData();
+            FeatureGateLabStore.setMasterEnabled(true);
+            FeatureGateLabRuntime.clearTriggered();
+            var entry = new FeatureGateCatalog.Entry("payload_config", "Payload config",
+                    FeatureGateLabStore.MANAGER_SETTINGS_MANAGER, "OBJECT", true, true,
+                    List.of(), List.of(), List.of(), "", "", true, "{\"count\":1}", "OBJECT",
+                    Payload.class.getName());
+            var cached = FeatureGateCatalog.class.getDeclaredField("cachedSnapshot");
+            cached.setAccessible(true);
+            cached.set(null, new FeatureGateCatalog.Snapshot(
+                    List.of(entry), Map.of(entry.identity(), entry), 0, 0, true));
+            FeatureGateLabStore.saveRule(entry.manager, entry.key, entry.type,
+                    "{\"missing_field\":2}", true);
+
+            // The live path: TikTok asks for the object, the override names a field the class
+            // does not have, and the runtime records the refusal.
+            Object returned = FeatureGateLabRuntime.observeSettingsObject(
+                    entry.key, Payload.class, new Payload(), new Payload());
+            assertTrue("the refused override changed the object anyway",
+                    returned instanceof Payload && ((Payload) returned).count == 1);
+            FeatureGateFailure recorded = FeatureGateLabRuntime.structuredFailure(
+                    entry.manager, entry.key, entry.type);
+            assertNotNull("the runtime recorded no refusal", recorded);
+            assertEquals(FeatureGateFailure.Reason.UNSUPPORTED_FIELD, recorded.reason);
+            assertEquals("missing_field", recorded.detail);
+
+            FeatureGateDetailFragment detail = FeatureGateDetailFragment.forEntry(
+                    entry.manager, entry.key, entry.type);
+            attach(activity, detail);
+            TextView status = fieldOf(detail, "status", TextView.class);
+            TextView reason = (TextView) detail.getView().findViewWithTag(
+                    "feature_gate_status_reason");
+            assertNotNull("the page has no line for the reason", reason);
+            assertEquals("Getter requested, but the structured override could not be applied",
+                    status.getText().toString());
+            assertEquals(View.VISIBLE, reason.getVisibility());
+            assertEquals("Field missing_field can't be changed on this build. Take it out of"
+                    + " the override, or reset the override.", reason.getText().toString());
+            assertEquals("the reason is not painted as a warning",
+                    FeatureGateLabUi.warningColor(activity), reason.getCurrentTextColor());
+
+            // Every other reason the runtime can record, read back through the same line.
+            var failures = FeatureGateLabRuntime.class.getDeclaredField("structuredFailures");
+            failures.setAccessible(true);
+            @SuppressWarnings("unchecked")
+            Map<String, FeatureGateFailure> map = (Map<String, FeatureGateFailure>) failures.get(null);
+            String id = FeatureGateLabStore.idFor(entry.manager, entry.key, entry.type);
+            Map<FeatureGateFailure, String> expected = new java.util.LinkedHashMap<>();
+            expected.put(FeatureGateFailure.of(FeatureGateFailure.Reason.NO_OBJECT),
+                    "TikTok hasn't handed this setting an object to change yet. Open the part"
+                            + " of the app that uses it, then come back.");
+            expected.put(FeatureGateFailure.of(FeatureGateFailure.Reason.CANNOT_COPY),
+                    "This setting's value can't be copied on this build, so it can't be"
+                            + " overridden. Reset the override.");
+            expected.put(FeatureGateFailure.of(FeatureGateFailure.Reason.NO_LIST_VALUE),
+                    "The override doesn't say what list to return. Edit the field values, or"
+                            + " reset the override.");
+            expected.put(FeatureGateFailure.of(FeatureGateFailure.Reason.NO_FIELDS),
+                    "The override changes no fields. Edit the field values, or reset the"
+                            + " override.");
+            expected.put(FeatureGateFailure.of(FeatureGateFailure.Reason.THREW,
+                            "IllegalArgumentException: count"),
+                    "The override couldn't be applied: IllegalArgumentException: count. Edit"
+                            + " the field values, or reset the override.");
+            expected.put(FeatureGateFailure.of(FeatureGateFailure.Reason.NOT_IN_CATALOGUE),
+                    "This key isn't in the local catalog, so its type can't be checked. Reset"
+                            + " the override.");
+            expected.put(FeatureGateFailure.of(FeatureGateFailure.Reason.TYPE_MISMATCH,
+                            "INT", "STRING"),
+                    "The catalog says this key is INT and this override is STRING. Reset the"
+                            + " override and make a new one.");
+            for (var each : expected.entrySet()) {
+                map.put(id, each.getKey());
+                detail.onResume();
+                assertEquals(each.getKey().reason + " is not explained",
+                        each.getValue(), reason.getText().toString());
+                assertEquals(View.VISIBLE, reason.getVisibility());
+            }
+
+            // And once the override goes through, the line goes away rather than staying
+            // as a warning about something that is no longer wrong.
+            map.remove(id);
+            detail.onResume();
+            assertEquals("a stale reason was left on the page", View.GONE, reason.getVisibility());
+            assertEquals("", reason.getText().toString());
+        }
+    }
+
     @Test public void rapidDetailChangesStayOrderedAndShareOneUndoPoint() throws Exception {
         for (boolean firstFails : new boolean[]{false, true, false}) {
             try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {

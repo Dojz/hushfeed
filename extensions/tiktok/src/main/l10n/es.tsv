@@ -990,3 +990,11 @@ Version %1$s	Versión %1$s
 Notices from this project and the ones it is built on	Avisos de este proyecto y de aquellos en los que se basa
 Full license	Licencia completa
 Licenses	Licencias
+TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.	TikTok todavía no le ha dado a este ajuste un objeto que cambiar. Abre la parte de la app que lo usa y vuelve aquí.
+This setting's value can't be copied on this build, so it can't be overridden. Reset the override.	El valor de este ajuste no se puede copiar en esta versión, así que no se puede anular. Restablece la anulación.
+The override doesn't say what list to return. Edit the field values, or reset the override.	La anulación no dice qué lista devolver. Edita los valores de los campos o restablece la anulación.
+Field %1$s can't be changed on this build. Take it out of the override, or reset the override.	El campo %1$s no se puede cambiar en esta versión. Quítalo de la anulación o restablece la anulación.
+The override changes no fields. Edit the field values, or reset the override.	La anulación no cambia ningún campo. Edita los valores de los campos o restablece la anulación.
+This key isn't in the local catalog, so its type can't be checked. Reset the override.	Esta clave no está en el catálogo local, así que no se puede comprobar su tipo. Restablece la anulación.
+The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.	El catálogo dice que esta clave es %1$s y esta anulación es %2$s. Restablece la anulación y crea una nueva.
+The override couldn't be applied: %1$s. Edit the field values, or reset the override.	No se pudo aplicar la anulación: %1$s. Edita los valores de los campos o restablece la anulación.
