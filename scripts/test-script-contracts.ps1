@@ -11,6 +11,7 @@ if (-not $Root) { $Root = Split-Path -Parent $PSScriptRoot }
 . (Join-Path $PSScriptRoot 'patch-report.ps1')
 . (Join-Path $PSScriptRoot 'device-install.ps1')
 . (Join-Path $PSScriptRoot 'Resolve-Java.ps1')
+. (Join-Path $PSScriptRoot 'common.ps1')
 
 function Assert-True {
     param([bool]$Condition, [string]$Message)
@@ -807,8 +808,7 @@ Assert-True (Test-ChangelogVersions -Current $goodChangelog -ExpectedVersion '0.
 
 # The control. The real file, held to the real version, must pass: every case above is this
 # same shape with one heading moved.
-$realVersion = ((Get-Content -LiteralPath (Join-Path $Root 'gradle.properties')) -match '^version\s*=' |
-    Select-Object -First 1) -replace '^version\s*=\s*', ''
+$realVersion = Get-BundleVersion -Root $Root
 $realChangelog = Get-Content -LiteralPath (Join-Path $Root 'CHANGELOG.md') -Raw
 $realTag = "$(& git -C $Root describe --tags --abbrev=0 HEAD 2>$null | Select-Object -First 1)".Trim()
 $realPrevious = if ($realTag) { (& git -C $Root show "${realTag}:CHANGELOG.md" 2>$null) -join "`n" } else { '' }
@@ -860,6 +860,107 @@ try {
 }
 
 Write-Host '[scripts] d8 resolution contracts passed'
+
+# --- common.ps1 ------------------------------------------------------------------------------
+#
+# The helpers four release scripts used to carry copies of. They had already drifted: the
+# cleanup helper recursed unconditionally in one script and only on request in another, and two
+# of the four version reads were missing -LiteralPath, which turns a repository path holding a
+# bracket into a wildcard that matches nothing.
+
+$commonRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("hushfeed-common-" + [guid]::NewGuid().ToString('N'))
+$savedJar = $env:HUSHFEED_DESKTOP_JAR
+$savedWork = $env:HUSHFEED_WORKDIR
+try {
+    New-Item -ItemType Directory -Path $commonRoot -Force | Out-Null
+    $work = Join-Path $commonRoot 'work'
+    New-Item -ItemType Directory -Path $work -Force | Out-Null
+
+    # The path guard, which is what keeps a generated name from reaching outside the directory
+    # the caller owns.
+    $inside = Resolve-WithinRoot -Path (Join-Path $work 'run/output.apk') -Root $work
+    Assert-True ($inside -like "$work*") 'A path inside the work directory was refused.'
+    Assert-Throws { Resolve-WithinRoot -Path (Join-Path $commonRoot 'elsewhere.apk') -Root $work } `
+        '*outside the work directory*' 'A path outside the work directory was accepted.'
+    Assert-Throws { Resolve-WithinRoot -Path (Join-Path $work '..\escape.apk') -Root $work } `
+        '*outside the work directory*' 'A path that climbs out with .. was accepted.'
+    # The prefix trap: a sibling directory whose name starts with the work directory's name.
+    Assert-Throws { Resolve-WithinRoot -Path ($work + '-other\file.apk') -Root $work } `
+        '*outside the work directory*' 'A sibling sharing the name prefix was accepted as inside.'
+
+    # Cleanup, recursive by default, and refusing anything outside the work directory.
+    $tree = Join-Path $work 'run/deep'
+    New-Item -ItemType Directory -Path $tree -Force | Out-Null
+    Set-Content -LiteralPath (Join-Path $tree 'leaf.txt') -Value 'x' -Encoding ASCII
+    Remove-GeneratedPath -Path (Join-Path $work 'run') -Root $work
+    Assert-True (-not (Test-Path -LiteralPath (Join-Path $work 'run'))) `
+        'A generated directory tree was left behind by the default cleanup.'
+
+    $single = Join-Path $work 'one.txt'
+    Set-Content -LiteralPath $single -Value 'x' -Encoding ASCII
+    Remove-GeneratedPath -Path $single -Root $work -NoRecurse
+    Assert-True (-not (Test-Path -LiteralPath $single)) 'A single generated file was not removed.'
+
+    $outside = Join-Path $commonRoot 'keep.txt'
+    Set-Content -LiteralPath $outside -Value 'x' -Encoding ASCII
+    Remove-GeneratedPath -Path $outside -Root $work -WarningAction SilentlyContinue
+    Assert-True (Test-Path -LiteralPath $outside) 'Cleanup deleted a path outside the work directory.'
+    # A path that is simply not there is nothing to do, not a failure.
+    Remove-GeneratedPath -Path (Join-Path $work 'never-existed') -Root $work
+
+    # The version read. -LiteralPath is the difference that had already drifted, so the fixture
+    # directory carries the bracket that makes a wildcard read find nothing.
+    $bracketRoot = Join-Path $commonRoot 'repo [1]'
+    New-Item -ItemType Directory -Path $bracketRoot -Force | Out-Null
+    Set-Content -LiteralPath (Join-Path $bracketRoot 'gradle.properties') -Encoding ASCII -Value @(
+        'org.gradle.caching = true', 'version = 9.9.9', 'android.useAndroidX = true')
+    Assert-True ((Get-BundleVersion -Root $bracketRoot) -eq '9.9.9') `
+        'The version read failed on a path containing a bracket.'
+    Assert-Throws { Get-BundleVersion -Root (Join-Path $commonRoot 'no-such-repo') } `
+        '*no gradle.properties*' 'A missing gradle.properties was not reported.'
+    Set-Content -LiteralPath (Join-Path $bracketRoot 'gradle.properties') -Value 'name = x' -Encoding ASCII
+    Assert-Throws { Get-BundleVersion -Root $bracketRoot } '*names no version*' `
+        'A gradle.properties with no version was accepted.'
+    Set-Content -LiteralPath (Join-Path $bracketRoot 'gradle.properties') -Value 'version =' -Encoding ASCII
+    Assert-Throws { Get-BundleVersion -Root $bracketRoot } '*empty version*' `
+        'A gradle.properties with an empty version was accepted.'
+
+    # The desktop CLI lookup, which was two functions with different search orders. The jar
+    # ships under its version, so the newest by write time is taken: sorting names as text puts
+    # 1.9.0 above 1.15.0.
+    $env:HUSHFEED_DESKTOP_JAR = $null
+    $env:HUSHFEED_WORKDIR = $null
+    $tools = Join-Path $commonRoot 'repo/build/morphe-tools'
+    New-Item -ItemType Directory -Path $tools -Force | Out-Null
+    $older = Join-Path $tools 'morphe-desktop-1.9.0-all.jar'
+    $newer = Join-Path $tools 'morphe-desktop-1.15.0-all.jar'
+    Set-Content -LiteralPath $older -Value 'old' -Encoding ASCII
+    Set-Content -LiteralPath $newer -Value 'new' -Encoding ASCII
+    (Get-Item -LiteralPath $older).LastWriteTime = (Get-Date).AddDays(-2)
+    (Get-Item -LiteralPath $newer).LastWriteTime = (Get-Date)
+    $repoRoot = Join-Path $commonRoot 'repo'
+    Assert-True ((Resolve-DesktopCli -Root $repoRoot) -eq $newer) `
+        'The desktop CLI lookup did not take the newest jar by write time.'
+
+    Assert-True ($null -eq (Resolve-DesktopCli -Root (Join-Path $commonRoot 'empty'))) `
+        'The lookup invented a jar where there is none.'
+    Assert-Throws { Resolve-DesktopCli -Root (Join-Path $commonRoot 'empty') -Required } `
+        '*No Morphe desktop CLI*' 'A required lookup with nothing to find did not say so.'
+    Assert-Throws { Resolve-DesktopCli -Explicit (Join-Path $commonRoot 'absent.jar') -Root $repoRoot } `
+        '*at the path given*' 'A named jar that is not there was quietly replaced by a search.'
+    Assert-True ((Resolve-DesktopCli -Explicit $older -Root $repoRoot) -eq $older) `
+        'An explicitly named jar was not honoured.'
+
+    $env:HUSHFEED_DESKTOP_JAR = $newer
+    Assert-True ((Resolve-DesktopCli -Root $repoRoot) -eq $newer) `
+        'HUSHFEED_DESKTOP_JAR was not read.'
+} finally {
+    $env:HUSHFEED_DESKTOP_JAR = $savedJar
+    $env:HUSHFEED_WORKDIR = $savedWork
+    Remove-Item -LiteralPath $commonRoot -Recurse -Force -ErrorAction SilentlyContinue
+}
+
+Write-Host '[scripts] shared helper contracts passed'
 
 $global:LASTEXITCODE = 0
 Write-Host '[scripts] report, target, Java and guarded replacement contracts passed'

@@ -55,30 +55,7 @@ if (-not $Root) { $Root = Split-Path -Parent $PSScriptRoot }
 . (Join-Path $PSScriptRoot 'Resolve-Java.ps1')
 . (Join-Path $PSScriptRoot 'patch-target.ps1')
 . (Join-Path $PSScriptRoot 'release-receipt.ps1')
-
-function Resolve-DesktopCli {
-    <#
-    .SYNOPSIS
-        The Morphe desktop CLI jar, or $null when there is none to be found.
-    .DESCRIPTION
-        Taken in order from -DesktopJar, HUSHFEED_DESKTOP_JAR, HUSHFEED_WORKDIR and the repo's
-        own build/morphe-tools. The jar ships under its version, so the newest by write time is
-        taken rather than one filename that goes stale: sorting those as text puts 1.9.0 above
-        1.15.0.
-    #>
-    param([string]$Explicit, [string]$Root)
-
-    if ($Explicit) { return $Explicit }
-    if ($env:HUSHFEED_DESKTOP_JAR) { return $env:HUSHFEED_DESKTOP_JAR }
-    $searched = @($env:HUSHFEED_WORKDIR, (Join-Path $Root 'build/morphe-tools')) |
-        Where-Object { $_ -and (Test-Path -LiteralPath $_ -PathType Container) }
-    foreach ($directory in $searched) {
-        $found = @(Get-ChildItem -LiteralPath $directory -Filter 'morphe-desktop*.jar' -File `
-            -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending)
-        if ($found.Count -gt 0) { return $found[0].FullName }
-    }
-    return $null
-}
+. (Join-Path $PSScriptRoot 'common.ps1')
 
 function Read-JsonFile {
     param([string]$Path)

@@ -46,6 +46,7 @@ if (-not $Root) { $Root = Split-Path -Parent $PSScriptRoot }
 . (Join-Path $PSScriptRoot 'patch-report.ps1')
 . (Join-Path $PSScriptRoot 'patch-target.ps1')
 . (Join-Path $PSScriptRoot 'release-receipt.ps1')
+. (Join-Path $PSScriptRoot 'common.ps1')
 
 $Java = Resolve-Java -Explicit $Java
 $Aapt2 = Resolve-Aapt2 -Explicit $Aapt2 -Root $Root
@@ -56,8 +57,7 @@ if (-not $DesktopJar -or -not (Test-Path -LiteralPath $DesktopJar -PathType Leaf
         'records real patch verdicts, so it has to actually patch each fixture.')
 }
 
-$releaseVersion = ((Get-Content -LiteralPath (Join-Path $Root 'gradle.properties')) -match '^version\s*=' |
-    Select-Object -First 1) -replace '^version\s*=\s*', ''
+$releaseVersion = Get-BundleVersion -Root $Root
 if (-not $Bundle) { $Bundle = Join-Path $Root "patches/build/libs/patches-$releaseVersion.mpp" }
 if (-not (Test-Path -LiteralPath $Bundle -PathType Leaf)) {
     throw "No bundle for version ${releaseVersion}: $Bundle. Run :patches:generatePatchesList then :patches:buildAndroid."
@@ -100,16 +100,6 @@ if ($dirty.Count -gt 0) {
     $shown = @($dirty | Select-Object -First 5 | ForEach-Object { $_.Trim() }) -join '; '
     throw ("The working tree has uncommitted changes, so the commit this receipt would name is " +
         "not what was built: $shown")
-}
-
-function Resolve-WithinRoot {
-    param([string]$Path, [string]$Root)
-    $candidate = [System.IO.Path]::GetFullPath($Path)
-    $prefix = $Root.TrimEnd('\') + '\'
-    if (-not $candidate.StartsWith($prefix, [System.StringComparison]::OrdinalIgnoreCase)) {
-        throw "Refusing to use a generated path outside the work directory: $candidate"
-    }
-    return $candidate
 }
 
 function Get-ExtensionPayloads {

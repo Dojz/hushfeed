@@ -41,31 +41,10 @@ $Java = Resolve-Java -Explicit $Java
 $root = Split-Path -Parent $PSScriptRoot
 . (Join-Path $PSScriptRoot 'patch-report.ps1')
 . (Join-Path $PSScriptRoot 'patch-target.ps1')
-
-function Resolve-WithinRoot {
-    param([string]$Path, [string]$Root)
-    $candidate = [System.IO.Path]::GetFullPath($Path)
-    $prefix = $Root.TrimEnd('\') + '\'
-    if (-not $candidate.StartsWith($prefix, [System.StringComparison]::OrdinalIgnoreCase)) {
-        throw "Refusing to use a generated path outside the work directory: $candidate"
-    }
-    return $candidate
-}
-
-function Remove-GeneratedPath {
-    param([string]$Path, [string]$Root, [switch]$Recurse)
-    try {
-        $safe = Resolve-WithinRoot -Path $Path -Root $Root
-        if (-not (Test-Path -LiteralPath $safe)) { return }
-        if ($Recurse) { Remove-Item -LiteralPath $safe -Recurse -Force -ErrorAction Stop }
-        else { Remove-Item -LiteralPath $safe -Force -ErrorAction Stop }
-    } catch {
-        Write-Warning "Could not remove generated path: $($_.Exception.Message)"
-    }
-}
+. (Join-Path $PSScriptRoot 'common.ps1')
 
 if (-not $Bundle) {
-    $version = ((Get-Content (Join-Path $root 'gradle.properties')) -match '^version\s*=' | Select-Object -First 1) -replace '^version\s*=\s*', ''
+    $version = Get-BundleVersion -Root $root
     $Bundle = Join-Path $root "patches/build/libs/patches-$version.mpp"
     if (-not (Test-Path -LiteralPath $Bundle -PathType Leaf)) {
         throw "No bundle for version $version at $Bundle. Run :patches:generatePatchesList then :patches:buildAndroid."
@@ -163,7 +142,7 @@ try {
         $exitCode = 0
     }
 } finally {
-    Remove-GeneratedPath -Path $runDir -Root $workRoot -Recurse
+    Remove-GeneratedPath -Path $runDir -Root $workRoot
 }
 
 exit $exitCode
