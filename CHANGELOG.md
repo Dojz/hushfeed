@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Copying a sound link now cleans it the way copying a video link already did. TikTok's share URL for a sound carries the parameters that say who sent it, and the long press put it on the clipboard exactly as written, so the identifiers travelled with every shared sound. The link is stripped now and takes the custom share domain like the video link does. Both copied links are also marked sensitive, which they were not: they were the only clips the bundle wrote without that flag.
+
 * The Not interested button no longer goes dead for the rest of the session. It marks itself busy before handing the request to the shared worker pool, and when that pool is full the request is refused and never runs, so nothing ever cleared the busy mark. The reader got one "Sending feedback" that never resolved and then a button that did nothing at all. A refused request now says so and leaves the button ready for the next tap.
 
 * The App behavior page can be opened again on a bundle that carries only the launcher shortcuts patch. The row into that page asked a list of patches kept separately from the page's own, and the two had drifted by one: the shortcut switch was built, and nothing on the home screen led to it, so the settings search was the only way in. The page answers for itself now, and the test that sweeps one patch at a time covers it.

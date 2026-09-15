@@ -1,7 +1,5 @@
 package app.morphe.extension.tiktok.interaction;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Rect;
 import android.view.MotionEvent;
@@ -140,7 +138,13 @@ public final class GestureActions {
             return true;
         }
         if ("copy_sound_link".equals(action)) {
-            String said = copyToClipboard("TikTok sound", soundLink(CurrentVideoAuthor.getAweme()))
+            // The same treatment the video link above gets. TikTok's own sound share URL is a
+            // share URL like any other: it carries the parameters that say who sent it, and the
+            // custom share domain belongs on it too. Only the link this builds from the sound's
+            // id has never had a query on it.
+            String sound = soundLink(CurrentVideoAuthor.getAweme());
+            String clean = sound == null ? null : ShareUrlSanitizer.rewriteShareUrl(sound);
+            String said = copyToClipboard("TikTok sound", clean)
                     ? L10n.t("Sound link copied")
                     : L10n.t("This video has no sound of its own");
             Utils.showToastShort(said);
@@ -173,14 +177,18 @@ public final class GestureActions {
         return "https://www.tiktok.com/music/x-" + id;
     }
 
+    /**
+     * Puts a link on the clipboard through the shared helper, which marks the clip sensitive on
+     * the Android versions that understand the flag. These two were the only clips in the bundle
+     * building their own {@code ClipData}, so they were the only ones a clipboard viewer could
+     * read back without the warning.
+     */
     static boolean copyToClipboard(String label, String text) {
         if (text == null || text.isEmpty()) return false;
         Context context = Utils.getContext();
         if (context == null) return false;
-        ClipboardManager clipboard =
-                (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-        if (clipboard == null) return false;
-        clipboard.setPrimaryClip(ClipData.newPlainText(label, text));
+        if (context.getSystemService(Context.CLIPBOARD_SERVICE) == null) return false;
+        Utils.setClipboard(context, label, text);
         return true;
     }
 
