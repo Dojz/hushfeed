@@ -298,6 +298,7 @@ Forget seen videos after,Forget seen videos after
 Forget what has been counted today and end any hold. The budgets themselves are left alone.,Forget what has been counted today and end any hold. The budgets themselves are left alone.
 Friends,Friends
 Full comment sort options,Full comment sort options
+Full license,Full license
 Full report saved to %1$s,Full report saved to %1$s
 GIF,GIF
 Gate data unavailable,Gate data unavailable
@@ -466,6 +467,7 @@ Length and views per like,Length and views per like
 Less than a minute left,Less than a minute left
 "Let screenshots, screen recording and Circle to Search work on TikTok again. Restart TikTok to apply this.","Let screenshots, screen recording and Circle to Search work on TikTok again. Restart TikTok to apply this."
 Let the Offline videos menu use your own limit instead of TikTok's fixed one. Restart TikTok to apply this.,Let the Offline videos menu use your own limit instead of TikTok's fixed one. Restart TikTok to apply this.
+Licenses,Licenses
 Link copied,Link copied
 "Links, privacy and player tools","Links, privacy and player tools"
 Live,Live
@@ -543,6 +545,7 @@ Nothing is playing to seek,Nothing is playing to seek
 "Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected.","Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected."
 "Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected. First rejection: %4$s","Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected. First rejection: %4$s"
 Nothing to undo yet.,Nothing to undo yet.
+Notices from this project and the ones it is built on,Notices from this project and the ones it is built on
 Off,Off
 "Off by default. Switched on, a small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out. It changes at most once a minute, appears only on the feed, and is never read out on its own.","Off by default. Switched on, a small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out. It changes at most once a minute, appears only on the feed, and is never read out on its own."
 "Off by default. Switched on, the feed dims over the last three quarters of a minute of a time budget, most of it in the final half minute, so the hold is somewhere you arrive rather than somewhere you land. Needs a budget in minutes and a hold to arrive at: a budget counted in videos has no time left to follow, and with the hold switched off there is nothing to lead into. Nothing fades if you have turned animations off.","Off by default. Switched on, the feed dims over the last three quarters of a minute of a time budget, most of it in the final half minute, so the hold is somewhere you arrive rather than somewhere you land. Needs a budget in minutes and a hold to arrive at: a budget counted in videos has no time left to follow, and with the hold switched off there is nothing to lead into. Nothing fades if you have turned animations off."

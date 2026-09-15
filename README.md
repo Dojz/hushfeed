@@ -389,7 +389,9 @@ Hushfeed stands on a lot of other people's work, and the licence asks that this 
 - [@oscski](https://github.com/oscski) for `Disable the long press repost`.
 - The [Morphe](https://github.com/MorpheApp) team for the patcher, the manager and the patches template.
 
-Files that came from another project keep their original notices, and files written here say so in their header.
+Files that came from another project keep their original notices, and files written here say so in their header. A test holds every source file the bundle ships to having one, so a file cannot arrive without saying where it came from.
+
+The notices are also in the app, under Settings, About, Licenses, because Morphe asks that they reach the person using the software and not just the person reading the source.
 
 ## Notes
 
@@ -403,4 +405,4 @@ Files that came from another project keep their original notices, and files writ
 
 ## License
 
-GPLv3, inherited from the projects Hushfeed was built on. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
+GPLv3, inherited from the projects Hushfeed was built on. See [LICENSE](LICENSE) and [NOTICE](NOTICE). The same notices are reachable on a patched phone under Settings, About, Licenses.

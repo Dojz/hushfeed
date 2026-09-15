@@ -102,6 +102,14 @@ public class AndroidTargetChangesGuardTest {
                 "not a host: the scheme itself, put in front of an address that arrived without "
                         + "one before a browser is asked to open it, and asked about before a "
                         + "share link is reused");
+        REVIEWED_ADDRESSES.put("https://github.com/SysAdminDoc/hushfeed/blob/main/LICENSE",
+                "not fetched: the button beside the notice, opened in the reader's browser");
+        REVIEWED_ADDRESSES.put("https://github.com/MorpheApp/morphe-patches",
+                "not fetched: printed inside the notice the Licenses row shows");
+        REVIEWED_ADDRESSES.put("https://github.com/MorpheApp/morphe-patches-library",
+                "not fetched: printed inside the notice the Licenses row shows");
+        REVIEWED_ADDRESSES.put("https://www.gnu.org/licenses/gpl-3.0.html",
+                "not fetched: printed inside the notice the Licenses row shows");
     }
 
     /** Where a java.lang.reflect.Field lands in a local, a field or a parameter. */
@@ -156,7 +164,13 @@ public class AndroidTargetChangesGuardTest {
         for (Path source : payloadSources()) {
             String text = withoutComments(read(source));
             Matcher address = ADDRESS.matcher(text);
-            while (address.find()) found.add(address.group(1));
+            while (address.find()) {
+                // A notice is carried as one string literal per line, so the address at the end
+                // of a line arrives with the newline escape still on it. Reviewing
+                // "https://example/\n" and "https://example/" as two different addresses would
+                // be silly, and the second is the one a reader recognises.
+                found.add(address.group(1).replaceAll("(?:\\\\n)+$", ""));
+            }
         }
 
         // Both directions. Asserting only that nothing unreviewed turned up would pass just as

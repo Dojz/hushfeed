@@ -232,6 +232,13 @@ android {
             it.inputs.dir(layout.projectDirectory.dir("src/main/l10n"))
                 .withPropertyName("l10nTables")
                 .withPathSensitivity(PathSensitivity.RELATIVE)
+            // Same reason, one file instead of a directory. LicensesRowTest holds NOTICE against
+            // the copy generated into the payload, and NOTICE is outside this module, so without
+            // this Gradle calls the task up to date after NOTICE changes and the comparison never
+            // runs. Editing NOTICE and watching the test still pass is how that was found.
+            it.inputs.file(rootProject.layout.projectDirectory.file("NOTICE"))
+                .withPropertyName("licenseNotice")
+                .withPathSensitivity(PathSensitivity.RELATIVE)
             // refreshScreenshots asks for the capture itself, so it does not need the property
             // and cannot be pointed at assets/ by accident. Forcing the rerun matters because a
             // capture is not one of the task's declared outputs: an up to date test task writes
