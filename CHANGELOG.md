@@ -1,5 +1,13 @@
 ## Unreleased
 
+* The SIM country preset list now marks the preset that is already chosen and opens scrolled to it, and a Clear preset action takes the row back to no preset. It used to be sixty identical rows with no sign of which one was on, and no way back short of retyping three fields.
+
+* When a settings dialog refuses a value, the focus now moves to the field that was refused and the reason is read out. Before, the dialog stayed open with the reason under the field while focus sat on Save, and a screen reader said nothing at all.
+
+* Search settings now opens with the search box focused and the keyboard up, the way every other search on the phone does, with a Search key that takes the keyboard down again so the results can be read. Autocorrect is off in that box, so it can no longer rewrite a setting's name into another word.
+
+* The "Blocked" banner with Undo now sits above TikTok's tab bar on the feed and above the input row in the comments sheet, instead of a fixed distance up from the bottom of whichever screen it was on, which put it over the tabs on one phone and on top of the comment box in the sheet. It is drawn on the same scrim, hairline and corner radius as the chips beside it.
+
 * New patch, Keep the Favorites tab, on by default. Two people found the Favorites tab on their profile empty after patching (issue #4): the tab was there, the saved videos were not. TikTok's server can put an account into an experiment that skips building that tab's pages, and forcing either of the two gates behind it on the test phone produced the reporters' page exactly. The patch answers those two reads with the values that keep the tab, the diagnostic report says when it did, and the switch is in Settings, Interface if you'd rather see what the server sends.
 
 * AMOLED dark theme now rewrites the theme style values behind the comments sheet and the share sheet, and one more page background colour. Both sheets are painted from style values that never go through the colour table the patch rewrote, which is why they stayed TikTok's grey with the patch on. Only dark values are touched, so the light theme keeps its white sheets.

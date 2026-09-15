@@ -100,6 +100,12 @@ public final class SettingsUi {
      */
     public static final @ColorInt int OVERLAY_SCRIM = Color.argb(140, 0, 0, 0);
     public static final @ColorInt int OVERLAY_HAIRLINE = Color.argb(90, 255, 255, 255);
+    /**
+     * The scrim raised to carry a sentence. A chip holds one glyph and reads through the video
+     * at 55 percent; a banner holds a line of 14sp text and an action, which need the video
+     * mostly gone behind them.
+     */
+    public static final @ColorInt int OVERLAY_BANNER_SCRIM = Color.argb(220, 0, 0, 0);
     /** Text and glyphs on {@link #OVERLAY_SCRIM}: white on it is 12.6:1. */
     public static final @ColorInt int OVERLAY_TEXT = Color.WHITE;
 
@@ -302,6 +308,11 @@ public final class SettingsUi {
      * <p>Drawn rather than typed, like every other glyph on this screen, so it keeps its weight
      * at any font scale. Returned already checked: a caller that has nothing to mark hides it.
      */
+    /** The radio the standard single-choice dialogs draw, drawn chosen, for a row with no state of its own. */
+    public static Drawable radioMark(Context context) {
+        return new DialogCheckMarkDrawable(context, true, true);
+    }
+
     public static Drawable checkMark(Context context) {
         // Pinned, not set through a state: an ImageView hands a stateful drawable its own
         // state the moment it is set, and no ImageView state carries state_checked, so a mark
@@ -625,6 +636,16 @@ public final class SettingsUi {
         chip.setColor(OVERLAY_SCRIM);
         chip.setStroke(Math.max(1, dp(context, 1)), OVERLAY_HAIRLINE);
         return chip;
+    }
+
+    /**
+     * The backdrop of a banner drawn over a video: the chip's radius and hairline on the
+     * raised scrim, so the Undo banner reads as one family with the controls beside it.
+     */
+    public static GradientDrawable overlayBanner(Context context) {
+        GradientDrawable banner = overlayChip(context, RADIUS_OVERLAY);
+        banner.setColor(OVERLAY_BANNER_SCRIM);
+        return banner;
     }
 
     /**
@@ -1023,6 +1044,22 @@ public final class SettingsUi {
             if (!check.accept()) return;
             dialog.dismiss();
         });
+    }
+
+    /**
+     * Puts a refused value's reason where the reader will get it: on the field, with the focus
+     * moved there, and said aloud.
+     *
+     * <p>Save was the focused view when the check ran, and Android reads a field's error only
+     * while the field itself holds focus, so a TalkBack user heard nothing and was left with a
+     * dialog that would not close. Every dialog's report goes through here so the three cannot
+     * drift apart again.
+     */
+    public static void reportFieldError(EditText field, String problem) {
+        if (field == null) return;
+        field.setError(problem);
+        field.requestFocus();
+        field.announceForAccessibility(problem);
     }
 
     /**

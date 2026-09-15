@@ -7,9 +7,7 @@
 package app.morphe.extension.tiktok.blockauthor;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -32,6 +30,7 @@ import app.morphe.extension.tiktok.settings.L10n;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
 import app.morphe.extension.tiktok.notinterested.NotInterested;
 import app.morphe.extension.tiktok.wellbeing.SessionBudget;
+import app.morphe.extension.tiktok.wellbeing.SessionLockOverlay;
 
 import java.lang.ref.WeakReference;
 
@@ -833,10 +832,7 @@ public final class BlockAuthorOverlay {
                 banner.setGravity(Gravity.CENTER_VERTICAL);
                 banner.setPadding(SettingsUi.dp(activity, 16), SettingsUi.dp(activity, 12), SettingsUi.dp(activity, 16), SettingsUi.dp(activity, 12));
 
-                GradientDrawable background = new GradientDrawable();
-                background.setCornerRadius(SettingsUi.dp(activity, 10));
-                background.setColor(Color.argb(235, 28, 28, 30));
-                banner.setBackground(background);
+                banner.setBackground(SettingsUi.overlayBanner(activity));
 
                 TextView label = new TextView(activity);
                 label.setText(message);
@@ -849,11 +845,7 @@ public final class BlockAuthorOverlay {
                 // was a way back at all.
                 banner.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
 
-                // Every window decor is a FrameLayout, so gravity params work in any root.
-                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(-1, -2,
-                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL);
-                params.setMargins(SettingsUi.dp(activity, 16), 0, SettingsUi.dp(activity, 16), SettingsUi.dp(activity, 96));
-                banner.setLayoutParams(params);
+                banner.setLayoutParams(bannerParams(activity, root));
 
                 root.addView(banner);
                 undoReference = new WeakReference<>(banner);
@@ -871,6 +863,83 @@ public final class BlockAuthorOverlay {
                 Utils.showToastShort(message);
             }
         });
+    }
+
+    /** Where the banner sat before it measured anything: a fixed 96dp up from the bottom. */
+    private static final int BANNER_FALLBACK_BOTTOM_DP = 96;
+    private static final int BANNER_GAP_DP = 16;
+
+    /**
+     * Where the banner goes, decided by what is under it.
+     *
+     * <p>Over the feed it sits a gap above TikTok's tab bar, measured the way the hold panel
+     * measures it, so it never covers the tabs or the caption; a build the bar cannot be found
+     * on gets the old fixed offset. In a sheet, which is any root that is not the activity's
+     * own window, it sits a gap above the lowest text field, which is the comments sheet's
+     * input row, and at the top of the sheet when there is no field to clear. Every window
+     * decor is a FrameLayout, so gravity params work in any root.
+     */
+    static FrameLayout.LayoutParams bannerParams(Activity activity, ViewGroup root) {
+        int side = SettingsUi.dp(activity, BANNER_GAP_DP);
+        int gap = side;
+        View decor = activity.getWindow() == null ? null : activity.getWindow().getDecorView();
+        boolean feed = decor != null && root.getRootView() == decor;
+        if (feed) {
+            int navigation = SessionLockOverlay.navigationHeight(activity, root);
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(-1, -2,
+                    Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL);
+            params.setMargins(side, 0, side, navigation > 0
+                    ? navigation + gap : SettingsUi.dp(activity, BANNER_FALLBACK_BOTTOM_DP));
+            return params;
+        }
+        View input = lowestShownEditText(root);
+        if (input != null && root.getHeight() > 0) {
+            int above = root.getHeight() - root.getPaddingBottom() - topWithin(input, root);
+            if (above > 0 && above < root.getHeight()) {
+                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(-1, -2,
+                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL);
+                params.setMargins(side, 0, side, above + gap);
+                return params;
+            }
+        }
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(-1, -2,
+                Gravity.TOP | Gravity.CENTER_HORIZONTAL);
+        params.setMargins(side, gap, side, 0);
+        return params;
+    }
+
+    /** The lowest visible text field inside the group, or null when it has none. */
+    private static View lowestShownEditText(ViewGroup group) {
+        View lowest = null;
+        int lowestTop = Integer.MIN_VALUE;
+        for (int index = 0; index < group.getChildCount(); index++) {
+            View child = group.getChildAt(index);
+            if (child.getVisibility() != View.VISIBLE) continue;
+            View candidate = child instanceof android.widget.EditText ? child
+                    : child instanceof ViewGroup ? lowestShownEditText((ViewGroup) child) : null;
+            if (candidate == null) continue;
+            int top = topWithin(candidate, group);
+            if (top > lowestTop) {
+                lowestTop = top;
+                lowest = candidate;
+            }
+        }
+        return lowest;
+    }
+
+    /**
+     * A descendant's top edge in the root's own coordinates, walked up through its parents.
+     * Screen coordinates would do the same on a phone and answer zero for a root that is not in
+     * a window yet, which is every root a test hands over.
+     */
+    private static int topWithin(View view, ViewGroup root) {
+        int top = 0;
+        for (View at = view; at != null && at != root; at = at.getParent() instanceof View
+                ? (View) at.getParent() : null) {
+            top += at.getTop();
+            if (at.getParent() instanceof View) top -= ((View) at.getParent()).getScrollY();
+        }
+        return top;
     }
 
     private static void addUndo(Activity activity, LinearLayout banner, Runnable undoAction) {

@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.tiktok.SettingsContextRule;
 import app.morphe.extension.tiktok.settings.Settings;
+import app.morphe.extension.tiktok.settings.preference.SettingsUi;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.Method;
@@ -659,6 +660,87 @@ public class OverlayControlsTest {
             assertTrue(factoryName + " cannot be reached by a keyboard or d-pad",
                     control.isFocusable());
         }
+    }
+
+    /**
+     * The banner is one of the overlay family, and it sits where nothing of TikTok's is.
+     *
+     * <p>It was a 10dp charcoal box with no hairline beside 12dp scrim chips with one, and it
+     * was pinned 96dp up from the bottom of whatever root it was given: over the tab bar and
+     * caption on one phone, and in the comments sheet right on top of the input row.
+     */
+    @Test public void theBannerWearsTheOverlayFamilyAndClearsTheTabBar() {
+        Activity activity = Robolectric.buildActivity(Activity.class).setup().visible().get();
+        Utils.setContext(activity);
+        Utils.setActivity(activity);
+        ViewGroup root = activity.findViewById(android.R.id.content);
+        // A tab bar the height of a real one across the bottom, the way the hold panel's own
+        // test builds it, and the Home tab put straight into the lookup's cache.
+        FrameLayout bar = new FrameLayout(activity);
+        View homeTab = new View(activity);
+        bar.addView(homeTab);
+        root.addView(bar);
+        layoutAt(root, 480, 960);
+        bar.layout(0, 860, 480, 960);
+        homeTab.layout(0, 0, 96, 100);
+        org.robolectric.util.ReflectionHelpers.setStaticField(FeedVisibility.class,
+                "homeTabReference", new java.lang.ref.WeakReference<>(homeTab));
+
+        // Measured here rather than after a looper idle: the idle runs the window's own layout
+        // pass, which puts the hand-laid bar wherever the window wants it.
+        FrameLayout.LayoutParams params = BlockAuthorOverlay.bannerParams(activity, root);
+        assertEquals("the banner does not clear the tab bar",
+                100 + SettingsUi.dp(activity, 16), params.bottomMargin);
+        assertEquals(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, params.gravity);
+
+        FrameLayout sheet = new FrameLayout(activity);
+        BlockAuthorOverlay.showUndoBanner(sheet, "Blocked someone", () -> { });
+        org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idle();
+        View banner = sheet.getChildAt(sheet.getChildCount() - 1);
+        android.graphics.drawable.Drawable background = banner.getBackground();
+        assertTrue("the banner is not drawn on the overlay family's chip: "
+                + background.getClass().getSimpleName(),
+                background instanceof android.graphics.drawable.GradientDrawable);
+        android.graphics.drawable.GradientDrawable chip =
+                (android.graphics.drawable.GradientDrawable) background;
+        assertEquals(SettingsUi.dp(activity, SettingsUi.RADIUS_OVERLAY), chip.getCornerRadius(), 0.5f);
+        assertEquals(SettingsUi.OVERLAY_BANNER_SCRIM, chip.getColor().getDefaultColor());
+    }
+
+    @Test public void inASheetTheBannerSitsAboveTheInputRow() {
+        Activity activity = Robolectric.buildActivity(Activity.class).setup().visible().get();
+        Utils.setContext(activity);
+        // The comments sheet's window: its own root, an input row along the bottom.
+        FrameLayout sheet = new FrameLayout(activity);
+        android.widget.EditText input = new android.widget.EditText(activity);
+        sheet.addView(input);
+        layoutAt(sheet, 480, 960);
+        input.layout(0, 880, 480, 960);
+
+        BlockAuthorOverlay.showUndoBanner(sheet, "Blocked someone", () -> { });
+        org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idle();
+
+        View banner = sheet.getChildAt(sheet.getChildCount() - 1);
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) banner.getLayoutParams();
+        assertEquals(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, params.gravity);
+        assertEquals("the banner lands on the input row", 80 + SettingsUi.dp(activity, 16),
+                params.bottomMargin);
+
+        // A sheet with nothing to clear along the bottom gets the banner at its top instead
+        // of 96dp up from wherever its bottom happens to be.
+        FrameLayout bare = new FrameLayout(activity);
+        layoutAt(bare, 480, 960);
+        BlockAuthorOverlay.showUndoBanner(bare, "Blocked someone", () -> { });
+        org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idle();
+        params = (FrameLayout.LayoutParams) bare.getChildAt(bare.getChildCount() - 1).getLayoutParams();
+        assertEquals(Gravity.TOP | Gravity.CENTER_HORIZONTAL, params.gravity);
+        assertEquals(SettingsUi.dp(activity, 16), params.topMargin);
+    }
+
+    private static void layoutAt(View view, int width, int height) {
+        view.measure(View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY));
+        view.layout(0, 0, width, height);
     }
 
     /**
