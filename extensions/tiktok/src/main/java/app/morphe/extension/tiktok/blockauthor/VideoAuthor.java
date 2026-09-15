@@ -55,7 +55,9 @@ public final class VideoAuthor {
         if (secUid != null && !secUid.isEmpty()) {
             return isolate(secUid);
         }
-        return isolate("this account");
+        // Nobody to name, so nothing to hide. Left bare, otherwise a report of a block with no
+        // identifiers at all reads "Blocked [name omitted]" and says less than the truth.
+        return "this account";
     }
 
     /**
@@ -72,9 +74,27 @@ public final class VideoAuthor {
         return "creator " + (pseudonym.length() > 12 ? pseudonym.substring(0, 12) : pseudonym);
     }
 
-    /** The isolate pair the report's redactor looks for. Keep both ends. */
+    /**
+     * The isolate pair the report's redactor looks for, around a name with nothing in it
+     * that could break the pair.
+     *
+     * <p>A display name is whatever the account chose, so it can hold a line break, or a
+     * copy of these very marks. Either one splits the run the redactor matches and leaves
+     * the rest of the name in the report: a name with a break in it is hidden as far as the
+     * break and no further, and a name carrying its own closing mark ends the pair early and
+     * leaves what follows in the clear. Both are taken out here rather than guessed at by
+     * the pattern, so what the pattern relies on, one run with no marks and no breaks inside
+     * it, is true before it is relied on. A name is one line on screen anyway.
+     */
     static String isolate(String text) {
-        return "⁨" + text + "⁩";
+        StringBuilder flat = new StringBuilder(text.length() + 2);
+        flat.append('\u2068');
+        for (int at = 0; at < text.length(); at++) {
+            char character = text.charAt(at);
+            if (character == '\u2068' || character == '\u2069') continue;
+            flat.append(character == '\n' || character == '\r' ? ' ' : character);
+        }
+        return flat.append('\u2069').toString();
     }
 
     @Override

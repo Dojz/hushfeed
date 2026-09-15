@@ -1183,11 +1183,6 @@ public final class FollowDiagnostics {
     }
 
     /**
-     * A stable per-install pseudonym. Prefixing FNV with a secret still lets one known account
-     * reveal the intermediate state and identify other accounts. HMAC keeps that secret as a
-     * key instead of mixing it into a reversible hash prefix. The key never enters a report.
-     */
-    /**
      * The same pseudonym for other reports about an account, so a creator blocked from the feed
      * and a creator followed read as one account across the two families of lines.
      */
@@ -1195,6 +1190,11 @@ public final class FollowDiagnostics {
         return hash(accountId);
     }
 
+    /**
+     * A stable per-install pseudonym. Prefixing FNV with a secret still lets one known account
+     * reveal the intermediate state and identify other accounts. HMAC keeps that secret as a
+     * key instead of mixing it into a reversible hash prefix. The key never enters a report.
+     */
     private static String hash(String value) {
         if (value == null || value.isEmpty()) return "empty";
 

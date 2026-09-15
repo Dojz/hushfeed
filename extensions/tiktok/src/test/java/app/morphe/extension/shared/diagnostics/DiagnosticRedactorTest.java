@@ -10,6 +10,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import app.morphe.extension.tiktok.blockauthor.VideoAuthor;
+
 import org.junit.Test;
 
 /**
@@ -50,6 +52,44 @@ public class DiagnosticRedactorTest {
         String text = DiagnosticRedactor.redact("Hidden " + FSI + "Dana Q locally\nnext line");
 
         assertEquals("Hidden [name omitted]\nnext line", text);
+    }
+
+    /**
+     * A display name is whatever the account chose, so it can carry a line break or a copy of
+     * the marks themselves. Either one used to split the run and leave the rest of the name in
+     * the report. The label takes both out, so what arrives here is one run.
+     */
+    @Test public void aNameCarryingABreakOrTheMarksThemselvesIsStillOneRun() {
+        String broken = new VideoAuthor(null, null, "Dana\nSecretHandle", null).label();
+        String nested = new VideoAuthor(null, null, "A" + PDI + "B" + FSI + "C", null).label();
+
+        assertEquals("Showing toast: Blocked [name omitted]",
+                DiagnosticRedactor.redact("Showing toast: Blocked " + broken));
+        assertEquals("Showing toast: Blocked [name omitted]",
+                DiagnosticRedactor.redact("Showing toast: Blocked " + nested));
+        assertFalse("half the name survived the break: " + broken,
+                DiagnosticRedactor.redact(broken).contains("SecretHandle"));
+        assertFalse("the middle of the name survived its own marks: " + nested,
+                DiagnosticRedactor.redact(nested).contains("B"));
+    }
+
+    /**
+     * The control for the pair above. Without the flattening the same two names leak, which is
+     * what makes the flattening the thing being tested rather than the pattern.
+     */
+    @Test public void theSameTwoNamesLeakWhenTheyAreNotFlattenedFirst() {
+        String rawBreak = FSI + "Dana\nSecretHandle" + PDI;
+        String rawNested = FSI + "A" + PDI + "B" + FSI + "C" + PDI;
+
+        assertTrue(DiagnosticRedactor.redact(rawBreak).contains("SecretHandle"));
+        assertTrue(DiagnosticRedactor.redact(rawNested).contains("B"));
+    }
+
+    @Test public void anAccountWithNothingToNameIsNotHiddenAtAll() {
+        // "this account" names nobody, so hiding it says less than the truth.
+        assertEquals("Blocked this account",
+                DiagnosticRedactor.redact("Blocked "
+                        + new VideoAuthor(null, null, null, null).label()));
     }
 
     @Test public void aHandleOnItsOwnGoesWhileAnEmailAndAnObjectHashStay() {

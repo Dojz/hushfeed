@@ -13,14 +13,12 @@ import static org.junit.Assert.assertTrue;
 
 import android.os.Looper;
 
-import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.diagnostics.HookStatus;
 import app.morphe.extension.shared.settings.BaseSettings;
 import app.morphe.extension.shared.settings.preference.LogBufferManager;
 import app.morphe.extension.tiktok.SettingsContextRule;
 import app.morphe.extension.tiktok.follow.FollowDiagnostics;
-import app.morphe.extension.tiktok.settings.L10n;
 import app.morphe.extension.tiktok.settings.Settings;
 
 import org.junit.After;
@@ -28,6 +26,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
@@ -97,28 +96,70 @@ public class CreatorIdentityReportTest {
                 FollowDiagnostics.pseudonym(UID).startsWith(reference.substring("creator ".length())));
     }
 
-    @Test public void theExportAfterBlockingHidingAndFollowingNamesNobody() {
-        // What the block, hide and follow paths write while diagnostic logging is on.
-        Utils.showToastShort(L10n.f("Blocked %1$s", DANA.label()));
-        Utils.showToastShort(L10n.f("Hidden %1$s locally", DANA.label()));
-        Utils.showToastShort(L10n.f("Showing %1$s again", DANA.label()));
-        Shadows.shadowOf(Looper.getMainLooper()).idle();
-        Logger.printDebug(() -> "Current video: " + DANA.reference() + " aweme=" + DANA.awemeId);
-        FollowDiagnostics.logCommonFollowRequest(1, 0, 0, 0, UID, SEC_UID, null, null, null, null);
+    /**
+     * Driven through the methods the app calls, not through hand-written copies of what they
+     * say. A test that builds the toast text itself proves the redactor and nothing about the
+     * call sites: putting {@code label()} back into any of these log lines would leave it green.
+     */
+    @Test public void theExportAfterBlockingUnblockingAndFollowingNamesNobody() {
+        try (var owner = Robolectric.buildActivity(android.app.Activity.class).setup().visible()) {
+            android.app.Activity activity = owner.get();
+            Utils.setContext(activity);
+            Utils.setActivity(activity);
 
-        // The control: the reader was told who was blocked.
-        assertEquals("Showing " + DANA.label() + " again", ShadowToast.getTextOfLatestToast());
+            // The feed naming the video on screen, which is what writes the author log line.
+            CurrentVideoAuthor.update(new Params(new Clip(DANA.awemeId, UID, SEC_UID, NAME)));
+            CurrentVideoAuthor.onPlaying(DANA.awemeId);
 
-        String report = LogBufferManager.buildExportText();
-        assertTrue("nothing was reported at all", report.contains("Blocked [name omitted]"));
-        assertTrue("the hide was lost with the name: " + report,
-                report.contains("Hidden [name omitted] locally"));
-        assertFalse("the creator's name left the phone: " + report, report.contains(NAME));
-        assertFalse("the creator's uid left the phone: " + report, report.contains(UID));
-        assertFalse("the creator's secUid left the phone: " + report, report.contains(SEC_UID));
-        assertFalse("the video id left the phone: " + report, report.contains(DANA.awemeId));
-        assertTrue("the block line lost the pseudonym that ties it to the follow line: " + report,
-                report.contains(DANA.reference()));
+            BlockAuthorOverlay.reportBlockResult(DANA, BlockAuthorService.Result.REJECTED);
+            BlockAuthorOverlay.reportUnblockResult(DANA, BlockAuthorService.Result.CONFIRMED);
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            FollowDiagnostics.logCommonFollowRequest(1, 0, 0, 0, UID, SEC_UID, null, null, null, null);
+
+            // The control: the reader was told which account it was.
+            assertTrue("the reader was not told who the message is about: "
+                            + ShadowToast.getTextOfLatestToast(),
+                    String.valueOf(ShadowToast.getTextOfLatestToast()).contains(NAME));
+
+            String report = LogBufferManager.buildExportText();
+            assertTrue("the block and unblock messages are not in the report at all: " + report,
+                    report.contains("[name omitted]"));
+            assertFalse("the creator's name left the phone: " + report, report.contains(NAME));
+            assertFalse("the creator's uid left the phone: " + report, report.contains(UID));
+            assertFalse("the creator's secUid left the phone: " + report, report.contains(SEC_UID));
+            assertFalse("the video id left the phone: " + report, report.contains(DANA.awemeId));
+            assertTrue("the author line lost the pseudonym that ties it to the follow line: "
+                    + report, report.contains(DANA.reference()));
+        } finally {
+            Utils.setActivity(null);
+            CurrentVideoAuthor.resetForTests();
+        }
+    }
+
+    /** Stands in for VideoItemParams, read by the same getters the app's own model exposes. */
+    public static final class Params {
+        public final Clip aweme;
+        Params(Clip aweme) { this.aweme = aweme; }
+    }
+
+    public static final class Clip {
+        public final String aid;
+        public final Author author;
+        Clip(String aid, String uid, String secUid, String name) {
+            this.aid = aid;
+            this.author = new Author(uid, secUid, name);
+        }
+    }
+
+    public static final class Author {
+        public final String uid;
+        public final String secUid;
+        public final String uniqueId;
+        Author(String uid, String secUid, String uniqueId) {
+            this.uid = uid;
+            this.secUid = secUid;
+            this.uniqueId = uniqueId;
+        }
     }
 
     /** The mutation control: the isolate pair is what the export finds the name by. */
