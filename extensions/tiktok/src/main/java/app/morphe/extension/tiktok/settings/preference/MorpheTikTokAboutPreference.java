@@ -52,7 +52,13 @@ public final class MorpheTikTokAboutPreference extends Preference {
     static CharSequence summaryFor(Context context, String bundleVersion, String appVersion) {
         String source = L10n.t(context, "Source code and releases");
         if (bundleVersion == null || bundleVersion.isEmpty()) return source;
-        String app = appVersion == null || appVersion.isEmpty() ? "?" : appVersion;
-        return L10n.f(context, "Version %1$s for TikTok %2$s", bundleVersion, app) + ". " + source;
+        // "Unknown" is the literal English word Utils hands back when the package manager
+        // refuses, and splicing it into an otherwise translated sentence reads worse than
+        // leaving the app out. The bundle version is the one the reporter is asked for anyway.
+        boolean readable = appVersion != null && !appVersion.isEmpty()
+                && !"Unknown".equals(appVersion);
+        return (readable
+                ? L10n.f(context, "Version %1$s for TikTok %2$s", bundleVersion, appVersion)
+                : L10n.f(context, "Version %1$s", bundleVersion)) + ". " + source;
     }
 }

@@ -33,7 +33,10 @@ public class TogglePreference extends SwitchPreference {
     public TogglePreference(Context context, String title, String summary, BooleanSetting setting) {
         super(context);
         setTitle(title);
-        setSummary(withRestartNote(context, summary, setting));
+        // super, because withRestartNote has already translated. Going through the override
+        // would look the translated text up as though it were a key of its own, which finds
+        // nothing today and would find the wrong row the day a translation equals a key.
+        super.setSummary(withRestartNote(context, summary, setting));
         setKey(setting.key);
         setChecked(setting.get());
     }

@@ -712,7 +712,11 @@ public class SettingsL10nTest {
             if (english.contains(text)) continue;
 
             String body = text;
-            if (body.endsWith(" " + TogglePreference.RESTART_SENTENCE)) {
+            // Both joins. A summary that is a sentence takes the note after a space; one that
+            // is a state line takes it on the line below. Stripping only the first left every
+            // tab row exempted as composed by the newline the note itself had just added.
+            if (body.endsWith(" " + TogglePreference.RESTART_SENTENCE)
+                    || body.endsWith("\n" + TogglePreference.RESTART_SENTENCE)) {
                 body = body.substring(0,
                         body.length() - TogglePreference.RESTART_SENTENCE.length() - 1);
             }

@@ -48,7 +48,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildDe() {
-        Map<String, String> table = new HashMap<>(1978);
+        Map<String, String> table = new HashMap<>(1980);
         fillDe0(table);
         fillDe1(table);
         fillDe2(table);
@@ -1993,6 +1993,8 @@ public final class L10nTranslations {
                 "Zurückgegebener Wert");
         table.put("Verified creators",
                 "Verifizierte Creator");
+        table.put("Version %1$s",
+                "Version %1$s");
         table.put("Version %1$s for TikTok %2$s",
                 "Version %1$s für TikTok %2$s");
         table.put("Video",
@@ -2033,11 +2035,11 @@ public final class L10nTranslations {
                 "YTDLnis-Hintergrundmodus");
         table.put("YTDLnis download type",
                 "YTDLnis-Downloadtyp");
-        table.put("Yes",
-                "Ja");
     }
 
     private static void fillDe16(Map<String, String> table) {
+        table.put("Yes",
+                "Ja");
         table.put("Your operator's name, like T-Mobile.",
                 "Der Name deines Anbieters, etwa T-Mobile.");
         table.put("Your operator's numeric code, like 310260.",
@@ -2099,7 +2101,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildEs() {
-        Map<String, String> table = new HashMap<>(1978);
+        Map<String, String> table = new HashMap<>(1980);
         fillEs0(table);
         fillEs1(table);
         fillEs2(table);
@@ -4044,6 +4046,8 @@ public final class L10nTranslations {
                 "Valor que se devuelve");
         table.put("Verified creators",
                 "Creadores verificados");
+        table.put("Version %1$s",
+                "Versión %1$s");
         table.put("Version %1$s for TikTok %2$s",
                 "Versión %1$s para TikTok %2$s");
         table.put("Video",
@@ -4084,11 +4088,11 @@ public final class L10nTranslations {
                 "Modo en segundo plano de YTDLnis");
         table.put("YTDLnis download type",
                 "Tipo de descarga de YTDLnis");
-        table.put("Yes",
-                "Sí");
     }
 
     private static void fillEs16(Map<String, String> table) {
+        table.put("Yes",
+                "Sí");
         table.put("Your operator's name, like T-Mobile.",
                 "El nombre de tu operador, como T-Mobile.");
         table.put("Your operator's numeric code, like 310260.",
@@ -4150,7 +4154,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIn() {
-        Map<String, String> table = new HashMap<>(1978);
+        Map<String, String> table = new HashMap<>(1980);
         fillIn0(table);
         fillIn1(table);
         fillIn2(table);
@@ -6095,6 +6099,8 @@ public final class L10nTranslations {
                 "Nilai yang dikembalikan");
         table.put("Verified creators",
                 "Kreator terverifikasi");
+        table.put("Version %1$s",
+                "Versi %1$s");
         table.put("Version %1$s for TikTok %2$s",
                 "Versi %1$s untuk TikTok %2$s");
         table.put("Video",
@@ -6135,11 +6141,11 @@ public final class L10nTranslations {
                 "Mode latar belakang YTDLnis");
         table.put("YTDLnis download type",
                 "Jenis unduhan YTDLnis");
-        table.put("Yes",
-                "Ya");
     }
 
     private static void fillIn16(Map<String, String> table) {
+        table.put("Yes",
+                "Ya");
         table.put("Your operator's name, like T-Mobile.",
                 "Nama operatormu, misalnya T-Mobile.");
         table.put("Your operator's numeric code, like 310260.",
@@ -6201,7 +6207,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildPt_rBR() {
-        Map<String, String> table = new HashMap<>(1978);
+        Map<String, String> table = new HashMap<>(1980);
         fillPt_rBR0(table);
         fillPt_rBR1(table);
         fillPt_rBR2(table);
@@ -8146,6 +8152,8 @@ public final class L10nTranslations {
                 "Valor devolvido");
         table.put("Verified creators",
                 "Criadores verificados");
+        table.put("Version %1$s",
+                "Versão %1$s");
         table.put("Version %1$s for TikTok %2$s",
                 "Versão %1$s para TikTok %2$s");
         table.put("Video",
@@ -8186,11 +8194,11 @@ public final class L10nTranslations {
                 "Modo em segundo plano do YTDLnis");
         table.put("YTDLnis download type",
                 "Tipo de download do YTDLnis");
-        table.put("Yes",
-                "Sim");
     }
 
     private static void fillPt_rBR16(Map<String, String> table) {
+        table.put("Yes",
+                "Sim");
         table.put("Your operator's name, like T-Mobile.",
                 "O nome da sua operadora, como T-Mobile.");
         table.put("Your operator's numeric code, like 310260.",

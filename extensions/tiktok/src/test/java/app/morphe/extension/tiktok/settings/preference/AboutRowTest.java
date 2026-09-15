@@ -57,11 +57,18 @@ public class AboutRowTest {
                 "Source code and releases", new MorpheTikTokAboutPreference(context).getSummary().toString());
     }
 
-    @Test public void anAppWhoseVersionCannotBeReadIsStillNamedAsUnknownRatherThanBlank() {
-        MorpheTikTokAboutPreference row = new MorpheTikTokAboutPreference(context, "0.31.0", "");
-
-        assertEquals("Version 0.31.0 for TikTok ?. Source code and releases",
-                row.getSummary().toString());
+    /**
+     * The package manager can refuse, and what it leaves behind is the literal English word
+     * "Unknown" for the rest of the process. Splicing that into a German sentence reads worse
+     * than leaving TikTok's version out, so the row falls back to the bundle version alone.
+     */
+    @Test public void anAppWhoseVersionCannotBeReadLeavesTikTokOutRatherThanSayingUnknown() {
+        assertEquals("Version 0.31.0. Source code and releases",
+                MorpheTikTokAboutPreference.summaryFor(context, "0.31.0", "Unknown").toString());
+        assertEquals("Version 0.31.0. Source code and releases",
+                MorpheTikTokAboutPreference.summaryFor(context, "0.31.0", "").toString());
+        assertEquals("Version 0.31.0. Source code and releases",
+                MorpheTikTokAboutPreference.summaryFor(context, "0.31.0", null).toString());
     }
 
     /**

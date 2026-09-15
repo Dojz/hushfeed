@@ -48,11 +48,30 @@ import java.util.Map;
 @SuppressWarnings("deprecation")
 public class RestartGatedRowsTest {
 
-    /** The pages, by the argument the fragment takes. Kept here so a new page fails loudly. */
+    /**
+     * The pages, by the argument the fragment takes.
+     *
+     * <p>Held against the fragment's own Section enum below rather than trusted. An unknown
+     * name is answered with null and a silent fallback, not an error, so a renamed page would
+     * quietly drop out of this walk and take its rows with it.
+     */
     private static final String[] SECTIONS = {
             "FEED_FILTER", "FEED_NAVIGATION", "INTERFACE", "COMMENTS", "DOWNLOADS", "PLAYBACK",
             "INBOX", "SHARE", "REGION", "BEHAVIOR", "DIAGNOSTICS",
     };
+
+    @Test public void theWalkCoversEveryPageTheSettingsScreenHas() throws Exception {
+        Class<?> section = Class.forName(
+                "app.morphe.extension.tiktok.settings.preference.TikTokPreferenceFragment$Section");
+        List<String> declared = new ArrayList<>();
+        for (Object value : section.getEnumConstants()) declared.add(((Enum<?>) value).name());
+        List<String> walked = new ArrayList<>(java.util.Arrays.asList(SECTIONS));
+
+        java.util.Collections.sort(declared);
+        java.util.Collections.sort(walked);
+        assertTrue("the pages this walks are not the pages the settings screen has. Walked "
+                + walked + ", declared " + declared, declared.equals(walked));
+    }
 
     private final Map<Field, Boolean> statuses = new LinkedHashMap<>();
     private Activity activity;

@@ -42,7 +42,8 @@ public class InputTextPreference extends EditTextPreference {
     public InputTextPreference(Context context, String title, String summary, StringSetting setting) {
         super(context);
         setTitle(title);
-        setSummary(TogglePreference.withRestartNote(context, summary, setting));
+        // Already translated by withRestartNote, so not looked up a second time.
+        super.setSummary(TogglePreference.withRestartNote(context, summary, setting));
         setKey(setting.key);
         setText(setting.get());
     }
