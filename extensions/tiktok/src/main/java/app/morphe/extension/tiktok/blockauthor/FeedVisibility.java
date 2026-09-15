@@ -141,6 +141,22 @@ public final class FeedVisibility {
     }
 
     /**
+     * @return true only when the recommendation feed is certainly what is on screen.
+     *
+     * <p>{@link #isOnFeed} answers "assume the feed" when the Home tab id is unknown, and counts
+     * a detail page opened from a profile grid or a search result. That is the right bargain for
+     * a button the reader has to press, where losing it is worse than seeing it somewhere odd.
+     * It is the wrong one for anything that just sits there: a label the reader cannot dismiss
+     * should be on the feed or absent, so this asks for the Home tab to exist, be shown and be
+     * selected, and for nothing to be covering it.
+     */
+    public static boolean onRecommendationFeed(Activity activity) {
+        View homeTab = homeTab(activity);
+        if (homeTab == null || !homeTab.isShown() || !homeTab.isSelected()) return false;
+        return !isCommentSheetVisible(activity);
+    }
+
+    /**
      * The Home tab itself, for anything that has to draw around the navigation rather than
      * over it. Null when this build does not have the id, which is the same case
      * {@link #isOnFeed} treats as "assume the feed".
