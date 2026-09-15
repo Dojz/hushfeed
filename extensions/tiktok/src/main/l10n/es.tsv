@@ -998,3 +998,4 @@ The override changes no fields. Edit the field values, or reset the override.	La
 This key isn't in the local catalog, so its type can't be checked. Reset the override.	Esta clave no está en el catálogo local, así que no se puede comprobar su tipo. Restablece la anulación.
 The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.	El catálogo dice que esta clave es %1$s y esta anulación es %2$s. Restablece la anulación y crea una nueva.
 The override couldn't be applied: %1$s. Edit the field values, or reset the override.	No se pudo aplicar la anulación: %1$s. Edita los valores de los campos o restablece la anulación.
+Clearing %1$d of %2$d	Borrando %1$d de %2$d

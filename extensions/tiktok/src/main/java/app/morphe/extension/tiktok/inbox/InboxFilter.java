@@ -79,6 +79,8 @@ public final class InboxFilter {
 
     /** Stops a runaway loop if TikTok keeps refilling the list while clearing. */
     private static final int MAX_CLEARED_PER_RUN = 60;
+    /** The busy look. The control has to stay pressable, so it is dimmed rather than disabled. */
+    private static final float BUSY_ALPHA = 0.6f;
 
     /** Id for the injected Clear all control, so it is only added once. */
     private static final int CLEAR_ALL_VIEW_ID = View.generateViewId();
@@ -99,6 +101,10 @@ public final class InboxFilter {
 
     /** Clicks and delayed steps run on the main thread and share one dismissal run. */
     private static boolean clearingSuggested;
+    /** A tap on the control while a run is going: honoured at the run's next step. */
+    private static boolean stopRequested;
+    /** How many the current run has dismissed, for a control rebuilt while it is going. */
+    private static int dismissedSoFar;
 
     /**
      * The injected Clear all control, so a run that takes about eighteen seconds can say so on
@@ -413,22 +419,35 @@ public final class InboxFilter {
     }
 
     private static void clearAllSuggested(Activity activity) {
-        if (clearingSuggested) return;
+        if (clearingSuggested) {
+            // The second tap is the reader asking for it to stop. The run is paced, so the
+            // step that is already scheduled honours it rather than this thread cutting in.
+            stopRequested = true;
+            return;
+        }
         clearingSuggested = true;
+        stopRequested = false;
         DISMISSED_LABELS.clear();
         setClearAllBusy(true);
         clearNextSuggested(activity, 0);
     }
 
     /**
-     * Sixty accounts paced at 300 ms is about eighteen seconds of nothing happening. The control
-     * says it is working and refuses the pointer while it does, and every terminal path puts it
-     * back so a stopped or failed run can be tried again.
+     * Sixty accounts paced at 300 ms is about eighteen seconds. The control stays pressable
+     * through it, because the tap is how the reader stops it, and says how far it has got
+     * instead; every terminal path puts it back so a stopped or failed run can be tried again.
+     * It is dimmed rather than disabled: a disabled view takes no touch, and a run nobody can
+     * stop is the eighteen seconds of nothing this used to be.
      */
     private static void setClearAllBusy(boolean busy) {
         TextView control = clearAllControl == null ? null : clearAllControl.get();
         if (control == null) return;
-        control.setEnabled(!busy);
+        control.setAlpha(busy ? BUSY_ALPHA : 1f);
+        if (busy && dismissedSoFar > 0) {
+            // A heading rebuilt mid-run gets the count the run is at, not the opening word.
+            showProgress(dismissedSoFar);
+            return;
+        }
         control.setText(L10n.t(control.getContext(), busy ? "Clearing" : "Clear all"));
         if (android.os.Build.VERSION.SDK_INT >= 30) {
             control.setStateDescription(busy ? L10n.t(control.getContext(), "Clearing") : null);
@@ -436,9 +455,24 @@ public final class InboxFilter {
         }
         // Below 30 there is no state to set, and the changed label is invisible to a reader
         // because the content description replaces it. Without this the whole eighteen second
-        // wait is announced as "Clear all suggested accounts, disabled" and nothing else.
+        // wait is announced as "Clear all suggested accounts" and nothing else.
         control.setContentDescription(L10n.t(control.getContext(),
                 busy ? "Clearing suggested accounts" : "Clear all suggested accounts"));
+    }
+
+    /** How far the run has got, on the label and where a screen reader hears it. */
+    private static void showProgress(int dismissed) {
+        dismissedSoFar = dismissed;
+        TextView control = clearAllControl == null ? null : clearAllControl.get();
+        if (control == null) return;
+        String progress = L10n.f(control.getContext(), "Clearing %1$d of %2$d",
+                dismissed, MAX_CLEARED_PER_RUN);
+        control.setText(progress);
+        if (android.os.Build.VERSION.SDK_INT >= 30) {
+            control.setStateDescription(progress);
+        } else {
+            control.setContentDescription(progress);
+        }
     }
 
     /**
@@ -451,6 +485,12 @@ public final class InboxFilter {
         // dismissed and reporting the count from before the click would be one short.
         int dismissed = cleared;
         try {
+            if (stopRequested) {
+                // Never at zero: the first click is made before the first step can be
+                // stopped, and a run with nothing to click reports on its own.
+                finishRun(failureMessage(cleared));
+                return;
+            }
             if (cleared >= MAX_CLEARED_PER_RUN || activity.isFinishing()) {
                 report(cleared);
                 return;
@@ -468,6 +508,7 @@ public final class InboxFilter {
             DISMISSED_LABELS.add(labelOf(button));
             button.performClick();
             dismissed = cleared + 1;
+            showProgress(dismissed);
 
             Utils.runOnMainThreadDelayed(
                     () -> clearNextSuggested(activity, cleared + 1), DISMISS_INTERVAL_MS);
@@ -486,6 +527,8 @@ public final class InboxFilter {
     /** Every way a run ends: the control comes back and the outcome is said once. */
     private static void finishRun(String outcome) {
         clearingSuggested = false;
+        stopRequested = false;
+        dismissedSoFar = 0;
         DISMISSED_LABELS.clear();
         setClearAllBusy(false);
         Utils.showToastShort(outcome);
