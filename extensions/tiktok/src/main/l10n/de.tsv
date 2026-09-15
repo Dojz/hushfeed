@@ -965,3 +965,4 @@ No gates match this filter.	Keine Schalter passen zu diesem Filter.
 Version %1$s for TikTok %2$s	Version %1$s für TikTok %2$s
 Show failures on screen	Fehler auf dem Bildschirm anzeigen
 While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.	Solange die Diagnoseprotokollierung läuft, nennt eine Meldung den Teil von Hushfeed, der fehlgeschlagen ist. Aus behält Fehler nur im Bericht.
+Could not send the feedback. Try again shortly.	Die Rückmeldung konnte nicht gesendet werden. Versuche es gleich noch einmal.
