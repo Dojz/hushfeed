@@ -420,6 +420,19 @@ public final class SettingsUi {
         return result;
     }
 
+    /**
+     * Writes text only when it is not already there.
+     *
+     * <p>{@link TextView#setText} does not compare, so setting the same words again still posts a
+     * content-changed event. On a surface that refreshes on a timer that is a screen reader being
+     * interrupted, once a timer tick, while nothing on screen has moved: the hold panel repeated
+     * its countdown, its release label and its hint once a second for the length of a hold.
+     */
+    public static void setTextIfChanged(TextView view, CharSequence text) {
+        if (view == null || TextUtils.equals(view.getText(), text)) return;
+        view.setText(text);
+    }
+
     /** Updates a result status only when it changed, avoiding duplicate announcements. */
     public static void setResultCount(TextView view, int count) {
         if (view == null) return;

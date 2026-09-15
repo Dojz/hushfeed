@@ -174,8 +174,10 @@ public final class SessionLockOverlay {
             // the answer is a failed lookup every time: asking on every tick would be a walk of
             // the whole view tree once a second for the length of the hold.
             if (goingUp) applyMessagesAction(activity);
-            TextView remaining = remainingReference.get();
-            if (remaining != null) remaining.setText(remainingLabel());
+            // Only when the number moved. The countdown is in whole minutes and this runs once a
+            // second, so fifty-nine writes in sixty say exactly what was already there, and each
+            // of them interrupted a screen reader.
+            SettingsUi.setTextIfChanged(remainingReference.get(), remainingLabel());
             applyLockedState();
         } catch (Throwable error) {
             Logger.printException(() -> "Could not update the session lock overlay", error);
@@ -210,14 +212,19 @@ public final class SessionLockOverlay {
             // Spent is the same as locked as far as this control goes: there is no way through
             // today. The hint below still says what does work, so the panel is not a dead end.
             release.setVisibility(locked || left == 0 ? View.GONE : View.VISIBLE);
-            release.setText(releaseLabel(left));
-            release.setContentDescription(release.getText());
+            String label = releaseLabel(left);
+            // Both only when they moved: a content description is announced the same way the
+            // text is, so writing it back unchanged is the same interruption.
+            if (!android.text.TextUtils.equals(release.getText(), label)) {
+                release.setText(label);
+                release.setContentDescription(label);
+            }
         }
         TextView hint = hintReference.get();
         if (hint == null) return;
         // One literal, because the translation gate reads the literal handed to L10n and a
         // string built from two of them is two entries it cannot find.
-        hint.setText(locked
+        SettingsUi.setTextIfChanged(hint, locked
                 ? L10n.f("Today's budget is locked. The feed opens again at %1$s. Messages, profiles and search still work.", resetTimeLabel())
                 : L10n.t("Messages, profiles and search still work."));
     }
@@ -281,8 +288,10 @@ public final class SessionLockOverlay {
         panel.setFocusable(true);
         // Touch was the only thing it swallowed. A screen reader was told nothing when the hold
         // went up, and could still swipe through to the like, comment and share controls behind
-        // it, which is the one thing the hold exists to stop.
-        panel.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
+        // it, which is the one thing the hold exists to stop. The arrival is announced by the
+        // pane title below, and the countdown carries the live region itself: marking the whole
+        // panel read the entire hold out again on every tick, because a live region announces
+        // for anything that changes anywhere under it.
 
         TextView title = new TextView(activity);
         String titleText = SessionBudgetNotice.spentMessage();
@@ -297,6 +306,10 @@ public final class SessionLockOverlay {
 
         TextView remaining = new TextView(activity);
         remaining.setText(remainingLabel());
+        // The one thing on the panel that changes while the hold runs, so it is the one thing
+        // worth announcing. Set here rather than on the panel, and written only when the minute
+        // changes (see sync), so the reader hears a new number and nothing else.
+        remaining.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
         // The panel is always this near-black scrim, so the countdown takes the colour meant
         // for what this project draws over the app rather than the settings accent, which is a
         // dark crimson in the light theme and 3:1 on black. SettingsUi.isDarkMode is a cached
@@ -407,6 +420,11 @@ public final class SessionLockOverlay {
         params.bottomMargin = navigationHeight(activity, root);
         panel.setLayoutParams(params);
         root.addView(panel);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+            // There is no pane title before P, so on those builds the arrival is said once by
+            // hand. Needs a parent, which is why it is here and not beside the pane title.
+            panel.announceForAccessibility(titleText);
+        }
         hideBehind(root, panel, true);
         overlayReference = new WeakReference<>(panel);
         panel.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
