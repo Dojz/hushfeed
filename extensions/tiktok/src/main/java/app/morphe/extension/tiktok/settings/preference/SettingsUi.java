@@ -23,6 +23,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.InsetDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.StateListDrawable;
@@ -83,6 +84,9 @@ public final class SettingsUi {
     public static final int RADIUS_CONTROL = 6;
     public static final int RADIUS_FIELD = 8;
     public static final int RADIUS_CARD = 10;
+
+    /** The focus ring's stroke, thick enough to read at arm's length on a phone. */
+    private static final int FOCUS_RING_DP = 2;
     public static final int RADIUS_OVERLAY = 12;
 
     /**
@@ -202,7 +206,53 @@ public final class SettingsUi {
 
     public static Drawable groupedRow(Context context, boolean first, boolean last) {
         return new RippleDrawable(ColorStateList.valueOf((accent() & 0x00ffffff) | 0x26000000),
-                new GroupRowDrawable(context, first, last), groupRowMask(context, first, last));
+                new LayerDrawable(new Drawable[]{new GroupRowDrawable(context, first, last),
+                        focusRing(context, first, last)}),
+                groupRowMask(context, first, last));
+    }
+
+    /**
+     * The ring a row wears while the focus is on it, in the shape of the card it belongs to.
+     *
+     * <p>A ripple is the only thing these rows had, and a RippleDrawable paints
+     * {@code state_focused} as its own tint at 60% opacity: the accent at 15% alpha came out at
+     * about 9% over the surface, near enough 1.3:1, which is nothing to look at with a keyboard,
+     * a d-pad or switch access. The ring is the accent at full strength instead.
+     *
+     * <p>Selected as well as focused, for the same reason {@code pressAndFocus} takes both: a
+     * list moves a d-pad by marking a row selected rather than focusing it.
+     *
+     * <p>Inset by the stroke's half width so the ring sits inside the card edge rather than
+     * straddling it, where the row below would cover half of it.
+     */
+    public static Drawable focusRing(Context context, boolean first, boolean last) {
+        float radius = dp(context, RADIUS_CARD);
+        float top = first ? radius : 0f;
+        float bottom = last ? radius : 0f;
+        return ring(context, new float[]{top, top, top, top, bottom, bottom, bottom, bottom});
+    }
+
+    /** The same ring on a control with one radius all round, such as the header's back button. */
+    public static Drawable focusRing(Context context, int radiusDp) {
+        float radius = dp(context, radiusDp);
+        return ring(context, new float[]{radius, radius, radius, radius,
+                radius, radius, radius, radius});
+    }
+
+    private static Drawable ring(Context context, float[] radii) {
+        int width = dp(context, FOCUS_RING_DP);
+        int inset = width / 2;
+        GradientDrawable ring = new GradientDrawable();
+        ring.setShape(GradientDrawable.RECTANGLE);
+        float[] inner = new float[radii.length];
+        for (int at = 0; at < radii.length; at++) inner[at] = Math.max(0f, radii[at] - inset);
+        ring.setCornerRadii(inner);
+        ring.setColor(Color.TRANSPARENT);
+        ring.setStroke(width, new ColorStateList(
+                new int[][]{new int[]{android.R.attr.state_focused},
+                        new int[]{android.R.attr.state_selected}, new int[0]},
+                new int[]{accent(), accent(), Color.TRANSPARENT}));
+        return new InsetDrawable(ring, inset);
     }
 
     /**

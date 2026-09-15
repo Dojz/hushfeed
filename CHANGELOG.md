@@ -10,6 +10,8 @@
 
 * Comment translation now tells the Hook status row what it found. The four places TikTok calls into it read fields of TikTok's own objects, and a release that renames one used to leave the switch on with nothing happening and nothing said. The row names the class and the field instead, and it travels in the exported diagnostic report.
 
+* Settings rows show where the focus is. Moving through the list with a keyboard, a d-pad or switch access left nothing on screen to say which row you were on, because the only thing a row painted was a ripple, and a ripple draws focus at a fraction of its own strength. A focused row now carries an accent ring inside the card's corners, and so does the back button in the header. A press still looks like a press.
+
 ## 0.32.0
 
 * Every control Hushfeed draws over the video answers a press and shows where the focus is. The four feed controls, the two actions on the daily hold, Undo, Clear all in the inbox and the sticker Save button used to paint the same thing pressed, focused or at rest, so a keyboard, a d-pad or switch access moved through them with nothing on screen saying so. Each one ripples under a finger now and carries a white ring while it holds focus.
