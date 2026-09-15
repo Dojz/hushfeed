@@ -57,8 +57,13 @@ public class TogglePreference extends SwitchPreference {
      *
      * <p>The two halves are looked up separately and then joined, because the joined sentence is
      * not a key in the table: translating it as one string would lose the translation of the
-     * summary as well. The check is against the English, which is the key, so it cannot be
-     * confused by a translation that words the sentence differently.
+     * summary as well.
+     *
+     * <p>Three of the four callers hand this the English, which is the key, so the check below
+     * cannot be confused by a translation that words the sentence differently. The tab rows are
+     * the exception: {@code TabSelectionPreference.refreshSummary} builds its summary out of tab
+     * labels it has already translated. No tab label carries the word today, so the answer is
+     * right there by luck rather than by construction.
      *
      * <p>Shared with the text, range and tab rows, which carry restart-gated settings as well:
      * nine of their rows said nothing about it while every switch did. A summary that is a list

@@ -868,6 +868,84 @@ public class SettingsL10nTest {
     }
 
     /**
+     * A summary that sends the reader to another switch names that switch, in every language.
+     *
+     * <p>Three of the four translations of the store-region row told the reader to turn on
+     * switches that are on no screen: "SIM-Details überschreiben" where the switch says
+     * "SIM-Angaben überschreiben", "Ganti detail SIM" where it says "Timpa detail SIM". Each
+     * table is right about its own titles and wrong about the titles quoted inside a summary,
+     * which no per-string check can see, because both halves are perfectly good translations.
+     */
+    @Test public void aSummaryThatNamesAnotherRowNamesItByTheTitleThatRowCarries() throws Exception {
+        List<String[]> rows = settingsRowArguments();
+        Set<String> titles = new LinkedHashSet<>();
+        for (String[] row : rows) {
+            // Long enough that finding it inside a sentence means it was quoted on purpose.
+            if (row[0] != null && row[0].length() >= 12) titles.add(row[0]);
+        }
+        assertTrue("the scan found too few row titles to mean anything: " + titles.size(),
+                titles.size() > 40);
+
+        List<String> wrong = new ArrayList<>();
+        int checked = 0;
+        for (String language : L10nTranslations.LANGUAGES) {
+            Map<String, String> table = L10nTranslations.of(language);
+            for (String[] row : rows) {
+                String summary = row[1];
+                if (summary == null) continue;
+                String translatedSummary = table.get(summary);
+                if (translatedSummary == null) continue;
+                for (String title : titles) {
+                    if (title.equals(row[0]) || !summary.contains(title)) continue;
+                    String translatedTitle = table.get(title);
+                    if (translatedTitle == null) continue;
+                    checked++;
+                    if (!translatedSummary.contains(translatedTitle)) {
+                        wrong.add(language + ": a summary sends the reader to \"" + translatedTitle
+                                + "\" but says \"" + translatedSummary + "\"");
+                    }
+                }
+            }
+        }
+
+        assertTrue("no summary quotes another row's title, so this checked nothing", checked > 0);
+        assertEquals("summaries that name a switch by words no switch carries:\n"
+                + String.join("\n", wrong), 0, wrong.size());
+    }
+
+    /** Every settings row the category sources build, as {@code [title, summary]}. */
+    private static List<String[]> settingsRowArguments() throws Exception {
+        java.io.File categories = new java.io.File(
+                "src/main/java/app/morphe/extension/tiktok/settings/preference/categories");
+        if (!categories.isDirectory()) categories = new java.io.File("extensions/tiktok/src/main/java"
+                + "/app/morphe/extension/tiktok/settings/preference/categories");
+        assertTrue("could not find the settings categories", categories.isDirectory());
+
+        java.util.regex.Pattern row = java.util.regex.Pattern.compile(
+                "new\\s+(?:[\\w.]+\\.)?(?:TogglePreference|NumberInputPreference"
+                        + "|ClockHourPreference|InputTextPreference|RangeValuePreference)\\s*\\(");
+        List<String[]> found = new ArrayList<>();
+        java.io.File[] sources = categories.listFiles((dir, name) -> name.endsWith(".java"));
+        assertTrue("no category sources to read", sources != null && sources.length > 5);
+        for (java.io.File file : sources) {
+            String text = new String(java.nio.file.Files.readAllBytes(file.toPath()),
+                    java.nio.charset.StandardCharsets.UTF_8);
+            byte[] kind = classify(text);
+            java.util.regex.Matcher match = row.matcher(text);
+            while (match.find()) {
+                if (kind[match.start()] != CODE) continue;
+                int close = closingBracket(text, kind, match.end() - 1);
+                if (close < 0) continue;
+                List<String> arguments = arguments(text, kind, match.end() - 1, close);
+                found.add(new String[]{
+                        arguments.size() > 0 ? arguments.get(0) : null,
+                        arguments.size() > 1 ? arguments.get(1) : null});
+            }
+        }
+        return found;
+    }
+
+    /**
      * One entry per argument of a call. Literals with nothing but a plus and whitespace between
      * them are one string in the source and one key in the table; a new argument starts a new
      * one. {@link #literalsIn} flattens both into a list, which cannot tell a summary written

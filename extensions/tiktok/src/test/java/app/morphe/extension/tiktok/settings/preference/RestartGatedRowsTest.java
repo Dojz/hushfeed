@@ -131,12 +131,14 @@ public class RestartGatedRowsTest {
      */
     @Test public void noRowAsksForARestartTwice() {
         List<String> doubled = new ArrayList<>();
+        int saying = 0;
         for (String section : SECTIONS) {
             TikTokPreferenceFragment page = attach(section);
             for (Preference row : rows(page.getPreferenceScreen(), new ArrayList<>())) {
                 CharSequence summary = row.getSummary();
                 if (summary == null) continue;
                 String text = summary.toString();
+                if (text.contains(TogglePreference.RESTART_SENTENCE)) saying++;
                 int first = text.indexOf(TogglePreference.RESTART_SENTENCE);
                 if (first >= 0 && text.indexOf(TogglePreference.RESTART_SENTENCE, first + 1) >= 0) {
                     doubled.add(section + " / " + row.getKey() + ": " + text);
@@ -150,6 +152,10 @@ public class RestartGatedRowsTest {
             }
         }
 
+        // A page walk that reaches nothing passes every "none of them is wrong" assertion, so it
+        // has to show it saw the rows first.
+        assertTrue("the walk saw too few rows carrying the sentence to mean anything: " + saying,
+                saying >= 40);
         assertTrue("rows that ask for a restart twice:\n" + String.join("\n", doubled),
                 doubled.isEmpty());
     }

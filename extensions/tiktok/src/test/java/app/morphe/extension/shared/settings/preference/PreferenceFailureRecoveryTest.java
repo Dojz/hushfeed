@@ -8,7 +8,6 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.preference.Preference;
