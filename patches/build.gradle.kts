@@ -283,7 +283,14 @@ tasks {
     register<JavaExec>("generatePatchesList") {
         description = "Build patch with patch list"
 
-        dependsOn(build)
+        // jar, not build. build runs check, which runs test, and ReadmePatchNamesTest asserts
+        // that the checked-in patches-list.json names exactly the patches the Kotlin sources
+        // declare. Adding or renaming a patch therefore failed the test before the task that
+        // regenerates the list could run, and the only ways through were -x test or editing the
+        // generated JSON by hand. The generator reads build/libs/patches-<version>.mpp, which
+        // jar produces; the test and verifyBundle are still the gate afterwards, which is the
+        // order that can actually pass.
+        dependsOn(jar)
 
         classpath = sourceSets["main"].runtimeClasspath
         mainClass.set("app.morphe.util.PatchListGeneratorKt")
