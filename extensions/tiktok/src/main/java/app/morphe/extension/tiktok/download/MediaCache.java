@@ -35,6 +35,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.RejectedExecutionException;
 
 /** Owns temporary media files and the pending publications created by this extension. */
@@ -43,6 +44,9 @@ public final class MediaCache {
     static final long STALE_AFTER_MS = 24L * 60 * 60 * 1000;
     private static final String PENDING_FILE_NAME = "pending-uris.tsv";
     private static final String PENDING_INTENT_PREFIX = "intent:";
+    /** What a row is called between the insert and the publish. */
+    static final String TEMPORARY_NAME_PREFIX = "hushfeed-pending-";
+    private static final AtomicInteger TEMPORARY_NAMES = new AtomicInteger();
     private static final Object LOCK = new Object();
     private static final AtomicBoolean RECONCILIATION_STARTED = new AtomicBoolean();
     private static final Set<String> ACTIVE_FILES = Collections.newSetFromMap(
@@ -106,12 +110,23 @@ public final class MediaCache {
     ) throws IOException {
         String displayName = values == null
                 ? null : values.getAsString(MediaStore.MediaColumns.DISPLAY_NAME);
+        if (displayName == null || displayName.isEmpty()) {
+            throw new IOException("MediaStore publication details are missing");
+        }
         String relativePath = values == null
                 ? null : values.getAsString(MediaStore.MediaColumns.RELATIVE_PATH);
-        String token = beginPending(context, collection, displayName, relativePath);
+        // The row goes in under a name nothing can collide with, and takes the reader's name at
+        // publish. MediaStore renames an insert that collides, video.mp4 becoming video (1).mp4,
+        // and recovery has only the name the insert asked for to go on, so a crash after a
+        // renamed insert left a row nothing would ever find. A rename at publish is harmless
+        // because the journal is holding the row's URI by then.
+        String temporaryName = temporaryName(displayName);
+        String token = beginPending(context, collection, temporaryName, relativePath);
         Uri uri = null;
         try {
-            uri = resolver.insert(collection, values);
+            ContentValues pending = new ContentValues(values);
+            pending.put(MediaStore.MediaColumns.DISPLAY_NAME, temporaryName);
+            uri = resolver.insert(collection, pending);
             if (uri == null) throw new IOException("MediaStore returned no URI");
             markPending(context, token, uri);
             return uri;
@@ -374,6 +389,20 @@ public final class MediaCache {
         while (start < end && path.charAt(start) == '/') start++;
         while (end > start && path.charAt(end - 1) == '/') end--;
         return path.substring(start, end);
+    }
+
+    /**
+     * A name for the insert that no existing file can already hold.
+     *
+     * <p>The extension is kept: MediaStore checks it against the MIME type and will append one
+     * of its own if it disagrees, which would be another rename of the kind this exists to
+     * avoid.
+     */
+    private static String temporaryName(String displayName) {
+        int dot = displayName.lastIndexOf('.');
+        String extension = dot > 0 && dot < displayName.length() - 1 ? displayName.substring(dot) : "";
+        return TEMPORARY_NAME_PREFIX + Long.toHexString(System.nanoTime())
+                + "-" + Integer.toHexString(TEMPORARY_NAMES.incrementAndGet()) + extension;
     }
 
     private static String encode(String value) {
