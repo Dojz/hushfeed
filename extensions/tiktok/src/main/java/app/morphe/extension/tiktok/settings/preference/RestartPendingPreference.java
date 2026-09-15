@@ -18,8 +18,6 @@ import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.settings.preference.AbstractPreferenceFragment;
 import app.morphe.extension.tiktok.settings.L10n;
 
-import java.util.function.Consumer;
-
 /**
  * The row pinned to the top of every settings page while a restart is owed.
  *
@@ -34,8 +32,17 @@ public final class RestartPendingPreference extends Preference {
     public static final String KEY = "hushfeed_restart_pending";
     static final String ROW_TAG = "hushfeed_restart_pending_row";
 
-    /** What the press does. Tests put a recorder here; the real thing ends the process. */
-    static Consumer<Context> restarter = Utils::restartApp;
+    /** What the press does with the context it is given. */
+    public interface Restarter {
+        void restart(Context context);
+    }
+
+    /**
+     * What the press does. Tests put a recorder here; the real thing ends the process. Its own
+     * interface rather than java.util.function: that package arrives at API 24 and this runs
+     * from 23.
+     */
+    static Restarter restarter = Utils::restartApp;
 
     public RestartPendingPreference(Context context) {
         super(context);
@@ -70,7 +77,7 @@ public final class RestartPendingPreference extends Preference {
         row.setFocusable(true);
         // A TextView with a click listener is read as text; the role has to be said.
         SettingsUi.markAsButton(row);
-        row.setOnClickListener(view -> restarter.accept(view.getContext()));
+        row.setOnClickListener(view -> restarter.restart(view.getContext()));
 
         FrameLayout holder = new FrameLayout(context);
         holder.setBackgroundColor(SettingsUi.background());
@@ -89,7 +96,7 @@ public final class RestartPendingPreference extends Preference {
     }
 
     /** Test seam: the press would otherwise end the test process. */
-    public static void setRestarterForTests(Consumer<Context> replacement) {
+    public static void setRestarterForTests(Restarter replacement) {
         restarter = replacement == null ? Utils::restartApp : replacement;
     }
 }
