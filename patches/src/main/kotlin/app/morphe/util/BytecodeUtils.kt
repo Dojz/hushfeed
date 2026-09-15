@@ -1309,6 +1309,26 @@ private fun MutableMethod.overrideReturnValue(
         else -> throw Exception("Return type is not supported: $this")
     }
 
+    // The override writes its value into v0, and a wide one into v0 and v1, so the frame has to
+    // hold those registers. Nothing above asks: a method with no room takes the instructions
+    // anyway and the result does not verify on the phone rather than failing here. Enable voice
+    // comments was checking this for itself beside its own hand-written smali; the check belongs
+    // with the code that decides which registers to write.
+    //
+    // A void return writes nothing and would need none, but the inline smali compiler below
+    // cannot assemble against a frame of no registers at all: it parses nothing and throws
+    // "Collection is empty" out of its own first(), naming neither the method nor the reason. So
+    // one is the floor for every return type.
+    val registersNeeded = when (returnType.first()) {
+        'J', 'D' -> 2
+        else -> 1
+    }
+    val registersAvailable = implementation?.registerCount ?: 0
+    check(registersAvailable >= registersNeeded) {
+        "$definingClass->$name has $registersAvailable registers and a $returnType override " +
+            "needs $registersNeeded to write into"
+    }
+
     if (returnLate) {
         findInstructionIndicesReversedOrThrow {
             opcode == RETURN || opcode == RETURN_WIDE || opcode == RETURN_OBJECT

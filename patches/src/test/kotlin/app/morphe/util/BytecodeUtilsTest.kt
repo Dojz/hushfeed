@@ -34,6 +34,19 @@ class BytecodeUtilsTest {
     private fun method(
         returnType: String,
         vararg instructions: Instruction = arrayOf(ImmutableInstruction10x(Opcode.RETURN_VOID)),
+    ): MutableMethod = methodWithRegisters(
+        returnType,
+        // Room for a few registers: a case that needs two of them should not have to build its
+        // own method.
+        4,
+        *instructions,
+    )
+
+    /** The same method, sized by the case, for the ones that are about the frame itself. */
+    private fun methodWithRegisters(
+        returnType: String,
+        registers: Int,
+        vararg instructions: Instruction = arrayOf(ImmutableInstruction10x(Opcode.RETURN_VOID)),
     ): MutableMethod = MutableMethod(
         ImmutableMethod(
             "Lcom/example/Host;",
@@ -44,9 +57,7 @@ class BytecodeUtilsTest {
             null,
             null,
             ImmutableMethodImplementation(
-                // Room for a few registers: a case that needs two of them should not have to
-                // build its own method.
-                4,
+                registers,
                 instructions.toList(),
                 null,
                 null,
@@ -135,6 +146,73 @@ class BytecodeUtilsTest {
                 "a null return was allowed on a method returning $primitive",
                 IllegalStateException::class.java,
             ) { method(primitive).returnEarly(null) }
+        }
+    }
+
+    @Test
+    fun `an override is refused when the frame has no register to write into`() {
+        // Four patches wrote const/4 v0 and return v0 by hand and only one of them asked whether
+        // the method had a v0 to write into. A frame with no room takes the instructions without
+        // complaint, and what fails is dex verification on the phone, a long way from the patch
+        // that caused it.
+        val noRoom = assertThrows(IllegalStateException::class.java) {
+            methodWithRegisters("Z", 0).returnEarly(false)
+        }
+        assertTrue(noRoom.message!!.contains("0 registers"))
+        assertTrue(noRoom.message!!.contains("Lcom/example/Host;->value"))
+
+        // One is enough, and one is what the gates these patches flip actually have.
+        val oneRegister = methodWithRegisters("Z", 1)
+        oneRegister.returnEarly(true)
+        assertEquals(Opcode.CONST_4, oneRegister.implementation!!.instructions.first().opcode)
+    }
+
+    @Test
+    fun `a wide override needs the pair of registers it writes`() {
+        // const-wide v0 writes v0 and v1, so a one register frame is short by one and the
+        // count has to follow the value rather than being a flat "at least one".
+        val tooNarrow = assertThrows(IllegalStateException::class.java) {
+            methodWithRegisters("J", 1).returnEarly(7L)
+        }
+        assertTrue(tooNarrow.message!!.contains("1 registers"))
+
+        val wideEnough = methodWithRegisters("J", 2)
+        wideEnough.returnEarly(7L)
+        assertEquals(Opcode.CONST_WIDE, wideEnough.implementation!!.instructions.first().opcode)
+    }
+
+    @Test
+    fun `a void override needs one register even though it writes none`() {
+        // Without this the two cases above would pass just as happily against a check that
+        // refused every method. return-void writes into nothing, so one register is the floor
+        // rather than the value's own requirement, and the floor is the inline smali compiler's:
+        // handed a frame of no registers it parses nothing and throws "Collection is empty" out
+        // of its own first(), naming neither the method nor the reason.
+        val one = methodWithRegisters("V", 1)
+        one.returnEarly()
+        assertEquals(
+            "one register frame held " + one.implementation!!.instructions.map { it.opcode },
+            Opcode.RETURN_VOID,
+            one.implementation!!.instructions.firstOrNull()?.opcode,
+        )
+
+        val none = assertThrows(IllegalStateException::class.java) {
+            methodWithRegisters("V", 0).returnEarly()
+        }
+        assertTrue(none.message!!.contains("Lcom/example/Host;->value"))
+    }
+
+    @Test
+    fun `a boolean override on a method that does not answer a boolean is refused`() {
+        // The check the four hand-written sites did not have. Both login gates answer Z on
+        // 46.2.3, 46.7.3, 46.8.3 and 46.9.3; a build that boxed either would have taken const/4
+        // v0 and return v0 and failed verification on the phone rather than at patch time.
+        for (notABoolean in listOf("Ljava/lang/Boolean;", "Ljava/lang/Object;", "I", "V")) {
+            val refused = assertThrows(
+                "returnEarly(false) was allowed on a method returning $notABoolean",
+                IllegalStateException::class.java,
+            ) { method(notABoolean).returnEarly(false) }
+            assertTrue(refused.message!!.contains("return type"))
         }
     }
 
