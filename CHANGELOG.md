@@ -1,5 +1,7 @@
 ## Unreleased
 
+* The actions that appear when you hold a gate in the Feature Gate Lab fit the screen now. Reset, Disable, Enable and Cancel sat in a row that couldn't wrap, so at larger text sizes the last of them were squeezed down to a box too small for the word and the labels were cut. In German they don't fit at ordinary size either. They wrap onto a second line instead. Cancel is also no longer painted like Enable, so the action that just puts the selection down doesn't look like the one that writes to every gate in it.
+
 * A boolean gate in the Feature Gate Lab has its own override switch now. Importing a profile brings its rules in with the overrides off, so a gate the file said should be true opened with the switch showing on, and the first tap turned it off and forced false. Two taps to get what the file asked for, and the wrong value was live in between. Turning an imported override on takes one tap, and the switch that says what to force is no longer the same one that says whether to force it.
 
 * The diagnostic report now says what Ghost mode did. It stops TikTok telling other people you looked at a story or a profile, or that you are typing, and until now an export said nothing about any of that, so a report of missing follower counts could not be told from a page TikTok never asked about. The report names each of the three places it answered and what it answered, and says Ghost mode is in the build even on a run where none of them came up. It still names no creator.

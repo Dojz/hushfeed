@@ -869,7 +869,12 @@ public final class SettingsUi {
      */
     public static void styleTextAction(TextView button, boolean primary) {
         button.setTextColor(enabledTextColors(primary ? accent() : textSecondary()));
-        button.setTypeface(button.getTypeface(), primary ? Typeface.BOLD : Typeface.NORMAL);
+        // From the typeface's plain face, not from whatever the button already wears.
+        // setTypeface(tf, NORMAL) takes the else branch and keeps the face it is handed, so a
+        // button built bold and then styled secondary stayed bold and went on reading as the
+        // action to take. The two callers that do want a bold secondary say so afterwards.
+        button.setTypeface(Typeface.create(button.getTypeface(), Typeface.NORMAL),
+                primary ? Typeface.BOLD : Typeface.NORMAL);
         button.setMinimumHeight(dp(button.getContext(), 48));
         button.setMinimumWidth(dp(button.getContext(), 48));
         button.setGravity(android.view.Gravity.CENTER);
@@ -880,6 +885,20 @@ public final class SettingsUi {
                 new ColorDrawable(Color.TRANSPARENT)));
         button.setFocusable(true);
         markAsButton(button);
+    }
+
+    /**
+     * A row of text actions that wraps onto another line rather than running off the edge.
+     *
+     * <p>A horizontal {@link android.widget.LinearLayout} hands each child what is left of the
+     * width, so once the labels are wider than the row the later ones are measured at nothing
+     * and squeezed to their minimum with their words cut. That is not a large-text problem
+     * alone: four German labels at ordinary size already overflow a 360dp phone. Lines are laid
+     * out towards the end of the row, which is where a row of actions belongs in either
+     * direction.
+     */
+    public static ViewGroup actionRow(Context context) {
+        return new ActionFlow(context);
     }
 
     /**
@@ -1083,6 +1102,81 @@ public final class SettingsUi {
         };
         int[] colors = new int[]{accent(), textDisabled(), textSecondary()};
         button.setButtonTintList(new ColorStateList(states, colors));
+    }
+
+    /** Lays its children out in rows, breaking to a new one when the next child will not fit. */
+    private static final class ActionFlow extends ViewGroup {
+        ActionFlow(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected void onMeasure(int widthSpec, int heightSpec) {
+            int available = Math.max(0, MeasureSpec.getSize(widthSpec)
+                    - getPaddingLeft() - getPaddingRight());
+            int childWidthSpec = MeasureSpec.makeMeasureSpec(available, MeasureSpec.AT_MOST);
+            int childHeightSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
+            int lineWidth = 0;
+            int lineHeight = 0;
+            int widest = 0;
+            int height = 0;
+            for (int index = 0; index < getChildCount(); index++) {
+                View child = getChildAt(index);
+                if (child.getVisibility() == GONE) continue;
+                measureChild(child, childWidthSpec, childHeightSpec);
+                int width = child.getMeasuredWidth();
+                if (lineWidth > 0 && lineWidth + width > available) {
+                    widest = Math.max(widest, lineWidth);
+                    height += lineHeight;
+                    lineWidth = 0;
+                    lineHeight = 0;
+                }
+                lineWidth += width;
+                lineHeight = Math.max(lineHeight, child.getMeasuredHeight());
+            }
+            widest = Math.max(widest, lineWidth);
+            height += lineHeight;
+            setMeasuredDimension(
+                    resolveSize(widest + getPaddingLeft() + getPaddingRight(), widthSpec),
+                    resolveSize(height + getPaddingTop() + getPaddingBottom(), heightSpec));
+        }
+
+        @Override
+        protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+            int available = Math.max(0, getWidth() - getPaddingLeft() - getPaddingRight());
+            boolean rtl = getLayoutDirection() == LAYOUT_DIRECTION_RTL;
+            int y = getPaddingTop();
+            int index = 0;
+            while (index < getChildCount()) {
+                // Gather the line first: where it starts depends on how wide it turns out.
+                int lineWidth = 0;
+                int lineHeight = 0;
+                int taken = 0;
+                for (int i = index; i < getChildCount(); i++) {
+                    View child = getChildAt(i);
+                    if (child.getVisibility() == GONE) {
+                        taken++;
+                        continue;
+                    }
+                    int width = child.getMeasuredWidth();
+                    if (lineWidth > 0 && lineWidth + width > available) break;
+                    lineWidth += width;
+                    lineHeight = Math.max(lineHeight, child.getMeasuredHeight());
+                    taken++;
+                }
+                if (taken == 0) break;
+                int x = getPaddingLeft() + (rtl ? 0 : available - lineWidth);
+                for (int i = index; i < index + taken; i++) {
+                    View child = getChildAt(i);
+                    if (child.getVisibility() == GONE) continue;
+                    child.layout(x, y, x + child.getMeasuredWidth(),
+                            y + child.getMeasuredHeight());
+                    x += child.getMeasuredWidth();
+                }
+                y += lineHeight;
+                index += taken;
+            }
+        }
     }
 
     private static final class DialogCheckMarkDrawable extends Drawable {

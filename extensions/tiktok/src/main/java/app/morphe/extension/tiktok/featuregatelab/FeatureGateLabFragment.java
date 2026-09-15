@@ -879,25 +879,30 @@ public final class FeatureGateLabFragment extends Fragment {
         selectionCount = FeatureGateLabUi.label(context, "");
         selectionBar.addView(selectionCount, FeatureGateLabUi.matchWrap());
 
-        LinearLayout actions = new LinearLayout(context);
-        actions.setOrientation(LinearLayout.HORIZONTAL);
-        actions.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
-        actions.addView(selectionAction(context, L10n.t(context, "Reset"), this::resetSelection));
+        // Four labels do not fit one line at large text, and four German labels do not fit one
+        // at any size, so the row wraps rather than squeezing the last of them to nothing.
+        ViewGroup actions = SettingsUi.actionRow(context);
+        actions.addView(selectionAction(context, L10n.t(context, "Reset"),
+                this::resetSelection, true));
         actions.addView(selectionAction(context, L10n.t(context, "Disable"),
-                () -> forceSelection(false)));
+                () -> forceSelection(false), true));
         actions.addView(selectionAction(context, L10n.t(context, "Enable"),
-                () -> forceSelection(true)));
+                () -> forceSelection(true), true));
+        // Cancel only puts the selection down. It is not one of the three that write.
         actions.addView(selectionAction(context, L10n.t(context, "Cancel"), () -> {
             selection.clear();
             onSelectionChanged();
-        }));
+        }, false));
         selectionBar.addView(actions, FeatureGateLabUi.matchWrap());
         return selectionBar;
     }
 
-    private TextView selectionAction(Context context, String label, Runnable action) {
-        TextView button = FeatureGateLabUi.text(context, label, 14, SettingsUi.accent(), Typeface.BOLD);
-        SettingsUi.styleTextAction(button, true);
+    private TextView selectionAction(Context context, String label, Runnable action,
+            boolean primary) {
+        TextView button = FeatureGateLabUi.text(context, label, 14,
+                primary ? SettingsUi.accent() : SettingsUi.textSecondary(),
+                primary ? Typeface.BOLD : Typeface.NORMAL);
+        SettingsUi.styleTextAction(button, primary);
         button.setMinimumHeight(FeatureGateLabUi.dp(context, 48));
         button.setMinimumWidth(FeatureGateLabUi.dp(context, 48));
         button.setGravity(Gravity.CENTER);

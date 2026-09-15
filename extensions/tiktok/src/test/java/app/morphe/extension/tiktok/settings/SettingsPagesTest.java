@@ -590,6 +590,23 @@ public class SettingsPagesTest {
                 assertEquals("a screen reader would read this as text",
                         android.widget.Button.class.getName(),
                         String.valueOf(info.getClassName()));
+
+                // Weight has to follow rank from whatever face the caller built. The hand-built
+                // actions are made bold and then styled, and setTypeface(tf, NORMAL) keeps the
+                // face it is handed, so a secondary action stayed as heavy as a primary one and
+                // went on reading as the action to take.
+                android.widget.TextView built = app.morphe.extension.tiktok.settings.preference
+                        .SettingsUi.text(activity, "Save", 14, 0xFFFFFFFF,
+                                android.graphics.Typeface.BOLD);
+                assertTrue("the fixture did not start from a bold face",
+                        built.getTypeface().isBold());
+                app.morphe.extension.tiktok.settings.preference.SettingsUi
+                        .styleTextAction(built, primary);
+                assertEquals("a " + (primary ? "primary" : "secondary")
+                                + " action is not the weight its rank calls for",
+                        primary, built.getTypeface().isBold());
+                assertFalse("a secondary action was faked bold instead",
+                        !primary && built.getPaint().isFakeBoldText());
             }
         }
     }
