@@ -1,5 +1,7 @@
 ## Unreleased
 
+* A download that was interrupted at the wrong moment no longer leaves an invisible half-saved entry in your gallery forever. The cleanup that was meant to find those gave up as soon as it saw a finished file of the same name, so anyone who had already saved a video called the same thing kept every leftover. It also could not find a leftover at all when the gallery had renamed it, which is what happens when the name is already taken. Both are fixed, and the filename a save reports back is now the one the file actually got.
+
 * The diagnostic report now says what Ghost mode did. It stops TikTok telling other people you looked at a story or a profile, or that you are typing, and until now an export said nothing about any of that, so a report of missing follower counts could not be told from a page TikTok never asked about. The report names each of the three places it answered and what it answered, and says Ghost mode is in the build even on a run where none of them came up. It still names no creator.
 
 * Settings, About now has a Licenses row. It shows the notices Hushfeed and the projects it was built on ask to be passed along, with the full licence a tap away. They were only ever in the repository before, which is no use to anyone holding a patched phone, and the projects this is built on ask that the notices reach that person too. The settings search finds it.
