@@ -1,5 +1,7 @@
 ## Unreleased
 
+* The hidden creators editor keeps what you typed and says what is wrong under the box. Type a handle and press Save without pressing Add and the dialog used to close, then a message appeared over whatever was behind it, and the handle was gone. Adding an empty, duplicate or broken entry did the same thing over the open dialog. The reason now sits under the field it is about, the dialog stays open, and nothing is written until it can be.
+
 * One sentence asks you to restart TikTok, not nine. The same screen used to say it four or five different ways, sometimes twice in view of each other, and each wording was its own thing to translate. Every row summary and every single-change message now says "Restart TikTok to apply this." Restoring, resetting or undoing settings, where several moved at once, says "Restart TikTok to apply all changes." Nothing else.
 
 * The section rows on the settings screen say how many settings you have changed, not how many are on. The number was always a count of settings away from their default, and two of them arrive switched on, so turning one of those off read as having turned something on.
