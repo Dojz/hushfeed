@@ -1315,18 +1315,29 @@ private fun MutableMethod.overrideReturnValue(
     // comments was checking this for itself beside its own hand-written smali; the check belongs
     // with the code that decides which registers to write.
     //
-    // A void return writes nothing and would need none, but the inline smali compiler below
-    // cannot assemble against a frame of no registers at all: it parses nothing and throws
-    // "Collection is empty" out of its own first(), naming neither the method nor the reason. So
-    // one is the floor for every return type.
+    // A void override writes into nothing and needs none of them. A static method with no
+    // parameters and no locals is `.registers 0`, `return-void` assembles against it, and
+    // RememberClearDisplayPatch goes looking for exactly that shape.
     val registersNeeded = when (returnType.first()) {
+        'V' -> 0
         'J', 'D' -> 2
         else -> 1
     }
-    val registersAvailable = implementation?.registerCount ?: 0
+    val registersAvailable = checkNotNull(implementation?.registerCount) {
+        "$definingClass->$name has no body, so there is nothing to override"
+    }
     check(registersAvailable >= registersNeeded) {
         "$definingClass->$name has $registersAvailable registers and a $returnType override " +
             "needs $registersNeeded to write into"
+    }
+    // The assembler below compiles against a method it re-declares with this one's parameters,
+    // so the frame also has to hold them. Valid dex always does. A hand-built method that does
+    // not gets "Collection is empty" thrown out of the compiler's own first(), naming neither
+    // the method nor the reason, and reading that refusal as a floor under every override is
+    // what briefly put one under the void case here.
+    check(registersAvailable >= numberOfParameterRegisters) {
+        "$definingClass->$name has $registersAvailable registers and its own parameters take " +
+            "$numberOfParameterRegisters, so the assembler has nothing to compile against"
     }
 
     if (returnLate) {

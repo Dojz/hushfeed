@@ -23,7 +23,9 @@ import org.junit.Test
  */
 class CatalogDependencyTest {
     private fun catalogPatches() = run {
-        val catalog = File("../patches-list.json").takeIf { it.isFile } ?: File("patches-list.json")
+        // The repository root first. The other way round, a run whose working directory is the
+        // root resolves "../patches-list.json" to a sibling of the checkout, outside it.
+        val catalog = File("patches-list.json").takeIf { it.isFile } ?: File("../patches-list.json")
         assertTrue("could not find the patch list from ${File(".").absolutePath}", catalog.isFile)
         JsonParser.parseString(catalog.readText()).asJsonObject.getAsJsonArray("patches")
             .map { it.asJsonObject }
@@ -98,6 +100,32 @@ class CatalogDependencyTest {
                {"name":"No dependencies here"}]}"""
         ).asJsonObject
         BundleVerifier.requireCanonicalDependencies(canonical)
+    }
+
+    /**
+     * A hand-edited catalog is what the verifier is for, so every shape one could be in comes
+     * back as a sentence naming the row rather than as a cast failure from inside Gson.
+     */
+    @Test
+    fun `a malformed catalog is refused by name rather than crashing`() {
+        val cases = mapOf(
+            "no patches array at all" to """{"version":"v0.32.0"}""",
+            "a null dependency list" to """{"patches":[{"name":"A","dependencies":null}]}""",
+            "a dependency list that is a string" to """{"patches":[{"name":"A","dependencies":"Settings"}]}""",
+            "a dependency that is a number" to """{"patches":[{"name":"A","dependencies":[1]}]}""",
+            "a dependency that is an object" to """{"patches":[{"name":"A","dependencies":[{}]}]}""",
+            "a row that is not an object" to """{"patches":["Settings"]}""",
+            "a row with a null name" to """{"patches":[{"name":null,"dependencies":["B","A"]}]}""",
+        )
+        for ((what, json) in cases) {
+            val failure = runCatching {
+                BundleVerifier.requireCanonicalDependencies(JsonParser.parseString(json).asJsonObject)
+            }.exceptionOrNull()
+            assertTrue(
+                "$what was accepted or crashed: $failure",
+                failure is IllegalArgumentException && !failure.message.isNullOrBlank(),
+            )
+        }
     }
 
     /**
