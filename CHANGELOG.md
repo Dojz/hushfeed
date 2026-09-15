@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Hide suggested accounts now covers every "People you may like" card, not only the inbox lists. The profile header, the Friends tab and the feed's account cards each build their own list, so the switch used to leave them all standing. Every one of those cards is collapsed as it is bound, and comes back at its own size when the switch goes off.
+
 * A change that needs a restart now leaves a row pinned to the top of every settings page, "Restart TikTok to apply this change" (or how many), and tapping it restarts TikTok. Before, the only sign was a toast that disappeared, so a switch that hadn't taken effect yet looked broken. The rows still waiting say "Restart pending" in place of the usual sentence, and the row goes away once TikTok has been restarted.
 
 * Hiding a rail button now hides its count too. Hide like button used to leave the number standing under an empty space, half under the creator's avatar, which looked like the switch had done nothing. Counts under buttons you keep are untouched.

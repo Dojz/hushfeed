@@ -8,6 +8,11 @@
 package app.morphe.patches.tiktok.misc.inbox
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
+import app.morphe.patcher.patch.BytecodePatchContext
+import app.morphe.patcher.patch.PatchException
+import app.morphe.util.findMutableMethodOf
+import com.android.tools.smali.dexlib2.iface.ClassDef
+import com.android.tools.smali.dexlib2.iface.Method
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.patch.bytecodePatch
@@ -30,7 +35,8 @@ private const val EXTENSION_CLASS_DESCRIPTOR = "Lapp/morphe/extension/tiktok/inb
 val hideSuggestedAccountsPatch = bytecodePatch(
     name = "Hide suggested accounts",
     description = "Stops the suggested accounts list from being built on the Activity, New " +
-        "followers and Inbox pages. Shares its switch with Hide inbox items.",
+        "followers and Inbox pages, and collapses every other People you may like card: the " +
+        "profile header, the Friends tab and the feed. Shares its switch with Hide inbox items.",
     default = false,
 ) {
     dependsOn(settingsPatch, sharedExtensionPatch)
@@ -52,7 +58,55 @@ val hideSuggestedAccountsPatch = bytecodePatch(
         ).forEach { fingerprint ->
             fingerprint.method.hideInboxWidget("shouldShowSuggestedAccounts")
         }
+
+        collapseSuggestionCells()
     }
+}
+
+private const val CELLS_EXTENSION_CLASS_DESCRIPTOR =
+    "Lapp/morphe/extension/tiktok/inbox/SuggestedAccountCells;"
+private const val CELL_PACKAGE = "/relation/usercard/impl/cell/"
+private const val CELL_SUFFIX = "RecUserCell;"
+
+/**
+ * Collapses every suggestion cell at its bind, whichever list it sits in.
+ *
+ * <p>The inbox gates above stop three lists from being built. The profile header, the
+ * Friends tab and the feed's account cards each build their own list from a different
+ * component with no shared source to anchor on, but every one of them is made of cells that
+ * extend the real-named `AbsRecUserCell`, and every cell's `onBindItemView` bridge is a
+ * PowerCell method with a real name. Each bridge in that family is hooked, so a build that
+ * adds a cell class is covered as long as it keeps the package and the suffix, and a build
+ * that renames the package fails here rather than shipping a switch that does nothing.
+ *
+ * @return how many bind methods were hooked.
+ */
+internal fun BytecodePatchContext.collapseSuggestionCells(): Int {
+    // Collected first, mutated after: the walk is over the immutable classes.
+    val binds = mutableListOf<Pair<ClassDef, Method>>()
+    classDefForEach { classDef ->
+        if (!classDef.type.contains(CELL_PACKAGE) || !classDef.type.endsWith(CELL_SUFFIX)) return@classDefForEach
+        classDef.methods.forEach { method ->
+            if (method.name == "onBindItemView" && method.implementation != null) binds += classDef to method
+        }
+    }
+    if (binds.isEmpty()) {
+        throw PatchException(
+            "Hide suggested accounts: no suggestion cell binds under $CELL_PACKAGE; the cells moved.",
+        )
+    }
+    binds.forEach { (classDef, method) ->
+        mutableClassDefBy(classDef).findMutableMethodOf(method).collapseSuggestionCellAtBind()
+    }
+    return binds.size
+}
+
+/** Hands the cell to the extension before TikTok binds it, so a collapsed cell stays collapsed. */
+internal fun MutableMethod.collapseSuggestionCellAtBind() {
+    addInstruction(
+        0,
+        "invoke-static {p0}, $CELLS_EXTENSION_CLASS_DESCRIPTOR->onBind(Ljava/lang/Object;)V",
+    )
 }
 
 /** A disabled hide switch must leave the native rollout and app-availability checks intact. */
