@@ -1475,4 +1475,42 @@ assertEquals(View.LAYOUT_DIRECTION_RTL, configuration.getLayoutDirection());
             Settings.SESSION_BUDGET_RESET_HOUR.resetToDefault();
         }
     }
+
+    /**
+     * Opening Search lands in the field with the keyboard up, the way every native search does.
+     *
+     * <p>The page used to open with the box unfocused and no keyboard, so the reader tapped
+     * it first, and the keyboard's action key was the generic one with autocorrect free to
+     * rewrite a setting's name.
+     */
+    @Test public void openingSearchLandsInTheFieldWithTheKeyboardUp() {
+        try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            TikTokPreferenceFragment home = attachHome(activity);
+            Preference search = findPreference(home.getPreferenceScreen(), "Search settings");
+            assertNotNull(search);
+            assertTrue(search.getOnPreferenceClickListener().onPreferenceClick(search));
+            activity.getFragmentManager().executePendingTransactions();
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+            TikTokPreferenceFragment page = (TikTokPreferenceFragment) activity.getFragmentManager()
+                    .findFragmentById(android.R.id.content);
+            EditText input = (EditText) page.getView().findViewWithTag("settings_search_input");
+            assertNotNull(input);
+            assertTrue("the field is not focused on entry", input.isFocused());
+            org.robolectric.shadows.ShadowInputMethodManager keyboard = Shadows.shadowOf(
+                    (android.view.inputmethod.InputMethodManager) activity.getSystemService(
+                            android.content.Context.INPUT_METHOD_SERVICE));
+            assertTrue("the keyboard was not asked for", keyboard.isSoftInputVisible());
+            assertEquals(android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH,
+                    input.getImeOptions() & android.view.inputmethod.EditorInfo.IME_MASK_ACTION);
+            assertTrue("autocorrect can rewrite a setting's name",
+                    (input.getInputType() & android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS) != 0);
+
+            // The search key takes the keyboard down so the results can be read.
+            input.onEditorAction(android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH);
+            assertFalse("the search key left the keyboard up", keyboard.isSoftInputVisible());
+        }
+    }
 }
