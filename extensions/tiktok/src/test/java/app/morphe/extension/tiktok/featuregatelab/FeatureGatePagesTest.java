@@ -167,6 +167,48 @@ public class FeatureGatePagesTest {
         }
     }
 
+    /**
+     * The focus that lands on the search field reaches the row drawn around it.
+     *
+     * <p>The focus goes to the {@code EditText}; the row carries the accent border. A group only
+     * merges its children's states when told to, so without that the border never came on. This
+     * asks the real question the render helpers cannot: it moves focus and reads the row's own
+     * drawable state, rather than pushing a state onto the drawable by hand.
+     */
+    @Test public void theSearchRowCarriesTheFocusThatLandsOnItsField() throws Exception {
+        try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            FeatureGateLabStore.resetAllLabData();
+            FeatureGateLabSession.begin();
+
+            FeatureGateLabFragment lab = new FeatureGateLabFragment();
+            attach(activity, lab);
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+            View searchRow = lab.getView().findViewWithTag("feature_gate_search_row");
+            assertNotNull("the search row is gone", searchRow);
+            EditText search = find(searchRow, EditText.class);
+            assertNotNull("the search field is gone", search);
+
+            assertFalse("the row was focused before anything asked it to be",
+                    contains(searchRow.getBackground().getState(),
+                            android.R.attr.state_focused));
+
+            assertTrue("the search field would not take focus", search.requestFocus());
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+            assertTrue("focus reached the field but not the row drawn around it",
+                    contains(searchRow.getBackground().getState(),
+                            android.R.attr.state_focused));
+        }
+    }
+
+    private static boolean contains(int[] states, int wanted) {
+        for (int state : states) if (state == wanted) return true;
+        return false;
+    }
+
     @Test public void darkLabFilterUsesTheSharedSingleChoiceTheme() throws Exception {
         assertLabFilterUsesTheSharedTheme("pages/dark/lab-filter.png");
     }

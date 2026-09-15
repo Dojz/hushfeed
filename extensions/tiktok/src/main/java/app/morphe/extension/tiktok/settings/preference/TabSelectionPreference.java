@@ -280,6 +280,9 @@ public class TabSelectionPreference extends Preference {
         row.setGravity(Gravity.CENTER_VERTICAL);
         row.setBackground(SettingsUi.listRow(context, getDialogBackgroundColor()));
         row.setPadding(dpToPx(10), dpToPx(10), dpToPx(10), dpToPx(10));
+        // A clickable view is only focusable by default from API 26; below that the d-pad
+        // would skip every row and the focus wash above would never show.
+        row.setFocusable(true);
 
         CheckBox checkBox = new CheckBox(context);
         // Tagged so "Select every tab" can tick them where they are, rather than closing the

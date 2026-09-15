@@ -228,9 +228,10 @@ public final class SettingsUi {
      * at any font scale. Returned already checked: a caller that has nothing to mark hides it.
      */
     public static Drawable checkMark(Context context) {
-        DialogCheckMarkDrawable mark = new DialogCheckMarkDrawable(context, false);
-        mark.setState(new int[]{android.R.attr.state_checked});
-        return mark;
+        // Pinned, not set through a state: an ImageView hands a stateful drawable its own
+        // state the moment it is set, and no ImageView state carries state_checked, so a mark
+        // that listened would be unchecked before it was ever drawn.
+        return new DialogCheckMarkDrawable(context, false, true);
     }
 
     /**
@@ -552,17 +553,36 @@ public final class SettingsUi {
      * page rather than part of it.
      */
     public static Drawable overlayAction(Context context, int radiusDp) {
-        return overlayControl(context, radiusDp, null, new ColorDrawable(Color.TRANSPARENT));
+        return overlayControl(context, radiusDp, null, new ColorDrawable(Color.TRANSPARENT),
+                OVERLAY_TEXT, OVERLAY_HAIRLINE);
+    }
+
+    /**
+     * The same press and focus pair in the colour of the surface it sits on.
+     *
+     * <p>For an action drawn onto one of TikTok's own surfaces rather than over the video: the
+     * inbox header and the sticker sheet follow the app's theme, so a white ring and a white
+     * ripple vanish on them in the light theme. The tone is the text colour the host paints
+     * there, which is by definition visible against its background.
+     */
+    public static Drawable overlayAction(Context context, int radiusDp, @ColorInt int tone) {
+        return overlayControl(context, radiusDp, null, new ColorDrawable(Color.TRANSPARENT),
+                tone, (tone & 0x00ffffff) | 0x40000000);
     }
 
     private static Drawable overlayControl(Context context, int radiusDp, Drawable glyph,
             Drawable backdrop) {
+        return overlayControl(context, radiusDp, glyph, backdrop, OVERLAY_TEXT, OVERLAY_HAIRLINE);
+    }
+
+    private static Drawable overlayControl(Context context, int radiusDp, Drawable glyph,
+            Drawable backdrop, @ColorInt int ringColor, @ColorInt int rippleColor) {
         GradientDrawable ring = new GradientDrawable();
         ring.setShape(GradientDrawable.RECTANGLE);
         ring.setCornerRadius(dp(context, radiusDp));
         ring.setStroke(Math.max(2, dp(context, 2)), new ColorStateList(
                 new int[][]{new int[]{android.R.attr.state_focused}, new int[0]},
-                new int[]{OVERLAY_TEXT, Color.TRANSPARENT}));
+                new int[]{ringColor, Color.TRANSPARENT}));
 
         Drawable content = glyph == null
                 ? new LayerDrawable(new Drawable[]{backdrop, ring})
@@ -572,7 +592,7 @@ public final class SettingsUi {
         mask.setShape(GradientDrawable.RECTANGLE);
         mask.setCornerRadius(dp(context, radiusDp));
         mask.setColor(Color.WHITE);
-        return new RippleDrawable(ColorStateList.valueOf(OVERLAY_HAIRLINE), content, mask);
+        return new RippleDrawable(ColorStateList.valueOf(rippleColor), content, mask);
     }
 
     public static void styleDialog(Dialog dialog) {
@@ -800,9 +820,13 @@ public final class SettingsUi {
         GradientDrawable focus = new GradientDrawable();
         focus.setShape(GradientDrawable.RECTANGLE);
         focus.setCornerRadius(dp(context, radiusDp));
+        // Selected as well as focused: a ListView never focuses its rows, it marks the one the
+        // d-pad is on as selected and draws its own selector underneath, where an opaque row
+        // fill covers it. The wash is the row's own answer to that.
         focus.setColor(new ColorStateList(
-                new int[][]{new int[]{android.R.attr.state_focused}, new int[0]},
-                new int[]{activatedFill(), Color.TRANSPARENT}));
+                new int[][]{new int[]{android.R.attr.state_focused},
+                        new int[]{android.R.attr.state_selected}, new int[0]},
+                new int[]{activatedFill(), activatedFill(), Color.TRANSPARENT}));
 
         GradientDrawable mask = new GradientDrawable();
         mask.setShape(GradientDrawable.RECTANGLE);
@@ -945,13 +969,21 @@ public final class SettingsUi {
         private final float boxSize;
         private final float radius;
         private final boolean radio;
+        /** Drawn checked whatever state it is handed, for a surface with no state to give it. */
+        private final boolean pinned;
         private boolean checked;
 
         DialogCheckMarkDrawable(Context context, boolean radio) {
+            this(context, radio, false);
+        }
+
+        DialogCheckMarkDrawable(Context context, boolean radio, boolean pinnedChecked) {
             intrinsicSize = dp(context, 32);
             boxSize = dp(context, 18);
             radius = dp(context, 2);
             this.radio = radio;
+            this.pinned = pinnedChecked;
+            this.checked = pinnedChecked;
             stroke.setStyle(Paint.Style.STROKE);
             stroke.setStrokeWidth(Math.max(2, dp(context, 2)));
             stroke.setStrokeCap(Paint.Cap.ROUND);
@@ -994,6 +1026,7 @@ public final class SettingsUi {
 
         @Override
         protected boolean onStateChange(int[] stateSet) {
+            if (pinned) return false;
             boolean nextChecked = false;
             for (int state : stateSet) {
                 if (state == android.R.attr.state_checked) {
@@ -1011,7 +1044,7 @@ public final class SettingsUi {
 
         @Override
         public boolean isStateful() {
-            return true;
+            return !pinned;
         }
 
         @Override

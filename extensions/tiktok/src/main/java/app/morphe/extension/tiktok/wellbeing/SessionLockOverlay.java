@@ -168,6 +168,12 @@ public final class SessionLockOverlay {
             overlay.setVisibility(View.VISIBLE);
             if (goingUp) hideBehind(parentOf(overlay), overlay, true);
             if (goingUp) requestQuiet();
+            if (goingUp && before == overlay && Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+                // A retained panel shown again after the reader was away on messages or search.
+                // From P the pane title announces the arrival each time; before it, the one
+                // announcement made at attach has already been spent.
+                overlay.announceForAccessibility(SessionBudgetNotice.spentMessage());
+            }
             // Only as the panel goes up. Whether there is an Inbox tab changes when TikTok
             // rebuilds its tab bar, not second by second, and for a reader who has hidden Inbox
             // the answer is a failed lookup every time: asking on every tick would be a walk of

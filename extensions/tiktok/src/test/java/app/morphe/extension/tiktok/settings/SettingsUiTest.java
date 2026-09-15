@@ -317,6 +317,70 @@ public class SettingsUiTest {
         }
     }
 
+    /**
+     * The chosen mark draws a check, not an empty box.
+     *
+     * <p>An ImageView hands a stateful drawable its own state the moment it is set, and no
+     * ImageView state carries {@code state_checked}, so a mark that listened to its state would
+     * be unchecked before it was ever drawn: the reader who needs the glyph most, a colour-blind
+     * one, would see an outlined empty square by a chosen row.
+     */
+    @Test
+    public void theChosenMarkDrawsACheckWhateverStateItIsGiven() {
+        Utils.setIsDarkModeEnabled(true);
+        Activity activity = Robolectric.buildActivity(DialogActivity.class).setup().get();
+        Utils.setContext(activity);
+
+        android.widget.ImageView holder = new android.widget.ImageView(activity);
+        holder.setImageDrawable(SettingsUi.checkMark(activity));
+        Drawable mark = holder.getDrawable();
+        // The states an ordinary, un-checked ImageView would push onto it.
+        mark.setState(new int[]{android.R.attr.state_enabled});
+        mark.setBounds(0, 0, 48, 48);
+        android.graphics.Bitmap bitmap =
+                android.graphics.Bitmap.createBitmap(48, 48, android.graphics.Bitmap.Config.ARGB_8888);
+        mark.draw(new android.graphics.Canvas(bitmap));
+        // A drawn check fills its box; an empty box is a stroked outline whose middle stays clear.
+        int centre = bitmap.getPixel(24, 24);
+        // A corner of the fill, clear of the white check line that antialiases through the centre.
+        int fill = bitmap.getPixel(18, 30);
+        bitmap.recycle();
+        assertEquals("the chosen mark drew an empty box: its centre is not filled",
+                255, android.graphics.Color.alpha(centre));
+        assertEquals("the chosen mark is filled with something other than the accent",
+                SettingsUi.accent() | 0xff000000, fill | 0xff000000);
+    }
+
+    /**
+     * An action drawn onto one of TikTok's own surfaces takes the ring and ripple in a tone that
+     * shows on that surface.
+     *
+     * <p>The inbox header and the sticker sheet follow the app's theme, so the white ring and
+     * white ripple every over-video control carries vanish on them in the light theme. This
+     * overload paints them in the host's own text colour instead.
+     */
+    @Test
+    public void anActionOnAHostSurfaceRingsInTheToneItIsGiven() {
+        Activity activity = Robolectric.buildActivity(DialogActivity.class).setup().get();
+        Utils.setContext(activity);
+
+        int tone = android.graphics.Color.rgb(12, 12, 12);
+        Drawable background = SettingsUi.overlayAction(activity, SettingsUi.RADIUS_CONTROL, tone);
+        background.setState(new int[]{android.R.attr.state_focused});
+        background.setBounds(0, 0, 64, 64);
+        android.graphics.Bitmap bitmap =
+                android.graphics.Bitmap.createBitmap(64, 64, android.graphics.Bitmap.Config.ARGB_8888);
+        background.draw(new android.graphics.Canvas(bitmap));
+        // The 2dp ring sits on the edge. The middle of the top edge is on it.
+        int ring = bitmap.getPixel(32, 1);
+        bitmap.recycle();
+        assertTrue("the focus ring did not draw at all", android.graphics.Color.alpha(ring) > 0);
+        assertTrue("the focus ring is white where it should carry the host tone",
+                android.graphics.Color.red(ring) < 128
+                        && android.graphics.Color.green(ring) < 128
+                        && android.graphics.Color.blue(ring) < 128);
+    }
+
     /** The colour a row's background paints in the middle, with or without the chosen state. */
     private static int centreOf(Drawable background, boolean activated) {
         background.setState(activated

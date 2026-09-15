@@ -195,7 +195,8 @@ public final class StickerGallerySaver {
         } else {
             // A template with no background of its own left this one flat: no press, and nothing
             // at all for a reader arriving with a keyboard or switch access.
-            button.setBackground(SettingsUi.overlayAction(context, SettingsUi.RADIUS_CONTROL));
+            button.setBackground(SettingsUi.overlayAction(context, SettingsUi.RADIUS_CONTROL,
+                    SettingsUi.textPrimary()));
         }
 
         button.setEnabled(template.isEnabled());

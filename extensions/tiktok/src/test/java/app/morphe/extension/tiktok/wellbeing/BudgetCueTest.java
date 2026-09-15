@@ -376,6 +376,42 @@ public class BudgetCueTest {
     }
 
     /**
+     * It is gone on a video detail page opened from a profile grid or a search result.
+     *
+     * <p>Those pages leave the Home tab in the tree but off screen and run a resumed detail
+     * fragment over the feed. The looser {@code isOnFeed} the block button uses counts that as
+     * the feed, which is the right bargain for a button worth keeping and the wrong one for a
+     * label that just sits there: it should be on the recommendation feed or absent.
+     */
+    @Test public void itIsGoneOnADetailPageOpenedFromTheFeed() {
+        Settings.SESSION_BUDGET_CUE.save(true);
+        Settings.SESSION_BUDGET_MINUTES.save(10);
+        Object page = new Object();
+        try (var owner = Robolectric.buildActivity(HostActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setActivity(activity);
+
+            // The Home tab is still in the tree, just no longer on screen: a detached view is
+            // not shown.
+            seedHomeTab(new View(activity));
+
+            // ...and a detail page is up, resumed and visible.
+            android.view.ViewGroup root = activity.findViewById(android.R.id.content);
+            View detailView = new View(activity);
+            root.addView(detailView, new android.widget.FrameLayout.LayoutParams(96, 100));
+            app.morphe.extension.tiktok.blockauthor.FeedVisibility.onDetailView(page, detailView);
+            app.morphe.extension.tiktok.blockauthor.FeedVisibility.onDetailResume(page);
+            app.morphe.extension.tiktok.blockauthor.FeedVisibility.onDetailVisibility(page, true);
+
+            sync();
+            assertNull("the cue drew over a detail page opened from the feed",
+                    BudgetCue.cueForTests());
+        } finally {
+            app.morphe.extension.tiktok.blockauthor.FeedVisibility.onDetailDestroyed(page);
+        }
+    }
+
+    /**
      * And it goes away with the comment sheet, the way the four feed controls do.
      *
      * <p>Opening the comments took the controls away and left the cue sitting over the top of

@@ -605,7 +605,36 @@ public class OverlayControlsTest {
             int focused = renderOf(background, new int[]{android.R.attr.state_focused});
             assertNotEquals(factoryName + " looks the same focused as it does at rest",
                     resting, focused);
+            // A clickable view is only focusable by default from API 26, and the ring is dead on
+            // a d-pad below that unless it is said outright.
+            assertTrue(factoryName + " cannot be reached by a keyboard or d-pad",
+                    control.isFocusable());
         }
+    }
+
+    /**
+     * The Undo on the block banner answers a press and shows its focus, like the four controls
+     * it undoes. It sits on the banner's own dark surface, so its ring and ripple are the white
+     * the over-video controls use.
+     */
+    @Test public void theUndoBannerAnswersAPressAndShowsItsFocus() {
+        Activity activity = Robolectric.buildActivity(Activity.class).setup().visible().get();
+        Utils.setContext(activity);
+        FrameLayout root = new FrameLayout(activity);
+        BlockAuthorOverlay.showUndoBanner(root, "Blocked someone", () -> { });
+        org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idle();
+
+        ViewGroup banner = (ViewGroup) root.getChildAt(root.getChildCount() - 1);
+        assertNotNull("no banner was drawn", banner);
+        View undo = banner.getChildAt(banner.getChildCount() - 1);
+        assertTrue("Undo is not reachable by a keyboard or d-pad", undo.isFocusable());
+        android.graphics.drawable.Drawable background = undo.getBackground();
+        assertTrue("Undo has no ripple: " + (background == null ? "null"
+                        : background.getClass().getSimpleName()),
+                background instanceof android.graphics.drawable.RippleDrawable);
+        assertNotEquals("Undo looks the same focused as it does at rest",
+                renderOf(background, new int[0]),
+                renderOf(background, new int[]{android.R.attr.state_focused}));
     }
 
     /**

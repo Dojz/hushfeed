@@ -348,6 +348,12 @@ public class SimPresetRowTest {
             assertNotEquals("a preset row looks the same focused as it does at rest",
                     renderOf(background, new int[0]),
                     renderOf(background, new int[]{android.R.attr.state_focused}));
+            // A ListView never focuses its rows: the d-pad marks the row it is on as selected and
+            // draws its own selector beneath, where the row's opaque fill hid it. The wash has to
+            // answer the selected state too, or a keyboard reader sees nothing move.
+            assertNotEquals("a preset row shows nothing when the d-pad lands on it",
+                    renderOf(background, new int[0]),
+                    renderOf(background, new int[]{android.R.attr.state_selected}));
             dialog.dismiss();
         }
     }

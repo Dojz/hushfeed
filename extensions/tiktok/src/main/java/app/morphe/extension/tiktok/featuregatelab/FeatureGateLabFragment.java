@@ -264,6 +264,9 @@ public final class FeatureGateLabFragment extends Fragment {
         searchRow.setPaddingRelative(FeatureGateLabUi.dp(context, 8), 0, 0, 0);
         searchRow.setTag("feature_gate_search_row");
         searchRow.setBackground(SettingsUi.focusableSurface(context, 6, false));
+        // The focus lands on the field inside, never on the row, and a group only carries its
+        // children's states when told to. Without this the accent border above never showed.
+        searchRow.setAddStatesFromChildren(true);
         search = new EditText(context);
         search.setSingleLine(true);
         search.setTextSize(16);

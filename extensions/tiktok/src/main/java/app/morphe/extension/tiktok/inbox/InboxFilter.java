@@ -384,7 +384,10 @@ public final class InboxFilter {
         clearAll.setOnClickListener(view -> clearAllSuggested(activity));
         // A press and a focus ring, the same pair every control this bundle draws now carries.
         // Underlined bold text was the only sign it could be pressed at all.
-        clearAll.setBackground(SettingsUi.overlayAction(activity, SettingsUi.RADIUS_CONTROL));
+        // In the heading's own colour: this header is light in the light theme, where a white
+        // ripple and a white ring are invisible.
+        clearAll.setBackground(SettingsUi.overlayAction(activity, SettingsUi.RADIUS_CONTROL,
+                headerTextColour(headerGroup)));
         clearAll.setFocusable(true);
         // It is a TextView because the header styles its own children, so the role has to be
         // said out loud or a reader is told the word "Clear all" and no way to press it.

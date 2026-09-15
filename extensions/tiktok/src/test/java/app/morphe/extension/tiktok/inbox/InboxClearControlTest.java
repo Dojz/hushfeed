@@ -112,6 +112,18 @@ public class InboxClearControlTest {
         assertEquals(List.of(), header.announcements);
     }
 
+    @Test public void theControlAnswersAPressAndCanBeFocused() {
+        TextView clear = clearControl();
+        // A press and a focus ring, the same pair every control this bundle draws now carries.
+        // This header follows TikTok's theme, so the ring and ripple take its own text colour
+        // rather than the white the over-video controls use, which would vanish on a light header.
+        assertTrue("Clear all cannot be reached by a keyboard or d-pad", clear.isFocusable());
+        android.graphics.drawable.Drawable background = clear.getBackground();
+        assertTrue("Clear all has no ripple: " + (background == null ? "null"
+                        : background.getClass().getSimpleName()),
+                background instanceof android.graphics.drawable.RippleDrawable);
+    }
+
     @Test public void aRunHoldsTheControlUntilItReportsAndThenHandsItBack() {
         addAccount("A", true);
         addAccount("B", true);

@@ -343,6 +343,9 @@ public final class BlockAuthorOverlay {
         button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         button.setGravity(Gravity.CENTER);
         button.setContentDescription(L10n.t(activity, "Block this sound"));
+        // Said outright: a clickable view is only focusable by default from API 26, and the
+        // focus ring below is unreachable on a d-pad before that.
+        button.setFocusable(true);
 
         button.setBackground(SettingsUi.overlayControl(activity, SettingsUi.RADIUS_OVERLAY));
 
@@ -358,6 +361,7 @@ public final class BlockAuthorOverlay {
         button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28);
         button.setGravity(Gravity.CENTER);
         button.setContentDescription(L10n.t(activity, "Hide this creator locally"));
+        button.setFocusable(true);
 
         button.setBackground(SettingsUi.overlayControl(activity, SettingsUi.RADIUS_OVERLAY));
         button.setOnClickListener(view -> onLocalHideTapped());
@@ -376,6 +380,7 @@ public final class BlockAuthorOverlay {
         button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28);
         button.setGravity(Gravity.CENTER);
         button.setContentDescription(L10n.t(activity, "Not interested in this video"));
+        button.setFocusable(true);
         // The same shape and the same scrim as the three it shares the rail with. On a column of
         // four, one control drawn differently reads as a mistake rather than as a distinction.
         button.setBackground(SettingsUi.overlayControl(activity, SettingsUi.RADIUS_OVERLAY));
@@ -418,6 +423,7 @@ public final class BlockAuthorOverlay {
         TextView button = new TextView(activity);
         button.setGravity(Gravity.CENTER);
         button.setContentDescription(L10n.t(activity, "Block this account"));
+        button.setFocusable(true);
 
         // The symbol is drawn over the backdrop instead of set as text, because the font
         // TikTok happens to be using may not carry it.

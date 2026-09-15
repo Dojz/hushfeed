@@ -435,6 +435,39 @@ public class SessionLockOverlayTest {
      * it ran. The countdown is the only thing that changes, so it is the only live region, and
      * nothing is written unless the words moved.
      */
+    /**
+     * The two ways out of the hold answer a press and show their focus, like every other control
+     * this bundle draws. They were flat, and unreachable by a d-pad below API 26. The pixel proof
+     * that the shared overlay helper changes on focus lives in OverlayControlsTest; this checks
+     * the hold's own two controls carry that background and can be focused at all.
+     */
+    @Test public void theHoldControlsAnswerAPressAndShowTheirFocus() throws Exception {
+        Settings.SESSION_BUDGET_VIDEOS.save(1);
+        Settings.SESSION_BUDGET_LOCK_MINUTES.save(5);
+        SessionBudget.noteVideo("a");
+        assertTrue(SessionBudget.claimNotice());
+
+        try (var owner = Robolectric.buildActivity(HostActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setActivity(activity);
+            SessionLockOverlay.sync();
+
+            ViewGroup root = activity.findViewById(android.R.id.content);
+            ViewGroup panel = (ViewGroup) root.getChildAt(root.getChildCount() - 1);
+            View release = panel.getChildAt(3);
+            View messages = panel.getChildAt(4);
+
+            for (View control : new View[]{release, messages}) {
+                assertTrue("a hold control cannot be reached by a keyboard or d-pad",
+                        control.isFocusable());
+                android.graphics.drawable.Drawable background = control.getBackground();
+                assertTrue("a hold control has no ripple: " + (background == null ? "null"
+                                : background.getClass().getSimpleName()),
+                        background instanceof android.graphics.drawable.RippleDrawable);
+            }
+        }
+    }
+
     @Test public void theHoldIsNotReadOutAgainOnEveryTick() throws Exception {
         Settings.SESSION_BUDGET_VIDEOS.save(1);
         Settings.SESSION_BUDGET_LOCK_MINUTES.save(5);
