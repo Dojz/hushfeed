@@ -79,7 +79,7 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 | `Runtime Memory Governor` | Makes TikTok's reviewed Fresco animated-frame cache lookups return no cached frame. This can increase decoding work or change animation playback. Choose this patch to enable it. |
 | `Studio & Creation De-bloat` | Empties TikTok's reviewed editor, camera-effect and face-model assets. Recording, editing, effects and creator tools may stop working. Choose this patch to enable it. |
 | `Update Prompt Suppressor` | Skips TikTok's background and boot-finished device-ID update-check tasks. This may suppress some in-app update checks. Play Store updates are unaffected. Choose this patch to enable it. |
-| `Always show publish date` | Always shows the publish date in video author information. Thanks to lyyako for the original implementation. |
+| `Always show publish date` | Always shows the publish date in video author information. |
 | `Not interested button` | Adds a movable button that tells TikTok you aren't interested in the current video. It hides while comments are open. Off by default. |
 | `Block author button` | Adds one-tap controls for blocking the uploader, hiding the uploader locally and blocking the current sound. The local-hide and sound controls have separate switches. Long press any visible control to move it, and all of them hide while comments are open. |
 | `Comment tools` | Hides comments that contain chosen words or come from chosen accounts, turns the thumbs down on each comment into a block button, hides comment media and polls, and adds a box above the comments that narrows them by what they say or who said it. |
@@ -122,7 +122,7 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 | `Hide inbox items` | Adds a switch for each row and header control on the Inbox tab, so message requests, TikTok Tako, TikTok Shop, the stories tray and the rest can be hidden individually. |
 | `Hide quick comment reactions` | Hides TikTok's exposed quick emoji row in supported comment inputs. |
 | `Hold-and-slide 2x lock` | Enables TikTok's native hold, slide down, and release gesture to lock 2x speed. |
-| `Open external links directly` | Opens profile and story website links in the system browser instead of TikTok's in-app browser. Thanks to lyyako for the original implementation. |
+| `Open external links directly` | Opens profile and story website links in the system browser instead of TikTok's in-app browser. |
 | `Playback speed` | Remembers playback speed or applies a default to each new video, with custom menu choices up to 3x. |
 | `Remember clear display` | Remembers clear display between videos, or enters it automatically after a chosen delay. |
 | `Resume videos after scrolling` | Continues supported videos from where playback stopped when returning after a scroll. |
