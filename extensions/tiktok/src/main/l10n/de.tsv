@@ -516,7 +516,7 @@ Use 0 for TikTok's size, or 12 to 48. Applies to the next caption.	0 für TikTok
 Use a default playback speed	Standardgeschwindigkeit verwenden
 Use non-personalized search	Nicht personalisierte Suche verwenden
 Use Save JSON for this large report	Nutze für diesen großen Bericht „JSON speichern“
-Use the selected country and operator values. Restart TikTok to apply this.	Das gewählte Land und die Anbieterwerte verwenden. TikTok neu starten, damit das gilt.
+Use the selected country and operator values. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.	Das gewählte Land und die Anbieterwerte verwenden. Das ändert nur, was die SIM meldet: deine IP-Adresse, der Verlauf deines Kontos und die Sprache, in der du liest, bleiben gleich, und eines davon reicht TikTok schon, um bei der bisherigen Region zu bleiben. TikTok neu starten, damit das gilt.
 Use the split layout on wider screens. Restart TikTok to apply this, or unfold again if the old layout is still there.	Auf breiteren Bildschirmen das geteilte Layout verwenden. TikTok neu starten, damit das gilt, oder erneut aufklappen, wenn das alte Layout noch da ist.
 Use TikTok's native hold, slide down, and release gesture to lock 2x speed.	TikToks eigene Geste „Halten, nach unten wischen, loslassen“ verwenden, um die 2x-Geschwindigkeit zu fixieren.
 Video	Video
@@ -709,7 +709,7 @@ point	Punkt
 points	Punkte
 millisecond	Millisekunde
 milliseconds	Millisekunden
-Use the selected country. Restart TikTok to apply this.	Das gewählte Land verwenden. TikTok neu starten, damit das gilt.
+Use the selected country. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.	Das gewählte Land verwenden. Das ändert nur, was die SIM meldet: deine IP-Adresse, der Verlauf deines Kontos und die Sprache, in der du liest, bleiben gleich, und eines davon reicht TikTok schon, um bei der bisherigen Region zu bleiben. TikTok neu starten, damit das gilt.
 Remind me every	Erinnere mich alle
 Still here. Nothing is waiting.	Immer noch hier. Es wartet nichts.
 A good place to stop, if you want one.	Ein guter Moment zum Aufhören, falls du einen suchst.

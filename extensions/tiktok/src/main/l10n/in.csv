@@ -514,7 +514,7 @@ Undo last restore or reset,Urungkan pemulihan atau reset terakhir
 Use a default playback speed,Pakai kecepatan pemutaran bawaan
 Use non-personalized search,Pakai pencarian nonpersonal
 Use Save JSON for this large report,Pakai Simpan JSON untuk laporan sebesar ini
-Use the selected country and operator values. Restart TikTok to apply this.,Gunakan negara dan nilai operator yang dipilih. Mulai ulang TikTok agar berlaku.
+"Use the selected country and operator values. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.","Gunakan negara dan nilai operator yang dipilih. Ini hanya mengubah apa yang dilaporkan SIM: alamat IP, riwayat akun, dan bahasa yang kamu baca tetap sama, dan salah satunya saja sudah cukup bagi TikTok untuk mempertahankan wilayah yang sudah dipilihnya. Mulai ulang TikTok agar berlaku."
 "Use the split layout on wider screens. Restart TikTok to apply this, or unfold again if the old layout is still there.","Gunakan tata letak terbagi di layar yang lebih lebar. Mulai ulang TikTok agar berlaku, atau buka lipatan lagi jika tata letak lama masih muncul."
 "Use TikTok's native hold, slide down, and release gesture to lock 2x speed.","Pakai gestur bawaan TikTok, tahan lalu geser ke bawah dan lepas, untuk mengunci kecepatan 2x."
 Video,Video
@@ -707,7 +707,7 @@ point,poin
 points,poin
 millisecond,milidetik
 milliseconds,milidetik
-Use the selected country. Restart TikTok to apply this.,Gunakan negara yang dipilih. Mulai ulang TikTok agar berlaku.
+"Use the selected country. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.","Gunakan negara yang dipilih. Ini hanya mengubah apa yang dilaporkan SIM: alamat IP, riwayat akun, dan bahasa yang kamu baca tetap sama, dan salah satunya saja sudah cukup bagi TikTok untuk mempertahankan wilayah yang sudah dipilihnya. Mulai ulang TikTok agar berlaku."
 Remind me every,Ingatkan saya setiap
 Still here. Nothing is waiting.,Masih di sini. Tidak ada yang menunggu.
 "A good place to stop, if you want one.","Tempat yang bagus untuk berhenti, kalau kamu mencarinya."
