@@ -14,6 +14,8 @@
 
 * Settings rows show where the focus is. Moving through the list with a keyboard, a d-pad or switch access left nothing on screen to say which row you were on, because the only thing a row painted was a ripple, and a ripple draws focus at a fraction of its own strength. A focused row now carries an accent ring inside the card's corners, and so does the back button in the header. A press still looks like a press.
 
+* A text field in settings shows which one you are typing into. Every field wore the same accent underline whether or not it had the cursor, which the Min and Max dialog made worst: two accent underlines and one caret to tell them apart. The field with the cursor keeps the accent and the rest sit quieter.
+
 ## 0.32.0
 
 * Every control Hushfeed draws over the video answers a press and shows where the focus is. The four feed controls, the two actions on the daily hold, Undo, Clear all in the inbox and the sticker Save button used to paint the same thing pressed, focused or at rest, so a keyboard, a d-pad or switch access moved through them with nothing on screen saying so. Each one ripples under a finger now and carries a white ring while it holds focus.

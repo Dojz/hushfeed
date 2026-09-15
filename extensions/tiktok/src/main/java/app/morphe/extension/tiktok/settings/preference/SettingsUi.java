@@ -23,7 +23,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.InsetDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.StateListDrawable;
@@ -206,53 +205,8 @@ public final class SettingsUi {
 
     public static Drawable groupedRow(Context context, boolean first, boolean last) {
         return new RippleDrawable(ColorStateList.valueOf((accent() & 0x00ffffff) | 0x26000000),
-                new LayerDrawable(new Drawable[]{new GroupRowDrawable(context, first, last),
-                        focusRing(context, first, last)}),
+                new GroupRowDrawable(context, first, last),
                 groupRowMask(context, first, last));
-    }
-
-    /**
-     * The ring a row wears while the focus is on it, in the shape of the card it belongs to.
-     *
-     * <p>A ripple is the only thing these rows had, and a RippleDrawable paints
-     * {@code state_focused} as its own tint at 60% opacity: the accent at 15% alpha came out at
-     * about 9% over the surface, near enough 1.3:1, which is nothing to look at with a keyboard,
-     * a d-pad or switch access. The ring is the accent at full strength instead.
-     *
-     * <p>Selected as well as focused, for the same reason {@code pressAndFocus} takes both: a
-     * list moves a d-pad by marking a row selected rather than focusing it.
-     *
-     * <p>Inset by the stroke's half width so the ring sits inside the card edge rather than
-     * straddling it, where the row below would cover half of it.
-     */
-    public static Drawable focusRing(Context context, boolean first, boolean last) {
-        float radius = dp(context, RADIUS_CARD);
-        float top = first ? radius : 0f;
-        float bottom = last ? radius : 0f;
-        return ring(context, new float[]{top, top, top, top, bottom, bottom, bottom, bottom});
-    }
-
-    /** The same ring on a control with one radius all round, such as the header's back button. */
-    public static Drawable focusRing(Context context, int radiusDp) {
-        float radius = dp(context, radiusDp);
-        return ring(context, new float[]{radius, radius, radius, radius,
-                radius, radius, radius, radius});
-    }
-
-    private static Drawable ring(Context context, float[] radii) {
-        int width = dp(context, FOCUS_RING_DP);
-        int inset = width / 2;
-        GradientDrawable ring = new GradientDrawable();
-        ring.setShape(GradientDrawable.RECTANGLE);
-        float[] inner = new float[radii.length];
-        for (int at = 0; at < radii.length; at++) inner[at] = Math.max(0f, radii[at] - inset);
-        ring.setCornerRadii(inner);
-        ring.setColor(Color.TRANSPARENT);
-        ring.setStroke(width, new ColorStateList(
-                new int[][]{new int[]{android.R.attr.state_focused},
-                        new int[]{android.R.attr.state_selected}, new int[0]},
-                new int[]{accent(), accent(), Color.TRANSPARENT}));
-        return new InsetDrawable(ring, inset);
     }
 
     /**
@@ -273,6 +227,71 @@ public final class SettingsUi {
         // Clockwise from the top left, two values per corner.
         mask.setCornerRadii(new float[]{top, top, top, top, bottom, bottom, bottom, bottom});
         return mask;
+    }
+
+    /**
+     * The ring a control wears while the focus is on it.
+     *
+     * <p>A ripple is the only thing these surfaces had, and a RippleDrawable paints
+     * {@code state_focused} as its own tint at 60% opacity: the accent at 15% alpha came out at
+     * about 9% over the surface, near enough 1.3:1, which is nothing to look at with a keyboard,
+     * a d-pad or switch access. The ring is the accent at full strength instead.
+     *
+     * <p>Selected as well as focused, for the same reason {@code pressAndFocus} takes both: a
+     * list moves a d-pad by marking a row selected rather than focusing it.
+     *
+     * <p>It draws its own inset rather than being wrapped in one. An {@code InsetDrawable}
+     * reports the inset as padding and a {@code LayerDrawable} nests a layer's inset into its
+     * padding, and a View hands its background's padding to itself: wrapping this cost every
+     * settings row a pixel on each side, which moved twenty-six tracked captures.
+     */
+    public static Drawable focusRing(Context context, int radiusDp) {
+        return new FocusRingDrawable(dp(context, radiusDp), dp(context, FOCUS_RING_DP));
+    }
+
+    /** A rounded stroke in the accent, painted inside its own bounds, while focused. */
+    private static final class FocusRingDrawable extends Drawable {
+        private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private final float radius;
+        private final float width;
+        private boolean lit;
+
+        FocusRingDrawable(float radius, float width) {
+            this.radius = radius;
+            this.width = width;
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setStrokeWidth(width);
+        }
+
+        @Override public void draw(Canvas canvas) {
+            if (!lit) return;
+            Rect bounds = getBounds();
+            float inset = width / 2f;
+            paint.setColor(accent());
+            canvas.drawRoundRect(new RectF(bounds.left + inset, bounds.top + inset,
+                            bounds.right - inset, bounds.bottom - inset),
+                    Math.max(0f, radius - inset), Math.max(0f, radius - inset), paint);
+        }
+
+        @Override public boolean isStateful() { return true; }
+
+        @Override protected boolean onStateChange(int[] stateSet) {
+            boolean next = false;
+            for (int state : stateSet) {
+                if (state == android.R.attr.state_focused || state == android.R.attr.state_selected) {
+                    next = true;
+                    break;
+                }
+            }
+            if (next == lit) return false;
+            lit = next;
+            invalidateSelf();
+            return true;
+        }
+
+        @Override public void setAlpha(int alpha) { paint.setAlpha(alpha); }
+        @Override public void setColorFilter(ColorFilter filter) { paint.setColorFilter(filter); }
+        @Override public int getOpacity() { return PixelFormat.TRANSLUCENT; }
     }
 
     /**
@@ -302,9 +321,13 @@ public final class SettingsUi {
         private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         private final boolean first, last;
         private final float radius, inset;
+        private final Context context;
         /** Selected, as {@code View.setActivated} sets it. Repainted when it changes. */
         private boolean activated;
+        /** Focused, or selected the way a list marks the row a d-pad is on. */
+        private boolean focused;
         GroupRowDrawable(Context context, boolean first, boolean last) {
+            this.context = context;
             this.first = first;
             this.last = last;
             radius = dp(context, 10);
@@ -330,6 +353,19 @@ public final class SettingsUi {
             paint.setStrokeWidth(1);
             paint.setColor(activated ? accent() : border());
             canvas.drawRoundRect(frame, radius, radius, paint);
+            if (focused) {
+                // Inside the card's own edge, so the row below cannot cover half of it, and
+                // drawn here rather than in a layer above: a wrapped drawable reports its inset
+                // as padding and every row would grow by it.
+                float width = dp(context, FOCUS_RING_DP);
+                float inset = width / 2f;
+                paint.setStrokeWidth(width);
+                paint.setColor(accent());
+                RectF ring = new RectF(frame.left + inset, frame.top + inset,
+                        frame.right - inset, frame.bottom - inset);
+                canvas.drawRoundRect(ring, Math.max(0f, radius - inset),
+                        Math.max(0f, radius - inset), paint);
+            }
             if (!last) {
                 paint.setColor(divider());
                 canvas.drawLine(bounds.left + inset, bottom - 0.5f, bounds.right - inset, bottom - 0.5f, paint);
@@ -343,15 +379,17 @@ public final class SettingsUi {
          */
         @Override public boolean isStateful() { return true; }
         @Override protected boolean onStateChange(int[] stateSet) {
-            boolean next = false;
+            boolean nextActivated = false;
+            boolean nextFocused = false;
             for (int state : stateSet) {
-                if (state == android.R.attr.state_activated) {
-                    next = true;
-                    break;
+                if (state == android.R.attr.state_activated) nextActivated = true;
+                if (state == android.R.attr.state_focused || state == android.R.attr.state_selected) {
+                    nextFocused = true;
                 }
             }
-            if (next == activated) return false;
-            activated = next;
+            if (nextActivated == activated && nextFocused == focused) return false;
+            activated = nextActivated;
+            focused = nextFocused;
             invalidateSelf();
             return true;
         }
@@ -956,15 +994,25 @@ public final class SettingsUi {
         });
     }
 
+    /**
+     * A text field, with an underline that says whether typing will land in it.
+     *
+     * <p>The tint had two states, disabled and everything else, so a field at rest wore the same
+     * accent underline as the one holding the cursor. In the Min and Max dialog that means two
+     * accent underlines and one caret to tell them apart, and the same on the search box and
+     * every other editor on this screen. Focused keeps the accent; at rest the line drops to the
+     * quieter colour, which is still a line, just not a claim to have the keyboard.
+     */
     public static void styleEditText(EditText editText) {
         editText.setTextColor(enabledTextColors(textPrimary()));
         editText.setHintTextColor(enabledTextColors(textSecondary()));
         editText.setBackgroundTintList(new ColorStateList(
                 new int[][]{
                         new int[]{-android.R.attr.state_enabled},
+                        new int[]{android.R.attr.state_focused},
                         new int[]{}
                 },
-                new int[]{border(), accent()}
+                new int[]{border(), accent(), textSecondary()}
         ));
     }
 
