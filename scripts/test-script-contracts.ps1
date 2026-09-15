@@ -404,6 +404,16 @@ try {
         Assert-True ([bool]$result.Reason) "Receipt validation refused $description without saying why."
     }
 
+    # The bundle the receipt is about, gone. Every fact above is checked against a file, and a
+    # missing file is the one case where there is nothing to disagree with, so an unguarded
+    # check would read it as agreement and pass the release.
+    $absent = Test-ReleaseReceipt -Receipt (New-TestReceipt) -ExpectedVersion '9.9.9' `
+        -ExpectedPatchNames @('Alpha', 'Beta') -ExpectedPatcherVersion '1.12.0' `
+        -ExpectedManagerFloor '1.29.0' -BundlePath (Join-Path $allowlistRoot 'not-built.mpp')
+    Assert-True (-not $absent.Valid) 'A receipt was accepted against a bundle that is not there.'
+    Assert-True ($absent.Reason -like '*not there*') `
+        "The missing bundle was refused for the wrong reason: $($absent.Reason)"
+
     # The bundle itself disagreeing with the receipt, which is the v0.28.0 failure: a bundle
     # built before its release commit existed carries the previous commit's pin, and nobody can
     # reproduce the published hash from the tag.
@@ -515,6 +525,110 @@ try {
 }
 
 Write-Host '[scripts] release receipt schema, manifest reading and validation contracts passed'
+
+# --- validate-release-facts.ps1 -------------------------------------------------------------
+#
+# The gate the pre-push hook runs on every push that touches a published file, and the one a
+# release cannot go out without. Its receipt half has been exercised above since the receipt
+# existed; the facts half, which is what holds README.md and patches-bundle.json to the
+# generated catalog, had never been shown to fail at all.
+#
+# Driven against a copy of this checkout rather than a hand-built tree: a fixture assembled by
+# hand is a second opinion about what the release files look like, and the thing worth catching
+# is a real file drifting from the real catalog. One fact is moved per case.
+
+$factsScript = Join-Path $PSScriptRoot 'validate-release-facts.ps1'
+$factsRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("hushfeed-facts-" + [guid]::NewGuid().ToString('N'))
+try {
+    New-Item -ItemType Directory -Path $factsRoot -Force | Out-Null
+    foreach ($relative in @('patches-list.json', 'patches-bundle.json', 'gradle.properties', 'README.md')) {
+        Copy-Item -LiteralPath (Join-Path $Root $relative) -Destination (Join-Path $factsRoot $relative)
+    }
+    New-Item -ItemType Directory -Path (Join-Path $factsRoot 'gradle') -Force | Out-Null
+    Copy-Item -LiteralPath (Join-Path $Root 'gradle/libs.versions.toml') `
+        -Destination (Join-Path $factsRoot 'gradle/libs.versions.toml')
+
+    function Invoke-Facts {
+        param([switch]$WithUrls)
+        $arguments = @{ Root = $factsRoot; SkipDescriptionTestCount = $true }
+        if (-not $WithUrls) { $arguments['SkipUrlCheck'] = $true }
+        # 6>, not *>. The check says what it found with Write-Host, which is the information
+        # stream, and that is all this wants to hide. Redirecting every stream also swallows the
+        # terminating error, so each case below was accepted in silence and proved nothing.
+        & $factsScript @arguments 6> $null
+    }
+
+    function Set-FactsFile {
+        param([string]$Name, [scriptblock]$Edit)
+        $path = Join-Path $factsRoot $Name
+        $text = Get-Content -LiteralPath $path -Raw
+        Set-Content -LiteralPath $path -Value (& $Edit $text) -Encoding UTF8 -NoNewline
+    }
+
+    function Reset-FactsFile {
+        param([string]$Name)
+        Copy-Item -LiteralPath (Join-Path $Root $Name) -Destination (Join-Path $factsRoot $Name) -Force
+    }
+
+    # The control. Everything below is this same tree with one fact moved, so a failure there is
+    # the moved fact talking and not the fixture being wrong.
+    Invoke-Facts
+    Assert-True ($LASTEXITCODE -eq 0 -or $null -eq $LASTEXITCODE) `
+        'The release facts check refused an unmodified copy of this checkout.'
+
+    $catalogVersion = ((Get-Content -LiteralPath (Join-Path $factsRoot 'gradle.properties')) `
+        -match '^version\s*=' | Select-Object -First 1) -replace '^version\s*=\s*', ''
+
+    # A published index naming a version the catalog does not build. This is the shape v0.28.0
+    # shipped in: the index said one thing and the bundle behind it was another.
+    Set-FactsFile 'patches-bundle.json' {
+        param($text) $text -replace [regex]::Escape('"' + $catalogVersion + '"'), '"0.0.1"'
+    }
+    Assert-Throws { Invoke-Facts } '*' 'A published index naming another version was accepted.'
+    Reset-FactsFile 'patches-bundle.json'
+
+    # The count the published description quotes, which is what somebody reads before they
+    # install. A number nobody would notice by eye, which is why the catalog is the source of it.
+    Set-FactsFile 'patches-bundle.json' {
+        param($text) $text -replace '\b\d+ patches\b', '3 patches'
+    }
+    Assert-Throws { Invoke-Facts } '*' 'An index counting patches the catalog does not have was accepted.'
+    Reset-FactsFile 'patches-bundle.json'
+
+    # The same number in the README, which is the other half of the same promise.
+    Set-FactsFile 'README.md' {
+        param($text) $text -replace '\b\d+ patches\b', '3 patches'
+    }
+    Assert-Throws { Invoke-Facts } '*' 'A README counting patches the catalog does not have was accepted.'
+    Reset-FactsFile 'README.md'
+
+    # The Manager floor in the README is what stops somebody being told to use a Manager that
+    # refuses the bundle, so it is held to the patcher the catalog pins.
+    Set-FactsFile 'README.md' {
+        param($text) $text -replace 'Morphe Manager 1\.29\.0 or newer', 'Morphe Manager 1.20.0 or newer'
+    }
+    Assert-Throws { Invoke-Facts } '*' 'A README naming a Manager older than the patcher needs was accepted.'
+    Reset-FactsFile 'README.md'
+
+    # A dead link in the index, answered from this machine so the case needs no network of its
+    # own: nothing listens on port 1, so the request is refused before it leaves the host.
+    Set-FactsFile 'patches-bundle.json' {
+        param($text) $text -replace 'https://github\.com/SysAdminDoc/hushfeed/releases/download/[^"]+',
+            'http://127.0.0.1:1/patches.mpp'
+    }
+    Assert-Throws { Invoke-Facts -WithUrls } '*' 'An index pointing at a dead address was accepted.'
+    Reset-FactsFile 'patches-bundle.json'
+
+    # And the same tree, once every fact is put back, is accepted again. Without this the cases
+    # above would also pass against a fixture that had become permanently broken.
+    Invoke-Facts
+    Assert-True ($LASTEXITCODE -eq 0 -or $null -eq $LASTEXITCODE) `
+        'The release facts check refused the fixture after every change was put back.'
+} finally {
+    Remove-Item -LiteralPath $factsRoot -Recurse -Force -ErrorAction SilentlyContinue
+}
+
+Write-Host '[scripts] release facts contracts passed'
 
 $global:LASTEXITCODE = 0
 Write-Host '[scripts] report, target, Java and guarded replacement contracts passed'

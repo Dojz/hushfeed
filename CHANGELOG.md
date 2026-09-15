@@ -1,5 +1,7 @@
 ## Unreleased
 
+* The release gate is now itself tested. The check that holds the README and the published index to the generated patch catalog runs on every push and before every release, and had never once been shown to refuse anything. It is now driven against a copy of the checkout with one fact moved at a time: an index naming another version, a patch count that is not the catalog's in either the index or the README, a README pointing at a Manager too old for the patcher, and a download link that answers nothing.
+
 * Hook status speaks for the sensitive-warning switch. Turning those overlays off means writing one flag on a model TikTok owns, and if that model is renamed the switch still reads on while every warning stays exactly where it was, which looks the same as a video that was never flagged. The row now names the field and the model it looked in.
 
 * The README and the Region page answer the three questions people keep asking. Downloads has always ignored the flag TikTok sets when a creator turns downloading off, and nothing said so. Region settings now says plainly what spoofing cannot change, which is your IP address, your account's history and the language you read in. And a patch run that sits at 24 or 25 percent forever is a memory problem with a known way through it, which the install steps now give.
