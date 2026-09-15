@@ -378,12 +378,6 @@ public final class Probe extends Instrumentation {
         }
 
         /**
-         * Every setting Hushfeed has created, with its value.
-         *
-         * <p>Loading the tiktok Settings class is what creates them: each is a static field on it,
-         * so until the class is initialised the registry is empty and a lookup finds nothing.
-         */
-        /**
          * What FeedVisibility sees right now: the current activity, its answers, the Home tab's
          * flags and whether any of it has pixels on screen, and the detail-page registry. The
          * registry and its entries are read by field type rather than name, since the release
@@ -459,6 +453,12 @@ public final class Probe extends Instrumentation {
             return out.toString();
         }
 
+        /**
+         * Every setting Hushfeed has created, with its value.
+         *
+         * <p>Loading the tiktok Settings class is what creates them: each is a static field on it,
+         * so until the class is initialised the registry is empty and a lookup finds nothing.
+         */
         private String dump() throws Exception {
             List<?> all = (List<?>) registry().getMethod("allLoadedSettings").invoke(null);
             List<String> lines = new ArrayList<>();

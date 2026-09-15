@@ -106,11 +106,22 @@ public final class CommentBatchTranslator {
      *
      * <p>Each of them reads a member of an object this code did not declare, and a build that
      * renames one leaves the switch on with nothing happening behind it, which is the failure
-     * the Diagnostics row exists to name. The heuristics further in do not report: they walk
+     * the Diagnostics row exists to name. The readers further in do not report: they walk
      * whatever they are handed and take what is there, so a member that is absent is an answer
      * rather than a miss.
+     *
+     * <p>The cell anchor is the one report that comes from a search rather than a named member,
+     * so it is held to a stricter rule: it is reported once, and only while no cell has ever
+     * resolved. A single bind that arrives before the manager's fields are set is a race, not a
+     * broken build, and a miss is never retracted once the row has it.
      */
     private static final String FAMILY = "comment translation";
+
+    /** Set by the first cell that resolved, so a later miss is a race rather than a rename. */
+    private static volatile boolean cellAnchorEverResolved;
+
+    /** The cell anchor miss is worth saying once; every bind after it costs a boolean read. */
+    private static volatile boolean cellAnchorMissReported;
 
     private CommentBatchTranslator() {
     }
@@ -125,10 +136,17 @@ public final class CommentBatchTranslator {
             if (parts == null) {
                 // Nothing on the cell's manager looks like a comment plus a native translator,
                 // so every comment on this build takes this path and the feature does nothing.
-                HookStatus.missingMember(FAMILY, "field", manager.getClass().getName(),
-                        "comment and native translator");
+                // Once, and only while nothing has ever resolved: this runs for every comment on
+                // a scrolling list, and HookStatus builds a miss's key before it checks whether
+                // it already has it, so a report per bind would allocate for the session.
+                if (!cellAnchorEverResolved && !cellAnchorMissReported) {
+                    cellAnchorMissReported = true;
+                    HookStatus.missingMember(FAMILY, "field", manager.getClass().getName(),
+                            "comment and native translator");
+                }
                 return;
             }
+            cellAnchorEverResolved = true;
             HookStatus.bound(FAMILY, "cell anchor");
             Object comment = parts.comment;
             Object context = parts.context;
@@ -259,9 +277,27 @@ public final class CommentBatchTranslator {
             disableForSession(runner);
             return;
         }
-        HookStatus.bound(FAMILY, "batch results");
+        if (runner != null) {
+            HookStatus.bound(FAMILY, "batch results");
+            // The results field is checked above; these two are read quietly further down, and a
+            // build that renames either leaves every batch unmatched with the switch still on.
+            // Asked of the class rather than the value: a field that is present and null is a
+            // moment in a batch's life, a field that is gone is a host update.
+            if (findField(runner.getClass(), "l1") == null) {
+                HookStatus.missingMember(FAMILY, "field", runner.getClass().getName(), "l1");
+            } else {
+                HookStatus.bound(FAMILY, "batch task");
+            }
+        }
         Object results = readFieldQuiet(runner, "l0");
         Object task = readFieldQuiet(runner, "l1");
+        if (task != null) {
+            if (findField(task.getClass(), "LIZ") == null) {
+                HookStatus.missingMember(FAMILY, "field", task.getClass().getName(), "LIZ");
+            } else {
+                HookStatus.bound(FAMILY, "requested comments");
+            }
+        }
         Object requested = readFieldQuiet(task, "LIZ");
         Set<String> requestedCids = commentIds(requested);
         boolean succeeded = results != null && !hasCompletionFailure(runner, task);

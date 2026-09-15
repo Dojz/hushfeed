@@ -571,6 +571,11 @@ public class CommentBatchTranslatorTest {
                 if (value instanceof Map) ((Map<?, ?>) value).clear();
                 else ((java.util.Collection<?>) value).clear();
             }
+            for (String name : new String[]{"cellAnchorEverResolved", "cellAnchorMissReported"}) {
+                Field flag = CommentBatchTranslator.class.getDeclaredField(name);
+                flag.setAccessible(true);
+                flag.set(null, false);
+            }
             for (String name : new String[]{"outstandingRequests", "completionsHandledForTests"}) {
                 Field counter = CommentBatchTranslator.class.getDeclaredField(name);
                 counter.setAccessible(true);
@@ -642,6 +647,62 @@ public class CommentBatchTranslatorTest {
         }
     }
 
+    /**
+     * A cell that cannot be read after cells have been read is a race, not a broken build.
+     *
+     * <p>The cell anchor is found by searching the manager's fields rather than by name, so one
+     * bind arriving before those fields are set would otherwise mark the family broken for the
+     * session on a host that is working: a miss is never retracted once the row has it.
+     */
+    @Test public void aStrayCellAfterAGoodOneDoesNotMarkTheBuildBroken() {
+        HookStatus.clear();
+        try {
+            Anchor anchor = anchor("aid-race", "cid-race");
+            CommentBatchTranslator.registerCommentCell(new View(context), anchor);
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            CommentBatchTranslator.registerCommentCell(new View(context), new StrangeManager());
+
+            assertEquals("a stray cell was reported as a broken build: "
+                    + HookStatus.missing("comment translation"),
+                    0, HookStatus.missing("comment translation").size());
+        } finally {
+            HookStatus.clear();
+        }
+    }
+
+    /** A runner that renamed the task or the list inside it is named, not swallowed. */
+    @Test public void aRenamedTaskOrRequestedListIsNamedToo() {
+        HookStatus.clear();
+        try {
+            CommentBatchTranslator.onNativeBatchComplete(
+                    new RunnerWithoutTask(new Object()));
+            CommentBatchTranslator.onNativeBatchComplete(
+                    new RunnerWithForeignTask(new Object()));
+
+            List<String> missing = HookStatus.missing("comment translation");
+            assertTrue("a renamed task field was not reported: " + missing,
+                    missing.stream().anyMatch(line -> line.endsWith("#l1")));
+            assertTrue("a renamed requested list was not reported: " + missing,
+                    missing.stream().anyMatch(line -> line.endsWith("#LIZ")));
+        } finally {
+            HookStatus.clear();
+        }
+    }
+
+    /** A completion with nothing to read is not evidence that anything was found. */
+    @Test public void aNullRunnerIsNotCountedAsAnAnchorThatBound() {
+        HookStatus.clear();
+        try {
+            CommentBatchTranslator.onNativeBatchComplete(null);
+            String line = HookStatus.report().stream()
+                    .filter(each -> each.contains("comment translation"))
+                    .findFirst().orElse("");
+            assertEquals("a null runner was counted on the row: " + line, "", line);
+        } finally {
+            HookStatus.clear();
+        }
+    }
+
     /** A build that still has all four says so, and says nothing is missing. */
     @Test public void aHostThatStillHasItsMembersReportsNothingMissing() {
         HookStatus.clear();
@@ -657,10 +718,13 @@ public class CommentBatchTranslatorTest {
             assertEquals("a healthy build reported a miss: "
                     + HookStatus.missing("comment translation"),
                     0, HookStatus.missing("comment translation").size());
+            // Six named things, not four methods: the completion reads three members of two
+            // objects. The count is asserted exactly so that dropping one report fails here.
             String line = HookStatus.report().stream()
                     .filter(each -> each.contains("comment translation"))
                     .findFirst().orElse("");
-            assertTrue("the row does not count the four anchors: " + line, line.contains("4"));
+            assertEquals("the row does not count every anchor the four entry points read",
+                    "comment translation: 6 found, 0 missing", line);
         } finally {
             HookStatus.clear();
         }
@@ -760,6 +824,30 @@ public class CommentBatchTranslatorTest {
         Runner(Object results, List<Comment> requested) {
             l0 = results;
             l1 = new Task(requested);
+        }
+    }
+
+    /** A host build that renamed the field the task arrives in. */
+    public static final class RunnerWithoutTask {
+        public final Object l0;
+
+        RunnerWithoutTask(Object results) {
+            l0 = results;
+        }
+    }
+
+    /** A task from a build that renamed the list of comments it asked about. */
+    public static final class TaskWithoutRequested {
+        public final List<Comment> rows = new ArrayList<>();
+    }
+
+    /** A runner carrying that task, which is how the rename would arrive. */
+    public static final class RunnerWithForeignTask {
+        public final Object l0;
+        public final TaskWithoutRequested l1 = new TaskWithoutRequested();
+
+        RunnerWithForeignTask(Object results) {
+            l0 = results;
         }
     }
 

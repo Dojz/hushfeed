@@ -90,21 +90,68 @@ public class FeedVisibilityTest {
             Shadows.shadowOf(Looper.getMainLooper()).idle();
             assertTrue("the window never laid out", homeTab.getWidth() > 0 && pager.getWidth() > 0);
             FeedVisibility.resolveForTests(activity.getPackageName(), "o1k", homeTab.getId());
+            try {
+                assertTrue(FeedVisibility.isOnFeed(activity));
+                assertTrue(FeedVisibility.onRecommendationFeed(activity));
 
-            assertTrue(FeedVisibility.isOnFeed(activity));
-            assertTrue(FeedVisibility.onRecommendationFeed(activity));
+                // The name tap: the pager scrolls to the profile page, one screen width right.
+                pager.scrollTo(pager.getWidth(), 0);
+                assertTrue("the tab still reads shown and selected",
+                        homeTab.isShown() && homeTab.isSelected());
+                assertFalse("a profile scrolled over the feed counted as the feed",
+                        FeedVisibility.isOnFeed(activity));
+                assertFalse(FeedVisibility.onRecommendationFeed(activity));
 
-            // The name tap: the pager scrolls to the profile page, one screen width to the right.
-            pager.scrollTo(pager.getWidth(), 0);
-            assertTrue("the tab still reads shown and selected", homeTab.isShown() && homeTab.isSelected());
-            assertFalse("a profile scrolled over the feed counted as the feed",
-                    FeedVisibility.isOnFeed(activity));
-            assertFalse(FeedVisibility.onRecommendationFeed(activity));
+                // Back: the feed's page returns under the finger.
+                pager.scrollTo(0, 0);
+                assertTrue(FeedVisibility.isOnFeed(activity));
+                assertTrue(FeedVisibility.onRecommendationFeed(activity));
+            } finally {
+                // The id cache is process-wide and this class shares a loader with every other
+                // test: a tab id left resolved answers for whatever runs next.
+                FeedVisibility.resolveForTests(activity.getPackageName(), "o1k", 0);
+            }
+        }
+    }
 
-            // Back: the feed's page returns under the finger.
-            pager.scrollTo(0, 0);
-            assertTrue(FeedVisibility.isOnFeed(activity));
-            assertTrue(FeedVisibility.onRecommendationFeed(activity));
+    /**
+     * An ancestor that has not been measured, or that draws outside itself, cannot prove the tab
+     * is gone. Both used to answer "not the feed" on the feed, which costs the reader the button
+     * and lifts the daily hold: {@code SessionLockOverlay} hides its panel on the same question.
+     */
+    @Test public void anAncestorThatCannotHideTheTabDoesNotCountAgainstIt() {
+        try (var controller = Robolectric.buildActivity(Activity.class).setup().visible()) {
+            Activity activity = controller.get();
+            FrameLayout outer = new FrameLayout(activity);
+            FrameLayout unmeasured = new FrameLayout(activity);
+            outer.addView(unmeasured, new FrameLayout.LayoutParams(0, 0));
+            View homeTab = new View(activity);
+            homeTab.setId(0x7f0a4b89);
+            homeTab.setSelected(true);
+            unmeasured.addView(homeTab, new FrameLayout.LayoutParams(60, 40));
+            activity.setContentView(outer);
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            FeedVisibility.resolveForTests(activity.getPackageName(), "o1k", homeTab.getId());
+            try {
+                homeTab.layout(0, 0, 60, 40);
+                assertTrue("an ancestor with no size counted as hiding the tab",
+                        FeedVisibility.isOnFeed(activity));
+
+                // The same group, measured, but drawing outside itself: a child beyond its box
+                // is on screen, which is the whole point of clipChildren being false.
+                unmeasured.layout(0, 0, 10, 10);
+                unmeasured.setClipChildren(false);
+                homeTab.layout(200, 200, 260, 240);
+                assertTrue("a group that does not clip counted as hiding the tab",
+                        FeedVisibility.isOnFeed(activity));
+
+                // And with clipping on, the same geometry is genuinely out of sight.
+                unmeasured.setClipChildren(true);
+                assertFalse("a clipped group did not hide a tab laid out outside it",
+                        FeedVisibility.isOnFeed(activity));
+            } finally {
+                FeedVisibility.resolveForTests(activity.getPackageName(), "o1k", 0);
+            }
         }
     }
 
@@ -155,6 +202,14 @@ public class FeedVisibilityTest {
                 storyPager.setVisibility(View.GONE);
                 assertFalse(FeedVisibility.isStoryVisible(activity));
                 assertTrue("a video detail page lost the button",
+                        FeedVisibility.isOnFeed(activity));
+
+                // A viewer dismissed by moving off screen, pager still attached and VISIBLE.
+                storyPager.setVisibility(View.VISIBLE);
+                storyPager.setTranslationY(5000f);
+                assertFalse("a story moved off screen still counted as covering the feed",
+                        FeedVisibility.isStoryVisible(activity));
+                assertTrue("a detail page lost the button to a dismissed story",
                         FeedVisibility.isOnFeed(activity));
             } finally {
                 FeedVisibility.onDetailDestroyed(page);

@@ -9,6 +9,7 @@ package app.morphe.extension.tiktok.blockauthor;
 import android.app.Activity;
 import android.graphics.Rect;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewParent;
 
 import app.morphe.extension.shared.diagnostics.HookStatus;
@@ -51,6 +52,12 @@ public final class FeedVisibility {
      * The story viewer's pager. One id rather than the comment sheet's two: this one is not
      * obfuscated, so it cannot collide with an unrelated layout that happens to reuse a
      * shortened name.
+     *
+     * <p>Read off 46.2.3 on 2026-09-15 by comparing what {@code dumpsys activity top} shows in
+     * all three states: 81 ids are visible in the story viewer and in neither the feed nor a
+     * profile, and this is the one that names itself. Not yet checked against 46.7.3 or 46.8.3,
+     * so a build that does not have it reports "story viewer: 0 found, 1 missing" and the chips
+     * behave as they did before this was added.
      */
     private static final String STORY_PAGER_RESOURCE_NAME = "vp_story_collection";
 
@@ -155,7 +162,10 @@ public final class FeedVisibility {
     public static boolean isStoryVisible(Activity activity) {
         View pager = namedView(activity, STORY_PAGER_RESOURCE_NAME, storyPagerReference,
                 reference -> storyPagerReference = reference, "story viewer");
-        return pager != null && pager.isShown();
+        // Shown is not enough here either. A viewer that is dismissed by moving off screen with
+        // its pager attached and VISIBLE would go on answering yes, and every video detail page
+        // opened from a grid or a search would lose the button until it detached.
+        return pager != null && pager.isShown() && !isScrolledAway(pager);
     }
 
     /**
@@ -191,7 +201,16 @@ public final class FeedVisibility {
             View group = (View) parent;
             rect.offset(child.getLeft() + Math.round(child.getTranslationX()) - group.getScrollX(),
                     child.getTop() + Math.round(child.getTranslationY()) - group.getScrollY());
-            if (!rect.intersect(0, 0, group.getWidth(), group.getHeight())) return true;
+            // Only an ancestor that has been measured and clips its children can hide anything.
+            // A group with no size yet is one that has not laid out, and a group that draws
+            // outside itself is why FLAG_CLIP_CHILDREN exists: taking either as proof the tab is
+            // gone would answer "not the feed" on the feed, which is the answer that costs the
+            // reader the button and lifts the daily hold.
+            boolean clips = !(group instanceof ViewGroup) || ((ViewGroup) group).getClipChildren();
+            if (clips && group.getWidth() > 0 && group.getHeight() > 0
+                    && !rect.intersect(0, 0, group.getWidth(), group.getHeight())) {
+                return true;
+            }
             // The app's own root. Above it are the decor and the window, whose size is the
             // system's business: a window resized under a laid-out root, split screen or an
             // inset would read as "not the feed" while the reader is on it.
