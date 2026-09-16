@@ -1714,8 +1714,8 @@ public final class L10nTranslations {
                 "Sticker");
         table.put("Sticker destination",
                 "Speicherort für Sticker");
-        table.put("Sticker saved as %1$s",
-                "Sticker als %1$s gespeichert");
+        table.put("Sticker saved to %1$s",
+                "Sticker gespeichert in %1$s");
         table.put("Still here. Nothing is waiting.",
                 "Immer noch hier. Es wartet nichts.");
         table.put("Still reading the record. Tap again in a moment.",
@@ -3847,8 +3847,8 @@ public final class L10nTranslations {
                 "Sticker");
         table.put("Sticker destination",
                 "Destino de los stickers");
-        table.put("Sticker saved as %1$s",
-                "Sticker guardado como %1$s");
+        table.put("Sticker saved to %1$s",
+                "Sticker guardado en %1$s");
         table.put("Still here. Nothing is waiting.",
                 "Sigues aquí. No hay nada esperando.");
         table.put("Still reading the record. Tap again in a moment.",
@@ -5980,8 +5980,8 @@ public final class L10nTranslations {
                 "Stiker");
         table.put("Sticker destination",
                 "Lokasi simpan stiker");
-        table.put("Sticker saved as %1$s",
-                "Stiker disimpan sebagai %1$s");
+        table.put("Sticker saved to %1$s",
+                "Stiker disimpan ke %1$s");
         table.put("Still here. Nothing is waiting.",
                 "Masih di sini. Tidak ada yang menunggu.");
         table.put("Still reading the record. Tap again in a moment.",
@@ -8113,8 +8113,8 @@ public final class L10nTranslations {
                 "Sticker");
         table.put("Sticker destination",
                 "Destino dos stickers");
-        table.put("Sticker saved as %1$s",
-                "Sticker salvo como %1$s");
+        table.put("Sticker saved to %1$s",
+                "Sticker salvo em %1$s");
         table.put("Still here. Nothing is waiting.",
                 "Você ainda está aqui. Nada está esperando.");
         table.put("Still reading the record. Tap again in a moment.",

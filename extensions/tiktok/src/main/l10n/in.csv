@@ -74,6 +74,7 @@ Seen,Terlihat
 Seen this session,Terlihat di sesi ini
 "Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this. It reads the style once per run and remembers it.","Tampilkan lembar pengurutan milik TikTok di setiap publikasi, dengan pilihan populer, terbaru, media dan kreator, bukan baris terpangkas yang didapat akun Anda. Mulai ulang TikTok agar berlaku. Aplikasi membaca gayanya sekali per proses dan mengingatnya."
 Sound link copied,Tautan suara disalin
+Sticker saved to %1$s,Stiker disimpan ke %1$s
 Tap again to follow,Ketuk lagi untuk mengikuti
 Tap again to like,Ketuk lagi untuk menyukai
 That is one minute today,Itu satu menit hari ini
@@ -488,7 +489,6 @@ Start each new video at your default. A manual choice lasts until the video chan
 Start feature gate recording,Mulai merekam feature gate
 Sticker,Stiker
 Sticker destination,Lokasi simpan stiker
-Sticker saved as %1$s,Stiker disimpan sebagai %1$s
 Still reading the record. Tap again in a moment.,Catatannya masih dibaca. Ketuk lagi sebentar lagi.
 Still saving the last one,Yang sebelumnya masih disimpan
 "Stop ByteDance AppLog events, AppsFlyer attribution, explicit Firebase screen reports and crash reporting from being sent. TikTok's own diagnostics go quiet with them.","Hentikan pengiriman peristiwa AppLog ByteDance, atribusi AppsFlyer, laporan layar Firebase, dan laporan mogok. Diagnostik milik TikTok ikut diam bersamanya."

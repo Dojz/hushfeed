@@ -1,5 +1,7 @@
 ## 0.40.0
 
+* A sticker save says where it landed, the same as every other download. It used to say "Sticker saved as MP4" and the reader had to guess the folder. It says the folder now, matching the four other savers.
+
 * The Feature Gate Lab speaks in plain terms. "Getter used", "Loaded", "All actionable", "Applies saved rules at supported getters", "Effective getter result", "TikTok cached value", "Not present in the current cache", "Getter not requested yet" and "Override saved but off" were implementation words that meant nothing to anyone who didn't write the code. The tabs say Seen, All, Overridden; the filter says Not seen; the states say TikTok read it, Not seen yet, Saved, override off; the detail page says What TikTok gets, TikTok's own value, Not read yet; and the master switch says Replace values when TikTok asks for them. The three source-name tables are two: the row badge matches its tab label, and the detail page spells it out.
 
 * Hide Tako AI now covers three additional trigger components. The slot component hooked in 0.39.0 only draws the ask bar on some accounts; on others, TikTok routes through a trigger component in the tikbot package instead, plus a "roof" variant and a detail-page trigger. A reporter's export on 0.39.0 showed the slot hook never firing while the bar was still drawn: the feed-level trigger was the one that ran. All four trigger binds now guard the same way, and the hook status family records whichever path fired.

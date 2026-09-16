@@ -76,6 +76,7 @@ Seen	Gesehen
 Seen this session	In dieser Sitzung gesehen
 Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this. It reads the style once per run and remembers it.	TikToks eigenes Sortiermenü bei jedem Beitrag zeigen, mit Beliebt, Neueste, Medien und Ersteller, statt der gekürzten Zeile, die dein Konto bekommen hat. TikTok neu starten, damit das gilt. Es liest den Stil einmal pro Start und merkt ihn sich.
 Sound link copied	Soundlink kopiert
+Sticker saved to %1$s	Sticker gespeichert in %1$s
 Tap again to follow	Noch einmal tippen zum Folgen
 Tap again to like	Noch einmal tippen zum Liken
 That is one minute today	Das ist eine Minute heute
@@ -490,7 +491,6 @@ Start each new video at your default. A manual choice lasts until the video chan
 Start feature gate recording	Feature-Gate-Aufzeichnung starten
 Sticker	Sticker
 Sticker destination	Speicherort für Sticker
-Sticker saved as %1$s	Sticker als %1$s gespeichert
 Still reading the record. Tap again in a moment.	Der Verlauf wird noch gelesen. Tippe gleich noch einmal.
 Still saving the last one	Das letzte wird noch gespeichert
 Stop ByteDance AppLog events, AppsFlyer attribution, explicit Firebase screen reports and crash reporting from being sent. TikTok's own diagnostics go quiet with them.	ByteDance-AppLog-Ereignisse, AppsFlyer-Attribution, explizite Firebase-Bildschirmberichte und Absturzmeldungen nicht mehr senden. TikToks eigene Diagnose verstummt damit ebenfalls.
