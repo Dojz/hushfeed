@@ -1,3 +1,7 @@
+## 0.38.0
+
+* Hide series no longer empties the feed. TikTok hangs a paid content struct on ordinary recommended videos with its fields left at defaults, and the filter treated the struct being there as the marker, so with the switch on nine of ten videos in a batch were removed and For You never loaded anything. A video counts as a series when it says it is paid content, or when that struct carries a collection behind it: an id, a name, an episode number or the intro flag. Hide playlist videos and Hide AI generated videos had the same fault and got the same repair, so an empty mix or moderation struct is no longer a match. Reported on 0.36.0 with a diagnostic export that named the filter.
+
 ## 0.37.0
 
 * The Android 17 audit covers the changes the platform will actually enforce, not just the three on the developer site. A phone running Android 16 already carries eleven compat changes gated at target 37, and three of them could have reached injected code. None does: the payload loads no code from a file, nothing in it subclasses Thread, and a handshake the platform refuses is reported rather than retried, which is the same answer Certificate Transparency gets. Each verdict is held by a test, so a change to any of the three fails the suite instead of a phone.
