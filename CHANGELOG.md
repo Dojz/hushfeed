@@ -1,5 +1,7 @@
 ## 0.37.0
 
+* The Android 17 audit covers the changes the platform will actually enforce, not just the three on the developer site. A phone running Android 16 already carries eleven compat changes gated at target 37, and three of them could have reached injected code. None does: the payload loads no code from a file, nothing in it subclasses Thread, and a handshake the platform refuses is reported rather than retried, which is the same answer Certificate Transparency gets. Each verdict is held by a test, so a change to any of the three fails the suite instead of a phone.
+
 * Every source notice that cites ReVanced's blocked GitHub repository now carries the GitLab mirror beside it, so a reader following the origin of a file reaches the file rather than a takedown page. The original line stays as the record of which revision the code came from, and a test fetches each mirror once so the next takedown is found by the suite.
 
 * The legacy settings import and export path is gone from the shared library. Nothing but its own test reached it, and it held the last English toasts the translation tables could not cover. Backups go through the settings backup, which still reads the older metra-settings format.
