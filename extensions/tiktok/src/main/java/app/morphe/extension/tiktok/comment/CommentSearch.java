@@ -321,8 +321,7 @@ public final class CommentSearch {
         status.setClickable(false);
         status.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
         status.setVisibility(View.GONE);
-        status.setPadding(padding, 0, padding, Math.round(
-                4 * context.getResources().getDisplayMetrics().density));
+        status.setPadding(padding, 0, padding, SettingsUi.dp(context, 4));
         status.setLayoutParams(new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));

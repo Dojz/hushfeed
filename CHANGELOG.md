@@ -1,5 +1,9 @@
 ## 0.37.0
 
+* Every source notice that cites ReVanced's blocked GitHub repository now carries the GitLab mirror beside it, so a reader following the origin of a file reaches the file rather than a takedown page. The original line stays as the record of which revision the code came from, and a test fetches each mirror once so the next takedown is found by the suite.
+
+* The legacy settings import and export path is gone from the shared library. Nothing but its own test reached it, and it held the last English toasts the translation tables could not cover. Backups go through the settings backup, which still reads the older metra-settings format.
+
 * Inside the patch bundle, thirteen hand-rolled register checks, sixteen hand-written entry guards, two copies of the argument-register helper with different casts, two same-named string helpers with different meanings and four superclass walks are one helper each. Nothing a user sees changes; the next TikTok build that moves a shape is one fix in one file instead of a hunt.
 
 * Auto translate comments no longer walks every field of every comment cell's manager, and the manager's declared methods, three times per cell on the thread that binds the list. The manager's shape is a property of its class, so the first cell of a class pays and the rest read three fields.

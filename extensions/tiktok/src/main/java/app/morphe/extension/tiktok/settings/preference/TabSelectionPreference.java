@@ -134,7 +134,7 @@ public class TabSelectionPreference extends Preference {
         LinearLayout dialogView = new LinearLayout(context);
         dialogView.setOrientation(LinearLayout.VERTICAL);
         dialogView.setBackground(createDialogBackground());
-        int padding = dpToPx(22);
+        int padding = SettingsUi.dp(getContext(), 22);
         dialogView.setPadding(padding, padding, padding, padding);
 
         TextView title = new TextView(context);
@@ -161,13 +161,13 @@ public class TabSelectionPreference extends Preference {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
-        helperParams.setMargins(0, dpToPx(16), 0, dpToPx(12));
+        helperParams.setMargins(0, SettingsUi.dp(getContext(), 16), 0, SettingsUi.dp(getContext(), 12));
         dialogView.addView(helper, helperParams);
 
         LinearLayout optionsContainer = new LinearLayout(context);
         optionsContainer.setOrientation(LinearLayout.VERTICAL);
         optionsContainer.setBackground(createListBackground());
-        int optionInset = Math.max(1, dpToPx(1));
+        int optionInset = Math.max(1, SettingsUi.dp(getContext(), 1));
         optionsContainer.setPadding(optionInset, optionInset, optionInset, optionInset);
 
         for (OptionRow option : observedOptions) {
@@ -186,7 +186,7 @@ public class TabSelectionPreference extends Preference {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 SettingsUi.dialogListHeight(context, 380)
         );
-        scrollParams.setMargins(0, 0, 0, dpToPx(16));
+        scrollParams.setMargins(0, 0, 0, SettingsUi.dp(getContext(), 16));
         dialogView.addView(scrollView, scrollParams);
 
         LinearLayout actions = new LinearLayout(context);
@@ -283,7 +283,7 @@ public class TabSelectionPreference extends Preference {
         row.setOrientation(LinearLayout.HORIZONTAL);
         row.setGravity(Gravity.CENTER_VERTICAL);
         row.setBackground(SettingsUi.listRow(context, getDialogBackgroundColor()));
-        row.setPadding(dpToPx(10), dpToPx(10), dpToPx(10), dpToPx(10));
+        row.setPadding(SettingsUi.dp(getContext(), 10), SettingsUi.dp(getContext(), 10), SettingsUi.dp(getContext(), 10), SettingsUi.dp(getContext(), 10));
         // A clickable view is only focusable by default from API 26; below that the d-pad
         // would skip every row and the focus wash above would never show.
         row.setFocusable(true);
@@ -368,7 +368,7 @@ public class TabSelectionPreference extends Preference {
         ));
         wrapper.addView(divider, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                Math.max(1, dpToPx(1))
+                Math.max(1, SettingsUi.dp(getContext(), 1))
         ));
         return wrapper;
     }
@@ -378,7 +378,7 @@ public class TabSelectionPreference extends Preference {
         button.setText(text);
         button.setTextSize(16);
         button.setGravity(Gravity.CENTER);
-        button.setPadding(dpToPx(12), dpToPx(8), dpToPx(12), dpToPx(6));
+        button.setPadding(SettingsUi.dp(getContext(), 12), SettingsUi.dp(getContext(), 8), SettingsUi.dp(getContext(), 12), SettingsUi.dp(getContext(), 6));
         SettingsUi.styleTextAction(button, primary);
         return button;
     }
@@ -409,10 +409,6 @@ public class TabSelectionPreference extends Preference {
             this.key = key;
             this.label = label;
         }
-    }
-
-    private int dpToPx(int dp) {
-        return Math.round(dp * getContext().getResources().getDisplayMetrics().density);
     }
 
     private GradientDrawable createDialogBackground() {

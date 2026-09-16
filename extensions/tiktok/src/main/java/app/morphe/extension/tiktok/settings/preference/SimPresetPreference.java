@@ -98,7 +98,7 @@ public class SimPresetPreference extends Preference {
         LinearLayout dialogView = new LinearLayout(context);
         dialogView.setOrientation(LinearLayout.VERTICAL);
         dialogView.setBackground(createDialogBackground());
-        int padding = dpToPx(20);
+        int padding = SettingsUi.dp(getContext(), 20);
         dialogView.setPadding(padding, padding, padding, padding);
 
         TextView title = new TextView(context);
@@ -119,7 +119,7 @@ public class SimPresetPreference extends Preference {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
-        helperParams.setMargins(0, dpToPx(18), 0, dpToPx(8));
+        helperParams.setMargins(0, SettingsUi.dp(getContext(), 18), 0, SettingsUi.dp(getContext(), 8));
         dialogView.addView(helper, helperParams);
 
         EditText search = new EditText(context);
@@ -138,16 +138,16 @@ public class SimPresetPreference extends Preference {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
-        resultParams.setMargins(0, dpToPx(10), 0, 0);
+        resultParams.setMargins(0, SettingsUi.dp(getContext(), 10), 0, 0);
         dialogView.addView(resultCount, resultParams);
 
         ListView listView = new ListView(context);
         listView.setBackgroundColor(Color.TRANSPARENT);
-        int listPadding = Math.max(1, dpToPx(1));
+        int listPadding = Math.max(1, SettingsUi.dp(getContext(), 1));
         listView.setPadding(listPadding, listPadding, listPadding, listPadding);
         listView.setClipToPadding(false);
         listView.setDivider(new ColorDrawable(getDialogDividerColor()));
-        listView.setDividerHeight(Math.max(1, dpToPx(1)));
+        listView.setDividerHeight(Math.max(1, SettingsUi.dp(getContext(), 1)));
         listView.setFooterDividersEnabled(true);
         PresetAdapter adapter = new PresetAdapter(context, visiblePresets);
         listView.setAdapter(adapter);
@@ -156,13 +156,13 @@ public class SimPresetPreference extends Preference {
 
         FrameLayout listContainer = new FrameLayout(context);
         listContainer.setBackground(createListBackground());
-        int containerInset = Math.max(1, dpToPx(1));
+        int containerInset = Math.max(1, SettingsUi.dp(getContext(), 1));
         listContainer.setPadding(containerInset, containerInset, containerInset, containerInset);
         LinearLayout.LayoutParams listParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 SettingsUi.dialogListHeight(context, 320)
         );
-        listParams.setMargins(0, dpToPx(12), 0, dpToPx(14));
+        listParams.setMargins(0, SettingsUi.dp(getContext(), 12), 0, SettingsUi.dp(getContext(), 14));
         listContainer.addView(listView, new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
@@ -177,7 +177,7 @@ public class SimPresetPreference extends Preference {
         emptyState.setTag("sim_preset_empty_state");
         emptyState.setFocusable(false);
         emptyState.setVisibility(View.GONE);
-        int emptyPadding = dpToPx(16);
+        int emptyPadding = SettingsUi.dp(getContext(), 16);
         emptyState.setPadding(emptyPadding, emptyPadding, emptyPadding, emptyPadding);
         listContainer.addView(emptyState, new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -195,7 +195,7 @@ public class SimPresetPreference extends Preference {
         clearButton.setTextSize(16);
         SettingsUi.styleTextAction(clearButton, false);
         clearButton.setTag("sim_preset_clear");
-        clearButton.setPadding(dpToPx(12), dpToPx(8), dpToPx(12), dpToPx(6));
+        clearButton.setPadding(SettingsUi.dp(getContext(), 12), SettingsUi.dp(getContext(), 8), SettingsUi.dp(getContext(), 12), SettingsUi.dp(getContext(), 6));
         actions.addView(clearButton, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
@@ -204,8 +204,8 @@ public class SimPresetPreference extends Preference {
         cancelButton.setText(android.R.string.cancel);
         cancelButton.setTextSize(16);
         SettingsUi.styleTextAction(cancelButton, false);
-        int buttonHorizontalPadding = dpToPx(12);
-        cancelButton.setPadding(buttonHorizontalPadding, dpToPx(8), buttonHorizontalPadding, dpToPx(6));
+        int buttonHorizontalPadding = SettingsUi.dp(getContext(), 12);
+        cancelButton.setPadding(buttonHorizontalPadding, SettingsUi.dp(getContext(), 8), buttonHorizontalPadding, SettingsUi.dp(getContext(), 6));
         actions.addView(cancelButton, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
@@ -336,10 +336,6 @@ public class SimPresetPreference extends Preference {
         mccMncPreference.setText("");
         operatorNamePreference.setText("");
         refreshSummary("", "", "");
-    }
-
-    private int dpToPx(int dp) {
-        return Math.round(dp * getContext().getResources().getDisplayMetrics().density);
     }
 
     private GradientDrawable createDialogBackground() {
