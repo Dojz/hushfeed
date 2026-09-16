@@ -7,6 +7,7 @@ package app.morphe.extension.tiktok.settings.preference;
 import app.morphe.extension.tiktok.settings.L10n;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
@@ -97,9 +98,10 @@ public class SimPresetPreference extends Preference {
         Context context = getContext();
         LinearLayout dialogView = new LinearLayout(context);
         dialogView.setOrientation(LinearLayout.VERTICAL);
-        dialogView.setBackground(createDialogBackground());
+        // No background of its own. The card is the window's, so it covers the platform's
+        // button panel as well, which is where the actions now live.
         int padding = SettingsUi.dp(getContext(), 20);
-        dialogView.setPadding(padding, padding, padding, padding);
+        dialogView.setPadding(padding, padding, padding, SettingsUi.dp(getContext(), 8));
 
         TextView title = new TextView(context);
         title.setText(L10n.t(getContext(), "SIM country preset"));
@@ -186,43 +188,17 @@ public class SimPresetPreference extends Preference {
         ));
         dialogView.addView(listContainer, listParams);
 
-        LinearLayout actions = new LinearLayout(context);
-        actions.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
-        // The way back to no preset. Picking a row applied it and closed the dialog, and there
-        // was nothing here that undid that short of retyping three fields.
-        TextView clearButton = new TextView(context);
-        clearButton.setText(L10n.t(context, "Clear preset"));
-        clearButton.setTextSize(16);
-        SettingsUi.styleTextAction(clearButton, false);
-        clearButton.setTag("sim_preset_clear");
-        clearButton.setPadding(SettingsUi.dp(getContext(), 12), SettingsUi.dp(getContext(), 8), SettingsUi.dp(getContext(), 12), SettingsUi.dp(getContext(), 6));
-        actions.addView(clearButton, new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        ));
-        TextView cancelButton = new TextView(context);
-        cancelButton.setText(android.R.string.cancel);
-        cancelButton.setTextSize(16);
-        SettingsUi.styleTextAction(cancelButton, false);
-        int buttonHorizontalPadding = SettingsUi.dp(getContext(), 12);
-        cancelButton.setPadding(buttonHorizontalPadding, SettingsUi.dp(getContext(), 8), buttonHorizontalPadding, SettingsUi.dp(getContext(), 6));
-        actions.addView(cancelButton, new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        ));
-        dialogView.addView(actions, new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        ));
-
+        // The actions are the platform's own. They were the last row of this column, under a
+        // list that is never shorter than 220dp, and the custom panel clips rather than scrolls,
+        // so at a large text size they were what got cut. The platform keeps its button panel on
+        // screen and shrinks the custom panel instead.
         AlertDialog dialog = new AlertDialog.Builder(context)
                 .setView(dialogView)
+                // The way back to no preset. Picking a row applied it and closed the dialog, and
+                // nothing undid that short of retyping three fields.
+                .setNeutralButton(L10n.t(context, "Clear preset"), (ignored, which) -> clearPreset())
+                .setNegativeButton(android.R.string.cancel, null)
                 .create();
-        cancelButton.setOnClickListener(view -> dialog.dismiss());
-        clearButton.setOnClickListener(view -> {
-            clearPreset();
-            dialog.dismiss();
-        });
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             SimPreset preset = visiblePresets.get(position);
@@ -248,7 +224,9 @@ public class SimPresetPreference extends Preference {
 
         filterPresets("", adapter);
         dialog.show();
-        SettingsUi.styleDialog(dialog);
+        SettingsUi.styleFramedDialog(dialog);
+        View clearButton = dialog.getButton(DialogInterface.BUTTON_NEUTRAL);
+        if (clearButton != null) clearButton.setTag("sim_preset_clear");
     }
 
     private boolean savePreset(SimPreset preset) {
@@ -336,10 +314,6 @@ public class SimPresetPreference extends Preference {
         mccMncPreference.setText("");
         operatorNamePreference.setText("");
         refreshSummary("", "", "");
-    }
-
-    private GradientDrawable createDialogBackground() {
-        return SettingsUi.borderedSurface(getContext(), 6, true);
     }
 
     private GradientDrawable createListBackground() {
