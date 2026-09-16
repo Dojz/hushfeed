@@ -11,6 +11,7 @@
 A creator pattern is taking too long and was switched off: %1$s	Ein Kreator-Muster braucht zu lange und wurde abgeschaltet: %1$s
 A hidden puzzle may be the cause.	Ein ausgeblendetes Rätsel kann die Ursache sein.
 A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.	Ein Host, der beim Teilen oder Kopieren an die Stelle von tiktok.com tritt, zum Beispiel vxtiktok.com. Leer lassen, um TikToks eigene Links zu teilen. Geändert werden nur TikTok-Links und nur der Host, es wird nichts irgendwohin geschickt.
+A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.	Ein kleines Label im Feed zeigt die verbleibenden Minuten oder Videos des heutigen Budgets.
 A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.	Eine Webadresse in einem Kommentar lässt sich antippen, statt sie von Hand herauszukopieren. Ein Tippen an anderer Stelle im Kommentar tut weiterhin das, was es vorher tat.
 Activity Center (PIA)	Activity Center (PIA)
 Automatic advance stopped after one video	Automatisches Weiterschalten nach einem Video angehalten
@@ -27,6 +28,7 @@ Current: %1$s	Aktuell: %1$s
 Discard edits	Änderungen verwerfen
 Empty	Leer
 Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.	Das Menü leeren, das sich beim langen Drücken des TikTok-Symbols auf dem Startbildschirm öffnet. Wird dies ausgeschaltet, wird TikTok gebeten, sie wieder aufzubauen. Ein Tippen auf das Symbol öffnet die App weiterhin, und eine selbst angeheftete Verknüpfung bleibt dort, wo sie abgelegt wurde.
+Enter a number.	Gib eine Zahl ein.
 Field edits were discarded.	Die Feldänderungen wurden verworfen.
 Field edits were not saved.	Die Feldänderungen wurden nicht gespeichert.
 Filter settings	Filtereinstellungen
@@ -36,12 +38,14 @@ Keep the Favorites tab	Favoriten-Tab behalten
 Link copied	Link kopiert
 Links in comments open	Links in Kommentaren lassen sich öffnen
 Media Config (VE)	Medienkonfiguration (VE)
+Mutes the video behind the comment sheet while you read. Sound comes back when the sheet closes.	Schaltet das Video hinter dem Kommentarfeld stumm, während du liest. Der Ton kommt zurück, wenn das Feld geschlossen wird.
 Not blocked	Nicht blockiert
 Not read yet	Noch nicht gelesen
 Not saved yet	Noch nicht gespeichert
 Not seen	Nicht gesehen
 Not seen yet	Noch nicht gesehen
 Nothing on this page changes what TikTok does until they are on.	Nichts auf dieser Seite ändert etwas an TikTok, solange sie aus sind.
+Once today's budget runs out, the hold stays and cannot be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out.	Sobald das heutige Budget aufgebraucht ist, bleibt die Sperre bestehen. Die Budgeteinstellungen sind bis zum nächsten Tag gesperrt. Schalte dies jederzeit vor Ablauf des Budgets aus.
 Overridden	Überschrieben
 Override set, not read yet	Überschreibung gesetzt, noch nicht gelesen
 Recovered an interrupted settings change. Restart TikTok to apply this.	Eine unterbrochene Einstellungsänderung wurde wiederhergestellt. TikTok neu starten, damit das gilt.
@@ -81,6 +85,8 @@ Tap again to follow	Noch einmal tippen zum Folgen
 Tap again to like	Noch einmal tippen zum Liken
 That is one minute today	Das ist eine Minute heute
 That is one video today	Das ist ein Video heute
+The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.	Der Feed dunkelt in den letzten drei Viertelminuten vor der Sperre ab, damit man dort ankommt statt darauf zu landen. Braucht ein Zeitbudget und eine Sperre.
+The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.	Der Feed wartet auf ein Tippen, bevor er wieder abspielt, wenn du zur App zurückkehrst. Nachrichten, Profile und Suche bleiben einen Tipp entfernt.
 This video has no link to copy	Dieses Video hat keinen Link zum Kopieren
 This video has no sound of its own	Dieses Video hat keinen eigenen Sound
 TikTok read it	TikTok hat ihn gelesen
@@ -709,12 +715,9 @@ Daily video budget	Tägliches Videobudget
 Daily time budget	Tägliches Zeitbudget
 Hold the feed after the budget	Feed nach dem Budget anhalten
 Quieten the feed while comments are open	Feed stummschalten, solange Kommentare offen sind
-Off by default. The video behind the comment sheet keeps playing, with sound, while you read. Switched on, Hushfeed asks for the sound the moment a sheet opens and hands it back when it closes, which is how one app tells another to stop.	Standardmäßig aus. Das Video hinter den Kommentaren läuft mit Ton weiter, während du liest. Eingeschaltet fordert Hushfeed den Ton an, sobald die Kommentare aufgehen, und gibt ihn beim Schließen zurück. So sagt eine App einer anderen, dass sie aufhören soll.
 Do not start the feed on returning	Feed beim Zurückkommen nicht starten
-Off by default. TikTok plays again by itself every time you come back to the app. Switched on, the feed waits for one tap first. The tab bar is left alone, so messages, a profile and search are still one tap away.	Standardmäßig aus. TikTok spielt bei jeder Rückkehr von selbst weiter. Eingeschaltet wartet der Feed erst auf einen Tipp. Die Tab-Leiste bleibt frei, damit Nachrichten, ein Profil und die Suche einen Tipp entfernt bleiben.
 Tap to start the feed	Zum Starten des Feeds tippen
 Fade the feed out before the hold	Feed vor dem Anhalten ausblenden
-Off by default. Switched on, the feed dims over the last three quarters of a minute of a time budget, most of it in the final half minute, so the hold is somewhere you arrive rather than somewhere you land. Needs a budget in minutes and a hold to arrive at: a budget counted in videos has no time left to follow, and with the hold switched off there is nothing to lead into. Nothing fades if you have turned animations off.	Standardmäßig aus. Eingeschaltet wird der Feed über die letzten drei Viertelminuten eines Zeitbudgets dunkler, das meiste davon in der letzten halben Minute, damit das Anhalten kein Sprung ist. Braucht ein Budget in Minuten und ein Anhalten, auf das es zuläuft: ein Budget in Videos hat keine verbleibende Zeit, und ohne Anhalten gibt es nichts, worauf es zuläuft. Es wird nichts ausgeblendet, wenn Animationen abgeschaltet sind.
 Start the day at	Tag beginnt um
 That is %1$d videos today	Das sind %1$d Videos heute
 The feed is open again	Der Feed ist wieder offen
@@ -766,7 +769,6 @@ That settings backup is incomplete, so it may have been cut short. Nothing was a
 That settings backup holds a value Hushfeed cannot read. Nothing was altered.	Diese Einstellungssicherung enthält einen Wert, den Hushfeed nicht lesen kann. Es wurde nichts geändert.
 That settings backup holds more Feature Gate Lab rules than the Lab takes. Nothing was altered.	Diese Einstellungssicherung enthält mehr Feature-Gate-Lab-Regeln, als das Lab annimmt. Es wurde nichts geändert.
 Lock today's budget	Heutiges Budget sperren
-Off by default. Switched on, the hold that starts when today's budget runs out has no way out, and the budgets, the reset hour and this switch cannot be changed again until the day starts over. Switch it off any time before the budget runs out.	Standardmäßig aus. Eingeschaltet hat die Sperre, die beim Aufbrauchen des heutigen Budgets beginnt, keinen Ausweg, und die Budgets, die Rücksetzstunde und dieser Schalter lassen sich bis zum Tagesbeginn nicht mehr ändern. Vor dem Aufbrauchen des Budgets kann er jederzeit ausgeschaltet werden.
 Today's budget is locked. This can be changed again at %1$s.	Das heutige Budget ist gesperrt. Änderungen sind wieder ab %1$s möglich.
 Today started over. Tap again to put the counts back.	Heute wurde neu gestartet. Zum Zurücksetzen der Zähler erneut tippen.
 Today's budget is locked. The day starts over at %1$s.	Das heutige Budget ist gesperrt. Der Tag beginnt um %1$s von vorn.
@@ -886,7 +888,6 @@ There is no diagnostic data to put back.	Es gibt keine Diagnosedaten zum Wiederh
 Could not put back the diagnostic data. Try again.	Die Diagnosedaten konnten nicht wiederhergestellt werden. Versuche es erneut.
 Loaded values are still being read. Try again in a moment.	Die geladenen Werte werden noch gelesen. Versuche es gleich noch einmal.
 The selected loaded-values file could not be read. Try again.	Die ausgewählte Datei mit geladenen Werten konnte nicht gelesen werden. Versuche es erneut.
-Enter a number. The previous value was kept.	Gib eine Zahl ein. Der vorherige Wert wurde beibehalten.
 There is no diagnostic data to clear.	Es gibt keine Diagnosedaten zum Löschen.
 Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this.	Die Lab-Daten überschritten das Regellimit und wurden daher ohne Rückgängig-Kopie gelöscht. TikTok neu starten, damit das gilt.
 The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.	Das Lab speichert höchstens %1$s Regeln. Diese Änderung würde %2$s ergeben, daher wurde nichts geändert.
@@ -969,7 +970,6 @@ Clearing suggested accounts	Kontovorschläge werden entfernt
 1 video left	Noch 1 Video
 %1$s videos left	Noch %1$s Videos
 Show what is left of the budget	Restliches Budget anzeigen
-Off by default. Switched on, a small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out. It changes at most once a minute, appears only on the feed, and is never read out on its own.	Standardmäßig aus. Eingeschaltet zeigt ein kleines Feld im Feed die verbleibenden Minuten oder Videos des heutigen Budgets an, je nachdem, was zuerst aufgebraucht ist. Es ändert sich höchstens einmal pro Minute, erscheint nur im Feed und wird nie von allein vorgelesen.
 Restart TikTok to apply this.	TikTok neu starten, damit das gilt.
 No gates match this filter.	Keine Schalter passen zu diesem Filter.
 Version %1$s for TikTok %2$s	Version %1$s für TikTok %2$s

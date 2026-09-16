@@ -15,6 +15,7 @@ A creator pattern is taking too long and was switched off: %1$s	Um padrão de cr
 A good place to stop, if you want one.	Uma boa hora para parar, se você quiser uma.
 A hidden puzzle may be the cause.	Talvez a causa seja um quebra-cabeça escondido.
 A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.	Um host para colocar no lugar de tiktok.com ao compartilhar ou copiar um link, como vxtiktok.com. Deixe vazio para compartilhar os links do próprio TikTok. Só os links do TikTok mudam, e só o host: nada é enviado para nenhum lugar novo.
+A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.	Um rótulo pequeno no feed mostra os minutos ou vídeos restantes do orçamento de hoje.
 A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.	Tocar em alguém na linha Enviar para apenas seleciona a pessoa. Um segundo toque na mesma pessoa dentro de quatro segundos envia o vídeo.
 A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.	Um endereço da web deixado em um comentário pode ser tocado em vez de copiado na mão. Tocar em qualquer outra parte do comentário continua fazendo o de sempre.
 AI-generated posts	Publicações geradas por IA
@@ -139,6 +140,7 @@ Custom SIM details	Dados de SIM personalizados
 Discard edits	Descartar as edições
 Empty	Vazio
 Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.	Esvaziar o menu que abre ao manter pressionado o ícone do TikTok na tela inicial. Ao desativar, o TikTok é solicitado a criá-los novamente. Tocar no ícone continua abrindo o app, e um atalho fixado por você permanece onde foi colocado.
+Enter a number.	Digite um número.
 Field edits were discarded.	As edições dos campos foram descartadas.
 Field edits were not saved.	As edições dos campos não foram salvas.
 Filter settings	Ajustes de filtros
@@ -146,11 +148,13 @@ Hide the launcher shortcuts	Ocultar os atalhos do inicializador
 Keep the Favorites tab	Manter a aba Favoritos
 Links in comments open	Os links nos comentários abrem
 Media Config (VE)	Configuração de Mídia (VE)
+Mutes the video behind the comment sheet while you read. Sound comes back when the sheet closes.	Silencia o vídeo atrás dos comentários enquanto você lê. O som volta quando os comentários fecham.
 Not read yet	Ainda não lido
 Not saved yet	Ainda não salvo
 Not seen	Não vistos
 Not seen yet	Ainda não visto
 Nothing on this page changes what TikTok does until they are on.	Nada nesta página muda o que o TikTok faz enquanto elas estiverem desligadas.
+Once today's budget runs out, the hold stays and cannot be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out.	Quando o orçamento de hoje acaba, a pausa fica e não pode ser fechada. As configurações de orçamento ficam bloqueadas até o dia recomeçar. Desative isso a qualquer momento antes do orçamento acabar.
 Overridden	Substituídos
 Override set, not read yet	Substituição definida, ainda não lido
 Remove all overrides	Remover todas as substituições
@@ -160,6 +164,8 @@ Saved, override off	Salvo, substituição desligada
 Seen	Vistos
 Seen this session	Visto nesta sessão
 Sticker saved to %1$s	Sticker salvo em %1$s
+The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.	O feed escurece nos últimos três quartos de minuto antes da pausa, para que você chegue a ela em vez de cair nela. Precisa de um orçamento de tempo e uma pausa.
+The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.	O feed espera um toque antes de reproduzir de novo quando você volta ao app. Mensagens, perfis e busca continuam a um toque.
 TikTok read it	O TikTok leu
 TikTok read it, but the structured override could not be applied	O TikTok leu, mas a substituição estruturada não pôde ser aplicada
 TikTok's own value	Valor do próprio TikTok
@@ -403,10 +409,6 @@ Not interested in this video	Não tenho interesse neste vídeo
 Nothing has been looked up yet. Use the app for a moment, then come back.	Nada foi procurado ainda. Use o app um pouco e volte.
 Nothing is playing to seek	Não há nada tocando para avançar
 Off	Desligado
-Off by default. Switched on, the feed dims over the last three quarters of a minute of a time budget, most of it in the final half minute, so the hold is somewhere you arrive rather than somewhere you land. Needs a budget in minutes and a hold to arrive at: a budget counted in videos has no time left to follow, and with the hold switched off there is nothing to lead into. Nothing fades if you have turned animations off.	Desligado por padrão. Ligado, o feed escurece ao longo dos últimos três quartos de minuto de um limite de tempo, a maior parte no último meio minuto, para a pausa ser algo a que você chega e não algo que cai em cima de você. Precisa de um limite em minutos e de uma pausa para chegar: um contado em vídeos não tem tempo restante para seguir, e sem pausa não há aonde chegar. Nada escurece se você desligou as animações.
-Off by default. Switched on, the hold that starts when today's budget runs out has no way out, and the budgets, the reset hour and this switch cannot be changed again until the day starts over. Switch it off any time before the budget runs out.	Desligado por padrão. Ligado, a pausa que começa quando o limite de hoje acaba não tem saída, e os limites, a hora de reinício e esta própria chave não podem ser mudados de novo até o dia virar. Você pode desligar a qualquer momento antes de o limite acabar.
-Off by default. The video behind the comment sheet keeps playing, with sound, while you read. Switched on, Hushfeed asks for the sound the moment a sheet opens and hands it back when it closes, which is how one app tells another to stop.	Desligado por padrão. O vídeo atrás da folha de comentários continua tocando, com som, enquanto você lê. Ligado, o Hushfeed pede o som assim que a folha abre e devolve quando ela fecha, que é como um app diz a outro para parar.
-Off by default. TikTok plays again by itself every time you come back to the app. Switched on, the feed waits for one tap first. The tab bar is left alone, so messages, a profile and search are still one tap away.	Desligado por padrão. O TikTok volta a tocar sozinho toda vez que você retorna ao app. Ligado, o feed espera um toque antes. A barra de abas fica como está, então mensagens, um perfil e a busca continuam a um toque.
 Offline videos limit	Limite de vídeos offline
 On mobile data	Nos dados móveis
 One minute left	Resta um minuto
@@ -883,7 +885,6 @@ There is no diagnostic data to put back.	Não há dados de diagnóstico para res
 Could not put back the diagnostic data. Try again.	Não foi possível restaurar os dados de diagnóstico. Tente novamente.
 Loaded values are still being read. Try again in a moment.	Os valores carregados ainda estão sendo lidos. Tente novamente em instantes.
 The selected loaded-values file could not be read. Try again.	Não foi possível ler o arquivo de valores carregados selecionado. Tente novamente.
-Enter a number. The previous value was kept.	Digite um número. O valor anterior foi mantido.
 There is no diagnostic data to clear.	Não há dados de diagnóstico para apagar.
 Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this.	Os dados do Lab ultrapassavam o limite de regras, então foram apagados sem uma cópia para desfazer. Reinicie o TikTok para aplicar.
 The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.	O Lab mantém no máximo %1$s regras. Esta alteração resultaria em %2$s, então nada foi alterado.
@@ -966,7 +967,6 @@ Clearing suggested accounts	Limpando as contas sugeridas
 1 video left	Resta 1 vídeo
 %1$s videos left	Restam %1$s vídeos
 Show what is left of the budget	Mostrar o que resta do limite
-Off by default. Switched on, a small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out. It changes at most once a minute, appears only on the feed, and is never read out on its own.	Desativado por padrão. Quando ativado, uma etiqueta pequena no feed mostra os minutos ou vídeos que restam do limite de hoje, o que estiver mais perto de acabar. Ela muda no máximo uma vez por minuto, aparece só no feed e nunca é lida em voz alta sozinha.
 Restart TikTok to apply this.	Reinicie o TikTok para aplicar.
 No gates match this filter.	Nenhum gate combina com este filtro.
 Version %1$s for TikTok %2$s	Versão %1$s para TikTok %2$s

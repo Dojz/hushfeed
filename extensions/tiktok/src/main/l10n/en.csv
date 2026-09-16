@@ -59,6 +59,7 @@ A field value could not be read. Check the values and try again.,A field value c
 A hidden puzzle may be the cause.,A hidden puzzle may be the cause.
 "A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.","A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new."
 A newer clear replaced that undo. Tap the row again to put it back.,A newer clear replaced that undo. Tap the row again to put it back.
+"A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.","A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out."
 A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.,A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.
 A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.,A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.
 AI-generated posts,AI-generated posts
@@ -261,7 +262,7 @@ Enter a JSON object or array.,Enter a JSON object or array.
 Enter a creator handle or id,Enter a creator handle or id
 Enter a finite number.,Enter a finite number.
 Enter a number,Enter a number
-Enter a number. The previous value was kept.,Enter a number. The previous value was kept.
+Enter a number.,Enter a number.
 Enter a valid structured value.,Enter a valid structured value.
 Enter a valid two-letter country code,Enter a valid two-letter country code
 Enter a valid value for %1$s.,Enter a valid value for %1$s.
@@ -520,6 +521,7 @@ Move down,Move down
 Move left,Move left
 Move right,Move right
 Move up,Move up
+Mutes the video behind the comment sheet while you read. Sound comes back when the sheet closes.,Mutes the video behind the comment sheet while you read. Sound comes back when the sheet closes.
 Nearby,Nearby
 Never from these countries,Never from these countries
 No,No
@@ -564,15 +566,11 @@ Nothing on this page changes what TikTok does until they are on.,Nothing on this
 Nothing to undo yet.,Nothing to undo yet.
 Notices from this project and the ones it is built on,Notices from this project and the ones it is built on
 Off,Off
-"Off by default. Switched on, a small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out. It changes at most once a minute, appears only on the feed, and is never read out on its own.","Off by default. Switched on, a small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out. It changes at most once a minute, appears only on the feed, and is never read out on its own."
-"Off by default. Switched on, the feed dims over the last three quarters of a minute of a time budget, most of it in the final half minute, so the hold is somewhere you arrive rather than somewhere you land. Needs a budget in minutes and a hold to arrive at: a budget counted in videos has no time left to follow, and with the hold switched off there is nothing to lead into. Nothing fades if you have turned animations off.","Off by default. Switched on, the feed dims over the last three quarters of a minute of a time budget, most of it in the final half minute, so the hold is somewhere you arrive rather than somewhere you land. Needs a budget in minutes and a hold to arrive at: a budget counted in videos has no time left to follow, and with the hold switched off there is nothing to lead into. Nothing fades if you have turned animations off."
-"Off by default. Switched on, the hold that starts when today's budget runs out has no way out, and the budgets, the reset hour and this switch cannot be changed again until the day starts over. Switch it off any time before the budget runs out.","Off by default. Switched on, the hold that starts when today's budget runs out has no way out, and the budgets, the reset hour and this switch cannot be changed again until the day starts over. Switch it off any time before the budget runs out."
-"Off by default. The video behind the comment sheet keeps playing, with sound, while you read. Switched on, Hushfeed asks for the sound the moment a sheet opens and hands it back when it closes, which is how one app tells another to stop.","Off by default. The video behind the comment sheet keeps playing, with sound, while you read. Switched on, Hushfeed asks for the sound the moment a sheet opens and hands it back when it closes, which is how one app tells another to stop."
-"Off by default. TikTok plays again by itself every time you come back to the app. Switched on, the feed waits for one tap first. The tab bar is left alone, so messages, a profile and search are still one tap away.","Off by default. TikTok plays again by itself every time you come back to the app. Switched on, the feed waits for one tap first. The tab bar is left alone, so messages, a profile and search are still one tap away."
 Off forces false; on forces true. Reset returns control to TikTok,Off forces false; on forces true. Reset returns control to TikTok
 Offline videos limit,Offline videos limit
 Older overrides were kept disabled. Review their values before enabling them on TikTok %1$s.,Older overrides were kept disabled. Review their values before enabling them on TikTok %1$s.
 On mobile data,On mobile data
+"Once today's budget runs out, the hold stays and cannot be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out.","Once today's budget runs out, the hold stays and cannot be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out."
 One area was checked and everything it needs is here.,One area was checked and everything it needs is here.
 One minute left,One minute left
 "One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out.","One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out."
@@ -859,8 +857,10 @@ The catalog says this key is %1$s and this override is %2$s. Reset the override 
 The destination contains an invalid folder name,The destination contains an invalid folder name
 The diagnostic report could not be exported.,The diagnostic report could not be exported.
 The diagnostic report could not be saved yet. Try again in a moment.,The diagnostic report could not be saved yet. Try again in a moment.
+"The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.","The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at."
 The feed does not end. This is a fine time to leave it.,The feed does not end. This is a fine time to leave it.
 The feed is open again,The feed is open again
+"The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.","The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away."
 "The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.","The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night."
 The last change is undone. Restart TikTok to apply all changes.,The last change is undone. Restart TikTok to apply all changes.
 The last change is undone. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.,The last change is undone. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.

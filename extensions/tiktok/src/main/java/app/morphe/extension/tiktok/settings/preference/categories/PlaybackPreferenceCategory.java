@@ -64,17 +64,14 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
         // block author patch installs. Without it these would take a number and count nothing.
         if (SettingsStatus.commentToolsEnabled) {
             addPreference(new TogglePreference(context, "Quieten the feed while comments are open",
-                    "Off by default. The video behind the comment sheet keeps playing, with "
-                            + "sound, while you read. Switched on, Hushfeed asks for the sound "
-                            + "the moment a sheet opens and hands it back when it closes, which "
-                            + "is how one app tells another to stop.",
+                    "Mutes the video behind the comment sheet while you read. "
+                            + "Sound comes back when the sheet closes.",
                     Settings.PAUSE_ON_COMMENTS));
         }
         if (SettingsStatus.blockAuthorEnabled) {
             addPreference(new TogglePreference(context, "Do not start the feed on returning",
-                    "Off by default. TikTok plays again by itself every time you come back to "
-                            + "the app. Switched on, the feed waits for one tap first. The tab "
-                            + "bar is left alone, so messages, a profile and search are still "
+                    "The feed waits for one tap before it starts playing again when you "
+                            + "come back to the app. Messages, profiles and search are still "
                             + "one tap away.",
                     Settings.NO_RESUME_ON_FOREGROUND));
         // Both budgets carry how much of today has gone, which until now was only visible in
@@ -118,29 +115,22 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
                         + "search keep working, and nothing in the feed is thrown away.",
                 Settings.SESSION_BUDGET_LOCK_MINUTES, "minute", "minutes"));
         addPreference(new TogglePreference(context, "Fade the feed out before the hold",
-                "Off by default. Switched on, the feed dims over the last three quarters of a "
-                        + "minute of a time budget, most of it in the final half minute, so the "
-                        + "hold is somewhere you arrive rather than somewhere you land. Needs a "
-                        + "budget in minutes and a hold to arrive at: a budget counted in videos "
-                        + "has no time left to follow, and with the hold switched off there is "
-                        + "nothing to lead into. Nothing fades if you have turned animations "
-                        + "off.",
+                "The feed dims over the last three quarters of a minute before the hold, "
+                        + "so you arrive at it rather than land on it. Needs a time budget and "
+                        + "a hold to arrive at.",
                 Settings.SESSION_BUDGET_RAMP));
         addPreference(new TogglePreference(context, "Show what is left of the budget",
-                "Off by default. Switched on, a small label on the feed shows the minutes or "
-                        + "videos left of today's budget, whichever is closer to running out. It "
-                        + "changes at most once a minute, appears only on the feed, and is never "
-                        + "read out on its own.",
+                "A small label on the feed shows the minutes or videos left of today's "
+                        + "budget, whichever is closer to running out.",
                 Settings.SESSION_BUDGET_CUE));
         addPreference(new ClockHourPreference(context, "Start the day at",
                 "The hour both budgets reset, on a 24 hour clock. Four in the morning by default, "
                         + "because someone still scrolling at one is having last night.",
                 Settings.SESSION_BUDGET_RESET_HOUR));
         addPreference(new TogglePreference(context, "Lock today's budget",
-                "Off by default. Switched on, the hold that starts when today's budget runs out "
-                        + "has no way out, and the budgets, the reset hour and this switch cannot "
-                        + "be changed again until the day starts over. Switch it off any time "
-                        + "before the budget runs out.",
+                "Once today's budget runs out, the hold stays and cannot be dismissed. "
+                        + "The budget settings are locked until the day starts over. "
+                        + "Turn this off any time before the budget runs out.",
                 Settings.SESSION_BUDGET_LOCK));
         addPreference(new NumberInputPreference(context, "Times you can open the feed anyway",
                 "Zero leaves the way out of the hold there every time, which is what it has "

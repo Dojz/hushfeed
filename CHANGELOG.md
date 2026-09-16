@@ -1,5 +1,7 @@
 ## 0.40.0
 
+* "Enter a number. The previous value was kept." is gone: the dialog stays open for a correction now, so no value was kept. Five Playback summaries that opened with "Off by default." lead with what the feature does instead; the switch already says whether it is on.
+
 * A sticker save says where it landed, the same as every other download. It used to say "Sticker saved as MP4" and the reader had to guess the folder. It says the folder now, matching the four other savers.
 
 * The Feature Gate Lab speaks in plain terms. "Getter used", "Loaded", "All actionable", "Applies saved rules at supported getters", "Effective getter result", "TikTok cached value", "Not present in the current cache", "Getter not requested yet" and "Override saved but off" were implementation words that meant nothing to anyone who didn't write the code. The tabs say Seen, All, Overridden; the filter says Not seen; the states say TikTok read it, Not seen yet, Saved, override off; the detail page says What TikTok gets, TikTok's own value, Not read yet; and the master switch says Replace values when TikTok asks for them. The three source-name tables are two: the row badge matches its tab label, and the detail page spells it out.

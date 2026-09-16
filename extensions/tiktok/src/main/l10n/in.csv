@@ -9,6 +9,7 @@ source,target
 A creator pattern is taking too long and was switched off: %1$s,"Ada pola kreator yang terlalu lama, jadi dimatikan: %1$s"
 A hidden puzzle may be the cause.,Teka-teki yang disembunyikan bisa jadi penyebabnya.
 "A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.","Host pengganti tiktok.com saat kamu membagikan atau menyalin tautan, misalnya vxtiktok.com. Kosongkan untuk membagikan tautan TikTok sendiri. Hanya tautan TikTok yang diubah, dan hanya bagian host-nya, tidak ada yang dikirim ke mana pun."
+"A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.",Label kecil di feed menunjukkan menit atau video yang tersisa dari anggaran hari ini.
 A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.,"Alamat web yang ditulis seseorang di komentar bisa diketuk, bukan disalin manual. Mengetuk bagian lain dari komentar tetap seperti sebelumnya."
 Activity Center (PIA),Pusat Aktivitas (PIA)
 Automatic advance stopped after one video,Lanjut otomatis dihentikan setelah satu video
@@ -25,6 +26,7 @@ Current: %1$s,Saat ini: %1$s
 Discard edits,Buang perubahan
 Empty,Kosong
 "Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.","Kosongkan menu yang terbuka saat ikon TikTok di layar beranda ditekan dan ditahan. Menonaktifkannya akan meminta TikTok membuatnya kembali. Mengetuk ikon tetap membuka aplikasi, dan pintasan yang Anda sematkan sendiri tetap berada di tempatnya."
+Enter a number.,Masukkan angka.
 Field edits were discarded.,Perubahan bidang dibuang.
 Field edits were not saved.,Perubahan bidang tidak disimpan.
 Filter settings,Pengaturan filter
@@ -34,12 +36,14 @@ Keep the Favorites tab,Pertahankan tab Favorit
 Link copied,Tautan disalin
 Links in comments open,Tautan di komentar bisa dibuka
 Media Config (VE),Konfigurasi Media (VE)
+Mutes the video behind the comment sheet while you read. Sound comes back when the sheet closes.,Membisukan video di balik komentar saat kamu membaca. Suara kembali saat komentar ditutup.
 Not blocked,Tidak diblokir
 Not read yet,Belum dibaca
 Not saved yet,Belum disimpan
 Not seen,Belum terlihat
 Not seen yet,Belum terlihat
 Nothing on this page changes what TikTok does until they are on.,Tidak ada di halaman ini yang mengubah perilaku TikTok selama itu mati.
+"Once today's budget runs out, the hold stays and cannot be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out.","Setelah anggaran hari ini habis, jeda tetap ada dan tidak bisa ditutup. Pengaturan anggaran dikunci sampai hari baru dimulai. Matikan ini kapan saja sebelum anggaranmu habis."
 Overridden,Diganti
 "Override set, not read yet","Penggantian diatur, belum dibaca"
 Recovered an interrupted settings change. Restart TikTok to apply this.,Perubahan pengaturan yang terhenti telah dipulihkan. Mulai ulang TikTok agar berlaku.
@@ -79,6 +83,8 @@ Tap again to follow,Ketuk lagi untuk mengikuti
 Tap again to like,Ketuk lagi untuk menyukai
 That is one minute today,Itu satu menit hari ini
 That is one video today,Itu satu video hari ini
+"The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.","Feed meredup selama tiga perempat menit terakhir sebelum jeda, agar kamu tiba di sana, bukan mendarat. Butuh anggaran waktu dan jeda."
+"The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.","Feed menunggu satu ketukan sebelum mulai memutar lagi saat kamu kembali ke aplikasi. Pesan, profil, dan pencarian tetap satu ketukan."
 This video has no link to copy,Video ini tidak punya tautan untuk disalin
 This video has no sound of its own,Video ini tidak punya suara sendiri
 TikTok read it,TikTok sudah membacanya
@@ -707,12 +713,9 @@ Daily video budget,Anggaran video harian
 Daily time budget,Anggaran waktu harian
 Hold the feed after the budget,Tahan feed setelah anggaran habis
 Quieten the feed while comments are open,Senyapkan feed saat komentar terbuka
-"Off by default. The video behind the comment sheet keeps playing, with sound, while you read. Switched on, Hushfeed asks for the sound the moment a sheet opens and hands it back when it closes, which is how one app tells another to stop.","Mati secara bawaan. Video di balik lembar komentar tetap berjalan, lengkap dengan suara, sementara Anda membaca. Saat aktif, Hushfeed meminta fokus audio begitu lembar komentar dibuka dan mengembalikannya saat ditutup. Begitulah satu aplikasi memberi tahu aplikasi lain untuk berhenti."
 Do not start the feed on returning,Jangan mulai feed saat kembali
-"Off by default. TikTok plays again by itself every time you come back to the app. Switched on, the feed waits for one tap first. The tab bar is left alone, so messages, a profile and search are still one tap away.","Mati secara bawaan. TikTok memutar sendiri setiap kali Anda kembali ke aplikasi. Saat aktif, feed menunggu satu ketukan lebih dulu. Bilah tab dibiarkan, jadi pesan, profil dan pencarian tetap sejauh satu ketukan."
 Tap to start the feed,Ketuk untuk memulai feed
 Fade the feed out before the hold,Redupkan feed sebelum feed ditahan
-"Off by default. Switched on, the feed dims over the last three quarters of a minute of a time budget, most of it in the final half minute, so the hold is somewhere you arrive rather than somewhere you land. Needs a budget in minutes and a hold to arrive at: a budget counted in videos has no time left to follow, and with the hold switched off there is nothing to lead into. Nothing fades if you have turned animations off.","Mati secara bawaan. Saat aktif, feed meredup selama tiga perempat menit terakhir dari anggaran waktu, sebagian besar pada setengah menit terakhir, sehingga feed yang ditahan bukan kejutan. Perlu anggaran dalam menit dan penahanan yang dituju: anggaran yang dihitung per video tidak punya sisa waktu untuk diikuti, dan tanpa penahanan tidak ada yang dituju. Tidak ada yang meredup jika animasi dimatikan."
 Start the day at,Hari dimulai pukul
 That is %1$d videos today,Itu %1$d video hari ini
 The feed is open again,Feed terbuka lagi
@@ -764,7 +767,6 @@ That backup was written by a newer Hushfeed than this one. Nothing was altered.,
 That settings backup holds a value Hushfeed cannot read. Nothing was altered.,Cadangan pengaturan itu memuat nilai yang tidak dapat dibaca Hushfeed. Tidak ada yang diubah.
 That settings backup holds more Feature Gate Lab rules than the Lab takes. Nothing was altered.,Cadangan pengaturan itu berisi lebih banyak aturan Feature Gate Lab daripada yang bisa diterima Lab. Tidak ada yang diubah.
 Lock today's budget,Kunci anggaran hari ini
-"Off by default. Switched on, the hold that starts when today's budget runs out has no way out, and the budgets, the reset hour and this switch cannot be changed again until the day starts over. Switch it off any time before the budget runs out.","Mati secara bawaan. Bila dinyalakan, penahanan yang dimulai saat anggaran hari ini habis tidak punya jalan keluar, dan anggaran, jam mulai hari serta sakelar ini tidak bisa diubah lagi sampai hari berganti. Matikan kapan saja sebelum anggaran habis."
 Today's budget is locked. This can be changed again at %1$s.,Anggaran hari ini terkunci. Ini bisa diubah lagi pada %1$s.
 Today started over. Tap again to put the counts back.,Hari ini dimulai ulang. Ketuk lagi untuk mengembalikan hitungannya.
 Today's budget is locked. The day starts over at %1$s.,Anggaran hari ini terkunci. Hari dimulai ulang pada %1$s.
@@ -884,7 +886,6 @@ There is no diagnostic data to put back.,Tidak ada data diagnostik yang dapat di
 Could not put back the diagnostic data. Try again.,Data diagnostik tidak dapat dikembalikan. Coba lagi.
 Loaded values are still being read. Try again in a moment.,Nilai yang dimuat masih dibaca. Coba lagi sebentar lagi.
 The selected loaded-values file could not be read. Try again.,Berkas nilai yang dimuat dan dipilih tidak dapat dibaca. Coba lagi.
-Enter a number. The previous value was kept.,Masukkan angka. Nilai sebelumnya dipertahankan.
 There is no diagnostic data to clear.,Tidak ada data diagnostik yang perlu dihapus.
 "Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this.","Data Lab melebihi batas aturan, jadi data dihapus tanpa salinan untuk dibatalkan. Mulai ulang TikTok agar berlaku."
 "The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.","Lab menyimpan paling banyak %1$s aturan. Perubahan ini akan membuat jumlahnya %2$s, jadi tidak ada yang diubah."
@@ -967,7 +968,6 @@ Clearing suggested accounts,Menghapus akun yang disarankan
 1 video left,Sisa 1 video
 %1$s videos left,Sisa %1$s video
 Show what is left of the budget,Tampilkan sisa batas harian
-"Off by default. Switched on, a small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out. It changes at most once a minute, appears only on the feed, and is never read out on its own.","Nonaktif secara bawaan. Saat diaktifkan, label kecil di feed menampilkan sisa menit atau video dari batas hari ini, mana yang lebih dekat habis. Label itu berubah paling sering sekali per menit, hanya muncul di feed, dan tidak pernah dibacakan dengan sendirinya."
 Restart TikTok to apply this.,Mulai ulang TikTok agar berlaku.
 No gates match this filter.,Tidak ada gate yang cocok dengan filter ini.
 Version %1$s for TikTok %2$s,Versi %1$s untuk TikTok %2$s
