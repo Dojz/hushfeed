@@ -147,6 +147,7 @@ final class FeedFilterFeedback {
         if ("SeriesFilter".equals(reason)) return "Series posts";
         if ("PlaylistFilter".equals(reason)) return "Playlist posts";
         if ("InsertedCardFilter".equals(reason)) return "Inserted cards";
+        if ("MidAdFilter".equals(reason)) return "Mid-roll ads";
         if ("SeenVideoFilter".equals(reason)) return "Seen videos";
         if ("KeywordFilter".equals(reason)) return "Blocked caption words";
         if ("CreatorFilter".equals(reason)) return "Hidden creators";

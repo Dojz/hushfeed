@@ -46,6 +46,7 @@ public class FeedFilterCountersTest {
         Settings.REMOVE_ADS.save(true);
         FeedItemsFilter.resetDiagnosticsForTests();
         LogBufferManager.clearLogBuffer();
+        app.morphe.extension.shared.diagnostics.HookStatus.clear();
     }
 
     @After public void tearDown() {
@@ -117,6 +118,32 @@ public class FeedFilterCountersTest {
         assertEquals("ProfileAwemeList: 1 lists, 3 items, 0 removed", lineFor("ProfileAwemeList"));
         String detail = lineFor("ProfileDetailAdEvent");
         assertTrue(detail, detail.startsWith("ProfileDetailAdEvent: 1 lists, 3 items, 1 removed"));
+    }
+
+    @Test public void theMidRollSpliceIsRefusedAndCountedOnItsOwnLine() {
+        // Issue #2's ads never appeared in any list: the mid-roll component swaps an ad into
+        // the pager adapter directly, after every list hook has run. The export has to say the
+        // route ran and what it did, whether the ad filter is on or off.
+        assertTrue("the splice was allowed with Remove ads on", FeedItemsFilter.dropMidAd(video(true)));
+        assertEquals("MidAdInsert: 1 lists, 1 items, 1 removed. Last reason: MidAdFilter",
+                lineFor("MidAdInsert"));
+        assertTrue(app.morphe.extension.shared.diagnostics.HookStatus.report().toString(),
+                app.morphe.extension.shared.diagnostics.HookStatus.report().toString().contains("mid-roll ads"));
+
+        Settings.REMOVE_ADS.save(false);
+        assertFalse("the splice was refused with Remove ads off", FeedItemsFilter.dropMidAd(video(true)));
+        assertEquals("MidAdInsert: 2 lists, 2 items, 1 removed. Last reason: MidAdFilter",
+                lineFor("MidAdInsert"));
+
+        assertFalse("a null ad is nothing to refuse", FeedItemsFilter.dropMidAd(null));
+    }
+
+    @Test public void theMidRollFamilyIsInTheExportBeforeAnyAdIsDue() {
+        // A run with no mid-roll ad served used to leave no trace, which read the same as a
+        // build where the component was never patched.
+        FeedItemsFilter.midAdInstalled();
+        String report = app.morphe.extension.shared.diagnostics.HookStatus.report().toString();
+        assertTrue(report, report.contains("mid-roll ads"));
     }
 
     @Test public void anElementThatIsNotAVideoIsCountedAndNamedOnce() {

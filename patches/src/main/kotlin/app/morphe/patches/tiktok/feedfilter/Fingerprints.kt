@@ -316,6 +316,40 @@ internal object ProfileDetailAdEventFingerprint : Fingerprint(
     },
 )
 
+private const val MID_AD_COMPONENT_DESCRIPTOR =
+    "Lcom/ss/android/ugc/feed/platform/panel/midad/MidAdComponent;"
+
+/**
+ * The mid-roll ad component's splice. Given the video on screen and an ad, it finds the video
+ * in the pager adapter and puts the ad in its place, logging {@code midroll_ads_show} first.
+ * This is the route issue #2 was about: it runs after every list the other feed hooks see, so
+ * an ad reached the profile pager while the profile list carried 184 videos with 0 removed.
+ *
+ * <p>Static on every retained build, with the same five parameters (the video, the ad, a flag,
+ * the component and the adapter) and the same event string; the log strings beside it are
+ * stripped after 46.2.3, and the method's own name changes on every build, so neither is used.
+ */
+internal object MidAdReplaceFingerprint : Fingerprint(
+    definingClass = MID_AD_COMPONENT_DESCRIPTOR,
+    returnType = "V",
+    strings = listOf("midroll_ads_show"),
+    custom = { method, _ ->
+        AccessFlags.STATIC.isSet(method.accessFlags) &&
+            method.parameterTypes.size == 5 &&
+            method.parameterTypes[0].toString() == AWEME_DESCRIPTOR &&
+            method.parameterTypes[1].toString() == AWEME_DESCRIPTOR &&
+            method.parameterTypes[2].toString() == "Z"
+    },
+)
+
+/** Where the mid-roll ad component comes to life, so the export carries its family on every run. */
+internal object MidAdComponentCreateFingerprint : Fingerprint(
+    definingClass = MID_AD_COMPONENT_DESCRIPTOR,
+    name = "onCreate",
+    returnType = "V",
+    parameters = listOf(),
+)
+
 /**
  * The search page's own result list. It arrives parsed, then this method walks its items to
  * stamp the request id on each, which makes it the one place every result passes through

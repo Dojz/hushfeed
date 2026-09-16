@@ -51,7 +51,8 @@ val feedFilterPatch = bytecodePatch(
         "filtered by your own caption words, creator handles or patterns, sound names, length, " +
         "the country they were posted from and their view, like, comment, favourite and share " +
         "counts. Sponsored cards are dropped from the profile video viewer, the search grids " +
-        "and the Friends tab as well as the feed.",
+        "and the Friends tab as well as the feed, and so are the mid-roll ads TikTok splices " +
+        "into a video pager after the list has loaded.",
     default = true,
 ) {
     dependsOn(settingsPatch, 
@@ -134,6 +135,20 @@ val feedFilterPatch = bytecodePatch(
         ).forEach(MutableMethod::filterProfileAdsAfterNativeTransform)
 
         ProfileDetailAdEventFingerprint.method.filterProfileDetailAdEvent()
+
+        // The mid-roll splice runs after every list above has been filtered and puts an ad in
+        // a video's place in the pager adapter directly, which is how issue #2's ads reached a
+        // profile pager whose list carried nothing but organic videos. The ad is the second
+        // parameter; the guard leaves before the adapter is touched, and the video stays.
+        MidAdReplaceFingerprint.method.guardAtEntry(
+            "Feed filter",
+            "invoke-static {p1}, $EXTENSION_CLASS_DESCRIPTOR->dropMidAd(Lcom/ss/android/ugc/aweme/feed/model/Aweme;)Z",
+            "return-void",
+        )
+        MidAdComponentCreateFingerprint.method.addInstructions(
+            0,
+            "invoke-static {}, $EXTENSION_CLASS_DESCRIPTOR->midAdInstalled()V",
+        )
 
         // The search grids are not Aweme lists, so their cards are filtered on the parsed
         // response instead, before the forty places that read them get a look.
