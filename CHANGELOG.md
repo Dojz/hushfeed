@@ -1,5 +1,7 @@
 ## 0.36.0
 
+* Playback quality now reaches the player. The setting picked a gear out of the video model's own list and reported it, but TikTok's player builds its models from a different, unfiltered list, so every video still played at whatever quality the player chose. That is what issue #3 saw on a Galaxy A56. The choice is now made at the one door into the player's list, on all four retained builds, and the report names it: a line like "picked lowest_540_1 540p of 5 gears from SimVideoUrlModel#setBitRate" is the player's list, not a bystander's. Checked on a Galaxy S22 with the setting on lowest and then on highest. The hook status row also stops counting a non-adaptive video's empty model as a missing hook, which is what turned "2 missing" into a false alarm, and single-gear lists no longer write a report line each.
+
 * Playback speed and the Feature Gate Lab (and the Feature Gate Recorder with it) apply on TikTok 46.9.3. That build carries the speed menu's list factory twice, two identical copies of one outlined lambda, and a second raw App AB getter next to the first. Both patches used to refuse with "found 2". The speed patch now hooks every identical copy and still refuses when the copies differ, and the Lab holds both raw getters open. Nothing moves on 46.2.3, 46.7.3 or 46.8.3, which carry one of each.
 
 ## 0.35.0
