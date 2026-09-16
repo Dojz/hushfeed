@@ -1,5 +1,9 @@
 ## 0.34.0
 
+* The feed filter table in the diagnostic report now says when a profile or insertion route was handed something that is not a video, and with diagnostic logging on the profile routes list every video they kept with its ad markers (ad, soft ad, raw ad, promotion, commission disclosure). A report about an ad that got through a profile page (issue #2) used to carry the counts and nothing about the ad itself.
+
+* The diagnostic report now has a Feature Gate Lab section: whether overrides are on, each rule with its value, and for each one whether TikTok has read that gate since the app started, from where, and what TikTok had before the override. Until now an export from a phone where an override changed nothing could not say whether the override was live at all.
+
 * Editing the fields of a structured gate in the Feature Gate Lab now shows that a save is pending, offers Discard edits beside it, and says so if you leave with edits unsaved. Before, Save looked the same before and after typing and Back dropped everything without a word. When overrides are off, the page says so above the controls instead of after the last one, with a Turn on overrides action that enables them without leaving the page.
 
 * While a settings backup, restore, reset or undo is running, the four rows on the Diagnostics page go out of reach and the one acting says what it is doing. Before, they looked exactly as they had a moment earlier, a second tap earned "A settings operation is already running", and a screen reader was told nothing at all.
