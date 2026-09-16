@@ -325,7 +325,9 @@ public final class CommentBatchTranslator {
         if (!Settings.COMMENT_BATCH_TRANSLATION.get() && outstandingRequests == 0) return;
         
         completionsHandledForTests++;
-        if (runner != null && findField(runner.getClass(), "l0") == null) {
+        Field resultsField = runner == null ? null : runnerField(runner.getClass(), "l0", true);
+        Field taskField = runner == null ? null : runnerField(runner.getClass(), "l1", false);
+        if (runner != null && resultsField == null) {
             HookStatus.missingMember(FAMILY, "field", runner.getClass().getName(), "l0");
             // The field holding the results is gone, which is what a host update looks like.
             // Every batch would read as a failure from here on, so the feature stands down for
@@ -339,14 +341,14 @@ public final class CommentBatchTranslator {
             // build that renames either leaves every batch unmatched with the switch still on.
             // Asked of the class rather than the value: a field that is present and null is a
             // moment in a batch's life, a field that is gone is a host update.
-            if (findField(runner.getClass(), "l1") == null) {
+            if (taskField == null) {
                 HookStatus.missingMember(FAMILY, "field", runner.getClass().getName(), "l1");
             } else {
                 HookStatus.bound(FAMILY, "batch task");
             }
         }
-        Object results = readFieldQuiet(runner, "l0");
-        Object task = readFieldQuiet(runner, "l1");
+        Object results = readFieldQuiet(runner, resultsField);
+        Object task = readFieldQuiet(runner, taskField);
         if (task != null) {
             if (findField(task.getClass(), "LIZ") == null) {
                 HookStatus.missingMember(FAMILY, "field", task.getClass().getName(), "LIZ");
@@ -1059,6 +1061,44 @@ public final class CommentBatchTranslator {
         if (field == null) throw new NoSuchFieldException(name);
         field.setAccessible(true);
         return field.get(instance);
+    }
+
+    /**
+     * The runner's field under the name R8's outlining gave it up to 46.8.3 (`l0` the results,
+     * `l1` the task), or, on a build that keeps the runner as a Runnable of its own, the one
+     * field of that kind: 46.9.3's carries `LIZ:List` and `LIZIZ:task`. The fallback is taken
+     * only when the class holds exactly two instance reference fields with exactly one of them a
+     * List, so a runner that merely lost a name is still reported as missing rather than guessed.
+     */
+    private static Field runnerField(Class<?> type, String outlinedName, boolean list) {
+        Field named = findField(type, outlinedName);
+        if (named != null) return named;
+        List<Field> references = new ArrayList<>();
+        for (Class<?> current = type; current != null && current != Object.class; current = current.getSuperclass()) {
+            for (Field field : current.getDeclaredFields()) {
+                if (Modifier.isStatic(field.getModifiers()) || field.getType().isPrimitive()) continue;
+                references.add(field);
+            }
+        }
+        if (references.size() != 2) return null;
+        Field lists = null;
+        Field other = null;
+        for (Field field : references) {
+            if (List.class.isAssignableFrom(field.getType())) lists = lists == null ? field : null;
+            else other = other == null ? field : null;
+        }
+        if (lists == null || other == null) return null;
+        return list ? lists : other;
+    }
+
+    private static Object readFieldQuiet(Object instance, Field field) {
+        if (instance == null || field == null) return null;
+        try {
+            field.setAccessible(true);
+            return field.get(instance);
+        } catch (Throwable ignored) {
+            return null;
+        }
     }
 
     private static Object readFieldQuiet(Object instance, String name) {

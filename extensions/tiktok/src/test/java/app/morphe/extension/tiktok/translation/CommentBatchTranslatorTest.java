@@ -98,6 +98,30 @@ public class CommentBatchTranslatorTest {
                 handled + 1, CommentBatchTranslator.completionsHandledForTests());
     }
 
+    @Test public void aRunnerThatKeepsItsOwnFieldNamesIsReadByKind() {
+        // 46.9.3 keeps the completion runner as a Runnable of its own, with the results list and
+        // the task under R8's names rather than the l0 and l1 an outlined body gives them. Such a
+        // runner is read by kind: the one List field is the results, the one other reference
+        // field is the task, and nothing is reported missing.
+        Anchor anchor = loadedAnchor("aid-own", "cid-own");
+        CommentBatchTranslator.registerCommentCell(new View(context), anchor);
+        assertEquals("the request never went out", 1, NativeManager.requests);
+        int handled = CommentBatchTranslator.completionsHandledForTests();
+
+        HookStatus.clear();
+        try {
+            CommentBatchTranslator.onNativeBatchComplete(new OwnRunner(new ArrayList<>(), anchor.comment));
+
+            assertEquals(handled + 1, CommentBatchTranslator.completionsHandledForTests());
+            assertTrue("a field read by kind was reported missing: " + HookStatus.missing("comment translation"),
+                    HookStatus.missing("comment translation").isEmpty());
+            assertTrue(HookStatus.report().toString(), HookStatus.report().stream()
+                    .anyMatch(line -> line.startsWith("comment translation:") && line.contains("0 missing")));
+        } finally {
+            HookStatus.clear();
+        }
+    }
+
     @Test public void commentsAlreadyInTheCurrentLanguageAreNotDispatched() {
         android.content.res.Configuration configuration =
                 new android.content.res.Configuration(context.getResources().getConfiguration());
@@ -924,6 +948,17 @@ public class CommentBatchTranslatorTest {
 
         RunnerWithoutResults(Comment comment) {
             l1 = new Task(Arrays.asList(comment));
+        }
+    }
+
+    /** 46.9.3's runner: a Runnable of its own whose two fields carry R8's names, not l0 and l1. */
+    public static final class OwnRunner {
+        public final List<Object> LIZ;
+        public final Task LIZIZ;
+
+        OwnRunner(List<Object> results, Comment comment) {
+            LIZ = results;
+            LIZIZ = new Task(Arrays.asList(comment));
         }
     }
 }

@@ -190,6 +190,19 @@ private val studioAssetProfiles = listOf(
     ),
     studioProfile("TikTok 46.7.3", "a373335786f26d0da9089a0c470c9b97b2beb6a2b59e4532e9f3dd6fb2ca793b"),
     studioProfile("TikTok 46.8.3", "9dda032818072944eaca3c08cbdf55103ceda0cc9707e7130993c54c204105f4"),
+    // Both ABIs again, like 46.2.3, with one camera library digest shared by the two and every
+    // other file unchanged since 46.2.3. Read off the retained fixture on 2026-09-16.
+    ResourceProfile(
+        "TikTok 46.9.3",
+        studioArm64Files +
+            file("lib/arm64-v8a/libdex_df_camera_biz.so", "82c825d91113b4ad1b9d111717859f6a070e9e0da378ba5a610757906962b595") +
+            listOf(
+                file("lib/armeabi-v7a/libEffectCreatorJni.so", "d3ae58712413c2d1d06dcf508eb7850452f58c93b9befd57867cd029421c9482"),
+                file("lib/armeabi-v7a/libdex_df_camera_biz.so", "82c825d91113b4ad1b9d111717859f6a070e9e0da378ba5a610757906962b595"),
+                file("lib/armeabi-v7a/libeffect_plugin.so", "f89bd50e941392fee2e47d031711fdce3520dae7f3e531da59dd0afbbec9d91c"),
+                file("lib/armeabi-v7a/libttvesdk_plugin.so", "42ab2be66f2b02622f52062fc3ff1b4862f44f0098faecfac3996afe3e7cf1f9"),
+            ),
+    ),
 )
 
 private val liveAssetProfiles = listOf(
@@ -220,6 +233,18 @@ private val liveAssetProfiles = listOf(
             file("lib/arm64-v8a/liblink_mic_sdk.so", "2b4e28569193f720e50679d928278f593bc5fd700acdc2d3b971702b5280a875"),
         ),
     ),
+    // Five files: the fixture carries both ABIs, so the armeabi-v7a link library is back beside
+    // the arm64 one, and the match invitee template is the same bytes as 46.7.3 and 46.8.3.
+    ResourceProfile(
+        "TikTok 46.9.3",
+        listOf(
+            file("assets/native_runtime_server/game/scripts/ttmg-core.js.zip", "897d0f54569ea8c34b31652943f9abd7f89a842357078ea9bc78ca47fa0c8a14"),
+            file("assets/offline/tiktok_live_tt_live_lynx_match_component_container/mainV12/template.js", "d648b3e0ad779a0dde442ca381212661ea97eeddc255dbb92003aab5f4514460"),
+            file("assets/offline/tiktok_live_tt_live_lynx_match_component_container/match_invitee_v3/template.js", "8e84ec297249a771c9c9d56438f6c509d2a0f438c759ee65e212ab14ef7cb3eb"),
+            file("lib/arm64-v8a/liblink_mic_sdk.so", "6b513a5d8b3e53178caabd02da3169f666a08817f367a8e49e807a9b1a37ef88"),
+            file("lib/armeabi-v7a/liblink_mic_sdk.so", "8e899f30d1419e57a4b4dd5d193c66b0e4ffb5ed522b2cfb2a55680ba533347b"),
+        ),
+    ),
 )
 
 private val languageInventory = LanguageInventoryContract(
@@ -234,5 +259,7 @@ private val languageInventory = LanguageInventoryContract(
         "147b0f0f1dba4e5baac4cccc512cc39f1fc2601291828a908825b382b0442e51",
         "4af4860c7f3f27fd9195bc6b2e0e976698861dc3cb82bba6465b06b9da14843c",
         "a42fac1f4d1fa86e0cfbbf3286c4daca12a6172944789a797bb27ac028ad1206",
+        // 46.9.3: the same 64 directories and the same path manifest, new strings.
+        "8bea806dfa98e0f0bf00362acf9f7afd065c77a90541e8a3bbb61b368898bab8",
     ),
 )

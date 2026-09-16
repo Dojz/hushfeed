@@ -23,6 +23,7 @@ import app.morphe.util.getReference
 import app.morphe.util.implementationOrPatchException
 import app.morphe.util.numberOfParameterRegisters
 import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.iface.Field
 import com.android.tools.smali.dexlib2.iface.ClassDef
 import com.android.tools.smali.dexlib2.iface.Method
 import com.android.tools.smali.dexlib2.iface.reference.StringReference
@@ -38,22 +39,30 @@ private const val VIEW = "Landroid/view/View;"
  * <p>It is called `l0` on 46.2.3, 46.7.3 and 46.8.3, and that name was written into the injected
  * smali. The class holds exactly one Object field on all three, so it is read rather than named.
  */
-private fun MutableClass.avatarCaptureField(): String =
-    fields.singleOrNull { it.type == "Ljava/lang/Object;" }?.name
+/**
+ * The one object the listener captured, whatever it is typed as. A merged listener group up to
+ * 46.8.3 keeps it as `l0:Object` beside the `$t:I` that picks the body; the listener class of
+ * its own that 46.9.3 leaves this one as keeps it as the assem's own type. The extension takes
+ * an Object either way.
+ */
+private fun MutableClass.avatarCaptureField(): Field =
+    fields.singleOrNull { !AccessFlags.STATIC.isSet(it.accessFlags) && it.type.startsWith("L") }
         ?: throw PatchException(
-            "Advanced downloads: $type does not hold exactly one captured Object.",
+            "Advanced downloads: $type does not hold exactly one captured object.",
         )
 
-internal fun MutableMethod.interceptProfileAvatarLongPress(captureField: String) {
-    check(accessFlags and AccessFlags.STATIC.value != 0
-        && parameterTypes.map(CharSequence::toString) == listOf(definingClass, VIEW)
-        && returnType == "V") { "Advanced downloads: unexpected avatar callback signature." }
+internal fun MutableMethod.interceptProfileAvatarLongPress(capture: Field) {
+    check(isAvatarLongPressShape(definingClass) && returnType == "V") {
+        "Advanced downloads: unexpected avatar callback signature."
+    }
     val registers = implementationOrPatchException("Advanced downloads").registerCount
     check(registers - numberOfParameterRegisters >= 1 && registers <= 16) {
         "Advanced downloads: avatar callback registers no longer fit the native gesture hook."
     }
+    // p0 is the listener whichever shape it has: the group instance handed to a static body, or
+    // `this` on an ordinary onClick. p1 is the view in both.
     addInstructionsWithLabels(0, """
-        iget-object v0, p0, $definingClass->$captureField:Ljava/lang/Object;
+        iget-object v0, p0, ${capture.definingClass}->${capture.name}:${capture.type}
         invoke-static { v0, p1 }, ${EXTENSION}ProfileAvatarSaver;->onAvatarLongPress(Ljava/lang/Object;Landroid/view/View;)Z
         move-result v0
         if-eqz v0, :native_avatar_hold
@@ -101,9 +110,21 @@ private object ProfileAvatarBindFingerprint : Fingerprint(
  * this shape carry `long_press` and `long_hold_head` on all three builds, they are always on the
  * same class, and only the one for the viewer's own profile also carries `photo` and `video`.
  */
+/**
+ * The listener body, whichever way R8 shaped it. Up to 46.8.3 the click listeners of one
+ * screen are merged into a group class and each body is a static `(group, View)V` taking its
+ * own instance first; 46.9.3 leaves the own-profile one as an ordinary `onClick(View)V` on a
+ * class of its own while the other-profile one stays in a group. Both read the captured assem
+ * out of `p0` and take the view as `p1`, which is all the hook asks of them.
+ */
+private fun Method.isAvatarLongPressShape(owner: String): Boolean {
+    val parameters = parameterTypes.map(CharSequence::toString)
+    return if (AccessFlags.STATIC.isSet(accessFlags)) parameters == listOf(owner, VIEW)
+    else parameters == listOf(VIEW)
+}
+
 private fun Method.isAvatarLongPressHandler(classDef: ClassDef) =
-    returnType == "V" &&
-        parameterTypes.map(CharSequence::toString) == listOf(classDef.type, VIEW)
+    returnType == "V" && isAvatarLongPressShape(classDef.type)
 
 /**
  * Whether any string constant of the method contains [value].
@@ -119,14 +140,12 @@ private fun Method.holdsString(value: String) =
     } == true
 
 private object OwnProfileAvatarLongPressFingerprint : Fingerprint(
-    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC, AccessFlags.FINAL),
     returnType = "V",
     strings = listOf("long_press", "long_hold_head", "photo", "video"),
     custom = { method, classDef -> method.isAvatarLongPressHandler(classDef) },
 )
 
 private object OtherProfileAvatarLongPressFingerprint : Fingerprint(
-    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC, AccessFlags.FINAL),
     returnType = "V",
     strings = listOf("long_press", "long_hold_head"),
     custom = { method, classDef ->

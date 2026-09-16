@@ -44,10 +44,14 @@ internal object FollowFeedFingerprint : Fingerprint(
     },
 )
 
+/**
+ * No access flags: the patcher compares them exactly, and 46.9.3 marks this getter `public
+ * final` where the three builds before it say `public`. The class, name, return type and empty
+ * parameter list name one method on every retained build, which is all the flags added.
+ */
 internal object FollowFeedListGetItemsFingerprint : Fingerprint(
     definingClass = "Lcom/ss/android/ugc/aweme/follow/presenter/FollowFeedList;",
     name = "getItems",
-    accessFlags = listOf(AccessFlags.PUBLIC),
     returnType = "Ljava/util/List;",
     parameters = emptyList(),
 )

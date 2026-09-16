@@ -26,17 +26,26 @@ import app.morphe.patches.tiktok.shared.valueIn
  * not moved, so the type comes off the match and only the method name stays written down, checked
  * against the class before anything is assembled against it.
  */
+/**
+ * The first four parameters, not the whole list. 46.9.3 adds a fifth (a string) and moves the
+ * body, its log line included, into that overload; the four-parameter one left behind is an
+ * eight-instruction forwarder that carries no string, so the `strings` filter keeps the two
+ * apart and the hook below lands on the one that does the work. p1 to p3 mean the same thing
+ * on both.
+ */
 private object CaptchaPopupFingerprint : Fingerprint(
     definingClass = "/sec/SecApiImpl;",
     name = "popCaptchaV2",
     returnType = "V",
-    parameters = listOf(
-        "Landroid/app/Activity;",
-        "Ljava/lang/String;",
-        "L",
-        "Landroidx/fragment/app/Fragment;",
-    ),
     strings = listOf("popCaptchaV2 - riskInfo ="),
+    custom = { method, _ ->
+        val parameters = method.parameterTypes.map(CharSequence::toString)
+        parameters.size >= 4 &&
+            parameters[0] == "Landroid/app/Activity;" &&
+            parameters[1] == "Ljava/lang/String;" &&
+            parameters[2].startsWith("L") &&
+            parameters[3] == "Landroidx/fragment/app/Fragment;"
+    },
 )
 
 private object LegacyCaptchaPopupFingerprint : Fingerprint(
