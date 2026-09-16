@@ -174,6 +174,10 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
         }
 
         if (SettingsStatus.playbackSpeedEnabled) {
+            addPreference(new TogglePreference(context, "Remember the last speed",
+                    "Keep the speed you chose for the next video. Off, each new video "
+                            + "starts at 1x and a manual choice lasts for that video only.",
+                    Settings.REMEMBER_SPEED));
             addPreference(new TogglePreference(context, "Use a default playback speed",
                     "Start each new video at your default. A manual choice lasts until the video changes.",
                     Settings.DEFAULT_SPEED_ENABLED));

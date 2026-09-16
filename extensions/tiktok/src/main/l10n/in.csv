@@ -33,6 +33,7 @@ Filter settings,Pengaturan filter
 Full comment sort options,Opsi urutan komentar lengkap
 Hide the launcher shortcuts,Sembunyikan pintasan peluncur
 Keep the Favorites tab,Pertahankan tab Favorit
+"Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only.","Menyimpan kecepatan yang dipilih untuk video berikutnya. Mati, setiap video baru dimulai dari 1x dan pilihan manual hanya berlaku untuk video itu."
 Link copied,Tautan disalin
 Links in comments open,Tautan di komentar bisa dibuka
 Media Config (VE),Konfigurasi Media (VE)
@@ -47,6 +48,7 @@ Nothing on this page changes what TikTok does until they are on.,Tidak ada di ha
 Overridden,Diganti
 "Override set, not read yet","Penggantian diatur, belum dibaca"
 Recovered an interrupted settings change. Restart TikTok to apply this.,Perubahan pengaturan yang terhenti telah dipulihkan. Mulai ulang TikTok agar berlaku.
+Remember the last speed,Ingat kecepatan terakhir
 Remove all overrides,Hapus semua penggantian
 Replace values when TikTok asks for them,Ganti nilai saat TikTok memintanya
 Save media,Simpan media

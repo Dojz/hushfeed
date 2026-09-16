@@ -466,6 +466,7 @@ Keep captions in clear display,Keep captions in clear display
 Keep the Favorites tab,Keep the Favorites tab
 Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.,Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.
 Keep the screen's refresh rate,Keep the screen's refresh rate
+"Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only.","Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only."
 "Keep this string to 4,096 characters or fewer.","Keep this string to 4,096 characters or fewer."
 Keep this structured value to 64 KB or less.,Keep this structured value to 64 KB or less.
 "Kept to %1$s, the nearest value this row allows","Kept to %1$s, the nearest value this row allows"
@@ -642,6 +643,7 @@ Refresh values,Refresh values
 Refreshing current TikTok cache...,Refreshing current TikTok cache...
 Region rules,Region rules
 Region settings,Region settings
+Remember the last speed,Remember the last speed
 Remind me every,Remind me every
 Remove,Remove
 Remove %1$s,Remove %1$s
