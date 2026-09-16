@@ -7,6 +7,8 @@ source,target
 %1$d minutes left,%1$d minutes left
 %1$d rejected,%1$d rejected
 %1$d results,%1$d results
+%1$d results so far,%1$d results so far
+"%1$d results so far, and more not counted","%1$d results so far, and more not counted"
 %1$d setting was not in that file and was left as it is.,%1$d setting was not in that file and was left as it is.
 %1$d settings were not in that file and were left as they are.,%1$d settings were not in that file and were left as they are.
 %1$d unavailable,%1$d unavailable
@@ -46,6 +48,7 @@ source,target
 1 gate selected,1 gate selected
 1 min left,1 min left
 1 result,1 result
+1 result so far,1 result so far
 1 video left,1 video left
 A Lab change is already running,A Lab change is already running
 A creator pattern is taking too long and was switched off: %1$s,A creator pattern is taking too long and was switched off: %1$s
@@ -141,6 +144,7 @@ Clear diagnostic data,Clear diagnostic data
 Clear display delay,Clear display delay
 Clear preset,Clear preset
 Clear search,Clear search
+Clear the search,Clear the search
 Clear the seen video history,Clear the seen video history
 Cleared. Tap again to put the record back.,Cleared. Tap again to put the record back.
 Clearing,Clearing
@@ -534,7 +538,7 @@ No gates match this filter.,No gates match this filter.
 No gates match this search and filter.,No gates match this search and filter.
 No hidden creators match this search,No hidden creators match this search
 No limit,No limit
-No matching comments. Try a different word or clear the search.,No matching comments. Try a different word or clear the search.
+"No matching comments. Try a different word, or clear the search with the X in the box.","No matching comments. Try a different word, or clear the search with the X in the box."
 No matching countries,No matching countries
 No matching diagnostics found.,No matching diagnostics found.
 No matching settings,No matching settings

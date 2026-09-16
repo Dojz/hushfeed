@@ -1,4 +1,6 @@
 %1$d minutes left	Restam %1$d minutos
+%1$d results so far	%1$d resultados até agora
+%1$d results so far, and more not counted	%1$d resultados até agora, e mais não contados
 %1$d setting was not in that file and was left as it is.	%1$d configuração não estava nesse arquivo e ficou como estava.
 %1$d settings were not in that file and were left as they are.	%1$d configurações não estavam nesse arquivo e ficaram como estavam.
 %1$s and above	%1$s ou superior
@@ -7,6 +9,7 @@
 %1$s left	Resta %1$s
 %1$s changed	%1$s alterados
 %1$s to %2$s	De %1$s a %2$s
+1 result so far	1 resultado até agora
 A creator pattern is taking too long and was switched off: %1$s	Um padrão de criador está demorando demais e foi desligado: %1$s
 A good place to stop, if you want one.	Uma boa hora para parar, se você quiser uma.
 A hidden puzzle may be the cause.	Talvez a causa seja um quebra-cabeça escondido.
@@ -80,6 +83,7 @@ Clear diagnostic data	Limpar os dados de diagnóstico
 Clear display delay	Espera para limpar a tela
 Clear preset	Limpar predefinição
 Clear search	Limpar a busca
+Clear the search	Limpar a pesquisa
 Clear the seen video history	Limpar o histórico de vídeos vistos
 Cleared. Tap again to put the record back.	Limpo. Toque de novo para trazer o registro de volta.
 Close	Fechar
@@ -942,7 +946,7 @@ TikTok rejected the request to block %1$s	O TikTok rejeitou a solicitação para
 TikTok rejected the request to unblock %1$s	O TikTok rejeitou a solicitação para desbloquear %1$s
 Unavailable	Indisponível
 Waiting	Aguardando
-No matching comments. Try a different word or clear the search.	Nenhum comentário encontrado. Tente outra palavra ou limpe a pesquisa.
+No matching comments. Try a different word, or clear the search with the X in the box.	Nenhum comentário encontrado. Tente outra palavra ou limpe a pesquisa com o X no campo.
 Retry	Tentar novamente
 Settings couldn't open	Não foi possível abrir as configurações
 Try again, or go back to TikTok.	Tente novamente ou volte ao TikTok.

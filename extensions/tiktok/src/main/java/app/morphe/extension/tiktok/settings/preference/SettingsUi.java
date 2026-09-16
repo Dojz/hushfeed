@@ -649,6 +649,60 @@ public final class SettingsUi {
         if (!TextUtils.equals(view.getText(), next)) view.setText(next);
     }
 
+    /**
+     * The X that clears a field, drawn rather than typed.
+     *
+     * <p>It carries its own intrinsic size so a TextView can hang it off the end of a box without
+     * being told how big it is, and it sizes from the density rather than the field, so it stays
+     * a touch target at a large font scale instead of growing with the letters.
+     */
+    public static final class ClearGlyphDrawable extends Drawable {
+        private static final float ARM_FRACTION = 0.26f;
+
+        private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private final int size;
+
+        public ClearGlyphDrawable(Context context, @ColorInt int color) {
+            paint.setColor(color);
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setStrokeWidth(strokePx(context, 1.8f));
+            paint.setStrokeCap(Paint.Cap.ROUND);
+            size = dp(context, 22);
+        }
+
+        @Override public int getIntrinsicWidth() {
+            return size;
+        }
+
+        @Override public int getIntrinsicHeight() {
+            return size;
+        }
+
+        @Override public void draw(Canvas canvas) {
+            Rect bounds = getBounds();
+            if (bounds.isEmpty()) return;
+            float centerX = bounds.exactCenterX();
+            float centerY = bounds.exactCenterY();
+            float arm = Math.min(bounds.width(), bounds.height()) * ARM_FRACTION;
+            canvas.drawLine(centerX - arm, centerY - arm, centerX + arm, centerY + arm, paint);
+            canvas.drawLine(centerX - arm, centerY + arm, centerX + arm, centerY - arm, paint);
+        }
+
+        @Override public void setAlpha(int alpha) {
+            paint.setAlpha(alpha);
+            invalidateSelf();
+        }
+
+        @Override public void setColorFilter(ColorFilter colorFilter) {
+            paint.setColorFilter(colorFilter);
+            invalidateSelf();
+        }
+
+        @Override public int getOpacity() {
+            return PixelFormat.TRANSLUCENT;
+        }
+    }
+
     public static GradientDrawable roundedSurface(Context context, int radiusDp, boolean lifted) {
         GradientDrawable drawable = new GradientDrawable();
         drawable.setColor(lifted ? liftedSurface() : surface());

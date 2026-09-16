@@ -1,9 +1,12 @@
 # Settings text, English on the left, German on the right, one entry per line, tab separated.
 # scripts/gen-l10n.py turns this into a table inside L10nTranslations.java.
 # Keep %s and %d placeholders, {tokens} and product names as they are.
+%1$d results so far	%1$d Ergebnisse bisher
+%1$d results so far, and more not counted	%1$d Ergebnisse bisher, weitere nicht gezählt
 %1$s destinations must start with %2$s	%1$s-Ziele müssen mit %2$s beginnen
 %1$s isn't installed or doesn't take links	%1$s ist nicht installiert oder nimmt keine Links an
 %1$s changed	%1$s geändert
+1 result so far	1 Ergebnis bisher
 A creator pattern is taking too long and was switched off: %1$s	Ein Kreator-Muster braucht zu lange und wurde abgeschaltet: %1$s
 A hidden puzzle may be the cause.	Ein ausgeblendetes Rätsel kann die Ursache sein.
 A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.	Ein Host, der beim Teilen oder Kopieren an die Stelle von tiktok.com tritt, zum Beispiel vxtiktok.com. Leer lassen, um TikToks eigene Links zu teilen. Geändert werden nur TikTok-Links und nur der Host, es wird nichts irgendwohin geschickt.
@@ -11,6 +14,7 @@ Automatic advance stopped after one video	Automatisches Weiterschalten nach eine
 Block this commenter	Diesen Kommentierenden blockieren
 Blocked	Blockiert
 Clear preset	Voreinstellung löschen
+Clear the search	Suche löschen
 Completed an interrupted settings change. Restart TikTok to apply this.	Eine unterbrochene Einstellungsänderung wurde abgeschlossen. TikTok neu starten, damit das gilt.
 Copy the sound link	Soundlink kopieren
 Copy the video link	Videolink kopieren
@@ -945,7 +949,7 @@ TikTok rejected the request to block %1$s	TikTok hat die Anfrage zum Blockieren 
 TikTok rejected the request to unblock %1$s	TikTok hat die Anfrage zum Entblocken von %1$s abgelehnt
 Unavailable	Nicht verfügbar
 Waiting	Wartet
-No matching comments. Try a different word or clear the search.	Keine passenden Kommentare. Versuche es mit einem anderen Wort oder lösche die Suche.
+No matching comments. Try a different word, or clear the search with the X in the box.	Keine passenden Kommentare. Versuche es mit einem anderen Wort oder lösche die Suche mit dem X im Feld.
 Retry	Erneut versuchen
 Settings couldn't open	Die Einstellungen konnten nicht geöffnet werden
 Try again, or go back to TikTok.	Versuche es erneut oder kehre zu TikTok zurück.
