@@ -295,8 +295,5 @@ public class SettingsStatus {
     }
 
     public static void load() {
-        // The report section that says what the Lab was told to do. Registered here rather
-        // than in the Lab's own class so it is there whether or not a Lab screen was opened.
-        app.morphe.extension.tiktok.featuregatelab.FeatureGateLabReport.install();
     }
 }
