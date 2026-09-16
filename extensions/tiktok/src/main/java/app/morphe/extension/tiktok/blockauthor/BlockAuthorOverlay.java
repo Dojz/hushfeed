@@ -46,7 +46,6 @@ import java.lang.ref.WeakReference;
  * are stored as fractions of the screen, so they survive rotation and a different device.
  */
 public final class BlockAuthorOverlay {
-    private static final String SOUND_GLYPH = "♪";
     // 44 clears WCAG 2.5.5 and is under Android's own 48dp guidance, and these four have no
     // TouchDelegate to make up the difference. They sit in a column on the feed, where a
     // miss is a like or a follow on somebody's video.
@@ -344,18 +343,16 @@ public final class BlockAuthorOverlay {
     }
 
     private static View createSoundButton(Activity activity) {
+        // All four controls are drawn the same way now: one OverlayGlyphDrawable at the same
+        // stroke weight and radius fraction, over the same scrim. They were three fonts and one
+        // drawing, and the font TikTok picks is not one any of them can rely on.
         TextView button = new TextView(activity);
-        button.setText(SOUND_GLYPH);
-        button.setTextColor(SettingsUi.OVERLAY_TEXT);
-        button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         button.setGravity(Gravity.CENTER);
         button.setContentDescription(L10n.t(activity, "Block this sound"));
-        // Said outright: a clickable view is only focusable by default from API 26, and the
-        // focus ring below is unreachable on a d-pad before that.
         button.setFocusable(true);
-
-        button.setBackground(SettingsUi.overlayControl(activity, SettingsUi.RADIUS_OVERLAY));
-
+        Drawable glyph = new OverlayGlyphDrawable(OverlayGlyphDrawable.Shape.NOTE,
+                SettingsUi.OVERLAY_TEXT, SettingsUi.dp(activity, 2));
+        button.setBackground(SettingsUi.overlayControl(activity, SettingsUi.RADIUS_OVERLAY, glyph));
         button.setOnClickListener(view -> onBlockSoundTapped());
         installDrag(button);
         return button;
@@ -363,14 +360,12 @@ public final class BlockAuthorOverlay {
 
     private static View createLocalHideButton(Activity activity) {
         TextView button = new TextView(activity);
-        button.setText("×");
-        button.setTextColor(SettingsUi.OVERLAY_TEXT);
-        button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28);
         button.setGravity(Gravity.CENTER);
         button.setContentDescription(L10n.t(activity, "Hide this creator locally"));
         button.setFocusable(true);
-
-        button.setBackground(SettingsUi.overlayControl(activity, SettingsUi.RADIUS_OVERLAY));
+        Drawable glyph = new OverlayGlyphDrawable(OverlayGlyphDrawable.Shape.CROSS,
+                SettingsUi.OVERLAY_TEXT, SettingsUi.dp(activity, 2));
+        button.setBackground(SettingsUi.overlayControl(activity, SettingsUi.RADIUS_OVERLAY, glyph));
         button.setOnClickListener(view -> onLocalHideTapped());
         installDrag(button);
         return button;
@@ -382,15 +377,12 @@ public final class BlockAuthorOverlay {
 
     private static View createNotInterestedButton(Activity activity) {
         TextView button = new TextView(activity);
-        button.setText("-");
-        button.setTextColor(SettingsUi.OVERLAY_TEXT);
-        button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28);
         button.setGravity(Gravity.CENTER);
         button.setContentDescription(L10n.t(activity, "Not interested in this video"));
         button.setFocusable(true);
-        // The same shape and the same scrim as the three it shares the rail with. On a column of
-        // four, one control drawn differently reads as a mistake rather than as a distinction.
-        button.setBackground(SettingsUi.overlayControl(activity, SettingsUi.RADIUS_OVERLAY));
+        Drawable glyph = new OverlayGlyphDrawable(OverlayGlyphDrawable.Shape.MINUS,
+                SettingsUi.OVERLAY_TEXT, SettingsUi.dp(activity, 2));
+        button.setBackground(SettingsUi.overlayControl(activity, SettingsUi.RADIUS_OVERLAY, glyph));
         button.setOnClickListener(view -> NotInterested.submit());
         installDrag(button);
         return button;
@@ -432,9 +424,8 @@ public final class BlockAuthorOverlay {
         button.setContentDescription(L10n.t(activity, "Block this account"));
         button.setFocusable(true);
 
-        // The symbol is drawn over the backdrop instead of set as text, because the font
-        // TikTok happens to be using may not carry it.
-        Drawable glyph = new BlockGlyphDrawable(SettingsUi.OVERLAY_TEXT, SettingsUi.dp(activity, 2));
+        Drawable glyph = new OverlayGlyphDrawable(OverlayGlyphDrawable.Shape.BLOCK,
+                SettingsUi.OVERLAY_TEXT, SettingsUi.dp(activity, 2));
         button.setBackground(SettingsUi.overlayControl(activity, SettingsUi.RADIUS_OVERLAY, glyph));
 
         button.setOnClickListener(view -> onBlockTapped());

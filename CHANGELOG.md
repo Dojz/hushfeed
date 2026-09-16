@@ -1,6 +1,8 @@
 ## 0.40.0
 
-* * The remembered speed can be turned off. It was always on, so a reader who wanted TikTok's per-video reset had to drop the whole playback speed patch. With the new switch off, each video starts at 1x and a manual choice from the menu lasts for that video only. Under Playback, on by default.
+* * The four feed overlay controls are drawn by one class at one stroke weight. Sound was a Unicode note in whatever font TikTok picked, local hide was a bold ×, and not interested was a thin dash; only the block symbol was drawn. They all draw through `OverlayGlyphDrawable` now, at the same 2dp stroke and the same radius fraction, so they look like one set.
+
+* The remembered speed can be turned off. It was always on, so a reader who wanted TikTok's per-video reset had to drop the whole playback speed patch. With the new switch off, each video starts at 1x and a manual choice from the menu lasts for that video only. Under Playback, on by default.
 
 * "Enter a number. The previous value was kept." is gone: the dialog stays open for a correction now, so no value was kept. Five Playback summaries that opened with "Off by default." lead with what the feature does instead; the switch already says whether it is on.
 
