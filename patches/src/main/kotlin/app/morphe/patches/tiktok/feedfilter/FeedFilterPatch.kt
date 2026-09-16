@@ -399,6 +399,34 @@ val feedFilterPatch = bytecodePatch(
             """,
         )
 
+        // The trigger component for the same slot. On some accounts TikTok draws the ask bar
+        // through this trigger instead of (or alongside) the slot, so a reporter's phone showed
+        // the bar while the slot hook never fired at all. The trigger's Sp (on 46.2.3; mr, yr,
+        // Kr on later builds) gets a content view and registers a callback that makes it visible.
+        // Returning before any of that runs is enough: nothing fills the strip and nothing makes
+        // it visible. The obfuscated view-getter name changes on every build, so calling it from
+        // the guard would need a name that matches only one; returning early avoids that.
+        TakoAskBarTriggerBindFingerprint.method.guardAtEntry(
+            "Feed filter",
+            "invoke-static {}, $TAKO_AI_FILTER_CLASS_DESCRIPTOR->shouldHideAskBar()Z",
+            "return-void",
+        )
+
+        // The feed-level Tako trigger lives in the tikbot package, separate from the detail-page
+        // one above. A reporter's export showed no detail-page hook firing while the bar still
+        // appeared, because their account draws it through this component instead. The roof
+        // variant covers the same slot from the "roof" layout position. Same guard on all three.
+        TakoFeedTriggerBindFingerprint.method.guardAtEntry(
+            "Feed filter",
+            "invoke-static {}, $TAKO_AI_FILTER_CLASS_DESCRIPTOR->shouldHideAskBar()Z",
+            "return-void",
+        )
+        TakoFeedTriggerRoofBindFingerprint.method.guardAtEntry(
+            "Feed filter",
+            "invoke-static {}, $TAKO_AI_FILTER_CLASS_DESCRIPTOR->shouldHideAskBar()Z",
+            "return-void",
+        )
+
         TakoAiFeedButtonBindFingerprint.method.apply {
             // After the base class has laid the view out, which is what index 2 meant on 46.2.3
             // and what it stops meaning the moment anything is added above it.

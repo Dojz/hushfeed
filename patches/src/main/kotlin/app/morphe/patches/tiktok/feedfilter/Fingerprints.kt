@@ -455,6 +455,59 @@ internal object TakoAskBarBindFingerprint : Fingerprint(
     },
 )
 
+/**
+ * The trigger component for the same slot. On some accounts TikTok draws the ask bar through
+ * this trigger instead of (or alongside) the slot component. A reporter's export on 0.39.0
+ * showed the slot hook never firing while the bar still appeared: the trigger was the one
+ * that ran. Its {@code hs} is a bridge into {@code Sp(VideoItemParams)}, which gets the
+ * content view and registers a show callback, so hiding the view at the top of the trigger's
+ * bind covers both paths.
+ *
+ * <p>Matched by its defining class and by the {@code CHECK_CAST} to {@code VideoItemParams}
+ * inside its body, the same way the slot fingerprint works.
+ */
+internal object TakoAskBarTriggerBindFingerprint : Fingerprint(
+    definingClass = "Lcom/ss/android/ugc/aweme/tako/detail/keyframe/ui/TakoDetailKeyFrameBottomTrigger;",
+    returnType = "V",
+    parameters = listOf("Lcom/ss/android/ugc/aweme/feed/model/VideoItemParams;"),
+    custom = { method, _ ->
+        // The name changes on every build (Sp, mr, yr, Kr), but it is always the sole
+        // (VideoItemParams)V method that is not the boolean variant (Wp, ur, Dr, Qr). Both
+        // sit on the same class with the same parameter; the return type separates them.
+        !com.android.tools.smali.dexlib2.AccessFlags.ABSTRACT.isSet(method.accessFlags)
+    },
+)
+
+/**
+ * The feed-level Tako trigger, in the tikbot package rather than the detail keyframe package.
+ * A reporter on 0.39.0 still saw the ask bar while the detail-page hook never fired, so the
+ * bar was drawn through a different component entirely. This trigger is the one that binds per
+ * video on the main scrolling feed and registers the callback that makes the ask bar visible.
+ * Same structural pattern as the detail trigger: one {@code (VideoItemParams)V} method, one
+ * {@code (VideoItemParams)Z} method, both with names that change on every build.
+ */
+internal object TakoFeedTriggerBindFingerprint : Fingerprint(
+    definingClass = "Lcom/ss/android/ugc/aweme/feed/assem/tikbot/TakoTrigger;",
+    returnType = "V",
+    parameters = listOf("Lcom/ss/android/ugc/aweme/feed/model/VideoItemParams;"),
+    custom = { method, _ ->
+        !com.android.tools.smali.dexlib2.AccessFlags.ABSTRACT.isSet(method.accessFlags)
+    },
+)
+
+/**
+ * The roof variant of the feed-level Tako trigger, which sits above the normal trigger and
+ * covers the same slot from the "roof" layout position. Same (VideoItemParams)V pattern.
+ */
+internal object TakoFeedTriggerRoofBindFingerprint : Fingerprint(
+    definingClass = "Lcom/ss/android/ugc/aweme/feed/assem/tikbot/TakoTriggerRoof;",
+    returnType = "V",
+    parameters = listOf("Lcom/ss/android/ugc/aweme/feed/model/VideoItemParams;"),
+    custom = { method, _ ->
+        !com.android.tools.smali.dexlib2.AccessFlags.ABSTRACT.isSet(method.accessFlags)
+    },
+)
+
 internal object FollowFeedPresenterPostProcessFingerprint : Fingerprint(
     returnType = "V",
     parameters = listOf("Lcom/ss/android/ugc/aweme/follow/presenter/FollowFeedList;"),
