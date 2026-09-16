@@ -700,6 +700,18 @@ public final class FeedItemsFilter {
         List kept = rangeKept;
         int removed = initialSize - kept.size();
 
+        // A batch filtered down to nothing is legitimate. Hide livestreams over a LIVE-only
+        // page really does leave zero videos, and putting one back would be the switch not
+        // working. What it is not is invisible: from the outside it looks like the feed has
+        // stopped, and upstream reported exactly that after a livestream was hidden. Counted
+        // so an export can say whether a stalled feed was ever handed anything to show.
+        if (initialSize > 0 && kept.isEmpty()) {
+            FeedFilterCounters.emptied(source);
+            Logger.printInfo(() -> "[Morphe TikTok FeedFilter] " + source
+                + " kept nothing out of " + initialSize + "; the feed has nothing to advance to"
+                + " until TikTok asks for another batch");
+        }
+
         List resultList = list;
         if (removed > 0) {
             try {

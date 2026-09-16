@@ -1,5 +1,7 @@
 ## 0.40.0
 
+* A feed batch that came out empty now says so in the diagnostic export. Hiding livestreams over a page of nothing but livestreams legitimately leaves zero videos, and putting one back would be the switch not working, but from the outside an empty batch and a broken feed look the same: there is nothing to swipe to until TikTok asks for another one. Upstream reported the feed freezing on exactly that swipe. A route's line now carries how many of its batches it handed back empty, so a report about a stuck feed can say whether anything was ever delivered to show.
+
 * A share hook that fails now leaves TikTok's own share sheet alone instead of taking it down. Three of them ran inside the share model's constructor with nothing catching behind them, and the link rewrite replaced a native method outright, so one bad read anywhere in there reached TikTok as a Share button that did nothing, followed by the app stopping. That is what upstream's report looked like from the outside. Each of those boundaries now catches for itself and hands back exactly what TikTok passed in, and a failure that used to be silent shows up in the diagnostic export as a named hook that threw. The confirm step keeps holding a send to a person, but it no longer eats a tap on Repost, Copy link or Save when it cannot tell what it is looking at.
 
 ## 0.39.0

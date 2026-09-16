@@ -146,6 +146,34 @@ public class FeedFilterCountersTest {
         assertTrue(report, report.contains("mid-roll ads"));
     }
 
+    @Test public void aBatchFilteredDownToNothingSaysSoOnItsOwnLine() {
+        // Upstream reported the feed freezing on the swipe after a livestream was hidden. A
+        // batch legitimately can come out empty, and from the outside that is indistinguishable
+        // from a feed that has stopped working. "3 items, 3 removed" does not say it either:
+        // three lists of one each read the same as one list of three. This does.
+        com.ss.android.ugc.aweme.feed.model.FeedItemList response =
+                new com.ss.android.ugc.aweme.feed.model.FeedItemList();
+        response.items = new ArrayList<>(List.of(video(true), video(true), video(true)));
+
+        FeedItemsFilter.filter(response);
+
+        assertTrue("the ad-only batch should have been emptied", response.items.isEmpty());
+        assertEquals("FeedItemList:response: 1 lists, 3 items, 3 removed, 1 left empty. "
+                + "Last reason: AdsFilter", lineFor("FeedItemList:response"));
+    }
+
+    @Test public void aBatchThatKeptSomethingIsNotCalledEmpty() {
+        com.ss.android.ugc.aweme.feed.model.FeedItemList response =
+                new com.ss.android.ugc.aweme.feed.model.FeedItemList();
+        response.items = new ArrayList<>(List.of(video(true), video(false)));
+
+        FeedItemsFilter.filter(response);
+
+        assertEquals(1, response.items.size());
+        assertFalse("a batch with a video left in it is not an empty one",
+                String.valueOf(lineFor("FeedItemList:response")).contains("left empty"));
+    }
+
     @Test public void anElementThatIsNotAVideoIsCountedAndNamedOnce() {
         // 64 items, 0 removed, two ads watched: the report could not say whether nothing
         // matched a rule or nothing was ever tested. On 46.2.3 the lists are videos, so this is
