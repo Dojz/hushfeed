@@ -63,10 +63,28 @@ val amoledThemePatch = resourcePatch(
             }
         }
         if (found != backgrounds) throw PatchException("Dark background palette is incomplete: $found")
-        if (styleItemsFound != SHEET_STYLE_ITEMS) {
-            throw PatchException("Dark sheet style items are incomplete: $styleItemsFound")
-        }
+        checkSheetStyleItems(styleItemsFound, packageMetadata.versionName, declaredVersions())
     }
+}
+
+/** The builds this patch is declared for, where the sheet style names are known to be right. */
+internal fun declaredVersions(): Set<String> =
+    AppCompatibilities.tiktok4623().flatMap { it.targets }.mapNotNull { it.version }.toSet()
+
+/**
+ * On a declared build every sheet item has to have been found: the names are that build's,
+ * and one missing means an identity is wrong. On a build the patch was forced onto, the
+ * names are not promised. What matched was rewritten, and the failure is nothing matching
+ * at all, which says the sheet lookup itself no longer works there. 46.7.3 has the comments
+ * sheet's item and not the share sheet's, and a whole patch that fails over one grey sheet
+ * on a build it never claimed is the wrong trade.
+ */
+internal fun checkSheetStyleItems(found: Set<String>, versionName: String?, declared: Set<String>) {
+    if (found == SHEET_STYLE_ITEMS) return
+    if (versionName != null && versionName in declared) {
+        throw PatchException("Dark sheet style items are incomplete: $found")
+    }
+    if (found.isEmpty()) throw PatchException("No dark sheet style item was found on $versionName")
 }
 
 /** The style items behind the comments sheet (agk) and the share sheet (c3) on 46.2.3. */

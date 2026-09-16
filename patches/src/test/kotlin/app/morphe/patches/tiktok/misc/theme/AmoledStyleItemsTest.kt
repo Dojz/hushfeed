@@ -2,9 +2,11 @@ package app.morphe.patches.tiktok.misc.theme
 
 import java.io.ByteArrayInputStream
 import javax.xml.parsers.DocumentBuilderFactory
+import app.morphe.patcher.patch.PatchException
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
+import org.junit.Assert.fail
 import org.junit.Test
 import org.w3c.dom.Document
 import org.w3c.dom.Element
@@ -34,6 +36,25 @@ class AmoledStyleItemsTest {
     fun `nothing dark to rewrite is reported as nothing changed`() {
         val styles = parse("""<resources><style name="zb"><item name="c3">#ffffffff</item></style></resources>""")
         assertTrue(rewriteDarkStyleItems(styles, SHEET_STYLE_ITEMS, "#000000").isEmpty())
+    }
+
+    @Test
+    fun `a declared build needs every sheet item and a forced build needs one`() {
+        assertEquals(setOf("46.2.3"), declaredVersions())
+        checkSheetStyleItems(setOf("agk", "c3"), "46.2.3", setOf("46.2.3"))
+        checkSheetStyleItems(setOf("agk"), "46.7.3", setOf("46.2.3"))
+        checkSheetStyleItems(setOf("agk"), null, setOf("46.2.3"))
+        assertRefused { checkSheetStyleItems(setOf("agk"), "46.2.3", setOf("46.2.3")) }
+        assertRefused { checkSheetStyleItems(emptySet(), "46.7.3", setOf("46.2.3")) }
+    }
+
+    private fun assertRefused(check: () -> Unit) {
+        try {
+            check()
+        } catch (refusal: PatchException) {
+            return
+        }
+        fail("the check accepted what it should have refused")
     }
 
     @Test
