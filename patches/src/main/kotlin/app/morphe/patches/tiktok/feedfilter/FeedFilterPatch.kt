@@ -385,6 +385,20 @@ val feedFilterPatch = bytecodePatch(
             "const/4 p1, 0x0",
         )
 
+        // The "Ask" strip under the caption is a slot component bound per video, and it is not
+        // the floating button the two hooks above cover (issue #6). Asked at the top of its bind:
+        // with the switch on the slot's view is hidden and the bind never fills it.
+        TakoAskBarBindFingerprint.method.guardAtEntry(
+            "Feed filter",
+            "invoke-static {}, $TAKO_AI_FILTER_CLASS_DESCRIPTOR->shouldHideAskBar()Z",
+            """
+                invoke-virtual {p0}, Lcom/bytedance/assem/arch/reused/ReusedUISlotAssem;->getContentView()Landroid/view/View;
+                move-result-object v0
+                invoke-static {v0}, $TAKO_AI_FILTER_CLASS_DESCRIPTOR->hideAskBar(Landroid/view/View;)V
+                return-void
+            """,
+        )
+
         TakoAiFeedButtonBindFingerprint.method.apply {
             // After the base class has laid the view out, which is what index 2 meant on 46.2.3
             // and what it stops meaning the moment anything is added above it.

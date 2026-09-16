@@ -436,6 +436,25 @@ internal object TakoAiFeedButtonSetVisibleFingerprint : Fingerprint(
     },
 )
 
+/**
+ * The bind of the Tako "Ask" strip under a video's caption, a bottom slot on the video cell
+ * (issue #6). Named {@code hs} on 46.2.3 and {@code onBind} on the three later builds, so it is
+ * found by what it does: it is the one single-Object method on the class that casts its
+ * argument to the video's item params before reading the video.
+ */
+internal object TakoAskBarBindFingerprint : Fingerprint(
+    definingClass = "Lcom/ss/android/ugc/aweme/tako/detail/keyframe/ui/TakoDetailKeyFrameBottomAssemAssem;",
+    returnType = "V",
+    parameters = listOf("Ljava/lang/Object;"),
+    custom = { method, _ ->
+        method.implementation?.instructions?.any { instruction ->
+            instruction.opcode == com.android.tools.smali.dexlib2.Opcode.CHECK_CAST &&
+                instruction.getReference<com.android.tools.smali.dexlib2.iface.reference.TypeReference>()
+                    ?.type == "Lcom/ss/android/ugc/aweme/feed/model/VideoItemParams;"
+        } == true
+    },
+)
+
 internal object FollowFeedPresenterPostProcessFingerprint : Fingerprint(
     returnType = "V",
     parameters = listOf("Lcom/ss/android/ugc/aweme/follow/presenter/FollowFeedList;"),
