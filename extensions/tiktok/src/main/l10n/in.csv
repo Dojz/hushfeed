@@ -1020,3 +1020,7 @@ First rejection:,Penolakan pertama:
 Done,Selesai
 %1$s. %2$s,%1$s. %2$s
 Imported %1$d values. Undo last Lab change is in the menu.,%1$d nilai diimpor. Batalkan perubahan Lab terakhir ada di menu.
+"No recording yet. Start one, use a feature, then return here.","Belum ada rekaman. Mulai satu, pakai sebuah fitur, lalu kembali ke sini."
+No gate reads were recorded. Use a TikTok feature while recording.,Tidak ada pembacaan gate yang terekam. Pakai fitur TikTok saat merekam.
+Start recording,Mulai merekam
+Show last report,Tampilkan laporan terakhir

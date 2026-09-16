@@ -183,8 +183,44 @@ public final class SettingsUi {
         }
     }
 
+    /** Keyed tags in the app's id space, which a plain tag and the chevron's string tag leave alone. */
+    private static final int TAG_ROW_PAINT = 0x7f7f4001;
+    private static final int TAG_SWITCH_PAINT = 0x7f7f4002;
+
+    /** What a row was last painted as, kept on the row so a rebind of the same view costs nothing. */
+    private static final class RowPaint {
+        final boolean first, last, dark;
+        RowPaint(boolean first, boolean last, boolean dark) { this.first = first; this.last = last; this.dark = dark; }
+    }
+
+    /**
+     * Paints the row as a member of its group, unless it already is. A list recycles its rows on
+     * every frame of a scroll, and the ripple, the card, its mask and the switch drawables were
+     * rebuilt for each one as it came into view. A row that comes back with the same edges in the
+     * same theme keeps what it has; only a changed edge or a changed theme paints again.
+     */
+    public static void applyGroupedRow(View row, boolean first, boolean last) {
+        boolean dark = isDarkMode();
+        Object painted = row.getTag(TAG_ROW_PAINT);
+        if (painted instanceof RowPaint && row.getBackground() != null) {
+            RowPaint paint = (RowPaint) painted;
+            if (paint.first == first && paint.last == last && paint.dark == dark) return;
+        }
+        row.setBackground(groupedRow(row.getContext(), first, last));
+        row.setTag(TAG_ROW_PAINT, new RowPaint(first, last, dark));
+    }
+
     public static void styleSwitch(Switch control) {
         Context context = control.getContext();
+        // The track and thumb depend on the theme and nothing else, so a switch that already
+        // wears this theme's pair keeps it. Four GradientDrawables and a state list per bind
+        // was the cost of a scroll on a forty-row page.
+        Object painted = control.getTag(TAG_SWITCH_PAINT);
+        if (painted instanceof Boolean && (Boolean) painted == isDarkMode()
+                && control.getTrackDrawable() != null && control.getThumbDrawable() != null) {
+            return;
+        }
+        control.setTag(TAG_SWITCH_PAINT, isDarkMode());
         StateListDrawable track = new StateListDrawable();
         // Checked-and-disabled first, or the -state_enabled entry below answers for it and a
         // greyed switch looks the same on as off: a reader cannot see what state it will come

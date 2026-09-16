@@ -1731,7 +1731,7 @@ public final class FeatureGateLabFragment extends Fragment {
             }
             holder.value.setText(shownValue);
             holder.value.setVisibility(entry.loaded || rule != null ? View.VISIBLE : View.GONE);
-            convertView.setBackground(SettingsUi.groupedRow(context, position == 0, position == entries.size() - 1));
+            SettingsUi.applyGroupedRow(convertView, position == 0, position == entries.size() - 1);
             // A chosen row is drawn as chosen, and says so to a screen reader further down: a
             // selection you cannot see is a selection you act on by accident.
             boolean chosen = selection.containsKey(entry.identity());
