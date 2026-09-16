@@ -38,7 +38,11 @@ public final class CommentPublishDiagnostics {
         Logger.printInfo(() -> TAG + "requested with " + line);
     }
 
-    /** Called before each return that leaves the entry without building a request. */
+    /**
+     * Called before each return that leaves the entry without building a request. The
+     * number is the instruction index of that return; on a build that splits the entry
+     * in two, the second method's exits count from 1000.
+     */
     public static void onPublishExit(int exit) {
         Logger.printInfo(() -> TAG + "returned before the request at exit " + exit);
     }

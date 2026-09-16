@@ -23,21 +23,34 @@ private const val COMMENT = "Lcom/ss/android/ugc/aweme/comment/model/Comment;"
 private const val FUNCTION1 = "Lkotlin/jvm/functions/Function1;"
 private const val EXTENSION = "Lapp/morphe/extension/tiktok/comment/CommentPublishDiagnostics;"
 
-/** The two event names the publish entry logs, on 46.2.3, 46.7.3 and 46.8.3 alike. */
-private val ENTRY_STRINGS = setOf("click_comment_send", "invalid_post_comment")
+/** The event the entry logs on the way in, on every build. */
+private const val CLICK_EVENT = "click_comment_send"
+
+/** The event the checks log when they refuse, on every build. */
+private const val REFUSAL_EVENT = "invalid_post_comment"
+
+/** Exit numbers from the second part of a split entry start here. */
+internal const val PART_STRIDE = 1000
+
+internal fun Method.stringConstants(): Set<String> =
+    implementation?.instructions?.mapNotNull { it.getReference<StringReference>()?.string }?.toSet()
+        ?: emptySet()
 
 /**
- * The publish entry: an instance method of the publish view model taking the publish
- * parameters, the comment being replied to and a completion callback, whose body logs the
- * send click. Its name is R8's and changes with every build; its shape and its strings do not.
+ * A part of the publish entry: an instance method of the publish view model taking the publish
+ * parameters, the comment being replied to and a completion callback, whose body logs either the
+ * send click or a refusal.
+ *
+ * <p>On 46.2.3 one method does both. 46.7.3 and 46.8.3 split it: one method logs the click and
+ * runs the first checks, then calls a second of the same shape that runs the rest and hands the
+ * comment to the request. Their names are R8's and change with every build; the shape and the
+ * two event names do not.
  */
-internal fun Method.isPublishEntry(): Boolean {
+internal fun Method.isPublishEntryPart(): Boolean {
     if (returnType != "V" || parameterTypes.size != 3) return false
     if (parameterTypes[1].toString() != COMMENT || parameterTypes[2].toString() != FUNCTION1) return false
-    val strings = implementation?.instructions?.mapNotNull {
-        it.getReference<StringReference>()?.string
-    }?.toSet() ?: return false
-    return strings.containsAll(ENTRY_STRINGS)
+    val strings = stringConstants()
+    return CLICK_EVENT in strings || REFUSAL_EVENT in strings
 }
 
 /**
@@ -65,46 +78,64 @@ val commentPublishDiagnosticsPatch = bytecodePatch(
     compatibleWith(*AppCompatibilities.tiktok4623())
 
     execute {
-        val entries = mutableListOf<Pair<ClassDef, Method>>()
+        val parts = mutableListOf<Pair<ClassDef, Method>>()
         classDefForEach { classDef ->
             if (!classDef.type.endsWith(PUBLISH_VIEW_MODEL_SUFFIX)) return@classDefForEach
-            classDef.methods.filter { it.isPublishEntry() }.forEach { entries += classDef to it }
+            classDef.methods.filter { it.isPublishEntryPart() }.forEach { parts += classDef to it }
         }
+        check(parts.isNotEmpty()) { "Comment publish diagnostics: no publish entry logs the send click or a refusal." }
+        check(parts.size <= 2) {
+            "Comment publish diagnostics: expected the publish entry in one or two methods, found ${parts.size}" +
+                parts.joinToString(prefix = " [", postfix = "]") { "${it.first.type}->${it.second.name}" }
+        }
+        val entries = parts.filter { CLICK_EVENT in it.second.stringConstants() }
         check(entries.size == 1) {
-            "Comment publish diagnostics: expected one publish entry, found ${entries.size}" +
-                entries.joinToString(prefix = " [", postfix = "]") { "${it.first.type}->${it.second.name}" }
+            "Comment publish diagnostics: expected one method that logs the send click, found ${entries.size}."
         }
-        val (classDef, entry) = entries.single()
-        val method = mutableClassDefBy(classDef.type).findMutableMethodOf(entry)
-        val implementation = method.implementation!!
-        val instructions = implementation.instructions.toList()
-        val parameterBase = implementation.registerCount - method.numberOfParameterRegisters
-        check(parameterBase >= 1) {
-            "Comment publish diagnostics: the publish entry has no local register to stage an exit number in."
-        }
+        // The click half first, so its exits are numbered from zero and the other half's from
+        // PART_STRIDE, whichever order R8 laid them out in.
+        val ordered = entries + parts.filterNot { it in entries }
 
-        // Every way out before the request, and every hand-off to it. Indices are read off
-        // the untouched body and written highest first, so none of them moves under another.
-        val exits = instructions.withIndex().filter { it.value.opcode == Opcode.RETURN_VOID }.map { it.index }
-        val handOffs = instructions.withIndex().filter { it.value.isHandOff(classDef.type) }.map { it.index }
-        check(exits.isNotEmpty()) { "Comment publish diagnostics: the publish entry never returns." }
-        check(handOffs.isNotEmpty()) {
+        var exits = 0
+        var handOffs = 0
+        ordered.forEachIndexed { ordinal, (classDef, part) ->
+            val method = mutableClassDefBy(classDef.type).findMutableMethodOf(part)
+            val implementation = method.implementation!!
+            val instructions = implementation.instructions.toList()
+            val parameterBase = implementation.registerCount - method.numberOfParameterRegisters
+            check(parameterBase >= 1) {
+                "Comment publish diagnostics: ${part.name} has no local register to stage an exit number in."
+            }
+
+            // Every way out before the request, and every hand-off to it. Indices are read off
+            // the untouched body and written highest first, so none of them moves under another.
+            val exitIndices = instructions.withIndex().filter { it.value.opcode == Opcode.RETURN_VOID }.map { it.index }
+            val handOffIndices = instructions.withIndex().filter { it.value.isHandOff(classDef.type) }.map { it.index }
+            exits += exitIndices.size
+            handOffs += handOffIndices.size
+
+            val insertions = exitIndices.map { index ->
+                index to """
+                    const/16 v0, ${ordinal * PART_STRIDE + index}
+                    invoke-static { v0 }, $EXTENSION->onPublishExit(I)V
+                """
+            } + handOffIndices.map { index ->
+                index to "invoke-static {}, $EXTENSION->onPublishHandedOff()V"
+            } + if (ordinal == 0) {
+                listOf(
+                    0 to "invoke-static/range { v$parameterBase .. v${parameterBase + 1} }, " +
+                        "$EXTENSION->onPublishRequested(Ljava/lang/Object;Ljava/lang/Object;)V",
+                )
+            } else {
+                emptyList()
+            }
+            insertions.sortedByDescending { it.first }.forEach { (index, code) ->
+                method.addInstructionsAtControlFlowLabel(index, code)
+            }
+        }
+        check(exits > 0) { "Comment publish diagnostics: the publish entry never returns." }
+        check(handOffs > 0) {
             "Comment publish diagnostics: the publish entry never hands the comment to the request."
-        }
-
-        val insertions = exits.map { index ->
-            index to """
-                const/16 v0, $index
-                invoke-static { v0 }, $EXTENSION->onPublishExit(I)V
-            """
-        } + handOffs.map { index ->
-            index to "invoke-static {}, $EXTENSION->onPublishHandedOff()V"
-        } + listOf(
-            0 to "invoke-static/range { v$parameterBase .. v${parameterBase + 1} }, " +
-                "$EXTENSION->onPublishRequested(Ljava/lang/Object;Ljava/lang/Object;)V",
-        )
-        insertions.sortedByDescending { it.first }.forEach { (index, code) ->
-            method.addInstructionsAtControlFlowLabel(index, code)
         }
     }
 }
