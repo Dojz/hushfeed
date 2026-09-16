@@ -1,5 +1,7 @@
 ## 0.34.0
 
+* A new patch, Comment publish diagnostics, on by default. When a comment will not post, the text stays in the box with no toast and nothing in the log, and TikTok's publish code has a dozen ways to return before the request without a word. The diagnostic report now says whether the send reached that code, what it had in hand (the text's length, the attachments, a reply target, the video), and whether it returned early or handed the comment to the request.
+
 * Reposting a video no longer arms the send-confirmation step. With Confirm before sending on, tapping Repost, Copy link or another share-channel action used to show "tap again to send" and act only on a second tap, because the confirmation gate treated every share-sheet button as a person to send to. It now gates only the recipients you can send to.
 
 * The feed filter table in the diagnostic report now says when a profile or insertion route was handed something that is not a video, and with diagnostic logging on the profile routes list every video they kept with its ad markers (ad, soft ad, raw ad, promotion, commission disclosure). A report about an ad that got through a profile page (issue #2) used to carry the counts and nothing about the ad itself.
