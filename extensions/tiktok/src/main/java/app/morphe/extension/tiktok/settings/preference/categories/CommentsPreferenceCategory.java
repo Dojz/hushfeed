@@ -90,6 +90,14 @@ public class CommentsPreferenceCategory extends ConditionalPreferenceCategory {
             ));
             addPreference(new TogglePreference(
                     context,
+                    "Links in comments open",
+                    "A web address someone left in a comment can be tapped instead of copied "
+                            + "out by hand. Tapping anywhere else in the comment still does what "
+                            + "it did.",
+                    Settings.COMMENT_LINKS
+            ));
+            addPreference(new TogglePreference(
+                    context,
                     "Filter comments by keyword",
                     "Hide comments that contain any of the words below, or that come from the accounts below.",
                     Settings.COMMENT_KEYWORD_FILTER

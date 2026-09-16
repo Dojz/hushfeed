@@ -159,7 +159,8 @@ public final class CommentTools {
             }
             itemView.post(() -> releaseDislike(itemView));
         }
-        if (!block && !CommentSearch.enabled()) {
+        boolean links = Settings.COMMENT_LINKS.get();
+        if (!block && !links && !CommentSearch.enabled()) {
             CommentSearch.onCellBound(itemView, null);
             return;
         }
@@ -172,6 +173,10 @@ public final class CommentTools {
             }
 
             CommentSearch.onCellBound(itemView, comment);
+            // Posted for the same reason the takeover is: the text view is not laid out while
+            // the cell is being bound, and a link cannot be placed on a line that has no
+            // width yet.
+            if (links) itemView.post(() -> CommentLinks.apply(itemView, comment));
             if (!block) {
                 return;
             }

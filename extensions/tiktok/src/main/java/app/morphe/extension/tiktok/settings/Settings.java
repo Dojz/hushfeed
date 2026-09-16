@@ -435,6 +435,7 @@ public class Settings extends BaseSettings {
     public static final StringSetting COMMENT_BLOCKED_USERS = new StringSetting("comment_blocked_users", "");
     public static final BooleanSetting BLOCK_FROM_COMMENT = new BooleanSetting("block_from_comment", TRUE);
     public static final BooleanSetting COMMENT_SEARCH = new BooleanSetting("comment_search", FALSE);
+    public static final BooleanSetting COMMENT_LINKS = new BooleanSetting("comment_links", TRUE);
     public static final BooleanSetting HIDE_COMMENT_MEDIA = new BooleanSetting("hide_comment_media", FALSE);
     public static final BooleanSetting HIDE_COMMENT_POLLS = new BooleanSetting("hide_comment_polls", FALSE);
     public static final BooleanSetting HIDE_COMMENT_EGGS = new BooleanSetting("hide_comment_eggs", TRUE);

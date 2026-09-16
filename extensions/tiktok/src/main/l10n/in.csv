@@ -8,6 +8,7 @@ source,target
 A creator pattern is taking too long and was switched off: %1$s,"Ada pola kreator yang terlalu lama, jadi dimatikan: %1$s"
 A hidden puzzle may be the cause.,Teka-teki yang disembunyikan bisa jadi penyebabnya.
 "A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.","Host pengganti tiktok.com saat kamu membagikan atau menyalin tautan, misalnya vxtiktok.com. Kosongkan untuk membagikan tautan TikTok sendiri. Hanya tautan TikTok yang diubah, dan hanya bagian host-nya, tidak ada yang dikirim ke mana pun."
+A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.,"Alamat web yang ditulis seseorang di komentar bisa diketuk, bukan disalin manual. Mengetuk bagian lain dari komentar tetap seperti sebelumnya."
 Automatic advance stopped after one video,Lanjut otomatis dihentikan setelah satu video
 Block this commenter,Blokir pengomentar ini
 Blocked,Diblokir
@@ -25,6 +26,7 @@ Full comment sort options,Opsi urutan komentar lengkap
 Hide the launcher shortcuts,Sembunyikan pintasan peluncur
 Keep the Favorites tab,Pertahankan tab Favorit
 Link copied,Tautan disalin
+Links in comments open,Tautan di komentar bisa dibuka
 No videos remained after Hushfeed applied your feed filters to one batch. Most matches: %1$s.,Tidak ada video tersisa setelah Hushfeed menerapkan filter feed pada satu kelompok. Paling sering cocok: %1$s.
 Not blocked,Tidak diblokir
 Not saved yet,Belum disimpan
