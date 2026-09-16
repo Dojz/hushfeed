@@ -98,6 +98,22 @@ public class CommentBatchTranslatorTest {
                 handled + 1, CommentBatchTranslator.completionsHandledForTests());
     }
 
+    @Test public void tenCellsOfOneManagerClassWalkTheNativeMethodsOnce() {
+        // Every cell of a comment sheet used to read every field of its manager and walk the
+        // native manager's declared methods, on the bind thread, three times per cell. The
+        // manager's shape is a property of its class, so the first cell pays and the rest read
+        // three fields.
+        CommentBatchTranslator.registerCommentCell(new View(context), anchor("aid-walk", "cid-walk-0"));
+        int afterFirst = CommentBatchTranslator.nativeMethodWalksForTests;
+        for (int cell = 1; cell < 10; cell++) {
+            CommentBatchTranslator.registerCommentCell(new View(context), anchor("aid-walk", "cid-walk-" + cell));
+        }
+        Shadows.shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(400));
+
+        assertEquals("later cells of the same class walked the manager's methods again",
+                afterFirst, CommentBatchTranslator.nativeMethodWalksForTests);
+    }
+
     @Test public void aRunnerThatKeepsItsOwnFieldNamesIsReadByKind() {
         // 46.9.3 keeps the completion runner as a Runnable of its own, with the results list and
         // the task under R8's names rather than the l0 and l1 an outlined body gives them. Such a

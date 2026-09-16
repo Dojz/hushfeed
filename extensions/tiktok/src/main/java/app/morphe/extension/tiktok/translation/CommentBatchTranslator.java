@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public final class CommentBatchTranslator {
     private static final long STALE_ENTRY_MS = 15_000L;
@@ -458,7 +459,33 @@ public final class CommentBatchTranslator {
         }
     }
 
+    /**
+     * The native batch method per (manager class, context class), the pairs that have none
+     * included. Both answers are properties of the two classes, and a comment sheet asks the
+     * same question for every cell it binds: forty cells used to walk the manager's declared
+     * methods a hundred and twenty times on the thread that binds the list.
+     */
+    private static final ConcurrentHashMap<String, ResolvedMethod> NATIVE_BATCH_METHODS = new ConcurrentHashMap<>();
+
+    /** How many times the declared methods were actually walked; a test binds ten cells and expects one. */
+    static int nativeMethodWalksForTests;
+
+    private static final class ResolvedMethod {
+        final Method method;
+        ResolvedMethod(Method method) { this.method = method; }
+    }
+
     private static Method findNativeBatchMethod(Class<?> managerClass, Class<?> contextClass) {
+        String key = managerClass.getName() + '|' + contextClass.getName();
+        ResolvedMethod cached = NATIVE_BATCH_METHODS.get(key);
+        if (cached != null) return cached.method;
+        Method found = walkForNativeBatchMethod(managerClass, contextClass);
+        NATIVE_BATCH_METHODS.put(key, new ResolvedMethod(found));
+        return found;
+    }
+
+    private static Method walkForNativeBatchMethod(Class<?> managerClass, Class<?> contextClass) {
+        nativeMethodWalksForTests++;
         Class<?> current = managerClass;
         while (current != null) {
             for (Method method : current.getDeclaredMethods()) {
@@ -1003,25 +1030,64 @@ public final class CommentBatchTranslator {
         return null;
     }
 
+    /**
+     * Which fields of a cell manager class held the comment, the native manager and the context
+     * the last time the full walk found them. The next cell of that class is three field reads
+     * and two cached class questions; the walk runs again only if one of the three is empty or
+     * no longer answers, which is how a class that carries two candidates and switches between
+     * them is still found.
+     */
+    private static final ConcurrentHashMap<Class<?>, AnchorShape> ANCHOR_SHAPES = new ConcurrentHashMap<>();
+
+    private static final class AnchorShape {
+        final Field comment;
+        final Field context;
+        final Field nativeManager;
+        AnchorShape(Field comment, Field context, Field nativeManager) {
+            this.comment = comment;
+            this.context = context;
+            this.nativeManager = nativeManager;
+        }
+    }
+
     private static AnchorParts resolveAnchorParts(Object anchor) {
         if (anchor == null) return null;
 
         try {
-            ArrayList<Object> values = readInstanceFieldValues(anchor);
-            Object comment = null;
-            for (Object value : values) {
-                if (value != null && hasNoArgMethod(value.getClass(), "getCid")) {
-                    comment = value;
+            AnchorShape shape = ANCHOR_SHAPES.get(anchor.getClass());
+            if (shape != null) {
+                Object comment = shape.comment.get(anchor);
+                Object context = shape.context.get(anchor);
+                Object nativeManager = shape.nativeManager.get(anchor);
+                if (comment != null && context != null && nativeManager != null
+                        && hasNoArgMethod(comment.getClass(), "getCid")
+                        && findNativeBatchMethod(nativeManager.getClass(), context.getClass()) != null) {
+                    return new AnchorParts(comment, context, nativeManager);
+                }
+            }
+
+            ArrayList<Field> fields = new ArrayList<>();
+            ArrayList<Object> values = new ArrayList<>();
+            readInstanceFields(anchor, fields, values);
+            int commentAt = -1;
+            for (int i = 0; i < values.size(); i++) {
+                if (hasNoArgMethod(values.get(i).getClass(), "getCid")) {
+                    commentAt = i;
                     break;
                 }
             }
-            if (comment == null) return null;
+            if (commentAt < 0) return null;
+            Object comment = values.get(commentAt);
 
-            for (Object nativeManager : values) {
-                if (nativeManager == null || nativeManager == comment) continue;
-                for (Object context : values) {
-                    if (context == null || context == comment || context == nativeManager) continue;
+            for (int m = 0; m < values.size(); m++) {
+                Object nativeManager = values.get(m);
+                if (nativeManager == comment) continue;
+                for (int c = 0; c < values.size(); c++) {
+                    Object context = values.get(c);
+                    if (context == comment || context == nativeManager) continue;
                     if (findNativeBatchMethod(nativeManager.getClass(), context.getClass()) != null) {
+                        ANCHOR_SHAPES.put(anchor.getClass(),
+                                new AnchorShape(fields.get(commentAt), fields.get(c), fields.get(m)));
                         return new AnchorParts(comment, context, nativeManager);
                     }
                 }
@@ -1032,19 +1098,22 @@ public final class CommentBatchTranslator {
         return null;
     }
 
-    private static ArrayList<Object> readInstanceFieldValues(Object instance) throws IllegalAccessException {
-        ArrayList<Object> values = new ArrayList<>();
+    /** Every non-null instance field of the object, superclasses included, with the field that held each value. */
+    private static void readInstanceFields(Object instance, ArrayList<Field> fields, ArrayList<Object> values)
+            throws IllegalAccessException {
         Class<?> current = instance.getClass();
         while (current != null) {
             for (Field field : current.getDeclaredFields()) {
                 if (Modifier.isStatic(field.getModifiers())) continue;
                 field.setAccessible(true);
                 Object value = field.get(instance);
-                if (value != null) values.add(value);
+                if (value != null) {
+                    fields.add(field);
+                    values.add(value);
+                }
             }
             current = current.getSuperclass();
         }
-        return values;
     }
 
     private static boolean hasNoArgMethod(Class<?> type, String name) {

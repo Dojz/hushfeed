@@ -1,3 +1,9 @@
+## 0.37.0
+
+* Auto translate comments no longer walks every field of every comment cell's manager, and the manager's declared methods, three times per cell on the thread that binds the list. The manager's shape is a property of its class, so the first cell of a class pays and the rest read three fields.
+
+* Follow diagnostics lets go of a request when its response is parsed or it fails, instead of holding up to 160 request graphs, bodies and buffers included, until TikTok is killed. A request that never finishes is held weakly, and the readback context expires after its thirty-second window.
+
 ## 0.36.0
 
 * The feature gate recorder's report dialog puts Save JSON last with the accent, and Copy report no longer closes the dialog, so the preview stays where it was. A stop with nothing read says so in a sentence instead of showing an empty JSON object, and offers nothing to copy or save. A fresh install's row says no recording has run yet rather than "Last recording: 0 gates", and it has no chevron while a tap starts recording on the spot. Once a report exists, the row offers Start recording or Show last report, so a report closed too soon can be opened again until the next recording.
