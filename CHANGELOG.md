@@ -1,3 +1,9 @@
+## 0.35.0
+
+* A Feature Gate Lab import that accepted something now reports in a dialog: one line per count, the first rejection selectable so it can be copied, and Undo beside Done. It was a five-clause toast that vanished in 3.5 seconds. An import that changed nothing keeps its one-line toast.
+
+* The Feature Gate Lab's switch rows (Enable overrides and the detail page's Override and Forced result rows) are one screen-reader stop each with the Switch role, and the whole row toggles the switch. They used to read twice and only answer a tap on the switch itself.
+
 ## 0.34.0
 
 * A new patch, Comment publish diagnostics, on by default. When a comment will not post, the text stays in the box with no toast and nothing in the log, and TikTok's publish code has a dozen ways to return before the request without a word. The diagnostic report now says whether the send reached that code, what it had in hand (the text's length, the attachments, a reply target, the video), and whether it returned early or handed the comment to the request.
