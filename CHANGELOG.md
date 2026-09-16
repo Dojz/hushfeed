@@ -1,3 +1,7 @@
+## 0.40.0
+
+* A share hook that fails now leaves TikTok's own share sheet alone instead of taking it down. Three of them ran inside the share model's constructor with nothing catching behind them, and the link rewrite replaced a native method outright, so one bad read anywhere in there reached TikTok as a Share button that did nothing, followed by the app stopping. That is what upstream's report looked like from the outside. Each of those boundaries now catches for itself and hands back exactly what TikTok passed in, and a failure that used to be silent shows up in the diagnostic export as a named hook that threw. The confirm step keeps holding a send to a person, but it no longer eats a tap on Repost, Copy link or Save when it cannot tell what it is looking at.
+
 ## 0.39.0
 
 * Ads no longer appear while paging through a creator's videos from their profile. TikTok has a mid-roll ad component that waits for the pager to load, then takes the video on screen and an ad, finds the video in the pager and puts the ad in its place. That runs after every list the feed filter reads, which is why issue #2's exports showed a profile list of 184 organic videos with nothing removed while the reporter was looking at an ad: the ad was never in the list. Remove feed ads now refuses that swap, on all four retained builds, and the diagnostic export carries a line for it, so a report can say whether the route ran and what it kept out. The video the ad would have replaced stays where it was.
