@@ -1,3 +1,7 @@
+## 0.36.0
+
+* Playback speed and the Feature Gate Lab (and the Feature Gate Recorder with it) apply on TikTok 46.9.3. That build carries the speed menu's list factory twice, two identical copies of one outlined lambda, and a second raw App AB getter next to the first. Both patches used to refuse with "found 2". The speed patch now hooks every identical copy and still refuses when the copies differ, and the Lab holds both raw getters open. Nothing moves on 46.2.3, 46.7.3 or 46.8.3, which carry one of each.
+
 ## 0.35.0
 
 * Hide feed surveys no longer empties the profile's Favorites tab. TikTok gives the Favorites page the same view id as the feed survey card, and the overlay hider took every view with that id anywhere in the window. Feed furniture (the caption, the music block, the action column, the survey card, the rail buttons and their counts) is now hidden only inside a feed cell; the tab strip is unchanged. Found on a Galaxy S25 by restoring the settings one group at a time, and the fix was checked there.
