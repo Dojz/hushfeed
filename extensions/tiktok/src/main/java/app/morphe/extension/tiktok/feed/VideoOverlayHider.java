@@ -40,7 +40,10 @@ import java.util.WeakHashMap;
  *   id/kzj                the right-hand column: avatar, like, comments, favourite, share
  *                         and the music disc, six id/eoh buttons in one LinearLayout
  *   id/ezp                the root of every feed survey card; the cell's survey ViewStubs
- *                         carry no inflatedId, so the card keeps its own layout id
+ *                         carry no inflatedId, so the card keeps its own layout id. The
+ *                         profile's Favorites page is a LinearLayout with the same id.
+ *   id/long_press_layout  the root of every feed cell, the layer that takes the long press.
+ *                         Every id below it here is feed furniture and lives inside one.
  *   id/twc                the strip across the top holding For You, Following and the rest
  *   id/hvo id/fws id/ehl  the six id/eoh buttons inside id/kzj, in order: avatar and
  *   id/hu9 id/p2l id/v9o  follow, like, comments, favourite, music disc, share
@@ -65,6 +68,15 @@ public final class VideoOverlayHider {
     private static final String ACTION_BAR_ID = "kzj";
     private static final String SURVEY_ID = "ezp";
     private static final String TAB_STRIP_ID = "twc";
+    /**
+     * The feed cell root. Furniture is only hidden underneath one: Hide feed surveys used to
+     * take every id/ezp in the window, and on the profile that is the Favorites tab's whole
+     * page, which showed as an empty tab (a Galaxy S25, 2026-09-16, found by restoring the
+     * settings one group at a time). The tab strip sits above the cells and is the one
+     * target that stays window-wide. A build that renames the cell root falls back to the
+     * whole window, and the hook status names the miss.
+     */
+    private static final String CELL_ROOT_ID = "long_press_layout";
     /** The six buttons inside the action column, in the order they are stacked. */
     /** The row under each rail button holding its count, without the button itself. */
     private static final String[] RAIL_COUNT_ROW_IDS = {"fwu", "ecq", "ht9", "v5x"};
@@ -227,8 +239,13 @@ public final class VideoOverlayHider {
                 for (List<View> views : found) {
                     views.clear();
                 }
+                boolean[] needsCell = TRAVERSAL.needsCell;
+                for (int i = 0; i < needsCell.length; i++) {
+                    needsCell[i] = i != 4;
+                }
+                int cellId = identifier(activity, APP_PACKAGE, CELL_ROOT_ID);
                 try {
-                    collect(root, ids, found);
+                    collect(root, ids, found, cellId, cellId == 0, needsCell);
                     for (int i = 0; i < ids.length; i++) {
                         for (View view : found.get(i)) {
                             setHidden(view, hidden[i]);
@@ -299,10 +316,23 @@ public final class VideoOverlayHider {
     }
 
     private static void collect(View view, int[] ids, List<List<View>> found) {
+        collect(view, ids, found, 0, true, null);
+    }
+
+    /**
+     * The walk. A target flagged in {@code needsCell} is collected only under a view whose
+     * id is {@code cellId}; with no cell id resolved ({@code inCell} starts true) every
+     * match is taken, which is what the walk did before the cell root was known.
+     */
+    private static void collect(View view, int[] ids, List<List<View>> found,
+                                int cellId, boolean inCell, boolean[] needsCell) {
         int viewId = view.getId();
+        if (cellId != 0 && viewId == cellId) {
+            inCell = true;
+        }
         if (viewId != View.NO_ID) {
             for (int i = 0; i < ids.length; i++) {
-                if (ids[i] == viewId) {
+                if (ids[i] == viewId && (inCell || needsCell == null || !needsCell[i])) {
                     found.get(i).add(view);
                 }
             }
@@ -310,7 +340,7 @@ public final class VideoOverlayHider {
         if (view instanceof ViewGroup) {
             ViewGroup group = (ViewGroup) view;
             for (int i = 0, count = group.getChildCount(); i < count; i++) {
-                collect(group.getChildAt(i), ids, found);
+                collect(group.getChildAt(i), ids, found, cellId, inCell, needsCell);
             }
         }
     }
@@ -318,12 +348,14 @@ public final class VideoOverlayHider {
     private static final class TraversalScratch {
         final int[] ids;
         final boolean[] hidden;
+        final boolean[] needsCell;
         final boolean[] rail;
         final List<List<View>> found;
 
         TraversalScratch(int targetCount) {
             ids = new int[targetCount];
             hidden = new boolean[targetCount];
+            needsCell = new boolean[targetCount];
             rail = new boolean[RAIL_BUTTON_IDS.length];
             found = new ArrayList<>(targetCount);
             for (int i = 0; i < targetCount; i++) {
