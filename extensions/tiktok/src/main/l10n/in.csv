@@ -10,6 +10,7 @@ A creator pattern is taking too long and was switched off: %1$s,"Ada pola kreato
 A hidden puzzle may be the cause.,Teka-teki yang disembunyikan bisa jadi penyebabnya.
 "A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.","Host pengganti tiktok.com saat kamu membagikan atau menyalin tautan, misalnya vxtiktok.com. Kosongkan untuk membagikan tautan TikTok sendiri. Hanya tautan TikTok yang diubah, dan hanya bagian host-nya, tidak ada yang dikirim ke mana pun."
 A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.,"Alamat web yang ditulis seseorang di komentar bisa diketuk, bukan disalin manual. Mengetuk bagian lain dari komentar tetap seperti sebelumnya."
+Activity Center (PIA),Pusat Aktivitas (PIA)
 Automatic advance stopped after one video,Lanjut otomatis dihentikan setelah satu video
 Block this commenter,Blokir pengomentar ini
 Blocked,Diblokir
@@ -17,6 +18,7 @@ Blocked,Diblokir
 Clear preset,Hapus preset
 Clear the search,Hapus pencarian
 Completed an interrupted settings change. Restart TikTok to apply this.,Perubahan pengaturan yang terhenti telah diselesaikan. Mulai ulang TikTok agar berlaku.
+Config (Settings Manager),Konfigurasi (Settings Manager)
 Copy the sound link,Salin tautan suara
 Copy the video link,Salin tautan video
 Current: %1$s,Saat ini: %1$s
@@ -31,11 +33,18 @@ Hide the launcher shortcuts,Sembunyikan pintasan peluncur
 Keep the Favorites tab,Pertahankan tab Favorit
 Link copied,Tautan disalin
 Links in comments open,Tautan di komentar bisa dibuka
+Media Config (VE),Konfigurasi Media (VE)
 Not blocked,Tidak diblokir
+Not read yet,Belum dibaca
 Not saved yet,Belum disimpan
+Not seen,Belum terlihat
+Not seen yet,Belum terlihat
 Nothing on this page changes what TikTok does until they are on.,Tidak ada di halaman ini yang mengubah perilaku TikTok selama itu mati.
+Overridden,Diganti
+"Override set, not read yet","Penggantian diatur, belum dibaca"
 Recovered an interrupted settings change. Restart TikTok to apply this.,Perubahan pengaturan yang terhenti telah dipulihkan. Mulai ulang TikTok agar berlaku.
 Remove all overrides,Hapus semua penggantian
+Replace values when TikTok asks for them,Ganti nilai saat TikTok memintanya
 Save media,Simpan media
 A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.,Satu ketukan pada orang di baris Kirim ke hanya memilihnya. Ketukan kedua pada orang yang sama dalam empat detik mengirim videonya.
 Add a block button to the video player that blocks the account that posted the current video in one tap. An undo action is shown after each block.,Tambahkan tombol blokir di pemutar video yang memblokir akun pengunggah video ini dalam satu ketukan. Aksi untuk mengurungkan muncul setelah tiap pemblokiran.
@@ -60,6 +69,9 @@ Applies to both video and photo downloads.,Berlaku untuk unduhan video dan foto.
 Arrange your feed and bottom tabs,Atur feed dan tab bawahmu
 Auto-advance session limit,Batas lanjut otomatis per sesi
 Saved,Tersimpan
+"Saved, override off","Disimpan, penggantian mati"
+Seen,Terlihat
+Seen this session,Terlihat di sesi ini
 "Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this. It reads the style once per run and remembers it.","Tampilkan lembar pengurutan milik TikTok di setiap publikasi, dengan pilihan populer, terbaru, media dan kreator, bukan baris terpangkas yang didapat akun Anda. Mulai ulang TikTok agar berlaku. Aplikasi membaca gayanya sekali per proses dan mengingatnya."
 Sound link copied,Tautan suara disalin
 Tap again to follow,Ketuk lagi untuk mengikuti
@@ -68,10 +80,14 @@ That is one minute today,Itu satu menit hari ini
 That is one video today,Itu satu video hari ini
 This video has no link to copy,Video ini tidak punya tautan untuk disalin
 This video has no sound of its own,Video ini tidak punya suara sendiri
+TikTok read it,TikTok sudah membacanya
+"TikTok read it, but the structured override could not be applied","TikTok sudah membacanya, tapi penggantian terstruktur tidak bisa diterapkan"
+TikTok's own value,Nilai milik TikTok
 TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.,Server TikTok bisa memasukkan akun ke eksperimen yang mengosongkan tab Favorit di profil Anda. Pertahankan tab itu beserta video yang tersimpan.
 Turn on %1$s first.,Nyalakan %1$s dulu.
 Turn on overrides,Nyalakan penimpaan
 Unblock this commenter,Buka blokir pengomentar ini
+What TikTok gets,Yang didapat TikTok
 Your filters hid everything TikTok just sent. Most were %1$s.,Filtermu menyembunyikan semua yang baru dikirim TikTok. Sebagian besar %1$s.
 "Your filters hid everything TikTok sent, %1$d times in a row. Most were %2$s.","Filtermu menyembunyikan semua yang dikirim TikTok, %1$d kali berturut-turut. Sebagian besar %2$s."
 "Zero means no limit. Counts the videos Hushfeed advanced past for you, not the ones you swiped yourself, and starts again when the feed is rebuilt or you change this number.","Nol berarti tanpa batas. Menghitung video yang dilewati Hushfeed untuk Anda, bukan yang Anda geser sendiri, dan mulai lagi saat feed dibangun ulang atau angka ini diubah."
@@ -599,15 +615,11 @@ Settings are back to their defaults. Restart TikTok to apply all changes.,Pengat
 The last change is undone. Restart TikTok to apply all changes.,Perubahan terakhir sudah dibatalkan. Mulai ulang TikTok untuk menerapkan semua perubahan.
 Value to return,Nilai yang dikembalikan
 Enable overrides,Aktifkan penggantian
-Applies saved rules at supported getters,Menerapkan aturan tersimpan pada getter yang didukung
 "%1$s, selected","%1$s, dipilih"
 Custom %1$s value (unverified),Nilai %1$s khusus (belum diverifikasi)
 Custom value (unverified),Nilai khusus (belum diverifikasi)
 Use value,Gunakan nilai
 Using TikTok's value,Memakai nilai TikTok
-Override saved but off,Penggantian tersimpan tapi mati
-Getter requested,Getter diminta
-Getter not requested yet,Getter belum diminta
 One value per line,Satu nilai per baris
 Advanced JSON value,Nilai JSON lanjutan
 Value,Nilai
@@ -627,9 +639,6 @@ Show gates,Tampilkan gate
 %1$d gates selected,%1$d gate dipilih
 1 result,1 hasil
 %1$d results,%1$d hasil
-Loaded,Dimuat
-All actionable,Semua yang dapat diubah
-Overrides,Penggantian
 App AB,AB aplikasi
 Config,Konfigurasi
 Player,Pemutar
@@ -772,14 +781,10 @@ Choose a subfolder under %1$s.,Pilih subfolder di %1$s.
 Off,Mati
 "Kept to %1$s, the nearest value this row allows","Disetel ke %1$s, nilai terdekat yang diizinkan baris ini"
 Current state,Kondisi saat ini
-Loaded for this account,Dimuat untuk akun ini
 Yes,Ya
 No,Tidak
-TikTok cached value,Nilai yang di-cache TikTok
 Structured value observed,Nilai terstruktur teramati
 Not requested in this process yet,Belum diminta dalam proses ini
-Not present in the current cache,Tidak ada di cache saat ini
-Effective getter result,Hasil efektif dari getter
 Override,Penggantian
 Override this configuration,Ganti konfigurasi ini
 Return a copied object with the selected fields changed,Kembalikan salinan objek dengan bidang terpilih yang diubah
@@ -808,7 +813,6 @@ All,Semua
 Boolean,Boolean
 Enabled,Aktif
 Disabled,Nonaktif
-Unloaded,Belum dimuat
 Reset 1 gate. Restart TikTok to apply this.,1 gate diatur ulang. Mulai ulang TikTok agar berlaku.
 Reset %1$d gates. Restart TikTok to apply this.,%1$d gate diatur ulang. Mulai ulang TikTok agar berlaku.
 Reset 1 gate of %1$d. Restart TikTok to apply this.,1 dari %1$d gate diatur ulang. Mulai ulang TikTok agar berlaku.
@@ -912,7 +916,6 @@ That settings backup contains a feed rule list larger than Hushfeed accepts. Not
 1 field overridden,1 kolom ditimpa
 1 field will be overridden when requested,1 kolom akan ditimpa saat diminta
 A field value could not be read. Check the values and try again.,Nilai kolom tidak dapat dibaca. Periksa nilainya lalu coba lagi.
-Activity Center,Pusat Aktivitas
 Current,Saat ini
 Current %1$s,Saat ini %1$s
 Custom value...,Nilai khusus...
@@ -925,30 +928,24 @@ Enter true or false.,Masukkan true atau false.
 Enter valid JSON.,Masukkan JSON yang valid.
 Entry %1$d has a field with the wrong data type.,Entri %1$d memiliki kolom dengan tipe data yang salah.
 Entry %1$d is not an object.,Entri %1$d bukan objek.
-"Getter requested, but the structured override could not be applied","Getter diminta, tetapi penimpaan terstruktur tidak dapat diterapkan"
-Getter used,Getter digunakan
 Historical,Historis
 "Keep this string to 4,096 characters or fewer.",Batasi string ini hingga 4.096 karakter atau kurang.
 Keep this structured value to 64 KB or less.,Batasi nilai terstruktur ini hingga 64 KB atau kurang.
 Live Settings,Pengaturan Live
-Media Config,Konfigurasi Media
 No current value,Tidak ada nilai saat ini
 No current value and no active override,Tidak ada nilai saat ini dan tidak ada penimpaan aktif
 "Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected. First rejection: %4$s","Tidak ada hal baru yang diimpor. %1$d sudah cocok, %2$d tidak tersedia, %3$d ditolak. Penolakan pertama: %4$s"
-Override off,Penimpaan nonaktif
 Player Config,Konfigurasi Pemutar
 Researched,Hasil riset
 Returns %1$s,Mengembalikan %1$s
 Saved %1$s,Tersimpan: %1$s
 Select at least one field.,Pilih setidaknya satu kolom.
 Selected,Dipilih
-Structured Config,Konfigurasi Terstruktur
 This gate type is not supported.,Tipe gate ini tidak didukung.
 This value is required.,Nilai ini wajib diisi.
 TikTok rejected the request to block %1$s,TikTok menolak permintaan untuk memblokir %1$s
 TikTok rejected the request to unblock %1$s,TikTok menolak permintaan untuk membuka blokir %1$s
 Unavailable,Tidak tersedia
-Waiting,Menunggu
 "No matching comments. Try a different word, or clear the search with the X in the box.",Tidak ada komentar yang cocok. Coba kata lain atau hapus pencarian dengan X di kotak.
 Retry,Coba lagi
 Settings couldn't open,Pengaturan tidak dapat dibuka

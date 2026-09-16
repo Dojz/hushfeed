@@ -68,8 +68,8 @@ import app.morphe.extension.tiktok.settings.preference.SettingsUi;
 
 @SuppressWarnings({"deprecation", "SetTextI18n"})
 public final class FeatureGateLabFragment extends Fragment {
-    private static final String[] VIEW_LABELS = {"Loaded", "All actionable", "Overrides"};
-    private static final String[] FILTER_LABELS = {"All", "Boolean", "Enabled", "Disabled", "Unloaded"};
+    private static final String[] VIEW_LABELS = {"Seen", "All", "Overridden"};
+    private static final String[] FILTER_LABELS = {"All", "Boolean", "Enabled", "Disabled", "Not seen"};
 
     /**
      * The five filter choices in the reader's language.
@@ -230,7 +230,7 @@ public final class FeatureGateLabFragment extends Fragment {
         // both read "Enable overrides", and only the 44dp switch answered a tap.
         LinearLayout masterRow = FeatureGateLabUi.switchRow(context,
                 L10n.t(context, "Enable overrides"),
-                L10n.t(context, "Applies saved rules at supported getters"), master);
+                L10n.t(context, "Replace values when TikTok asks for them"), master);
         controls.addView(masterRow, FeatureGateLabUi.matchWrap());
 
         TextView warning = FeatureGateLabUi.label(
@@ -1800,16 +1800,16 @@ public final class FeatureGateLabFragment extends Fragment {
             String state;
             int stateColor;
             if (rule != null && rule.enabled && FeatureGateLabRuntime.isTriggered(entry.manager, entry.key, entry.type)) {
-                state = L10n.t(getContext(), "Getter used");
+                state = L10n.t(getContext(), "TikTok read it");
                 stateColor = SettingsUi.accent();
             } else if (rule != null && rule.enabled) {
-                state = L10n.t(getContext(), "Waiting");
+                state = L10n.t(getContext(), "Override set, not read yet");
                 stateColor = FeatureGateLabUi.warningColor(context);
             } else if (rule != null) {
-                state = L10n.t(getContext(), "Override off");
+                state = L10n.t(getContext(), "Saved, override off");
                 stateColor = SettingsUi.textSecondary();
             } else {
-                state = L10n.t(getContext(), entry.loaded ? "Loaded" : "Unloaded");
+                state = L10n.t(getContext(), entry.loaded ? "Seen this session" : "Not seen yet");
                 // Both in the secondary colour. A gate TikTok has not read yet was painted in
                 // the disabled colour, which is about 3.7:1 on the dark surface and 3.4:1 on
                 // white, under the 4.5:1 floor for 12sp text, and the row it sits on is fully

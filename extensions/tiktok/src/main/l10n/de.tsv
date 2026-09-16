@@ -12,6 +12,7 @@ A creator pattern is taking too long and was switched off: %1$s	Ein Kreator-Must
 A hidden puzzle may be the cause.	Ein ausgeblendetes Rätsel kann die Ursache sein.
 A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.	Ein Host, der beim Teilen oder Kopieren an die Stelle von tiktok.com tritt, zum Beispiel vxtiktok.com. Leer lassen, um TikToks eigene Links zu teilen. Geändert werden nur TikTok-Links und nur der Host, es wird nichts irgendwohin geschickt.
 A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.	Eine Webadresse in einem Kommentar lässt sich antippen, statt sie von Hand herauszukopieren. Ein Tippen an anderer Stelle im Kommentar tut weiterhin das, was es vorher tat.
+Activity Center (PIA)	Activity Center (PIA)
 Automatic advance stopped after one video	Automatisches Weiterschalten nach einem Video angehalten
 Block this commenter	Diesen Kommentierenden blockieren
 Blocked	Blockiert
@@ -19,6 +20,7 @@ Clear all Lab data (overrides, switch, recordings)	Alle Labordaten löschen (Üb
 Clear preset	Voreinstellung löschen
 Clear the search	Suche löschen
 Completed an interrupted settings change. Restart TikTok to apply this.	Eine unterbrochene Einstellungsänderung wurde abgeschlossen. TikTok neu starten, damit das gilt.
+Config (Settings Manager)	Konfiguration (Settings Manager)
 Copy the sound link	Soundlink kopieren
 Copy the video link	Videolink kopieren
 Current: %1$s	Aktuell: %1$s
@@ -33,11 +35,18 @@ Hide the launcher shortcuts	Launcher-Verknüpfungen ausblenden
 Keep the Favorites tab	Favoriten-Tab behalten
 Link copied	Link kopiert
 Links in comments open	Links in Kommentaren lassen sich öffnen
+Media Config (VE)	Medienkonfiguration (VE)
 Not blocked	Nicht blockiert
+Not read yet	Noch nicht gelesen
 Not saved yet	Noch nicht gespeichert
+Not seen	Nicht gesehen
+Not seen yet	Noch nicht gesehen
 Nothing on this page changes what TikTok does until they are on.	Nichts auf dieser Seite ändert etwas an TikTok, solange sie aus sind.
+Overridden	Überschrieben
+Override set, not read yet	Überschreibung gesetzt, noch nicht gelesen
 Recovered an interrupted settings change. Restart TikTok to apply this.	Eine unterbrochene Einstellungsänderung wurde wiederhergestellt. TikTok neu starten, damit das gilt.
 Remove all overrides	Alle Überschreibungen entfernen
+Replace values when TikTok asks for them	Werte ersetzen, wenn TikTok sie abfragt
 Save media	Medien speichern
 A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.	Ein Tippen auf eine Person in der Zeile „Senden an“ wählt sie nur aus. Ein zweites Tippen auf dieselbe Person innerhalb von vier Sekunden sendet das Video.
 Add a block button to the video player that blocks the account that posted the current video in one tap. An undo action is shown after each block.	Dem Videoplayer eine Schaltfläche hinzufügen, die das Konto hinter dem aktuellen Video mit einem Tippen blockiert. Nach jeder Blockierung wird eine Rückgängig-Aktion angezeigt.
@@ -62,6 +71,9 @@ Applies to both video and photo downloads.	Gilt für Video- und Foto-Downloads.
 Arrange your feed and bottom tabs	Ordne deine Feed-Tabs und unteren Tabs an
 Auto-advance session limit	Limit für automatisches Weiterschalten pro Sitzung
 Saved	Gespeichert
+Saved, override off	Gespeichert, Überschreibung aus
+Seen	Gesehen
+Seen this session	In dieser Sitzung gesehen
 Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this. It reads the style once per run and remembers it.	TikToks eigenes Sortiermenü bei jedem Beitrag zeigen, mit Beliebt, Neueste, Medien und Ersteller, statt der gekürzten Zeile, die dein Konto bekommen hat. TikTok neu starten, damit das gilt. Es liest den Stil einmal pro Start und merkt ihn sich.
 Sound link copied	Soundlink kopiert
 Tap again to follow	Noch einmal tippen zum Folgen
@@ -70,10 +82,14 @@ That is one minute today	Das ist eine Minute heute
 That is one video today	Das ist ein Video heute
 This video has no link to copy	Dieses Video hat keinen Link zum Kopieren
 This video has no sound of its own	Dieses Video hat keinen eigenen Sound
+TikTok read it	TikTok hat ihn gelesen
+TikTok read it, but the structured override could not be applied	TikTok hat ihn gelesen, aber die strukturierte Überschreibung konnte nicht angewendet werden
+TikTok's own value	TikToks eigener Wert
 TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.	TikToks Server kann ein Konto in ein Experiment stecken, das den Favoriten-Tab im Profil leert. Behält den Tab und seine gespeicherten Videos.
 Turn on %1$s first.	Zuerst %1$s einschalten.
 Turn on overrides	Überschreibungen einschalten
 Unblock this commenter	Blockierung dieses Kommentierenden aufheben
+What TikTok gets	Was TikTok erhält
 Your filters hid everything TikTok just sent. Most were %1$s.	Deine Filter haben alles ausgeblendet, was TikTok gerade geschickt hat. Das meiste war %1$s.
 Your filters hid everything TikTok sent, %1$d times in a row. Most were %2$s.	Deine Filter haben %1$d Mal hintereinander alles ausgeblendet, was TikTok geschickt hat. Das meiste war %2$s.
 Zero means no limit. Counts the videos Hushfeed advanced past for you, not the ones you swiped yourself, and starts again when the feed is rebuilt or you change this number.	Null bedeutet kein Limit. Zählt die Videos, die Hushfeed für dich weitergeschaltet hat, nicht die, die du selbst weggewischt hast, und beginnt neu, wenn der Feed neu aufgebaut wird oder du diese Zahl änderst.
@@ -601,15 +617,11 @@ Settings are back to their defaults. Restart TikTok to apply all changes.	Die Ei
 The last change is undone. Restart TikTok to apply all changes.	Die letzte Änderung ist rückgängig gemacht. TikTok neu starten, um alle Änderungen zu übernehmen.
 Value to return	Zurückgegebener Wert
 Enable overrides	Überschreibungen aktivieren
-Applies saved rules at supported getters	Wendet gespeicherte Regeln an unterstützten Gettern an
 %1$s, selected	%1$s, ausgewählt
 Custom %1$s value (unverified)	Eigener %1$s-Wert (ungeprüft)
 Custom value (unverified)	Eigener Wert (ungeprüft)
 Use value	Wert verwenden
 Using TikTok's value	TikToks Wert wird verwendet
-Override saved but off	Überschreibung gespeichert, aber aus
-Getter requested	Getter abgefragt
-Getter not requested yet	Getter noch nicht abgefragt
 One value per line	Ein Wert pro Zeile
 Advanced JSON value	Erweiterter JSON-Wert
 Value	Wert
@@ -629,9 +641,6 @@ Show gates	Schalter anzeigen
 %1$d gates selected	%1$d Schalter ausgewählt
 1 result	1 Ergebnis
 %1$d results	%1$d Ergebnisse
-Loaded	Geladen
-All actionable	Alle änderbaren
-Overrides	Überschreibungen
 App AB	App-AB
 Config	Konfiguration
 Player	Wiedergabe
@@ -774,14 +783,10 @@ Choose a subfolder under %1$s.	Wähle einen Unterordner in %1$s.
 Off	Aus
 Kept to %1$s, the nearest value this row allows	Auf %1$s gesetzt, den nächsten Wert, den diese Zeile zulässt
 Current state	Aktueller Zustand
-Loaded for this account	Für dieses Konto geladen
 Yes	Ja
 No	Nein
-TikTok cached value	Von TikTok zwischengespeicherter Wert
 Structured value observed	Strukturierter Wert beobachtet
 Not requested in this process yet	In diesem Prozess noch nicht angefordert
-Not present in the current cache	Nicht im aktuellen Zwischenspeicher
-Effective getter result	Tatsächliches Ergebnis des Getters
 Override	Überschreibung
 Override this configuration	Diese Konfiguration überschreiben
 Return a copied object with the selected fields changed	Ein kopiertes Objekt mit den geänderten Feldern zurückgeben
@@ -810,7 +815,6 @@ All	Alle
 Boolean	Boolesch
 Enabled	Eingeschaltet
 Disabled	Ausgeschaltet
-Unloaded	Nicht geladen
 Reset 1 gate. Restart TikTok to apply this.	1 Schalter zurückgesetzt. TikTok neu starten, damit das gilt.
 Reset %1$d gates. Restart TikTok to apply this.	%1$d Schalter zurückgesetzt. TikTok neu starten, damit das gilt.
 Reset 1 gate of %1$d. Restart TikTok to apply this.	1 von %1$d Schaltern zurückgesetzt. TikTok neu starten, damit das gilt.
@@ -914,7 +918,6 @@ That settings backup contains a feed rule list larger than Hushfeed accepts. Not
 1 field overridden	1 Feld überschrieben
 1 field will be overridden when requested	1 Feld wird bei der Abfrage überschrieben
 A field value could not be read. Check the values and try again.	Ein Feldwert konnte nicht gelesen werden. Prüfe die Werte und versuche es erneut.
-Activity Center	Aktivitätscenter
 Current	Aktuell
 Current %1$s	Aktuell %1$s
 Custom value...	Benutzerdefinierter Wert...
@@ -927,30 +930,24 @@ Enter true or false.	Gib true oder false ein.
 Enter valid JSON.	Gib gültiges JSON ein.
 Entry %1$d has a field with the wrong data type.	Eintrag %1$d enthält ein Feld mit dem falschen Datentyp.
 Entry %1$d is not an object.	Eintrag %1$d ist kein Objekt.
-Getter requested, but the structured override could not be applied	Getter abgefragt, aber die strukturierte Überschreibung konnte nicht angewendet werden
-Getter used	Getter verwendet
 Historical	Historisch
 Keep this string to 4,096 characters or fewer.	Begrenze diese Zeichenfolge auf höchstens 4.096 Zeichen.
 Keep this structured value to 64 KB or less.	Begrenze diesen strukturierten Wert auf höchstens 64 KB.
 Live Settings	Live-Einstellungen
-Media Config	Medienkonfiguration
 No current value	Kein aktueller Wert
 No current value and no active override	Kein aktueller Wert und keine aktive Überschreibung
 Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected. First rejection: %4$s	Nichts Neues wurde importiert. Bereits identisch: %1$d. Nicht verfügbar: %2$d. Abgelehnt: %3$d. Erste Ablehnung: %4$s
-Override off	Überschreibung aus
 Player Config	Player-Konfiguration
 Researched	Recherchiert
 Returns %1$s	Gibt %1$s zurück
 Saved %1$s	Gespeichert: %1$s
 Select at least one field.	Wähle mindestens ein Feld aus.
 Selected	Ausgewählt
-Structured Config	Strukturierte Konfiguration
 This gate type is not supported.	Dieser Gate-Typ wird nicht unterstützt.
 This value is required.	Dieser Wert ist erforderlich.
 TikTok rejected the request to block %1$s	TikTok hat die Anfrage zum Blockieren von %1$s abgelehnt
 TikTok rejected the request to unblock %1$s	TikTok hat die Anfrage zum Entblocken von %1$s abgelehnt
 Unavailable	Nicht verfügbar
-Waiting	Wartet
 No matching comments. Try a different word, or clear the search with the X in the box.	Keine passenden Kommentare. Versuche es mit einem anderen Wort oder lösche die Suche mit dem X im Feld.
 Retry	Erneut versuchen
 Settings couldn't open	Die Einstellungen konnten nicht geöffnet werden
