@@ -311,11 +311,13 @@ public class FeatureGateLabActionsTest {
             var uri = android.net.Uri.parse("content://lab-test/values.json.gz");
             Shadows.shadowOf(activity.getContentResolver()).registerInputStream(uri, new ByteArrayInputStream(bytes.toByteArray()));
             fragment.onActivityResult(started.requestCode, Activity.RESULT_OK, new Intent().setData(uri));
-            waitFor("Imported 1 disabled values. 1 already matched, 1 unavailable, 2 rejected.");
+            // No prompt before the import; the result comes after it, as a dialog with the
+            // counts on their own lines.
+            waitForImportDialog("Imported 1 values", "1 already matched", "1 unavailable", "2 rejected");
             assertFalse(FeatureGateLabStore.rule("abmock", "gate", "BOOLEAN").enabled);
             assertEquals("true", FeatureGateLabStore.rule("abmock", "gate", "BOOLEAN").value);
             assertEquals(1, FeatureGateLabStore.rules().size());
-            assertNull(ShadowDialog.getLatestDialog());
+            assertFalse("the result dialog was dismissed", ShadowDialog.getLatestDialog().isShowing());
             action(fragment, 6);
             waitFor("Restored the previous Lab settings.");
             assertTrue(FeatureGateLabStore.rules().isEmpty());
@@ -335,7 +337,7 @@ public class FeatureGateLabActionsTest {
             Shadows.shadowOf(activity.getContentResolver()).registerInputStream(uri,
                     new ByteArrayInputStream(root.toString().getBytes(StandardCharsets.UTF_8)));
             fragment.onActivityResult(started.requestCode, Activity.RESULT_OK, new Intent().setData(uri));
-            waitFor("Imported 1 disabled values.");
+            waitForImportDialog("Imported 1 values", "0 rejected");
             assertFalse(FeatureGateLabStore.rule("abmock", "gate", "BOOLEAN").enabled);
             assertEquals("true", FeatureGateLabStore.rule("abmock", "gate", "BOOLEAN").value);
         }
@@ -486,7 +488,9 @@ public class FeatureGateLabActionsTest {
                 release.countDown();
             }
 
-            waitFor("Imported 1 disabled values.");
+            // With the Lab gone there is nothing to hang the dialog on, so the one line goes
+            // out as a toast, with the way back named.
+            waitFor("Imported 1 values. Undo last Lab change is in the menu.");
             assertEquals("true", FeatureGateLabStore.rule(
                     "abmock", "gate", "BOOLEAN").value);
         }
@@ -846,6 +850,32 @@ public class FeatureGateLabActionsTest {
         assertTrue(menu.getMenu().performIdentifierAction(id, 0));
         menu.dismiss();
     }
+    /** The import result dialog, showing, with each expected line somewhere in its view; then dismissed. */
+    private static void waitForImportDialog(String... lines) throws Exception {
+        FeatureGateLabFragment.awaitFileIoForTests();
+        Utils.awaitBackgroundTasksForTests();
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+        var dialog = ShadowDialog.getLatestDialog();
+        assertNotNull("Missing import result dialog; last toast: " + ShadowToast.getTextOfLatestToast(), dialog);
+        assertTrue(dialog.isShowing());
+        var texts = new java.util.ArrayList<String>();
+        collectTexts(Shadows.shadowOf((android.app.AlertDialog) dialog).getView(), texts);
+        for (String line : lines) {
+            assertTrue(line + " is not among " + texts, texts.contains(line));
+        }
+        dialog.dismiss();
+    }
+
+    private static void collectTexts(View view, java.util.List<String> into) {
+        if (view instanceof android.widget.TextView) {
+            into.add(((android.widget.TextView) view).getText().toString());
+        }
+        if (view instanceof ViewGroup) {
+            var group = (ViewGroup) view;
+            for (int i = 0; i < group.getChildCount(); i++) collectTexts(group.getChildAt(i), into);
+        }
+    }
+
     private static void waitFor(String prefix) throws Exception {
         FeatureGateLabFragment.awaitFileIoForTests();
         Utils.awaitBackgroundTasksForTests();

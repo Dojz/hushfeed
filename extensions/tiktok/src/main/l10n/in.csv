@@ -833,7 +833,6 @@ This file isn't a loaded-values export from the Feature Gate Lab.,Berkas ini buk
 These loaded values are for a different TikTok version.,Nilai yang dimuat ini untuk versi TikTok yang berbeda.
 This file has no loaded values in it.,Berkas ini tidak berisi nilai yang dimuat.
 This file has more loaded values than the Lab takes at once.,Berkas ini berisi lebih banyak nilai yang dimuat daripada yang bisa diterima Lab sekaligus.
-"Imported %1$d disabled values. %2$d already matched, %3$d unavailable, %4$d rejected. Undo last Lab change is in the menu.","%1$d nilai nonaktif diimpor. %2$d sudah cocok, %3$d tidak tersedia, %4$d ditolak. Batalkan perubahan Lab terakhir ada di menu."
 Could not change Lab settings.,Pengaturan Lab tidak bisa diubah.
 None of these gates had an override to reset.,Tidak satu pun gate ini punya penggantian untuk diatur ulang.
 None of these gates takes a true or false value.,Tidak satu pun gate ini menerima nilai true atau false.
@@ -923,7 +922,6 @@ Entry %1$d is not an object.,Entri %1$d bukan objek.
 "Getter requested, but the structured override could not be applied","Getter diminta, tetapi penimpaan terstruktur tidak dapat diterapkan"
 Getter used,Getter digunakan
 Historical,Historis
-"Imported %1$d disabled values. %2$d already matched, %3$d unavailable, %4$d rejected. First rejection: %5$s Undo last Lab change is in the menu.","%1$d nilai nonaktif diimpor. %2$d sudah cocok, %3$d tidak tersedia, %4$d ditolak. Penolakan pertama: %5$s Perubahan Lab terakhir dapat diurungkan dari menu."
 "Keep this string to 4,096 characters or fewer.",Batasi string ini hingga 4.096 karakter atau kurang.
 Keep this structured value to 64 KB or less.,Batasi nilai terstruktur ini hingga 64 KB atau kurang.
 Live Settings,Pengaturan Live
@@ -1013,3 +1011,12 @@ Restart TikTok to apply %1$d changes,Mulai ulang TikTok untuk menerapkan %1$d pe
 Restart TikTok to apply this change,Mulai ulang TikTok untuk menerapkan perubahan ini
 Restart pending,Menunggu mulai ulang
 "Clearing, %1$d so far","Membersihkan, %1$d sejauh ini"
+Import finished,Impor selesai
+Imported %1$d values,%1$d nilai diimpor
+%1$d already matched,%1$d sudah cocok
+%1$d unavailable,%1$d tidak tersedia
+%1$d rejected,%1$d ditolak
+First rejection:,Penolakan pertama:
+Done,Selesai
+%1$s. %2$s,%1$s. %2$s
+Imported %1$d values. Undo last Lab change is in the menu.,%1$d nilai diimpor. Batalkan perubahan Lab terakhir ada di menu.

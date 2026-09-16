@@ -832,7 +832,6 @@ This file isn't a loaded-values export from the Feature Gate Lab.	Este archivo n
 These loaded values are for a different TikTok version.	Estos valores cargados son de otra versión de TikTok.
 This file has no loaded values in it.	Este archivo no contiene valores cargados.
 This file has more loaded values than the Lab takes at once.	Este archivo tiene más valores cargados de los que el Lab acepta de una vez.
-Imported %1$d disabled values. %2$d already matched, %3$d unavailable, %4$d rejected. Undo last Lab change is in the menu.	%1$d valores desactivados importados. %2$d ya coincidían, %3$d no están disponibles y %4$d se han rechazado. Deshacer el último cambio del Lab está en el menú.
 Could not change Lab settings.	No se han podido cambiar los ajustes del Lab.
 None of these gates had an override to reset.	Ninguno de estos interruptores tenía una sustitución que restablecer.
 None of these gates takes a true or false value.	Ninguno de estos interruptores acepta un valor true o false.
@@ -922,7 +921,6 @@ Entry %1$d is not an object.	La entrada %1$d no es un objeto.
 Getter requested, but the structured override could not be applied	Se solicitó el getter, pero no se pudo aplicar la sobrescritura estructurada
 Getter used	Getter usado
 Historical	Histórico
-Imported %1$d disabled values. %2$d already matched, %3$d unavailable, %4$d rejected. First rejection: %5$s Undo last Lab change is in the menu.	Se importaron %1$d valores desactivados. %2$d ya coincidían, %3$d no estaban disponibles y %4$d fueron rechazados. Primer rechazo: %5$s La última modificación del Lab se puede deshacer desde el menú.
 Keep this string to 4,096 characters or fewer.	Limita esta cadena a 4096 caracteres o menos.
 Keep this structured value to 64 KB or less.	Limita este valor estructurado a 64 KB o menos.
 Live Settings	Ajustes de Live
@@ -1012,3 +1010,13 @@ Restart TikTok to apply %1$d changes	Reinicia TikTok para aplicar %1$d cambios
 Restart TikTok to apply this change	Reinicia TikTok para aplicar este cambio
 Restart pending	Reinicio pendiente
 Clearing, %1$d so far	Borrando, %1$d hasta ahora
+
+Import finished	Importación finalizada
+Imported %1$d values	%1$d valores importados
+%1$d already matched	%1$d ya coincidían
+%1$d unavailable	%1$d no disponibles
+%1$d rejected	%1$d rechazados
+First rejection:	Primer rechazo:
+Done	Listo
+%1$s. %2$s	%1$s. %2$s
+Imported %1$d values. Undo last Lab change is in the menu.	%1$d valores importados. Deshacer el último cambio del Lab está en el menú.

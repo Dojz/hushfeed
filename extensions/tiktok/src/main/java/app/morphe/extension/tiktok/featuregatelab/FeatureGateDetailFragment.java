@@ -273,17 +273,13 @@ public final class FeatureGateDetailFragment extends Fragment {
         boolean booleanEntry = "BOOLEAN".equals(entry.type);
         boolean objectEntry = "OBJECT".equals(entry.type);
         if (objectEntry) {
-            LinearLayout forceRow = settingRow(
+            force = new Switch(context);
+            LinearLayout forceRow = FeatureGateLabUi.switchRow(
                     context,
                     L10n.t(context, "Override this configuration"),
-                    L10n.t(context, "Return a copied object with the selected fields changed")
+                    L10n.t(context, "Return a copied object with the selected fields changed"),
+                    force
             );
-            force = new Switch(context);
-            force.setContentDescription(L10n.t(context, "Override this configuration"));
-            forceRow.addView(force, new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    FeatureGateLabUi.dp(context, 48)
-            ));
             content.addView(forceRow, FeatureGateLabUi.matchWrap());
             addObjectEditors(content, editable);
             saveObject = FeatureGateLabUi.text(
@@ -317,47 +313,35 @@ public final class FeatureGateDetailFragment extends Fragment {
             // Two rows, the same as every other type. With one switch doing both jobs, a rule
             // saved with its override off (which is how an import lands) could only be turned
             // on by first forcing the opposite of the value it holds.
-            LinearLayout forceRow = settingRow(
+            force = new Switch(context);
+            LinearLayout forceRow = FeatureGateLabUi.switchRow(
                     context,
                     L10n.t(context, "Override this gate"),
-                    L10n.t(context, "When TikTok requests this key, return the selected value below")
+                    L10n.t(context, "When TikTok requests this key, return the selected value below"),
+                    force
             );
-            force = new Switch(context);
-            force.setContentDescription(L10n.t(context, "Override this gate"));
-            forceRow.addView(force, new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    FeatureGateLabUi.dp(context, 48)
-            ));
             forceRow.setBackground(SettingsUi.groupedRow(context, true, false));
             content.addView(forceRow, FeatureGateLabUi.matchWrap());
 
-            LinearLayout valueRow = settingRow(
-                    context,
-                    L10n.t(context, "Forced result"),
-                    L10n.t(context, "Off forces false; on forces true. Reset returns control to TikTok")
-            );
-            valueRow.setBackground(SettingsUi.groupedRow(context, false, true));
             booleanValue = new Switch(context);
-            booleanValue.setContentDescription(L10n.t(context, "Forced result"));
             booleanValue.setChecked(Boolean.parseBoolean(rule == null ? bestInitialValue(entry) : rule.value));
             booleanValue.setEnabled(editable);
-            valueRow.addView(booleanValue, new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    FeatureGateLabUi.dp(context, 48)
-            ));
+            LinearLayout valueRow = FeatureGateLabUi.switchRow(
+                    context,
+                    L10n.t(context, "Forced result"),
+                    L10n.t(context, "Off forces false; on forces true. Reset returns control to TikTok"),
+                    booleanValue
+            );
+            valueRow.setBackground(SettingsUi.groupedRow(context, false, true));
             content.addView(valueRow, FeatureGateLabUi.matchWrap());
         } else {
-            LinearLayout forceRow = settingRow(
+            force = new Switch(context);
+            LinearLayout forceRow = FeatureGateLabUi.switchRow(
                     context,
                     L10n.t(context, "Override this gate"),
-                    L10n.t(context, "When TikTok requests this key, return the selected value below")
+                    L10n.t(context, "When TikTok requests this key, return the selected value below"),
+                    force
             );
-            force = new Switch(context);
-            force.setContentDescription(L10n.t(context, "Override this gate"));
-            forceRow.addView(force, new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    FeatureGateLabUi.dp(context, 48)
-            ));
             content.addView(forceRow, FeatureGateLabUi.matchWrap());
 
             forceRow.setBackground(SettingsUi.groupedRow(context, true, false));

@@ -835,7 +835,6 @@ This file isn't a loaded-values export from the Feature Gate Lab.	Diese Datei is
 These loaded values are for a different TikTok version.	Diese geladenen Werte gehören zu einer anderen TikTok-Version.
 This file has no loaded values in it.	Diese Datei enthält keine geladenen Werte.
 This file has more loaded values than the Lab takes at once.	Diese Datei enthält mehr geladene Werte, als das Lab auf einmal annimmt.
-Imported %1$d disabled values. %2$d already matched, %3$d unavailable, %4$d rejected. Undo last Lab change is in the menu.	%1$d abgeschaltete Werte importiert. %2$d stimmten bereits überein, %3$d sind nicht verfügbar, %4$d wurden abgelehnt. Letzte Lab-Änderung rückgängig machen steht im Menü.
 Could not change Lab settings.	Die Lab-Einstellungen ließen sich nicht ändern.
 None of these gates had an override to reset.	Keiner dieser Schalter hatte eine Überschreibung zum Zurücksetzen.
 None of these gates takes a true or false value.	Keiner dieser Schalter nimmt einen true- oder false-Wert.
@@ -925,7 +924,6 @@ Entry %1$d is not an object.	Eintrag %1$d ist kein Objekt.
 Getter requested, but the structured override could not be applied	Getter abgefragt, aber die strukturierte Überschreibung konnte nicht angewendet werden
 Getter used	Getter verwendet
 Historical	Historisch
-Imported %1$d disabled values. %2$d already matched, %3$d unavailable, %4$d rejected. First rejection: %5$s Undo last Lab change is in the menu.	Deaktivierte Werte importiert: %1$d. Bereits identisch: %2$d. Nicht verfügbar: %3$d. Abgelehnt: %4$d. Erste Ablehnung: %5$s Die letzte Lab-Änderung kann im Menü rückgängig gemacht werden.
 Keep this string to 4,096 characters or fewer.	Begrenze diese Zeichenfolge auf höchstens 4.096 Zeichen.
 Keep this structured value to 64 KB or less.	Begrenze diesen strukturierten Wert auf höchstens 64 KB.
 Live Settings	Live-Einstellungen
@@ -1015,3 +1013,13 @@ Restart TikTok to apply %1$d changes	TikTok neu starten, um %1$d Änderungen anz
 Restart TikTok to apply this change	TikTok neu starten, um diese Änderung anzuwenden
 Restart pending	Neustart ausstehend
 Clearing, %1$d so far	Wird geleert, bisher %1$d
+
+Import finished	Import abgeschlossen
+Imported %1$d values	%1$d Werte importiert
+%1$d already matched	%1$d stimmten bereits überein
+%1$d unavailable	%1$d nicht verfügbar
+%1$d rejected	%1$d abgelehnt
+First rejection:	Erste Ablehnung:
+Done	Fertig
+%1$s. %2$s	%1$s. %2$s
+Imported %1$d values. Undo last Lab change is in the menu.	%1$d Werte importiert. Letzte Lab-Änderung rückgängig machen steht im Menü.

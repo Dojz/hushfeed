@@ -1,12 +1,15 @@
 source,target
+%1$d already matched,%1$d already matched
 %1$d areas were checked and everything they need is here.,%1$d areas were checked and everything they need is here.
 %1$d fields overridden,%1$d fields overridden
 %1$d fields will be overridden when requested,%1$d fields will be overridden when requested
 %1$d gates selected,%1$d gates selected
 %1$d minutes left,%1$d minutes left
+%1$d rejected,%1$d rejected
 %1$d results,%1$d results
 %1$d setting was not in that file and was left as it is.,%1$d setting was not in that file and was left as it is.
 %1$d settings were not in that file and were left as they are.,%1$d settings were not in that file and were left as they are.
+%1$d unavailable,%1$d unavailable
 %1$s (%2$s),%1$s (%2$s)
 %1$s (TikTok value),%1$s (TikTok value)
 "%1$s (custom, unverified)","%1$s (custom, unverified)"
@@ -33,6 +36,7 @@ source,target
 %1$s was rejected. %2$s,%1$s was rejected. %2$s
 "%1$s, %2$s, %3$s, %4$s, %5$s","%1$s, %2$s, %3$s, %4$s, %5$s"
 "%1$s, selected","%1$s, selected"
+%1$s. %2$s,%1$s. %2$s
 "%1$s: %2$d found, %3$d missing","%1$s: %2$d found, %3$d missing"
 "%1$s: %2$d found, %3$d missing, and more it stopped counting","%1$s: %2$d found, %3$d missing, and more it stopped counting"
 "%1$s: %2$d found, %3$d missing, and more it stopped counting. First missing: %4$s","%1$s: %2$d found, %3$d missing, and more it stopped counting. First missing: %4$s"
@@ -232,6 +236,7 @@ Dismissed %1$s suggested accounts,Dismissed %1$s suggested accounts
 Dismissed one suggested account,Dismissed one suggested account
 Do not start the feed on returning,Do not start the feed on returning
 Do nothing,Do nothing
+Done,Done
 Double tap,Double tap
 Download original photos,Download original photos
 Download path updated,Download path updated
@@ -288,6 +293,7 @@ Filter: %1$s,Filter: %1$s
 "Filters, translation and copy options","Filters, translation and copy options"
 Find a setting by title or description,Find a setting by title or description
 First caller,First caller
+First rejection:,First rejection:
 Fit the video to the screen,Fit the video to the screen
 Follow probe,Follow probe
 Following,Following
@@ -440,9 +446,10 @@ Hushfeed cannot read the creator pattern %1$s,Hushfeed cannot read the creator p
 Hushfeed filtered this batch,Hushfeed filtered this batch
 Hushfeed hid a TikTok puzzle. Turn off Hide CAPTCHA popups if something stops working.,Hushfeed hid a TikTok puzzle. Turn off Hide CAPTCHA popups if something stops working.
 "Ignore the creator's choice so the Duet and Stitch entries appear. Everything else the app checks still applies, and whether the upload is accepted is the server's decision.","Ignore the creator's choice so the Duet and Stitch entries appear. Everything else the app checks still applies, and whether the upload is accepted is the server's decision."
+Import finished,Import finished
 Import loaded values,Import loaded values
-"Imported %1$d disabled values. %2$d already matched, %3$d unavailable, %4$d rejected. First rejection: %5$s Undo last Lab change is in the menu.","Imported %1$d disabled values. %2$d already matched, %3$d unavailable, %4$d rejected. First rejection: %5$s Undo last Lab change is in the menu."
-"Imported %1$d disabled values. %2$d already matched, %3$d unavailable, %4$d rejected. Undo last Lab change is in the menu.","Imported %1$d disabled values. %2$d already matched, %3$d unavailable, %4$d rejected. Undo last Lab change is in the menu."
+Imported %1$d values,Imported %1$d values
+Imported %1$d values. Undo last Lab change is in the menu.,Imported %1$d values. Undo last Lab change is in the menu.
 Inbox,Inbox
 Include diagnostic events,Include diagnostic events
 Included diagnostics,Included diagnostics
