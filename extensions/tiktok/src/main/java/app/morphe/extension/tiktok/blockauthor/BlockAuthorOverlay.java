@@ -798,7 +798,7 @@ public final class BlockAuthorOverlay {
      * root is a parameter. Falls back to a plain toast when there is nowhere to draw it.
      */
     public static void showUndoBanner(ViewGroup root, String message, Runnable undoAction) {
-        showBanner(root, message, undoAction);
+        showBanner(root, message, undoAction, null);
     }
 
     /**
@@ -809,10 +809,23 @@ public final class BlockAuthorOverlay {
      * which a toast does not.
      */
     public static void showNoticeBanner(ViewGroup root, String message) {
-        showBanner(root, message, null);
+        showBanner(root, message, null, null);
     }
 
-    private static void showBanner(ViewGroup root, String message, Runnable undoAction) {
+    /**
+     * The same banner with an action of your own instead of Undo.
+     *
+     * <p>Undo was the only thing a banner could offer, so anything with a different action had
+     * to be a dialog, and a dialog over the feed stops a scroll dead for something whose only
+     * purpose is to be read.
+     */
+    public static void showActionBanner(ViewGroup root, String message, String actionLabel,
+            Runnable action) {
+        showBanner(root, message, action, actionLabel);
+    }
+
+    private static void showBanner(ViewGroup root, String message, Runnable action,
+            String actionLabel) {
         Utils.runOnMainThread(() -> {
             try {
                 if (root == null) {
@@ -840,7 +853,10 @@ public final class BlockAuthorOverlay {
                 label.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
                 banner.addView(label, new LinearLayout.LayoutParams(0, -2, 1f));
 
-                if (undoAction != null) addUndo(activity, banner, undoAction);
+                if (action != null) {
+                    addAction(activity, banner,
+                            actionLabel == null ? L10n.t(activity, "Undo") : actionLabel, action);
+                }
                 // Nothing announced this banner, so a reader using TalkBack never knew there
                 // was a way back at all.
                 banner.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
@@ -942,10 +958,11 @@ public final class BlockAuthorOverlay {
         return top;
     }
 
-    private static void addUndo(Activity activity, LinearLayout banner, Runnable undoAction) {
+    private static void addAction(Activity activity, LinearLayout banner, String label,
+            Runnable action) {
         TextView undo = new TextView(activity);
-        undo.setText(L10n.t(activity, "Undo"));
-        undo.setContentDescription(L10n.t(activity, "Undo"));
+        undo.setText(label);
+        undo.setContentDescription(label);
         undo.setTextColor(SettingsUi.OVERLAY_ACCENT);
         undo.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         // A banner that dismisses itself is the worst place for a small target.
@@ -961,7 +978,7 @@ public final class BlockAuthorOverlay {
         SettingsUi.markAsButton(undo);
         undo.setOnClickListener(view -> {
             dismissUndo();
-            undoAction.run();
+            action.run();
         });
         banner.addView(undo, new LinearLayout.LayoutParams(-2, -2));
     }

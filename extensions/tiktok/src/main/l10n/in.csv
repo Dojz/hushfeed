@@ -22,12 +22,12 @@ Discard edits,Buang perubahan
 "Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.","Kosongkan menu yang terbuka saat ikon TikTok di layar beranda ditekan dan ditahan. Menonaktifkannya akan meminta TikTok membuatnya kembali. Mengetuk ikon tetap membuka aplikasi, dan pintasan yang Anda sematkan sendiri tetap berada di tempatnya."
 Field edits were discarded.,Perubahan bidang dibuang.
 Field edits were not saved.,Perubahan bidang tidak disimpan.
+Filter settings,Pengaturan filter
 Full comment sort options,Opsi urutan komentar lengkap
 Hide the launcher shortcuts,Sembunyikan pintasan peluncur
 Keep the Favorites tab,Pertahankan tab Favorit
 Link copied,Tautan disalin
 Links in comments open,Tautan di komentar bisa dibuka
-No videos remained after Hushfeed applied your feed filters to one batch. Most matches: %1$s.,Tidak ada video tersisa setelah Hushfeed menerapkan filter feed pada satu kelompok. Paling sering cocok: %1$s.
 Not blocked,Tidak diblokir
 Not saved yet,Belum disimpan
 Nothing on this page changes what TikTok does until they are on.,Tidak ada di halaman ini yang mengubah perilaku TikTok selama itu mati.
@@ -68,6 +68,8 @@ TikTok's server can put an account into an experiment that empties the Favorites
 Turn on %1$s first.,Nyalakan %1$s dulu.
 Turn on overrides,Nyalakan penimpaan
 Unblock this commenter,Buka blokir pengomentar ini
+Your filters hid everything TikTok just sent. Most were %1$s.,Filtermu menyembunyikan semua yang baru dikirim TikTok. Sebagian besar %1$s.
+"Your filters hid everything TikTok sent, %1$d times in a row. Most were %2$s.","Filtermu menyembunyikan semua yang dikirim TikTok, %1$d kali berturut-turut. Sebagian besar %2$s."
 "Zero means no limit. Counts the videos Hushfeed advanced past for you, not the ones you swiped yourself, and starts again when the feed is rebuilt or you change this number.","Nol berarti tanpa batas. Menghitung video yang dilewati Hushfeed untuk Anda, bukan yang Anda geser sendiri, dan mulai lagi saat feed dibangun ulang atau angka ini diubah."
 Auto translate comments,Terjemahkan komentar otomatis
 Audio,Audio
@@ -678,10 +680,6 @@ LIVE replays,Putar ulang LIVE
 Region rules,Aturan wilayah
 Publication age,Usia kiriman
 Other feed filters,Filter feed lainnya
-Hushfeed filtered this batch,Hushfeed menyaring pemuatan ini
-No videos remained after Hushfeed applied your feed filters to %1$d batches. Most matches: %2$s.,Tidak ada video tersisa setelah Hushfeed menerapkan filter feed ke %1$d pemuatan. Yang paling sering: %2$s.
-Open feed filter settings,Buka setelan filter feed
-Dismiss,Tutup
 Share action checklist,Daftar periksa tindakan berbagi
 Choose observed share actions to hide. The stable identifier is shown below each label; unknown saved identifiers stay in the manual list.,Pilih tindakan berbagi yang telah diamati untuk disembunyikan. Pengenal stabil ditampilkan di bawah setiap label; pengenal tersimpan yang tidak dikenal tetap ada di daftar manual.
 Search share actions,Cari tindakan berbagi

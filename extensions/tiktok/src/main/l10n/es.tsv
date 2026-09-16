@@ -136,6 +136,7 @@ Discard edits	Descartar los cambios
 Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.	Vaciar el menú que se abre al mantener pulsado el icono de TikTok en la pantalla de inicio. Al desactivarlo se pide a TikTok que los vuelva a crear. Tocar el icono sigue abriendo la aplicación, y un acceso directo que hayas anclado permanece donde lo pusiste.
 Field edits were discarded.	Se descartaron los cambios de los campos.
 Field edits were not saved.	Los cambios de los campos no se guardaron.
+Filter settings	Ajustes de filtros
 Hide the launcher shortcuts	Ocultar los accesos directos del lanzador
 Keep the Favorites tab	Mantener la pestaña Favoritos
 Links in comments open	Los enlaces de los comentarios se abren
@@ -158,7 +159,6 @@ Diagnostics	Diagnóstico
 Disable analytics and tracking	Desactivar la analítica y el seguimiento
 Disable the long press quick share	Desactivar el compartir rápido con pulsación larga
 Disable the long press repost	Desactivar el repost con pulsación larga
-Dismiss	Descartar
 Dismissed %1$s suggested accounts	%1$s cuentas sugeridas descartadas
 Dismissed one suggested account	Una cuenta sugerida descartada
 Do not start the feed on returning	No poner el feed en marcha al volver
@@ -320,7 +320,6 @@ Home	Inicio
 Hook status	Comprobación de funciones
 How far each edge press moves the video.	Cuánto avanza el vídeo con cada toque en el borde.
 Hushfeed cannot read the creator pattern %1$s	Hushfeed no puede leer el patrón de creador %1$s
-Hushfeed filtered this batch	Hushfeed filtró este lote
 Hushfeed hid a TikTok puzzle. Turn off Hide CAPTCHA popups if something stops working.	Hushfeed ocultó un rompecabezas de TikTok. Desactiva Ocultar las ventanas de CAPTCHA si algo deja de funcionar.
 Ignore the creator's choice so the Duet and Stitch entries appear. Everything else the app checks still applies, and whether the upload is accepted is the server's decision.	Ignorar la decisión del creador para que aparezcan las entradas de Dúo y Unir. Todo lo demás que comprueba la app sigue aplicándose, y que se acepte la subida lo decide el servidor.
 Inbox	Bandeja de entrada
@@ -378,8 +377,6 @@ No sound to block on this video	No hay ningún sonido que bloquear en este víde
 No suggested accounts to clear	No hay cuentas sugeridas que borrar
 Nothing has been checked yet, so there is nothing to report.	Todavía no se ha comprobado nada, así que no hay nada que contar.
 No video selected	Ningún vídeo seleccionado
-No videos remained after Hushfeed applied your feed filters to %1$d batches. Most matches: %2$s.	No quedó ningún vídeo después de que Hushfeed aplicara tus filtros del feed a %1$d lotes. La mayoría coincidieron por: %2$s.
-No videos remained after Hushfeed applied your feed filters to one batch. Most matches: %1$s.	No quedó ningún vídeo después de que Hushfeed aplicara tus filtros del feed a un lote. La mayoría coincidieron por: %1$s.
 Not blocked	Sin bloquear
 Show the Not interested button	Mostrar el botón de No me interesa
 Not interested in this video	No me interesa este vídeo
@@ -403,7 +400,6 @@ Open TikTok home to detect loaded bottom tabs.	Abre el inicio de TikTok para det
 Open a share sheet once, then return here to choose its actions.	Abre una vez el panel de compartir y vuelve aquí para elegir sus acciones.
 Open comments	Abrir los comentarios
 Open external links directly	Abrir los enlaces externos directamente
-Open feed filter settings	Abrir los ajustes del filtro del feed
 Open messages	Abrir los mensajes
 Open profile and story website links in your system browser instead of TikTok's in-app browser.	Abrir los enlaces web de perfiles e historias en tu navegador del sistema en vez de en el navegador interno de TikTok.
 Open the feed anyway	Abrir el feed de todas formas
@@ -751,6 +747,8 @@ Write the video's sound beside it as an .m4a. Android 10 and later file audio se
 YOUR EXPERIENCE	TU EXPERIENCIA
 YTDLnis background mode	Modo en segundo plano de YTDLnis
 YTDLnis download type	Tipo de descarga de YTDLnis
+Your filters hid everything TikTok just sent. Most were %1$s.	Tus filtros ocultaron todo lo que TikTok acaba de enviar. La mayoría era %1$s.
+Your filters hid everything TikTok sent, %1$d times in a row. Most were %2$s.	Tus filtros ocultaron todo lo que TikTok envió, %1$d veces seguidas. La mayoría era %2$s.
 Your operator's name, like T-Mobile.	El nombre de tu operador, como T-Mobile.
 Your operator's numeric code, like 310260.	El código numérico de tu operador, como 310260.
 Zero means no limit. Counts the videos Hushfeed advanced past for you, not the ones you swiped yourself, and starts again when the feed is rebuilt or you change this number.	Cero significa sin límite. Cuenta los vídeos que Hushfeed pasó por ti, no los que deslizaste tú, y empieza de nuevo cuando el feed se reconstruye o cambias este número.

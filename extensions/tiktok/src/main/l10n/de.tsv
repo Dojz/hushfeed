@@ -24,12 +24,12 @@ Discard edits	Änderungen verwerfen
 Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.	Das Menü leeren, das sich beim langen Drücken des TikTok-Symbols auf dem Startbildschirm öffnet. Wird dies ausgeschaltet, wird TikTok gebeten, sie wieder aufzubauen. Ein Tippen auf das Symbol öffnet die App weiterhin, und eine selbst angeheftete Verknüpfung bleibt dort, wo sie abgelegt wurde.
 Field edits were discarded.	Die Feldänderungen wurden verworfen.
 Field edits were not saved.	Die Feldänderungen wurden nicht gespeichert.
+Filter settings	Filtereinstellungen
 Full comment sort options	Vollständige Sortieroptionen für Kommentare
 Hide the launcher shortcuts	Launcher-Verknüpfungen ausblenden
 Keep the Favorites tab	Favoriten-Tab behalten
 Link copied	Link kopiert
 Links in comments open	Links in Kommentaren lassen sich öffnen
-No videos remained after Hushfeed applied your feed filters to one batch. Most matches: %1$s.	Nach Hushfeeds Feed-Filtern blieb in einem Stapel kein Video übrig. Häufigste Treffer: %1$s.
 Not blocked	Nicht blockiert
 Not saved yet	Noch nicht gespeichert
 Nothing on this page changes what TikTok does until they are on.	Nichts auf dieser Seite ändert etwas an TikTok, solange sie aus sind.
@@ -70,6 +70,8 @@ TikTok's server can put an account into an experiment that empties the Favorites
 Turn on %1$s first.	Zuerst %1$s einschalten.
 Turn on overrides	Überschreibungen einschalten
 Unblock this commenter	Blockierung dieses Kommentierenden aufheben
+Your filters hid everything TikTok just sent. Most were %1$s.	Deine Filter haben alles ausgeblendet, was TikTok gerade geschickt hat. Das meiste war %1$s.
+Your filters hid everything TikTok sent, %1$d times in a row. Most were %2$s.	Deine Filter haben %1$d Mal hintereinander alles ausgeblendet, was TikTok geschickt hat. Das meiste war %2$s.
 Zero means no limit. Counts the videos Hushfeed advanced past for you, not the ones you swiped yourself, and starts again when the feed is rebuilt or you change this number.	Null bedeutet kein Limit. Zählt die Videos, die Hushfeed für dich weitergeschaltet hat, nicht die, die du selbst weggewischt hast, und beginnt neu, wenn der Feed neu aufgebaut wird oder du diese Zahl änderst.
 Auto translate comments	Kommentare automatisch übersetzen
 Audio	Audio
@@ -680,10 +682,6 @@ LIVE replays	LIVE-Wiederholungen
 Region rules	Regionsregeln
 Publication age	Beitragsalter
 Other feed filters	Andere Feed-Filter
-Hushfeed filtered this batch	Hushfeed hat diese Ladung gefiltert
-No videos remained after Hushfeed applied your feed filters to %1$d batches. Most matches: %2$s.	Keine Videos blieben übrig, nachdem Hushfeed deine Feed-Filter auf %1$d Ladungen angewendet hatte. Am häufigsten: %2$s.
-Open feed filter settings	Feed-Filter öffnen
-Dismiss	Schließen
 Share action checklist	Checkliste der Share-Aktionen
 Choose observed share actions to hide. The stable identifier is shown below each label; unknown saved identifiers stay in the manual list.	Wähle beobachtete Share-Aktionen zum Ausblenden. Die stabile Kennung steht unter jedem Namen; unbekannte gespeicherte Kennungen bleiben in der manuellen Liste.
 Search share actions	Share-Aktionen durchsuchen
