@@ -1,5 +1,7 @@
 ## 0.34.0
 
+* Reposting a video no longer arms the send-confirmation step. With Confirm before sending on, tapping Repost, Copy link or another share-channel action used to show "tap again to send" and act only on a second tap, because the confirmation gate treated every share-sheet button as a person to send to. It now gates only the recipients you can send to.
+
 * The feed filter table in the diagnostic report now says when a profile or insertion route was handed something that is not a video, and with diagnostic logging on the profile routes list every video they kept with its ad markers (ad, soft ad, raw ad, promotion, commission disclosure). A report about an ad that got through a profile page (issue #2) used to carry the counts and nothing about the ad itself.
 
 * The diagnostic report now has a Feature Gate Lab section: whether overrides are on, each rule with its value, and for each one whether TikTok has read that gate since the app started, from where, and what TikTok had before the override. Until now an export from a phone where an override changed nothing could not say whether the override was live at all.
@@ -20,7 +22,7 @@
 
 * New patch, Keep the Favorites tab, on by default. Two people found the Favorites tab on their profile empty after patching (issue #4): the tab was there, the saved videos were not. TikTok's server can put an account into an experiment that skips building that tab's pages, and forcing either of the two gates behind it on the test phone produced the reporters' page exactly. The patch answers those two reads with the values that keep the tab, the diagnostic report says when it did, and the switch is in Settings, Interface if you'd rather see what the server sends.
 
-* AMOLED dark theme now rewrites the theme style values behind the comments sheet and the share sheet, and one more page background colour. Both sheets are painted from style values that never go through the colour table the patch rewrote, which is why they stayed TikTok's grey with the patch on. Only dark values are touched, so the light theme keeps its white sheets.
+* AMOLED dark theme now rewrites the theme style values behind the comments sheet and the share sheet, and one more page background colour. Both sheets are painted from style values that never go through the colour table the patch rewrote, which is why they stayed TikTok's grey with the patch on. Only dark values are touched, so the light theme keeps its white sheets. On a TikTok build the patch is forced onto, a sheet style name that build does not have is skipped instead of failing the whole patch.
 
 * The feed filter table in the diagnostic report gives the profile detail pager's ad event a line of its own. It used to share the profile grid's line, so a report about an ad seen while watching videos from a profile (issue #2) couldn't say whether that route ran at all or what it took out.
 
