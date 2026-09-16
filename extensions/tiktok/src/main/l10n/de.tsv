@@ -3,6 +3,7 @@
 # Keep %s and %d placeholders, {tokens} and product names as they are.
 %1$d results so far	%1$d Ergebnisse bisher
 %1$d results so far, and more not counted	%1$d Ergebnisse bisher, weitere nicht gezählt
+%1$d results, filtered to %2$s	%1$d Ergebnisse, gefiltert nach %2$s
 %1$s destinations must start with %2$s	%1$s-Ziele müssen mit %2$s beginnen
 %1$s isn't installed or doesn't take links	%1$s ist nicht installiert oder nimmt keine Links an
 %1$s changed	%1$s geändert
@@ -14,6 +15,7 @@ A web address someone left in a comment can be tapped instead of copied out by h
 Automatic advance stopped after one video	Automatisches Weiterschalten nach einem Video angehalten
 Block this commenter	Diesen Kommentierenden blockieren
 Blocked	Blockiert
+Clear all Lab data (overrides, switch, recordings)	Alle Labordaten löschen (Überschreibungen, Schalter, Aufzeichnungen)
 Clear preset	Voreinstellung löschen
 Clear the search	Suche löschen
 Completed an interrupted settings change. Restart TikTok to apply this.	Eine unterbrochene Einstellungsänderung wurde abgeschlossen. TikTok neu starten, damit das gilt.
@@ -34,6 +36,7 @@ Not blocked	Nicht blockiert
 Not saved yet	Noch nicht gespeichert
 Nothing on this page changes what TikTok does until they are on.	Nichts auf dieser Seite ändert etwas an TikTok, solange sie aus sind.
 Recovered an interrupted settings change. Restart TikTok to apply this.	Eine unterbrochene Einstellungsänderung wurde wiederhergestellt. TikTok neu starten, damit das gilt.
+Remove all overrides	Alle Überschreibungen entfernen
 Save media	Medien speichern
 A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.	Ein Tippen auf eine Person in der Zeile „Senden an“ wählt sie nur aus. Ein zweites Tippen auf dieselbe Person innerhalb von vier Sekunden sendet das Video.
 Add a block button to the video player that blocks the account that posted the current video in one tap. An undo action is shown after each block.	Dem Videoplayer eine Schaltfläche hinzufügen, die das Konto hinter dem aktuellen Video mit einem Tippen blockiert. Nach jeder Blockierung wird eine Rückgängig-Aktion angezeigt.
@@ -801,8 +804,6 @@ More options	Weitere Optionen
 Refresh values	Werte aktualisieren
 Export loaded values	Geladene Werte exportieren
 Import loaded values	Geladene Werte importieren
-Reset all overrides	Alle Überschreibungen zurücksetzen
-Reset all Lab data	Alle Labordaten zurücksetzen
 Undo last Lab change	Letzte Lab-Änderung rückgängig machen
 All	Alle
 Boolean	Boolesch

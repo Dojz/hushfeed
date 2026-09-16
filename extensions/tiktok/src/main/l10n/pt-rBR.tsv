@@ -1,6 +1,7 @@
 %1$d minutes left	Restam %1$d minutos
 %1$d results so far	%1$d resultados até agora
 %1$d results so far, and more not counted	%1$d resultados até agora, e mais não contados
+%1$d results, filtered to %2$s	%1$d resultados, filtrados por %2$s
 %1$d setting was not in that file and was left as it is.	%1$d configuração não estava nesse arquivo e ficou como estava.
 %1$d settings were not in that file and were left as they are.	%1$d configurações não estavam nesse arquivo e ficaram como estavam.
 %1$s and above	%1$s ou superior
@@ -78,6 +79,7 @@ Choose which loaded TikTok bottom navigation tabs should stay visible.	Escolha q
 Choose which loaded TikTok feed tabs should stay visible.	Escolha quais abas do feed carregadas pelo TikTok devem continuar visíveis.
 Choose which rows and controls appear	Escolha quais linhas e controles aparecem
 Clear all	Limpar tudo
+Clear all Lab data (overrides, switch, recordings)	Limpar todos os dados do Lab (substituições, interruptor, gravações)
 Clear all suggested accounts	Limpar todas as contas sugeridas
 Clear buffered events, saved crash reports and the hook status above.	Limpa os eventos em memória, os relatórios de falha salvos e o estado dos ganchos acima.
 Clear diagnostic data	Limpar os dados de diagnóstico
@@ -142,6 +144,7 @@ Keep the Favorites tab	Manter a aba Favoritos
 Links in comments open	Os links nos comentários abrem
 Not saved yet	Ainda não salvo
 Nothing on this page changes what TikTok does until they are on.	Nada nesta página muda o que o TikTok faz enquanto elas estiverem desligadas.
+Remove all overrides	Remover todas as substituições
 Saved	Salvo
 TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.	O servidor do TikTok pode colocar uma conta em um experimento que esvazia a aba Favoritos do seu perfil. Mantém a aba e os vídeos salvos nela.
 Turn on %1$s first.	Ative %1$s primeiro.
@@ -798,8 +801,6 @@ More options	Mais opções
 Refresh values	Atualizar os valores
 Export loaded values	Exportar os valores carregados
 Import loaded values	Importar os valores carregados
-Reset all overrides	Redefinir todas as substituições
-Reset all Lab data	Redefinir todos os dados do Lab
 Undo last Lab change	Desfazer a última mudança do Lab
 All	Todos
 Boolean	Booleano

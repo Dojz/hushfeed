@@ -1,6 +1,7 @@
 source,target
 %1$d results so far,%1$d hasil sejauh ini
 "%1$d results so far, and more not counted","%1$d hasil sejauh ini, lainnya tidak dihitung"
+"%1$d results, filtered to %2$s","%1$d hasil, difilter menurut %2$s"
 %1$s destinations must start with %2$s,Tujuan %1$s harus diawali %2$s
 %1$s isn't installed or doesn't take links,%1$s tidak terpasang atau tidak menerima tautan
 %1$s changed,%1$s diubah
@@ -12,6 +13,7 @@ A web address someone left in a comment can be tapped instead of copied out by h
 Automatic advance stopped after one video,Lanjut otomatis dihentikan setelah satu video
 Block this commenter,Blokir pengomentar ini
 Blocked,Diblokir
+"Clear all Lab data (overrides, switch, recordings)","Hapus semua data Lab (penggantian, sakelar, rekaman)"
 Clear preset,Hapus preset
 Clear the search,Hapus pencarian
 Completed an interrupted settings change. Restart TikTok to apply this.,Perubahan pengaturan yang terhenti telah diselesaikan. Mulai ulang TikTok agar berlaku.
@@ -32,6 +34,7 @@ Not blocked,Tidak diblokir
 Not saved yet,Belum disimpan
 Nothing on this page changes what TikTok does until they are on.,Tidak ada di halaman ini yang mengubah perilaku TikTok selama itu mati.
 Recovered an interrupted settings change. Restart TikTok to apply this.,Perubahan pengaturan yang terhenti telah dipulihkan. Mulai ulang TikTok agar berlaku.
+Remove all overrides,Hapus semua penggantian
 Save media,Simpan media
 A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.,Satu ketukan pada orang di baris Kirim ke hanya memilihnya. Ketukan kedua pada orang yang sama dalam empat detik mengirim videonya.
 Add a block button to the video player that blocks the account that posted the current video in one tap. An undo action is shown after each block.,Tambahkan tombol blokir di pemutar video yang memblokir akun pengunggah video ini dalam satu ketukan. Aksi untuk mengurungkan muncul setelah tiap pemblokiran.
@@ -799,8 +802,6 @@ More options,Opsi lainnya
 Refresh values,Segarkan nilai
 Export loaded values,Ekspor nilai yang dimuat
 Import loaded values,Impor nilai yang dimuat
-Reset all overrides,Atur ulang semua penggantian
-Reset all Lab data,Atur ulang semua data Lab
 Undo last Lab change,Batalkan perubahan Lab terakhir
 All,Semua
 Boolean,Boolean

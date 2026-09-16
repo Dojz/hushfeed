@@ -9,6 +9,7 @@ source,target
 %1$d results,%1$d results
 %1$d results so far,%1$d results so far
 "%1$d results so far, and more not counted","%1$d results so far, and more not counted"
+"%1$d results, filtered to %2$s","%1$d results, filtered to %2$s"
 %1$d setting was not in that file and was left as it is.,%1$d setting was not in that file and was left as it is.
 %1$d settings were not in that file and were left as they are.,%1$d settings were not in that file and were left as they are.
 %1$d unavailable,%1$d unavailable
@@ -139,6 +140,7 @@ Choose which loaded TikTok bottom navigation tabs should stay visible.,Choose wh
 Choose which loaded TikTok feed tabs should stay visible.,Choose which loaded TikTok feed tabs should stay visible.
 Choose which rows and controls appear,Choose which rows and controls appear
 Clear all,Clear all
+"Clear all Lab data (overrides, switch, recordings)","Clear all Lab data (overrides, switch, recordings)"
 Clear all suggested accounts,Clear all suggested accounts
 "Clear buffered events, saved crash reports and the hook status above.","Clear buffered events, saved crash reports and the hook status above."
 Clear diagnostic data,Clear diagnostic data
@@ -651,6 +653,7 @@ Region settings,Region settings
 Remind me every,Remind me every
 Remove,Remove
 Remove %1$s,Remove %1$s
+Remove all overrides,Remove all overrides
 Remove feed ads,Remove feed ads
 "Remove feed ads, including videos with a creator commission disclosure.","Remove feed ads, including videos with a creator commission disclosure."
 Remove polls from the comments before TikTok shows them.,Remove polls from the comments before TikTok shows them.
@@ -669,8 +672,6 @@ Reset %1$d gates of %2$d. Restart TikTok to apply this.,Reset %1$d gates of %2$d
 Reset %1$d gates. Restart TikTok to apply this.,Reset %1$d gates. Restart TikTok to apply this.
 Reset 1 gate of %1$d. Restart TikTok to apply this.,Reset 1 gate of %1$d. Restart TikTok to apply this.
 Reset 1 gate. Restart TikTok to apply this.,Reset 1 gate. Restart TikTok to apply this.
-Reset all Lab data,Reset all Lab data
-Reset all overrides,Reset all overrides
 Reset override,Reset override
 Reset position,Reset position
 Reset settings,Reset settings
