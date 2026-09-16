@@ -17,6 +17,7 @@ import app.morphe.patches.tiktok.misc.extension.sharedExtensionPatch
 import app.morphe.patches.tiktok.misc.settings.SettingsStatusLoadFingerprint
 import app.morphe.patches.tiktok.misc.settings.settingsPatch
 import app.morphe.patches.tiktok.shared.callThroughLocals
+import app.morphe.patches.tiktok.shared.guardAtEntry
 import app.morphe.patches.tiktok.shared.objectIn
 import app.morphe.patches.tiktok.shared.requireLocals
 import app.morphe.util.addInstructionsAtControlFlowLabel
@@ -363,16 +364,10 @@ val feedFilterPatch = bytecodePatch(
         }
 
         TakoAiFeedButtonSetVisibleFingerprint.method.requireLocals("Feed filter", 1)
-        TakoAiFeedButtonSetVisibleFingerprint.method.addInstructions(
-            0,
-            """
-                invoke-static {}, $TAKO_AI_FILTER_CLASS_DESCRIPTOR->shouldHideFeedButton()Z
-                move-result v0
-                if-eqz v0, :morphe_keep_feed_tako_visible_state
-                const/4 p1, 0x0
-                :morphe_keep_feed_tako_visible_state
-                nop
-            """,
+        TakoAiFeedButtonSetVisibleFingerprint.method.guardAtEntry(
+            "Feed filter",
+            "invoke-static {}, $TAKO_AI_FILTER_CLASS_DESCRIPTOR->shouldHideFeedButton()Z",
+            "const/4 p1, 0x0",
         )
 
         TakoAiFeedButtonBindFingerprint.method.apply {
@@ -393,16 +388,12 @@ val feedFilterPatch = bytecodePatch(
         // are stopped where they are built. Each is optional: a build without the surface
         // simply skips it.
         PlaylistBottomBarAvailableFingerprint.method.requireLocals("Feed filter", 1)
-        PlaylistBottomBarAvailableFingerprint.method.addInstructions(
-            0,
+        PlaylistBottomBarAvailableFingerprint.method.guardAtEntry(
+            "Feed filter",
+            "invoke-static {}, $CARD_FILTERS_CLASS_DESCRIPTOR->shouldHidePlaylistBar()Z",
             """
-                invoke-static {}, $CARD_FILTERS_CLASS_DESCRIPTOR->shouldHidePlaylistBar()Z
-                move-result v0
-                if-eqz v0, :morphe_show_playlist_bar
                 const/4 v0, 0x0
                 return v0
-                :morphe_show_playlist_bar
-                nop
             """,
         )
 
@@ -425,31 +416,23 @@ val feedFilterPatch = bytecodePatch(
         )?.let { insertion ->
             // Null is the app's own "no recommended users to insert" result.
             insertion.requireLocals("Feed filter", 1)
-            insertion.addInstructions(
-                0,
+            insertion.guardAtEntry(
+                "Feed filter",
+                "invoke-static {}, $CARD_FILTERS_CLASS_DESCRIPTOR->shouldHideInsertedCards()Z",
                 """
-                    invoke-static {}, $CARD_FILTERS_CLASS_DESCRIPTOR->shouldHideInsertedCards()Z
-                    move-result v0
-                    if-eqz v0, :morphe_insert_rec_user_card
                     const/4 v0, 0x0
                     return-object v0
-                    :morphe_insert_rec_user_card
-                    nop
                 """,
             )
         }
 
         FeedLynxCardLoadFingerprint.method.requireLocals("Feed filter", 1)
-        FeedLynxCardLoadFingerprint.method.addInstructions(
-            0,
+        FeedLynxCardLoadFingerprint.method.guardAtEntry(
+            "Feed filter",
+            "invoke-static {}, $CARD_FILTERS_CLASS_DESCRIPTOR->shouldHideInsertedCards()Z",
             """
-                invoke-static {}, $CARD_FILTERS_CLASS_DESCRIPTOR->shouldHideInsertedCards()Z
-                move-result v0
-                if-eqz v0, :morphe_load_feed_card
                 const/4 v0, 0x0
                 return v0
-                :morphe_load_feed_card
-                nop
             """,
         )
 
@@ -470,16 +453,10 @@ val feedFilterPatch = bytecodePatch(
         }
 
         SpecActTouchpointAttachFingerprint.method.requireLocals("Feed filter", 1)
-        SpecActTouchpointAttachFingerprint.method.addInstructions(
-            0,
-            """
-                invoke-static {}, $CARD_FILTERS_CLASS_DESCRIPTOR->shouldHideEventBadge()Z
-                move-result v0
-                if-eqz v0, :morphe_attach_event_badge
-                return-void
-                :morphe_attach_event_badge
-                nop
-            """,
+        SpecActTouchpointAttachFingerprint.method.guardAtEntry(
+            "Feed filter",
+            "invoke-static {}, $CARD_FILTERS_CLASS_DESCRIPTOR->shouldHideEventBadge()Z",
+            "return-void",
         )
     }
 }

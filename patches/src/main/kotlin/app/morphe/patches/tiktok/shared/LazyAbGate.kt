@@ -124,7 +124,7 @@ internal class LazyAbGateSearch(private val classOf: (String) -> ClassDef?) {
 
     /** Whether the static initialiser reaches [key], directly or through the lambda it builds. */
     fun readsSettingsKey(clinit: Method, key: String): Boolean {
-        if (clinit.holdsString(key)) return true
+        if (clinit.hasExactString(key)) return true
         val instructions = clinit.implementation?.instructions?.toList() ?: return false
         instructions.forEachIndexed { index, instruction ->
             when (instruction.opcode) {
@@ -137,7 +137,7 @@ internal class LazyAbGateSearch(private val classOf: (String) -> ClassDef?) {
                     val bodies = classOf(built)?.methods?.filter {
                         it.name != "<init>" && it.parameterTypes.none() && it.implementation != null
                     } ?: return@forEachIndexed
-                    if (bodies.any { it.holdsString(key) }) return true
+                    if (bodies.any { it.hasExactString(key) }) return true
                 }
                 Opcode.INVOKE_STATIC, Opcode.INVOKE_STATIC_RANGE -> {
                     val factory = instruction.getReference<MethodReference>()
@@ -148,7 +148,7 @@ internal class LazyAbGateSearch(private val classOf: (String) -> ClassDef?) {
                         ?: return@forEachIndexed
                     val number = constantBefore(instructions, index, argument)
                         ?: return@forEachIndexed
-                    if (groupBodies(factory.definingClass, number).any { it.holdsString(key) }) {
+                    if (groupBodies(factory.definingClass, number).any { it.hasExactString(key) }) {
                         return true
                     }
                 }
@@ -316,7 +316,7 @@ internal fun Method.isLazyAbRead(): Boolean {
 }
 
 /** Whether any string constant of the method is exactly this one. */
-private fun Method.holdsString(value: String) =
+private fun Method.hasExactString(value: String) =
     implementation?.instructions?.any {
         it.getReference<StringReference>()?.string == value
     } == true

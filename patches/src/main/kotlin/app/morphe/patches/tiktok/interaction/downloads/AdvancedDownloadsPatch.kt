@@ -19,6 +19,7 @@ import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.tiktok.misc.extension.sharedExtensionPatch
 import app.morphe.patches.tiktok.misc.settings.SettingsStatusLoadFingerprint
 import app.morphe.patches.tiktok.misc.settings.settingsPatch
+import app.morphe.patches.tiktok.shared.requireLocals
 import app.morphe.util.getReference
 import app.morphe.util.implementationOrPatchException
 import app.morphe.util.numberOfParameterRegisters
@@ -55,8 +56,8 @@ internal fun MutableMethod.interceptProfileAvatarLongPress(capture: Field) {
     check(isAvatarLongPressShape(definingClass) && returnType == "V") {
         "Advanced downloads: unexpected avatar callback signature."
     }
-    val registers = implementationOrPatchException("Advanced downloads").registerCount
-    check(registers - numberOfParameterRegisters >= 1 && registers <= 16) {
+    requireLocals("Advanced downloads", 1)
+    check(implementationOrPatchException("Advanced downloads").registerCount <= 16) {
         "Advanced downloads: avatar callback registers no longer fit the native gesture hook."
     }
     // p0 is the listener whichever shape it has: the group instance handed to a static body, or
@@ -134,7 +135,7 @@ private fun Method.isAvatarLongPressHandler(classDef: ClassDef) =
  * that renamed `photo` to something with `photo` inside it satisfy the own-profile fingerprint
  * and this exclusion at once, and both fingerprints would then land on the same method.
  */
-private fun Method.holdsString(value: String) =
+private fun Method.containsString(value: String) =
     implementation?.instructions?.any {
         it.getReference<StringReference>()?.string?.contains(value) == true
     } == true
@@ -149,7 +150,7 @@ private object OtherProfileAvatarLongPressFingerprint : Fingerprint(
     returnType = "V",
     strings = listOf("long_press", "long_hold_head"),
     custom = { method, classDef ->
-        method.isAvatarLongPressHandler(classDef) && !method.holdsString("photo")
+        method.isAvatarLongPressHandler(classDef) && !method.containsString("photo")
     },
 )
 
@@ -213,10 +214,7 @@ val advancedDownloadsPatch = bytecodePatch(
     execute {
         listOf(DownloadAddressFingerprint, CleanDownloadAddressFingerprint).forEach { fingerprint ->
             fingerprint.method.apply {
-                check(implementationOrPatchException("Advanced downloads").registerCount -
-                    numberOfParameterRegisters >= 1) {
-                    "Advanced downloads: ${fingerprint.method.name} has no free local register."
-                }
+                requireLocals("Advanced downloads", 1)
                 addInstructionsWithLabels(0, """
                     invoke-static/range { p0 .. p0 }, ${EXTENSION}QualitySelector;->download(Ljava/lang/Object;)$URL
                     move-result-object v0
@@ -226,10 +224,7 @@ val advancedDownloadsPatch = bytecodePatch(
             }
         }
         StartDownloadFingerprint.method.apply {
-            check(implementationOrPatchException("Advanced downloads").registerCount -
-                numberOfParameterRegisters >= 1) {
-                "Advanced downloads: the photo download start has no free local register."
-            }
+            requireLocals("Advanced downloads", 1)
             addInstructionsWithLabels(0, """
                 invoke-static/range { p1 .. p2 }, ${EXTENSION}OriginalPhotos;->start(Ljava/lang/Object;Landroid/content/Context;)Z
                 move-result v0

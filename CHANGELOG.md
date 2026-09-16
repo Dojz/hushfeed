@@ -1,5 +1,7 @@
 ## 0.37.0
 
+* Inside the patch bundle, thirteen hand-rolled register checks, sixteen hand-written entry guards, two copies of the argument-register helper with different casts, two same-named string helpers with different meanings and four superclass walks are one helper each. Nothing a user sees changes; the next TikTok build that moves a shape is one fix in one file instead of a hunt.
+
 * Auto translate comments no longer walks every field of every comment cell's manager, and the manager's declared methods, three times per cell on the thread that binds the list. The manager's shape is a property of its class, so the first cell of a class pays and the rest read three fields.
 
 * Follow diagnostics lets go of a request when its response is parsed or it fails, instead of holding up to 160 request graphs, bodies and buffers included, until TikTok is killed. A request that never finishes is held weakly, and the readback context expires after its thirty-second window.
