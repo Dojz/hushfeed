@@ -1200,12 +1200,19 @@ public final class SettingsUi {
         labelEditor(label, editor, label.getText());
     }
 
+    /** Hint-only field with no visible label: just the spoken name for screen readers. */
+    public static void labelEditor(EditText editor, CharSequence spokenName) {
+        labelEditor(null, editor, spokenName);
+    }
+
     /** Same contract with a more precise spoken name for generated fields. */
     public static void labelEditor(TextView label, EditText editor, CharSequence spokenName) {
         if (editor.getId() == View.NO_ID) editor.setId(View.generateViewId());
-        label.setLabelFor(editor.getId());
-        label.setFocusable(false);
-        label.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+        if (label != null) {
+            label.setLabelFor(editor.getId());
+            label.setFocusable(false);
+            label.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+        }
         final CharSequence fieldName = spokenName == null ? "" : spokenName.toString();
         editor.setAccessibilityDelegate(new View.AccessibilityDelegate() {
             @Override public void onInitializeAccessibilityNodeInfo(
@@ -1234,6 +1241,12 @@ public final class SettingsUi {
         };
         int[] colors = new int[]{accent(), textDisabled(), textSecondary()};
         button.setButtonTintList(new ColorStateList(states, colors));
+    }
+
+    public static void styleCheckBoxRow(CompoundButton button) {
+        styleCheckBox(button);
+        button.setTextColor(enabledTextColors(textPrimary()));
+        button.setTextSize(16);
     }
 
     /** Lays its children out in rows, breaking to a new one when the next child will not fit. */

@@ -130,6 +130,7 @@ public class SimPresetPreference extends Preference {
         search.setTextColor(getTitleTextColor());
         search.setHintTextColor(getSummaryTextColor());
         SettingsUi.styleEditText(search);
+        SettingsUi.labelEditor(search, L10n.t(getContext(), "Search countries or operators"));
         dialogView.addView(search, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
