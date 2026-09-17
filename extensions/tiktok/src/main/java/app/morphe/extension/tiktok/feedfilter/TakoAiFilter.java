@@ -28,10 +28,12 @@ public final class TakoAiFilter {
     }
 
     public static void hideBoundFeedButtonView(View view) {
-        if (!Settings.HIDE_TAKO_AI.get() || view == null) return;
+        boolean enabled = Settings.HIDE_TAKO_AI.get();
+        HookStatus.bound(HOOK_FAMILY,
+                "bound button " + (enabled ? "hidden" : "left"));
+        if (!enabled || view == null) return;
 
         view.setVisibility(View.GONE);
-        HookStatus.bound(HOOK_FAMILY, "bound button hidden");
         logBoundViewHide();
     }
 

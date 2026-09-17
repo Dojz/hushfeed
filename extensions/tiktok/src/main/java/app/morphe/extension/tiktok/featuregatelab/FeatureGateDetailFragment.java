@@ -1186,8 +1186,13 @@ public final class FeatureGateDetailFragment extends Fragment {
         ));
         SettingsUi.markAsButton(heading);
         heading.setFocusable(true);
-        heading.setContentDescription(
-                L10n.f(context, "Technical details, %1$s", L10n.t(context, "collapsed")));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            heading.setContentDescription(L10n.t(context, "Technical details"));
+            heading.setStateDescription(L10n.t(context, "collapsed"));
+        } else {
+            heading.setContentDescription(
+                    L10n.f(context, "Technical details, %1$s", L10n.t(context, "collapsed")));
+        }
         LinearLayout.LayoutParams headingParams = FeatureGateLabUi.matchWrap();
         headingParams.setMargins(0, FeatureGateLabUi.dp(context, 12), 0, 0);
         root.addView(heading, headingParams);
