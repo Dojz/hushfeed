@@ -277,10 +277,12 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
     private void addCaptions(Context context) {
         if (SettingsStatus.subtitleToolsEnabled) {
             addPreference(new SectionHeadingPreference(context, "Captions"));
-            addPreference(new NumberInputPreference(context, "Caption text size",
+            NumberInputPreference captionSize = new NumberInputPreference(context, "Caption text size",
                     "Use 0 for TikTok's size, or 12 to 48. Applies to the next caption.", Settings.CAPTION_TEXT_SIZE, "point", "points") {
                 @Override protected int clamp(int value) { return value <= 0 ? 0 : Math.max(12, Math.min(48, value)); }
-            });
+            };
+            captionSize.zeroMeans("TikTok's size");
+            addPreference(captionSize);
             addPreference(new ChoicePreference(context, "Caption background", Settings.CAPTION_BACKGROUND,
                     new String[]{"TikTok default", "Transparent", "Dark", "Black"},
                     new String[]{"default", "transparent", "dark", "black"}));
@@ -313,9 +315,11 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             addPreference(new SectionHeadingPreference(context, "Clear display"));
             addPreference(new TogglePreference(context, "Automatic clear display",
                     "Hide controls after each video starts. Tap to restore them.", Settings.AUTOMATIC_CLEAR_DISPLAY));
-            addPreference(new NumberInputPreference(context, "Clear display delay",
+            NumberInputPreference delay = new NumberInputPreference(context, "Clear display delay",
                     "Wait before hiding the controls.", Settings.AUTOMATIC_CLEAR_DISPLAY_DELAY,
-                    "millisecond", "milliseconds"));
+                    "millisecond", "milliseconds");
+            delay.zeroMeans("No delay");
+            addPreference(delay);
         }
     }
 
