@@ -890,7 +890,7 @@ public final class FeatureGateDetailFragment extends Fragment {
                 entry.manager, entry.key, entry.type);
         status.setText(failure != null
                 ? L10n.t(getContext(),
-                        "TikTok read it, but the structured override could not be applied")
+                        "TikTok read it, but the override could not be applied. Reset it and save it again.")
                 : L10n.t(getContext(), triggered
                         ? "TikTok read it" : "Not read yet"));
         status.setTextColor(triggered ? SettingsUi.accent() : FeatureGateLabUi.warningColor(getActivity()));

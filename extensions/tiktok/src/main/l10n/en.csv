@@ -85,6 +85,9 @@ All events,All events
 All loaded tabs,All loaded tabs
 Allow Duet and Stitch anyway,Allow Duet and Stitch anyway
 Allow screenshots and Circle to Search,Allow screenshots and Circle to Search
+Allow storage for TikTok in Android settings to save profile pictures.,Allow storage for TikTok in Android settings to save profile pictures.
+Allow storage for TikTok in Android settings to save sounds.,Allow storage for TikTok in Android settings to save sounds.
+Allow storage for TikTok in Android settings to save stories.,Allow storage for TikTok in Android settings to save stories.
 Allowed bottom tabs,Allowed bottom tabs
 Already marked as not interested,Already marked as not interested
 Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.,Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.
@@ -130,6 +133,7 @@ Block this creator,Block this creator
 Block this sound,Block this sound
 Blocked,Blocked
 Blocked %1$s,Blocked %1$s
+"Blocked %1$s, but TikTok has not confirmed it yet.","Blocked %1$s, but TikTok has not confirmed it yet."
 Blocked caption words,Blocked caption words
 Blocked comment words,Blocked comment words
 Blocked creators,Blocked creators
@@ -149,6 +153,7 @@ Captions,Captions
 Capture crash reports locally,Capture crash reports locally
 Choose 1-1000 videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.,Choose 1-1000 videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.
 Choose a backup file. Your current settings are kept for Undo.,Choose a backup file. Your current settings are kept for Undo.
+Choose a folder on internal storage. SD cards are not supported.,Choose a folder on internal storage. SD cards are not supported.
 Choose a preset to fill the SIM details.,Choose a preset to fill the SIM details.
 Choose a subfolder under %1$s.,Choose a subfolder under %1$s.
 Choose observed share actions to hide. The stable identifier is shown below each label; unknown saved identifiers stay in the manual list.,Choose observed share actions to hide. The stable identifier is shown below each label; unknown saved identifiers stay in the manual list.
@@ -205,8 +210,6 @@ Copy the sound link,Copy the sound link
 Copy the video link,Copy the video link
 Could not change Lab settings.,Could not change Lab settings.
 Could not clear suggested accounts,Could not clear suggested accounts
-Could not confirm block for %1$s,Could not confirm block for %1$s
-Could not confirm unblock for %1$s,Could not confirm unblock for %1$s
 Could not copy report. Use Save JSON.,Could not copy report. Use Save JSON.
 Could not open settings search,Could not open settings search
 Could not open settings section,Could not open settings section
@@ -307,7 +310,6 @@ Exported %1$d loaded values,Exported %1$d loaded values
 Exported 1 loaded value,Exported 1 loaded value
 Fade the feed out before the hold,Fade the feed out before the hold
 Feature Gate Lab,Feature Gate Lab
-Feature Gate Lab could not find the settings container,Feature Gate Lab could not find the settings container
 Feature gate override reset,Feature gate override reset
 Feature gate override saved,Feature gate override saved
 Feed and navigation,Feed and navigation
@@ -481,7 +483,6 @@ Included diagnostics,Included diagnostics
 Includes all diagnostic events.,Includes all diagnostic events.
 Includes these events: %1$s,Includes these events: %1$s
 Inserted cards,Inserted cards
-Invalid SIM preset,Invalid SIM preset
 Keep a local record of what you have watched and drop those videos from later feed pages.,Keep a local record of what you have watched and drop those videos from later feed pages.
 "Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this. Then use this switch to turn it off.","Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this. Then use this switch to turn it off."
 Keep captions in clear display,Keep captions in clear display
@@ -522,8 +523,6 @@ Live Settings,Live Settings
 Loaded current values. Loading all known gates...,Loaded current values. Loading all known gates...
 Loaded values are still being read. Try again in a moment.,Loaded values are still being read. Try again in a moment.
 Loaded-value file export failed,Loaded-value file export failed
-Loaded-value file export failed; cleanup also failed,Loaded-value file export failed; cleanup also failed
-Loaded-value file is invalid or too large,Loaded-value file is invalid or too large
 Loading gates...,Loading gates...
 Loading local catalog and current TikTok cache...,Loading local catalog and current TikTok cache...
 Locally hidden creators,Locally hidden creators
@@ -617,7 +616,6 @@ Only bottom tabs TikTok has loaded on this device are shown here. This does not 
 Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.,Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.
 Only fields that can be type-checked and applied to a copied configuration object are shown.,Only fields that can be type-checked and applied to a copied configuration object are shown.
 Only from these countries,Only from these countries
-Only internal storage folders are supported,Only internal storage folders are supported
 Only tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.,Only tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.
 Open TikTok home feed to detect loaded tabs.,Open TikTok home feed to detect loaded tabs.
 Open TikTok home to detect loaded bottom tabs.,Open TikTok home to detect loaded bottom tabs.
@@ -873,9 +871,6 @@ Stop video looping,Stop video looping
 Stop videos at the end instead of replaying them.,Stop videos at the end instead of replaying them.
 Stopped after dismissing %1$s suggested accounts,Stopped after dismissing %1$s suggested accounts
 Stopped after dismissing one suggested account,Stopped after dismissing one suggested account
-Storage permission is needed to save a profile picture,Storage permission is needed to save a profile picture
-Storage permission is needed to save a sound,Storage permission is needed to save a sound
-Storage permission is needed to save a story,Storage permission is needed to save a story
 Stories,Stories
 Story saved to %1$s,Story saved to %1$s
 Structured value observed,Structured value observed
@@ -896,8 +891,10 @@ That backup was written by a newer Hushfeed than this one. Nothing was altered.,
 That creator is already in the list,That creator is already in the list
 "That creator pattern is too long to use, so it was skipped: %1$s","That creator pattern is too long to use, so it was skipped: %1$s"
 "That creator pattern is too long, so it was not added: %1$s","That creator pattern is too long, so it was not added: %1$s"
+"That file is not a loaded-values export, or it is larger than the Lab accepts.","That file is not a loaded-values export, or it is larger than the Lab accepts."
 "That file is not readable text, so it may have been damaged in transit. Nothing was altered.","That file is not readable text, so it may have been damaged in transit. Nothing was altered."
 That file is too large to be a settings backup. Nothing was altered.,That file is too large to be a settings backup. Nothing was altered.
+"That folder name has a character Android does not allow. Use letters, numbers, spaces or dashes.","That folder name has a character Android does not allow. Use letters, numbers, spaces or dashes."
 That is %1$d minutes today,That is %1$d minutes today
 That is %1$d videos today,That is %1$d videos today
 That is not a Hushfeed settings backup. Nothing was altered.,That is not a Hushfeed settings backup. Nothing was altered.
@@ -906,6 +903,7 @@ That is one minute today,That is one minute today
 That is one video today,That is one video today
 "That list has too many entries. Keep it to 10,000 or fewer.","That list has too many entries. Keep it to 10,000 or fewer."
 That list is too large. Keep it to 256 KB or less.,That list is too large. Keep it to 256 KB or less.
+That preset is not recognized. Choose another.,That preset is not recognized. Choose another.
 That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.,That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.
 That settings backup holds a value Hushfeed cannot read. Nothing was altered.,That settings backup holds a value Hushfeed cannot read. Nothing was altered.
 That settings backup holds more Feature Gate Lab rules than the Lab takes. Nothing was altered.,That settings backup holds more Feature Gate Lab rules than the Lab takes. Nothing was altered.
@@ -913,11 +911,12 @@ That settings backup is damaged or only partly downloaded. Nothing was altered.,
 "That settings backup is incomplete, so it may have been cut short. Nothing was altered.","That settings backup is incomplete, so it may have been cut short. Nothing was altered."
 That settings change did not go through. Nothing was altered.,That settings change did not go through. Nothing was altered.
 That sticker is in a format Hushfeed cannot read,That sticker is in a format Hushfeed cannot read
+The Lab could not open. Go back and open it again.,The Lab could not open. Go back and open it again.
 "The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.","The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed."
 The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.,The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.
-The destination contains an invalid folder name,The destination contains an invalid folder name
-The diagnostic report could not be exported.,The diagnostic report could not be exported.
 The diagnostic report could not be saved yet. Try again in a moment.,The diagnostic report could not be saved yet. Try again in a moment.
+The diagnostic report could not be saved. Try again.,The diagnostic report could not be saved. Try again.
+The export failed and the partial file could not be removed. Delete it from your Downloads folder.,The export failed and the partial file could not be removed. Delete it from your Downloads folder.
 "The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.","The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at."
 The feed does not end. This is a fine time to leave it.,The feed does not end. This is a fine time to leave it.
 The feed is open again,The feed is open again
@@ -934,7 +933,7 @@ The minimum or maximum views of a video to show.,The minimum or maximum views of
 "The override changes no fields. Edit the field values, or reset the override.","The override changes no fields. Edit the field values, or reset the override."
 "The override couldn't be applied: %1$s. Edit the field values, or reset the override.","The override couldn't be applied: %1$s. Edit the field values, or reset the override."
 "The override doesn't say what list to return. Edit the field values, or reset the override.","The override doesn't say what list to return. Edit the field values, or reset the override."
-The profile picture couldn't be saved.,The profile picture couldn't be saved.
+The profile picture couldn't be saved. Try again.,The profile picture couldn't be saved. Try again.
 "The record of an interrupted settings change could not be read, so it was set aside. Check your settings.","The record of an interrupted settings change could not be read, so it was set aside. Check your settings."
 The report couldn't be saved. Try again.,The report couldn't be saved. Try again.
 The selected loaded-values file could not be read. Try again.,The selected loaded-values file could not be read. Try again.
@@ -943,7 +942,7 @@ The settings backup was rejected. Nothing was altered.,The settings backup was r
 The smallest value is above the largest,The smallest value is above the largest
 The sound couldn't be saved. Try again.,The sound couldn't be saved. Try again.
 The sticker couldn't be saved. Try again.,The sticker couldn't be saved. Try again.
-The story couldn't be saved.,The story couldn't be saved.
+The story couldn't be saved. Try again.,The story couldn't be saved. Try again.
 "The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.","The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks."
 "The video couldn't be saved. Try again, or choose Automatic.","The video couldn't be saved. Try again, or choose Automatic."
 There is no Lab change to undo.,There is no Lab change to undo.
@@ -973,13 +972,13 @@ This video has no sound of its own,This video has no sound of its own
 Thumbs down blocks the commenter,Thumbs down blocks the commenter
 TikTok default,TikTok default
 "TikTok default (2x hold, quick share)","TikTok default (2x hold, quick share)"
+TikTok did not block %1$s. Try again in a moment.,TikTok did not block %1$s. Try again in a moment.
+TikTok did not unblock %1$s. Try again in a moment.,TikTok did not unblock %1$s. Try again in a moment.
 TikTok didn't accept the feedback. Try again later.,TikTok didn't accept the feedback. Try again later.
 "TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.","TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back."
 TikTok read it,TikTok read it
-"TikTok read it, but the structured override could not be applied","TikTok read it, but the structured override could not be applied"
+"TikTok read it, but the override could not be applied. Reset it and save it again.","TikTok read it, but the override could not be applied. Reset it and save it again."
 TikTok refused the follow: %1$s,TikTok refused the follow: %1$s
-TikTok rejected the request to block %1$s,TikTok rejected the request to block %1$s
-TikTok rejected the request to unblock %1$s,TikTok rejected the request to unblock %1$s
 TikTok's own value,TikTok's own value
 TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.,TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.
 Times you can open the feed anyway,Times you can open the feed anyway
@@ -1016,6 +1015,7 @@ Type to search settings,Type to search settings
 Unavailable,Unavailable
 Unblock this commenter,Unblock this commenter
 Unblocked %1$s,Unblocked %1$s
+"Unblocked %1$s, but TikTok has not confirmed it yet.","Unblocked %1$s, but TikTok has not confirmed it yet."
 Undo,Undo
 Undo last Lab change,Undo last Lab change
 Undo last restore or reset,Undo last restore or reset

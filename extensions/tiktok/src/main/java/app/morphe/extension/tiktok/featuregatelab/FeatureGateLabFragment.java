@@ -164,7 +164,7 @@ public final class FeatureGateLabFragment extends Fragment {
         int containerId = findFragmentContainer(activity);
         if (containerId == View.NO_ID) {
             Utils.showToastLong(L10n.t(Utils.getContext(),
-                    "Feature Gate Lab could not find the settings container"));
+                    "The Lab could not open. Go back and open it again."));
             return;
         }
         FeatureGateLabSession.begin();
@@ -1154,7 +1154,7 @@ public final class FeatureGateLabFragment extends Fragment {
                 Logger.printException(() -> "Loaded-value file export failed", throwable);
                 postToast(L10n.t(Utils.getContext(), deleteCreatedDocument(resolver, uri)
                         ? "Loaded-value file export failed"
-                        : "Loaded-value file export failed; cleanup also failed"));
+                        : "The export failed and the partial file could not be removed. Delete it from your Downloads folder."));
             }
         });
     }
@@ -1181,7 +1181,7 @@ public final class FeatureGateLabFragment extends Fragment {
                 // used to be reported as invalid or too large, the same as a corrupt one.
                 postToast(throwable instanceof ImportRefused
                         ? throwable.getMessage()
-                        : L10n.t(Utils.getContext(), "Loaded-value file is invalid or too large"));
+                        : L10n.t(Utils.getContext(), "That file is not a loaded-values export, or it is larger than the Lab accepts."));
             }
         });
     }

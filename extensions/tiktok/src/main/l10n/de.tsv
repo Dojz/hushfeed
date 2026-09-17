@@ -236,8 +236,8 @@ Copy the sound link	Soundlink kopieren
 Copy the video link	Videolink kopieren
 Could not change Lab settings.	Die Lab-Einstellungen ließen sich nicht ändern.
 Could not clear suggested accounts	Kontovorschläge konnten nicht entfernt werden
-Could not confirm block for %1$s	Die Blockierung von %1$s konnte nicht bestätigt werden
-Could not confirm unblock for %1$s	Die Aufhebung der Blockierung von %1$s konnte nicht bestätigt werden
+Blocked %1$s, but TikTok has not confirmed it yet.	Die Blockierung von %1$s konnte nicht bestätigt werden.
+Unblocked %1$s, but TikTok has not confirmed it yet.	Die Aufhebung der Blockierung von %1$s konnte nicht bestätigt werden.
 Could not copy report. Use Save JSON.	Bericht konnte nicht kopiert werden. Nutze „JSON speichern“.
 Could not open settings search	Einstellungsuche konnte nicht geöffnet werden
 Could not open settings section	Einstellungsbereich konnte nicht geöffnet werden
@@ -336,7 +336,7 @@ Exported %1$d loaded values	%1$d geladene Werte exportiert
 Exported 1 loaded value	1 geladener Wert exportiert
 Fade the feed out before the hold	Feed vor dem Anhalten ausblenden
 Feature Gate Lab	Feature Gate Lab
-Feature Gate Lab could not find the settings container	Das Feature Gate Lab hat den Einstellungsbereich nicht gefunden
+The Lab could not open. Go back and open it again.	Das Feature Gate Lab hat den Einstellungsbereich nicht gefunden.
 Feature gate override reset	Überschreibung des Schalters zurückgesetzt
 Feature gate override saved	Überschreibung des Schalters gespeichert
 Feed and navigation	Feed und Navigation
@@ -499,7 +499,7 @@ Included diagnostics	Enthaltene Diagnosedaten
 Includes all diagnostic events.	Enthält alle Diagnoseereignisse.
 Includes these events: %1$s	Enthält diese Ereignisse: %1$s
 Inserted cards	Eingefügte Karten
-Invalid SIM preset	Ungültige SIM-Vorlage
+That preset is not recognized. Choose another.	Ungültige SIM-Vorlage.
 Keep a local record of what you have watched and drop those videos from later feed pages.	Lokal festhalten, was du gesehen hast, und diese Videos aus späteren Feed-Seiten entfernen.
 Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this. Then use this switch to turn it off.	Den automatischen Weiterlauf aktiviert lassen und TikToks eigene Aktion Auto-Scrollen im Videomenü zeigen, auch wenn dein Konto sie nie hatte. Pausen und offene Dialoge stoppen das Scrollen weiterhin. TikTok neu starten, damit das gilt. Danach mit diesem Schalter wieder ausschalten.
 Keep captions in clear display	Untertitel in der freien Ansicht behalten
@@ -535,8 +535,8 @@ LIVE videos	LIVE-Videos
 Loaded current values. Loading all known gates...	Aktuelle Werte geladen. Alle bekannten Schalter werden geladen ...
 Loaded values are still being read. Try again in a moment.	Die geladenen Werte werden noch gelesen. Versuche es gleich noch einmal.
 Loaded-value file export failed	Der Export der geladenen Werte ist fehlgeschlagen
-Loaded-value file export failed; cleanup also failed	Der Export der geladenen Werte ist fehlgeschlagen; auch das Aufräumen ist fehlgeschlagen
-Loaded-value file is invalid or too large	Die Datei mit den geladenen Werten ist ungültig oder zu groß
+The export failed and the partial file could not be removed. Delete it from your Downloads folder.	Der Export der geladenen Werte ist fehlgeschlagen; auch das Aufräumen ist fehlgeschlagen.
+That file is not a loaded-values export, or it is larger than the Lab accepts.	Die Datei mit den geladenen Werten ist ungültig oder zu groß.
 Loading gates...	Schalter werden geladen ...
 Loading local catalog and current TikTok cache...	Lokaler Katalog und aktueller TikTok-Cache werden geladen ...
 Locally hidden creators	Lokal ausgeblendete Creator
@@ -628,7 +628,7 @@ Only bottom tabs TikTok has loaded on this device are shown here. This does not 
 Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.	Nur einschalten, wenn du Protokolle für eine Fehlermeldung aufzeichnest. Bleibt es zu lange an, kann TikTok träge wirken und abstürzen.
 Only fields that can be type-checked and applied to a copied configuration object are shown.	Es werden nur Felder gezeigt, deren Typ geprüft und die auf eine kopierte Konfiguration angewendet werden können.
 Only from these countries	Nur aus diesen Ländern
-Only internal storage folders are supported	Nur Ordner im internen Speicher werden unterstützt
+Choose a folder on internal storage. SD cards are not supported.	Nur Ordner im internen Speicher werden unterstützt.
 Only tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.	Hier stehen nur die Tabs, die TikTok auf diesem Gerät geladen hat. Nicht verfügbare Tabs erscheinen dadurch nicht.
 Open a share sheet once, then return here to choose its actions.	Öffne einmal ein Share-Menü und kehre dann zurück, um seine Aktionen auszuwählen.
 Open comments	Kommentare öffnen
@@ -874,9 +874,9 @@ Stop video looping	Videoschleife beenden
 Stop videos at the end instead of replaying them.	Videos am Ende anhalten, statt sie zu wiederholen.
 Stopped after dismissing %1$s suggested accounts	Nach %1$s entfernten Kontovorschlägen gestoppt
 Stopped after dismissing one suggested account	Nach einem entfernten Kontovorschlag gestoppt
-Storage permission is needed to save a profile picture	Zum Speichern eines Profilbilds wird die Speicherberechtigung gebraucht
-Storage permission is needed to save a sound	Zum Speichern eines Sounds wird die Speicherberechtigung gebraucht
-Storage permission is needed to save a story	Zum Speichern einer Story wird die Speicherberechtigung gebraucht
+Allow storage for TikTok in Android settings to save profile pictures.	Zum Speichern eines Profilbilds wird die Speicherberechtigung gebraucht.
+Allow storage for TikTok in Android settings to save sounds.	Zum Speichern eines Sounds wird die Speicherberechtigung gebraucht.
+Allow storage for TikTok in Android settings to save stories.	Zum Speichern einer Story wird die Speicherberechtigung gebraucht.
 Stories	Storys
 Story saved to %1$s	Story gespeichert unter %1$s
 Structured value observed	Strukturierter Wert beobachtet
@@ -913,8 +913,8 @@ That settings backup is incomplete, so it may have been cut short. Nothing was a
 That settings change did not go through. Nothing was altered.	Diese Änderung hat nicht geklappt. Es wurde nichts geändert.
 That sticker is in a format Hushfeed cannot read	Dieser Sticker liegt in einem Format vor, das Hushfeed nicht lesen kann
 The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.	Der Katalog nennt für diesen Schlüssel %1$s, diese Überschreibung ist %2$s. Setze die Überschreibung zurück und leg eine neue an.
-The destination contains an invalid folder name	Im Zielpfad steht ein unzulässiger Ordnername
-The diagnostic report could not be exported.	Der Diagnosebericht ließ sich nicht exportieren.
+That folder name has a character Android does not allow. Use letters, numbers, spaces or dashes.	Im Zielpfad steht ein unzulässiger Ordnername.
+The diagnostic report could not be saved. Try again.	Der Diagnosebericht ließ sich nicht exportieren.
 The diagnostic report could not be saved yet. Try again in a moment.	Der Diagnosebericht ließ sich noch nicht speichern. Versuche es gleich noch einmal.
 The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.	Der Feed dunkelt in den letzten drei Viertelminuten vor der Sperre ab, damit man dort ankommt statt darauf zu landen. Braucht ein Zeitbudget und eine Sperre.
 The feed does not end. This is a fine time to leave it.	Der Feed hört nicht auf. Jetzt ist ein guter Zeitpunkt zu gehen.
@@ -933,7 +933,7 @@ The original photos aren't available, so TikTok's own save runs instead	Die Orig
 The override changes no fields. Edit the field values, or reset the override.	Die Überschreibung ändert keine Felder. Bearbeite die Feldwerte oder setze die Überschreibung zurück.
 The override couldn't be applied: %1$s. Edit the field values, or reset the override.	Die Überschreibung konnte nicht angewendet werden: %1$s. Bearbeite die Feldwerte oder setze die Überschreibung zurück.
 The override doesn't say what list to return. Edit the field values, or reset the override.	Die Überschreibung gibt nicht an, welche Liste zurückgegeben werden soll. Bearbeite die Feldwerte oder setze die Überschreibung zurück.
-The profile picture couldn't be saved.	Das Profilbild konnte nicht gespeichert werden.
+The profile picture couldn't be saved. Try again.	Das Profilbild konnte nicht gespeichert werden.
 The record of an interrupted settings change could not be read, so it was set aside. Check your settings.	Die Aufzeichnung einer unterbrochenen Einstellungsänderung ließ sich nicht lesen und wurde beiseitegelegt. Prüfe deine Einstellungen.
 The report couldn't be saved. Try again.	Der Bericht konnte nicht gespeichert werden. Versuch es noch einmal.
 The selected loaded-values file could not be read. Try again.	Die ausgewählte Datei mit geladenen Werten konnte nicht gelesen werden. Versuche es erneut.
@@ -942,7 +942,7 @@ The settings backup was rejected. Nothing was altered.	Die Einstellungssicherung
 The smallest value is above the largest	Der kleinste Wert liegt über dem größten
 The sound couldn't be saved. Try again.	Der Ton konnte nicht gespeichert werden. Versuch es noch einmal.
 The sticker couldn't be saved. Try again.	Der Sticker konnte nicht gespeichert werden. Versuch es noch einmal.
-The story couldn't be saved.	Die Story konnte nicht gespeichert werden.
+The story couldn't be saved. Try again.	Die Story konnte nicht gespeichert werden.
 The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.	Der Daumen runter bei jedem Kommentar blockiert den Kommentator statt zu disliken. Der Kommentar wird gedimmt, ein Rückgängig-Banner folgt, und ein zweites Tippen entsperrt.
 The video couldn't be saved. Try again, or choose Automatic.	Das Video konnte nicht gespeichert werden. Versuche es noch einmal oder wähle Automatisch.
 There is no diagnostic data to clear.	Es gibt keine Diagnosedaten zum Löschen.
@@ -975,10 +975,10 @@ TikTok default (2x hold, quick share)	TikTok-Standard (2x halten, schnelles Teil
 TikTok didn't accept the feedback. Try again later.	TikTok hat die Rückmeldung nicht angenommen. Versuche es später noch einmal.
 TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.	TikTok hat dieser Einstellung noch kein Objekt zum Ändern übergeben. Öffne den Teil der App, der sie verwendet, und komm dann zurück.
 TikTok read it	TikTok hat ihn gelesen
-TikTok read it, but the structured override could not be applied	TikTok hat ihn gelesen, aber die strukturierte Überschreibung konnte nicht angewendet werden
+TikTok read it, but the override could not be applied. Reset it and save it again.	TikTok hat ihn gelesen, aber die strukturierte Überschreibung konnte nicht angewendet werden.
 TikTok refused the follow: %1$s	TikTok hat das Folgen abgelehnt: %1$s
-TikTok rejected the request to block %1$s	TikTok hat die Anfrage zum Blockieren von %1$s abgelehnt
-TikTok rejected the request to unblock %1$s	TikTok hat die Anfrage zum Entblocken von %1$s abgelehnt
+TikTok did not block %1$s. Try again in a moment.	TikTok hat die Anfrage zum Blockieren von %1$s abgelehnt.
+TikTok did not unblock %1$s. Try again in a moment.	TikTok hat die Anfrage zum Entblocken von %1$s abgelehnt.
 TikTok's own value	TikToks eigener Wert
 TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.	TikToks Server kann ein Konto in ein Experiment stecken, das den Favoriten-Tab im Profil leert. Behält den Tab und seine gespeicherten Videos.
 time	Mal

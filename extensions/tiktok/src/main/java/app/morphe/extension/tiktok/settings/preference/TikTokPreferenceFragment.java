@@ -365,7 +365,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         app.morphe.extension.shared.settings.preference.LogBufferManager.copiedMessage =
                 L10n.t(context, "Diagnostic report copied to the clipboard.");
         app.morphe.extension.shared.settings.preference.LogBufferManager.exportFailedMessage =
-                L10n.t(context, "The diagnostic report could not be exported.");
+                L10n.t(context, "The diagnostic report could not be saved. Try again.");
         app.morphe.extension.shared.settings.preference.LogBufferManager.noContextMessage =
                 L10n.t(context, "The diagnostic report could not be saved yet. Try again in a moment.");
         app.morphe.extension.shared.settings.preference.LogBufferManager.alreadySavingMessage =
@@ -1189,7 +1189,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
 
         String relativePath = getRelativePrimaryStoragePath(data.getData());
         if (relativePath == null) {
-            app.morphe.extension.shared.Utils.showToastLong(L10n.t("Only internal storage folders are supported"));
+            app.morphe.extension.shared.Utils.showToastLong(L10n.t("Choose a folder on internal storage. SD cards are not supported."));
             return;
         }
 

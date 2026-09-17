@@ -232,11 +232,11 @@ public class SimPresetPreference extends Preference {
 
     private boolean savePreset(SimPreset preset) {
         if (!preset.isValid()) {
-            Logger.printException(() -> "Invalid SIM preset refused: "
+            Logger.printException(() -> "That preset is not recognized. Choose another. refused: "
                     + preset.country + " / " + preset.operatorName + " / "
                     + preset.mccMnc + " / " + preset.iso);
             app.morphe.extension.shared.Utils.showToastLong(
-                app.morphe.extension.tiktok.settings.L10n.t("Invalid SIM preset"));
+                app.morphe.extension.tiktok.settings.L10n.t("That preset is not recognized. Choose another."));
             return false;
         }
 

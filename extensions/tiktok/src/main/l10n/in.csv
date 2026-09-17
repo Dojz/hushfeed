@@ -234,8 +234,8 @@ Copy the sound link,Salin tautan suara
 Copy the video link,Salin tautan video
 Could not change Lab settings.,Pengaturan Lab tidak bisa diubah.
 Could not clear suggested accounts,Tidak dapat menghapus akun yang disarankan
-Could not confirm block for %1$s,Pemblokiran %1$s tidak dapat dikonfirmasi
-Could not confirm unblock for %1$s,Pembukaan blokir %1$s tidak dapat dikonfirmasi
+"Blocked %1$s, but TikTok has not confirmed it yet.","Pemblokiran %1$s tidak dapat dikonfirmasi."
+"Unblocked %1$s, but TikTok has not confirmed it yet.","Pembukaan blokir %1$s tidak dapat dikonfirmasi."
 Could not copy report. Use Save JSON.,Laporan tidak bisa disalin. Pakai Simpan JSON.
 Could not open settings search,Pencarian setelan tidak bisa dibuka
 Could not open settings section,Bagian pengaturan tidak bisa dibuka
@@ -334,7 +334,7 @@ Exported %1$d loaded values,%1$d nilai yang dimuat diekspor
 Exported 1 loaded value,1 nilai yang dimuat diekspor
 Fade the feed out before the hold,Redupkan feed sebelum feed ditahan
 Feature Gate Lab,Feature Gate Lab
-Feature Gate Lab could not find the settings container,Feature Gate Lab tidak menemukan wadah pengaturan
+The Lab could not open. Go back and open it again.,Feature Gate Lab tidak menemukan wadah pengaturan.
 Feature gate override reset,Penggantian gate diatur ulang
 Feature gate override saved,Penggantian gate disimpan
 Feed and navigation,Feed dan navigasi
@@ -497,7 +497,7 @@ Included diagnostics,Diagnostik yang disertakan
 Includes all diagnostic events.,Termasuk semua peristiwa diagnostik.
 Includes these events: %1$s,Termasuk peristiwa berikut: %1$s
 Inserted cards,Kartu yang disisipkan
-Invalid SIM preset,Pratata SIM tidak sah
+That preset is not recognized. Choose another.,Pratata SIM tidak sah.
 Keep a local record of what you have watched and drop those videos from later feed pages.,Simpan catatan tontonanmu di perangkat dan buang video itu dari halaman feed berikutnya.
 "Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this. Then use this switch to turn it off.",Biarkan lanjut otomatis tetap aktif dan tampilkan aksi Auto scroll milik TikTok di panel video meski akun Anda tidak pernah punya. Jeda dan dialog terbuka tetap menghentikan guliran. Mulai ulang TikTok agar berlaku. Lalu pakai sakelar ini untuk mematikannya.
 Keep captions in clear display,Pertahankan keterangan saat tampilan bersih
@@ -533,8 +533,8 @@ LIVE videos,Video LIVE
 Loaded current values. Loading all known gates...,Nilai saat ini dimuat. Memuat semua gate yang diketahui...
 Loaded values are still being read. Try again in a moment.,Nilai yang dimuat masih dibaca. Coba lagi sebentar lagi.
 Loaded-value file export failed,Ekspor berkas nilai yang dimuat gagal
-Loaded-value file export failed; cleanup also failed,Ekspor berkas nilai yang dimuat gagal; pembersihannya juga gagal
-Loaded-value file is invalid or too large,Berkas nilai yang dimuat tidak valid atau terlalu besar
+"The export failed and the partial file could not be removed. Delete it from your Downloads folder.","Ekspor berkas nilai yang dimuat gagal; pembersihannya juga gagal."
+"That file is not a loaded-values export, or it is larger than the Lab accepts.","Berkas nilai yang dimuat tidak valid atau terlalu besar."
 Loading gates...,Memuat gate...
 Loading local catalog and current TikTok cache...,Memuat katalog lokal dan cache TikTok saat ini...
 Locally hidden creators,Kreator yang disembunyikan secara lokal
@@ -626,7 +626,7 @@ Only bottom tabs TikTok has loaded on this device are shown here. This does not 
 Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.,Aktifkan hanya saat merekam log untuk melaporkan masalah. Membiarkannya menyala terlalu lama bisa membuat TikTok terasa berat dan berpotensi mogok.
 Only fields that can be type-checked and applied to a copied configuration object are shown.,Hanya bidang yang tipenya bisa diperiksa dan diterapkan ke salinan objek konfigurasi yang ditampilkan.
 Only from these countries,Hanya dari negara ini
-Only internal storage folders are supported,Hanya folder penyimpanan internal yang didukung
+Choose a folder on internal storage. SD cards are not supported.,Hanya folder penyimpanan internal yang didukung.
 Only tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.,Hanya tab yang sudah dimuat TikTok di perangkat ini yang muncul di sini. Ini tidak memaksa tab yang tidak tersedia untuk muncul.
 "Open a share sheet once, then return here to choose its actions.","Buka lembar berbagi sekali, lalu kembali ke sini untuk memilih tindakannya."
 Open comments,Buka komentar
@@ -872,9 +872,9 @@ Stop video looping,Hentikan pengulangan video
 Stop videos at the end instead of replaying them.,"Hentikan video di akhir, bukan memutarnya ulang."
 Stopped after dismissing %1$s suggested accounts,Berhenti setelah menutup %1$s akun yang disarankan
 Stopped after dismissing one suggested account,Berhenti setelah menutup satu akun yang disarankan
-Storage permission is needed to save a profile picture,Izin penyimpanan dibutuhkan untuk menyimpan foto profil
-Storage permission is needed to save a sound,Izin penyimpanan dibutuhkan untuk menyimpan suara
-Storage permission is needed to save a story,Izin penyimpanan dibutuhkan untuk menyimpan Story
+Allow storage for TikTok in Android settings to save profile pictures.,Izin penyimpanan dibutuhkan untuk menyimpan foto profil.
+Allow storage for TikTok in Android settings to save sounds.,Izin penyimpanan dibutuhkan untuk menyimpan suara.
+Allow storage for TikTok in Android settings to save stories.,Izin penyimpanan dibutuhkan untuk menyimpan Story.
 Stories,Cerita
 Story saved to %1$s,Story disimpan ke %1$s
 Structured value observed,Nilai terstruktur teramati
@@ -911,8 +911,8 @@ That settings backup is damaged or only partly downloaded. Nothing was altered.,
 That settings change did not go through. Nothing was altered.,Perubahan itu tidak berhasil. Tidak ada yang diubah.
 That sticker is in a format Hushfeed cannot read,Stiker itu formatnya tidak bisa dibaca Hushfeed
 The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.,Katalog menyebut kunci ini %1$s dan penimpaan ini %2$s. Setel ulang penimpaan lalu buat yang baru.
-The destination contains an invalid folder name,Ada nama folder yang tidak sah di tujuannya
-The diagnostic report could not be exported.,Laporan diagnostik tidak bisa diekspor.
+"That folder name has a character Android does not allow. Use letters, numbers, spaces or dashes.","Ada nama folder yang tidak sah di tujuannya."
+The diagnostic report could not be saved. Try again.,Laporan diagnostik tidak bisa diekspor.
 The diagnostic report could not be saved yet. Try again in a moment.,Laporan diagnostik belum bisa disimpan. Coba lagi sebentar.
 "The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.","Feed meredup selama tiga perempat menit terakhir sebelum jeda, agar kamu tiba di sana, bukan mendarat. Butuh anggaran waktu dan jeda."
 The feed does not end. This is a fine time to leave it.,Feed tidak ada habisnya. Ini saat yang baik untuk berhenti.
@@ -931,7 +931,7 @@ The minimum or maximum views of a video to show.,Jumlah tayangan minimum atau ma
 "The override changes no fields. Edit the field values, or reset the override.","Penimpaan tidak mengubah field apa pun. Ubah nilai field, atau setel ulang penimpaan."
 "The override couldn't be applied: %1$s. Edit the field values, or reset the override.","Penimpaan tidak bisa diterapkan: %1$s. Ubah nilai field, atau setel ulang penimpaan."
 "The override doesn't say what list to return. Edit the field values, or reset the override.","Penimpaan tidak menyebutkan daftar mana yang harus dikembalikan. Ubah nilai field, atau setel ulang penimpaan."
-The profile picture couldn't be saved.,Foto profilnya tidak bisa disimpan.
+The profile picture couldn't be saved. Try again.,Foto profilnya tidak bisa disimpan.
 "The record of an interrupted settings change could not be read, so it was set aside. Check your settings.","Catatan perubahan pengaturan yang terputus tidak bisa dibaca, jadi disisihkan. Periksa pengaturan Anda."
 The report couldn't be saved. Try again.,Laporan tidak bisa disimpan. Coba lagi.
 The selected loaded-values file could not be read. Try again.,Berkas nilai yang dimuat dan dipilih tidak dapat dibaca. Coba lagi.
@@ -940,7 +940,7 @@ The settings backup was rejected. Nothing was altered.,Cadangan pengaturan ditol
 The smallest value is above the largest,Nilai terkecil lebih besar daripada yang terbesar
 The sound couldn't be saved. Try again.,Suara tidak bisa disimpan. Coba lagi.
 The sticker couldn't be saved. Try again.,Sticker tidak bisa disimpan. Coba lagi.
-The story couldn't be saved.,Story-nya tidak bisa disimpan.
+The story couldn't be saved. Try again.,Story-nya tidak bisa disimpan.
 "The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.","Tombol tidak suka di setiap komentar memblokir komentator alih-alih tidak menyukai. Komentar meredup, banner batalkan mengikuti, dan ketukan kedua membuka blokir."
 "The video couldn't be saved. Try again, or choose Automatic.","Videonya tidak bisa disimpan. Coba lagi, atau pilih Otomatis."
 There is no diagnostic data to clear.,Tidak ada data diagnostik yang perlu dihapus.
@@ -973,10 +973,10 @@ TikTok default,Bawaan TikTok
 TikTok didn't accept the feedback. Try again later.,TikTok tidak menerima masukannya. Coba lagi nanti.
 "TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.","TikTok belum memberi setelan ini objek untuk diubah. Buka bagian aplikasi yang memakainya, lalu kembali ke sini."
 TikTok read it,TikTok sudah membacanya
-"TikTok read it, but the structured override could not be applied","TikTok sudah membacanya, tapi penggantian terstruktur tidak bisa diterapkan"
+"TikTok read it, but the override could not be applied. Reset it and save it again.","TikTok sudah membacanya, tapi penggantian terstruktur tidak bisa diterapkan."
 TikTok refused the follow: %1$s,TikTok menolak permintaan mengikuti: %1$s
-TikTok rejected the request to block %1$s,TikTok menolak permintaan untuk memblokir %1$s
-TikTok rejected the request to unblock %1$s,TikTok menolak permintaan untuk membuka blokir %1$s
+TikTok did not block %1$s. Try again in a moment.,TikTok menolak permintaan untuk memblokir %1$s.
+TikTok did not unblock %1$s. Try again in a moment.,TikTok menolak permintaan untuk membuka blokir %1$s.
 TikTok's own value,Nilai milik TikTok
 TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.,Server TikTok bisa memasukkan akun ke eksperimen yang mengosongkan tab Favorit di profil Anda. Pertahankan tab itu beserta video yang tersimpan.
 time,kali
