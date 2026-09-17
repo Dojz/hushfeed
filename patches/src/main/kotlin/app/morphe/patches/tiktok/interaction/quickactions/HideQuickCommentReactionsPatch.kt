@@ -19,7 +19,7 @@ private const val FEATURE_CONTROLS_DESCRIPTOR =
 @Suppress("unused")
 val hideQuickCommentReactionsPatch = bytecodePatch(
     name = "Hide quick comment reactions",
-    description = "Hides the emoji row above the comment box and the quick comment strip on videos.",
+    description = "Hides the emoji row above the comment box and the quick comment strip on videos. Switch: Hushfeed settings > Comments.",
     default = true,
 ) {
     dependsOn(settingsPatch, sharedExtensionPatch)
