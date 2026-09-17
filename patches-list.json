@@ -6,7 +6,7 @@
   "patches": [
     {
       "name": "AMOLED dark theme",
-      "description": "Replaces TikTok's dark background palette with black or a chosen color. The light theme keeps its colors. Choose this patch to enable it. It is the one patch that rewrites resources, so patching with it on needs the memory limit raised to 768 MB.",
+      "description": "Replaces TikTok's dark background palette with black or a chosen color. The light theme keeps its colors. It is the one patch that rewrites resources, so patching with it on needs the memory limit raised to 768 MB.",
       "use": false,
       "dependencies": [],
       "compatiblePackages": {
@@ -364,32 +364,6 @@
       "options": []
     },
     {
-      "name": "Core Asset De-bloat",
-      "description": "Empties TikTok's bundled C2PA native libraries and Microblink payment-card OCR assets. Content credentials and card scanning may stop. Choose this patch to enable it.",
-      "use": false,
-      "dependencies": [],
-      "compatiblePackages": {
-        "com.zhiliaoapp.musically": [
-          "46.2.3"
-        ]
-      },
-      "compatibility": [
-        {
-          "name": "TikTok",
-          "packageName": "com.zhiliaoapp.musically",
-          "description": null,
-          "appIconColor": 16657493,
-          "targets": [
-            {
-              "version": "46.2.3",
-              "experimental": false
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
       "name": "Custom offline videos limit",
       "description": "Adds a custom entry to TikTok's offline videos menu with a configurable limit from 1 to 1000 videos.",
       "use": true,
@@ -624,6 +598,32 @@
         "BytecodePatch",
         "Settings"
       ],
+      "compatiblePackages": {
+        "com.zhiliaoapp.musically": [
+          "46.2.3"
+        ]
+      },
+      "compatibility": [
+        {
+          "name": "TikTok",
+          "packageName": "com.zhiliaoapp.musically",
+          "description": null,
+          "appIconColor": 16657493,
+          "targets": [
+            {
+              "version": "46.2.3",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Drop the animated image cache",
+      "description": "Makes TikTok's reviewed Fresco animated-frame cache lookups return no cached frame. This can increase decoding work or change animation playback.",
+      "use": false,
+      "dependencies": [],
       "compatiblePackages": {
         "com.zhiliaoapp.musically": [
           "46.2.3"
@@ -1451,32 +1451,6 @@
       "options": []
     },
     {
-      "name": "Instant Launch & Splash Blocker",
-      "description": "Stops TikTok's splash-ad preload tasks and returns false from its reviewed splash and TopView gates. Other startup behavior is left in place. Choose this patch to enable it.",
-      "use": false,
-      "dependencies": [],
-      "compatiblePackages": {
-        "com.zhiliaoapp.musically": [
-          "46.2.3"
-        ]
-      },
-      "compatibility": [
-        {
-          "name": "TikTok",
-          "packageName": "com.zhiliaoapp.musically",
-          "description": null,
-          "appIconColor": 16657493,
-          "targets": [
-            {
-              "version": "46.2.3",
-              "experimental": false
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
       "name": "Keep the Favorites tab",
       "description": "Keeps the Favorites tab on your profile when TikTok's server puts the account into an experiment that empties it. Two people saw that after patching: the tab was there and the saved videos were not.",
       "use": true,
@@ -1535,48 +1509,10 @@
       "options": []
     },
     {
-      "name": "Language Pack Purger",
-      "description": "Empties unselected TikTok language bundles while always keeping English. Selected language codes are checked before any file changes. Choose this patch to enable it.",
+      "name": "Limit background traffic",
+      "description": "Turns off TikTok's buffer-preload gate and skips its push initialization task. Videos may start buffering later, and TikTok push notifications may stop.",
       "use": false,
       "dependencies": [],
-      "compatiblePackages": {
-        "com.zhiliaoapp.musically": [
-          "46.2.3"
-        ]
-      },
-      "compatibility": [
-        {
-          "name": "TikTok",
-          "packageName": "com.zhiliaoapp.musically",
-          "description": null,
-          "appIconColor": 16657493,
-          "targets": [
-            {
-              "version": "46.2.3",
-              "experimental": false
-            }
-          ]
-        }
-      ],
-      "options": [
-        {
-          "key": "locales",
-          "title": "Languages to keep",
-          "description": "Comma-separated language codes such as en, es, pt, fr or de. English is always kept.",
-          "required": false,
-          "type": "kotlin.String",
-          "default": "en",
-          "values": null
-        }
-      ]
-    },
-    {
-      "name": "Live Stream Suite Optimizer",
-      "description": "Empties TikTok's link-mic and LIVE match or minigame assets, then skips its gift-effect widget setup. Co-hosting, games and animated gifts may stop. Choose this patch to enable it.",
-      "use": false,
-      "dependencies": [
-        "BytecodePatch"
-      ],
       "compatiblePackages": {
         "com.zhiliaoapp.musically": [
           "46.2.3"
@@ -1607,32 +1543,6 @@
         "Double-tap controls",
         "Settings"
       ],
-      "compatiblePackages": {
-        "com.zhiliaoapp.musically": [
-          "46.2.3"
-        ]
-      },
-      "compatibility": [
-        {
-          "name": "TikTok",
-          "packageName": "com.zhiliaoapp.musically",
-          "description": null,
-          "appIconColor": 16657493,
-          "targets": [
-            {
-              "version": "46.2.3",
-              "experimental": false
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Network & Background Traffic Governor",
-      "description": "Turns off TikTok's buffer-preload gate and skips its push initialization task. Videos may start buffering later, and TikTok push notifications may stop. Choose this patch to enable it.",
-      "use": false,
-      "dependencies": [],
       "compatiblePackages": {
         "com.zhiliaoapp.musically": [
           "46.2.3"
@@ -1859,12 +1769,11 @@
       "options": []
     },
     {
-      "name": "Resume videos after scrolling",
-      "description": "Continues supported videos from where playback stopped when returning after a scroll.",
-      "use": true,
+      "name": "Remove LIVE extras",
+      "description": "Empties TikTok's link-mic and LIVE match or minigame assets, then skips its gift-effect widget setup. Co-hosting, games and animated gifts may stop.",
+      "use": false,
       "dependencies": [
-        "BytecodePatch",
-        "Settings"
+        "BytecodePatch"
       ],
       "compatiblePackages": {
         "com.zhiliaoapp.musically": [
@@ -1888,10 +1797,101 @@
       "options": []
     },
     {
-      "name": "Runtime Memory Governor",
-      "description": "Makes TikTok's reviewed Fresco animated-frame cache lookups return no cached frame. This can increase decoding work or change animation playback. Choose this patch to enable it.",
+      "name": "Remove content credential and card scanner assets",
+      "description": "Empties TikTok's bundled C2PA native libraries and Microblink payment-card OCR assets. Content credentials and card scanning may stop.",
       "use": false,
       "dependencies": [],
+      "compatiblePackages": {
+        "com.zhiliaoapp.musically": [
+          "46.2.3"
+        ]
+      },
+      "compatibility": [
+        {
+          "name": "TikTok",
+          "packageName": "com.zhiliaoapp.musically",
+          "description": null,
+          "appIconColor": 16657493,
+          "targets": [
+            {
+              "version": "46.2.3",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Remove creation tools",
+      "description": "Empties TikTok's reviewed editor, camera-effect and face-model assets. Recording, editing, effects and creator tools may stop working.",
+      "use": false,
+      "dependencies": [],
+      "compatiblePackages": {
+        "com.zhiliaoapp.musically": [
+          "46.2.3"
+        ]
+      },
+      "compatibility": [
+        {
+          "name": "TikTok",
+          "packageName": "com.zhiliaoapp.musically",
+          "description": null,
+          "appIconColor": 16657493,
+          "targets": [
+            {
+              "version": "46.2.3",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Remove unused language packs",
+      "description": "Empties unselected TikTok language bundles while always keeping English. Selected language codes are checked before any file changes.",
+      "use": false,
+      "dependencies": [],
+      "compatiblePackages": {
+        "com.zhiliaoapp.musically": [
+          "46.2.3"
+        ]
+      },
+      "compatibility": [
+        {
+          "name": "TikTok",
+          "packageName": "com.zhiliaoapp.musically",
+          "description": null,
+          "appIconColor": 16657493,
+          "targets": [
+            {
+              "version": "46.2.3",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "key": "locales",
+          "title": "Languages to keep",
+          "description": "Comma-separated language codes such as en, es, pt, fr or de. English is always kept.",
+          "required": false,
+          "type": "kotlin.String",
+          "default": "en",
+          "values": null
+        }
+      ]
+    },
+    {
+      "name": "Resume videos after scrolling",
+      "description": "Continues supported videos from where playback stopped when returning after a scroll.",
+      "use": true,
+      "dependencies": [
+        "BytecodePatch",
+        "Settings"
+      ],
       "compatiblePackages": {
         "com.zhiliaoapp.musically": [
           "46.2.3"
@@ -2173,13 +2173,10 @@
       "options": []
     },
     {
-      "name": "Stop video looping",
-      "description": "Stops videos at the end instead of replaying them.",
-      "use": true,
-      "dependencies": [
-        "BytecodePatch",
-        "Settings"
-      ],
+      "name": "Skip the splash ad",
+      "description": "Stops TikTok's splash-ad preload tasks and returns false from its reviewed splash and TopView gates. Other startup behavior is left in place.",
+      "use": false,
+      "dependencies": [],
       "compatiblePackages": {
         "com.zhiliaoapp.musically": [
           "46.2.3"
@@ -2202,10 +2199,39 @@
       "options": []
     },
     {
-      "name": "Studio & Creation De-bloat",
-      "description": "Empties TikTok's reviewed editor, camera-effect and face-model assets. Recording, editing, effects and creator tools may stop working. Choose this patch to enable it.",
+      "name": "Skip update checks",
+      "description": "Skips TikTok's background and boot-finished device-ID update-check tasks. This may suppress some in-app update checks. Play Store updates are unaffected.",
       "use": false,
       "dependencies": [],
+      "compatiblePackages": {
+        "com.zhiliaoapp.musically": [
+          "46.2.3"
+        ]
+      },
+      "compatibility": [
+        {
+          "name": "TikTok",
+          "packageName": "com.zhiliaoapp.musically",
+          "description": null,
+          "appIconColor": 16657493,
+          "targets": [
+            {
+              "version": "46.2.3",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Stop video looping",
+      "description": "Stops videos at the end instead of replaying them.",
+      "use": true,
+      "dependencies": [
+        "BytecodePatch",
+        "Settings"
+      ],
       "compatiblePackages": {
         "com.zhiliaoapp.musically": [
           "46.2.3"
@@ -2266,32 +2292,6 @@
         "BytecodePatch",
         "Settings"
       ],
-      "compatiblePackages": {
-        "com.zhiliaoapp.musically": [
-          "46.2.3"
-        ]
-      },
-      "compatibility": [
-        {
-          "name": "TikTok",
-          "packageName": "com.zhiliaoapp.musically",
-          "description": null,
-          "appIconColor": 16657493,
-          "targets": [
-            {
-              "version": "46.2.3",
-              "experimental": false
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Update Prompt Suppressor",
-      "description": "Skips TikTok's background and boot-finished device-ID update-check tasks. This may suppress some in-app update checks. Play Store updates are unaffected. Choose this patch to enable it.",
-      "use": false,
-      "dependencies": [],
       "compatiblePackages": {
         "com.zhiliaoapp.musically": [
           "46.2.3"

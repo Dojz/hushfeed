@@ -12,8 +12,8 @@ import java.util.Locale
 
 @Suppress("unused")
 val coreAssetDebloatPatch = rawResourcePatch(
-    name = "Core Asset De-bloat",
-    description = "Empties TikTok's bundled C2PA native libraries and Microblink payment-card OCR assets. Content credentials and card scanning may stop. Choose this patch to enable it.",
+    name = "Remove content credential and card scanner assets",
+    description = "Empties TikTok's bundled C2PA native libraries and Microblink payment-card OCR assets. Content credentials and card scanning may stop.",
     default = false,
 ) {
     compatibleWith(*AppCompatibilities.tiktok4623())
@@ -39,8 +39,8 @@ val coreAssetDebloatPatch = rawResourcePatch(
 
 @Suppress("unused")
 val languagePackPurgerPatch = rawResourcePatch(
-    name = "Language Pack Purger",
-    description = "Empties unselected TikTok language bundles while always keeping English. Selected language codes are checked before any file changes. Choose this patch to enable it.",
+    name = "Remove unused language packs",
+    description = "Empties unselected TikTok language bundles while always keeping English. Selected language codes are checked before any file changes.",
     default = false,
 ) {
     compatibleWith(*AppCompatibilities.tiktok4623())
@@ -59,8 +59,8 @@ val languagePackPurgerPatch = rawResourcePatch(
 
 @Suppress("unused")
 val studioCreationDebloatPatch = rawResourcePatch(
-    name = "Studio & Creation De-bloat",
-    description = "Empties TikTok's reviewed editor, camera-effect and face-model assets. Recording, editing, effects and creator tools may stop working. Choose this patch to enable it.",
+    name = "Remove creation tools",
+    description = "Empties TikTok's reviewed editor, camera-effect and face-model assets. Recording, editing, effects and creator tools may stop working.",
     default = false,
 ) {
     compatibleWith(*AppCompatibilities.tiktok4623())
@@ -90,8 +90,8 @@ val studioCreationDebloatPatch = rawResourcePatch(
 
 @Suppress("unused")
 val liveStreamSuiteOptimizerPatch = rawResourcePatch(
-    name = "Live Stream Suite Optimizer",
-    description = "Empties TikTok's link-mic and LIVE match or minigame assets, then skips its gift-effect widget setup. Co-hosting, games and animated gifts may stop. Choose this patch to enable it.",
+    name = "Remove LIVE extras",
+    description = "Empties TikTok's link-mic and LIVE match or minigame assets, then skips its gift-effect widget setup. Co-hosting, games and animated gifts may stop.",
     default = false,
 ) {
     compatibleWith(*AppCompatibilities.tiktok4623())
