@@ -77,6 +77,8 @@ public final class VideoOverlayHider {
      * whole window, and the hook status names the miss.
      */
     private static final String CELL_ROOT_ID = "long_press_layout";
+    /** Whether the last pass left the rail buttons scaled, so the next one can put them back. */
+    private static boolean scaledLastPass;
     /** The six buttons inside the action column, in the order they are stacked. */
     /** The row under each rail button holding its count, without the button itself. */
     private static final String[] RAIL_COUNT_ROW_IDS = {"fwu", "ecq", "ht9", "v5x"};
@@ -204,8 +206,17 @@ public final class VideoOverlayHider {
             for (boolean one : rail) {
                 anyRail |= one;
             }
+            // The rail scale needs the same walk the hiding uses, so it joins the gate. Without
+            // it a build with every hide switch off never traversed and the chosen size did
+            // nothing at all (seen on the S22, 2026-09-16). scaledLastPass keeps the walk alive
+            // for the one pass that writes the buttons back to 1.
+            float touchScale = 1f;
+            try {
+                touchScale = Float.parseFloat(Settings.TOUCH_TARGET_SCALE.get());
+            } catch (NumberFormatException ignored) {
+            }
             if (caption || music || actionBar || surveys || tabStrip || anyRail
-                    || !HIDDEN_HERE.isEmpty()) {
+                    || !HIDDEN_HERE.isEmpty() || touchScale != 1f || scaledLastPass) {
                 ViewGroup root = activity.findViewById(android.R.id.content);
                 int[] ids = TRAVERSAL.ids;
                 boolean[] hidden = TRAVERSAL.hidden;
@@ -251,20 +262,24 @@ public final class VideoOverlayHider {
                             setHidden(view, hidden[i]);
                         }
                     }
-                    float touchScale = 1f;
-                    try { touchScale = Float.parseFloat(Settings.TOUCH_TARGET_SCALE.get()); }
-                    catch (NumberFormatException ignored) {}
-                    if (touchScale > 1f) {
-                        for (int i = 5; i < 5 + RAIL_BUTTON_IDS.length; i++) {
-                            for (View view : found.get(i)) {
-                                if (view.getVisibility() != View.VISIBLE) continue;
-                                view.setScaleX(touchScale);
-                                view.setScaleY(touchScale);
+                    // Written every pass, 1 included, so returning the row to Normal puts the
+                    // buttons back instead of leaving them enlarged. The pivot is the right
+                    // edge so a grown button reaches into the video rather than off the screen.
+                    for (int i = 5; i < 5 + RAIL_BUTTON_IDS.length; i++) {
+                        for (View view : found.get(i)) {
+                            // The scale is written whatever the measured size, because a button
+                            // skipped for having no width yet was never revisited and stayed at
+                            // 1 while its neighbours grew (S22, 2026-09-16: only the avatar and
+                            // the like heart scaled). The pivot needs a real width, so it waits.
+                            if (view.getWidth() > 0) {
                                 view.setPivotX(view.getWidth());
                                 view.setPivotY(view.getHeight() / 2f);
                             }
+                            view.setScaleX(touchScale);
+                            view.setScaleY(touchScale);
                         }
                     }
+                    scaledLastPass = touchScale != 1f;
                 } finally {
                     for (List<View> views : found) {
                         views.clear();

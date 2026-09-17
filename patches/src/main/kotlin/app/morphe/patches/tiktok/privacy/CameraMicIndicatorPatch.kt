@@ -5,7 +5,6 @@
 package app.morphe.patches.tiktok.privacy
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
-import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.tiktok.misc.extension.sharedExtensionPatch
@@ -53,10 +52,15 @@ val cameraMicIndicatorPatch = bytecodePatch(
                 }
             }
         }
-        sites.forEach { site ->
+        // Inserted before the call, never after it. Camera.open returns a Camera and its
+        // move-result-object has to stay adjacent to the invoke that produced it; putting
+        // anything between the two makes the verifier reject the whole class
+        // (copyRes1 vN <- result0 type=Conflict), which killed the app at attachBaseContext.
+        // Walking in reverse keeps the earlier indices of a method valid as each one shifts.
+        sites.asReversed().forEach { site ->
             val mutable = mutableClassDefBy(site.owner).findMutableMethodOf(site.method)
             val call = if (site.type == "camera") "onCameraAccess()V" else "onMicAccess()V"
-            mutable.addInstruction(site.index + 1, "invoke-static {}, $EXTENSION->$call")
+            mutable.addInstruction(site.index, "invoke-static {}, $EXTENSION->$call")
         }
         println("[Camera/mic indicator] Instrumented ${sites.size} media access sites (${sites.count { it.type == "camera" }} camera, ${sites.count { it.type == "mic" }} mic).")
     }

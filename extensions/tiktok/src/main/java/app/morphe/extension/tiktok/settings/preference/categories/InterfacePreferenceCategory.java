@@ -95,9 +95,6 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             addPreference(new TogglePreference(context, "Confirm before following", "Tap the feed Follow button twice within four seconds.", Settings.CONFIRM_FOLLOW));
             addPreference(new TogglePreference(context, "Confirm before liking", "Tap the like heart twice within four seconds. Removing a like stays immediate.", Settings.CONFIRM_LIKE));
         }
-        addPreference(new ChoicePreference(context, "Left swipe", Settings.SWIPE_LEFT_ACTION,
-                new String[]{"TikTok default (profile)", "Do nothing", "Open comments"},
-                new String[]{"default", "nothing", "comments"}));
         boolean hasFeedControls = SettingsStatus.promotionalBannersEnabled
                 || SettingsStatus.captchaPopupSuppressionEnabled
                 || SettingsStatus.alwaysShowPublishDateEnabled

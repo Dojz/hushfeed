@@ -366,7 +366,6 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting HIDE_RAIL_COUNTS = new BooleanSetting("hide_rail_counts", FALSE);
     public static final BooleanSetting HIDE_STATUS_BAR = new BooleanSetting("hide_status_bar", FALSE);
     public static final StringSetting TOUCH_TARGET_SCALE = new StringSetting("touch_target_scale", "1");
-    public static final StringSetting SWIPE_LEFT_ACTION = new StringSetting("swipe_left_action", "default");
     public static final BooleanSetting HIDE_SENSITIVE_WARNINGS = new BooleanSetting("hide_sensitive_warnings", FALSE);
     public static final BooleanSetting SHOW_AUTHOR_REGION = new BooleanSetting("show_author_region", FALSE);
     public static final BooleanSetting SHOW_AUTHOR_HANDLE = new BooleanSetting("show_author_handle", FALSE);

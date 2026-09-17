@@ -22,7 +22,7 @@
 
 Hushfeed is a [Morphe](https://github.com/MorpheApp/morphe-manager) patch bundle for people who want TikTok to behave differently. It can cut feed clutter, guard risky taps, improve downloads and expose controls TikTok leaves buried or unavailable. Every selected patch is configured from one native settings screen inside the app.
 
-**[Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc%2Fhushfeed)** | [Download the latest bundle](https://github.com/SysAdminDoc/hushfeed/releases/latest) | [Tour the settings](#settings-tour) | [Browse all 91 patches](#patches)
+**[Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc%2Fhushfeed)** | [Download the latest bundle](https://github.com/SysAdminDoc/hushfeed/releases/latest) | [Tour the settings](#settings-tour) | [Browse all 90 patches](#patches)
 
 > [!IMPORTANT]
 > Hushfeed is very active in development, features and bugs are being actively pursued and improved! Hushfeed targets the global TikTok package, `com.zhiliaoapp.musically`, version [46.2.3](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-46-2-3-release/tiktok-46-2-3-android-apk-download/). Use that exact APK when patching. See [Supported target](#supported-target) for the verified build details.
@@ -145,7 +145,6 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 | `Stop on-device AI profiling` | Kills the Pitaya on-device ML inference engine at startup so it cannot build a behavioral profile. The AI asset strip in the core de-bloat patch removes the native libraries; this stops the initialization code that would download replacements. |
 | `Stop video looping` | Stops videos at the end instead of replaying them. |
 | `Subtitle tools` | Saves subtitle files beside downloaded videos and adds caption size, background, and clear-display options. |
-| `Swipe direction override` | Controls what a left swipe on the feed does. By default it opens the creator's profile. Change it to do nothing or open comments instead. |
 | `Translate comments` | Adds comment translation controls using TikTok's translation system, with selectable language exclusions. |
 | `Use non-personalized search` | Uses TikTok's non-personalized search mode instead of its saved account choice. |
 

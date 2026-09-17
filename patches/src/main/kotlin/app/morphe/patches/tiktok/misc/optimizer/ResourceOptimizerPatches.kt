@@ -224,11 +224,6 @@ private val liveCastFiles4623 = listOf(
     file("lib/armeabi-v7a/libdex_df_live_cast.so", "3189dad02b2c99caac3511da1ba9e761ab452299bf3fc495867c76cfbde679f2"),
 )
 
-private val pitayaAssets = listOf(
-    file("assets/dynamic_feature_install/df_pitaya.json", "0e116c2809c78ac05a90fac4ef910b231b2de47d91195c5e825b8d2222c0378b"),
-    file("assets/pitaya_ab_info.json", "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"),
-)
-
 private val coreAssetProfiles = listOf(
     ResourceProfile(
         "TikTok 46.2.3",
@@ -237,7 +232,7 @@ private val coreAssetProfiles = listOf(
             file("lib/arm64-v8a/libtt_c2pa_sdk_d.so", "a64ce0fb43e7c22e2d95d8bbfcaede522d585c5d51dbae87d24db1359c27a01a"),
             file("lib/armeabi-v7a/libtt_c2pa_sdk.so", "24bc0cbc99cdca42ddd9062ac7deef64abaf3d1206969ef8f461c097ebdaf77c"),
             file("lib/armeabi-v7a/libtt_c2pa_sdk_d.so", "a96af4a99de68503234e3ab658d9702ac436ae1e0650dc5551e4e29a89700b0c"),
-        ) + pitayaFiles4623 + monitorFiles4623 + liveCastFiles4623 + pitayaAssets,
+        ) + pitayaFiles4623 + monitorFiles4623 + liveCastFiles4623,
     ),
 )
 
