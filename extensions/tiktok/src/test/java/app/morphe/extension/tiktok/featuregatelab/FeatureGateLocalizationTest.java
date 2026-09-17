@@ -72,7 +72,7 @@ public class FeatureGateLocalizationTest {
     @Config(sdk = 28, qualifiers = "de-w480dp-h960dp-night-mdpi")
     public void germanOwnsEveryFeatureGateFailureAndStateSentence() throws Exception {
         verifyFeatureGateLanguage(new Expected(
-                "Gib einen gültigen Wert für INT ein.",
+                "Gib eine ganze Zahl ein.",
                 "Kein aktueller Wert und keine aktive Überschreibung",
                 "11 (wird bei der Abfrage zurückgegeben)",
                 "App-AB / generiertes Register und aktueller Cache",
@@ -95,7 +95,7 @@ public class FeatureGateLocalizationTest {
     @Config(sdk = 28, qualifiers = "in-rID-w480dp-h960dp-night-mdpi")
     public void indonesianOwnsEveryFeatureGateFailureAndStateSentence() throws Exception {
         verifyFeatureGateLanguage(new Expected(
-                "Masukkan nilai INT yang valid.",
+                "Masukkan bilangan bulat.",
                 "Tidak ada nilai saat ini dan tidak ada penimpaan aktif",
                 "11 (akan dikembalikan saat diminta)",
                 "AB aplikasi / registri yang dibuat dan cache saat ini",

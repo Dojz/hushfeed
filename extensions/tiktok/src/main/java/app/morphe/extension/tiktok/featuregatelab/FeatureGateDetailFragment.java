@@ -765,15 +765,26 @@ public final class FeatureGateDetailFragment extends Fragment {
     private void showCustomValue() {
         EditText input = new EditText(getActivity());
         input.setSingleLine(!"STRING".equals(entry.type));
-        // One sentence with the type in it, rather than three pieces glued together: no
-        // table row can express a concatenation, and word order is not the same everywhere.
-        input.setHint(L10n.f(getContext(), "Custom %1$s value (unverified)",
-                entry.type.toLowerCase(Locale.ROOT)));
+        input.setHint(L10n.t(getContext(), "Value"));
         input.setText(rule == null ? "" : rule.value);
         SettingsUi.styleEditText(input);
+        LinearLayout dialogBody = new LinearLayout(getActivity());
+        dialogBody.setOrientation(LinearLayout.VERTICAL);
+        int bodyPad = SettingsUi.dp(getActivity(), 20);
+        dialogBody.setPadding(bodyPad, bodyPad, bodyPad, 0);
+        TextView notice = new TextView(getActivity());
+        notice.setText(L10n.t(getContext(),
+                "The Lab can't check this. TikTok gets it exactly as typed."));
+        notice.setTextColor(SettingsUi.textSecondary());
+        notice.setTextSize(14);
+        dialogBody.addView(notice);
+        LinearLayout.LayoutParams inputParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        inputParams.setMargins(0, SettingsUi.dp(getActivity(), 12), 0, 0);
+        dialogBody.addView(input, inputParams);
         AlertDialog dialog = customValueDialog = new AlertDialog.Builder(getActivity())
-                .setTitle(L10n.t(getContext(), "Custom value (unverified)"))
-                .setView(input)
+                .setTitle(L10n.t(getContext(), "Custom value"))
+                .setView(dialogBody)
                 .setPositiveButton(L10n.t(getContext(), "Use value"), null)
                 .setNegativeButton(L10n.t(getContext(), "Cancel"),
                         (ignored, which) -> restoreSelection())

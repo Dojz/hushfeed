@@ -266,9 +266,8 @@ Current cache unavailable: %1$s,Cache saat ini tidak tersedia: %1$s
 Current state,Kondisi saat ini
 Current: %1$s,Saat ini: %1$s
 Current: %1$s %2$s,Saat ini: %1$s %2$s
-Custom %1$s value (unverified),Nilai %1$s khusus (belum diverifikasi)
 Custom SIM details,Detail SIM khusus
-Custom value (unverified),Nilai khusus (belum diverifikasi)
+Custom value,Nilai kustom
 Custom value...,Nilai khusus...
 Daily budget,Anggaran harian
 Daily time budget,Anggaran waktu harian
@@ -321,7 +320,7 @@ Enter a number,Masukkan angka
 Enter a number.,Masukkan angka.
 Enter a valid structured value.,Masukkan nilai terstruktur yang valid.
 Enter a valid two-letter country code,Masukkan kode negara dua huruf yang sah
-Enter a valid value for %1$s.,Masukkan nilai %1$s yang valid.
+Enter a whole number.,Masukkan bilangan bulat.
 "Enter a whole number, or one like 20K, 1.5M or 2B","Masukkan bilangan bulat, atau seperti 20K, 1.5M atau 2B"
 Enter true or false.,Masukkan true atau false.
 Enter up to 8 comma-separated speeds from 0.5 to 3,"Masukkan sampai 8 kecepatan dari 0.5 hingga 3, dipisahkan koma"
@@ -338,6 +337,7 @@ Exported 1 loaded value,1 nilai yang dimuat diekspor
 Fade the feed out before the hold,Redupkan feed sebelum feed ditahan
 Feature Gate Lab,Feature Gate Lab
 The Lab could not open. Go back and open it again.,Feature Gate Lab tidak menemukan wadah pengaturan.
+The Lab can't check this. TikTok gets it exactly as typed.,Lab tidak bisa memeriksa ini. TikTok menerimanya persis seperti yang Anda ketik.
 Feature gate override reset,Penggantian gate diatur ulang
 Feature gate override saved,Penggantian gate disimpan
 Feed and navigation,Feed dan navigasi
@@ -508,7 +508,7 @@ Keep the clock and status icons off the screen while TikTok is open. Swipe down 
 Keep the Favorites tab,Pertahankan tab Favorit
 Keep the screen's refresh rate,Pertahankan laju penyegaran layar
 "Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only.","Menyimpan kecepatan yang dipilih untuk video berikutnya. Mati, setiap video baru dimulai dari 1x dan pilihan manual hanya berlaku untuk video itu."
-"Keep this string to 4,096 characters or fewer.",Batasi string ini hingga 4.096 karakter atau kurang.
+Keep this string to %1$s characters or fewer.,Jaga string ini %1$s karakter atau kurang.
 Keep this structured value to 64 KB or less.,Batasi nilai terstruktur ini hingga 64 KB atau kurang.
 "Kept to %1$s, the nearest value this row allows","Disetel ke %1$s, nilai terdekat yang diizinkan baris ini"
 Kinds of post,Jenis postingan

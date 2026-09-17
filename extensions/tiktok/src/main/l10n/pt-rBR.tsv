@@ -265,9 +265,8 @@ Current cache unavailable: %1$s	O cache atual não está disponível: %1$s
 Current state	Estado atual
 Current: %1$s	Agora: %1$s
 Current: %1$s %2$s	Agora: %1$s %2$s
-Custom %1$s value (unverified)	Valor %1$s próprio (não verificado)
 Custom SIM details	Dados de SIM personalizados
-Custom value (unverified)	Valor próprio (não verificado)
+Custom value	Valor personalizado
 Custom value...	Valor personalizado...
 Daily budget	Limite diário
 Daily time budget	Limite diário de tempo
@@ -320,7 +319,7 @@ Enter a number	Digite um número
 Enter a number.	Digite um número.
 Enter a valid structured value.	Digite um valor estruturado válido.
 Enter a valid two-letter country code	Digite um código de país válido de duas letras
-Enter a valid value for %1$s.	Digite um valor válido para %1$s.
+Enter a whole number.	Insira um número inteiro.
 Enter a whole number, or one like 20K, 1.5M or 2B	Digite um número inteiro, ou um como 20K, 1.5M ou 2B
 Enter true or false.	Digite true ou false.
 Enter up to 8 comma-separated speeds from 0.5 to 3	Digite até 8 velocidades separadas por vírgula, de 0.5 a 3
@@ -337,6 +336,7 @@ Exported 1 loaded value	1 valor carregado exportado
 Fade the feed out before the hold	Escurecer o feed antes da pausa
 Feature Gate Lab	Laboratório de gates
 The Lab could not open. Go back and open it again.	O Feature Gate Lab não encontrou o contêiner das configurações.
+The Lab can't check this. TikTok gets it exactly as typed.	O Lab não consegue verificar isso. O TikTok recebe exatamente como você digitou.
 Feature gate override reset	Substituição do gate redefinida
 Feature gate override saved	Substituição do gate salva
 Feed and navigation	Feed e navegação
@@ -507,7 +507,7 @@ Keep the clock and status icons off the screen while TikTok is open. Swipe down 
 Keep the Favorites tab	Manter a aba Favoritos
 Keep the screen's refresh rate	Manter a taxa de atualização da tela
 Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only.	Mantém a velocidade escolhida para o próximo vídeo. Desligado, cada vídeo novo começa em 1x e uma escolha manual vale só para aquele vídeo.
-Keep this string to 4,096 characters or fewer.	Limite esta string a 4.096 caracteres ou menos.
+Keep this string to %1$s characters or fewer.	Mantenha esta string com %1$s caracteres ou menos.
 Keep this structured value to 64 KB or less.	Limite este valor estruturado a 64 KB ou menos.
 Kept to %1$s, the nearest value this row allows	Ajustado para %1$s, o valor mais próximo que esta linha aceita
 Kinds of post	Tipos de post

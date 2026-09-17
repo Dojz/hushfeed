@@ -268,9 +268,8 @@ Current cache unavailable: %1$s	Aktueller Cache nicht verfügbar: %1$s
 Current state	Aktueller Zustand
 Current: %1$s	Aktuell: %1$s
 Current: %1$s %2$s	Aktuell: %1$s %2$s
-Custom %1$s value (unverified)	Eigener %1$s-Wert (ungeprüft)
 Custom SIM details	Eigene SIM-Angaben
-Custom value (unverified)	Eigener Wert (ungeprüft)
+Custom value	Benutzerdefinierter Wert
 Custom value...	Benutzerdefinierter Wert...
 Daily budget	Tagesbudget
 Daily time budget	Tägliches Zeitbudget
@@ -323,7 +322,7 @@ Enter a number	Gib eine Zahl ein
 Enter a number.	Gib eine Zahl ein.
 Enter a valid structured value.	Gib einen gültigen strukturierten Wert ein.
 Enter a valid two-letter country code	Gib einen gültigen Ländercode aus zwei Buchstaben ein
-Enter a valid value for %1$s.	Gib einen gültigen Wert für %1$s ein.
+Enter a whole number.	Gib eine ganze Zahl ein.
 Enter a whole number, or one like 20K, 1.5M or 2B	Gib eine ganze Zahl ein, oder eine wie 20K, 1.5M oder 2B
 Enter true or false.	Gib true oder false ein.
 Enter up to 8 comma-separated speeds from 0.5 to 3	Bis zu 8 durch Kommas getrennte Geschwindigkeiten von 0.5 bis 3 eingeben
@@ -340,6 +339,7 @@ Exported 1 loaded value	1 geladener Wert exportiert
 Fade the feed out before the hold	Feed vor dem Anhalten ausblenden
 Feature Gate Lab	Feature Gate Lab
 The Lab could not open. Go back and open it again.	Das Feature Gate Lab hat den Einstellungsbereich nicht gefunden.
+The Lab can't check this. TikTok gets it exactly as typed.	Das Lab kann das nicht prüfen. TikTok bekommt es genau so, wie du es tippst.
 Feature gate override reset	Überschreibung des Schalters zurückgesetzt
 Feature gate override saved	Überschreibung des Schalters gespeichert
 Feed and navigation	Feed und Navigation
@@ -510,7 +510,7 @@ Keep the clock and status icons off the screen while TikTok is open. Swipe down 
 Keep the Favorites tab	Favoriten-Tab behalten
 Keep the screen's refresh rate	Bildwiederholrate des Bildschirms behalten
 Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only.	Behalte die gewählte Geschwindigkeit für das nächste Video. Aus, startet jedes neue Video mit 1x und eine manuelle Wahl gilt nur für dieses Video.
-Keep this string to 4,096 characters or fewer.	Begrenze diese Zeichenfolge auf höchstens 4.096 Zeichen.
+Keep this string to %1$s characters or fewer.	Halte diese Zeichenkette bei %1$s Zeichen oder weniger.
 Keep this structured value to 64 KB or less.	Begrenze diesen strukturierten Wert auf höchstens 64 KB.
 Kept to %1$s, the nearest value this row allows	Auf %1$s gesetzt, den nächsten Wert, den diese Zeile zulässt
 Kinds of post	Beitragsarten

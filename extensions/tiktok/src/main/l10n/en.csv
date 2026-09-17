@@ -242,9 +242,8 @@ Current cache unavailable: %1$s,Current cache unavailable: %1$s
 Current state,Current state
 Current: %1$s,Current: %1$s
 Current: %1$s %2$s,Current: %1$s %2$s
-Custom %1$s value (unverified),Custom %1$s value (unverified)
 Custom SIM details,Custom SIM details
-Custom value (unverified),Custom value (unverified)
+Custom value,Custom value
 Custom value...,Custom value...
 Cut the in-app browser off from TikTok,Cut the in-app browser off from TikTok
 Daily budget,Daily budget
@@ -296,8 +295,8 @@ Enter a number,Enter a number
 Enter a number.,Enter a number.
 Enter a valid structured value.,Enter a valid structured value.
 Enter a valid two-letter country code,Enter a valid two-letter country code
-Enter a valid value for %1$s.,Enter a valid value for %1$s.
 "Enter a whole number, or one like 20K, 1.5M or 2B","Enter a whole number, or one like 20K, 1.5M or 2B"
+Enter a whole number.,Enter a whole number.
 Enter true or false.,Enter true or false.
 Enter up to 8 comma-separated speeds from 0.5 to 3,Enter up to 8 comma-separated speeds from 0.5 to 3
 Enter valid JSON.,Enter valid JSON.
@@ -492,7 +491,7 @@ Keep the Favorites tab,Keep the Favorites tab
 Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.,Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.
 Keep the screen's refresh rate,Keep the screen's refresh rate
 "Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only.","Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only."
-"Keep this string to 4,096 characters or fewer.","Keep this string to 4,096 characters or fewer."
+Keep this string to %1$s characters or fewer.,Keep this string to %1$s characters or fewer.
 Keep this structured value to 64 KB or less.,Keep this structured value to 64 KB or less.
 "Kept to %1$s, the nearest value this row allows","Kept to %1$s, the nearest value this row allows"
 Kinds of post,Kinds of post
@@ -915,6 +914,7 @@ That settings backup is damaged or only partly downloaded. Nothing was altered.,
 "That settings backup is incomplete, so it may have been cut short. Nothing was altered.","That settings backup is incomplete, so it may have been cut short. Nothing was altered."
 That settings change did not go through. Nothing was altered.,That settings change did not go through. Nothing was altered.
 That sticker is in a format Hushfeed cannot read,That sticker is in a format Hushfeed cannot read
+The Lab can't check this. TikTok gets it exactly as typed.,The Lab can't check this. TikTok gets it exactly as typed.
 The Lab could not open. Go back and open it again.,The Lab could not open. Go back and open it again.
 "The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.","The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed."
 The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.,The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.

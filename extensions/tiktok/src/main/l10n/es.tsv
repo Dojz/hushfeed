@@ -265,9 +265,8 @@ Current cache unavailable: %1$s	La caché actual no está disponible: %1$s
 Current state	Estado actual
 Current: %1$s	Ahora: %1$s
 Current: %1$s %2$s	Ahora: %1$s %2$s
-Custom %1$s value (unverified)	Valor %1$s propio (sin verificar)
 Custom SIM details	Datos de SIM personalizados
-Custom value (unverified)	Valor propio (sin verificar)
+Custom value	Valor personalizado
 Custom value...	Valor personalizado...
 Daily budget	Presupuesto diario
 Daily time budget	Presupuesto diario de tiempo
@@ -320,7 +319,7 @@ Enter a number	Escribe un número
 Enter a number.	Escribe un número.
 Enter a valid structured value.	Introduce un valor estructurado válido.
 Enter a valid two-letter country code	Escribe un código de país válido de dos letras
-Enter a valid value for %1$s.	Introduce un valor válido para %1$s.
+Enter a whole number.	Ingresa un número entero.
 Enter a whole number, or one like 20K, 1.5M or 2B	Escribe un número entero, o uno como 20K, 1.5M o 2B
 Enter true or false.	Introduce true o false.
 Enter up to 8 comma-separated speeds from 0.5 to 3	Escribe hasta 8 velocidades separadas por comas, de 0.5 a 3
@@ -337,6 +336,7 @@ Exported 1 loaded value	1 valor cargado exportado
 Fade the feed out before the hold	Atenuar el feed antes de la pausa
 Feature Gate Lab	Laboratorio de interruptores
 The Lab could not open. Go back and open it again.	El Feature Gate Lab no ha encontrado el contenedor de los ajustes.
+The Lab can't check this. TikTok gets it exactly as typed.	El Lab no puede verificar esto. TikTok lo recibe exactamente como lo escribes.
 Feature gate override reset	Sustitución del interruptor restablecida
 Feature gate override saved	Sustitución del interruptor guardada
 Feed and navigation	Feed y navegación
@@ -507,7 +507,7 @@ Keep the clock and status icons off the screen while TikTok is open. Swipe down 
 Keep the Favorites tab	Mantener la pestaña Favoritos
 Keep the screen's refresh rate	Mantener la tasa de refresco de la pantalla
 Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only.	Mantiene la velocidad elegida para el siguiente video. Desactivado, cada video nuevo empieza a 1x y una elección manual dura solo ese video.
-Keep this string to 4,096 characters or fewer.	Limita esta cadena a 4096 caracteres o menos.
+Keep this string to %1$s characters or fewer.	Mantén esta cadena en %1$s caracteres o menos.
 Keep this structured value to 64 KB or less.	Limita este valor estructurado a 64 KB o menos.
 Kept to %1$s, the nearest value this row allows	Ajustado a %1$s, el valor más cercano que permite esta fila
 Kinds of post	Tipos de publicación
