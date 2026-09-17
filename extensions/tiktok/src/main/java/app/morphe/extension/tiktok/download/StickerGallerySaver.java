@@ -180,7 +180,9 @@ public final class StickerGallerySaver {
                     textTemplate.getPaddingBottom()
             );
         } else {
-            button.setTextColor(SettingsUi.enabledTextColors(SettingsUi.textPrimary()));
+            boolean dark = SettingsUi.isDarkContext(template.getContext());
+            int textColor = SettingsUi.textPrimaryOn(dark);
+            button.setTextColor(SettingsUi.enabledTextColors(textColor));
             button.setTextSize(16);
             int paddingHorizontal = SettingsUi.dp(context, 16);
             int paddingVertical = SettingsUi.dp(context, 10);
@@ -191,8 +193,9 @@ public final class StickerGallerySaver {
         if (background != null && background.getConstantState() != null) {
             button.setBackground(background.getConstantState().newDrawable().mutate());
         } else {
+            boolean dark = SettingsUi.isDarkContext(template.getContext());
             button.setBackground(SettingsUi.overlayAction(context, SettingsUi.RADIUS_CONTROL,
-                    SettingsUi.textPrimary()));
+                    SettingsUi.textPrimaryOn(dark)));
         }
 
         button.setEnabled(template.isEnabled());
