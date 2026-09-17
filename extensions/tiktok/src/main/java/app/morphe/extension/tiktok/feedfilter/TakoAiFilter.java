@@ -21,6 +21,8 @@ public final class TakoAiFilter {
 
     public static boolean shouldHideFeedButton() {
         boolean enabled = Settings.HIDE_TAKO_AI.get();
+        HookStatus.bound(HOOK_FAMILY,
+                "floating button " + (enabled ? "hidden" : "left"));
         logFloatingButtonRoute("feed-tako-state", enabled);
         return enabled;
     }
@@ -29,6 +31,7 @@ public final class TakoAiFilter {
         if (!Settings.HIDE_TAKO_AI.get() || view == null) return;
 
         view.setVisibility(View.GONE);
+        HookStatus.bound(HOOK_FAMILY, "bound button hidden");
         logBoundViewHide();
     }
 

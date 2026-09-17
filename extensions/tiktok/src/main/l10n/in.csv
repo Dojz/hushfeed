@@ -40,11 +40,11 @@ source,target
 "%1$s, %2$s, %3$s, %4$s, %5$s","%1$s, %2$s, %3$s, %4$s, %5$s"
 "%1$s, selected","%1$s, dipilih"
 %1$s. %2$s,%1$s. %2$s
-"%1$s: %2$s","%1$s: %2$s"
 "%1$s: %2$d found, %3$d missing","%1$s: %2$d ditemukan, %3$d hilang"
 "%1$s: %2$d found, %3$d missing, and more it stopped counting","%1$s: %2$d ditemukan, %3$d hilang, dan sisanya berhenti dihitung"
 "%1$s: %2$d found, %3$d missing, and more it stopped counting. First missing: %4$s","%1$s: %2$d ditemukan, %3$d hilang, dan sisanya berhenti dihitung. Yang pertama hilang: %4$s"
 "%1$s: %2$d found, %3$d missing. First missing: %4$s","%1$s: %2$d ditemukan, %3$d hilang. Yang pertama hilang: %4$s"
+"%1$s: %2$s","%1$s: %2$s"
 1 field overridden,1 kolom ditimpa
 1 field will be overridden when requested,1 kolom akan ditimpa saat diminta
 1 gate selected,1 gate dipilih

@@ -39,11 +39,11 @@
 %1$s, %2$s, %3$s, %4$s, %5$s	%1$s, %2$s, %3$s, %4$s, %5$s
 %1$s, selected	%1$s, seleccionado
 %1$s. %2$s	%1$s. %2$s
-%1$s: %2$s	%1$s: %2$s
 %1$s: %2$d found, %3$d missing	%1$s: %2$d encontrados, %3$d faltan
 %1$s: %2$d found, %3$d missing, and more it stopped counting	%1$s: %2$d encontrados, %3$d faltan, y más que dejó de contar
 %1$s: %2$d found, %3$d missing, and more it stopped counting. First missing: %4$s	%1$s: %2$d encontrados, %3$d faltan, y más que dejó de contar. El primero que faltó: %4$s
 %1$s: %2$d found, %3$d missing. First missing: %4$s	%1$s: %2$d encontrados, %3$d faltan. El primero que faltó: %4$s
+%1$s: %2$s	%1$s: %2$s
 1 field overridden	1 campo sobrescrito
 1 field will be overridden when requested	1 campo se sobrescribirá cuando se solicite
 1 gate selected	1 interruptor seleccionado

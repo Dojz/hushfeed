@@ -42,11 +42,11 @@
 %1$s, %2$s, %3$s, %4$s, %5$s	%1$s, %2$s, %3$s, %4$s, %5$s
 %1$s, selected	%1$s, ausgewählt
 %1$s. %2$s	%1$s. %2$s
-%1$s: %2$s	%1$s: %2$s
 %1$s: %2$d found, %3$d missing	%1$s: %2$d gefunden, %3$d fehlen
 %1$s: %2$d found, %3$d missing, and more it stopped counting	%1$s: %2$d gefunden, %3$d fehlen, und weitere, die nicht mehr gezählt wurden
 %1$s: %2$d found, %3$d missing, and more it stopped counting. First missing: %4$s	%1$s: %2$d gefunden, %3$d fehlen, und weitere, die nicht mehr gezählt wurden. Zuerst fehlte: %4$s
 %1$s: %2$d found, %3$d missing. First missing: %4$s	%1$s: %2$d gefunden, %3$d fehlen. Zuerst fehlte: %4$s
+%1$s: %2$s	%1$s: %2$s
 1 field overridden	1 Feld überschrieben
 1 field will be overridden when requested	1 Feld wird bei der Abfrage überschrieben
 1 gate selected	1 Schalter ausgewählt

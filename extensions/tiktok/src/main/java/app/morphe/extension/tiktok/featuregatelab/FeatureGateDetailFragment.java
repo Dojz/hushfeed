@@ -1221,10 +1221,13 @@ public final class FeatureGateDetailFragment extends Fragment {
             technicalDetails.setVisibility(show ? View.VISIBLE : View.GONE);
             technicalToggle.setText(L10n.t(getContext(), show ? "Hide" : "Show"));
             String state = L10n.t(getContext(), show ? "expanded" : "collapsed");
-            heading.setContentDescription(
-                    L10n.f(getContext(), "Technical details, %1$s", state));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                heading.setContentDescription(
+                        L10n.t(getContext(), "Technical details"));
                 heading.setStateDescription(state);
+            } else {
+                heading.setContentDescription(
+                        L10n.f(getContext(), "Technical details, %1$s", state));
             }
         };
         heading.setOnClickListener(toggle);

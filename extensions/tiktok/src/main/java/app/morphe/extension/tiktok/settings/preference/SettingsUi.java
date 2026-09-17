@@ -1173,7 +1173,11 @@ public final class SettingsUi {
     public static void submitOnDone(EditText field, Dialog dialog) {
         field.setImeOptions(EditorInfo.IME_ACTION_DONE);
         field.setOnEditorActionListener((view, actionId, event) -> {
-            if (actionId != EditorInfo.IME_ACTION_DONE) return false;
+            boolean done = actionId == EditorInfo.IME_ACTION_DONE
+                    || (actionId == EditorInfo.IME_NULL && event != null
+                        && event.getKeyCode() == android.view.KeyEvent.KEYCODE_ENTER
+                        && event.getAction() == android.view.KeyEvent.ACTION_DOWN);
+            if (!done) return false;
             if (!(dialog instanceof AlertDialog)) return false;
             Button save = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
             if (save != null) save.performClick();
