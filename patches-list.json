@@ -190,8 +190,34 @@
       "options": []
     },
     {
+      "name": "Block P2P video relay",
+      "description": "Strips TikTok's peer-to-peer CDN libraries so your phone is not used as a relay node for other people's video traffic. Saves battery and mobile data.",
+      "use": false,
+      "dependencies": [],
+      "compatiblePackages": {
+        "com.zhiliaoapp.musically": [
+          "46.2.3"
+        ]
+      },
+      "compatibility": [
+        {
+          "name": "TikTok",
+          "packageName": "com.zhiliaoapp.musically",
+          "description": null,
+          "appIconColor": 16657493,
+          "targets": [
+            {
+              "version": "46.2.3",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Block author button",
-      "description": "Adds one-tap controls for blocking the uploader, hiding the uploader locally and blocking the current sound. The local-hide and sound controls have separate switches. Long press any visible control to move it, and all of them hide while comments are open.",
+      "description": "Adds one-tap controls for blocking the creator, hiding them locally and blocking the current sound. The local-hide and sound controls have separate switches. Long press any visible control to move it, and all of them hide while comments are open.",
       "use": false,
       "dependencies": [
         "BytecodePatch",
@@ -367,6 +393,35 @@
       "name": "Custom offline videos limit",
       "description": "Adds a custom entry to TikTok's offline videos menu with a configurable limit from 1 to 1000 videos.",
       "use": true,
+      "dependencies": [
+        "BytecodePatch",
+        "Settings"
+      ],
+      "compatiblePackages": {
+        "com.zhiliaoapp.musically": [
+          "46.2.3"
+        ]
+      },
+      "compatibility": [
+        {
+          "name": "TikTok",
+          "packageName": "com.zhiliaoapp.musically",
+          "description": null,
+          "appIconColor": 16657493,
+          "targets": [
+            {
+              "version": "46.2.3",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Device privacy guard",
+      "description": "Blocks TikTok from reading your clipboard contents and scanning devices on your local network. Clipboard writes (copying links you asked for) are not affected.",
+      "use": false,
       "dependencies": [
         "BytecodePatch",
         "Settings"
@@ -1451,6 +1506,35 @@
       "options": []
     },
     {
+      "name": "In-app browser privacy guard",
+      "description": "Stops TikTok from injecting JavaScript tracking interfaces into the in-app browser's WebView. Links redirected to the system browser by Open external links directly are not affected.",
+      "use": false,
+      "dependencies": [
+        "BytecodePatch",
+        "Settings"
+      ],
+      "compatiblePackages": {
+        "com.zhiliaoapp.musically": [
+          "46.2.3"
+        ]
+      },
+      "compatibility": [
+        {
+          "name": "TikTok",
+          "packageName": "com.zhiliaoapp.musically",
+          "description": null,
+          "appIconColor": 16657493,
+          "targets": [
+            {
+              "version": "46.2.3",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Keep the Favorites tab",
       "description": "Keeps the Favorites tab on your profile when TikTok's server puts the account into an experiment that empties it. Two people saw that after patching: the tab was there and the saved videos were not.",
       "use": true,
@@ -1798,7 +1882,7 @@
     },
     {
       "name": "Remove content credential and card scanner assets",
-      "description": "Empties TikTok's bundled C2PA native libraries and Microblink payment-card OCR assets. Content credentials and card scanning may stop.",
+      "description": "Empties TikTok's bundled C2PA and Microblink card-scanning assets, Pitaya AI engine libraries, the live-cast dynamic feature, and runtime monitoring probes.",
       "use": false,
       "dependencies": [],
       "compatiblePackages": {
@@ -1883,6 +1967,35 @@
           "values": null
         }
       ]
+    },
+    {
+      "name": "Resource and battery governor",
+      "description": "Blocks TikTok from polling device sensors for fingerprinting and throttles background buffer preloading. Reduces battery drain from motion tracking and prefetch.",
+      "use": false,
+      "dependencies": [
+        "BytecodePatch",
+        "Settings"
+      ],
+      "compatiblePackages": {
+        "com.zhiliaoapp.musically": [
+          "46.2.3"
+        ]
+      },
+      "compatibility": [
+        {
+          "name": "TikTok",
+          "packageName": "com.zhiliaoapp.musically",
+          "description": null,
+          "appIconColor": 16657493,
+          "targets": [
+            {
+              "version": "46.2.3",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": []
     },
     {
       "name": "Resume videos after scrolling",
@@ -2201,6 +2314,32 @@
     {
       "name": "Skip update checks",
       "description": "Skips TikTok's background and boot-finished device-ID update-check tasks. This may suppress some in-app update checks. Play Store updates are unaffected.",
+      "use": false,
+      "dependencies": [],
+      "compatiblePackages": {
+        "com.zhiliaoapp.musically": [
+          "46.2.3"
+        ]
+      },
+      "compatibility": [
+        {
+          "name": "TikTok",
+          "packageName": "com.zhiliaoapp.musically",
+          "description": null,
+          "appIconColor": 16657493,
+          "targets": [
+            {
+              "version": "46.2.3",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Stop on-device AI profiling",
+      "description": "Kills the Pitaya on-device ML inference engine at startup so it cannot build a behavioral profile. The AI asset strip in the core de-bloat patch removes the native libraries; this stops the initialization code that would download replacements.",
       "use": false,
       "dependencies": [],
       "compatiblePackages": {
