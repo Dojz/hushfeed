@@ -48,7 +48,8 @@ final class SettingsListAdapter extends BaseAdapter implements WrapperListAdapte
     private boolean isBoundary(int position) {
         if (position < 0 || position >= getCount()) return true;
         Object item = getItem(position);
-        return item instanceof SettingsHeaderPreference || item instanceof PreferenceCategory;
+        return item instanceof SettingsHeaderPreference || item instanceof PreferenceCategory
+                || item instanceof SectionHeadingPreference;
     }
 
     @Override public View getView(int position, View convertView, ViewGroup parent) {

@@ -12,6 +12,7 @@ import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.L10n;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
 import app.morphe.extension.tiktok.settings.preference.ChoicePreference;
+import app.morphe.extension.tiktok.settings.preference.SectionHeadingPreference;
 import app.morphe.extension.tiktok.settings.preference.TogglePreference;
 import app.morphe.extension.tiktok.settings.preference.InputTextPreference;
 import app.morphe.extension.tiktok.settings.preference.ClockHourPreference;
@@ -48,6 +49,7 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
 
     @Override public void addPreferences(Context context) {
         if (SettingsStatus.autoAdvanceEnabled) {
+            addPreference(new SectionHeadingPreference(context, "Automatic advance"));
             addPreference(new TogglePreference(context, "Advance when a video ends",
                     "Keep automatic advance enabled, and show TikTok's own Auto scroll action in "
                             + "the video panel even if your account never had it. Pauses and open "
@@ -74,9 +76,7 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
                             + "come back to the app. Messages, profiles and search are still "
                             + "one tap away.",
                     Settings.NO_RESUME_ON_FOREGROUND));
-        // Both budgets carry how much of today has gone, which until now was only visible in
-        // the one notice when it ran out. Read when the page is built, which is what a settings
-        // screen shows: it is a figure for the day, not a ticker.
+        addPreference(new SectionHeadingPreference(context, "Daily budget"));
         addPreference(new NumberInputPreference(context, "Daily video budget",
                 "Zero switches this off. Count every video that comes up in the feed, however you "
                         + "got to it, and say so once the count is reached. This is separate from "
@@ -174,6 +174,7 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
         }
 
         if (SettingsStatus.playbackSpeedEnabled) {
+            addPreference(new SectionHeadingPreference(context, "Speed"));
             addPreference(new TogglePreference(context, "Remember the last speed",
                     "Keep the speed you chose for the next video. Off, each new video "
                             + "starts at 1x and a manual choice lasts for that video only.",
@@ -195,6 +196,9 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
                 }
             });
             addPreference(speeds);
+        }
+        if (SettingsStatus.playbackQualityEnabled || SettingsStatus.videoFitEnabled) {
+            addPreference(new SectionHeadingPreference(context, "Quality"));
         }
         if (SettingsStatus.playbackQualityEnabled) {
             addPreference(new ChoicePreference(context, "Video playback quality", Settings.PLAYBACK_QUALITY,
