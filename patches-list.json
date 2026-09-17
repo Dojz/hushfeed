@@ -1391,7 +1391,7 @@
     },
     {
       "name": "Hide quick comment reactions",
-      "description": "Hides TikTok's exposed quick emoji row in supported comment inputs.",
+      "description": "Hides the emoji row above the comment box and the quick comment strip on videos.",
       "use": true,
       "dependencies": [
         "BytecodePatch",
