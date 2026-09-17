@@ -244,27 +244,43 @@ public final class SettingsMenuPreference extends Preference {
 
     public static final class ChevronDrawable extends Drawable {
         private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private final int enabledColor;
+        private final int disabledColor;
 
         public ChevronDrawable(Context context) {
-            // For the one call site that hands this to a TextView rather than an ImageView:
-            // FeatureGateDetailFragment builds a spinner row and hangs the chevron off it as a
-            // compound drawable, and an adapter's row is unattached, so it has no direction of
-            // its own to pass on and the arrow went out pointing away from the text an Arabic
-            // reader was reading. An ImageView is a different story: setImageDrawable sets the
-            // direction from the view there and then, so for those sites this line is
-            // overwritten immediately and the direction arrives when the view resolves.
             setLayoutDirection(context.getResources().getConfiguration().getLayoutDirection());
-            paint.setColor(SettingsUi.textSecondary());
+            enabledColor = SettingsUi.textSecondary();
+            disabledColor = SettingsUi.textDisabled();
+            paint.setColor(enabledColor);
             paint.setStyle(Paint.Style.STROKE);
             paint.setStrokeWidth(SettingsUi.strokePx(context, 1.8f));
             paint.setStrokeCap(Paint.Cap.ROUND);
             paint.setStrokeJoin(Paint.Join.ROUND);
         }
 
-        /** The row it sits at the end of mirrors; pointing into the text is what it did before. */
         @Override
         public boolean isAutoMirrored() {
             return true;
+        }
+
+        @Override
+        public boolean isStateful() {
+            return true;
+        }
+
+        @Override
+        protected boolean onStateChange(int[] state) {
+            boolean enabled = false;
+            for (int s : state) {
+                if (s == android.R.attr.state_enabled) { enabled = true; break; }
+            }
+            int color = enabled ? enabledColor : disabledColor;
+            if (paint.getColor() != color) {
+                paint.setColor(color);
+                invalidateSelf();
+                return true;
+            }
+            return false;
         }
 
         @Override

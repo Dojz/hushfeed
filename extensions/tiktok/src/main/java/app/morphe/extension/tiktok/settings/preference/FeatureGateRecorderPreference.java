@@ -109,7 +109,7 @@ public final class FeatureGateRecorderPreference extends Preference implements I
         TextView title = SettingsUi.text(context,
                 L10n.f(context, "Recorded gate reads (%1$d)",
                         FeatureGateLearnMode.lastCandidateCount()),
-                28, SettingsUi.textPrimary(), 1);
+                20, SettingsUi.textPrimary(), 1);
         SettingsUi.markDialogHeading(title);
         title.setPadding(padding, padding, padding, SettingsUi.dp(context, 12));
         // Save JSON is the accented action and sits last, like every other dialog's. Copy and
