@@ -1113,7 +1113,7 @@ public final class FeatureGateLabFragment extends Fragment {
                     .addCategory(Intent.CATEGORY_OPENABLE)
                     .setType("application/gzip")
                     .putExtra(Intent.EXTRA_TITLE,
-                            "tiktok-46.2.3-loaded-feature-gates-" + timestamp + ".json.gz");
+                            "tiktok-" + FeatureGateLabStore.TARGET_VERSION + "-loaded-feature-gates-" + timestamp + ".json.gz");
             startActivityForResult(intent, REQUEST_EXPORT_LOADED);
         } catch (Throwable throwable) {
             Utils.showToastLong(L10n.t(Utils.getContext(),
