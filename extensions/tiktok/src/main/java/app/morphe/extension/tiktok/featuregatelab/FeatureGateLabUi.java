@@ -59,10 +59,8 @@ final class FeatureGateLabUi {
         FrameLayout frame = new FrameLayout(context);
         frame.setPadding(dp(context, 16), 0, dp(context, 16), dp(context, 24));
         LinearLayout header = app.morphe.extension.tiktok.settings.preference.SettingsHeaderPreference.createHeader(context, title, onBack);
-        // The header already sized the title for the font scale. The page with a menu takes a
-        // smaller title to leave the button room, scaled the same way.
-        int heading = app.morphe.extension.tiktok.settings.preference.SettingsHeaderPreference.headingSizeSp(context);
-        ((TextView) header.findViewWithTag("hushfeed_page_title")).setTextSize(onMenu == null ? heading : Math.round(heading * 0.7f));
+        ((TextView) header.findViewWithTag("hushfeed_page_title")).setTextSize(
+                app.morphe.extension.tiktok.settings.preference.SettingsHeaderPreference.headingSizeSp(context));
         if (onMenu != null) {
             View menu = iconButton(context, "icon_ellipsis_horizontal", android.R.drawable.ic_menu_more,
                     L10n.t(context, "More options"), onMenu);
