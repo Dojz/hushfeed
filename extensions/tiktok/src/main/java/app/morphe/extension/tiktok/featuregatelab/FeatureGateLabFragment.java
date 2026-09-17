@@ -133,7 +133,6 @@ public final class FeatureGateLabFragment extends Fragment {
     private FeatureGateCatalog.Snapshot snapshot;
     private GateAdapter adapter;
     private TextView count;
-    private TextView loading;
     private TextView empty;
     private TextView emptyAction;
     private EditText search;
@@ -403,10 +402,6 @@ public final class FeatureGateLabFragment extends Fragment {
         ));
         controls.addView(resultRow, FeatureGateLabUi.matchWrap());
 
-        loading = FeatureGateLabUi.label(context,
-                L10n.t(context, "Loading local catalog and current TikTok cache..."));
-        controls.addView(loading, FeatureGateLabUi.matchWrap());
-
         FrameLayout listContainer = new FrameLayout(context);
         list = new ListView(context);
         list.setDivider(null);
@@ -476,9 +471,12 @@ public final class FeatureGateLabFragment extends Fragment {
                 ViewGroup.LayoutParams.MATCH_PARENT
         ));
         list.setEmptyView(emptyColumn);
+        LinearLayout selectionOverlay = buildSelectionBar(context);
+        FrameLayout.LayoutParams barParams = new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        barParams.gravity = Gravity.BOTTOM;
+        listContainer.addView(selectionOverlay, barParams);
         root.addView(listContainer, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
-
-        root.addView(buildSelectionBar(context), FeatureGateLabUi.matchWrap());
 
         master.setOnCheckedChangeListener((button, checked) -> onMasterChanged(checked));
         search.addTextChangedListener(new SimpleTextWatcher(() -> {
@@ -541,7 +539,6 @@ public final class FeatureGateLabFragment extends Fragment {
         }
         adapter = null;
         count = null;
-        loading = null;
         empty = null;
         emptyAction = null;
         search = null;
@@ -602,8 +599,7 @@ public final class FeatureGateLabFragment extends Fragment {
     }
 
     private void load(boolean refresh) {
-        loading.setVisibility(View.VISIBLE);
-        loading.setText(L10n.t(getContext(), refresh
+        count.setText(L10n.t(getContext(), refresh
                 ? "Refreshing current TikTok cache..."
                 : "Loading local catalog and current TikTok cache..."));
         FeatureGateCatalog.loadAsync(refresh, new FeatureGateCatalog.Callback() {
@@ -611,11 +607,8 @@ public final class FeatureGateLabFragment extends Fragment {
             public void onLoaded(FeatureGateCatalog.Snapshot loaded) {
                 if (!isAdded() || getView() == null) return;
                 snapshot = loaded;
-                if (loaded.catalogComplete) {
-                    loading.setVisibility(View.GONE);
-                } else {
-                    loading.setVisibility(View.VISIBLE);
-                    loading.setText(L10n.t(getContext(),
+                if (!loaded.catalogComplete) {
+                    count.setText(L10n.t(getContext(),
                             "Loaded current values. Loading all known gates..."));
                 }
                 // The message is chosen in rebuild now, from whether a search or only the
@@ -627,7 +620,7 @@ public final class FeatureGateLabFragment extends Fragment {
             @Override
             public void onError(String message) {
                 if (!isAdded() || getView() == null) return;
-                loading.setText(
+                count.setText(
                         L10n.f(getContext(), "Current cache unavailable: %1$s", message));
                 FeatureGateCatalog.Snapshot cached = FeatureGateCatalog.cachedSnapshot();
                 if (cached != null) {
@@ -933,8 +926,16 @@ public final class FeatureGateLabFragment extends Fragment {
 
     /** Shows or hides the bar and repaints the rows, which draw their own chosen state. */
     private void onSelectionChanged() {
+        boolean barVisible = !selection.isEmpty();
         if (selectionBar != null) {
-            selectionBar.setVisibility(selection.isEmpty() ? View.GONE : View.VISIBLE);
+            selectionBar.setVisibility(barVisible ? View.VISIBLE : View.GONE);
+        }
+        if (list != null) {
+            int bottomPad = barVisible && selectionBar != null
+                    ? FeatureGateLabUi.dp(list.getContext(), 80)
+                    : FeatureGateLabUi.dp(list.getContext(), 24);
+            list.setPadding(list.getPaddingLeft(), list.getPaddingTop(),
+                    list.getPaddingRight(), bottomPad);
         }
         if (selectionCount != null) {
             selectionCount.setText(selection.size() == 1
