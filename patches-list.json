@@ -246,7 +246,7 @@
     },
     {
       "name": "Block contact list access",
-      "description": "Stops TikTok from reading your phone contacts. Find Friends and People you may know lose access to your contact list.",
+      "description": "Answers TikTok's reads of your phone contacts with an empty list. Find Friends and People you may know lose access to your contact list. Switch: Hushfeed settings > Privacy.",
       "use": false,
       "dependencies": [
         "BytecodePatch",
@@ -275,7 +275,7 @@
     },
     {
       "name": "Block installed app scanning",
-      "description": "Stops TikTok from reading the list of apps installed on your phone. TikTok uses this for device fingerprinting and ad targeting.",
+      "description": "Answers TikTok's scan of the apps installed on your phone with an empty list. Checks for one named app, which TikTok also uses to open an app you tap, are left alone. Switch: Hushfeed settings > Privacy.",
       "use": false,
       "dependencies": [
         "BytecodePatch",
@@ -304,7 +304,7 @@
     },
     {
       "name": "Camera and microphone indicator",
-      "description": "Shows a small colored dot when TikTok accesses the camera or microphone. Green for camera, orange for microphone. Stays visible until the access ends.",
+      "description": "Shows a small dot in the top corner while TikTok has the camera open or is recording sound. Green for the camera, orange for the microphone, both when both. It goes when the access ends. Switch: Hushfeed settings > Privacy.",
       "use": false,
       "dependencies": [
         "BytecodePatch",
@@ -507,7 +507,7 @@
     },
     {
       "name": "Device privacy guard",
-      "description": "Blocks TikTok from reading your clipboard contents and scanning devices on your local network. Clipboard writes (copying links you asked for) are not affected.",
+      "description": "Blocks TikTok from reading your clipboard. Copying a link you asked for still works. Switch: Hushfeed settings > Privacy.",
       "use": false,
       "dependencies": [
         "BytecodePatch",
@@ -1594,7 +1594,7 @@
     },
     {
       "name": "In-app browser privacy guard",
-      "description": "Stops TikTok from injecting JavaScript tracking interfaces into the in-app browser's WebView. Links redirected to the system browser by Open external links directly are not affected.",
+      "description": "Can stop TikTok's in-app browser handing its JavaScript bridge to the pages it loads. Most of TikTok's own web pages need that bridge, including the shop checkout and the CAPTCHA page, so the switch is off until you turn it on. Switch: Hushfeed settings > Privacy.",
       "use": false,
       "dependencies": [
         "BytecodePatch",
@@ -1707,7 +1707,7 @@
     },
     {
       "name": "Location access governor",
-      "description": "Blocks TikTok from reading your real GPS location. Location requests return null. Goes beyond the SIM and region spoof, which changes the locale and timezone but not the coordinates.",
+      "description": "Answers TikTok's location requests with nothing: the last known location comes back empty and update requests never fire. The SIM and region spoof change the locale and timezone, not the coordinates; this stops the coordinates. Switch: Hushfeed settings > Privacy.",
       "use": false,
       "dependencies": [
         "BytecodePatch",
@@ -1998,7 +1998,7 @@
     },
     {
       "name": "Remove content credential and card scanner assets",
-      "description": "Empties TikTok's bundled C2PA and Microblink card-scanning assets, Pitaya AI engine libraries, the live-cast dynamic feature, and runtime monitoring probes.",
+      "description": "Empties TikTok's bundled C2PA and Microblink card-scanning assets, the Pitaya AI model libraries, the live-cast dynamic feature, and the ART log monitor probe.",
       "use": false,
       "dependencies": [],
       "compatiblePackages": {
@@ -2086,7 +2086,7 @@
     },
     {
       "name": "Resource and battery governor",
-      "description": "Blocks TikTok from polling device sensors for fingerprinting and throttles background buffer preloading. Reduces battery drain from motion tracking and prefetch.",
+      "description": "Stops TikTok listening to the motion sensors it polls for device fingerprinting: the accelerometer, gyroscope, magnetometer, rotation, gravity and linear acceleration sensors. Saves the battery they wake. Switch: Hushfeed settings > Privacy.",
       "use": false,
       "dependencies": [
         "BytecodePatch",

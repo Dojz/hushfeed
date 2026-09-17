@@ -53,6 +53,7 @@ import app.morphe.extension.tiktok.settings.preference.categories.FeedNavigation
 import app.morphe.extension.tiktok.settings.preference.categories.InboxPreferenceCategory;
 import app.morphe.extension.tiktok.settings.preference.categories.InterfacePreferenceCategory;
 import app.morphe.extension.tiktok.settings.preference.categories.PlaybackPreferenceCategory;
+import app.morphe.extension.tiktok.settings.preference.categories.PrivacyPreferenceCategory;
 import app.morphe.extension.tiktok.settings.preference.categories.SharePreferenceCategory;
 import app.morphe.extension.tiktok.settings.preference.categories.SimSpoofPreferenceCategory;
 
@@ -98,7 +99,8 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         INBOX("Inbox", "Choose which rows and controls appear"),
         SHARE("Share sheet", "People, shortcuts and sending controls"),
         REGION("Region settings", "Country and network preferences"),
-        BEHAVIOR("App behavior", "Links, privacy and player tools"),
+        PRIVACY("Privacy", "Tracking, device access and links"),
+        BEHAVIOR("App behavior", "Layout, player and app tools"),
         DIAGNOSTICS("Diagnostics", "Backups and troubleshooting");
 
         final String title;
@@ -852,6 +854,8 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
                 return new SharePreferenceCategory(context, screen);
             case REGION:
                 return new SimSpoofPreferenceCategory(context, screen);
+            case PRIVACY:
+                return new PrivacyPreferenceCategory(context, screen);
             case DIAGNOSTICS:
                 return new DebugPreferenceCategory(context, screen);
             case BEHAVIOR:
@@ -913,6 +917,9 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         }
         if (SimSpoofPreferenceCategory.isAvailable()) {
             addMenu(screen, Section.REGION, SettingsMenuPreference.Icon.REGION);
+        }
+        if (PrivacyPreferenceCategory.isAvailable()) {
+            addMenu(screen, Section.PRIVACY, SettingsMenuPreference.Icon.PRIVACY);
         }
 
         // The Diagnostics row always shows, because settings backup and restore live on that

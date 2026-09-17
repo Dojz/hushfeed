@@ -499,7 +499,6 @@ Limits	Límites
 Link copied	Enlace copiado
 Links	Enlaces
 Links in comments open	Los enlaces de los comentarios se abren
-Links, privacy and player tools	Enlaces, privacidad y herramientas del reproductor
 Lists	Listas
 Live	LIVE
 LIVE	LIVE
@@ -1047,3 +1046,31 @@ Zero shows the notice and leaves the feed alone. Anything else covers the feed f
 Zero switches this off. A short reminder after that many minutes of watching, and again after the same again. Time on messages, a profile or search does not count, and nothing is shown while the feed is on hold.	Cero lo desactiva. Un aviso breve tras esos minutos de visionado, y otra vez después de los mismos. El tiempo en mensajes, un perfil o la búsqueda no cuenta, y no se muestra nada mientras el feed está en pausa.
 Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance limit above, which only counts videos Hushfeed itself advanced past.	Cero lo desactiva. Cuenta cada vídeo que aparece en el feed, sin importar cómo llegaste a él, y avisa cuando se alcanza la cifra. Es independiente del límite de avance automático de arriba, que solo cuenta los vídeos que Hushfeed pasó por ti.
 Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.	Cero lo desactiva. Cuenta los minutos que el reproductor pasa funcionando en el feed. El tiempo en mensajes, un perfil o la búsqueda no cuenta.
+Tracking, device access and links	Rastreo, acceso al dispositivo y enlaces
+Tracking	Rastreo
+Device access	Acceso al dispositivo
+Block contact list access	Bloquear el acceso a los contactos
+Answer TikTok's reads of your contacts with an empty list. Find Friends and People you may know lose access to your contact list.	Responde a las lecturas de tus contactos por parte de TikTok con una lista vacía. Buscar amigos y Personas que quizá conozcas pierden el acceso a tu lista de contactos.
+Block installed app scanning	Bloquear el escaneo de apps instaladas
+Answer TikTok's scan of the apps on this phone with an empty list. A check for one named app, which TikTok also uses to open an app you tap, is left alone.	Responde al escaneo de las apps de este teléfono por parte de TikTok con una lista vacía. La comprobación de una app concreta, que TikTok también usa para abrir una app que tocas, no se toca.
+Block location	Bloquear la ubicación
+Answer TikTok's location requests with nothing. The region settings change the locale and timezone; this stops the coordinates.	Responde a las solicitudes de ubicación de TikTok con nada. Los ajustes de región cambian la configuración regional y la zona horaria; esto detiene las coordenadas.
+Block clipboard reads	Bloquear la lectura del portapapeles
+Stop TikTok reading what you copied. Copying a link from TikTok still works.	Impide que TikTok lea lo que copiaste. Copiar un enlace desde TikTok sigue funcionando.
+Block motion sensors	Bloquear los sensores de movimiento
+Stop TikTok listening to the accelerometer, gyroscope, magnetometer and the other motion sensors it uses to fingerprint the phone. Saves the battery they wake.	Impide que TikTok escuche el acelerómetro, el giroscopio, el magnetómetro y los demás sensores de movimiento que usa para identificar el teléfono. Ahorra la batería que consumen.
+Show when the camera or microphone is in use	Mostrar cuando la cámara o el micrófono estén en uso
+A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.	Un punto verde en la esquina superior mientras TikTok tiene la cámara abierta y uno naranja mientras graba sonido. Desaparecen cuando termina el acceso.
+Cut the in-app browser off from TikTok	Desconectar el navegador integrado de TikTok
+Stop the in-app browser handing TikTok's JavaScript bridge to the pages it loads. Most of TikTok's own web pages need that bridge, including the shop checkout and the CAPTCHA page, so leave this off unless you want them cut off too.	Impide que el navegador integrado entregue el puente de JavaScript de TikTok a las páginas que carga. La mayoría de las páginas web del propio TikTok necesitan ese puente, incluidas la caja de la tienda y la página del CAPTCHA, así que déjalo apagado a menos que quieras desconectarlas también.
+Camera and microphone in use	Cámara y micrófono en uso
+Camera in use	Cámara en uso
+Microphone in use	Micrófono en uso
+Layout, player and app tools	Diseño, reproductor y herramientas de la app
+Maximum views per comment	Máximo de visualizaciones por comentario
+Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.	Oculta los vídeos con muchas visualizaciones y pocos comentarios. Funciona igual que las visualizaciones por me gusta. Cero lo desactiva.
+view per comment	visualización por comentario
+views per comment	visualizaciones por comentario
+Feed button size	Tamaño de los botones del feed
+Normal	Normal
+Larger (1.25x)	Más grande (1,25x)

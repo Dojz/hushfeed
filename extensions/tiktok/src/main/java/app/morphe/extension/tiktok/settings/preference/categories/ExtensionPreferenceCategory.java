@@ -34,8 +34,6 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
      */
     public static boolean isAvailable() {
         return SettingsStatus.foldableSplitViewEnabled
-                || SettingsStatus.sanitizeShareUrlsEnabled
-                || SettingsStatus.externalBrowserEnabled
                 || SettingsStatus.showSeekbarEnabled
                 || SettingsStatus.seekbarThumbnailEnabled
                 || SettingsStatus.stopVideoLoopingEnabled
@@ -43,8 +41,6 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                 || SettingsStatus.longPressSpeedLockEnabled
                 || SettingsStatus.disableLongPressQuickShareEnabled
                 || SettingsStatus.disableLongPressRepostEnabled
-                || SettingsStatus.disableTelemetryEnabled
-                || SettingsStatus.ghostModeEnabled
                 || SettingsStatus.blockAuthorEnabled
                 || SettingsStatus.notInterestedEnabled
                 || SettingsStatus.nonPersonalizedSearchEnabled
@@ -69,34 +65,6 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                     "Split comment minimum width", "Window width needed to enable the layout. Restart TikTok to apply this.",
                     Settings.FOLDABLE_SPLIT_VIEW_MIN_WIDTH_DP, "dp", "dp"));
         }
-        if (SettingsStatus.sanitizeShareUrlsEnabled || SettingsStatus.externalBrowserEnabled) {
-            addPreference(new SectionHeadingPreference(context, "Links"));
-        }
-        if (SettingsStatus.sanitizeShareUrlsEnabled) {
-            addPreference(new TogglePreference(
-                    context,
-                    "Sanitize sharing links",
-                    "Remove tracking parameters from shared links.",
-                    BaseSettings.SANITIZE_SHARING_LINKS
-            ));
-            addPreference(new app.morphe.extension.tiktok.settings.preference.InputTextPreference(
-                context,
-                "Share links through another host",
-                "A host to put in place of tiktok.com when you share or copy a link, like "
-                        + "vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok "
-                        + "links are changed, and only the host: nothing is sent anywhere new.",
-                Settings.CUSTOM_SHARE_DOMAIN
-            ));
-        }
-        if (SettingsStatus.externalBrowserEnabled) {
-            addPreference(new TogglePreference(
-                    context,
-                    "Open external links directly",
-                    "Open profile and story website links in your system browser instead of TikTok's in-app browser.",
-                    Settings.OPEN_EXTERNAL_LINKS
-            ));
-        }
-
         boolean hasPlayer = SettingsStatus.showSeekbarEnabled || SettingsStatus.seekbarThumbnailEnabled
                 || SettingsStatus.stopVideoLoopingEnabled || SettingsStatus.resumeVideoAfterScrollEnabled
                 || SettingsStatus.longPressSpeedLockEnabled || SettingsStatus.disableLongPressQuickShareEnabled
@@ -158,28 +126,6 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                     "Disable the long press repost",
                     "Stop a long press on Like from opening TikTok's repost action.",
                     Settings.DISABLE_LONG_PRESS_REPOST
-            ));
-        }
-        if (SettingsStatus.ghostModeEnabled || SettingsStatus.disableTelemetryEnabled) {
-            addPreference(new SectionHeadingPreference(context, "Privacy"));
-        }
-        if (SettingsStatus.ghostModeEnabled) {
-            addPreference(new TogglePreference(
-                    context,
-                    "Ghost mode",
-                    "Stop TikTok reporting that you viewed a story or a profile, or that you are "
-                            + "typing. Online status is unchanged. It cannot undo what the server has "
-                            + "already recorded.",
-                    Settings.GHOST_MODE
-            ));
-        }
-        if (SettingsStatus.disableTelemetryEnabled) {
-            addPreference(new TogglePreference(
-                    context,
-                    "Disable analytics and tracking",
-                    "Stop ByteDance AppLog events, AppsFlyer attribution, explicit Firebase screen reports and "
-                            + "crash reporting from being sent. TikTok's own diagnostics go quiet with them.",
-                    Settings.DISABLE_ANALYTICS
             ));
         }
         if (SettingsStatus.blockAuthorEnabled) {

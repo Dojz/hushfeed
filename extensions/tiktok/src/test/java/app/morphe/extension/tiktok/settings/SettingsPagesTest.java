@@ -38,9 +38,9 @@ import org.robolectric.annotation.GraphicsMode;
 public class SettingsPagesTest {
     @Rule public final SettingsContextRule settingsContext = new SettingsContextRule();
     private static final String[] SECTIONS = {"FEED_FILTER", "FEED_NAVIGATION", "INTERFACE", "COMMENTS",
-            "DOWNLOADS", "PLAYBACK", "INBOX", "SHARE", "REGION", "BEHAVIOR", "DIAGNOSTICS"};
+            "DOWNLOADS", "PLAYBACK", "INBOX", "SHARE", "REGION", "PRIVACY", "BEHAVIOR", "DIAGNOSTICS"};
     private static final String[] TITLES = {"Feed filter", "Feed navigation", "Interface", "Comments and translation",
-            "Downloads", "Playback", "Inbox", "Share sheet", "Region settings", "App behavior", "Diagnostics"};
+            "Downloads", "Playback", "Inbox", "Share sheet", "Region settings", "Privacy", "App behavior", "Diagnostics"};
     private final Map<Field, Boolean> statuses = new LinkedHashMap<>();
 
     public static class PageActivity extends Activity {
@@ -104,13 +104,14 @@ public class SettingsPagesTest {
             app.morphe.extension.tiktok.settings.preference.categories.InboxPreferenceCategory.class,
             app.morphe.extension.tiktok.settings.preference.categories.SharePreferenceCategory.class,
             app.morphe.extension.tiktok.settings.preference.categories.SimSpoofPreferenceCategory.class,
+            app.morphe.extension.tiktok.settings.preference.categories.PrivacyPreferenceCategory.class,
             // Left out until 2026-09-14, and it was the one that had drifted: its row asked a
             // copy of the question kept in the fragment, and the copy was missing the launcher
             // shortcuts flag. A page this sweep does not walk is a page the drift can hide in.
             app.morphe.extension.tiktok.settings.preference.categories.ExtensionPreferenceCategory.class,
         };
         String[] titles = {"Feed filter", "Feed navigation", "Interface", "Comments and translation",
-            "Downloads", "Playback", "Inbox", "Share sheet", "Region settings", "App behavior"};
+            "Downloads", "Playback", "Inbox", "Share sheet", "Region settings", "Privacy", "App behavior"};
 
         // What each page builds with nothing in the bundle at all. Those rows are unconditional
         // and show whenever something else opens the page, so they are the floor to compare
@@ -1011,7 +1012,7 @@ assertEquals(View.LAYOUT_DIRECTION_RTL, configuration.getLayoutDirection());
      * coverage that already exists.
      */
     private static final String[] MAIN_PAGES = {"FEED_FILTER", "INTERFACE", "COMMENTS",
-            "DOWNLOADS", "PLAYBACK", "INBOX", "SHARE", "BEHAVIOR", "DIAGNOSTICS"};
+            "DOWNLOADS", "PLAYBACK", "INBOX", "SHARE", "PRIVACY", "BEHAVIOR", "DIAGNOSTICS"};
 
     /**
      * A badge on the master menu says how many settings on the page behind it are away from

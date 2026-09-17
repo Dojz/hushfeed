@@ -423,6 +423,18 @@ public class Settings extends BaseSettings {
     // Feed toolbar controls. The LIVE button shares HIDE_LIVE_ENTRANCE with the overlay hider.
     public static final BooleanSetting GHOST_MODE = new BooleanSetting("ghost_mode", FALSE);
     public static final BooleanSetting DISABLE_ANALYTICS = new BooleanSetting("disable_analytics", FALSE);
+    // One switch per device-access patch, on by default: the patch was chosen to block, so it
+    // blocks until the reader says otherwise. Each is read at the intercepted call, so none
+    // needs a restart.
+    public static final BooleanSetting BLOCK_CONTACT_LIST = new BooleanSetting("block_contact_list", TRUE);
+    public static final BooleanSetting BLOCK_INSTALLED_APPS = new BooleanSetting("block_installed_apps", TRUE);
+    public static final BooleanSetting BLOCK_LOCATION = new BooleanSetting("block_location", TRUE);
+    public static final BooleanSetting BLOCK_CLIPBOARD_READS = new BooleanSetting("block_clipboard_reads", TRUE);
+    public static final BooleanSetting BLOCK_MOTION_SENSORS = new BooleanSetting("block_motion_sensors", TRUE);
+    // Off by default: TikTok's own hybrid pages, the shop checkout and the CAPTCHA page among
+    // them, are built on that bridge and stop working without it.
+    public static final BooleanSetting BLOCK_WEBVIEW_JS_INTERFACES = new BooleanSetting("block_webview_js_interfaces", FALSE);
+    public static final BooleanSetting CAMERA_MIC_INDICATOR = new BooleanSetting("camera_mic_indicator", TRUE);
     public static final BooleanSetting HIDE_FEED_FOLLOW_BUTTON =
             new BooleanSetting("hide_feed_follow_button", FALSE, true);
     public static final BooleanSetting HIDE_FEED_SAVE_BUTTON =

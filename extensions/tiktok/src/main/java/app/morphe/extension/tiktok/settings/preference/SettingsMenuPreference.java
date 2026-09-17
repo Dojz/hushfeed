@@ -37,6 +37,7 @@ public final class SettingsMenuPreference extends Preference {
         INBOX,
         SHARE,
         REGION,
+        PRIVACY,
         BEHAVIOR,
         LAB,
         DIAGNOSTICS
@@ -410,6 +411,22 @@ public final class SettingsMenuPreference extends Preference {
                     canvas.drawCircle(cx, cy, bounds.width() * 0.23f, line);
                     canvas.drawLine(left, cy, right, cy, line);
                     canvas.drawOval(new RectF(cx - bounds.width() * 0.1f, top, cx + bounds.width() * 0.1f, bottom), line);
+                    break;
+                case PRIVACY:
+                    // A shield with a tick in it.
+                    path.reset();
+                    path.moveTo(cx, top);
+                    path.lineTo(right, top + bounds.height() * 0.08f);
+                    path.lineTo(right, cy);
+                    path.quadTo(right, bottom - bounds.height() * 0.05f, cx, bottom);
+                    path.quadTo(left, bottom - bounds.height() * 0.05f, left, cy);
+                    path.lineTo(left, top + bounds.height() * 0.08f);
+                    path.close();
+                    canvas.drawPath(path, line);
+                    canvas.drawLine(cx - bounds.width() * 0.1f, cy, cx - bounds.width() * 0.02f,
+                            cy + bounds.height() * 0.08f, line);
+                    canvas.drawLine(cx - bounds.width() * 0.02f, cy + bounds.height() * 0.08f,
+                            cx + bounds.width() * 0.11f, cy - bounds.height() * 0.09f, line);
                     break;
                 case LAYOUT:
                 case BEHAVIOR:

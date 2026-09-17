@@ -500,7 +500,6 @@ Limits,Batas
 Link copied,Tautan disalin
 Links,Tautan
 Links in comments open,Tautan di komentar bisa dibuka
-"Links, privacy and player tools","Tautan, privasi, dan perkakas pemutar"
 Lists,Daftar
 Live,LIVE
 LIVE,LIVE
@@ -1048,3 +1047,31 @@ YTDLnis download type,Jenis unduhan YTDLnis
 "Zero switches this off. A short reminder after that many minutes of watching, and again after the same again. Time on messages, a profile or search does not count, and nothing is shown while the feed is on hold.","Nol mematikan ini. Pengingat singkat setelah sekian menit menonton, lalu lagi setelah selang yang sama. Waktu di pesan, profil, atau pencarian tidak dihitung, dan tidak ada yang muncul selama feed ditahan."
 "Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance limit above, which only counts videos Hushfeed itself advanced past.","Nol mematikan ini. Menghitung setiap video yang muncul di feed, bagaimanapun kamu sampai ke sana, dan memberi tahu begitu jumlahnya tercapai. Ini terpisah dari batas maju otomatis di atas, yang hanya menghitung video yang dilewati Hushfeed sendiri."
 "Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.","Nol mematikan ini. Menghitung menit saat pemutar berjalan di feed. Waktu di pesan, profil, atau pencarian tidak dihitung."
+"Tracking, device access and links","Pelacakan, akses perangkat, dan tautan"
+Tracking,Pelacakan
+Device access,Akses perangkat
+Block contact list access,Blokir akses ke daftar kontak
+Answer TikTok's reads of your contacts with an empty list. Find Friends and People you may know lose access to your contact list.,Menjawab pembacaan kontak oleh TikTok dengan daftar kosong. Temukan Teman dan Orang yang mungkin Anda kenal kehilangan akses ke daftar kontak Anda.
+Block installed app scanning,Blokir pemindaian aplikasi terpasang
+"Answer TikTok's scan of the apps on this phone with an empty list. A check for one named app, which TikTok also uses to open an app you tap, is left alone.","Menjawab pemindaian aplikasi di ponsel ini oleh TikTok dengan daftar kosong. Pemeriksaan satu aplikasi tertentu, yang juga dipakai TikTok untuk membuka aplikasi yang Anda ketuk, dibiarkan."
+Block location,Blokir lokasi
+Answer TikTok's location requests with nothing. The region settings change the locale and timezone; this stops the coordinates.,Menjawab permintaan lokasi TikTok dengan kosong. Pengaturan wilayah mengubah lokal dan zona waktu; ini menghentikan koordinatnya.
+Block clipboard reads,Blokir pembacaan papan klip
+Stop TikTok reading what you copied. Copying a link from TikTok still works.,Mencegah TikTok membaca apa yang Anda salin. Menyalin tautan dari TikTok tetap berfungsi.
+Block motion sensors,Blokir sensor gerak
+"Stop TikTok listening to the accelerometer, gyroscope, magnetometer and the other motion sensors it uses to fingerprint the phone. Saves the battery they wake.","Mencegah TikTok mendengarkan akselerometer, giroskop, magnetometer, dan sensor gerak lain yang dipakainya untuk mengenali ponsel. Menghemat baterai yang mereka bangunkan."
+Show when the camera or microphone is in use,Tampilkan saat kamera atau mikrofon dipakai
+A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.,Titik hijau di sudut atas selama TikTok membuka kamera dan titik oranye selama merekam suara. Keduanya hilang saat akses berakhir.
+Cut the in-app browser off from TikTok,Putuskan peramban dalam aplikasi dari TikTok
+"Stop the in-app browser handing TikTok's JavaScript bridge to the pages it loads. Most of TikTok's own web pages need that bridge, including the shop checkout and the CAPTCHA page, so leave this off unless you want them cut off too.","Mencegah peramban dalam aplikasi menyerahkan jembatan JavaScript TikTok ke halaman yang dimuatnya. Sebagian besar halaman web milik TikTok memerlukan jembatan itu, termasuk kasir toko dan halaman CAPTCHA, jadi biarkan mati kecuali Anda ingin memutus halaman itu juga."
+Camera and microphone in use,Kamera dan mikrofon sedang dipakai
+Camera in use,Kamera sedang dipakai
+Microphone in use,Mikrofon sedang dipakai
+"Layout, player and app tools","Tata letak, pemutar, dan alat aplikasi"
+Maximum views per comment,Maksimum tayangan per komentar
+Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.,Sembunyikan video dengan banyak tayangan dan sedikit komentar. Bekerja sama seperti tayangan per suka. Nol mematikannya.
+view per comment,tayangan per komentar
+views per comment,tayangan per komentar
+Feed button size,Ukuran tombol feed
+Normal,Normal
+Larger (1.25x),"Lebih besar (1,25x)"

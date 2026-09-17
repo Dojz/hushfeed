@@ -64,17 +64,17 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 | `AMOLED dark theme` | Replaces TikTok's dark background palette with black or a chosen color. The light theme keeps its colors. It is the one patch that rewrites resources, so patching with it on needs the memory limit raised to 768 MB. |
 | `Automatic video advance` | Keeps TikTok's automatic advance enabled while preserving its pause, dialog and gesture checks, and shows TikTok's own Auto scroll action in the video panel for accounts outside its rollout. |
 | `Block author button` | Adds one-tap controls for blocking the creator, hiding them locally and blocking the current sound. The local-hide and sound controls have separate switches. Long press any visible control to move it, and all of them hide while comments are open. |
-| `Block contact list access` | Stops TikTok from reading your phone contacts. Find Friends and People you may know lose access to your contact list. |
-| `Block installed app scanning` | Stops TikTok from reading the list of apps installed on your phone. TikTok uses this for device fingerprinting and ad targeting. |
+| `Block contact list access` | Answers TikTok's reads of your phone contacts with an empty list. Find Friends and People you may know lose access to your contact list. Switch: Hushfeed settings > Privacy. |
+| `Block installed app scanning` | Answers TikTok's scan of the apps installed on your phone with an empty list. Checks for one named app, which TikTok also uses to open an app you tap, are left alone. Switch: Hushfeed settings > Privacy. |
 | `Block P2P video relay` | Strips TikTok's peer-to-peer CDN libraries so your phone is not used as a relay node for other people's video traffic. Saves battery and mobile data. |
-| `Camera and microphone indicator` | Shows a small colored dot when TikTok accesses the camera or microphone. Green for camera, orange for microphone. Stays visible until the access ends. |
+| `Camera and microphone indicator` | Shows a small dot in the top corner while TikTok has the camera open or is recording sound. Green for the camera, orange for the microphone, both when both. It goes when the access ends. Switch: Hushfeed settings > Privacy. |
 | `Comment publish diagnostics` | Says in the diagnostic report whether a comment send reached TikTok's publish code, what it had in hand, and whether it returned early or handed the comment to the request. A comment that never posts leaves no other trace. |
 | `Comment sort controls` | Shows TikTok's own comment sort sheet on every post, with its hot, newest, media and creator options, instead of the cut-down row an account outside the rollout is given. |
 | `Comment tools` | Hides comments that contain chosen words or come from chosen accounts, turns the thumbs down on each comment into a block button that shows the block symbol, makes a web address in a comment tappable, hides comment media and polls, and adds a box above the comments that narrows them by what they say or who said it. |
 | `Confirm feed interactions` | Adds optional second-tap protection to the feed Follow button and like heart. A red ring marks the armed button. |
 | `Copy comments without username` | Copies only the comment text without including the creator's username. |
 | `Custom offline videos limit` | Adds a custom entry to TikTok's offline videos menu with a configurable limit from 1 to 1000 videos. |
-| `Device privacy guard` | Blocks TikTok from reading your clipboard contents and scanning devices on your local network. Clipboard writes (copying links you asked for) are not affected. |
+| `Device privacy guard` | Blocks TikTok from reading your clipboard. Copying a link you asked for still works. Switch: Hushfeed settings > Privacy. |
 | `Diagnostic tools` | Adds diagnostic logging, filtered reports and local TikTok crash capture. The switches are under Diagnostics in Hushfeed settings. |
 | `Disable login requirement` | Removes TikTok's mandatory login gate from supported flows. |
 | `Disable screen capture detection` | Prevents TikTok from reacting to screenshots and screen recordings. |
@@ -112,11 +112,11 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 | `Hide the risk control CAPTCHA` | Hides TikTok's risk control CAPTCHA dialog, raised by its BdTuring service, which the browsing CAPTCHA patch does not cover. Answers the Hide CAPTCHA popups setting, never touches SMS or two factor verification, and never hides a check the server raised over a follow, like, comment or repost. Off by default. |
 | `Hide video overlays` | Hides the visual search prompt TikTok lays over videos, the Live entrance in the top left corner, caption and music text, selected action buttons or their counts in the right column, survey cards and the status bar. |
 | `Hold-and-slide 2x lock` | Enables TikTok's native hold, slide down, and release gesture to lock 2x speed. |
-| `In-app browser privacy guard` | Stops TikTok from injecting JavaScript tracking interfaces into the in-app browser's WebView. Links redirected to the system browser by Open external links directly are not affected. |
+| `In-app browser privacy guard` | Can stop TikTok's in-app browser handing its JavaScript bridge to the pages it loads. Most of TikTok's own web pages need that bridge, including the shop checkout and the CAPTCHA page, so the switch is off until you turn it on. Switch: Hushfeed settings > Privacy. |
 | `Keep the Favorites tab` | Keeps the Favorites tab on your profile when TikTok's server puts the account into an experiment that empties it. Two people saw that after patching: the tab was there and the saved videos were not. |
 | `Keep the screen's refresh rate` | Stops TikTok asking the screen to run slower than it can, which it does by asking for the frame rate of the video it is playing. On a 90 or 120 Hz phone that ask takes the whole app down to that rate, scrolling included. A request that is not slower than the screen is left alone. |
 | `Limit background traffic` | Turns off TikTok's buffer-preload gate and skips its push initialization task. Videos may start buffering later, and TikTok push notifications may stop. |
-| `Location access governor` | Blocks TikTok from reading your real GPS location. Location requests return null. Goes beyond the SIM and region spoof, which changes the locale and timezone but not the coordinates. |
+| `Location access governor` | Answers TikTok's location requests with nothing: the last known location comes back empty and update requests never fire. The SIM and region spoof change the locale and timezone, not the coordinates; this stops the coordinates. Switch: Hushfeed settings > Privacy. |
 | `Long-press controls` | Lets a long press on a video keep TikTok's own action, do nothing, open the video's comments, save the original sound, or copy the link to the video or its sound, and can turn a press on the left or right third of the screen into a jump back or forward. Brings Double-tap controls with it, which supplies the comment control. |
 | `Not interested button` | Adds a movable button that tells TikTok you aren't interested in the current video. It hides while comments are open. Off by default. |
 | `Notification controls` | Adds a switch for the notification saying somebody new followed you, and one for message streaks, neither of which TikTok lets you turn off. The follower switch drops the notification before Android is asked to post it, so nothing else in the drawer is affected. |
@@ -125,19 +125,19 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 | `Playback speed` | Remembers playback speed or applies a default to each new video, with custom menu choices up to 3x. |
 | `Region spoof` | Matches locale, timezone and native region getters to the SIM preset, with a separate experimental store-region switch. |
 | `Remember clear display` | Remembers clear display between videos, or enters it automatically after a chosen delay. |
-| `Remove content credential and card scanner assets` | Empties TikTok's bundled C2PA and Microblink card-scanning assets, Pitaya AI engine libraries, the live-cast dynamic feature, and runtime monitoring probes. |
+| `Remove content credential and card scanner assets` | Empties TikTok's bundled C2PA and Microblink card-scanning assets, the Pitaya AI model libraries, the live-cast dynamic feature, and the ART log monitor probe. |
 | `Remove creation tools` | Empties TikTok's reviewed editor, camera-effect and face-model assets. Recording, editing, effects and creator tools may stop working. |
 | `Remove LIVE extras` | Empties TikTok's link-mic and LIVE match or minigame assets, then skips its gift-effect widget setup. Co-hosting, games and animated gifts may stop. |
 | `Remove unused language packs` | Empties unselected TikTok language bundles while always keeping English. Selected language codes are checked before any file changes. |
-| `Resource and battery governor` | Blocks TikTok from polling device sensors for fingerprinting and throttles background buffer preloading. Reduces battery drain from motion tracking and prefetch. |
+| `Resource and battery governor` | Stops TikTok listening to the motion sensors it polls for device fingerprinting: the accelerometer, gyroscope, magnetometer, rotation, gravity and linear acceleration sensors. Saves the battery they wake. Switch: Hushfeed settings > Privacy. |
 | `Resume videos after scrolling` | Continues supported videos from where playback stopped when returning after a scroll. |
 | `Sanitize sharing links` | Removes tracking parameters from TikTok links before they are shared, and can put a host of your choosing in place of tiktok.com. |
 | `Settings` | Adds the Hushfeed settings screen to TikTok. |
 | `Share sheet tools` | Asks twice before a video is sent to a friend from the share sheet. The check follows the account or conversation instead of the visible name and covers accessibility actions and keyboard input. It can also hide chosen people, share options or the whole Send to row. |
 | `Show author region` | Adds an option to show the country a video was posted from next to the creator's name on the feed. |
 | `Show LIVE search` | Shows TikTok's search entry in the Live drawer where supported. |
-| `Show the progress bar thumbnail` | Shows TikTok's video preview thumbnail while dragging the seekbar. |
 | `Show the progress bar` | Shows TikTok's native video seekbar where it would normally be hidden. |
+| `Show the progress bar thumbnail` | Shows TikTok's video preview thumbnail while dragging the seekbar. |
 | `SIM spoof` | Spoofs SIM country and operator information retrieved by TikTok, with country presets for easier setup. |
 | `Skip content warnings` | Adds an option to play videos TikTok has classified without the warning overlay asking to be tapped through first. |
 | `Skip the splash ad` | Stops TikTok's splash-ad preload tasks and returns false from its reviewed splash and TopView gates. Other startup behavior is left in place. |

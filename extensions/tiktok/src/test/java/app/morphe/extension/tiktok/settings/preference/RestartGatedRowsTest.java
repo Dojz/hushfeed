@@ -57,7 +57,7 @@ public class RestartGatedRowsTest {
      */
     private static final String[] SECTIONS = {
             "FEED_FILTER", "FEED_NAVIGATION", "INTERFACE", "COMMENTS", "DOWNLOADS", "PLAYBACK",
-            "INBOX", "SHARE", "REGION", "BEHAVIOR", "DIAGNOSTICS",
+            "INBOX", "SHARE", "REGION", "PRIVACY", "BEHAVIOR", "DIAGNOSTICS",
     };
 
     @Test public void theWalkCoversEveryPageTheSettingsScreenHas() throws Exception {
