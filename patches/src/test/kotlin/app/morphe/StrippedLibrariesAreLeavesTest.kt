@@ -23,16 +23,20 @@ import org.junit.Test
 class StrippedLibrariesAreLeavesTest {
     @Test
     fun `no emptied library is needed by one that stays`() {
-        val apk = fixture()
-        assumeTrue("no TikTok 46.2.3 fixture on this machine", apk != null)
+        val apks = fixtures()
+        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
         val stripped = strippedLibraryNames()
         assertTrue("the scan found too few emptied libraries to mean anything: $stripped", stripped.size > 10)
 
-        val graph = neededGraph(apk!!)
-        assertTrue("the fixture carries too few arm64 libraries to be TikTok", graph.size > 100)
-        val offenders = stripped.flatMap { name ->
-            graph.filter { (lib, needed) -> lib !in stripped && name in needed }
-                .keys.sorted().map { "$name is needed by $it" }
+        // Every retained build, not only the declared target: the release receipt patches all
+        // of them, and a library that is a leaf on 46.2.3 may have gained a dependent since.
+        val offenders = apks.flatMap { apk ->
+            val graph = neededGraph(apk)
+            assertTrue("${apk.name} carries too few arm64 libraries to be TikTok", graph.size > 100)
+            stripped.flatMap { name ->
+                graph.filter { (lib, needed) -> lib !in stripped && name in needed }
+                    .keys.sorted().map { "${apk.name}: $name is needed by $it" }
+            }
         }
         assertEquals(
             "an emptied library is still linked against, so the library that needs it fails to load",
@@ -52,10 +56,11 @@ class StrippedLibrariesAreLeavesTest {
             .toSet()
     }
 
-    private fun fixture(): File? {
+    /** Every TikTok APK in the fixture directory, the declared target and the retained newer builds. */
+    private fun fixtures(): List<File> {
         val directory = File(System.getenv("HUSHFEED_FIXTURE_DIR") ?: "C:/_claude-backups/tiktok-fixture")
-        if (!directory.isDirectory) return null
-        return directory.listFiles()?.firstOrNull { it.isFile && it.name.contains("46.2.3") && it.extension == "apk" }
+        if (!directory.isDirectory) return emptyList()
+        return directory.listFiles()?.filter { it.isFile && it.extension == "apk" }?.sortedBy { it.name } ?: emptyList()
     }
 
     /** Library name to the names it declares as DT_NEEDED, for every arm64 library in the APK. */

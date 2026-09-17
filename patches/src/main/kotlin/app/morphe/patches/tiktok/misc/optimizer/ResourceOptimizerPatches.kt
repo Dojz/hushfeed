@@ -219,15 +219,95 @@ private val liveCastFiles4623 = listOf(
     file("lib/armeabi-v7a/libdex_df_live_cast.so", "3189dad02b2c99caac3511da1ba9e761ab452299bf3fc495867c76cfbde679f2"),
 )
 
+// The C2PA and Microblink files are byte-identical on every retained build. The Pitaya, live
+// cast and log monitor libraries are not: each build ships its own, and 46.7.3 and 46.8.3 ship
+// arm64 only. One reviewed path set per build, read off the fixtures on 2026-09-17, or the
+// receipt's forced runs on the newer builds refuse the group ("no reviewed path set matched").
+private val c2paArm64Files = listOf(
+    file("lib/arm64-v8a/libtt_c2pa_sdk.so", "e9c5a788ca3b36696bec2a05832d856af0a2510ccbb4d393ccdb9fbaa2aa16ba"),
+    file("lib/arm64-v8a/libtt_c2pa_sdk_d.so", "a64ce0fb43e7c22e2d95d8bbfcaede522d585c5d51dbae87d24db1359c27a01a"),
+)
+
+private val c2paArmeabiFiles = listOf(
+    file("lib/armeabi-v7a/libtt_c2pa_sdk.so", "24bc0cbc99cdca42ddd9062ac7deef64abaf3d1206969ef8f461c097ebdaf77c"),
+    file("lib/armeabi-v7a/libtt_c2pa_sdk_d.so", "a96af4a99de68503234e3ab658d9702ac436ae1e0650dc5551e4e29a89700b0c"),
+)
+
+private val pitayaFiles4673 = listOf(
+    file("lib/arm64-v8a/libPitayaBdComponent.so", "ae7cf15f60167939497dabfd2c0149d94d3b2b2ae8045a309287066ffcad4edd"),
+    file("lib/arm64-v8a/libPitayaTTPPolicy.so", "cfdde9c90b7a1e8a7258f50eab8d626326026de282b1b40c8da82556c708d12d"),
+    file("lib/arm64-v8a/libTTNativeML.so", "c3e8635ba8f6bddaa297f096153d668c88f2b2457d1ecc95fbf79350232bf513"),
+    file("lib/arm64-v8a/libclient_ai_impl_df_jni.so", "400dd59e695e229017cb4835ab997d54280b35de4b4d9f3deb602db29c0b18a5"),
+    file("lib/arm64-v8a/libclient_ai_impl_jni.so", "d0f460ff1a77521c51adbcee6597a6e3afc2dbd849f4b563fb5e3eb00f2dd624"),
+    file("lib/arm64-v8a/libdex_df_pitaya.so", "fd207d5750c7ffa9614f0fdd8ef5ea6fe546bde765387795d6833063d8e715e3"),
+)
+
+private val monitorFiles4673 = listOf(
+    file("lib/arm64-v8a/libartlog_monitor.so", "58ef4dc22fbbfae9ed1099ceba0f9c8549bdf6ecdb46c7a52b92ad0102fb19d3"),
+)
+
+private val liveCastFiles4673 = listOf(
+    file("lib/arm64-v8a/libdex_df_live_cast.so", "4625d073c58177af99917f782cd03236052f58e1bb83688833d54bf82f770176"),
+)
+
+private val pitayaFiles4683 = listOf(
+    file("lib/arm64-v8a/libPitayaBdComponent.so", "ae7cf15f60167939497dabfd2c0149d94d3b2b2ae8045a309287066ffcad4edd"),
+    file("lib/arm64-v8a/libPitayaTTPPolicy.so", "cfdde9c90b7a1e8a7258f50eab8d626326026de282b1b40c8da82556c708d12d"),
+    file("lib/arm64-v8a/libTTNativeML.so", "d36ee98f6f830ac707e92667f6c722414e4387b97ece99e30ddaf34d807d27f5"),
+    file("lib/arm64-v8a/libclient_ai_impl_df_jni.so", "6672f774e57996e25465104dbb17e13b5cd1895e96375f2dd2a0bf121e6bb83d"),
+    file("lib/arm64-v8a/libclient_ai_impl_jni.so", "aa7205cc36f70214bb805121717cb42bdc116c31d66ca09ee7269c499751220b"),
+    file("lib/arm64-v8a/libdex_df_pitaya.so", "e114beb125f615cb7403cfa32c21e5d19884cc11e4b1a6b3132421b23d9a4f5e"),
+)
+
+private val monitorFiles4683 = listOf(
+    file("lib/arm64-v8a/libartlog_monitor.so", "58ef4dc22fbbfae9ed1099ceba0f9c8549bdf6ecdb46c7a52b92ad0102fb19d3"),
+)
+
+private val liveCastFiles4683 = listOf(
+    file("lib/arm64-v8a/libdex_df_live_cast.so", "3f5bb5827457443d6c928cf899e88ea330542faf7229ade8a6a134aaa1fc9df6"),
+)
+
+private val pitayaFiles4693 = listOf(
+    file("lib/arm64-v8a/libPitayaBdComponent.so", "ae7cf15f60167939497dabfd2c0149d94d3b2b2ae8045a309287066ffcad4edd"),
+    file("lib/arm64-v8a/libPitayaTTPPolicy.so", "644c79287cb465a2bbba9f43887eca694f0c9561e46830154c0a57473c1d3694"),
+    file("lib/arm64-v8a/libTTNativeML.so", "3ee1f54531db56564834e2aa9ef39e8da71c176be8650569275e2038098ee35a"),
+    file("lib/arm64-v8a/libclient_ai_impl_df_jni.so", "fa6bfab1f2a98bbe1c6d91aba8f482870025ff88cdc7edc9b7b5d9ccfb1a922a"),
+    file("lib/arm64-v8a/libclient_ai_impl_jni.so", "68526523a6c7b17f105647f5856e06cea74c5a7c28d6971a360a95360f1c13fb"),
+    file("lib/arm64-v8a/libdex_df_pitaya.so", "a7a84478d2d4202e688f4f76910ebc7d245cc71caadde805537c4d85be2e102a"),
+    file("lib/armeabi-v7a/libPitayaBdComponent.so", "220748d0bf194d4eebfef7dd004533716de7b2b085c997d015811fd1991efc65"),
+    file("lib/armeabi-v7a/libPitayaTTPPolicy.so", "67e1414f464907311a16567c69717289ed67f3a5334c281913c040cfa7f37a55"),
+    file("lib/armeabi-v7a/libTTNativeML.so", "22faf86123cff1bfdff97bae69c2bf9dee9dfb8fb6d0bc2bf89a61c45b3d3bca"),
+    file("lib/armeabi-v7a/libclient_ai_impl_df_jni.so", "cd81cbd9e342392dab3eb85732c3db293b312ec967e66a82f8455c3b1bcf917e"),
+    file("lib/armeabi-v7a/libclient_ai_impl_jni.so", "14fd15d3b83fa2f064f72948a5cc3b043531a11d0725698a8eaf93a8c6c9ed18"),
+    file("lib/armeabi-v7a/libdex_df_pitaya.so", "a7a84478d2d4202e688f4f76910ebc7d245cc71caadde805537c4d85be2e102a"),
+)
+
+private val monitorFiles4693 = listOf(
+    file("lib/arm64-v8a/libartlog_monitor.so", "58ef4dc22fbbfae9ed1099ceba0f9c8549bdf6ecdb46c7a52b92ad0102fb19d3"),
+    file("lib/armeabi-v7a/libartlog_monitor.so", "2f5810cf024b209e0c6de883af8ca92325217571a39d4ad58035cb8c3ea0c251"),
+)
+
+private val liveCastFiles4693 = listOf(
+    file("lib/arm64-v8a/libdex_df_live_cast.so", "499ed07c6858a5739f55f46bb61b3de64e4dd0aacac76a6f22b01f3f8f058a76"),
+    file("lib/armeabi-v7a/libdex_df_live_cast.so", "499ed07c6858a5739f55f46bb61b3de64e4dd0aacac76a6f22b01f3f8f058a76"),
+)
+
 private val coreAssetProfiles = listOf(
     ResourceProfile(
         "TikTok 46.2.3",
-        microblinkFiles + listOf(
-            file("lib/arm64-v8a/libtt_c2pa_sdk.so", "e9c5a788ca3b36696bec2a05832d856af0a2510ccbb4d393ccdb9fbaa2aa16ba"),
-            file("lib/arm64-v8a/libtt_c2pa_sdk_d.so", "a64ce0fb43e7c22e2d95d8bbfcaede522d585c5d51dbae87d24db1359c27a01a"),
-            file("lib/armeabi-v7a/libtt_c2pa_sdk.so", "24bc0cbc99cdca42ddd9062ac7deef64abaf3d1206969ef8f461c097ebdaf77c"),
-            file("lib/armeabi-v7a/libtt_c2pa_sdk_d.so", "a96af4a99de68503234e3ab658d9702ac436ae1e0650dc5551e4e29a89700b0c"),
-        ) + pitayaFiles4623 + monitorFiles4623 + liveCastFiles4623,
+        microblinkFiles + c2paArm64Files + c2paArmeabiFiles + pitayaFiles4623 + monitorFiles4623 + liveCastFiles4623,
+    ),
+    ResourceProfile(
+        "TikTok 46.7.3",
+        microblinkFiles + c2paArm64Files + pitayaFiles4673 + monitorFiles4673 + liveCastFiles4673,
+    ),
+    ResourceProfile(
+        "TikTok 46.8.3",
+        microblinkFiles + c2paArm64Files + pitayaFiles4683 + monitorFiles4683 + liveCastFiles4683,
+    ),
+    ResourceProfile(
+        "TikTok 46.9.3",
+        microblinkFiles + c2paArm64Files + c2paArmeabiFiles + pitayaFiles4693 + monitorFiles4693 + liveCastFiles4693,
     ),
 )
 
