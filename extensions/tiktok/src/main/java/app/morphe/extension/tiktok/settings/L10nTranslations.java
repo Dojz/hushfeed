@@ -212,8 +212,8 @@ public final class L10nTranslations {
                 "Activity Center (PIA)");
         table.put("Add",
                 "Hinzufügen");
-        table.put("Add a block button to the video player that blocks the account that posted the current video in one tap. An undo action is shown after each block.",
-                "Dem Videoplayer eine Schaltfläche hinzufügen, die das Konto hinter dem aktuellen Video mit einem Tippen blockiert. Nach jeder Blockierung wird eine Rückgängig-Aktion angezeigt.");
+        table.put("Add a block button to the video player that blocks the creator of the current video in one tap. An undo action is shown after each block.",
+                "Dem Videoplayer eine Schaltfläche hinzufügen, die den Ersteller des aktuellen Videos mit einem Tippen blockiert. Nach jeder Blockierung wird eine Rückgängig-Aktion angezeigt.");
         table.put("Add a button beside the block control to send feedback about the current video.",
                 "Neben der Blockieren-Schaltfläche eine Schaltfläche hinzufügen, um Feedback zum aktuellen Video zu senden.");
         table.put("Add a separate button that skips this account locally without blocking it.",
@@ -300,10 +300,10 @@ public final class L10nTranslations {
                 "Neue TikTok-Tabs blockieren");
         table.put("Block new bottom tabs",
                 "Neue untere Tabs blockieren");
-        table.put("Block this account",
-                "Dieses Konto blockieren");
         table.put("Block this commenter",
                 "Diesen Kommentierenden blockieren");
+        table.put("Block this creator",
+                "Diesen Ersteller blockieren");
         table.put("Block this sound",
                 "Diesen Sound blockieren");
         table.put("Blocked",
@@ -1180,10 +1180,10 @@ public final class L10nTranslations {
     private static void fillDe9(Map<String, String> table) {
         table.put("No",
                 "Nein");
-        table.put("No account to block on this video",
-                "Bei diesem Video gibt es kein Konto zum Blockieren");
-        table.put("No account to hide on this video",
-                "Auf diesem Video wurde kein ausblendbares Konto gefunden");
+        table.put("No creator to block on this video",
+                "Kein Ersteller zum Blockieren bei diesem Video");
+        table.put("No creator to hide on this video",
+                "Kein Ersteller zum Ausblenden bei diesem Video");
         table.put("No creators are hidden yet",
                 "Noch keine Creator ausgeblendet");
         table.put("No current value",
@@ -1928,8 +1928,8 @@ public final class L10nTranslations {
                 "Der Sticker konnte nicht gespeichert werden. Versuch es noch einmal.");
         table.put("The story couldn't be saved.",
                 "Die Story konnte nicht gespeichert werden.");
-        table.put("The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
-                "Der Daumen runter an jedem Kommentar blockiert das Konto dahinter, statt zu disliken. Der Kommentar wird blasser, ein Banner bietet den Weg zurück, und ein zweiter Tipp hebt die Blockierung auf.");
+        table.put("The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
+                "Der Daumen runter bei jedem Kommentar blockiert den Kommentator statt zu disliken. Der Kommentar wird gedimmt, ein Rückgängig-Banner folgt, und ein zweites Tippen entsperrt.");
         table.put("The video couldn't be saved. Try again, or choose Automatic.",
                 "Das Video konnte nicht gespeichert werden. Versuche es noch einmal oder wähle Automatisch.");
         table.put("There is no Lab change to undo.",
@@ -2389,8 +2389,8 @@ public final class L10nTranslations {
                 "Centro de actividad (PIA)");
         table.put("Add",
                 "Añadir");
-        table.put("Add a block button to the video player that blocks the account that posted the current video in one tap. An undo action is shown after each block.",
-                "Añade un botón de bloqueo al reproductor que bloquea en un toque la cuenta que publicó el vídeo actual. Después de cada bloqueo se muestra una acción para deshacerlo.");
+        table.put("Add a block button to the video player that blocks the creator of the current video in one tap. An undo action is shown after each block.",
+                "Agrega un botón de bloqueo al reproductor que bloquea al creador del video actual con un toque. Se muestra una acción de deshacer después de cada bloqueo.");
         table.put("Add a button beside the block control to send feedback about the current video.",
                 "Añade un botón junto al control de bloqueo para enviar comentarios sobre el vídeo actual.");
         table.put("Add a separate button that skips this account locally without blocking it.",
@@ -2477,10 +2477,10 @@ public final class L10nTranslations {
                 "Bloquear pestañas nuevas de TikTok");
         table.put("Block new bottom tabs",
                 "Bloquear pestañas inferiores nuevas");
-        table.put("Block this account",
-                "Bloquear esta cuenta");
         table.put("Block this commenter",
                 "Bloquear a quien comenta");
+        table.put("Block this creator",
+                "Bloquear a este creador");
         table.put("Block this sound",
                 "Bloquear este sonido");
         table.put("Blocked",
@@ -3357,10 +3357,10 @@ public final class L10nTranslations {
     private static void fillEs9(Map<String, String> table) {
         table.put("No",
                 "No");
-        table.put("No account to block on this video",
-                "No hay ninguna cuenta que bloquear en este vídeo");
-        table.put("No account to hide on this video",
-                "No hay ninguna cuenta que ocultar en este vídeo");
+        table.put("No creator to block on this video",
+                "No hay creador para bloquear en este video");
+        table.put("No creator to hide on this video",
+                "No hay creador para ocultar en este video");
         table.put("No creators are hidden yet",
                 "Todavía no hay creadores ocultos");
         table.put("No current value",
@@ -4105,8 +4105,8 @@ public final class L10nTranslations {
                 "No se pudo guardar el sticker. Inténtalo otra vez.");
         table.put("The story couldn't be saved.",
                 "No se pudo guardar la historia.");
-        table.put("The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
-                "El pulgar hacia abajo de cada comentario bloquea la cuenta que lo publicó en vez de darle un no me gusta. El comentario se atenúa, aparece un aviso para deshacerlo, y un segundo toque desbloquea.");
+        table.put("The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
+                "El pulgar hacia abajo en cada comentario bloquea al comentarista en vez de dar No me gusta. El comentario se atenúa, un banner de deshacer sigue, y un segundo toque desbloquea.");
         table.put("The video couldn't be saved. Try again, or choose Automatic.",
                 "No se pudo guardar el vídeo. Inténtalo otra vez, o elige Automático.");
         table.put("There is no Lab change to undo.",
@@ -4566,8 +4566,8 @@ public final class L10nTranslations {
                 "Pusat Aktivitas (PIA)");
         table.put("Add",
                 "Tambah");
-        table.put("Add a block button to the video player that blocks the account that posted the current video in one tap. An undo action is shown after each block.",
-                "Tambahkan tombol blokir di pemutar video yang memblokir akun pengunggah video ini dalam satu ketukan. Aksi untuk mengurungkan muncul setelah tiap pemblokiran.");
+        table.put("Add a block button to the video player that blocks the creator of the current video in one tap. An undo action is shown after each block.",
+                "Tambahkan tombol blokir ke pemutar video yang memblokir kreator video saat ini dengan satu ketukan. Tindakan batalkan ditampilkan setelah setiap blokir.");
         table.put("Add a button beside the block control to send feedback about the current video.",
                 "Tambahkan tombol di samping kontrol blokir untuk mengirim masukan tentang video ini.");
         table.put("Add a separate button that skips this account locally without blocking it.",
@@ -4654,10 +4654,10 @@ public final class L10nTranslations {
                 "Blokir tab TikTok yang baru");
         table.put("Block new bottom tabs",
                 "Blokir tab bawah yang baru");
-        table.put("Block this account",
-                "Blokir akun ini");
         table.put("Block this commenter",
                 "Blokir pengomentar ini");
+        table.put("Block this creator",
+                "Blokir kreator ini");
         table.put("Block this sound",
                 "Blokir suara ini");
         table.put("Blocked",
@@ -5534,10 +5534,10 @@ public final class L10nTranslations {
     private static void fillIn9(Map<String, String> table) {
         table.put("No",
                 "Tidak");
-        table.put("No account to block on this video",
-                "Tidak ada akun untuk diblokir di video ini");
-        table.put("No account to hide on this video",
-                "Tidak ada akun yang bisa disembunyikan di video ini");
+        table.put("No creator to block on this video",
+                "Tidak ada kreator untuk diblokir di video ini");
+        table.put("No creator to hide on this video",
+                "Tidak ada kreator untuk disembunyikan di video ini");
         table.put("No creators are hidden yet",
                 "Belum ada kreator yang disembunyikan");
         table.put("No current value",
@@ -6282,8 +6282,8 @@ public final class L10nTranslations {
                 "Sticker tidak bisa disimpan. Coba lagi.");
         table.put("The story couldn't be saved.",
                 "Story-nya tidak bisa disimpan.");
-        table.put("The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
-                "Jempol ke bawah pada tiap komentar memblokir akun penulisnya, bukan memberi dislike. Komentarnya meredup, ada spanduk untuk membatalkan, dan ketukan kedua membuka blokirnya.");
+        table.put("The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
+                "Tombol tidak suka di setiap komentar memblokir komentator alih-alih tidak menyukai. Komentar meredup, banner batalkan mengikuti, dan ketukan kedua membuka blokir.");
         table.put("The video couldn't be saved. Try again, or choose Automatic.",
                 "Videonya tidak bisa disimpan. Coba lagi, atau pilih Otomatis.");
         table.put("There is no Lab change to undo.",
@@ -6743,8 +6743,8 @@ public final class L10nTranslations {
                 "Centro de Atividade (PIA)");
         table.put("Add",
                 "Adicionar");
-        table.put("Add a block button to the video player that blocks the account that posted the current video in one tap. An undo action is shown after each block.",
-                "Adiciona um botão de bloqueio ao player que bloqueia com um toque a conta que publicou o vídeo atual. Depois de cada bloqueio aparece uma ação para desfazer.");
+        table.put("Add a block button to the video player that blocks the creator of the current video in one tap. An undo action is shown after each block.",
+                "Adiciona um botão de bloqueio ao reprodutor que bloqueia o criador do video atual com um toque. Uma ação de desfazer aparece depois de cada bloqueio.");
         table.put("Add a button beside the block control to send feedback about the current video.",
                 "Adiciona um botão ao lado do controle de bloqueio para enviar feedback sobre o vídeo atual.");
         table.put("Add a separate button that skips this account locally without blocking it.",
@@ -6831,10 +6831,10 @@ public final class L10nTranslations {
                 "Bloquear novas abas do TikTok");
         table.put("Block new bottom tabs",
                 "Bloquear novas abas de baixo");
-        table.put("Block this account",
-                "Bloquear esta conta");
         table.put("Block this commenter",
                 "Bloquear quem comentou");
+        table.put("Block this creator",
+                "Bloquear este criador");
         table.put("Block this sound",
                 "Bloquear este som");
         table.put("Blocked",
@@ -7711,10 +7711,10 @@ public final class L10nTranslations {
     private static void fillPt_rBR9(Map<String, String> table) {
         table.put("No",
                 "Não");
-        table.put("No account to block on this video",
-                "Não há conta para bloquear neste vídeo");
-        table.put("No account to hide on this video",
-                "Não há conta para esconder neste vídeo");
+        table.put("No creator to block on this video",
+                "Nenhum criador para bloquear neste video");
+        table.put("No creator to hide on this video",
+                "Nenhum criador para esconder neste video");
         table.put("No creators are hidden yet",
                 "Ainda não há criadores escondidos");
         table.put("No current value",
@@ -8459,8 +8459,8 @@ public final class L10nTranslations {
                 "Não foi possível salvar o sticker. Tente de novo.");
         table.put("The story couldn't be saved.",
                 "Não foi possível salvar o story.");
-        table.put("The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
-                "O joinha para baixo de cada comentário bloqueia a conta que o publicou em vez de descurtir. O comentário escurece, aparece um aviso para desfazer, e um segundo toque desbloqueia.");
+        table.put("The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
+                "O polegar para baixo em cada comentário bloqueia o comentarista em vez de dar Não gostei. O comentário escurece, um banner de desfazer segue, e um segundo toque desbloqueia.");
         table.put("The video couldn't be saved. Try again, or choose Automatic.",
                 "Não foi possível salvar o vídeo. Tente de novo, ou escolha Automático.");
         table.put("There is no Lab change to undo.",

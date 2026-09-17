@@ -68,7 +68,7 @@ Account warning: forced client values apply to every account in this app data an
 Activity,Activity
 Activity Center (PIA),Activity Center (PIA)
 Add,Add
-Add a block button to the video player that blocks the account that posted the current video in one tap. An undo action is shown after each block.,Add a block button to the video player that blocks the account that posted the current video in one tap. An undo action is shown after each block.
+Add a block button to the video player that blocks the creator of the current video in one tap. An undo action is shown after each block.,Add a block button to the video player that blocks the creator of the current video in one tap. An undo action is shown after each block.
 Add a button beside the block control to send feedback about the current video.,Add a button beside the block control to send feedback about the current video.
 Add a separate button that skips this account locally without blocking it.,Add a separate button that skips this account locally without blocking it.
 Add a separate button that skips videos using the current sound.,Add a separate button that skips videos using the current sound.
@@ -112,8 +112,8 @@ Backups and troubleshooting,Backups and troubleshooting
 Black,Black
 Block new TikTok tabs,Block new TikTok tabs
 Block new bottom tabs,Block new bottom tabs
-Block this account,Block this account
 Block this commenter,Block this commenter
+Block this creator,Block this creator
 Block this sound,Block this sound
 Blocked,Blocked
 Blocked %1$s,Blocked %1$s
@@ -540,8 +540,8 @@ Mutes the video behind the comment sheet while you read. Sound comes back when t
 Nearby,Nearby
 Never from these countries,Never from these countries
 No,No
-No account to block on this video,No account to block on this video
-No account to hide on this video,No account to hide on this video
+No creator to block on this video,No creator to block on this video
+No creator to hide on this video,No creator to hide on this video
 No creators are hidden yet,No creators are hidden yet
 No current value,No current value
 No current value and no active override,No current value and no active override
@@ -905,7 +905,7 @@ The smallest value is above the largest,The smallest value is above the largest
 The sound couldn't be saved. Try again.,The sound couldn't be saved. Try again.
 The sticker couldn't be saved. Try again.,The sticker couldn't be saved. Try again.
 The story couldn't be saved.,The story couldn't be saved.
-"The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.","The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks."
+"The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.","The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks."
 "The video couldn't be saved. Try again, or choose Automatic.","The video couldn't be saved. Try again, or choose Automatic."
 There is no Lab change to undo.,There is no Lab change to undo.
 There is no diagnostic data to clear.,There is no diagnostic data to clear.

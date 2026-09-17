@@ -129,7 +129,7 @@ public class CommentsPreferenceCategory extends ConditionalPreferenceCategory {
             addPreference(new TogglePreference(
                     context,
                     "Thumbs down blocks the commenter",
-                    "The thumbs down on each comment blocks the account that posted it instead of "
+                    "The thumbs down on each comment blocks the commenter instead of "
                             + "disliking. The comment dims, an undo banner follows, and a second tap "
                             + "unblocks.",
                     Settings.BLOCK_FROM_COMMENT

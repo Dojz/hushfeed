@@ -66,7 +66,7 @@ Account-sensitive name: forcing this key may affect security, login, compliance,
 Activity	Actividad
 Activity Center (PIA)	Centro de actividad (PIA)
 Add	Añadir
-Add a block button to the video player that blocks the account that posted the current video in one tap. An undo action is shown after each block.	Añade un botón de bloqueo al reproductor que bloquea en un toque la cuenta que publicó el vídeo actual. Después de cada bloqueo se muestra una acción para deshacerlo.
+Add a block button to the video player that blocks the creator of the current video in one tap. An undo action is shown after each block.	Agrega un botón de bloqueo al reproductor que bloquea al creador del video actual con un toque. Se muestra una acción de deshacer después de cada bloqueo.
 Add a button beside the block control to send feedback about the current video.	Añade un botón junto al control de bloqueo para enviar comentarios sobre el vídeo actual.
 Add a separate button that skips this account locally without blocking it.	Añade un botón separado que omite esta cuenta localmente sin bloquearla.
 Add a separate button that skips videos using the current sound.	Añade un botón separado que omite los vídeos que usan el sonido actual.
@@ -111,8 +111,8 @@ Backups and troubleshooting	Copias de seguridad y resolución de problemas
 Black	Negro
 Block new bottom tabs	Bloquear pestañas inferiores nuevas
 Block new TikTok tabs	Bloquear pestañas nuevas de TikTok
-Block this account	Bloquear esta cuenta
 Block this commenter	Bloquear a quien comenta
+Block this creator	Bloquear a este creador
 Block this sound	Bloquear este sonido
 Blocked	Bloqueado
 Blocked %1$s	%1$s bloqueado
@@ -548,8 +548,8 @@ Mutes the video behind the comment sheet while you read. Sound comes back when t
 Nearby	Cerca de ti
 Never from these countries	Nunca desde estos países
 No	No
-No account to block on this video	No hay ninguna cuenta que bloquear en este vídeo
-No account to hide on this video	No hay ninguna cuenta que ocultar en este vídeo
+No creator to block on this video	No hay creador para bloquear en este video
+No creator to hide on this video	No hay creador para ocultar en este video
 No creators are hidden yet	Todavía no hay creadores ocultos
 No current value	Sin valor actual
 No current value and no active override	No hay ningún valor actual ni una sobrescritura activa
@@ -919,7 +919,7 @@ The smallest value is above the largest	El valor mínimo es mayor que el máximo
 The sound couldn't be saved. Try again.	No se pudo guardar el sonido. Inténtalo otra vez.
 The sticker couldn't be saved. Try again.	No se pudo guardar el sticker. Inténtalo otra vez.
 The story couldn't be saved.	No se pudo guardar la historia.
-The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.	El pulgar hacia abajo de cada comentario bloquea la cuenta que lo publicó en vez de darle un no me gusta. El comentario se atenúa, aparece un aviso para deshacerlo, y un segundo toque desbloquea.
+The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.	El pulgar hacia abajo en cada comentario bloquea al comentarista en vez de dar No me gusta. El comentario se atenúa, un banner de deshacer sigue, y un segundo toque desbloquea.
 The video couldn't be saved. Try again, or choose Automatic.	No se pudo guardar el vídeo. Inténtalo otra vez, o elige Automático.
 There is no diagnostic data to clear.	No hay datos de diagnóstico que borrar.
 There is no diagnostic data to put back.	No hay datos de diagnóstico que restaurar.

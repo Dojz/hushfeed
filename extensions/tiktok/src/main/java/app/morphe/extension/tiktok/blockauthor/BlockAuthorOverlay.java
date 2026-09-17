@@ -421,7 +421,7 @@ public final class BlockAuthorOverlay {
     private static View createButton(Activity activity) {
         TextView button = new TextView(activity);
         button.setGravity(Gravity.CENTER);
-        button.setContentDescription(L10n.t(activity, "Block this account"));
+        button.setContentDescription(L10n.t(activity, "Block this creator"));
         button.setFocusable(true);
 
         Drawable glyph = new OverlayGlyphDrawable(OverlayGlyphDrawable.Shape.BLOCK,
@@ -696,7 +696,7 @@ public final class BlockAuthorOverlay {
 
         VideoAuthor author = CurrentVideoAuthor.get();
         if (author == null || !author.isUsable()) {
-            Utils.showToastShort(L10n.t("No account to block on this video"));
+            Utils.showToastShort(L10n.t("No creator to block on this video"));
             return;
         }
 
@@ -723,7 +723,7 @@ public final class BlockAuthorOverlay {
         VideoAuthor author = CurrentVideoAuthor.get();
         if (author == null || !author.isUsable() || author.stableId() == null
                 || author.stableId().isEmpty()) {
-            Utils.showToastShort(L10n.t("No account to hide on this video"));
+            Utils.showToastShort(L10n.t("No creator to hide on this video"));
             return;
         }
 

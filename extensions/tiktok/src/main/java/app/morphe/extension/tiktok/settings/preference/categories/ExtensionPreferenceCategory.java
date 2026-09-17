@@ -186,7 +186,7 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
             addPreference(new TogglePreference(
                     context,
                     "Show block button on videos",
-                    "Add a block button to the video player that blocks the account that posted the "
+                    "Add a block button to the video player that blocks the creator of the "
                             + "current video in one tap. An undo action is shown after each block.",
                     Settings.BLOCK_AUTHOR_BUTTON
             ));

@@ -69,7 +69,7 @@ Account-sensitive name: forcing this key may affect security, login, compliance,
 Activity	Aktivität
 Activity Center (PIA)	Activity Center (PIA)
 Add	Hinzufügen
-Add a block button to the video player that blocks the account that posted the current video in one tap. An undo action is shown after each block.	Dem Videoplayer eine Schaltfläche hinzufügen, die das Konto hinter dem aktuellen Video mit einem Tippen blockiert. Nach jeder Blockierung wird eine Rückgängig-Aktion angezeigt.
+Add a block button to the video player that blocks the creator of the current video in one tap. An undo action is shown after each block.	Dem Videoplayer eine Schaltfläche hinzufügen, die den Ersteller des aktuellen Videos mit einem Tippen blockiert. Nach jeder Blockierung wird eine Rückgängig-Aktion angezeigt.
 Add a button beside the block control to send feedback about the current video.	Neben der Blockieren-Schaltfläche eine Schaltfläche hinzufügen, um Feedback zum aktuellen Video zu senden.
 Add a separate button that skips this account locally without blocking it.	Eine separate Schaltfläche hinzufügen, die dieses Konto lokal überspringt, ohne es zu blockieren.
 Add a separate button that skips videos using the current sound.	Eine separate Schaltfläche hinzufügen, die Videos mit dem aktuellen Sound überspringt.
@@ -114,8 +114,8 @@ Backups and troubleshooting	Sicherungen und Fehlerdiagnose
 Black	Schwarz
 Block new bottom tabs	Neue untere Tabs blockieren
 Block new TikTok tabs	Neue TikTok-Tabs blockieren
-Block this account	Dieses Konto blockieren
 Block this commenter	Diesen Kommentierenden blockieren
+Block this creator	Diesen Ersteller blockieren
 Block this sound	Diesen Sound blockieren
 Blocked	Blockiert
 Blocked %1$s	%1$s blockiert
@@ -551,8 +551,8 @@ Mutes the video behind the comment sheet while you read. Sound comes back when t
 Nearby	In der Nähe
 Never from these countries	Nie aus diesen Ländern
 No	Nein
-No account to block on this video	Bei diesem Video gibt es kein Konto zum Blockieren
-No account to hide on this video	Auf diesem Video wurde kein ausblendbares Konto gefunden
+No creator to block on this video	Kein Ersteller zum Blockieren bei diesem Video
+No creator to hide on this video	Kein Ersteller zum Ausblenden bei diesem Video
 No creators are hidden yet	Noch keine Creator ausgeblendet
 No current value	Kein aktueller Wert
 No current value and no active override	Kein aktueller Wert und keine aktive Überschreibung
@@ -922,7 +922,7 @@ The smallest value is above the largest	Der kleinste Wert liegt über dem größ
 The sound couldn't be saved. Try again.	Der Ton konnte nicht gespeichert werden. Versuch es noch einmal.
 The sticker couldn't be saved. Try again.	Der Sticker konnte nicht gespeichert werden. Versuch es noch einmal.
 The story couldn't be saved.	Die Story konnte nicht gespeichert werden.
-The thumbs down on each comment blocks the account that posted it instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.	Der Daumen runter an jedem Kommentar blockiert das Konto dahinter, statt zu disliken. Der Kommentar wird blasser, ein Banner bietet den Weg zurück, und ein zweiter Tipp hebt die Blockierung auf.
+The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.	Der Daumen runter bei jedem Kommentar blockiert den Kommentator statt zu disliken. Der Kommentar wird gedimmt, ein Rückgängig-Banner folgt, und ein zweites Tippen entsperrt.
 The video couldn't be saved. Try again, or choose Automatic.	Das Video konnte nicht gespeichert werden. Versuche es noch einmal oder wähle Automatisch.
 There is no diagnostic data to clear.	Es gibt keine Diagnosedaten zum Löschen.
 There is no diagnostic data to put back.	Es gibt keine Diagnosedaten zum Wiederherstellen.
