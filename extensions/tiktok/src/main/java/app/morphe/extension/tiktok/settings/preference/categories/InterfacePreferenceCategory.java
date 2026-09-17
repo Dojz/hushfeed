@@ -95,6 +95,9 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             addPreference(new TogglePreference(context, "Confirm before following", "Tap the feed Follow button twice within four seconds.", Settings.CONFIRM_FOLLOW));
             addPreference(new TogglePreference(context, "Confirm before liking", "Tap the like heart twice within four seconds. Removing a like stays immediate.", Settings.CONFIRM_LIKE));
         }
+        addPreference(new ChoicePreference(context, "Left swipe", Settings.SWIPE_LEFT_ACTION,
+                new String[]{"TikTok default (profile)", "Do nothing", "Open comments"},
+                new String[]{"default", "nothing", "comments"}));
         boolean hasFeedControls = SettingsStatus.promotionalBannersEnabled
                 || SettingsStatus.captchaPopupSuppressionEnabled
                 || SettingsStatus.alwaysShowPublishDateEnabled
@@ -243,6 +246,9 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                     "Hide the \"Search this image\" prompt TikTok shows over videos when it spots something to shop for.",
                     Settings.HIDE_VISUAL_SEARCH
             ));
+            addPreference(new ChoicePreference(context, "Feed button size", Settings.TOUCH_TARGET_SCALE,
+                    new String[]{"Normal", "Larger (1.25x)", "Large (1.5x)", "Extra large (2x)"},
+                    new String[]{"1", "1.25", "1.5", "2"}));
         }
         if (SettingsStatus.hideSearchSuggestionsEnabled) {
             addPreference(new TogglePreference(

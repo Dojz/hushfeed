@@ -251,6 +251,20 @@ public final class VideoOverlayHider {
                             setHidden(view, hidden[i]);
                         }
                     }
+                    float touchScale = 1f;
+                    try { touchScale = Float.parseFloat(Settings.TOUCH_TARGET_SCALE.get()); }
+                    catch (NumberFormatException ignored) {}
+                    if (touchScale > 1f) {
+                        for (int i = 5; i < 5 + RAIL_BUTTON_IDS.length; i++) {
+                            for (View view : found.get(i)) {
+                                if (view.getVisibility() != View.VISIBLE) continue;
+                                view.setScaleX(touchScale);
+                                view.setScaleY(touchScale);
+                                view.setPivotX(view.getWidth());
+                                view.setPivotY(view.getHeight() / 2f);
+                            }
+                        }
+                    }
                 } finally {
                     for (List<View> views : found) {
                         views.clear();
