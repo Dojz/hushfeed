@@ -48,7 +48,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildDe() {
-        Map<String, String> table = new HashMap<>(2196);
+        Map<String, String> table = new HashMap<>(2198);
         fillDe0(table);
         fillDe1(table);
         fillDe2(table);
@@ -1955,6 +1955,8 @@ public final class L10nTranslations {
                 "Der Diagnosebericht ließ sich noch nicht speichern. Versuche es gleich noch einmal.");
         table.put("The diagnostic report could not be saved. Try again.",
                 "Der Diagnosebericht ließ sich nicht exportieren.");
+        table.put("The downloader app you chose isn't installed. Check Send links to another app under Downloads.",
+                "Die gewaehlte Downloader-App ist nicht installiert. Pruefe Links an andere App senden unter Downloads.");
         table.put("The export failed and the partial file could not be removed. Delete it from your Downloads folder.",
                 "Der Export der geladenen Werte ist fehlgeschlagen; auch das Aufräumen ist fehlgeschlagen.");
         table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
@@ -2035,11 +2037,11 @@ public final class L10nTranslations {
                 "Diese Datei ist kein Export geladener Werte aus dem Feature Gate Lab.");
         table.put("This gate type is not supported.",
                 "Dieser Gate-Typ wird nicht unterstützt.");
-        table.put("This key isn't in the local catalog, so its type can't be checked. Reset the override.",
-                "Dieser Schlüssel steht nicht im lokalen Katalog, deshalb lässt sich sein Typ nicht prüfen. Setze die Überschreibung zurück.");
     }
 
     private static void fillDe16(Map<String, String> table) {
+        table.put("This key isn't in the local catalog, so its type can't be checked. Reset the override.",
+                "Dieser Schlüssel steht nicht im lokalen Katalog, deshalb lässt sich sein Typ nicht prüfen. Setze die Überschreibung zurück.");
         table.put("This line opens a rule and does not finish it: %1$s. Write two phrases as \"a\" & \"b\" for both, or \"a\" !& \"b\" for the first without the second.",
                 "Diese Zeile beginnt eine Regel und beendet sie nicht: %1$s. Schreiben Sie zwei Wendungen als \"a\" & \"b\" für beide oder als \"a\" !& \"b\" für die erste ohne die zweite.");
         table.put("This phone has no file picker, so there is no way to choose a file here.",
@@ -2158,11 +2160,11 @@ public final class L10nTranslations {
                 "Blockierung dieses Kommentierenden aufheben");
         table.put("Unblocked %1$s",
                 "%1$s entblockt");
-        table.put("Unblocked %1$s, but TikTok has not confirmed it yet.",
-                "Die Aufhebung der Blockierung von %1$s konnte nicht bestätigt werden.");
     }
 
     private static void fillDe17(Map<String, String> table) {
+        table.put("Unblocked %1$s, but TikTok has not confirmed it yet.",
+                "Die Aufhebung der Blockierung von %1$s konnte nicht bestätigt werden.");
         table.put("Undo",
                 "Rückgängig");
         table.put("Undo last Lab change",
@@ -2281,11 +2283,11 @@ public final class L10nTranslations {
                 "Tage");
         table.put("dp",
                 "dp");
-        table.put("millisecond",
-                "Millisekunde");
     }
 
     private static void fillDe18(Map<String, String> table) {
+        table.put("millisecond",
+                "Millisekunde");
         table.put("milliseconds",
                 "Millisekunden");
         table.put("minute",
@@ -2325,7 +2327,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildEs() {
-        Map<String, String> table = new HashMap<>(2196);
+        Map<String, String> table = new HashMap<>(2198);
         fillEs0(table);
         fillEs1(table);
         fillEs2(table);
@@ -4232,6 +4234,8 @@ public final class L10nTranslations {
                 "Todavía no se pudo guardar el informe de diagnóstico. Inténtalo de nuevo en un momento.");
         table.put("The diagnostic report could not be saved. Try again.",
                 "No se pudo exportar el informe de diagnóstico.");
+        table.put("The downloader app you chose isn't installed. Check Send links to another app under Downloads.",
+                "La aplicacion de descarga que elegiste no esta instalada. Revisa Enviar enlaces a otra aplicacion en Descargas.");
         table.put("The export failed and the partial file could not be removed. Delete it from your Downloads folder.",
                 "Ha fallado la exportación de los valores cargados y la limpieza también.");
         table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
@@ -4312,11 +4316,11 @@ public final class L10nTranslations {
                 "Este archivo no es una exportación de valores cargados del Feature Gate Lab.");
         table.put("This gate type is not supported.",
                 "Este tipo de gate no es compatible.");
-        table.put("This key isn't in the local catalog, so its type can't be checked. Reset the override.",
-                "Esta clave no está en el catálogo local, así que no se puede comprobar su tipo. Restablece la anulación.");
     }
 
     private static void fillEs16(Map<String, String> table) {
+        table.put("This key isn't in the local catalog, so its type can't be checked. Reset the override.",
+                "Esta clave no está en el catálogo local, así que no se puede comprobar su tipo. Restablece la anulación.");
         table.put("This line opens a rule and does not finish it: %1$s. Write two phrases as \"a\" & \"b\" for both, or \"a\" !& \"b\" for the first without the second.",
                 "Esta línea abre una regla y no la termina: %1$s. Escribe dos frases como \"a\" & \"b\" para pedir las dos, o \"a\" !& \"b\" para la primera sin la segunda.");
         table.put("This phone has no file picker, so there is no way to choose a file here.",
@@ -4435,11 +4439,11 @@ public final class L10nTranslations {
                 "Desbloquear a quien comenta");
         table.put("Unblocked %1$s",
                 "%1$s desbloqueado");
-        table.put("Unblocked %1$s, but TikTok has not confirmed it yet.",
-                "No se pudo confirmar el desbloqueo de %1$s.");
     }
 
     private static void fillEs17(Map<String, String> table) {
+        table.put("Unblocked %1$s, but TikTok has not confirmed it yet.",
+                "No se pudo confirmar el desbloqueo de %1$s.");
         table.put("Undo",
                 "Deshacer");
         table.put("Undo last Lab change",
@@ -4558,11 +4562,11 @@ public final class L10nTranslations {
                 "días");
         table.put("dp",
                 "dp");
-        table.put("millisecond",
-                "milisegundo");
     }
 
     private static void fillEs18(Map<String, String> table) {
+        table.put("millisecond",
+                "milisegundo");
         table.put("milliseconds",
                 "milisegundos");
         table.put("minute",
@@ -4602,7 +4606,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIn() {
-        Map<String, String> table = new HashMap<>(2196);
+        Map<String, String> table = new HashMap<>(2198);
         fillIn0(table);
         fillIn1(table);
         fillIn2(table);
@@ -6509,6 +6513,8 @@ public final class L10nTranslations {
                 "Laporan diagnostik belum bisa disimpan. Coba lagi sebentar.");
         table.put("The diagnostic report could not be saved. Try again.",
                 "Laporan diagnostik tidak bisa diekspor.");
+        table.put("The downloader app you chose isn't installed. Check Send links to another app under Downloads.",
+                "Aplikasi pengunduh yang Anda pilih tidak terpasang. Periksa Kirim tautan ke aplikasi lain di Unduhan.");
         table.put("The export failed and the partial file could not be removed. Delete it from your Downloads folder.",
                 "Ekspor berkas nilai yang dimuat gagal; pembersihannya juga gagal.");
         table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
@@ -6589,11 +6595,11 @@ public final class L10nTranslations {
                 "Berkas ini bukan ekspor nilai yang dimuat dari Feature Gate Lab.");
         table.put("This gate type is not supported.",
                 "Tipe gate ini tidak didukung.");
-        table.put("This key isn't in the local catalog, so its type can't be checked. Reset the override.",
-                "Kunci ini tidak ada di katalog lokal, jadi tipenya tidak bisa diperiksa. Setel ulang penimpaan.");
     }
 
     private static void fillIn16(Map<String, String> table) {
+        table.put("This key isn't in the local catalog, so its type can't be checked. Reset the override.",
+                "Kunci ini tidak ada di katalog lokal, jadi tipenya tidak bisa diperiksa. Setel ulang penimpaan.");
         table.put("This line opens a rule and does not finish it: %1$s. Write two phrases as \"a\" & \"b\" for both, or \"a\" !& \"b\" for the first without the second.",
                 "Baris ini memulai sebuah aturan dan tidak menyelesaikannya: %1$s. Tulis dua frasa sebagai \"a\" & \"b\" untuk keduanya, atau \"a\" !& \"b\" untuk yang pertama tanpa yang kedua.");
         table.put("This phone has no file picker, so there is no way to choose a file here.",
@@ -6712,11 +6718,11 @@ public final class L10nTranslations {
                 "Buka blokir pengomentar ini");
         table.put("Unblocked %1$s",
                 "%1$s dibuka blokirnya");
-        table.put("Unblocked %1$s, but TikTok has not confirmed it yet.",
-                "Pembukaan blokir %1$s tidak dapat dikonfirmasi.");
     }
 
     private static void fillIn17(Map<String, String> table) {
+        table.put("Unblocked %1$s, but TikTok has not confirmed it yet.",
+                "Pembukaan blokir %1$s tidak dapat dikonfirmasi.");
         table.put("Undo",
                 "Urungkan");
         table.put("Undo last Lab change",
@@ -6835,11 +6841,11 @@ public final class L10nTranslations {
                 "hari");
         table.put("dp",
                 "dp");
-        table.put("millisecond",
-                "milidetik");
     }
 
     private static void fillIn18(Map<String, String> table) {
+        table.put("millisecond",
+                "milidetik");
         table.put("milliseconds",
                 "milidetik");
         table.put("minute",
@@ -6879,7 +6885,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildPt_rBR() {
-        Map<String, String> table = new HashMap<>(2196);
+        Map<String, String> table = new HashMap<>(2198);
         fillPt_rBR0(table);
         fillPt_rBR1(table);
         fillPt_rBR2(table);
@@ -8786,6 +8792,8 @@ public final class L10nTranslations {
                 "O relatório de diagnóstico ainda não pôde ser salvo. Tente de novo em instantes.");
         table.put("The diagnostic report could not be saved. Try again.",
                 "O relatório de diagnóstico não pôde ser exportado.");
+        table.put("The downloader app you chose isn't installed. Check Send links to another app under Downloads.",
+                "O aplicativo de download que voce escolheu nao esta instalado. Verifique Enviar links para outro aplicativo em Downloads.");
         table.put("The export failed and the partial file could not be removed. Delete it from your Downloads folder.",
                 "A exportação do arquivo de valores carregados falhou e a limpeza também.");
         table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
@@ -8866,11 +8874,11 @@ public final class L10nTranslations {
                 "Este arquivo não é uma exportação de valores carregados do Feature Gate Lab.");
         table.put("This gate type is not supported.",
                 "Este tipo de gate não é compatível.");
-        table.put("This key isn't in the local catalog, so its type can't be checked. Reset the override.",
-                "Esta chave não está no catálogo local, então o tipo dela não pode ser conferido. Redefina a substituição.");
     }
 
     private static void fillPt_rBR16(Map<String, String> table) {
+        table.put("This key isn't in the local catalog, so its type can't be checked. Reset the override.",
+                "Esta chave não está no catálogo local, então o tipo dela não pode ser conferido. Redefina a substituição.");
         table.put("This line opens a rule and does not finish it: %1$s. Write two phrases as \"a\" & \"b\" for both, or \"a\" !& \"b\" for the first without the second.",
                 "Esta linha abre uma regra e não a fecha: %1$s. Escreva duas frases como \"a\" & \"b\" para pedir as duas, ou \"a\" !& \"b\" para a primeira sem a segunda.");
         table.put("This phone has no file picker, so there is no way to choose a file here.",
@@ -8989,11 +8997,11 @@ public final class L10nTranslations {
                 "Desbloquear quem comentou");
         table.put("Unblocked %1$s",
                 "%1$s desbloqueado");
-        table.put("Unblocked %1$s, but TikTok has not confirmed it yet.",
-                "Não foi possível confirmar o desbloqueio de %1$s.");
     }
 
     private static void fillPt_rBR17(Map<String, String> table) {
+        table.put("Unblocked %1$s, but TikTok has not confirmed it yet.",
+                "Não foi possível confirmar o desbloqueio de %1$s.");
         table.put("Undo",
                 "Desfazer");
         table.put("Undo last Lab change",
@@ -9112,11 +9120,11 @@ public final class L10nTranslations {
                 "dias");
         table.put("dp",
                 "dp");
-        table.put("millisecond",
-                "milissegundo");
     }
 
     private static void fillPt_rBR18(Map<String, String> table) {
+        table.put("millisecond",
+                "milissegundo");
         table.put("milliseconds",
                 "milissegundos");
         table.put("minute",
