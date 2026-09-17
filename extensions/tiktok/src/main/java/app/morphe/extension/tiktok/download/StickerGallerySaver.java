@@ -189,12 +189,8 @@ public final class StickerGallerySaver {
 
         Drawable background = template.getBackground();
         if (background != null && background.getConstantState() != null) {
-            // TikTok's own row background, states and all, so a press on this looks like a press
-            // on the rows beside it.
             button.setBackground(background.getConstantState().newDrawable().mutate());
         } else {
-            // A template with no background of its own left this one flat: no press, and nothing
-            // at all for a reader arriving with a keyboard or switch access.
             button.setBackground(SettingsUi.overlayAction(context, SettingsUi.RADIUS_CONTROL,
                     SettingsUi.textPrimary()));
         }

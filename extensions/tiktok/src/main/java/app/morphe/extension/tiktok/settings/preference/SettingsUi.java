@@ -133,6 +133,12 @@ public final class SettingsUi {
         return isDarkModeEnabled();
     }
 
+    public static boolean isDarkContext(android.content.Context context) {
+        int night = context.getResources().getConfiguration().uiMode
+                & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
+        return night == android.content.res.Configuration.UI_MODE_NIGHT_YES;
+    }
+
     public static @ColorInt int accent() { return isDarkMode() ? ACCENT : LIGHT_ACCENT; }
 
     /**
