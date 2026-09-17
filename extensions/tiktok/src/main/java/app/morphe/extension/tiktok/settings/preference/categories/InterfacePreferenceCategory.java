@@ -196,8 +196,8 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             ));
             addPreference(new TogglePreference(
                     context,
-                    "Hide the favorite button",
-                    "Hide the favorite button and its count in the right column.",
+                    "Hide the save button",
+                    "Hide the save button and its count in the right column.",
                     Settings.HIDE_RAIL_FAVOURITE
             ));
             addPreference(new TogglePreference(

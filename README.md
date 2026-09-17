@@ -114,7 +114,7 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 | `Share sheet tools` | Asks twice before a video is sent to a friend from the share sheet. The check follows the account or conversation instead of the visible name and covers accessibility actions and keyboard input. It can also hide chosen people, share options or the whole Send to row. |
 | `Hide feed LIVE button` | Adds an option to hide the LIVE button at the top left of video feeds. Shares its switch with the Live entrance option of Hide video overlays, and stops the button before it is built rather than hiding it once it is on screen. |
 | `Hide feed follow button` | Adds an option to hide the + follow button below creator avatars in video feeds. |
-| `Hide feed save button` | Adds an option to hide the save/favourites button from video feeds. |
+| `Hide feed save button` | Adds an option to hide the save button from video feeds. |
 | `Keep the Favorites tab` | Keeps the Favorites tab on your profile when TikTok's server puts the account into an experiment that empties it. Two people saw that after patching: the tab was there and the saved videos were not. |
 | `Hide feed search button` | Adds an option to hide the search button at the top right of video feeds. |
 | `Disable telemetry` | Adds an App behavior toggle that stops ByteDance AppLog analytics, AppsFlyer attribution, explicit Firebase screen reports and TikTok's Npth or MonitorCrash startup reporting. TikTok's own diagnostics go quiet with them. Off by default. |
