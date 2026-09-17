@@ -198,7 +198,7 @@ public class SimPresetPreference extends Preference {
                 // The way back to no preset. Picking a row applied it and closed the dialog, and
                 // nothing undid that short of retyping three fields.
                 .setNeutralButton(L10n.t(context, "Clear preset"), (ignored, which) -> clearPreset())
-                .setNegativeButton(android.R.string.cancel, null)
+                .setNegativeButton(L10n.t(context, "Cancel"), null)
                 .create();
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
