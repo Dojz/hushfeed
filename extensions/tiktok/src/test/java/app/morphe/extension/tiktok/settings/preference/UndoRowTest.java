@@ -61,7 +61,7 @@ public class UndoRowTest {
 
         Exception missing = new java.io.FileNotFoundException("hushfeed-settings-undo.json");
         assertTrue("an empty undo reads as a breakage",
-                "There is nothing to undo yet.".equals(message.invoke(null, UNDO, missing)));
+                "Nothing to undo yet.".equals(message.invoke(null, UNDO, missing)));
         // A reset that really failed still says so.
         assertTrue("a real failure was softened into the empty message",
                 "Could not restore settings.".equals(

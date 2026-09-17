@@ -250,6 +250,7 @@ public class CreatorListPreference extends DialogPreference {
         addEditText.setError(null);
         addEditText.setText("");
         refreshEntryRows();
+        Utils.showToastShort(L10n.f(getContext(), "Added %1$s", candidate));
     }
 
     private void refreshEntryRows() {
