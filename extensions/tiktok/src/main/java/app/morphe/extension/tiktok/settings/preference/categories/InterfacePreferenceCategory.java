@@ -243,9 +243,12 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                     "Hide the \"Search this image\" prompt TikTok shows over videos when it spots something to shop for.",
                     Settings.HIDE_VISUAL_SEARCH
             ));
+            // Two choices, not four. The right column has no room between its slots, so a
+            // glyph grown by more than a quarter lands on the count under it or the button
+            // above it (S22, 2026-09-17); 1.5x and 2x were offered before that was measured.
             addPreference(new ChoicePreference(context, "Feed button size", Settings.TOUCH_TARGET_SCALE,
-                    new String[]{"Normal", "Larger (1.25x)", "Large (1.5x)", "Extra large (2x)"},
-                    new String[]{"1", "1.25", "1.5", "2"}));
+                    new String[]{"Normal", "Larger (1.25x)"},
+                    new String[]{"1", "1.25"}));
         }
         if (SettingsStatus.hideSearchSuggestionsEnabled) {
             addPreference(new TogglePreference(
