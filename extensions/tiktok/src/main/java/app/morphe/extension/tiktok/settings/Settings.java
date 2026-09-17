@@ -159,6 +159,8 @@ public class Settings extends BaseSettings {
             new IntegerSetting("max_publication_age_days", 0).withRange(0, 3650);
     public static final IntegerSetting MAX_VIEWS_PER_LIKE =
             new IntegerSetting("max_views_per_like", 0).withRange(0, 1000000);
+    public static final IntegerSetting MAX_VIEWS_PER_COMMENT =
+            new IntegerSetting("max_views_per_comment", 0).withRange(0, 1000000);
     public static final BooleanSetting HIDE_PROMOTIONAL_MUSIC = new BooleanSetting("hide_promotional_music", FALSE);
     public static final BooleanSetting HIDE_LIVE_REPLAYS = new BooleanSetting("hide_live_replays", FALSE);
     public static final BooleanSetting HIDE_SHARE_CHANNELS = new BooleanSetting("hide_share_channels", FALSE);
