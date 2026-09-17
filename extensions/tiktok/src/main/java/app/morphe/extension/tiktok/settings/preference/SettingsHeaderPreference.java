@@ -114,8 +114,7 @@ public final class SettingsHeaderPreference extends Preference {
         // dark surface, which is no press feedback at all. The ring under it is what a reader
         // moving by keyboard or d-pad sees: the ripple's own focus tint is fainter still.
         back.setBackground(new android.graphics.drawable.RippleDrawable(
-                android.content.res.ColorStateList.valueOf(
-                        (SettingsUi.accent() & 0x00ffffff) | 0x26000000),
+                android.content.res.ColorStateList.valueOf(SettingsUi.rippleTint()),
                 SettingsUi.focusRing(context, 6),
                 SettingsUi.roundedSurface(context, 6, false)));
         LinearLayout.LayoutParams backParams = new LinearLayout.LayoutParams(SettingsUi.dp(context, 48), SettingsUi.dp(context, 48));

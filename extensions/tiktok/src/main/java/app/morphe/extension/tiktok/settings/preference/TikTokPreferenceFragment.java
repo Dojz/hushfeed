@@ -905,8 +905,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
                     list.getContext().getContentResolver(),
                     android.provider.Settings.Global.ANIMATOR_DURATION_SCALE, 1f);
             if (scale > 0f) {
-                int accent = SettingsUi.accent();
-                int highlight = (accent & 0x00FFFFFF) | 0x26000000;
+                int highlight = SettingsUi.rippleTint();
                 android.graphics.drawable.ColorDrawable flash =
                         new android.graphics.drawable.ColorDrawable(highlight);
                 row.setForeground(flash);

@@ -71,6 +71,16 @@ public final class SettingsUi {
 
     public static final int LIGHT_ACCENT = Color.rgb(184, 22, 77);
 
+    static final @ColorInt int DARK_SWITCH_TRACK_OFF = Color.rgb(100, 100, 111);
+    static final @ColorInt int LIGHT_SWITCH_TRACK_OFF = Color.rgb(116, 116, 127);
+    static final @ColorInt int SWITCH_THUMB = Color.WHITE;
+    static final @ColorInt int DARK_SWITCH_THUMB_STROKE = Color.rgb(225, 225, 230);
+    static final @ColorInt int LIGHT_SWITCH_THUMB_STROKE = Color.rgb(116, 116, 127);
+
+    public static @ColorInt int rippleTint() {
+        return (accent() & 0x00FFFFFF) | 0x26000000;
+    }
+
     /**
      * The corner radii this bundle draws with. Every rounded surface picks one of these rather
      * than a number of its own, so a card, a field and a chip on the same screen agree.
@@ -229,12 +239,12 @@ public final class SettingsUi {
                 switchShape(context, (accent() & 0x00ffffff) | 0x66000000, 44, 26, 6));
         track.addState(new int[]{-android.R.attr.state_enabled}, switchShape(context, border(), 44, 26, 6));
         track.addState(new int[]{android.R.attr.state_checked}, switchShape(context, accent(), 44, 26, 6));
-        track.addState(new int[]{}, switchShape(context, isDarkMode() ? Color.rgb(100, 100, 111) : Color.rgb(116, 116, 127), 44, 26, 6));
+        track.addState(new int[]{}, switchShape(context, isDarkMode() ? DARK_SWITCH_TRACK_OFF : LIGHT_SWITCH_TRACK_OFF, 44, 26, 6));
         control.setTrackTintList(null);
         control.setThumbTintList(null);
         control.setTrackDrawable(track);
-        GradientDrawable thumb = switchShape(context, Color.WHITE, 20, 22, 4);
-        thumb.setStroke(dp(context, 1), isDarkMode() ? Color.rgb(225, 225, 230) : Color.rgb(116, 116, 127));
+        GradientDrawable thumb = switchShape(context, SWITCH_THUMB, 20, 22, 4);
+        thumb.setStroke(dp(context, 1), isDarkMode() ? DARK_SWITCH_THUMB_STROKE : LIGHT_SWITCH_THUMB_STROKE);
         control.setThumbDrawable(thumb);
         control.setSwitchMinWidth(dp(context, 44));
         control.setThumbTextPadding(0);
@@ -252,7 +262,7 @@ public final class SettingsUi {
     }
 
     public static Drawable groupedRow(Context context, boolean first, boolean last) {
-        return new RippleDrawable(ColorStateList.valueOf((accent() & 0x00ffffff) | 0x26000000),
+        return new RippleDrawable(ColorStateList.valueOf(rippleTint()),
                 new GroupRowDrawable(context, first, last),
                 groupRowMask(context, first, last));
     }
@@ -368,7 +378,7 @@ public final class SettingsUi {
      * press that made it rather than as a second idea.
      */
     public static int activatedFill() {
-        return (accent() & 0x00ffffff) | 0x26000000;
+        return rippleTint();
     }
 
     private static final class GroupRowDrawable extends Drawable {
