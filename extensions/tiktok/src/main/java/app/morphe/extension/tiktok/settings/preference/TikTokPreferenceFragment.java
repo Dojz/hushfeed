@@ -79,6 +79,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
      */
     private static String pendingDownloadPathKey;
     private static final String PENDING_DOWNLOAD_PATH_STATE = "morphe_pending_download_path";
+    private static final String SEARCH_QUERY_STATE = "morphe_search_query";
     private SettingsListAdapter styledAdapter;
     private PreferenceScreen searchScreen;
     private List<SearchResult> searchIndex;
@@ -548,12 +549,22 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
     @Override public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(PENDING_DOWNLOAD_PATH_STATE, pendingDownloadPathKey);
+        if (searchInput != null) {
+            String query = searchInput.getQuery();
+            if (!query.isEmpty()) outState.putString(SEARCH_QUERY_STATE, query);
+        }
     }
 
     @Override public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
         if (pendingDownloadPathKey == null && state != null) {
             pendingDownloadPathKey = state.getString(PENDING_DOWNLOAD_PATH_STATE);
+        }
+        if (state != null && searchInput != null) {
+            String savedQuery = state.getString(SEARCH_QUERY_STATE);
+            if (savedQuery != null && !savedQuery.isEmpty()) {
+                searchInput.setQuery(savedQuery);
+            }
         }
         ListView list = getView().findViewById(android.R.id.list);
         if (list != null && list.getAdapter() != null) {

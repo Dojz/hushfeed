@@ -126,6 +126,13 @@ public final class SettingsSearchInputPreference extends Preference {
         return editText == null ? "" : editText.getText().toString();
     }
 
+    public void setQuery(String query) {
+        if (editText != null && query != null && !query.isEmpty()) {
+            editText.setText(query);
+            editText.setSelection(query.length());
+        }
+    }
+
     @Override
     protected void onBindView(View view) {
         super.onBindView(view);
