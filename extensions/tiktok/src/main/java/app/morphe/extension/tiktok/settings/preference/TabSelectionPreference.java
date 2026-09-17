@@ -172,6 +172,19 @@ public class TabSelectionPreference extends Preference {
         int optionInset = Math.max(1, SettingsUi.dp(getContext(), 1));
         optionsContainer.setPadding(optionInset, optionInset, optionInset, optionInset);
 
+        boolean empty = observedOptions.size() <= 1;
+        if (empty) {
+            TextView emptyState = new TextView(context);
+            emptyState.setText(L10n.t(context, bottomTabs
+                    ? "Open the feed once so Hushfeed can see which bottom tabs TikTok loaded."
+                    : "Open the feed once so Hushfeed can see which tabs TikTok loaded."));
+            emptyState.setTextColor(SettingsUi.textSecondary());
+            emptyState.setTextSize(14);
+            emptyState.setGravity(Gravity.CENTER);
+            int emptyPad = SettingsUi.dp(context, 24);
+            emptyState.setPadding(emptyPad, emptyPad, emptyPad, emptyPad);
+            optionsContainer.addView(emptyState);
+        }
         for (OptionRow option : observedOptions) {
             optionsContainer.addView(createOptionRow(context, selected, option));
         }
@@ -213,6 +226,9 @@ public class TabSelectionPreference extends Preference {
         // selection they came in with, with no undo.
         View showAllButton = dialog.getButton(DialogInterface.BUTTON_NEUTRAL);
         if (showAllButton != null) {
+            if (empty) {
+                showAllButton.setEnabled(false);
+            }
             showAllButton.setOnClickListener(view -> {
                 selected.clear();
                 for (OptionRow option : observedOptions) {
