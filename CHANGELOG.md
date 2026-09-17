@@ -643,7 +643,7 @@
 
 * The comment image watermark keeps the position TikTok gave it. The patch read its own on/off answer into the register holding the watermark's x coordinate, then wrote a zero back before drawing. That is the same picture on this build, because TikTok moves the canvas first and draws at nothing but zero, and it would have pinned the watermark to the left edge on a build that draws anywhere else. The switch has a register of its own now.
 
-* The patched app carries less code. Twenty classes inherited from ReVanced were compiled into the shared payload of every build and nothing in this project called any of them, including a colour picker, a second settings backup, a network helper and an environment nag screen that had been switched off and left in place. They are gone. Nothing reachable changes.
+* The patched app carries less code. Twenty classes inherited from ReVanced were compiled into the shared payload of every build and nothing in this project called any of them, including a color picker, a second settings backup, a network helper and an environment nag screen that had been switched off and left in place. They are gone. Nothing reachable changes.
 
 * The two caption settings say so when a TikTok build drops them. Caption text size and the strip behind the captions found their views by a number baked into this project, which the next TikTok build is free to reassign, and both settings would then have done nothing while the Hook status row reported everything fine. They are looked up by name now, the way every other lookup here is, and a build without those names is reported under "captions" in the diagnostics.
 
@@ -689,7 +689,7 @@
 
 * Comment translation stops rebuilding one of TikTok's own services over and over. Working out which language you read in, and which languages you asked not to be translated, meant building that service and looking for the right method. The answer was only remembered when the method was found, so on a build that does not have one it was built again for every comment in view, while holding the lock that TikTok needs to hand a finished batch back. It is asked once now, and once is enough either way.
 
-* Every row in a settings dialog list keeps Hushfeed's check mark. The list was restyled once, just after it opened, so any row you had to scroll to reach had never been touched and came up with Android's own check mark on the wrong side and TikTok's text colour. The eight row "Included diagnostics" picker scrolls on a small screen and on every screen at large text. Rows are styled as they appear now.
+* Every row in a settings dialog list keeps Hushfeed's check mark. The list was restyled once, just after it opened, so any row you had to scroll to reach had never been touched and came up with Android's own check mark on the wrong side and TikTok's text color. The eight row "Included diagnostics" picker scrolls on a small screen and on every screen at large text. Rows are styled as they appear now.
 
 * The patches keep applying when TikTok's own methods grow. A call Hushfeed injects can only name sixteen registers, and a method with enough locals pushes its arguments past that, which fails the patch with an error that says nothing about registers. Thirty five injections were written the short way and would have broken on the first TikTok build that crossed the line. They now use the long form only where they have to, so nothing about the current build changes, and a frame that cannot be patched at all says so in those words.
 
@@ -723,7 +723,7 @@
 
 * A new switch turns the daily budget from advice into a commitment. Leave "Lock today's budget" off and nothing changes. Turn it on, and when today's budget runs out the hold has no "Open the feed anyway", "Start today over" is refused, and the budgets, the reset hour and the switch itself cannot be edited again until the day starts over at your chosen hour. You can turn it off freely any time before the budget runs out, and turning it on after the budget has already gone locks the rest of that day too. The lock lets go on its own when the day turns, and only then: moving the phone to another timezone does not end it early. It survives the app being killed, and messages, profiles and search keep working the whole time.
 
-* The settings screen no longer draws its first row under the status bar and its last under the navigation bar. TikTok targets a recent enough Android that every window is edge to edge whether the app asks for it or not, and the two calls that used to colour the bars stopped doing anything at the same time. The screen now measures the bars and the display cutout and moves its content clear of both, with its own background reaching behind them.
+* The settings screen no longer draws its first row under the status bar and its last under the navigation bar. TikTok targets a recent enough Android that every window is edge to edge whether the app asks for it or not, and the two calls that used to color the bars stopped doing anything at the same time. The screen now measures the bars and the display cutout and moves its content clear of both, with its own background reaching behind them.
 
 * Comment translation stops hammering TikTok when a batch fails. A comment list binds its cells many times a second, and every one of those binds asked for the same failed batch again, with an exception logged each time. It now waits two seconds, then eight, then thirty, and after a fourth failure leaves that batch alone until the comment list loads again. A batch the service is working through a few comments at a time is not counted as failing.
 
@@ -794,7 +794,7 @@
 
 * Two patches that could be selected on their own put their switches somewhere nobody could reach them. Hide comment popup ads built a switch on a page that never appeared, and the offline videos limit sat below an early return belonging to the Downloads patch, so selecting it alone gave a page without it. Every settings page now keeps each patch's rows behind that patch's own flag.
 
-* Clear all in the inbox is readable in both themes. It was picking its colour from a flag the settings screen sets, which away from that screen answers for the system theme rather than TikTok's own, so it could draw dark red on a dark sheet.
+* Clear all in the inbox is readable in both themes. It was picking its color from a flag the settings screen sets, which away from that screen answers for the system theme rather than TikTok's own, so it could draw dark red on a dark sheet.
 
 * The feature gate report says more precisely what it replaces, instead of implying every value is redacted.
 
@@ -1036,7 +1036,7 @@
 
 ## 0.17.0 (2026-09-06)
 
-* Review pass over the sticker formats and the profile picture save. The profile hook was reading the user through the very method it had been added to, so every profile open burned a stack and swallowed the overflow. It reads the field now. The long press is only taken when the feature is on, so TikTok's own is left alone otherwise, and a picture is refused rather than saved when the handle on screen belongs to somebody else. A sticker with more colours than a palette can hold no longer counts every one of them: 64 frames of noise went from running out of memory to under a second.
+* Review pass over the sticker formats and the profile picture save. The profile hook was reading the user through the very method it had been added to, so every profile open burned a stack and swallowed the overflow. It reads the field now. The long press is only taken when the feature is on, so TikTok's own is left alone otherwise, and a picture is refused rather than saved when the handle on screen belongs to somebody else. A sticker with more colors than a palette can hold no longer counts every one of them: 64 frames of noise went from running out of memory to under a second.
 
 * Press and hold a profile picture to save it. TikTok never puts the full size avatar on screen, so the file comes from the profile the app loaded rather than from what is drawn, which means you get the original rather than a display crop. It lands in your photo destination, named after the account.
 
@@ -1200,7 +1200,7 @@
 
 * **feed:** four upstream patches for the feed toolbar: hide the LIVE button, the search button, the follow plus under the avatar, and the save button. The LIVE one shares the existing Live entrance switch and stops the button before it is built
 
-* **build:** move to Morphe patcher 1.12.0 and patches plugin 1.3.4, which is what Morphe Manager 1.29 ships. Typed patch options, sliders and colour pickers are available to patches from here on
+* **build:** move to Morphe patcher 1.12.0 and patches plugin 1.3.4, which is what Morphe Manager 1.29 ships. Typed patch options, sliders and color pickers are available to patches from here on
 * **feed:** a Hide already seen videos patch. Watched video ids go into a local database and are dropped from later feed pages, with a retention setting and a clear button. Nothing leaves the device
 * **feed:** switches for the playlist bar, the floating event badge and the cards TikTok inserts between videos, plus the countdown lock on short drama adverts, which now releases when ads are being removed
 * **captcha:** a second CAPTCHA patch for TikTok's risk control dialog, answering the existing switch. Off by default, it never touches SMS or two factor verification, and it logs every suppression
