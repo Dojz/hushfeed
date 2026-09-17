@@ -172,7 +172,7 @@ final class FeatureGateLabUi {
         row.setOrientation(LinearLayout.HORIZONTAL);
         row.setGravity(Gravity.CENTER_VERTICAL);
         row.setPadding(dp(context, 16), dp(context, 14), dp(context, 16), dp(context, 14));
-        row.setBackground(SettingsUi.borderedSurface(context, 10, false));
+        row.setBackground(SettingsUi.borderedSurface(context, SettingsUi.RADIUS_CARD, false));
         LinearLayout labels = new LinearLayout(context);
         labels.setOrientation(LinearLayout.VERTICAL);
         labels.addView(body(context, title), matchWrap());

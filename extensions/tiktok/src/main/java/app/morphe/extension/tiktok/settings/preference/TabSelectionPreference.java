@@ -399,7 +399,7 @@ public class TabSelectionPreference extends Preference {
     }
 
     private GradientDrawable createListBackground() {
-        return SettingsUi.borderedSurface(getContext(), 4, false);
+        return SettingsUi.borderedSurface(getContext(), SettingsUi.RADIUS_BADGE, false);
     }
 
     private static int getDialogBackgroundColor() {

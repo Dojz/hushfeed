@@ -851,7 +851,7 @@ public final class SettingsUi {
     public static void styleFramedDialog(Dialog dialog) {
         Window window = dialog.getWindow();
         if (window != null) {
-            window.setBackgroundDrawable(borderedSurface(dialog.getContext(), 10, true));
+            window.setBackgroundDrawable(borderedSurface(dialog.getContext(), RADIUS_CARD, true));
             constrainDialogWindow(dialog, window);
         }
 

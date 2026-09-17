@@ -98,7 +98,7 @@ public final class FeatureGateRecorderPreference extends Preference implements I
         text.setTextSize(13);
         text.setTypeface(android.graphics.Typeface.MONOSPACE);
         text.setLineSpacing(SettingsUi.dp(context, 3), 1f);
-        text.setBackground(SettingsUi.borderedSurface(context, 8, false));
+        text.setBackground(SettingsUi.borderedSurface(context, SettingsUi.RADIUS_FIELD, false));
         int padding = SettingsUi.dp(context, 16);
         text.setPadding(padding, padding, padding, padding);
         scroll.setPadding(padding, 0, padding, 0);

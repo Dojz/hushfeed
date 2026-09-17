@@ -358,7 +358,7 @@ public final class FeatureGateLabFragment extends Fragment {
                 FeatureGateLabUi.dp(context, 2),
                 FeatureGateLabUi.dp(context, 2)
         );
-        viewTabs.setBackground(SettingsUi.borderedSurface(context, 6, false));
+        viewTabs.setBackground(SettingsUi.borderedSurface(context, SettingsUi.RADIUS_CONTROL, false));
         for (int i = 0; i < VIEW_LABELS.length; i++) {
             final int position = i;
             TextView tab = FeatureGateLabUi.text(context, L10n.t(context, VIEW_LABELS[i]), 14,
@@ -885,7 +885,7 @@ public final class FeatureGateLabFragment extends Fragment {
         int padding = FeatureGateLabUi.dp(context, 16);
         selectionBar.setPadding(padding, FeatureGateLabUi.dp(context, 12), padding,
                 FeatureGateLabUi.dp(context, 12));
-        selectionBar.setBackground(SettingsUi.roundedSurface(context, 0, false));
+        selectionBar.setBackground(SettingsUi.roundedSurface(context, SettingsUi.RADIUS_SQUARE, false));
 
         selectionCount = FeatureGateLabUi.label(context, "");
         selectionBar.addView(selectionCount, FeatureGateLabUi.matchWrap());

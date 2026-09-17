@@ -285,7 +285,7 @@ public class CreatorListPreference extends DialogPreference {
         row.setGravity(Gravity.CENTER_VERTICAL);
         row.setPadding(SettingsUi.dp(context, 12), SettingsUi.dp(context, 3),
                 SettingsUi.dp(context, 4), SettingsUi.dp(context, 3));
-        row.setBackground(SettingsUi.borderedSurface(context, 8, true));
+        row.setBackground(SettingsUi.borderedSurface(context, SettingsUi.RADIUS_FIELD, true));
         TextView label = SettingsUi.text(context, entry, 15, SettingsUi.textPrimary(), Typeface.NORMAL);
         label.setTextIsSelectable(true);
         label.setContentDescription(entry);

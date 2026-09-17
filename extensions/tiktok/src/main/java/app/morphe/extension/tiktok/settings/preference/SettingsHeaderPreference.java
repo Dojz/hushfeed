@@ -116,7 +116,7 @@ public final class SettingsHeaderPreference extends Preference {
         back.setBackground(new android.graphics.drawable.RippleDrawable(
                 android.content.res.ColorStateList.valueOf(SettingsUi.rippleTint()),
                 SettingsUi.focusRing(context, 6),
-                SettingsUi.roundedSurface(context, 6, false)));
+                SettingsUi.roundedSurface(context, SettingsUi.RADIUS_CONTROL, false)));
         LinearLayout.LayoutParams backParams = new LinearLayout.LayoutParams(SettingsUi.dp(context, 48), SettingsUi.dp(context, 48));
         // -8 lines the glyph up with the 8dp gutter. Anything more pushes the button's
         // leading edge outside the header, where it is clipped and takes no touches.

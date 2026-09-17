@@ -202,7 +202,7 @@ public final class FeatureGateDetailFragment extends Fragment {
         LinearLayout currentState = new LinearLayout(context);
         currentState.setOrientation(LinearLayout.VERTICAL);
         currentState.setPadding(FeatureGateLabUi.dp(context, 16), 0, FeatureGateLabUi.dp(context, 16), 0);
-        currentState.setBackground(SettingsUi.borderedSurface(context, 10, false));
+        currentState.setBackground(SettingsUi.borderedSurface(context, SettingsUi.RADIUS_CARD, false));
         content.addView(currentState, FeatureGateLabUi.matchWrap());
         addInfo(currentState, L10n.t(context, "Seen this session"),
                 L10n.t(context, entry.loaded ? "Yes" : "No"));
@@ -610,7 +610,7 @@ public final class FeatureGateDetailFragment extends Fragment {
         row.setGravity(Gravity.CENTER_VERTICAL);
         row.setPadding(FeatureGateLabUi.dp(context, 16), FeatureGateLabUi.dp(context, 16),
                 FeatureGateLabUi.dp(context, 16), FeatureGateLabUi.dp(context, 16));
-        row.setBackground(SettingsUi.borderedSurface(context, 10, false));
+        row.setBackground(SettingsUi.borderedSurface(context, SettingsUi.RADIUS_CARD, false));
         LinearLayout labels = new LinearLayout(context);
         labels.setOrientation(LinearLayout.VERTICAL);
         labels.addView(FeatureGateLabUi.body(context, title), FeatureGateLabUi.matchWrap());

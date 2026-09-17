@@ -223,7 +223,7 @@ public final class SettingsMenuPreference extends Preference {
                     SettingsUi.dp(getContext(), 9),
                     SettingsUi.dp(getContext(), 5)
             );
-            android.graphics.drawable.GradientDrawable badgeBackground = SettingsUi.roundedSurface(getContext(), 4, true);
+            android.graphics.drawable.GradientDrawable badgeBackground = SettingsUi.roundedSurface(getContext(), SettingsUi.RADIUS_BADGE, true);
             badgeBackground.setColor(SettingsUi.badgeFill());
             badge.setBackground(badgeBackground);
             accessory.addView(badge);
