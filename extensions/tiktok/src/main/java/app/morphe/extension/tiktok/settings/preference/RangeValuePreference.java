@@ -145,17 +145,12 @@ public class RangeValuePreference extends DialogPreference {
         EditText minEditText = new EditText(context);
         // Not TYPE_CLASS_NUMBER: a number keyboard has no letter on it, and a field that
         // accepts 1.5M has to be typeable.
-        minEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+        minEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         minEditText.setSingleLine(true);
-        // The hint is the label, which is the rule the rest of this package follows. Without one
-        // TalkBack read these two as "edit box" and "edit box, Unlimited" in all five of these
-        // dialogs: the visible headings above them are separate views and say nothing about the
-        // field. "Unlimited" was a value rather than a label anyway, and it disappeared as soon
-        // as anything was typed; the helper sentence above already says an empty maximum means
-        // no upper bound.
         minEditText.setHint(L10n.t(context, "Minimum"));
         minEditText.setText(minValue);
         SettingsUi.styleEditText(minEditText);
+        SettingsUi.labelEditor(min, minEditText);
         dialogView.addView(minEditText, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
@@ -170,11 +165,12 @@ public class RangeValuePreference extends DialogPreference {
         dialogView.addView(max, maxLabelParams);
 
         EditText maxEditText = new EditText(context);
-        maxEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+        maxEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         maxEditText.setSingleLine(true);
         maxEditText.setHint(L10n.t(context, "Maximum"));
         maxEditText.setText(Long.toString(Long.MAX_VALUE).equals(maxValue) ? "" : maxValue);
         SettingsUi.styleEditText(maxEditText);
+        SettingsUi.labelEditor(max, maxEditText);
         dialogView.addView(maxEditText, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
