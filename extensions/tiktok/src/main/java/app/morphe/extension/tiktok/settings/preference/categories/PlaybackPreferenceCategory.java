@@ -18,7 +18,6 @@ import app.morphe.extension.tiktok.settings.preference.InputTextPreference;
 import app.morphe.extension.tiktok.settings.preference.NumberInputPreference;
 import app.morphe.extension.tiktok.speed.PlaybackSpeedPatch;
 
-import app.morphe.extension.shared.Utils;
 
 @SuppressWarnings("deprecation")
 public final class PlaybackPreferenceCategory extends ConditionalPreferenceCategory {
@@ -78,12 +77,17 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
             InputTextPreference speeds = new InputTextPreference(context, "Speed menu choices",
                     "Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.",
                     Settings.CUSTOM_SPEEDS);
-            speeds.setOnPreferenceChangeListener((preference, value) -> {
-                try { PlaybackSpeedPatch.parseMenuSpeeds(value.toString()); return true; }
+            speeds.withCheck(value -> {
+                if (value == null || value.isEmpty()) return null;
+                try { PlaybackSpeedPatch.parseMenuSpeeds(value); return null; }
                 catch (IllegalArgumentException error) {
-                    Utils.showToastShort(L10n.t("Enter up to 8 comma-separated speeds from 0.5 to 3"));
-                    return false;
+                    return L10n.t(context, "Enter up to 8 comma-separated speeds from 0.5 to 3");
                 }
+            });
+            speeds.setOnPreferenceChangeListener((preference, value) -> {
+                if (value == null || value.toString().isEmpty()) return true;
+                try { PlaybackSpeedPatch.parseMenuSpeeds(value.toString()); return true; }
+                catch (IllegalArgumentException error) { return false; }
             });
             addPreference(speeds);
         }

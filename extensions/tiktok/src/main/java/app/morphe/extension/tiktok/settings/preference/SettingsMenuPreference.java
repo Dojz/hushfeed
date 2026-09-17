@@ -115,13 +115,13 @@ public final class SettingsMenuPreference extends Preference {
         labels.setGravity(Gravity.CENTER_VERTICAL);
         labels.setOrientation(LinearLayout.VERTICAL);
 
-        TextView title = SettingsUi.text(context, "", 15.5f, SettingsUi.textPrimary(), 1);
+        TextView title = SettingsUi.text(context, "", 16, SettingsUi.textPrimary(), 1);
         title.setId(android.R.id.title);
         title.setSingleLine(false);
         title.setEllipsize(null);
         labels.addView(title, new LinearLayout.LayoutParams(-1, -2));
 
-        TextView summary = SettingsUi.text(context, "", 12.8f, SettingsUi.textSecondary(), 0);
+        TextView summary = SettingsUi.text(context, "", 14, SettingsUi.textSecondary(), 0);
         summary.setId(android.R.id.summary);
         summary.setSingleLine(false);
         summary.setEllipsize(null);
