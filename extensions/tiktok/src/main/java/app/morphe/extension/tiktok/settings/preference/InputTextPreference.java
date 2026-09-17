@@ -189,9 +189,7 @@ public class InputTextPreference extends EditTextPreference {
     protected void showDialog(Bundle state) {
         super.showDialog(state);
         SettingsUi.styleFramedDialog(getDialog());
-        // Rejecting a value used to close the dialog and then say why, so the reader reopened
-        // the row and typed it again. Save now answers before it closes, and the answer sits
-        // under the field rather than over the screen the dialog just left.
+        SettingsUi.submitOnDone(getEditText(), getDialog());
         SettingsUi.keepOpenOnInvalidInput(getDialog(), new SettingsUi.DialogCheck() {
             @Override public String problem() {
                 return check == null

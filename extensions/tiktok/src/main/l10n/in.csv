@@ -40,6 +40,7 @@ source,target
 "%1$s, %2$s, %3$s, %4$s, %5$s","%1$s, %2$s, %3$s, %4$s, %5$s"
 "%1$s, selected","%1$s, dipilih"
 %1$s. %2$s,%1$s. %2$s
+"%1$s: %2$s","%1$s: %2$s"
 "%1$s: %2$d found, %3$d missing","%1$s: %2$d ditemukan, %3$d hilang"
 "%1$s: %2$d found, %3$d missing, and more it stopped counting","%1$s: %2$d ditemukan, %3$d hilang, dan sisanya berhenti dihitung"
 "%1$s: %2$d found, %3$d missing, and more it stopped counting. First missing: %4$s","%1$s: %2$d ditemukan, %3$d hilang, dan sisanya berhenti dihitung. Yang pertama hilang: %4$s"
@@ -203,6 +204,7 @@ Words and countries,Kata dan negara
 Your feed,Feed kamu
 "Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.","Nol mematikan ini. Menghitung setiap video yang muncul di feed, bagaimanapun kamu sampai ke sana, dan memberi tahu begitu jumlahnya tercapai. Ini terpisah dari batas sesi maju otomatis di Pemutaran, yang hanya menghitung video yang dilewati Hushfeed sendiri."
 code %1$s,kode %1$s
+collapsed,Diciutkan
 "Comma separated account handles or user ids. These accounts are always skipped. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.","Nama pengguna atau id pengguna dipisahkan koma. Akun ini selalu dilewati. Entri di antara garis miring, seperti /^news_/, adalah pola yang dicocokkan dengan nama pengguna dan nama tampilan."
 "Comma separated country codes, like GB, IE. Videos posted from anywhere else are hidden. Leave empty for all countries.","Kode negara dipisahkan koma, seperti GB, IE. Video dari tempat lain disembunyikan. Kosongkan untuk semua negara."
 "Comma separated country codes. Videos posted from these are hidden, whatever the list above says.","Kode negara dipisahkan koma. Video dari negara ini disembunyikan, apa pun isi daftar di atas."
@@ -300,6 +302,7 @@ Download original photos,Unduh foto asli
 Download path updated,Lokasi unduhan diperbarui
 Downloads,Unduhan
 dp,dp
+expanded,Diperluas
 "Drag to move, release to place","Seret untuk memindahkan, lepaskan untuk menempatkan"
 Drama and Series,Drama dan Serial
 "Drop the notification saying somebody new followed you before it reaches the drawer. Every other notification is left alone, and the follower still appears in the Inbox.","Buang notifikasi yang memberi tahu ada orang baru yang mengikutimu sebelum masuk ke laci notifikasi. Notifikasi lain tidak terpengaruh, dan pengikutnya tetap muncul di Kotak Masuk."
@@ -889,6 +892,7 @@ Tap the feed Follow button twice within four seconds.,Ketuk tombol Ikuti di feed
 Tap the like heart twice within four seconds. Removing a like stays immediate.,Ketuk ikon hati dua kali dalam empat detik. Membatalkan suka tetap langsung berlaku.
 Tap to start the feed,Ketuk untuk memulai feed
 Technical details,Detail teknis
+"Technical details, %1$s","Detail teknis, %1$s"
 That backup was written by a newer Hushfeed than this one. Nothing was altered.,Cadangan itu dibuat oleh Hushfeed yang lebih baru dari ini. Tidak ada yang diubah.
 That creator is already in the list,Kreator itu sudah ada di daftar
 "That creator pattern is too long to use, so it was skipped: %1$s","Pola kreator itu terlalu panjang, jadi dilewati: %1$s"

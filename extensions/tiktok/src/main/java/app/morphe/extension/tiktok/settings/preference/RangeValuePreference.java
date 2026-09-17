@@ -267,8 +267,8 @@ public class RangeValuePreference extends DialogPreference {
     protected void showDialog(Bundle state) {
         super.showDialog(state);
         SettingsUi.styleFramedDialog(getDialog());
-        // Same as the text rows: a rejected pair used to close the dialog and then say what was
-        // wrong, so both numbers had to be typed again.
+        minField.setImeOptions(android.view.inputmethod.EditorInfo.IME_ACTION_NEXT);
+        SettingsUi.submitOnDone(maxField, getDialog());
         SettingsUi.keepOpenOnInvalidInput(getDialog(), new SettingsUi.DialogCheck() {
             @Override public String problem() {
                 long min = readField(minValue, 0L);

@@ -200,9 +200,7 @@ public class NumberInputPreference extends EditTextPreference {
     protected void showDialog(Bundle state) {
         super.showDialog(state);
         SettingsUi.styleFramedDialog(getDialog());
-        // Nothing typed here is rejected outright, because a number outside the range is
-        // pulled into it and said so. What does get refused is the whole row, while the day's
-        // budget is locked, and that refusal used to arrive after the dialog had closed.
+        SettingsUi.submitOnDone(getEditText(), getDialog());
         SettingsUi.keepOpenOnInvalidInput(getDialog(), new SettingsUi.DialogCheck() {
             @Override public String problem() {
                 return typedProblem(getEditText().getText().toString());

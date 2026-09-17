@@ -32,6 +32,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.EditorInfo;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.AbsListView;
@@ -1162,6 +1163,21 @@ public final class SettingsUi {
             }
             if (!check.accept()) return;
             dialog.dismiss();
+        });
+    }
+
+    /**
+     * Pressing the keyboard's Done key clicks the positive button so the dialog's own
+     * validation runs, rather than just hiding the keyboard and waiting for a tap.
+     */
+    public static void submitOnDone(EditText field, Dialog dialog) {
+        field.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        field.setOnEditorActionListener((view, actionId, event) -> {
+            if (actionId != EditorInfo.IME_ACTION_DONE) return false;
+            if (!(dialog instanceof AlertDialog)) return false;
+            Button save = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+            if (save != null) save.performClick();
+            return true;
         });
     }
 

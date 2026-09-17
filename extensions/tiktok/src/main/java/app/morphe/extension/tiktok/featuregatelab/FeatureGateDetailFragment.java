@@ -39,6 +39,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import android.os.Build;
+
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.tiktok.settings.preference.SettingsUi;
@@ -875,14 +877,14 @@ public final class FeatureGateDetailFragment extends Fragment {
             status.setText(L10n.t(getContext(), "Using TikTok's value"));
             status.setTextColor(SettingsUi.textSecondary());
             showFailureReason(null);
-            if (effectiveValue != null) effectiveValue.setText(effectiveValueText());
+            if (effectiveValue != null) updateEffectiveValue();
             return;
         }
         if (!rule.enabled) {
             status.setText(L10n.t(getContext(), "Saved, override off"));
             status.setTextColor(SettingsUi.textSecondary());
             showFailureReason(null);
-            if (effectiveValue != null) effectiveValue.setText(effectiveValueText());
+            if (effectiveValue != null) updateEffectiveValue();
             return;
         }
         boolean triggered = FeatureGateLabRuntime.isTriggered(entry.manager, entry.key, entry.type);
@@ -895,7 +897,7 @@ public final class FeatureGateDetailFragment extends Fragment {
                         ? "TikTok read it" : "Not read yet"));
         status.setTextColor(triggered ? SettingsUi.accent() : FeatureGateLabUi.warningColor(getActivity()));
         showFailureReason(failure);
-        if (effectiveValue != null) effectiveValue.setText(effectiveValueText());
+        if (effectiveValue != null) updateEffectiveValue();
     }
 
     /** The reason under the status, which is there only while there is one. */
@@ -912,6 +914,14 @@ public final class FeatureGateDetailFragment extends Fragment {
 
     private String effectiveValueText() {
         return FeatureGateLabText.effectiveValue(getContext(), entry);
+    }
+
+    private void updateEffectiveValue() {
+        String text = effectiveValueText();
+        effectiveValue.setText(text);
+        effectiveValue.setContentDescription(
+                L10n.f(getContext(), "%1$s: %2$s",
+                        L10n.t(getContext(), "What TikTok gets"), text));
     }
 
     private void addObjectEditors(LinearLayout root, boolean editable) {
@@ -1169,10 +1179,15 @@ public final class FeatureGateDetailFragment extends Fragment {
                 FeatureGateLabUi.dp(context, 12),
                 0
         );
+        technicalToggle.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
         heading.addView(technicalToggle, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 FeatureGateLabUi.dp(context, 48)
         ));
+        SettingsUi.markAsButton(heading);
+        heading.setFocusable(true);
+        heading.setContentDescription(
+                L10n.f(context, "Technical details, %1$s", L10n.t(context, "collapsed")));
         LinearLayout.LayoutParams headingParams = FeatureGateLabUi.matchWrap();
         headingParams.setMargins(0, FeatureGateLabUi.dp(context, 12), 0, 0);
         root.addView(heading, headingParams);
@@ -1205,6 +1220,12 @@ public final class FeatureGateDetailFragment extends Fragment {
             boolean show = technicalDetails.getVisibility() != View.VISIBLE;
             technicalDetails.setVisibility(show ? View.VISIBLE : View.GONE);
             technicalToggle.setText(L10n.t(getContext(), show ? "Hide" : "Show"));
+            String state = L10n.t(getContext(), show ? "expanded" : "collapsed");
+            heading.setContentDescription(
+                    L10n.f(getContext(), "Technical details, %1$s", state));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                heading.setStateDescription(state);
+            }
         };
         heading.setOnClickListener(toggle);
         technicalToggle.setOnClickListener(toggle);
@@ -1230,11 +1251,14 @@ public final class FeatureGateDetailFragment extends Fragment {
         row.setMinimumHeight(FeatureGateLabUi.dp(context, 60));
         row.setPadding(0, FeatureGateLabUi.dp(context, 16), 0, FeatureGateLabUi.dp(context, 16));
         TextView labelView = FeatureGateLabUi.body(context, label);
+        labelView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
         row.addView(labelView, new LinearLayout.LayoutParams(0, -2, 1));
-        TextView valueView = FeatureGateLabUi.label(context, value == null || value.isEmpty()
-                ? L10n.t(context, "None recorded") : value);
+        String displayValue = value == null || value.isEmpty()
+                ? L10n.t(context, "None recorded") : value;
+        TextView valueView = FeatureGateLabUi.label(context, displayValue);
         valueView.setTextIsSelectable(true);
         valueView.setGravity(Gravity.END);
+        valueView.setContentDescription(L10n.f(context, "%1$s: %2$s", label, displayValue));
         LinearLayout.LayoutParams valueParams = new LinearLayout.LayoutParams(0, -2, 1);
         valueParams.setMarginStart(FeatureGateLabUi.dp(context, 16));
         row.addView(valueView, valueParams);

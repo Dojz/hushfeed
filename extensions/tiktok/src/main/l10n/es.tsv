@@ -39,6 +39,7 @@
 %1$s, %2$s, %3$s, %4$s, %5$s	%1$s, %2$s, %3$s, %4$s, %5$s
 %1$s, selected	%1$s, seleccionado
 %1$s. %2$s	%1$s. %2$s
+%1$s: %2$s	%1$s: %2$s
 %1$s: %2$d found, %3$d missing	%1$s: %2$d encontrados, %3$d faltan
 %1$s: %2$d found, %3$d missing, and more it stopped counting	%1$s: %2$d encontrados, %3$d faltan, y más que dejó de contar
 %1$s: %2$d found, %3$d missing, and more it stopped counting. First missing: %4$s	%1$s: %2$d encontrados, %3$d faltan, y más que dejó de contar. El primero que faltó: %4$s
@@ -202,6 +203,7 @@ Words and countries	Palabras y países
 Your feed	Tu feed
 Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.	Cero lo desactiva. Cuenta cada vídeo que aparece en el feed, sin importar cómo llegaste a él, y avisa cuando se alcanza la cifra. Es independiente del límite de sesión del avance automático, en Reproducción, que solo cuenta los vídeos que Hushfeed pasó por ti.
 code %1$s	código %1$s
+collapsed	Contraído
 Comma separated account handles or user ids. These accounts are always skipped. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.	Nombres de usuario o ids separados por comas. Estas cuentas siempre se saltan. Una entrada entre barras, como /^news_/, es un patrón que se compara con el nombre de usuario y con el nombre visible.
 Comma separated country codes, like GB, IE. Videos posted from anywhere else are hidden. Leave empty for all countries.	Códigos de país separados por comas, como GB, IE. Los vídeos publicados desde cualquier otro sitio se ocultan. Déjalo vacío para todos los países.
 Comma separated country codes. Videos posted from these are hidden, whatever the list above says.	Códigos de país separados por comas. Los vídeos publicados desde ellos se ocultan, diga lo que diga la lista de arriba.
@@ -299,6 +301,7 @@ Download original photos	Descargar las fotos originales
 Download path updated	Ruta de descarga actualizada
 Downloads	Descargas
 dp	dp
+expanded	Expandido
 Drag to move, release to place	Arrastra para mover, suelta para colocar
 Drama and Series	Drama y series
 Drop the notification saying somebody new followed you before it reaches the drawer. Every other notification is left alone, and the follower still appears in the Inbox.	Descarta la notificación que dice que alguien nuevo te ha seguido antes de que llegue al panel. Las demás notificaciones se quedan como están, y quien te siguió sigue apareciendo en la bandeja.
@@ -888,6 +891,7 @@ Tap the feed Follow button twice within four seconds.	Toca el botón Seguir del 
 Tap the like heart twice within four seconds. Removing a like stays immediate.	Toca el corazón de me gusta dos veces en menos de cuatro segundos. Quitar un me gusta sigue siendo inmediato.
 Tap to start the feed	Toca para poner el feed en marcha
 Technical details	Detalles técnicos
+Technical details, %1$s	Detalles técnicos, %1$s
 That backup was written by a newer Hushfeed than this one. Nothing was altered.	Esa copia de seguridad la escribió un Hushfeed más nuevo que este. No se ha cambiado nada.
 That creator is already in the list	Ese creador ya está en la lista
 That creator pattern is too long to use, so it was skipped: %1$s	Ese patrón de creador es demasiado largo, así que se omitió: %1$s

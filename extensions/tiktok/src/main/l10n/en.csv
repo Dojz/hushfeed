@@ -44,6 +44,7 @@ source,target
 "%1$s: %2$d found, %3$d missing, and more it stopped counting","%1$s: %2$d found, %3$d missing, and more it stopped counting"
 "%1$s: %2$d found, %3$d missing, and more it stopped counting. First missing: %4$s","%1$s: %2$d found, %3$d missing, and more it stopped counting. First missing: %4$s"
 "%1$s: %2$d found, %3$d missing. First missing: %4$s","%1$s: %2$d found, %3$d missing. First missing: %4$s"
+%1$s: %2$s,%1$s: %2$s
 1 field overridden,1 field overridden
 1 field will be overridden when requested,1 field will be overridden when requested
 1 gate selected,1 gate selected
@@ -889,6 +890,7 @@ Tap the feed Follow button twice within four seconds.,Tap the feed Follow button
 Tap the like heart twice within four seconds. Removing a like stays immediate.,Tap the like heart twice within four seconds. Removing a like stays immediate.
 Tap to start the feed,Tap to start the feed
 Technical details,Technical details
+"Technical details, %1$s","Technical details, %1$s"
 That backup was written by a newer Hushfeed than this one. Nothing was altered.,That backup was written by a newer Hushfeed than this one. Nothing was altered.
 That creator is already in the list,That creator is already in the list
 "That creator pattern is too long to use, so it was skipped: %1$s","That creator pattern is too long to use, so it was skipped: %1$s"
@@ -1076,9 +1078,11 @@ Your filters hid everything TikTok just sent. Most were %1$s.,Your filters hid e
 "Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.","Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past."
 "Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.","Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count."
 code %1$s,code %1$s
+collapsed,collapsed
 day,day
 days,days
 dp,dp
+expanded,expanded
 millisecond,millisecond
 milliseconds,milliseconds
 minute,minute
