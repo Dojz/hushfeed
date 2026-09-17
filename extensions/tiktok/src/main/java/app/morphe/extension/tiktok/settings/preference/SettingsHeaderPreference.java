@@ -131,6 +131,7 @@ public final class SettingsHeaderPreference extends Preference {
         TextView heading = SettingsUi.text(
                 context, title, headingSizeSp(context), SettingsUi.textPrimary(), 1);
         heading.setTag("hushfeed_page_title");
+        heading.setHyphenationFrequency(android.text.Layout.HYPHENATION_FREQUENCY_NONE);
         if (android.os.Build.VERSION.SDK_INT >= 28) heading.setAccessibilityHeading(true);
         LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(-1, -2);
         titleParams.topMargin = SettingsUi.dp(context, 24);
