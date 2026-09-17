@@ -40,6 +40,8 @@
 
 * "Enter a number. The previous value was kept." is gone: the dialog stays open for a correction now, so no value was kept. Five Playback summaries that opened with "Off by default." lead with what the feature does instead; the switch already says whether it is on.
 
+* The asset strips patch the newer TikTok builds again. Remove content credential and card scanner assets knew one reviewed set of files, 46.2.3's, and 46.7.3 and 46.8.3 ship 23 of those 33 paths while 46.9.3 ships different bytes behind 15 of them; Block P2P video relay carried a hash from the wrong build for one 46.9.3 library. A forced patch on any of those builds refused both. Each build has its own reviewed set now, read off the real files, and a test holds every set of every strip against every fixture on the machine before a release is built.
+
 * Holding Like does nothing with Disable the long press repost on. It kept the repost panel away, but it told TikTok the hold was not handled, so Android treated the release as a tap and a hold liked the video: on the S22 the heart went red and the count rose by one. The hold is consumed now.
 
 * "Save the sound as well" saves the sound. Every attempt ended in "The sound couldn't be saved. Try again." and the export said "Download contains no media samples". TikTok's AAC tracks open with an edit list that puts the encoder's priming frames before zero, so the extractor hands the first frames back at a negative time (the S22's files start at -161 ms), and the copy loop read the very first one as the end of the track. A track's lead-in is now taken off every stamp, and when a picture and a sound are put together they move by the same amount, so nothing drifts. Found on the S22 on 2026-09-17.
