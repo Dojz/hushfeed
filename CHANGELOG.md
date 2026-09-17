@@ -6,6 +6,12 @@
 
 * Backup and restore is its own page. Back up, Restore, Reset and Undo used to be the tail of Diagnostics, so anyone who patched without the diagnostics patch found them on a page named for something they didn't have. The Feature gate recorder row moved the other way, off the menu and into Diagnostics, where it stops being the one row without an icon.
 
+* The Feed screen page is laid out by where things sit. Right column first, with one checklist row over the six hides and the counts (its second line says what is hidden, "Hidden: Like, Share", instead of seven rows each saying "Hide the ... button"), then Video info, Around the video, Popups, Captions, Screen, Clear display and Gestures. The three long-press rows that lived under Player on the App page sit beside the Long press row now, and the playlist bar, event badge and inserted cards rows moved here from Feed filter, since they hide things drawn around a video rather than videos.
+
+* Feed filter reads in the order people ask: Kinds of post with Remove feed ads first, Limits, Creators and sounds, Words and countries, Seen videos, then one Advanced switch. The four player buttons (block, local hide, block sound, Not interested) moved here from the App page, next to the lists they add to.
+
+* The App page keeps what is about the app: Layout, Player, Search (with Hide search suggestions), Profile (Keep the Favorites tab) and System. Downloads has Files, Video, Photos and stickers, Long press, Subtitles, Hand-off and Offline videos headings, and Comments has Reading, Hiding and Blocking.
+
 * Every menu icon is its own picture. Feed screen and App shared the sliders glyph; Feed screen draws the feed now, a screen with the right column down its edge, Screen time is a clock and Backup and restore is a box with an arrow rising out of it. The App page has Search and System headings so its last four rows stop reading as part of Player.
 
 * A Privacy page. Everything that decides what TikTok learns sits in one place now. Disable analytics and tracking and Ghost mode moved there from App behavior, the three link rows came with them, and each of the device-access patches below has a switch of its own. Before this the seven device patches had no row anywhere, so there was no way to see they were installed and no way to turn one off short of patching again.
@@ -22,11 +28,11 @@
 
 * The six right column switches (hide the like, comment, favorite, share, avatar and music buttons) work again on 46.2.3. Since 0.35.0 they looked for the video cell under the long-press layer, which on this build sits beside the column rather than above it, so the walk found no buttons and hid nothing. It starts from the cell's own root now, which holds both.
 
-* Feed button size makes the right column's icons a quarter larger for anyone who finds them small. Under Interface. The first cut offered 1.5x and 2x as well and scaled the whole button, and on the phone that did nothing: TikTok animates those buttons itself and writes its own scale back on every frame. The setting scales the icon inside each button now, from the icon's base so it grows upward, and puts the size back before each frame TikTok draws. Past 1.25x an icon runs into the next button, so the two larger sizes are gone, and a stored 1.5x or 2x reads as 1.25x.
+* Feed button size makes the right column's icons a quarter larger for anyone who finds them small. Under Feed screen. The first cut offered 1.5x and 2x as well and scaled the whole button, and on the phone that did nothing: TikTok animates those buttons itself and writes its own scale back on every frame. The setting scales the icon inside each button now, from the icon's base so it grows upward, and puts the size back before each frame TikTok draws. Past 1.25x an icon runs into the next button, so the two larger sizes are gone, and a stored 1.5x or 2x reads as 1.25x.
 
 * A feed check asked from a new window no longer takes its answer from a Home tab that belongs to an older one. Anything drawn only on the recommendation feed could otherwise show up, or stay away, on the wrong screen for as long as the old window lingered.
 
-* The share prompt that pops up after a like can be hidden. With the switch on, the bubble asking you to share a video with friends never appears. Under Interface, off by default. Upstream #22.
+* The share prompt that pops up after a like can be hidden. With the switch on, the bubble asking you to share a video with friends never appears. Under Feed screen, off by default. Upstream #22.
 
 * The four feed overlay controls are drawn by one class at one stroke weight. Sound was a Unicode note in whatever font TikTok picked, local hide was a bold ×, and not interested was a thin dash; only the block symbol was drawn. They all draw through `OverlayGlyphDrawable` now, at the same 2dp stroke and the same radius fraction, so they look like one set.
 

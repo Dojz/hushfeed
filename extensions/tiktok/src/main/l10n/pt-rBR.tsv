@@ -74,6 +74,7 @@ Add a separate button that skips videos using the current sound.	Adiciona um bot
 Add hidden creator	Adicionar criador oculto
 Ads	Anúncios
 Advance when a video ends	Avançar quando um vídeo termina
+Advanced	Avançado
 Advanced JSON value	Valor JSON avançado
 AI-generated posts	Publicações geradas por IA
 All	Todos
@@ -97,6 +98,7 @@ App	Aplicativo
 App AB	AB do app
 Applies to both video and photo downloads.	Vale tanto para os downloads de vídeo quanto para os de fotos.
 Apply	Aplicar
+Around the video	Ao redor do vídeo
 Arrange your feed and bottom tabs	Organize seu feed e as abas de baixo
 Audio	Áudio
 Auto translate comments	Traduzir comentários automaticamente
@@ -106,6 +108,7 @@ Automatic advance	Avanço automático
 Automatic advance stopped after %1$d videos	O avanço automático parou depois de %1$d vídeos
 Automatic advance stopped after one video	O avanço automático parou depois de um vídeo
 Automatic clear display	Limpar a tela automaticamente
+Avatar and follow button	Avatar e botão de seguir
 Back	Voltar
 Back up settings	Backup das configurações
 Backup and restore	Backup e restauração
@@ -123,6 +126,7 @@ Blocked creators	Criadores bloqueados
 Blocked sound ids	Ids de sons bloqueados
 Blocked sound names	Nomes de sons bloqueados
 Blocked sounds	Sons bloqueados
+Blocking	Bloquear
 Boolean	Booleano
 Browse	Procurar
 Cancel	Cancelar
@@ -145,6 +149,7 @@ Clear all Lab data (overrides, switch, recordings)	Limpar todos os dados do Lab 
 Clear all suggested accounts	Limpar todas as contas sugeridas
 Clear buffered events, saved crash reports and the hook status above.	Limpa os eventos em memória, os relatórios de falha salvos e o estado dos ganchos acima.
 Clear diagnostic data	Limpar os dados de diagnóstico
+Clear display	Tela limpa
 Clear display delay	Espera para limpar a tela
 Clear preset	Limpar predefinição
 Clear search	Limpar a busca
@@ -157,21 +162,43 @@ Clearing, %1$d so far	Limpando, %1$d até agora
 Close	Fechar
 Comments	Comentários
 Compare gate reads with their previous values.	Compara as leituras dos gates com os valores anteriores.
+Counts under the buttons	Números sob os botões
+Creators and sounds	Criadores e sons
 Daily budgets, reminders and the hold	Limites diários, lembretes e a pausa
 Feed screen	Tela do feed
 Feed tabs	Abas do feed
+Files	Arquivos
 Focus	Foco
+Hand-off	Passagem
+Hidden: %1$s	Ocultos: %1$s
+Hide buttons in the right column	Ocultar botões da coluna da direita
+Hide the plus button under the creator's picture in the right column. Ticking Avatar and follow button above hides the picture with it.	Oculta o botão de mais sob a foto do criador na coluna da direita. Marcar Avatar e botão de seguir acima esconde a foto junto.
+Hiding	Ocultar
 Last recording: %1$d gates.	Última gravação: %1$d gates.
 Last recording: 1 gate.	Última gravação: 1 gate.
 Layout, player, search and system	Layout, player, pesquisa e sistema
+Like	Curtir
 Logging, hook status and reports	Registros, status dos hooks e relatórios
+Music disc	Disco de música
+Nothing hidden.	Nada oculto.
+Offline videos	Vídeos offline
+Photos and stickers	Fotos e figurinhas
+Pick the buttons to take off the column. The rest stay where they are.	Escolha os botões para tirar da coluna. O resto fica onde está.
+Popups	Pop-ups
 Privacy and system	Privacidade e sistema
+Reading	Leitura
 Region	Região
+Right column	Coluna da direita
 Save, restore, reset and undo your settings	Salve, restaure, redefina e desfaça suas configurações
+Screen	Tela
 Screen time	Tempo de tela
 Search	Pesquisa
+Share	Compartilhar
+Subtitles	Legendas
 System	Sistema
+Video info	Informações do vídeo
 Watching and sharing	Assistir e compartilhar
+Words and countries	Palavras e países
 Your feed	Seu feed
 Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.	Zero desliga isso. Conta cada vídeo que aparece no feed, não importa como você chegou nele, e avisa assim que a contagem for atingida. É separado do limite de sessão do avanço automático, em Reprodução, que só conta os vídeos que o Hushfeed passou por você.
 code %1$s	código %1$s
@@ -264,7 +291,6 @@ Disabled	Desligados
 Discard edits	Descartar as edições
 Dismissed %1$s suggested accounts	%1$s contas sugeridas dispensadas
 Dismissed one suggested account	Uma conta sugerida dispensada
-Display	Tela
 Do not start the feed on returning	Não iniciar o feed ao voltar
 Do nothing	Não fazer nada
 Done	Concluído
@@ -311,8 +337,6 @@ Feature Gate Lab could not find the settings container	O Feature Gate Lab não e
 Feature gate override reset	Substituição do gate redefinida
 Feature gate override saved	Substituição do gate salva
 Feed and navigation	Feed e navegação
-Feed controls	Controles do feed
-Feed elements	Elementos do feed
 Feed filter	Filtro do feed
 Field %1$s can't be changed on this build. Take it out of the override, or reset the override.	O campo %1$s não pode ser alterado nesta versão. Tire-o da substituição ou redefina a substituição.
 Field edits were discarded.	As edições dos campos foram descartadas.
@@ -405,47 +429,32 @@ Hide the activity status control in the Inbox header.	Esconder o controle de sta
 Hide the add people icon	Esconder o ícone de adicionar pessoas
 Hide the add people icon in the Inbox header.	Esconder o ícone de adicionar pessoas no topo da caixa de entrada.
 Hide the Archive row.	Esconder a linha de Arquivo.
-Hide the arrow and its count in the right column.	Esconder a seta e o número dela na coluna da direita.
-Hide the avatar and follow button	Esconder a foto e o botão de seguir
 Hide the caption	Esconder a legenda
-Hide the comments button	Esconder o botão de comentários
-Hide the counts on the right column	Esconder os números da coluna da direita
-Hide the creator's picture and the plus button at the top of the right column. Hide the follow button on the feed hides the plus button on its own.	Esconder a foto do criador e o botão de mais no topo da coluna da direita. Esconder o botão de seguir do feed esconde só o botão de mais.
 Hide the description under the creator's name on the feed.	Esconder a descrição embaixo do nome do criador no feed.
 Hide the event badge	Esconder o selo de evento
 Hide the floating promotional badge over the feed.	Esconder o selo promocional flutuante sobre o feed.
 Hide the follow button on the feed	Esconder o botão de seguir do feed
 Hide the friend recommendation card and the other cards TikTok slots between videos.	Esconder o card de amigos recomendados e os outros cards que o TikTok encaixa entre os vídeos.
-Hide the heart and its count in the right column.	Esconder o coração e o número dele na coluna da direita.
 Hide the launcher shortcuts	Ocultar os atalhos do inicializador
-Hide the like button	Esconder o botão de curtir
 Hide the LIVE button	Esconder o botão de LIVE
 Hide the LIVE button in the top left corner of the feed.	Esconder o botão de LIVE no canto superior esquerdo do feed.
 Hide the LIVE videos from the feed.	Esconder os vídeos LIVE do feed.
 Hide the Message requests row.	Esconder a linha de Solicitações de mensagem.
-Hide the music disc	Esconder o disco de música
 Hide the music line	Esconder a linha da música
 Hide the New followers row.	Esconder a linha de Novos seguidores.
-Hide the numbers under the like, comment, favorite and share buttons. The buttons stay.	Esconder os números embaixo dos botões de curtir, comentar, favoritar e compartilhar. Os botões ficam.
 Hide the photo posts from the feed.	Esconder as publicações de fotos do feed.
 Hide the playlist bar	Esconder a barra da playlist
 Hide the playlist bar along the bottom of videos that belong to a series.	Esconder a barra da playlist na parte de baixo dos vídeos que fazem parte de uma série.
-Hide the plus button under the creator's picture in the right column. Hide the avatar and follow button hides the picture with it.	Esconder o botão de mais embaixo da foto do criador na coluna da direita. Esconder a foto e o botão de seguir leva a foto junto.
 Hide the question cards TikTok slides over a video near its end.	Esconder os cards com perguntas que o TikTok desliza sobre o vídeo perto do fim.
 Hide the right column	Esconder a coluna da direita
 Hide the row of story avatars across the top of the Inbox.	Esconder a linha de fotos de stories no topo da caixa de entrada.
-Hide the save button	Esconder o botão de salvar
-Hide the save button and its count in the right column.	Esconder o botão de salvar e sua contagem na coluna da direita.
 Hide the save button in the right column.	Esconder o botão de salvar na coluna da direita.
 Hide the search button in the top right corner of the feed.	Esconder o botão de busca no canto superior direito do feed.
 Hide the search icon in the Inbox header.	Esconder o ícone de busca no topo da caixa de entrada.
 Hide the searches TikTok offers before you type. Your own search history stays.	Esconder as buscas que o TikTok propõe antes de você digitar. Seu próprio histórico de busca fica.
 Hide the Send to row	Esconder a linha Enviar para
-Hide the share button	Esconder o botão de compartilhar
 Hide the share prompt after a like	Ocultar o pedido de compartilhar depois de curtir
-Hide the speech bubble and its count in the right column.	Esconder o balão e o número dele na coluna da direita.
 Hide the spinning music cover and the track name beside the caption.	Esconder a capa giratória da música e o nome da faixa ao lado da legenda.
-Hide the spinning record at the bottom of the right column.	Esconder o disco giratório na parte de baixo da coluna da direita.
 Hide the status bar	Esconder a barra de status
 Hide the stories from the feed.	Esconder os stories do feed.
 Hide the Tako AI feed bubble above the profile button.	Esconder a bolha do Tako AI no feed, acima do botão de perfil.
@@ -515,7 +524,6 @@ Limits	Limites
 Link copied	Link copiado
 Links	Links
 Links in comments open	Os links nos comentários abrem
-Lists	Listas
 Live	LIVE
 LIVE	LIVE
 LIVE replays	Reprises de LIVE
@@ -834,7 +842,6 @@ Skipping videos with %1$s	Pulando os vídeos com %1$s
 Something is missing from %1$s. Tap for the whole report.	Falta alguma coisa em %1$s. Toque para ver o relatório inteiro.
 Sound link copied	Link do som copiado
 Sound saved to %1$s	Som salvo em %1$s
-Sounds	Sons
 Source	Origem
 Source code and releases	Código-fonte e versões
 Speed	Velocidade

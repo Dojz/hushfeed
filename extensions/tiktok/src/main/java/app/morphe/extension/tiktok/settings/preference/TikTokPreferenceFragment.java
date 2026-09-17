@@ -735,6 +735,13 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
                 collectSettings((PreferenceGroup) preference, found, seen);
                 continue;
             }
+            // A checklist row stands for several switches and has no setting of its own.
+            if (preference instanceof SwitchListPreference) {
+                for (Setting<?> setting : ((SwitchListPreference) preference).settings()) {
+                    if (seen.add(setting.key)) found.add(setting);
+                }
+                continue;
+            }
             if (!preference.hasKey()) {
                 continue;
             }

@@ -78,7 +78,7 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 | `Diagnostic tools` | Adds diagnostic logging, filtered reports and local TikTok crash capture. The switches are under Diagnostics in Hushfeed settings. |
 | `Disable login requirement` | Removes TikTok's mandatory login gate from supported flows. |
 | `Disable screen capture detection` | Prevents TikTok from reacting to screenshots and screen recordings. |
-| `Disable telemetry` | Adds an App behavior toggle that stops ByteDance AppLog analytics, AppsFlyer attribution, explicit Firebase screen reports and TikTok's Npth or MonitorCrash startup reporting. TikTok's own diagnostics go quiet with them. Off by default. |
+| `Disable telemetry` | Adds a switch on the Privacy page that stops ByteDance AppLog analytics, AppsFlyer attribution, explicit Firebase screen reports and TikTok's Npth or MonitorCrash startup reporting. TikTok's own diagnostics go quiet with them. Off by default. |
 | `Disable the long press quick share` | Keeps long-pressing Share from opening TikTok's quick-share interaction. |
 | `Disable the long press repost` | Keeps holding Like from opening TikTok's repost action. |
 | `Double-tap controls` | Lets double taps do nothing or open the current video's comments. |
@@ -150,7 +150,11 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 
 ## Settings tour
 
-The settings pages use grouped controls on an AMOLED background. Light mode follows TikTok's theme, including the space behind the system bars, and larger text wraps across lines without clipping headers, captions or editor labels. Changing font size or navigation mode keeps the settings page you were using and its Back history. If a page cannot finish loading, Hushfeed replaces partial controls with a translated explanation plus Back and Retry actions. Use Search settings at the top to find translated titles or descriptions and jump to the original control, including Feature Gate Lab. These screenshots come from native Android views rendered by the local test suite. Enabled controls and values are test fixtures.
+The settings menu is four groups. Your feed holds Feed filter, Feed tabs and Feed screen. Watching and sharing holds Playback, Screen time, Comments, Downloads, Share sheet and Inbox. Privacy and system holds Privacy, Region, App, the Feature Gate Lab, Diagnostics and Backup and restore. About sits at the end. A group only appears when the patches you chose give it a page, and Search settings at the top finds any row by its translated title or description and jumps to it.
+
+Inside a page, rows sit under headings that say what they are about. Feed filter starts with Kinds of post (Remove feed ads first), then Limits, Creators and sounds, Words and countries, Seen videos and Advanced. Feed screen starts with the right column, where one checklist row hides any of the six buttons and the counts, then Video info, Around the video, Popups, Captions, Screen, Clear display and Gestures. Screen time is the daily budgets, the reminder and the hold. Backup and restore is Back up, Restore, Reset and Undo.
+
+The pages use grouped controls on an AMOLED background. Light mode follows TikTok's theme, including the space behind the system bars, and larger text wraps across lines without clipping headers, captions or editor labels. Changing font size or navigation mode keeps the settings page you were using and its Back history. If a page cannot finish loading, Hushfeed replaces partial controls with a translated explanation plus Back and Retry actions. These screenshots come from native Android views rendered by the local test suite. Enabled controls and values are test fixtures.
 
 <img src="assets/settings/settings.png" alt="Hushfeed settings home" width="260" /> <img src="assets/settings/playback.png" alt="Playback settings" width="260" /> <img src="assets/settings/playback-light.png" alt="Playback settings in light mode" width="260" />
 
@@ -161,16 +165,19 @@ The settings pages use grouped controls on an AMOLED background. Light mode foll
 |---|---|
 | Feed filter | [View](assets/settings/feed_filter.png) |
 | Local creator list | [View](assets/settings/creator-list.png) |
-| Feed navigation | [View](assets/settings/feed_navigation.png) |
-| Interface | [View](assets/settings/interface.png) |
-| Comments and translation | [View](assets/settings/comments.png) |
-| Downloads | [View](assets/settings/downloads.png) |
+| Feed tabs | [View](assets/settings/feed_navigation.png) |
+| Feed screen | [View](assets/settings/interface.png) |
 | Playback | [View](assets/settings/playback.png) |
-| Inbox | [View](assets/settings/inbox.png) |
+| Screen time | [View](assets/settings/screen_time.png) |
+| Comments | [View](assets/settings/comments.png) |
+| Downloads | [View](assets/settings/downloads.png) |
 | Share sheet | [View](assets/settings/share.png) |
-| Region settings | [View](assets/settings/region.png) |
-| App behavior | [View](assets/settings/behavior.png) |
+| Inbox | [View](assets/settings/inbox.png) |
+| Privacy | [View](assets/settings/privacy.png) |
+| Region | [View](assets/settings/region.png) |
+| App | [View](assets/settings/behavior.png) |
 | Diagnostics | [View](assets/settings/diagnostics.png) |
+| Backup and restore | [View](assets/settings/backup.png) |
 | Settings search | [View](assets/settings/search.png) |
 | Settings recovery | [View](assets/settings/settings-error.png) |
 | Feature Gate Lab | [View](assets/settings/lab.png) |
@@ -198,7 +205,7 @@ Hushfeed saves what the app already has. The download reads the addresses TikTok
 
 Select `Subtitle tools` in the patcher, then enable subtitle downloads in Downloads. Captioned videos and their SRT files share the same filename stem. Language names can use Unicode, and filename collisions keep separate tracks. Android 11 and later save the pair in Movies; Android 10 uses Download. The selected subfolder still applies. A failed subtitle transfer leaves the saved video intact and reports the partial result.
 
-Caption appearance and the clear display option are in Interface:
+Caption appearance and the clear display option are on the Feed screen page:
 
 The clear-display caption is removed as soon as you turn its switch off. Turning it back on restores the current cue when its video is still on screen.
 
@@ -218,7 +225,7 @@ Advanced downloads can send a sanitized TikTok link to another installed app. En
 
 Photo filename templates can use `{index}`. TikTok's own Photo Mode saver numbers each image from 1 and starts over when the post has finished saving, including on Android versions that write straight to a shared folder.
 
-Foldable controls are in App behavior. Settings save immediately, including when an older settings page is still open. A notification tells you when to restart TikTok.
+Foldable controls are on the App page. Settings save immediately, including when an older settings page is still open. A notification tells you when to restart TikTok.
 
 Numeric feed limits show their actual unit with language-aware singular and plural labels.
 
@@ -226,7 +233,7 @@ Native settings pickers use one radio indicator for a single choice and one chec
 
 <img src="assets/settings/behavior.png" alt="Foldable comment settings" width="300" />
 
-Region spoof requires Override SIM details plus Match locale and timezone to country in Region settings. Each built-in country preset supplies a timezone. Country codes must be two ASCII letters. Locale scripts and extensions are retained, including when a legacy variant needs fallback handling. Restart TikTok after changing these settings. Enable the separate store-region option only if needed, since it can affect search. GPS and the network address stay unchanged. Neither switch can change where TikTok thinks you are on its own: your IP address, the history on your account and the language you read in all say the same thing they said before, and any one of them is enough for TikTok to keep serving the region it already chose.
+Region spoof requires Override SIM details plus Match locale and timezone to country on the Region page. Each built-in country preset supplies a timezone. Country codes must be two ASCII letters. Locale scripts and extensions are retained, including when a legacy variant needs fallback handling. Restart TikTok after changing these settings. Enable the separate store-region option only if needed, since it can affect search. GPS and the network address stay unchanged. Neither switch can change where TikTok thinks you are on its own: your IP address, the history on your account and the language you read in all say the same thing they said before, and any one of them is enough for TikTok to keep serving the region it already chose.
 
 <img src="assets/settings/region.png" alt="Country and region settings" width="300" />
 

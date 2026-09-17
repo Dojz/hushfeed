@@ -9,12 +9,16 @@ package app.morphe.extension.tiktok.settings.preference.categories;
 import android.content.Context;
 import android.preference.PreferenceScreen;
 
-import app.morphe.extension.shared.settings.BaseSettings;
 import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
 import app.morphe.extension.tiktok.settings.preference.SectionHeadingPreference;
 import app.morphe.extension.tiktok.settings.preference.TogglePreference;
 
+/**
+ * The app around the feed: its layout, the player, search, the profile and the system it
+ * runs on. The feed's own buttons and gestures moved to Feed filter and Feed screen, where
+ * the rows they belong beside are.
+ */
 @SuppressWarnings("deprecation")
 public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
     public ExtensionPreferenceCategory(Context context, PreferenceScreen screen) {
@@ -38,14 +42,11 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                 || SettingsStatus.seekbarThumbnailEnabled
                 || SettingsStatus.stopVideoLoopingEnabled
                 || SettingsStatus.resumeVideoAfterScrollEnabled
-                || SettingsStatus.longPressSpeedLockEnabled
-                || SettingsStatus.disableLongPressQuickShareEnabled
-                || SettingsStatus.disableLongPressRepostEnabled
-                || SettingsStatus.blockAuthorEnabled
-                || SettingsStatus.notInterestedEnabled
+                || SettingsStatus.duetStitchEnabled
                 || SettingsStatus.nonPersonalizedSearchEnabled
                 || SettingsStatus.liveSearchEnabled
-                || SettingsStatus.duetStitchEnabled
+                || SettingsStatus.hideSearchSuggestionsEnabled
+                || SettingsStatus.keepFavoritesTabEnabled
                 || SettingsStatus.refreshRateEnabled
                 || SettingsStatus.launcherShortcutsEnabled;
     }
@@ -67,9 +68,7 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
         }
         boolean hasPlayer = SettingsStatus.showSeekbarEnabled || SettingsStatus.seekbarThumbnailEnabled
                 || SettingsStatus.stopVideoLoopingEnabled || SettingsStatus.resumeVideoAfterScrollEnabled
-                || SettingsStatus.longPressSpeedLockEnabled || SettingsStatus.disableLongPressQuickShareEnabled
-                || SettingsStatus.disableLongPressRepostEnabled || SettingsStatus.duetStitchEnabled
-                || SettingsStatus.blockAuthorEnabled || SettingsStatus.notInterestedEnabled;
+                || SettingsStatus.duetStitchEnabled;
         if (hasPlayer) {
             addPreference(new SectionHeadingPreference(context, "Player"));
         }
@@ -105,30 +104,6 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                     Settings.RESUME_VIDEO_AFTER_SCROLL
             ));
         }
-        if (SettingsStatus.longPressSpeedLockEnabled) {
-            addPreference(new TogglePreference(
-                    context,
-                    "Enable hold-and-slide 2x lock",
-                    "Use TikTok's native hold, slide down, and release gesture to lock 2x speed.",
-                    Settings.ENABLE_LONG_PRESS_SPEED_LOCK
-            ));
-        }
-        if (SettingsStatus.disableLongPressQuickShareEnabled) {
-            addPreference(new TogglePreference(
-                    context,
-                    "Disable the long press quick share",
-                    "Stop a long press on Share from opening TikTok's quick share action.",
-                    Settings.DISABLE_LONG_PRESS_QUICK_SHARE
-            ));
-        }
-        if (SettingsStatus.disableLongPressRepostEnabled) {
-            addPreference(new TogglePreference(
-                    context,
-                    "Disable the long press repost",
-                    "Stop a long press on Like from opening TikTok's repost action.",
-                    Settings.DISABLE_LONG_PRESS_REPOST
-            ));
-        }
         if (SettingsStatus.duetStitchEnabled) {
             addPreference(new TogglePreference(
                     context,
@@ -139,33 +114,9 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                     Settings.ALLOW_DUET_AND_STITCH
             ));
         }
-        if (SettingsStatus.blockAuthorEnabled) {
-            addPreference(new TogglePreference(
-                    context,
-                    "Show block button on videos",
-                    "Add a block button to the video player that blocks the creator of the "
-                            + "current video in one tap. An undo action is shown after each block.",
-                    Settings.BLOCK_AUTHOR_BUTTON
-            ));
-            addPreference(new TogglePreference(
-                    context,
-                    "Show local hide button",
-                    "Add a separate button that skips this account locally without blocking it.",
-                    Settings.LOCAL_HIDE_BUTTON
-            ));
-            addPreference(new TogglePreference(
-                    context,
-                    "Show block sound button",
-                    "Add a separate button that skips videos using the current sound.",
-                    Settings.BLOCK_SOUND_BUTTON
-            ));
-        }
-        if (SettingsStatus.notInterestedEnabled) {
-            addPreference(new TogglePreference(context, "Show the Not interested button",
-                    "Add a button beside the block control to send feedback about the current video.",
-                    Settings.NOT_INTERESTED_BUTTON));
-        }
-        if (SettingsStatus.nonPersonalizedSearchEnabled || SettingsStatus.liveSearchEnabled) {
+        boolean hasSearch = SettingsStatus.nonPersonalizedSearchEnabled || SettingsStatus.liveSearchEnabled
+                || SettingsStatus.hideSearchSuggestionsEnabled;
+        if (hasSearch) {
             addPreference(new SectionHeadingPreference(context, "Search"));
         }
         if (SettingsStatus.nonPersonalizedSearchEnabled) {
@@ -182,6 +133,23 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                     "Show LIVE search",
                     "Show TikTok's search entry in the LIVE drawer where supported.",
                     Settings.ENABLE_LIVE_SEARCH
+            ));
+        }
+        if (SettingsStatus.hideSearchSuggestionsEnabled) {
+            addPreference(new TogglePreference(
+                    context,
+                    "Hide search suggestions",
+                    "Hide the searches TikTok offers before you type. Your own search history stays.",
+                    Settings.HIDE_SEARCH_SUGGESTIONS
+            ));
+        }
+        if (SettingsStatus.keepFavoritesTabEnabled) {
+            addPreference(new SectionHeadingPreference(context, "Profile"));
+            addPreference(new TogglePreference(
+                    context,
+                    "Keep the Favorites tab",
+                    "TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.",
+                    Settings.KEEP_FAVORITES_TAB
             ));
         }
         if (SettingsStatus.refreshRateEnabled || SettingsStatus.launcherShortcutsEnabled) {
@@ -208,6 +176,5 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                     Settings.HIDE_LAUNCHER_SHORTCUTS
             ));
         }
-
     }
 }

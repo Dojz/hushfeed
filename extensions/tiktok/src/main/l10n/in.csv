@@ -75,6 +75,7 @@ Add a separate button that skips videos using the current sound.,Tambahkan tombo
 Add hidden creator,Tambah kreator tersembunyi
 Ads,Iklan
 Advance when a video ends,Lanjut saat video berakhir
+Advanced,Lanjutan
 Advanced JSON value,Nilai JSON lanjutan
 AI-generated posts,Kiriman buatan AI
 All,Semua
@@ -98,6 +99,7 @@ App,Aplikasi
 App AB,AB aplikasi
 Applies to both video and photo downloads.,Berlaku untuk unduhan video dan foto.
 Apply,Terapkan
+Around the video,Di sekitar video
 Arrange your feed and bottom tabs,Atur feed dan tab bawahmu
 Audio,Audio
 Auto translate comments,Terjemahkan komentar otomatis
@@ -107,6 +109,7 @@ Automatic advance,Otomatis lanjut
 Automatic advance stopped after %1$d videos,Lanjut otomatis dihentikan setelah %1$d video
 Automatic advance stopped after one video,Lanjut otomatis dihentikan setelah satu video
 Automatic clear display,Tampilan bersih otomatis
+Avatar and follow button,Avatar dan tombol ikuti
 Back,Kembali
 Back up settings,Cadangkan pengaturan
 Backup and restore,Cadangkan dan pulihkan
@@ -124,6 +127,7 @@ Blocked creators,Kreator yang diblokir
 Blocked sound ids,Id suara yang diblokir
 Blocked sound names,Nama suara yang diblokir
 Blocked sounds,Suara yang diblokir
+Blocking,Memblokir
 Boolean,Boolean
 Browse,Telusuri
 Cancel,Batal
@@ -146,6 +150,7 @@ Clear all,Hapus semua
 Clear all suggested accounts,Hapus semua akun yang disarankan
 "Clear buffered events, saved crash reports and the hook status above.","Hapus peristiwa yang tersimpan, laporan crash dan status hook di atas."
 Clear diagnostic data,Hapus data diagnostik
+Clear display,Tampilan bersih
 Clear display delay,Jeda tampilan bersih
 Clear preset,Hapus preset
 Clear search,Hapus pencarian
@@ -158,21 +163,43 @@ Clearing suggested accounts,Menghapus akun yang disarankan
 Close,Tutup
 Comments,Komentar
 Compare gate reads with their previous values.,Bandingkan pembacaan gate dengan nilai sebelumnya.
+Counts under the buttons,Angka di bawah tombol
+Creators and sounds,Kreator dan suara
 "Daily budgets, reminders and the hold","Anggaran harian, pengingat, dan jeda"
 Feed screen,Layar feed
 Feed tabs,Tab feed
+Files,Berkas
 Focus,Fokus
+Hand-off,Penerusan
+Hidden: %1$s,Disembunyikan: %1$s
+Hide buttons in the right column,Sembunyikan tombol di kolom kanan
+Hide the plus button under the creator's picture in the right column. Ticking Avatar and follow button above hides the picture with it.,Sembunyikan tombol plus di bawah foto kreator di kolom kanan. Mencentang Avatar dan tombol ikuti di atas ikut menyembunyikan fotonya.
+Hiding,Menyembunyikan
 Last recording: %1$d gates.,Rekaman terakhir: %1$d gate.
 Last recording: 1 gate.,Rekaman terakhir: 1 gate.
 "Layout, player, search and system","Tata letak, pemutar, pencarian, dan sistem"
+Like,Suka
 "Logging, hook status and reports","Log, status hook, dan laporan"
+Music disc,Piringan musik
+Nothing hidden.,Tidak ada yang disembunyikan.
+Offline videos,Video offline
+Photos and stickers,Foto dan stiker
+Pick the buttons to take off the column. The rest stay where they are.,Pilih tombol yang mau dihilangkan dari kolom. Sisanya tetap di tempat.
+Popups,Pop-up
 Privacy and system,Privasi dan sistem
+Reading,Membaca
 Region,Wilayah
+Right column,Kolom kanan
 "Save, restore, reset and undo your settings","Simpan, pulihkan, atur ulang, dan batalkan pengaturanmu"
+Screen,Layar
 Screen time,Waktu layar
 Search,Pencarian
+Share,Bagikan
+Subtitles,Subtitel
 System,Sistem
+Video info,Info video
 Watching and sharing,Menonton dan berbagi
+Words and countries,Kata dan negara
 Your feed,Feed kamu
 "Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.","Nol mematikan ini. Menghitung setiap video yang muncul di feed, bagaimanapun kamu sampai ke sana, dan memberi tahu begitu jumlahnya tercapai. Ini terpisah dari batas sesi maju otomatis di Pemutaran, yang hanya menghitung video yang dilewati Hushfeed sendiri."
 code %1$s,kode %1$s
@@ -265,7 +292,6 @@ Disabled,Nonaktif
 Discard edits,Buang perubahan
 Dismissed %1$s suggested accounts,%1$s akun saran dihapus
 Dismissed one suggested account,Satu akun saran dihapus
-Display,Tampilan
 Do not start the feed on returning,Jangan mulai feed saat kembali
 Do nothing,Tidak melakukan apa pun
 Done,Selesai
@@ -312,8 +338,6 @@ Feature Gate Lab could not find the settings container,Feature Gate Lab tidak me
 Feature gate override reset,Penggantian gate diatur ulang
 Feature gate override saved,Penggantian gate disimpan
 Feed and navigation,Feed dan navigasi
-Feed controls,Kontrol feed
-Feed elements,Elemen feed
 Feed filter,Filter feed
 "Field %1$s can't be changed on this build. Take it out of the override, or reset the override.","Field %1$s tidak bisa diubah di build ini. Keluarkan dari penimpaan, atau setel ulang penimpaan."
 Field edits were discarded.,Perubahan bidang dibuang.
@@ -406,47 +430,32 @@ Hide the activity status control in the Inbox header.,Sembunyikan kontrol status
 Hide the add people icon,Sembunyikan ikon tambah orang
 Hide the add people icon in the Inbox header.,Sembunyikan ikon tambah orang di header Kotak Masuk.
 Hide the Archive row.,Sembunyikan baris Arsip.
-Hide the arrow and its count in the right column.,Sembunyikan ikon panah dan angkanya di kolom kanan.
-Hide the avatar and follow button,Sembunyikan foto profil dan tombol ikuti
 Hide the caption,Sembunyikan keterangan
-Hide the comments button,Sembunyikan tombol komentar
-Hide the counts on the right column,Sembunyikan angka di kolom kanan
-Hide the creator's picture and the plus button at the top of the right column. Hide the follow button on the feed hides the plus button on its own.,Sembunyikan foto kreator dan tombol plus di atas kolom kanan. Sembunyikan tombol ikuti di feed hanya menyembunyikan tombol plusnya saja.
 Hide the description under the creator's name on the feed.,Sembunyikan deskripsi di bawah nama kreator pada feed.
 Hide the event badge,Sembunyikan lencana acara
 Hide the floating promotional badge over the feed.,Sembunyikan lencana promosi yang mengambang di atas feed.
 Hide the follow button on the feed,Sembunyikan tombol ikuti di feed
 Hide the friend recommendation card and the other cards TikTok slots between videos.,Sembunyikan kartu rekomendasi teman dan kartu lain yang TikTok selipkan di antara video.
-Hide the heart and its count in the right column.,Sembunyikan ikon hati dan angkanya di kolom kanan.
 Hide the launcher shortcuts,Sembunyikan pintasan peluncur
-Hide the like button,Sembunyikan tombol suka
 Hide the LIVE button,Sembunyikan tombol LIVE
 Hide the LIVE button in the top left corner of the feed.,Sembunyikan tombol LIVE di pojok kiri atas feed.
 Hide the LIVE videos from the feed.,Sembunyikan video LIVE dari feed.
 Hide the Message requests row.,Sembunyikan baris Permintaan pesan.
-Hide the music disc,Sembunyikan piringan musik
 Hide the music line,Sembunyikan baris musik
 Hide the New followers row.,Sembunyikan baris Pengikut baru.
-"Hide the numbers under the like, comment, favorite and share buttons. The buttons stay.","Sembunyikan angka di bawah tombol suka, komentar, favorit dan bagikan. Tombolnya tetap ada."
 Hide the photo posts from the feed.,Sembunyikan publikasi foto dari feed.
 Hide the playlist bar,Sembunyikan bilah playlist
 Hide the playlist bar along the bottom of videos that belong to a series.,Sembunyikan bilah playlist di bagian bawah video yang termasuk sebuah seri.
-Hide the plus button under the creator's picture in the right column. Hide the avatar and follow button hides the picture with it.,Sembunyikan tombol plus di bawah foto kreator pada kolom kanan. Sembunyikan foto profil dan tombol ikuti ikut menyembunyikan fotonya.
 Hide the question cards TikTok slides over a video near its end.,Sembunyikan kartu pertanyaan yang TikTok munculkan menjelang akhir video.
 Hide the right column,Sembunyikan kolom kanan
 Hide the row of story avatars across the top of the Inbox.,Sembunyikan baris foto profil Story di bagian atas Kotak Masuk.
-Hide the save button,Sembunyikan tombol simpan
-Hide the save button and its count in the right column.,Sembunyikan tombol simpan dan jumlahnya di kolom kanan.
 Hide the save button in the right column.,Sembunyikan tombol simpan di kolom kanan.
 Hide the search button in the top right corner of the feed.,Sembunyikan tombol cari di pojok kanan atas feed.
 Hide the search icon in the Inbox header.,Sembunyikan ikon cari di header Kotak Masuk.
 Hide the searches TikTok offers before you type. Your own search history stays.,Sembunyikan pencarian yang ditawarkan TikTok sebelum kamu mengetik. Riwayat pencarianmu sendiri tetap ada.
 Hide the Send to row,Sembunyikan baris Kirim ke
-Hide the share button,Sembunyikan tombol bagikan
 Hide the share prompt after a like,Sembunyikan ajakan berbagi setelah suka
-Hide the speech bubble and its count in the right column.,Sembunyikan gelembung komentar dan angkanya di kolom kanan.
 Hide the spinning music cover and the track name beside the caption.,Sembunyikan sampul musik yang berputar dan nama lagu di samping keterangan.
-Hide the spinning record at the bottom of the right column.,Sembunyikan piringan yang berputar di bagian bawah kolom kanan.
 Hide the status bar,Sembunyikan bilah status
 Hide the stories from the feed.,Sembunyikan stories dari feed.
 Hide the Tako AI feed bubble above the profile button.,"Sembunyikan gelembung Tako AI di feed, tepat di atas tombol profil."
@@ -516,7 +525,6 @@ Limits,Batas
 Link copied,Tautan disalin
 Links,Tautan
 Links in comments open,Tautan di komentar bisa dibuka
-Lists,Daftar
 Live,LIVE
 LIVE,LIVE
 LIVE replays,Putar ulang LIVE
@@ -835,7 +843,6 @@ Skipping videos with %1$s,Melewati video dengan %1$s
 Something is missing from %1$s. Tap for the whole report.,Ada yang hilang dari %1$s. Ketuk untuk laporan lengkapnya.
 Sound link copied,Tautan suara disalin
 Sound saved to %1$s,Suara disimpan di %1$s
-Sounds,Suara
 Source,Sumber
 Source code and releases,Kode sumber dan rilis
 Speed,Kecepatan

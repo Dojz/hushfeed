@@ -74,6 +74,7 @@ Add a separate button that skips videos using the current sound.	Añade un botó
 Add hidden creator	Añadir creador oculto
 Ads	Anuncios
 Advance when a video ends	Avanzar cuando termina un vídeo
+Advanced	Avanzado
 Advanced JSON value	Valor JSON avanzado
 AI-generated posts	Publicaciones generadas por IA
 All	Todos
@@ -97,6 +98,7 @@ App	Aplicación
 App AB	AB de la aplicación
 Applies to both video and photo downloads.	Se aplica tanto a las descargas de vídeo como a las de fotos.
 Apply	Aplicar
+Around the video	Alrededor del vídeo
 Arrange your feed and bottom tabs	Organiza tu feed y las pestañas inferiores
 Audio	Audio
 Auto translate comments	Traducir comentarios automáticamente
@@ -106,6 +108,7 @@ Automatic advance	Avance automático
 Automatic advance stopped after %1$d videos	El avance automático se detuvo tras %1$d vídeos
 Automatic advance stopped after one video	El avance automático se detuvo tras un vídeo
 Automatic clear display	Ocultar controles automáticamente
+Avatar and follow button	Avatar y botón de seguir
 Back	Atrás
 Back up settings	Copia de seguridad de los ajustes
 Backup and restore	Copia de seguridad y restauración
@@ -123,6 +126,7 @@ Blocked creators	Creadores bloqueados
 Blocked sound ids	Ids de sonidos bloqueados
 Blocked sound names	Nombres de sonidos bloqueados
 Blocked sounds	Sonidos bloqueados
+Blocking	Bloquear
 Boolean	Booleano
 Browse	Explorar
 Cancel	Cancelar
@@ -145,6 +149,7 @@ Clear all Lab data (overrides, switch, recordings)	Borrar todos los datos del La
 Clear all suggested accounts	Borrar todas las cuentas sugeridas
 Clear buffered events, saved crash reports and the hook status above.	Borra los eventos en memoria, los informes de fallo guardados y el estado de los enganches de arriba.
 Clear diagnostic data	Borrar los datos de diagnóstico
+Clear display	Controles ocultos
 Clear display delay	Retardo para ocultar los controles
 Clear preset	Quitar el preajuste
 Clear search	Borrar la búsqueda
@@ -157,21 +162,43 @@ Clearing, %1$d so far	Borrando, %1$d hasta ahora
 Close	Cerrar
 Comments	Comentarios
 Compare gate reads with their previous values.	Compara las lecturas de los interruptores con sus valores anteriores.
+Counts under the buttons	Cifras bajo los botones
+Creators and sounds	Creadores y sonidos
 Daily budgets, reminders and the hold	Presupuestos diarios, recordatorios y la pausa
 Feed screen	Pantalla del feed
 Feed tabs	Pestañas del feed
+Files	Archivos
 Focus	Enfoque
+Hand-off	Traspaso
+Hidden: %1$s	Ocultos: %1$s
+Hide buttons in the right column	Ocultar botones de la columna derecha
+Hide the plus button under the creator's picture in the right column. Ticking Avatar and follow button above hides the picture with it.	Oculta el botón más bajo la foto del creador en la columna derecha. Si marcas Avatar y botón de seguir arriba, la foto desaparece también.
+Hiding	Ocultar
 Last recording: %1$d gates.	Última grabación: %1$d interruptores.
 Last recording: 1 gate.	Última grabación: 1 interruptor.
 Layout, player, search and system	Diseño, reproductor, búsqueda y sistema
+Like	Me gusta
 Logging, hook status and reports	Registros, estado de los hooks e informes
+Music disc	Disco de música
+Nothing hidden.	Nada oculto.
+Offline videos	Vídeos sin conexión
+Photos and stickers	Fotos y stickers
+Pick the buttons to take off the column. The rest stay where they are.	Elige los botones que quieres quitar de la columna. El resto se queda donde está.
+Popups	Ventanas emergentes
 Privacy and system	Privacidad y sistema
+Reading	Lectura
 Region	Región
+Right column	Columna derecha
 Save, restore, reset and undo your settings	Guarda, restaura, restablece y deshaz tus ajustes
+Screen	Pantalla
 Screen time	Tiempo de pantalla
 Search	Búsqueda
+Share	Compartir
+Subtitles	Subtítulos
 System	Sistema
+Video info	Información del vídeo
 Watching and sharing	Ver y compartir
+Words and countries	Palabras y países
 Your feed	Tu feed
 Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.	Cero lo desactiva. Cuenta cada vídeo que aparece en el feed, sin importar cómo llegaste a él, y avisa cuando se alcanza la cifra. Es independiente del límite de sesión del avance automático, en Reproducción, que solo cuenta los vídeos que Hushfeed pasó por ti.
 code %1$s	código %1$s
@@ -264,7 +291,6 @@ Disabled	Desactivados
 Discard edits	Descartar los cambios
 Dismissed %1$s suggested accounts	%1$s cuentas sugeridas descartadas
 Dismissed one suggested account	Una cuenta sugerida descartada
-Display	Pantalla
 Do not start the feed on returning	No poner el feed en marcha al volver
 Do nothing	No hacer nada
 Done	Listo
@@ -311,8 +337,6 @@ Feature Gate Lab could not find the settings container	El Feature Gate Lab no ha
 Feature gate override reset	Sustitución del interruptor restablecida
 Feature gate override saved	Sustitución del interruptor guardada
 Feed and navigation	Feed y navegación
-Feed controls	Controles del feed
-Feed elements	Elementos del feed
 Feed filter	Filtro del feed
 Field %1$s can't be changed on this build. Take it out of the override, or reset the override.	El campo %1$s no se puede cambiar en esta versión. Quítalo de la anulación o restablece la anulación.
 Field edits were discarded.	Se descartaron los cambios de los campos.
@@ -405,47 +429,32 @@ Hide the activity status control in the Inbox header.	Ocultar el control de esta
 Hide the add people icon	Ocultar el icono de añadir personas
 Hide the add people icon in the Inbox header.	Ocultar el icono de añadir personas en la cabecera de la bandeja.
 Hide the Archive row.	Ocultar la fila de Archivo.
-Hide the arrow and its count in the right column.	Ocultar la flecha y su número en la columna derecha.
-Hide the avatar and follow button	Ocultar la foto y el botón de seguir
 Hide the caption	Ocultar la descripción
-Hide the comments button	Ocultar el botón de comentarios
-Hide the counts on the right column	Ocultar los números de la columna derecha
-Hide the creator's picture and the plus button at the top of the right column. Hide the follow button on the feed hides the plus button on its own.	Ocultar la foto del creador y el botón más de la parte de arriba de la columna derecha. Ocultar el botón de seguir del feed oculta solo el botón más.
 Hide the description under the creator's name on the feed.	Ocultar la descripción bajo el nombre del creador en el feed.
 Hide the event badge	Ocultar la insignia de evento
 Hide the floating promotional badge over the feed.	Ocultar la insignia promocional flotante sobre el feed.
 Hide the follow button on the feed	Ocultar el botón de seguir del feed
 Hide the friend recommendation card and the other cards TikTok slots between videos.	Ocultar la tarjeta de amigos recomendados y las demás tarjetas que TikTok mete entre vídeos.
-Hide the heart and its count in the right column.	Ocultar el corazón y su número en la columna derecha.
 Hide the launcher shortcuts	Ocultar los accesos directos del lanzador
-Hide the like button	Ocultar el botón de me gusta
 Hide the LIVE button	Ocultar el botón de LIVE
 Hide the LIVE button in the top left corner of the feed.	Ocultar el botón de LIVE en la esquina superior izquierda del feed.
 Hide the LIVE videos from the feed.	Ocultar del feed los vídeos LIVE.
 Hide the Message requests row.	Ocultar la fila de Solicitudes de mensaje.
-Hide the music disc	Ocultar el disco de música
 Hide the music line	Ocultar la línea de música
 Hide the New followers row.	Ocultar la fila de Nuevos seguidores.
-Hide the numbers under the like, comment, favorite and share buttons. The buttons stay.	Ocultar los números bajo los botones de me gusta, comentar, favoritos y compartir. Los botones se quedan.
 Hide the photo posts from the feed.	Ocultar del feed las publicaciones de fotos.
 Hide the playlist bar	Ocultar la barra de la lista de reproducción
 Hide the playlist bar along the bottom of videos that belong to a series.	Ocultar la barra de la lista de reproducción en la parte de abajo de los vídeos que pertenecen a una serie.
-Hide the plus button under the creator's picture in the right column. Hide the avatar and follow button hides the picture with it.	Ocultar el botón más bajo la foto del creador en la columna derecha. Ocultar la foto y el botón de seguir se lleva también la foto.
 Hide the question cards TikTok slides over a video near its end.	Ocultar las tarjetas con preguntas que TikTok desliza sobre un vídeo cerca del final.
 Hide the right column	Ocultar la columna derecha
 Hide the row of story avatars across the top of the Inbox.	Ocultar la fila de fotos de historias en la parte de arriba de la bandeja.
-Hide the save button	Ocultar el botón de guardar
-Hide the save button and its count in the right column.	Ocultar el botón de guardar y su número en la columna derecha.
 Hide the save button in the right column.	Ocultar el botón de guardar en la columna derecha.
 Hide the search button in the top right corner of the feed.	Ocultar el botón de buscar en la esquina superior derecha del feed.
 Hide the search icon in the Inbox header.	Ocultar el icono de buscar en la cabecera de la bandeja.
 Hide the searches TikTok offers before you type. Your own search history stays.	Ocultar las búsquedas que TikTok propone antes de que escribas. Tu propio historial de búsqueda se queda.
 Hide the Send to row	Ocultar la fila Enviar a
-Hide the share button	Ocultar el botón de compartir
 Hide the share prompt after a like	Ocultar la sugerencia de compartir tras un me gusta
-Hide the speech bubble and its count in the right column.	Ocultar el bocadillo y su número en la columna derecha.
 Hide the spinning music cover and the track name beside the caption.	Ocultar la portada giratoria de la música y el nombre de la pista junto a la descripción.
-Hide the spinning record at the bottom of the right column.	Ocultar el disco giratorio en la parte de abajo de la columna derecha.
 Hide the status bar	Ocultar la barra de estado
 Hide the stories from the feed.	Ocultar las historias del feed.
 Hide the Tako AI feed bubble above the profile button.	Ocultar la burbuja de Tako AI del feed, encima del botón de perfil.
@@ -515,7 +524,6 @@ Limits	Límites
 Link copied	Enlace copiado
 Links	Enlaces
 Links in comments open	Los enlaces de los comentarios se abren
-Lists	Listas
 Live	LIVE
 LIVE	LIVE
 LIVE replays	Repeticiones de LIVE
@@ -834,7 +842,6 @@ Skipping videos with %1$s	Saltando los vídeos con %1$s
 Something is missing from %1$s. Tap for the whole report.	Falta algo en %1$s. Toca para ver el informe completo.
 Sound link copied	Enlace del sonido copiado
 Sound saved to %1$s	Sonido guardado en %1$s
-Sounds	Sonidos
 Source	Origen
 Source code and releases	Código fuente y versiones
 Speed	Velocidad

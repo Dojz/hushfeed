@@ -77,6 +77,7 @@ Add a separate button that skips videos using the current sound.	Eine separate S
 Add hidden creator	Ausgeblendeten Creator hinzufügen
 Ads	Anzeigen
 Advance when a video ends	Weiterschalten, wenn ein Video endet
+Advanced	Erweitert
 Advanced JSON value	Erweiterter JSON-Wert
 AI-generated posts	KI-generierte Beiträge
 All	Alle
@@ -100,6 +101,7 @@ App	App
 App AB	App-AB
 Applies to both video and photo downloads.	Gilt für Video- und Foto-Downloads.
 Apply	Übernehmen
+Around the video	Rund um das Video
 Arrange your feed and bottom tabs	Ordne deine Feed-Tabs und unteren Tabs an
 Audio	Audio
 Auto translate comments	Kommentare automatisch übersetzen
@@ -109,6 +111,7 @@ Automatic advance	Automatisches Weiterschalten
 Automatic advance stopped after %1$d videos	Automatisches Weiterschalten nach %1$d Videos angehalten
 Automatic advance stopped after one video	Automatisches Weiterschalten nach einem Video angehalten
 Automatic clear display	Automatische freie Ansicht
+Avatar and follow button	Avatar und Folgen-Button
 Back	Zurück
 Back up settings	Einstellungen sichern
 Backup and restore	Sichern und wiederherstellen
@@ -126,6 +129,7 @@ Blocked creators	Gesperrte Creator
 Blocked sound ids	Gesperrte Sound-IDs
 Blocked sound names	Gesperrte Sound-Namen
 Blocked sounds	Blockierte Sounds
+Blocking	Blockieren
 Boolean	Boolesch
 Browse	Durchsuchen
 Cancel	Abbrechen
@@ -148,6 +152,7 @@ Clear all Lab data (overrides, switch, recordings)	Alle Labordaten löschen (Üb
 Clear all suggested accounts	Alle vorgeschlagenen Konten löschen
 Clear buffered events, saved crash reports and the hook status above.	Gepufferte Ereignisse, gespeicherte Absturzberichte und den Hook-Status oben löschen.
 Clear diagnostic data	Diagnosedaten löschen
+Clear display	Freie Ansicht
 Clear display delay	Verzögerung der freien Ansicht
 Clear preset	Voreinstellung löschen
 Clear search	Suche löschen
@@ -160,21 +165,43 @@ Clearing, %1$d so far	Wird geleert, bisher %1$d
 Close	Schließen
 Comments	Kommentare
 Compare gate reads with their previous values.	Gate-Zugriffe mit ihren vorherigen Werten vergleichen.
+Counts under the buttons	Zahlen unter den Schaltflächen
+Creators and sounds	Creator und Sounds
 Daily budgets, reminders and the hold	Tagesbudgets, Erinnerungen und die Pause
 Feed screen	Feed-Ansicht
 Feed tabs	Feed-Tabs
+Files	Dateien
 Focus	Fokus
+Hand-off	Weitergabe
+Hidden: %1$s	Ausgeblendet: %1$s
+Hide buttons in the right column	Schaltflächen in der rechten Spalte ausblenden
+Hide the plus button under the creator's picture in the right column. Ticking Avatar and follow button above hides the picture with it.	Blendet das Plus unter dem Bild des Creators in der rechten Spalte aus. Mit dem Häkchen bei Avatar und Folgen-Button oben verschwindet auch das Bild.
+Hiding	Ausblenden
 Last recording: %1$d gates.	Letzte Aufzeichnung: %1$d Gates.
 Last recording: 1 gate.	Letzte Aufzeichnung: 1 Gate.
 Layout, player, search and system	Layout, Player, Suche und System
+Like	Gefällt mir
 Logging, hook status and reports	Protokolle, Hook-Status und Berichte
+Music disc	Musikscheibe
+Nothing hidden.	Nichts ausgeblendet.
+Offline videos	Offline-Videos
+Photos and stickers	Fotos und Sticker
+Pick the buttons to take off the column. The rest stay where they are.	Wähle die Schaltflächen, die aus der Spalte verschwinden sollen. Der Rest bleibt, wo er ist.
+Popups	Pop-ups
 Privacy and system	Datenschutz und System
+Reading	Lesen
 Region	Region
+Right column	Rechte Spalte
 Save, restore, reset and undo your settings	Einstellungen sichern, wiederherstellen, zurücksetzen und rückgängig machen
+Screen	Bildschirm
 Screen time	Bildschirmzeit
 Search	Suche
+Share	Teilen
+Subtitles	Untertitel
 System	System
+Video info	Videoinfo
 Watching and sharing	Ansehen und Teilen
+Words and countries	Wörter und Länder
 Your feed	Dein Feed
 Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.	Null schaltet das aus. Zählt jedes Video, das im Feed auftaucht, egal wie du dort gelandet bist, und sagt Bescheid, sobald die Zahl erreicht ist. Das ist unabhängig vom Sitzungslimit für automatisches Weiterblättern unter Wiedergabe, das nur Videos zählt, die Hushfeed selbst weitergeschaltet hat.
 code %1$s	Code %1$s
@@ -267,7 +294,6 @@ Disabled	Ausgeschaltet
 Discard edits	Änderungen verwerfen
 Dismissed %1$s suggested accounts	%1$s Kontovorschläge entfernt
 Dismissed one suggested account	Ein Kontovorschlag entfernt
-Display	Anzeige
 Do not start the feed on returning	Feed beim Zurückkommen nicht starten
 Do nothing	Nichts tun
 Done	Fertig
@@ -314,8 +340,6 @@ Feature Gate Lab could not find the settings container	Das Feature Gate Lab hat 
 Feature gate override reset	Überschreibung des Schalters zurückgesetzt
 Feature gate override saved	Überschreibung des Schalters gespeichert
 Feed and navigation	Feed und Navigation
-Feed controls	Feed-Steuerung
-Feed elements	Feed-Elemente
 Feed filter	Feed-Filter
 Field %1$s can't be changed on this build. Take it out of the override, or reset the override.	Das Feld %1$s lässt sich in diesem Build nicht ändern. Nimm es aus der Überschreibung heraus oder setze die Überschreibung zurück.
 Field edits were discarded.	Die Feldänderungen wurden verworfen.
@@ -408,47 +432,32 @@ Hide the activity status control in the Inbox header.	Das Element für den Aktiv
 Hide the add people icon	Symbol Personen hinzufügen ausblenden
 Hide the add people icon in the Inbox header.	Das Symbol zum Hinzufügen von Personen in der Kopfzeile des Posteingangs ausblenden.
 Hide the Archive row.	Die Zeile „Archiv“ ausblenden.
-Hide the arrow and its count in the right column.	Pfeil und Zähler in der rechten Spalte ausblenden.
-Hide the avatar and follow button	Bild und Folgen-Button ausblenden
 Hide the caption	Beschreibung ausblenden
-Hide the comments button	Kommentar-Button ausblenden
-Hide the counts on the right column	Zahlen in der rechten Spalte ausblenden
-Hide the creator's picture and the plus button at the top of the right column. Hide the follow button on the feed hides the plus button on its own.	Das Bild des Erstellers und den Plus-Knopf oben in der rechten Spalte ausblenden. Folgen-Knopf im Feed ausblenden blendet nur den Plus-Knopf aus.
 Hide the description under the creator's name on the feed.	Die Beschreibung unter dem Namen des Creators im Feed ausblenden.
 Hide the event badge	Event-Abzeichen ausblenden
 Hide the floating promotional badge over the feed.	Das schwebende Werbe-Abzeichen über dem Feed ausblenden.
 Hide the follow button on the feed	Folgen-Knopf im Feed ausblenden
 Hide the friend recommendation card and the other cards TikTok slots between videos.	Die Freundesvorschlagskarte und die anderen Karten ausblenden, die TikTok zwischen Videos einschiebt.
-Hide the heart and its count in the right column.	Herz und Zähler in der rechten Spalte ausblenden.
 Hide the launcher shortcuts	Launcher-Verknüpfungen ausblenden
-Hide the like button	Like-Button ausblenden
 Hide the LIVE button	LIVE-Knopf ausblenden
 Hide the LIVE button in the top left corner of the feed.	Den LIVE-Knopf in der linken oberen Ecke des Feeds ausblenden.
 Hide the LIVE videos from the feed.	Die LIVE-Videos aus dem Feed ausblenden.
 Hide the Message requests row.	Die Zeile „Nachrichtenanfragen“ ausblenden.
-Hide the music disc	Musikplatte ausblenden
 Hide the music line	Musikzeile ausblenden
 Hide the New followers row.	Die Zeile „Neue Follower“ ausblenden.
-Hide the numbers under the like, comment, favorite and share buttons. The buttons stay.	Die Zahlen unter den Knöpfen für Gefällt mir, Kommentare, Favoriten und Teilen ausblenden. Die Knöpfe bleiben.
 Hide the photo posts from the feed.	Die Fotobeiträge aus dem Feed ausblenden.
 Hide the playlist bar	Playlist-Leiste ausblenden
 Hide the playlist bar along the bottom of videos that belong to a series.	Die Playlist-Leiste am unteren Rand von Videos ausblenden, die zu einer Serie gehören.
-Hide the plus button under the creator's picture in the right column. Hide the avatar and follow button hides the picture with it.	Den Plus-Knopf unter dem Bild des Erstellers in der rechten Spalte ausblenden. Bild und Folgen-Button ausblenden nimmt das Bild mit.
 Hide the question cards TikTok slides over a video near its end.	Die Fragekarten ausblenden, die TikTok gegen Ende eines Videos einblendet.
 Hide the right column	Rechte Spalte ausblenden
 Hide the row of story avatars across the top of the Inbox.	Die Reihe der Story-Avatare oben im Posteingang ausblenden.
-Hide the save button	Den Speichern-Knopf ausblenden
-Hide the save button and its count in the right column.	Den Speichern-Knopf und seine Zahl in der rechten Spalte ausblenden.
 Hide the save button in the right column.	Den Speichern-Knopf ausblenden in der rechten Spalte.
 Hide the search button in the top right corner of the feed.	Die Suchschaltfläche oben rechts im Feed ausblenden.
 Hide the search icon in the Inbox header.	Das Suchsymbol in der Kopfzeile des Posteingangs ausblenden.
 Hide the searches TikTok offers before you type. Your own search history stays.	Die Suchen ausblenden, die TikTok anbietet, bevor du tippst. Dein eigener Suchverlauf bleibt.
 Hide the Send to row	Zeile „Senden an“ ausblenden
-Hide the share button	Teilen-Button ausblenden
 Hide the share prompt after a like	Die Teilen-Aufforderung nach einem Like ausblenden
-Hide the speech bubble and its count in the right column.	Sprechblase und Zähler in der rechten Spalte ausblenden.
 Hide the spinning music cover and the track name beside the caption.	Das drehende Musik-Cover und den Titelnamen neben der Beschreibung ausblenden.
-Hide the spinning record at the bottom of the right column.	Drehende Platte unten in der rechten Spalte ausblenden.
 Hide the status bar	Statusleiste ausblenden
 Hide the stories from the feed.	Die Stories aus dem Feed ausblenden.
 Hide the Tako AI feed bubble above the profile button.	Die Tako-AI-Blase im Feed über der Profil-Schaltfläche ausblenden.
@@ -518,7 +527,6 @@ Limits	Grenzen
 Link copied	Link kopiert
 Links	Links
 Links in comments open	Links in Kommentaren lassen sich öffnen
-Lists	Listen
 Live	LIVE
 LIVE	LIVE
 LIVE replays	LIVE-Wiederholungen
@@ -837,7 +845,6 @@ Skipping videos with %1$s	Videos mit %1$s werden übersprungen
 Something is missing from %1$s. Tap for the whole report.	Bei %1$s fehlt etwas. Tippe für den vollständigen Bericht.
 Sound link copied	Soundlink kopiert
 Sound saved to %1$s	Sound gespeichert unter %1$s
-Sounds	Sounds
 Source	Quelle
 Source code and releases	Quellcode und Versionen
 Speed	Geschwindigkeit
