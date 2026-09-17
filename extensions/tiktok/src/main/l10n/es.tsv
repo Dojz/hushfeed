@@ -451,7 +451,7 @@ Hide the playlist bar along the bottom of videos that belong to a series.	Oculta
 Hide the question cards TikTok slides over a video near its end.	Ocultar las tarjetas con preguntas que TikTok desliza sobre un vídeo cerca del final.
 Hide the right column	Ocultar la columna derecha
 Hide the row of story avatars across the top of the Inbox.	Ocultar la fila de fotos de historias en la parte de arriba de la bandeja.
-Hide the save button in the right column.	Ocultar el botón de guardar en la columna derecha.
+Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.	Ocultar el boton de guardar a traves de su hook de visibilidad nativo. Marcar Guardar en la lista de arriba oculta el mismo boton a traves de la superposicion.
 Hide the search button in the top right corner of the feed.	Ocultar el botón de buscar en la esquina superior derecha del feed.
 Hide the search icon in the Inbox header.	Ocultar el icono de buscar en la cabecera de la bandeja.
 Hide the searches TikTok offers before you type. Your own search history stays.	Ocultar las búsquedas que TikTok propone antes de que escribas. Tu propio historial de búsqueda se queda.

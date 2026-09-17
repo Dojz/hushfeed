@@ -979,8 +979,8 @@ public final class L10nTranslations {
                 "Rechte Spalte ausblenden");
         table.put("Hide the row of story avatars across the top of the Inbox.",
                 "Die Reihe der Story-Avatare oben im Posteingang ausblenden.");
-        table.put("Hide the save button in the right column.",
-                "Den Speichern-Knopf ausblenden in der rechten Spalte.");
+        table.put("Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.",
+                "Den Speichern-Button über seinen nativen Sichtbarkeits-Hook ausblenden. Wenn Save in der Checkliste oben angehakt ist, wird derselbe Button über das Overlay ausgeblendet.");
         table.put("Hide the search button in the top right corner of the feed.",
                 "Die Suchschaltfläche oben rechts im Feed ausblenden.");
         table.put("Hide the search icon in the Inbox header.",
@@ -3266,8 +3266,8 @@ public final class L10nTranslations {
                 "Ocultar la columna derecha");
         table.put("Hide the row of story avatars across the top of the Inbox.",
                 "Ocultar la fila de fotos de historias en la parte de arriba de la bandeja.");
-        table.put("Hide the save button in the right column.",
-                "Ocultar el botón de guardar en la columna derecha.");
+        table.put("Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.",
+                "Ocultar el boton de guardar a traves de su hook de visibilidad nativo. Marcar Guardar en la lista de arriba oculta el mismo boton a traves de la superposicion.");
         table.put("Hide the search button in the top right corner of the feed.",
                 "Ocultar el botón de buscar en la esquina superior derecha del feed.");
         table.put("Hide the search icon in the Inbox header.",
@@ -5553,8 +5553,8 @@ public final class L10nTranslations {
                 "Sembunyikan kolom kanan");
         table.put("Hide the row of story avatars across the top of the Inbox.",
                 "Sembunyikan baris foto profil Story di bagian atas Kotak Masuk.");
-        table.put("Hide the save button in the right column.",
-                "Sembunyikan tombol simpan di kolom kanan.");
+        table.put("Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.",
+                "Sembunyikan tombol simpan melalui hook visibilitas aslinya. Mencentang Simpan di daftar di atas menyembunyikan tombol yang sama melalui overlay.");
         table.put("Hide the search button in the top right corner of the feed.",
                 "Sembunyikan tombol cari di pojok kanan atas feed.");
         table.put("Hide the search icon in the Inbox header.",
@@ -7840,8 +7840,8 @@ public final class L10nTranslations {
                 "Esconder a coluna da direita");
         table.put("Hide the row of story avatars across the top of the Inbox.",
                 "Esconder a linha de fotos de stories no topo da caixa de entrada.");
-        table.put("Hide the save button in the right column.",
-                "Esconder o botão de salvar na coluna da direita.");
+        table.put("Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.",
+                "Ocultar o botao de salvar atraves de seu hook de visibilidade nativo. Marcar Salvar na lista acima oculta o mesmo botao pela sobreposicao.");
         table.put("Hide the search button in the top right corner of the feed.",
                 "Esconder o botão de busca no canto superior direito do feed.");
         table.put("Hide the search icon in the Inbox header.",

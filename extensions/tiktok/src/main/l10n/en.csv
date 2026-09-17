@@ -442,7 +442,7 @@ Hide the plus button under the creator's picture in the right column. Ticking Av
 Hide the question cards TikTok slides over a video near its end.,Hide the question cards TikTok slides over a video near its end.
 Hide the right column,Hide the right column
 Hide the row of story avatars across the top of the Inbox.,Hide the row of story avatars across the top of the Inbox.
-Hide the save button in the right column.,Hide the save button in the right column.
+Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.,Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.
 Hide the search button in the top right corner of the feed.,Hide the search button in the top right corner of the feed.
 Hide the search icon in the Inbox header.,Hide the search icon in the Inbox header.
 Hide the searches TikTok offers before you type. Your own search history stays.,Hide the searches TikTok offers before you type. Your own search history stays.

@@ -454,7 +454,7 @@ Hide the playlist bar along the bottom of videos that belong to a series.	Die Pl
 Hide the question cards TikTok slides over a video near its end.	Die Fragekarten ausblenden, die TikTok gegen Ende eines Videos einblendet.
 Hide the right column	Rechte Spalte ausblenden
 Hide the row of story avatars across the top of the Inbox.	Die Reihe der Story-Avatare oben im Posteingang ausblenden.
-Hide the save button in the right column.	Den Speichern-Knopf ausblenden in der rechten Spalte.
+Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.	Den Speichern-Button über seinen nativen Sichtbarkeits-Hook ausblenden. Wenn Save in der Checkliste oben angehakt ist, wird derselbe Button über das Overlay ausgeblendet.
 Hide the search button in the top right corner of the feed.	Die Suchschaltfläche oben rechts im Feed ausblenden.
 Hide the search icon in the Inbox header.	Das Suchsymbol in der Kopfzeile des Posteingangs ausblenden.
 Hide the searches TikTok offers before you type. Your own search history stays.	Die Suchen ausblenden, die TikTok anbietet, bevor du tippst. Dein eigener Suchverlauf bleibt.
