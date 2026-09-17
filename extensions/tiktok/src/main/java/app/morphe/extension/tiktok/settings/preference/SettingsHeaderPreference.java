@@ -86,14 +86,10 @@ public final class SettingsHeaderPreference extends Preference {
                 14, SettingsUi.textSecondary(), 0);
         LinearLayout.LayoutParams subtitleParams = new LinearLayout.LayoutParams(-1, -2);
         subtitleParams.topMargin = SettingsUi.dp(getContext(), 12);
+        // The "YOUR EXPERIENCE" label that used to sit here headed one card holding every row
+        // from Search to Licenses. The master menu carries its own group headings now.
+        subtitleParams.bottomMargin = SettingsUi.dp(getContext(), 8);
         header.addView(subtitle, subtitleParams);
-        TextView label = SettingsUi.text(getContext(), L10n.t(getContext(), "YOUR EXPERIENCE"),
-                11, SettingsUi.textSecondary(), 1);
-        label.setLetterSpacing(0.15f);
-        LinearLayout.LayoutParams labelParams = new LinearLayout.LayoutParams(-1, -2);
-        labelParams.topMargin = SettingsUi.dp(getContext(), 38);
-        labelParams.bottomMargin = SettingsUi.dp(getContext(), 12);
-        header.addView(label, labelParams);
         return header;
     }
 

@@ -62,9 +62,8 @@ public final class FeatureGateRecorderPreference extends Preference implements I
     private void offerStartOrLastReport(Context context) {
         AlertDialog dialog = new AlertDialog.Builder(context)
                 .setTitle(L10n.t(context, "Start feature gate recording"))
-                .setMessage(L10n.f(context,
-                        "Compare gate reads with their previous values. Last recording: %1$d gates.",
-                        FeatureGateLearnMode.lastCandidateCount()))
+                .setMessage(L10n.t(context, "Compare gate reads with their previous values.")
+                        + "\n" + lastRecordingLine(context))
                 .setPositiveButton(L10n.t(context, "Start recording"), (ignored, which) -> {
                     begin();
                     refresh();
@@ -147,12 +146,23 @@ public final class FeatureGateRecorderPreference extends Preference implements I
         if (FeatureGateLearnMode.isRecording()) {
             setSummary("Return after using a TikTok feature to see every gate read during the recording.");
         } else if (hasLastReport()) {
-            setSummary(L10n.f(getContext(), "Compare gate reads with their previous values. Last recording: %1$d gates.",
-                    FeatureGateLearnMode.lastCandidateCount()));
+            // Two sentences on two lines, each a translation entry of its own. Joined into one
+            // sentence they were one key with a number in it, which no table can carry once the
+            // number is written in.
+            setSummary(L10n.t(getContext(), "Compare gate reads with their previous values.")
+                    + "\n" + lastRecordingLine(getContext()));
         } else {
             // Nothing has run yet, so the row must not report a recording of nought gates.
             setSummary("No recording yet. Start one, use a feature, then return here.");
         }
+    }
+
+    /** "Last recording: 1 gate." or "Last recording: 12 gates.", in the reader's language. */
+    private static String lastRecordingLine(Context context) {
+        int count = FeatureGateLearnMode.lastCandidateCount();
+        return count == 1
+                ? L10n.t(context, "Last recording: 1 gate.")
+                : L10n.f(context, "Last recording: %1$d gates.", count);
     }
 
     @Override protected void onBindView(View view) {

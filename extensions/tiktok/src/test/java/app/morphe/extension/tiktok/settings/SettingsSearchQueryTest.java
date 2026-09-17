@@ -225,7 +225,7 @@ public class SettingsSearchQueryTest {
         assertNotNull("the Restore settings row is not in the index at all", found);
         java.lang.reflect.Field section = found.getClass().getDeclaredField("section");
         section.setAccessible(true);
-        assertEquals("opening it would not land on Diagnostics",
-                "DIAGNOSTICS", ((Enum<?>) section.get(found)).name());
+        assertEquals("opening it would not land on Backup and restore",
+                "BACKUP", ((Enum<?>) section.get(found)).name());
     }
 }

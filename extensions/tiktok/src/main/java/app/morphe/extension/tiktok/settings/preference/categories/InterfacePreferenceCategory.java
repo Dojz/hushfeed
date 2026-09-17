@@ -18,7 +18,7 @@ import app.morphe.extension.tiktok.settings.preference.NumberInputPreference;
 public final class InterfacePreferenceCategory extends ConditionalPreferenceCategory {
     public InterfacePreferenceCategory(Context context, PreferenceScreen screen) {
         super(context, screen);
-        setTitle("Interface");
+        setTitle("Feed screen");
     }
 
     /** Whether this page has anything on it. The row into it asks the same question. */

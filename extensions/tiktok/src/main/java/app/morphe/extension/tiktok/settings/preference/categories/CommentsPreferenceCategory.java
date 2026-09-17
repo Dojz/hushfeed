@@ -16,7 +16,7 @@ import app.morphe.extension.tiktok.settings.preference.TogglePreference;
 public class CommentsPreferenceCategory extends ConditionalPreferenceCategory {
     public CommentsPreferenceCategory(Context context, PreferenceScreen screen) {
         super(context, screen);
-        setTitle("Comments and translation");
+        setTitle("Comments");
     }
 
     /** Whether this page has anything on it. The row into it asks the same question. */

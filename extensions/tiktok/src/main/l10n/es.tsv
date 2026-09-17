@@ -61,6 +61,7 @@ A newer clear replaced that undo. Tap the row again to put it back.	Un borrado m
 A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.	Una pequeña etiqueta en el feed muestra los minutos o videos restantes del presupuesto de hoy.
 A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.	Al tocar a una persona en la fila Enviar a solo se la selecciona. Un segundo toque sobre la misma persona antes de cuatro segundos envía el vídeo.
 A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.	Una dirección web escrita en un comentario se puede tocar en lugar de copiarla a mano. Tocar en cualquier otra parte del comentario sigue haciendo lo de siempre.
+About	Acerca de
 Account warning: forced client values apply to every account in this app data and cannot bypass server controls.	Aviso sobre la cuenta: los valores forzados en el dispositivo se aplican a todas las cuentas de estos datos de la app y no saltan los controles del servidor.
 Account-sensitive name: forcing this key may affect security, login, compliance, region, payment, or account safety behavior.	Nombre sensible para la cuenta: forzar esta clave puede afectar a la seguridad, el inicio de sesión, el cumplimiento, la región, los pagos o la protección de la cuenta.
 Activity	Actividad
@@ -92,8 +93,8 @@ An interrupted settings change could not be recovered, so its record was set asi
 An operator code is five or six digits, like 310260	Un código de operador tiene cinco o seis dígitos, como 310260
 An override changes the value returned by the getter. It does not rewrite TikTok's cached value or prove the named feature changed.	Una sustitución cambia el valor que devuelve el lector. No reescribe el valor que TikTok tiene en caché ni demuestra que la función nombrada haya cambiado.
 Animated sticker format	Formato de los stickers animados
+App	Aplicación
 App AB	AB de la aplicación
-App behavior	Comportamiento de la app
 Applies to both video and photo downloads.	Se aplica tanto a las descargas de vídeo como a las de fotos.
 Apply	Aplicar
 Arrange your feed and bottom tabs	Organiza tu feed y las pestañas inferiores
@@ -107,7 +108,7 @@ Automatic advance stopped after one video	El avance automático se detuvo tras u
 Automatic clear display	Ocultar controles automáticamente
 Back	Atrás
 Back up settings	Copia de seguridad de los ajustes
-Backups and troubleshooting	Copias de seguridad y resolución de problemas
+Backup and restore	Copia de seguridad y restauración
 Black	Negro
 Block new bottom tabs	Bloquear pestañas inferiores nuevas
 Block new TikTok tabs	Bloquear pestañas nuevas de TikTok
@@ -154,6 +155,25 @@ Clearing	Borrando
 Clearing suggested accounts	Borrando las cuentas sugeridas
 Clearing, %1$d so far	Borrando, %1$d hasta ahora
 Close	Cerrar
+Comments	Comentarios
+Compare gate reads with their previous values.	Compara las lecturas de los interruptores con sus valores anteriores.
+Daily budgets, reminders and the hold	Presupuestos diarios, recordatorios y la pausa
+Feed screen	Pantalla del feed
+Feed tabs	Pestañas del feed
+Focus	Enfoque
+Last recording: %1$d gates.	Última grabación: %1$d interruptores.
+Last recording: 1 gate.	Última grabación: 1 interruptor.
+Layout, player, search and system	Diseño, reproductor, búsqueda y sistema
+Logging, hook status and reports	Registros, estado de los hooks e informes
+Privacy and system	Privacidad y sistema
+Region	Región
+Save, restore, reset and undo your settings	Guarda, restaura, restablece y deshaz tus ajustes
+Screen time	Tiempo de pantalla
+Search	Búsqueda
+System	Sistema
+Watching and sharing	Ver y compartir
+Your feed	Tu feed
+Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.	Cero lo desactiva. Cuenta cada vídeo que aparece en el feed, sin importar cómo llegaste a él, y avisa cuando se alcanza la cifra. Es independiente del límite de sesión del avance automático, en Reproducción, que solo cuenta los vídeos que Hushfeed pasó por ti.
 code %1$s	código %1$s
 Comma separated account handles or user ids. These accounts are always skipped. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.	Nombres de usuario o ids separados por comas. Estas cuentas siempre se saltan. Una entrada entre barras, como /^news_/, es un patrón que se compara con el nombre de usuario y con el nombre visible.
 Comma separated country codes, like GB, IE. Videos posted from anywhere else are hidden. Leave empty for all countries.	Códigos de país separados por comas, como GB, IE. Los vídeos publicados desde cualquier otro sitio se ocultan. Déjalo vacío para todos los países.
@@ -166,10 +186,8 @@ Comma separated words or phrases. Matching captions are skipped. Case does not m
 Comma separated words to match against a sound's name, like saxophone. Case does not matter.	Palabras separadas por comas para comparar con el nombre de un sonido, como saxofón. Da igual mayúsculas y minúsculas.
 Comma separated. A comment is hidden if its text contains any of them. Case does not matter. Two phrases in quotes can be joined: "a" & "b" needs both, "a" !& "b" needs the first without the second.	Separadas por comas. Un comentario se oculta si su texto contiene cualquiera de ellas. Da igual mayúsculas y minúsculas. Dos frases entre comillas se pueden unir: "a" & "b" pide las dos, "a" !& "b" pide la primera sin la segunda.
 Comment media filename	Nombre de archivo del contenido de un comentario
-Comments and translation	Comentarios y traducción
 Comments aren't available for this video	Los comentarios no están disponibles para este vídeo
 Comments beside the video	Comentarios junto al vídeo
-Compare gate reads with their previous values. Last recording: %1$d gates.	Compara las lecturas de los interruptores con sus valores anteriores. Última grabación: %1$d interruptores.
 Completed an interrupted settings change. Restart TikTok to apply this.	Se completó un cambio de ajustes interrumpido. Reinicia TikTok para que se aplique.
 Config	Configuración
 Config (Settings Manager)	Configuración (Settings Manager)
@@ -296,7 +314,6 @@ Feed and navigation	Feed y navegación
 Feed controls	Controles del feed
 Feed elements	Elementos del feed
 Feed filter	Filtro del feed
-Feed navigation	Navegación del feed
 Field %1$s can't be changed on this build. Take it out of the override, or reset the override.	El campo %1$s no se puede cambiar en esta versión. Quítalo de la anulación o restablece la anulación.
 Field edits were discarded.	Se descartaron los cambios de los campos.
 Field edits were not saved.	Los cambios de los campos no se guardaron.
@@ -470,7 +487,6 @@ Included diagnostics	Diagnóstico incluido
 Includes all diagnostic events.	Incluye todos los eventos de diagnóstico.
 Includes these events: %1$s	Incluye estos eventos: %1$s
 Inserted cards	Tarjetas insertadas
-Interface	Interfaz
 Invalid SIM preset	Ajuste preestablecido de SIM no válido
 Keep a local record of what you have watched and drop those videos from later feed pages.	Guardar en el dispositivo un registro de lo que has visto y quitar esos vídeos de las páginas siguientes del feed.
 Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this. Then use this switch to turn it off.	Mantener el avance automático activado y mostrar la acción Desplazamiento automático de TikTok en el panel del vídeo aunque tu cuenta nunca la haya tenido. Las pausas y los diálogos abiertos siguen deteniendo el desplazamiento. Reinicia TikTok para que se aplique. Luego usa este interruptor para desactivarlo.
@@ -668,7 +684,6 @@ Recovered an interrupted settings change. Restart TikTok to apply this.	Se recup
 Refresh values	Actualizar los valores
 Refreshing current TikTok cache...	Actualizando la caché actual de TikTok...
 Region rules	Reglas de la región
-Region settings	Ajustes de región
 Remember the last speed	Recordar la última velocidad
 Remind me every	Recordármelo cada
 Remove	Quitar
@@ -1033,7 +1048,6 @@ While diagnostic logging is on, a message names the part of Hushfeed that failed
 Window width needed to enable the layout. Restart TikTok to apply this.	Anchura de ventana necesaria para activar el diseño. Reinicia TikTok para que se aplique.
 Write the video's sound beside it as an .m4a. Android 10 and later file audio separately, so it lands in Music under the same folder name as your videos.	Escribir el sonido del vídeo a su lado como un .m4a. Android 10 y posteriores archivan el audio por separado, así que acaba en Music, en una carpeta con el mismo nombre que la de tus vídeos.
 Yes	Sí
-YOUR EXPERIENCE	TU EXPERIENCIA
 Your filters hid everything TikTok just sent. Most were %1$s.	Tus filtros ocultaron todo lo que TikTok acaba de enviar. La mayoría era %1$s.
 Your filters hid everything TikTok sent, %1$d times in a row. Most were %2$s.	Tus filtros ocultaron todo lo que TikTok envió, %1$d veces seguidas. La mayoría era %2$s.
 Your operator's name, like T-Mobile.	El nombre de tu operador, como T-Mobile.
@@ -1044,7 +1058,6 @@ Zero leaves the way out of the hold there every time, which is what it has alway
 Zero means no limit. Counts the videos Hushfeed advanced past for you, not the ones you swiped yourself, and starts again when the feed is rebuilt or you change this number.	Cero significa sin límite. Cuenta los vídeos que Hushfeed pasó por ti, no los que deslizaste tú, y empieza de nuevo cuando el feed se reconstruye o cambias este número.
 Zero shows the notice and leaves the feed alone. Anything else covers the feed for that many minutes once a budget is reached. Messages, profiles and search keep working, and nothing in the feed is thrown away.	Cero muestra el aviso y deja el feed en paz. Cualquier otro valor cubre el feed durante esos minutos en cuanto se alcanza un límite. Los mensajes, los perfiles y la búsqueda siguen funcionando, y no se descarta nada del feed.
 Zero switches this off. A short reminder after that many minutes of watching, and again after the same again. Time on messages, a profile or search does not count, and nothing is shown while the feed is on hold.	Cero lo desactiva. Un aviso breve tras esos minutos de visionado, y otra vez después de los mismos. El tiempo en mensajes, un perfil o la búsqueda no cuenta, y no se muestra nada mientras el feed está en pausa.
-Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance limit above, which only counts videos Hushfeed itself advanced past.	Cero lo desactiva. Cuenta cada vídeo que aparece en el feed, sin importar cómo llegaste a él, y avisa cuando se alcanza la cifra. Es independiente del límite de avance automático de arriba, que solo cuenta los vídeos que Hushfeed pasó por ti.
 Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.	Cero lo desactiva. Cuenta los minutos que el reproductor pasa funcionando en el feed. El tiempo en mensajes, un perfil o la búsqueda no cuenta.
 Tracking, device access and links	Rastreo, acceso al dispositivo y enlaces
 Tracking	Rastreo
@@ -1066,7 +1079,6 @@ Stop the in-app browser handing TikTok's JavaScript bridge to the pages it loads
 Camera and microphone in use	Cámara y micrófono en uso
 Camera in use	Cámara en uso
 Microphone in use	Micrófono en uso
-Layout, player and app tools	Diseño, reproductor y herramientas de la app
 Maximum views per comment	Máximo de visualizaciones por comentario
 Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.	Oculta los vídeos con muchas visualizaciones y pocos comentarios. Funciona igual que las visualizaciones por me gusta. Cero lo desactiva.
 view per comment	visualización por comentario

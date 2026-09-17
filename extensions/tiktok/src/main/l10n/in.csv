@@ -62,6 +62,7 @@ A newer clear replaced that undo. Tap the row again to put it back.,Penghapusan 
 "A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.",Label kecil di feed menunjukkan menit atau video yang tersisa dari anggaran hari ini.
 A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.,Satu ketukan pada orang di baris Kirim ke hanya memilihnya. Ketukan kedua pada orang yang sama dalam empat detik mengirim videonya.
 A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.,"Alamat web yang ditulis seseorang di komentar bisa diketuk, bukan disalin manual. Mengetuk bagian lain dari komentar tetap seperti sebelumnya."
+About,Tentang
 Account warning: forced client values apply to every account in this app data and cannot bypass server controls.,Peringatan akun: nilai yang dipaksa di klien berlaku untuk setiap akun di data aplikasi ini dan tidak bisa menembus kontrol server.
 "Account-sensitive name: forcing this key may affect security, login, compliance, region, payment, or account safety behavior.","Nama sensitif akun: memaksa kunci ini bisa memengaruhi keamanan, login, kepatuhan, wilayah, pembayaran atau perilaku keselamatan akun."
 Activity,Aktivitas
@@ -93,8 +94,8 @@ Always show the publish date in video author information. Restart TikTok to appl
 "An operator code is five or six digits, like 310260","Kode operator itu lima atau enam angka, misalnya 310260"
 An override changes the value returned by the getter. It does not rewrite TikTok's cached value or prove the named feature changed.,Penggantian mengubah nilai yang dikembalikan getter. Ini tidak menulis ulang nilai cache TikTok dan tidak membuktikan fitur yang disebut berubah.
 Animated sticker format,Format stiker animasi
+App,Aplikasi
 App AB,AB aplikasi
-App behavior,Perilaku aplikasi
 Applies to both video and photo downloads.,Berlaku untuk unduhan video dan foto.
 Apply,Terapkan
 Arrange your feed and bottom tabs,Atur feed dan tab bawahmu
@@ -108,7 +109,7 @@ Automatic advance stopped after one video,Lanjut otomatis dihentikan setelah sat
 Automatic clear display,Tampilan bersih otomatis
 Back,Kembali
 Back up settings,Cadangkan pengaturan
-Backups and troubleshooting,Cadangan dan pemecahan masalah
+Backup and restore,Cadangkan dan pulihkan
 Black,Hitam
 Block new bottom tabs,Blokir tab bawah yang baru
 Block new TikTok tabs,Blokir tab TikTok yang baru
@@ -155,6 +156,25 @@ Clearing,Menghapus
 Clearing suggested accounts,Menghapus akun yang disarankan
 "Clearing, %1$d so far","Membersihkan, %1$d sejauh ini"
 Close,Tutup
+Comments,Komentar
+Compare gate reads with their previous values.,Bandingkan pembacaan gate dengan nilai sebelumnya.
+"Daily budgets, reminders and the hold","Anggaran harian, pengingat, dan jeda"
+Feed screen,Layar feed
+Feed tabs,Tab feed
+Focus,Fokus
+Last recording: %1$d gates.,Rekaman terakhir: %1$d gate.
+Last recording: 1 gate.,Rekaman terakhir: 1 gate.
+"Layout, player, search and system","Tata letak, pemutar, pencarian, dan sistem"
+"Logging, hook status and reports","Log, status hook, dan laporan"
+Privacy and system,Privasi dan sistem
+Region,Wilayah
+"Save, restore, reset and undo your settings","Simpan, pulihkan, atur ulang, dan batalkan pengaturanmu"
+Screen time,Waktu layar
+Search,Pencarian
+System,Sistem
+Watching and sharing,Menonton dan berbagi
+Your feed,Feed kamu
+"Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.","Nol mematikan ini. Menghitung setiap video yang muncul di feed, bagaimanapun kamu sampai ke sana, dan memberi tahu begitu jumlahnya tercapai. Ini terpisah dari batas sesi maju otomatis di Pemutaran, yang hanya menghitung video yang dilewati Hushfeed sendiri."
 code %1$s,kode %1$s
 "Comma separated account handles or user ids. These accounts are always skipped. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.","Nama pengguna atau id pengguna dipisahkan koma. Akun ini selalu dilewati. Entri di antara garis miring, seperti /^news_/, adalah pola yang dicocokkan dengan nama pengguna dan nama tampilan."
 "Comma separated country codes, like GB, IE. Videos posted from anywhere else are hidden. Leave empty for all countries.","Kode negara dipisahkan koma, seperti GB, IE. Video dari tempat lain disembunyikan. Kosongkan untuk semua negara."
@@ -167,10 +187,8 @@ Comma separated usernames or display names whose comments are hidden.,Nama pengg
 "Comma separated words to match against a sound's name, like saxophone. Case does not matter.","Kata dipisahkan koma untuk dicocokkan dengan nama suara, misalnya saxophone. Huruf besar kecil tidak berpengaruh."
 "Comma separated. A comment is hidden if its text contains any of them. Case does not matter. Two phrases in quotes can be joined: ""a"" & ""b"" needs both, ""a"" !& ""b"" needs the first without the second.","Dipisahkan koma. Komentar disembunyikan jika teksnya memuat salah satunya. Huruf besar kecil tidak berpengaruh. Dua frasa dalam tanda kutip bisa digabung: ""a"" & ""b"" butuh keduanya, ""a"" !& ""b"" butuh yang pertama tanpa yang kedua."
 Comment media filename,Nama berkas media komentar
-Comments and translation,Komentar dan terjemahan
 Comments aren't available for this video,Komentar tidak tersedia untuk video ini
 Comments beside the video,Komentar di samping video
-Compare gate reads with their previous values. Last recording: %1$d gates.,Bandingkan pembacaan gate dengan nilai sebelumnya. Rekaman terakhir: %1$d gate.
 Completed an interrupted settings change. Restart TikTok to apply this.,Perubahan pengaturan yang terhenti telah diselesaikan. Mulai ulang TikTok agar berlaku.
 Config,Konfigurasi
 Config (Settings Manager),Konfigurasi (Settings Manager)
@@ -297,7 +315,6 @@ Feed and navigation,Feed dan navigasi
 Feed controls,Kontrol feed
 Feed elements,Elemen feed
 Feed filter,Filter feed
-Feed navigation,Navigasi feed
 "Field %1$s can't be changed on this build. Take it out of the override, or reset the override.","Field %1$s tidak bisa diubah di build ini. Keluarkan dari penimpaan, atau setel ulang penimpaan."
 Field edits were discarded.,Perubahan bidang dibuang.
 Field edits were not saved.,Perubahan bidang tidak disimpan.
@@ -471,7 +488,6 @@ Included diagnostics,Diagnostik yang disertakan
 Includes all diagnostic events.,Termasuk semua peristiwa diagnostik.
 Includes these events: %1$s,Termasuk peristiwa berikut: %1$s
 Inserted cards,Kartu yang disisipkan
-Interface,Tampilan
 Invalid SIM preset,Pratata SIM tidak sah
 Keep a local record of what you have watched and drop those videos from later feed pages.,Simpan catatan tontonanmu di perangkat dan buang video itu dari halaman feed berikutnya.
 "Keep automatic advance enabled, and show TikTok's own Auto scroll action in the video panel even if your account never had it. Pauses and open dialogs still stop scrolling. Restart TikTok to apply this. Then use this switch to turn it off.",Biarkan lanjut otomatis tetap aktif dan tampilkan aksi Auto scroll milik TikTok di panel video meski akun Anda tidak pernah punya. Jeda dan dialog terbuka tetap menghentikan guliran. Mulai ulang TikTok agar berlaku. Lalu pakai sakelar ini untuk mematikannya.
@@ -669,7 +685,6 @@ Recovered an interrupted settings change. Restart TikTok to apply this.,Perubaha
 Refresh values,Segarkan nilai
 Refreshing current TikTok cache...,Menyegarkan cache TikTok saat ini...
 Region rules,Aturan wilayah
-Region settings,Pengaturan wilayah
 Remember the last speed,Ingat kecepatan terakhir
 Remind me every,Ingatkan saya setiap
 Remove,Hapus
@@ -1034,7 +1049,6 @@ What TikTok gets,Yang didapat TikTok
 Window width needed to enable the layout. Restart TikTok to apply this.,Lebar jendela yang dibutuhkan agar tata letaknya aktif. Mulai ulang TikTok agar berlaku.
 "Write the video's sound beside it as an .m4a. Android 10 and later file audio separately, so it lands in Music under the same folder name as your videos.","Simpan suara video di sebelahnya sebagai .m4a. Android 10 ke atas menyimpan audio secara terpisah, jadi berkasnya masuk ke Music dengan nama folder yang sama seperti folder videomu."
 Yes,Ya
-YOUR EXPERIENCE,PENGALAMANMU
 Your filters hid everything TikTok just sent. Most were %1$s.,Filtermu menyembunyikan semua yang baru dikirim TikTok. Sebagian besar %1$s.
 "Your filters hid everything TikTok sent, %1$d times in a row. Most were %2$s.","Filtermu menyembunyikan semua yang dikirim TikTok, %1$d kali berturut-turut. Sebagian besar %2$s."
 "Your operator's name, like T-Mobile.","Nama operatormu, misalnya T-Mobile."
@@ -1045,7 +1059,6 @@ YTDLnis download type,Jenis unduhan YTDLnis
 "Zero means no limit. Counts the videos Hushfeed advanced past for you, not the ones you swiped yourself, and starts again when the feed is rebuilt or you change this number.","Nol berarti tanpa batas. Menghitung video yang dilewati Hushfeed untuk Anda, bukan yang Anda geser sendiri, dan mulai lagi saat feed dibangun ulang atau angka ini diubah."
 "Zero shows the notice and leaves the feed alone. Anything else covers the feed for that many minutes once a budget is reached. Messages, profiles and search keep working, and nothing in the feed is thrown away.","Nol menampilkan pemberitahuan dan membiarkan feed apa adanya. Nilai lain menutupi feed selama sekian menit begitu batas tercapai. Pesan, profil, dan pencarian tetap berjalan, dan tidak ada isi feed yang dibuang."
 "Zero switches this off. A short reminder after that many minutes of watching, and again after the same again. Time on messages, a profile or search does not count, and nothing is shown while the feed is on hold.","Nol mematikan ini. Pengingat singkat setelah sekian menit menonton, lalu lagi setelah selang yang sama. Waktu di pesan, profil, atau pencarian tidak dihitung, dan tidak ada yang muncul selama feed ditahan."
-"Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance limit above, which only counts videos Hushfeed itself advanced past.","Nol mematikan ini. Menghitung setiap video yang muncul di feed, bagaimanapun kamu sampai ke sana, dan memberi tahu begitu jumlahnya tercapai. Ini terpisah dari batas maju otomatis di atas, yang hanya menghitung video yang dilewati Hushfeed sendiri."
 "Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.","Nol mematikan ini. Menghitung menit saat pemutar berjalan di feed. Waktu di pesan, profil, atau pencarian tidak dihitung."
 "Tracking, device access and links","Pelacakan, akses perangkat, dan tautan"
 Tracking,Pelacakan
@@ -1067,7 +1080,6 @@ Cut the in-app browser off from TikTok,Putuskan peramban dalam aplikasi dari Tik
 Camera and microphone in use,Kamera dan mikrofon sedang dipakai
 Camera in use,Kamera sedang dipakai
 Microphone in use,Mikrofon sedang dipakai
-"Layout, player and app tools","Tata letak, pemutar, dan alat aplikasi"
 Maximum views per comment,Maksimum tayangan per komentar
 Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.,Sembunyikan video dengan banyak tayangan dan sedikit komentar. Bekerja sama seperti tayangan per suka. Nol mematikannya.
 view per comment,tayangan per komentar

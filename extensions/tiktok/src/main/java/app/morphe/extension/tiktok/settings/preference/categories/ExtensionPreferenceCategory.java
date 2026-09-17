@@ -19,7 +19,7 @@ import app.morphe.extension.tiktok.settings.preference.TogglePreference;
 public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
     public ExtensionPreferenceCategory(Context context, PreferenceScreen screen) {
         super(context, screen);
-        setTitle("App behavior");
+        setTitle("App");
     }
 
     /**
@@ -68,7 +68,8 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
         boolean hasPlayer = SettingsStatus.showSeekbarEnabled || SettingsStatus.seekbarThumbnailEnabled
                 || SettingsStatus.stopVideoLoopingEnabled || SettingsStatus.resumeVideoAfterScrollEnabled
                 || SettingsStatus.longPressSpeedLockEnabled || SettingsStatus.disableLongPressQuickShareEnabled
-                || SettingsStatus.disableLongPressRepostEnabled;
+                || SettingsStatus.disableLongPressRepostEnabled || SettingsStatus.duetStitchEnabled
+                || SettingsStatus.blockAuthorEnabled || SettingsStatus.notInterestedEnabled;
         if (hasPlayer) {
             addPreference(new SectionHeadingPreference(context, "Player"));
         }
@@ -128,6 +129,16 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                     Settings.DISABLE_LONG_PRESS_REPOST
             ));
         }
+        if (SettingsStatus.duetStitchEnabled) {
+            addPreference(new TogglePreference(
+                    context,
+                    "Allow Duet and Stitch anyway",
+                    "Ignore the creator's choice so the Duet and Stitch entries appear. "
+                            + "Everything else the app checks still applies, and whether the "
+                            + "upload is accepted is the server's decision.",
+                    Settings.ALLOW_DUET_AND_STITCH
+            ));
+        }
         if (SettingsStatus.blockAuthorEnabled) {
             addPreference(new TogglePreference(
                     context,
@@ -154,6 +165,9 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                     "Add a button beside the block control to send feedback about the current video.",
                     Settings.NOT_INTERESTED_BUTTON));
         }
+        if (SettingsStatus.nonPersonalizedSearchEnabled || SettingsStatus.liveSearchEnabled) {
+            addPreference(new SectionHeadingPreference(context, "Search"));
+        }
         if (SettingsStatus.nonPersonalizedSearchEnabled) {
             addPreference(new TogglePreference(
                     context,
@@ -170,15 +184,8 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                     Settings.ENABLE_LIVE_SEARCH
             ));
         }
-        if (SettingsStatus.duetStitchEnabled) {
-            addPreference(new TogglePreference(
-                    context,
-                    "Allow Duet and Stitch anyway",
-                    "Ignore the creator's choice so the Duet and Stitch entries appear. "
-                            + "Everything else the app checks still applies, and whether the "
-                            + "upload is accepted is the server's decision.",
-                    Settings.ALLOW_DUET_AND_STITCH
-            ));
+        if (SettingsStatus.refreshRateEnabled || SettingsStatus.launcherShortcutsEnabled) {
+            addPreference(new SectionHeadingPreference(context, "System"));
         }
         if (SettingsStatus.refreshRateEnabled) {
             addPreference(new TogglePreference(

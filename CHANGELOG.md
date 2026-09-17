@@ -1,5 +1,13 @@
 ## 0.40.0
 
+* The settings menu is four groups instead of one list. Your feed holds Feed filter, Feed tabs and Feed screen. Watching and sharing holds Playback, Screen time, Comments, Downloads, Share sheet and Inbox. Privacy and system holds Privacy, Region, App, the Feature Gate Lab, Diagnostics and Backup and restore, and About sits on its own at the end. The "YOUR EXPERIENCE" label over a single card of fourteen rows is gone. Five pages have shorter names: Interface is Feed screen, Feed navigation is Feed tabs, Comments and translation is Comments, Region settings is Region, and App behavior is App.
+
+* Screen time is its own page. The daily video and time budgets, the reminder, the hold and its fade, the budget label, the lock, the day's start and the passes all sat at the bottom of Playback under a "Daily budget" heading. They have a page of their own now, with "Do not start the feed on returning" under a Focus heading at the top of it.
+
+* Backup and restore is its own page. Back up, Restore, Reset and Undo used to be the tail of Diagnostics, so anyone who patched without the diagnostics patch found them on a page named for something they didn't have. The Feature gate recorder row moved the other way, off the menu and into Diagnostics, where it stops being the one row without an icon.
+
+* Every menu icon is its own picture. Feed screen and App shared the sliders glyph; Feed screen draws the feed now, a screen with the right column down its edge, Screen time is a clock and Backup and restore is a box with an arrow rising out of it. The App page has Search and System headings so its last four rows stop reading as part of Player.
+
 * A Privacy page. Everything that decides what TikTok learns sits in one place now. Disable analytics and tracking and Ghost mode moved there from App behavior, the three link rows came with them, and each of the device-access patches below has a switch of its own. Before this the seven device patches had no row anywhere, so there was no way to see they were installed and no way to turn one off short of patching again.
 
 * Seven patches that stand between TikTok and the phone: Block contact list access, Block installed app scanning, Location access governor, Device privacy guard for clipboard reads, Resource and battery governor for the motion sensors, In-app browser privacy guard, and the Camera and microphone indicator. All but the browser guard are on as soon as the patch is chosen. The browser guard stays off until you turn it on, because TikTok's own web pages are built on the bridge it cuts, the shop checkout and the CAPTCHA page among them.

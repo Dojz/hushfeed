@@ -54,6 +54,7 @@ import app.morphe.extension.tiktok.settings.preference.categories.InboxPreferenc
 import app.morphe.extension.tiktok.settings.preference.categories.InterfacePreferenceCategory;
 import app.morphe.extension.tiktok.settings.preference.categories.PlaybackPreferenceCategory;
 import app.morphe.extension.tiktok.settings.preference.categories.PrivacyPreferenceCategory;
+import app.morphe.extension.tiktok.settings.preference.categories.ScreenTimePreferenceCategory;
 import app.morphe.extension.tiktok.settings.preference.categories.SharePreferenceCategory;
 import app.morphe.extension.tiktok.settings.preference.categories.SimSpoofPreferenceCategory;
 
@@ -91,17 +92,19 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
      */
     private enum Section {
         FEED_FILTER("Feed filter", "Choose what reaches your feed"),
-        FEED_NAVIGATION("Feed navigation", "Arrange your feed and bottom tabs"),
-        INTERFACE("Interface", "Captions, gestures and on-screen controls"),
-        COMMENTS("Comments and translation", "Filters, translation and copy options"),
-        DOWNLOADS("Downloads", "Quality, files, subtitles and hand-off"),
+        FEED_NAVIGATION("Feed tabs", "Arrange your feed and bottom tabs"),
+        INTERFACE("Feed screen", "Captions, gestures and on-screen controls"),
         PLAYBACK("Playback", "Quality, speed and automatic advance"),
-        INBOX("Inbox", "Choose which rows and controls appear"),
+        SCREEN_TIME("Screen time", "Daily budgets, reminders and the hold"),
+        COMMENTS("Comments", "Filters, translation and copy options"),
+        DOWNLOADS("Downloads", "Quality, files, subtitles and hand-off"),
         SHARE("Share sheet", "People, shortcuts and sending controls"),
-        REGION("Region settings", "Country and network preferences"),
+        INBOX("Inbox", "Choose which rows and controls appear"),
         PRIVACY("Privacy", "Tracking, device access and links"),
-        BEHAVIOR("App behavior", "Layout, player and app tools"),
-        DIAGNOSTICS("Diagnostics", "Backups and troubleshooting");
+        REGION("Region", "Country and network preferences"),
+        BEHAVIOR("App", "Layout, player, search and system"),
+        DIAGNOSTICS("Diagnostics", "Logging, hook status and reports"),
+        BACKUP("Backup and restore", "Save, restore, reset and undo your settings");
 
         final String title;
         final String description;
@@ -749,21 +752,21 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         List<SearchResult> results = new ArrayList<>();
         PreferenceScreen scratch = getPreferenceManager().createPreferenceScreen(context);
         for (Section section : Section.values()) {
+            // Back up, Restore, Reset and Undo are added straight to their page rather than
+            // through a category, so walking categories alone never saw them: searching
+            // "backup" or "restore" answered "No matching settings" for four rows one page away.
+            if (section == Section.BACKUP) {
+                PreferenceScreen backupRows = getPreferenceManager().createPreferenceScreen(context);
+                SettingsBackupPreference.addTo(this, backupRows);
+                indexRows(results, backupRows, section, L10n.t(context, section.title));
+                continue;
+            }
             PreferenceCategory category = createCategory(context, scratch, section);
             if (category == null) {
                 continue;
             }
             String categoryTitle = String.valueOf(category.getTitle());
             indexRows(results, category, section, categoryTitle);
-
-            // Back up, Restore, Reset and Undo are added straight to the section screen rather
-            // than into the category, so walking the category alone never saw them: searching
-            // "backup" or "restore" answered "No matching settings" for four rows one page away.
-            if (section == Section.DIAGNOSTICS) {
-                PreferenceScreen backupRows = getPreferenceManager().createPreferenceScreen(context);
-                SettingsBackupPreference.addTo(this, backupRows);
-                indexRows(results, backupRows, section, categoryTitle);
-            }
             scratch.removePreference(category);
         }
         // This row opens its own fragment from the master menu rather than living in one of the
@@ -848,6 +851,11 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
                 return new DownloadsPreferenceCategory(context, screen);
             case PLAYBACK:
                 return new PlaybackPreferenceCategory(context, screen);
+            case SCREEN_TIME:
+                return new ScreenTimePreferenceCategory(context, screen);
+            case BACKUP:
+                // Its four rows need the fragment, so createSectionMenu adds them itself.
+                return null;
             case INBOX:
                 return new InboxPreferenceCategory(context, screen);
             case SHARE:
@@ -891,6 +899,13 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
                 }
         ));
 
+        // Four groups, each a card of its own under a heading, and a heading only shows when
+        // the bundle gives its group at least one page. Every page answers for itself, from
+        // the page, so a row and its page cannot drift apart.
+        boolean feed = FeedFilterPreferenceCategory.isAvailable()
+                || FeedNavigationPreferenceCategory.isAvailable()
+                || InterfacePreferenceCategory.isAvailable();
+        if (feed) addHeading(screen, "Your feed");
         if (FeedFilterPreferenceCategory.isAvailable()) {
             addMenu(screen, Section.FEED_FILTER, SettingsMenuPreference.Icon.FILTER);
         }
@@ -900,31 +915,41 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         if (InterfacePreferenceCategory.isAvailable()) {
             addMenu(screen, Section.INTERFACE, SettingsMenuPreference.Icon.LAYOUT);
         }
+
+        boolean watching = PlaybackPreferenceCategory.isAvailable()
+                || ScreenTimePreferenceCategory.isAvailable()
+                || CommentsPreferenceCategory.isAvailable()
+                || DownloadsPreferenceCategory.isAvailable()
+                || SharePreferenceCategory.isAvailable()
+                || InboxPreferenceCategory.isAvailable();
+        if (watching) addHeading(screen, "Watching and sharing");
+        if (PlaybackPreferenceCategory.isAvailable()) {
+            addMenu(screen, Section.PLAYBACK, SettingsMenuPreference.Icon.PLAYBACK);
+        }
+        if (ScreenTimePreferenceCategory.isAvailable()) {
+            addMenu(screen, Section.SCREEN_TIME, SettingsMenuPreference.Icon.SCREEN_TIME);
+        }
         if (CommentsPreferenceCategory.isAvailable()) {
             addMenu(screen, Section.COMMENTS, SettingsMenuPreference.Icon.COMMENTS);
         }
         if (DownloadsPreferenceCategory.isAvailable()) {
             addMenu(screen, Section.DOWNLOADS, SettingsMenuPreference.Icon.DOWNLOADS);
         }
-        if (PlaybackPreferenceCategory.isAvailable()) {
-            addMenu(screen, Section.PLAYBACK, SettingsMenuPreference.Icon.PLAYBACK);
+        if (SharePreferenceCategory.isAvailable()) {
+            addMenu(screen, Section.SHARE, SettingsMenuPreference.Icon.SHARE);
         }
         if (InboxPreferenceCategory.isAvailable()) {
             addMenu(screen, Section.INBOX, SettingsMenuPreference.Icon.INBOX);
         }
-        if (SharePreferenceCategory.isAvailable()) {
-            addMenu(screen, Section.SHARE, SettingsMenuPreference.Icon.SHARE);
+
+        // Backup and restore needs no patch, so this group and its heading always exist.
+        addHeading(screen, "Privacy and system");
+        if (PrivacyPreferenceCategory.isAvailable()) {
+            addMenu(screen, Section.PRIVACY, SettingsMenuPreference.Icon.PRIVACY);
         }
         if (SimSpoofPreferenceCategory.isAvailable()) {
             addMenu(screen, Section.REGION, SettingsMenuPreference.Icon.REGION);
         }
-        if (PrivacyPreferenceCategory.isAvailable()) {
-            addMenu(screen, Section.PRIVACY, SettingsMenuPreference.Icon.PRIVACY);
-        }
-
-        // The Diagnostics row always shows, because settings backup and restore live on that
-        // page whether or not the diagnostics patch is in the bundle. App behavior answers for
-        // itself, from the page, so the row and the page cannot drift apart again.
         if (ExtensionPreferenceCategory.isAvailable()) {
             addMenu(screen, Section.BEHAVIOR, SettingsMenuPreference.Icon.BEHAVIOR);
         }
@@ -946,17 +971,22 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
             screen.addPreference(featureGateLab);
         }
 
-        if (SettingsStatus.featureGateRecorderEnabled) {
-            screen.addPreference(new FeatureGateRecorderPreference(context));
+        if (DebugPreferenceCategory.isAvailable()) {
+            addMenu(screen, Section.DIAGNOSTICS, SettingsMenuPreference.Icon.DIAGNOSTICS);
         }
+        addMenu(screen, Section.BACKUP, SettingsMenuPreference.Icon.BACKUP);
 
-        addMenu(screen, Section.DIAGNOSTICS, SettingsMenuPreference.Icon.DIAGNOSTICS);
-
+        addHeading(screen, "About");
         screen.addPreference(new MorpheTikTokAboutPreference(context));
         // Under About, because that is where somebody looks for who wrote this. Morphe's
         // Section 7b asks that its notice reach the person using the software, and a file in the
         // repository does not reach them.
         screen.addPreference(new LicensesPreference(context));
+    }
+
+    /** A group heading on the master menu, which the list adapter treats as a card boundary. */
+    private void addHeading(PreferenceScreen screen, String title) {
+        screen.addPreference(new SectionHeadingPreference(getActivity(), title));
     }
 
     /** The master menu's rows and the section each one opens, for the badge refresh. */
@@ -997,7 +1027,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
 
         PreferenceCategory category = createCategory(context, screen, section);
         flattenCategory(screen, category);
-        if (section == Section.DIAGNOSTICS) SettingsBackupPreference.addTo(this, screen);
+        if (section == Section.BACKUP) SettingsBackupPreference.addTo(this, screen);
     }
 
     void refreshBackupSettings() { updateUIToSettingValues(); }

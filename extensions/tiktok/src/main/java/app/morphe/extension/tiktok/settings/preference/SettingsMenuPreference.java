@@ -34,13 +34,15 @@ public final class SettingsMenuPreference extends Preference {
         COMMENTS,
         DOWNLOADS,
         PLAYBACK,
+        SCREEN_TIME,
         INBOX,
         SHARE,
         REGION,
         PRIVACY,
         BEHAVIOR,
         LAB,
-        DIAGNOSTICS
+        DIAGNOSTICS,
+        BACKUP
     }
 
     private static final int ACCESSORY_TAG = 0x4D4D454E;
@@ -429,6 +431,39 @@ public final class SettingsMenuPreference extends Preference {
                             cx + bounds.width() * 0.11f, cy - bounds.height() * 0.09f, line);
                     break;
                 case LAYOUT:
+                    // A screen with the right column's buttons down its edge and a caption
+                    // line at the foot: the feed as it is drawn.
+                    canvas.drawRoundRect(new RectF(left, top, right, bottom),
+                            bounds.width() * 0.06f, bounds.width() * 0.06f, line);
+                    // Inside the frame with room to spare: on the tile's edge the three dots
+                    // merged with the border and read as a bite out of the screen.
+                    float railX = right - bounds.width() * 0.17f;
+                    float railDot = bounds.width() * 0.025f;
+                    canvas.drawCircle(railX, cy - bounds.height() * 0.13f, railDot, line);
+                    canvas.drawCircle(railX, cy, railDot, line);
+                    canvas.drawCircle(railX, cy + bounds.height() * 0.13f, railDot, line);
+                    canvas.drawLine(left + bounds.width() * 0.1f, bottom - bounds.height() * 0.1f,
+                            cx - bounds.width() * 0.02f, bottom - bounds.height() * 0.1f, line);
+                    break;
+                case SCREEN_TIME:
+                    // A clock face.
+                    canvas.drawCircle(cx, cy, bounds.width() * 0.23f, line);
+                    canvas.drawLine(cx, cy, cx, cy - bounds.height() * 0.14f, line);
+                    canvas.drawLine(cx, cy, cx + bounds.width() * 0.1f, cy + bounds.height() * 0.06f, line);
+                    break;
+                case BACKUP:
+                    // An open box with an arrow rising out of it. Downloads is the arrow going
+                    // the other way onto a line, so the two read as a pair.
+                    path.reset();
+                    path.moveTo(left, cy);
+                    path.lineTo(left, bottom);
+                    path.lineTo(right, bottom);
+                    path.lineTo(right, cy);
+                    canvas.drawPath(path, line);
+                    canvas.drawLine(cx, top, cx, cy + bounds.height() * 0.1f, line);
+                    canvas.drawLine(cx, top, cx - bounds.width() * 0.1f, top + bounds.height() * 0.1f, line);
+                    canvas.drawLine(cx, top, cx + bounds.width() * 0.1f, top + bounds.height() * 0.1f, line);
+                    break;
                 case BEHAVIOR:
                     canvas.drawLine(left, top + bounds.height() * 0.05f, right, top + bounds.height() * 0.05f, line);
                     canvas.drawLine(left, cy, right, cy, line);
