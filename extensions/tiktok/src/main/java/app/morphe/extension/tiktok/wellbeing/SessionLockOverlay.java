@@ -319,8 +319,8 @@ public final class SessionLockOverlay {
         LinearLayout panel = new LinearLayout(activity);
         panel.setOrientation(LinearLayout.VERTICAL);
         panel.setGravity(Gravity.CENTER);
-        // The same shade the ramp finishes on, taken from there rather than written twice, so
-        // the last frame before the hold and the first frame of it cannot drift apart.
+        int sidePad = SettingsUi.dp(activity, 24);
+        panel.setPadding(sidePad, sidePad, sidePad, sidePad);
         panel.setBackgroundColor(Color.argb(HoldRamp.FULL_ALPHA, 0, 0, 0));
         // Swallows every touch, so the feed underneath stops scrolling without being emptied.
         panel.setClickable(true);

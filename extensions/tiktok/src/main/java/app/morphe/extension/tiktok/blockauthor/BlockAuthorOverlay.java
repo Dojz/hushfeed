@@ -474,7 +474,9 @@ public final class BlockAuthorOverlay {
             dragging = true;
             view.setAlpha(0.75f);
             view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-            Utils.showToastShort(L10n.t("Drag to move, release to place"));
+            if (positionSetting(view).get().isEmpty()) {
+                Utils.showToastShort(L10n.t("Drag to move, release to place"));
+            }
             return true;
         });
 
