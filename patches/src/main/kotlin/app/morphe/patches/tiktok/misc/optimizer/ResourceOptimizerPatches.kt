@@ -154,7 +154,7 @@ val liveStreamSuiteOptimizerPatch = rawResourcePatch(
         )
         val result = stripVerifiedResources(
             get("."),
-            "Live Stream Suite Optimizer",
+            "LIVE Stream Suite Optimizer",
             listOf(
                 "assets/native_runtime_server/game",
                 "assets/offline/tiktok_live_tt_live_lynx_match_component_container",
@@ -163,7 +163,7 @@ val liveStreamSuiteOptimizerPatch = rawResourcePatch(
             liveAssetProfiles,
             resolveStandaloneFile = { path -> get(path) },
         )
-        result.report("Live Stream Suite Optimizer")
+        result.report("LIVE Stream Suite Optimizer")
     }
 }
 

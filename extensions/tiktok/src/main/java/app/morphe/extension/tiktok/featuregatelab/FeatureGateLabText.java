@@ -165,7 +165,7 @@ final class FeatureGateLabText {
             return L10n.t(context, "Player Config");
         }
         if (FeatureGateLabStore.MANAGER_LIVE.equals(manager)) {
-            return L10n.t(context, "Live Settings");
+            return L10n.t(context, "LIVE settings");
         }
         if (FeatureGateLabStore.MANAGER_VE_CONFIG.equals(manager)) {
             return L10n.t(context, "Media Config (VE)");

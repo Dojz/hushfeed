@@ -1092,6 +1092,8 @@ public final class L10nTranslations {
                 "LIVE");
         table.put("LIVE replays",
                 "LIVE-Wiederholungen");
+        table.put("LIVE settings",
+                "Live-Einstellungen");
         table.put("LIVE videos",
                 "LIVE-Videos");
         table.put("Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.",
@@ -1138,8 +1140,6 @@ public final class L10nTranslations {
                 "Links in Kommentaren lassen sich öffnen");
         table.put("Live",
                 "LIVE");
-        table.put("Live Settings",
-                "Live-Einstellungen");
         table.put("Loaded current values. Loading all known gates...",
                 "Aktuelle Werte geladen. Alle bekannten Schalter werden geladen ...");
         table.put("Loaded values are still being read. Try again in a moment.",
@@ -3371,6 +3371,8 @@ public final class L10nTranslations {
                 "LIVE");
         table.put("LIVE replays",
                 "Repeticiones de LIVE");
+        table.put("LIVE settings",
+                "Ajustes de Live");
         table.put("LIVE videos",
                 "Vídeos LIVE");
         table.put("Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.",
@@ -3417,8 +3419,6 @@ public final class L10nTranslations {
                 "Los enlaces de los comentarios se abren");
         table.put("Live",
                 "LIVE");
-        table.put("Live Settings",
-                "Ajustes de Live");
         table.put("Loaded current values. Loading all known gates...",
                 "Valores actuales cargados. Cargando todos los interruptores conocidos...");
         table.put("Loaded values are still being read. Try again in a moment.",
@@ -5650,6 +5650,8 @@ public final class L10nTranslations {
                 "LIVE");
         table.put("LIVE replays",
                 "Putar ulang LIVE");
+        table.put("LIVE settings",
+                "Pengaturan Live");
         table.put("LIVE videos",
                 "Video LIVE");
         table.put("Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.",
@@ -5696,8 +5698,6 @@ public final class L10nTranslations {
                 "Tautan di komentar bisa dibuka");
         table.put("Live",
                 "LIVE");
-        table.put("Live Settings",
-                "Pengaturan Live");
         table.put("Loaded current values. Loading all known gates...",
                 "Nilai saat ini dimuat. Memuat semua gate yang diketahui...");
         table.put("Loaded values are still being read. Try again in a moment.",
@@ -7929,6 +7929,8 @@ public final class L10nTranslations {
                 "LIVE");
         table.put("LIVE replays",
                 "Reprises de LIVE");
+        table.put("LIVE settings",
+                "Configurações de Live");
         table.put("LIVE videos",
                 "Vídeos LIVE");
         table.put("Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.",
@@ -7975,8 +7977,6 @@ public final class L10nTranslations {
                 "Os links nos comentários abrem");
         table.put("Live",
                 "LIVE");
-        table.put("Live Settings",
-                "Configurações de Live");
         table.put("Loaded current values. Loading all known gates...",
                 "Valores atuais carregados. Carregando todos os gates conhecidos...");
         table.put("Loaded values are still being read. Try again in a moment.",
