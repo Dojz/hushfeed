@@ -277,7 +277,7 @@ public final class FeatureGateDetailFragment extends Fragment {
             LinearLayout forceRow = FeatureGateLabUi.switchRow(
                     context,
                     L10n.t(context, "Override this configuration"),
-                    L10n.t(context, "Return a copied object with the selected fields changed"),
+                    L10n.t(context, "Return a copy of this configuration with the fields below changed"),
                     force
             );
             content.addView(forceRow, FeatureGateLabUi.matchWrap());
