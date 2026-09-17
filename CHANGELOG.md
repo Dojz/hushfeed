@@ -1,6 +1,24 @@
 ## 0.40.0
 
-* * The share prompt that pops up after a like can be hidden. With the switch on, the bubble asking you to share a video with friends never appears. Under Interface, off by default. Upstream #22.
+* A Privacy page. Everything that decides what TikTok learns sits in one place now. Disable analytics and tracking and Ghost mode moved there from App behavior, the three link rows came with them, and each of the device-access patches below has a switch of its own. Before this the seven device patches had no row anywhere, so there was no way to see they were installed and no way to turn one off short of patching again.
+
+* Seven patches that stand between TikTok and the phone: Block contact list access, Block installed app scanning, Location access governor, Device privacy guard for clipboard reads, Resource and battery governor for the motion sensors, In-app browser privacy guard, and the Camera and microphone indicator. All but the browser guard are on as soon as the patch is chosen. The browser guard stays off until you turn it on, because TikTok's own web pages are built on the bridge it cuts, the shop checkout and the CAPTCHA page among them.
+
+* Three of those patches said more than they did, and two did nothing at all. The contact blocker matched the plain call form only, and a five-argument ContentResolver.query is always the ranged form, so it intercepted zero call sites and applied anyway. The installed-app blocker watched getInstalledPackages, which TikTok 46.2.3 never calls. The app list is read through the launcher enumeration, which is what it watches now, and a check for one named app is left alone so opening another app still works. The device privacy guard claimed to block local network scanning and the battery governor claimed to throttle preloading. Neither did, and both descriptions now say what the code does. Every one of these patches reads both call forms now and refuses to apply when it finds nothing to intercept.
+
+* The camera and microphone indicator draws the dot it promised. A green dot sits in the top corner while TikTok has the camera open and an orange one while it records sound, both when both, on whichever screen is in front. It follows Camera.open, camera2's openCamera and AudioRecord.startRecording, and goes when the camera is released or the recorder stops. The first version wrote a log line and nothing else.
+
+* Block P2P video relay strips TikTok's peer-to-peer CDN libraries so the phone isn't used as a relay for other people's video. Stop on-device AI profiling returns early from the Pitaya inference engine's start. Remove content credential and card scanner assets now also empties six Pitaya model libraries per ABI, the LIVE casting feature and the ART log monitor probe. It leaves libbytemonitor, libprofiler and libAndroidPitayaCore alone: other libraries in the APK link against those, and an emptied one fails their load. The first cut emptied libbytemonitor too, which libbytebench needs, which the whole video editor needs, so the Create tab killed the app until the S22 showed it.
+
+* Maximum views per comment joins Maximum views per like under Feed filter, for hiding videos with a lot of views and few comments.
+
+* The six right column switches (hide the like, comment, favorite, share, avatar and music buttons) work again on 46.2.3. Since 0.35.0 they looked for the video cell under the long-press layer, which on this build sits beside the column rather than above it, so the walk found no buttons and hid nothing. It starts from the cell's own root now, which holds both.
+
+* Feed button size makes the right column's icons a quarter larger for anyone who finds them small. Under Interface. The first cut offered 1.5x and 2x as well and scaled the whole button, and on the phone that did nothing: TikTok animates those buttons itself and writes its own scale back on every frame. The setting scales the icon inside each button now, from the icon's base so it grows upward, and puts the size back before each frame TikTok draws. Past 1.25x an icon runs into the next button, so the two larger sizes are gone, and a stored 1.5x or 2x reads as 1.25x.
+
+* A feed check asked from a new window no longer takes its answer from a Home tab that belongs to an older one. Anything drawn only on the recommendation feed could otherwise show up, or stay away, on the wrong screen for as long as the old window lingered.
+
+* The share prompt that pops up after a like can be hidden. With the switch on, the bubble asking you to share a video with friends never appears. Under Interface, off by default. Upstream #22.
 
 * The four feed overlay controls are drawn by one class at one stroke weight. Sound was a Unicode note in whatever font TikTok picked, local hide was a bold ×, and not interested was a thin dash; only the block symbol was drawn. They all draw through `OverlayGlyphDrawable` now, at the same 2dp stroke and the same radius fraction, so they look like one set.
 
