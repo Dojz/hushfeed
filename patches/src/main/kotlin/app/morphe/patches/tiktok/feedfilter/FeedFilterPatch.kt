@@ -52,7 +52,8 @@ val feedFilterPatch = bytecodePatch(
         "the country they were posted from and their view, like, comment, favourite and share " +
         "counts. Sponsored cards are dropped from the profile video viewer, the search grids " +
         "and the Friends tab as well as the feed, and so are the mid-roll ads TikTok splices " +
-        "into a video pager after the list has loaded.",
+        "into a video pager after the list has loaded. The share prompt that appears after a " +
+        "like can also be hidden.",
     default = true,
 ) {
     dependsOn(settingsPatch, 
@@ -440,6 +441,16 @@ val feedFilterPatch = bytecodePatch(
                     "$TAKO_AI_FILTER_CLASS_DESCRIPTOR->hideBoundFeedButtonView(Landroid/view/View;)V",
             )
         }
+
+        // The share prompt that pops up after a like, asking the reader to share the video
+        // with friends. Upstream #22. The method name changes on every build (O, J, H, D)
+        // but the string "share_guide" and the parameter shape are stable. Returning early
+        // is enough: nothing about the prompt is shown if the method never runs.
+        ShareGuideFingerprint.method.guardAtEntry(
+            "Feed filter",
+            "invoke-static {}, Lapp/morphe/extension/tiktok/settings/Settings;->shouldHideShareGuide()Z",
+            "return-void",
+        )
 
         // Things TikTok slots into the feed that never arrive as ordinary items, so they
         // are stopped where they are built. Each is optional: a build without the surface

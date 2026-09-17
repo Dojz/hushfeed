@@ -421,6 +421,7 @@ Hide the search button in the top right corner of the feed.,Hide the search butt
 Hide the search icon in the Inbox header.,Hide the search icon in the Inbox header.
 Hide the searches TikTok offers before you type. Your own search history stays.,Hide the searches TikTok offers before you type. Your own search history stays.
 Hide the share button,Hide the share button
+Hide the share prompt after a like,Hide the share prompt after a like
 Hide the speech bubble and its count in the right column.,Hide the speech bubble and its count in the right column.
 Hide the spinning music cover and the track name beside the caption.,Hide the spinning music cover and the track name beside the caption.
 Hide the spinning record at the bottom of the right column.,Hide the spinning record at the bottom of the right column.
@@ -812,6 +813,7 @@ Stop a long press on Like from opening TikTok's repost action.,Stop a long press
 Stop a long press on Share from opening TikTok's quick share action.,Stop a long press on Share from opening TikTok's quick share action.
 Stop feature gate recording,Stop feature gate recording
 Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.,Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.
+Stop the bubble that asks you to share a video with friends after you like it.,Stop the bubble that asks you to share a video with friends after you like it.
 Stop video looping,Stop video looping
 Stop videos at the end instead of replaying them.,Stop videos at the end instead of replaying them.
 Stopped after dismissing %1$s suggested accounts,Stopped after dismissing %1$s suggested accounts

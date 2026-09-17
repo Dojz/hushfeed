@@ -48,7 +48,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildDe() {
-        Map<String, String> table = new HashMap<>(2060);
+        Map<String, String> table = new HashMap<>(2064);
         fillDe0(table);
         fillDe1(table);
         fillDe2(table);
@@ -936,6 +936,8 @@ public final class L10nTranslations {
                 "Die Suchen ausblenden, die TikTok anbietet, bevor du tippst. Dein eigener Suchverlauf bleibt.");
         table.put("Hide the share button",
                 "Teilen-Button ausblenden");
+        table.put("Hide the share prompt after a like",
+                "Die Teilen-Aufforderung nach einem Like ausblenden");
         table.put("Hide the speech bubble and its count in the right column.",
                 "Sprechblase und Zähler in der rechten Spalte ausblenden.");
         table.put("Hide the spinning music cover and the track name beside the caption.",
@@ -1050,11 +1052,11 @@ public final class L10nTranslations {
                 "Letzter Originalwert");
         table.put("Leave maximum empty to keep it unlimited.",
                 "Lass das Maximum leer, damit es unbegrenzt bleibt.");
-        table.put("Leave the sound out of the saved video. Save the sound as well still writes the .m4a beside it if you want both.",
-                "Den Ton aus dem gespeicherten Video weglassen. Ton ebenfalls speichern schreibt die .m4a weiterhin daneben, wenn du beides willst.");
     }
 
     private static void fillDe8(Map<String, String> table) {
+        table.put("Leave the sound out of the saved video. Save the sound as well still writes the .m4a beside it if you want both.",
+                "Den Ton aus dem gespeicherten Video weglassen. Ton ebenfalls speichern schreibt die .m4a weiterhin daneben, wenn du beides willst.");
         table.put("Length and views per like",
                 "Länge und Aufrufe pro Like");
         table.put("Less than a minute left",
@@ -1173,11 +1175,11 @@ public final class L10nTranslations {
                 "Keine Grenze");
         table.put("No matching comments. Try a different word, or clear the search with the X in the box.",
                 "Keine passenden Kommentare. Versuche es mit einem anderen Wort oder lösche die Suche mit dem X im Feld.");
-        table.put("No matching countries",
-                "Keine passenden Länder");
     }
 
     private static void fillDe9(Map<String, String> table) {
+        table.put("No matching countries",
+                "Keine passenden Länder");
         table.put("No matching diagnostics found.",
                 "Keine passenden Diagnosedaten gefunden.");
         table.put("No matching settings",
@@ -1296,11 +1298,11 @@ public final class L10nTranslations {
                 "Originalsprache");
         table.put("Other",
                 "Sonstiges");
-        table.put("Other feed filters",
-                "Andere Feed-Filter");
     }
 
     private static void fillDe10(Map<String, String> table) {
+        table.put("Other feed filters",
+                "Andere Feed-Filter");
         table.put("Overridden",
                 "Überschrieben");
         table.put("Override",
@@ -1419,11 +1421,11 @@ public final class L10nTranslations {
                 "%1$s entfernt");
         table.put("Replace values when TikTok asks for them",
                 "Werte ersetzen, wenn TikTok sie abfragt");
-        table.put("Report saved to %1$s",
-                "Bericht gespeichert unter %1$s");
     }
 
     private static void fillDe11(Map<String, String> table) {
+        table.put("Report saved to %1$s",
+                "Bericht gespeichert unter %1$s");
         table.put("Required",
                 "Erforderlich");
         table.put("Researched",
@@ -1542,11 +1544,11 @@ public final class L10nTranslations {
                 "Die gewählte Videoqualität wird gespeichert");
         table.put("Saving the selected video quality without sound",
                 "Die gewählte Videoqualität wird ohne Ton gespeichert");
-        table.put("Saving the story",
-                "Story wird gespeichert");
     }
 
     private static void fillDe12(Map<String, String> table) {
+        table.put("Saving the story",
+                "Story wird gespeichert");
         table.put("Saving video and subtitles to %1$s",
                 "Video und Untertitel werden in %1$s gespeichert");
         table.put("Search a title, description or category.",
@@ -1665,11 +1667,11 @@ public final class L10nTranslations {
                 "Die vollständigen Listen „Aktivität“ und „Neue Follower“ anzeigen, statt bei einer Schaltfläche „Alle anzeigen“ zu enden.");
         table.put("Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off.",
                 "Das ganze Video zeigen, statt es auf das Fenster zuzuschneiden. Auf einem hohen Telefon ändert sich nichts, dort passt es bereits. Auf einem aufgeklappten Falttelefon, einem quadratischeren Bildschirm oder im geteilten Bildschirm werden die Seiten oder die Enden nicht mehr abgeschnitten.");
-        table.put("Show what is left of the budget",
-                "Restliches Budget anzeigen");
     }
 
     private static void fillDe13(Map<String, String> table) {
+        table.put("Show what is left of the budget",
+                "Restliches Budget anzeigen");
         table.put("Show where a video was posted",
                 "Herkunftsland anzeigen");
         table.put("Showing %1$s again",
@@ -1736,6 +1738,8 @@ public final class L10nTranslations {
                 "Feature-Gate-Aufzeichnung beenden");
         table.put("Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.",
                 "Stoppt die Markenanimation über den Kommentaren, wenn das Getippte zu einem Werbe-Auslöser passt.");
+        table.put("Stop the bubble that asks you to share a video with friends after you like it.",
+                "Stoppt die Blase, die dich auffordert, ein Video nach dem Liken mit Freunden zu teilen.");
         table.put("Stop video looping",
                 "Videoschleife beenden");
         table.put("Stop videos at the end instead of replaying them.",
@@ -1786,13 +1790,13 @@ public final class L10nTranslations {
                 "Dieses Kreator-Muster ist zu lang und wurde übersprungen: %1$s");
         table.put("That creator pattern is too long, so it was not added: %1$s",
                 "Dieses Kreator-Muster ist zu lang und wurde nicht hinzugefügt: %1$s");
+    }
+
+    private static void fillDe14(Map<String, String> table) {
         table.put("That file is not readable text, so it may have been damaged in transit. Nothing was altered.",
                 "Diese Datei ist kein lesbarer Text und wurde womöglich bei der Übertragung beschädigt. Es wurde nichts geändert.");
         table.put("That file is too large to be a settings backup. Nothing was altered.",
                 "Diese Datei ist zu groß für eine Einstellungssicherung. Es wurde nichts geändert.");
-    }
-
-    private static void fillDe14(Map<String, String> table) {
         table.put("That is %1$d minutes today",
                 "Das sind %1$d Minuten heute");
         table.put("That is %1$d videos today",
@@ -1909,13 +1913,13 @@ public final class L10nTranslations {
                 "Diese Datei enthält keine geladenen Werte.");
         table.put("This file isn't a loaded-values export from the Feature Gate Lab.",
                 "Diese Datei ist kein Export geladener Werte aus dem Feature Gate Lab.");
+    }
+
+    private static void fillDe15(Map<String, String> table) {
         table.put("This gate type is not supported.",
                 "Dieser Gate-Typ wird nicht unterstützt.");
         table.put("This key isn't in the local catalog, so its type can't be checked. Reset the override.",
                 "Dieser Schlüssel steht nicht im lokalen Katalog, deshalb lässt sich sein Typ nicht prüfen. Setze die Überschreibung zurück.");
-    }
-
-    private static void fillDe15(Map<String, String> table) {
         table.put("This line opens a rule and does not finish it: %1$s. Write two phrases as \"a\" & \"b\" for both, or \"a\" !& \"b\" for the first without the second.",
                 "Diese Zeile beginnt eine Regel und beendet sie nicht: %1$s. Schreiben Sie zwei Wendungen als \"a\" & \"b\" für beide oder als \"a\" !& \"b\" für die erste ohne die zweite.");
         table.put("This phone has no file picker, so there is no way to choose a file here.",
@@ -2032,13 +2036,13 @@ public final class L10nTranslations {
                 "%1$s entblockt");
         table.put("Undo",
                 "Rückgängig");
+    }
+
+    private static void fillDe16(Map<String, String> table) {
         table.put("Undo last Lab change",
                 "Letzte Lab-Änderung rückgängig machen");
         table.put("Undo last restore or reset",
                 "Letzte Wiederherstellung oder Zurücksetzung rückgängig machen");
-    }
-
-    private static void fillDe16(Map<String, String> table) {
         table.put("Undoing the last change",
                 "Die letzte Änderung wird rückgängig gemacht");
         table.put("Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.",
@@ -2155,13 +2159,13 @@ public final class L10nTranslations {
                 "Minuten");
         table.put("ms",
                 "ms");
+    }
+
+    private static void fillDe17(Map<String, String> table) {
         table.put("or",
                 "oder");
         table.put("point",
                 "Punkt");
-    }
-
-    private static void fillDe17(Map<String, String> table) {
         table.put("points",
                 "Punkte");
         table.put("s",
@@ -2185,7 +2189,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildEs() {
-        Map<String, String> table = new HashMap<>(2060);
+        Map<String, String> table = new HashMap<>(2064);
         fillEs0(table);
         fillEs1(table);
         fillEs2(table);
@@ -3073,6 +3077,8 @@ public final class L10nTranslations {
                 "Ocultar las búsquedas que TikTok propone antes de que escribas. Tu propio historial de búsqueda se queda.");
         table.put("Hide the share button",
                 "Ocultar el botón de compartir");
+        table.put("Hide the share prompt after a like",
+                "Ocultar la sugerencia de compartir tras un me gusta");
         table.put("Hide the speech bubble and its count in the right column.",
                 "Ocultar el bocadillo y su número en la columna derecha.");
         table.put("Hide the spinning music cover and the track name beside the caption.",
@@ -3187,11 +3193,11 @@ public final class L10nTranslations {
                 "Último valor original");
         table.put("Leave maximum empty to keep it unlimited.",
                 "Deja el máximo vacío para que no tenga límite.");
-        table.put("Leave the sound out of the saved video. Save the sound as well still writes the .m4a beside it if you want both.",
-                "Dejar el sonido fuera del vídeo guardado. Guardar también el sonido sigue escribiendo el .m4a al lado si quieres los dos.");
     }
 
     private static void fillEs8(Map<String, String> table) {
+        table.put("Leave the sound out of the saved video. Save the sound as well still writes the .m4a beside it if you want both.",
+                "Dejar el sonido fuera del vídeo guardado. Guardar también el sonido sigue escribiendo el .m4a al lado si quieres los dos.");
         table.put("Length and views per like",
                 "Duración y visualizaciones por me gusta");
         table.put("Less than a minute left",
@@ -3310,11 +3316,11 @@ public final class L10nTranslations {
                 "Sin límite");
         table.put("No matching comments. Try a different word, or clear the search with the X in the box.",
                 "No hay comentarios que coincidan. Prueba otra palabra o borra la búsqueda con la X del campo.");
-        table.put("No matching countries",
-                "Ningún país coincide");
     }
 
     private static void fillEs9(Map<String, String> table) {
+        table.put("No matching countries",
+                "Ningún país coincide");
         table.put("No matching diagnostics found.",
                 "No se encontraron diagnósticos que coincidan.");
         table.put("No matching settings",
@@ -3433,11 +3439,11 @@ public final class L10nTranslations {
                 "Idioma original");
         table.put("Other",
                 "Otros");
-        table.put("Other feed filters",
-                "Otros filtros del feed");
     }
 
     private static void fillEs10(Map<String, String> table) {
+        table.put("Other feed filters",
+                "Otros filtros del feed");
         table.put("Overridden",
                 "Sustituidos");
         table.put("Override",
@@ -3556,11 +3562,11 @@ public final class L10nTranslations {
                 "Se quitó %1$s");
         table.put("Replace values when TikTok asks for them",
                 "Reemplazar valores cuando TikTok los pide");
-        table.put("Report saved to %1$s",
-                "Informe guardado en %1$s");
     }
 
     private static void fillEs11(Map<String, String> table) {
+        table.put("Report saved to %1$s",
+                "Informe guardado en %1$s");
         table.put("Required",
                 "Obligatorio");
         table.put("Researched",
@@ -3679,11 +3685,11 @@ public final class L10nTranslations {
                 "Guardando la calidad de vídeo elegida");
         table.put("Saving the selected video quality without sound",
                 "Guardando la calidad de vídeo elegida sin sonido");
-        table.put("Saving the story",
-                "Guardando la historia");
     }
 
     private static void fillEs12(Map<String, String> table) {
+        table.put("Saving the story",
+                "Guardando la historia");
         table.put("Saving video and subtitles to %1$s",
                 "Guardando el vídeo y los subtítulos en %1$s");
         table.put("Search a title, description or category.",
@@ -3802,11 +3808,11 @@ public final class L10nTranslations {
                 "Mostrar las listas completas de Actividad y Nuevos seguidores en vez de pararse en un botón de Ver todo.");
         table.put("Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off.",
                 "Mostrar el vídeo entero en vez de recortarlo a la ventana. En un móvil alto no cambia nada, porque ya cabe. En un plegable abierto, en una pantalla más cuadrada o en vista dividida dejan de cortarse los lados o los extremos.");
-        table.put("Show what is left of the budget",
-                "Mostrar lo que queda del límite");
     }
 
     private static void fillEs13(Map<String, String> table) {
+        table.put("Show what is left of the budget",
+                "Mostrar lo que queda del límite");
         table.put("Show where a video was posted",
                 "Mostrar desde dónde se publicó un vídeo");
         table.put("Showing %1$s again",
@@ -3873,6 +3879,8 @@ public final class L10nTranslations {
                 "Parar de grabar los interruptores");
         table.put("Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.",
                 "Parar la animación de marca que sale sobre los comentarios cuando lo que alguien escribió coincide con el disparador de un anunciante.");
+        table.put("Stop the bubble that asks you to share a video with friends after you like it.",
+                "Detiene la burbuja que pide compartir un video con amigos tras darle me gusta.");
         table.put("Stop video looping",
                 "Parar la repetición de los vídeos");
         table.put("Stop videos at the end instead of replaying them.",
@@ -3923,13 +3931,13 @@ public final class L10nTranslations {
                 "Ese patrón de creador es demasiado largo, así que se omitió: %1$s");
         table.put("That creator pattern is too long, so it was not added: %1$s",
                 "Ese patrón de creador es demasiado largo, así que no se añadió: %1$s");
+    }
+
+    private static void fillEs14(Map<String, String> table) {
         table.put("That file is not readable text, so it may have been damaged in transit. Nothing was altered.",
                 "Ese archivo no es texto legible, así que puede haberse dañado por el camino. No se ha cambiado nada.");
         table.put("That file is too large to be a settings backup. Nothing was altered.",
                 "Ese archivo es demasiado grande para ser una copia de seguridad de ajustes. No se ha cambiado nada.");
-    }
-
-    private static void fillEs14(Map<String, String> table) {
         table.put("That is %1$d minutes today",
                 "Eso son %1$d minutos hoy");
         table.put("That is %1$d videos today",
@@ -4046,13 +4054,13 @@ public final class L10nTranslations {
                 "Este archivo no contiene valores cargados.");
         table.put("This file isn't a loaded-values export from the Feature Gate Lab.",
                 "Este archivo no es una exportación de valores cargados del Feature Gate Lab.");
+    }
+
+    private static void fillEs15(Map<String, String> table) {
         table.put("This gate type is not supported.",
                 "Este tipo de gate no es compatible.");
         table.put("This key isn't in the local catalog, so its type can't be checked. Reset the override.",
                 "Esta clave no está en el catálogo local, así que no se puede comprobar su tipo. Restablece la anulación.");
-    }
-
-    private static void fillEs15(Map<String, String> table) {
         table.put("This line opens a rule and does not finish it: %1$s. Write two phrases as \"a\" & \"b\" for both, or \"a\" !& \"b\" for the first without the second.",
                 "Esta línea abre una regla y no la termina: %1$s. Escribe dos frases como \"a\" & \"b\" para pedir las dos, o \"a\" !& \"b\" para la primera sin la segunda.");
         table.put("This phone has no file picker, so there is no way to choose a file here.",
@@ -4169,13 +4177,13 @@ public final class L10nTranslations {
                 "%1$s desbloqueado");
         table.put("Undo",
                 "Deshacer");
+    }
+
+    private static void fillEs16(Map<String, String> table) {
         table.put("Undo last Lab change",
                 "Deshacer el último cambio del Lab");
         table.put("Undo last restore or reset",
                 "Deshacer la última restauración o reinicio");
-    }
-
-    private static void fillEs16(Map<String, String> table) {
         table.put("Undoing the last change",
                 "Deshaciendo el último cambio");
         table.put("Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.",
@@ -4292,13 +4300,13 @@ public final class L10nTranslations {
                 "minutos");
         table.put("ms",
                 "ms");
+    }
+
+    private static void fillEs17(Map<String, String> table) {
         table.put("or",
                 "o");
         table.put("point",
                 "punto");
-    }
-
-    private static void fillEs17(Map<String, String> table) {
         table.put("points",
                 "puntos");
         table.put("s",
@@ -4322,7 +4330,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIn() {
-        Map<String, String> table = new HashMap<>(2060);
+        Map<String, String> table = new HashMap<>(2064);
         fillIn0(table);
         fillIn1(table);
         fillIn2(table);
@@ -5210,6 +5218,8 @@ public final class L10nTranslations {
                 "Sembunyikan pencarian yang ditawarkan TikTok sebelum kamu mengetik. Riwayat pencarianmu sendiri tetap ada.");
         table.put("Hide the share button",
                 "Sembunyikan tombol bagikan");
+        table.put("Hide the share prompt after a like",
+                "Sembunyikan ajakan berbagi setelah suka");
         table.put("Hide the speech bubble and its count in the right column.",
                 "Sembunyikan gelembung komentar dan angkanya di kolom kanan.");
         table.put("Hide the spinning music cover and the track name beside the caption.",
@@ -5324,11 +5334,11 @@ public final class L10nTranslations {
                 "Nilai asli terakhir");
         table.put("Leave maximum empty to keep it unlimited.",
                 "Kosongkan nilai maksimum agar tetap tanpa batas.");
-        table.put("Leave the sound out of the saved video. Save the sound as well still writes the .m4a beside it if you want both.",
-                "Hilangkan suara dari video yang disimpan. Simpan suaranya juga tetap menulis berkas .m4a di sebelahnya kalau kamu mau keduanya.");
     }
 
     private static void fillIn8(Map<String, String> table) {
+        table.put("Leave the sound out of the saved video. Save the sound as well still writes the .m4a beside it if you want both.",
+                "Hilangkan suara dari video yang disimpan. Simpan suaranya juga tetap menulis berkas .m4a di sebelahnya kalau kamu mau keduanya.");
         table.put("Length and views per like",
                 "Durasi dan penayangan per suka");
         table.put("Less than a minute left",
@@ -5447,11 +5457,11 @@ public final class L10nTranslations {
                 "Tanpa batas");
         table.put("No matching comments. Try a different word, or clear the search with the X in the box.",
                 "Tidak ada komentar yang cocok. Coba kata lain atau hapus pencarian dengan X di kotak.");
-        table.put("No matching countries",
-                "Tidak ada negara yang cocok");
     }
 
     private static void fillIn9(Map<String, String> table) {
+        table.put("No matching countries",
+                "Tidak ada negara yang cocok");
         table.put("No matching diagnostics found.",
                 "Tidak ada diagnostik yang cocok.");
         table.put("No matching settings",
@@ -5570,11 +5580,11 @@ public final class L10nTranslations {
                 "Bahasa asli");
         table.put("Other",
                 "Lainnya");
-        table.put("Other feed filters",
-                "Filter feed lainnya");
     }
 
     private static void fillIn10(Map<String, String> table) {
+        table.put("Other feed filters",
+                "Filter feed lainnya");
         table.put("Overridden",
                 "Diganti");
         table.put("Override",
@@ -5693,11 +5703,11 @@ public final class L10nTranslations {
                 "%1$s dihapus");
         table.put("Replace values when TikTok asks for them",
                 "Ganti nilai saat TikTok memintanya");
-        table.put("Report saved to %1$s",
-                "Laporan disimpan di %1$s");
     }
 
     private static void fillIn11(Map<String, String> table) {
+        table.put("Report saved to %1$s",
+                "Laporan disimpan di %1$s");
         table.put("Required",
                 "Wajib");
         table.put("Researched",
@@ -5816,11 +5826,11 @@ public final class L10nTranslations {
                 "Menyimpan kualitas video pilihan");
         table.put("Saving the selected video quality without sound",
                 "Menyimpan kualitas video pilihan tanpa suara");
-        table.put("Saving the story",
-                "Menyimpan Story");
     }
 
     private static void fillIn12(Map<String, String> table) {
+        table.put("Saving the story",
+                "Menyimpan Story");
         table.put("Saving video and subtitles to %1$s",
                 "Menyimpan video dan subtitel ke %1$s");
         table.put("Search a title, description or category.",
@@ -5939,11 +5949,11 @@ public final class L10nTranslations {
                 "Tampilkan seluruh daftar Aktivitas dan Pengikut baru, bukan berhenti di tombol Lihat semua.");
         table.put("Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off.",
                 "Tampilkan video secara utuh, bukan dipotong mengikuti jendela. Di ponsel yang tinggi tidak ada yang berubah karena videonya memang sudah pas. Di ponsel lipat yang dibuka, layar yang lebih persegi, atau mode layar terbagi, sisi atau ujung videonya tidak lagi terpotong.");
-        table.put("Show what is left of the budget",
-                "Tampilkan sisa batas harian");
     }
 
     private static void fillIn13(Map<String, String> table) {
+        table.put("Show what is left of the budget",
+                "Tampilkan sisa batas harian");
         table.put("Show where a video was posted",
                 "Tampilkan asal unggahan video");
         table.put("Showing %1$s again",
@@ -6010,6 +6020,8 @@ public final class L10nTranslations {
                 "Hentikan rekaman feature gate");
         table.put("Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.",
                 "Hentikan animasi merek yang muncul di atas komentar saat ketikan seseorang cocok dengan pemicu pengiklan.");
+        table.put("Stop the bubble that asks you to share a video with friends after you like it.",
+                "Menghentikan gelembung yang meminta kamu berbagi video dengan teman setelah menyukainya.");
         table.put("Stop video looping",
                 "Hentikan pengulangan video");
         table.put("Stop videos at the end instead of replaying them.",
@@ -6060,13 +6072,13 @@ public final class L10nTranslations {
                 "Pola kreator itu terlalu panjang, jadi dilewati: %1$s");
         table.put("That creator pattern is too long, so it was not added: %1$s",
                 "Pola kreator itu terlalu panjang, jadi tidak ditambahkan: %1$s");
+    }
+
+    private static void fillIn14(Map<String, String> table) {
         table.put("That file is not readable text, so it may have been damaged in transit. Nothing was altered.",
                 "Berkas itu bukan teks yang dapat dibaca, jadi mungkin rusak saat dikirim. Tidak ada yang diubah.");
         table.put("That file is too large to be a settings backup. Nothing was altered.",
                 "Berkas itu terlalu besar untuk sebuah cadangan pengaturan. Tidak ada yang diubah.");
-    }
-
-    private static void fillIn14(Map<String, String> table) {
         table.put("That is %1$d minutes today",
                 "Itu %1$d menit hari ini");
         table.put("That is %1$d videos today",
@@ -6183,13 +6195,13 @@ public final class L10nTranslations {
                 "Berkas ini tidak berisi nilai yang dimuat.");
         table.put("This file isn't a loaded-values export from the Feature Gate Lab.",
                 "Berkas ini bukan ekspor nilai yang dimuat dari Feature Gate Lab.");
+    }
+
+    private static void fillIn15(Map<String, String> table) {
         table.put("This gate type is not supported.",
                 "Tipe gate ini tidak didukung.");
         table.put("This key isn't in the local catalog, so its type can't be checked. Reset the override.",
                 "Kunci ini tidak ada di katalog lokal, jadi tipenya tidak bisa diperiksa. Setel ulang penimpaan.");
-    }
-
-    private static void fillIn15(Map<String, String> table) {
         table.put("This line opens a rule and does not finish it: %1$s. Write two phrases as \"a\" & \"b\" for both, or \"a\" !& \"b\" for the first without the second.",
                 "Baris ini memulai sebuah aturan dan tidak menyelesaikannya: %1$s. Tulis dua frasa sebagai \"a\" & \"b\" untuk keduanya, atau \"a\" !& \"b\" untuk yang pertama tanpa yang kedua.");
         table.put("This phone has no file picker, so there is no way to choose a file here.",
@@ -6306,13 +6318,13 @@ public final class L10nTranslations {
                 "%1$s dibuka blokirnya");
         table.put("Undo",
                 "Urungkan");
+    }
+
+    private static void fillIn16(Map<String, String> table) {
         table.put("Undo last Lab change",
                 "Batalkan perubahan Lab terakhir");
         table.put("Undo last restore or reset",
                 "Urungkan pemulihan atau reset terakhir");
-    }
-
-    private static void fillIn16(Map<String, String> table) {
         table.put("Undoing the last change",
                 "Membatalkan perubahan terakhir");
         table.put("Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.",
@@ -6429,13 +6441,13 @@ public final class L10nTranslations {
                 "menit");
         table.put("ms",
                 "ms");
+    }
+
+    private static void fillIn17(Map<String, String> table) {
         table.put("or",
                 "atau");
         table.put("point",
                 "poin");
-    }
-
-    private static void fillIn17(Map<String, String> table) {
         table.put("points",
                 "poin");
         table.put("s",
@@ -6459,7 +6471,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildPt_rBR() {
-        Map<String, String> table = new HashMap<>(2060);
+        Map<String, String> table = new HashMap<>(2064);
         fillPt_rBR0(table);
         fillPt_rBR1(table);
         fillPt_rBR2(table);
@@ -7347,6 +7359,8 @@ public final class L10nTranslations {
                 "Esconder as buscas que o TikTok propõe antes de você digitar. Seu próprio histórico de busca fica.");
         table.put("Hide the share button",
                 "Esconder o botão de compartilhar");
+        table.put("Hide the share prompt after a like",
+                "Ocultar o pedido de compartilhar depois de curtir");
         table.put("Hide the speech bubble and its count in the right column.",
                 "Esconder o balão e o número dele na coluna da direita.");
         table.put("Hide the spinning music cover and the track name beside the caption.",
@@ -7461,11 +7475,11 @@ public final class L10nTranslations {
                 "Último valor original");
         table.put("Leave maximum empty to keep it unlimited.",
                 "Deixe o máximo vazio para ficar sem limite.");
-        table.put("Leave the sound out of the saved video. Save the sound as well still writes the .m4a beside it if you want both.",
-                "Deixar o som fora do vídeo salvo. Salvar o som também continua escrevendo o .m4a ao lado se você quiser os dois.");
     }
 
     private static void fillPt_rBR8(Map<String, String> table) {
+        table.put("Leave the sound out of the saved video. Save the sound as well still writes the .m4a beside it if you want both.",
+                "Deixar o som fora do vídeo salvo. Salvar o som também continua escrevendo o .m4a ao lado se você quiser os dois.");
         table.put("Length and views per like",
                 "Duração e visualizações por curtida");
         table.put("Less than a minute left",
@@ -7584,11 +7598,11 @@ public final class L10nTranslations {
                 "Sem limite");
         table.put("No matching comments. Try a different word, or clear the search with the X in the box.",
                 "Nenhum comentário encontrado. Tente outra palavra ou limpe a pesquisa com o X no campo.");
-        table.put("No matching countries",
-                "Nenhum país combina");
     }
 
     private static void fillPt_rBR9(Map<String, String> table) {
+        table.put("No matching countries",
+                "Nenhum país combina");
         table.put("No matching diagnostics found.",
                 "Nenhum diagnóstico correspondente foi encontrado.");
         table.put("No matching settings",
@@ -7707,11 +7721,11 @@ public final class L10nTranslations {
                 "Idioma original");
         table.put("Other",
                 "Outros");
-        table.put("Other feed filters",
-                "Outros filtros do feed");
     }
 
     private static void fillPt_rBR10(Map<String, String> table) {
+        table.put("Other feed filters",
+                "Outros filtros do feed");
         table.put("Overridden",
                 "Substituídos");
         table.put("Override",
@@ -7830,11 +7844,11 @@ public final class L10nTranslations {
                 "%1$s removido");
         table.put("Replace values when TikTok asks for them",
                 "Substituir valores quando o TikTok os pede");
-        table.put("Report saved to %1$s",
-                "Relatório salvo em %1$s");
     }
 
     private static void fillPt_rBR11(Map<String, String> table) {
+        table.put("Report saved to %1$s",
+                "Relatório salvo em %1$s");
         table.put("Required",
                 "Obrigatório");
         table.put("Researched",
@@ -7953,11 +7967,11 @@ public final class L10nTranslations {
                 "Salvando a qualidade de vídeo escolhida");
         table.put("Saving the selected video quality without sound",
                 "Salvando a qualidade de vídeo escolhida sem som");
-        table.put("Saving the story",
-                "Salvando o story");
     }
 
     private static void fillPt_rBR12(Map<String, String> table) {
+        table.put("Saving the story",
+                "Salvando o story");
         table.put("Saving video and subtitles to %1$s",
                 "Salvando o vídeo e as legendas em %1$s");
         table.put("Search a title, description or category.",
@@ -8076,11 +8090,11 @@ public final class L10nTranslations {
                 "Mostrar as listas completas de Atividade e Novos seguidores em vez de parar num botão de Ver tudo.");
         table.put("Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off.",
                 "Mostrar o vídeo inteiro em vez de cortá-lo para a janela. Num celular alto nada muda, porque já cabe. Num dobrável aberto, numa tela mais quadrada ou numa tela dividida, as laterais ou as pontas deixam de ser cortadas.");
-        table.put("Show what is left of the budget",
-                "Mostrar o que resta do limite");
     }
 
     private static void fillPt_rBR13(Map<String, String> table) {
+        table.put("Show what is left of the budget",
+                "Mostrar o que resta do limite");
         table.put("Show where a video was posted",
                 "Mostrar de onde o vídeo foi publicado");
         table.put("Showing %1$s again",
@@ -8147,6 +8161,8 @@ public final class L10nTranslations {
                 "Parar de gravar os gates");
         table.put("Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.",
                 "Parar a animação de marca que aparece sobre os comentários quando o que alguém escreveu bate com o gatilho de um anunciante.");
+        table.put("Stop the bubble that asks you to share a video with friends after you like it.",
+                "Para a bolha que pede para compartilhar um vídeo com amigos depois de curtir.");
         table.put("Stop video looping",
                 "Parar a repetição dos vídeos");
         table.put("Stop videos at the end instead of replaying them.",
@@ -8197,13 +8213,13 @@ public final class L10nTranslations {
                 "Esse padrão de criador é longo demais, então foi ignorado: %1$s");
         table.put("That creator pattern is too long, so it was not added: %1$s",
                 "Esse padrão de criador é longo demais, então não foi adicionado: %1$s");
+    }
+
+    private static void fillPt_rBR14(Map<String, String> table) {
         table.put("That file is not readable text, so it may have been damaged in transit. Nothing was altered.",
                 "Esse arquivo não é texto legível, então pode ter se danificado no caminho. Nada foi alterado.");
         table.put("That file is too large to be a settings backup. Nothing was altered.",
                 "Esse arquivo é grande demais para ser um backup de configurações. Nada foi alterado.");
-    }
-
-    private static void fillPt_rBR14(Map<String, String> table) {
         table.put("That is %1$d minutes today",
                 "Isso dá %1$d minutos hoje");
         table.put("That is %1$d videos today",
@@ -8320,13 +8336,13 @@ public final class L10nTranslations {
                 "Este arquivo não contém valores carregados.");
         table.put("This file isn't a loaded-values export from the Feature Gate Lab.",
                 "Este arquivo não é uma exportação de valores carregados do Feature Gate Lab.");
+    }
+
+    private static void fillPt_rBR15(Map<String, String> table) {
         table.put("This gate type is not supported.",
                 "Este tipo de gate não é compatível.");
         table.put("This key isn't in the local catalog, so its type can't be checked. Reset the override.",
                 "Esta chave não está no catálogo local, então o tipo dela não pode ser conferido. Redefina a substituição.");
-    }
-
-    private static void fillPt_rBR15(Map<String, String> table) {
         table.put("This line opens a rule and does not finish it: %1$s. Write two phrases as \"a\" & \"b\" for both, or \"a\" !& \"b\" for the first without the second.",
                 "Esta linha abre uma regra e não a fecha: %1$s. Escreva duas frases como \"a\" & \"b\" para pedir as duas, ou \"a\" !& \"b\" para a primeira sem a segunda.");
         table.put("This phone has no file picker, so there is no way to choose a file here.",
@@ -8443,13 +8459,13 @@ public final class L10nTranslations {
                 "%1$s desbloqueado");
         table.put("Undo",
                 "Desfazer");
+    }
+
+    private static void fillPt_rBR16(Map<String, String> table) {
         table.put("Undo last Lab change",
                 "Desfazer a última mudança do Lab");
         table.put("Undo last restore or reset",
                 "Desfazer a última restauração ou redefinição");
-    }
-
-    private static void fillPt_rBR16(Map<String, String> table) {
         table.put("Undoing the last change",
                 "Desfazendo a última mudança");
         table.put("Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.",
@@ -8566,13 +8582,13 @@ public final class L10nTranslations {
                 "minutos");
         table.put("ms",
                 "ms");
+    }
+
+    private static void fillPt_rBR17(Map<String, String> table) {
         table.put("or",
                 "ou");
         table.put("point",
                 "ponto");
-    }
-
-    private static void fillPt_rBR17(Map<String, String> table) {
         table.put("points",
                 "pontos");
         table.put("s",

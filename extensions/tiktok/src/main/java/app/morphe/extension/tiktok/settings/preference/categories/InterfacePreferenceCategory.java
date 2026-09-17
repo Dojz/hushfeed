@@ -203,6 +203,12 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             ));
             addPreference(new TogglePreference(
                     context,
+                    "Hide the share prompt after a like",
+                    "Stop the bubble that asks you to share a video with friends after you like it.",
+                    Settings.HIDE_SHARE_GUIDE
+            ));
+            addPreference(new TogglePreference(
+                    context,
                     "Hide the status bar",
                     "Keep the clock and status icons off the screen while TikTok is open. "
                             + "Swipe down from the top to peek at them.",

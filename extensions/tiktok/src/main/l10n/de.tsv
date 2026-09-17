@@ -34,6 +34,7 @@ Field edits were not saved.	Die Feldänderungen wurden nicht gespeichert.
 Filter settings	Filtereinstellungen
 Full comment sort options	Vollständige Sortieroptionen für Kommentare
 Hide the launcher shortcuts	Launcher-Verknüpfungen ausblenden
+Hide the share prompt after a like	Die Teilen-Aufforderung nach einem Like ausblenden
 Keep the Favorites tab	Favoriten-Tab behalten
 Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only.	Behalte die gewählte Geschwindigkeit für das nächste Video. Aus, startet jedes neue Video mit 1x und eine manuelle Wahl gilt nur für dieses Video.
 Link copied	Link kopiert
@@ -83,6 +84,7 @@ Seen this session	In dieser Sitzung gesehen
 Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this. It reads the style once per run and remembers it.	TikToks eigenes Sortiermenü bei jedem Beitrag zeigen, mit Beliebt, Neueste, Medien und Ersteller, statt der gekürzten Zeile, die dein Konto bekommen hat. TikTok neu starten, damit das gilt. Es liest den Stil einmal pro Start und merkt ihn sich.
 Sound link copied	Soundlink kopiert
 Sticker saved to %1$s	Sticker gespeichert in %1$s
+Stop the bubble that asks you to share a video with friends after you like it.	Stoppt die Blase, die dich auffordert, ein Video nach dem Liken mit Freunden zu teilen.
 Tap again to follow	Noch einmal tippen zum Folgen
 Tap again to like	Noch einmal tippen zum Liken
 That is one minute today	Das ist eine Minute heute

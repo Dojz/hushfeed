@@ -145,6 +145,7 @@ Field edits were discarded.	Se descartaron los cambios de los campos.
 Field edits were not saved.	Los cambios de los campos no se guardaron.
 Filter settings	Ajustes de filtros
 Hide the launcher shortcuts	Ocultar los accesos directos del lanzador
+Hide the share prompt after a like	Ocultar la sugerencia de compartir tras un me gusta
 Keep the Favorites tab	Mantener la pestaña Favoritos
 Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only.	Mantiene la velocidad elegida para el siguiente video. Desactivado, cada video nuevo empieza a 1x y una elección manual dura solo ese video.
 Links in comments open	Los enlaces de los comentarios se abren
@@ -166,6 +167,7 @@ Saved, override off	Guardado, sustitución desactivada
 Seen	Vistos
 Seen this session	Visto en esta sesión
 Sticker saved to %1$s	Sticker guardado en %1$s
+Stop the bubble that asks you to share a video with friends after you like it.	Detiene la burbuja que pide compartir un video con amigos tras darle me gusta.
 The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.	El feed se oscurece en los últimos tres cuartos de minuto antes de la pausa, para que llegues a ella en lugar de caer. Necesita un presupuesto de tiempo y una pausa.
 The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.	El feed espera un toque antes de reproducirse de nuevo cuando vuelves a la app. Mensajes, perfiles y búsqueda siguen a un toque.
 TikTok read it	TikTok lo leyó

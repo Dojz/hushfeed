@@ -585,3 +585,16 @@ internal object FeedLynxCardLoadFingerprint : Fingerprint(
     ),
     strings = listOf("feedDynamicComponentLoadSuccess"),
 )
+
+/**
+ * The share guide that pops up after a like, asking the reader to share the video with friends.
+ * Named {@code O} on 46.2.3, {@code J} on 46.7.3, {@code H} on 46.8.3, {@code D} on 46.9.3;
+ * matched by its defining class, parameter shape and the {@code "share_guide"} string it logs.
+ * Upstream #22.
+ */
+internal object ShareGuideFingerprint : Fingerprint(
+    definingClass = "Lcom/ss/android/ugc/aweme/feed/panel/FullFeedFragmentPanel;",
+    returnType = "V",
+    parameters = listOf("I", "Lcom/ss/android/ugc/aweme/feed/model/Aweme;", "Ljava/lang/String;"),
+    strings = listOf("share_guide"),
+)
