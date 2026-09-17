@@ -206,7 +206,7 @@ public class SettingsSearchQueryTest {
         assertTrue("the About row is not indexed by its name",
                 search(search, "hushfeed").contains("Hushfeed"));
         assertTrue("the About row's summary is not searched",
-                search(search, "source code").contains("Hushfeed"));
+                search(search, "github").contains("Hushfeed"));
     }
 
     @Test public void openingAFoundBackupRowLandsOnDiagnostics() throws Exception {

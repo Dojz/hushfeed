@@ -1240,8 +1240,7 @@ public final class FeatureGateDetailFragment extends Fragment {
     }
 
     private void addSectionTitle(LinearLayout root, String text) {
-        TextView title = FeatureGateLabUi.text(root.getContext(), text.toUpperCase(Locale.ROOT), 11, SettingsUi.accent(), Typeface.BOLD);
-        title.setLetterSpacing(0.12f);
+        TextView title = SettingsUi.sectionTitle(root.getContext(), text);
         LinearLayout.LayoutParams params = FeatureGateLabUi.matchWrap();
         params.setMargins(0, FeatureGateLabUi.dp(root.getContext(), 18), 0, FeatureGateLabUi.dp(root.getContext(), 12));
         root.addView(title, params);

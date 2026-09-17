@@ -604,6 +604,18 @@ public final class SettingsUi {
         }
     }
 
+    public static TextView sectionTitle(Context context, String text) {
+        TextView title = new TextView(context);
+        title.setText(text);
+        title.setTextColor(accent());
+        title.setTextSize(13);
+        title.setTypeface(title.getTypeface(), Typeface.BOLD);
+        if (android.os.Build.VERSION.SDK_INT >= 28) {
+            title.setAccessibilityHeading(true);
+        }
+        return title;
+    }
+
     public static TextView text(Context context, String value, float sizeSp, int color, int style) {
         TextView textView = new TextView(context);
         textView.setText(value);

@@ -1368,6 +1368,8 @@ public final class L10nTranslations {
                 "Öffne das Profil erneut und versuche es noch einmal");
         table.put("Open the story again and try once more",
                 "Öffne die Story erneut und versuche es noch einmal");
+        table.put("Opens github.com in your browser",
+                "Öffnet github.com in deinem Browser");
         table.put("Operator MCC/MNC",
                 "Netzbetreiber MCC/MNC");
         table.put("Operator name",
@@ -1420,11 +1422,11 @@ public final class L10nTranslations {
                 "Wiedergabe");
         table.put("Player",
                 "Wiedergabe");
-        table.put("Player Config",
-                "Player-Konfiguration");
     }
 
     private static void fillDe11(Map<String, String> table) {
+        table.put("Player Config",
+                "Player-Konfiguration");
         table.put("Playlist posts",
                 "Playlist-Beiträge");
         table.put("Popular",
@@ -1543,11 +1545,11 @@ public final class L10nTranslations {
                 "TikTok neu starten, um diese Änderung anzuwenden");
         table.put("Restart TikTok to apply this.",
                 "TikTok neu starten, damit das gilt.");
-        table.put("Restart pending",
-                "Neustart ausstehend");
     }
 
     private static void fillDe12(Map<String, String> table) {
+        table.put("Restart pending",
+                "Neustart ausstehend");
         table.put("Restore defaults immediately. Your current settings are kept for Undo.",
                 "Standardwerte sofort wiederherstellen. Deine aktuellen Einstellungen bleiben zum Rückgängigmachen erhalten.");
         table.put("Restore failed. Some settings may still be changed.",
@@ -1666,11 +1668,11 @@ public final class L10nTranslations {
                 "Share-Aktionen durchsuchen");
         table.put("Search the comments",
                 "Kommentare durchsuchen");
-        table.put("Search these comments",
-                "Diese Kommentare durchsuchen");
     }
 
     private static void fillDe13(Map<String, String> table) {
+        table.put("Search these comments",
+                "Diese Kommentare durchsuchen");
         table.put("Search translated titles and descriptions, then open the original setting.",
                 "Übersetzte Titel und Beschreibungen durchsuchen und dann die ursprüngliche Einstellung öffnen.");
         table.put("Search without personalization, whatever your account is set to.",
@@ -1789,11 +1791,11 @@ public final class L10nTranslations {
                 "Aufgezeichnete LIVE-Übertragungen im Feed überspringen.");
         table.put("Skip videos marked as using promotional music.",
                 "Videos überspringen, die als Werbemusik gekennzeichnet sind.");
-        table.put("Skip videos that use a sound blocked with the player's sound button, or named below.",
-                "Videos überspringen, deren Sound über die Sound-Taste im Player gesperrt wurde oder unten aufgeführt ist.");
     }
 
     private static void fillDe14(Map<String, String> table) {
+        table.put("Skip videos that use a sound blocked with the player's sound button, or named below.",
+                "Videos überspringen, deren Sound über die Sound-Taste im Player gesperrt wurde oder unten aufgeführt ist.");
         table.put("Skipping videos with %1$s",
                 "Videos mit %1$s werden übersprungen");
         table.put("Something is missing from %1$s. Tap for the whole report.",
@@ -1804,8 +1806,6 @@ public final class L10nTranslations {
                 "Sound gespeichert unter %1$s");
         table.put("Source",
                 "Quelle");
-        table.put("Source code and releases",
-                "Quellcode und Versionen");
         table.put("Speed",
                 "Geschwindigkeit");
         table.put("Speed menu choices",
@@ -3655,6 +3655,8 @@ public final class L10nTranslations {
                 "Abre el perfil otra vez e inténtalo de nuevo");
         table.put("Open the story again and try once more",
                 "Abre la historia otra vez e inténtalo de nuevo");
+        table.put("Opens github.com in your browser",
+                "Abre github.com en tu navegador");
         table.put("Operator MCC/MNC",
                 "MCC/MNC del operador");
         table.put("Operator name",
@@ -3707,11 +3709,11 @@ public final class L10nTranslations {
                 "Reproducción");
         table.put("Player",
                 "Reproductor");
-        table.put("Player Config",
-                "Configuración del reproductor");
     }
 
     private static void fillEs11(Map<String, String> table) {
+        table.put("Player Config",
+                "Configuración del reproductor");
         table.put("Playlist posts",
                 "Publicaciones de listas de reproducción");
         table.put("Popular",
@@ -3830,11 +3832,11 @@ public final class L10nTranslations {
                 "Reinicia TikTok para aplicar este cambio");
         table.put("Restart TikTok to apply this.",
                 "Reinicia TikTok para que se aplique.");
-        table.put("Restart pending",
-                "Reinicio pendiente");
     }
 
     private static void fillEs12(Map<String, String> table) {
+        table.put("Restart pending",
+                "Reinicio pendiente");
         table.put("Restore defaults immediately. Your current settings are kept for Undo.",
                 "Restaurar los valores de fábrica ahora mismo. Tus ajustes actuales se guardan para Deshacer.");
         table.put("Restore failed. Some settings may still be changed.",
@@ -3953,11 +3955,11 @@ public final class L10nTranslations {
                 "Buscar acciones de compartir");
         table.put("Search the comments",
                 "Buscar en los comentarios");
-        table.put("Search these comments",
-                "Buscar en estos comentarios");
     }
 
     private static void fillEs13(Map<String, String> table) {
+        table.put("Search these comments",
+                "Buscar en estos comentarios");
         table.put("Search translated titles and descriptions, then open the original setting.",
                 "Buscar entre los títulos y las descripciones traducidos, y abrir después el ajuste original.");
         table.put("Search without personalization, whatever your account is set to.",
@@ -4076,11 +4078,11 @@ public final class L10nTranslations {
                 "Saltar en el feed las emisiones LIVE grabadas.");
         table.put("Skip videos marked as using promotional music.",
                 "Saltar los vídeos marcados como que usan música promocional.");
-        table.put("Skip videos that use a sound blocked with the player's sound button, or named below.",
-                "Saltar los vídeos que usen un sonido bloqueado con el botón de sonido del reproductor, o nombrado abajo.");
     }
 
     private static void fillEs14(Map<String, String> table) {
+        table.put("Skip videos that use a sound blocked with the player's sound button, or named below.",
+                "Saltar los vídeos que usen un sonido bloqueado con el botón de sonido del reproductor, o nombrado abajo.");
         table.put("Skipping videos with %1$s",
                 "Saltando los vídeos con %1$s");
         table.put("Something is missing from %1$s. Tap for the whole report.",
@@ -4091,8 +4093,6 @@ public final class L10nTranslations {
                 "Sonido guardado en %1$s");
         table.put("Source",
                 "Origen");
-        table.put("Source code and releases",
-                "Código fuente y versiones");
         table.put("Speed",
                 "Velocidad");
         table.put("Speed menu choices",
@@ -5942,6 +5942,8 @@ public final class L10nTranslations {
                 "Buka lagi profilnya dan coba sekali lagi");
         table.put("Open the story again and try once more",
                 "Buka lagi Story-nya dan coba sekali lagi");
+        table.put("Opens github.com in your browser",
+                "Membuka github.com di browser Anda");
         table.put("Operator MCC/MNC",
                 "MCC/MNC operator");
         table.put("Operator name",
@@ -5994,11 +5996,11 @@ public final class L10nTranslations {
                 "Pemutaran");
         table.put("Player",
                 "Pemutar");
-        table.put("Player Config",
-                "Konfigurasi Pemutar");
     }
 
     private static void fillIn11(Map<String, String> table) {
+        table.put("Player Config",
+                "Konfigurasi Pemutar");
         table.put("Playlist posts",
                 "Kiriman playlist");
         table.put("Popular",
@@ -6117,11 +6119,11 @@ public final class L10nTranslations {
                 "Mulai ulang TikTok untuk menerapkan perubahan ini");
         table.put("Restart TikTok to apply this.",
                 "Mulai ulang TikTok agar berlaku.");
-        table.put("Restart pending",
-                "Menunggu mulai ulang");
     }
 
     private static void fillIn12(Map<String, String> table) {
+        table.put("Restart pending",
+                "Menunggu mulai ulang");
         table.put("Restore defaults immediately. Your current settings are kept for Undo.",
                 "Kembalikan ke bawaan sekarang juga. Pengaturanmu yang sekarang disimpan untuk Urungkan.");
         table.put("Restore failed. Some settings may still be changed.",
@@ -6240,11 +6242,11 @@ public final class L10nTranslations {
                 "Cari tindakan berbagi");
         table.put("Search the comments",
                 "Cari di komentar");
-        table.put("Search these comments",
-                "Cari di komentar ini");
     }
 
     private static void fillIn13(Map<String, String> table) {
+        table.put("Search these comments",
+                "Cari di komentar ini");
         table.put("Search translated titles and descriptions, then open the original setting.",
                 "Cari judul dan deskripsi terjemahan, lalu buka setelan asli.");
         table.put("Search without personalization, whatever your account is set to.",
@@ -6363,11 +6365,11 @@ public final class L10nTranslations {
                 "Lewati rekaman siaran LIVE di feed.");
         table.put("Skip videos marked as using promotional music.",
                 "Lewati video yang ditandai memakai musik promosi.");
-        table.put("Skip videos that use a sound blocked with the player's sound button, or named below.",
-                "Lewati video yang memakai suara yang diblokir lewat tombol suara di pemutar, atau yang namanya ada di bawah.");
     }
 
     private static void fillIn14(Map<String, String> table) {
+        table.put("Skip videos that use a sound blocked with the player's sound button, or named below.",
+                "Lewati video yang memakai suara yang diblokir lewat tombol suara di pemutar, atau yang namanya ada di bawah.");
         table.put("Skipping videos with %1$s",
                 "Melewati video dengan %1$s");
         table.put("Something is missing from %1$s. Tap for the whole report.",
@@ -6378,8 +6380,6 @@ public final class L10nTranslations {
                 "Suara disimpan di %1$s");
         table.put("Source",
                 "Sumber");
-        table.put("Source code and releases",
-                "Kode sumber dan rilis");
         table.put("Speed",
                 "Kecepatan");
         table.put("Speed menu choices",
@@ -8229,6 +8229,8 @@ public final class L10nTranslations {
                 "Abra o perfil de novo e tente mais uma vez");
         table.put("Open the story again and try once more",
                 "Abra o story de novo e tente mais uma vez");
+        table.put("Opens github.com in your browser",
+                "Abre github.com no seu navegador");
         table.put("Operator MCC/MNC",
                 "MCC/MNC da operadora");
         table.put("Operator name",
@@ -8281,11 +8283,11 @@ public final class L10nTranslations {
                 "Reprodução");
         table.put("Player",
                 "Reprodutor");
-        table.put("Player Config",
-                "Configuração do player");
     }
 
     private static void fillPt_rBR11(Map<String, String> table) {
+        table.put("Player Config",
+                "Configuração do player");
         table.put("Playlist posts",
                 "Publicações de playlists");
         table.put("Popular",
@@ -8404,11 +8406,11 @@ public final class L10nTranslations {
                 "Reinicie o TikTok para aplicar esta alteração");
         table.put("Restart TikTok to apply this.",
                 "Reinicie o TikTok para aplicar.");
-        table.put("Restart pending",
-                "Reinício pendente");
     }
 
     private static void fillPt_rBR12(Map<String, String> table) {
+        table.put("Restart pending",
+                "Reinício pendente");
         table.put("Restore defaults immediately. Your current settings are kept for Undo.",
                 "Restaurar os padrões agora mesmo. Suas configurações atuais ficam guardadas para Desfazer.");
         table.put("Restore failed. Some settings may still be changed.",
@@ -8527,11 +8529,11 @@ public final class L10nTranslations {
                 "Buscar ações de compartilhamento");
         table.put("Search the comments",
                 "Buscar nos comentários");
-        table.put("Search these comments",
-                "Buscar nestes comentários");
     }
 
     private static void fillPt_rBR13(Map<String, String> table) {
+        table.put("Search these comments",
+                "Buscar nestes comentários");
         table.put("Search translated titles and descriptions, then open the original setting.",
                 "Buscar entre os títulos e descrições traduzidos e depois abrir a configuração original.");
         table.put("Search without personalization, whatever your account is set to.",
@@ -8650,11 +8652,11 @@ public final class L10nTranslations {
                 "Pular no feed as transmissões LIVE gravadas.");
         table.put("Skip videos marked as using promotional music.",
                 "Pular os vídeos marcados como usando música promocional.");
-        table.put("Skip videos that use a sound blocked with the player's sound button, or named below.",
-                "Pular os vídeos que usam um som bloqueado pelo botão de som do player, ou citado abaixo.");
     }
 
     private static void fillPt_rBR14(Map<String, String> table) {
+        table.put("Skip videos that use a sound blocked with the player's sound button, or named below.",
+                "Pular os vídeos que usam um som bloqueado pelo botão de som do player, ou citado abaixo.");
         table.put("Skipping videos with %1$s",
                 "Pulando os vídeos com %1$s");
         table.put("Something is missing from %1$s. Tap for the whole report.",
@@ -8665,8 +8667,6 @@ public final class L10nTranslations {
                 "Som salvo em %1$s");
         table.put("Source",
                 "Origem");
-        table.put("Source code and releases",
-                "Código-fonte e versões");
         table.put("Speed",
                 "Velocidade");
         table.put("Speed menu choices",
