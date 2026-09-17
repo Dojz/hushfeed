@@ -97,7 +97,7 @@ public class TabSelectionPreference extends Preference {
         Set<String> selected = parseEnabledKeys(value);
         List<OptionRow> observedOptions = getObservedOptions();
         if (observedOptions.size() <= 1) {
-            setSummary(bottomTabs ? "Open TikTok home to detect loaded bottom tabs." : "Open TikTok home feed to detect loaded tabs.");
+            setSummary(bottomTabs ? "Open the feed once so Hushfeed can see which bottom tabs TikTok loaded." : "Open the feed once so Hushfeed can see which tabs TikTok loaded.");
             return;
         }
 

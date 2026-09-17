@@ -396,7 +396,7 @@ Hide conversations,Sembunyikan percakapan
 Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still switched on.,Sembunyikan semua percakapan pesan langsung. Kotak Masuk jadi kosong kecuali apa pun yang masih kamu aktifkan.
 Hide feed save button,Sembunyikan tombol simpan di feed
 Hide feed search button,Sembunyikan tombol cari di feed
-"Hide floating promotion badges, coins, and timer banners on the homepage.","Sembunyikan lencana promosi mengambang, koin, dan spanduk penghitung waktu di beranda."
+"Hide floating promotion badges, coins, and timer banners on the feed.","Sembunyikan lencana promosi mengambang, koin, dan spanduk penghitung waktu di beranda."
 Hide floating promotions,Sembunyikan promosi mengambang
 Hide inserted cards,Sembunyikan kartu sisipan
 Hide LIVE replays,Sembunyikan tayangan ulang LIVE
@@ -638,8 +638,8 @@ Open the feed anyway,Tetap buka feed
 "Open the feed anyway, the last time today","Tetap buka feed, terakhir kali hari ini"
 Open the profile again and try once more,Buka lagi profilnya dan coba sekali lagi
 Open the story again and try once more,Buka lagi Story-nya dan coba sekali lagi
-Open TikTok home feed to detect loaded tabs.,Buka feed beranda TikTok untuk mendeteksi tab yang dimuat.
-Open TikTok home to detect loaded bottom tabs.,Buka beranda TikTok untuk mendeteksi tab bawah yang dimuat.
+Open the feed once so Hushfeed can see which tabs TikTok loaded.,Buka feed beranda TikTok untuk mendeteksi tab yang dimuat.
+Open the feed once so Hushfeed can see which bottom tabs TikTok loaded.,Buka beranda TikTok untuk mendeteksi tab bawah yang dimuat.
 Operator MCC/MNC,MCC/MNC operator
 Operator name,Nama operator
 or,atau

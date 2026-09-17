@@ -243,7 +243,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             addPreference(new TogglePreference(
                     context,
                     "Hide floating promotions",
-                    "Hide floating promotion badges, coins, and timer banners on the homepage.",
+                    "Hide floating promotion badges, coins, and timer banners on the feed.",
                     Settings.HIDE_HOMEPAGE_COIN
             ));
         }

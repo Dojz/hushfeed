@@ -389,7 +389,7 @@ Hide conversations,Hide conversations
 Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still switched on.,Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still switched on.
 Hide feed save button,Hide feed save button
 Hide feed search button,Hide feed search button
-"Hide floating promotion badges, coins, and timer banners on the homepage.","Hide floating promotion badges, coins, and timer banners on the homepage."
+"Hide floating promotion badges, coins, and timer banners on the feed.","Hide floating promotion badges, coins, and timer banners on the feed."
 Hide floating promotions,Hide floating promotions
 Hide inserted cards,Hide inserted cards
 Hide message requests,Hide message requests
@@ -619,8 +619,6 @@ Only enable when recording logs to report an issue. Leaving it on for too long c
 Only fields that can be type-checked and applied to a copied configuration object are shown.,Only fields that can be type-checked and applied to a copied configuration object are shown.
 Only from these countries,Only from these countries
 Only tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.,Only tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.
-Open TikTok home feed to detect loaded tabs.,Open TikTok home feed to detect loaded tabs.
-Open TikTok home to detect loaded bottom tabs.,Open TikTok home to detect loaded bottom tabs.
 "Open a share sheet once, then return here to choose its actions.","Open a share sheet once, then return here to choose its actions."
 Open comments,Open comments
 Open external links directly,Open external links directly
@@ -629,6 +627,8 @@ Open profile and story website links in your system browser instead of TikTok's 
 Open the feed anyway,Open the feed anyway
 "Open the feed anyway, %1$d left today","Open the feed anyway, %1$d left today"
 "Open the feed anyway, the last time today","Open the feed anyway, the last time today"
+Open the feed once so Hushfeed can see which bottom tabs TikTok loaded.,Open the feed once so Hushfeed can see which bottom tabs TikTok loaded.
+Open the feed once so Hushfeed can see which tabs TikTok loaded.,Open the feed once so Hushfeed can see which tabs TikTok loaded.
 Open the profile again and try once more,Open the profile again and try once more
 Open the story again and try once more,Open the story again and try once more
 Operator MCC/MNC,Operator MCC/MNC

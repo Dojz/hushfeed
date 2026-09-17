@@ -395,7 +395,7 @@ Hide conversations	Esconder as conversas
 Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still switched on.	Esconder todas as conversas de mensagens diretas. Deixa a caixa de entrada vazia, tirando o que você ainda tiver ligado.
 Hide feed save button	Esconder o botão de salvar do feed
 Hide feed search button	Esconder o botão de busca do feed
-Hide floating promotion badges, coins, and timer banners on the homepage.	Esconder os selos promocionais flutuantes, as moedas e os banners com contagem regressiva da página inicial.
+Hide floating promotion badges, coins, and timer banners on the feed.	Esconder os selos promocionais flutuantes, as moedas e os banners com contagem regressiva da página inicial.
 Hide floating promotions	Esconder as promoções flutuantes
 Hide inserted cards	Esconder os cards inseridos
 Hide LIVE replays	Esconder as reprises de LIVE
@@ -637,8 +637,8 @@ Open the feed anyway, %1$d left today	Abrir o feed mesmo assim, restam %1$d hoje
 Open the feed anyway, the last time today	Abrir o feed mesmo assim, pela última vez hoje
 Open the profile again and try once more	Abra o perfil de novo e tente mais uma vez
 Open the story again and try once more	Abra o story de novo e tente mais uma vez
-Open TikTok home feed to detect loaded tabs.	Abra o feed inicial do TikTok para detectar as abas carregadas.
-Open TikTok home to detect loaded bottom tabs.	Abra o início do TikTok para detectar as abas de baixo carregadas.
+Open the feed once so Hushfeed can see which tabs TikTok loaded.	Abra o feed inicial do TikTok para detectar as abas carregadas.
+Open the feed once so Hushfeed can see which bottom tabs TikTok loaded.	Abra o início do TikTok para detectar as abas de baixo carregadas.
 Operator MCC/MNC	MCC/MNC da operadora
 Operator name	Nome da operadora
 or	ou

@@ -870,7 +870,7 @@ public final class L10nTranslations {
                 "Speichern-Schaltfläche im Feed ausblenden");
         table.put("Hide feed search button",
                 "Suchschaltfläche im Feed ausblenden");
-        table.put("Hide floating promotion badges, coins, and timer banners on the homepage.",
+        table.put("Hide floating promotion badges, coins, and timer banners on the feed.",
                 "Schwebende Werbe-Abzeichen, Münzen und Timer-Banner auf der Startseite ausblenden.");
         table.put("Hide floating promotions",
                 "Schwebende Werbeaktionen ausblenden");
@@ -1342,10 +1342,6 @@ public final class L10nTranslations {
                 "Nur aus diesen Ländern");
         table.put("Only tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.",
                 "Hier stehen nur die Tabs, die TikTok auf diesem Gerät geladen hat. Nicht verfügbare Tabs erscheinen dadurch nicht.");
-        table.put("Open TikTok home feed to detect loaded tabs.",
-                "Öffne den TikTok-Startfeed, damit geladene Tabs erkannt werden.");
-        table.put("Open TikTok home to detect loaded bottom tabs.",
-                "Öffne die TikTok-Startseite, damit geladene untere Tabs erkannt werden.");
         table.put("Open a share sheet once, then return here to choose its actions.",
                 "Öffne einmal ein Share-Menü und kehre dann zurück, um seine Aktionen auszuwählen.");
         table.put("Open comments",
@@ -1362,6 +1358,10 @@ public final class L10nTranslations {
                 "Feed trotzdem öffnen, heute noch %1$d Mal");
         table.put("Open the feed anyway, the last time today",
                 "Feed trotzdem öffnen, heute zum letzten Mal");
+        table.put("Open the feed once so Hushfeed can see which bottom tabs TikTok loaded.",
+                "Öffne die TikTok-Startseite, damit geladene untere Tabs erkannt werden.");
+        table.put("Open the feed once so Hushfeed can see which tabs TikTok loaded.",
+                "Öffne den TikTok-Startfeed, damit geladene Tabs erkannt werden.");
         table.put("Open the profile again and try once more",
                 "Öffne das Profil erneut und versuche es noch einmal");
         table.put("Open the story again and try once more",
@@ -3149,7 +3149,7 @@ public final class L10nTranslations {
                 "Ocultar el botón de guardar del feed");
         table.put("Hide feed search button",
                 "Ocultar el botón de buscar del feed");
-        table.put("Hide floating promotion badges, coins, and timer banners on the homepage.",
+        table.put("Hide floating promotion badges, coins, and timer banners on the feed.",
                 "Ocultar las insignias promocionales flotantes, las monedas y los banners con cuenta atrás de la página de inicio.");
         table.put("Hide floating promotions",
                 "Ocultar las promociones flotantes");
@@ -3621,10 +3621,6 @@ public final class L10nTranslations {
                 "Solo desde estos países");
         table.put("Only tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.",
                 "Aquí solo están las pestañas que TikTok ha cargado en este dispositivo. Esto no hace aparecer las que no están disponibles.");
-        table.put("Open TikTok home feed to detect loaded tabs.",
-                "Abre el feed de inicio de TikTok para detectar las pestañas cargadas.");
-        table.put("Open TikTok home to detect loaded bottom tabs.",
-                "Abre el inicio de TikTok para detectar las pestañas inferiores cargadas.");
         table.put("Open a share sheet once, then return here to choose its actions.",
                 "Abre una vez el panel de compartir y vuelve aquí para elegir sus acciones.");
         table.put("Open comments",
@@ -3641,6 +3637,10 @@ public final class L10nTranslations {
                 "Abrir el feed de todas formas, quedan %1$d hoy");
         table.put("Open the feed anyway, the last time today",
                 "Abrir el feed de todas formas, por última vez hoy");
+        table.put("Open the feed once so Hushfeed can see which bottom tabs TikTok loaded.",
+                "Abre el inicio de TikTok para detectar las pestañas inferiores cargadas.");
+        table.put("Open the feed once so Hushfeed can see which tabs TikTok loaded.",
+                "Abre el feed de inicio de TikTok para detectar las pestañas cargadas.");
         table.put("Open the profile again and try once more",
                 "Abre el perfil otra vez e inténtalo de nuevo");
         table.put("Open the story again and try once more",
@@ -5428,7 +5428,7 @@ public final class L10nTranslations {
                 "Sembunyikan tombol simpan di feed");
         table.put("Hide feed search button",
                 "Sembunyikan tombol cari di feed");
-        table.put("Hide floating promotion badges, coins, and timer banners on the homepage.",
+        table.put("Hide floating promotion badges, coins, and timer banners on the feed.",
                 "Sembunyikan lencana promosi mengambang, koin, dan spanduk penghitung waktu di beranda.");
         table.put("Hide floating promotions",
                 "Sembunyikan promosi mengambang");
@@ -5900,10 +5900,6 @@ public final class L10nTranslations {
                 "Hanya dari negara ini");
         table.put("Only tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.",
                 "Hanya tab yang sudah dimuat TikTok di perangkat ini yang muncul di sini. Ini tidak memaksa tab yang tidak tersedia untuk muncul.");
-        table.put("Open TikTok home feed to detect loaded tabs.",
-                "Buka feed beranda TikTok untuk mendeteksi tab yang dimuat.");
-        table.put("Open TikTok home to detect loaded bottom tabs.",
-                "Buka beranda TikTok untuk mendeteksi tab bawah yang dimuat.");
         table.put("Open a share sheet once, then return here to choose its actions.",
                 "Buka lembar berbagi sekali, lalu kembali ke sini untuk memilih tindakannya.");
         table.put("Open comments",
@@ -5920,6 +5916,10 @@ public final class L10nTranslations {
                 "Tetap buka feed, sisa %1$d hari ini");
         table.put("Open the feed anyway, the last time today",
                 "Tetap buka feed, terakhir kali hari ini");
+        table.put("Open the feed once so Hushfeed can see which bottom tabs TikTok loaded.",
+                "Buka beranda TikTok untuk mendeteksi tab bawah yang dimuat.");
+        table.put("Open the feed once so Hushfeed can see which tabs TikTok loaded.",
+                "Buka feed beranda TikTok untuk mendeteksi tab yang dimuat.");
         table.put("Open the profile again and try once more",
                 "Buka lagi profilnya dan coba sekali lagi");
         table.put("Open the story again and try once more",
@@ -7707,7 +7707,7 @@ public final class L10nTranslations {
                 "Esconder o botão de salvar do feed");
         table.put("Hide feed search button",
                 "Esconder o botão de busca do feed");
-        table.put("Hide floating promotion badges, coins, and timer banners on the homepage.",
+        table.put("Hide floating promotion badges, coins, and timer banners on the feed.",
                 "Esconder os selos promocionais flutuantes, as moedas e os banners com contagem regressiva da página inicial.");
         table.put("Hide floating promotions",
                 "Esconder as promoções flutuantes");
@@ -8179,10 +8179,6 @@ public final class L10nTranslations {
                 "Só destes países");
         table.put("Only tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.",
                 "Aqui só aparecem as abas que o TikTok carregou neste aparelho. Isto não faz aparecer as que não estão disponíveis.");
-        table.put("Open TikTok home feed to detect loaded tabs.",
-                "Abra o feed inicial do TikTok para detectar as abas carregadas.");
-        table.put("Open TikTok home to detect loaded bottom tabs.",
-                "Abra o início do TikTok para detectar as abas de baixo carregadas.");
         table.put("Open a share sheet once, then return here to choose its actions.",
                 "Abra uma vez a folha de compartilhamento e volte aqui para escolher as ações dela.");
         table.put("Open comments",
@@ -8199,6 +8195,10 @@ public final class L10nTranslations {
                 "Abrir o feed mesmo assim, restam %1$d hoje");
         table.put("Open the feed anyway, the last time today",
                 "Abrir o feed mesmo assim, pela última vez hoje");
+        table.put("Open the feed once so Hushfeed can see which bottom tabs TikTok loaded.",
+                "Abra o início do TikTok para detectar as abas de baixo carregadas.");
+        table.put("Open the feed once so Hushfeed can see which tabs TikTok loaded.",
+                "Abra o feed inicial do TikTok para detectar as abas carregadas.");
         table.put("Open the profile again and try once more",
                 "Abra o perfil de novo e tente mais uma vez");
         table.put("Open the story again and try once more",
