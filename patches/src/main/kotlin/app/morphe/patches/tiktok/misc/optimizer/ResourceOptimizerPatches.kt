@@ -292,7 +292,7 @@ private val liveCastFiles4693 = listOf(
     file("lib/armeabi-v7a/libdex_df_live_cast.so", "499ed07c6858a5739f55f46bb61b3de64e4dd0aacac76a6f22b01f3f8f058a76"),
 )
 
-private val coreAssetProfiles = listOf(
+internal val coreAssetProfiles = listOf(
     ResourceProfile(
         "TikTok 46.2.3",
         microblinkFiles + c2paArm64Files + c2paArmeabiFiles + pitayaFiles4623 + monitorFiles4623 + liveCastFiles4623,
@@ -330,7 +330,7 @@ private fun studioProfile(label: String, cameraDigest: String, additionalFiles: 
     studioArm64Files + file("lib/arm64-v8a/libdex_df_camera_biz.so", cameraDigest) + additionalFiles,
 )
 
-private val studioAssetProfiles = listOf(
+internal val studioAssetProfiles = listOf(
     studioProfile(
         "TikTok 46.2.3",
         "007e1196a936af0c15ced6749b01b5cfb29f8d16858af7c3a9eaffd0c57a01a7",
@@ -353,7 +353,7 @@ private val studioAssetProfiles = listOf(
     ),
 )
 
-private val liveAssetProfiles = listOf(
+internal val liveAssetProfiles = listOf(
     ResourceProfile(
         "TikTok 46.2.3",
         listOf(
@@ -395,7 +395,7 @@ private val liveAssetProfiles = listOf(
     ),
 )
 
-private val p2pRelayProfiles = listOf(
+internal val p2pRelayProfiles = listOf(
     ResourceProfile(
         "TikTok 46.2.3",
         listOf(
@@ -424,7 +424,10 @@ private val p2pRelayProfiles = listOf(
         listOf(
             file("lib/arm64-v8a/libavmdlp2pv2.so", "7cea29a6fca15cfe6d0f2001b27dc204b3fe534132f447c479ceef828f071d07"),
             file("lib/arm64-v8a/libp2plivevdp.so", "ed35b032fac7c169860d3f37bc3be1933df9bddc8ac6785413f9608945946337"),
-            file("lib/armeabi-v7a/libavmdlp2pv2.so", "4455cf9ce576de61c04368e869d27abc485fac1e33046e14a87abad7f422a429"),
+            // 46.9.3 rebuilt the armeabi relay library; the arm64 one and both live ones are
+            // the same bytes as on 46.2.3. Read off the fixture on 2026-09-17, after the
+            // release receipt refused the group with 46.2.3's hash in this slot.
+            file("lib/armeabi-v7a/libavmdlp2pv2.so", "6366e54832a633ce18e878e4d2b758ffdf490164a2e5174578573e06619fee80"),
             file("lib/armeabi-v7a/libp2plivevdp.so", "dd8a626f8b0efe36a883096923bed56ecb457e9408b26262c844442901dc1d09"),
         ),
     ),
