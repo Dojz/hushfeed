@@ -550,26 +550,26 @@ Never from these countries	Nunca destes países
 No	Não
 No creator to block on this video	Nenhum criador para bloquear neste video
 No creator to hide on this video	Nenhum criador para esconder neste video
-No creators are hidden yet	Ainda não há criadores escondidos
+No creators are hidden yet. Hide one from a video, or add a handle above.	Nenhum criador escondido ainda. Esconda um de um video, ou adicione um handle acima.
 No current value	Sem valor atual
 No current value and no active override	Não há valor atual nem substituição ativa
 No gate data is available. Refresh values from the menu to try again.	Não há dados dos gates. Atualize os valores pelo menu para tentar de novo.
 No gate reads were recorded. Use a TikTok feature while recording.	Nenhuma leitura de gate foi gravada. Use um recurso do TikTok durante a gravação.
 No gates match this filter.	Nenhum gate combina com este filtro.
 No gates match this search and filter.	Nenhum gate combina com esta busca e este filtro.
-No hidden creators match this search	Nenhum criador escondido combina com esta busca
+No hidden creators match this search. Clear the search to see them all.	Nenhum criador escondido corresponde a essa busca. Limpe a busca para ver todos.
 No limit	Sem limite
 No matching comments. Try a different word, or clear the search with the X in the box.	Nenhum comentário encontrado. Tente outra palavra ou limpe a pesquisa com o X no campo.
-No matching countries	Nenhum país combina
+No matching countries. Try a country name or a two-letter code.	Nenhum pais corresponde. Tente um nome de pais ou um codigo de duas letras.
 No matching diagnostics found.	Nenhum diagnóstico correspondente foi encontrado.
 No matching settings	Nenhuma configuração combina
-No preset selected	Nenhuma predefinição selecionada
+No preset selected. Choose a preset above.	Nenhum preset selecionado. Escolha um preset acima.
 No recording yet. Start one, use a feature, then return here.	Nenhuma gravação ainda. Inicie uma, use um recurso e volte aqui.
 No share actions have been observed yet	Nenhuma ação de compartilhamento foi vista ainda
 No share actions match this search	Nenhuma ação de compartilhamento combina com esta busca
 No sound to block on this video	Não há som para bloquear neste vídeo
 No suggested accounts to clear	Não há contas sugeridas para limpar
-No video selected	Nenhum vídeo selecionado
+No video selected. Open a video first.	Nenhum video selecionado. Abra um video primeiro.
 None of these gates had an override to reset.	Nenhum destes gates tinha uma substituição para redefinir.
 None of these gates takes a true or false value.	Nenhum destes gates aceita um valor true ou false.
 None recorded	Nada registrado
@@ -977,7 +977,6 @@ Tokens: {date}, {media_id}. Works for image and video stickers.	Curingas: {date}
 Too many media saves are already running. Try again shortly.	Muitos salvamentos de mídia já estão em andamento. Tente daqui a pouco.
 Translate comments as they load, using TikTok's own translator.	Traduzir os comentários conforme eles carregam, com o tradutor do próprio TikTok.
 Transparent	Transparente
-Try a country name, or a two-letter code	Tente o nome de um país, ou um código de duas letras
 Try a different word or clear the search.	Tente outra palavra ou limpe a busca.
 Try again, or go back to TikTok.	Tente novamente ou volte ao TikTok.
 Turn on %1$s first.	Ative %1$s primeiro.

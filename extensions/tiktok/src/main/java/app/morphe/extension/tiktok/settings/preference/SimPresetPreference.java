@@ -76,7 +76,7 @@ public class SimPresetPreference extends Preference {
             setSummary(selectedPreset.country + ", " + selectedPreset.operatorName + " ("
                     + selectedPreset.mccMnc + ")");
         } else if (SimPresets.hasEmptyCurrentValues(iso, mccMnc, operatorName)) {
-            setSummary("No preset selected");
+            setSummary("No preset selected. Choose a preset above.");
         } else {
             setSummary("Custom SIM details");
         }
@@ -273,8 +273,7 @@ public class SimPresetPreference extends Preference {
         SettingsUi.setResultCount(resultCount, visiblePresets.size());
         if (emptyState == null) return;
         if (visiblePresets.isEmpty()) {
-            emptyState.setText(L10n.t(getContext(), "No matching countries")
-                    + "\n" + L10n.t(getContext(), "Try a country name, or a two-letter code"));
+            emptyState.setText(L10n.t(getContext(), "No matching countries. Try a country name or a two-letter code."));
             emptyState.setVisibility(View.VISIBLE);
         } else {
             emptyState.setVisibility(View.GONE);

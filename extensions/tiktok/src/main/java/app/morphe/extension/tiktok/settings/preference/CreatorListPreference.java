@@ -267,8 +267,8 @@ public class CreatorListPreference extends DialogPreference {
         SettingsUi.setResultCount(resultCount, visible);
         if (visible == 0) {
             emptyState.setText(pendingEntries.isEmpty()
-                    ? L10n.t(getContext(), "No creators are hidden yet")
-                    : L10n.t(getContext(), "No hidden creators match this search"));
+                    ? L10n.t(getContext(), "No creators are hidden yet. Hide one from a video, or add a handle above.")
+                    : L10n.t(getContext(), "No hidden creators match this search. Clear the search to see them all."));
             emptyState.setVisibility(View.VISIBLE);
             entriesContainer.addView(emptyState, new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
