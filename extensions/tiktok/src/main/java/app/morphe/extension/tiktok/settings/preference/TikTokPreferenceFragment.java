@@ -7,6 +7,8 @@
 package app.morphe.extension.tiktok.settings.preference;
 
 import app.morphe.extension.tiktok.settings.L10n;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.ActivityNotFoundException;
@@ -544,6 +546,37 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
             }
         }
         decor.setSystemUiVisibility(visibility);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override public android.animation.Animator onCreateAnimator(
+            int transit, boolean enter, int nextAnim) {
+        if ((transit == 0 && nextAnim == 0) || getActivity() == null) {
+            return super.onCreateAnimator(transit, enter, nextAnim);
+        }
+        float dp24 = SettingsUi.dp(getActivity(), 24);
+        boolean isRtl = getResources().getConfiguration().getLayoutDirection()
+                == View.LAYOUT_DIRECTION_RTL;
+        float endEdge = isRtl ? -dp24 : dp24;
+        boolean opening = transit == android.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN;
+        float fromX, toX;
+        float fromAlpha, toAlpha;
+        if (opening && enter) {
+            fromX = endEdge; toX = 0f; fromAlpha = 0f; toAlpha = 1f;
+        } else if (opening) {
+            fromX = 0f; toX = -endEdge * 0.3f; fromAlpha = 1f; toAlpha = 0f;
+        } else if (enter) {
+            fromX = -endEdge * 0.3f; toX = 0f; fromAlpha = 0f; toAlpha = 1f;
+        } else {
+            fromX = 0f; toX = endEdge; fromAlpha = 1f; toAlpha = 0f;
+        }
+        ObjectAnimator slide = ObjectAnimator.ofFloat(null, "translationX", fromX, toX);
+        ObjectAnimator fade = ObjectAnimator.ofFloat(null, "alpha", fromAlpha, toAlpha);
+        AnimatorSet set = new AnimatorSet();
+        set.playTogether(slide, fade);
+        set.setDuration(220);
+        set.setInterpolator(new android.view.animation.DecelerateInterpolator());
+        return set;
     }
 
     @Override public void onSaveInstanceState(Bundle outState) {
@@ -1116,12 +1149,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         arguments.putBoolean(ARG_SEARCH, true);
         fragment.setArguments(arguments);
         manager.beginTransaction()
-                .setCustomAnimations(
-                        android.R.animator.fade_in,
-                        android.R.animator.fade_out,
-                        android.R.animator.fade_in,
-                        android.R.animator.fade_out
-                )
+                .setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .replace(getId(), fragment)
                 .addToBackStack("search")
                 .commit();
@@ -1147,12 +1175,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         fragment.setArguments(arguments);
 
         manager.beginTransaction()
-                .setCustomAnimations(
-                        android.R.animator.fade_in,
-                        android.R.animator.fade_out,
-                        android.R.animator.fade_in,
-                        android.R.animator.fade_out
-                )
+                .setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .replace(getId(), fragment)
                 .addToBackStack(section.name())
                 .commit();
