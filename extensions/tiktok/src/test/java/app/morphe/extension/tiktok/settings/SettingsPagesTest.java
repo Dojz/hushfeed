@@ -716,6 +716,12 @@ public class SettingsPagesTest {
             assertTrue(targetPosition >= 0);
             assertTrue(list.getFirstVisiblePosition() <= targetPosition);
             assertTrue(list.getLastVisiblePosition() >= targetPosition);
+            int childIndex = targetPosition - list.getFirstVisiblePosition();
+            if (childIndex >= 0 && childIndex < list.getChildCount()) {
+                View row = list.getChildAt(childIndex);
+                assertTrue("the target row sits flush at the top with no context above it",
+                        row.getTop() > list.getPaddingTop());
+            }
         }
     }
 

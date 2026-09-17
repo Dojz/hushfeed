@@ -883,13 +883,48 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         if (list == null || list.getAdapter() == null) {
             return;
         }
+        int dp24 = SettingsUi.dp(list.getContext(), 24);
         for (int position = 0; position < list.getAdapter().getCount(); position++) {
             Object item = list.getAdapter().getItem(position);
             if (item instanceof Preference && key.equals(((Preference) item).getKey())) {
-                list.setSelection(position);
+                list.setSelectionFromTop(position, dp24);
+                highlightRow(list, position);
                 return;
             }
         }
+    }
+
+    private static void highlightRow(ListView list, int position) {
+        list.post(() -> {
+            int first = list.getFirstVisiblePosition();
+            int index = position - first;
+            if (index < 0 || index >= list.getChildCount()) return;
+            android.view.View row = list.getChildAt(index);
+            if (row == null) return;
+            float scale = android.provider.Settings.Global.getFloat(
+                    list.getContext().getContentResolver(),
+                    android.provider.Settings.Global.ANIMATOR_DURATION_SCALE, 1f);
+            if (scale > 0f) {
+                int accent = SettingsUi.accent();
+                int highlight = (accent & 0x00FFFFFF) | 0x26000000;
+                android.graphics.drawable.ColorDrawable flash =
+                        new android.graphics.drawable.ColorDrawable(highlight);
+                row.setForeground(flash);
+                row.postDelayed(() -> {
+                    android.animation.ObjectAnimator fade = android.animation.ObjectAnimator
+                            .ofInt(flash, "alpha", 0x26, 0);
+                    fade.setDuration(600);
+                    fade.addListener(new android.animation.AnimatorListenerAdapter() {
+                        @Override public void onAnimationEnd(android.animation.Animator a) {
+                            row.setForeground(null);
+                        }
+                    });
+                    fade.start();
+                }, 100);
+            }
+            row.performAccessibilityAction(
+                    android.view.accessibility.AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS, null);
+        });
     }
 
     private void createMasterMenu(Context context, PreferenceScreen screen) {
