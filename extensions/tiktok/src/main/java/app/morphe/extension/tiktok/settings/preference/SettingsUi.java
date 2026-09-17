@@ -67,7 +67,7 @@ public final class SettingsUi {
     public static final @ColorInt int LIGHT_DIVIDER = Color.argb(255, 224, 224, 224);
     public static final @ColorInt int LIGHT_TEXT_PRIMARY = Color.rgb(22, 22, 28);
     public static final @ColorInt int LIGHT_TEXT_SECONDARY = Color.rgb(87, 87, 98);
-    public static final @ColorInt int LIGHT_TEXT_DISABLED = Color.argb(255, 140, 140, 140);
+    public static final @ColorInt int LIGHT_TEXT_DISABLED = Color.argb(255, 117, 117, 125);
 
     public static final int LIGHT_ACCENT = Color.rgb(184, 22, 77);
 
