@@ -607,6 +607,14 @@ public final class SettingsUi {
         return textView;
     }
 
+    public static TextView dialogTitle(Context context, CharSequence text) {
+        TextView title = text(context, text.toString(), 20, textPrimary(), Typeface.BOLD);
+        markDialogHeading(title);
+        int padding = dp(context, 22);
+        title.setPadding(padding, padding, padding, dp(context, 12));
+        return title;
+    }
+
     /** Marks a title in a hand-built dialog as a heading for accessibility services. */
     public static void markDialogHeading(TextView title) {
         if (Build.VERSION.SDK_INT >= 28) {
