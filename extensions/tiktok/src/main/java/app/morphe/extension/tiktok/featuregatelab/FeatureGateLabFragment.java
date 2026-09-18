@@ -232,11 +232,9 @@ public final class FeatureGateLabFragment extends Fragment {
                 L10n.t(context, "Replace values when TikTok asks for them"), master);
         controls.addView(masterRow, FeatureGateLabUi.matchWrap());
 
-        TextView warning = FeatureGateLabUi.label(
-                context,
-                L10n.t(context, "Account warning: forced client values apply to every account in this app data and cannot bypass server controls.")
-        );
-        warning.setTextColor(FeatureGateLabUi.warningColor(context));
+        View warning = SettingsUi.inlineNotice(context,
+                L10n.t(context, "Account warning: forced client values apply to every account in this app data and cannot bypass server controls."),
+                SettingsUi.attentionColor());
         LinearLayout.LayoutParams warningParams = FeatureGateLabUi.matchWrap();
         warningParams.setMargins(0, FeatureGateLabUi.dp(context, 14), 0, FeatureGateLabUi.dp(context, 16));
         controls.addView(warning, warningParams);

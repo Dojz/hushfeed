@@ -224,11 +224,9 @@ public final class FeatureGateDetailFragment extends Fragment {
         content.addView(cacheNote, cacheNoteParams);
 
         if (isSensitiveKey(entry.key)) {
-            TextView sensitive = FeatureGateLabUi.label(
-                    context,
-                    L10n.t(context, "Account-sensitive name: forcing this key may affect security, login, compliance, region, payment, or account safety behavior.")
-            );
-            sensitive.setTextColor(FeatureGateLabUi.warningColor(context));
+            View sensitive = SettingsUi.inlineNotice(context,
+                    L10n.t(context, "Account-sensitive name: forcing this key may affect security, login, compliance, region, payment, or account safety behavior."),
+                    SettingsUi.attentionColor());
             LinearLayout.LayoutParams params = FeatureGateLabUi.matchWrap();
             params.setMargins(0, FeatureGateLabUi.dp(context, 12), 0, 0);
             content.addView(sensitive, params);

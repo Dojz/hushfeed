@@ -173,6 +173,32 @@ public final class SettingsUi {
         return isDarkMode() ? 0xFF6BCB77 : 0xFF1D7A37;
     }
 
+    public static android.widget.LinearLayout inlineNotice(
+            android.content.Context context, String text, @ColorInt int toneColor) {
+        android.widget.LinearLayout row = new android.widget.LinearLayout(context);
+        row.setOrientation(android.widget.LinearLayout.HORIZONTAL);
+        row.setGravity(android.view.Gravity.CENTER_VERTICAL);
+        int pad = dp(context, 12);
+        row.setPadding(pad, pad, pad, pad);
+        row.setBackground(borderedSurface(context, RADIUS_CARD, false));
+        android.widget.TextView glyph = new android.widget.TextView(context);
+        glyph.setText("⚠");
+        glyph.setTextColor(toneColor);
+        glyph.setTextSize(16);
+        glyph.setPadding(0, 0, dp(context, 8), 0);
+        glyph.setImportantForAccessibility(android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+        row.addView(glyph, new android.widget.LinearLayout.LayoutParams(
+                android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
+                android.view.ViewGroup.LayoutParams.WRAP_CONTENT));
+        android.widget.TextView body = new android.widget.TextView(context);
+        body.setText(text);
+        body.setTextColor(textSecondary());
+        body.setTextSize(13);
+        row.addView(body, new android.widget.LinearLayout.LayoutParams(
+                0, android.view.ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+        return row;
+    }
+
     public static void stylePreferenceRow(View view) {
         Context context = view.getContext();
         view.setPaddingRelative(dp(context, 18), dp(context, 18), dp(context, 18), dp(context, 18));
