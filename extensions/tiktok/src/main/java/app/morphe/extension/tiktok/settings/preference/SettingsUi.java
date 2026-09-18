@@ -163,6 +163,14 @@ public final class SettingsUi {
         return darkSurface ? OVERLAY_ACCENT : LIGHT_ACCENT;
     }
 
+    public static @ColorInt int attentionColor() {
+        return isDarkMode() ? 0xFFFFA45B : 0xFFB45309;
+    }
+
+    public static @ColorInt int okColor() {
+        return isDarkMode() ? 0xFF6BCB77 : 0xFF1D7A37;
+    }
+
     public static void stylePreferenceRow(View view) {
         Context context = view.getContext();
         view.setPaddingRelative(dp(context, 18), dp(context, 18), dp(context, 18), dp(context, 18));
