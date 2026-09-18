@@ -163,6 +163,14 @@ public class AutoAdvanceLimitPreferenceTest {
         idle();
         assertLimitNotice("Automatic advance stopped after 3 videos");
 
+        View keepGoing = findBannerAction(
+                feedOwner.get().findViewById(android.R.id.content), "Keep going");
+        assertNotNull("the banner must carry a Keep going action", keepGoing);
+        keepGoing.performClick();
+        idle();
+        assertEquals("Keep going must reset the count", 0, retained.completedCount);
+        assertTrue("Keep going must restart advancing", retained.owned);
+
         // The stopped video can finish again in the new session. Neither its previous ID nor
         // the previous session's shown-notice flag may survive a real change of the limit.
         withPlaybackSettings(activity -> {
@@ -360,6 +368,21 @@ public class AutoAdvanceLimitPreferenceTest {
             found = findBannerText(root);
         }
         assertEquals(expected, found);
+    }
+
+    private static View findBannerAction(View root, String label) {
+        if (root instanceof android.widget.TextView) {
+            android.widget.TextView tv = (android.widget.TextView) root;
+            if (label.equals(tv.getText().toString()) && tv.isClickable()) return tv;
+        }
+        if (root instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) root;
+            for (int i = 0; i < group.getChildCount(); i++) {
+                View found = findBannerAction(group.getChildAt(i), label);
+                if (found != null) return found;
+            }
+        }
+        return null;
     }
 
     private static String findBannerText(View root) {
