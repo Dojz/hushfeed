@@ -888,6 +888,7 @@ public final class FeatureGateLabFragment extends Fragment {
         selectionBar.setBackground(SettingsUi.roundedSurface(context, SettingsUi.RADIUS_SQUARE, false));
 
         selectionCount = FeatureGateLabUi.label(context, "");
+        selectionCount.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
         selectionBar.addView(selectionCount, FeatureGateLabUi.matchWrap());
 
         // Four labels do not fit one line at large text, and four German labels do not fit one
@@ -905,6 +906,11 @@ public final class FeatureGateLabFragment extends Fragment {
             onSelectionChanged();
         }, false));
         selectionBar.addView(actions, FeatureGateLabUi.matchWrap());
+
+        TextView selectionHint = FeatureGateLabUi.label(context,
+                L10n.t(context, "Hold a gate to choose several"));
+        selectionHint.setTextColor(SettingsUi.textSecondary());
+        selectionBar.addView(selectionHint, FeatureGateLabUi.matchWrap());
         return selectionBar;
     }
 
@@ -1764,6 +1770,18 @@ public final class FeatureGateLabFragment extends Fragment {
                 if (stacked) stateParams.setMargins(0, FeatureGateLabUi.dp(context, 8), 0, 0);
                 row.addView(stateColumn, stateParams);
 
+                row.setAccessibilityDelegate(new View.AccessibilityDelegate() {
+                    @Override
+                    public void onInitializeAccessibilityNodeInfo(
+                            View host, android.view.accessibility.AccessibilityNodeInfo info) {
+                        super.onInitializeAccessibilityNodeInfo(host, info);
+                        info.addAction(
+                                new android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction(
+                                        android.view.accessibility.AccessibilityNodeInfo
+                                                .AccessibilityAction.ACTION_LONG_CLICK.getId(),
+                                        L10n.t(context, "Select")));
+                    }
+                });
                 holder = new RowHolder(title, key, type, value, state, chosenMark);
                 row.setTag(holder);
                 convertView = row;

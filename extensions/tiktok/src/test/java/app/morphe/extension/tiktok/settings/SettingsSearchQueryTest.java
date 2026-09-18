@@ -187,13 +187,18 @@ public class SettingsSearchQueryTest {
                 {"undo", "Undo last restore or reset"},
                 {"hook", "Hook status"},
                 {"diagnostic", "Export diagnostic report"},
-                {"seen", "Clear the seen video history"},
         };
         for (String[] pair : wanted) {
             java.util.List<String> titles = search(search, pair[0]);
             assertTrue("searching \"" + pair[0] + "\" did not find \"" + pair[1] + "\", it found "
                     + titles, titles.contains(pair[1]));
         }
+        // The seen video row's title changes with its undo state, so check either one.
+        java.util.List<String> seenTitles = search(search, "seen");
+        assertTrue("searching \"seen\" did not find the seen videos row, it found "
+                + seenTitles,
+                seenTitles.contains("Clear seen videos")
+                        || seenTitles.contains("Undo clearing seen videos"));
     }
 
     @Test public void theAboutRowIsFoundByItsNameAndByWhatItSays() throws Exception {

@@ -60,7 +60,7 @@ A field value could not be read. Check the values and try again.,A field value c
 A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.,A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.
 A hidden puzzle may be the cause.,A hidden puzzle may be the cause.
 "A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.","A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new."
-A newer clear replaced that undo. Tap the row again to put it back.,A newer clear replaced that undo. Tap the row again to put it back.
+A newer clear replaced that undo. Tap the row again to undo.,A newer clear replaced that undo. Tap the row again to undo.
 "A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.","A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out."
 A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.,A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.
 A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.,A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.
@@ -172,9 +172,9 @@ Clear display,Clear display
 Clear display delay,Clear display delay
 Clear preset,Clear preset
 Clear search,Clear search
+Clear seen videos,Clear seen videos
 Clear the search,Clear the search
-Clear the seen video history,Clear the seen video history
-Cleared. Tap again to put the record back.,Cleared. Tap again to put the record back.
+Cleared. Tap to undo before TikTok closes.,Cleared. Tap to undo before TikTok closes.
 Clearing,Clearing
 Clearing suggested accounts,Clearing suggested accounts
 "Clearing, %1$d so far","Clearing, %1$d so far"
@@ -218,7 +218,6 @@ Could not open settings section,Could not open settings section
 Could not open the export file picker,Could not open the export file picker
 Could not open the import file picker,Could not open the import file picker
 Could not put back the diagnostic data. Try again.,Could not put back the diagnostic data. Try again.
-Could not put back the seen video history. Try again.,Could not put back the seen video history. Try again.
 Could not read who posted this comment,Could not read who posted this comment
 Could not reset this override.,Could not reset this override.
 Could not restore settings.,Could not restore settings.
@@ -229,6 +228,7 @@ Could not start the Lab change. Try again shortly.,Could not start the Lab chang
 Could not start the report export. Try again shortly.,Could not start the report export. Try again shortly.
 Could not start the settings operation. Try again shortly.,Could not start the settings operation. Try again shortly.
 Could not tell which folder to update. Choose it again.,Could not tell which folder to update. Choose it again.
+Could not undo the clear. Try again.,Could not undo the clear. Try again.
 Country ISO,Country ISO
 Country and network preferences,Country and network preferences
 Counts under the buttons,Counts under the buttons
@@ -255,7 +255,6 @@ Dark,Dark
 "Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible.","Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible."
 Default,Default
 Default playback speed,Default playback speed
-Delete the local record of the videos you have watched.,Delete the local record of the videos you have watched.
 Device access,Device access
 "Device language, then original","Device language, then original"
 Diagnostic data cleared. Tap again to put it back.,Diagnostic data cleared. Tap again to put it back.
@@ -346,6 +345,7 @@ Forced 1 gate of %1$d; the rest do not take a true or false value. Restart TikTo
 Forced 1 gate. Restart TikTok to apply this.,Forced 1 gate. Restart TikTok to apply this.
 Forced result,Forced result
 Forget seen videos after,Forget seen videos after
+Forget the %1$s seen videos.,Forget the %1$s seen videos.
 Forget what has been counted today and end any hold. The budgets themselves are left alone.,Forget what has been counted today and end any hold. The budgets themselves are left alone.
 Friends,Friends
 Full comment sort options,Full comment sort options
@@ -467,6 +467,7 @@ Hiding,Hiding
 Highest,Highest
 Historical,Historical
 Historical values,Historical values
+Hold a gate to choose several,Hold a gate to choose several
 Hold the feed after the budget,Hold the feed after the budget
 Home,Home
 Hook status,Hook status
@@ -578,6 +579,7 @@ No matching diagnostics found.,No matching diagnostics found.
 No matching settings,No matching settings
 No preset selected. Choose a preset above.,No preset selected. Choose a preset above.
 "No recording yet. Start one, use a feature, then return here.","No recording yet. Start one, use a feature, then return here."
+No seen videos recorded yet.,No seen videos recorded yet.
 No share actions have been observed yet,No share actions have been observed yet
 No share actions match this search,No share actions match this search
 No sound to block on this video,No sound to block on this video
@@ -733,8 +735,6 @@ Returns %1$s,Returns %1$s
 Right column,Right column
 Rows,Rows
 SIM country preset,SIM country preset
-SIM preset saved,SIM preset saved
-SIM preset saved. Restart TikTok to apply this.,SIM preset saved. Restart TikTok to apply this.
 STEM,STEM
 Sanitize sharing links,Sanitize sharing links
 Save,Save
@@ -787,9 +787,10 @@ Seek by,Seek by
 Seek from the edges,Seek from the edges
 Seen,Seen
 Seen this session,Seen this session
-Seen video history cleared. Tap again to put it back.,Seen video history cleared. Tap again to put it back.
-Seen video history put back,Seen video history put back
 Seen videos,Seen videos
+Seen videos cleared. Tap the row to undo before TikTok closes.,Seen videos cleared. Tap the row to undo before TikTok closes.
+Seen videos restored.,Seen videos restored.
+Select,Select
 Select at least one field.,Select at least one field.
 Select every tab,Select every tab
 Selected,Selected
@@ -953,7 +954,7 @@ The story couldn't be saved. Try again.,The story couldn't be saved. Try again.
 There is no Lab change to undo.,There is no Lab change to undo.
 There is no diagnostic data to clear.,There is no diagnostic data to clear.
 There is no diagnostic data to put back.,There is no diagnostic data to put back.
-There was nothing to put back,There was nothing to put back
+There was nothing to undo.,There was nothing to undo.
 These loaded values are for a different TikTok version.,These loaded values are for a different TikTok version.
 This catalog entry is no longer available. Refresh the Lab and try again.,This catalog entry is no longer available. Refresh the Lab and try again.
 This configuration has no fields that can be copied and changed safely on this build.,This configuration has no fields that can be copied and changed safely on this build.
@@ -1023,6 +1024,7 @@ Unblock this commenter,Unblock this commenter
 Unblocked %1$s,Unblocked %1$s
 "Unblocked %1$s, but TikTok has not confirmed it yet.","Unblocked %1$s, but TikTok has not confirmed it yet."
 Undo,Undo
+Undo clearing seen videos,Undo clearing seen videos
 Undo last Lab change,Undo last Lab change
 Undo last restore or reset,Undo last restore or reset
 Undoing the last change,Undoing the last change

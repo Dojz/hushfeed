@@ -192,7 +192,7 @@ public class FeatureGateLocalizationTest {
             View save = structuredPage.getView().findViewWithTag("feature_gate_save_fields");
             assertNotNull(save);
             assertTrue(save.performClick());
-            assertEquals(expected.invalidStructured, ShadowToast.getTextOfLatestToast());
+            assertEquals(expected.invalidStructured, String.valueOf(json.getError()));
 
             // A saved override naming a field the class does not have is refused when TikTok
             // asks for the object, and the page has to say which field, in this language.

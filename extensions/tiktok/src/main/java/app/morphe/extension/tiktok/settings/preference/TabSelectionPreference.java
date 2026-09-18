@@ -163,7 +163,7 @@ public class TabSelectionPreference extends Preference {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
-        helperParams.setMargins(0, SettingsUi.dp(getContext(), 16), 0, SettingsUi.dp(getContext(), 12));
+        helperParams.setMargins(0, SettingsUi.dp(getContext(), 14), 0, SettingsUi.dp(getContext(), 10));
         dialogView.addView(helper, helperParams);
 
         LinearLayout optionsContainer = new LinearLayout(context);

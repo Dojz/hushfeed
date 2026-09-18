@@ -1097,8 +1097,16 @@ public final class FeatureGateDetailFragment extends Fragment {
                 result.put(editor.name, editor.value());
             }
         } catch (FieldValueException failure) {
-            Utils.showToastLong(FeatureGateLabText.fieldValidation(
-                    getContext(), failure.fieldName, failure.validation));
+            String message = FeatureGateLabText.fieldValidation(
+                    getContext(), failure.fieldName, failure.validation);
+            for (ObjectFieldEditor editor : objectEditors) {
+                if (editor.name.equals(failure.fieldName) && editor.input != null) {
+                    editor.input.setError(message);
+                    editor.input.requestFocus();
+                    return null;
+                }
+            }
+            Utils.showToastLong(message);
             return null;
         } catch (Throwable failure) {
             Logger.printException(() -> "Could not collect Feature Gate field values", failure);
