@@ -145,6 +145,30 @@ public class OverlayChipTest {
                 + "in SettingsUi: " + offenders, 0, offenders.size());
     }
 
+    @Test public void noOverlayClassHandRollsColourLiterals() throws Exception {
+        java.io.File root = new java.io.File("src/main/java/app/morphe/extension/tiktok");
+        if (!root.isDirectory()) {
+            root = new java.io.File("extensions/tiktok/src/main/java/app/morphe/extension/tiktok");
+        }
+        assertTrue(root.isDirectory());
+        String[] overlayFiles = {
+                "blockauthor/BlockAuthorOverlay.java",
+                "wellbeing/SessionLockOverlay.java"
+        };
+        java.util.regex.Pattern literal = java.util.regex.Pattern.compile(
+                "Color\\s*\\.\\s*(argb|WHITE)");
+        List<String> offenders = new ArrayList<>();
+        for (String name : overlayFiles) {
+            java.io.File file = new java.io.File(root, name);
+            if (!file.exists()) continue;
+            String text = new String(java.nio.file.Files.readAllBytes(file.toPath()),
+                    java.nio.charset.StandardCharsets.UTF_8);
+            if (literal.matcher(text).find()) offenders.add(name);
+        }
+        assertEquals("overlay classes still hand-roll colour literals instead of using tokens: "
+                + offenders, 0, offenders.size());
+    }
+
     /** The mutation control for the scan: the pattern has to catch what it is looking for. */
     @Test public void theSourceScanCanActuallyFail() {
         java.util.regex.Pattern bare = java.util.regex.Pattern.compile(

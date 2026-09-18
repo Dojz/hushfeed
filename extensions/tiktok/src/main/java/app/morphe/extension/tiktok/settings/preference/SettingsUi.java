@@ -119,6 +119,8 @@ public final class SettingsUi {
     public static final @ColorInt int OVERLAY_BANNER_SCRIM = Color.argb(220, 0, 0, 0);
     /** Text and glyphs on {@link #OVERLAY_SCRIM}: white on it is 12.6:1. */
     public static final @ColorInt int OVERLAY_TEXT = Color.WHITE;
+    public static final @ColorInt int OVERLAY_TEXT_MUTED = Color.argb(200, 255, 255, 255);
+    public static final @ColorInt int OVERLAY_SCRIM_SOLID = Color.argb(238, 0, 0, 0);
 
     private SettingsUi() {
     }
