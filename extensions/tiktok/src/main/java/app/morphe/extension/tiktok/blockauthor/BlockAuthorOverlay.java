@@ -824,6 +824,15 @@ public final class BlockAuthorOverlay {
      * to be a dialog, and a dialog over the feed stops a scroll dead for something whose only
      * purpose is to be read.
      */
+    public static void showActionBanner(String message, String actionLabel, Runnable action) {
+        Utils.runOnMainThread(() -> {
+            Activity activity = Utils.getActivity();
+            ViewGroup root = activity == null || activity.isFinishing() || activity.isDestroyed()
+                    ? null : activity.findViewById(android.R.id.content);
+            showBanner(root, message, action, actionLabel);
+        });
+    }
+
     public static void showActionBanner(ViewGroup root, String message, String actionLabel,
             Runnable action) {
         showBanner(root, message, action, actionLabel);
