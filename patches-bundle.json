@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-09-18T12:44:23",
-  "description": "Hushfeed v0.42.0 targets global TikTok 46.2.3 (com.zhiliaoapp.musically).\n\nTwo ad and Tako surfaces that slipped past the feed filter, both reported on 0.40.0. Ads no longer appear while you scroll a creator's videos from their profile: that pager was asking a separate ad endpoint of its own, which is refused now while Remove feed ads is on. And the \"Ask\" bar under some videos, which turned out to be one of TikTok's bottom banners rather than a Tako component, is gone with Hide Tako AI on.\n\nValidation: 1419 runtime tests passed locally, plus the patches module suite. The bundle carries 90 patches and all three DEX payloads are non-empty. All patches applied with zero failures to the 46.2.3, 46.7.3, 46.8.3 and 46.9.3 fixtures. Needs Morphe Manager 1.30.0 or newer.\n\nThe downloadable .mpp is the patch bundle. Patch on the device with Morphe Manager and keep its existing signing key.",
-  "download_url": "https://github.com/SysAdminDoc/hushfeed/releases/download/v0.42.0/patches-0.42.0.mpp",
+  "created_at": "2026-09-18T13:51:47",
+  "description": "Hushfeed v0.43.0 targets global TikTok 46.2.3 (com.zhiliaoapp.musically).\n\nOne new patch, from a feature request. Use system font draws TikTok's text in your device's own font instead of TikTok Sans, at the same weight, while the icons, the gift animations and the @ and # glyphs keep their own fonts. It is off by default and needs a restart.\n\nValidation: 1423 runtime tests passed locally, plus the patches module suite. The bundle carries 91 patches and all three DEX payloads are non-empty. All patches applied with zero failures to the 46.2.3, 46.7.3, 46.8.3 and 46.9.3 fixtures. Needs Morphe Manager 1.30.0 or newer.\n\nThe downloadable .mpp is the patch bundle. Patch on the device with Morphe Manager and keep its existing signing key.",
+  "download_url": "https://github.com/SysAdminDoc/hushfeed/releases/download/v0.43.0/patches-0.43.0.mpp",
   "signature_download_url": "",
-  "version": "0.42.0"
+  "version": "0.43.0"
 }
