@@ -2,6 +2,14 @@
 
 Every Hushfeed release, newest first.
 
+## 0.43.1 (2026-09-18)
+
+A packaging fix. No patch changed.
+
+### Fixes
+
+* **TikTok:** The 0.43.0 bundle was published without its patch code, so Morphe Manager showed zero patches for the source and could not build anything. This rebuilds it correctly, with all 91 patches. If you updated to 0.43.0 and saw no patches, update the source again.
+
 ## 0.43.0 (2026-09-18)
 
 One new patch, from a feature request.

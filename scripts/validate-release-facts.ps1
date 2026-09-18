@@ -463,6 +463,31 @@ if ($VerifyPublishedAsset) {
         # Last of the three on purpose. It is the only one needing a tool from outside the
         # repository, so running it first meant a machine without that tool also lost the hash
         # and checksum comparisons, which need nothing but the download.
+        # Morphe Manager loads patches from the bundle's classes.dex (loadPatchesFromDex), not from
+        # the .class files the desktop CLI and verifyBundle read. A bundle whose classes.dex was
+        # dropped, which a stray :patches:jar run after buildAndroid does, still lists every patch
+        # to those JVM readers while Manager shows zero. v0.43.0 shipped exactly that. So the
+        # published asset is opened here and its classes.dex is required, non-empty, the one thing
+        # that reproduces what Manager sees.
+        Add-Type -AssemblyName System.IO.Compression.FileSystem -ErrorAction SilentlyContinue
+        $assetZip = [System.IO.Compression.ZipFile]::OpenRead($temporaryArtifact)
+        try {
+            $classesDex = $assetZip.GetEntry('classes.dex')
+            if ($null -eq $classesDex) {
+                throw ('The published bundle has no classes.dex, so Morphe Manager will load zero ' +
+                    'patches from it. It was built without its patch dex (a :patches:jar run after ' +
+                    ':patches:buildAndroid strips it). Rebuild with :patches:buildAndroid last and ' +
+                    'republish.')
+            }
+            if ($classesDex.Length -le 0) {
+                throw 'The published bundle carries an empty classes.dex, so Morphe Manager loads zero patches.'
+            }
+            Write-Host ("[release] the published bundle carries classes.dex (" +
+                "$($classesDex.Length) bytes), which is what Morphe Manager loads")
+        } finally {
+            $assetZip.Dispose()
+        }
+
         $countJar = Resolve-DesktopCli -Explicit $DesktopJar -Root $Root
         if (-not $countJar) {
             throw ('The published bundle was downloaded but its patches cannot be counted: no ' +
