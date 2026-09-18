@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Looper;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
@@ -12,6 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
+import app.morphe.extension.tiktok.settings.preference.SettingsUi;
 import app.morphe.extension.tiktok.settings.preference.categories.InterfacePreferenceCategory;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -117,6 +121,22 @@ public class TapConfirmationTest {
             new InterfacePreferenceCategory(activity, screen);
             assertNotNull(screen.findPreference("confirm_follow"));
             assertNotNull(screen.findPreference("confirm_like"));
+        }
+    }
+
+    @Test public void theRingContrastsOnAnyFillAndArmPerformsAHaptic() throws Exception {
+        try (var controller = Robolectric.buildActivity(TestActivity.class).setup()) {
+            Utils.setContext(controller.get());
+            View view = new View(controller.get());
+            assertFalse(TapConfirmation.allow(view, "follow", "video1", true));
+            Drawable foreground = view.getForeground();
+            assertTrue("the ring is not a LayerDrawable", foreground instanceof LayerDrawable);
+            LayerDrawable layers = (LayerDrawable) foreground;
+            assertEquals("the ring needs two layers (outer white, inner dark)", 2, layers.getNumberOfLayers());
+            GradientDrawable outer = (GradientDrawable) layers.getDrawable(0);
+            assertNotNull(outer);
+            assertTrue("the outer stroke should be haptic-performed",
+                    Shadows.shadowOf(view).lastHapticFeedbackPerformed() >= 0);
         }
     }
 
