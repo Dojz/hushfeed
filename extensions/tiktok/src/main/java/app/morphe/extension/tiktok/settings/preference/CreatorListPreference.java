@@ -163,6 +163,7 @@ public class CreatorListPreference extends DialogPreference {
         // and the weight and leaves the platform background, so this was the only raised button
         // in any Hushfeed dialog.
         TextView addButton = new TextView(context);
+        addButton.setTag("creator_list_add_button");
         addButton.setText(L10n.t(context, "Add"));
         addButton.setContentDescription(L10n.t(context, "Add hidden creator"));
         addButton.setTextSize(16);
