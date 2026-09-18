@@ -524,7 +524,7 @@ function Test-ChangelogHere {
     <#
     .SYNOPSIS
         The CHANGELOG still describes what it described at the last tag, and describes this
-        version.
+        version in a form Morphe Manager can show.
     .DESCRIPTION
         Held against the file as it stood at the most recent tag reachable from HEAD, which is
         read with git. A checkout with no tag, or one where that tag carried no CHANGELOG, is
@@ -557,6 +557,11 @@ function Test-ChangelogHere {
     }
     $check = Test-ChangelogVersions @arguments
     if (-not $check.Valid) { throw "The CHANGELOG does not describe this release: $($check.Reason)" }
+
+    $manager = Test-ChangelogManagerEntry -Current $current -ExpectedVersion $releaseVersion
+    if (-not $manager.Valid) { throw "Morphe Manager cannot show this release: $($manager.Reason)" }
+    Write-Host ("[release] Morphe Manager can read the $releaseVersion entry: dated " +
+        "$($manager.Date), $($manager.Bullets) bullets scoped TikTok")
 
     $described = @(Get-ChangelogVersions -Text $current)
     if ($null -eq $previous) {
