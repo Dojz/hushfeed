@@ -238,7 +238,7 @@ public final class FeatureGateLabFragment extends Fragment {
         );
         warning.setTextColor(FeatureGateLabUi.warningColor(context));
         LinearLayout.LayoutParams warningParams = FeatureGateLabUi.matchWrap();
-        warningParams.setMargins(FeatureGateLabUi.dp(context, 4), FeatureGateLabUi.dp(context, 14), FeatureGateLabUi.dp(context, 4), FeatureGateLabUi.dp(context, 16));
+        warningParams.setMargins(0, FeatureGateLabUi.dp(context, 14), 0, FeatureGateLabUi.dp(context, 16));
         controls.addView(warning, warningParams);
 
         LinearLayout searchRow = new LinearLayout(context);
@@ -1731,7 +1731,7 @@ public final class FeatureGateLabFragment extends Fragment {
 
                 LinearLayout textColumn = new LinearLayout(context);
                 textColumn.setOrientation(LinearLayout.VERTICAL);
-                TextView title = FeatureGateLabUi.text(context, "", 15, SettingsUi.textPrimary(), Typeface.BOLD);
+                TextView title = FeatureGateLabUi.text(context, "", 16, SettingsUi.textPrimary(), Typeface.BOLD);
                 title.setMaxLines(2);
                 TextView key = FeatureGateLabUi.label(context, "");
                 key.setTextSize(12);

@@ -170,8 +170,14 @@ public class CreatorListPreference extends DialogPreference {
         resultParams.setMargins(0, SettingsUi.dp(context, 10), 0, 0);
         dialogView.addView(resultCount, resultParams);
 
-        ScrollView scroll = new ScrollView(context);
-        scroll.setFillViewport(true);
+        int maxHeight = SettingsUi.dialogListHeight(context, 230);
+        ScrollView scroll = new ScrollView(context) {
+            @Override protected void onMeasure(int widthSpec, int heightSpec) {
+                int capped = android.view.View.MeasureSpec.makeMeasureSpec(
+                        maxHeight, android.view.View.MeasureSpec.AT_MOST);
+                super.onMeasure(widthSpec, capped);
+            }
+        };
         entriesContainer = new LinearLayout(context);
         entriesContainer.setOrientation(LinearLayout.VERTICAL);
         scroll.addView(entriesContainer, new ScrollView.LayoutParams(
@@ -180,7 +186,7 @@ public class CreatorListPreference extends DialogPreference {
         ));
         LinearLayout.LayoutParams scrollParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                SettingsUi.dialogListHeight(context, 230)
+                ViewGroup.LayoutParams.WRAP_CONTENT
         );
         scrollParams.setMargins(0, SettingsUi.dp(context, 12), 0, 0);
         dialogView.addView(scroll, scrollParams);
