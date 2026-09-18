@@ -2,6 +2,14 @@
 
 Every Hushfeed release, newest first.
 
+## 0.43.0 (2026-09-18)
+
+One new patch, from a feature request.
+
+### App
+
+* **TikTok:** A new Use system font switch draws TikTok's text in your device's own font instead of TikTok Sans. The icons, the gift animations and the @ and # glyphs keep their own fonts. It is off by default and needs a restart. Switch: Hushfeed settings > App.
+
 ## 0.42.0 (2026-09-18)
 
 Two ad and Tako surfaces that slipped past the feed filter, both reported on 0.40.0 and traced to routes the earlier hooks never saw.

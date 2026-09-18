@@ -109,6 +109,7 @@ Answer TikTok's reads of your contacts with an empty list. Find Friends and Peop
 Answer TikTok's scan of the apps on this phone with an empty list. A check for one named app, which TikTok also uses to open an app you tap, is left alone.	Beantwortet TikToks Scan der Apps auf diesem Telefon mit einer leeren Liste. Die Abfrage einer einzelnen App, mit der TikTok auch eine angetippte App öffnet, bleibt unangetastet.
 App	App
 App AB	App-AB
+Appearance	Darstellung
 Applies to both video and photo downloads.	Gilt für Video- und Foto-Downloads.
 Apply	Übernehmen
 Around the video	Rund um das Video
@@ -281,6 +282,7 @@ Download path updated	Speicherort aktualisiert
 Downloads	Downloads
 Drag to move, release to place	Zum Verschieben ziehen, zum Ablegen loslassen
 Drama and Series	Drama und Serien
+Draw TikTok's text in your device's font instead of TikTok Sans. Icons, gift animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this.	TikToks Text in der Schrift deines Geräts statt in TikTok Sans anzeigen. Symbole, Geschenkanimationen und die @- und #-Zeichen behalten ihre eigene Schrift. TikTok neu starten, damit das gilt.
 Drop the notification saying somebody new followed you before it reaches the drawer. Every other notification is left alone, and the follower still appears in the Inbox.	Die Benachrichtigung, dass dir jemand Neues folgt, verwerfen, bevor sie in der Leiste landet. Alle anderen Benachrichtigungen bleiben unberührt, und der Follower erscheint weiterhin im Posteingang.
 Each area, how many of the things it looks for are in this build and how many are not.	Jeder Bereich, wie viel von dem, was er sucht, in diesem Build steckt und wie viel nicht.
 Empty	Leer
@@ -1041,6 +1043,7 @@ Use Save JSON for this large report	Nutze für diesen großen Bericht „JSON sp
 Use TikTok's native hold, slide down, and release gesture to lock 2x speed.	TikToks eigene Geste „Halten, nach unten wischen, loslassen“ verwenden, um die 2x-Geschwindigkeit zu fixieren.
 Use a default playback speed	Standardgeschwindigkeit verwenden
 Use non-personalized search	Nicht personalisierte Suche verwenden
+Use system font	Systemschrift verwenden
 Use the preset for the region TikTok reports for your account and its shop too. May affect search.	Die Vorlage auch für die Region verwenden, die TikTok für dein Konto und seinen Shop meldet. Kann die Suche beeinflussen.
 Use the selected country and operator values. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.	Das gewählte Land und die Anbieterwerte verwenden. Das ändert nur, was die SIM meldet: deine IP-Adresse, der Verlauf deines Kontos und die Sprache, in der du liest, bleiben gleich, und eines davon reicht TikTok schon, um bei der bisherigen Region zu bleiben. TikTok neu starten, damit das gilt.
 Use the selected country. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.	Das gewählte Land verwenden. Das ändert nur, was die SIM meldet: deine IP-Adresse, der Verlauf deines Kontos und die Sprache, in der du liest, bleiben gleich, und eines davon reicht TikTok schon, um bei der bisherigen Region zu bleiben. TikTok neu starten, damit das gilt.

@@ -107,6 +107,7 @@ Answer TikTok's reads of your contacts with an empty list. Find Friends and Peop
 "Answer TikTok's scan of the apps on this phone with an empty list. A check for one named app, which TikTok also uses to open an app you tap, is left alone.","Menjawab pemindaian aplikasi di ponsel ini oleh TikTok dengan daftar kosong. Pemeriksaan satu aplikasi tertentu, yang juga dipakai TikTok untuk membuka aplikasi yang Anda ketuk, dibiarkan."
 App,Aplikasi
 App AB,AB aplikasi
+Appearance,Tampilan
 Applies to both video and photo downloads.,Berlaku untuk unduhan video dan foto.
 Apply,Terapkan
 Around the video,Di sekitar video
@@ -279,6 +280,7 @@ Download path updated,Lokasi unduhan diperbarui
 Downloads,Unduhan
 "Drag to move, release to place","Seret untuk memindahkan, lepaskan untuk menempatkan"
 Drama and Series,Drama dan Serial
+"Draw TikTok's text in your device's font instead of TikTok Sans. Icons, gift animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this.","Tampilkan teks TikTok dengan font perangkatmu, bukan TikTok Sans. Ikon, animasi hadiah, serta tanda @ dan # tetap memakai fontnya sendiri. Mulai ulang TikTok agar berlaku."
 "Drop the notification saying somebody new followed you before it reaches the drawer. Every other notification is left alone, and the follower still appears in the Inbox.","Buang notifikasi yang memberi tahu ada orang baru yang mengikutimu sebelum masuk ke laci notifikasi. Notifikasi lain tidak terpengaruh, dan pengikutnya tetap muncul di Kotak Masuk."
 "Each area, how many of the things it looks for are in this build and how many are not.","Setiap area, berapa banyak hal yang dicarinya ada di build ini dan berapa yang tidak."
 Empty,Kosong
@@ -1039,6 +1041,7 @@ Use Save JSON for this large report,Pakai Simpan JSON untuk laporan sebesar ini
 "Use TikTok's native hold, slide down, and release gesture to lock 2x speed.","Pakai gestur bawaan TikTok, tahan lalu geser ke bawah dan lepas, untuk mengunci kecepatan 2x."
 Use a default playback speed,Pakai kecepatan pemutaran bawaan
 Use non-personalized search,Pakai pencarian nonpersonal
+Use system font,Gunakan font sistem
 Use the preset for the region TikTok reports for your account and its shop too. May affect search.,Gunakan preset juga untuk wilayah yang dilaporkan TikTok untuk akun Anda dan tokonya. Bisa memengaruhi pencarian.
 "Use the selected country and operator values. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.","Gunakan negara dan nilai operator yang dipilih. Ini hanya mengubah apa yang dilaporkan SIM: alamat IP, riwayat akun, dan bahasa yang kamu baca tetap sama, dan salah satunya saja sudah cukup bagi TikTok untuk mempertahankan wilayah yang sudah dipilihnya. Mulai ulang TikTok agar berlaku."
 "Use the selected country. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.","Gunakan negara yang dipilih. Ini hanya mengubah apa yang dilaporkan SIM: alamat IP, riwayat akun, dan bahasa yang kamu baca tetap sama, dan salah satunya saja sudah cukup bagi TikTok untuk mempertahankan wilayah yang sudah dipilihnya. Mulai ulang TikTok agar berlaku."
