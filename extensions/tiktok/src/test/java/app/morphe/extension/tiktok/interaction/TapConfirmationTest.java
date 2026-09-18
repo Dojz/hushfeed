@@ -135,7 +135,12 @@ public class TapConfirmationTest {
             assertEquals("the ring needs two layers (outer white, inner dark)", 2, layers.getNumberOfLayers());
             GradientDrawable outer = (GradientDrawable) layers.getDrawable(0);
             assertNotNull(outer);
-            assertTrue("the outer stroke should be haptic-performed",
+            assertNotEquals("the outer stroke must not be OVERLAY_ACCENT (red)",
+                    SettingsUi.OVERLAY_ACCENT,
+                    outer.getColor() == null ? 0 : outer.getColor().getDefaultColor());
+            GradientDrawable inner = (GradientDrawable) layers.getDrawable(1);
+            assertNotNull(inner);
+            assertTrue("arm must perform a haptic",
                     Shadows.shadowOf(view).lastHapticFeedbackPerformed() >= 0);
         }
     }

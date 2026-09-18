@@ -1144,11 +1144,19 @@ public final class SettingsUi {
         if (android.os.Build.VERSION.SDK_INT >= 30) {
             control.setStateDescription(busy ? busyLabel : null);
         } else {
-            control.setContentDescription(busy
-                    ? busyLabel
-                    : control.getTag(android.R.id.text1) instanceof CharSequence
-                            ? (CharSequence) control.getTag(android.R.id.text1)
-                            : control.getContentDescription());
+            if (busy) {
+                if (control.getTag(android.R.id.text1) == null) {
+                    control.setTag(android.R.id.text1, control.getContentDescription());
+                }
+                control.setContentDescription(busyLabel);
+            } else {
+                CharSequence saved = control.getTag(android.R.id.text1) instanceof CharSequence
+                        ? (CharSequence) control.getTag(android.R.id.text1) : null;
+                if (saved != null) {
+                    control.setContentDescription(saved);
+                    control.setTag(android.R.id.text1, null);
+                }
+            }
         }
     }
 
