@@ -115,7 +115,7 @@ public class CreatorListPreference extends DialogPreference {
         TextView searchLabel = SettingsUi.text(
                 context,
                 L10n.t(context, "Search hidden creators"),
-                13,
+                14,
                 SettingsUi.textSecondary(),
                 Typeface.BOLD
         );
@@ -138,11 +138,25 @@ public class CreatorListPreference extends DialogPreference {
         searchParams.setMargins(0, SettingsUi.dp(context, 5), 0, SettingsUi.dp(context, 10));
         dialogView.addView(searchEditText, searchParams);
 
+        TextView addLabel = SettingsUi.text(
+                context,
+                L10n.t(context, "Add a creator"),
+                14,
+                SettingsUi.textSecondary(),
+                Typeface.BOLD
+        );
+        LinearLayout.LayoutParams addLabelParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        addLabelParams.setMargins(0, SettingsUi.dp(context, 10), 0, 0);
+        dialogView.addView(addLabel, addLabelParams);
+
         LinearLayout addRow = new LinearLayout(context);
         addRow.setGravity(Gravity.CENTER_VERTICAL);
-        addEditText = editor(context, L10n.t(context, "Creator handle or id"));
+        addEditText = editor(context, L10n.t(context, "Handle or id"));
         addEditText.setTag("creator_list_add");
-        SettingsUi.labelEditor(addEditText, L10n.t(context, "Creator handle or id"));
+        SettingsUi.labelEditor(addLabel, addEditText);
         addRow.addView(addEditText, new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
         // Flat, like the Cancel and Save two rows below it. styleActionButton sets the colour

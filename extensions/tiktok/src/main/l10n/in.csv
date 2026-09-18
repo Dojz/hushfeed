@@ -73,6 +73,7 @@ Activity Center (PIA),Pusat Aktivitas (PIA)
 Add,Tambah
 Add a block button to the video player that blocks the creator of the current video in one tap. An undo action is shown after each block.,Tambahkan tombol blokir ke pemutar video yang memblokir kreator video saat ini dengan satu ketukan. Tindakan batalkan ditampilkan setelah setiap blokir.
 Add a button beside the block control to send feedback about the current video.,Tambahkan tombol di samping kontrol blokir untuk mengirim masukan tentang video ini.
+Add a creator,Add a creator
 Add a separate button that skips this account locally without blocking it.,Tambahkan tombol terpisah yang melewati akun ini secara lokal tanpa memblokirnya.
 Add a separate button that skips videos using the current sound.,Tambahkan tombol terpisah yang melewati video yang menggunakan suara saat ini.
 Add hidden creator,Tambah kreator tersembunyi
@@ -234,7 +235,6 @@ Country ISO,ISO negara
 Country and network preferences,Preferensi negara dan jaringan
 Counts under the buttons,Angka di bawah tombol
 Create,Buat
-Creator handle or id,Handle atau ID kreator
 Creators and sounds,Kreator dan suara
 Creators hidden from later feed batches by the player action. Search the list and remove one entry at a time.,Kreator yang disembunyikan dari pemuatan feed berikutnya lewat aksi pemutar. Cari di daftar dan hapus satu entri setiap kali.
 Current,Saat ini
@@ -359,6 +359,7 @@ Generated defaults,Nilai bawaan yang dihasilkan
 Gestures,Gerakan
 Ghost mode,Mode siluman
 Hand-off,Penerusan
+Handle or id,Handle or id
 Hidden %1$s locally,%1$s disembunyikan secara lokal
 Hidden commenters,Pengomentar yang disembunyikan
 Hidden creators,Kreator tersembunyi

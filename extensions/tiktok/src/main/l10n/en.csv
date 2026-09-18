@@ -73,6 +73,7 @@ Activity Center (PIA),Activity Center (PIA)
 Add,Add
 Add a block button to the video player that blocks the creator of the current video in one tap. An undo action is shown after each block.,Add a block button to the video player that blocks the creator of the current video in one tap. An undo action is shown after each block.
 Add a button beside the block control to send feedback about the current video.,Add a button beside the block control to send feedback about the current video.
+Add a creator,Add a creator
 Add a separate button that skips this account locally without blocking it.,Add a separate button that skips this account locally without blocking it.
 Add a separate button that skips videos using the current sound.,Add a separate button that skips videos using the current sound.
 Add hidden creator,Add hidden creator
@@ -234,7 +235,6 @@ Country ISO,Country ISO
 Country and network preferences,Country and network preferences
 Counts under the buttons,Counts under the buttons
 Create,Create
-Creator handle or id,Creator handle or id
 Creators and sounds,Creators and sounds
 Creators hidden from later feed batches by the player action. Search the list and remove one entry at a time.,Creators hidden from later feed batches by the player action. Search the list and remove one entry at a time.
 Current,Current
@@ -359,6 +359,7 @@ Generated defaults,Generated defaults
 Gestures,Gestures
 Ghost mode,Ghost mode
 Hand-off,Hand-off
+Handle or id,Handle or id
 Hidden %1$s locally,Hidden %1$s locally
 Hidden commenters,Hidden commenters
 Hidden creators,Hidden creators

@@ -72,6 +72,7 @@ Activity Center (PIA)	Centro de Atividade (PIA)
 Add	Adicionar
 Add a block button to the video player that blocks the creator of the current video in one tap. An undo action is shown after each block.	Adiciona um botão de bloqueio ao reprodutor que bloqueia o criador do video atual com um toque. Uma ação de desfazer aparece depois de cada bloqueio.
 Add a button beside the block control to send feedback about the current video.	Adiciona um botão ao lado do controle de bloqueio para enviar feedback sobre o vídeo atual.
+Add a creator	Add a creator
 Add a separate button that skips this account locally without blocking it.	Adiciona um botão separado que ignora esta conta localmente sem bloqueá-la.
 Add a separate button that skips videos using the current sound.	Adiciona um botão separado que ignora vídeos que usam o som atual.
 Add hidden creator	Adicionar criador oculto
@@ -233,7 +234,6 @@ Country ISO	ISO do país
 Country and network preferences	Preferências de país e de rede
 Counts under the buttons	Números sob os botões
 Create	Criar
-Creator handle or id	Nome de usuário ou id do criador
 Creators and sounds	Criadores e sons
 Creators hidden from later feed batches by the player action. Search the list and remove one entry at a time.	Criadores escondidos dos próximos lotes do feed pela ação do player. Busque na lista e tire uma entrada de cada vez.
 Current	Atual
@@ -358,6 +358,7 @@ Generated defaults	Padrões gerados
 Gestures	Gestos
 Ghost mode	Modo fantasma
 Hand-off	Passagem
+Handle or id	Handle or id
 Hidden %1$s locally	%1$s escondido no aparelho
 Hidden commenters	Comentaristas escondidos
 Hidden creators	Criadores escondidos
