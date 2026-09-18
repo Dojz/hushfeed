@@ -763,8 +763,8 @@ public final class BlockAuthorOverlay {
     private static void setButtonEnabled(boolean enabled) {
         View button = buttonReference.get();
         if (button != null) {
-            button.setEnabled(enabled);
-            button.setAlpha(enabled ? 1f : 0.4f);
+            SettingsUi.setBusy(button, !enabled,
+                    L10n.t(button.getContext(), "Blocking"));
         }
     }
 

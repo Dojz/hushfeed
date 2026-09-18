@@ -1138,6 +1138,20 @@ public final class SettingsUi {
         });
     }
 
+    public static void setBusy(View control, boolean busy, String busyLabel) {
+        control.setEnabled(!busy);
+        control.setAlpha(busy ? 0.6f : 1f);
+        if (android.os.Build.VERSION.SDK_INT >= 30) {
+            control.setStateDescription(busy ? busyLabel : null);
+        } else {
+            control.setContentDescription(busy
+                    ? busyLabel
+                    : control.getTag(android.R.id.text1) instanceof CharSequence
+                            ? (CharSequence) control.getTag(android.R.id.text1)
+                            : control.getContentDescription());
+        }
+    }
+
     /** What a dialog's Save has to satisfy before the dialog is allowed to close. */
     public interface DialogCheck {
         /** Null when the value is fine, otherwise what is wrong with it, in the reader's words. */

@@ -48,7 +48,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildDe() {
-        Map<String, String> table = new HashMap<>(2210);
+        Map<String, String> table = new HashMap<>(2212);
         fillDe0(table);
         fillDe1(table);
         fillDe2(table);
@@ -1632,6 +1632,8 @@ public final class L10nTranslations {
                 "Gespeichert, Überschreibung aus");
         table.put("Saved. Restart TikTok to apply this.",
                 "Gespeichert. TikTok neu starten, damit das gilt.");
+        table.put("Saving",
+                "Saving");
         table.put("Saving %1$s original photos",
                 "%1$s Originalfotos werden gespeichert");
         table.put("Saving settings backup",
@@ -1666,11 +1668,11 @@ public final class L10nTranslations {
                 "Share-Aktionen durchsuchen");
         table.put("Search the comments",
                 "Kommentare durchsuchen");
-        table.put("Search these comments",
-                "Diese Kommentare durchsuchen");
     }
 
     private static void fillDe13(Map<String, String> table) {
+        table.put("Search these comments",
+                "Diese Kommentare durchsuchen");
         table.put("Search translated titles and descriptions, then open the original setting.",
                 "Übersetzte Titel und Beschreibungen durchsuchen und dann die ursprüngliche Einstellung öffnen.");
         table.put("Search without personalization, whatever your account is set to.",
@@ -1789,11 +1791,11 @@ public final class L10nTranslations {
                 "Inhaltswarnungen überspringen");
         table.put("Skip recorded LIVE broadcasts in the feed.",
                 "Aufgezeichnete LIVE-Übertragungen im Feed überspringen.");
-        table.put("Skip videos marked as using promotional music.",
-                "Videos überspringen, die als Werbemusik gekennzeichnet sind.");
     }
 
     private static void fillDe14(Map<String, String> table) {
+        table.put("Skip videos marked as using promotional music.",
+                "Videos überspringen, die als Werbemusik gekennzeichnet sind.");
         table.put("Skip videos that use a sound blocked with the player's sound button, or named below.",
                 "Videos überspringen, deren Sound über die Sound-Taste im Player gesperrt wurde oder unten aufgeführt ist.");
         table.put("Skipping videos with %1$s",
@@ -1912,11 +1914,11 @@ public final class L10nTranslations {
                 "Diese Datei ist kein lesbarer Text und wurde womöglich bei der Übertragung beschädigt. Es wurde nichts geändert.");
         table.put("That file is too large to be a settings backup. Nothing was altered.",
                 "Diese Datei ist zu groß für eine Einstellungssicherung. Es wurde nichts geändert.");
-        table.put("That folder name has a character Android does not allow. Use letters, numbers, spaces or dashes.",
-                "Im Zielpfad steht ein unzulässiger Ordnername.");
     }
 
     private static void fillDe15(Map<String, String> table) {
+        table.put("That folder name has a character Android does not allow. Use letters, numbers, spaces or dashes.",
+                "Im Zielpfad steht ein unzulässiger Ordnername.");
         table.put("That is %1$d minutes today",
                 "Das sind %1$d Minuten heute");
         table.put("That is %1$d videos today",
@@ -2035,11 +2037,11 @@ public final class L10nTranslations {
                 "Dieser Katalogeintrag ist nicht mehr verfügbar. Das Labor aktualisieren und es erneut versuchen.");
         table.put("This configuration has no fields that can be copied and changed safely on this build.",
                 "Diese Konfiguration hat keine Felder, die sich in diesem Build gefahrlos kopieren und ändern lassen.");
-        table.put("This file has more loaded values than the Lab takes at once.",
-                "Diese Datei enthält mehr geladene Werte, als das Lab auf einmal annimmt.");
     }
 
     private static void fillDe16(Map<String, String> table) {
+        table.put("This file has more loaded values than the Lab takes at once.",
+                "Diese Datei enthält mehr geladene Werte, als das Lab auf einmal annimmt.");
         table.put("This file has no loaded values in it.",
                 "Diese Datei enthält keine geladenen Werte.");
         table.put("This file isn't a loaded-values export from the Feature Gate Lab.",
@@ -2158,11 +2160,11 @@ public final class L10nTranslations {
                 "Zwei Buchstaben, etwa us, gb oder jp.");
         table.put("Type",
                 "Typ");
-        table.put("Type to search settings",
-                "Tippe, um Einstellungen zu durchsuchen");
     }
 
     private static void fillDe17(Map<String, String> table) {
+        table.put("Type to search settings",
+                "Tippe, um Einstellungen zu durchsuchen");
         table.put("Unavailable",
                 "Nicht verfügbar");
         table.put("Unblock this commenter",
@@ -2281,11 +2283,11 @@ public final class L10nTranslations {
                 "Null schaltet das aus. Eine kurze Erinnerung nach so vielen Minuten Zuschauen und danach jeweils wieder. Zeit in Nachrichten, auf einem Profil oder in der Suche zählt nicht, und während der Feed pausiert ist, wird nichts angezeigt.");
         table.put("Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.",
                 "Null schaltet das aus. Zählt jedes Video, das im Feed auftaucht, egal wie du dort gelandet bist, und sagt Bescheid, sobald die Zahl erreicht ist. Das ist unabhängig vom Sitzungslimit für automatisches Weiterblättern unter Wiedergabe, das nur Videos zählt, die Hushfeed selbst weitergeschaltet hat.");
-        table.put("Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.",
-                "Null schaltet das aus. Zählt die Minuten, die der Player im Feed läuft. Zeit in Nachrichten, auf einem Profil oder in der Suche zählt nicht.");
     }
 
     private static void fillDe18(Map<String, String> table) {
+        table.put("Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.",
+                "Null schaltet das aus. Zählt die Minuten, die der Player im Feed läuft. Zeit in Nachrichten, auf einem Profil oder in der Suche zählt nicht.");
         table.put("code %1$s",
                 "Code %1$s");
         table.put("collapsed",
@@ -2339,7 +2341,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildEs() {
-        Map<String, String> table = new HashMap<>(2210);
+        Map<String, String> table = new HashMap<>(2212);
         fillEs0(table);
         fillEs1(table);
         fillEs2(table);
@@ -3923,6 +3925,8 @@ public final class L10nTranslations {
                 "Guardado, sustitución desactivada");
         table.put("Saved. Restart TikTok to apply this.",
                 "Guardado. Reinicia TikTok para que se aplique.");
+        table.put("Saving",
+                "Saving");
         table.put("Saving %1$s original photos",
                 "Guardando %1$s fotos originales");
         table.put("Saving settings backup",
@@ -3957,11 +3961,11 @@ public final class L10nTranslations {
                 "Buscar acciones de compartir");
         table.put("Search the comments",
                 "Buscar en los comentarios");
-        table.put("Search these comments",
-                "Buscar en estos comentarios");
     }
 
     private static void fillEs13(Map<String, String> table) {
+        table.put("Search these comments",
+                "Buscar en estos comentarios");
         table.put("Search translated titles and descriptions, then open the original setting.",
                 "Buscar entre los títulos y las descripciones traducidos, y abrir después el ajuste original.");
         table.put("Search without personalization, whatever your account is set to.",
@@ -4080,11 +4084,11 @@ public final class L10nTranslations {
                 "Saltar los avisos de contenido");
         table.put("Skip recorded LIVE broadcasts in the feed.",
                 "Saltar en el feed las emisiones LIVE grabadas.");
-        table.put("Skip videos marked as using promotional music.",
-                "Saltar los vídeos marcados como que usan música promocional.");
     }
 
     private static void fillEs14(Map<String, String> table) {
+        table.put("Skip videos marked as using promotional music.",
+                "Saltar los vídeos marcados como que usan música promocional.");
         table.put("Skip videos that use a sound blocked with the player's sound button, or named below.",
                 "Saltar los vídeos que usen un sonido bloqueado con el botón de sonido del reproductor, o nombrado abajo.");
         table.put("Skipping videos with %1$s",
@@ -4203,11 +4207,11 @@ public final class L10nTranslations {
                 "Ese archivo no es texto legible, así que puede haberse dañado por el camino. No se ha cambiado nada.");
         table.put("That file is too large to be a settings backup. Nothing was altered.",
                 "Ese archivo es demasiado grande para ser una copia de seguridad de ajustes. No se ha cambiado nada.");
-        table.put("That folder name has a character Android does not allow. Use letters, numbers, spaces or dashes.",
-                "El destino contiene un nombre de carpeta no válido.");
     }
 
     private static void fillEs15(Map<String, String> table) {
+        table.put("That folder name has a character Android does not allow. Use letters, numbers, spaces or dashes.",
+                "El destino contiene un nombre de carpeta no válido.");
         table.put("That is %1$d minutes today",
                 "Eso son %1$d minutos hoy");
         table.put("That is %1$d videos today",
@@ -4326,11 +4330,11 @@ public final class L10nTranslations {
                 "Esta entrada del catálogo ya no está disponible. Actualiza el Laboratorio e inténtalo otra vez.");
         table.put("This configuration has no fields that can be copied and changed safely on this build.",
                 "Esta configuración no tiene campos que se puedan copiar y cambiar con seguridad en esta compilación.");
-        table.put("This file has more loaded values than the Lab takes at once.",
-                "Este archivo tiene más valores cargados de los que el Lab acepta de una vez.");
     }
 
     private static void fillEs16(Map<String, String> table) {
+        table.put("This file has more loaded values than the Lab takes at once.",
+                "Este archivo tiene más valores cargados de los que el Lab acepta de una vez.");
         table.put("This file has no loaded values in it.",
                 "Este archivo no contiene valores cargados.");
         table.put("This file isn't a loaded-values export from the Feature Gate Lab.",
@@ -4449,11 +4453,11 @@ public final class L10nTranslations {
                 "Dos letras, como us, gb o jp.");
         table.put("Type",
                 "Tipo");
-        table.put("Type to search settings",
-                "Escribe para buscar en los ajustes");
     }
 
     private static void fillEs17(Map<String, String> table) {
+        table.put("Type to search settings",
+                "Escribe para buscar en los ajustes");
         table.put("Unavailable",
                 "No disponible");
         table.put("Unblock this commenter",
@@ -4572,11 +4576,11 @@ public final class L10nTranslations {
                 "Cero lo desactiva. Un aviso breve tras esos minutos de visionado, y otra vez después de los mismos. El tiempo en mensajes, un perfil o la búsqueda no cuenta, y no se muestra nada mientras el feed está en pausa.");
         table.put("Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.",
                 "Cero lo desactiva. Cuenta cada vídeo que aparece en el feed, sin importar cómo llegaste a él, y avisa cuando se alcanza la cifra. Es independiente del límite de sesión del avance automático, en Reproducción, que solo cuenta los vídeos que Hushfeed pasó por ti.");
-        table.put("Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.",
-                "Cero lo desactiva. Cuenta los minutos que el reproductor pasa funcionando en el feed. El tiempo en mensajes, un perfil o la búsqueda no cuenta.");
     }
 
     private static void fillEs18(Map<String, String> table) {
+        table.put("Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.",
+                "Cero lo desactiva. Cuenta los minutos que el reproductor pasa funcionando en el feed. El tiempo en mensajes, un perfil o la búsqueda no cuenta.");
         table.put("code %1$s",
                 "código %1$s");
         table.put("collapsed",
@@ -4630,7 +4634,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIn() {
-        Map<String, String> table = new HashMap<>(2210);
+        Map<String, String> table = new HashMap<>(2212);
         fillIn0(table);
         fillIn1(table);
         fillIn2(table);
@@ -6214,6 +6218,8 @@ public final class L10nTranslations {
                 "Disimpan, penggantian mati");
         table.put("Saved. Restart TikTok to apply this.",
                 "Tersimpan. Mulai ulang TikTok agar berlaku.");
+        table.put("Saving",
+                "Saving");
         table.put("Saving %1$s original photos",
                 "Menyimpan %1$s foto asli");
         table.put("Saving settings backup",
@@ -6248,11 +6254,11 @@ public final class L10nTranslations {
                 "Cari tindakan berbagi");
         table.put("Search the comments",
                 "Cari di komentar");
-        table.put("Search these comments",
-                "Cari di komentar ini");
     }
 
     private static void fillIn13(Map<String, String> table) {
+        table.put("Search these comments",
+                "Cari di komentar ini");
         table.put("Search translated titles and descriptions, then open the original setting.",
                 "Cari judul dan deskripsi terjemahan, lalu buka setelan asli.");
         table.put("Search without personalization, whatever your account is set to.",
@@ -6371,11 +6377,11 @@ public final class L10nTranslations {
                 "Lewati peringatan konten");
         table.put("Skip recorded LIVE broadcasts in the feed.",
                 "Lewati rekaman siaran LIVE di feed.");
-        table.put("Skip videos marked as using promotional music.",
-                "Lewati video yang ditandai memakai musik promosi.");
     }
 
     private static void fillIn14(Map<String, String> table) {
+        table.put("Skip videos marked as using promotional music.",
+                "Lewati video yang ditandai memakai musik promosi.");
         table.put("Skip videos that use a sound blocked with the player's sound button, or named below.",
                 "Lewati video yang memakai suara yang diblokir lewat tombol suara di pemutar, atau yang namanya ada di bawah.");
         table.put("Skipping videos with %1$s",
@@ -6494,11 +6500,11 @@ public final class L10nTranslations {
                 "Berkas itu bukan teks yang dapat dibaca, jadi mungkin rusak saat dikirim. Tidak ada yang diubah.");
         table.put("That file is too large to be a settings backup. Nothing was altered.",
                 "Berkas itu terlalu besar untuk sebuah cadangan pengaturan. Tidak ada yang diubah.");
-        table.put("That folder name has a character Android does not allow. Use letters, numbers, spaces or dashes.",
-                "Ada nama folder yang tidak sah di tujuannya.");
     }
 
     private static void fillIn15(Map<String, String> table) {
+        table.put("That folder name has a character Android does not allow. Use letters, numbers, spaces or dashes.",
+                "Ada nama folder yang tidak sah di tujuannya.");
         table.put("That is %1$d minutes today",
                 "Itu %1$d menit hari ini");
         table.put("That is %1$d videos today",
@@ -6617,11 +6623,11 @@ public final class L10nTranslations {
                 "Entri katalog ini sudah tidak tersedia. Segarkan Lab dan coba lagi.");
         table.put("This configuration has no fields that can be copied and changed safely on this build.",
                 "Konfigurasi ini tidak punya bidang yang bisa disalin dan diubah dengan aman di build ini.");
-        table.put("This file has more loaded values than the Lab takes at once.",
-                "Berkas ini berisi lebih banyak nilai yang dimuat daripada yang bisa diterima Lab sekaligus.");
     }
 
     private static void fillIn16(Map<String, String> table) {
+        table.put("This file has more loaded values than the Lab takes at once.",
+                "Berkas ini berisi lebih banyak nilai yang dimuat daripada yang bisa diterima Lab sekaligus.");
         table.put("This file has no loaded values in it.",
                 "Berkas ini tidak berisi nilai yang dimuat.");
         table.put("This file isn't a loaded-values export from the Feature Gate Lab.",
@@ -6740,11 +6746,11 @@ public final class L10nTranslations {
                 "Dua huruf, misalnya us, gb atau jp.");
         table.put("Type",
                 "Tipe");
-        table.put("Type to search settings",
-                "Ketik untuk mencari setelan");
     }
 
     private static void fillIn17(Map<String, String> table) {
+        table.put("Type to search settings",
+                "Ketik untuk mencari setelan");
         table.put("Unavailable",
                 "Tidak tersedia");
         table.put("Unblock this commenter",
@@ -6863,11 +6869,11 @@ public final class L10nTranslations {
                 "Nol mematikan ini. Pengingat singkat setelah sekian menit menonton, lalu lagi setelah selang yang sama. Waktu di pesan, profil, atau pencarian tidak dihitung, dan tidak ada yang muncul selama feed ditahan.");
         table.put("Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.",
                 "Nol mematikan ini. Menghitung setiap video yang muncul di feed, bagaimanapun kamu sampai ke sana, dan memberi tahu begitu jumlahnya tercapai. Ini terpisah dari batas sesi maju otomatis di Pemutaran, yang hanya menghitung video yang dilewati Hushfeed sendiri.");
-        table.put("Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.",
-                "Nol mematikan ini. Menghitung menit saat pemutar berjalan di feed. Waktu di pesan, profil, atau pencarian tidak dihitung.");
     }
 
     private static void fillIn18(Map<String, String> table) {
+        table.put("Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.",
+                "Nol mematikan ini. Menghitung menit saat pemutar berjalan di feed. Waktu di pesan, profil, atau pencarian tidak dihitung.");
         table.put("code %1$s",
                 "kode %1$s");
         table.put("collapsed",
@@ -6921,7 +6927,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildPt_rBR() {
-        Map<String, String> table = new HashMap<>(2210);
+        Map<String, String> table = new HashMap<>(2212);
         fillPt_rBR0(table);
         fillPt_rBR1(table);
         fillPt_rBR2(table);
@@ -8505,6 +8511,8 @@ public final class L10nTranslations {
                 "Salvo, substituição desligada");
         table.put("Saved. Restart TikTok to apply this.",
                 "Salvo. Reinicie o TikTok para aplicar.");
+        table.put("Saving",
+                "Saving");
         table.put("Saving %1$s original photos",
                 "Salvando %1$s fotos originais");
         table.put("Saving settings backup",
@@ -8539,11 +8547,11 @@ public final class L10nTranslations {
                 "Buscar ações de compartilhamento");
         table.put("Search the comments",
                 "Buscar nos comentários");
-        table.put("Search these comments",
-                "Buscar nestes comentários");
     }
 
     private static void fillPt_rBR13(Map<String, String> table) {
+        table.put("Search these comments",
+                "Buscar nestes comentários");
         table.put("Search translated titles and descriptions, then open the original setting.",
                 "Buscar entre os títulos e descrições traduzidos e depois abrir a configuração original.");
         table.put("Search without personalization, whatever your account is set to.",
@@ -8662,11 +8670,11 @@ public final class L10nTranslations {
                 "Pular os avisos de conteúdo");
         table.put("Skip recorded LIVE broadcasts in the feed.",
                 "Pular no feed as transmissões LIVE gravadas.");
-        table.put("Skip videos marked as using promotional music.",
-                "Pular os vídeos marcados como usando música promocional.");
     }
 
     private static void fillPt_rBR14(Map<String, String> table) {
+        table.put("Skip videos marked as using promotional music.",
+                "Pular os vídeos marcados como usando música promocional.");
         table.put("Skip videos that use a sound blocked with the player's sound button, or named below.",
                 "Pular os vídeos que usam um som bloqueado pelo botão de som do player, ou citado abaixo.");
         table.put("Skipping videos with %1$s",
@@ -8785,11 +8793,11 @@ public final class L10nTranslations {
                 "Esse arquivo não é texto legível, então pode ter se danificado no caminho. Nada foi alterado.");
         table.put("That file is too large to be a settings backup. Nothing was altered.",
                 "Esse arquivo é grande demais para ser um backup de configurações. Nada foi alterado.");
-        table.put("That folder name has a character Android does not allow. Use letters, numbers, spaces or dashes.",
-                "O destino tem um nome de pasta inválido.");
     }
 
     private static void fillPt_rBR15(Map<String, String> table) {
+        table.put("That folder name has a character Android does not allow. Use letters, numbers, spaces or dashes.",
+                "O destino tem um nome de pasta inválido.");
         table.put("That is %1$d minutes today",
                 "Isso dá %1$d minutos hoje");
         table.put("That is %1$d videos today",
@@ -8908,11 +8916,11 @@ public final class L10nTranslations {
                 "Esta entrada do catálogo não está mais disponível. Atualize o Laboratório e tente de novo.");
         table.put("This configuration has no fields that can be copied and changed safely on this build.",
                 "Esta configuração não tem campos que dê para copiar e mudar com segurança nesta build.");
-        table.put("This file has more loaded values than the Lab takes at once.",
-                "Este arquivo tem mais valores carregados do que o Lab aceita de uma vez.");
     }
 
     private static void fillPt_rBR16(Map<String, String> table) {
+        table.put("This file has more loaded values than the Lab takes at once.",
+                "Este arquivo tem mais valores carregados do que o Lab aceita de uma vez.");
         table.put("This file has no loaded values in it.",
                 "Este arquivo não contém valores carregados.");
         table.put("This file isn't a loaded-values export from the Feature Gate Lab.",
@@ -9031,11 +9039,11 @@ public final class L10nTranslations {
                 "Duas letras, como us, gb ou jp.");
         table.put("Type",
                 "Tipo");
-        table.put("Type to search settings",
-                "Digite para buscar nas configurações");
     }
 
     private static void fillPt_rBR17(Map<String, String> table) {
+        table.put("Type to search settings",
+                "Digite para buscar nas configurações");
         table.put("Unavailable",
                 "Indisponível");
         table.put("Unblock this commenter",
@@ -9154,11 +9162,11 @@ public final class L10nTranslations {
                 "Zero desliga isso. Um lembrete curto depois desses minutos assistindo, e de novo após o mesmo intervalo. Tempo em mensagens, num perfil ou na busca não conta, e nada aparece enquanto o feed está em espera.");
         table.put("Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.",
                 "Zero desliga isso. Conta cada vídeo que aparece no feed, não importa como você chegou nele, e avisa assim que a contagem for atingida. É separado do limite de sessão do avanço automático, em Reprodução, que só conta os vídeos que o Hushfeed passou por você.");
-        table.put("Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.",
-                "Zero desliga isso. Conta os minutos que o player passa rodando no feed. Tempo em mensagens, num perfil ou na busca não conta.");
     }
 
     private static void fillPt_rBR18(Map<String, String> table) {
+        table.put("Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.",
+                "Zero desliga isso. Conta os minutos que o player passa rodando no feed. Tempo em mensagens, num perfil ou na busca não conta.");
         table.put("code %1$s",
                 "código %1$s");
         table.put("collapsed",
