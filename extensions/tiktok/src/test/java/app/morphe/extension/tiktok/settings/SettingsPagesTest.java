@@ -749,7 +749,7 @@ public class SettingsPagesTest {
             input.setText("kein Treffer");
             Shadows.shadowOf(Looper.getMainLooper()).idle();
             assertNotNull(findPreference(page.getPreferenceScreen(), "Keine passenden Einstellungen"));
-            TextView clear = page.getView().findViewWithTag("settings_search_clear");
+            View clear = page.getView().findViewWithTag("settings_search_clear");
             assertNotNull(clear);
             assertTrue(clear.performClick());
             Shadows.shadowOf(Looper.getMainLooper()).idle();
