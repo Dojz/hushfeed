@@ -684,6 +684,7 @@ public final class FeatureGateLabFragment extends Fragment {
                     visible.size(), filterLabels(getContext())[selectedFilter]));
         }
         updateEmptyState(query);
+        adapter.setRules(rules);
         adapter.notifyDataSetChanged();
         if (restoreListPosition && list != null) {
             int position = listPosition;
@@ -1681,10 +1682,15 @@ public final class FeatureGateLabFragment extends Fragment {
     private final class GateAdapter extends BaseAdapter {
         private final Context context;
         private final List<FeatureGateCatalog.Entry> entries;
+        private Map<String, FeatureGateLabStore.Rule> rules = Collections.emptyMap();
 
         GateAdapter(Context context, List<FeatureGateCatalog.Entry> entries) {
             this.context = context;
             this.entries = entries;
+        }
+
+        void setRules(Map<String, FeatureGateLabStore.Rule> rules) {
+            this.rules = rules;
         }
 
         @Override public int getCount() { return entries.size(); }
@@ -1790,7 +1796,7 @@ public final class FeatureGateLabFragment extends Fragment {
             }
 
             FeatureGateCatalog.Entry entry = entries.get(position);
-            FeatureGateLabStore.Rule rule = FeatureGateLabStore.rule(entry.manager, entry.key, entry.type);
+            FeatureGateLabStore.Rule rule = rules.get(ruleIdentity(entry));
             holder.title.setText(entry.title);
             holder.key.setText(entry.key);
             holder.type.setText(entry.shortSourceName() + " " + entry.type);
