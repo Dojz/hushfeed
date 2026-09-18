@@ -2,6 +2,15 @@
 
 Every Hushfeed release, newest first.
 
+## 0.42.0 (2026-09-18)
+
+Two ad and Tako surfaces that slipped past the feed filter, both reported on 0.40.0 and traced to routes the earlier hooks never saw.
+
+### Feed filter
+
+* **TikTok:** Ads no longer appear while you scroll a creator's videos from their profile. The profile's own video pager was asking a separate ad endpoint and splicing the answer between the creator's videos, so those ads were in none of the lists the filter already cleaned. That request is refused now while Remove feed ads is on.
+* **TikTok:** The "Ask" bar that sat under some videos is gone with Hide Tako AI on. It looked like a Tako feature but was one of TikTok's bottom banners, so Hide Tako AI now covers it along with the floating bubble, and its switch says so.
+
 ## 0.41.0 (2026-09-18)
 
 A polish release. No patches were added or removed. Most of it makes the settings screen and the Feature Gate Lab read as one app, with a round of accessibility fixes and a changelog Morphe Manager can finally read.
