@@ -1,5 +1,5 @@
 {
-  "version": "v0.40.0",
+  "version": "v0.41.0",
   "appNames": {
     "com.zhiliaoapp.musically": "TikTok"
   },
@@ -1188,7 +1188,7 @@
     },
     {
       "name": "Hide feed LIVE button",
-      "description": "Hide the LIVE button at the top left of video feeds. Shares its switch with the Live entrance option of Hide video overlays, and stops the button before it is built rather than hiding it once it is on screen. Switch: Hushfeed settings > Feed screen.",
+      "description": "Hide the LIVE button at the top left of video feeds. Shares its switch with the LIVE entrance option of Hide video overlays, and stops the button before it is built rather than hiding it once it is on screen. Switch: Hushfeed settings > Feed screen.",
       "use": true,
       "dependencies": [
         "BytecodePatch",
@@ -1304,7 +1304,7 @@
     },
     {
       "name": "Hide floating promotions",
-      "description": "Removes floating promotional badges, coin icons, and timer banners from the Home feed. Switch: Hushfeed settings > Feed screen.",
+      "description": "Removes floating promotional badges, coin icons, and timer banners from the feed. Switch: Hushfeed settings > Feed screen.",
       "use": true,
       "dependencies": [
         "BytecodePatch",
@@ -2259,7 +2259,7 @@
     },
     {
       "name": "Show LIVE search",
-      "description": "Shows TikTok's search entry in the Live drawer where supported.",
+      "description": "Shows TikTok's search entry in the LIVE drawer where supported.",
       "use": true,
       "dependencies": [
         "BytecodePatch"
