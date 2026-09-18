@@ -120,6 +120,11 @@ public final class SettingsUi {
     /** Text and glyphs on {@link #OVERLAY_SCRIM}: white on it is 12.6:1. */
     public static final @ColorInt int OVERLAY_TEXT = Color.WHITE;
     public static final @ColorInt int OVERLAY_TEXT_MUTED = Color.argb(200, 255, 255, 255);
+    /**
+     * The scrim a panel that replaces the feed is painted with, rather than one that sits over it.
+     * Its alpha is the value {@code HoldRamp.FULL_ALPHA} ramps to, so the ramp's last frame and
+     * this panel's first frame are the same shade; {@code HoldRampTest} pins the pair.
+     */
     public static final @ColorInt int OVERLAY_SCRIM_SOLID = Color.argb(238, 0, 0, 0);
 
     private SettingsUi() {
@@ -173,18 +178,26 @@ public final class SettingsUi {
         return isDarkMode() ? 0xFF6BCB77 : 0xFF1D7A37;
     }
 
+    /** The glyph every toned notice and status row leads with, so it is written once. */
+    public static final String ATTENTION_GLYPH = "⚠";
+
+    /** The margins a notice keeps from whatever it sits between, so two of them match. */
+    public static final int NOTICE_MARGIN = 14;
+
     public static android.widget.LinearLayout inlineNotice(
             android.content.Context context, String text, @ColorInt int toneColor) {
         android.widget.LinearLayout row = new android.widget.LinearLayout(context);
         row.setOrientation(android.widget.LinearLayout.HORIZONTAL);
-        row.setGravity(android.view.Gravity.CENTER_VERTICAL);
+        // Top, not centre. A three-line paragraph centred its glyph against the middle of the
+        // block instead of against the line it belongs to.
+        row.setGravity(android.view.Gravity.TOP);
         int pad = dp(context, 12);
         row.setPadding(pad, pad, pad, pad);
         row.setBackground(borderedSurface(context, RADIUS_CARD, false));
         android.widget.TextView glyph = new android.widget.TextView(context);
-        glyph.setText("⚠");
+        glyph.setText(ATTENTION_GLYPH);
         glyph.setTextColor(toneColor);
-        glyph.setTextSize(16);
+        glyph.setTextSize(14);
         glyph.setPadding(0, 0, dp(context, 8), 0);
         glyph.setImportantForAccessibility(android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO);
         row.addView(glyph, new android.widget.LinearLayout.LayoutParams(
@@ -192,8 +205,10 @@ public final class SettingsUi {
                 android.view.ViewGroup.LayoutParams.WRAP_CONTENT));
         android.widget.TextView body = new android.widget.TextView(context);
         body.setText(text);
-        body.setTextColor(textSecondary());
-        body.setTextSize(13);
+        // The tone carries the notice, so it carries the sentence as well as the glyph. Both of
+        // these pairs clear 4.5:1 on surface() in either theme.
+        body.setTextColor(toneColor);
+        body.setTextSize(14);
         row.addView(body, new android.widget.LinearLayout.LayoutParams(
                 0, android.view.ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
         return row;
@@ -1174,9 +1189,16 @@ public final class SettingsUi {
         });
     }
 
+    /**
+     * Says a control is working, without fading it.
+     *
+     * <p>Alpha on the view multiplies its backdrop as well as its glyph, so a chip drawn over a
+     * video went from a readable disabled control to a smudge over a bright frame. A caller that
+     * wants a visible disabled state mutes its own glyph, which is the one thing on the control
+     * that should lose contrast.
+     */
     public static void setBusy(View control, boolean busy, String busyLabel) {
         control.setEnabled(!busy);
-        control.setAlpha(busy ? 0.6f : 1f);
         if (android.os.Build.VERSION.SDK_INT >= 30) {
             control.setStateDescription(busy ? busyLabel : null);
         } else {

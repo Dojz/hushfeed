@@ -82,7 +82,7 @@ public class HookStatusPreference extends Preference {
         String surfaces = String.join(", ", broken);
         String text = L10n.f(context, "Something is missing from %1$s. Tap for the whole report.",
                 surfaces);
-        return toned("⚠ ", SettingsUi.attentionColor(), text);
+        return toned(SettingsUi.ATTENTION_GLYPH + " ", SettingsUi.attentionColor(), text);
     }
 
     private static CharSequence toned(String glyph, int color, String body) {

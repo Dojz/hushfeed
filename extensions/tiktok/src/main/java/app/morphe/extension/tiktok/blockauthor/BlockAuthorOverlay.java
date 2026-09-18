@@ -762,9 +762,13 @@ public final class BlockAuthorOverlay {
 
     private static void setButtonEnabled(boolean enabled) {
         View button = buttonReference.get();
-        if (button != null) {
-            SettingsUi.setBusy(button, !enabled,
-                    L10n.t(button.getContext(), "Blocking"));
+        if (button == null) return;
+        SettingsUi.setBusy(button, !enabled, L10n.t(button.getContext(), "Blocking"));
+        // The glyph loses contrast, the scrim behind it does not. Fading the whole chip took
+        // the backdrop's alpha down with it and left a smudge over a bright frame.
+        if (button instanceof TextView) {
+            ((TextView) button).setTextColor(
+                    enabled ? SettingsUi.OVERLAY_TEXT : SettingsUi.OVERLAY_TEXT_MUTED);
         }
     }
 

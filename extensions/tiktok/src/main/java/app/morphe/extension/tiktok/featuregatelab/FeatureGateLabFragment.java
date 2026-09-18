@@ -238,7 +238,8 @@ public final class FeatureGateLabFragment extends Fragment {
                 L10n.t(context, "Account warning: forced client values apply to every account in this app data and cannot bypass server controls."),
                 SettingsUi.attentionColor());
         LinearLayout.LayoutParams warningParams = FeatureGateLabUi.matchWrap();
-        warningParams.setMargins(0, FeatureGateLabUi.dp(context, 14), 0, FeatureGateLabUi.dp(context, 16));
+        int noticeMargin = FeatureGateLabUi.dp(context, SettingsUi.NOTICE_MARGIN);
+        warningParams.setMargins(0, noticeMargin, 0, noticeMargin);
         controls.addView(warning, warningParams);
 
         LinearLayout searchRow = new LinearLayout(context);
@@ -559,7 +560,11 @@ public final class FeatureGateLabFragment extends Fragment {
         list = null;
         selectionBar = null;
         selectionCount = null;
-        for (int i = 0; i < viewTabLabels.length; i++) viewTabLabels[i] = null;
+        for (int i = 0; i < viewTabLabels.length; i++) {
+            viewTabContainers[i] = null;
+            viewTabLabels[i] = null;
+            viewTabIndicators[i] = null;
+        }
         for (int i = 0; i < sourceTabLabels.length; i++) {
             sourceTabContainers[i] = null;
             sourceTabLabels[i] = null;

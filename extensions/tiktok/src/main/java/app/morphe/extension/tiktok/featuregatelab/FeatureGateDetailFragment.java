@@ -228,7 +228,8 @@ public final class FeatureGateDetailFragment extends Fragment {
                     L10n.t(context, "Account-sensitive name: forcing this key may affect security, login, compliance, region, payment, or account safety behavior."),
                     SettingsUi.attentionColor());
             LinearLayout.LayoutParams params = FeatureGateLabUi.matchWrap();
-            params.setMargins(0, FeatureGateLabUi.dp(context, 12), 0, 0);
+            int noticeMargin = FeatureGateLabUi.dp(context, SettingsUi.NOTICE_MARGIN);
+            params.setMargins(0, noticeMargin, 0, noticeMargin);
             content.addView(sensitive, params);
         }
 
