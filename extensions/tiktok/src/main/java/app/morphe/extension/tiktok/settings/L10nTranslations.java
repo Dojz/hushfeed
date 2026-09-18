@@ -943,8 +943,8 @@ public final class L10nTranslations {
                 "Die Zeile „Neue Follower“ ausblenden.");
         table.put("Hide the Send to row",
                 "Zeile „Senden an“ ausblenden");
-        table.put("Hide the Tako AI feed bubble above the profile button.",
-                "Die Tako-AI-Blase im Feed über der Profil-Schaltfläche ausblenden.");
+        table.put("Hide the Tako AI bubble above the profile button and the Ask bar under videos.",
+                "Die Tako-AI-Blase über der Profil-Schaltfläche und die Tako-Leiste unter Videos ausblenden.");
         table.put("Hide the TikTok Tako assistant conversation.",
                 "Die Unterhaltung mit dem TikTok-Tako-Assistenten ausblenden.");
         table.put("Hide the activity status control in the Inbox header.",
@@ -3244,8 +3244,8 @@ public final class L10nTranslations {
                 "Ocultar la fila de Nuevos seguidores.");
         table.put("Hide the Send to row",
                 "Ocultar la fila Enviar a");
-        table.put("Hide the Tako AI feed bubble above the profile button.",
-                "Ocultar la burbuja de Tako AI del feed, encima del botón de perfil.");
+        table.put("Hide the Tako AI bubble above the profile button and the Ask bar under videos.",
+                "Ocultar la burbuja de Tako AI encima del botón de perfil y la barra de Tako debajo de los videos.");
         table.put("Hide the TikTok Tako assistant conversation.",
                 "Ocultar la conversación con el asistente TikTok Tako.");
         table.put("Hide the activity status control in the Inbox header.",
@@ -5545,8 +5545,8 @@ public final class L10nTranslations {
                 "Sembunyikan baris Pengikut baru.");
         table.put("Hide the Send to row",
                 "Sembunyikan baris Kirim ke");
-        table.put("Hide the Tako AI feed bubble above the profile button.",
-                "Sembunyikan gelembung Tako AI di feed, tepat di atas tombol profil.");
+        table.put("Hide the Tako AI bubble above the profile button and the Ask bar under videos.",
+                "Sembunyikan gelembung Tako AI di atas tombol profil dan bilah Tako di bawah video.");
         table.put("Hide the TikTok Tako assistant conversation.",
                 "Sembunyikan percakapan asisten TikTok Tako.");
         table.put("Hide the activity status control in the Inbox header.",
@@ -7846,8 +7846,8 @@ public final class L10nTranslations {
                 "Esconder a linha de Novos seguidores.");
         table.put("Hide the Send to row",
                 "Esconder a linha Enviar para");
-        table.put("Hide the Tako AI feed bubble above the profile button.",
-                "Esconder a bolha do Tako AI no feed, acima do botão de perfil.");
+        table.put("Hide the Tako AI bubble above the profile button and the Ask bar under videos.",
+                "Esconder a bolha do Tako AI acima do botão de perfil e a barra do Tako abaixo dos vídeos.");
         table.put("Hide the TikTok Tako assistant conversation.",
                 "Esconder a conversa com o assistente TikTok Tako.");
         table.put("Hide the activity status control in the Inbox header.",
