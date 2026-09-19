@@ -73,7 +73,7 @@ internal fun stripVerifiedResources(
         val expectedCounts = profiles.map { it.files.size }.distinct().sorted().joinToString()
         throw PatchException(
             "$patchName: found ${actual.size} target files, but no reviewed path set matched " +
-                "(expected file counts: $expectedCounts).",
+                "(expected file counts: $expectedCounts).$UNREVIEWED_BUILD_HINT",
         )
     }
 
@@ -92,7 +92,7 @@ internal fun stripVerifiedResources(
         profile.files.all { contract -> digests[contract.path] == contract.sha256 }
     }
     if (matchingContentProfiles.isEmpty()) {
-        throw PatchException("$patchName: target resources do not match a reviewed TikTok build.")
+        throw PatchException("$patchName: target resources do not match a reviewed TikTok build.$UNREVIEWED_BUILD_HINT")
     }
 
     val originalBytes = actual.values.sumOf(File::length)
@@ -138,7 +138,7 @@ internal fun stripVerifiedLanguagePacks(
     if (byCode.keys != contract.directories) {
         throw PatchException(
             "$patchName: found ${byCode.size} language directories, but the reviewed set has " +
-                "${contract.directories.size}.",
+                "${contract.directories.size}.$UNREVIEWED_BUILD_HINT",
         )
     }
 
@@ -149,7 +149,7 @@ internal fun stripVerifiedLanguagePacks(
         .joinToString(separator = "", postfix = "") { path -> "$path\n" }
         .sha256()
     if (pathManifest != contract.pathManifestSha256) {
-        throw PatchException("$patchName: language file paths do not match the reviewed inventory.")
+        throw PatchException("$patchName: language file paths do not match the reviewed inventory.$UNREVIEWED_BUILD_HINT")
     }
 
     val selected = parseLanguageSelection(targetLocales, contract.directories)
@@ -179,7 +179,7 @@ internal fun stripVerifiedLanguagePacks(
         }
         .sha256()
     if (contentManifest !in contract.contentManifestSha256) {
-        throw PatchException("$patchName: language resources do not match a reviewed TikTok build.")
+        throw PatchException("$patchName: language resources do not match a reviewed TikTok build.$UNREVIEWED_BUILD_HINT")
     }
 
     val originalBytes = targets.sumOf(File::length)
@@ -188,6 +188,17 @@ internal fun stripVerifiedLanguagePacks(
 }
 
 private const val LANGUAGE_DIRECTORY_PREFIX = "strings#lang_"
+
+/**
+ * What a person patching needs after any "not a build we know" refusal, which Manager shows as
+ * the patch's error. The refusal itself reads like a fault, and on its own it doesn't say that
+ * nothing was touched or what to do next. The `#lang_` directories are App Bundle language
+ * targeting, so a split bundle merged on the phone keeps only some of them (issue #9: 25 of 64).
+ */
+internal const val UNREVIEWED_BUILD_HINT =
+    " Nothing was removed. This patch only empties files it has checked byte for byte against a " +
+        "known TikTok APK, and this one carries a different set. A split bundle (an .apkm file) " +
+        "can do this. Untick the patch, or patch the full APK from APKMirror instead."
 
 private fun File.resolveChecked(relativePath: String, patchName: String): File {
     val normalized = relativePath.replace('\\', '/')

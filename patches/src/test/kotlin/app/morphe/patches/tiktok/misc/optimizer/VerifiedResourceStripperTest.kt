@@ -34,6 +34,7 @@ class VerifiedResourceStripperTest {
         }
 
         assertTrue(error.message.orEmpty().contains("Test resources"))
+        assertTrue(error.message.orEmpty(), error.message.orEmpty().endsWith(UNREVIEWED_BUILD_HINT))
         assertArrayEquals("first".toByteArray(), first.readBytes())
         assertArrayEquals("changed".toByteArray(), second.readBytes())
     }
@@ -215,6 +216,24 @@ class VerifiedResourceStripperTest {
         assertThrows(PatchException::class.java) {
             stripVerifiedLanguagePacks(root, "en", contract)
         }
+        assertArrayEquals("spanish".toByteArray(), root.resolve("assets/strings#lang_es/es.xrsc").readBytes())
+    }
+
+    @Test
+    fun `a bundle merged with only some languages is refused, says why, and empties nothing`() {
+        // Issue #9: a split bundle merged on the phone kept 25 of the 64 #lang_ directories.
+        val root = temporary.newFolder("partial-languages")
+        root.write("assets/strings#lang_en/en.xrsc", "english")
+        root.write("assets/strings#lang_es/es.xrsc", "spanish")
+        val contract = languageContract(root, setOf("en", "es", "fr"))
+
+        val error = assertThrows(PatchException::class.java) {
+            stripVerifiedLanguagePacks(root, "en", contract)
+        }
+
+        val message = error.message.orEmpty()
+        assertTrue(message, message.contains("found 2 language directories, but the reviewed set has 3."))
+        assertTrue(message, message.endsWith(UNREVIEWED_BUILD_HINT))
         assertArrayEquals("spanish".toByteArray(), root.resolve("assets/strings#lang_es/es.xrsc").readBytes())
     }
 
