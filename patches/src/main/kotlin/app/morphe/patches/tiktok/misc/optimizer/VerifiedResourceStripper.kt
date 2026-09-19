@@ -122,11 +122,16 @@ internal fun parseLanguageSelection(raw: String?, available: Set<String>): Set<S
     return selected
 }
 
-/** Verify the complete language inventory before emptying every unselected pack. */
+/**
+ * Verify the complete language inventory before emptying every unselected pack.
+ *
+ * <p>Each reviewed build has its own inventory, told apart by its directory set: the universal
+ * APKs carry 64, a merged split bundle only the languages it shipped splits for.
+ */
 internal fun stripVerifiedLanguagePacks(
     root: File,
     targetLocales: String?,
-    contract: LanguageInventoryContract,
+    contracts: List<LanguageInventoryContract>,
 ): StripSummary {
     val patchName = "Language Pack Purger"
     val assets = root.resolveChecked("assets", patchName)
@@ -135,10 +140,13 @@ internal fun stripVerifiedLanguagePacks(
     val languageDirectories = assets.listFiles().orEmpty()
         .filter { it.isDirectory && it.name.startsWith(LANGUAGE_DIRECTORY_PREFIX) }
     val byCode = languageDirectories.associateBy { it.name.removePrefix(LANGUAGE_DIRECTORY_PREFIX).lowercase(Locale.ROOT) }
-    if (byCode.keys != contract.directories) {
+    val contract = contracts.firstOrNull { it.directories == byCode.keys }
+    if (contract == null) {
+        val counts = contracts.map { it.directories.size }.distinct().sorted().joinToString(" or ")
+        val reviewed = if (contracts.size == 1) "the reviewed set has" else "the reviewed sets have"
         throw PatchException(
-            "$patchName: found ${byCode.size} language directories, but the reviewed set has " +
-                "${contract.directories.size}.$UNREVIEWED_BUILD_HINT",
+            "$patchName: found ${byCode.size} language directories, but $reviewed " +
+                "$counts.$UNREVIEWED_BUILD_HINT",
         )
     }
 
