@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-09-18T21:16:57",
-  "description": "Hushfeed v0.44.0 targets global TikTok 46.2.3 (com.zhiliaoapp.musically).\n\nA profile's share sheet and a LIVE's share sheet can now hide a different set of actions from a video's, each with its own checklist under Share sheet. Until you save one it hides whatever your video list hides. Downloads now patches on builds where it used to refuse (a reporter's 46.8.3), and the four optional cleanup patches say plainly when they've left an unfamiliar APK alone.\n\nValidation: 1427 runtime tests passed locally, plus 236 patch tests. The bundle carries 91 patches and a non-empty classes.dex. All patches applied with zero failures to the 46.2.3, 46.7.3, 46.8.3 and 46.9.3 fixtures. Needs Morphe Manager 1.30.0 or newer.\n\nThe downloadable .mpp is the patch bundle. Patch on the device with Morphe Manager and keep its existing signing key.",
-  "download_url": "https://github.com/SysAdminDoc/hushfeed/releases/download/v0.44.0/patches-0.44.0.mpp",
+  "created_at": "2026-09-18T22:50:25",
+  "description": "Hushfeed v0.45.0 targets global TikTok 46.2.3 (com.zhiliaoapp.musically).\n\nTikTok 46.2.3 from APKMirror's bundle download (an .apkm file) now patches cleanly. The four optional cleanup patches accept it, still checking every file byte for byte before emptying it. AMOLED dark theme refuses a merged bundle instead of building one that crashes at launch, so use the plain APK if you want the dark theme.\n\nValidation: 1427 runtime tests passed locally, plus 240 patch tests. The bundle carries 91 patches and a non-empty classes.dex. All patches applied with zero failures to the 46.2.3, 46.7.3, 46.8.3 and 46.9.3 fixtures, and 90 of 91 to the APKMirror 46.2.3 bundle with AMOLED refusing it as intended. Needs Morphe Manager 1.30.0 or newer.\n\nThe downloadable .mpp is the patch bundle. Patch on the device with Morphe Manager and keep its existing signing key.",
+  "download_url": "https://github.com/SysAdminDoc/hushfeed/releases/download/v0.45.0/patches-0.45.0.mpp",
   "signature_download_url": "",
-  "version": "0.44.0"
+  "version": "0.45.0"
 }
