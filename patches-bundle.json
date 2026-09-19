@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-09-18T14:33:15",
-  "description": "Hushfeed v0.43.1 targets global TikTok 46.2.3 (com.zhiliaoapp.musically).\n\nA packaging fix. No patch changed. The 0.43.0 bundle went out without its patch code, so Morphe Manager showed zero patches for the source. This is the same 91 patches, rebuilt correctly. If you saw no patches on 0.43.0, update the source again.\n\nValidation: 1423 runtime tests passed locally, plus the patches module suite. The bundle carries 91 patches and a non-empty classes.dex, which the release check now requires. All patches applied with zero failures to the 46.2.3, 46.7.3, 46.8.3 and 46.9.3 fixtures. Needs Morphe Manager 1.30.0 or newer.\n\nThe downloadable .mpp is the patch bundle. Patch on the device with Morphe Manager and keep its existing signing key.",
-  "download_url": "https://github.com/SysAdminDoc/hushfeed/releases/download/v0.43.1/patches-0.43.1.mpp",
+  "created_at": "2026-09-18T21:16:57",
+  "description": "Hushfeed v0.44.0 targets global TikTok 46.2.3 (com.zhiliaoapp.musically).\n\nA profile's share sheet and a LIVE's share sheet can now hide a different set of actions from a video's, each with its own checklist under Share sheet. Until you save one it hides whatever your video list hides. Downloads now patches on builds where it used to refuse (a reporter's 46.8.3), and the four optional cleanup patches say plainly when they've left an unfamiliar APK alone.\n\nValidation: 1427 runtime tests and 236 patch tests passed locally. The bundle carries 91 patches and a non-empty classes.dex. All patches applied with zero failures to the 46.2.3, 46.7.3, 46.8.3 and 46.9.3 fixtures. Needs Morphe Manager 1.30.0 or newer.\n\nThe downloadable .mpp is the patch bundle. Patch on the device with Morphe Manager and keep its existing signing key.",
+  "download_url": "https://github.com/SysAdminDoc/hushfeed/releases/download/v0.44.0/patches-0.44.0.mpp",
   "signature_download_url": "",
-  "version": "0.43.1"
+  "version": "0.44.0"
 }
