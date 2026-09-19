@@ -2,6 +2,15 @@
 
 Every Hushfeed release, newest first.
 
+## 0.45.0 (2026-09-18)
+
+TikTok 46.2.3 from APKMirror's bundle download, an .apkm file, now patches cleanly (#9).
+
+### Fixes
+
+* **TikTok:** The four optional cleanup patches now accept APKMirror's 46.2.3 bundle. They refused it before, because a merged bundle carries fewer files and only 25 of the 64 language packs. Every file they empty is still checked byte for byte first.
+* **TikTok:** AMOLED dark theme now refuses an APK merged from a bundle instead of building one that crashes at launch, because rebuilding a merged bundle's resources loses about 1,400 of them. Use the plain APK from APKMirror if you want the dark theme.
+
 ## 0.44.0 (2026-09-18)
 
 Separate share lists for profiles and LIVEs, and two fixes from a patching report (#9).
