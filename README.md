@@ -345,13 +345,15 @@ A patched app inherits TikTok's target SDK, which is 36 today. Android 17 raises
 
 Google Play only ever serves the newest build it thinks your device can run, so the copy on your phone is almost certainly not 46.2.3, and there is no way to ask Play for an older one. Take the APK from [APKMirror](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-46-2-3-release/tiktok-46-2-3-android-apk-download/), which serves the exact version, then patch that file rather than the installed app.
 
+APKMirror also offers 46.2.3 as a bundle, an `.apkm` file. Morphe Manager merges it into one APK and every patch applies to it except AMOLED dark theme, which refuses it with a message saying why. Rebuilding the resources of a merged bundle loses about 1,400 of them, and TikTok would crash at launch. Take the plain APK if you want the dark theme.
+
 ### Why that version and not a newer one
 
 Every patch here is tied to code TikTok does not name: the classes and methods are renamed on each build, so a patch finds its place by the shape of the code around it. Those shapes move. 46.2.3 remains the declared target and the build with full device acceptance. The complete bundle also applies without a patch-time failure to retained 46.7.3 and 46.8.3 fixtures, but those outputs have not completed the same device behavior checks and are not advertised as compatible. Another build can fail loudly when an anchor moves or, worse, accept the wrong shape.
 
 Only the global package is declared in the compatibility metadata.
 
-The four resource optimizers are off by default. Before changing the APK, they compare the complete target set with reviewed paths and SHA-256 digests from the retained fixtures. An exact group that is already completely empty is accepted. A missing, extra, altered or partly emptied set stops patching. The 46.2.3 checks cover both its arm64-v8a and armeabi-v7a native libraries; the retained 46.7.3 and 46.8.3 fixtures contain only arm64-v8a libraries. Language packs also require the reviewed 64-directory and 207-file inventory, keep English, and preserve both Android aliases for Hebrew and Indonesian when either one is selected.
+The four resource optimizers are off by default. Before changing the APK, they compare the complete target set with reviewed paths and SHA-256 digests from the retained fixtures. An exact group that is already completely empty is accepted. A missing, extra, altered or partly emptied set stops patching. The 46.2.3 checks cover both its arm64-v8a and armeabi-v7a native libraries; the retained 46.7.3 and 46.8.3 fixtures contain only arm64-v8a libraries. Language packs also require a reviewed inventory (64 directories on the full APK, 25 on the APKMirror bundle), keep English, and preserve both Android aliases for Hebrew and Indonesian when either one is selected.
 
 ### Moving from Kveld
 
