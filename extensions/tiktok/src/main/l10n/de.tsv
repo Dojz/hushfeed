@@ -506,6 +506,7 @@ Kinds of post	Beitragsarten
 LIVE	LIVE
 LIVE replays	LIVE-Wiederholungen
 LIVE settings	Live-Einstellungen
+LIVE share actions	Share-Aktionen bei LIVE
 LIVE videos	LIVE-Videos
 Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.	Lab-Daten zurückgesetzt. Letzte Lab-Änderung rückgängig machen steht im Menü. TikTok neu starten, damit das gilt.
 Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this.	Die Lab-Daten überschritten das Regellimit und wurden daher ohne Rückgängig-Kopie gelöscht. TikTok neu starten, damit das gilt.
@@ -680,6 +681,7 @@ Privacy	Datenschutz
 Privacy and system	Datenschutz und System
 Profile	Profil
 Profile picture saved to %1$s	Profilbild gespeichert unter %1$s
+Profile share actions	Share-Aktionen im Profil
 Promotional music	Werbemusik
 Proof	Beleg
 Publication age	Beitragsalter
@@ -1037,6 +1039,7 @@ Undo clearing seen videos	Undo clearing seen videos
 Undo last Lab change	Letzte Lab-Änderung rückgängig machen
 Undo last restore or reset	Letzte Wiederherstellung oder Zurücksetzung rückgängig machen
 Undoing the last change	Die letzte Änderung wird rückgängig gemacht
+Until you save a choice here, this sheet hides the same actions as the share action checklist.	Bis du hier etwas speicherst, blendet dieses Menü dieselben Aktionen aus wie die Checkliste der Share-Aktionen.
 Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.	Bis zu 8 Geschwindigkeiten von 0.5 bis 3, durch Kommas getrennt. Beispiel: 0.5, 1, 1.5, 2, 2.5, 3. Leer lassen für TikToks Liste. TikTok neu starten, damit das gilt.
 Use 0 for TikTok's size, or 12 to 48. Applies to the next caption.	0 für TikToks Größe, sonst 12 bis 48. Gilt ab dem nächsten Untertitel.
 Use Save JSON for this large report	Nutze für diesen großen Bericht „JSON speichern“

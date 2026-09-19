@@ -504,6 +504,7 @@ Kinds of post,Kinds of post
 LIVE,LIVE
 LIVE replays,LIVE replays
 LIVE settings,LIVE settings
+LIVE share actions,LIVE share actions
 LIVE videos,LIVE videos
 Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.,Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.
 "Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this.","Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this."
@@ -678,6 +679,7 @@ Privacy,Privacy
 Privacy and system,Privacy and system
 Profile,Profile
 Profile picture saved to %1$s,Profile picture saved to %1$s
+Profile share actions,Profile share actions
 Promotional music,Promotional music
 Proof,Proof
 Publication age,Publication age
@@ -1035,6 +1037,7 @@ Undo clearing seen videos,Undo clearing seen videos
 Undo last Lab change,Undo last Lab change
 Undo last restore or reset,Undo last restore or reset
 Undoing the last change,Undoing the last change
+"Until you save a choice here, this sheet hides the same actions as the share action checklist.","Until you save a choice here, this sheet hides the same actions as the share action checklist."
 "Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.","Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this."
 "Use 0 for TikTok's size, or 12 to 48. Applies to the next caption.","Use 0 for TikTok's size, or 12 to 48. Applies to the next caption."
 Use Save JSON for this large report,Use Save JSON for this large report

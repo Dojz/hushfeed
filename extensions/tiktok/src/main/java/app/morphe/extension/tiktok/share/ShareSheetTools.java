@@ -146,7 +146,7 @@ public final class ShareSheetTools {
                 RECIPIENTS.clear();
             }
 
-            List<String> hidden = entries(Settings.SHARE_HIDDEN_ITEMS.get());
+            List<String> hidden = entries(ShareModelFilter.hiddenItems());
             boolean confirm = Settings.SHARE_CONFIRM_SEND.get();
             if (!confirm) {
                 disarm();

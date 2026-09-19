@@ -503,6 +503,7 @@ Kinds of post	Tipos de post
 LIVE	LIVE
 LIVE replays	Reprises de LIVE
 LIVE settings	Configurações de Live
+LIVE share actions	Ações de compartilhamento de LIVE
 LIVE videos	Vídeos LIVE
 Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.	Dados do Lab redefinidos. Desfazer a última alteração do Lab está no menu. Reinicie o TikTok para aplicar.
 Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this.	Os dados do Lab ultrapassavam o limite de regras, então foram apagados sem uma cópia para desfazer. Reinicie o TikTok para aplicar.
@@ -677,6 +678,7 @@ Privacy	Privacidade
 Privacy and system	Privacidade e sistema
 Profile	Perfil
 Profile picture saved to %1$s	Foto de perfil salva em %1$s
+Profile share actions	Ações de compartilhamento do perfil
 Promotional music	Música promocional
 Proof	Comprovação
 Publication age	Idade da publicação
@@ -1034,6 +1036,7 @@ Undo clearing seen videos	Undo clearing seen videos
 Undo last Lab change	Desfazer a última mudança do Lab
 Undo last restore or reset	Desfazer a última restauração ou redefinição
 Undoing the last change	Desfazendo a última mudança
+Until you save a choice here, this sheet hides the same actions as the share action checklist.	Até você salvar uma escolha aqui, este menu oculta as mesmas ações que a lista de ações de compartilhamento.
 Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.	Até 8 velocidades de 0.5 a 3, separadas por vírgula. Por exemplo: 0.5, 1, 1.5, 2, 2.5, 3. Deixe vazio para a lista do TikTok. Reinicie o TikTok para aplicar.
 Use 0 for TikTok's size, or 12 to 48. Applies to the next caption.	Use 0 para o tamanho do TikTok, ou de 12 a 48. Vale para a próxima legenda.
 Use Save JSON for this large report	Use Salvar JSON para este relatório grande

@@ -504,6 +504,7 @@ Kinds of post,Jenis postingan
 LIVE,LIVE
 LIVE replays,Putar ulang LIVE
 LIVE settings,Pengaturan Live
+LIVE share actions,Tindakan berbagi LIVE
 LIVE videos,Video LIVE
 Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.,Data Lab disetel ulang. Batalkan perubahan Lab terakhir ada di menu. Mulai ulang TikTok agar berlaku.
 "Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this.","Data Lab melebihi batas aturan, jadi data dihapus tanpa salinan untuk dibatalkan. Mulai ulang TikTok agar berlaku."
@@ -678,6 +679,7 @@ Privacy,Privasi
 Privacy and system,Privasi dan sistem
 Profile,Profil
 Profile picture saved to %1$s,Foto profil disimpan ke %1$s
+Profile share actions,Tindakan berbagi profil
 Promotional music,Musik promosi
 Proof,Bukti
 Publication age,Usia kiriman
@@ -1035,6 +1037,7 @@ Undo clearing seen videos,Undo clearing seen videos
 Undo last Lab change,Batalkan perubahan Lab terakhir
 Undo last restore or reset,Urungkan pemulihan atau reset terakhir
 Undoing the last change,Membatalkan perubahan terakhir
+"Until you save a choice here, this sheet hides the same actions as the share action checklist.","Sampai Anda menyimpan pilihan di sini, lembar ini menyembunyikan tindakan yang sama dengan daftar periksa tindakan berbagi."
 "Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.","Sampai 8 kecepatan dari 0.5 hingga 3, dipisah koma. Contoh: 0.5, 1, 1.5, 2, 2.5, 3. Kosongkan untuk daftar TikTok. Mulai ulang TikTok agar berlaku."
 "Use 0 for TikTok's size, or 12 to 48. Applies to the next caption.","Gunakan 0 untuk ukuran TikTok, atau 12 sampai 48. Berlaku untuk teks berikutnya."
 Use Save JSON for this large report,Pakai Simpan JSON untuk laporan sebesar ini

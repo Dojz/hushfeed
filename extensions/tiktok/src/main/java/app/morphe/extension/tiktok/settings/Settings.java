@@ -464,6 +464,14 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting SHARE_CONFIRM_SEND = new BooleanSetting("share_confirm_send", TRUE);
     public static final BooleanSetting HIDE_SHARE_CONTACTS = new BooleanSetting("hide_share_contacts", FALSE);
     public static final StringSetting SHARE_HIDDEN_ITEMS = new StringSetting("share_hidden_items", "");
+    // The profile and LIVE sheets keep lists of their own. Until one is saved it holds this
+    // marker and follows SHARE_HIDDEN_ITEMS, so a list chosen before the split keeps working on
+    // every sheet, unknown identifiers included.
+    public static final String SHARE_HIDDEN_ITEMS_FOLLOW_VIDEO = "@video";
+    public static final StringSetting SHARE_HIDDEN_ITEMS_PROFILE =
+            new StringSetting("share_hidden_items_profile", SHARE_HIDDEN_ITEMS_FOLLOW_VIDEO);
+    public static final StringSetting SHARE_HIDDEN_ITEMS_LIVE =
+            new StringSetting("share_hidden_items_live", SHARE_HIDDEN_ITEMS_FOLLOW_VIDEO);
     public static final StringSetting SHARE_ACTION_CATALOG = new StringSetting("share_action_catalog", "");
     public static final BooleanSetting DISABLE_LONG_PRESS_QUICK_SHARE =
             new BooleanSetting("disable_long_press_quick_share", FALSE);
