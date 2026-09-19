@@ -2,6 +2,19 @@
 
 Every Hushfeed release, newest first.
 
+## 0.44.0 (2026-09-18)
+
+Separate share lists for profiles and LIVEs, and two fixes from a patching report (#9).
+
+### Share sheet
+
+* **TikTok:** A profile's share sheet and a LIVE's share sheet can now hide a different set of actions from a video's. Each has its own checklist under Hushfeed settings > Share sheet, and until you save one it hides whatever your video list hides, so nothing you set up before changes.
+
+### Fixes
+
+* **TikTok:** Downloads no longer fails to patch on TikTok builds where the download step's code is larger than usual. A reporter's 46.8.3 lost Downloads to this.
+* **TikTok:** When one of the four optional cleanup patches meets a TikTok APK it hasn't checked, its error now says nothing was removed and what to do next: untick it, or patch the full APK from APKMirror. A split bundle (an .apkm file) can cause this.
+
 ## 0.43.1 (2026-09-18)
 
 A packaging fix. No patch changed.
