@@ -2,6 +2,14 @@
 
 Every Hushfeed release, newest first.
 
+## 0.45.2 (2026-09-19)
+
+One settings search fix found during the TikTok interface audit.
+
+### Settings search
+
+* **TikTok:** Opening a search result and pressing Back now keeps the query visible. Before this release the filtered result list stayed on screen, but the search box looked empty.
+
 ## 0.45.1 (2026-09-19)
 
 Two fixes for TikTok 46.9.3, one of them a crash (#12).
