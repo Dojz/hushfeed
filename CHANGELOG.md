@@ -2,7 +2,9 @@
 
 Every Hushfeed release, newest first.
 
-## Unreleased
+## 0.50.0 (2026-09-20)
+
+Settings failures are recoverable, movable controls stay reachable and the largest settings catalog no longer ranks searches on TikTok's UI thread.
 
 ### Interface and accessibility
 
