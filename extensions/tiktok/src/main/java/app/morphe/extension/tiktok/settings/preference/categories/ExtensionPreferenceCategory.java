@@ -48,6 +48,7 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                 || SettingsStatus.liveSearchEnabled
                 || SettingsStatus.hideSearchSuggestionsEnabled
                 || SettingsStatus.keepFavoritesTabEnabled
+                || SettingsStatus.promotionalBannersEnabled
                 || SettingsStatus.refreshRateEnabled
                 || SettingsStatus.launcherShortcutsEnabled;
     }
@@ -154,13 +155,23 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                     Settings.HIDE_SEARCH_SUGGESTIONS
             ));
         }
-        if (SettingsStatus.keepFavoritesTabEnabled) {
+        if (SettingsStatus.keepFavoritesTabEnabled || SettingsStatus.promotionalBannersEnabled) {
             addPreference(new SectionHeadingPreference(context, "Profile"));
+        }
+        if (SettingsStatus.keepFavoritesTabEnabled) {
             addPreference(new TogglePreference(
                     context,
                     "Keep the Favorites tab",
                     "TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.",
                     Settings.KEEP_FAVORITES_TAB
+            ));
+        }
+        if (SettingsStatus.promotionalBannersEnabled) {
+            addPreference(new TogglePreference(
+                    context,
+                    "Hide the rewards shortcut",
+                    "Hide the purple rewards button beside Add friends on your profile.",
+                    Settings.HIDE_PROFILE_REWARDS_SHORTCUT
             ));
         }
         if (SettingsStatus.refreshRateEnabled || SettingsStatus.launcherShortcutsEnabled) {
