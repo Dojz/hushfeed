@@ -29,6 +29,78 @@ function Assert-Throws {
     throw "$Message No error was raised."
 }
 
+# --- phone.sh foreground parser -------------------------------------------------------------
+#
+# Samsung's Android 16 activity dump wraps the component onto the line after `u0`. The device
+# guard must recognize both that shape and the older single-line form before it can safely send
+# input to the dedicated test phone.
+$bash = (Get-Command bash -ErrorAction Stop).Source
+$bashHost = $bash
+$bashArguments = @('-lc')
+$phoneScript = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot 'phone.sh')).Path
+if ($IsWindows) {
+    $bashHost = (Get-Command wsl.exe -ErrorAction Stop).Source
+    $bashArguments = @('--exec', '/bin/bash', '-lc')
+    $escapedPhoneScript = $phoneScript.Replace("'", "'\''")
+    $phoneScript = (& $bashHost @bashArguments "wslpath -a -- '$escapedPhoneScript'").Trim()
+    if ($LASTEXITCODE -ne 0 -or -not $phoneScript) {
+        throw 'Could not translate phone.sh to a path visible to bash.'
+    }
+}
+$escapedPhoneScript = $phoneScript.Replace("'", "'\''")
+$phoneParserCommand = "PHONE_SERIAL=R5CT139QJ5F ADB=/not-used " +
+    "PHONE_SHOTS=/tmp/hushfeed-phone-parser-contract '$escapedPhoneScript' parse_top"
+
+function Invoke-PhoneTopParser {
+    param([Parameter(Mandatory)][string]$Fixture)
+    $output = @($Fixture | & $bashHost @bashArguments $phoneParserCommand 2> $null)
+    return [pscustomobject]@{
+        ExitCode = $LASTEXITCODE
+        Output   = ($output -join "`n").Trim()
+    }
+}
+
+$singleLineTop = Invoke-PhoneTopParser @'
+ACTIVITY MANAGER ACTIVITIES (dumpsys activity activities)
+topResumedActivity=ActivityRecord{88b58d7 u0 com.zhiliaoapp.musically/com.ss.android.ugc.aweme.splash.SplashActivity t101}
+'@
+Assert-True ($singleLineTop.ExitCode -eq 0 -and $singleLineTop.Output -eq
+    'com.zhiliaoapp.musically/com.ss.android.ugc.aweme.splash.SplashActivity') `
+    'phone.sh did not parse the single-line resumed activity.'
+
+$wrappedTop = Invoke-PhoneTopParser @'
+ACTIVITY MANAGER ACTIVITIES (dumpsys activity activities)
+topResumedActivity=ActivityRecord{ddb77cb u0
+  com.zhiliaoapp.musically/com.ss.android.ugc.aweme.main.MainActivity t123}
+'@
+Assert-True ($wrappedTop.ExitCode -eq 0 -and $wrappedTop.Output -eq
+    'com.zhiliaoapp.musically/com.ss.android.ugc.aweme.main.MainActivity') `
+    'phone.sh did not parse the wrapped Android 16 resumed activity.'
+
+$legacyTop = Invoke-PhoneTopParser @'
+mResumedActivity: ActivityRecord{5ef9021 u0 com.example.app/.MainActivity t3}
+'@
+Assert-True ($legacyTop.ExitCode -eq 0 -and $legacyTop.Output -eq 'com.example.app/.MainActivity') `
+    'phone.sh did not parse the legacy resumed activity fallback.'
+
+$missingTop = Invoke-PhoneTopParser 'ACTIVITY MANAGER ACTIVITIES (dumpsys activity activities)'
+Assert-True ($missingTop.ExitCode -ne 0 -and -not $missingTop.Output) `
+    'phone.sh accepted a dump with no resumed activity.'
+
+$findAdbCommand = (@'
+fixture=$(mktemp -d)
+trap 'rm -rf "$fixture"' EXIT
+printf '#!/bin/sh\nexit 0\n' > "$fixture/adb.exe"
+chmod +x "$fixture/adb.exe"
+PATH="$fixture:/usr/bin:/bin" PHONE_SERIAL=R5CT139QJ5F \
+    PHONE_SHOTS=/tmp/hushfeed-phone-parser-contract '__PHONE_SCRIPT__' find_adb
+'@).Replace('__PHONE_SCRIPT__', $escapedPhoneScript)
+$resolvedWindowsAdb = @(& $bashHost @bashArguments $findAdbCommand 2> $null)
+Assert-True ($LASTEXITCODE -eq 0 -and ($resolvedWindowsAdb -join "`n").Trim() -like '*/adb.exe') `
+    'phone.sh did not resolve adb.exe from an interoperable Windows path.'
+
+Write-Host '[scripts] guarded phone foreground parser contracts passed'
+
 $catalog = Get-Content -LiteralPath (Join-Path $Root 'patches-list.json') -Raw | ConvertFrom-Json
 $target = Get-PatchTarget -PatchList $catalog
 Assert-True ($target.PackageName -eq 'com.zhiliaoapp.musically') 'The catalog package was not resolved.'

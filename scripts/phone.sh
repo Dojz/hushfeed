@@ -25,13 +25,74 @@ if [[ "$S" != "R5CT139QJ5F" ]]; then
     echo "REFUSED: device $S is not the S22 test phone" >&2
     exit 2
 fi
-ADB="${ADB:-$(command -v adb || ls "$LOCALAPPDATA"/Microsoft/WinGet/Packages/Google.PlatformTools*/platform-tools/adb.exe 2>/dev/null | head -1)}"
-SP="${PHONE_SHOTS:-$TEMP/hushfeed-device/shots}"
+
+normalise_path() {
+    local candidate converted
+    candidate="$1"
+    if [[ "$candidate" =~ ^[[:alpha:]]:[\\/].* ]] && command -v wslpath >/dev/null 2>&1; then
+        if converted=$(wslpath -u "$candidate" 2>/dev/null); then
+            printf '%s\n' "$converted"
+            return
+        fi
+    fi
+    printf '%s\n' "$candidate"
+}
+
+find_adb() {
+    local app_data candidate
+    if command -v adb >/dev/null 2>&1; then
+        command -v adb
+        return
+    fi
+    if command -v adb.exe >/dev/null 2>&1; then
+        command -v adb.exe
+        return
+    fi
+    app_data=$(normalise_path "${LOCALAPPDATA:-}")
+    [[ -n "$app_data" ]] || return 1
+    for candidate in \
+        "$app_data/Android/Sdk/platform-tools/adb.exe" \
+        "$app_data"/Microsoft/WinGet/Packages/Google.PlatformTools*/platform-tools/adb.exe; do
+        if [[ -x "$candidate" ]]; then
+            printf '%s\n' "$candidate"
+            return
+        fi
+    done
+    return 1
+}
+
+if [[ -n "${ADB:-}" ]]; then
+    ADB=$(normalise_path "$ADB")
+elif ! ADB=$(find_adb); then
+    echo "REFUSED: adb was not found" >&2
+    exit 127
+fi
+SP=$(normalise_path "${PHONE_SHOTS:-${TEMP:-/tmp}/hushfeed-device/shots}")
 PKG=com.zhiliaoapp.musically
 SCALE="${PHONE_SCALE:-1.15756}"
 mkdir -p "$SP"
 
-top() { local result; result=$(timeout 30 "$ADB" -s "$S" shell dumpsys activity activities 2>/dev/null) || return $?; printf '%s\n' "$result" | grep -m1 -o "topResumedActivity=ActivityRecord{[^}]*}" | sed 's/.*u0 //;s/ t[0-9]*}//'; }
+parse_top() {
+    awk '
+        /(topResumedActivity=|mResumedActivity:).*ActivityRecord\{/ {
+            record = $0
+            while (record !~ /}/ && (getline continuation) > 0) {
+                record = record " " continuation
+            }
+            sub(/^.*ActivityRecord\{[^[:space:]]+[[:space:]]+u[0-9]+[[:space:]]+/, "", record)
+            sub(/[[:space:]]+t[0-9]+}.*$/, "", record)
+            sub(/^[[:space:]]+/, "", record)
+            sub(/[[:space:]]+$/, "", record)
+            if (record ~ /^[^[:space:]]+\/[^[:space:]]+$/) {
+                print record
+                found = 1
+                exit
+            }
+        }
+        END { if (!found) exit 1 }
+    '
+}
+top() { local result; result=$(timeout 30 "$ADB" -s "$S" shell dumpsys activity activities 2>/dev/null) || return $?; printf '%s\n' "$result" | parse_top; }
 # Written to a temporary name and moved into place only after a zero exit: the redirection
 # creates the file before adb runs, so a dropped device or a timeout left an empty .png where
 # a device check expected evidence.
