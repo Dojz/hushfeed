@@ -14,7 +14,7 @@ Settings feedback is clearer, easier to recover from and more consistent across 
 * **TikTok:** Restart-gated changes now offer Restart now in the same banner while keeping the pinned restart row for later. Returning a value to what TikTok already runs no longer asks for a restart.
 * **TikTok:** Feed and bottom tab pickers now join the persistent restart state correctly instead of showing a restart message and then losing it.
 * **TikTok:** Forty-one labels and descriptions now use one naming system across Feed filter, Feed screen, Inbox, Playback, Region, search and the share sheet. German, Spanish, Indonesian and Brazilian Portuguese were updated with them.
-* **TikTok:** The full settings matrix was rendered again in dark and light themes, large text and mirrored layout. The refreshed screenshots cover every page changed by this pass.
+* **TikTok:** The three home shortcuts now become full-width rows at Android's first large-text step, so Privacy and Screen time stay intact instead of breaking in the middle of a word. The full settings matrix was rendered again in dark and light themes, large text and mirrored layout.
 
 ## 0.48.0 (2026-09-20)
 

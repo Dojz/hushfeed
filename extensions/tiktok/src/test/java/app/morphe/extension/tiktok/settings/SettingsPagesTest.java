@@ -465,6 +465,28 @@ public class SettingsPagesTest {
         }
     }
 
+    @Test
+    @Config(qualifiers = "w480dp-h960dp-night-mdpi", fontScale = 1.3f)
+    public void quickActionsStackAtTheFirstLargeTextPreset() {
+        try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            TikTokPreferenceFragment home = new TikTokPreferenceFragment();
+            activity.getFragmentManager().beginTransaction()
+                    .replace(android.R.id.content, home).commit();
+            activity.getFragmentManager().executePendingTransactions();
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+            Preference quick = home.getPreferenceScreen().findPreference(
+                    "hushfeed_quick_routes");
+            View row = quick.getView(null, null).findViewWithTag(
+                    "hushfeed_quick_routes_row");
+            assertEquals("the first large-text preset split quick-action words",
+                    android.widget.LinearLayout.VERTICAL,
+                    ((android.widget.LinearLayout) row).getOrientation());
+        }
+    }
+
     @Test public void darkPagesNavigateAndRender() throws Exception { capturePages("dark"); }
     @Test @Config(qualifiers = "w480dp-h960dp-notnight-mdpi")
     public void lightPagesNavigateAndRender() throws Exception { capturePages("light"); }

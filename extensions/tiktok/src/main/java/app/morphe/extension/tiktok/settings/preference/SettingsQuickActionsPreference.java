@@ -64,7 +64,7 @@ public final class SettingsQuickActionsPreference extends Preference {
         Context context = getContext();
         LinearLayout row = new LinearLayout(context);
         row.setTag(ROW_TAG);
-        boolean stack = context.getResources().getConfiguration().fontScale > 1.3f
+        boolean stack = context.getResources().getConfiguration().fontScale >= 1.3f
                 || context.getResources().getConfiguration().screenWidthDp < 360;
         row.setOrientation(stack ? LinearLayout.VERTICAL : LinearLayout.HORIZONTAL);
         row.setGravity(Gravity.CENTER_VERTICAL);
