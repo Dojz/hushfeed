@@ -92,6 +92,7 @@ Allow storage for TikTok in Android settings to save profile pictures.,Allow sto
 Allow storage for TikTok in Android settings to save sounds.,Allow storage for TikTok in Android settings to save sounds.
 Allow storage for TikTok in Android settings to save stories.,Allow storage for TikTok in Android settings to save stories.
 Allowed bottom tabs,Allowed bottom tabs
+Already active,Already active
 Already marked as not interested,Already marked as not interested
 Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.,Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.
 Also change the region TikTok reports internally. Keeps your interface language. Your IP address and your account's own rules still apply.,Also change the region TikTok reports internally. Keeps your interface language. Your IP address and your account's own rules still apply.
@@ -110,6 +111,7 @@ App AB,App AB
 Appearance,Appearance
 Applies to both video and photo downloads.,Applies to both video and photo downloads.
 Apply,Apply
+Applying Calm feed,Applying Calm feed
 Around the video,Around the video
 Arrange your feed and bottom tabs,Arrange your feed and bottom tabs
 Attention,Attention
@@ -148,6 +150,11 @@ Blocked sounds,Blocked sounds
 Blocking,Blocking
 Boolean,Boolean
 Browse,Browse
+Calm feed,Calm feed
+Calm feed couldn't be applied. Nothing was changed.,Calm feed couldn't be applied. Nothing was changed.
+Calm feed couldn't start. Try again shortly.,Calm feed couldn't start. Try again shortly.
+Calm feed is on.,Calm feed is on.
+Calm feed is on. Restart TikTok to apply every change.,Calm feed is on. Restart TikTok to apply every change.
 Camera and microphone in use,Camera and microphone in use
 Camera in use,Camera in use
 Cancel,Cancel
@@ -156,6 +163,7 @@ Caption text size,Caption text size
 Captions,Captions
 "Captions, gestures and on-screen controls","Captions, gestures and on-screen controls"
 Capture crash reports locally,Capture crash reports locally
+Changed,Changed
 Choose 1-1000 videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.,Choose 1-1000 videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.
 Choose a backup file. Your current settings are kept for Undo.,Choose a backup file. Your current settings are kept for Undo.
 Choose a folder on internal storage. SD cards are not supported.,Choose a folder on internal storage. SD cards are not supported.
@@ -380,6 +388,7 @@ Hide TikTok Tako,Hide TikTok Tako
 Hide TikTok's exposed quick emoji row in supported comment inputs.,Hide TikTok's exposed quick emoji row in supported comment inputs.
 Hide activity,Hide activity
 Hide activity status,Hide activity status
+"Hide ads, Shop posts, LIVE videos and replays, promotional music, and paid partnerships.","Hide ads, Shop posts, LIVE videos and replays, promotional music, and paid partnerships."
 Hide archive,Hide archive
 Hide bottom tabs TikTok adds later unless you allow them.,Hide bottom tabs TikTok adds later unless you allow them.
 "Hide browsing and LIVE puzzle dialogs. Login, account verification and any puzzle raised over a follow, like, comment or repost stay visible.","Hide browsing and LIVE puzzle dialogs. Login, account verification and any puzzle raised over a follow, like, comment or repost stay visible."
@@ -618,7 +627,9 @@ Off forces false; on forces true. Reset returns control to TikTok,Off forces fal
 Offline videos,Offline videos
 Offline videos limit,Offline videos limit
 Older overrides were kept disabled. Review their values before enabling them on TikTok %1$s.,Older overrides were kept disabled. Review their values before enabling them on TikTok %1$s.
+On,On
 On mobile data,On mobile data
+On. Restore puts back the feed setup you had before.,On. Restore puts back the feed setup you had before.
 "Once today's budget runs out, the hold stays and cannot be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out.","Once today's budget runs out, the hold stays and cannot be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out."
 One area was checked and everything it needs is here.,One area was checked and everything it needs is here.
 One minute left,One minute left
@@ -672,6 +683,7 @@ Player Config,Player Config
 Playlist posts,Playlist posts
 Popular,Popular
 Popups,Popups
+Preset,Preset
 Press and hold a profile picture to save the full size original to your photo destination.,Press and hold a profile picture to save the full size original to your photo destination.
 "Press and hold a story to save it. Stories have no save button of their own, and holding one is how TikTok pauses it, so this takes that gesture over.","Press and hold a story to save it. Stories have no save button of their own, and holding one is how TikTok pauses it, so this takes that gesture over."
 Press and hold the left or right third of the screen to jump back or forward. The middle third keeps the Long press action.,Press and hold the left or right third of the screen to jump back or forward. The middle third keeps the Long press action.
@@ -689,6 +701,7 @@ Putting the settings back to their defaults,Putting the settings back to their d
 Quality,Quality
 "Quality, files, subtitles and hand-off","Quality, files, subtitles and hand-off"
 "Quality, speed and automatic advance","Quality, speed and automatic advance"
+Quick setup,Quick setup
 Quieten the feed while comments are open,Quieten the feed while comments are open
 Reading,Reading
 Recorded gate reads (%1$d),Recorded gate reads (%1$d)
@@ -734,7 +747,9 @@ Restore defaults immediately. Your current settings are kept for Undo.,Restore d
 Restore failed. Some settings may still be changed.,Restore failed. Some settings may still be changed.
 Restore failed. Some settings may still be changed. Use Undo to recover.,Restore failed. Some settings may still be changed. Use Undo to recover.
 Restore settings,Restore settings
+Restore setup,Restore setup
 Restored the previous Lab settings. Restart TikTok to apply this.,Restored the previous Lab settings. Restart TikTok to apply this.
+Restoring setup,Restoring setup
 Restoring your settings,Restoring your settings
 Resume videos after scrolling,Resume videos after scrolling
 Retry,Retry
@@ -851,6 +866,7 @@ Skip recorded LIVE broadcasts in the feed.,Skip recorded LIVE broadcasts in the 
 Skip videos marked as using promotional music.,Skip videos marked as using promotional music.
 "Skip videos that use a sound blocked with the player's sound button, or named below.","Skip videos that use a sound blocked with the player's sound button, or named below."
 Skipping videos with %1$s,Skipping videos with %1$s
+Some Calm feed settings changed. Restore still puts back your earlier setup.,Some Calm feed settings changed. Restore still puts back your earlier setup.
 Something is missing from %1$s. Tap for the whole report.,Something is missing from %1$s. Tap for the whole report.
 Sound link copied,Sound link copied
 Sound saved to %1$s,Sound saved to %1$s
@@ -1041,6 +1057,7 @@ Undoing the last change,Undoing the last change
 "Until you save a choice here, this sheet hides the same actions as the share action checklist.","Until you save a choice here, this sheet hides the same actions as the share action checklist."
 "Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.","Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this."
 "Use 0 for TikTok's size, or 12 to 48. Applies to the next caption.","Use 0 for TikTok's size, or 12 to 48. Applies to the next caption."
+Use Calm feed,Use Calm feed
 Use Save JSON for this large report,Use Save JSON for this large report
 "Use TikTok's native hold, slide down, and release gesture to lock 2x speed.","Use TikTok's native hold, slide down, and release gesture to lock 2x speed."
 Use a default playback speed,Use a default playback speed
@@ -1076,15 +1093,20 @@ What TikTok gets,What TikTok gets
 "While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.","While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only."
 Window width needed to enable the layout. Restart TikTok to apply this.,Window width needed to enable the layout. Restart TikTok to apply this.
 Words and countries,Words and countries
+Working,Working
 "Write the video's sound beside it as an .m4a. Android 10 and later file audio separately, so it lands in Music under the same folder name as your videos.","Write the video's sound beside it as an .m4a. Android 10 and later file audio separately, so it lands in Music under the same folder name as your videos."
 YTDLnis background mode,YTDLnis background mode
 YTDLnis download type,YTDLnis download type
 Yes,Yes
+Your current settings already match Calm feed.,Your current settings already match Calm feed.
 Your feed,Your feed
 Your filters hid everything TikTok just sent. Most were %1$s.,Your filters hid everything TikTok just sent. Most were %1$s.
 "Your filters hid everything TikTok sent, %1$d times in a row. Most were %2$s.","Your filters hid everything TikTok sent, %1$d times in a row. Most were %2$s."
 "Your operator's name, like T-Mobile.","Your operator's name, like T-Mobile."
 "Your operator's numeric code, like 310260.","Your operator's numeric code, like 310260."
+Your previous feed setup couldn't be restored. Nothing was changed.,Your previous feed setup couldn't be restored. Nothing was changed.
+Your previous feed setup is back.,Your previous feed setup is back.
+Your previous feed setup is back. Restart TikTok to apply every change.,Your previous feed setup is back. Restart TikTok to apply every change.
 "Zero leaves the way out of the hold there every time, which is what it has always done. Anything else is how many times a day it works, and once they are gone the hold stays up until the day starts over. Ignored while the budget is locked, which takes the way out away entirely.","Zero leaves the way out of the hold there every time, which is what it has always done. Anything else is how many times a day it works, and once they are gone the hold stays up until the day starts over. Ignored while the budget is locked, which takes the way out away entirely."
 "Zero means no limit. Counts the videos Hushfeed advanced past for you, not the ones you swiped yourself, and starts again when the feed is rebuilt or you change this number.","Zero means no limit. Counts the videos Hushfeed advanced past for you, not the ones you swiped yourself, and starts again when the feed is rebuilt or you change this number."
 "Zero shows the notice and leaves the feed alone. Anything else covers the feed for that many minutes once a budget is reached. Messages, profiles and search keep working, and nothing in the feed is thrown away.","Zero shows the notice and leaves the feed alone. Anything else covers the feed for that many minutes once a budget is reached. Messages, profiles and search keep working, and nothing in the feed is thrown away."

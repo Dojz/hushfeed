@@ -51,7 +51,8 @@ final class SettingsListAdapter extends BaseAdapter implements WrapperListAdapte
         return item instanceof SettingsHeaderPreference || item instanceof PreferenceCategory
                 || item instanceof SectionHeadingPreference
                 || item instanceof SettingsStatusPreference
-                || item instanceof SettingsQuickActionsPreference;
+                || item instanceof SettingsQuickActionsPreference
+                || item instanceof CalmFeedPresetPreference;
     }
 
     @Override public View getView(int position, View convertView, ViewGroup parent) {

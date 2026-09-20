@@ -2,6 +2,17 @@
 
 Every Hushfeed release, newest first.
 
+## 0.48.0 (2026-09-20)
+
+Feed filter now has a reversible starting point for a calmer feed.
+
+### Calm feed
+
+* **TikTok:** Calm feed turns on six focused filters together: feed ads, Shop posts, LIVE videos, LIVE replays, promotional music and paid partnerships.
+* **TikTok:** Applying the preset saves the previous values first. Restore puts that exact setup back, even after TikTok restarts or after one of the six switches is changed by hand.
+* **TikTok:** The preset leaves stories, photo posts, AI labels, creator rules, keywords and time limits alone.
+* **TikTok:** Its status card shows when the preset is on or has been adjusted. The action is a real 48 dp button, stacks at large text sizes and is translated with the rest of Hushfeed settings.
+
 ## 0.47.0 (2026-09-20)
 
 The settings home is faster to scan and easier to use with touch or a screen reader.

@@ -1151,6 +1151,20 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
 
     void refreshBackupSettings() { updateUIToSettingValues(); }
 
+    /** Reconciles a preset's batch write with the rows and the restart debt on this page. */
+    static void onSettingsBatchChanged(java.util.Map<Setting<?>, Object> previousValues) {
+        TikTokPreferenceFragment current = activeFragment;
+        if (current == null || !current.isAdded()) return;
+        for (java.util.Map.Entry<Setting<?>, Object> entry : previousValues.entrySet()) {
+            Setting<?> setting = entry.getKey();
+            if (setting.rebootApp && !java.util.Objects.equals(entry.getValue(), setting.get())) {
+                current.noteRestartPending(setting, entry.getValue());
+            }
+        }
+        current.updateUIToSettingValues();
+        current.refreshRestartPending();
+    }
+
     private static void flattenCategory(PreferenceScreen screen, PreferenceCategory category) {
         if (category == null) {
             return;

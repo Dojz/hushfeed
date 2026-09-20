@@ -935,6 +935,55 @@ public class SettingsPagesTest {
         }
     }
 
+    @Test public void calmFeedPresetComesBeforeIndividualFeedFilters() throws Exception {
+        boolean shop = Settings.HIDE_SHOP.get();
+        CalmFeedPreset.clearForTests(org.robolectric.RuntimeEnvironment.getApplication());
+        Settings.HIDE_SHOP.save(false);
+        try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            TikTokPreferenceFragment page = attachSection(activity, "FEED_FILTER");
+            Preference preset = page.findPreference("calm_feed_preset");
+            assertNotNull("the Feed filter page has no calm starting point", preset);
+            assertEquals("Calm feed", preset.getTitle());
+            assertTrue(String.valueOf(preset.getSummary()).contains("ads"));
+
+            ListView list = page.getView().findViewById(android.R.id.list);
+            int presetPosition = positionOf(list, "calm_feed_preset");
+            int firstFilterPosition = positionOf(list, Settings.REMOVE_ADS.key);
+            assertTrue("the preset is buried below the switches",
+                    presetPosition >= 0 && presetPosition < firstFilterPosition);
+        } finally {
+            Settings.HIDE_SHOP.save(shop);
+            CalmFeedPreset.clearForTests(org.robolectric.RuntimeEnvironment.getApplication());
+        }
+    }
+
+    @Test @Config(qualifiers = "de-rDE-w320dp-h800dp-night-mdpi", fontScale = 2f)
+    public void calmFeedPresetStacksAndKeepsAnAccessibleActionAtLargeText() {
+        boolean shop = Settings.HIDE_SHOP.get();
+        CalmFeedPreset.clearForTests(org.robolectric.RuntimeEnvironment.getApplication());
+        Settings.HIDE_SHOP.save(false);
+        try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            Preference preset = new app.morphe.extension.tiktok.settings.preference
+                    .CalmFeedPresetPreference(activity);
+            View view = preset.getView(null, null);
+            android.widget.LinearLayout heading = view.findViewWithTag(
+                    "calm_feed_preset_heading");
+            assertNotNull(heading);
+            assertEquals("large text kept the status beside the title",
+                    android.widget.LinearLayout.VERTICAL, heading.getOrientation());
+            assertAccessibleButton(activity,
+                    view.findViewWithTag("calm_feed_preset_action"),
+                    "„Ruhiger Feed“ verwenden");
+        } finally {
+            Settings.HIDE_SHOP.save(shop);
+            CalmFeedPreset.clearForTests(org.robolectric.RuntimeEnvironment.getApplication());
+        }
+    }
+
     @Test public void localCreatorEditorFiltersAndRemovesIndividualEntries() throws Exception {
         try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
             Activity activity = owner.get();
