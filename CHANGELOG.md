@@ -4,6 +4,11 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+### Interface and accessibility
+
+* **TikTok:** Large translated settings titles now keep words whole at enlarged text sizes. The title adapts within a limited range while Android's chosen font scale remains unchanged everywhere else.
+* **TikTok:** Movable feed controls now stay clear of status bars, navigation insets, display cutouts and TikTok's bottom tab row.
+
 ### Reliability
 
 * **TikTok:** A failed settings write now keeps the live value aligned with the value that will survive a restart. Hushfeed reports the storage error and keeps an old preference intact until migration has finished successfully.

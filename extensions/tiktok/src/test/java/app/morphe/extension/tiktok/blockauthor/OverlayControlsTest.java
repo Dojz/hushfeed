@@ -378,6 +378,74 @@ public class OverlayControlsTest {
         assertEquals("a control was pushed off the right", maxLeft, leftOf(feedback));
     }
 
+    @Test @Config(sdk = 35)
+    public void draggedControlsStayOutsideSystemBarsAndSideCutouts() throws Exception {
+        Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
+        Utils.setContext(activity);
+        Utils.setActivity(activity);
+        android.view.WindowInsets insets = new android.view.WindowInsets.Builder()
+                .setInsets(android.view.WindowInsets.Type.systemBars(),
+                        android.graphics.Insets.of(36, 72, 54, 96))
+                .build();
+        FrameLayout root = new FrameLayout(activity) {
+            @Override public android.view.WindowInsets getRootWindowInsets() {
+                return insets;
+            }
+        };
+        View feedback = new View(activity);
+        int size = SettingsUi.dp(activity, 48);
+        root.addView(feedback, new FrameLayout.LayoutParams(size, size));
+        int exact = View.MeasureSpec.makeMeasureSpec(1080, View.MeasureSpec.EXACTLY);
+        root.measure(exact, exact);
+        root.layout(0, 0, 1080, 1080);
+        Method move = declared("moveTo", View.class, ViewGroup.class, float.class, float.class);
+
+        move.invoke(null, feedback, root, -500f, -500f);
+        assertEquals("the control entered the side cutout", 36, leftOf(feedback));
+        assertEquals("the control entered the status bar", 72, topOf(feedback));
+
+        move.invoke(null, feedback, root, 2_000f, 2_000f);
+        assertEquals("the control entered the right system inset", 1080 - 54 - size,
+                leftOf(feedback));
+        assertEquals("the control entered the navigation inset", 1080 - 96 - size,
+                topOf(feedback));
+    }
+
+    @Test public void draggedControlsStayAboveTikToksBottomTabRow() throws Exception {
+        Activity activity = Robolectric.buildActivity(Activity.class).setup().visible().get();
+        Utils.setContext(activity);
+        Utils.setActivity(activity);
+        ViewGroup root = activity.findViewById(android.R.id.content);
+        assertNotNull(root);
+        FrameLayout tabBar = new FrameLayout(activity);
+        View homeTab = new View(activity);
+        View feedback = new View(activity);
+        int size = SettingsUi.dp(activity, 48);
+        tabBar.addView(homeTab, new FrameLayout.LayoutParams(216, 160));
+        root.addView(tabBar, new FrameLayout.LayoutParams(1080, 160));
+        root.addView(feedback, new FrameLayout.LayoutParams(size, size));
+        int exact = View.MeasureSpec.makeMeasureSpec(1080, View.MeasureSpec.EXACTLY);
+        root.measure(exact, exact);
+        root.layout(0, 0, 1080, 1080);
+        tabBar.layout(0, 920, 1080, 1080);
+        homeTab.layout(0, 0, 216, 160);
+        org.robolectric.util.ReflectionHelpers.setStaticField(
+                FeedVisibility.class, "homeTabReference",
+                new java.lang.ref.WeakReference<>(homeTab));
+        try {
+            declared("moveTo", View.class, ViewGroup.class, float.class, float.class)
+                    .invoke(null, feedback, root, 2_000f, 2_000f);
+
+            assertEquals("the control covered TikTok's bottom tab row",
+                    1080 - 160 - size, topOf(feedback));
+        } finally {
+            org.robolectric.util.ReflectionHelpers.setStaticField(
+                    FeedVisibility.class, "homeTabReference",
+                    new java.lang.ref.WeakReference<>(null));
+            activity.finish();
+        }
+    }
+
     @Test public void aMoveActionNeverEntersPointerDragMode() throws Exception {
         ViewGroup root = attachedRoot();
         View block = held("buttonReference");

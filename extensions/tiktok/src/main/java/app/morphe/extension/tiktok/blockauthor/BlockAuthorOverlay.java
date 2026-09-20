@@ -7,6 +7,7 @@
 package app.morphe.extension.tiktok.blockauthor;
 
 import android.app.Activity;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.util.TypedValue;
@@ -25,6 +26,7 @@ import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.settings.StringSetting;
 import app.morphe.extension.tiktok.feedfilter.SoundIdentity;
 import app.morphe.extension.tiktok.settings.Settings;
+import app.morphe.extension.tiktok.settings.SystemBarInsets;
 import app.morphe.extension.tiktok.settings.preference.SettingsUi;
 import app.morphe.extension.tiktok.settings.L10n;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
@@ -610,19 +612,30 @@ public final class BlockAuthorOverlay {
         return location[1];
     }
 
-    /** Moves the button, keeping it fully inside its parent. */
+    /** Moves the button, keeping it clear of screen edges, cutouts and TikTok's tab bar. */
     private static void moveTo(View view, ViewGroup parent, float left, float top) {
         // Before the first layout the view has no size, so fall back to the size it was
         // given, or the clamp would let it sit partly off the right and bottom edges.
         ViewGroup.LayoutParams layout = view.getLayoutParams();
         int width = view.getWidth() > 0 ? view.getWidth() : layout.width;
         int height = view.getHeight() > 0 ? view.getHeight() : layout.height;
-        int maxLeft = Math.max(0, parent.getWidth() - width);
-        int maxTop = Math.max(0, parent.getHeight() - height);
+        Rect systemInsets = SystemBarInsets.current(parent);
+        int minimumLeft = Math.max(0, systemInsets.left);
+        int minimumTop = Math.max(0, systemInsets.top);
+        int reservedBottom = Math.max(0, systemInsets.bottom);
+        Activity activity = Utils.getActivity();
+        if (activity != null) {
+            reservedBottom = Math.max(reservedBottom,
+                    SessionLockOverlay.navigationHeight(activity, parent));
+        }
+        int maxLeft = Math.max(minimumLeft,
+                parent.getWidth() - Math.max(0, systemInsets.right) - width);
+        int maxTop = Math.max(minimumTop,
+                parent.getHeight() - reservedBottom - height);
 
         ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
-        params.leftMargin = Math.round(Math.min(Math.max(left, 0), maxLeft));
-        params.topMargin = Math.round(Math.min(Math.max(top, 0), maxTop));
+        params.leftMargin = Math.round(Math.min(Math.max(left, minimumLeft), maxLeft));
+        params.topMargin = Math.round(Math.min(Math.max(top, minimumTop), maxTop));
         view.setLayoutParams(params);
     }
 

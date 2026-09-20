@@ -1066,6 +1066,16 @@ public class SettingsPagesTest {
             assertTrue(heading.getLineCount() > 1);
             assertEquals(0, heading.getLayout().getEllipsisCount(heading.getLineCount() - 1));
             assertTrue(heading.getHeight() >= heading.getLayout().getHeight());
+            String renderedTitle = heading.getText().toString();
+            for (int line = 0; line < heading.getLineCount() - 1; line++) {
+                int end = heading.getLayout().getLineEnd(line);
+                boolean atWordBoundary = end > 0 && Character.isWhitespace(renderedTitle.charAt(end - 1));
+                if (!atWordBoundary && end < renderedTitle.length()) {
+                    atWordBoundary = Character.isWhitespace(renderedTitle.charAt(end));
+                }
+                assertTrue("the title broke a word at line " + line + ": " + renderedTitle,
+                        atWordBoundary);
+            }
             TextView caption = findTextViewContaining(page.getView(), "Einstellungen sichern");
             assertNotNull(caption);
             assertTextFits(caption);
