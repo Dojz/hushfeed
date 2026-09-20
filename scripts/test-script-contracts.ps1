@@ -846,6 +846,31 @@ try {
     $catalogVersion = ((Get-Content -LiteralPath (Join-Path $factsRoot 'gradle.properties')) `
         -match '^version\s*=' | Select-Object -First 1) -replace '^version\s*=\s*', ''
 
+    # Manager decodes created_at as kotlinx.datetime.LocalDateTime, not Instant.
+    # A trailing Z produces its generic "remote metadata file is unavailable" error,
+    # even when both the JSON and bundle download answer HTTP 200.
+    foreach ($invalidTimestamp in @(
+            '"2026-09-20T21:23:31Z"',
+            '"2026-09-20T21:23:31+00:00"',
+            '"2026-02-30T21:23:31"',
+            '"2026-09-20"',
+            '""',
+            'null',
+            '1790000000')) {
+        Set-FactsFile 'patches-bundle.json' {
+            param($text)
+            $text -replace '"created_at"\s*:\s*("[^"\r\n]*"|null|\d+)', ('"created_at": ' + $invalidTimestamp)
+        }
+        Assert-Throws { Invoke-Facts } '*created_at*' `
+            "An index with a Manager-incompatible created_at was accepted: $invalidTimestamp"
+        Reset-FactsFile 'patches-bundle.json'
+    }
+    Set-FactsFile 'patches-bundle.json' {
+        param($text) $text -replace '"created_at"\s*:\s*"[^"\r\n]*"\s*,', ''
+    }
+    Assert-Throws { Invoke-Facts } '*created_at*' 'An index without created_at was accepted.'
+    Reset-FactsFile 'patches-bundle.json'
+
     # A published index naming a version the catalog does not build. This is the shape v0.28.0
     # shipped in: the index said one thing and the bundle behind it was another.
     Set-FactsFile 'patches-bundle.json' {

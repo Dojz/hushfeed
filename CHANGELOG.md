@@ -8,6 +8,7 @@ Comments get their own suggested-search control, and search settings now say whe
 
 * **TikTok:** Comment tools adds Hide search suggestions above comments. It removes TikTok's "Search: ..." banner above the comment count without removing comments, their controls or Hushfeed's separate search box. It's off by default and needs a restart.
 * **TikTok:** Search controls now distinguish the feed button, Inbox button, LIVE drawer, image-search prompts, main search-page suggestions and searching within loaded comments. Poll hiding also explains that it removes voting cards and ended poll results.
+* **TikTok:** Fixed the Hushfeed source metadata that made Morphe report "The remote metadata file is unavailable." Refreshing the source is enough. The release check now rejects timestamps Manager can't read.
 
 ## 0.51.0 (2026-09-20)
 

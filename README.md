@@ -42,6 +42,8 @@ The block, local hide, sound and Not interested controls, rendered in a local UI
 
 Selected patches activate when TikTok starts. The Settings patch adds the entry point and is selected by default. Deselect it and the other patches still apply, but their switches have nowhere to live. `patches-bundle.json` in the repository root is the source index Morphe reads for the published bundle.
 
+If Morphe reported "The remote metadata file is unavailable" for Hushfeed v0.51.0, refresh the source. The v0.52.0 source update corrects a timestamp that Manager couldn't read. You don't need to reinstall Manager, clear its data or change its signing key.
+
 <br>
 
 ## Patches
