@@ -97,7 +97,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         FEED_FILTER("Feed filter", "Choose what reaches your feed"),
         FEED_NAVIGATION("Feed tabs", "Arrange your feed and bottom tabs"),
         INTERFACE("Feed screen", "Captions, gestures and on-screen controls"),
-        PLAYBACK("Playback", "Quality, speed and automatic advance"),
+        PLAYBACK("Playback", "Quality, speed and auto-advance"),
         SCREEN_TIME("Screen time", "Daily budgets, reminders and the hold"),
         COMMENTS("Comments", "Filters, translation and copy options"),
         DOWNLOADS("Downloads", "Quality, files, subtitles and hand-off"),
@@ -675,7 +675,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         String normalizedQuery = normalizeSearchText(query == null ? "" : query.trim());
         if (normalizedQuery.isEmpty()) {
             if (searchInput != null) searchInput.hideResultCount();
-            addSearchState("Type to search settings", "Search a title, description or category.");
+            addSearchState("Start typing", "Search by name, description or category.");
             return;
         }
 
@@ -981,7 +981,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         SettingsMenuPreference search = new SettingsMenuPreference(
                 context,
                 "Search settings",
-                "Find a setting by title or description",
+                "Find a setting by name or description",
                 SettingsMenuPreference.Icon.SEARCH,
                 0,
                 preference -> {

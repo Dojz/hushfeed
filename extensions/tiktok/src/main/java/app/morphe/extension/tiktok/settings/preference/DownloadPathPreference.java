@@ -89,7 +89,7 @@ public class DownloadPathPreference extends DialogPreference {
             } else {
                 setValue(validated);
                 app.morphe.extension.shared.Utils.showToastShort(
-                        app.morphe.extension.tiktok.settings.L10n.t("Download path updated"));
+                app.morphe.extension.tiktok.settings.L10n.t("Destination updated"));
             }
         } catch (IllegalArgumentException ex) {
             if (pathField != null && getDialog() != null && getDialog().isShowing()) {

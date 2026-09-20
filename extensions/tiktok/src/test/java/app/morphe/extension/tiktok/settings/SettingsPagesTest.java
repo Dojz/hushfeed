@@ -882,7 +882,7 @@ public class SettingsPagesTest {
             assertTrue(clear.performClick());
             Shadows.shadowOf(Looper.getMainLooper()).idle();
             assertEquals("", input.getText().toString());
-            assertNotNull(findPreference(page.getPreferenceScreen(), "Tippe, um Einstellungen zu durchsuchen"));
+            assertNotNull(findPreference(page.getPreferenceScreen(), "Tippe zum Suchen"));
             View toolbar = page.getView().findViewWithTag("hushfeed_toolbar");
             assertNotNull(toolbar);
             assertTrue(((android.view.ViewGroup) toolbar).getChildAt(0).performClick());

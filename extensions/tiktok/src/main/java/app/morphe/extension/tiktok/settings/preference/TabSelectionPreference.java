@@ -45,7 +45,7 @@ public class TabSelectionPreference extends Preference {
         super(context);
         this.setting = setting;
         this.bottomTabs = bottomTabs;
-        setTitle(bottomTabs ? "Allowed bottom tabs" : "Tabs TikTok has loaded");
+        setTitle(bottomTabs ? "Bottom tabs to keep" : "Feed tabs to keep");
         setKey(setting.key);
         // In memory only. setValue writes, and writing the tidied form of what is already
         // stored, at the moment the row is built, made building the page a change to the
@@ -141,7 +141,7 @@ public class TabSelectionPreference extends Preference {
 
         TextView title = new TextView(context);
         title.setText(L10n.t(getContext(),
-                bottomTabs ? "Allowed bottom tabs" : "Tabs TikTok has loaded"));
+                bottomTabs ? "Bottom tabs to keep" : "Feed tabs to keep"));
         title.setTextColor(getTitleTextColor());
         title.setTextSize(20);
         title.setTypeface(title.getTypeface(), Typeface.BOLD);

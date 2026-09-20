@@ -119,7 +119,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
         if (SettingsStatus.hideFeedSaveButtonEnabled) {
             addPreference(new TogglePreference(
                     context,
-                    "Hide feed save button",
+                    "Hide the save button on the feed",
                     "Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.",
                     Settings.HIDE_FEED_SAVE_BUTTON
             ));
@@ -188,7 +188,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
         if (SettingsStatus.hideFeedSearchButtonEnabled) {
             addPreference(new TogglePreference(
                     context,
-                    "Hide feed search button",
+                    "Hide the search button on the feed",
                     "Hide the search button in the top right corner of the feed.",
                     Settings.HIDE_FEED_SEARCH_BUTTON
             ));

@@ -60,8 +60,8 @@ public final class InboxPreferenceCategory extends ConditionalPreferenceCategory
             ));
             addPreference(new TogglePreference(
                     context,
-                    "Hide TikTok Tako",
-                    "Hide the TikTok Tako assistant conversation.",
+                    "Hide the Tako chat",
+                    "Hide the Tako assistant conversation in Inbox.",
                     Settings.HIDE_INBOX_TAKO
             ));
             addPreference(new TogglePreference(

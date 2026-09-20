@@ -43,7 +43,7 @@ public class FeedNavigationPreferenceCategory extends ConditionalPreferenceCateg
         ));
         addPreference(new TogglePreference(
                 context,
-                "Block new TikTok tabs",
+                "Block new feed tabs",
                 "Hide tabs TikTok adds later unless you allow them.",
                 Settings.FEED_NAVIGATION_BLOCK_NEW_TABS
         ));
@@ -66,7 +66,7 @@ public class FeedNavigationPreferenceCategory extends ConditionalPreferenceCateg
         ));
         addPreference(new TogglePreference(
                 context,
-                "Hide Tako AI",
+                "Hide the Tako bubble",
                 "Hide the Tako AI bubble above the profile button and the Ask bar under videos.",
                 Settings.HIDE_TAKO_AI
         ));

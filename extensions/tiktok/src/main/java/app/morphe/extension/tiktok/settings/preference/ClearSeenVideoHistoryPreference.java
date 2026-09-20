@@ -40,7 +40,7 @@ public final class ClearSeenVideoHistoryPreference extends Preference
             SeenVideoHistory.clear();
             applyState(true);
             SettingsActionBanner.showUndo(context, L10n.t(context,
-                            "Seen videos cleared. Tap the row to undo before TikTok closes."),
+                            "Seen videos cleared. You can undo until TikTok closes."),
                     () -> undoClear(context));
             return true;
         });

@@ -364,7 +364,7 @@ public final class BlockAuthorOverlay {
     private static View createLocalHideButton(Activity activity) {
         TextView button = new TextView(activity);
         button.setGravity(Gravity.CENTER);
-        button.setContentDescription(L10n.t(activity, "Hide this creator locally"));
+        button.setContentDescription(L10n.t(activity, "Hide this creator on this phone"));
         button.setFocusable(true);
         Drawable glyph = new OverlayGlyphDrawable(OverlayGlyphDrawable.Shape.CROSS,
                 SettingsUi.OVERLAY_TEXT, SettingsUi.dp(activity, 2));
@@ -745,7 +745,7 @@ public final class BlockAuthorOverlay {
         String after = app.morphe.extension.tiktok.feedfilter.AdvancedFeedRules.addCreatorEntry(
                 before, author.stableId());
         if (after.equals(before)) {
-            Utils.showToastShort(L10n.t("That creator is already in the list"));
+            Utils.showToastShort(L10n.f("%1$s is already hidden", author.label()));
             return;
         }
         String problem = app.morphe.extension.tiktok.feedfilter.FeedRuleLimits.creatorProblem(after);
@@ -754,7 +754,7 @@ public final class BlockAuthorOverlay {
             return;
         }
         Settings.LOCAL_HIDDEN_CREATORS.save(after);
-        showUndoBanner(L10n.f("Hidden %1$s locally", author.label()), () -> {
+        showUndoBanner(L10n.f("Hidden %1$s on this phone", author.label()), () -> {
             Settings.LOCAL_HIDDEN_CREATORS.save(before);
             Utils.showToastShort(L10n.f("Showing %1$s again", author.label()));
         });

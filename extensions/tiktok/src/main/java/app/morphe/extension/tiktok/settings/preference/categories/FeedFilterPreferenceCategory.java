@@ -82,18 +82,18 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
         ));
         addPreference(new TogglePreference(
                 context,
-                "Hide LIVE videos", "Hide the LIVE videos from the feed.",
+                "Hide LIVE videos", "Hide LIVE videos from the feed.",
                 Settings.HIDE_LIVE
         ));
         addPreference(new TogglePreference(context, "Hide LIVE replays", "Skip recorded LIVE broadcasts in the feed.", Settings.HIDE_LIVE_REPLAYS));
         addPreference(new TogglePreference(
                 context,
-                "Hide story", "Hide the stories from the feed.",
+                "Hide stories", "Hide stories from the feed.",
                 Settings.HIDE_STORY
         ));
         addPreference(new TogglePreference(
                 context,
-                "Hide photo posts", "Hide the photo posts from the feed.",
+                "Hide photo posts", "Hide photo posts from the feed.",
                 Settings.HIDE_IMAGE
         ));
         addPreference(new TogglePreference(context, "Hide promotional music", "Skip videos marked as using promotional music.", Settings.HIDE_PROMOTIONAL_MUSIC));
@@ -105,8 +105,8 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
         ));
         addPreference(new TogglePreference(
                 context,
-                "Hide AI generated videos",
-                "Hide videos carrying TikTok's AI generated label.",
+                "Hide AI-generated videos",
+                "Hide videos carrying TikTok's AI-generated label.",
                 Settings.HIDE_AI_GENERATED
         ));
         addPreference(new TogglePreference(
@@ -172,8 +172,8 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
         if (SettingsStatus.feedFilterEnabled) {
             addPreference(new InputTextPreference(context, "Blocked creators", "Comma separated account handles or user ids. These accounts are always skipped. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.", Settings.BLOCKED_CREATORS)
                     .withCheck(AdvancedFeedRules::creatorEntryProblem));
-            addPreference(new CreatorListPreference(context, "Locally hidden creators",
-                    "Creators hidden from later feed batches by the player action. Search the list and remove one entry at a time.",
+            addPreference(new CreatorListPreference(context, "Creators hidden on this phone",
+                    "Creators you hid from a video. Search the list and remove one at a time.",
                     Settings.LOCAL_HIDDEN_CREATORS));
         }
         // The player's own buttons. They were the middle of the App page's Player card,
@@ -181,20 +181,20 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
         if (SettingsStatus.blockAuthorEnabled) {
             addPreference(new TogglePreference(
                     context,
-                    "Show block button on videos",
+                    "Show the block button on videos",
                     "Add a block button to the video player that blocks the creator of the "
                             + "current video in one tap. An undo action is shown after each block.",
                     Settings.BLOCK_AUTHOR_BUTTON
             ));
             addPreference(new TogglePreference(
                     context,
-                    "Show local hide button",
-                    "Add a separate button that skips this account locally without blocking it.",
+                    "Show the hide button on videos",
+                    "Add a button that hides the current creator on this phone without blocking them.",
                     Settings.LOCAL_HIDE_BUTTON
             ));
             addPreference(new TogglePreference(
                     context,
-                    "Show block sound button",
+                    "Show the block sound button",
                     "Add a separate button that skips videos using the current sound.",
                     Settings.BLOCK_SOUND_BUTTON
             ));
