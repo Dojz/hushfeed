@@ -2,6 +2,13 @@
 
 Every Hushfeed release, newest first.
 
+## 0.52.0 (2026-09-20)
+
+Comments get their own suggested-search control, and search settings now say where they work.
+
+* **TikTok:** Comment tools adds Hide search suggestions above comments. It removes TikTok's "Search: ..." banner above the comment count without removing comments, their controls or Hushfeed's separate search box. It's off by default and needs a restart.
+* **TikTok:** Search controls now distinguish the feed button, Inbox button, LIVE drawer, image-search prompts, main search-page suggestions and searching within loaded comments. Poll hiding also explains that it removes voting cards and ended poll results.
+
 ## 0.51.0 (2026-09-20)
 
 Commission posts now use the same location-affiliate signal TikTok checks before showing its disclosure.

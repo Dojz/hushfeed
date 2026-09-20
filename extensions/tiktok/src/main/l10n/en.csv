@@ -76,6 +76,7 @@ Add a block button to the video player that blocks the creator of the current vi
 Add a button beside the block control to send feedback about the current video.,Add a button beside the block control to send feedback about the current video.
 Add a button that hides the current creator on this phone without blocking them.,Add a button that hides the current creator on this phone without blocking them.
 Add a creator,Add a creator
+Add a search box that filters comments already loaded on this video by text or username. It doesn't search all of TikTok or remove TikTok's suggested-search banner.,Add a search box that filters comments already loaded on this video by text or username. It doesn't search all of TikTok or remove TikTok's suggested-search banner.
 Add a separate button that skips videos using the current sound.,Add a separate button that skips videos using the current sound.
 Add hidden creator,Add hidden creator
 Added %1$s,Added %1$s
@@ -113,6 +114,7 @@ Apply,Apply
 Applying Calm feed,Applying Calm feed
 Around the video,Around the video
 Arrange your feed and bottom tabs,Arrange your feed and bottom tabs
+"Ask TikTok for search results that aren't personalized to your account. This changes results, not search buttons or suggestions.","Ask TikTok for search results that aren't personalized to your account. This changes results, not search buttons or suggestions."
 Attention,Attention
 Audio,Audio
 Auto translate comments,Auto translate comments
@@ -382,10 +384,12 @@ Hide CAPTCHA popups,Hide CAPTCHA popups
 Hide LIVE replays,Hide LIVE replays
 Hide LIVE videos,Hide LIVE videos
 Hide LIVE videos from the feed.,Hide LIVE videos from the feed.
+Hide Search this image prompts,Hide Search this image prompts
 Hide Series,Hide Series
 Hide TikTok Shop,Hide TikTok Shop
 Hide TikTok Shop posts from the feed.,Hide TikTok Shop posts from the feed.
 Hide TikTok Shop updates and coupon messages.,Hide TikTok Shop updates and coupon messages.
+"Hide TikTok's ""Search: ..."" banner above the comment count. This doesn't hide the comments or Hushfeed's comment-search box.","Hide TikTok's ""Search: ..."" banner above the comment count. This doesn't hide the comments or Hushfeed's comment-search box."
 Hide TikTok's exposed quick emoji row in supported comment inputs.,Hide TikTok's exposed quick emoji row in supported comment inputs.
 Hide activity,Hide activity
 Hide activity status,Hide activity status
@@ -416,9 +420,9 @@ Hide picture comments,Hide picture comments
 Hide playlist videos,Hide playlist videos
 Hide promotional music,Hide promotional music
 Hide quick comment reactions,Hide quick comment reactions
+Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.,Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.
 Hide rows by title,Hide rows by title
-Hide search,Hide search
-Hide search suggestions,Hide search suggestions
+Hide search suggestions above comments,Hide search suggestions above comments
 Hide share actions,Hide share actions
 Hide sharing apps,Hide sharing apps
 Hide stories,Hide stories
@@ -426,11 +430,13 @@ Hide stories from the feed.,Hide stories from the feed.
 Hide stories tray,Hide stories tray
 Hide suggested account rows.,Hide suggested account rows.
 Hide suggested accounts,Hide suggested accounts
+Hide suggestions on the search page,Hide suggestions on the search page
 Hide surveys,Hide surveys
 Hide tabs TikTok adds later unless you allow them.,Hide tabs TikTok adds later unless you allow them.
-"Hide the ""Search this image"" prompt TikTok shows over videos when it spots something to shop for.","Hide the ""Search this image"" prompt TikTok shows over videos when it spots something to shop for."
+"Hide the ""Search this image"" prompt shown over videos. The feed search button and suggestions above comments are separate settings.","Hide the ""Search this image"" prompt shown over videos. The feed search button and suggestions above comments are separate settings."
 Hide the Activity row of likes and comments on your posts.,Hide the Activity row of likes and comments on your posts.
 Hide the Archive row.,Hide the Archive row.
+Hide the Inbox search button,Hide the Inbox search button
 Hide the LIVE button,Hide the LIVE button
 Hide the LIVE button in the top left corner of the feed.,Hide the LIVE button in the top left corner of the feed.
 Hide the Message requests row.,Hide the Message requests row.
@@ -450,6 +456,7 @@ Hide the floating promotional badge over the feed.,Hide the floating promotional
 Hide the follow button on the feed,Hide the follow button on the feed
 Hide the friend recommendation card and the other cards TikTok slots between videos.,Hide the friend recommendation card and the other cards TikTok slots between videos.
 Hide the launcher shortcuts,Hide the launcher shortcuts
+Hide the magnifying glass at the top right of the feed. Search in Inbox and suggestions above comments stay unchanged.,Hide the magnifying glass at the top right of the feed. Search in Inbox and suggestions above comments stay unchanged.
 Hide the music line,Hide the music line
 Hide the playlist bar,Hide the playlist bar
 Hide the playlist bar along the bottom of videos that belong to a series.,Hide the playlist bar along the bottom of videos that belong to a series.
@@ -461,10 +468,7 @@ Hide the right column,Hide the right column
 Hide the row of story avatars across the top of the Inbox.,Hide the row of story avatars across the top of the Inbox.
 Hide the save button on the feed,Hide the save button on the feed
 Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.,Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.
-Hide the search button in the top right corner of the feed.,Hide the search button in the top right corner of the feed.
 Hide the search button on the feed,Hide the search button on the feed
-Hide the search icon in the Inbox header.,Hide the search icon in the Inbox header.
-Hide the searches TikTok offers before you type. Your own search history stays.,Hide the searches TikTok offers before you type. Your own search history stays.
 Hide the share prompt after a like,Hide the share prompt after a like
 Hide the spinning music cover and the track name beside the caption.,Hide the spinning music cover and the track name beside the caption.
 Hide the status bar,Hide the status bar
@@ -480,7 +484,7 @@ Hide videos that belong to a paid Series.,Hide videos that belong to a paid Seri
 Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.,Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.
 "Hide videos with a lot of views and few likes. Lower numbers are stricter, zero turns the rule off, and one video is kept back if a whole batch would go.","Hide videos with a lot of views and few likes. Lower numbers are stricter, zero turns the rule off, and one video is kept back if a whole batch would go."
 Hide videos you have already seen,Hide videos you have already seen
-Hide visual search prompt,Hide visual search prompt
+"Hide voting cards and poll results above the comments, including polls that have ended.","Hide voting cards and poll results above the comments, including polls that have ended."
 Hiding,Hiding
 Highest,Highest
 Historical,Historical
@@ -701,7 +705,6 @@ Profile share actions,Profile share actions
 Promotional music,Promotional music
 Proof,Proof
 Publication age,Publication age
-"Put a box above the comments that narrows them to the ones matching what you type, by what they say or who said it. Clearing the box brings the rest back.","Put a box above the comments that narrows them to the ones matching what you type, by what they say or who said it. Clearing the box brings the rest back."
 Putting the settings back to their defaults,Putting the settings back to their defaults
 Quality,Quality
 "Quality, files, subtitles and hand-off","Quality, files, subtitles and hand-off"
@@ -723,9 +726,9 @@ Remove %1$s,Remove %1$s
 Remove all overrides,Remove all overrides
 Remove feed ads,Remove feed ads
 "Remove feed ads, creator commission posts, paid partnerships, and branded content.","Remove feed ads, creator commission posts, paid partnerships, and branded content."
-Remove polls from the comments before TikTok shows them.,Remove polls from the comments before TikTok shows them.
 Remove the Share via row.,Remove the Share via row.
 Remove the actions row from the share sheet.,Remove the actions row from the share sheet.
+Remove the magnifying glass at the top of Inbox. It doesn't hide search on the feed or in comments.,Remove the magnifying glass at the top of Inbox. It doesn't hide search on the feed or in comments.
 Remove the row of friends from the top of the share sheet.,Remove the row of friends from the top of the share sheet.
 Remove tracking parameters from shared links.,Remove tracking parameters from shared links.
 Remove watermark,Remove watermark
@@ -808,10 +811,9 @@ Search countries or operators,Search countries or operators
 Search hidden creators,Search hidden creators
 Search settings,Search settings
 Search share actions,Search share actions
-Search the comments,Search the comments
 Search these comments,Search these comments
 "Search translated titles and descriptions, then open the original setting.","Search translated titles and descriptions, then open the original setting."
-"Search without personalization, whatever your account is set to.","Search without personalization, whatever your account is set to."
+Search within comments,Search within comments
 "Seconds. Zero keeps every length. If a whole batch would be filtered out, the video closest to your limit is kept so the feed is not empty.","Seconds. Zero keeps every length. If a whole batch would be filtered out, the video closest to your limit is kept so the feed is not empty."
 Seek by,Seek by
 Seek from the edges,Seek from the edges
@@ -841,14 +843,13 @@ Shop,Shop
 Shop posts,Shop posts
 Show,Show
 Show @username beside a video instead of the display name the creator chose.,Show @username beside a video instead of the display name the creator chose.
-Show LIVE search,Show LIVE search
 Show TikTok's own progress bar on videos where it is normally hidden.,Show TikTok's own progress bar on videos where it is normally hidden.
 "Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this. It reads the style once per run and remembers it.","Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this. It reads the style once per run and remembers it."
-Show TikTok's search entry in the LIVE drawer where supported.,Show TikTok's search entry in the LIVE drawer where supported.
 Show a video preview thumbnail while dragging the progress bar.,Show a video preview thumbnail while dragging the progress bar.
 Show failures on screen,Show failures on screen
 Show gates,Show gates
 Show last report,Show last report
+Show search in LIVE,Show search in LIVE
 Show the Not interested button,Show the Not interested button
 Show the block button on videos,Show the block button on videos
 Show the block sound button,Show the block sound button
@@ -858,6 +859,7 @@ Show the handle instead of the name,Show the handle instead of the name
 Show the hide button on videos,Show the hide button on videos
 Show the progress bar,Show the progress bar
 Show the progress bar thumbnail,Show the progress bar thumbnail
+"Show the search entry inside TikTok's LIVE drawer, where available. This doesn't add a search box to video comments.","Show the search entry inside TikTok's LIVE drawer, where available. This doesn't add a search box to video comments."
 Show the whole Activity and New followers lists instead of stopping at a View all button.,Show the whole Activity and New followers lists instead of stopping at a View all button.
 "Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off.","Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off."
 Show what is left of the budget,Show what is left of the budget

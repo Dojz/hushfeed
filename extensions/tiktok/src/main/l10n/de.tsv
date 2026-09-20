@@ -411,8 +411,8 @@ Hide playlist videos	Playlist-Videos ausblenden
 Hide promotional music	Werbemusik ausblenden
 Hide quick comment reactions	Schnelle Kommentar-Reaktionen ausblenden
 Hide rows by title	Zeilen nach Titel ausblenden
-Hide search	Suche ausblenden
-Hide search suggestions	Suchvorschläge ausblenden
+Hide the Inbox search button	Suchschaltfläche im Posteingang ausblenden
+Hide suggestions on the search page	Vorschläge auf der Suchseite ausblenden
 Hide sharing apps	Apps zum Teilen ausblenden
 Hide stories tray	Story-Leiste ausblenden
 Hide stories	Storys ausblenden
@@ -420,7 +420,7 @@ Hide suggested account rows.	Zeilen mit vorgeschlagenen Konten ausblenden.
 Hide suggested accounts	Vorgeschlagene Konten ausblenden
 Hide surveys	Umfragen ausblenden
 Hide tabs TikTok adds later unless you allow them.	Tabs ausblenden, die TikTok später hinzufügt, sofern du sie nicht erlaubst.
-Hide the "Search this image" prompt TikTok shows over videos when it spots something to shop for.	Den Hinweis „Dieses Bild suchen“ ausblenden, den TikTok über Videos zeigt, wenn es etwas zum Kaufen erkennt.
+Hide the "Search this image" prompt shown over videos. The feed search button and suggestions above comments are separate settings.	Blende den Hinweis „Dieses Bild suchen“ über Videos aus. Die Suchschaltfläche im Feed und die Vorschläge über Kommentaren haben eigene Einstellungen.
 Hide the Activity row of likes and comments on your posts.	Die Zeile „Aktivität“ mit Likes und Kommentaren zu deinen Beiträgen ausblenden.
 Hide the Archive row.	Die Zeile „Archiv“ ausblenden.
 Hide the LIVE button	LIVE-Knopf ausblenden
@@ -452,9 +452,9 @@ Hide the rewards shortcut	Belohnungs-Schaltfläche ausblenden
 Hide the right column	Rechte Spalte ausblenden
 Hide the row of story avatars across the top of the Inbox.	Die Reihe der Story-Avatare oben im Posteingang ausblenden.
 Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.	Den Speichern-Button über seinen nativen Sichtbarkeits-Hook ausblenden. Wenn Save in der Checkliste oben angehakt ist, wird derselbe Button über das Overlay ausgeblendet.
-Hide the search button in the top right corner of the feed.	Die Suchschaltfläche oben rechts im Feed ausblenden.
-Hide the search icon in the Inbox header.	Das Suchsymbol in der Kopfzeile des Posteingangs ausblenden.
-Hide the searches TikTok offers before you type. Your own search history stays.	Die Suchen ausblenden, die TikTok anbietet, bevor du tippst. Dein eigener Suchverlauf bleibt.
+Hide the magnifying glass at the top right of the feed. Search in Inbox and suggestions above comments stay unchanged.	Blende die Lupe oben rechts im Feed aus. Die Suche im Posteingang und die Vorschläge über Kommentaren bleiben unverändert.
+Remove the magnifying glass at the top of Inbox. It doesn't hide search on the feed or in comments.	Entferne die Lupe oben im Posteingang. Die Suche im Feed und in Kommentaren bleibt unverändert.
+Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.	Blende empfohlene Suchen auf TikToks Suchseite aus, bevor du etwas eingibst. Dein Suchverlauf bleibt erhalten. Vorschläge über Kommentaren werden dadurch nicht ausgeblendet.
 Hide the share prompt after a like	Die Teilen-Aufforderung nach einem Like ausblenden
 Hide the spinning music cover and the track name beside the caption.	Das drehende Musik-Cover und den Titelnamen neben der Beschreibung ausblenden.
 Hide the status bar	Statusleiste ausblenden
@@ -471,7 +471,7 @@ Hide videos that belong to a paid Series.	Videos ausblenden, die zu einer bezahl
 Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.	Blendet Videos mit vielen Aufrufen und wenigen Kommentaren aus. Funktioniert genauso wie Aufrufe pro Like. Null schaltet es aus.
 Hide videos with a lot of views and few likes. Lower numbers are stricter, zero turns the rule off, and one video is kept back if a whole batch would go.	Videos mit vielen Aufrufen und wenigen Likes ausblenden. Kleinere Zahlen sind strenger, null schaltet die Regel ab, und ein Video bleibt übrig, wenn ein ganzer Schwung wegfiele.
 Hide videos you have already seen	Bereits gesehene Videos ausblenden
-Hide visual search prompt	Bildersuche-Hinweis ausblenden
+Hide Search this image prompts	Hinweise zur Bildsuche ausblenden
 Hiding	Ausblenden
 Highest	Höchste
 Historical	Historisch
@@ -689,7 +689,7 @@ Profile share actions	Share-Aktionen im Profil
 Promotional music	Werbemusik
 Proof	Beleg
 Publication age	Beitragsalter
-Put a box above the comments that narrows them to the ones matching what you type, by what they say or who said it. Clearing the box brings the rest back.	Ein Feld über den Kommentaren, das auf die passenden eingrenzt, nach Inhalt oder nach der Person. Feld leeren bringt die übrigen zurück.
+Add a search box that filters comments already loaded on this video by text or username. It doesn't search all of TikTok or remove TikTok's suggested-search banner.	Füge ein Suchfeld hinzu, das bereits geladene Kommentare zu diesem Video nach Text oder Nutzername filtert. Es durchsucht nicht ganz TikTok und entfernt nicht TikToks Banner mit Suchvorschlägen.
 Putting the settings back to their defaults	Einstellungen werden auf die Standardwerte zurückgesetzt
 Quality	Qualität
 Quality, files, subtitles and hand-off	Qualität, Dateien, Untertitel und Weitergabe
@@ -711,7 +711,7 @@ Remove %1$s	%1$s entfernen
 Remove all overrides	Alle Überschreibungen entfernen
 Remove feed ads	Werbung im Feed entfernen
 Remove feed ads, creator commission posts, paid partnerships, and branded content.	Feed-Werbung, Posts mit Creator-Provision, bezahlte Partnerschaften und Markeninhalte entfernen.
-Remove polls from the comments before TikTok shows them.	Umfragen aus den Kommentaren entfernen, bevor TikTok sie anzeigt.
+Hide voting cards and poll results above the comments, including polls that have ended.	Blende Abstimmungen und ihre Ergebnisse über den Kommentaren aus, auch wenn die Abstimmung bereits beendet ist.
 Remove the Share via row.	Die Zeile „Teilen über“ entfernen.
 Remove the actions row from the share sheet.	Die Aktionszeile aus dem Teilen-Menü entfernen.
 Remove the row of friends from the top of the share sheet.	Die Freundesreihe oben im Teilen-Menü entfernen.
@@ -793,10 +793,10 @@ Search countries or operators	Nach Ländern oder Anbietern suchen
 Search hidden creators	Ausgeblendete Creator durchsuchen
 Search settings	Einstellungen durchsuchen
 Search share actions	Share-Aktionen durchsuchen
-Search the comments	Kommentare durchsuchen
+Search within comments	In Kommentaren suchen
 Search these comments	Diese Kommentare durchsuchen
 Search translated titles and descriptions, then open the original setting.	Übersetzte Titel und Beschreibungen durchsuchen und dann die ursprüngliche Einstellung öffnen.
-Search without personalization, whatever your account is set to.	Ohne Personalisierung suchen, unabhängig davon, was dein Konto eingestellt hat.
+Ask TikTok for search results that aren't personalized to your account. This changes results, not search buttons or suggestions.	Fordere Suchergebnisse an, die nicht auf dein Konto zugeschnitten sind. Das ändert die Ergebnisse, nicht die Suchschaltflächen oder Vorschläge.
 Search by name or gate key	Nach Name oder Gate-Schlüssel suchen
 Seconds. Zero keeps every length. If a whole batch would be filtered out, the video closest to your limit is kept so the feed is not empty.	Sekunden. Null behält jede Länge. Würde ein ganzer Schwung wegfallen, bleibt das Video, das deinem Limit am nächsten kommt, damit der Feed nicht leer ist.
 Seek by	Sprungweite
@@ -828,10 +828,10 @@ Shop	Shop
 Shop posts	Shop-Beiträge
 Show	Anzeigen
 Show @username beside a video instead of the display name the creator chose.	Zeigt @Benutzername neben einem Video statt des Anzeigenamens, den die Person gewählt hat.
-Show LIVE search	LIVE-Suche anzeigen
+Show search in LIVE	Suche in LIVE anzeigen
 Show TikTok's own progress bar on videos where it is normally hidden.	TikToks eigene Fortschrittsleiste bei Videos zeigen, wo sie sonst versteckt ist.
 Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this. It reads the style once per run and remembers it.	TikToks eigenes Sortiermenü bei jedem Beitrag zeigen, mit Beliebt, Neueste, Medien und Ersteller, statt der gekürzten Zeile, die dein Konto bekommen hat. TikTok neu starten, damit das gilt. Es liest den Stil einmal pro Start und merkt ihn sich.
-Show TikTok's search entry in the LIVE drawer where supported.	TikToks Sucheinstieg im LIVE-Bereich zeigen, wo es geht.
+Show the search entry inside TikTok's LIVE drawer, where available. This doesn't add a search box to video comments.	Zeige die Suchfunktion im LIVE-Seitenmenü von TikTok an, sofern verfügbar. Dadurch wird kein Suchfeld zu Videokommentaren hinzugefügt.
 Show a video preview thumbnail while dragging the progress bar.	Beim Ziehen des Fortschrittsbalkens ein Vorschaubild des Videos zeigen.
 Show the block button on videos	Blockieren-Schaltfläche auf Videos anzeigen
 Show the block sound button	Die Schaltfläche zum Blockieren des Sounds anzeigen
@@ -1145,3 +1145,5 @@ Your current settings already match Calm feed.	Deine aktuellen Einstellungen ent
 Your previous feed setup couldn't be restored. Nothing was changed.	Deine vorherige Feed-Einrichtung konnte nicht wiederhergestellt werden. Es wurde nichts geändert.
 Your previous feed setup is back. Restart TikTok to apply every change.	Deine vorherige Feed-Einrichtung ist wiederhergestellt. Starte TikTok neu, um alle Änderungen anzuwenden.
 Your previous feed setup is back.	Deine vorherige Feed-Einrichtung ist wiederhergestellt.
+Hide search suggestions above comments	Suchvorschläge über Kommentaren ausblenden
+Hide TikTok's "Search: ..." banner above the comment count. This doesn't hide the comments or Hushfeed's comment-search box.	Blende TikToks Banner „Suchen: ...“ über der Kommentaranzahl aus. Die Kommentare und das Hushfeed-Suchfeld für Kommentare bleiben sichtbar.

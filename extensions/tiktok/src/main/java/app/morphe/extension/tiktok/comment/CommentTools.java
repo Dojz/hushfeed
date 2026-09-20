@@ -63,6 +63,12 @@ import java.util.WeakHashMap;
  * sits underneath it.
  */
 public final class CommentTools {
+    /** The optional suggested-search banner, not Hushfeed's loaded-comment search box. */
+    public static boolean shouldHideCommentSearchSuggestions() {
+        HookStatus.bound("comment search suggestions", "comment_top banner factory");
+        return Settings.HIDE_COMMENT_SEARCH_SUGGESTIONS.get();
+    }
+
     /**
      * The brand animation TikTok plays over the comment sheet when a comment matches an
      * advertiser's trigger. Called from the trigger itself, so returning true skips it.

@@ -1,7 +1,7 @@
 ![Hushfeed. Take back your feed with focused controls for filtering, gestures, playback, downloads and privacy.](assets/readme-hero.png)
 
 <p align="center">
-  <a href="CHANGELOG.md"><img alt="version" src="https://img.shields.io/badge/version-0.51.0-6f42c1.svg" /></a>
+  <a href="CHANGELOG.md"><img alt="version" src="https://img.shields.io/badge/version-0.52.0-6f42c1.svg" /></a>
   <a href="LICENSE"><img alt="license" src="https://img.shields.io/badge/license-GPLv3-blue.svg" /></a>
   <a href="https://www.android.com/"><img alt="platform" src="https://img.shields.io/badge/platform-Android-3ddc84.svg" /></a>
   <a href="https://github.com/MorpheApp/morphe-manager"><img alt="Morphe" src="https://img.shields.io/badge/works%20with-Morphe-00b894.svg" /></a>
@@ -35,7 +35,7 @@ The block, local hide, sound and Not interested controls, rendered in a local UI
 
 1. Get the TikTok 47.0.3 APK. Google Play only offers the newest build, so take it from [APKMirror](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-0-3-release/tiktok-47-0-3-3-android-apk-download/).
 2. Use Morphe Manager 1.30.0 or newer. Manager refuses a bundle built against a patcher newer than its own, and this one is built against patcher 1.13.0, which Manager 1.30.0 was the first to ship. On anything older the bundle simply will not load.
-3. Add Hushfeed as a source in Morphe Manager. The quickest way is this link on the phone: [Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc%2Fhushfeed). Some in-app browsers block Android from handing a web link to another app. If **Open in Morphe** leaves you in the browser, open Morphe Manager, tap **Sources**, tap **+**, and paste `https://github.com/SysAdminDoc/hushfeed`. You can also download `patches-0.51.0.mpp` from the [latest release](https://github.com/SysAdminDoc/hushfeed/releases/latest) and load it as a local bundle.
+3. Add Hushfeed as a source in Morphe Manager. The quickest way is this link on the phone: [Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc%2Fhushfeed). Some in-app browsers block Android from handing a web link to another app. If **Open in Morphe** leaves you in the browser, open Morphe Manager, tap **Sources**, tap **+**, and paste `https://github.com/SysAdminDoc/hushfeed`. You can also download `patches-0.52.0.mpp` from the [latest release](https://github.com/SysAdminDoc/hushfeed/releases/latest) and load it as a local bundle.
 4. Pick the patches you want and patch the APK. Keep the manager's existing signing key so TikTok stays logged in across updates. Every patch here fits the manager's 640 MB memory default except AMOLED dark theme, which rewrites TikTok's color resources and needs the limit raised to 768 MB. That 640 is the manager's default and not a measured minimum: the whole set apart from AMOLED fits in 576 MB. If patching stops with an out of memory error, that setting is the one to raise. A run that sits at 24 or 25 percent and never moves is the same problem wearing a different face: cancel it, set the limit to 768 MB and start again, and if that still stalls try 512 MB, which gives the patcher less to hold at once.
 5. Install the patched APK. From 2026-09-30, phones in Brazil, Indonesia, Singapore and Thailand ask for more before they will install an app from a developer Google has not verified. The flow is the same every time: turn on the option in Developer options, confirm the device lock, restart the phone, then wait 24 hours before the install goes through. After that it stays open for 7 days, or indefinitely if you chose that. This is not a one-off. Every Hushfeed release is an update, and an update goes through it again once the window closes. `adb install` from a computer skips the whole thing.
 6. Open TikTok and go to Settings and privacy. Hushfeed is the first row. Tap it to find the switches for every patch you selected.
@@ -61,7 +61,7 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 | `Camera and microphone indicator` | Shows a small dot in the top corner while TikTok has the camera open or is recording sound. Green for the camera, orange for the microphone, both when both. It goes when the access ends. Switch: Hushfeed settings > Privacy. |
 | `Comment publish diagnostics` | Says in the diagnostic report whether a comment send reached TikTok's publish code, what it had in hand, and whether it returned early or handed the comment to the request. A comment that never posts leaves no other trace. |
 | `Comment sort controls` | Shows TikTok's own comment sort sheet on every post, with its hot, newest, media and creator options, instead of the cut-down row an account outside the rollout is given. Switch: Hushfeed settings > Comments. |
-| `Comment tools` | Hides comments that contain chosen words or come from chosen accounts, turns the thumbs down on each comment into a block button that shows the block symbol, makes a web address in a comment tappable, hides comment media and polls, and adds a box above the comments that narrows them by what they say or who said it. Switch: Hushfeed settings > Comments. |
+| `Comment tools` | Hides comments that contain chosen words or come from chosen accounts, turns the thumbs down on each comment into a block button that shows the block symbol, makes links tappable and can hide pictures, polls or TikTok's suggested-search banner above comments. A separate search box filters comments already loaded on the video. Each tool has its own switch in Hushfeed settings > Comments. |
 | `Confirm feed interactions` | Adds optional second-tap protection to the feed Follow button and like heart. A red ring marks the armed button. Switch: Hushfeed settings > Feed screen. |
 | `Copy comments without username` | Copies only the comment text without including the creator's username. Switch: Hushfeed settings > Comments. |
 | `Custom offline videos limit` | Adds a custom entry to TikTok's offline videos menu with a configurable limit from 1 to 1000 videos. Switch: Hushfeed settings > Downloads. |
@@ -141,6 +141,21 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 | `Use system font` | Draws TikTok's text in your device's font instead of TikTok Sans. The icons, the gift animations and the @ and # glyphs keep their own fonts. Off by default; restart after changing. Switch: Hushfeed settings > App. |
 
 ## Settings tour
+
+### Which search setting do I need?
+
+| What you want to change | Setting and location |
+| --- | --- |
+| The `Search: ...` suggestion above a video's comments | Comments > **Hide search suggestions above comments**. Restart TikTok after changing it. |
+| A box for finding text or usernames in loaded comments | Comments > **Search within comments**. This adds Hushfeed's own filter, not TikTok search. |
+| Recommended searches shown before typing on TikTok's search page | App > **Hide suggestions on the search page**. Search history stays. |
+| The magnifying glass at the top of the feed | Feed screen > **Hide the search button on the feed**. |
+| The magnifying glass at the top of Inbox | Inbox > **Hide the Inbox search button**. |
+| A `Search this image` prompt over a video | Feed screen > **Hide Search this image prompts**. |
+
+Each switch controls its own surface. Turning one off doesn't change the others. The search field in Hushfeed settings only finds settings.
+
+### Pages and navigation
 
 The settings home starts with a live Hushfeed status card and the installed Hushfeed and TikTok versions. Diagnostics is available from that card. Search follows it, then direct buttons for Feed filter, Privacy and Screen time. The full menu remains in four groups. Your feed holds Feed filter, Feed tabs and Feed screen. Watching and sharing holds Playback, Screen time, Comments, Downloads, Share sheet and Inbox. Privacy and system holds Privacy, Region, App, the Feature Gate Lab, Diagnostics and Backup and restore. About sits at the end. A group only appears when the patches you chose give it a page. Search finds any row by its translated title or description, jumps to it and keeps your search when you return.
 

@@ -4,6 +4,9 @@ import app.morphe.patches.tiktok.feedfilter.countColdStartFeedItemListStores
 import app.morphe.patches.tiktok.interaction.downloads.drawsCommentImageWatermark
 import app.morphe.patches.tiktok.interaction.speed.playerManagerSpeedBoundary
 import app.morphe.patches.tiktok.misc.settings.isSettingsComposeRowsMethod
+import app.morphe.patches.tiktok.misc.commenttools.isCommentSearchHeaderFactory
+import app.morphe.patches.tiktok.misc.commenttools.resolveCommentSearchSuggestions
+import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.DexFileFactory
 import com.android.tools.smali.dexlib2.Opcode
@@ -21,11 +24,37 @@ import org.junit.Assume.assumeTrue
 import org.junit.Test
 
 /**
- * The three instruction-level anchors that changed in TikTok 47.0.3 remain unique on every
+ * Instruction-level anchors used by TikTok 47.0.3 remain unique on every
  * retained universal APK. The assertions describe behavior the patches consume rather than R8
  * names or strings that can move into adjacent methods.
  */
 class TikTokPatchAnchorsMatchFixturesTest {
+    @Test
+    fun `comment suggestion banner factory is unique and guardable on every fixture`() {
+        val apks = fixtures()
+        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
+        for (apk in apks) {
+            val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
+            val matches = container.dexEntryNames.flatMap { entry ->
+                container.getEntry(entry)!!.dexFile.classes.filter {
+                    it.type == "Lcom/ss/android/ugc/aweme/search/common/communicate/AbsSearchService;"
+                }.flatMap { it.methods.filter(::isCommentSearchHeaderFactory) }
+            }
+            assertEquals("${apk.name}: optional comment_top banner factory", 1, matches.size)
+            val method = MutableMethod(matches.single())
+            val original = method.implementation!!.instructions.toList()
+            assertTrue("native absent-banner returns remain supported",
+                original.count { it.opcode == Opcode.RETURN_OBJECT } >= 2)
+            val write = method.resolveCommentSearchSuggestions()
+            assertEquals("preflight must not edit", original, method.implementation!!.instructions.toList())
+            write()
+            assertEquals(listOf(Opcode.INVOKE_STATIC, Opcode.MOVE_RESULT, Opcode.IF_EQZ,
+                Opcode.CONST_4, Opcode.RETURN_OBJECT, Opcode.NOP),
+                method.implementation!!.instructions.take(6).map { it.opcode })
+            assertEquals(original, method.implementation!!.instructions.drop(6).toList())
+        }
+    }
+
     @Test
     fun `location affiliate disclosure uses the same named contract on every fixture`() {
         val apks = fixtures()

@@ -189,7 +189,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             addPreference(new TogglePreference(
                     context,
                     "Hide the search button on the feed",
-                    "Hide the search button in the top right corner of the feed.",
+                    "Hide the magnifying glass at the top right of the feed. Search in Inbox and suggestions above comments stay unchanged.",
                     Settings.HIDE_FEED_SEARCH_BUTTON
             ));
         }
@@ -202,8 +202,8 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             ));
             addPreference(new TogglePreference(
                     context,
-                    "Hide visual search prompt",
-                    "Hide the \"Search this image\" prompt TikTok shows over videos when it spots something to shop for.",
+                    "Hide Search this image prompts",
+                    "Hide the \"Search this image\" prompt shown over videos. The feed search button and suggestions above comments are separate settings.",
                     Settings.HIDE_VISUAL_SEARCH
             ));
         }
