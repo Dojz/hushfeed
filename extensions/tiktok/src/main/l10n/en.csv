@@ -206,6 +206,7 @@ Comment media filename,Comment media filename
 Comments,Comments
 Comments aren't available for this video,Comments aren't available for this video
 Comments beside the video,Comments beside the video
+Compact comment header,Compact comment header
 Compare gate reads with their previous values.,Compare gate reads with their previous values.
 Completed an interrupted settings change. Restart TikTok to apply this.,Completed an interrupted settings change. Restart TikTok to apply this.
 Config,Config
@@ -887,6 +888,7 @@ Start recording,Start recording
 Start the day at,Start the day at
 Start today over,Start today over
 Start typing,Start typing
+"Start with comments. Hide the comment count, sort and close buttons, plus the suggestion area above them. Use Back or swipe down to close comments.","Start with comments. Hide the comment count, sort and close buttons, plus the suggestion area above them. Use Back or swipe down to close comments."
 Sticker,Sticker
 Sticker destination,Sticker destination
 Sticker saved to %1$s,Sticker saved to %1$s

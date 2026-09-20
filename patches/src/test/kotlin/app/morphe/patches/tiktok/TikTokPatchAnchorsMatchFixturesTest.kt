@@ -6,6 +6,9 @@ import app.morphe.patches.tiktok.interaction.speed.playerManagerSpeedBoundary
 import app.morphe.patches.tiktok.misc.settings.isSettingsComposeRowsMethod
 import app.morphe.patches.tiktok.misc.commenttools.isCommentSearchHeaderFactory
 import app.morphe.patches.tiktok.misc.commenttools.resolveCommentSearchSuggestions
+import app.morphe.patches.tiktok.misc.commenttools.compactCommentHeaderComponents
+import app.morphe.patches.tiktok.misc.commenttools.isCompactCommentHeaderBind
+import app.morphe.patches.tiktok.misc.commenttools.resolveCompactCommentHeader
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.DexFileFactory
@@ -29,6 +32,29 @@ import org.junit.Test
  * names or strings that can move into adjacent methods.
  */
 class TikTokPatchAnchorsMatchFixturesTest {
+    @Test
+    fun `all three compact comment roots keep their named lifecycle contract on every fixture`() {
+        val apks = fixtures()
+        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
+        for (apk in apks) {
+            val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
+            val components = container.dexEntryNames.flatMap { entry ->
+                container.getEntry(entry)!!.dexFile.classes.filter { it.type in compactCommentHeaderComponents }
+            }
+            assertEquals("${apk.name}: three dedicated header components", 3, components.size)
+            for (component in components) {
+                assertEquals("${apk.name}: ${component.type} is a slot, not the sheet root",
+                    "Lcom/bytedance/assem/arch/view/UISlotAssem;", component.superclass)
+                val binds = component.methods.filter(::isCompactCommentHeaderBind)
+                assertEquals("${apk.name}: ${component.type} lifecycle", 1, binds.size)
+                val method = MutableMethod(binds.single())
+                val original = method.implementation!!.instructions.toList()
+                method.resolveCompactCommentHeader()()
+                assertEquals(original, method.implementation!!.instructions.drop(1).toList())
+            }
+        }
+    }
+
     @Test
     fun `comment suggestion banner factory is unique and guardable on every fixture`() {
         val apks = fixtures()

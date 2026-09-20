@@ -128,6 +128,7 @@ val commentToolsPatch = bytecodePatch(
     description = "Hides comments that contain chosen words or come from chosen accounts, turns " +
         "the thumbs down on each comment into a block button that shows the block symbol, " +
         "makes links tappable and can hide pictures, polls or TikTok's suggested-search banner above comments. " +
+        "Compact comment header removes the count, controls and suggestion space above the list. " +
         "A separate search box filters comments already loaded on the video. Each tool has its own switch in Hushfeed settings > Comments.",
     default = false,
 ) {
@@ -139,6 +140,15 @@ val commentToolsPatch = bytecodePatch(
         // The patcher keeps writes made by a patch that later fails. Each resolver below returns
         // a deferred write, so even the last reply/list/register refusal leaves the APK untouched.
         applyAfterCommentToolsPreflight(
+            {
+                val writes = compactCommentHeaderComponents.keys.map { owner ->
+                    val method = mutableClassDefBy(owner).methods.singleOrNull(::isCompactCommentHeaderBind)
+                        ?: throw PatchException("Comment tools: expected one compact header bind in $owner")
+                    method.resolveCompactCommentHeader()
+                }
+                val write: CommentToolsWrite = { writes.forEach { it() } }
+                write
+            },
             { CommentSearchHeaderFactoryFingerprint.method.resolveCommentSearchSuggestions() },
             {
                 val settingsStatus = SettingsStatusLoadFingerprint.method

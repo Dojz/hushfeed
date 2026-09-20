@@ -125,6 +125,13 @@ public class CommentsPreferenceCategory extends ConditionalPreferenceCategory {
             ));
             addPreference(new TogglePreference(
                     context,
+                    "Compact comment header",
+                    "Start with comments. Hide the comment count, sort and close buttons, "
+                            + "plus the suggestion area above them. Use Back or swipe down to close comments.",
+                    Settings.COMPACT_COMMENT_HEADER
+            ));
+            addPreference(new TogglePreference(
+                    context,
                     "Filter comments by keyword",
                     "Hide comments that contain any of the words below, or that come from the accounts below.",
                     Settings.COMMENT_KEYWORD_FILTER

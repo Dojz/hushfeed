@@ -47,6 +47,12 @@ public class SearchSettingsClarityTest {
         assertRow("COMMENTS", "comment_search", "Search within comments", "already loaded");
     }
 
+    @Test public void compactHeaderExplainsBothSpaceSavingsAndHowToCloseComments() {
+        assertRow("COMMENTS", "compact_comment_header", "Compact comment header", "comment count");
+        assertRow("COMMENTS", "compact_comment_header", "Compact comment header", "Back");
+        assertRow("COMMENTS", "compact_comment_header", "Compact comment header", "sort");
+    }
+
     @Test public void otherSearchControlsNameTheirOwnSurface() {
         assertRow("BEHAVIOR", "hide_search_suggestions",
                 "Hide suggestions on the search page", "search history");

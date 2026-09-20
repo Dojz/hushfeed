@@ -2,6 +2,12 @@
 
 Every Hushfeed release, newest first.
 
+## 0.53.0 (2026-09-20)
+
+Give the comment list more room.
+
+* **TikTok:** Comment tools adds Compact comment header. It removes the comment count, sort and close buttons, plus the suggestion area above them, including its empty space. Comments and the reply box stay available. Use Back or swipe down to close the panel. Headers with list-navigation tabs stay visible. The switch is off by default and needs a restart.
+
 ## 0.52.0 (2026-09-20)
 
 Comments get their own suggested-search control, and search settings now say where they work.
