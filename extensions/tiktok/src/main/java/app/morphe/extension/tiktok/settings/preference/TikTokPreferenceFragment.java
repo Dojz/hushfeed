@@ -513,6 +513,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
 
         ListView list = view.findViewById(android.R.id.list);
         if (list != null) {
+            SettingsUi.styleScrollableList(list);
             list.setBackgroundColor(SettingsUi.background());
             list.setCacheColorHint(SettingsUi.background());
             list.setDivider(null);

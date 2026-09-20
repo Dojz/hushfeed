@@ -75,7 +75,7 @@ public class DownloadPathPreference extends DialogPreference {
             String error = app.morphe.extension.tiktok.settings.L10n.t(
                     "Choose a folder on internal storage. SD cards are not supported.");
             if (pathField != null && getDialog() != null && getDialog().isShowing()) {
-                pathField.setError(error);
+                SettingsUi.reportFieldError(pathField, error);
             } else {
                 app.morphe.extension.shared.Utils.showToastLong(error);
             }
@@ -85,7 +85,7 @@ public class DownloadPathPreference extends DialogPreference {
             String validated = DownloadDestination.validate(path, kind);
             if (pathField != null && getDialog() != null && getDialog().isShowing()) {
                 pathField.setText(validated);
-                pathField.setError(null);
+                SettingsUi.clearFieldError(pathField);
             } else {
                 setValue(validated);
                 app.morphe.extension.shared.Utils.showToastShort(
@@ -93,7 +93,7 @@ public class DownloadPathPreference extends DialogPreference {
             }
         } catch (IllegalArgumentException ex) {
             if (pathField != null && getDialog() != null && getDialog().isShowing()) {
-                pathField.setError(ex.getMessage());
+                SettingsUi.reportFieldError(pathField, ex.getMessage());
             } else {
                 app.morphe.extension.shared.Utils.showToastLong(ex.getMessage());
             }
@@ -220,7 +220,7 @@ public class DownloadPathPreference extends DialogPreference {
             }
 
             @Override public void report(String problem) {
-                if (pathField != null) pathField.setError(problem);
+                SettingsUi.reportFieldError(pathField, problem);
             }
 
             @Override public boolean accept() {

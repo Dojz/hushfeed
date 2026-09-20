@@ -415,6 +415,7 @@ public final class FeatureGateLabFragment extends Fragment {
 
         FrameLayout listContainer = new FrameLayout(context);
         list = new ListView(context);
+        SettingsUi.styleScrollableList(list);
         list.setDivider(null);
         list.setDividerHeight(0);
         list.setPadding(FeatureGateLabUi.dp(context, 16), 0, FeatureGateLabUi.dp(context, 16), FeatureGateLabUi.dp(context, 24));

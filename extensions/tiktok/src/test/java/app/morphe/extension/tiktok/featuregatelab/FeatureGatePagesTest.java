@@ -767,6 +767,11 @@ public class FeatureGatePagesTest {
                 attach(activity, detail);
                 Spinner values = find(detail.getView(), Spinner.class);
                 assertNotNull(values);
+                assertTrue("the value picker popup kept TikTok's surface",
+                        values.getPopupBackground()
+                                instanceof android.graphics.drawable.GradientDrawable);
+                assertTrue("the value picker is shorter than a 48dp touch target",
+                        values.getMinimumHeight() >= SettingsUi.dp(activity, 48));
                 var firstStarted = new java.util.concurrent.CountDownLatch(1);
                 var releaseFirst = new java.util.concurrent.CountDownLatch(1);
                 var secondFinished = new java.util.concurrent.CountDownLatch(1);
