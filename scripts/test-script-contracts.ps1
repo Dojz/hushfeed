@@ -32,7 +32,7 @@ function Assert-Throws {
 $catalog = Get-Content -LiteralPath (Join-Path $Root 'patches-list.json') -Raw | ConvertFrom-Json
 $target = Get-PatchTarget -PatchList $catalog
 Assert-True ($target.PackageName -eq 'com.zhiliaoapp.musically') 'The catalog package was not resolved.'
-Assert-True ($target.PackageVersion -eq '46.2.3') 'The catalog version was not resolved.'
+Assert-True ($target.PackageVersion -eq '47.0.3') 'The catalog version was not resolved.'
 
 $allNames = @($catalog.patches | ForEach-Object { $_.name })
 $allDependencies = @(Get-PatchDependencyNames -PatchList $catalog -RequestedNames $allNames)
@@ -890,6 +890,37 @@ try {
     Assert-True (Test-Path -LiteralPath $factsMarker) 'An index change ran no release check.'
     Assert-True ((Get-Content -LiteralPath $factsMarker -Raw) -like 'lag=False*') `
         'An index change was allowed to lag behind the published release.'
+
+    # A new remote branch can contain several unpublished commits. The code change here is in
+    # the first commit and the tip changes only documentation. Looking at HEAD^..HEAD silently
+    # misses the code and skips every build gate.
+    $newBranchSource = Join-Path $hookRoot 'extensions/tiktok/src/main/java/FirstCommit.java'
+    New-Item -ItemType Directory -Path (Split-Path -Parent $newBranchSource) -Force | Out-Null
+    Set-Content -LiteralPath $newBranchSource -Encoding UTF8 -Value 'final class FirstCommit {}'
+    & git -C $hookRoot init --quiet
+    & git -C $hookRoot config user.name 'Hook Contract'
+    & git -C $hookRoot config user.email 'hook@example.invalid'
+    & git -C $hookRoot add extensions/tiktok/src/main/java/FirstCommit.java
+    & git -C $hookRoot commit --quiet -m 'code first'
+    Set-Content -LiteralPath (Join-Path $hookRoot 'CONTRIBUTING.md') -Encoding UTF8 -Value 'tip only'
+    & git -C $hookRoot add CONTRIBUTING.md
+    & git -C $hookRoot commit --quiet -m 'docs tip'
+    $newBranchHead = (& git -C $hookRoot rev-parse HEAD).Trim()
+    $newBranchRefs = "refs/heads/new $newBranchHead refs/heads/new $('0' * 40)"
+    $savedNewBranchPath = $env:PATH
+    $savedNewBranchActor = $env:GITHUB_ACTOR
+    $savedNewBranchToken = $env:GITHUB_TOKEN
+    try {
+        $env:PATH = Split-Path -Parent (Get-Command git).Source
+        $env:GITHUB_ACTOR = $null
+        $env:GITHUB_TOKEN = $null
+        Assert-Throws { & $prePushScript -Root $hookRoot -PushedRefs $newBranchRefs 6> $null } `
+            '*GITHUB_ACTOR*' 'A new branch checked only its documentation tip and skipped earlier code.'
+    } finally {
+        $env:PATH = $savedNewBranchPath
+        $env:GITHUB_ACTOR = $savedNewBranchActor
+        $env:GITHUB_TOKEN = $savedNewBranchToken
+    }
 
     # The build branch, which runs the Gradle gates that hold the Bouncy Castle graphs to the
     # reviewed release. Starting a real build from a contract test would be absurd, so the case

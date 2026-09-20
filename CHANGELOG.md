@@ -9,6 +9,7 @@ Every Hushfeed release, newest first.
 * **TikTok:** A failed settings write now keeps the live value aligned with the value that will survive a restart. Hushfeed reports the storage error and keeps an old preference intact until migration has finished successfully.
 * **TikTok:** Settings restore now rejects fractional and overflowing backup schema numbers instead of truncating them into a supported version.
 * **Tests:** Session budget resets now invalidate older queued writes, so one test can't quietly restore a spent budget after the next test has cleared it.
+* **Build:** A first push of a branch now checks every unpublished commit. A documentation-only tip can no longer hide code changed earlier in the branch, and the script contracts follow the current TikTok 47.0.3 target.
 
 ## 0.49.0 (2026-09-20)
 
