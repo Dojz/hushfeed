@@ -478,6 +478,7 @@ Hook status,Hook status
 How far each edge press moves the video.,How far each edge press moves the video.
 Hushfeed cannot read the creator pattern %1$s,Hushfeed cannot read the creator pattern %1$s
 Hushfeed hid a TikTok puzzle. Turn off Hide CAPTCHA popups if something stops working.,Hushfeed hid a TikTok puzzle. Turn off Hide CAPTCHA popups if something stops working.
+Hushfeed is active,Hushfeed is active
 "Ignore the creator's choice so the Duet and Stitch entries appear. Everything else the app checks still applies, and whether the upload is accepted is the server's decision.","Ignore the creator's choice so the Duet and Stitch entries appear. Everything else the app checks still applies, and whether the upload is accepted is the server's decision."
 Import finished,Import finished
 Import loaded values,Import loaded values

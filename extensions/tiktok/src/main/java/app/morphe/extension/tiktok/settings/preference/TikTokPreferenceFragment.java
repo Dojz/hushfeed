@@ -972,7 +972,12 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
 
     private void createMasterMenu(Context context, PreferenceScreen screen) {
         screen.addPreference(SettingsHeaderPreference.master(context, this::closeSettings));
-        screen.addPreference(new SettingsMenuPreference(
+        boolean diagnosticsAvailable = DebugPreferenceCategory.isAvailable();
+        screen.addPreference(new SettingsStatusPreference(
+                context,
+                diagnosticsAvailable ? () -> openSection(Section.DIAGNOSTICS) : null));
+
+        SettingsMenuPreference search = new SettingsMenuPreference(
                 context,
                 "Search settings",
                 "Find a setting by title or description",
@@ -982,7 +987,36 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
                     openSearch();
                     return true;
                 }
-        ));
+        );
+        search.setKey("action_search_settings");
+        search.setOrder(-900);
+        screen.addPreference(search);
+
+        List<SettingsQuickActionsPreference.Action> quickRoutes = new ArrayList<>();
+        if (FeedFilterPreferenceCategory.isAvailable()) {
+            quickRoutes.add(new SettingsQuickActionsPreference.Action(
+                    L10n.t(context, Section.FEED_FILTER.title),
+                    SettingsQuickActionsPreference.FEED_TAG,
+                    SettingsMenuPreference.Icon.FILTER,
+                    () -> openSection(Section.FEED_FILTER)));
+        }
+        if (PrivacyPreferenceCategory.isAvailable()) {
+            quickRoutes.add(new SettingsQuickActionsPreference.Action(
+                    L10n.t(context, Section.PRIVACY.title),
+                    SettingsQuickActionsPreference.PRIVACY_TAG,
+                    SettingsMenuPreference.Icon.PRIVACY,
+                    () -> openSection(Section.PRIVACY)));
+        }
+        if (ScreenTimePreferenceCategory.isAvailable()) {
+            quickRoutes.add(new SettingsQuickActionsPreference.Action(
+                    L10n.t(context, Section.SCREEN_TIME.title),
+                    SettingsQuickActionsPreference.SCREEN_TIME_TAG,
+                    SettingsMenuPreference.Icon.SCREEN_TIME,
+                    () -> openSection(Section.SCREEN_TIME)));
+        }
+        if (!quickRoutes.isEmpty()) {
+            screen.addPreference(new SettingsQuickActionsPreference(context, quickRoutes));
+        }
 
         // Four groups, each a card of its own under a heading, and a heading only shows when
         // the bundle gives its group at least one page. Every page answers for itself, from
@@ -1056,7 +1090,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
             screen.addPreference(featureGateLab);
         }
 
-        if (DebugPreferenceCategory.isAvailable()) {
+        if (diagnosticsAvailable) {
             addMenu(screen, Section.DIAGNOSTICS, SettingsMenuPreference.Icon.DIAGNOSTICS);
         }
         addMenu(screen, Section.BACKUP, SettingsMenuPreference.Icon.BACKUP);

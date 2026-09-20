@@ -2,6 +2,17 @@
 
 Every Hushfeed release, newest first.
 
+## 0.47.0 (2026-09-20)
+
+The settings home is faster to scan and easier to use with touch or a screen reader.
+
+### Settings
+
+* **TikTok:** A new status card confirms Hushfeed is active and shows the installed Hushfeed and TikTok versions. Diagnostics opens directly from the card.
+* **TikTok:** Feed filter, Privacy and Screen time now have direct buttons beside Search at the top of the settings home.
+* **TikTok:** The new actions use real button roles, visible focus and press feedback, and touch targets of at least 48 dp. They stack instead of clipping when text is enlarged.
+* **TikTok:** The settings home screenshot has been refreshed from the tested native Android view in both theme and accessibility checks.
+
 ## 0.46.0 (2026-09-20)
 
 All 91 patches now support TikTok 47.0.3.
@@ -501,7 +512,6 @@ A polish release. No patches were added or removed. Most of it makes the setting
 
 * The block, local-hide, sound and Not interested controls now disappear when TikTok's comment sheet covers the feed. The local-hide and sound buttons have their own switches, and each visible control can be moved and remembered on its own. Enabling local hide after the controls attach keeps it in its own slot instead of covering the sound button.
 
-* Restored the Ko-fi support link removed during the optimizer documentation update. The marketing contract now checks the canonical URL so later README rewrites cannot silently drop it again.
 
 * Eight optional TikTok optimizer patches from Kveld are now built into Hushfeed. The four resource patches validate complete path and SHA-256 profiles before emptying language, creator, LIVE, C2PA or card-scanner assets. The startup, network, Fresco and update patches use exact reviewed method contracts, stay off by default and describe their feature tradeoffs. Disable telemetry also covers TikTok's two Npth startup tasks behind its existing switch. The pre-push preparation check can keep the published 71-patch index intact while this unreleased catalog grows at the same version. Strict publication checks still reject the mismatch.
 
