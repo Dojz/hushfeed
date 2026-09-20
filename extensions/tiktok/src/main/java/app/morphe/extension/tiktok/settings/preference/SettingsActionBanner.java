@@ -26,9 +26,9 @@ import app.morphe.extension.tiktok.settings.L10n;
 /**
  * Feedback that stays inside the Hushfeed settings window instead of disappearing as a toast.
  *
- * <p>The settings pages replace one another inside a single fragment container. The banner is a
- * sibling of the current page, with elevation above it, so an Undo offered on one page remains
- * visible if that page is replaced. Only one banner is shown at a time.</p>
+ * <p>The settings pages replace one another inside a fragment container. The banner sits in the
+ * stable surface above that container, with elevation above it, so an Undo offered on one page
+ * remains visible if that page is replaced. Only one banner is shown at a time.</p>
  */
 public final class SettingsActionBanner {
     private SettingsActionBanner() {
