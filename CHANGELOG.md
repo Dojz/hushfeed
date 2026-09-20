@@ -9,7 +9,7 @@ Commission posts now use the same location-affiliate signal TikTok checks before
 * **TikTok:** Remove feed ads catches location videos marked "Creator earns commission" even when TikTok leaves the shopping and standard ad fields empty. It filters the video before display, without matching English text. Ordinary location tags aren't enough to remove a post.
 * **TikTok:** Paid partnerships and branded content are included in Remove feed ads. The separate paid-partnership switch remains available, and the related controls now sit together under Ads.
 * **TikTok:** When For You is the only remaining top tab, its title and underline are hidden. The feed and Search stay available.
-* **TikTok:** App settings can hide the purple rewards shortcut beside Add friends on Profile. This belongs to Hide floating promotions and is on by default.
+* **TikTok:** App settings can hide the purple rewards shortcut beside Add friends on Profile. This belongs to Hide floating promotions and is off by default.
 
 ## 0.50.0 (2026-09-20)
 
