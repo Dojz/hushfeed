@@ -41,6 +41,7 @@ public class SettingsActionBannerTest {
 
     @After public void tearDown() {
         SettingsActionBanner.dismissForTests();
+        RestartPendingPreference.setRestarterForTests(null);
         activity.finish();
     }
 
@@ -94,5 +95,25 @@ public class SettingsActionBannerTest {
         TextView message = content.findViewWithTag(SettingsActionBanner.MESSAGE_TAG);
         assertNotNull(message);
         assertEquals("second", message.getText().toString());
+    }
+
+    @Test public void restartIsAReachableOneShotAction() {
+        AtomicInteger restarts = new AtomicInteger();
+        RestartPendingPreference.setRestarterForTests(ignored -> restarts.incrementAndGet());
+
+        SettingsActionBanner.showRestart(activity, "Restart TikTok to apply this change");
+
+        TextView action = content.findViewWithTag(SettingsActionBanner.ACTION_TAG);
+        assertNotNull("restart feedback has no action", action);
+        assertEquals("Restart now", action.getText().toString());
+        AccessibilityNodeInfo node = action.createAccessibilityNodeInfo();
+        assertEquals(android.widget.Button.class.getName(), node.getClassName());
+        assertTrue(node.isClickable());
+        node.recycle();
+
+        assertTrue(action.performClick());
+        action.performClick();
+        assertEquals("one press restarted more than once", 1, restarts.get());
+        assertNull(content.findViewWithTag(SettingsActionBanner.BANNER_TAG));
     }
 }

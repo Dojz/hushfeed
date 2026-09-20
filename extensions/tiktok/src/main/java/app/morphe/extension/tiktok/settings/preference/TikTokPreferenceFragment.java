@@ -350,6 +350,9 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         // translation table itself, so they are handed to it once, from here, where the
         // settings screen is being built and a context is at hand.
         savedMessage = L10n.t(context, "Saved. Restart TikTok to apply this.");
+        AbstractPreferenceFragment.setRestartFeedbackPresenter((feedbackContext, ignored) ->
+                SettingsActionBanner.showRestart(feedbackContext,
+                        RestartPendingPreference.label(feedbackContext)));
         app.morphe.extension.shared.settings.preference.LogBufferManager.clearedMessage =
                 L10n.t(context, "Diagnostic data cleared. Tap again to put it back.");
         app.morphe.extension.shared.settings.preference.LogBufferManager.nothingToClearMessage =

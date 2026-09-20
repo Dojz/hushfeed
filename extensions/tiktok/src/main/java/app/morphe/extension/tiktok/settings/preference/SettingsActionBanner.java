@@ -52,6 +52,11 @@ public final class SettingsActionBanner {
         show(context, message, null, null);
     }
 
+    public static void showRestart(Context context, String message) {
+        show(context, message, L10n.t(context, "Restart now"),
+                () -> RestartPendingPreference.restart(context));
+    }
+
     private static void show(Context context, String message, String actionLabel, Runnable action) {
         Utils.runOnMainThreadNowOrLater(() -> {
             try {

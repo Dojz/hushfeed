@@ -1437,6 +1437,41 @@ assertEquals(View.LAYOUT_DIRECTION_RTL, configuration.getLayoutDirection());
         }
     }
 
+    @Test public void tabPickerChangesJoinThePersistentRestartDebt() throws Exception {
+        String original = Settings.BOTTOM_NAVIGATION_TABS.get();
+        app.morphe.extension.shared.settings.preference.AbstractPreferenceFragment
+                .restartPending.clear();
+        try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            TikTokPreferenceFragment page = attachSection(activity, "FEED_NAVIGATION");
+            app.morphe.extension.tiktok.settings.preference.TabSelectionPreference tabs =
+                    (app.morphe.extension.tiktok.settings.preference.TabSelectionPreference)
+                            page.findPreference(Settings.BOTTOM_NAVIGATION_TABS.key);
+            assertNotNull("the bottom-tab picker is not on Feed tabs", tabs);
+            assertTrue("the bottom-tab picker does not require a restart",
+                    Settings.BOTTOM_NAVIGATION_TABS.rebootApp);
+
+            String next = tabs.getValue().contains("FRIENDS")
+                    ? "HOME,PROFILE" : "HOME,FRIENDS,PROFILE";
+            assertTrue("the test did not change the selected tabs", tabs.setValue(next));
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+            assertEquals("the picker and Setting disagree", tabs.getValue(),
+                    Settings.BOTTOM_NAVIGATION_TABS.get());
+            assertTrue("the custom picker bypassed the restart tracker",
+                    app.morphe.extension.shared.settings.preference.AbstractPreferenceFragment
+                            .restartPending.contains(Settings.BOTTOM_NAVIGATION_TABS.key));
+            assertNotNull("the change did not pin the restart action",
+                    page.findPreference(app.morphe.extension.tiktok.settings.preference
+                            .RestartPendingPreference.KEY));
+        } finally {
+            Settings.BOTTOM_NAVIGATION_TABS.save(original);
+            app.morphe.extension.shared.settings.preference.AbstractPreferenceFragment
+                    .restartPending.clear();
+        }
+    }
+
     private static TikTokPreferenceFragment attachSection(Activity activity, String section) {
         TikTokPreferenceFragment fragment = new TikTokPreferenceFragment();
         Bundle arguments = new Bundle();

@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Set;
 
 import app.morphe.extension.shared.settings.StringSetting;
-import app.morphe.extension.shared.settings.preference.AbstractPreferenceFragment;
 import app.morphe.extension.tiktok.navigation.BottomNavigationTabOptions;
 import app.morphe.extension.tiktok.navigation.NavigationTabOptions;
 import app.morphe.extension.tiktok.settings.Settings;
@@ -66,7 +65,10 @@ public class TabSelectionPreference extends Preference {
         if (changed || !valueSet) {
             this.value = sanitizedValue;
             valueSet = true;
-            setting.save(sanitizedValue);
+            // Persist through Preference so the fragment sees the old running value before it
+            // updates the Setting. Saving the Setting directly made this custom editor skip the
+            // restart tracker even though it still showed a restart toast.
+            persistString(sanitizedValue);
             refreshSummary();
             if (changed) {
                 notifyDependencyChange(shouldDisableDependents());
@@ -240,11 +242,8 @@ public class TabSelectionPreference extends Preference {
         View saveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
         if (saveButton != null) {
             saveButton.setOnClickListener(view -> {
-                boolean changed = setValue(serializeEnabledKeys(selected));
+                setValue(serializeEnabledKeys(selected));
                 dialog.dismiss();
-                if (changed && setting.rebootApp) {
-                    AbstractPreferenceFragment.showRestartDialog(context);
-                }
             });
         }
     }
