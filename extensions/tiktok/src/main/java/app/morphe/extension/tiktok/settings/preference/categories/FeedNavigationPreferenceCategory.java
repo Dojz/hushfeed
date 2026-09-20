@@ -34,7 +34,7 @@ public class FeedNavigationPreferenceCategory extends ConditionalPreferenceCateg
         addPreference(new TogglePreference(
                 context,
                 "Filter feed tabs",
-                "Choose which loaded TikTok feed tabs should stay visible.",
+                "Choose which loaded TikTok feed tabs should stay visible. If only For You remains, its redundant header is hidden.",
                 Settings.FEED_NAVIGATION
         ));
         addPreference(new TabSelectionPreference(
