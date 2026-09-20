@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
+import app.morphe.extension.tiktok.settings.preference.SettingsActionBanner;
 import app.morphe.extension.tiktok.settings.preference.SettingsUi;
 import app.morphe.extension.tiktok.settings.preference.TikTokPreferenceFragment;
 
@@ -71,6 +72,7 @@ public class TikTokActivityHook {
         Fragment restoredRoot = base.getFragmentManager().findFragmentByTag(SETTINGS_ROOT_TAG);
         int fragmentId = restoredRoot == null ? View.generateViewId() : restoredRoot.getId();
         fragment.setId(fragmentId);
+        fragment.setTag(SettingsActionBanner.CONTENT_ROOT_TAG);
 
         linearLayout.addView(fragment);
         base.setContentView(linearLayout);
