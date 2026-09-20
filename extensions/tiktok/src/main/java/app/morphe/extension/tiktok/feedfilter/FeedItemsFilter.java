@@ -191,6 +191,25 @@ public final class FeedItemsFilter {
         );
     }
 
+    /**
+     * Last shared boundary before TikTok consumes a main-feed response.
+     *
+     * <p>TikTok 47.0.3 can restore or finish populating a {@link FeedItemList} without returning
+     * it through {@code FeedApiService.fetchFeedList}. Every consumer still reads the response
+     * through {@code FeedItemList.getItems()}, so filtering there catches cached and late-filled
+     * lists as well. The wrapper must fail open because this method runs inside TikTok's model
+     * getter. A filter failure must never make the feed getter throw.
+     */
+    public static void filterOnRead(FeedItemList feedItemList) {
+        try {
+            HookStatus.bound("main feed", "FeedItemList.getItems");
+            filter(feedItemList);
+        } catch (Throwable ex) {
+            HookStatus.threw("main feed", "FeedItemList.getItems", ex);
+            Logger.printException(() -> "Could not filter the main feed while reading it", ex);
+        }
+    }
+
     public static void filter(FollowFeedList followFeedList) {
         filterFollowFeedListSafely(followFeedList, true, FilterPhase.RESPONSE);
     }
@@ -1448,6 +1467,7 @@ public final class FeedItemsFilter {
         final String firstAid;
         final String middleAid;
         final String lastAid;
+        final long contentSignature;
 
         private ListFingerprint(
             int size,
@@ -1456,7 +1476,8 @@ public final class FeedItemsFilter {
             int lastIdentity,
             String firstAid,
             String middleAid,
-            String lastAid
+            String lastAid,
+            long contentSignature
         ) {
             this.size = size;
             this.firstIdentity = firstIdentity;
@@ -1465,12 +1486,13 @@ public final class FeedItemsFilter {
             this.firstAid = firstAid;
             this.middleAid = middleAid;
             this.lastAid = lastAid;
+            this.contentSignature = contentSignature;
         }
 
         static ListFingerprint from(List list, AwemeExtractor extractor) {
             int size = list.size();
             if (size == 0) {
-                return new ListFingerprint(0, 0, 0, 0, "", "", "");
+                return new ListFingerprint(0, 0, 0, 0, "", "", "", 0L);
             }
 
             int middleIndex = size / 2;
@@ -1478,6 +1500,13 @@ public final class FeedItemsFilter {
             Aweme first = extractAt(list, extractor, 0);
             Aweme middle = extractAt(list, extractor, middleIndex);
             Aweme last = extractAt(list, extractor, lastIndex);
+            long contentSignature = 1125899906842597L;
+            for (int index = 0; index < size; index++) {
+                Aweme item = extractAt(list, extractor, index);
+                contentSignature = 31L * contentSignature + identity(item);
+                contentSignature = 31L * contentSignature + aid(item).hashCode();
+                contentSignature = 31L * contentSignature + AdsFilter.evidenceFingerprint(item);
+            }
 
             return new ListFingerprint(
                 size,
@@ -1486,7 +1515,8 @@ public final class FeedItemsFilter {
                 identity(last),
                 aid(first),
                 aid(middle),
-                aid(last)
+                aid(last),
+                contentSignature
             );
         }
 
@@ -1505,7 +1535,8 @@ public final class FeedItemsFilter {
                 && lastIdentity == other.lastIdentity
                 && firstAid.equals(other.firstAid)
                 && middleAid.equals(other.middleAid)
-                && lastAid.equals(other.lastAid);
+                && lastAid.equals(other.lastAid)
+                && contentSignature == other.contentSignature;
         }
 
         String toSampleString() {

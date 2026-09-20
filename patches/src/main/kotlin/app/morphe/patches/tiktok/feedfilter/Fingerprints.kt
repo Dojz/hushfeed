@@ -30,6 +30,18 @@ internal object MainFeedResponseFingerprint : Fingerprint(
     },
 )
 
+/**
+ * The real-named model getter is the stable late boundary for main-feed lists. TikTok 47.0.3
+ * has delivery paths that do not return through FeedApiService.fetchFeedList, but all retained
+ * builds expose this exact getter before consumers can read the response items.
+ */
+internal object FeedItemListGetItemsFingerprint : Fingerprint(
+    definingClass = "Lcom/ss/android/ugc/aweme/feed/model/FeedItemList;",
+    name = "getItems",
+    returnType = "Ljava/util/List;",
+    parameters = emptyList(),
+)
+
 internal object FollowFeedFingerprint : Fingerprint(
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC),
     returnType = "Lcom/ss/android/ugc/aweme/follow/presenter/FollowFeedList;",

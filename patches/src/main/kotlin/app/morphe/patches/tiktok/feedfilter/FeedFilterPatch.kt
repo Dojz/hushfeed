@@ -91,6 +91,16 @@ val feedFilterPatch = bytecodePatch(
             }
         }
 
+        // Some 47.0.3 main-feed lists are restored or filled after fetchFeedList has returned.
+        // Every consumer still crosses this real-named getter. The extension wrapper catches
+        // every Throwable and leaves the original list alone on failure, so this late safety
+        // net cannot break TikTok's model read.
+        FeedItemListGetItemsFingerprint.method.addInstruction(
+            0,
+            "invoke-static/range {p0 .. p0}, " +
+                "$EXTENSION_CLASS_DESCRIPTOR->filterOnRead(Lcom/ss/android/ugc/aweme/feed/model/FeedItemList;)V",
+        )
+
         FollowFeedFingerprint.method.let { method ->
             val returnIndices =
                 method.implementation!!.instructions.withIndex()

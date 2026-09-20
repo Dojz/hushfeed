@@ -4,11 +4,13 @@ import app.morphe.patches.tiktok.feedfilter.countColdStartFeedItemListStores
 import app.morphe.patches.tiktok.interaction.downloads.drawsCommentImageWatermark
 import app.morphe.patches.tiktok.interaction.speed.playerManagerSpeedBoundary
 import app.morphe.patches.tiktok.misc.settings.isSettingsComposeRowsMethod
+import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.DexFileFactory
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.Opcodes
 import com.android.tools.smali.dexlib2.iface.Method
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.NarrowLiteralInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.iface.reference.StringReference
@@ -24,6 +26,80 @@ import org.junit.Test
  * names or strings that can move into adjacent methods.
  */
 class TikTokPatchAnchorsMatchFixturesTest {
+    @Test
+    fun `location affiliate disclosure uses the same named contract on every fixture`() {
+        val apks = fixtures()
+        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
+        val model = "Lcom/ss/android/ugc/aweme/feed/model/"
+        val expectedClasses = listOf("Aweme", "ContentModel", "StandardBusinessModel", "LocalAllianceInfo")
+        for (apk in apks) {
+            val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
+            val models = container.dexEntryNames.flatMap { entry ->
+                container.getEntry(entry)!!.dexFile.classes.filter { it.type in expectedClasses.map { "$model$it;" } }
+            }.associateBy { it.type }
+            assertEquals("${apk.name}: complete model chain", 4, models.size)
+            val aweme = models.getValue("${model}Aweme;")
+            assertTrue(aweme.methods.any {
+                it.name == "getContentModel" && it.parameterTypes.isEmpty() &&
+                    it.returnType == "${model}ContentModel;"
+            })
+            assertTrue(models.getValue("${model}ContentModel;").fields.any {
+                it.name == "standardBusinessModel" && it.type == "${model}StandardBusinessModel;"
+            })
+            assertTrue(models.getValue("${model}StandardBusinessModel;").methods.any {
+                it.name == "getLocalAllianceInfo" && it.parameterTypes.isEmpty() &&
+                    it.returnType == "${model}LocalAllianceInfo;"
+            })
+            val show = models.getValue("${model}LocalAllianceInfo;").methods.single {
+                it.name == "showBottomLabel" && it.parameterTypes.isEmpty() && it.returnType == "Z"
+            }
+            val instructions = show.implementation!!.instructions.toList()
+            assertEquals(
+                "${apk.name}: label type is 1 and label text is nonempty",
+                listOf(Opcode.IGET_OBJECT, Opcode.CONST_4, Opcode.IF_EQZ, Opcode.INVOKE_VIRTUAL,
+                    Opcode.MOVE_RESULT, Opcode.CONST_4, Opcode.IF_NE, Opcode.IGET_OBJECT,
+                    Opcode.IF_EQZ, Opcode.INVOKE_VIRTUAL, Opcode.MOVE_RESULT, Opcode.IF_EQZ,
+                    Opcode.CONST_4, Opcode.RETURN),
+                instructions.map { it.opcode },
+            )
+            assertEquals(listOf(0, 1, 1), instructions.filterIsInstance<NarrowLiteralInstruction>().map { it.narrowLiteral })
+            assertEquals(listOf(
+                "${model}LocalAllianceInfo;->allianceItemLabelType:Ljava/lang/Integer;",
+                "Ljava/lang/Integer;->intValue()I",
+                "${model}LocalAllianceInfo;->allianceItemLabelText:Ljava/lang/String;",
+                "Ljava/lang/String;->length()I",
+            ), instructions.filterIsInstance<ReferenceInstruction>().map { it.reference.toString() })
+        }
+    }
+
+    @Test
+    fun `main feed items getter exists once on every fixture`() {
+        val apks = fixtures()
+        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
+
+        for (apk in apks) {
+            val matches = mutableListOf<Method>()
+            val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
+            for (entry in container.dexEntryNames) {
+                for (classDef in container.getEntry(entry)!!.dexFile.classes) {
+                    if (classDef.type !=
+                        "Lcom/ss/android/ugc/aweme/feed/model/FeedItemList;"
+                    ) continue
+                    matches += classDef.methods.filter { method ->
+                        method.name == "getItems" && method.parameterTypes.isEmpty() &&
+                            method.returnType == "Ljava/util/List;"
+                    }
+                }
+            }
+
+            assertEquals(
+                "${apk.name}: FeedItemList.getItems late filter boundary",
+                1,
+                matches.size,
+            )
+        }
+    }
+
     @Test
     fun `settings compose rows anchor is unique on every fixture`() {
         val apks = fixtures()

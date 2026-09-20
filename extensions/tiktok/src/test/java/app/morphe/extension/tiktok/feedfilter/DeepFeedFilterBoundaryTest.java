@@ -62,6 +62,8 @@ public class DeepFeedFilterBoundaryTest {
         private final String caption;
         private final AwemeStatistics statistics;
         private AwemeRawAd rawAd;
+        private String anchorsExtras;
+        private Object contentModel;
         public String commercialVideoInfo;
 
         Video(String id, boolean ad, long durationMs, String caption) {
@@ -81,6 +83,8 @@ public class DeepFeedFilterBoundaryTest {
         @Override public boolean isSoftAd() { return false; }
         @Override public AwemeRawAd getAwemeRawAd() { return rawAd; }
         @Override public boolean isWithPromotionalMusic() { return false; }
+        public String getAnchorsExtras() { return anchorsExtras; }
+        public Object getContentModel() { return contentModel; }
         public String getDesc() { return caption; }
         public Object getVideo() { return new Duration(durationMs); }
         @Override public AwemeStatistics getStatistics() { return statistics; }
@@ -93,6 +97,12 @@ public class DeepFeedFilterBoundaryTest {
 
         Video asPaidPartnership() {
             commercialVideoInfo = "paid partnership";
+            return this;
+        }
+
+        Video withCreatorCommissionDisclosure() {
+            anchorsExtras = "{\"panel_top_disclosure_label\":"
+                    + "{\"display_text\":\"Creator earns commission\"}}";
             return this;
         }
     }
@@ -260,6 +270,73 @@ public class DeepFeedFilterBoundaryTest {
     }
 
     @Test
+    public void repeatedResponseIsRescannedWhenCommissionMetadataArrives() {
+        Settings.REMOVE_ADS.save(true);
+        BaseSettings.DEBUG.save(true);
+        FeedItemList page = new FeedItemList();
+        Video video = new Video("late-commission", false, 500, "");
+        page.items = new ArrayList<>(List.of(video));
+
+        FeedItemsFilter.filter(page);
+        video.withCreatorCommissionDisclosure();
+        FeedItemsFilter.filter(page);
+
+        assertTrue(page.items.isEmpty());
+        String summary = FeedItemsFilter.rotateProbeSummaryForTests(System.currentTimeMillis() + 10_000L);
+        assertNotNull(summary);
+        assertTrue(summary, summary.contains("cacheHits=0"));
+        assertTrue(summary, summary.contains("scans=2"));
+    }
+
+    @Test
+    public void feedItemListReadCatchesCommissionDisclosureMissedByTheResponseHook() {
+        Settings.REMOVE_ADS.save(true);
+        FeedItemList page = new FeedItemList();
+        Video video = new Video("late-read-commission", false, 500, "")
+                .withCreatorCommissionDisclosure();
+        page.items = new ArrayList<>(List.of(video));
+
+        FeedItemsFilter.filterOnRead(page);
+
+        assertTrue(page.items.isEmpty());
+    }
+
+    @Test
+    public void feedItemListReadCatchesLateLocationAllianceMetadata() {
+        Settings.REMOVE_ADS.save(true);
+        FeedItemList page = new FeedItemList();
+        Video video = new Video("native-commission", false, 500, "");
+        page.items = new ArrayList<>(List.of(video));
+        FeedItemsFilter.filter(page);
+        assertEquals(1, page.items.size());
+
+        video.contentModel = new AdsFilterTest.Content(new AdsFilterTest.Business(
+                new AdsFilterTest.Alliance(1, "Creator earns commission")));
+        FeedItemsFilter.filterOnRead(page);
+
+        assertTrue(page.items.isEmpty());
+    }
+
+    @Test
+    public void responseDropsLocationCommissionBeforeDisplayAndKeepsOrdinaryVideo() {
+        Settings.REMOVE_ADS.save(true);
+        Video commission = new Video("location-commission", false, 500, "");
+        commission.contentModel = new AdsFilterTest.Content(new AdsFilterTest.Business(
+                new AdsFilterTest.Alliance(1, "Creator earns commission")));
+        Video ordinary = new Video("ordinary-location", false, 500, "");
+        FeedItemList page = new FeedItemList();
+        page.items = new ArrayList<>(List.of(commission, ordinary));
+
+        FeedItemsFilter.filter(page);
+
+        assertEquals(List.of(ordinary), page.items);
+        assertEquals(List.of(ordinary), FeedItemsFilter.filterProfileAds(List.of(commission, ordinary)));
+        Settings.REMOVE_ADS.save(false);
+        assertEquals(List.of(commission, ordinary),
+                FeedItemsFilter.filterProfileAds(List.of(commission, ordinary)));
+    }
+
+    @Test
     public void rawMetadataAdsReachEverySharedDeliveryDelegate() {
         Settings.REMOVE_ADS.save(true);
         Video rawAd = new Video("raw-ad", false, 500, "").withRawAd();
@@ -267,12 +344,12 @@ public class DeepFeedFilterBoundaryTest {
 
         AdsFilter classifier = new AdsFilter();
         assertTrue(classifier.getFiltered(rawAd));
-        assertFalse(classifier.getFiltered(partnership));
+        assertTrue(classifier.getFiltered(partnership));
 
         FeedItemList response = new FeedItemList();
         response.items = new ArrayList<>(Arrays.asList(rawAd, partnership));
         FeedItemsFilter.filter(response);
-        assertEquals(List.of(partnership), response.items);
+        assertTrue(response.items.isEmpty());
 
         List<Aweme> inserted = Arrays.asList(
                 new Video("inserted-ad", false, 500, "").withRawAd(),

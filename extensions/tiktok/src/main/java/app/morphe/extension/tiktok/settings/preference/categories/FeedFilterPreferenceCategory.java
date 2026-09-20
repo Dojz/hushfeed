@@ -53,6 +53,7 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
         // is in the bundle, and a page reachable because of one of them must not offer the
         // others' settings, which would sit there doing nothing.
         if (SettingsStatus.feedFilterEnabled) addQuickSetup(context);
+        if (SettingsStatus.feedFilterEnabled) addAds(context);
         if (SettingsStatus.feedFilterEnabled) addKindsOfPost(context);
         if (SettingsStatus.feedFilterEnabled) addLimits(context);
         addCreatorsAndSounds(context);
@@ -68,13 +69,6 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
 
     private void addKindsOfPost(Context context) {
         addPreference(new SectionHeadingPreference(context, "Kinds of post"));
-        // Ads first: it is the switch most people open this page for.
-        addPreference(new TogglePreference(
-                context,
-                "Remove feed ads",
-                "Remove feed ads, including videos with a creator commission disclosure.",
-                Settings.REMOVE_ADS
-        ));
         addPreference(new TogglePreference(
                 context,
                 "Hide TikTok Shop", "Hide TikTok Shop posts from the feed.",
@@ -95,13 +89,6 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
                 context,
                 "Hide photo posts", "Hide photo posts from the feed.",
                 Settings.HIDE_IMAGE
-        ));
-        addPreference(new TogglePreference(context, "Hide promotional music", "Skip videos marked as using promotional music.", Settings.HIDE_PROMOTIONAL_MUSIC));
-        addPreference(new TogglePreference(
-                context,
-                "Hide paid partnerships",
-                "Hide videos marked as paid partnership or branded content.",
-                Settings.HIDE_PAID_PARTNERSHIP
         ));
         addPreference(new TogglePreference(
                 context,
@@ -127,6 +114,24 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
                 "Hide videos posted as part of a playlist.",
                 Settings.HIDE_PLAYLIST_VIDEOS
         ));
+    }
+
+    private void addAds(Context context) {
+        addPreference(new SectionHeadingPreference(context, "Ads"));
+        addPreference(new TogglePreference(
+                context,
+                "Remove feed ads",
+                "Remove feed ads, creator commission posts, paid partnerships, and branded content.",
+                Settings.REMOVE_ADS
+        ));
+        addPreference(new TogglePreference(
+                context,
+                "Hide paid partnerships",
+                "Hide videos marked as paid partnership or branded content.",
+                Settings.HIDE_PAID_PARTNERSHIP
+        ));
+        addPreference(new TogglePreference(context, "Hide promotional music",
+                "Skip videos marked as using promotional music.", Settings.HIDE_PROMOTIONAL_MUSIC));
     }
 
     private void addLimits(Context context) {
