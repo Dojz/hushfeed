@@ -1,5 +1,5 @@
 {
-  "version": "v0.50.0",
+  "version": "v0.51.0",
   "appNames": {
     "com.zhiliaoapp.musically": "TikTok"
   },
@@ -1304,7 +1304,7 @@
     },
     {
       "name": "Hide floating promotions",
-      "description": "Removes floating promotional badges, coin icons, and timer banners from the feed. Switch: Hushfeed settings > Feed screen.",
+      "description": "Removes floating promotional badges from the feed and can hide the rewards shortcut on Profile. Switches: Hushfeed settings > Feed screen and App.",
       "use": true,
       "dependencies": [
         "BytecodePatch",

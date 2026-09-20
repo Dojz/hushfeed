@@ -172,7 +172,7 @@ Choose a preset to fill the SIM details.,Choose a preset to fill the SIM details
 Choose a subfolder under %1$s.,Choose a subfolder under %1$s.
 Choose what reaches your feed,Choose what reaches your feed
 Choose which loaded TikTok bottom navigation tabs should stay visible.,Choose which loaded TikTok bottom navigation tabs should stay visible.
-Choose which loaded TikTok feed tabs should stay visible.,Choose which loaded TikTok feed tabs should stay visible.
+"Choose which loaded TikTok feed tabs should stay visible. If only For You remains, its redundant header is hidden.","Choose which loaded TikTok feed tabs should stay visible. If only For You remains, its redundant header is hidden."
 Choose which rows and controls appear,Choose which rows and controls appear
 Clear all,Clear all
 "Clear all Lab data (overrides, switch, recordings)","Clear all Lab data (overrides, switch, recordings)"
@@ -454,7 +454,9 @@ Hide the music line,Hide the music line
 Hide the playlist bar,Hide the playlist bar
 Hide the playlist bar along the bottom of videos that belong to a series.,Hide the playlist bar along the bottom of videos that belong to a series.
 Hide the plus button under the creator's picture in the right column. Ticking Avatar and follow button above hides the picture with it.,Hide the plus button under the creator's picture in the right column. Ticking Avatar and follow button above hides the picture with it.
+Hide the purple rewards button beside Add friends on your profile.,Hide the purple rewards button beside Add friends on your profile.
 Hide the question cards TikTok slides over a video near its end.,Hide the question cards TikTok slides over a video near its end.
+Hide the rewards shortcut,Hide the rewards shortcut
 Hide the right column,Hide the right column
 Hide the row of story avatars across the top of the Inbox.,Hide the row of story avatars across the top of the Inbox.
 Hide the save button on the feed,Hide the save button on the feed
@@ -720,7 +722,7 @@ Remove,Remove
 Remove %1$s,Remove %1$s
 Remove all overrides,Remove all overrides
 Remove feed ads,Remove feed ads
-"Remove feed ads, including videos with a creator commission disclosure.","Remove feed ads, including videos with a creator commission disclosure."
+"Remove feed ads, creator commission posts, paid partnerships, and branded content.","Remove feed ads, creator commission posts, paid partnerships, and branded content."
 Remove polls from the comments before TikTok shows them.,Remove polls from the comments before TikTok shows them.
 Remove the Share via row.,Remove the Share via row.
 Remove the actions row from the share sheet.,Remove the actions row from the share sheet.

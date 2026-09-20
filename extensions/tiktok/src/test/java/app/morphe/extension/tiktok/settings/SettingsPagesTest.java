@@ -981,6 +981,37 @@ public class SettingsPagesTest {
         }
     }
 
+    @Test public void adControlsStayTogetherBeforeOtherPostKinds() throws Exception {
+        try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            TikTokPreferenceFragment page = attachSection(activity, "FEED_FILTER");
+            ListView list = page.getView().findViewById(android.R.id.list);
+
+            int removeAds = positionOf(list, Settings.REMOVE_ADS.key);
+            int partnerships = positionOf(list, Settings.HIDE_PAID_PARTNERSHIP.key);
+            int promotionalMusic = positionOf(list, Settings.HIDE_PROMOTIONAL_MUSIC.key);
+            int shop = positionOf(list, Settings.HIDE_SHOP.key);
+            assertTrue(removeAds >= 0);
+            assertEquals(removeAds + 1, partnerships);
+            assertEquals(partnerships + 1, promotionalMusic);
+            assertTrue("the ad controls were scattered among unrelated post types",
+                    promotionalMusic < shop);
+        }
+    }
+
+    @Test public void appProfileSectionOffersTheRewardsShortcutDeclutterControl() throws Exception {
+        try (var owner = Robolectric.buildActivity(PageActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            TikTokPreferenceFragment page = attachSection(activity, "BEHAVIOR");
+            Preference rewards = page.findPreference(Settings.HIDE_PROFILE_REWARDS_SHORTCUT.key);
+            assertNotNull(rewards);
+            assertEquals("Hide the rewards shortcut", rewards.getTitle());
+            assertTrue(String.valueOf(rewards.getSummary()).contains("Add friends"));
+        }
+    }
+
     @Test @Config(qualifiers = "de-rDE-w320dp-h800dp-night-mdpi", fontScale = 2f)
     public void calmFeedPresetStacksAndKeepsAnAccessibleActionAtLargeText() {
         boolean shop = Settings.HIDE_SHOP.get();

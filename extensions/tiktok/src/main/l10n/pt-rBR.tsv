@@ -164,7 +164,7 @@ Choose a subfolder under %1$s.	Escolha uma subpasta dentro de %1$s.
 Pick the actions to remove from the share sheet. Names you typed by hand that TikTok hasn't shown yet stay in the list above.	Escolha as ações que quer remover da lista de compartilhamento. Os nomes digitados manualmente que o TikTok ainda não mostrou continuam na lista acima.
 Choose what reaches your feed	Escolha o que chega ao seu feed
 Choose which loaded TikTok bottom navigation tabs should stay visible.	Escolha quais abas de navegação de baixo carregadas pelo TikTok devem continuar visíveis.
-Choose which loaded TikTok feed tabs should stay visible.	Escolha quais abas do feed carregadas pelo TikTok devem continuar visíveis.
+Choose which loaded TikTok feed tabs should stay visible. If only For You remains, its redundant header is hidden.	Escolha quais abas do feed carregadas pelo TikTok devem continuar visíveis. Se só Para você restar, o cabeçalho redundante será ocultado.
 Choose which rows and controls appear	Escolha quais linhas e controles aparecem
 Clear all	Limpar tudo
 Clear all Lab data (overrides, switch, recordings)	Limpar todos os dados do Lab (substituições, interruptor, gravações)
@@ -443,7 +443,9 @@ Hide photo posts from the feed.	Esconder publicações de fotos do feed.
 Hide the playlist bar	Esconder a barra da playlist
 Hide the playlist bar along the bottom of videos that belong to a series.	Esconder a barra da playlist na parte de baixo dos vídeos que fazem parte de uma série.
 Hide the plus button under the creator's picture in the right column. Ticking Avatar and follow button above hides the picture with it.	Oculta o botão de mais sob a foto do criador na coluna da direita. Marcar Avatar e botão de seguir acima esconde a foto junto.
+Hide the purple rewards button beside Add friends on your profile.	Ocultar o botão roxo de recompensas ao lado de Adicionar amigos no seu perfil.
 Hide the question cards TikTok slides over a video near its end.	Esconder os cards com perguntas que o TikTok desliza sobre o vídeo perto do fim.
+Hide the rewards shortcut	Ocultar o atalho de recompensas
 Hide the right column	Esconder a coluna da direita
 Hide the row of story avatars across the top of the Inbox.	Esconder a linha de fotos de stories no topo da caixa de entrada.
 Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.	Ocultar o botao de salvar atraves de seu hook de visibilidade nativo. Marcar Salvar na lista acima oculta o mesmo botao pela sobreposicao.
@@ -705,7 +707,7 @@ Remove	Remover
 Remove %1$s	Remover %1$s
 Remove all overrides	Remover todas as substituições
 Remove feed ads	Remover os anúncios do feed
-Remove feed ads, including videos with a creator commission disclosure.	Remover anúncios do feed, incluindo vídeos com um aviso de comissão do criador.
+Remove feed ads, creator commission posts, paid partnerships, and branded content.	Remover anúncios do feed, posts com comissão do criador, parcerias pagas e conteúdo de marca.
 Remove polls from the comments before TikTok shows them.	Remover as enquetes dos comentários antes que o TikTok as exiba.
 Remove the Share via row.	Remover a linha Compartilhar via.
 Remove the actions row from the share sheet.	Remover a linha de ações da folha de compartilhamento.

@@ -165,7 +165,7 @@ Choose a subfolder under %1$s.,Pilih subfolder di %1$s.
 "Pick the actions to remove from the share sheet. Names you typed by hand that TikTok hasn't shown yet stay in the list above.","Pilih tindakan yang ingin dihapus dari lembar berbagi. Nama yang Anda ketik sendiri dan belum ditampilkan TikTok tetap ada di daftar di atas."
 Choose what reaches your feed,Pilih apa yang sampai ke feed-mu
 Choose which loaded TikTok bottom navigation tabs should stay visible.,Pilih tab navigasi bawah TikTok mana yang tetap terlihat.
-Choose which loaded TikTok feed tabs should stay visible.,Pilih tab feed TikTok mana yang tetap terlihat.
+"Choose which loaded TikTok feed tabs should stay visible. If only For You remains, its redundant header is hidden.","Pilih tab feed TikTok mana yang tetap terlihat. Jika hanya For You yang tersisa, header yang tidak diperlukan akan disembunyikan."
 Choose which rows and controls appear,Pilih baris dan kontrol yang muncul
 Clear all,Hapus semua
 "Clear all Lab data (overrides, switch, recordings)","Hapus semua data Lab (penggantian, sakelar, rekaman)"
@@ -444,7 +444,9 @@ Hide photo posts from the feed.,Sembunyikan postingan foto dari feed.
 Hide the playlist bar,Sembunyikan bilah playlist
 Hide the playlist bar along the bottom of videos that belong to a series.,Sembunyikan bilah playlist di bagian bawah video yang termasuk sebuah seri.
 Hide the plus button under the creator's picture in the right column. Ticking Avatar and follow button above hides the picture with it.,Sembunyikan tombol plus di bawah foto kreator di kolom kanan. Mencentang Avatar dan tombol ikuti di atas ikut menyembunyikan fotonya.
+Hide the purple rewards button beside Add friends on your profile.,Sembunyikan tombol hadiah ungu di samping Tambah teman di profilmu.
 Hide the question cards TikTok slides over a video near its end.,Sembunyikan kartu pertanyaan yang TikTok munculkan menjelang akhir video.
+Hide the rewards shortcut,Sembunyikan pintasan hadiah
 Hide the right column,Sembunyikan kolom kanan
 Hide the row of story avatars across the top of the Inbox.,Sembunyikan baris foto profil Story di bagian atas Kotak Masuk.
 "Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.","Sembunyikan tombol simpan melalui hook visibilitas aslinya. Mencentang Simpan di daftar di atas menyembunyikan tombol yang sama melalui overlay."
@@ -706,7 +708,7 @@ Remove,Hapus
 Remove %1$s,Hapus %1$s
 Remove all overrides,Hapus semua penggantian
 Remove feed ads,Hapus iklan di feed
-"Remove feed ads, including videos with a creator commission disclosure.","Hapus iklan di feed, termasuk video dengan label komisi kreator."
+"Remove feed ads, creator commission posts, paid partnerships, and branded content.","Hapus iklan di feed, postingan komisi kreator, kemitraan berbayar, dan konten bermerek."
 Remove polls from the comments before TikTok shows them.,Hapus jajak pendapat dari komentar sebelum TikTok menampilkannya.
 Remove the Share via row.,Hapus baris Bagikan lewat.
 Remove the actions row from the share sheet.,Hapus baris aksi dari menu bagikan.
