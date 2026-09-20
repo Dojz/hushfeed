@@ -60,6 +60,20 @@ function Get-PushedPaths {
         if ($localSha -eq $zeroObject) { continue }
 
         if ($remoteSha -eq $zeroObject) {
+            # A new tag of an already hosted branch adds no files. In particular it does not
+            # rewrite the source index, which must keep naming the previous working bundle
+            # until the new release asset exists. Trust a live advertisement, not tracking refs.
+            if ($parts[2] -like 'refs/tags/*' -and $RemoteUrl) {
+                $target = git rev-parse --verify "$localSha^{commit}" 2>$null
+                if ($LASTEXITCODE -ne 0) { throw "Could not resolve tag target $localSha." }
+                $advertised = @(git ls-remote --heads $RemoteUrl 2>$null)
+                if ($LASTEXITCODE -ne 0) { throw 'Could not read remote branches to verify the tag target.' }
+                $targetPattern = '^' + [regex]::Escape(([string]$target).Trim()) + '\s+refs/heads/'
+                if (@($advertised | Where-Object { $_ -match $targetPattern }).Count -gt 0) {
+                    Write-Step 'new tag names an advertised remote branch commit; no file changes'
+                    continue
+                }
+            }
             # This intentionally runs the relevant gate for any matching path in the tree, even
             # when the branch changed only documentation. A first push is rare, and a complete
             # tree cannot be made incomplete by a deleted or force-updated remote-tracking ref.

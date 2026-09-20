@@ -952,6 +952,13 @@ Write-Host '[scripts] release facts contracts passed'
 $prePushScript = Join-Path $PSScriptRoot 'pre-push.ps1'
 $hookRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("hushfeed-hook-" + [guid]::NewGuid().ToString('N'))
 $savedSkip = $env:HUSHFEED_SKIP_PRE_PUSH
+$savedHookGit = @{}
+# These cases invoke another hook against a foreign repository. Git's own hook environment
+# must not leak into that repository or its local bare transport, including GIT_EXEC_PATH.
+foreach ($variable in @(Get-ChildItem Env: | Where-Object { $_.Name -like 'GIT_*' })) {
+    $savedHookGit[$variable.Name] = $variable.Value
+    Remove-Item -LiteralPath ('Env:\' + $variable.Name)
+}
 try {
     $env:HUSHFEED_SKIP_PRE_PUSH = $null
     New-Item -ItemType Directory -Path (Join-Path $hookRoot 'scripts') -Force | Out-Null
@@ -1008,6 +1015,10 @@ try {
     New-Item -ItemType Directory -Path (Split-Path -Parent $newBranchSource) -Force | Out-Null
     Set-Content -LiteralPath $newBranchSource -Encoding UTF8 -Value 'final class FirstCommit {}'
     & git -C $hookRoot init --quiet
+    $actualHookGitDir = (& git -C $hookRoot rev-parse --absolute-git-dir).Trim()
+    Assert-True ([IO.Path]::GetFullPath($actualHookGitDir).TrimEnd('\', '/') -ieq
+        [IO.Path]::GetFullPath((Join-Path $hookRoot '.git')).TrimEnd('\', '/')) `
+        'The hook fixture resolved outside its temporary repository; refusing to write.'
     & git -C $hookRoot config user.name 'Hook Contract'
     & git -C $hookRoot config user.email 'hook@example.invalid'
     & git -C $hookRoot add extensions/tiktok/src/main/java/FirstCommit.java
@@ -1030,6 +1041,47 @@ try {
         $env:GITHUB_TOKEN = $null
         Assert-Throws { & $prePushScript -Root $hookRoot -PushedRefs $newBranchRefs 6> $null } `
             '*GITHUB_ACTOR*' 'A new branch checked only its documentation tip and skipped earlier code.'
+    } finally {
+        $env:PATH = $savedNewBranchPath
+        $env:GITHUB_ACTOR = $savedNewBranchActor
+        $env:GITHUB_TOKEN = $savedNewBranchToken
+    }
+
+    # A release tag can name the exact tree already on a remote branch. It adds a pointer,
+    # not a new index: treating it as a first branch push creates a publication deadlock.
+    $tagRemote = Join-Path $hookRoot 'tag-remote.git'
+    & git init --bare --quiet $tagRemote
+    & git -C $hookRoot push --quiet $tagRemote "${newBranchHead}:refs/heads/main"
+    & git -C $hookRoot tag -a release-same-tree -m 'release' $newBranchHead
+    $tagObject = (& git -C $hookRoot rev-parse refs/tags/release-same-tree).Trim()
+    $tagRefs = "refs/tags/release-same-tree $tagObject refs/tags/release-same-tree $('0' * 40)"
+    try {
+        # Git hooks put git-core first. Keeping only that directory breaks Windows Git's
+        # local transport because its runtime DLLs live elsewhere. Hide gh, not Git's dependencies.
+        $env:PATH = (@($savedNewBranchPath -split [IO.Path]::PathSeparator | Where-Object {
+            $directory = $_.Trim('"')
+            $directory -and -not (@('gh', 'gh.exe', 'gh.cmd', 'gh.bat') | Where-Object {
+                Test-Path -LiteralPath (Join-Path $directory $_) -PathType Leaf
+            })
+        }) -join [IO.Path]::PathSeparator)
+        Assert-True (-not (Get-Command gh -ErrorAction SilentlyContinue)) 'The tag fixture still exposes gh.'
+        $env:GITHUB_ACTOR = $null
+        $env:GITHUB_TOKEN = $null
+        & $prePushScript -Root $hookRoot -RemoteUrl $tagRemote -PushedRefs $tagRefs 6> $null
+        Assert-True ($LASTEXITCODE -eq 0) 'An annotated tag of the advertised remote tree reran file-change gates.'
+        $lightTagRefs = "refs/tags/light $newBranchHead refs/tags/light $('0' * 40)"
+        & $prePushScript -Root $hookRoot -RemoteUrl $tagRemote -PushedRefs $lightTagRefs 6> $null
+        Assert-True ($LASTEXITCODE -eq 0) 'A lightweight tag of the advertised remote tree reran file-change gates.'
+
+        # A stale local tracking ref is not proof that the target is hosted. Only the live
+        # remote advertisement above can qualify; unknown targets retain the full-tree gate.
+        $unknownTagRefs = "refs/tags/unknown $firstCommit refs/tags/unknown $('0' * 40)"
+        Assert-Throws { & $prePushScript -Root $hookRoot -RemoteUrl $tagRemote -PushedRefs $unknownTagRefs 6> $null } `
+            '*GITHUB_ACTOR*' 'A tag not matching an advertised remote branch skipped code checks.'
+        Assert-Throws { & $prePushScript -Root $hookRoot -RemoteUrl $tagRemote -PushedRefs "$tagRefs`n$newBranchRefs" 6> $null } `
+            '*GITHUB_ACTOR*' 'A known tag suppressed checks for a new branch in the same push.'
+        Assert-Throws { & $prePushScript -Root $hookRoot -RemoteUrl (Join-Path $hookRoot 'missing-remote.git') -PushedRefs $tagRefs 6> $null } `
+            '*remote branches*' 'An unavailable remote was treated as proof that a tag target was already hosted.'
     } finally {
         $env:PATH = $savedNewBranchPath
         $env:GITHUB_ACTOR = $savedNewBranchActor
@@ -1064,6 +1116,7 @@ try {
     }
 } finally {
     $env:HUSHFEED_SKIP_PRE_PUSH = $savedSkip
+    foreach ($name in $savedHookGit.Keys) { Set-Item -LiteralPath ('Env:\' + $name) -Value $savedHookGit[$name] }
     Remove-Item -LiteralPath $hookRoot -Recurse -Force -ErrorAction SilentlyContinue
 }
 
