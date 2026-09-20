@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.FrameLayout;
 import app.morphe.extension.shared.Utils;
+import app.morphe.extension.shared.settings.Setting;
 import app.morphe.extension.tiktok.SettingsContextRule;
 import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.preference.SettingsUi;
@@ -24,6 +25,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.GraphicsMode;
+import org.robolectric.shadows.ShadowToast;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(sdk = 28)
@@ -444,6 +446,55 @@ public class OverlayControlsTest {
                     new java.lang.ref.WeakReference<>(null));
             activity.finish();
         }
+    }
+
+    @Test public void anAttachedControlIsReclampedWhenTheSafeAreaChanges() throws Exception {
+        ViewGroup root = attachedRoot();
+        View feedback = held("notInterestedReference");
+        int size = SettingsUi.dp(root.getContext(), 48);
+        declared("moveTo", View.class, ViewGroup.class, float.class, float.class)
+                .invoke(null, feedback, root, 2_000f, 2_000f);
+        assertEquals(1080 - size, topOf(feedback));
+
+        FrameLayout tabBar = new FrameLayout(root.getContext());
+        View homeTab = new View(root.getContext());
+        tabBar.addView(homeTab, new FrameLayout.LayoutParams(216, 160));
+        root.addView(tabBar, new FrameLayout.LayoutParams(1080, 160));
+        tabBar.layout(0, 920, 1080, 1080);
+        homeTab.layout(0, 0, 216, 160);
+        org.robolectric.util.ReflectionHelpers.setStaticField(
+                FeedVisibility.class, "homeTabReference",
+                new java.lang.ref.WeakReference<>(homeTab));
+        try {
+            root.getViewTreeObserver().dispatchOnGlobalLayout();
+
+            assertEquals("the existing control stayed under a newly visible tab row",
+                    1080 - 160 - size, topOf(feedback));
+        } finally {
+            org.robolectric.util.ReflectionHelpers.setStaticField(
+                    FeedVisibility.class, "homeTabReference",
+                    new java.lang.ref.WeakReference<>(null));
+        }
+    }
+
+    @Test public void aFailedOverlayActionReportsFailureInsteadOfSuccess() {
+        Activity activity = Robolectric.buildActivity(Activity.class).setup().visible().get();
+        Utils.setContext(activity);
+        ShadowToast.reset();
+        Setting<String> failing = new Setting<String>(
+                "overlay_failure_" + System.nanoTime(), "before", false, false, null, null) {
+            @Override protected void load() { value = defaultValue; }
+            @Override protected void setValueFromString(String newValue) { value = newValue; }
+            @Override protected void saveToPreferences() {
+                throw new IllegalStateException("injected commit failure");
+            }
+            @Override public String get() { return value; }
+        };
+
+        assertFalse(BlockAuthorOverlay.saveAction(failing, "after"));
+        assertEquals("before", failing.get());
+        assertEquals("This change couldn't be saved. Try again.",
+                ShadowToast.getTextOfLatestToast());
     }
 
     @Test public void aMoveActionNeverEntersPointerDragMode() throws Exception {

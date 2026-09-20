@@ -74,35 +74,39 @@ mkdir -p "$SP"
 
 parse_top() {
     awk '
-        /(topResumedActivity=|mResumedActivity:).*ActivityRecord\{/ {
+        /^[[:space:]]*Display: mDisplayId=/ {
+            default_display = ($0 ~ /^[[:space:]]*Display: mDisplayId=0([[:space:]]|$)/)
+            next
+        }
+        default_display && /^[[:space:]]*mCurrentFocus=/ {
             record = $0
-            while (record !~ /}/ && (getline continuation) > 0) {
+            while (record !~ /}/ && record !~ /=null[[:space:]]*$/ && (getline continuation) > 0) {
                 record = record " " continuation
             }
-            sub(/^.*ActivityRecord\{[^[:space:]]+[[:space:]]+u[0-9]+[[:space:]]+/, "", record)
-            sub(/[[:space:]]+t[0-9]+}.*$/, "", record)
+            sub(/^.*mCurrentFocus=Window\{[^[:space:]]+[[:space:]]+u[0-9]+[[:space:]]+/, "", record)
+            sub(/}.*$/, "", record)
             sub(/^[[:space:]]+/, "", record)
             sub(/[[:space:]]+$/, "", record)
             if (record ~ /^[^[:space:]]+\/[^[:space:]]+$/) {
                 print record
                 found = 1
-                exit
             }
+            exit
         }
         END { if (!found) exit 1 }
     '
 }
-top() { local result; result=$(timeout 30 "$ADB" -s "$S" shell dumpsys activity activities 2>/dev/null) || return $?; printf '%s\n' "$result" | parse_top; }
+top() { local result; result=$(timeout 30 "$ADB" -s "$S" shell dumpsys window displays 2>/dev/null) || return $?; printf '%s\n' "$result" | parse_top; }
 # Written to a temporary name and moved into place only after a zero exit: the redirection
 # creates the file before adb runs, so a dropped device or a timeout left an empty .png where
 # a device check expected evidence.
 shot() { local activity tmp; tmp="$SP/$1.png.part"; if ! timeout 60 "$ADB" -s "$S" exec-out screencap -p > "$tmp" 2>/dev/null || [ ! -s "$tmp" ]; then rm -f "$tmp"; echo "screencap failed for $1" >&2; return 1; fi; mv -f "$tmp" "$SP/$1.png"; activity=$(top) || return $?; echo "shot $SP/$1.png top=$activity"; }
 guard() { local t; t=$(top); case "$t" in $PKG/*) ;; *) echo "REFUSED: foreground is $t"; exit 2;; esac; }
 px() { awk "BEGIN{printf \"%d\", $1*$SCALE}"; }
-tap() { guard; timeout 30 "$ADB" -s "$S" shell input tap "$(px "$1")" "$(px "$2")"; sleep "${3:-2}"; }
-swipe() { guard; timeout 30 "$ADB" -s "$S" shell input swipe "$(px "$1")" "$(px "$2")" "$(px "$3")" "$(px "$4")" "${5:-300}"; sleep "${6:-2}"; }
-key() { guard; timeout 30 "$ADB" -s "$S" shell input keyevent "$1"; sleep "${2:-2}"; }
-text() { guard; timeout 30 "$ADB" -s "$S" shell input text "$1"; sleep 1; }
+tap() { guard; timeout 30 "$ADB" -s "$S" shell input -d 0 tap "$(px "$1")" "$(px "$2")"; sleep "${3:-2}"; }
+swipe() { guard; timeout 30 "$ADB" -s "$S" shell input -d 0 swipe "$(px "$1")" "$(px "$2")" "$(px "$3")" "$(px "$4")" "${5:-300}"; sleep "${6:-2}"; }
+key() { guard; timeout 30 "$ADB" -s "$S" shell input -d 0 keyevent "$1"; sleep "${2:-2}"; }
+text() { guard; timeout 30 "$ADB" -s "$S" shell input -d 0 text "$1"; sleep 1; }
 logcat() { local result pattern; pattern="${1:?logcat requires a filter}"; result=$(timeout 60 "$ADB" -s "$S" logcat -d 2>/dev/null) || return $?; printf '%s\n' "$result" | grep -iE "$pattern" | tail -"${2:-20}"; }
 gfx() { local result; result=$(timeout 60 "$ADB" -s "$S" shell dumpsys gfxinfo $PKG "${1:-}" 2>/dev/null) || return $?; printf '%s\n' "$result" | grep -E "Total frames|Janky|50th|90th|99th|Number Frame|Uptime" | head -12; }
 "$@"

@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
+import app.morphe.extension.shared.settings.Setting;
 import app.morphe.extension.shared.settings.StringSetting;
 import app.morphe.extension.tiktok.feedfilter.SoundIdentity;
 import app.morphe.extension.tiktok.settings.Settings;
@@ -194,6 +195,7 @@ public final class BlockAuthorOverlay {
             View existing = buttonReference.get();
             if (existing != null && existing.getParent() == root) {
                 syncVisibility();
+                clampCurrentPositions(root);
                 return;
             }
 
@@ -304,9 +306,24 @@ public final class BlockAuthorOverlay {
         }
         removeVisibilityListener();
 
-        visibilityListener = BlockAuthorOverlay::syncVisibility;
+        visibilityListener = () -> {
+            syncVisibility();
+            clampCurrentPositions(root);
+        };
         root.getViewTreeObserver().addOnGlobalLayoutListener(visibilityListener);
         rootReference = new WeakReference<>(root);
+    }
+
+    /** Re-applies only the safe-area bounds, without moving a control back during a drag. */
+    private static void clampCurrentPositions(ViewGroup root) {
+        if (root.getWidth() == 0 || root.getHeight() == 0) return;
+        for (View view : new View[]{buttonReference.get(), localHideReference.get(),
+                soundButtonReference.get(), notInterestedReference.get()}) {
+            if (view == null || view.getParent() != root) continue;
+            ViewGroup.MarginLayoutParams params =
+                    (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            moveTo(view, root, params.leftMargin, params.topMargin);
+        }
     }
 
     private static void removeVisibilityListener() {
@@ -411,22 +428,24 @@ public final class BlockAuthorOverlay {
         }
 
         final boolean byId = sound.id != null && !sound.id.isEmpty();
-        if (byId) {
-            Settings.BLOCKED_SOUND_IDS.save(SoundIdentity.withEntry(Settings.BLOCKED_SOUND_IDS.get(), sound.id));
-        } else {
-            Settings.BLOCKED_SOUND_NAMES.save(SoundIdentity.withEntry(Settings.BLOCKED_SOUND_NAMES.get(), sound.name));
-        }
+        StringSetting setting = byId ? Settings.BLOCKED_SOUND_IDS : Settings.BLOCKED_SOUND_NAMES;
+        String identity = byId ? sound.id : sound.name;
+        if (!saveAction(setting, SoundIdentity.withEntry(setting.get(), identity))) return;
         // The sound's author is a creator, so the line says how the sound was recorded, not which.
         Logger.printDebug(() -> "Blocked sound " + (byId ? "by id" : "by name"));
 
         showUndoBanner(L10n.f("Skipping videos with %1$s", sound.label()), () -> {
-            if (byId) {
-                Settings.BLOCKED_SOUND_IDS.save(SoundIdentity.withoutEntry(Settings.BLOCKED_SOUND_IDS.get(), sound.id));
-            } else {
-                Settings.BLOCKED_SOUND_NAMES.save(SoundIdentity.withoutEntry(Settings.BLOCKED_SOUND_NAMES.get(), sound.name));
+            if (saveAction(setting, SoundIdentity.withoutEntry(setting.get(), identity))) {
+                Utils.showToastShort(L10n.f("Unblocked %1$s", sound.label()));
             }
-            Utils.showToastShort(L10n.f("Unblocked %1$s", sound.label()));
         });
+    }
+
+    /** A local action may claim success only after its preference commit succeeded. */
+    static <T> boolean saveAction(Setting<T> setting, T value) {
+        if (setting.save(value)) return true;
+        Utils.showToastLong(L10n.t("This change couldn't be saved. Try again."));
+        return false;
     }
 
     private static View createButton(Activity activity) {
@@ -540,7 +559,7 @@ public final class BlockAuthorOverlay {
         if (parent.getWidth() == 0 || parent.getHeight() == 0) return false;
 
         StringSetting setting = positionSetting(view);
-        setting.resetToDefault();
+        if (!saveAction(setting, setting.defaultValue)) return false;
         int size = SettingsUi.dp(parent.getContext(), BUTTON_SIZE_DP);
         int step = size + SettingsUi.dp(parent.getContext(), BUTTON_GAP_DP);
         float[] fractions = defaultFractions(view, parent, button, size, step);
@@ -634,8 +653,11 @@ public final class BlockAuthorOverlay {
                 parent.getHeight() - reservedBottom - height);
 
         ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
-        params.leftMargin = Math.round(Math.min(Math.max(left, minimumLeft), maxLeft));
-        params.topMargin = Math.round(Math.min(Math.max(top, minimumTop), maxTop));
+        int nextLeft = Math.round(Math.min(Math.max(left, minimumLeft), maxLeft));
+        int nextTop = Math.round(Math.min(Math.max(top, minimumTop), maxTop));
+        if (params.leftMargin == nextLeft && params.topMargin == nextTop) return;
+        params.leftMargin = nextLeft;
+        params.topMargin = nextTop;
         view.setLayoutParams(params);
     }
 
@@ -697,8 +719,17 @@ public final class BlockAuthorOverlay {
 
         StringSetting setting = positionSetting(view);
         String position = round(x) + "," + round(y);
-        setting.save(position);
-        Logger.printDebug(() -> String.valueOf(view.getContentDescription()) + " moved to " + position);
+        if (saveAction(setting, position)) {
+            Logger.printDebug(() -> String.valueOf(view.getContentDescription()) + " moved to " + position);
+            return;
+        }
+
+        View button = buttonReference.get();
+        if (button == null) return;
+        int size = SettingsUi.dp(parent.getContext(), BUTTON_SIZE_DP);
+        int step = size + SettingsUi.dp(parent.getContext(), BUTTON_GAP_DP);
+        float[] defaults = defaultFractions(view, parent, button, size, step);
+        applySavedPosition(view, parent, size, setting, defaults[0], defaults[1]);
     }
 
     private static StringSetting positionSetting(View view) {
@@ -766,10 +797,11 @@ public final class BlockAuthorOverlay {
             Utils.showToastLong(problem);
             return;
         }
-        Settings.LOCAL_HIDDEN_CREATORS.save(after);
+        if (!saveAction(Settings.LOCAL_HIDDEN_CREATORS, after)) return;
         showUndoBanner(L10n.f("Hidden %1$s on this phone", author.label()), () -> {
-            Settings.LOCAL_HIDDEN_CREATORS.save(before);
-            Utils.showToastShort(L10n.f("Showing %1$s again", author.label()));
+            if (saveAction(Settings.LOCAL_HIDDEN_CREATORS, before)) {
+                Utils.showToastShort(L10n.f("Showing %1$s again", author.label()));
+            }
         });
     }
 

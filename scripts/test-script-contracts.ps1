@@ -31,9 +31,8 @@ function Assert-Throws {
 
 # --- phone.sh foreground parser -------------------------------------------------------------
 #
-# Samsung's Android 16 activity dump wraps the component onto the line after `u0`. The device
-# guard must recognize both that shape and the older single-line form before it can safely send
-# input to the dedicated test phone.
+# Android can report focused windows for several displays. The input guard reads display 0 only,
+# which is where an unqualified adb input command lands, and refuses a missing or null focus.
 $bash = (Get-Command bash -ErrorAction Stop).Source
 $bashHost = $bash
 $bashArguments = @('-lc')
@@ -60,32 +59,46 @@ function Invoke-PhoneTopParser {
     }
 }
 
-$singleLineTop = Invoke-PhoneTopParser @'
-ACTIVITY MANAGER ACTIVITIES (dumpsys activity activities)
-topResumedActivity=ActivityRecord{88b58d7 u0 com.zhiliaoapp.musically/com.ss.android.ugc.aweme.splash.SplashActivity t101}
+$defaultDisplayTop = Invoke-PhoneTopParser @'
+WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)
+  Display: mDisplayId=55 (organized)
+  mCurrentFocus=Window{1111111 u0 com.zhiliaoapp.musically/.OtherDisplayActivity}
+  Display: mDisplayId=0
+  mCurrentFocus=Window{2222222 u0 com.example.app/.MainActivity}
 '@
-Assert-True ($singleLineTop.ExitCode -eq 0 -and $singleLineTop.Output -eq
-    'com.zhiliaoapp.musically/com.ss.android.ugc.aweme.splash.SplashActivity') `
-    'phone.sh did not parse the single-line resumed activity.'
+Assert-True ($defaultDisplayTop.ExitCode -eq 0 -and
+    $defaultDisplayTop.Output -eq 'com.example.app/.MainActivity') `
+    'phone.sh trusted TikTok on a display that adb input does not target.'
 
 $wrappedTop = Invoke-PhoneTopParser @'
-ACTIVITY MANAGER ACTIVITIES (dumpsys activity activities)
-topResumedActivity=ActivityRecord{ddb77cb u0
-  com.zhiliaoapp.musically/com.ss.android.ugc.aweme.main.MainActivity t123}
+WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)
+  Display: mDisplayId=0
+  mCurrentFocus=Window{ddb77cb u0
+    com.zhiliaoapp.musically/com.ss.android.ugc.aweme.main.MainActivity}
+  Display: mDisplayId=55 (organized)
+  mCurrentFocus=Window{3333333 u0 com.example.app/.OtherActivity}
 '@
 Assert-True ($wrappedTop.ExitCode -eq 0 -and $wrappedTop.Output -eq
     'com.zhiliaoapp.musically/com.ss.android.ugc.aweme.main.MainActivity') `
-    'phone.sh did not parse the wrapped Android 16 resumed activity.'
+    'phone.sh did not parse the wrapped focused window on display 0.'
 
-$legacyTop = Invoke-PhoneTopParser @'
-mResumedActivity: ActivityRecord{5ef9021 u0 com.example.app/.MainActivity t3}
+$nullTop = Invoke-PhoneTopParser @'
+WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)
+  Display: mDisplayId=0
+  mCurrentFocus=null
 '@
-Assert-True ($legacyTop.ExitCode -eq 0 -and $legacyTop.Output -eq 'com.example.app/.MainActivity') `
-    'phone.sh did not parse the legacy resumed activity fallback.'
+Assert-True ($nullTop.ExitCode -ne 0 -and -not $nullTop.Output) `
+    'phone.sh accepted display 0 with no focused window.'
 
-$missingTop = Invoke-PhoneTopParser 'ACTIVITY MANAGER ACTIVITIES (dumpsys activity activities)'
+$missingTop = Invoke-PhoneTopParser 'WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)'
 Assert-True ($missingTop.ExitCode -ne 0 -and -not $missingTop.Output) `
-    'phone.sh accepted a dump with no resumed activity.'
+    'phone.sh accepted a dump with no default display.'
+
+$phoneSource = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'phone.sh') -Raw
+foreach ($verb in @('tap', 'swipe', 'keyevent', 'text')) {
+    Assert-True ($phoneSource -match "shell input -d 0 $verb") `
+        "phone.sh guards display 0 but sends $verb input to another display."
+}
 
 $findAdbCommand = (@'
 fixture=$(mktemp -d)
@@ -974,10 +987,14 @@ try {
     & git -C $hookRoot config user.email 'hook@example.invalid'
     & git -C $hookRoot add extensions/tiktok/src/main/java/FirstCommit.java
     & git -C $hookRoot commit --quiet -m 'code first'
+    $firstCommit = (& git -C $hookRoot rev-parse HEAD).Trim()
     Set-Content -LiteralPath (Join-Path $hookRoot 'CONTRIBUTING.md') -Encoding UTF8 -Value 'tip only'
     & git -C $hookRoot add CONTRIBUTING.md
     & git -C $hookRoot commit --quiet -m 'docs tip'
     $newBranchHead = (& git -C $hookRoot rev-parse HEAD).Trim()
+    # A stale local remote-tracking ref that already points at the code commit must not subtract
+    # that commit from a new branch push. The destination advertises this branch as new.
+    & git -C $hookRoot update-ref refs/remotes/origin/stale $firstCommit
     $newBranchRefs = "refs/heads/new $newBranchHead refs/heads/new $('0' * 40)"
     $savedNewBranchPath = $env:PATH
     $savedNewBranchActor = $env:GITHUB_ACTOR

@@ -48,7 +48,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildDe() {
-        Map<String, String> table = new HashMap<>(2282);
+        Map<String, String> table = new HashMap<>(2284);
         fillDe0(table);
         fillDe1(table);
         fillDe2(table);
@@ -2095,6 +2095,8 @@ public final class L10nTranslations {
                 "Diese geladenen Werte gehören zu einer anderen TikTok-Version.");
         table.put("This catalog entry is no longer available. Refresh the Lab and try again.",
                 "Dieser Katalogeintrag ist nicht mehr verfügbar. Das Labor aktualisieren und es erneut versuchen.");
+        table.put("This change couldn't be saved. Try again.",
+                "Diese Änderung konnte nicht gespeichert werden. Versuche es erneut.");
         table.put("This configuration has no fields that can be copied and changed safely on this build.",
                 "Diese Konfiguration hat keine Felder, die sich in diesem Build gefahrlos kopieren und ändern lassen.");
         table.put("This file has more loaded values than the Lab takes at once.",
@@ -2159,11 +2161,11 @@ public final class L10nTranslations {
                 "TikToks Groesse");
         table.put("Times you can open the feed anyway",
                 "Wie oft du den Feed trotzdem öffnen kannst");
-        table.put("Today has moved on, so there is nothing to put back",
-                "Der Tag ist weitergezogen, es gibt nichts zurückzuholen");
     }
 
     private static void fillDe17(Map<String, String> table) {
+        table.put("Today has moved on, so there is nothing to put back",
+                "Der Tag ist weitergezogen, es gibt nichts zurückzuholen");
         table.put("Today is back where it was",
                 "Der heutige Tag ist wieder wie zuvor");
         table.put("Today started over. Tap again to put the counts back.",
@@ -2282,11 +2284,11 @@ public final class L10nTranslations {
                 "Version %1$s für TikTok %2$s");
         table.put("Video",
                 "Video");
-        table.put("Video (MP4)",
-                "Video (MP4)");
     }
 
     private static void fillDe18(Map<String, String> table) {
+        table.put("Video (MP4)",
+                "Video (MP4)");
         table.put("Video destination",
                 "Speicherort für Videos");
         table.put("Video download quality",
@@ -2405,17 +2407,17 @@ public final class L10nTranslations {
                 "Aufruf pro Kommentar");
         table.put("view per like",
                 "Aufruf pro Like");
-        table.put("views per comment",
-                "Aufrufe pro Kommentar");
     }
 
     private static void fillDe19(Map<String, String> table) {
+        table.put("views per comment",
+                "Aufrufe pro Kommentar");
         table.put("views per like",
                 "Aufrufe pro Like");
     }
 
     private static Map<String, String> buildEs() {
-        Map<String, String> table = new HashMap<>(2282);
+        Map<String, String> table = new HashMap<>(2284);
         fillEs0(table);
         fillEs1(table);
         fillEs2(table);
@@ -4462,6 +4464,8 @@ public final class L10nTranslations {
                 "Estos valores cargados son de otra versión de TikTok.");
         table.put("This catalog entry is no longer available. Refresh the Lab and try again.",
                 "Esta entrada del catálogo ya no está disponible. Actualiza el Laboratorio e inténtalo otra vez.");
+        table.put("This change couldn't be saved. Try again.",
+                "No se pudo guardar este cambio. Inténtalo de nuevo.");
         table.put("This configuration has no fields that can be copied and changed safely on this build.",
                 "Esta configuración no tiene campos que se puedan copiar y cambiar con seguridad en esta compilación.");
         table.put("This file has more loaded values than the Lab takes at once.",
@@ -4526,11 +4530,11 @@ public final class L10nTranslations {
                 "Tamano de TikTok");
         table.put("Times you can open the feed anyway",
                 "Veces que puedes abrir el feed de todas formas");
-        table.put("Today has moved on, so there is nothing to put back",
-                "El día ha avanzado, así que no hay nada que recuperar");
     }
 
     private static void fillEs17(Map<String, String> table) {
+        table.put("Today has moved on, so there is nothing to put back",
+                "El día ha avanzado, así que no hay nada que recuperar");
         table.put("Today is back where it was",
                 "Hoy está como estaba");
         table.put("Today started over. Tap again to put the counts back.",
@@ -4649,11 +4653,11 @@ public final class L10nTranslations {
                 "Versión %1$s para TikTok %2$s");
         table.put("Video",
                 "Vídeo");
-        table.put("Video (MP4)",
-                "Vídeo (MP4)");
     }
 
     private static void fillEs18(Map<String, String> table) {
+        table.put("Video (MP4)",
+                "Vídeo (MP4)");
         table.put("Video destination",
                 "Destino de los vídeos");
         table.put("Video download quality",
@@ -4772,17 +4776,17 @@ public final class L10nTranslations {
                 "visualización por comentario");
         table.put("view per like",
                 "visualización por me gusta");
-        table.put("views per comment",
-                "visualizaciones por comentario");
     }
 
     private static void fillEs19(Map<String, String> table) {
+        table.put("views per comment",
+                "visualizaciones por comentario");
         table.put("views per like",
                 "visualizaciones por me gusta");
     }
 
     private static Map<String, String> buildIn() {
-        Map<String, String> table = new HashMap<>(2282);
+        Map<String, String> table = new HashMap<>(2284);
         fillIn0(table);
         fillIn1(table);
         fillIn2(table);
@@ -6829,6 +6833,8 @@ public final class L10nTranslations {
                 "Nilai yang dimuat ini untuk versi TikTok yang berbeda.");
         table.put("This catalog entry is no longer available. Refresh the Lab and try again.",
                 "Entri katalog ini sudah tidak tersedia. Segarkan Lab dan coba lagi.");
+        table.put("This change couldn't be saved. Try again.",
+                "Perubahan ini tidak dapat disimpan. Coba lagi.");
         table.put("This configuration has no fields that can be copied and changed safely on this build.",
                 "Konfigurasi ini tidak punya bidang yang bisa disalin dan diubah dengan aman di build ini.");
         table.put("This file has more loaded values than the Lab takes at once.",
@@ -6893,11 +6899,11 @@ public final class L10nTranslations {
                 "Ukuran TikTok");
         table.put("Times you can open the feed anyway",
                 "Berapa kali kamu bisa tetap membuka feed");
-        table.put("Today has moved on, so there is nothing to put back",
-                "Hari sudah berganti, jadi tidak ada yang bisa dikembalikan");
     }
 
     private static void fillIn17(Map<String, String> table) {
+        table.put("Today has moved on, so there is nothing to put back",
+                "Hari sudah berganti, jadi tidak ada yang bisa dikembalikan");
         table.put("Today is back where it was",
                 "Hari ini kembali seperti semula");
         table.put("Today started over. Tap again to put the counts back.",
@@ -7016,11 +7022,11 @@ public final class L10nTranslations {
                 "Versi %1$s untuk TikTok %2$s");
         table.put("Video",
                 "Video");
-        table.put("Video (MP4)",
-                "Video (MP4)");
     }
 
     private static void fillIn18(Map<String, String> table) {
+        table.put("Video (MP4)",
+                "Video (MP4)");
         table.put("Video destination",
                 "Lokasi simpan video");
         table.put("Video download quality",
@@ -7139,17 +7145,17 @@ public final class L10nTranslations {
                 "tayangan per komentar");
         table.put("view per like",
                 "tayangan per like");
-        table.put("views per comment",
-                "tayangan per komentar");
     }
 
     private static void fillIn19(Map<String, String> table) {
+        table.put("views per comment",
+                "tayangan per komentar");
         table.put("views per like",
                 "tayangan per like");
     }
 
     private static Map<String, String> buildPt_rBR() {
-        Map<String, String> table = new HashMap<>(2282);
+        Map<String, String> table = new HashMap<>(2284);
         fillPt_rBR0(table);
         fillPt_rBR1(table);
         fillPt_rBR2(table);
@@ -9196,6 +9202,8 @@ public final class L10nTranslations {
                 "Estes valores carregados são de outra versão do TikTok.");
         table.put("This catalog entry is no longer available. Refresh the Lab and try again.",
                 "Esta entrada do catálogo não está mais disponível. Atualize o Laboratório e tente de novo.");
+        table.put("This change couldn't be saved. Try again.",
+                "Não foi possível salvar esta alteração. Tente novamente.");
         table.put("This configuration has no fields that can be copied and changed safely on this build.",
                 "Esta configuração não tem campos que dê para copiar e mudar com segurança nesta build.");
         table.put("This file has more loaded values than the Lab takes at once.",
@@ -9260,11 +9268,11 @@ public final class L10nTranslations {
                 "Tamanho do TikTok");
         table.put("Times you can open the feed anyway",
                 "Vezes que você pode abrir o feed mesmo assim");
-        table.put("Today has moved on, so there is nothing to put back",
-                "O dia já andou, então não há nada para trazer de volta");
     }
 
     private static void fillPt_rBR17(Map<String, String> table) {
+        table.put("Today has moved on, so there is nothing to put back",
+                "O dia já andou, então não há nada para trazer de volta");
         table.put("Today is back where it was",
                 "Hoje está como estava");
         table.put("Today started over. Tap again to put the counts back.",
@@ -9383,11 +9391,11 @@ public final class L10nTranslations {
                 "Versão %1$s para TikTok %2$s");
         table.put("Video",
                 "Vídeo");
-        table.put("Video (MP4)",
-                "Vídeo (MP4)");
     }
 
     private static void fillPt_rBR18(Map<String, String> table) {
+        table.put("Video (MP4)",
+                "Vídeo (MP4)");
         table.put("Video destination",
                 "Destino dos vídeos");
         table.put("Video download quality",
@@ -9506,11 +9514,11 @@ public final class L10nTranslations {
                 "visualização por comentário");
         table.put("view per like",
                 "visualização por curtida");
-        table.put("views per comment",
-                "visualizações por comentário");
     }
 
     private static void fillPt_rBR19(Map<String, String> table) {
+        table.put("views per comment",
+                "visualizações por comentário");
         table.put("views per like",
                 "visualizações por curtida");
     }

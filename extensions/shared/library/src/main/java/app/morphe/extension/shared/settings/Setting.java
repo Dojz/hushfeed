@@ -354,33 +354,38 @@ public abstract class Setting<T> {
      * Persistently saves the value.
      */
     public final boolean save(T newValue) {
-        if (!Utils.isMainProcess()) {
-            Logger.printInfo(() -> "Ignored persistent setting write from a secondary process: " + key);
-            return false;
-        }
-        newValue = coerce(Objects.requireNonNull(newValue));
-        if (value.equals(newValue)) {
-            return true;
-        }
+        // Every Setting shares one preference file. Keep the live-value swap, disk commit and
+        // possible rollback in the same class lock as saveAll(), so a failed write cannot roll a
+        // newer successful write back after the newer caller has already returned.
+        synchronized (Setting.class) {
+            if (!Utils.isMainProcess()) {
+                Logger.printInfo(() -> "Ignored persistent setting write from a secondary process: " + key);
+                return false;
+            }
+            newValue = coerce(Objects.requireNonNull(newValue));
+            if (value.equals(newValue)) {
+                return true;
+            }
 
-        // Must set before saving to preferences (otherwise importing fails to update UI correctly).
-        T previousValue = value;
-        value = newValue;
-        try {
-            persistCurrentValue();
-            return true;
-        } catch (RuntimeException failure) {
-            // A failed commit means the value that survives a restart is still the old one. Keep
-            // the live process on that same value, then make a best effort to restore storage in
-            // case a platform implementation reports failure after touching the file.
-            value = previousValue;
+            // Must set before saving to preferences (otherwise importing fails to update UI correctly).
+            T previousValue = value;
+            value = newValue;
             try {
                 persistCurrentValue();
-            } catch (RuntimeException rollbackFailure) {
-                failure.addSuppressed(rollbackFailure);
+                return true;
+            } catch (RuntimeException failure) {
+                // A failed commit means the value that survives a restart is still the old one.
+                // Keep the live process on that same value, then make a best effort to restore
+                // storage in case a platform implementation reports failure after touching it.
+                value = previousValue;
+                try {
+                    persistCurrentValue();
+                } catch (RuntimeException rollbackFailure) {
+                    failure.addSuppressed(rollbackFailure);
+                }
+                Logger.printException(() -> "Could not save setting: " + key, failure);
+                return false;
             }
-            Logger.printException(() -> "Could not save setting: " + key, failure);
-            return false;
         }
     }
 

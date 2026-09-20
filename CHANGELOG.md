@@ -9,7 +9,7 @@ Settings failures are recoverable, movable controls stay reachable and the large
 ### Interface and accessibility
 
 * **TikTok:** Large translated settings titles now keep words whole at enlarged text sizes. The title adapts within a limited range while Android's chosen font scale remains unchanged everywhere else.
-* **TikTok:** Movable feed controls now stay clear of status bars, navigation insets, display cutouts and TikTok's bottom tab row.
+* **TikTok:** Movable feed controls now stay clear of status bars, navigation insets, display cutouts and TikTok's bottom tab row. They recheck those boundaries whenever the window geometry changes.
 
 ### Performance
 
@@ -17,11 +17,11 @@ Settings failures are recoverable, movable controls stay reachable and the large
 
 ### Reliability
 
-* **TikTok:** A failed settings write now keeps the live value aligned with the value that will survive a restart. Hushfeed reports the storage error and keeps an old preference intact until migration has finished successfully.
+* **TikTok:** A failed settings write now keeps the live value aligned with the value that will survive a restart. Concurrent writes can't cross its rollback window, and feed actions show a failure instead of a false success or Undo state.
 * **TikTok:** Settings restore now rejects fractional and overflowing backup schema numbers instead of truncating them into a supported version.
 * **TikTok:** Session budget resets now invalidate older queued writes, so one test can't quietly restore a spent budget after the next test has cleared it.
-* **TikTok:** A first push of a branch now checks every unpublished commit. A documentation-only tip can no longer hide code changed earlier in the branch, and the script contracts follow the current TikTok 47.0.3 target.
-* **TikTok:** Guarded S22 acceptance now recognizes resumed activities when Android 16 wraps its activity record. The device script also resolves Windows `adb.exe` and evidence paths correctly under WSL, while still refusing input unless TikTok is in front.
+* **TikTok:** A first push of a branch now checks its complete resulting tree. A documentation-only tip or stale tracking ref can no longer hide a code path from the local gates, and the script contracts follow the current TikTok 47.0.3 target.
+* **TikTok:** Guarded S22 acceptance now checks the focused window on Android's default display and sends every input to that same display. TikTok on another task or display can't authorize input, and the helper still resolves Windows `adb.exe` and evidence paths correctly under WSL.
 
 ## 0.49.0 (2026-09-20)
 

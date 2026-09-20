@@ -41,8 +41,8 @@ function Write-Step {
 function Get-PushedPaths {
     <#
         Git writes "<local ref> <local sha> <remote ref> <remote sha>" per ref on stdin. A remote
-        sha of all zeroes means the branch is new there. Every commit not reachable from an
-        existing ref on that remote is part of the push, not only the new branch tip.
+        sha of all zeroes means the branch is new there. A new branch is checked conservatively
+        from its complete resulting tree, so a stale local tracking ref cannot hide a code path.
 
         Read from the console rather than $input: a script started with -File binds stdin to its
         parameters, so piping into it fails to bind and leaves $input empty, which made the hook
@@ -60,18 +60,11 @@ function Get-PushedPaths {
         if ($localSha -eq $zeroObject) { continue }
 
         if ($remoteSha -eq $zeroObject) {
-            $remoteRoot = if ($RemoteName) { "refs/remotes/$RemoteName" } else { 'refs/remotes' }
-            $remoteTips = @(git for-each-ref '--format=%(objectname)' $remoteRoot 2>$null)
-            if ($LASTEXITCODE -ne 0) {
-                throw "Could not read existing refs for $remoteRoot. Fetch the remote and try again."
-            }
-            $range = "$localSha excluding commits already on $remoteRoot"
-            $arguments = @('log', '--format=', '--name-only', $localSha)
-            if ($remoteTips.Count -gt 0) {
-                $arguments += '--not'
-                $arguments += $remoteTips
-            }
-            $names = & git @arguments 2>$null
+            # This intentionally runs the relevant gate for any matching path in the tree, even
+            # when the branch changed only documentation. A first push is rare, and a complete
+            # tree cannot be made incomplete by a deleted or force-updated remote-tracking ref.
+            $range = "$localSha complete branch tree"
+            $names = git ls-tree -r --name-only $localSha 2>$null
         } else {
             $range = "$remoteSha..$localSha"
             $names = git diff --name-only $remoteSha $localSha 2>$null
