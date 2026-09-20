@@ -2,6 +2,20 @@
 
 Every Hushfeed release, newest first.
 
+## 0.49.0 (2026-09-20)
+
+Settings feedback is clearer, easier to recover from and more consistent across every page.
+
+### Premium settings polish
+
+* **TikTok:** Invalid number, text, range, creator, folder and Feature Gate values now show an inline explanation inside the editor. The field keeps focus, announces the problem once and clears the message when typing resumes.
+* **TikTok:** Text cursors, selection handles, picker frames and list edge effects now use the Hushfeed palette instead of leaking TikTok's theme into the settings screen.
+* **TikTok:** Clear seen videos and Start today over now offer Undo in a ten-second settings banner. The action survives page changes and remains at least 48 dp for touch and accessibility input.
+* **TikTok:** Restart-gated changes now offer Restart now in the same banner while keeping the pinned restart row for later. Returning a value to what TikTok already runs no longer asks for a restart.
+* **TikTok:** Feed and bottom tab pickers now join the persistent restart state correctly instead of showing a restart message and then losing it.
+* **TikTok:** Forty-one labels and descriptions now use one naming system across Feed filter, Feed screen, Inbox, Playback, Region, search and the share sheet. German, Spanish, Indonesian and Brazilian Portuguese were updated with them.
+* **TikTok:** The full settings matrix was rendered again in dark and light themes, large text and mirrored layout. The refreshed screenshots cover every page changed by this pass.
+
 ## 0.48.0 (2026-09-20)
 
 Feed filter now has a reversible starting point for a calmer feed.
