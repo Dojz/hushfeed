@@ -2,6 +2,13 @@
 
 Every Hushfeed release, newest first.
 
+## Unreleased
+
+### Reliability
+
+* **TikTok:** A failed settings write now keeps the live value aligned with the value that will survive a restart. Hushfeed reports the storage error and keeps an old preference intact until migration has finished successfully.
+* **TikTok:** Settings restore now rejects fractional and overflowing backup schema numbers instead of truncating them into a supported version.
+
 ## 0.49.0 (2026-09-20)
 
 Settings feedback is clearer, easier to recover from and more consistent across every page.
