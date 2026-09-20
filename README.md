@@ -1,12 +1,12 @@
 ![Hushfeed. Take back your feed with focused controls for filtering, gestures, playback, downloads and privacy.](assets/readme-hero.png)
 
 <p align="center">
-  <a href="CHANGELOG.md"><img alt="version" src="https://img.shields.io/badge/version-0.45.2-6f42c1.svg" /></a>
+  <a href="CHANGELOG.md"><img alt="version" src="https://img.shields.io/badge/version-0.46.0-6f42c1.svg" /></a>
   <a href="LICENSE"><img alt="license" src="https://img.shields.io/badge/license-GPLv3-blue.svg" /></a>
   <a href="https://www.android.com/"><img alt="platform" src="https://img.shields.io/badge/platform-Android-3ddc84.svg" /></a>
   <a href="https://github.com/MorpheApp/morphe-manager"><img alt="Morphe" src="https://img.shields.io/badge/works%20with-Morphe-00b894.svg" /></a>
   <a href="https://github.com/SysAdminDoc/hushfeed/discussions"><img alt="Discussions" src="https://img.shields.io/github/discussions/SysAdminDoc/hushfeed?color=0969da" /></a>
-  <a href="https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-46-2-3-release/tiktok-46-2-3-android-apk-download/"><img alt="TikTok 46.2.3" src="https://img.shields.io/badge/TikTok-46.2.3-ff0050.svg" /></a>
+  <a href="https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-0-3-release/tiktok-47-0-3-3-android-apk-download/"><img alt="TikTok 47.0.3" src="https://img.shields.io/badge/TikTok-47.0.3-ff0050.svg" /></a>
 </p>
 
 <p align="center">
@@ -26,7 +26,7 @@ Hushfeed is a [Morphe](https://github.com/MorpheApp/morphe-manager) patch bundle
 **[Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc%2Fhushfeed)** | [Download the latest bundle](https://github.com/SysAdminDoc/hushfeed/releases/latest) | [Tour the settings](#settings-tour) | [Browse all 91 patches](#patches)
 
 > [!IMPORTANT]
-> Hushfeed is very active in development, features and bugs are being actively pursued and improved! Hushfeed targets the global TikTok package, `com.zhiliaoapp.musically`, version [46.2.3](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-46-2-3-release/tiktok-46-2-3-android-apk-download/). Use that exact APK when patching. See [Supported target](#supported-target) for the verified build details.
+> Hushfeed changes often while TikTok moves underneath it. Hushfeed targets the global TikTok package, `com.zhiliaoapp.musically`, version [47.0.3](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-0-3-release/tiktok-47-0-3-3-android-apk-download/). Use that exact APK when patching. See [Supported target](#supported-target) for the verified build details.
 
 ## Pick what changes
 
@@ -43,12 +43,12 @@ The block, local hide, sound and Not interested controls, rendered in a local UI
 
 ## Install
 
-1. Get the TikTok 46.2.3 APK. Google Play only offers the newest build, so take it from [APKMirror](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-46-2-3-release/tiktok-46-2-3-android-apk-download/).
+1. Get the TikTok 47.0.3 APK. Google Play only offers the newest build, so take it from [APKMirror](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-0-3-release/tiktok-47-0-3-3-android-apk-download/).
 2. Use Morphe Manager 1.30.0 or newer. Manager refuses a bundle built against a patcher newer than its own, and this one is built against patcher 1.13.0, which Manager 1.30.0 was the first to ship. On anything older the bundle simply will not load.
-3. Add Hushfeed as a source in Morphe Manager. The quickest way is this link on the phone: [Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc%2Fhushfeed). Some in-app browsers block Android from handing a web link to another app. If **Open in Morphe** leaves you in the browser, open Morphe Manager, tap **Sources**, tap **+**, and paste `https://github.com/SysAdminDoc/hushfeed`. You can also download `patches-0.45.2.mpp` from the [latest release](https://github.com/SysAdminDoc/hushfeed/releases/latest) and load it as a local bundle.
+3. Add Hushfeed as a source in Morphe Manager. The quickest way is this link on the phone: [Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc%2Fhushfeed). Some in-app browsers block Android from handing a web link to another app. If **Open in Morphe** leaves you in the browser, open Morphe Manager, tap **Sources**, tap **+**, and paste `https://github.com/SysAdminDoc/hushfeed`. You can also download `patches-0.46.0.mpp` from the [latest release](https://github.com/SysAdminDoc/hushfeed/releases/latest) and load it as a local bundle.
 4. Pick the patches you want and patch the APK. Keep the manager's existing signing key so TikTok stays logged in across updates. Every patch here fits the manager's 640 MB memory default except AMOLED dark theme, which rewrites TikTok's color resources and needs the limit raised to 768 MB. That 640 is the manager's default and not a measured minimum: the whole set apart from AMOLED fits in 576 MB. If patching stops with an out of memory error, that setting is the one to raise. A run that sits at 24 or 25 percent and never moves is the same problem wearing a different face: cancel it, set the limit to 768 MB and start again, and if that still stalls try 512 MB, which gives the patcher less to hold at once.
 5. Install the patched APK. From 2026-09-30, phones in Brazil, Indonesia, Singapore and Thailand ask for more before they will install an app from a developer Google has not verified. The flow is the same every time: turn on the option in Developer options, confirm the device lock, restart the phone, then wait 24 hours before the install goes through. After that it stays open for 7 days, or indefinitely if you chose that. This is not a one-off. Every Hushfeed release is an update, and an update goes through it again once the window closes. `adb install` from a computer skips the whole thing.
-6. Open TikTok, go to Settings and privacy, and tap Hushfeed. Every patch you selected has its switches there.
+6. Open TikTok and go to Settings and privacy. Hushfeed is the first row. Tap it to find the switches for every patch you selected.
 
 Selected patches activate when TikTok starts. The Settings patch adds the entry point and is selected by default. Deselect it and the other patches still apply, but their switches have nowhere to live. `patches-bundle.json` in the repository root is the source index Morphe reads for the published bundle.
 
@@ -133,7 +133,7 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 | `Resource and battery governor` | Stops TikTok listening to the motion sensors it polls for device fingerprinting: the accelerometer, gyroscope, magnetometer, rotation, gravity and linear acceleration sensors. Saves the battery they wake. Switch: Hushfeed settings > Privacy. |
 | `Resume videos after scrolling` | Continues supported videos from where playback stopped when returning after a scroll. Switch: Hushfeed settings > App. |
 | `Sanitize sharing links` | Removes tracking parameters from TikTok links before they are shared, and can put a host of your choosing in place of tiktok.com. Switch: Hushfeed settings > Privacy. |
-| `Settings` | Adds the Hushfeed settings screen to TikTok. |
+| `Settings` | Adds the Hushfeed settings screen to TikTok and keeps its entry first in Settings and privacy. |
 | `Share sheet tools` | Asks twice before a video is sent to a friend from the share sheet. The check follows the account or conversation instead of the visible name and covers accessibility actions and keyboard input. It can also hide chosen people, share options or the whole Send to row, and a profile's or a LIVE's share sheet can hide a different set from a video's. Switch: Hushfeed settings > Share sheet. |
 | `Show author region` | Show the country a video was posted from next to the creator's name on the feed. Switch: Hushfeed settings > Feed screen. |
 | `Show LIVE search` | Shows TikTok's search entry in the LIVE drawer where supported. |
@@ -335,31 +335,31 @@ The script writes two generated files, neither of them meant to be edited by han
 ## Supported target
 
 - App: TikTok, the global package `com.zhiliaoapp.musically`
-- Version: [46.2.3](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-46-2-3-release/tiktok-46-2-3-android-apk-download/), released 28 July 2026
-- Build: version code 2024602030, arm64-v8a and armeabi-v7a, nodpi, minSdk 23
-- SHA-256 of the APK every patch was verified against: `2fbe277a568e0e820cb51b09bcf0c0d788dc4fb070e66025f12d11cd3ec16936`
+- Version: [47.0.3](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-0-3-release/tiktok-47-0-3-3-android-apk-download/), released 19 September 2026
+- Build: version code 2024700030, arm64-v8a and armeabi-v7a, nodpi, minSdk 23
+- SHA-256 of the APK every patch was verified against: `f4d853f6ccaf145a9b5f106b8e63767e2345e17ae829b6cc6b272fdf0161389c`
 
 A patched app inherits TikTok's target SDK, which is 36 today. Android 17 raises that to 37, and the changes that come with it were audited against everything Hushfeed injects: nothing it adds loads code from a file, subclasses Thread, writes a static final field through reflection or keeps audio going without a foreground service, and a connection the platform refuses is reported with its reason rather than retried. Forcing those changes on a running build still needs an Android 17 device, which is why the audit says checked in source and not checked on a phone.
 
 ### Why you have to fetch that APK yourself
 
-Google Play only ever serves the newest build it thinks your device can run, so the copy on your phone is almost certainly not 46.2.3, and there is no way to ask Play for an older one. Take the APK from [APKMirror](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-46-2-3-release/tiktok-46-2-3-android-apk-download/), which serves the exact version, then patch that file rather than the installed app.
+Google Play only ever serves the newest build it thinks your device can run, so the copy on your phone may not be 47.0.3, and there is no way to ask Play for a specific older build. Take the APK from [APKMirror](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-0-3-release/tiktok-47-0-3-3-android-apk-download/), which serves the exact version, then patch that file rather than the installed app.
 
-APKMirror also offers 46.2.3 as a bundle, an `.apkm` file. Morphe Manager merges it into one APK and every patch applies to it except AMOLED dark theme, which refuses it with a message saying why. Rebuilding the resources of a merged bundle loses about 1,400 of them, and TikTok would crash at launch. Take the plain APK if you want the dark theme.
+APKMirror also offers some TikTok releases as bundles, using an `.apkm` file. Morphe Manager merges one into a single APK. AMOLED dark theme refuses a merged bundle with a message saying why, because rebuilding those merged resources can lose entries and make TikTok crash at launch. Take the plain 47.0.3 APK if you want the dark theme.
 
 ### Why that version and not a newer one
 
-Every patch here is tied to code TikTok does not name: the classes and methods are renamed on each build, so a patch finds its place by the shape of the code around it. Those shapes move. 46.2.3 remains the declared target and the build with full device acceptance. The complete bundle also applies without a patch-time failure to retained 46.7.3 and 46.8.3 fixtures, but those outputs have not completed the same device behavior checks and are not advertised as compatible. Another build can fail loudly when an anchor moves or, worse, accept the wrong shape.
+Every patch here is tied to code TikTok does not name: the classes and methods are renamed on each build, so a patch finds its place by the shape of the code around it. Those shapes move. 47.0.3 is the declared target. All 91 patches apply to the reviewed APK, and the retained 46.2.3, 46.7.3, 46.8.3 and 46.9.3 builds remain regression fixtures rather than advertised targets. Another build can fail loudly when an anchor moves or, worse, accept the wrong shape.
 
 Only the global package is declared in the compatibility metadata.
 
-The four resource optimizers are off by default. Before changing the APK, they compare the complete target set with reviewed paths and SHA-256 digests from the retained fixtures. An exact group that is already completely empty is accepted. A missing, extra, altered or partly emptied set stops patching. The 46.2.3 checks cover both its arm64-v8a and armeabi-v7a native libraries; the retained 46.7.3 and 46.8.3 fixtures contain only arm64-v8a libraries. Language packs also require a reviewed inventory (64 directories on the full APK, 25 on the APKMirror bundle), keep English, and preserve both Android aliases for Hebrew and Indonesian when either one is selected.
+The four resource optimizers are off by default. Before changing the APK, they compare the complete target set with reviewed paths and SHA-256 digests from the retained fixtures. An exact group that is already completely empty is accepted. A missing, extra, altered or partly emptied set stops patching. The 47.0.3 and 46.2.3 checks cover both arm64-v8a and armeabi-v7a native libraries; the retained 46.7.3, 46.8.3 and 46.9.3 fixtures provide additional regression coverage. Language packs also require a reviewed inventory, keep English, and preserve both Android aliases for Hebrew and Indonesian when either one is selected.
 
 ### Moving from Kveld
 
 Hushfeed now contains the eight Kveld TikTok optimizers that were not already here. Kveld's `Feed Ad Blocker` behavior is covered by `Feed filter`, and its Npth startup coverage is part of `Disable telemetry`. Remove or disable Kveld's TikTok patches after updating Hushfeed. Keeping both current sources at their defaults activates all eight shared optimizer names because Kveld marks them on by default, even though the Hushfeed copies are optional.
 
-| Bundle combination | Result on the reviewed 46.2.3 APK |
+| Bundle combination | Result from the recorded 46.2.3 migration test |
 | --- | --- |
 | Current Hushfeed source by itself | Supported. The eight optimizers stay off until selected. |
 | Released Hushfeed 0.30.2 plus Kveld 1.23.1 | Migration-tested. Each Kveld TikTok root passed beside Hushfeed's 34 defaults. All 44 roots also passed in both source orders. |

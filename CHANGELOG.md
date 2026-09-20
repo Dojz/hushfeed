@@ -2,6 +2,20 @@
 
 Every Hushfeed release, newest first.
 
+## 0.46.0 (2026-09-20)
+
+All 91 patches now support TikTok 47.0.3.
+
+### TikTok 47.0.3
+
+* **TikTok:** Hushfeed is the first row in Settings and privacy again. TikTok 47.0.3 changed how that menu is assembled, and the patch now moves the existing row instead of creating a duplicate.
+* **TikTok:** Downloads now follows the actual comment-image watermark draw when TikTok moves nearby MIME and pending-state strings.
+* **TikTok:** Feed filter now handles TikTok's separate golden-cache and offline-cache delivery methods. Hide already seen videos follows the same repaired boundary.
+* **TikTok:** Playback speed now finds the player boundary by its behavior after TikTok obfuscated both method names.
+* **TikTok:** Empty comment pages and ordinary posts without a survey no longer appear as broken hooks in Diagnostics.
+* **TikTok:** Block P2P video relay, Remove LIVE extras, Remove content credential and card scanner assets, Remove creation tools, and Remove unused language packs now use reviewed 47.0.3 file inventories.
+* **TikTok:** Feature Gate Lab now treats 47.0.3 as its target. Saved rules from an older target stay disabled until they are reviewed.
+
 ## 0.45.2 (2026-09-19)
 
 One settings search fix found during the TikTok interface audit.

@@ -126,21 +126,27 @@ internal object FinalFeedInsertionFingerprint : Fingerprint(
     },
 )
 
-internal object ColdStartCachedFeedFingerprint : Fingerprint(
+internal fun Method.countColdStartFeedItemListStores(): Int =
+    implementation?.instructions?.count {
+        it.opcode == com.android.tools.smali.dexlib2.Opcode.SPUT_OBJECT &&
+            it.getReference<FieldReference>()?.type ==
+            "Lcom/ss/android/ugc/aweme/feed/model/FeedItemList;"
+    } ?: 0
+
+internal object ColdStartGoldenCacheFingerprint : Fingerprint(
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC),
     returnType = "Z",
     parameters = emptyList(),
-    strings = listOf(
-        "processGoldenVideoHitCache hitCache , time cost ",
-        "processOfflineVideoHitCache error",
-    ),
-    custom = { method, _ ->
-        method.implementation?.instructions?.count {
-            it.opcode == com.android.tools.smali.dexlib2.Opcode.SPUT_OBJECT &&
-                it.getReference<FieldReference>()?.type ==
-                "Lcom/ss/android/ugc/aweme/feed/model/FeedItemList;"
-        } == 4
-    },
+    strings = listOf("processGoldenVideoHitCache hitCache , time cost "),
+    custom = { method, _ -> method.countColdStartFeedItemListStores() in 3..4 },
+)
+
+internal object ColdStartOfflineCacheFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC),
+    returnType = "Z",
+    parameters = emptyList(),
+    strings = listOf("processOfflineVideoHitCache error"),
+    custom = { method, _ -> method.countColdStartFeedItemListStores() in 1..4 },
 )
 
 /** Names TikTok's cache-result data class without depending on its R8 descriptor. */

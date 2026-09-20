@@ -188,6 +188,18 @@ public final class Probe extends Instrumentation {
                     case "feed":
                         Log.i(TAG, "ok feed\n" + feedReport());
                         break;
+                    case "hooks": {
+                        // HookStatus contains only the names and counts of Hushfeed's own
+                        // technical anchors. Keep this separate from the full diagnostic
+                        // export so a compatibility pass never has to collect account or
+                        // content-linked events just to find a renamed view or member.
+                        List<?> lines = (List<?>) loader.loadClass(
+                                "app.morphe.extension.shared.diagnostics.HookStatus")
+                                .getMethod("report").invoke(null);
+                        for (Object line : lines) Log.i(TAG, "hook " + line);
+                        Log.i(TAG, "ok hooks " + lines.size());
+                        break;
+                    }
                     case "doubletap": {
                         // Two taps on TikTok's own window, timed inside the double-tap window.
                         // "input tap" twice from adb spawns a process per tap and lands inside or
@@ -287,6 +299,34 @@ public final class Probe extends Instrumentation {
                         Log.i(TAG, "ok views " + text.length() + " chars in " + pieces + " pieces");
                         break;
                     }
+                    case "windowviews": {
+                        // Dialogs and bottom sheets can live in a separate WindowManager root.
+                        // TikTok 47.0.3's comment sheet leaves MainActivity's own content view
+                        // empty while its dialog window is visible, so the ordinary views action
+                        // cannot observe or verify its resource anchors. This emits the same
+                        // technical-only fields for every root, without text or descriptions.
+                        android.app.Activity activity = (android.app.Activity) loader.loadClass(UTILS)
+                                .getMethod("getActivity").invoke(null);
+                        if (activity == null) throw new IllegalStateException("no current activity");
+                        String find = intent.getStringExtra("find");
+                        java.util.List<android.view.View> roots = windowRoots();
+                        StringBuilder out = new StringBuilder();
+                        for (int i = 0; i < roots.size(); i++) {
+                            android.view.View root = roots.get(i);
+                            out.append("root ").append(i).append(' ')
+                                    .append(root.getClass().getSimpleName()).append('\n');
+                            walkViews(root, 0, find, out, activity.getResources());
+                        }
+                        String text = out.toString();
+                        int pieces = 0;
+                        for (int at = 0; at < text.length(); at += 3000, pieces++) {
+                            Log.i(TAG, "windowviews[" + pieces + "] "
+                                    + text.substring(at, Math.min(text.length(), at + 3000)));
+                        }
+                        Log.i(TAG, "ok windowviews " + roots.size() + " roots "
+                                + text.length() + " chars in " + pieces + " pieces");
+                        break;
+                    }
                     default:
                         throw new IllegalArgumentException("unknown action: " + action);
                 }
@@ -365,6 +405,29 @@ public final class Probe extends Instrumentation {
                     walkViews(group.getChildAt(i), depth + 1, find, out, resources);
                 }
             }
+        }
+
+        @SuppressWarnings("unchecked")
+        private static java.util.List<android.view.View> windowRoots() throws Exception {
+            Class<?> globalClass = Class.forName("android.view.WindowManagerGlobal");
+            java.lang.reflect.Method getInstance = globalClass.getDeclaredMethod("getInstance");
+            getInstance.setAccessible(true);
+            Object global = getInstance.invoke(null);
+            Object value;
+            try {
+                java.lang.reflect.Method getWindowViews =
+                        globalClass.getDeclaredMethod("getWindowViews");
+                getWindowViews.setAccessible(true);
+                value = getWindowViews.invoke(global);
+            } catch (NoSuchMethodException missingMethod) {
+                java.lang.reflect.Field views = globalClass.getDeclaredField("mViews");
+                views.setAccessible(true);
+                value = views.get(global);
+            }
+            if (value instanceof java.util.List) {
+                return (java.util.List<android.view.View>) value;
+            }
+            throw new IllegalStateException("WindowManagerGlobal returned no root list");
         }
 
         /** Opens the settings screen the same way the row inside TikTok's own settings does. */
