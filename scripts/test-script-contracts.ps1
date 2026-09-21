@@ -967,7 +967,7 @@ try {
     Set-Content -LiteralPath (Join-Path $hookRoot 'scripts/validate-release-facts.ps1') -Encoding UTF8 -Value @(
         'param([string]$Root, [switch]$SkipDescriptionTestCount, [switch]$AllowPublishedIndexLag,',
         '    [switch]$VerifyPublishedAsset, [string]$ArtifactPath)',
-        "Set-Content -LiteralPath '$factsMarker' -Value `"lag=`$AllowPublishedIndexLag`"",
+        "Set-Content -LiteralPath '$factsMarker' -Value `"lag=`$AllowPublishedIndexLag verify=`$VerifyPublishedAsset artifact=`$ArtifactPath`"",
         'exit 0')
     Set-Content -LiteralPath (Join-Path $hookRoot 'scripts/test-script-contracts.ps1') -Encoding UTF8 -Value @(
         'param([string]$Root)',
@@ -1007,6 +1007,25 @@ try {
     Assert-True (Test-Path -LiteralPath $factsMarker) 'An index change ran no release check.'
     Assert-True ((Get-Content -LiteralPath $factsMarker -Raw) -like 'lag=False*') `
         'An index change was allowed to lag behind the published release.'
+
+    # The order that shipped a dexless bundle: buildAndroid, then any task that reruns
+    # :patches:jar, which leaves the plain jar in build/libs under the bundle's own name. The
+    # finished bundle sits in build/release, and the index push must be compared against that
+    # one. A plain jar left beside it in build/libs is the state :patches:test produces.
+    $releaseDirectory = Join-Path $hookRoot 'patches/build/release'
+    $libsDirectory = Join-Path $hookRoot 'patches/build/libs'
+    New-Item -ItemType Directory -Path $releaseDirectory, $libsDirectory -Force | Out-Null
+    # Normalized, because the hook hands over the listing's own full name.
+    $releaseCopy = [System.IO.Path]::GetFullPath((Join-Path $releaseDirectory 'patches-9.9.9.mpp'))
+    Set-Content -LiteralPath $releaseCopy -Value 'bundle with classes.dex' -Encoding ASCII
+    Set-Content -LiteralPath (Join-Path $libsDirectory 'patches-9.9.9.mpp') -Value 'plain jar' -Encoding ASCII
+    Invoke-Hook -Paths @('patches-bundle.json')
+    $routed = Get-Content -LiteralPath $factsMarker -Raw
+    Assert-True ($routed -like '*verify=True*') `
+        'An index push with a built release bundle did not compare it against the published asset.'
+    Assert-True ($routed -like "*artifact=$releaseCopy*") `
+        "The index push compared something other than the release copy: $routed"
+    Remove-Item -LiteralPath (Join-Path $hookRoot 'patches') -Recurse -Force
 
     # A new remote branch can contain several unpublished commits. The code change here is in
     # the first commit and the tip changes only documentation. Looking at HEAD^..HEAD silently
@@ -1396,6 +1415,61 @@ try {
 }
 
 Write-Host '[scripts] shared helper contracts passed'
+
+# --- release bundle path ---------------------------------------------------------------------
+#
+# Every release step reads the bundle from patches/build/release. The plugin's buildAndroid
+# finishes the bundle inside the jar task's own output, so a task run after it that reruns
+# :patches:jar put the plain jar back under the same name in build/libs: v0.43.0 shipped with no
+# classes.dex that way. buildAndroid copies the finished bundle to build/release, where nothing
+# else writes, and the Gradle file and this helper have to agree on that directory.
+
+$bundlePathRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("hushfeed-bundle-path-" + [guid]::NewGuid().ToString('N'))
+try {
+    New-Item -ItemType Directory -Path $bundlePathRoot -Force | Out-Null
+    Set-Content -LiteralPath (Join-Path $bundlePathRoot 'gradle.properties') -Value 'version = 9.9.9' -Encoding ASCII
+    $expectedRelease = Join-Path $bundlePathRoot 'patches/build/release/patches-9.9.9.mpp'
+    Assert-True ((Get-ReleaseBundlePath -Root $bundlePathRoot) -eq $expectedRelease) `
+        'The release bundle path did not follow gradle.properties into patches/build/release.'
+    Assert-True ((Get-ReleaseBundlePath -Root $bundlePathRoot -Version '1.2.3') -eq
+        (Join-Path $bundlePathRoot 'patches/build/release/patches-1.2.3.mpp')) `
+        'An explicit version was not used for the release bundle path.'
+} finally {
+    Remove-Item -LiteralPath $bundlePathRoot -Recurse -Force -ErrorAction SilentlyContinue
+}
+
+$gradleFile = Get-Content -LiteralPath (Join-Path $Root 'patches/build.gradle.kts') -Raw
+Assert-True ($gradleFile -match 'buildDirectory\.dir\("release"\)' -and
+    $gradleFile -match 'buildDirectory\.file\("release/\$releaseBundleName"\)' -and
+    $gradleFile -match 'buildDirectory\.file\("release/bundle\.sha256"\)') `
+    'patches/build.gradle.kts no longer writes and verifies the bundle in build/release, where the scripts read it.'
+
+# Code only: a comment may say where the bundle used to be read from.
+$libsReaders = New-Object System.Collections.Generic.List[string]
+foreach ($script in @(Get-ChildItem -LiteralPath $PSScriptRoot -Filter '*.ps1' -File)) {
+    if ($script.Name -eq 'test-script-contracts.ps1') { continue }
+    $inBlockComment = $false
+    $number = 0
+    foreach ($line in @(Get-Content -LiteralPath $script.FullName)) {
+        $number++
+        $trimmed = $line.Trim()
+        if ($inBlockComment) {
+            if ($trimmed -like '*#>*') { $inBlockComment = $false }
+            continue
+        }
+        if ($trimmed.StartsWith('<#')) {
+            if ($trimmed -notlike '*#>*') { $inBlockComment = $true }
+            continue
+        }
+        if ($trimmed.StartsWith('#')) { continue }
+        if ($trimmed -match 'build[\\/]+libs') { $libsReaders.Add("$($script.Name):$number") }
+    }
+}
+Assert-True ($libsReaders.Count -eq 0) `
+    ("These script lines read patches/build/libs, which :patches:jar rewrites with the plain jar: " +
+        ($libsReaders -join ', '))
+
+Write-Host '[scripts] release bundle path contracts passed'
 
 $global:LASTEXITCODE = 0
 Write-Host '[scripts] report, target, Java and guarded replacement contracts passed'

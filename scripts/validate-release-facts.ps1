@@ -356,7 +356,7 @@ if ($SkipDescriptionTestCount) {
 
 if ($VerifyPublishedAsset) {
     if ([string]::IsNullOrWhiteSpace($ArtifactPath)) {
-        $ArtifactPath = Join-Path $rootPath "patches/build/libs/patches-$releaseVersion.mpp"
+        $ArtifactPath = Get-ReleaseBundlePath -Root $rootPath -Version $releaseVersion
     }
     if (-not (Test-Path -LiteralPath $ArtifactPath -PathType Leaf)) {
         throw "The local release artifact is missing: $ArtifactPath"
@@ -460,7 +460,7 @@ if ($VerifyPublishedAsset) {
             $localStamp = [long]$stampMatch.Groups[1].Value
         } finally { $zip.Dispose() }
         if ($localStamp -ne $expectedStamp) {
-            throw ("The bundle in patches/build/libs is pinned to $localStamp but release tag " +
+            throw ("The bundle at $ArtifactPath is pinned to $localStamp but release tag " +
                 "v$publishedVersion ($releaseCommit) is $expectedStamp. Build the bundle from " +
                 'the tagged commit so rebuilding from the tag reproduces the published hash.')
         }
@@ -704,7 +704,7 @@ function Test-ReleaseReceiptHere {
 
 
 $bundlePath = if ($ArtifactPath) { $ArtifactPath } else {
-    Join-Path $rootPath "patches/build/libs/patches-$releaseVersion.mpp"
+    Get-ReleaseBundlePath -Root $rootPath -Version $releaseVersion
 }
 if (-not (Test-Path -LiteralPath $bundlePath -PathType Leaf)) {
     # The stamp is a fact about a built bundle, and only the hash comparison needs one built

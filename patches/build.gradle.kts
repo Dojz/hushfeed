@@ -247,6 +247,13 @@ tasks {
             .withPropertyName("marketingArchive")
             .withPathSensitivity(PathSensitivity.RELATIVE)
     }
+    // The bundle a release publishes lives in build/release, not build/libs. The plugin's
+    // buildAndroid merges the DEX payload into the jar task's own output in place, so any later
+    // task that reruns jar (test does) put the plain jar back over the finished bundle under the
+    // same name: v0.43.0 shipped with no classes.dex that way, and on 2026-09-21 the pre-push
+    // test run did it again between the build and the index push. Nothing but buildAndroid
+    // writes build/release. scripts/common.ps1 names the same path for every release script.
+    val releaseBundleName = "patches-${project.version}.mpp"
     val verifyBundle = register<JavaExec>("verifyBundle") {
         group = "verification"
         description = "Check the Android bundle and its published patch list without rebuilding it"
@@ -255,28 +262,37 @@ tasks {
         mainClass.set("app.morphe.util.BundleVerifier")
         args(
             providers.gradleProperty("patchBundle").getOrElse(
-                layout.buildDirectory.file("libs/patches-${project.version}.mpp").get().asFile.absolutePath
+                layout.buildDirectory.file("release/$releaseBundleName").get().asFile.absolutePath
             ),
             rootProject.file("patches-list.json").absolutePath,
             project.version.toString(),
-            layout.buildDirectory.file("bundle.sha256").get().asFile.absolutePath
+            layout.buildDirectory.file("release/bundle.sha256").get().asFile.absolutePath
         )
     }
     named("buildAndroid") {
         // Resolved at configuration time. Reaching for project inside doLast is what the
         // configuration cache refuses, and Gradle 10 turns that refusal into an error.
-        val bundleFile = layout.buildDirectory.file("libs/patches-${project.version}.mpp")
-        val checksumFile = layout.buildDirectory.file("bundle.sha256")
+        val bundleFile = layout.buildDirectory.file("libs/$releaseBundleName")
+        val releaseDirectory = layout.buildDirectory.dir("release")
         val pinnedEpoch = sourceDateEpoch
         doLast {
+            // Emptied first, so the directory never holds a bundle of another version or a
+            // checksum of another build: the release scripts take the one file they find.
+            val directory = releaseDirectory.get().asFile
+            directory.mkdirs()
+            directory.listFiles()?.filter { it.isFile }?.forEach { stale ->
+                if (!stale.delete()) throw GradleException("Could not clear the old release file $stale")
+            }
+            val releaseBundle = directory.resolve(releaseBundleName)
+            bundleFile.get().asFile.copyTo(releaseBundle)
             // Before the checksum, so what is recorded is what a rebuild will produce.
-            pinBundleTimestamp(bundleFile.get().asFile, pinnedEpoch)
+            pinBundleTimestamp(releaseBundle, pinnedEpoch)
             // Record only at the producer boundary. Standalone verification must not
             // bless a modified bundle by generating its own expected checksum.
             val digest = MessageDigest.getInstance("SHA-256")
-                .digest(bundleFile.get().asFile.readBytes())
+                .digest(releaseBundle.readBytes())
                 .joinToString("") { "%02x".format(it) }
-            checksumFile.get().asFile.writeText(digest)
+            directory.resolve("bundle.sha256").writeText(digest)
         }
         finalizedBy(verifyBundle)
     }

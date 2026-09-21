@@ -63,7 +63,7 @@ if ([string]::IsNullOrEmpty($keystorePassword)) {
     Write-Host "[device] $passwordVariable is unset; using the documented local test-key fallback"
 }
 $version = Get-BundleVersion -Root $root
-$bundle = Join-Path $root "patches\build\libs\patches-$version.mpp"
+$bundle = Get-ReleaseBundlePath -Root $root -Version $version
 if (-not (Test-Path $bundle)) { throw "No bundle at $bundle. Build it first: :patches:generatePatchesList then :patches:buildAndroid, through the governor." }
 $names = @($catalog.patches | ForEach-Object { $_.name } | Where-Object { $_ -notin $Exclude })
 foreach ($excluded in $Exclude) {

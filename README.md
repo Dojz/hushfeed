@@ -299,7 +299,7 @@ pwsh -File scripts/validate-release-facts.ps1
 ./gradlew :patches:buildAndroid
 ```
 
-The bundle is byte reproducible: two builds of the same commit produce the same file and the same SHA-256, so you can rebuild it yourself and check the published checksum against your own. The one field that would otherwise differ, the build timestamp in the bundle manifest, is pinned to the commit being built. Set `SOURCE_DATE_EPOCH` to override it. `patches/build/bundle.sha256` is written from the finished bundle at the end of `buildAndroid`, so it always describes the file beside it.
+The bundle is byte reproducible: two builds of the same commit produce the same file and the same SHA-256, so you can rebuild it yourself and check the published checksum against your own. The one field that would otherwise differ, the build timestamp in the bundle manifest, is pinned to the commit being built. Set `SOURCE_DATE_EPOCH` to override it. `buildAndroid` ends by copying the finished bundle to `patches/build/release/` and writing `bundle.sha256` beside it, so the checksum always describes the file next to it.
 
 Run these tasks in this order. The Android build finishes with `verifyBundle`, which checks the patch list and all three DEX payloads against the checksum recorded by the Android build. You can also run `./gradlew :patches:verifyBundle` on its own to re-check the bundle this checkout built. It compares against a checksum only `buildAndroid` writes, so it will not verify a bundle from anywhere else.
 
@@ -328,18 +328,20 @@ Video overlay traversals reuse their id, visibility and match buffers, so repeat
 Legacy settings import tests cover complete JSON and older text fragments, rejecting invalid values before any preference changes.
 Numeric tokens retain their precision until validation, and literal NUL characters cannot hide trailing data in imports or undo files.
 
-The generated bundle is written to:
+The finished bundle is written to:
 
 ```text
-patches/build/libs/patches-<version>.mpp
+patches/build/release/patches-<version>.mpp
 ```
+
+Publish that file. `patches/build/libs` holds one with the same name, but any later Gradle task that rebuilds the jar (the patch tests do) turns it back into a plain jar with no DEX payload, and Morphe Manager then shows zero patches. Nothing in `scripts/` reads from there.
 
 Morphe reads `patches-bundle.json` from this repository, downloads the `.mpp` release asset listed there, and loads the patch metadata from that bundle.
 
 After uploading the bundle and a `SHA256SUMS.txt` file to the GitHub release, verify the published asset against the local build:
 
 ```bash
-pwsh -File scripts/validate-release-facts.ps1 -VerifyPublishedAsset -ArtifactPath patches/build/libs/patches-<version>.mpp
+pwsh -File scripts/validate-release-facts.ps1 -VerifyPublishedAsset -ArtifactPath patches/build/release/patches-<version>.mpp
 ```
 
 The check follows the indexed URL, compares its SHA-256 with the local artifact, checks the matching entry in `SHA256SUMS.txt`, and counts the patches inside the published bundle against the number the index advertises.

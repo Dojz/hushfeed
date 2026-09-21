@@ -237,16 +237,16 @@ try {
         $describesThisTree = @($paths | Where-Object { $_ -eq 'patches-bundle.json' }).Count -gt 0
         $validate = Join-Path $Root 'scripts/validate-release-facts.ps1'
         $global:LASTEXITCODE = 0
-        # The sources and javadoc jars share the .mpp extension, so an unfiltered listing found
-        # three files after every build, took the branch below, and the hash comparison this
-        # exists for never ran once.
-        $artifacts = @(Get-ChildItem -LiteralPath (Join-Path $Root 'patches/build/libs') `
-            -Filter '*.mpp' -File -ErrorAction SilentlyContinue |
-            Where-Object { $_.Name -notmatch '(^|-)(sources|javadoc)\.mpp$' })
+        # The release copy buildAndroid leaves in patches/build/release, which no other task
+        # writes. patches/build/libs was read here until 2026-09-21: the patch tests this hook
+        # runs rerun :patches:jar, which put the plain jar back over the bundle under the same
+        # name, and the sources and javadoc jars share the .mpp extension there as well.
+        $artifacts = @(Get-ChildItem -LiteralPath (Join-Path $Root 'patches/build/release') `
+            -Filter '*.mpp' -File -ErrorAction SilentlyContinue)
         if ($artifacts.Count -eq 1 -and $describesThisTree) {
             # The bundle this checkout built, so the indexed URL, its hash and the hosted
             # checksum entry can all be compared against something real. Only while the index is
-            # being rewritten, though: at any other time build/libs holds a bundle built from
+            # being rewritten, though: at any other time build/release holds a bundle built from
             # whatever the tree was at the time, and comparing that byte for byte against the
             # published release fails as soon as any source changes, which is not a release fact
             # going wrong.
