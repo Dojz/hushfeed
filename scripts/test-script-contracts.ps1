@@ -140,7 +140,7 @@ fixture=$(mktemp -d)
 trap 'rm -rf "$fixture"' EXIT
 printf '#!/bin/sh\nexit 1\n' > "$fixture/wslpath"
 chmod +x "$fixture/wslpath"
-out=$(PATH="$fixture:/usr/bin:/bin" bash -c '. "__PHONE_SCRIPT__"; normalise_path "C:\\repos\\test"' 2>/dev/null)
+out=$(PATH="$fixture:/usr/bin:/bin" PHONE_SERIAL=TESTPHONE01 HUSHFEED_DEVICE_SERIAL=TESTPHONE01 ADB=/not-used PHONE_SHOTS=/tmp/hushfeed-wslpath-contract bash -c '. "__PHONE_SCRIPT__"; normalise_path "C:\\repos\\test"' 2>/dev/null)
 exit_code=$?
 [ "$exit_code" -ne 0 ] && [ -z "$out" ]
 '@).Replace('__PHONE_SCRIPT__', $escapedPhoneScript)
