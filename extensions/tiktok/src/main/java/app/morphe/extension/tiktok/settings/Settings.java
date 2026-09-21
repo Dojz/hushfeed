@@ -413,6 +413,7 @@ public class Settings extends BaseSettings {
     public static final StringSetting BLOCKED_SOUND_IDS = new StringSetting("blocked_sound_ids", "");
     public static final StringSetting BLOCKED_SOUND_NAMES = new StringSetting("blocked_sound_names", "");
     public static final BooleanSetting HIDE_PAID_PARTNERSHIP = new BooleanSetting("hide_paid_partnership", FALSE, true);
+    public static final BooleanSetting FILTER_LOCATION_VIDEOS = new BooleanSetting("filter_location_videos", FALSE, true);
     public static final BooleanSetting HIDE_AI_GENERATED = new BooleanSetting("hide_ai_generated", FALSE, true);
     public static final BooleanSetting HIDE_VERIFIED = new BooleanSetting("hide_verified", FALSE, true);
     public static final BooleanSetting HIDE_SERIES = new BooleanSetting("hide_series", FALSE, true);
@@ -449,6 +450,8 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting HIDE_FEED_SEARCH_BUTTON =
             new BooleanSetting("hide_feed_search_button", FALSE, true);
     public static final BooleanSetting HIDE_VISUAL_SEARCH = new BooleanSetting("hide_visual_search", FALSE);
+    public static final BooleanSetting HIDE_FULLSCREEN_BUTTON = new BooleanSetting("hide_fullscreen_button", FALSE, true);
+    public static final BooleanSetting HIDE_LOCATION_LABELS = new BooleanSetting("hide_location_labels", FALSE, true);
     public static final BooleanSetting HIDE_SEARCH_SUGGESTIONS = new BooleanSetting("hide_search_suggestions", FALSE);
     public static final StringSetting CUSTOM_SHARE_DOMAIN = new StringSetting("custom_share_domain", "");
     public static final BooleanSetting HIDE_LIVE_ENTRANCE = new BooleanSetting("hide_live_entrance", FALSE);

@@ -2,6 +2,14 @@
 
 Every Hushfeed release, newest first.
 
+## 0.55.0 (2026-09-20)
+
+Choose which video overlays you want to see.
+
+* **TikTok:** Feed screen adds Hide the Full screen button and Hide location labels. Each has its own switch inside Hide video overlays. Hiding a location card doesn't filter the video or change location permissions. Full screen hiding leaves playback and automatic rotation alone. Both options are off by default and need a restart.
+* **TikTok:** Location hiding covers multi-place badges too. Filter location-tagged videos is a separate option under Feed filter > Ads. It skips videos with place badges, whether or not they're paid ads. Hiding a badge doesn't erase the location markers used by the filter. Both controls are optional.
+* **TikTok:** Includes Easier comment likes from 0.54.0. The heart can receive taps in nearby blank space without making comment rows taller. Enable it under Comments.
+
 ## 0.54.0 (2026-09-20)
 
 Comment hearts are easier to tap.

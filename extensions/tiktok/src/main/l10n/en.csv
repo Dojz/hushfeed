@@ -342,6 +342,7 @@ Files,Files
 Filter bottom tabs,Filter bottom tabs
 Filter comments by keyword,Filter comments by keyword
 Filter feed tabs,Filter feed tabs
+Filter location-tagged videos,Filter location-tagged videos
 Filter offline fallback videos,Filter offline fallback videos
 Filter settings,Filter settings
 Filter the list,Filter the list
@@ -411,6 +412,7 @@ Hide every direct message conversation. Leaves the Inbox empty apart from whatev
 "Hide floating promotion badges, coins, and timer banners on the feed.","Hide floating promotion badges, coins, and timer banners on the feed."
 Hide floating promotions,Hide floating promotions
 Hide inserted cards,Hide inserted cards
+Hide location labels,Hide location labels
 Hide message requests,Hide message requests
 Hide message streaks,Hide message streaks
 Hide new follower notifications,Hide new follower notifications
@@ -420,6 +422,7 @@ Hide people and options by name,Hide people and options by name
 Hide photo posts,Hide photo posts
 Hide photo posts from the feed.,Hide photo posts from the feed.
 Hide picture comments,Hide picture comments
+"Hide place badges on videos, including cards with multiple places. Videos and your location permissions stay unchanged.","Hide place badges on videos, including cards with multiple places. Videos and your location permissions stay unchanged."
 Hide playlist videos,Hide playlist videos
 Hide promotional music,Hide promotional music
 Hide quick comment reactions,Hide quick comment reactions
@@ -439,6 +442,8 @@ Hide tabs TikTok adds later unless you allow them.,Hide tabs TikTok adds later u
 "Hide the ""Search this image"" prompt shown over videos. The feed search button and suggestions above comments are separate settings.","Hide the ""Search this image"" prompt shown over videos. The feed search button and suggestions above comments are separate settings."
 Hide the Activity row of likes and comments on your posts.,Hide the Activity row of likes and comments on your posts.
 Hide the Archive row.,Hide the Archive row.
+Hide the Full screen button,Hide the Full screen button
+Hide the Full screen button over videos. Playback and automatic rotation keep working as before.,Hide the Full screen button over videos. Playback and automatic rotation keep working as before.
 Hide the Inbox search button,Hide the Inbox search button
 Hide the LIVE button,Hide the LIVE button
 Hide the LIVE button in the top left corner of the feed.,Hide the LIVE button in the top left corner of the feed.
@@ -554,6 +559,7 @@ Loaded values are still being read. Try again in a moment.,Loaded values are sti
 Loaded-value file export failed,Loaded-value file export failed
 Loading gates...,Loading gates...
 Loading local catalog and current TikTok cache...,Loading local catalog and current TikTok cache...
+Location-tagged videos,Location-tagged videos
 Lock today's budget,Lock today's budget
 "Logging, hook status and reports","Logging, hook status and reports"
 Long press,Long press
@@ -872,6 +878,7 @@ Showing %1$s again,Showing %1$s again
 Silence the feed while comments are open,Silence the feed while comments are open
 Skip blocked sounds,Skip blocked sounds
 Skip content warnings,Skip content warnings
+"Skip feed videos with place badges, even when they aren't paid ads. To keep the video and hide only its badge, use Hide location labels in Feed screen.","Skip feed videos with place badges, even when they aren't paid ads. To keep the video and hide only its badge, use Hide location labels in Feed screen."
 Skip recorded LIVE broadcasts in the feed.,Skip recorded LIVE broadcasts in the feed.
 Skip videos marked as using promotional music.,Skip videos marked as using promotional music.
 "Skip videos that use a sound blocked with the player's sound button, or named below.","Skip videos that use a sound blocked with the player's sound button, or named below."

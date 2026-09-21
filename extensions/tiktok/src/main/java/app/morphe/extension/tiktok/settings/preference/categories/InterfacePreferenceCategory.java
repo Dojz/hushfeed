@@ -196,6 +196,18 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
         if (SettingsStatus.videoOverlaysEnabled) {
             addPreference(new TogglePreference(
                     context,
+                    "Hide the Full screen button",
+                    "Hide the Full screen button over videos. Playback and automatic rotation keep working as before.",
+                    Settings.HIDE_FULLSCREEN_BUTTON
+            ));
+            addPreference(new TogglePreference(
+                    context,
+                    "Hide location labels",
+                    "Hide place badges on videos, including cards with multiple places. Videos and your location permissions stay unchanged.",
+                    Settings.HIDE_LOCATION_LABELS
+            ));
+            addPreference(new TogglePreference(
+                    context,
                     "Hide surveys",
                     "Hide the question cards TikTok slides over a video near its end.",
                     Settings.HIDE_FEED_SURVEYS

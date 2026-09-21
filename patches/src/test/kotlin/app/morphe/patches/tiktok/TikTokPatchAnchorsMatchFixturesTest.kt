@@ -10,6 +10,7 @@ import app.morphe.patches.tiktok.misc.commenttools.compactCommentHeaderComponent
 import app.morphe.patches.tiktok.misc.commenttools.isCompactCommentHeaderBind
 import app.morphe.patches.tiktok.misc.commenttools.resolveCompactCommentHeader
 import app.morphe.patches.tiktok.misc.commenttools.resolveLikeTouchListener
+import app.morphe.patches.tiktok.interaction.videooverlays.*
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.DexFileFactory
@@ -33,6 +34,47 @@ import org.junit.Test
  * names or strings that can move into adjacent methods.
  */
 class TikTokPatchAnchorsMatchFixturesTest {
+    @Test
+    fun `fullscreen entry and both location card contracts survive every retained fixture`() {
+        val apks=fixtures()
+        assumeTrue("no TikTok fixture on this machine",apks.isNotEmpty())
+        for(apk in apks) {
+            val container=DexFileFactory.loadDexContainer(apk,Opcodes.getDefault())
+            val classes=container.dexEntryNames.flatMap{container.getEntry(it)!!.dexFile.classes}
+            val byType=classes.associateBy{it.type}
+            val listFactories = classes.asSequence().flatMap { it.methods.asSequence() }
+                .filter(::isLocationBadgeListFactory).toList()
+            assertEquals("${apk.name}: location-only presentation list boundary", 1, listFactories.size)
+            val factory = MutableMethod(listFactories.single())
+            val factoryBefore = factory.implementation!!.instructions.toList()
+            val writeFactory = factory.resolveLocationBadgeList()
+            assertEquals(factoryBefore, factory.implementation!!.instructions.toList())
+            writeFactory()
+            assertEquals(factoryBefore.size + 2, factory.implementation!!.instructions.size)
+            val model = byType.getValue("Lcom/ss/android/ugc/aweme/feed/model/AnchorCommonStruct;")
+            assertTrue(model.methods.any { it.name == "getComponentKey" && it.parameterTypes.isEmpty() &&
+                it.returnType == "Ljava/lang/String;" })
+            val preload = byType.getValue("Lcom/ss/android/ugc/aweme/poi/preload/PoiAnchorPreloadTask;")
+            assertTrue(preload.methods.any { method -> "anchor_poi" in method.stringConstants() })
+            val full=byType.getValue(FULLSCREEN_COMPONENT).methods.filter(::isFullscreenBind)
+            assertEquals("${apk.name}: exact Full screen entry",1,full.size)
+            val cards=locationCardMarkers.map{marker->
+                // Don't materialize every method in a large APK just to retain one binder.
+                val matches=classes.asSequence().flatMap{it.methods.asSequence()}
+                    .filter{isLocationCardBind(it,marker)}.toList()
+                assertEquals("${apk.name}: $marker",1,matches.size)
+                marker to MutableMethod(matches.single())
+            }
+            val f=MutableMethod(full.single())
+            val methods=listOf(f)+cards.map{it.second}
+            val before=methods.map{it.implementation!!.instructions.toList()}
+            val write=resolveFeedOverlayControls(f,cards){byType[it]}
+            methods.forEachIndexed{i,m->assertEquals(before[i],m.implementation!!.instructions.toList())}
+            write()
+            methods.forEachIndexed{i,m->assertEquals(before[i],m.implementation!!.instructions.drop(1))}
+        }
+    }
+
     @Test
     fun `native comment like installer is unique and leaves other actions intact on every fixture`() {
         val apks = fixtures()

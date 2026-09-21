@@ -205,6 +205,9 @@ public final class Probe extends Instrumentation {
                     case "ad-boundary":
                         Log.i(TAG, "ok ad-boundary\n" + adBoundary());
                         break;
+                    case "location-evidence":
+                        Log.i(TAG, "ok location-evidence\n" + locationEvidence(intent.getStringExtra("aid")));
+                        break;
                     case "commerce-evidence":
                         // Each line is deliberately structural. Strings are represented only by
                         // length, hash and fixed marker booleans so a diagnostic cannot collect
@@ -248,6 +251,17 @@ public final class Probe extends Instrumentation {
                         video.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         app.startActivity(video);
                         Log.i(TAG, "ok open-copied-video");
+                        break;
+                    }
+                    case "open-public-video": {
+                        String aid = required(intent, "aid");
+                        if (!aid.matches("[0-9]+")) throw new IllegalArgumentException("invalid public video id");
+                        Intent video = new Intent(Intent.ACTION_VIEW,
+                                android.net.Uri.parse("snssdk1233://aweme/detail/" + aid));
+                        video.setPackage("com.zhiliaoapp.musically");
+                        video.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        app.startActivity(video);
+                        Log.i(TAG, "ok open-public-video");
                         break;
                     }
                     case "open-video": {
@@ -518,11 +532,18 @@ public final class Probe extends Instrumentation {
                         .append(" size=").append(view.getWidth()).append('x').append(view.getHeight())
                         .append(" scale=").append(view.getScaleX());
                 if (find != null) {
+                    out.append(" shown=").append(view.isShown())
+                            .append(" clickable=").append(view.isClickable())
+                            .append(" a11y=").append(view.getImportantForAccessibility());
                     out.append(" under=");
                     android.view.ViewParent parent = view.getParent();
                     while (parent instanceof android.view.View) {
-                        String above = idName((android.view.View) parent, resources);
-                        if (above != null) out.append(above).append(" < ");
+                        android.view.View ancestor = (android.view.View) parent;
+                        String above = idName(ancestor, resources);
+                        out.append(above == null ? ancestor.getClass().getSimpleName() : above)
+                                .append("(vis=").append(ancestor.getVisibility())
+                                .append(",a11y=").append(ancestor.getImportantForAccessibility())
+                                .append(") < ");
                         parent = parent.getParent();
                     }
                 }
@@ -771,6 +792,38 @@ public final class Probe extends Instrumentation {
             out.add("awemeClass=" + aweme.getClass().getName());
             addRelevantMembers("aweme", aweme, out, true);
             return out;
+        }
+
+        /** Real current model and patched native getter, on a detached list. No place or creator text. */
+        private String locationEvidence(String expectedId) throws Exception {
+            Object aweme = loader.loadClass("app.morphe.extension.tiktok.blockauthor.CurrentVideoAuthor")
+                    .getMethod("getAweme").invoke(null);
+            if (aweme == null) return "aweme=null";
+            Class<?> model = loader.loadClass("com.ss.android.ugc.aweme.feed.model.Aweme");
+            Object raw = model.getMethod("getAnchors").invoke(aweme);
+            List<?> anchors = raw instanceof List ? (List<?>) raw : Collections.emptyList();
+            int locations = 0;
+            for (Object anchor : anchors) {
+                if (anchor != null && "anchor_poi".equals(anchor.getClass().getMethod("getComponentKey").invoke(anchor))) locations++;
+            }
+            Class<?> rule = loader.loadClass("app.morphe.extension.tiktok.feedfilter.LocationBadgeFilter");
+            boolean classified = (Boolean) rule.getMethod("hasBadge", model).invoke(null, aweme);
+            List<?> display = (List<?>) rule.getMethod("visibleAnchors", List.class).invoke(null, anchors);
+            Class<?> feed = loader.loadClass("com.ss.android.ugc.aweme.feed.model.FeedItemList");
+            Object response = feed.getConstructor().newInstance();
+            Field items = feed.getDeclaredField("items");
+            items.setAccessible(true);
+            items.set(response, new ArrayList<>(Collections.singletonList(aweme)));
+            List<?> remaining = (List<?>) feed.getMethod("getItems").invoke(response);
+            Object originalAfter = model.getMethod("getAnchors").invoke(aweme);
+            return "anchors=" + anchors.size() + "\nlocationAnchors=" + locations
+                    + "\nclassified=" + classified + "\ndisplayAnchors=" + display.size()
+                    + "\noriginalAnchorsAfter=" + (originalAfter instanceof List ? ((List<?>) originalAfter).size() : 0)
+                    + "\nfilterEnabled=" + valueOf(find("filter_location_videos"))
+                    + "\nhideEnabled=" + valueOf(find("hide_location_labels"))
+                    + "\nnativeGetterInput=1\nnativeGetterRemaining=" + remaining.size()
+                    + "\nexpectedPublicVideo=" + (expectedId == null ? "not checked" :
+                    String.valueOf(expectedId.equals(model.getMethod("getAid").invoke(aweme))));
         }
 
         /** Finds the fixed disclosure label and reports only its native view structure. */

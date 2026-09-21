@@ -64,6 +64,7 @@ public class DeepFeedFilterBoundaryTest {
         private AwemeRawAd rawAd;
         private String anchorsExtras;
         private Object contentModel;
+        public List<?> anchors;
         public String commercialVideoInfo;
 
         Video(String id, boolean ad, long durationMs, String caption) {
@@ -85,6 +86,7 @@ public class DeepFeedFilterBoundaryTest {
         @Override public boolean isWithPromotionalMusic() { return false; }
         public String getAnchorsExtras() { return anchorsExtras; }
         public Object getContentModel() { return contentModel; }
+        public List<?> getAnchors() { return anchors; }
         public String getDesc() { return caption; }
         public Object getVideo() { return new Duration(durationMs); }
         @Override public AwemeStatistics getStatistics() { return statistics; }
@@ -159,6 +161,7 @@ public class DeepFeedFilterBoundaryTest {
         save(Settings.HIDE_SHOP);
         save(Settings.HIDE_BLOCKED_SOUNDS);
         save(Settings.HIDE_PAID_PARTNERSHIP);
+        save(Settings.FILTER_LOCATION_VIDEOS);
         save(Settings.HIDE_AI_GENERATED);
         save(Settings.HIDE_VERIFIED);
         save(Settings.HIDE_SERIES);
@@ -224,6 +227,7 @@ public class DeepFeedFilterBoundaryTest {
         Settings.HIDE_SHOP.save(false);
         Settings.HIDE_BLOCKED_SOUNDS.save(false);
         Settings.HIDE_PAID_PARTNERSHIP.save(false);
+        Settings.FILTER_LOCATION_VIDEOS.save(false);
         Settings.HIDE_AI_GENERATED.save(false);
         Settings.HIDE_VERIFIED.save(false);
         Settings.HIDE_SERIES.save(false);
@@ -286,6 +290,66 @@ public class DeepFeedFilterBoundaryTest {
         assertNotNull(summary);
         assertTrue(summary, summary.contains("cacheHits=0"));
         assertTrue(summary, summary.contains("scans=2"));
+    }
+
+    @Test
+    public void optionalLocationFilterRemovesPlacesButDoesNotRedefineAds() {
+        Settings.FILTER_LOCATION_VIDEOS.save(true);
+        Video tagged = new Video("two-places", false, 500, "");
+        tagged.anchors = List.of(new LocationBadgeFilterTest.Anchor("anchor_poi"),
+                new LocationBadgeFilterTest.Anchor("anchor_poi"));
+        Video plain = new Video("plain", false, 500, "Dog Bar is caption text, not a badge");
+        plain.anchors = List.of(new LocationBadgeFilterTest.Anchor("anchor_effect"));
+        FeedItemList page = new FeedItemList();
+        page.items = List.of(tagged, plain); // Immutable cached lists must use the replacement path.
+        assertFalse(new AdsFilter().getFiltered(tagged));
+        FeedItemsFilter.filterOnRead(page);
+        assertEquals(List.of(plain), page.items);
+        assertEquals(2, tagged.anchors.size());
+        // Profile grids deliberately retain their ad-only policy.
+        assertEquals(List.of(tagged, plain), FeedItemsFilter.filterProfileAds(List.of(tagged, plain)));
+        FollowFeedList following = new FollowFeedList();
+        FollowFeed ordinaryFollow = follow(plain);
+        following.mItems = new ArrayList<>(List.of(follow(tagged), ordinaryFollow));
+        FeedItemsFilter.filterLate(following);
+        assertEquals(List.of(ordinaryFollow), following.mItems);
+        FriendEntry ordinaryFriend = new FriendEntry(plain);
+        FriendsResponse friends = new FriendsResponse(new FriendEntry(tagged), ordinaryFriend);
+        FeedItemsFilter.filterFriendsFeed(friends);
+        assertEquals(List.of(ordinaryFriend), friends.friendFeedData);
+    }
+
+    @Test
+    public void lateLocationAnchorsInvalidateTheDuplicateListCache() {
+        Settings.FILTER_LOCATION_VIDEOS.save(true);
+        Video late = new Video("late-place", false, 500, "");
+        LocationBadgeFilterTest.Anchor anchor = new LocationBadgeFilterTest.Anchor("");
+        late.anchors = List.of(anchor);
+        FeedItemList page = new FeedItemList();
+        page.items = new ArrayList<>(List.of(late));
+        FeedItemsFilter.filterOnRead(page);
+        assertEquals(1, page.items.size());
+        anchor.key = "anchor_poi"; // Same list, Aweme and anchor identities, different evidence.
+        FeedItemsFilter.filterOnRead(page);
+        assertTrue(page.items.isEmpty());
+    }
+
+    @Test
+    public void enablingLocationFilteringRechecksRecentlyProcessedLists() {
+        Settings.REMOVE_ADS.save(true);
+        Video tagged = new Video("place-toggle", false, 500, "");
+        tagged.anchors = List.of(new LocationBadgeFilterTest.Anchor("anchor_poi"));
+        FeedItemList page = new FeedItemList();
+        page.items = new ArrayList<>(List.of(tagged));
+        FeedItemsFilter.filterOnRead(page);
+        assertEquals(1, page.items.size());
+        Settings.FILTER_LOCATION_VIDEOS.save(true);
+        FeedItemsFilter.filterOnRead(page);
+        assertTrue(page.items.isEmpty());
+        Settings.FILTER_LOCATION_VIDEOS.save(false);
+        page.items = new ArrayList<>(List.of(tagged));
+        FeedItemsFilter.filterOnRead(page);
+        assertEquals(1, page.items.size());
     }
 
     @Test

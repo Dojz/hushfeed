@@ -36,6 +36,7 @@ public final class FeedItemsFilter {
     static final String FINAL_INSERT_SOURCE = "FinalInsert:";
 
     private static final AdsFilter ADS_FILTER = new AdsFilter();
+    private static final LocationBadgeFilter LOCATION_FILTER = new LocationBadgeFilter();
     private static final List<IFilter> CONTENT_FILTERS = List.of(
         ADS_FILTER,
         new LiveFilter(),
@@ -44,6 +45,7 @@ public final class FeedItemsFilter {
         new ShopFilter(),
         new SoundFilter(),
         new ContentMarkerFilters.PaidPartnershipFilter(),
+        LOCATION_FILTER,
         new ContentMarkerFilters.AiGeneratedFilter(),
         new ContentMarkerFilters.VerifiedFilter(),
         new ContentMarkerFilters.SeriesFilter(),
@@ -59,7 +61,8 @@ public final class FeedItemsFilter {
         new AdvancedFeedRules.QualityFilter()
     );
     private static volatile List<IFilter> RANGE_FILTERS = createRangeFilters();
-    private static final List<IFilter> LATE_FOLLOW_FILTERS = List.of(ADS_FILTER);
+    private static final List<IFilter> AD_ONLY_FILTERS = List.of(ADS_FILTER);
+    private static final List<IFilter> LATE_FOLLOW_FILTERS = List.of(ADS_FILTER, LOCATION_FILTER);
     /** The card shapes TikTok uses for a bought search result. */
     private static final String[] SEARCH_AD_FIELDS = {"multiAdCard", "aiAdCard", "brandZoneCard"};
 
@@ -452,7 +455,7 @@ public final class FeedItemsFilter {
         }
 
         Object aweme = Reflect.readField(card, "aweme");
-        return aweme instanceof Aweme && getFilterReason(LATE_FOLLOW_FILTERS, (Aweme) aweme) != null;
+        return aweme instanceof Aweme && getFilterReason(AD_ONLY_FILTERS, (Aweme) aweme) != null;
     }
 
     /**
@@ -540,7 +543,7 @@ public final class FeedItemsFilter {
                 notVideos++;
                 nameNotVideo(source, container);
             }
-            String reason = item == null ? null : getFilterReason(LATE_FOLLOW_FILTERS, item);
+            String reason = item == null ? null : getFilterReason(AD_ONLY_FILTERS, item);
             if (reason == null) {
                 if (kept != null) kept.add(container);
                 if (item != null) logKeptItem(source, item, verbose);
@@ -1506,6 +1509,10 @@ public final class FeedItemsFilter {
                 contentSignature = 31L * contentSignature + identity(item);
                 contentSignature = 31L * contentSignature + aid(item).hashCode();
                 contentSignature = 31L * contentSignature + AdsFilter.evidenceFingerprint(item);
+                // A cached Aweme can receive its anchors after the first delivery. The UI-only
+                // hide option must never erase the evidence used by this independent filter.
+                if (Settings.FILTER_LOCATION_VIDEOS.get())
+                    contentSignature = 31L * contentSignature + (LocationBadgeFilter.hasBadge(item) ? 1 : 0);
             }
 
             return new ListFingerprint(

@@ -68,6 +68,17 @@ public class SearchSettingsClarityTest {
                 "Hide Search this image prompts", "above comments");
     }
 
+    @Test public void videoOverlayOptionsExplainWhatTheyHideAndWhatTheyKeep() {
+        assertRow("INTERFACE", "hide_fullscreen_button", "Hide the Full screen button", "rotation");
+        assertRow("INTERFACE", "hide_location_labels", "Hide location labels", "permissions");
+    }
+
+    @Test public void locationFilteringIsSeparateFromHidingTheBadge() {
+        assertRow("FEED_FILTER", "filter_location_videos", "Filter location-tagged videos", "aren't paid ads");
+        assertRow("FEED_FILTER", "filter_location_videos", "Filter location-tagged videos", "Hide location labels");
+        assertRow("INTERFACE", "hide_location_labels", "Hide location labels", "multiple places");
+    }
+
     private void assertRow(String section, String key, String title, String detail) {
         try (var owner = Robolectric.buildActivity(SettingsPagesTest.PageActivity.class).setup().visible()) {
             Activity activity = owner.get();

@@ -132,6 +132,9 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
         ));
         addPreference(new TogglePreference(context, "Hide promotional music",
                 "Skip videos marked as using promotional music.", Settings.HIDE_PROMOTIONAL_MUSIC));
+        addPreference(new TogglePreference(context, "Filter location-tagged videos",
+                "Skip feed videos with place badges, even when they aren't paid ads. To keep the video and hide only its badge, use Hide location labels in Feed screen.",
+                Settings.FILTER_LOCATION_VIDEOS));
     }
 
     private void addLimits(Context context) {
