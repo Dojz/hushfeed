@@ -43,6 +43,14 @@ only during that first step. During the index push, it checks the artifact times
 published version tag, not the later index commit. It won't compare a new artifact with an old
 release.
 
+When the TikTok target moves, record the content-marker corpus again on the new build.
+`ContentMarkerCorpusTest` replays shapes recorded from real videos through the AI label, paid
+partnership, series and playlist filters, because hand-built test objects never carried the
+defaults TikTok actually sends. `tools/verification-probe/record-markers.ps1` records them on the
+test phone, route by route, and `-Write` turns the recordings into
+`extensions/tiktok/src/test/resources/feed-markers/<route>-<version>.json`. The files hold shapes
+only: no ids, names or captions.
+
 Translations live in `extensions/tiktok/src/main/l10n/`, either as a tab separated `<code>.tsv`
 or as the `source,target` CSV a Weblate export gives you. `scripts/gen-l10n.py` reads both and
 writes `en.csv`, the base a Weblate project translates from. Rerun it after touching a table:

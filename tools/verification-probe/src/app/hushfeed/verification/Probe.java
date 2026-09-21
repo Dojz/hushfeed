@@ -281,6 +281,17 @@ public final class Probe extends Instrumentation {
                     case "series-evidence":
                         Log.i(TAG, "ok series-evidence\n" + seriesEvidence());
                         break;
+                    case "marker-corpus": {
+                        // One log line per loaded video, so no line nears logcat's size limit.
+                        String route = intent.getStringExtra("route");
+                        if (route == null || !route.matches("[a-z-]{1,24}")) {
+                            throw new IllegalArgumentException("marker-corpus needs -e route <for-you|profile|following|search>");
+                        }
+                        List<String> lines = markerCorpus(route);
+                        for (String line : lines) Log.i(TAG, "corpus\t" + route + "\t" + line);
+                        Log.i(TAG, "ok marker-corpus " + route + " items=" + lines.size());
+                        break;
+                    }
                     case "commerce-evidence":
                         // Each line is deliberately structural. Strings are represented only by
                         // length, hash and fixed marker booleans so a diagnostic cannot collect
@@ -1004,6 +1015,205 @@ public final class Probe extends Instrumentation {
                 out.append("\nclassifiedPlaylist=unavailable ").append(unavailable.getClass().getSimpleName());
             }
             return out.toString();
+        }
+
+        /**
+         * The marker fields the content filters read, for every video TikTok has loaded on the
+         * current screen, one line each: a key for dropping repeats, the verdicts of the live
+         * filters, and the shape of every field they read.
+         *
+         * <p>Only shapes leave the phone. Booleans stay; numbers stay below 10,000 and become
+         * plus or minus 10,000 above it, so a zero stays a zero and an id stays non-zero without
+         * being an id; text becomes its trimmed length, or a blank marker; a bare numeral stays
+         * as written up to six digits and becomes its digit count beyond that. The key is the
+         * first 12 hex digits of a SHA-256 of the video id, which the host drops before anything
+         * is committed. Every field is read through Hushfeed's own Reflect, getter first and
+         * field second, which is exactly the read the filters make.
+         */
+        private List<String> markerCorpus(String route) throws Exception {
+            android.app.Activity activity = (android.app.Activity) loader.loadClass(UTILS)
+                    .getMethod("getActivity").invoke(null);
+            if (activity == null) return Collections.singletonList("{\"error\":\"no activity\"}");
+            Class<?> model = loader.loadClass("com.ss.android.ugc.aweme.feed.model.Aweme");
+            java.util.IdentityHashMap<Object, Boolean> seen = new java.util.IdentityHashMap<>();
+            List<Object> videos = new ArrayList<>();
+            List<android.view.View> views = new ArrayList<>();
+            views.add(activity.getWindow().getDecorView());
+            for (int index = 0; index < views.size(); index++) {
+                android.view.View view = views.get(index);
+                if (view instanceof android.view.ViewGroup) {
+                    android.view.ViewGroup group = (android.view.ViewGroup) view;
+                    for (int child = 0; child < group.getChildCount(); child++) views.add(group.getChildAt(child));
+                }
+                Object adapter = null;
+                try {
+                    adapter = view.getClass().getMethod("getAdapter").invoke(view);
+                } catch (NoSuchMethodException none) {
+                    // not an adapter view
+                }
+                if (adapter != null) collectVideos(adapter, model, seen, videos);
+            }
+            // The feed pager's adapter does not hold its list where a walk can reach it, so the
+            // videos Hushfeed saw bound (up to 16, CurrentVideoAuthor.RECENT) are added as well.
+            try {
+                Field recent = loader.loadClass("app.morphe.extension.tiktok.blockauthor.CurrentVideoAuthor")
+                        .getDeclaredField("RECENT");
+                recent.setAccessible(true);
+                Map<?, ?> map = (Map<?, ?>) recent.get(null);
+                List<Object> items;
+                synchronized (map) {
+                    items = new ArrayList<>(map.values());
+                }
+                for (Object item : items) {
+                    Field aweme = item.getClass().getDeclaredField("aweme");
+                    aweme.setAccessible(true);
+                    Object video = aweme.get(item);
+                    if (model.isInstance(video) && seen.put(video, Boolean.TRUE) == null) videos.add(video);
+                }
+            } catch (Throwable unavailable) {
+                Log.w(TAG, "marker-corpus: recent binds unavailable, adapters only", unavailable);
+            }
+            String[] filterNames = {"AiGeneratedFilter", "PaidPartnershipFilter", "SeriesFilter", "PlaylistFilter"};
+            String[] markerNames = {"ai", "paid", "series", "playlist"};
+            Object[] filters = new Object[filterNames.length];
+            for (int i = 0; i < filterNames.length; i++) {
+                filters[i] = loader.loadClass("app.morphe.extension.tiktok.feedfilter.ContentMarkerFilters$"
+                        + filterNames[i]).getConstructor().newInstance();
+            }
+            Method property = loader.loadClass("app.morphe.extension.tiktok.blockauthor.Reflect")
+                    .getMethod("property", Object.class, String.class, String.class);
+            java.security.MessageDigest sha = java.security.MessageDigest.getInstance("SHA-256");
+            List<String> lines = new ArrayList<>();
+            for (Object video : videos) {
+                JSONArray markers = new JSONArray();
+                for (int i = 0; i < filters.length; i++) {
+                    Object matched = filters[i].getClass().getMethod("getFiltered", model).invoke(filters[i], video);
+                    if (Boolean.TRUE.equals(matched)) markers.put(markerNames[i]);
+                }
+                JSONObject line = new JSONObject();
+                Object aid = model.getMethod("getAid").invoke(video);
+                byte[] digest = sha.digest(String.valueOf(aid).getBytes(java.nio.charset.StandardCharsets.UTF_8));
+                StringBuilder key = new StringBuilder();
+                for (int i = 0; i < 6; i++) key.append(String.format(Locale.ROOT, "%02x", digest[i] & 0xff));
+                line.put("key", key.toString());
+                line.put("markers", markers);
+                line.put("shape", markerShape(video, property));
+                lines.add(line.toString());
+            }
+            return lines;
+        }
+
+        /** Breadth-first through an adapter's own objects, at most four levels, for loaded videos. */
+        private static void collectVideos(Object root, Class<?> model,
+                java.util.IdentityHashMap<Object, Boolean> seen, List<Object> videos) {
+            List<Object> level = new ArrayList<>();
+            level.add(root);
+            for (int depth = 0; depth < 5 && !level.isEmpty(); depth++) {
+                List<Object> next = new ArrayList<>();
+                for (Object node : level) {
+                    if (node == null || seen.put(node, Boolean.TRUE) != null || seen.size() > 50_000) continue;
+                    if (model.isInstance(node)) {
+                        videos.add(node);
+                        continue;
+                    }
+                    if (node instanceof Collection) {
+                        next.addAll((Collection<?>) node);
+                    } else if (node instanceof Map) {
+                        next.addAll(((Map<?, ?>) node).values());
+                    } else if (node.getClass().isArray() && !node.getClass().getComponentType().isPrimitive()) {
+                        for (int i = 0; i < Array.getLength(node); i++) next.add(Array.get(node, i));
+                    } else if (depth < 4 && worthOpening(node)) {
+                        for (Class<?> type = node.getClass(); type != null && worthOpening(type.getName()); type = type.getSuperclass()) {
+                            for (Field field : type.getDeclaredFields()) {
+                                if (Modifier.isStatic(field.getModifiers()) || field.getType().isPrimitive()) continue;
+                                try {
+                                    field.setAccessible(true);
+                                    next.add(field.get(node));
+                                } catch (Throwable unreadable) {
+                                    // skip it
+                                }
+                            }
+                        }
+                    }
+                }
+                level = next;
+            }
+        }
+
+        /** TikTok's own model and adapter classes, never views, contexts or the platform. */
+        private static boolean worthOpening(Object node) {
+            if (node instanceof android.view.View || node instanceof Context) return false;
+            return worthOpening(node.getClass().getName());
+        }
+
+        private static boolean worthOpening(String name) {
+            return name.startsWith("com.ss.") || name.startsWith("com.bytedance.") || name.startsWith("X.")
+                    || name.startsWith("androidx.recyclerview.") || name.startsWith("androidx.viewpager");
+        }
+
+        /** The fields ContentMarkerFilters reads, as privacy-safe typed tokens. */
+        private static JSONObject markerShape(Object video, Method property) throws Exception {
+            JSONObject shape = new JSONObject();
+            shape.put("aigcInfo", struct(read(property, video, "getAigcInfo", "aigcInfo"), property,
+                    "getAIGCLabelType", "aigcLabelType"));
+            shape.put("moderationAigcInfo", struct(read(property, video, "getModerationAigcInfo", "moderationAigcInfo"),
+                    property, "getModerationAigcLabelType", "moderationAigcLabelType",
+                    "getModerationUserLabelStatus", "moderationUserLabelStatus"));
+            shape.put("brandContentAccounts", token(read(property, video, "getBrandContentAccounts", "brandContentAccounts")));
+            shape.put("commerceVideoAuthInfo", struct(read(property, video, "getCommerceVideoAuthInfo", "commerceVideoAuthInfo"),
+                    property, "isBrandedContent", "isBrandedContent", "isBrandOrganicContent", "isBrandOrganicContent",
+                    "getBrandedContentType", "brandedContentType", "getBrandOrganicType", "brandOrganicType",
+                    "getEcSearchBoBcLabelText", "ecSearchBoBcLabelText", "isCommerce", "isCommerce"));
+            shape.put("commercialVideoInfo", token(read(property, video, "getCommercialVideoInfo", "commercialVideoInfo")));
+            shape.put("isPaidContent", token(read(property, video, "isPaidContent", "isPaidContent")));
+            shape.put("mPaidContentInfo", struct(read(property, video, "getMPaidContentInfo", "mPaidContentInfo"),
+                    property, "getPaidCollectionId", "paidCollectionId", "getCollectionName", "collectionName",
+                    "getEpisodeNumber", "episodeNumber", "isPaidCollectionIntro", "isPaidCollectionIntro"));
+            shape.put("mixInfo", struct(read(property, video, "getMixInfo", "mixInfo"), property,
+                    "getMixId", "mixId", "getMixName", "mixName"));
+            return shape;
+        }
+
+        private static Object read(Method property, Object target, String getter, String field) throws Exception {
+            return property.invoke(null, target, getter, field);
+        }
+
+        /** A struct as {field: token}, from getter and field name pairs, or JSON null when absent. */
+        private static Object struct(Object value, Method property, String... pairs) throws Exception {
+            if (value == null) return JSONObject.NULL;
+            JSONObject out = new JSONObject();
+            for (int i = 0; i < pairs.length; i += 2) out.put(pairs[i + 1], token(read(property, value, pairs[i], pairs[i + 1])));
+            return out;
+        }
+
+        /** One value as a typed token that keeps what the filters test and drops what identifies. */
+        private static Object token(Object value) throws Exception {
+            if (value == null) return JSONObject.NULL;
+            JSONObject out = new JSONObject();
+            if (value instanceof Boolean) {
+                out.put("b", value);
+            } else if (value instanceof Number) {
+                long number = ((Number) value).longValue();
+                out.put("n", Math.abs(number) >= 10_000L ? Long.signum(number) * 10_000L : number);
+            } else if (value instanceof CharSequence) {
+                String text = value.toString().trim();
+                if (text.isEmpty()) {
+                    out.put("sblank", value.toString().length());
+                } else if (text.matches("-?[0-9]+")) {
+                    int digits = text.startsWith("-") ? text.length() - 1 : text.length();
+                    if (digits <= 6) out.put("s", text);
+                    else out.put("snum", text.startsWith("-") ? -digits : digits);
+                } else {
+                    out.put("slen", text.length());
+                }
+            } else if (value instanceof Collection) {
+                out.put("c", ((Collection<?>) value).size());
+            } else if (value instanceof Map) {
+                out.put("m", ((Map<?, ?>) value).size());
+            } else {
+                out.put("o", 1);
+            }
+            return out;
         }
 
         /** Finds the fixed disclosure label and reports only its native view structure. */
