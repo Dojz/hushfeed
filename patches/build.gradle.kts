@@ -330,4 +330,19 @@ tasks {
     publish {
         dependsOn("generatePatchesList")
     }
+    // Rebuilds the Feature Gate Lab's four offline catalogs from a TikTok APK:
+    // ./gradlew :patches:generateGateCatalog -Papk=<TikTok APK>. The generator is a test-source
+    // tool because the test classpath is the one that carries dexlib2 and apksig.
+    register<JavaExec>("generateGateCatalog") {
+        description = "Rebuild the Feature Gate Lab catalogs from the TikTok APK given as -Papk"
+        dependsOn(testClasses)
+        classpath = sourceSets["test"].runtimeClasspath
+        mainClass.set("app.morphe.gatecatalog.GateCatalogGenerator")
+        maxHeapSize = "8g"
+        args(
+            providers.gradleProperty("apk").getOrElse(""),
+            rootProject.file("extensions/tiktok/src/main/java/app/morphe/extension/tiktok/featuregatelab").absolutePath,
+            file("src/test/resources/gate-catalog-curated.tsv").absolutePath
+        )
+    }
 }
