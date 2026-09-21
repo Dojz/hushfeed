@@ -14,6 +14,9 @@ If you open an issue, include:
 - ordered reproduction steps, including each Hushfeed setting changed before the first failure
 - logs or screenshots if the issue is visual or crash related
 
+GitHub doesn't let the person who opened an issue reopen it once a maintainer closes it. So a
+closing comment always says how to get it reopened: comment there and we'll reopen it.
+
 Small focused pull requests are easier to test than large mixed changes.
 
 For patch changes, please include what APK version you tested against and what behavior you verified.
@@ -25,7 +28,9 @@ Before publishing a release, run `scripts/validate-release-facts.ps1` after the 
 the patch tests and patch list generation. It checks the generated version, target package,
 target version, patch count and both test counts against the README and `patches-bundle.json`.
 Run the patch tests with `HUSHFEED_FIXTURE_DIR` set: a skipped fixture test fails the check,
-because the description can only quote a run that read the fixtures. After uploading the
+because the description can only quote a run that read the fixtures. The check also holds the
+bug report form's placeholders to the published version, the TikTok target and the Manager floor,
+so update them in the same commit that moves `patches-bundle.json` to the new release. After uploading the
 bundle and `SHA256SUMS.txt`, run it again with `-VerifyPublishedAsset` to check the indexed URL,
 the local artifact hash and the hosted checksum entry. The local release helpers are
 `scripts/gen-l10n.py`, `scripts/verify-all-patches.ps1`, `scripts/patch-for-device.ps1` and

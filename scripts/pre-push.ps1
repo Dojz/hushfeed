@@ -274,7 +274,9 @@ try {
         $_ -eq 'scripts/manifest-delta-allowlist.txt' -or
         # A released version's heading is the only record a reader has that it shipped, and one
         # was renamed away by a post-release commit that no gate read.
-        $_ -eq 'CHANGELOG.md'
+        $_ -eq 'CHANGELOG.md' -or
+        # Its version placeholders are held to the target and the published index.
+        $_ -eq '.github/ISSUE_TEMPLATE/bug_report.yml'
     }).Count -gt 0
 
     if ($touchesScripts) {

@@ -803,6 +803,9 @@ try {
     New-Item -ItemType Directory -Path (Join-Path $factsRoot 'gradle') -Force | Out-Null
     Copy-Item -LiteralPath (Join-Path $Root 'gradle/libs.versions.toml') `
         -Destination (Join-Path $factsRoot 'gradle/libs.versions.toml')
+    $bugFormRelative = '.github/ISSUE_TEMPLATE/bug_report.yml'
+    New-Item -ItemType Directory -Path (Join-Path $factsRoot '.github/ISSUE_TEMPLATE') -Force | Out-Null
+    Copy-Item -LiteralPath (Join-Path $Root $bugFormRelative) -Destination (Join-Path $factsRoot $bugFormRelative)
 
     function Invoke-Facts {
         param([switch]$WithUrls)
@@ -841,13 +844,26 @@ try {
         }
     }
 
+    # The bug form names the published version, which the synced index above now names too.
+    function Sync-FixtureBugForm {
+        $fixtureVersion = ((Get-Content -LiteralPath (Join-Path $factsRoot 'gradle.properties')) `
+            -match '^version\s*=' | Select-Object -First 1) -replace '^version\s*=\s*', ''
+        $publishedHere = "$((Get-Content -LiteralPath (Join-Path $Root 'patches-bundle.json') -Raw | ConvertFrom-Json).version)"
+        if ($publishedHere -eq $fixtureVersion) { return }
+        Set-FactsFile $bugFormRelative {
+            param($text) $text -replace ('Version ' + [regex]::Escape($publishedHere) + ' for TikTok'), "Version $fixtureVersion for TikTok"
+        }
+    }
+
     function Reset-FactsFile {
         param([string]$Name)
         Copy-Item -LiteralPath (Join-Path $Root $Name) -Destination (Join-Path $factsRoot $Name) -Force
         if ($Name -eq 'patches-bundle.json') { Sync-FixtureIndex }
+        if ($Name -eq $bugFormRelative) { Sync-FixtureBugForm }
     }
 
     Sync-FixtureIndex
+    Sync-FixtureBugForm
 
     # The control. Everything below is this same tree with one fact moved, so a failure there is
     # the moved fact talking and not the fixture being wrong.
@@ -933,6 +949,21 @@ try {
     }
     Assert-Throws { Invoke-Facts } '*' 'A CHANGELOG with no heading for the built version was accepted.'
     Reset-FactsFile 'CHANGELOG.md'
+
+    # The bug form's placeholders, which sat three TikTok releases behind the target before
+    # anything read them. One for the version line, one for the manager line.
+    Set-FactsFile $bugFormRelative {
+        param($text) $text -replace '(placeholder:\s*Version \S+ for TikTok )\S+', '${1}46.2.3'
+    }
+    Assert-Throws { Invoke-Facts } '*bug report form version placeholder*' `
+        'A bug report form naming an old TikTok build was accepted.'
+    Reset-FactsFile $bugFormRelative
+    Set-FactsFile $bugFormRelative {
+        param($text) $text -replace '(placeholder:\s*Morphe Manager )\S+', '${1}1.20.0'
+    }
+    Assert-Throws { Invoke-Facts } '*bug report form Manager placeholder*' `
+        'A bug report form naming a Manager below the floor was accepted.'
+    Reset-FactsFile $bugFormRelative
 
     # A dead link in the index, answered from this machine so the case needs no network of its
     # own: nothing listens on port 1, so the request is refused before it leaves the host.
@@ -1076,6 +1107,10 @@ try {
     Invoke-Hook -Paths @('CHANGELOG.md')
     Assert-True (Test-Path -LiteralPath $factsMarker) `
         'A push that changed only the CHANGELOG ran no release check.'
+
+    Invoke-Hook -Paths @('.github/ISSUE_TEMPLATE/bug_report.yml')
+    Assert-True (Test-Path -LiteralPath $factsMarker) `
+        'A push that changed only the bug report form ran no release check.'
 
     Invoke-Hook -Paths @('patches-bundle.json')
     Assert-True (Test-Path -LiteralPath $factsMarker) 'An index change ran no release check.'

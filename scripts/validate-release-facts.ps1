@@ -642,6 +642,22 @@ $managerFloorPattern = "\bMorphe Manager\s+$([regex]::Escape($managerFloor))\s+o
 Require-Match -Text $readme -Pattern $managerFloorPattern -Description 'README Manager floor'
 Write-Host "[release] README requires Morphe Manager $managerFloor or newer for patcher $pinnedPatcher"
 
+# The bug form's placeholders are what a reporter copies when unsure what to write, and they had
+# drifted a long way: TikTok 46.2.3, Manager 1.29.0 and Hushfeed 0.29.0 while the bundle targeted
+# 47.0.3. The version line reads the way Hushfeed's settings card does, with the version the index
+# publishes, and the manager line names the Manager floor.
+$bugFormPath = Join-Path $rootPath '.github/ISSUE_TEMPLATE/bug_report.yml'
+if (-not (Test-Path -LiteralPath $bugFormPath -PathType Leaf)) {
+    throw "The bug report form is missing: $bugFormPath"
+}
+$bugForm = Get-Content -LiteralPath $bugFormPath -Raw
+$bugFormVersions = "Version $publishedVersion for TikTok $targetVersion"
+Require-Match -Text $bugForm -Pattern "(?m)^\s*placeholder:\s*$([regex]::Escape($bugFormVersions))\s*$" `
+    -Description 'bug report form version placeholder'
+Require-Match -Text $bugForm -Pattern "(?m)^\s*placeholder:\s*Morphe Manager $([regex]::Escape($managerFloor))\s*$" `
+    -Description 'bug report form Manager placeholder'
+Write-Host "[release] the bug report form's placeholders say `"$bugFormVersions`" and Morphe Manager $managerFloor"
+
 function Test-ChangelogHere {
     <#
     .SYNOPSIS
