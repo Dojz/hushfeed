@@ -64,6 +64,48 @@ Selected patches activate when TikTok starts. The Settings patch adds the entry 
 
 If Morphe reported "The remote metadata file is unavailable" for Hushfeed v0.51.0, refresh the source. The v0.52.0 source update corrects a timestamp that Manager couldn't read. You don't need to reinstall Manager, clear its data or change its signing key.
 
+### Which managers can load it
+
+Morphe Manager 1.30.0 or newer loads Hushfeed on the phone, and morphe-desktop does it from a computer. Universal ReVanced Manager can't import a Morphe bundle, so patches picked there never reach TikTok ([its issue #733](https://github.com/Jman-Github/Universal-ReVanced-Manager/issues/733)). Use Morphe Manager instead.
+
+## Troubleshooting
+
+### Logging in fails
+
+Login trouble is the most common complaint about any patched TikTok. These are the fixes people report:
+
+- Turn off Private DNS, AdGuard or any other ad blocker while you log in. They can block the addresses TikTok checks a login against.
+- After several failed tries TikTok stops taking new ones for a while. Wait an hour, then try again.
+- Facebook login can't work on a patched build. Facebook checks the app's signing key, and a patched TikTok carries your manager's key instead of TikTok's. Log in with your email or phone number and a code, or with Google.
+- Hide CAPTCHA popups leaves login and account checks on screen, so it shouldn't be the cause. If a login stalls with nothing showing, turn it off and try once more to rule it out.
+
+### Patching stops at 24 or 25 percent
+
+The manager has run short of memory. Step 4 of [Install](#install) says which limit to change and what to try if it still stalls.
+
+### The file from APKMirror ends in .apkm
+
+That's a split bundle. Morphe Manager merges it, with one catch for AMOLED dark theme, which [Why you have to fetch that APK yourself](#why-you-have-to-fetch-that-apk-yourself) explains.
+
+### Can I select every patch at once?
+
+Yes. Every release is patched with all of them selected before it ships, so no two refuse to go in together. The one thing to watch is memory: with AMOLED dark theme selected, raise the manager's limit as step 4 of [Install](#install) says. Mixing Hushfeed with another TikTok bundle is a different question, and [Moving from Kveld](#moving-from-kveld) covers the overlap we know about.
+
+## Going back
+
+### To plain TikTok
+
+1. If you might come back, save your Hushfeed settings first: Hushfeed settings > Backup and restore > Back up settings. The file goes wherever you pick, so choose a folder you'll find again.
+2. Uninstall the patched TikTok, then install TikTok from Google Play. Android won't put one over the other, because they're signed with different keys. Uninstalling clears the app's data, so you'll log in again afterwards.
+
+### To an older Hushfeed
+
+Download that release's `.mpp` from the [releases page](https://github.com/SysAdminDoc/hushfeed/releases) and load it in Morphe Manager as a local bundle, then patch and install as usual. As long as the manager signs with the same key, it installs over the current build and keeps your login and settings.
+
+### Keeping the signing key
+
+The manager signs every patched build with its own key, and Android only installs an update over the old app when both carry the same one. So don't reset that key, and remember it when you move to a new phone or reinstall the manager. A build signed with a new key means uninstalling first, which clears your login and data. Your settings come back from Backup and restore > Restore settings.
+
 <br>
 
 ## Patches
@@ -270,7 +312,7 @@ Playback has two switches for a feed that keeps going when nobody is watching it
 
 Playback also carries a daily budget for the feed, on builds that include the block author patch, which is where the hook that knows which video is on screen comes from. It is off until you put a number in it, and until then nothing is counted at all. Set a video count, a number of minutes, or both, and Hushfeed says once that the day is used up. Set a hold too and the current player pauses behind a countdown for that many minutes, with a way through it on the countdown itself for the times you decide otherwise. It resumes only when the held video is still current, the feed is visible and audio focus permits playback. If another app holds focus past the countdown, Hushfeed waits for native focus to return before handing that video back. This also works when TikTok hasn't applied the queued pause yet. The panel follows the tab row as the screen layout changes. Messages, profiles and search are untouched, and so is the feed itself: nothing is dropped, so TikTok never refetches a batch it already sent. The day rolls over at four in the morning unless you move it, and the count and the hold both survive the app being killed. If a hold arriving out of nowhere is not what you want, there is a switch that fades the feed out over the last three quarters of a minute of a time budget, so you can see it coming. It needs a budget in minutes to follow and a hold to lead into, and it stays out of the way if you have turned system animations off.
 
-Diagnostics includes Back up settings, Restore settings and Reset settings even without the logging patch. Backups include patch preferences and Feature Gate Lab rules with their enabled state. Choose a JSON file through Android's file picker. Invalid files leave settings unchanged. Restore and reset keep one undo copy inside TikTok. An interrupted write can recover from its backup file, and a current Hushfeed copy always wins over a copy written under the project's earlier name. Export a backup first if you plan to clear app data or reinstall, since that removes the undo copy too. Restart after restoring or resetting. Show failures on screen decides whether a failure inside Hushfeed is also put in front of you while diagnostic logging is on. Turn it off and failures go to the report alone.
+Backup and restore holds Back up settings, Restore settings and Reset settings, and it's there whichever patches you picked. Backups include patch preferences and Feature Gate Lab rules with their enabled state. Choose a JSON file through Android's file picker. Invalid files leave settings unchanged. Restore and reset keep one undo copy inside TikTok. An interrupted write can recover from its backup file, and a current Hushfeed copy always wins over a copy written under the project's earlier name. Export a backup first if you plan to clear app data or reinstall, since that removes the undo copy too. Restart after restoring or resetting. Show failures on screen decides whether a failure inside Hushfeed is also put in front of you while diagnostic logging is on. Turn it off and failures go to the report alone.
 
 Backups record which settings they contain, so missing entries are rejected. A backup is a set of values to apply rather than a picture of the whole app, so anything it predates is left as you have it and the restore says how many that was. A backup from before the download destinations were split carries the one folder it knew about, and that fills in all three. If saving fails, recovery attempts both preference stores and keeps the undo copy available.
 
@@ -448,6 +490,16 @@ Hushfeed stands on a lot of other people's work, and the licence asks that this 
 Files that came from another project keep their original notices, and files written here say so in their header. A test holds every source file the bundle ships to having one, so a file cannot arrive without saying where it came from.
 
 The notices are also in the app, under Settings, About, Licenses, because Morphe asks that they reach the person using the software and not just the person reading the source.
+
+## Privacy
+
+Hushfeed has no server of its own and collects nothing. Everything it adds runs inside TikTok on your phone.
+
+It goes online by itself for one job. When you save a video, a photo, a sound, subtitles, a sticker or a profile picture, it downloads that file over HTTPS from the address TikTok's own data holds for it. It won't fetch from an address on your own network, and it gives up after five redirects. Anything else Hushfeed does online, such as translating a comment or blocking a creator, goes through TikTok's own code to TikTok's servers, the way the app's own buttons do.
+
+The only web addresses written into Hushfeed's code are github.com for this project, gitlab.com and gnu.org for licence texts, and tiktok.com for the share links TikTok itself uses. A test fails the build if another one turns up, or if code outside that download path opens a connection.
+
+The diagnostic report stays on your phone until you copy or save it. It leaves out web addresses, login tokens and cookies, device ids, the ids of videos, comments and messages, and creator names and handles. Read it through before you share it anyway.
 
 ## Notes
 
