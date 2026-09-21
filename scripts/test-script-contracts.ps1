@@ -1051,6 +1051,40 @@ try {
         Assert-Throws { Invoke-StrictFacts } '*patch test count*' `
             'A description quoting a patch test count the run does not have was accepted.'
 
+        # A test class deleted since the last run. Its results stay until the tests run again,
+        # no source left is newer than them, and every class left has results, so its tests
+        # were counted as passing. The sources go in first so the results are the newer files.
+        $runtimeSource = Join-Path $factsRoot 'extensions/tiktok/src/test/java/fixture/RuntimeTest.java'
+        $patchSource = Join-Path $factsRoot 'patches/src/test/kotlin/fixture/PatchTest.kt'
+        foreach ($source in @($runtimeSource, $patchSource)) {
+            New-Item -ItemType Directory -Path (Split-Path -Parent $source) -Force | Out-Null
+            Set-Content -LiteralPath $source -Value '' -Encoding ASCII
+        }
+        function Add-OrphanResult([string]$Folder, [string]$Suite) {
+            Set-Content -LiteralPath (Join-Path (Join-Path $factsRoot $Folder) "TEST-fixture.$Suite.xml") -Encoding UTF8 -Value (
+                "<?xml version=`"1.0`" encoding=`"UTF-8`"?><testsuite name=`"fixture.$Suite`" tests=`"1`" " +
+                "skipped=`"0`" failures=`"0`" errors=`"0`"><testcase name=`"t1`" classname=`"fixture.$Suite`"/></testsuite>")
+        }
+        Write-FactsResults $patchResults 'PatchTest' $patchQuoted
+        Write-FactsResults $runtimeResults 'RuntimeTest' ($runtimeQuoted - 1)
+        Add-OrphanResult $runtimeResults 'GoneTest'
+        Assert-Throws { Invoke-StrictFacts } '*runtime test results include 1 test class*GoneTest*' `
+            'The runtime results of a deleted test class were counted.'
+        Write-FactsResults $runtimeResults 'RuntimeTest' $runtimeQuoted
+        Write-FactsResults $patchResults 'PatchTest' ($patchQuoted - 1)
+        Add-OrphanResult $patchResults 'GonePatchTest'
+        Assert-Throws { Invoke-StrictFacts } '*patch test results include 1 test class*GonePatchTest*' `
+            'The patch results of a deleted test class were counted.'
+        # The control: the same sources with no orphan pass.
+        Write-FactsResults $runtimeResults 'RuntimeTest' $runtimeQuoted
+        Write-FactsResults $patchResults 'PatchTest' $patchQuoted
+        Invoke-StrictFacts
+        Assert-True ($LASTEXITCODE -eq 0 -or $null -eq $LASTEXITCODE) `
+            'The strict release check refused results that match their sources and the description.'
+        foreach ($folder in @('extensions/tiktok/src', 'patches/src')) {
+            Remove-Item -LiteralPath (Join-Path $factsRoot $folder) -Recurse -Force
+        }
+
         Remove-Item -LiteralPath (Join-Path $factsRoot 'patches') -Recurse -Force
         Assert-Throws { Invoke-StrictFacts } '*No patch test results*' `
             'A release was checked with no patch test results at all.'

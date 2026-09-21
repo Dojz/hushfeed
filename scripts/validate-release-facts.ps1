@@ -343,6 +343,16 @@ if ($testFiles.Count -gt 0 -and (Test-Path -LiteralPath $testSourceRoot)) {
             (($missing | Select-Object -First 8) -join ', ') +
             ". Run :extensions:tiktok:test unfiltered.")
     }
+    # The other way round: a class deleted or renamed since the last run leaves its results until
+    # the tests run again, and nothing above notices. No remaining source is newer than the
+    # results, and every class that is left has one, so its tests would be counted as passing.
+    $orphaned = @($ranClasses | Where-Object { $sourceClasses -notcontains $_ } | Sort-Object)
+    if ($orphaned.Count -gt 0) {
+        throw ("Runtime test results include " + $orphaned.Count + " test class(es) with no source " +
+            "any more, left from a run before they were deleted or renamed: " +
+            (($orphaned | Select-Object -First 8) -join ', ') +
+            ". Run :extensions:tiktok:testDebugUnitTest --rerun.")
+    }
 }
 
 $testCount = 0
@@ -410,6 +420,12 @@ if (-not $SkipDescriptionTestCount) {
             throw ("Patch test results are missing " + $missing.Count + " of " + $patchClasses.Count +
                 " test classes, so the counts here describe part of a run: " +
                 (($missing | Select-Object -First 8) -join ', ') + ". Run :patches:test unfiltered.")
+        }
+        $orphaned = @($ranPatchClasses | Where-Object { $patchClasses -notcontains $_ } | Sort-Object)
+        if ($orphaned.Count -gt 0) {
+            throw ("Patch test results include " + $orphaned.Count + " test class(es) with no source " +
+                "any more, left from a run before they were deleted or renamed: " +
+                (($orphaned | Select-Object -First 8) -join ', ') + ". Run :patches:test --rerun.")
         }
     }
     $patchTestCount = 0
