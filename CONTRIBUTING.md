@@ -51,6 +51,14 @@ test phone, route by route, and `-Write` turns the recordings into
 `extensions/tiktok/src/test/resources/feed-markers/<route>-<version>.json`. The files hold shapes
 only: no ids, names or captions.
 
+The view ids the extension looks up by name move too. TikTok hands its short resource names out
+again on every build, mostly to other views, so a name that still resolves can be the wrong one.
+`patches/src/test/resources/view-id-anchors.txt` lists every lookup with an owner where there is
+one: a class of the target, with a real name, whose code loads the id. `RuntimeViewIdAnchorsTest`
+fails for each owner that no longer loads its id on the declared target. Read that group off the
+new build's live view tree, then change the code and the table together, because the test also
+holds the table to the code.
+
 Translations live in `extensions/tiktok/src/main/l10n/`, either as a tab separated `<code>.tsv`
 or as the `source,target` CSV a Weblate export gives you. `scripts/gen-l10n.py` reads both and
 writes `en.csv`, the base a Weblate project translates from. Rerun it after touching a table:
