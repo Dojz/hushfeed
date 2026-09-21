@@ -768,6 +768,41 @@ try {
     Assert-True ($noCommit.Toolchain.PatcherVersion -eq '1.13.0' -and $null -eq $noCommit.Note) `
         'A receipt naming no commit did not fall back quietly to the working catalog.'
 
+    # The patch list, the same way: a patch renamed after the release is held to the name its own
+    # commit carried, which is what the hold after 0.58.0 needed; the released commit itself is
+    # held to the working list; no list at that commit, or no commit, falls back to the working one.
+    $listFile = Join-Path $toolchainRoot 'patches-list.json'
+    function Save-FixtureList([string[]]$Names) {
+        $list = @{ patches = @($Names | ForEach-Object { @{ name = $_; compatiblePackages = @{ 'com.example' = @('1.0.0') } } }) }
+        Set-Content -LiteralPath $listFile -Encoding UTF8 -Value ($list | ConvertTo-Json -Depth 5)
+        Invoke-FixtureGit -Root $toolchainRoot -Arguments @('add', '-A') | Out-Null
+        Invoke-FixtureGit -Root $toolchainRoot -Arguments @('commit', '-m', "list $($Names -join ' ')", '--quiet') | Out-Null
+        return "$(Invoke-FixtureGit -Root $toolchainRoot -Arguments @('rev-parse', 'HEAD') | Select-Object -First 1)".Trim()
+    }
+    $listReleased = Save-FixtureList @('Alpha', 'Beta')
+    $listNow = Save-FixtureList @('Alpha', 'Gamma')
+    $workingList = Get-Content -LiteralPath $listFile -Raw | ConvertFrom-Json
+    $atListRelease = Resolve-ReceiptCatalog -Root $toolchainRoot -Commit $listReleased -WorkingPatchList $workingList
+    $namesAtRelease = @($atListRelease.PatchList.patches | ForEach-Object { [string]$_.name }) -join ','
+    Assert-True ($namesAtRelease -eq 'Alpha,Beta' -and $atListRelease.Note -like '*2 patches*') `
+        "The receipt was not held to the patch list its own commit carried: $namesAtRelease / $($atListRelease.Note)"
+    $atListHead = Resolve-ReceiptCatalog -Root $toolchainRoot -Commit $listNow -WorkingPatchList $workingList
+    Assert-True ((@($atListHead.PatchList.patches | ForEach-Object { [string]$_.name }) -join ',') -eq 'Alpha,Gamma' -and
+        $null -eq $atListHead.Note) "A receipt at the released commit was not held to the working patch list: $($atListHead.Note)"
+    $atNoList = Resolve-ReceiptCatalog -Root $toolchainRoot -Commit $releaseCommitSha -WorkingPatchList $workingList
+    Assert-True ($atNoList.PatchList -eq $workingList -and $atNoList.Note -like '*no patch list*') `
+        "A commit with no patch list did not fall back to the working one: $($atNoList.Note)"
+    $atNoCommit = Resolve-ReceiptCatalog -Root $toolchainRoot -Commit '' -WorkingPatchList $workingList
+    Assert-True ($atNoCommit.PatchList -eq $workingList -and $null -eq $atNoCommit.Note) `
+        'A receipt naming no commit did not fall back quietly to the working patch list.'
+    # And the release check hands the receipt that list, names and target both, rather than the
+    # working one. A helper nothing calls would pass every case above.
+    $factsSource = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'validate-release-facts.ps1') -Raw
+    Assert-True ($factsSource -match '-ExpectedPatchNames @\(\$resolvedList\.PatchList\.patches' -and
+        $factsSource -match '\$receiptTarget = Get-PatchTarget -PatchList \$resolvedList\.PatchList' -and
+        $factsSource -match '-ExpectedPackageName \$receiptTarget\.PackageName') `
+        'validate-release-facts.ps1 no longer holds the receipt to the patch list its own commit carried.'
+
     # A catalog that pins nothing usable still stops the run, rather than being read as blank.
     foreach ($broken in @(
         @{ Name = 'no patcher pin'; Lines = @('[versions]', 'manager-floor = "1.29.0"') },

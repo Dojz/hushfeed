@@ -785,12 +785,17 @@ function Test-ReleaseReceiptHere {
         -WorkingToolchain $workingToolchain
     $expectedToolchain = $resolved.Toolchain
     if ($resolved.Note) { Write-Host "[release] $($resolved.Note)" }
+    # And the patch list its own commit carried, for the same reason: a patch added or renamed
+    # after the release doesn't make the release's receipt wrong.
+    $resolvedList = Resolve-ReceiptCatalog -Root $rootPath -Commit $receiptCommit -WorkingPatchList $patchList
+    if ($resolvedList.Note) { Write-Host "[release] $($resolvedList.Note)" }
+    $receiptTarget = Get-PatchTarget -PatchList $resolvedList.PatchList
 
     $receiptCheck = Test-ReleaseReceipt -Receipt $receiptDocument -ExpectedVersion $releaseVersion `
-        -ExpectedPatchNames @($patches | ForEach-Object { [string]$_.name }) `
+        -ExpectedPatchNames @($resolvedList.PatchList.patches | ForEach-Object { [string]$_.name }) `
         -ExpectedPatcherVersion $expectedToolchain.PatcherVersion `
         -ExpectedManagerFloor $expectedToolchain.ManagerFloor `
-        -ExpectedPackageName $target.PackageName -ExpectedPackageVersion $target.PackageVersion `
+        -ExpectedPackageName $receiptTarget.PackageName -ExpectedPackageVersion $receiptTarget.PackageVersion `
         -BundlePath $BundleForComparison -ApprovedManifestDelta $approvedDelta `
         -ActualCommitTimestamp $actualEpoch -ExpectedCommit $expectedCommit
     if (-not $receiptCheck.Valid) {
