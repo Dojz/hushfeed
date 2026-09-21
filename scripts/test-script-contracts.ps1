@@ -943,6 +943,57 @@ try {
     Assert-Throws { Invoke-Facts -WithUrls } '*' 'An index pointing at a dead address was accepted.'
     Reset-FactsFile 'patches-bundle.json'
 
+    # The test counts the description quotes, which only the strict path reads: a release, or the
+    # push that rewrites the index. The copied tree holds no test results, so each folder gets a
+    # suite of exactly as many tests as the copied description names, and one fact moves per case.
+    $factsDescription = [string](Get-Content -LiteralPath (Join-Path $factsRoot 'patches-bundle.json') -Raw |
+        ConvertFrom-Json).description
+    $runtimeQuoted = [int]([regex]::Match($factsDescription, '\b(\d+) runtime tests passed\b').Groups[1].Value)
+    $patchQuoted = [int]([regex]::Match($factsDescription, '\b(\d+) patch tests passed\b').Groups[1].Value)
+    Assert-True ($runtimeQuoted -gt 0 -and $patchQuoted -gt 0) `
+        "The copied description quotes no test counts, so these cases would prove nothing: $factsDescription"
+    function Write-FactsResults {
+        param([string]$Folder, [string]$Suite, [int]$Tests, [int]$Skipped = 0)
+        $directory = Join-Path $factsRoot $Folder
+        Remove-Item -LiteralPath $directory -Recurse -Force -ErrorAction SilentlyContinue
+        New-Item -ItemType Directory -Path $directory -Force | Out-Null
+        $cases = (1..$Tests | ForEach-Object {
+            if ($_ -le $Skipped) { "<testcase name=`"t$_`" classname=`"fixture.$Suite`"><skipped/></testcase>" }
+            else { "<testcase name=`"t$_`" classname=`"fixture.$Suite`"/>" }
+        }) -join ''
+        Set-Content -LiteralPath (Join-Path $directory "TEST-fixture.$Suite.xml") -Encoding UTF8 -Value (
+            "<?xml version=`"1.0`" encoding=`"UTF-8`"?><testsuite name=`"fixture.$Suite`" tests=`"$Tests`" " +
+            "skipped=`"$Skipped`" failures=`"0`" errors=`"0`">$cases</testsuite>")
+    }
+    function Invoke-StrictFacts { & $factsScript -Root $factsRoot -SkipUrlCheck 6> $null }
+    $runtimeResults = 'extensions/tiktok/build/test-results/testDebugUnitTest'
+    $patchResults = 'patches/build/test-results/test'
+    try {
+        Write-FactsResults $runtimeResults 'RuntimeTest' $runtimeQuoted
+        Write-FactsResults $patchResults 'PatchTest' $patchQuoted
+        Invoke-StrictFacts
+        Assert-True ($LASTEXITCODE -eq 0 -or $null -eq $LASTEXITCODE) `
+            'The strict release check refused test results that match the description.'
+
+        # A fixture test that skipped, which Gradle reports as a pass.
+        Write-FactsResults $patchResults 'PatchTest' $patchQuoted -Skipped 1
+        Assert-Throws { Invoke-StrictFacts } '*skipped 1 test*' `
+            'A release was checked against patch test results with a skipped fixture test.'
+
+        # A count the run doesn't have, which is how "All 269 patch tests passed" was written.
+        Write-FactsResults $patchResults 'PatchTest' ($patchQuoted + 1)
+        Assert-Throws { Invoke-StrictFacts } '*patch test count*' `
+            'A description quoting a patch test count the run does not have was accepted.'
+
+        Remove-Item -LiteralPath (Join-Path $factsRoot 'patches') -Recurse -Force
+        Assert-Throws { Invoke-StrictFacts } '*No patch test results*' `
+            'A release was checked with no patch test results at all.'
+    } finally {
+        foreach ($folder in @('patches', 'extensions')) {
+            Remove-Item -LiteralPath (Join-Path $factsRoot $folder) -Recurse -Force -ErrorAction SilentlyContinue
+        }
+    }
+
     # And the same tree, once every fact is put back, is accepted again. Without this the cases
     # above would also pass against a fixture that had become permanently broken.
     Invoke-Facts

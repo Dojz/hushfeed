@@ -21,9 +21,11 @@ For patch changes, please include what APK version you tested against and what b
 Diagnostic tools can copy or save a redacted report. Attach that report instead of raw logcat
 when possible, and remove any private messages or account details from screenshots.
 
-Before publishing a release, run `scripts/validate-release-facts.ps1` after the runtime tests
-and patch list generation. It checks the generated version, target package, target version,
-patch count and test count against the README and `patches-bundle.json`. After uploading the
+Before publishing a release, run `scripts/validate-release-facts.ps1` after the runtime tests,
+the patch tests and patch list generation. It checks the generated version, target package,
+target version, patch count and both test counts against the README and `patches-bundle.json`.
+Run the patch tests with `HUSHFEED_FIXTURE_DIR` set: a skipped fixture test fails the check,
+because the description can only quote a run that read the fixtures. After uploading the
 bundle and `SHA256SUMS.txt`, run it again with `-VerifyPublishedAsset` to check the indexed URL,
 the local artifact hash and the hosted checksum entry. The local release helpers are
 `scripts/gen-l10n.py`, `scripts/verify-all-patches.ps1`, `scripts/patch-for-device.ps1` and

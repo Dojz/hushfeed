@@ -5,7 +5,7 @@
 .DESCRIPTION
     The generated patches-list.json is the local source for the release version, target
     package, target version and patch count. This check makes README.md, patches-bundle.json
-    and the recorded runtime test count agree before a release is published. It also checks
+    and the recorded runtime and patch test counts agree before a release is published. It also checks
     the canonical Morphe add-source link in the README and verifies that its landing page is live. A guarded
     preparation mode lets the source commit reach GitHub while the public index still points
     at the previous working bundle. Published-asset verification remains strict.
@@ -30,7 +30,9 @@ param(
     # when patches-bundle.json is not among the changed files; a release, which rewrites that
     # file, does not. With it, a checkout that has no test results at all (a fresh clone pushing
     # a README edit, which runs no tests) is not held to a run it had no reason to make; any
-    # results that are there are still checked for age, completeness, failures and skips. A
+    # runtime results that are there are still checked for age, completeness, failures and skips.
+    # The patch test results are read only without it: their fixture tests skip on any machine
+    # with no HUSHFEED_FIXTURE_DIR, and a skip matters only to a count a description quotes. A
     # release and a run by hand check everything.
     [switch]$SkipDescriptionTestCount,
     # Release source changes have to reach GitHub before their tag and bundle can be published.
@@ -352,6 +354,73 @@ if ($SkipDescriptionTestCount) {
         "against the release it describes" + $ranHere)
 } else {
     Require-Match -Text ([string]$bundle.description) -Pattern "\b$testCount runtime tests passed\b" -Description 'bundle description test count'
+}
+
+# The patch module's tests, which the description quotes as "All N patch tests passed". Until
+# 2026-09-21 nothing read that number; it was typed by hand. Their fixture tests skip when
+# HUSHFEED_FIXTURE_DIR is unset, and Gradle counts a skip as a pass, so a release could quote a
+# run that never opened a TikTok APK. Only a check that holds the description to its counts reads
+# them: they are a fact about the release, and a push that rewrites no description has no count
+# to compare them with and no reason to have run them.
+if (-not $SkipDescriptionTestCount) {
+    $patchTestRoot = Join-Path $rootPath 'patches/build/test-results/test'
+    $patchTestFiles = @(Get-ChildItem -LiteralPath $patchTestRoot -Filter '*.xml' -File -ErrorAction SilentlyContinue)
+    if ($patchTestFiles.Count -eq 0) {
+        throw ("No patch test results found under $patchTestRoot. Run :patches:test with " +
+            'HUSHFEED_FIXTURE_DIR set first.')
+    }
+    # Stale and partial runs, read the same way as the runtime results above: the trees the patch
+    # tests build from, and every test class the module has.
+    $patchSourceRoots = @('patches/src', 'extensions/tiktok/src/main', 'extensions/shared/library/src/main') |
+        ForEach-Object { Join-Path $rootPath $_ } |
+        Where-Object { Test-Path -LiteralPath $_ }
+    $newestPatchSource = $patchSourceRoots |
+        ForEach-Object { Get-ChildItem -LiteralPath $_ -Recurse -File -ErrorAction SilentlyContinue } |
+        Sort-Object LastWriteTimeUtc -Descending |
+        Select-Object -First 1
+    $newestPatchResult = $patchTestFiles | Sort-Object LastWriteTimeUtc -Descending | Select-Object -First 1
+    if ($null -ne $newestPatchSource -and $newestPatchResult.LastWriteTimeUtc -lt $newestPatchSource.LastWriteTimeUtc) {
+        throw ("Patch test results are older than the sources. The newest result " +
+            "$($newestPatchResult.Name) was written $($newestPatchResult.LastWriteTimeUtc.ToString('u')) but " +
+            "$($newestPatchSource.FullName) changed $($newestPatchSource.LastWriteTimeUtc.ToString('u')). " +
+            'Run :patches:test --rerun.')
+    }
+    $patchTestSourceRoot = Join-Path $rootPath 'patches/src/test'
+    if (Test-Path -LiteralPath $patchTestSourceRoot) {
+        $patchClasses = @(Get-ChildItem -LiteralPath $patchTestSourceRoot -Recurse -File -Filter '*Test.kt' |
+            ForEach-Object { $_.BaseName })
+        $ranPatchClasses = @($patchTestFiles | ForEach-Object { ($_.BaseName -replace '^TEST-', '') -replace '^.*\.', '' })
+        $missing = @($patchClasses | Where-Object { $ranPatchClasses -notcontains $_ } | Sort-Object)
+        if ($missing.Count -gt 0) {
+            throw ("Patch test results are missing " + $missing.Count + " of " + $patchClasses.Count +
+                " test classes, so the counts here describe part of a run: " +
+                (($missing | Select-Object -First 8) -join ', ') + ". Run :patches:test unfiltered.")
+        }
+    }
+    $patchTestCount = 0
+    foreach ($file in $patchTestFiles) {
+        try {
+            $results = [xml](Get-Content -LiteralPath $file.FullName -Raw)
+        } catch {
+            throw "Could not read test results from $($file.FullName): $($_.Exception.Message)"
+        }
+        foreach ($suite in @($results.testsuite)) {
+            $failed = [int]$suite.failures
+            $errors = [int]$suite.errors
+            $skipped = [int]$suite.skipped
+            if ($skipped -gt 0) {
+                throw ("Patch test suite $($file.Name) skipped $skipped test(s). A fixture test skips " +
+                    'when HUSHFEED_FIXTURE_DIR is not set, and a release quotes only a run that read the fixtures.')
+            }
+            if ($failed -gt 0 -or $errors -gt 0) {
+                throw "Patch test suite $($file.Name) has failures=$failed, errors=$errors."
+            }
+        }
+        $patchTestCount += @($results.testsuite.testcase).Count
+    }
+    Require-Match -Text ([string]$bundle.description) -Pattern "\b$patchTestCount patch tests passed\b" `
+        -Description 'bundle description patch test count'
+    $testFacts += ", $patchTestCount patch tests"
 }
 
 if ($VerifyPublishedAsset) {

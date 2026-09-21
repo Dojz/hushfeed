@@ -290,10 +290,11 @@ Feature Gate Lab saves its master switch immediately. Its menu can reset overrid
 
 Use JDK 21 or newer and an Android SDK configured through `local.properties`. GitHub Packages needs `GITHUB_ACTOR` and a `GITHUB_TOKEN` with `read:packages` access for the Morphe dependencies.
 
-Run the runtime tests, then build the Morphe patch bundle and metadata:
+Run the runtime and patch tests, then build the Morphe patch bundle and metadata. The patch tests read the vendor TikTok APKs from the folder `HUSHFEED_FIXTURE_DIR` names (see CONTRIBUTING.md), and the release check refuses a run in which any of them skipped:
 
 ```bash
 ./gradlew :extensions:tiktok:test
+./gradlew :patches:test
 ./gradlew :patches:generatePatchesList
 pwsh -File scripts/validate-release-facts.ps1
 ./gradlew :patches:buildAndroid
