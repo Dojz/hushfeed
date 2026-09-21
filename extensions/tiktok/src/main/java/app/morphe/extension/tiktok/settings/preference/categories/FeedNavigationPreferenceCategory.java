@@ -67,7 +67,8 @@ public class FeedNavigationPreferenceCategory extends ConditionalPreferenceCateg
         addPreference(new TogglePreference(
                 context,
                 "Hide the Tako bubble",
-                "Hide the Tako AI bubble above the profile button and the Ask bar under videos.",
+                "Hide the Tako AI bubble above the profile button, the Ask bar under videos and "
+                        + "the Ask Tako button on the search page.",
                 Settings.HIDE_TAKO_AI
         ));
     }

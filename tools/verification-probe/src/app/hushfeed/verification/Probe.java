@@ -211,6 +211,76 @@ public final class Probe extends Instrumentation {
                     case "banner-evidence":
                         Log.i(TAG, "ok banner-evidence\n" + bannerEvidence(intent.getStringExtra("aid")));
                         break;
+                    case "webviews": {
+                        // Which page a WebView is showing and what it was built with. Hosts and
+                        // paths only: a query can carry tokens, so it is never printed.
+                        android.app.Activity activity = (android.app.Activity) loader.loadClass(UTILS)
+                                .getMethod("getActivity").invoke(null);
+                        StringBuilder out = new StringBuilder();
+                        if (activity != null) {
+                            out.append("activity=").append(activity.getClass().getName());
+                            android.net.Uri data = activity.getIntent() == null ? null : activity.getIntent().getData();
+                            out.append("\nintentData=").append(hostAndPath(data));
+                            if (data != null && data.isHierarchical()) {
+                                String inner = data.getQueryParameter("url");
+                                out.append("\nintentUrlParam=").append(inner == null ? "none"
+                                        : hostAndPath(android.net.Uri.parse(inner)));
+                            }
+                            android.os.Bundle extras = activity.getIntent() == null ? null : activity.getIntent().getExtras();
+                            out.append("\nextraKeys=").append(extras == null ? "none" : String.valueOf(extras.keySet()));
+                        }
+                        for (android.view.View root : windowRoots()) {
+                            java.util.ArrayDeque<android.view.View> queue = new java.util.ArrayDeque<>();
+                            queue.add(root);
+                            while (!queue.isEmpty()) {
+                                android.view.View view = queue.poll();
+                                if (view instanceof android.webkit.WebView) {
+                                    android.webkit.WebView web = (android.webkit.WebView) view;
+                                    out.append("\nwebview=").append(web.getClass().getName())
+                                            .append(" url=").append(hostAndPath(web.getUrl() == null
+                                                    ? null : android.net.Uri.parse(web.getUrl())))
+                                            .append(" context=");
+                                    Context holder = web.getContext();
+                                    for (int depth = 0; holder != null && depth < 6; depth++) {
+                                        out.append(holder.getClass().getName()).append(" > ");
+                                        if (holder instanceof android.app.Activity) {
+                                            Intent hosting = ((android.app.Activity) holder).getIntent();
+                                            android.net.Uri hostData = hosting == null ? null : hosting.getData();
+                                            out.append("[data=").append(hostAndPath(hostData));
+                                            if (hostData != null && hostData.isHierarchical()
+                                                    && hostData.getQueryParameter("url") != null) {
+                                                out.append(" urlParam=").append(hostAndPath(
+                                                        android.net.Uri.parse(hostData.getQueryParameter("url"))));
+                                            }
+                                            android.os.Bundle held = hosting == null ? null : hosting.getExtras();
+                                            if (held != null) {
+                                                for (String key : held.keySet()) {
+                                                    Object value = held.get(key);
+                                                    out.append(' ').append(key).append('=');
+                                                    String text = value instanceof String ? (String) value : null;
+                                                    out.append(text != null && text.contains("://")
+                                                            ? hostAndPath(android.net.Uri.parse(text))
+                                                            : value == null ? "null" : value.getClass().getName());
+                                                }
+                                            }
+                                            out.append("] ");
+                                        }
+                                        holder = holder instanceof android.content.ContextWrapper
+                                                ? ((android.content.ContextWrapper) holder).getBaseContext() : null;
+                                    }
+                                }
+                                if (view instanceof android.view.ViewGroup) {
+                                    android.view.ViewGroup group = (android.view.ViewGroup) view;
+                                    for (int i = 0; i < group.getChildCount(); i++) queue.add(group.getChildAt(i));
+                                }
+                            }
+                        }
+                        Log.i(TAG, "ok webviews\n" + out);
+                        break;
+                    }
+                    case "series-evidence":
+                        Log.i(TAG, "ok series-evidence\n" + seriesEvidence());
+                        break;
                     case "commerce-evidence":
                         // Each line is deliberately structural. Strings are represented only by
                         // length, hash and fixed marker booleans so a diagnostic cannot collect
@@ -857,6 +927,83 @@ public final class Probe extends Instrumentation {
                     + "\nnativeGetterInput=1\nnativeGetterRemaining=" + remaining.size()
                     + "\nexpectedPublicVideo=" + (expectedId == null ? "not checked" :
                     String.valueOf(expectedId.equals(model.getMethod("getAid").invoke(aweme))));
+        }
+
+        private static String hostAndPath(android.net.Uri uri) {
+            if (uri == null) return "null";
+            return uri.getScheme() + "://" + uri.getHost() + uri.getPath();
+        }
+
+        /**
+         * Which paid-series markers the current video carries. Strings are reported by length and
+         * by whether they are a bare number, never by content, so no collection name is recorded.
+         */
+        private String seriesEvidence() throws Exception {
+            Object aweme = loader.loadClass("app.morphe.extension.tiktok.blockauthor.CurrentVideoAuthor")
+                    .getMethod("getAweme").invoke(null);
+            if (aweme == null) return "aweme=null";
+            Class<?> model = loader.loadClass("com.ss.android.ugc.aweme.feed.model.Aweme");
+            Object info = model.getMethod("getMPaidContentInfo").invoke(aweme);
+            StringBuilder out = new StringBuilder("isPaidContent=" + model.getMethod("isPaidContent").invoke(aweme));
+            out.append("\ninfoPresent=").append(info != null);
+            if (info != null) {
+                for (String getter : new String[] {"getPaidCollectionId", "getCategory", "getDisplayPrompt",
+                        "isPaidCollectionIntro", "isLimitedFreeShortDrama", "getShowSeriesPurchaseLabel",
+                        "getShouldShowPreview", "getHasPurchased"}) {
+                    out.append('\n').append(getter).append('=').append(info.getClass().getMethod(getter).invoke(info));
+                }
+                for (String getter : new String[] {"getCollectionName", "getEpisodeNumber", "getMiniDramaInfo",
+                        "getBottomButtonText", "getVoucherId"}) {
+                    Object value = info.getClass().getMethod(getter).invoke(info);
+                    String text = value == null ? null : value.toString();
+                    out.append('\n').append(getter).append('=').append(text == null ? "null"
+                            : "length " + text.length() + (text.matches("-?[0-9]+") ? " number " + text : ""));
+                }
+                for (String getter : new String[] {"getPrice", "getCoverUrl", "getMiniDramaCardInfo"}) {
+                    out.append('\n').append(getter).append("Present=")
+                            .append(info.getClass().getMethod(getter).invoke(info) != null);
+                }
+            }
+            try {
+                Object filter = loader.loadClass(
+                        "app.morphe.extension.tiktok.feedfilter.ContentMarkerFilters$SeriesFilter")
+                        .getConstructor().newInstance();
+                Method filtered = filter.getClass().getMethod("getFiltered", model);
+                out.append("\nclassifiedSeries=").append(filtered.invoke(filter, aweme));
+            } catch (Throwable unavailable) {
+                out.append("\nclassifiedSeries=unavailable ").append(unavailable.getClass().getSimpleName());
+            }
+            out.append("\nhideSeries=").append(valueOf(find("hide_series")));
+            // The playlist filter reads strings the same way, so its defaults are recorded too.
+            Object mix = model.getMethod("getMixInfo").invoke(aweme);
+            out.append("\nmixPresent=").append(mix != null);
+            if (mix != null) {
+                for (String name : new String[] {"mixId", "mixName"}) {
+                    Object value = null;
+                    for (Class<?> type = mix.getClass(); type != null && value == null; type = type.getSuperclass()) {
+                        try {
+                            Field field = type.getDeclaredField(name);
+                            field.setAccessible(true);
+                            value = field.get(mix);
+                        } catch (NoSuchFieldException absent) {
+                            // keep climbing
+                        }
+                    }
+                    String text = value == null ? null : value.toString();
+                    out.append('\n').append(name).append('=').append(text == null ? "null"
+                            : "length " + text.length() + (text.matches("-?[0-9]+") && text.length() < 3 ? " number " + text : ""));
+                }
+            }
+            try {
+                Object filter = loader.loadClass(
+                        "app.morphe.extension.tiktok.feedfilter.ContentMarkerFilters$PlaylistFilter")
+                        .getConstructor().newInstance();
+                out.append("\nclassifiedPlaylist=")
+                        .append(filter.getClass().getMethod("getFiltered", model).invoke(filter, aweme));
+            } catch (Throwable unavailable) {
+                out.append("\nclassifiedPlaylist=unavailable ").append(unavailable.getClass().getSimpleName());
+            }
+            return out.toString();
         }
 
         /** Finds the fixed disclosure label and reports only its native view structure. */

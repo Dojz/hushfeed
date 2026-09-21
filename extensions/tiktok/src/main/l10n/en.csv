@@ -430,6 +430,7 @@ Hide promotional music,Hide promotional music
 Hide quick comment reactions,Hide quick comment reactions
 Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.,Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.
 Hide rows by title,Hide rows by title
+Hide search rewards,Hide search rewards
 Hide search suggestions above comments,Hide search suggestions above comments
 Hide share actions,Hide share actions
 Hide sharing apps,Hide sharing apps
@@ -451,8 +452,9 @@ Hide the LIVE button,Hide the LIVE button
 Hide the LIVE button in the top left corner of the feed.,Hide the LIVE button in the top left corner of the feed.
 Hide the Message requests row.,Hide the Message requests row.
 Hide the New followers row.,Hide the New followers row.
+Hide the Report button on videos,Hide the Report button on videos
 Hide the Send to row,Hide the Send to row
-Hide the Tako AI bubble above the profile button and the Ask bar under videos.,Hide the Tako AI bubble above the profile button and the Ask bar under videos.
+"Hide the Tako AI bubble above the profile button, the Ask bar under videos and the Ask Tako button on the search page.","Hide the Tako AI bubble above the profile button, the Ask bar under videos and the Ask Tako button on the search page."
 Hide the Tako assistant conversation in Inbox.,Hide the Tako assistant conversation in Inbox.
 Hide the Tako bubble,Hide the Tako bubble
 Hide the Tako chat,Hide the Tako chat
@@ -462,6 +464,7 @@ Hide the add people icon in the Inbox header.,Hide the add people icon in the In
 Hide the caption,Hide the caption
 Hide the description under the creator's name on the feed.,Hide the description under the creator's name on the feed.
 Hide the event badge,Hide the event badge
+Hide the flag button TikTok puts above the creator's picture in some regions. You can still report a video from the share menu.,Hide the flag button TikTok puts above the creator's picture in some regions. You can still report a video from the share menu.
 Hide the floating promotional badge over the feed.,Hide the floating promotional badge over the feed.
 Hide the follow button on the feed,Hide the follow button on the feed
 Hide the friend recommendation card and the other cards TikTok slots between videos.,Hide the friend recommendation card and the other cards TikTok slots between videos.
@@ -471,6 +474,7 @@ Hide the music line,Hide the music line
 Hide the playlist bar,Hide the playlist bar
 Hide the playlist bar along the bottom of videos that belong to a series.,Hide the playlist bar along the bottom of videos that belong to a series.
 Hide the plus button under the creator's picture in the right column. Ticking Avatar and follow button above hides the picture with it.,Hide the plus button under the creator's picture in the right column. Ticking Avatar and follow button above hides the picture with it.
+"Hide the points banner under the search box and the coin counter floating over search results, which TikTok shows in some regions. Searching works as before.","Hide the points banner under the search box and the coin counter floating over search results, which TikTok shows in some regions. Searching works as before."
 Hide the purple rewards button beside Add friends on your profile.,Hide the purple rewards button beside Add friends on your profile.
 Hide the question cards TikTok slides over a video near its end.,Hide the question cards TikTok slides over a video near its end.
 Hide the rewards shortcut,Hide the rewards shortcut
@@ -918,7 +922,7 @@ Stop a long press on Share from opening TikTok's quick share action.,Stop a long
 Stop feature gate recording,Stop feature gate recording
 Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.,Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.
 Stop the bubble that asks you to share a video with friends after you like it.,Stop the bubble that asks you to share a video with friends after you like it.
-"Stop the in-app browser handing TikTok's JavaScript bridge to the pages it loads. Most of TikTok's own web pages need that bridge, including the shop checkout and the CAPTCHA page, so leave this off unless you want them cut off too.","Stop the in-app browser handing TikTok's JavaScript bridge to the pages it loads. Most of TikTok's own web pages need that bridge, including the shop checkout and the CAPTCHA page, so leave this off unless you want them cut off too."
+"Stop the in-app browser handing TikTok's JavaScript bridge to the pages it loads. TikTok's own pages need that bridge too. With this on, Activity center and Watch history stop responding, and the shop checkout and the CAPTCHA page break. Leave it off unless you want those cut off as well.","Stop the in-app browser handing TikTok's JavaScript bridge to the pages it loads. TikTok's own pages need that bridge too. With this on, Activity center and Watch history stop responding, and the shop checkout and the CAPTCHA page break. Leave it off unless you want those cut off as well."
 Stop video looping,Stop video looping
 Stop videos at the end instead of replaying them.,Stop videos at the end instead of replaying them.
 Stopped after dismissing %1$s suggested accounts,Stopped after dismissing %1$s suggested accounts

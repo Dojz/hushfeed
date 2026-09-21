@@ -19,7 +19,7 @@ private const val ADD_INTERFACE = "->addJavascriptInterface(Ljava/lang/Object;Lj
 @Suppress("unused")
 val browserPrivacyGuardPatch = bytecodePatch(
     name = "In-app browser privacy guard",
-    description = "Can stop TikTok's in-app browser handing its JavaScript bridge to the pages it loads. Most of TikTok's own web pages need that bridge, including the shop checkout and the CAPTCHA page, so the switch is off until you turn it on. Switch: Hushfeed settings > Privacy.",
+    description = "Can stop TikTok's in-app browser handing its JavaScript bridge to the pages it loads. TikTok's own pages need that bridge too, so turning it on also breaks Activity center, Watch history, the shop checkout and the CAPTCHA page. The switch is off until you turn it on. Switch: Hushfeed settings > Privacy.",
     default = false,
 ) {
     dependsOn(settingsPatch, sharedExtensionPatch)

@@ -1,7 +1,10 @@
 package app.morphe.patches.tiktok
 
 import app.morphe.patches.tiktok.feedfilter.countColdStartFeedItemListStores
+import app.morphe.patches.tiktok.feedfilter.isTakoSearchEntranceInflater
+import app.morphe.patches.tiktok.feedfilter.takoSearchEntranceVariants
 import app.morphe.patches.tiktok.interaction.downloads.drawsCommentImageWatermark
+import app.morphe.patches.tiktok.interaction.searchsuggestions.isSearchRewardsAccessor
 import app.morphe.patches.tiktok.interaction.speed.playerManagerSpeedBoundary
 import app.morphe.patches.tiktok.misc.settings.isSettingsComposeRowsMethod
 import app.morphe.patches.tiktok.misc.commenttools.isCommentSearchHeaderFactory
@@ -34,6 +37,118 @@ import org.junit.Test
  * names or strings that can move into adjacent methods.
  */
 class TikTokPatchAnchorsMatchFixturesTest {
+    /**
+     * Issue #21. The regional Report button's gate and the search rewards accessor are each one
+     * method on every build, static and without parameters, so every register is a local the
+     * entry guard can use.
+     */
+    @Test
+    fun `regional Report gate and search rewards accessor stay unique on every retained fixture`() {
+        val apks = fixtures()
+        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
+        for (apk in apks) {
+            val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
+            val gates = mutableListOf<Method>()
+            val accessors = mutableListOf<Method>()
+            container.dexEntryNames.asSequence()
+                .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }
+                .flatMap { it.methods.asSequence() }
+                .forEach {
+                    if (isFeedReportButtonGate(it)) gates += it
+                    if (isSearchRewardsAccessor(it)) accessors += it
+                }
+            assertEquals("${apk.name}: Report button gate ${gates.map { it.definingClass }}", 1, gates.size)
+            assertEquals("${apk.name}: search rewards accessor ${accessors.map { it.definingClass }}", 1, accessors.size)
+            for (method in gates + accessors) {
+                assertTrue("${apk.name}: ${method.definingClass} has no local for the guard",
+                    method.implementation!!.registerCount >= 1)
+            }
+            // The gate's own false is the ordinary answer, so the guard's false is one it handles.
+            assertTrue("${apk.name}: the Report gate never answers false itself",
+                gates.single().implementation!!.instructions.any {
+                    it.opcode == Opcode.CONST_4 && (it as NarrowLiteralInstruction).narrowLiteral == 0
+                })
+        }
+    }
+
+    /**
+     * Issue #23. The Save media button finds the sticker sheet's actions by the sheet's shape:
+     * exactly one set of two or more fields sharing a TextView-descended type. The type itself is
+     * renamed on every build (0GSy, 1AWY, 1D84, 0CNa, 02Lg), which is what broke the old lookup.
+     */
+    @Test
+    fun `sticker sheet keeps one group of like typed action fields on every retained fixture`() {
+        val apks = fixtures()
+        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
+        for (apk in apks) {
+            val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
+            val byType = container.dexEntryNames.asSequence()
+                .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }.associateBy { it.type }
+            fun descendsFrom(type: String, ancestor: String): Boolean {
+                var current: String? = type
+                repeat(8) {
+                    if (current == ancestor) return true
+                    current = byType[current]?.superclass ?: return false
+                }
+                return false
+            }
+            val rows = byType.values.filter { row ->
+                row.superclass == "Landroid/widget/LinearLayout;" &&
+                    row.fields.any { it.type == "Lcom/bytedance/lighten/loader/SmartImageView;" } &&
+                    row.fields.any { it.type == "Lcom/bytedance/tux/input/TuxTextView;" } &&
+                    row.methods.any { method ->
+                        val parameters = method.parameterTypes.map(CharSequence::toString)
+                        method.returnType == "V" && parameters.size == 4 && parameters[1] == "Z" &&
+                            parameters[2] == "Ljava/lang/String;" && parameters[3] == "Ljava/util/Map;" &&
+                            !AccessFlags.STATIC.isSet(method.accessFlags) &&
+                            byType[parameters[0]]?.fields?.any {
+                                it.type == "Lcom/ss/android/ugc/aweme/base/model/UrlModel;"
+                            } == true
+                    }
+            }
+            assertEquals("${apk.name}: sticker preview row", 1, rows.size)
+            val groups = rows.single().fields
+                .filter { !AccessFlags.STATIC.isSet(it.accessFlags) && descendsFrom(it.type, "Landroid/widget/TextView;") }
+                .groupBy { it.type }.filterValues { it.size >= 2 }
+            assertEquals("${apk.name}: like typed action fields ${groups.keys}", 1, groups.size)
+        }
+    }
+
+    /**
+     * Issue #22. Each search-page Tako entrance has exactly one ViewStub inflater with a local
+     * for the guard, and TikTok itself answers null from it, which is the answer the guard gives.
+     */
+    @Test
+    fun `both search page Tako entrances keep one nullable inflater on every retained fixture`() {
+        val apks = fixtures()
+        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
+        for (apk in apks) {
+            val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
+            val inflaters = container.dexEntryNames.asSequence()
+                .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }
+                .filter { it.type in takoSearchEntranceVariants }
+                .flatMap { it.methods.asSequence() }
+                .filter(::isTakoSearchEntranceInflater).toList()
+            assertEquals(
+                "${apk.name}: one inflater per entrance",
+                takoSearchEntranceVariants.toSet(),
+                inflaters.map { it.definingClass }.toSet(),
+            )
+            assertEquals("${apk.name}: no second inflater", 2, inflaters.size)
+            for (inflater in inflaters) {
+                val body = inflater.implementation!!
+                assertTrue("${apk.name}: ${inflater.definingClass} has no local for the guard",
+                    body.registerCount - 2 >= 1)
+                val instructions = body.instructions.toList()
+                assertTrue("${apk.name}: ${inflater.definingClass} never answers null itself",
+                    instructions.zipWithNext().any { (first, second) ->
+                        first.opcode == Opcode.CONST_4 && (first as NarrowLiteralInstruction).narrowLiteral == 0 &&
+                            second.opcode == Opcode.RETURN_OBJECT
+                    })
+            }
+        }
+    }
+
     @Test
     fun `block skip native pager methods survive every retained fixture`() {
         val apks = fixtures()
