@@ -476,6 +476,7 @@ Hide the right column,Hide the right column
 Hide the row of story avatars across the top of the Inbox.,Hide the row of story avatars across the top of the Inbox.
 Hide the save button on the feed,Hide the save button on the feed
 Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.,Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.
+Hide the search bar below videos,Hide the search bar below videos
 Hide the search button on the feed,Hide the search button on the feed
 Hide the share prompt after a like,Hide the share prompt after a like
 Hide the spinning music cover and the track name beside the caption.,Hide the spinning music cover and the track name beside the caption.
@@ -739,6 +740,7 @@ Remove the Share via row.,Remove the Share via row.
 Remove the actions row from the share sheet.,Remove the actions row from the share sheet.
 Remove the magnifying glass at the top of Inbox. It doesn't hide search on the feed or in comments.,Remove the magnifying glass at the top of Inbox. It doesn't hide search on the feed or in comments.
 Remove the row of friends from the top of the share sheet.,Remove the row of friends from the top of the share sheet.
+Remove the suggested-search strip above the bottom tabs and let video details and side controls use its space. The top search button and comments stay unchanged.,Remove the suggested-search strip above the bottom tabs and let video details and side controls use its space. The top search button and comments stay unchanged.
 Remove tracking parameters from shared links.,Remove tracking parameters from shared links.
 Remove watermark,Remove watermark
 Removed %1$s,Removed %1$s

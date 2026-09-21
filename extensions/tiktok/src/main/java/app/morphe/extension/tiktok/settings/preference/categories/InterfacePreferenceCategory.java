@@ -219,10 +219,16 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                     Settings.HIDE_VISUAL_SEARCH
             ));
         }
-        // Three feed filter rows that hide things drawn around a video rather than videos.
+        // Feed filter rows that hide things drawn around a video rather than videos.
         // They were the tail of the Feed filter page under "Feed elements", a page about
         // which videos arrive.
         if (SettingsStatus.feedFilterEnabled) {
+            addPreference(new TogglePreference(
+                    context,
+                    "Hide the search bar below videos",
+                    "Remove the suggested-search strip above the bottom tabs and let video details and side controls use its space. The top search button and comments stay unchanged.",
+                    Settings.HIDE_BOTTOM_SEARCH_BAR
+            ));
             addPreference(new TogglePreference(
                     context,
                     "Hide the playlist bar",

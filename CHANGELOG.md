@@ -2,6 +2,13 @@
 
 Every Hushfeed release, newest first.
 
+## 0.56.0 (2026-09-20)
+
+Give video controls the space used by suggested searches.
+
+* **TikTok:** Feed screen adds Hide the search bar below videos. It removes the suggested-search strip above the bottom tabs so video details and side controls can use that space. The top search button and suggestions above comments stay unchanged. It's off by default and needs a restart.
+* **TikTok:** Includes the independent location badge hiding and location-tagged video filtering from 0.55.0, plus Full screen button hiding and Easier comment likes.
+
 ## 0.55.0 (2026-09-20)
 
 Choose which video overlays you want to see.

@@ -208,6 +208,9 @@ public final class Probe extends Instrumentation {
                     case "location-evidence":
                         Log.i(TAG, "ok location-evidence\n" + locationEvidence(intent.getStringExtra("aid")));
                         break;
+                    case "banner-evidence":
+                        Log.i(TAG, "ok banner-evidence\n" + bannerEvidence(intent.getStringExtra("aid")));
+                        break;
                     case "commerce-evidence":
                         // Each line is deliberately structural. Strings are represented only by
                         // length, hash and fixed marker booleans so a diagnostic cannot collect
@@ -792,6 +795,28 @@ public final class Probe extends Instrumentation {
             out.add("awemeClass=" + aweme.getClass().getName());
             addRelevantMembers("aweme", aweme, out, true);
             return out;
+        }
+
+        /** Exact technical banner counts only. Never collect the search suggestion or other text. */
+        private String bannerEvidence(String expectedId) throws Exception {
+            Object aweme = loader.loadClass("app.morphe.extension.tiktok.blockauthor.CurrentVideoAuthor")
+                    .getMethod("getAweme").invoke(null);
+            if (aweme == null) return "aweme=null";
+            Class<?> model = loader.loadClass("com.ss.android.ugc.aweme.feed.model.Aweme");
+            Object raw = model.getMethod("getBanners").invoke(aweme);
+            List<?> banners = raw instanceof List ? (List<?>) raw : Collections.emptyList();
+            int search = 0, tako = 0, unknown = 0;
+            for (Object banner : banners) {
+                if (banner == null) { unknown++; continue; }
+                Object key = banner.getClass().getField("bannerKey").get(banner);
+                Object component = key == null ? null : key.getClass().getField("componentKey").get(key);
+                if ("bottom_banner_search_rs".equals(component)) search++;
+                else if ("bottom_banner_tako".equals(component)) tako++;
+                else unknown++;
+            }
+            return "banners=" + banners.size() + "\nsearchBanners=" + search + "\ntakoBanners=" + tako
+                    + "\notherBanners=" + unknown + "\nexpectedPublicVideo=" + (expectedId == null ? "not checked" :
+                    String.valueOf(expectedId.equals(model.getMethod("getAid").invoke(aweme))));
         }
 
         /** Real current model and patched native getter, on a detached list. No place or creator text. */

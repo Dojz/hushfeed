@@ -79,6 +79,11 @@ public class SearchSettingsClarityTest {
         assertRow("INTERFACE", "hide_location_labels", "Hide location labels", "multiple places");
     }
 
+    @Test public void bottomSearchNamesItsStripAndExplainsSpaceRecovery() {
+        assertRow("INTERFACE", "hide_bottom_search_bar", "Hide the search bar below videos", "space");
+        assertRow("INTERFACE", "hide_bottom_search_bar", "Hide the search bar below videos", "comments");
+    }
+
     private void assertRow(String section, String key, String title, String detail) {
         try (var owner = Robolectric.buildActivity(SettingsPagesTest.PageActivity.class).setup().visible()) {
             Activity activity = owner.get();

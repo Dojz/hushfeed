@@ -35,6 +35,38 @@ import org.junit.Test
  */
 class TikTokPatchAnchorsMatchFixturesTest {
     @Test
+    fun `bottom search banner model and native component key survive every retained fixture`() {
+        val apks = fixtures()
+        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
+        for (apk in apks) {
+            val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
+            val wanted = setOf(
+                "Lcom/ss/android/ugc/aweme/feed/model/Aweme;",
+                "Lcom/ss/android/ugc/aweme/feed/model/banner/BannerCommonStruct;",
+                "Lcom/ss/android/ugc/aweme/feed/model/banner/BannerCommonKey;",
+                "Lcom/ss/android/ugc/feed/platform/cell/interact/bottom/bar/FeedSearchBottomBarPreload;",
+            )
+            val classes = container.dexEntryNames.asSequence()
+                .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }
+                .filter { it.type in wanted }.associateBy { it.type }
+            assertEquals("${apk.name}: named banner contracts", wanted, classes.keys)
+            val model = classes.getValue("Lcom/ss/android/ugc/aweme/feed/model/Aweme;")
+            assertEquals(1, model.methods.count { it.name == "getBanners" && it.parameterTypes.isEmpty() &&
+                it.returnType == "Ljava/util/List;" && !AccessFlags.STATIC.isSet(it.accessFlags) })
+            assertEquals(1, model.methods.count { it.name == "setBanners" &&
+                it.parameterTypes.map(CharSequence::toString) == listOf("Ljava/util/List;") && it.returnType == "V" })
+            val banner = classes.getValue("Lcom/ss/android/ugc/aweme/feed/model/banner/BannerCommonStruct;")
+            assertTrue(banner.fields.any { it.name == "bannerKey" &&
+                it.type == "Lcom/ss/android/ugc/aweme/feed/model/banner/BannerCommonKey;" && AccessFlags.PUBLIC.isSet(it.accessFlags) })
+            val key = classes.getValue("Lcom/ss/android/ugc/aweme/feed/model/banner/BannerCommonKey;")
+            assertTrue(key.fields.any { it.name == "componentKey" && it.type == "Ljava/lang/String;" &&
+                AccessFlags.PUBLIC.isSet(it.accessFlags) })
+            val preload = classes.getValue("Lcom/ss/android/ugc/feed/platform/cell/interact/bottom/bar/FeedSearchBottomBarPreload;")
+            assertTrue(preload.methods.any { "bottom_banner_search_rs" in it.stringConstants() })
+        }
+    }
+
+    @Test
     fun `fullscreen entry and both location card contracts survive every retained fixture`() {
         val apks=fixtures()
         assumeTrue("no TikTok fixture on this machine",apks.isNotEmpty())

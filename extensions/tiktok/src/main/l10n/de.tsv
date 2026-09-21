@@ -1151,6 +1151,8 @@ Easier comment likes	Kommentare leichter liken
 Hide the Full screen button	Vollbild-Schaltfläche ausblenden
 Hide the Full screen button over videos. Playback and automatic rotation keep working as before.	Blende die Vollbild-Schaltfläche über Videos aus. Wiedergabe und automatische Drehung funktionieren wie bisher.
 Hide location labels	Ortsangaben ausblenden
+Hide the search bar below videos	Suchleiste unter Videos ausblenden
+Remove the suggested-search strip above the bottom tabs and let video details and side controls use its space. The top search button and comments stay unchanged.	Entferne die Suchvorschlagsleiste über den unteren Tabs, damit Videodetails und seitliche Bedienelemente den Platz nutzen können. Die Suchschaltfläche oben und die Kommentare bleiben unverändert.
 Hide place badges on videos, including cards with multiple places. Videos and your location permissions stay unchanged.	Blende Ortsangaben in Videos aus, auch Karten mit mehreren Orten. Videos und deine Standortberechtigungen bleiben unverändert.
 Filter location-tagged videos	Videos mit Ortsangaben filtern
 Skip feed videos with place badges, even when they aren't paid ads. To keep the video and hide only its badge, use Hide location labels in Feed screen.	Überspringe Feed-Videos mit Ortsangaben, auch wenn sie keine bezahlte Werbung sind. Wenn du das Video behalten und nur die Ortsangabe ausblenden möchtest, nutze Ortsangaben ausblenden unter Feed-Anzeige.
