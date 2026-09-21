@@ -9,6 +9,7 @@ import app.morphe.patches.tiktok.misc.commenttools.resolveCommentSearchSuggestio
 import app.morphe.patches.tiktok.misc.commenttools.compactCommentHeaderComponents
 import app.morphe.patches.tiktok.misc.commenttools.isCompactCommentHeaderBind
 import app.morphe.patches.tiktok.misc.commenttools.resolveCompactCommentHeader
+import app.morphe.patches.tiktok.misc.commenttools.resolveLikeTouchListener
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.DexFileFactory
@@ -32,6 +33,43 @@ import org.junit.Test
  * names or strings that can move into adjacent methods.
  */
 class TikTokPatchAnchorsMatchFixturesTest {
+    @Test
+    fun `native comment like installer is unique and leaves other actions intact on every fixture`() {
+        val apks = fixtures()
+        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
+        for (apk in apks) {
+            val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
+            val classes = container.dexEntryNames.flatMap { container.getEntry(it)!!.dexFile.classes }
+            val owners = classes.filter { type -> type.methods.any { method ->
+                method.implementation?.instructions?.any {
+                    ((it as? ReferenceInstruction)?.reference as? StringReference)?.string == "diggView bind: comment id "
+                } == true
+            } }
+            assertEquals("${apk.name}: native comment like view", 1, owners.size)
+            val installers = owners.single().methods.filter { method ->
+                method.returnType == "V" && method.parameterTypes.isEmpty() &&
+                    method.implementation?.instructions?.any {
+                        ((it as? ReferenceInstruction)?.reference as? MethodReference)?.name == "setOnTouchListener"
+                    } == true
+            }
+            assertEquals("${apk.name}: listener installer", 1, installers.size)
+            val byType = classes.associateBy { it.type }
+            val method = MutableMethod(installers.single())
+            val before = method.implementation!!.instructions.toList()
+            val write = method.resolveLikeTouchListener { byType[it] }
+            assertEquals(before, method.implementation!!.instructions.toList())
+            write()
+            val after = method.implementation!!.instructions.toList()
+            assertEquals(before.size, after.size)
+            assertEquals("${apk.name}: only one native call changes", 1,
+                before.indices.count { before[it] !== after[it] })
+            assertEquals(1, after.count {
+                ((it as? ReferenceInstruction)?.reference as? MethodReference)?.definingClass ==
+                    "Lapp/morphe/extension/tiktok/comment/CommentLikeTouchTarget;"
+            })
+        }
+    }
+
     @Test
     fun `all three compact comment roots keep their named lifecycle contract on every fixture`() {
         val apks = fixtures()

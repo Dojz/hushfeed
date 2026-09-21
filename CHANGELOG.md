@@ -2,6 +2,12 @@
 
 Every Hushfeed release, newest first.
 
+## 0.54.0 (2026-09-20)
+
+Comment hearts are easier to tap.
+
+* **TikTok:** Comment tools adds Easier comment likes. It extends the heart's touch area into nearby blank space without enlarging the icon or adding space between comments. Text, Reply and neighboring controls keep their own areas. Swipes and interrupted presses don't turn into likes. It's off by default and needs a restart.
+
 ## 0.53.0 (2026-09-20)
 
 Give the comment list more room.

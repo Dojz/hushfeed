@@ -152,6 +152,7 @@ public final class CommentTools {
         // Before the switches below: a sheet is open whichever of the comment tools are on,
         // and this is the only callback that says so.
         app.morphe.extension.tiktok.playback.PausePlayback.onCommentCellBound(itemView);
+        CommentLikeTouchTarget.onCellBound(itemView);
 
         boolean block = Settings.BLOCK_FROM_COMMENT.get();
         if (!block) {

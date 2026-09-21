@@ -375,6 +375,11 @@ public final class Probe extends Instrumentation {
                         Log.i(TAG, "ok views " + text.length() + " chars in " + pieces + " pieces");
                         break;
                     }
+                    case "like-targets": {
+                        for (android.view.View root : windowRoots()) readLikeTargets(root);
+                        Log.i(TAG, "ok like-targets");
+                        break;
+                    }
                     case "windowviews": {
                         // Dialogs and bottom sheets can live in a separate WindowManager root.
                         // TikTok 47.0.3's comment sheet leaves MainActivity's own content view
@@ -408,6 +413,54 @@ public final class Probe extends Instrumentation {
                 }
             } catch (Throwable error) {
                 Log.e(TAG, "failed " + action, error);
+            }
+        }
+
+        /** Read-only 47.0.3 acceptance data. No comment text, ids or account data is emitted. */
+        private void readLikeTargets(android.view.View view) throws Exception {
+            if (view.isShown() && "ncu".equals(idName(view, view.getResources()))) {
+                int[] position = new int[2];
+                view.getLocationOnScreen(position);
+                StringBuilder out = new StringBuilder("like-target at=").append(position[0])
+                        .append(',').append(position[1]).append(" size=").append(view.getWidth())
+                        .append('x').append(view.getHeight());
+                android.view.ViewParent parent = view.getParent();
+                boolean modelFound = false;
+                while (parent instanceof android.view.View) {
+                    android.view.View ancestor = (android.view.View) parent;
+                    if (!modelFound) {
+                        for (Field field : ancestor.getClass().getDeclaredFields()) {
+                            if (!field.getType().getName().equals(
+                                    "com.ss.android.ugc.aweme.comment.model.Comment")) continue;
+                            field.setAccessible(true);
+                            Object comment = field.get(ancestor);
+                            if (comment != null) {
+                                out.append(" liked=").append(comment.getClass()
+                                        .getMethod("isUserDigged").invoke(comment));
+                                modelFound = true;
+                            }
+                        }
+                    }
+                    android.view.TouchDelegate delegate = ancestor.getTouchDelegate();
+                    if (delegate != null) {
+                        ancestor.getLocationOnScreen(position);
+                        out.append(" delegate=").append(delegate.getClass().getName())
+                                .append(" hostAt=").append(position[0]).append(',').append(position[1]);
+                        if (Build.VERSION.SDK_INT >= 29) {
+                            android.view.accessibility.AccessibilityNodeInfo.TouchDelegateInfo info =
+                                    delegate.getTouchDelegateInfo();
+                            for (int i = 0; i < info.getRegionCount(); i++) {
+                                out.append(" localArea=").append(info.getRegionAt(i));
+                            }
+                        }
+                    }
+                    parent = parent.getParent();
+                }
+                Log.i(TAG, out.toString());
+            }
+            if (view instanceof android.view.ViewGroup) {
+                android.view.ViewGroup group = (android.view.ViewGroup) view;
+                for (int i = 0; i < group.getChildCount(); i++) readLikeTargets(group.getChildAt(i));
             }
         }
 

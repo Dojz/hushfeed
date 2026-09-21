@@ -295,6 +295,7 @@ Drama and Series,Drama and Series
 "Draw TikTok's text in your device's font instead of TikTok Sans. Icons, gift animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this.","Draw TikTok's text in your device's font instead of TikTok Sans. Icons, gift animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this."
 "Drop the notification saying somebody new followed you before it reaches the drawer. Every other notification is left alone, and the follower still appears in the Inbox.","Drop the notification saying somebody new followed you before it reaches the drawer. Every other notification is left alone, and the follower still appears in the Inbox."
 "Each area, how many of the things it looks for are in this build and how many are not.","Each area, how many of the things it looks for are in this build and how many are not."
+Easier comment likes,Easier comment likes
 Empty,Empty
 "Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.","Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it."
 Enable,Enable
@@ -323,6 +324,7 @@ Export diagnostic report,Export diagnostic report
 Export loaded values,Export loaded values
 Exported %1$d loaded values,Exported %1$d loaded values
 Exported 1 loaded value,Exported 1 loaded value
+"Extend the heart's touch area into nearby blank space. The icon and row spacing stay the same. Text, Reply and other controls keep their own space.","Extend the heart's touch area into nearby blank space. The icon and row spacing stay the same. Text, Reply and other controls keep their own space."
 Fade the feed out before the hold,Fade the feed out before the hold
 Feature Gate Lab,Feature Gate Lab
 Feature gate override reset,Feature gate override reset

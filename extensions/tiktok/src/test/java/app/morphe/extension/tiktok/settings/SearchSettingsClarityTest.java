@@ -53,6 +53,11 @@ public class SearchSettingsClarityTest {
         assertRow("COMMENTS", "compact_comment_header", "Compact comment header", "sort");
     }
 
+    @Test public void commentHeartTargetSaysWhatGetsEasierWithoutChangingTheRowLayout() {
+        assertRow("COMMENTS", "larger_comment_like_target", "Easier comment likes", "heart");
+        assertRow("COMMENTS", "larger_comment_like_target", "Easier comment likes", "blank space");
+    }
+
     @Test public void otherSearchControlsNameTheirOwnSurface() {
         assertRow("BEHAVIOR", "hide_search_suggestions",
                 "Hide suggestions on the search page", "search history");

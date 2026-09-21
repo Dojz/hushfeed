@@ -464,6 +464,8 @@ public class Settings extends BaseSettings {
             new BooleanSetting("hide_comment_search_suggestions", FALSE, true);
     public static final BooleanSetting COMPACT_COMMENT_HEADER =
             new BooleanSetting("compact_comment_header", FALSE, true);
+    public static final BooleanSetting LARGER_COMMENT_LIKE_TARGET =
+            new BooleanSetting("larger_comment_like_target", FALSE, true);
     public static final BooleanSetting HIDE_COMMENT_EGGS = new BooleanSetting("hide_comment_eggs", TRUE);
     public static final BooleanSetting COMMENT_SORT_CONTROLS = new BooleanSetting("comment_sort_controls", FALSE);
     // Share sheet tools. The confirm step is on by default because it is the point of the patch.
