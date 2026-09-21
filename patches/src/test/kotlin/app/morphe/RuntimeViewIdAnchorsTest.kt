@@ -50,6 +50,25 @@ class RuntimeViewIdAnchorsTest {
         )
     }
 
+    /**
+     * A group names one view. Its second name used to be the 46.x name of the same view, tried when
+     * the current one found nothing, and on 47.0.3 each of those names some other view, which the
+     * fallback then hid or read. A group may keep more than one name only with a reason in
+     * [MORE_THAN_ONE_NAME], and that list only shrinks: a group that drops its extra names fails
+     * here until its entry goes too.
+     */
+    @Test
+    fun `a group looks up more than one name only for a reason the test records`() {
+        val several = anchors().filter { it.names.size > 1 }.map { it.lookup }.toSortedSet()
+        assertEquals(
+            "Groups that try more than one name. On the target a second name is an older build's " +
+                "name for the view, now some other view, so drop it; or record why the group needs " +
+                "both in MORE_THAN_ONE_NAME. A recorded group that has one name now loses its entry.",
+            MORE_THAN_ONE_NAME.keys.toSortedSet(),
+            several,
+        )
+    }
+
     @Test
     fun `every anchor resolves on the declared target and its owner loads the id`() {
         val compatibility = AppCompatibilities.tiktok4703().single()
@@ -301,6 +320,21 @@ class RuntimeViewIdAnchorsTest {
 
         val LITERAL = Regex(""""([^"]*)"""")
         val CLASS_NAME = Regex("""[a-z][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_$]*)+""")
+
+        /** The groups that may look up more than one name, as `source|group|names`, and why. */
+        val MORE_THAN_ONE_NAME = mapOf(
+            "feed/VideoOverlayHider.java|VISUAL_SEARCH_IDS|fb,cn" to
+                "two views of the target, each hidden on its own: the visual search layer and the " +
+                "pill inside it",
+            "blockauthor/FeedVisibility.java|HOME_TAB_RESOURCE_NAMES|omq,o1k" to
+                "46.x fallback, left while FeedVisibility.java has another change open (2026-09-21)",
+            "blockauthor/FeedVisibility.java|INBOX_TAB_RESOURCE_NAMES|omr,o1l" to
+                "46.x fallback, left while FeedVisibility.java has another change open (2026-09-21)",
+            "blockauthor/FeedVisibility.java|COMMENT_SHEET_RESOURCE_NAMES|pvp,p_5" to
+                "46.x fallback, left while FeedVisibility.java has another change open (2026-09-21)",
+            "blockauthor/FeedVisibility.java|COMMENT_TITLE_RESOURCE_NAMES|wk7,vjb" to
+                "46.x fallback, left while FeedVisibility.java has another change open (2026-09-21)",
+        )
     }
 }
 

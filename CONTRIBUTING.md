@@ -64,7 +64,10 @@ again on every build, mostly to other views, so a name that still resolves can b
 one: a class of the target, with a real name, whose code loads the id. `RuntimeViewIdAnchorsTest`
 fails for each owner that no longer loads its id on the declared target. Read that group off the
 new build's live view tree, then change the code and the table together, because the test also
-holds the table to the code.
+holds the table to the code. Replace the old name rather than keeping it as a fallback. On the new
+build the old name belongs to some other view, and a fallback hides or clicks that view wherever
+the new name finds nothing. The test only lets a group look up more than one name when its entry
+in `MORE_THAN_ONE_NAME` says why.
 
 Translations live in `extensions/tiktok/src/main/l10n/`, either as a tab separated `<code>.tsv`
 or as the `source,target` CSV a Weblate export gives you. `scripts/gen-l10n.py` reads both and

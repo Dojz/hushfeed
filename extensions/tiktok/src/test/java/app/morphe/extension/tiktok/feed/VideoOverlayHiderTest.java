@@ -150,11 +150,11 @@ public class VideoOverlayHiderTest {
         // hold through a reset and stop holding once Normal is chosen again. The music row
         // spans the width and is left alone. Before 2026-09-17 none of this reached a phone:
         // the cell root the walk scoped to was a sibling of the rail, so it found nothing.
-        String[] names = {"hvo", "fws", "ehl", "hu9", "p2l", "v9o"};
+        String[] names = {"i98", "g6r", "ep7", "i7r", "pnp", "w_2"};
         int cellId = 0x7f0a0a31;
         int actionBarId = 0x7f0a0a32;
         VideoOverlayHider.resolveForTests("view_rootview", cellId);
-        VideoOverlayHider.resolveForTests("kzj", actionBarId);
+        VideoOverlayHider.resolveForTests("liy", actionBarId);
         for (int i = 0; i < names.length; i++) {
             VideoOverlayHider.resolveForTests(names[i], 0x7f0a0a40 + i);
         }
@@ -238,7 +238,7 @@ public class VideoOverlayHiderTest {
         } finally {
             Settings.TOUCH_TARGET_SCALE.resetToDefault();
             VideoOverlayHider.resolveForTests("view_rootview", 0);
-            VideoOverlayHider.resolveForTests("kzj", 0);
+            VideoOverlayHider.resolveForTests("liy", 0);
             for (String name : names) {
                 VideoOverlayHider.resolveForTests(name, 0);
             }
@@ -274,9 +274,9 @@ public class VideoOverlayHiderTest {
         // Every layout the feed cell's survey stubs inflate has the root f7u on 47.0.3, which
         // 46.2.3 called ezp. On 47.0.3 ezp is a label in the paid series panel instead, so a
         // view under a cell that carries it is not a survey.
-        int cellId = 0x7f0a0a31;
-        int surveyId = 0x7f0a0a32;
-        int oldNameId = 0x7f0a0a33;
+        int cellId = 0x7f0a0a51;
+        int surveyId = 0x7f0a0a52;
+        int oldNameId = 0x7f0a0a53;
         VideoOverlayHider.resolveForTests("view_rootview", cellId);
         VideoOverlayHider.resolveForTests("f7u", surveyId);
         VideoOverlayHider.resolveForTests("ezp", oldNameId);
@@ -344,7 +344,7 @@ public class VideoOverlayHiderTest {
         int captionId = 0x7f0a0001;
         int columnId = 0x7f0a0002;
         VideoOverlayHider.resolveForTests("desc", captionId);
-        VideoOverlayHider.resolveForTests("kzj", columnId);
+        VideoOverlayHider.resolveForTests("liy", columnId);
         try (var controller = Robolectric.buildActivity(Activity.class).setup()) {
             Activity activity = controller.get();
             Utils.setContext(activity);
@@ -394,10 +394,10 @@ public class VideoOverlayHiderTest {
     }
 
     @Test
-    public void current47NamesWinWhenOlderResourcesStillExistElsewhere() {
-        // TikTok 47.0.3 kept several 46.x names in the resource table even though the live
-        // feed moved to different ids. Resolving a name is therefore not proof that the view
-        // belongs to the current feed. The current candidate must win when both resolve.
+    public void olderBuildNamesAreNeverTriedEvenInACellWithoutTheCurrentOnes() {
+        // TikTok hands its short names out again on every build, and on 47.0.3 each 46.x name
+        // here is some other view. They used to be tried whenever the current name found
+        // nothing, so a cell without a like button lost whatever 47.0.3 calls fws.
         int cellId = 0x7f0a0500;
         int currentColumnId = 0x7f0a0501;
         int oldColumnId = 0x7f0a0502;
@@ -420,9 +420,34 @@ public class VideoOverlayHiderTest {
         try (var controller = Robolectric.buildActivity(Activity.class).setup()) {
             Activity activity = controller.get();
             Utils.setContext(activity);
-            LinearLayout root = new LinearLayout(activity);
             FrameLayout cell = new FrameLayout(activity);
             cell.setId(cellId);
+            // Views under the 46.x names, inside the cell, standing in for whatever 47.0.3
+            // gives those names.
+            View oldColumn = new View(activity);
+            oldColumn.setId(oldColumnId);
+            View oldLike = new View(activity);
+            oldLike.setId(oldLikeId);
+            LinearLayout oldCountRow = new LinearLayout(activity);
+            oldCountRow.setId(oldCountRowId);
+            TextView oldCountText = new TextView(activity);
+            oldCountText.setId(oldCountTextId);
+            oldCountRow.addView(oldCountText);
+            cell.addView(oldColumn);
+            cell.addView(oldLike);
+            cell.addView(oldCountRow);
+            activity.setContentView(cell);
+
+            // Nothing under a current name yet, the case the fallback used to answer.
+            Settings.HIDE_FEED_ACTION_BAR.save(true);
+            Settings.HIDE_RAIL_LIKE.save(true);
+            Settings.HIDE_RAIL_COUNTS.save(true);
+            VideoOverlayHider.applyTo(activity);
+            assertEquals(View.VISIBLE, oldColumn.getVisibility());
+            assertEquals(View.VISIBLE, oldLike.getVisibility());
+            assertEquals(View.VISIBLE, oldCountRow.getVisibility());
+            assertEquals(View.VISIBLE, oldCountText.getVisibility());
+
             View currentColumn = new View(activity);
             currentColumn.setId(currentColumnId);
             View currentLike = new View(activity);
@@ -435,27 +460,6 @@ public class VideoOverlayHiderTest {
             cell.addView(currentColumn);
             cell.addView(currentLike);
             cell.addView(currentCountRow);
-
-            // These simulate the stale resource names that still resolve in 47.0.3 but are
-            // attached to unrelated preloaded UI rather than the active feed cell.
-            View oldColumn = new View(activity);
-            oldColumn.setId(oldColumnId);
-            View oldLike = new View(activity);
-            oldLike.setId(oldLikeId);
-            LinearLayout oldCountRow = new LinearLayout(activity);
-            oldCountRow.setId(oldCountRowId);
-            TextView oldCountText = new TextView(activity);
-            oldCountText.setId(oldCountTextId);
-            oldCountRow.addView(oldCountText);
-            root.addView(cell);
-            root.addView(oldColumn);
-            root.addView(oldLike);
-            root.addView(oldCountRow);
-            activity.setContentView(root);
-
-            Settings.HIDE_FEED_ACTION_BAR.save(true);
-            Settings.HIDE_RAIL_LIKE.save(true);
-            Settings.HIDE_RAIL_COUNTS.save(true);
             VideoOverlayHider.applyTo(activity);
 
             assertEquals(View.GONE, currentColumn.getVisibility());
@@ -509,7 +513,7 @@ public class VideoOverlayHiderTest {
     public void eachRailButtonHasItsOwnSwitchInEveryCell() {
         // The column keeps its six buttons under fixed ids, and the feed keeps the cells on
         // either side inflated with the same ones.
-        String[] names = {"hvo", "fws", "ehl", "hu9", "p2l", "v9o"};
+        String[] names = {"i98", "g6r", "ep7", "i7r", "pnp", "w_2"};
         int[] ids = new int[names.length];
         for (int i = 0; i < names.length; i++) {
             ids[i] = 0x7f0a0100 + i;
@@ -571,9 +575,9 @@ public class VideoOverlayHiderTest {
      */
     @Test
     public void aHiddenButtonTakesItsOwnCountWithIt() {
-        String[] rowNames = {"fwu", "ecq", "ht9", "v5x"};
-        String[] textNames = {"fwt", "ecp", "ht8", "v5w"};
-        String[] buttonNames = {"fws", "ehl", "hu9", "v9o"};
+        String[] rowNames = {"g6t", "ej_", "i6r", "w6_"};
+        String[] textNames = {"g6s", "ej9", "i6q", "w69"};
+        String[] buttonNames = {"g6r", "ep7", "i7r", "w_2"};
         for (int i = 0; i < rowNames.length; i++) {
             VideoOverlayHider.resolveForTests(rowNames[i], 0x7f0a0300 + i);
             VideoOverlayHider.resolveForTests(textNames[i], 0x7f0a0310 + i);
@@ -633,9 +637,9 @@ public class VideoOverlayHiderTest {
 
     @Test
     public void countRowsAndTheirInnerTextAnchorsGoWithoutTheButtons() {
-        String[] rowNames = {"fwu", "ecq", "ht9", "v5x"};
-        String[] textNames = {"fwt", "ecp", "ht8", "v5w"};
-        String[] buttonNames = {"fws", "ehl", "hu9", "v9o"};
+        String[] rowNames = {"g6t", "ej_", "i6r", "w6_"};
+        String[] textNames = {"g6s", "ej9", "i6q", "w69"};
+        String[] buttonNames = {"g6r", "ep7", "i7r", "w_2"};
         int[] rowIds = new int[rowNames.length];
         int[] textIds = new int[textNames.length];
         int[] buttonIds = new int[buttonNames.length];
@@ -719,7 +723,7 @@ public class VideoOverlayHiderTest {
     @Test
     public void clearDisplayKeepsTheTabStripAwayUntilItEnds() {
         int tabStripId = 0x7f0a0011;
-        VideoOverlayHider.resolveForTests("twc", tabStripId);
+        VideoOverlayHider.resolveForTests("uvy", tabStripId);
         try (var controller = Robolectric.buildActivity(Activity.class).setup()) {
             Activity activity = controller.get();
             Utils.setContext(activity);
