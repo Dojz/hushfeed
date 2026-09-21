@@ -225,6 +225,9 @@ dependencies {
     // as well as the compile one.
     testImplementation("junit:junit:4.13.2")
     testImplementation(libs.morphe.patcher)
+    // Reads the signing certificate of every retained fixture. The patcher already brings this
+    // exact version at run time; this puts it on the test compile classpath as well.
+    testImplementation("com.android.tools.build:apksig:9.1.1")
 }
 
 tasks {

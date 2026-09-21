@@ -144,12 +144,17 @@ private fun Compatibility.toJsonCompatibility() = JsonCompatibility(
     packageName = packageName ?: "",
     description = description?.takeUnless { it.isBlank() },
     appIconColor = appIconColor,
+    // The certificates Morphe Manager holds a picked APK to. The patches template's generator
+    // writes these and the per-target version codes; this one used to drop both, so the catalog
+    // said nothing about what Manager actually checks.
+    signatures = signatures?.sorted(),
     targets = targets?.map { t -> t.toJsonAppTarget() },
 )
 
 private fun AppTarget.toJsonAppTarget() = JsonAppTarget(
     version = version ?: "",
     experimental = isExperimental,
+    versionCodes = versionCodes?.entries?.sortedBy { it.key.name }?.associate { it.key.name to it.value },
 )
 
 @Suppress("unused")
@@ -158,6 +163,7 @@ private class JsonCompatibility(
     val packageName: String,
     val description: String? = null,
     val appIconColor: Int?,
+    val signatures: List<String>?,
     val targets: List<JsonAppTarget>?,
 )
 
@@ -165,6 +171,7 @@ private class JsonCompatibility(
 private class JsonAppTarget(
     val version: String,
     val experimental: Boolean = false,
+    val versionCodes: Map<String, Int>? = null,
 )
 
 @Suppress("unused")
