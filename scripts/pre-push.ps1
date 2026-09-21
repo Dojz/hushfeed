@@ -295,6 +295,31 @@ try {
         if ($LASTEXITCODE -ne 0) { throw 'The injected-register device cleanup fixtures did not pass.' }
     }
 
+    # Both gates below check each pushed commit, and check it in place only when it is HEAD and
+    # nothing in the working tree differs from it. Everything else goes to a clean worktree of the
+    # commit. Uncommitted work that isn't in the push can fail it (another agent's did, twice on
+    # 2026-09-21) or pass it, and a push of anything but HEAD would otherwise have HEAD checked in
+    # its place. The whole tree counts: the tests read README.md, patches-list.json, the artwork
+    # and NOTICE as well as the sources, and the release facts are those same files.
+    if ($PSBoundParameters.ContainsKey('ChangedPaths')) {
+        # A run by hand names its paths itself and checks this working tree as it stands.
+        $head = $null
+        $dirty = @()
+        $gateCommits = @($null)
+    } elseif ($touchesCode -or $touchesRelease) {
+        $head = ([string](Invoke-HookGit @('-C', $Root, 'rev-parse', 'HEAD') | Select-Object -Last 1)).Trim()
+        $dirty = @(Invoke-HookGit @('-C', $Root, 'status', '--porcelain', '--untracked-files=all'))
+        $gateCommits = @($script:pushedCommits)
+        if ($gateCommits.Count -eq 0) { $gateCommits = @($head) }
+        if ($dirty.Count -gt 0) {
+            $shown = @($dirty | Select-Object -First 5 | ForEach-Object { $_.Trim() }) -join '; '
+            Write-Step ("uncommitted changes in the working tree ($shown), so each pushed commit is " +
+                'checked in a clean worktree instead of this working tree')
+        }
+    }
+    # A commit is checked in place when it is HEAD of a clean tree, or when a run by hand names none.
+    function Test-InPlace([string]$Commit) { return -not $Commit -or ($dirty.Count -eq 0 -and $Commit -eq $head) }
+
     if ($touchesCode) {
         Write-Step 'extension or patch sources changed, running the runtime tests and the API level check'
 
@@ -336,25 +361,10 @@ try {
             throw "HUSHFEED_BUILD_WRAPPER names $wrapper, which is not there."
         }
 
-        # Gradle builds whatever tree it is pointed at, so the gate builds each pushed commit, and
-        # builds it in place only when it is HEAD and nothing in the working tree differs from it.
-        # Everything else goes to a clean worktree of the commit. Uncommitted work that isn't in the
-        # push can fail it (another agent's did, on 2026-09-21) or pass it, and a push of anything
-        # but HEAD would otherwise have HEAD tested in its place. The whole tree counts: the tests
-        # read README.md, patches-list.json, the artwork and NOTICE as well as the sources.
-        $head = ([string](Invoke-HookGit @('-C', $Root, 'rev-parse', 'HEAD') | Select-Object -Last 1)).Trim()
-        $dirty = @(Invoke-HookGit @('-C', $Root, 'status', '--porcelain', '--untracked-files=all'))
-        $gateCommits = @($script:pushedCommits)
-        if ($gateCommits.Count -eq 0) { $gateCommits = @($head) }
-        if ($dirty.Count -gt 0) {
-            $shown = @($dirty | Select-Object -First 5 | ForEach-Object { $_.Trim() }) -join '; '
-            Write-Step ("uncommitted changes in the working tree ($shown), so the gate builds a clean " +
-                'worktree of each pushed commit instead of this working tree')
-        }
         $gateLock = $null
         try {
             foreach ($gateCommit in $gateCommits) {
-                if ($dirty.Count -eq 0 -and $gateCommit -eq $head) {
+                if (Test-InPlace $gateCommit) {
                     $gateRoot = $Root
                 } else {
                     if (-not $gateLock) { $gateLock = Enter-GateLock }
@@ -389,40 +399,72 @@ try {
         # it only means something while the description is being rewritten, which is when
         # patches-bundle.json is one of the files that moved.
         $describesThisTree = @($paths | Where-Object { $_ -eq 'patches-bundle.json' }).Count -gt 0
-        $validate = Join-Path $Root 'scripts/validate-release-facts.ps1'
-        $global:LASTEXITCODE = 0
-        # The release copy buildAndroid leaves in patches/build/release, which no other task
-        # writes. patches/build/libs was read here until 2026-09-21: the patch tests this hook
-        # runs rerun :patches:jar, which put the plain jar back over the bundle under the same
-        # name, and the sources and javadoc jars share the .mpp extension there as well.
-        $artifacts = @(Get-ChildItem -LiteralPath (Join-Path $Root 'patches/build/release') `
-            -Filter '*.mpp' -File -ErrorAction SilentlyContinue)
-        if ($artifacts.Count -eq 1 -and $describesThisTree) {
-            # The bundle this checkout built, so the indexed URL, its hash and the hosted
-            # checksum entry can all be compared against something real. Only while the index is
-            # being rewritten, though: at any other time build/release holds a bundle built from
-            # whatever the tree was at the time, and comparing that byte for byte against the
-            # published release fails as soon as any source changes, which is not a release fact
-            # going wrong.
-            & $validate -Root $Root -VerifyPublishedAsset -ArtifactPath $artifacts[0].FullName
-        } else {
-            if ($artifacts.Count -gt 1) {
-                Write-Step "found $($artifacts.Count) bundles, so the hosted artifact is not compared"
-            } elseif ($artifacts.Count -eq 1) {
-                Write-Step 'patches-bundle.json did not change, so the local bundle is not compared'
-            } else {
-                Write-Step 'no local bundle here, so the hosted artifact is not compared'
+        $factsFailed = 'The release facts do not agree. Fix them or push with HUSHFEED_SKIP_PRE_PUSH=1.'
+        if ($describesThisTree) {
+            # The index push holds the bundle and the test results this checkout built to the new
+            # description, and those exist only here, so it has to be a clean checkout of the
+            # commit it pushes: anything else would check other files than the ones going out.
+            $elsewhere = @($gateCommits | Where-Object { -not (Test-InPlace $_) })
+            if ($elsewhere.Count -gt 0) {
+                throw ('An index push checks the bundle and test results this checkout built, so it ' +
+                    'has to come from a clean checkout of the commit it pushes. Commit or stash the ' +
+                    'rest, check out ' + ($elsewhere -join ', ') + ' and push again.')
             }
-            # The indexed URL is still fetched. Only the byte-for-byte hash comparison needs a
-            # local bundle to compare against. A release source commit reaches GitHub before its
-            # tag and bundle can exist, so an unchanged index may keep naming the previous
-            # working release during that first push. The index update takes the strict path.
-            & $validate -Root $Root `
-                -SkipDescriptionTestCount:(-not $describesThisTree) `
-                -AllowPublishedIndexLag:(-not $describesThisTree)
-        }
-        if ($LASTEXITCODE -ne 0) {
-            throw 'The release facts do not agree. Fix them or push with HUSHFEED_SKIP_PRE_PUSH=1.'
+            $validate = Join-Path $Root 'scripts/validate-release-facts.ps1'
+            $global:LASTEXITCODE = 0
+            # The release copy buildAndroid leaves in patches/build/release, which no other task
+            # writes. patches/build/libs was read here until 2026-09-21: the patch tests this hook
+            # runs rerun :patches:jar, which put the plain jar back over the bundle under the same
+            # name, and the sources and javadoc jars share the .mpp extension there as well.
+            $artifacts = @(Get-ChildItem -LiteralPath (Join-Path $Root 'patches/build/release') `
+                -Filter '*.mpp' -File -ErrorAction SilentlyContinue)
+            if ($artifacts.Count -eq 1) {
+                # The bundle this checkout built, so the indexed URL, its hash and the hosted
+                # checksum entry can all be compared against something real.
+                & $validate -Root $Root -VerifyPublishedAsset -ArtifactPath $artifacts[0].FullName
+            } else {
+                if ($artifacts.Count -gt 1) {
+                    Write-Step "found $($artifacts.Count) bundles, so the hosted artifact is not compared"
+                } else {
+                    Write-Step 'no local bundle here, so the hosted artifact is not compared'
+                }
+                & $validate -Root $Root
+            }
+            if ($LASTEXITCODE -ne 0) { throw $factsFailed }
+        } else {
+            # Every other push checks the files it carries, against the published index it leaves
+            # alone. The indexed URL is still fetched; only the byte-for-byte hash comparison needs
+            # a local bundle, and at any time but an index push build/release holds a bundle built
+            # from whatever the tree was then. A release source commit reaches GitHub before its tag
+            # and bundle exist, so the unchanged index may keep naming the previous release.
+            $factsLock = $null
+            try {
+                foreach ($factsCommit in $gateCommits) {
+                    $arguments = @{ SkipDescriptionTestCount = $true; AllowPublishedIndexLag = $true }
+                    if (Test-InPlace $factsCommit) {
+                        $factsRoot = $Root
+                    } else {
+                        if (-not $factsLock) { $factsLock = Enter-GateLock }
+                        $factsRoot = Get-GateWorktree -Commit $factsCommit
+                        Write-Step "checking the release facts of $factsCommit in $factsRoot"
+                    }
+                    # The pushed commit's own check, which reads its own helpers. In the worktree its
+                    # build folders can hold another commit's test results, so they are left unread
+                    # there, by any check that knows how.
+                    $validate = Join-Path $factsRoot 'scripts/validate-release-facts.ps1'
+                    if ($factsRoot -ne $Root -and (Get-Command $validate).Parameters.ContainsKey('SkipTestResults')) {
+                        $arguments['SkipTestResults'] = $true
+                    }
+                    $global:LASTEXITCODE = 0
+                    & $validate -Root $factsRoot @arguments
+                    if ($LASTEXITCODE -ne 0) { throw $factsFailed }
+                }
+            } finally {
+                if ($factsLock) {
+                    $factsLock.ReleaseMutex()
+                    $factsLock.Dispose()
+                }
+            }
         }
     }
 

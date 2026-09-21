@@ -988,6 +988,17 @@ try {
         Remove-Item -LiteralPath (Join-Path $factsRoot 'patches') -Recurse -Force
         Assert-Throws { Invoke-StrictFacts } '*No patch test results*' `
             'A release was checked with no patch test results at all.'
+
+        # Results the check is told to leave unread, as the pre-push hook does in its worktree,
+        # where they can belong to another commit: read, a skipped runtime test fails the lenient
+        # check; unread, it doesn't. A check that quotes counts can't be told to skip them.
+        Write-FactsResults $runtimeResults 'RuntimeTest' $runtimeQuoted -Skipped 1
+        Assert-Throws { Invoke-Facts } '*skipped=1*' 'A lenient check read past a skipped runtime test.'
+        & $factsScript -Root $factsRoot -SkipDescriptionTestCount -SkipUrlCheck -SkipTestResults 6> $null
+        Assert-True ($LASTEXITCODE -eq 0 -or $null -eq $LASTEXITCODE) `
+            'A check told to leave the test results unread read them anyway.'
+        Assert-Throws { & $factsScript -Root $factsRoot -SkipUrlCheck -SkipTestResults 6> $null } `
+            '*SkipDescriptionTestCount*' 'A check holding the description to its counts left the results unread.'
     } finally {
         foreach ($folder in @('patches', 'extensions')) {
             Remove-Item -LiteralPath (Join-Path $factsRoot $folder) -Recurse -Force -ErrorAction SilentlyContinue
@@ -1206,10 +1217,6 @@ try {
     try {
         $env:GITHUB_ACTOR = 'contract'
         $env:GITHUB_TOKEN = 'contract'
-        # The stubs, markers and remotes these cases leave beside the repository's own files are
-        # none of its content. Visible to git, they would count as uncommitted work and send this
-        # build to a gate worktree, which the cases after this one test on a repository of their own.
-        Set-Content -LiteralPath (Join-Path $hookRoot '.git/info/exclude') -Value '/*' -Encoding ASCII
         $wrapperMarker = Join-Path $hookRoot 'wrapper-ran.txt'
         $wrapperStub = Join-Path $hookRoot 'build-wrapper.ps1'
         Set-Content -LiteralPath $wrapperStub -Encoding UTF8 -Value @(
@@ -1347,6 +1354,62 @@ try {
             # The control: the same child push, with the lock free, goes through.
             $free = Invoke-ChildPush
             Assert-True ($LASTEXITCODE -eq 0) "The child push failed with the gate lock free: $free"
+
+            # The release facts half checks the files a push carries as well. A stub check, committed
+            # the way the real one is, fails on a README that says broken and records where it ran
+            # and whether it read test results. Its own commit is never in a pushed range, so no
+            # push below touches scripts/ and asks for contract tests this repository doesn't have.
+            $gateFacts = Join-Path $hookRoot 'gate-facts-ran.txt'
+            & git -C $gateRepo checkout --quiet -- extensions/marker.txt
+            New-Item -ItemType Directory -Path (Join-Path $gateRepo 'scripts') -Force | Out-Null
+            Set-Content -LiteralPath (Join-Path $gateRepo 'scripts/validate-release-facts.ps1') -Encoding UTF8 -Value @(
+                'param([string]$Root, [switch]$SkipDescriptionTestCount, [switch]$AllowPublishedIndexLag,',
+                '    [switch]$VerifyPublishedAsset, [string]$ArtifactPath, [switch]$SkipTestResults)',
+                '$state = (Get-Content -LiteralPath (Join-Path $Root ''README.md'') -Raw).Trim()',
+                "Set-Content -LiteralPath '$gateFacts' -Value (`"root=`$Root readme=`$state results=`$(-not `$SkipTestResults)`")",
+                'if ($state -eq ''broken'') { exit 1 }',
+                'exit 0')
+            $gateReadme = Join-Path $gateRepo 'README.md'
+            function Save-GateReadme([string]$State) {
+                Set-Content -LiteralPath $gateReadme -Value $State -Encoding ASCII
+                & git -C $gateRepo add README.md
+                & git -C $gateRepo commit --quiet -m "readme $State"
+                return (& git -C $gateRepo rev-parse HEAD).Trim()
+            }
+            & git -C $gateRepo add scripts/validate-release-facts.ps1
+            $factsBase = Save-GateReadme 'base'
+            $factsGood = Save-GateReadme 'good'
+
+            # An uncommitted README that would fail the check doesn't fail a push without it.
+            Set-Content -LiteralPath $gateReadme -Value 'broken' -Encoding ASCII
+            & $prePushScript -Root $gateRepo -PushedRefs "refs/heads/main $factsGood refs/heads/main $factsBase" 6> $null
+            $checked = Get-Content -LiteralPath $gateFacts -Raw
+            Assert-True ($LASTEXITCODE -eq 0 -and $checked -like '*readme=good results=False*' -and
+                $checked -notlike "*root=$gateRepo *") `
+                "The release facts were read from the working tree instead of the pushed commit: $checked"
+
+            # And an uncommitted fix doesn't pass a push whose own README fails.
+            $factsBroken = Save-GateReadme 'broken'
+            Set-Content -LiteralPath $gateReadme -Value 'good' -Encoding ASCII
+            Assert-Throws { & $prePushScript -Root $gateRepo -PushedRefs "refs/heads/main $factsBroken refs/heads/main $factsGood" 6> $null } `
+                '*release facts do not agree*' 'An uncommitted README fix passed a push whose README fails the release facts.'
+
+            # An index push is checked against the bundle and results this checkout built, so from a
+            # dirty tree it is refused by name rather than checked against the wrong files.
+            Set-Content -LiteralPath (Join-Path $gateRepo 'patches-bundle.json') -Value '{}' -Encoding ASCII
+            & git -C $gateRepo add patches-bundle.json
+            & git -C $gateRepo commit --quiet -m 'index'
+            $factsIndex = (& git -C $gateRepo rev-parse HEAD).Trim()
+            Assert-Throws { & $prePushScript -Root $gateRepo -PushedRefs "refs/heads/main $factsIndex refs/heads/main $factsBroken" 6> $null } `
+                '*clean checkout of the commit it pushes*' 'An index push from a dirty tree was checked against files it does not carry.'
+
+            # The control: a clean tree pushing HEAD is checked in place, results and all.
+            & git -C $gateRepo checkout --quiet -- README.md
+            $factsFixed = Save-GateReadme 'good'
+            & $prePushScript -Root $gateRepo -PushedRefs "refs/heads/main $factsFixed refs/heads/main $factsIndex" 6> $null
+            $checked = Get-Content -LiteralPath $gateFacts -Raw
+            Assert-True ($LASTEXITCODE -eq 0 -and $checked -like "*root=$gateRepo readme=good results=True*") `
+                "A clean tree pushing HEAD was not checked in place: $checked"
         } finally {
             foreach ($line in @(& git -C $gateRepo worktree list --porcelain)) {
                 if ($line -like 'worktree *') {

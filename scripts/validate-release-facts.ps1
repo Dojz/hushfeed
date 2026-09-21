@@ -35,6 +35,10 @@ param(
     # with no HUSHFEED_FIXTURE_DIR, and a skip matters only to a count a description quotes. A
     # release and a run by hand check everything.
     [switch]$SkipDescriptionTestCount,
+    # Leaves the test results unread. The pre-push hook passes it when it checks a pushed commit in
+    # its gate worktree, whose build folders can hold another commit's results. Only with
+    # -SkipDescriptionTestCount, since a description's counts are read off those results.
+    [switch]$SkipTestResults,
     # Release source changes have to reach GitHub before their tag and bundle can be published.
     # During that preparation, patches-bundle.json still describes the working release. This
     # includes a newer source version and an unreleased catalog change held at the current version.
@@ -274,13 +278,22 @@ if ($SkipUrlCheck) {
 }
 
 $testRoot = Join-Path $rootPath 'extensions/tiktok/build/test-results/testDebugUnitTest'
-$testFiles = @(Get-ChildItem -LiteralPath $testRoot -Filter '*.xml' -File -ErrorAction SilentlyContinue)
+if ($SkipTestResults -and -not $SkipDescriptionTestCount) {
+    throw '-SkipTestResults leaves nothing to hold the description test counts to. Pass -SkipDescriptionTestCount with it.'
+}
+$testFiles = @(if (-not $SkipTestResults) {
+    Get-ChildItem -LiteralPath $testRoot -Filter '*.xml' -File -ErrorAction SilentlyContinue
+})
 if ($testFiles.Count -eq 0) {
     if (-not $SkipDescriptionTestCount) {
         throw "No runtime test results found under $testRoot. Run :extensions:tiktok:test first."
     }
-    Write-Host ('[release] no runtime test results here, and this push rewrites no release ' +
-        'description, so there is no run to check')
+    if ($SkipTestResults) {
+        Write-Host '[release] the test results here were left unread, since they can belong to another commit'
+    } else {
+        Write-Host ('[release] no runtime test results here, and this push rewrites no release ' +
+            'description, so there is no run to check')
+    }
 }
 
 # Gradle leaves the previous run's XML in place, so results from before the last edit satisfy
@@ -307,7 +320,9 @@ if ($null -ne $newestSource -and $testFiles.Count -gt 0) {
         throw ("Runtime test results are older than the sources. The newest result " +
             "$($newestResult.Name) was written $($newestResult.LastWriteTimeUtc.ToString('u')) but " +
             "$($newestSource.FullName) changed $($newestSource.LastWriteTimeUtc.ToString('u')). " +
-            'Run :extensions:tiktok:test again.')
+            'Run :extensions:tiktok:testDebugUnitTest --rerun. A checkout that only moves a file''s ' +
+            'date leaves Gradle calling the tests up to date, and naming :extensions:tiktok:test reruns ' +
+            'only that umbrella task.')
     }
 }
 # Gradle clears the results directory on every run and writes only the classes that ran, so a

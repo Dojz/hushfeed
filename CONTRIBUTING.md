@@ -72,10 +72,12 @@ Run `scripts/install-hooks.ps1` once per checkout. It installs a pre-push hook t
 runtime tests when a push changes anything under `extensions/` or `patches/`, and the release
 check when it changes `README.md`, `gradle.properties`, `patches-list.json` or
 `patches-bundle.json`. Nothing builds on GitHub, so a push is the last place either can run.
-Set `HUSHFEED_SKIP_PRE_PUSH=1` to push without it. The hook builds each commit the push carries.
-It builds in place only when that commit is HEAD and nothing in the working tree differs from it.
-Otherwise it builds a clean worktree of the commit in the temp folder, one push at a time, so work
-that isn't part of the push can neither fail it nor pass it.
+Set `HUSHFEED_SKIP_PRE_PUSH=1` to push without it. Both checks look at each commit the push
+carries. They work in place only when that commit is HEAD and nothing in the working tree differs
+from it. Otherwise they use a clean worktree of the commit in the temp folder, one push at a time,
+so work that isn't part of the push can neither fail it nor pass it. The one exception is the
+push that rewrites `patches-bundle.json`: it's checked against the bundle and test results this
+checkout built, so it has to come from a clean checkout of the commit it pushes.
 
 ## Settings for your machine
 
