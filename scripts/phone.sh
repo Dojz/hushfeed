@@ -32,10 +32,14 @@ fi
 normalise_path() {
     local candidate converted
     candidate="$1"
-    if [[ "$candidate" =~ ^[[:alpha:]]:[\\/].* ]] && command -v wslpath >/dev/null 2>&1; then
-        if converted=$(wslpath -u "$candidate" 2>/dev/null); then
-            printf '%s\n' "$converted"
-            return
+    if [[ "$candidate" =~ ^[[:alpha:]]:[\\/].* ]]; then
+        if command -v wslpath >/dev/null 2>&1; then
+            if converted=$(wslpath -u "$candidate" 2>/dev/null); then
+                printf '%s\n' "$converted"
+                return
+            fi
+            echo "normalise_path: wslpath could not convert $candidate" >&2
+            return 1
         fi
     fi
     printf '%s\n' "$candidate"

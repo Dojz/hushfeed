@@ -134,6 +134,27 @@ Assert-True ($otherPhoneExit -eq 2 -and ($otherPhone -join "`n") -like '*REFUSED
 Assert-True ($unnamedExit -ne 0 -and ($unnamed -join "`n") -like '*HUSHFEED_DEVICE_SERIAL*') `
     'phone.sh ran with no test phone named in HUSHFEED_DEVICE_SERIAL.'
 
+# A wslpath that fails should refuse the path rather than creating a stray directory.
+$wslpathFailCommand = (@'
+fixture=$(mktemp -d)
+trap 'rm -rf "$fixture"' EXIT
+printf '#!/bin/sh\nexit 1\n' > "$fixture/wslpath"
+chmod +x "$fixture/wslpath"
+out=$(PATH="$fixture:/usr/bin:/bin" bash -c '. "__PHONE_SCRIPT__"; normalise_path "C:\\repos\\test"' 2>/dev/null)
+exit_code=$?
+[ "$exit_code" -ne 0 ] && [ -z "$out" ]
+'@).Replace('__PHONE_SCRIPT__', $escapedPhoneScript)
+$savedEAP2 = $ErrorActionPreference
+$ErrorActionPreference = 'Continue'
+try {
+    & $bashHost @bashArguments $wslpathFailCommand 2>$null
+    $wslpathExit = $LASTEXITCODE
+} finally {
+    $ErrorActionPreference = $savedEAP2
+}
+Assert-True ($wslpathExit -eq 0) `
+    'phone.sh passed through a Windows path when wslpath was present but failed.'
+
 Write-Host '[scripts] guarded phone foreground parser contracts passed'
 
 $catalog = Get-Content -LiteralPath (Join-Path $Root 'patches-list.json') -Raw | ConvertFrom-Json
