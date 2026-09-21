@@ -215,10 +215,17 @@ try {
             ':extensions:shared:library:lint',
             ':extensions:tiktok:lint'
         )
-        $governor = Join-Path $HOME '.claude/scripts/build-governor.ps1'
+        # HUSHFEED_BUILD_WRAPPER names a PowerShell script that runs Gradle on this machine,
+        # called as <wrapper> -ProjectDir <repository> -Tasks <task>...: a machine that shares its
+        # CPU and memory between several builds points it at a governor. Unset, the Gradle
+        # wrapper in the repository runs the tasks directly.
+        $wrapper = $env:HUSHFEED_BUILD_WRAPPER
         $global:LASTEXITCODE = 0
-        if (Test-Path -LiteralPath $governor) {
-            & $governor -ProjectDir $Root -MinFreeGb 2 -NoReap -Tasks $tasks
+        if ($wrapper) {
+            if (-not (Test-Path -LiteralPath $wrapper -PathType Leaf)) {
+                throw "HUSHFEED_BUILD_WRAPPER names $wrapper, which is not there."
+            }
+            & $wrapper -ProjectDir $Root -Tasks $tasks
         } else {
             & (Join-Path $Root 'gradlew.bat') @tasks
         }

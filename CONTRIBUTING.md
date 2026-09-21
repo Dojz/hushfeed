@@ -56,6 +56,25 @@ check when it changes `README.md`, `gradle.properties`, `patches-list.json` or
 `patches-bundle.json`. Nothing builds on GitHub, so a push is the last place either can run.
 Set `HUSHFEED_SKIP_PRE_PUSH=1` to push without it.
 
+## Settings for your machine
+
+Nothing in the repository points at a folder or a phone on anybody's machine. These variables do
+that instead, and none of them has a default:
+
+- `HUSHFEED_FIXTURE_DIR` is the folder that holds the vendor TikTok APKs the fixture tests read.
+  They're hundreds of megabytes each, so they aren't in the repository. When it's unset the
+  fixture tests skip and say which variable to set. When it names a folder that holds none of
+  them they fail, because a skip there would look like a pass. `scripts/patch-for-device.ps1` and
+  `scripts/verify-injected-registers.ps1` take their default APK from the same folder.
+- `HUSHFEED_DESKTOP_JAR` is the Morphe desktop CLI jar. `HUSHFEED_WORKDIR` or a jar under
+  `build/morphe-tools` works too.
+- `HUSHFEED_BUILD_WRAPPER` names a PowerShell script the pre-push hook runs Gradle through,
+  called as `<wrapper> -ProjectDir <repository> -Tasks <task>...`. It helps when several builds
+  share one machine and need to queue. Unset, the hook runs `gradlew.bat` itself.
+- `HUSHFEED_DEVICE_SERIAL` is the adb serial of the one test phone `scripts/phone.sh` may drive.
+  The script refuses every other device, and it won't run at all while this is unset. Keep your
+  own phone out of it.
+
 ## Source notices
 
 Preserve every existing copyright, license, author-credit, and source-origin

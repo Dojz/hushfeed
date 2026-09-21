@@ -47,7 +47,7 @@ if ($IsWindows) {
     }
 }
 $escapedPhoneScript = $phoneScript.Replace("'", "'\''")
-$phoneParserCommand = "PHONE_SERIAL=R5CT139QJ5F ADB=/not-used " +
+$phoneParserCommand = "PHONE_SERIAL=TESTPHONE01 HUSHFEED_DEVICE_SERIAL=TESTPHONE01 ADB=/not-used " +
     "PHONE_SHOTS=/tmp/hushfeed-phone-parser-contract '$escapedPhoneScript' parse_top"
 
 function Invoke-PhoneTopParser {
@@ -105,12 +105,24 @@ fixture=$(mktemp -d)
 trap 'rm -rf "$fixture"' EXIT
 printf '#!/bin/sh\nexit 0\n' > "$fixture/adb.exe"
 chmod +x "$fixture/adb.exe"
-PATH="$fixture:/usr/bin:/bin" PHONE_SERIAL=R5CT139QJ5F \
+PATH="$fixture:/usr/bin:/bin" PHONE_SERIAL=TESTPHONE01 HUSHFEED_DEVICE_SERIAL=TESTPHONE01 \
     PHONE_SHOTS=/tmp/hushfeed-phone-parser-contract '__PHONE_SCRIPT__' find_adb
 '@).Replace('__PHONE_SCRIPT__', $escapedPhoneScript)
 $resolvedWindowsAdb = @(& $bashHost @bashArguments $findAdbCommand 2> $null)
 Assert-True ($LASTEXITCODE -eq 0 -and ($resolvedWindowsAdb -join "`n").Trim() -like '*/adb.exe') `
     'phone.sh did not resolve adb.exe from an interoperable Windows path.'
+
+# The device guard. The one phone this machine may drive comes from HUSHFEED_DEVICE_SERIAL rather
+# than a serial written into the script, and anything else, or no named phone at all, is refused
+# before adb is looked for.
+$otherPhone = @(& $bashHost @bashArguments ("PHONE_SERIAL=OTHERPHONE02 HUSHFEED_DEVICE_SERIAL=TESTPHONE01 ADB=/not-used " +
+    "PHONE_SHOTS=/tmp/hushfeed-phone-parser-contract '$escapedPhoneScript' top") 2>&1)
+Assert-True ($LASTEXITCODE -eq 2 -and ($otherPhone -join "`n") -like '*REFUSED*') `
+    'phone.sh drove a device other than the one HUSHFEED_DEVICE_SERIAL names.'
+$unnamed = @(& $bashHost @bashArguments ("env -u HUSHFEED_DEVICE_SERIAL PHONE_SERIAL=TESTPHONE01 ADB=/not-used " +
+    "PHONE_SHOTS=/tmp/hushfeed-phone-parser-contract '$escapedPhoneScript' top") 2>&1)
+Assert-True ($LASTEXITCODE -ne 0 -and ($unnamed -join "`n") -like '*HUSHFEED_DEVICE_SERIAL*') `
+    'phone.sh ran with no test phone named in HUSHFEED_DEVICE_SERIAL.'
 
 Write-Host '[scripts] guarded phone foreground parser contracts passed'
 
@@ -1133,6 +1145,38 @@ try {
         $env:GITHUB_ACTOR = $savedActor
         $env:GITHUB_TOKEN = $savedToken
     }
+
+    # The build wrapper. HUSHFEED_BUILD_WRAPPER names the script that runs Gradle on this
+    # machine, and the hook hands it the repository and the tasks. A stub stands in for it and
+    # records what it was given, so no build starts.
+    $savedWrapper = $env:HUSHFEED_BUILD_WRAPPER
+    $savedActor = $env:GITHUB_ACTOR
+    $savedToken = $env:GITHUB_TOKEN
+    try {
+        $env:GITHUB_ACTOR = 'contract'
+        $env:GITHUB_TOKEN = 'contract'
+        $wrapperMarker = Join-Path $hookRoot 'wrapper-ran.txt'
+        $wrapperStub = Join-Path $hookRoot 'build-wrapper.ps1'
+        Set-Content -LiteralPath $wrapperStub -Encoding UTF8 -Value @(
+            'param([string]$ProjectDir, [string[]]$Tasks)',
+            "Set-Content -LiteralPath '$wrapperMarker' -Value (`"dir=`$ProjectDir tasks=`" + (`$Tasks -join ','))",
+            'exit 0')
+        $env:HUSHFEED_BUILD_WRAPPER = $wrapperStub
+        & $prePushScript -Root $hookRoot -ChangedPaths @('extensions/tiktok/src/main/java/Any.java') 6> $null
+        Assert-True (Test-Path -LiteralPath $wrapperMarker) `
+            'The hook did not run the build through the wrapper HUSHFEED_BUILD_WRAPPER names.'
+        $wrapped = Get-Content -LiteralPath $wrapperMarker -Raw
+        Assert-True ($wrapped -like "dir=$hookRoot tasks=*:extensions:tiktok:test*:patches:test*") `
+            "The build wrapper was not handed the repository and the test tasks: $wrapped"
+
+        $env:HUSHFEED_BUILD_WRAPPER = Join-Path $hookRoot 'no-such-wrapper.ps1'
+        Assert-Throws { & $prePushScript -Root $hookRoot -ChangedPaths @('patches/build.gradle.kts') 6> $null } `
+            '*HUSHFEED_BUILD_WRAPPER*' 'A build wrapper that is not there was ignored rather than reported.'
+    } finally {
+        $env:HUSHFEED_BUILD_WRAPPER = $savedWrapper
+        $env:GITHUB_ACTOR = $savedActor
+        $env:GITHUB_TOKEN = $savedToken
+    }
 } finally {
     $env:HUSHFEED_SKIP_PRE_PUSH = $savedSkip
     foreach ($name in $savedHookGit.Keys) { Set-Item -LiteralPath ('Env:\' + $name) -Value $savedHookGit[$name] }
@@ -1470,6 +1514,32 @@ Assert-True ($libsReaders.Count -eq 0) `
         ($libsReaders -join ', '))
 
 Write-Host '[scripts] release bundle path contracts passed'
+
+# --- tracked files name no machine -----------------------------------------------------------
+#
+# No tracked file names the working-notes folder .gitignore keeps out, the backup folders on the
+# maintainer's machine that share its name, or a phone's adb serial. Four fixture tests fell back
+# to one of those folders, which skipped quietly on every other machine and published this one's
+# layout, and five scripts carried the test phone's serial. .gitignore is the one exception: it
+# has to name what it keeps out. Both patterns are built from parts so this file cannot match
+# itself, and the serial is matched by its shape, a Samsung serial being R5C and eight more
+# letters or digits.
+
+$assistantPattern = 'cla' + 'ude'
+$serialPattern = 'R5' + 'C[A-Z0-9]{8}'
+$machineNames = New-Object System.Collections.Generic.List[string]
+foreach ($scan in @(@('-i', $assistantPattern), @('-E', $serialPattern))) {
+    $hits = @(& git -C $Root grep -n -a $scan[0] -e $scan[1] -- '.' ':!.gitignore' 2>$null)
+    # 1 is git grep's "no match". Anything above it means the search did not run, which must not
+    # read as a clean tree.
+    if ($LASTEXITCODE -gt 1) { throw "git grep could not search the tracked files for $($scan[1])." }
+    foreach ($hit in $hits) { $machineNames.Add([string]$hit) }
+}
+$global:LASTEXITCODE = 0
+Assert-True ($machineNames.Count -eq 0) `
+    ("Tracked files name the maintainer's machine or phone: " + ($machineNames -join '; '))
+
+Write-Host '[scripts] tracked-file machine name contracts passed'
 
 $global:LASTEXITCODE = 0
 Write-Host '[scripts] report, target, Java and guarded replacement contracts passed'

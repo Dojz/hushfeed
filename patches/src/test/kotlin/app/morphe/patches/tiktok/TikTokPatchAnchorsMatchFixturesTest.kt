@@ -1,5 +1,6 @@
 package app.morphe.patches.tiktok
 
+import app.morphe.Fixtures
 import app.morphe.patches.tiktok.feedfilter.countColdStartFeedItemListStores
 import app.morphe.patches.tiktok.feedfilter.isTakoSearchEntranceInflater
 import app.morphe.patches.tiktok.feedfilter.takoSearchEntranceVariants
@@ -28,7 +29,6 @@ import com.android.tools.smali.dexlib2.iface.reference.StringReference
 import java.io.File
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
-import org.junit.Assume.assumeTrue
 import org.junit.Test
 
 /**
@@ -45,7 +45,6 @@ class TikTokPatchAnchorsMatchFixturesTest {
     @Test
     fun `regional Report gate and search rewards accessor stay unique on every retained fixture`() {
         val apks = fixtures()
-        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
         for (apk in apks) {
             val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
             val gates = mutableListOf<Method>()
@@ -79,7 +78,6 @@ class TikTokPatchAnchorsMatchFixturesTest {
     @Test
     fun `sticker sheet keeps one group of like typed action fields on every retained fixture`() {
         val apks = fixtures()
-        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
         for (apk in apks) {
             val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
             val byType = container.dexEntryNames.asSequence()
@@ -121,7 +119,6 @@ class TikTokPatchAnchorsMatchFixturesTest {
     @Test
     fun `both search page Tako entrances keep one nullable inflater on every retained fixture`() {
         val apks = fixtures()
-        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
         for (apk in apks) {
             val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
             val inflaters = container.dexEntryNames.asSequence()
@@ -152,7 +149,6 @@ class TikTokPatchAnchorsMatchFixturesTest {
     @Test
     fun `block skip native pager methods survive every retained fixture`() {
         val apks = fixtures()
-        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
         for (apk in apks) {
             val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
             val pager = container.dexEntryNames.asSequence()
@@ -164,7 +160,6 @@ class TikTokPatchAnchorsMatchFixturesTest {
     @Test
     fun `bottom search banner model and native component key survive every retained fixture`() {
         val apks = fixtures()
-        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
         for (apk in apks) {
             val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
             val wanted = setOf(
@@ -196,7 +191,6 @@ class TikTokPatchAnchorsMatchFixturesTest {
     @Test
     fun `fullscreen entry and both location card contracts survive every retained fixture`() {
         val apks=fixtures()
-        assumeTrue("no TikTok fixture on this machine",apks.isNotEmpty())
         for(apk in apks) {
             val container=DexFileFactory.loadDexContainer(apk,Opcodes.getDefault())
             val classes=container.dexEntryNames.flatMap{container.getEntry(it)!!.dexFile.classes}
@@ -237,7 +231,6 @@ class TikTokPatchAnchorsMatchFixturesTest {
     @Test
     fun `native comment like installer is unique and leaves other actions intact on every fixture`() {
         val apks = fixtures()
-        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
         for (apk in apks) {
             val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
             val classes = container.dexEntryNames.flatMap { container.getEntry(it)!!.dexFile.classes }
@@ -274,7 +267,6 @@ class TikTokPatchAnchorsMatchFixturesTest {
     @Test
     fun `all three compact comment roots keep their named lifecycle contract on every fixture`() {
         val apks = fixtures()
-        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
         for (apk in apks) {
             val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
             val components = container.dexEntryNames.flatMap { entry ->
@@ -297,7 +289,6 @@ class TikTokPatchAnchorsMatchFixturesTest {
     @Test
     fun `comment suggestion banner factory is unique and guardable on every fixture`() {
         val apks = fixtures()
-        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
         for (apk in apks) {
             val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
             val matches = container.dexEntryNames.flatMap { entry ->
@@ -323,7 +314,6 @@ class TikTokPatchAnchorsMatchFixturesTest {
     @Test
     fun `location affiliate disclosure uses the same named contract on every fixture`() {
         val apks = fixtures()
-        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
         val model = "Lcom/ss/android/ugc/aweme/feed/model/"
         val expectedClasses = listOf("Aweme", "ContentModel", "StandardBusinessModel", "LocalAllianceInfo")
         for (apk in apks) {
@@ -369,7 +359,6 @@ class TikTokPatchAnchorsMatchFixturesTest {
     @Test
     fun `main feed items getter exists once on every fixture`() {
         val apks = fixtures()
-        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
 
         for (apk in apks) {
             val matches = mutableListOf<Method>()
@@ -397,7 +386,6 @@ class TikTokPatchAnchorsMatchFixturesTest {
     @Test
     fun `settings compose rows anchor is unique on every fixture`() {
         val apks = fixtures()
-        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
 
         for (apk in apks.sortedByDescending { it.name }) {
             val matches = mutableListOf<Method>()
@@ -429,7 +417,6 @@ class TikTokPatchAnchorsMatchFixturesTest {
     @Test
     fun `watermark cache and playback anchors are unique on every fixture`() {
         val apks = fixtures()
-        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
 
         for (apk in apks) {
             val watermark = mutableListOf<Method>()
@@ -522,12 +509,7 @@ class TikTokPatchAnchorsMatchFixturesTest {
             }
         } ?: emptyList()
 
-    private fun fixtures(): List<File> {
-        val directory = File(System.getenv("HUSHFEED_FIXTURE_DIR") ?: "C:/_claude-backups/tiktok-fixture")
-        if (!directory.isDirectory) return emptyList()
-        return directory.listFiles()?.filter { file ->
-            file.isFile && file.extension == "apk" &&
-                file.name.contains(Regex("(46\\.[2789]\\.3|47\\.0\\.3)"))
-        }?.sortedBy { it.name } ?: emptyList()
-    }
+    private fun fixtures(): List<File> = Fixtures.files { file ->
+            file.extension == "apk" && file.name.contains(Regex("(46\\.[2789]\\.3|47\\.0\\.3)"))
+        }
 }

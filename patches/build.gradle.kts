@@ -246,6 +246,9 @@ tasks {
         inputs.dir(rootProject.file("concepts/marketing/2026-09-12"))
             .withPropertyName("marketingArchive")
             .withPathSensitivity(PathSensitivity.RELATIVE)
+        // The fixture tests skip when this is unset and read the folder when it is set, so a
+        // run with it unset must not be reused as up to date once it is set.
+        inputs.property("fixtureDirectory", providers.environmentVariable("HUSHFEED_FIXTURE_DIR").orElse(""))
     }
     // The bundle a release publishes lives in build/release, not build/libs. The plugin's
     // buildAndroid merges the DEX payload into the jar task's own output in place, so any later
