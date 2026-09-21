@@ -304,9 +304,9 @@ if ($testFiles.Count -eq 0) {
 # the task up to date, no XML is rewritten, and comparing against it would refuse every release
 # from then on with no rerun that could clear it.
 #
-# The newest result is the one to compare. Gradle never removes the XML of a test class that was
-# deleted or renamed, and that file keeps its original timestamp through every later run, so
-# taking the oldest would refuse forever after the first class is dropped.
+# The newest result is the one to compare: it is the last evidence of a run, and an older one
+# could predate the latest source edit. Orphaned results from deleted or renamed test classes
+# are caught separately below.
 $sourceRoots = @('extensions/tiktok/src', 'extensions/tiktok/stub/src', 'extensions/shared/library/src') |
     ForEach-Object { Join-Path $rootPath $_ } |
     Where-Object { Test-Path -LiteralPath $_ }

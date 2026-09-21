@@ -88,7 +88,10 @@ without it. Every check looks at each commit the push carries, with that commit'
 the check. It works in place only when that commit is HEAD and nothing in the working tree differs
 from it. Otherwise it uses a clean worktree of the commit in the temp folder, one push at a time,
 so work that isn't part of the push can neither fail it nor pass it. An in-place check reads the
-tree again when it finishes and stops the push if anything changed meanwhile. The one exception
+tree again when it finishes, even after a build failure, and stops the push if anything changed
+meanwhile: a tree that moved during a build invalidates the result whether it passed or failed.
+Each commit is checked by its own copy of the check script, so a renamed or removed helper
+cannot cause one commit's check to run through another commit's code. The one exception
 is the push that rewrites `patches-bundle.json`: it's checked against the bundle and test results
 this checkout built, so it has to come from a clean checkout of the commit it pushes.
 

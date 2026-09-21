@@ -497,9 +497,14 @@ function Invoke-RepoGit {
         $saved[$variable.Name] = $variable.Value
         Remove-Item -LiteralPath ('Env:\' + $variable.Name) -ErrorAction SilentlyContinue
     }
+    # Windows PowerShell 5.1 turns a native command's stderr into a terminating error under
+    # Stop even when it is redirected. Relax for the call and restore afterwards.
+    $preference = $ErrorActionPreference
     try {
+        $ErrorActionPreference = 'Continue'
         return & git -C $Root @Arguments 2>$null
     } finally {
+        $ErrorActionPreference = $preference
         foreach ($name in $saved.Keys) { Set-Item -LiteralPath ('Env:\' + $name) -Value $saved[$name] }
     }
 }

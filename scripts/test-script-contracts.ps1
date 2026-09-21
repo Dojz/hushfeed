@@ -37,7 +37,7 @@ $bash = (Get-Command bash -ErrorAction Stop).Source
 $bashHost = $bash
 $bashArguments = @('-lc')
 $phoneScript = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot 'phone.sh')).Path
-if ($IsWindows) {
+if ($env:OS -eq 'Windows_NT') {
     $bashHost = (Get-Command wsl.exe -ErrorAction Stop).Source
     $bashArguments = @('--exec', '/bin/bash', '-lc')
     $escapedPhoneScript = $phoneScript.Replace("'", "'\''")
@@ -115,13 +115,23 @@ Assert-True ($LASTEXITCODE -eq 0 -and ($resolvedWindowsAdb -join "`n").Trim() -l
 # The device guard. The one phone this machine may drive comes from HUSHFEED_DEVICE_SERIAL rather
 # than a serial written into the script, and anything else, or no named phone at all, is refused
 # before adb is looked for.
-$otherPhone = @(& $bashHost @bashArguments ("PHONE_SERIAL=OTHERPHONE02 HUSHFEED_DEVICE_SERIAL=TESTPHONE01 ADB=/not-used " +
-    "PHONE_SHOTS=/tmp/hushfeed-phone-parser-contract '$escapedPhoneScript' top") 2>&1)
-Assert-True ($LASTEXITCODE -eq 2 -and ($otherPhone -join "`n") -like '*REFUSED*') `
+# Windows PowerShell 5.1 turns a native command's stderr into a terminating error under Stop
+# even when 2>&1 redirects it. Relax for the two calls that expect stderr output.
+$savedEAP = $ErrorActionPreference
+$ErrorActionPreference = 'Continue'
+try {
+    $otherPhone = @(& $bashHost @bashArguments ("PHONE_SERIAL=OTHERPHONE02 HUSHFEED_DEVICE_SERIAL=TESTPHONE01 ADB=/not-used " +
+        "PHONE_SHOTS=/tmp/hushfeed-phone-parser-contract '$escapedPhoneScript' top") 2>&1)
+    $otherPhoneExit = $LASTEXITCODE
+    $unnamed = @(& $bashHost @bashArguments ("env -u HUSHFEED_DEVICE_SERIAL PHONE_SERIAL=TESTPHONE01 ADB=/not-used " +
+        "PHONE_SHOTS=/tmp/hushfeed-phone-parser-contract '$escapedPhoneScript' top") 2>&1)
+    $unnamedExit = $LASTEXITCODE
+} finally {
+    $ErrorActionPreference = $savedEAP
+}
+Assert-True ($otherPhoneExit -eq 2 -and ($otherPhone -join "`n") -like '*REFUSED*') `
     'phone.sh drove a device other than the one HUSHFEED_DEVICE_SERIAL names.'
-$unnamed = @(& $bashHost @bashArguments ("env -u HUSHFEED_DEVICE_SERIAL PHONE_SERIAL=TESTPHONE01 ADB=/not-used " +
-    "PHONE_SHOTS=/tmp/hushfeed-phone-parser-contract '$escapedPhoneScript' top") 2>&1)
-Assert-True ($LASTEXITCODE -ne 0 -and ($unnamed -join "`n") -like '*HUSHFEED_DEVICE_SERIAL*') `
+Assert-True ($unnamedExit -ne 0 -and ($unnamed -join "`n") -like '*HUSHFEED_DEVICE_SERIAL*') `
     'phone.sh ran with no test phone named in HUSHFEED_DEVICE_SERIAL.'
 
 Write-Host '[scripts] guarded phone foreground parser contracts passed'

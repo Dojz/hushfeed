@@ -33,6 +33,19 @@ $ErrorActionPreference = 'Stop'
 # wherever pwsh is off the PATH: a git hook runs with git's environment, so that is the ordinary
 # case rather than the rare one.
 if (-not $Root) { $Root = Split-Path -Parent $PSScriptRoot }
+
+# A hook runs with git's own environment. User environment variables set after the shell
+# launched, or set in the user scope only, may be absent. Import the four this script and
+# its suites need from the registry so a gate worktree can find the desktop CLI, the
+# fixture folder, the build governor and the device serial.
+foreach ($envName in @('HUSHFEED_DESKTOP_JAR', 'HUSHFEED_FIXTURE_DIR',
+        'HUSHFEED_BUILD_WRAPPER', 'HUSHFEED_DEVICE_SERIAL')) {
+    if (-not (Test-Path "Env:\$envName")) {
+        $regValue = [Environment]::GetEnvironmentVariable($envName, [EnvironmentVariableTarget]::User)
+        if ($regValue) { Set-Item -LiteralPath "Env:\$envName" -Value $regValue }
+    }
+}
+
 $zeroObject = '0' * 40
 # The commits this push carries, peeled, filled in by Get-PushedPaths. The build gate builds each
 # of these, and never whatever else the working tree holds.
@@ -361,10 +374,13 @@ try {
                     if (-not $scriptsLock) { $scriptsLock = Enter-GateLock }
                     $scriptsRoot = Get-GateWorktree -Commit $scriptsCommit
                 }
+                try {
                 foreach ($suite in $suites) {
                     $suiteScript = Join-Path $scriptsRoot $suite[0]
                     if (-not (Test-Path -LiteralPath $suiteScript -PathType Leaf)) {
-                        # An older commit in the pushed range, from before the suite existed.
+                        if ($paths.Contains($suite[0])) {
+                            throw "$($suite[0]) was deleted in this push. The gate scripts must not lose their tests."
+                        }
                         Write-Step "$($suite[0]) is not in $scriptsCommit, so it has nothing to run there"
                         continue
                     }
@@ -374,7 +390,9 @@ try {
                     Invoke-WithoutGitEnvironment { & $suiteScript -Root $scriptsRoot }
                     if ($LASTEXITCODE -ne 0) { throw $suite[2] }
                 }
-                if ($scriptsRoot -eq $Root) { Assert-TreeUnchanged 'the script tests' }
+                } finally {
+                    if ($scriptsRoot -eq $Root) { Assert-TreeUnchanged 'the script tests' }
+                }
             }
         } finally {
             if ($scriptsLock) {
@@ -435,6 +453,7 @@ try {
                     $gateRoot = Get-GateWorktree -Commit $gateCommit
                     Write-Step "building $gateCommit in $gateRoot"
                 }
+                try {
                 $global:LASTEXITCODE = 0
                 Invoke-WithoutGitEnvironment {
                     if ($wrapper) {
@@ -448,7 +467,9 @@ try {
                         'test failed, an API level above the payload floor was reached, or the build could ' +
                         'not start. Push anyway with HUSHFEED_SKIP_PRE_PUSH=1.')
                 }
-                if ($gateRoot -eq $Root) { Assert-TreeUnchanged 'the runtime test build' }
+                } finally {
+                    if ($gateRoot -eq $Root) { Assert-TreeUnchanged 'the runtime test build' }
+                }
             }
         } finally {
             if ($gateLock) {
@@ -476,6 +497,7 @@ try {
                     'rest, check out ' + ($elsewhere -join ', ') + ' and push again.')
             }
             $validate = Join-Path $Root 'scripts/validate-release-facts.ps1'
+            try {
             $global:LASTEXITCODE = 0
             # The release copy buildAndroid leaves in patches/build/release, which no other task
             # writes. patches/build/libs was read here until 2026-09-21: the patch tests this hook
@@ -496,7 +518,9 @@ try {
                 & $validate -Root $Root
             }
             if ($LASTEXITCODE -ne 0) { throw $factsFailed }
-            Assert-TreeUnchanged 'the release facts check'
+            } finally {
+                Assert-TreeUnchanged 'the release facts check'
+            }
         } else {
             # Every other push checks the files it carries, against the published index it leaves
             # alone. The indexed URL is still fetched; only the byte-for-byte hash comparison needs
@@ -521,10 +545,13 @@ try {
                     if ($factsRoot -ne $Root -and (Get-Command $validate).Parameters.ContainsKey('SkipTestResults')) {
                         $arguments['SkipTestResults'] = $true
                     }
+                    try {
                     $global:LASTEXITCODE = 0
                     & $validate -Root $factsRoot @arguments
                     if ($LASTEXITCODE -ne 0) { throw $factsFailed }
-                    if ($factsRoot -eq $Root) { Assert-TreeUnchanged 'the release facts check' }
+                    } finally {
+                        if ($factsRoot -eq $Root) { Assert-TreeUnchanged 'the release facts check' }
+                    }
                 }
             } finally {
                 if ($factsLock) {
