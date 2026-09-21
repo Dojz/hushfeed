@@ -95,7 +95,7 @@ public class VideoOverlayHiderTest {
 
     @Test
     public void feedFurnitureOutsideAFeedCellIsLeftAlone() {
-        // The profile's Favorites page is a LinearLayout carrying id/ezp, the survey card's
+        // The profile's Favorites page is a LinearLayout carrying id/f7u, the survey card's
         // id, and Hide feed surveys took the whole tab with it. Furniture is only hidden
         // under a feed cell root now.
         // Ids apart from every other fixture in this class: the id cache is static, and a
@@ -103,7 +103,7 @@ public class VideoOverlayHiderTest {
         int surveyId = 0x7f0a0a11;
         int cellId = 0x7f0a0a12;
         int captionId = 0x7f0a0a13;
-        VideoOverlayHider.resolveForTests("ezp", surveyId);
+        VideoOverlayHider.resolveForTests("f7u", surveyId);
         VideoOverlayHider.resolveForTests("desc", captionId);
         VideoOverlayHider.resolveForTests("view_rootview", cellId);
         try (var controller = Robolectric.buildActivity(Activity.class).setup()) {
@@ -250,7 +250,7 @@ public class VideoOverlayHiderTest {
         // A build that renames the cell root must not turn every hide switch off; the walk
         // falls back to the whole window and the hook status names the miss.
         int surveyId = 0x7f0a0a21;
-        VideoOverlayHider.resolveForTests("ezp", surveyId);
+        VideoOverlayHider.resolveForTests("f7u", surveyId);
         VideoOverlayHider.resolveForTests("view_rootview", 0);
         try (var controller = Robolectric.buildActivity(Activity.class).setup()) {
             Activity activity = controller.get();
@@ -270,11 +270,51 @@ public class VideoOverlayHiderTest {
     }
 
     @Test
+    public void theSurveyIsFoundByItsFortySevenNameAndTheOldNameHidesNothing() {
+        // Every layout the feed cell's survey stubs inflate has the root f7u on 47.0.3, which
+        // 46.2.3 called ezp. On 47.0.3 ezp is a label in the paid series panel instead, so a
+        // view under a cell that carries it is not a survey.
+        int cellId = 0x7f0a0a31;
+        int surveyId = 0x7f0a0a32;
+        int oldNameId = 0x7f0a0a33;
+        VideoOverlayHider.resolveForTests("view_rootview", cellId);
+        VideoOverlayHider.resolveForTests("f7u", surveyId);
+        VideoOverlayHider.resolveForTests("ezp", oldNameId);
+        try (var controller = Robolectric.buildActivity(Activity.class).setup()) {
+            Activity activity = controller.get();
+            Utils.setContext(activity);
+            FrameLayout cell = new FrameLayout(activity);
+            cell.setId(cellId);
+            TextView label = new TextView(activity);
+            label.setId(oldNameId);
+            cell.addView(label);
+            activity.setContentView(cell);
+
+            // An ordinary post: no survey, so nothing under the current name to prefer.
+            Settings.HIDE_FEED_SURVEYS.save(true);
+            VideoOverlayHider.applyTo(activity);
+            assertEquals("a 46.2.3 name hid a 47.0.3 view", View.VISIBLE, label.getVisibility());
+
+            View survey = new View(activity);
+            survey.setId(surveyId);
+            cell.addView(survey);
+            VideoOverlayHider.applyTo(activity);
+            assertEquals(View.GONE, survey.getVisibility());
+            assertEquals(View.VISIBLE, label.getVisibility());
+        } finally {
+            Settings.HIDE_FEED_SURVEYS.save(false);
+            VideoOverlayHider.resolveForTests("view_rootview", 0);
+            VideoOverlayHider.resolveForTests("f7u", 0);
+            VideoOverlayHider.resolveForTests("ezp", 0);
+        }
+    }
+
+    @Test
     public void anOrdinaryPostWithoutASurveyDoesNotReportTheBuildBroken() {
         int cellId = 0x7f0a0a22;
         int surveyId = 0x7f0a0a23;
         VideoOverlayHider.resolveForTests("view_rootview", cellId);
-        VideoOverlayHider.resolveForTests("ezp", surveyId);
+        VideoOverlayHider.resolveForTests("f7u", surveyId);
         HookStatus.clear();
         try (var controller = Robolectric.buildActivity(Activity.class).setup()) {
             Activity activity = controller.get();
@@ -288,11 +328,11 @@ public class VideoOverlayHiderTest {
 
             assertTrue("a survey is optional content, not a required build anchor: "
                             + HookStatus.missing("overlay"),
-                    HookStatus.missing("overlay").stream().noneMatch(line -> line.contains("ezp")));
+                    HookStatus.missing("overlay").stream().noneMatch(line -> line.contains("f7u")));
         } finally {
             Settings.HIDE_FEED_SURVEYS.save(false);
             VideoOverlayHider.resolveForTests("view_rootview", 0);
-            VideoOverlayHider.resolveForTests("ezp", 0);
+            VideoOverlayHider.resolveForTests("f7u", 0);
             HookStatus.clear();
         }
     }

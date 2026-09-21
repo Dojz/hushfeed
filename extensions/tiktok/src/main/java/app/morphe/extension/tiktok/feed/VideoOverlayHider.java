@@ -41,9 +41,12 @@ import java.util.WeakHashMap;
  *   id/k_5 / id/jup       the Live entrance, top left, 158 px square, no description
  *   id/liy / id/kzj       the interaction area over the video: the right-hand column's slots
  *                         (id/ewa or id/eoh), the caption block and the music row
- *   id/ezp                the root of every feed survey card; the cell's survey ViewStubs
- *                         carry no inflatedId, so the card keeps its own layout id. The
- *                         profile's Favorites page is a LinearLayout with the same id.
+ *   id/f7u                the root of every feed survey card; the cell's survey ViewStubs
+ *                         carry no inflatedId, so the card keeps its own layout id. All
+ *                         seven layouts those stubs inflate have it on 47.0.3, where 46.2.3
+ *                         called it ezp (on 47.0.3 ezp is a label in the paid series panel).
+ *                         It is a shared root id: the profile's Favorites page is a
+ *                         LinearLayout with the same id.
  *   id/view_rootview      the root of every feed cell (VideoViewCellRootView). Every id below
  *                         it here is feed furniture and lives inside one. id/long_press_layout
  *                         is a sibling layer under it, not an ancestor of the rail: scoping
@@ -74,11 +77,11 @@ public final class VideoOverlayHider {
     private static final String[] CAPTION_IDS = {"desc"};
     private static final String[] MUSIC_IDS = {"videomusiccoverblock"};
     private static final String[] ACTION_BAR_IDS = {"liy", "kzj"};
-    private static final String[] SURVEY_IDS = {"ezp"};
+    private static final String[] SURVEY_IDS = {"f7u"};
     private static final String[] TAB_STRIP_IDS = {"uvy", "twc"};
     /**
      * The feed cell root. Furniture is only hidden underneath one: Hide feed surveys used to
-     * take every id/ezp in the window, and on the profile that is the Favorites tab's whole
+     * take every survey card id in the window, and on the profile that is the Favorites tab's whole
      * page, which showed as an empty tab (a Galaxy S25, 2026-09-16, found by restoring the
      * settings one group at a time). The tab strip sits above the cells and is the one
      * target that stays window-wide. A build that renames the cell root falls back to the

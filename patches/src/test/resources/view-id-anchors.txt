@@ -20,7 +20,7 @@ feed/VideoOverlayHider.java|LIVE_ENTRANCE_IDS|k_5,jup|app|com.bytedance.tiktok.h
 feed/VideoOverlayHider.java|CAPTION_IDS|desc|app|com.ss.android.ugc.aweme.feed.assem.desc.VideoDescAssem
 feed/VideoOverlayHider.java|MUSIC_IDS|videomusiccoverblock|app|com.by.andInflater.common_feed_interaction_area_feed
 feed/VideoOverlayHider.java|ACTION_BAR_IDS|liy,kzj|app|com.ss.android.ugc.feed.platform.cell.interact.InteractAreaComponent
-feed/VideoOverlayHider.java|SURVEY_IDS|ezp|app|-
+feed/VideoOverlayHider.java|SURVEY_IDS|f7u|app|-
 feed/VideoOverlayHider.java|TAB_STRIP_IDS|uvy,twc|app|com.ss.android.ugc.aweme.homepage.ui.view.tab.top.TopTabLayoutAbility
 feed/VideoOverlayHider.java|CELL_ROOT_ID|view_rootview|app|com.ss.android.ugc.aweme.feed.adapter.VideoViewCell
 feed/VideoOverlayHider.java|LIKE_COUNT_ROW_IDS|g6t,fwu|app|com.by.andInflater.common_feed_layout_video_digg
