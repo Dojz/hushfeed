@@ -36,10 +36,11 @@ import org.robolectric.annotation.LooperMode;
 @LooperMode(LooperMode.Mode.PAUSED)
 public class InboxLayoutLifecycleTest {
     /**
-     * TikTok 47.0.3's names, and the 46.2.3 names they replaced (v15, vid) plus the wrapper
-     * every 47.0.3 chat cell shares (zci). The older ones are registered too, so a fallback
-     * put back into InboxFilter would resolve here and fail the test that says it is never
-     * tried.
+     * TikTok 47.0.3's names, two of the 46.2.3 names they replaced (v15, vid) and the wrapper
+     * every 47.0.3 chat cell shares (zci). Either older name put back into InboxFilter as a
+     * fallback would resolve here and fail the test that says it is never tried. The other
+     * 46.2.3 names are not registered, so this class would not notice one of them coming back;
+     * RuntimeViewIdAnchorsTest's rule that a group looks up one name is what stops those.
      */
     private static final String[] RESOURCE_NAMES = {"omr", "l7b", "q3m", "u1n", "fwz", "wqq",
             "user_name", "uy5", "brb", "w1f", "tv_request_unread_count", "olv", "zci", "fg5",
