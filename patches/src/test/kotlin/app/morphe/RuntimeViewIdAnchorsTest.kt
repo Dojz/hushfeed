@@ -1,6 +1,7 @@
 package app.morphe
 
 import app.morphe.patches.shared.compat.AppCompatibilities
+import com.android.apksig.internal.apk.AndroidBinXmlParser
 import com.android.tools.smali.dexlib2.DexFileFactory
 import com.android.tools.smali.dexlib2.Opcodes
 import com.android.tools.smali.dexlib2.iface.instruction.NarrowLiteralInstruction
@@ -24,7 +25,9 @@ import org.junit.Test
  * the other. Every name here exists in every retained build from 46.2.3 on, so a name that
  * resolves proves very little. What `view-id-anchors.txt` adds is an owner, a class with a real
  * name whose code loads the id. VideoDiggAssem loading g6r's id says g6r is still the like button,
- * and a build that hands g6r to something else fails here instead of on a phone.
+ * and a build that hands g6r to something else fails here instead of on a phone. An id that only
+ * layout XML sets is held through the layout instead: the feed cell's inflater loads the survey
+ * layouts, and the survey card's id has to be one of the ids those layouts set.
  *
  * <p>The table has to list exactly the lookups the code makes, so it can't fall behind the code.
  * Older fixtures only report what they cover, since the bundle doesn't claim them.
@@ -111,12 +114,22 @@ class RuntimeViewIdAnchorsTest {
     @Test
     fun `the resource table reader finds entries in every chunk and entry layout it reads`() {
         for ((flags, compact) in listOf(0 to false, SPARSE to false, OFFSET16 to false, 0 to true)) {
-            val ids = ResourceIds.read(syntheticTable(flags, compact))
-            assertEquals(
-                "type chunk flags $flags, compact entries $compact",
-                mapOf("com.example" to mapOf("first" to listOf(0x7f020000), "third" to listOf(0x7f020002))),
-                ids,
-            )
+            for (layouts in listOf(false, true)) {
+                val table = syntheticTable(flags, compact, layouts)
+                val label = "type chunk flags $flags, compact entries $compact, layouts $layouts"
+                assertEquals(
+                    label,
+                    mapOf("com.example" to mapOf("first" to listOf(0x7f020000), "third" to listOf(0x7f020002))),
+                    ResourceIds.read(table),
+                )
+                assertEquals(
+                    label,
+                    if (layouts) mapOf("com.example" to mapOf(
+                        0x7f030000 to listOf("res/a/first.xml"), 0x7f030002 to listOf("res/a/third.xml")))
+                    else emptyMap(),
+                    ResourceIds.files(table, "layout"),
+                )
+            }
         }
     }
 
@@ -126,6 +139,8 @@ class RuntimeViewIdAnchorsTest {
         val packageSuffix: String,
         /** The owner's class name, or null for none. */
         val owner: String?,
+        /** The owner loads a layout that sets the id, rather than loading the id itself. */
+        val viaLayout: Boolean,
     )
 
     private enum class State { OWNED, UNOWNED, BROKEN }
@@ -139,7 +154,11 @@ class RuntimeViewIdAnchorsTest {
     private fun coverage(apk: File, anchors: List<Anchor>, appPackage: String): List<Coverage> {
         val tables = ResourceIds.read(apk)
         val loaded = literalsLoadedBy(apk, anchors.mapNotNull { it.owner }.map(::descriptor).toSet())
-        return anchors.map { anchor ->
+        // Every package's layouts in one map: an id carries its package in its top byte.
+        val layouts = if (anchors.none { it.viaLayout }) emptyMap()
+            else ResourceIds.files(apk, "layout").values.fold(mutableMapOf<Int, List<String>>()) { all, one -> all.apply { putAll(one) } }
+        val setIn = mutableMapOf<String, Set<Int>>()
+        return ZipFile(apk).use { zip -> anchors.map { anchor ->
             val packageName = if (anchor.packageSuffix == "app") appPackage else "$appPackage.${anchor.packageSuffix}"
             val ids = tables[packageName].orEmpty()
             val used = anchor.names.firstOrNull { it in ids }
@@ -154,6 +173,20 @@ class RuntimeViewIdAnchorsTest {
                     "$packageName gives $used ${candidates.size} ids, ${candidates.joinToString { hex(it) }}")
                 owner == null -> Coverage(anchor, State.UNOWNED, "resolves as $used")
                 literals == null -> Coverage(anchor, State.BROKEN, "there is no class $owner")
+                anchor.viaLayout -> {
+                    val paths = literals.flatMap { layouts[it].orEmpty() }.distinct()
+                    val setting = paths.filter { path ->
+                        candidates.single() in setIn.getOrPut(path) { idsSetIn(zip, path) }
+                    }
+                    when {
+                        setting.isNotEmpty() -> Coverage(anchor, State.OWNED,
+                            "$owner loads ${setting.first()}, which sets $used")
+                        paths.isEmpty() -> Coverage(anchor, State.BROKEN, "$owner loads no layout")
+                        else -> Coverage(anchor, State.BROKEN,
+                            "none of the ${paths.size} layouts $owner loads sets ${hex(candidates.single())}, " +
+                                "the id of $used")
+                    }
+                }
                 candidates.single() in literals -> Coverage(anchor, State.OWNED, "$owner loads $used")
                 else -> {
                     val others = anchor.names.filter { name -> ids[name].orEmpty().any { it in literals } }
@@ -161,6 +194,23 @@ class RuntimeViewIdAnchorsTest {
                         "$owner doesn't load ${hex(candidates.single())}, the id of $used" +
                             if (others.isEmpty()) ", nor the id of any other name in the group"
                             else "; it loads the id of ${others.joinToString()}")
+                }
+            }
+        } }
+    }
+
+    /** Every android:id a compiled layout sets, on any element. */
+    private fun idsSetIn(zip: ZipFile, path: String): Set<Int> {
+        val entry = zip.getEntry(path) ?: return emptySet()
+        val parser = AndroidBinXmlParser(ByteBuffer.wrap(zip.getInputStream(entry).use { it.readBytes() }))
+        val ids = mutableSetOf<Int>()
+        while (true) {
+            when (parser.next()) {
+                AndroidBinXmlParser.EVENT_END_DOCUMENT -> return ids
+                AndroidBinXmlParser.EVENT_START_ELEMENT -> for (i in 0 until parser.attributeCount) {
+                    if (parser.getAttributeNameResourceId(i) == ANDROID_ID &&
+                        parser.getAttributeValueType(i) == AndroidBinXmlParser.VALUE_TYPE_REFERENCE
+                    ) ids += parser.getAttributeIntValue(i)
                 }
             }
         }
@@ -199,14 +249,17 @@ class RuntimeViewIdAnchorsTest {
         val anchors = text.lineSequence().map { it.trim() }.filter { it.isNotEmpty() && !it.startsWith("#") }.map { line ->
             val fields = line.split('|')
             assertEquals("a line of view-id-anchors.txt needs five fields: $line", 5, fields.size)
-            val (source, group, names, packageSuffix, owner) = fields
+            val (source, group, names, packageSuffix, ownerField) = fields
+            val viaLayout = ownerField.startsWith(LAYOUT_OWNER)
+            val owner = ownerField.removePrefix(LAYOUT_OWNER)
             assertTrue("bad package in: $line", packageSuffix.matches(Regex("[a-z][a-z0-9_]*")))
-            assertTrue("bad owner in: $line", owner == "-" || owner.matches(CLASS_NAME))
+            assertTrue("bad owner in: $line", owner == "-" && !viaLayout || owner.matches(CLASS_NAME))
             Anchor(
                 lookup = "$source|$group|$names",
                 names = names.split(','),
                 packageSuffix = packageSuffix,
                 owner = owner.takeIf { it != "-" },
+                viaLayout = viaLayout,
             )
         }.toList()
         val repeated = anchors.groupBy { it.lookup }.filterValues { it.size > 1 }.keys
@@ -238,7 +291,7 @@ class RuntimeViewIdAnchorsTest {
         return found
     }
 
-    private fun syntheticTable(flags: Int, compact: Boolean): ByteBuffer {
+    private fun syntheticTable(flags: Int, compact: Boolean, layouts: Boolean): ByteBuffer {
         val out = ByteBuffer.allocate(4096).order(ByteOrder.LITTLE_ENDIAN)
         fun chunk(type: Int, headerSize: Int, body: () -> Unit) {
             val start = out.position()
@@ -256,9 +309,39 @@ class RuntimeViewIdAnchorsTest {
             check(out.position() - start == 28 + 4 * strings.size)
             for (bytes in encoded) { out.put(bytes.size.toByte()).put(bytes.size.toByte()).put(bytes).put(0) }
         }
+        // Entries first at index 0, nothing at 1, third at 2, with key strings 0 and 1. An id entry
+        // is written as its header alone; a layout entry carries a string value, the index of its
+        // path in the table's pool: a full entry as a Res_value after the header, a compact one in
+        // the header's second word, with the value's type in the top byte of its flags.
+        fun typeChunk(typeId: Int, withValues: Boolean) = chunk(0x0201, 20 + 4) {
+            val start = out.position() - 8
+            out.put(typeId.toByte()).put(flags.toByte()).putShort(0)
+            val count = if (flags and SPARSE != 0) 2 else 3
+            out.putInt(count)
+            val entriesStart = out.position()
+            out.putInt(0)
+            out.putInt(4)
+            val size = if (withValues && !compact) 16 else 8
+            when {
+                flags and SPARSE != 0 -> out.putShort(0).putShort(0).putShort(2).putShort((size / 4).toShort())
+                flags and OFFSET16 != 0 -> out.putShort(0).putShort(0xffff.toShort()).putShort((size / 4).toShort()).putShort(0)
+                else -> out.putInt(0).putInt(-1).putInt(size)
+            }
+            out.putInt(entriesStart, out.position() - start)
+            for (key in 0..1) {
+                // A full entry is its size, its flags and a 32 bit key; a compact one puts
+                // a 16 bit key where the size goes and flags it.
+                when {
+                    compact && withValues -> out.putShort(key.toShort()).putShort((0x0008 or (0x03 shl 8)).toShort()).putInt(key)
+                    compact -> out.putShort(key.toShort()).putShort(0x0008).putInt(0)
+                    withValues -> out.putShort(8).putShort(0).putInt(key).putShort(8).put(0).put(0x03).putInt(key)
+                    else -> out.putShort(8).putShort(0).putInt(key)
+                }
+            }
+        }
         chunk(0x0002, 12) {
             out.putInt(1)
-            pool(emptyList())
+            pool(if (layouts) listOf("res/a/first.xml", "res/a/third.xml") else emptyList())
             chunk(0x0200, 288) {
                 val start = out.position() - 8
                 out.putInt(0x7f)
@@ -267,31 +350,11 @@ class RuntimeViewIdAnchorsTest {
                 val offsets = out.position()
                 out.putInt(0).putInt(0).putInt(0).putInt(0).putInt(0)
                 out.putInt(offsets, out.position() - start)
-                pool(listOf("attr", "id"))
+                pool(if (layouts) listOf("attr", "id", "layout") else listOf("attr", "id"))
                 out.putInt(offsets + 8, out.position() - start)
                 pool(listOf("first", "third"))
-                // The entries: first at index 0, nothing at 1, third at 2, with key strings 0 and 1.
-                chunk(0x0201, 20 + 4) {
-                    val start = out.position() - 8
-                    out.put(2).put(flags.toByte()).putShort(0)
-                    val count = if (flags and SPARSE != 0) 2 else 3
-                    out.putInt(count)
-                    val entriesStart = out.position()
-                    out.putInt(0)
-                    out.putInt(4)
-                    when {
-                        flags and SPARSE != 0 -> out.putShort(0).putShort(0).putShort(2).putShort((8 / 4).toShort())
-                        flags and OFFSET16 != 0 -> out.putShort(0).putShort(0xffff.toShort()).putShort((8 / 4).toShort()).putShort(0)
-                        else -> out.putInt(0).putInt(-1).putInt(8)
-                    }
-                    out.putInt(entriesStart, out.position() - start)
-                    for (key in 0..1) {
-                        // A full entry is its size, its flags and a 32 bit key; a compact one puts
-                        // a 16 bit key where the size goes and flags it.
-                        if (compact) out.putShort(key.toShort()).putShort(0x0008).putInt(0)
-                        else out.putShort(8).putShort(0).putInt(key)
-                    }
-                }
+                typeChunk(2, withValues = false)
+                if (layouts) typeChunk(3, withValues = true)
             }
         }
         out.flip()
@@ -321,6 +384,10 @@ class RuntimeViewIdAnchorsTest {
         val LITERAL = Regex(""""([^"]*)"""")
         val CLASS_NAME = Regex("""[a-z][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_$]*)+""")
 
+        /** An owner written `layout:<class>`: the class loads a layout that sets the id. */
+        const val LAYOUT_OWNER = "layout:"
+        const val ANDROID_ID = 0x010100d0
+
         /** The groups that may look up more than one name, as `source|group|names`, and why. */
         val MORE_THAN_ONE_NAME = mapOf(
             "feed/VideoOverlayHider.java|VISUAL_SEARCH_IDS|fb,cn" to
@@ -341,38 +408,67 @@ class RuntimeViewIdAnchorsTest {
 /**
  * The `id` entries of an APK's resource table, by package name and then entry name, with every id
  * a name has in the order of the entries. A name normally has one. TikTok 47.0.3 gives ten names
- * two or three, some because a made-up short name like `url` or `tv1` matches a real one. Only as
- * much of the format as that takes: the package chunks, their type and key string pools and the
- * type chunks for `id`, in the dense, sparse and 16 bit offset layouts, with full or compact entries.
+ * two or three, some because a made-up short name like `url` or `tv1` matches a real one. And the
+ * file each entry of a file type such as `layout` points to. Only as much of the format as that
+ * takes: the table's value strings, the package chunks, their type and key string pools and the
+ * type chunks, in the dense, sparse and 16 bit offset layouts, with full or compact entries.
  */
 internal object ResourceIds {
+    private const val STRING_POOL = 0x0001
     private const val TABLE = 0x0002
     private const val PACKAGE = 0x0200
     private const val TYPE = 0x0201
     private const val SPARSE = 0x01
     private const val OFFSET16 = 0x02
+    private const val COMPLEX = 0x0001
     private const val COMPACT = 0x0008
+    private const val TYPE_STRING = 0x03
 
-    fun read(apk: File): Map<String, Map<String, List<Int>>> {
-        val bytes = ZipFile(apk).use { zip ->
-            val entry = checkNotNull(zip.getEntry("resources.arsc")) { "${apk.name} has no resources.arsc" }
-            zip.getInputStream(entry).use { it.readBytes() }
-        }
-        return read(ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN))
-    }
+    fun read(apk: File): Map<String, Map<String, List<Int>>> = read(tableOf(apk))
 
     fun read(table: ByteBuffer): Map<String, Map<String, List<Int>>> {
         check(u16(table, 0) == TABLE) { "not a resource table" }
         val packages = linkedMapOf<String, MutableMap<String, MutableList<Int>>>()
         forEachChunk(table, u16(table, 2), table.limit()) { start, type ->
-            if (type == PACKAGE) readPackage(table, start, packages)
+            if (type == PACKAGE) readIds(table, PackageHeader(table, start), packages)
         }
         return packages
     }
 
-    private fun readPackage(table: ByteBuffer, start: Int, into: MutableMap<String, MutableMap<String, MutableList<Int>>>) {
+    /**
+     * The files the entries of [typeName] point to, by package name and then id, one path for each
+     * configuration that has one. A layout entry holds a string from the table's own pool: the path
+     * of its compiled XML inside the APK.
+     */
+    fun files(apk: File, typeName: String): Map<String, Map<Int, List<String>>> = files(tableOf(apk), typeName)
+
+    fun files(table: ByteBuffer, typeName: String): Map<String, Map<Int, List<String>>> {
+        check(u16(table, 0) == TABLE) { "not a resource table" }
+        var values: StringPool? = null
+        val packages = linkedMapOf<String, MutableMap<Int, MutableList<String>>>()
+        forEachChunk(table, u16(table, 2), table.limit()) { start, type ->
+            when (type) {
+                STRING_POOL -> if (values == null) values = StringPool(table, start)
+                PACKAGE -> readFiles(table, PackageHeader(table, start), typeName,
+                    checkNotNull(values) { "a package comes before the table's string pool" }, packages)
+                else -> Unit
+            }
+        }
+        return packages
+    }
+
+    private fun tableOf(apk: File): ByteBuffer {
+        val bytes = ZipFile(apk).use { zip ->
+            val entry = checkNotNull(zip.getEntry("resources.arsc")) { "${apk.name} has no resources.arsc" }
+            zip.getInputStream(entry).use { it.readBytes() }
+        }
+        return ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN)
+    }
+
+    private class PackageHeader(table: ByteBuffer, val start: Int) {
         val headerSize = u16(table, start + 2)
-        val packageId = table.getInt(start + 8)
+        val end = start + table.getInt(start + 4)
+        val id = table.getInt(start + 8)
         val name = buildString {
             for (i in 0 until 128) {
                 val c = table.getChar(start + 12 + 2 * i)
@@ -382,21 +478,66 @@ internal object ResourceIds {
         }
         val typeNames = StringPool(table, start + table.getInt(start + 268))
         val keys = StringPool(table, start + table.getInt(start + 276))
-        val typeIdOffset = if (headerSize >= 288) table.getInt(start + 284) else 0
-        val idType = (0 until typeNames.count).firstOrNull { typeNames[it] == "id" }?.let { it + 1 + typeIdOffset } ?: return
-        val ids = into.getOrPut(name) { linkedMapOf() }
-        forEachChunk(table, start + headerSize, start + table.getInt(start + 4)) { chunk, type ->
+        private val typeIdOffset = if (headerSize >= 288) table.getInt(start + 284) else 0
+
+        fun typeId(typeName: String) =
+            (0 until typeNames.count).firstOrNull { typeNames[it] == typeName }?.let { it + 1 + typeIdOffset }
+    }
+
+    private fun readIds(table: ByteBuffer, header: PackageHeader, into: MutableMap<String, MutableMap<String, MutableList<Int>>>) {
+        val idType = header.typeId("id") ?: return
+        val ids = into.getOrPut(header.name) { linkedMapOf() }
+        forEachChunk(table, header.start + header.headerSize, header.end) { chunk, type ->
             if (type != TYPE || u8(table, chunk + 8) != idType) return@forEachChunk
-            forEachEntry(table, chunk) { index, key ->
-                val id = (packageId shl 24) or (idType shl 16) or index
-                val sameName = ids.getOrPut(keys[key]) { mutableListOf() }
+            forEachEntry(table, chunk) { index, entry ->
+                val id = (header.id shl 24) or (idType shl 16) or index
+                val sameName = ids.getOrPut(header.keys[keyOf(table, entry)]) { mutableListOf() }
                 // Another configuration's chunk repeats the entries; an id is listed once.
                 if (id !in sameName) sameName += id
             }
         }
     }
 
-    private fun forEachEntry(table: ByteBuffer, chunk: Int, each: (index: Int, key: Int) -> Unit) {
+    private fun readFiles(
+        table: ByteBuffer,
+        header: PackageHeader,
+        typeName: String,
+        values: StringPool,
+        into: MutableMap<String, MutableMap<Int, MutableList<String>>>,
+    ) {
+        val fileType = header.typeId(typeName) ?: return
+        val files = into.getOrPut(header.name) { linkedMapOf() }
+        forEachChunk(table, header.start + header.headerSize, header.end) { chunk, type ->
+            if (type != TYPE || u8(table, chunk + 8) != fileType) return@forEachChunk
+            forEachEntry(table, chunk) { index, entry ->
+                val flags = u16(table, entry + 2)
+                // A compact entry keeps its value's type in the top byte of its flags and the value
+                // where a full entry keeps its key; a full one is followed by a Res_value. A complex
+                // entry holds a map, not a file.
+                val dataType: Int
+                val data: Int
+                when {
+                    flags and COMPACT != 0 -> { dataType = flags ushr 8; data = table.getInt(entry + 4) }
+                    flags and COMPLEX != 0 -> return@forEachEntry
+                    else -> {
+                        val value = entry + u16(table, entry)
+                        dataType = u8(table, value + 3)
+                        data = table.getInt(value + 4)
+                    }
+                }
+                if (dataType != TYPE_STRING) return@forEachEntry
+                val paths = files.getOrPut((header.id shl 24) or (fileType shl 16) or index) { mutableListOf() }
+                val path = values[data]
+                if (path !in paths) paths += path
+            }
+        }
+    }
+
+    /** A full entry keeps a 32 bit key after its size and flags; a compact one a 16 bit key first. */
+    private fun keyOf(table: ByteBuffer, entry: Int) =
+        if (u16(table, entry + 2) and COMPACT != 0) u16(table, entry) else table.getInt(entry + 4)
+
+    private fun forEachEntry(table: ByteBuffer, chunk: Int, each: (index: Int, entry: Int) -> Unit) {
         val flags = u8(table, chunk + 9)
         val count = table.getInt(chunk + 12)
         val entries = chunk + table.getInt(chunk + 16)
@@ -419,9 +560,7 @@ internal object ResourceIds {
                 }
             }
             if (offset == -1) continue
-            val entry = entries + offset
-            val key = if (u16(table, entry + 2) and COMPACT != 0) u16(table, entry) else table.getInt(entry + 4)
-            each(index, key)
+            each(index, entries + offset)
         }
     }
 
