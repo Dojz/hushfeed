@@ -82,7 +82,8 @@ val refreshingScreenshots = gradle.startParameter.taskNames.any {
 // has looked at, this build stops instead of quietly rewriting it away.
 val safeBouncyCastleVersion = libs.versions.bouncycastle.get()
 // 1.85 was checked on 2026-09-15 against the six advisories the catalog names: CVE-2025-8916
-// ends at 1.78, CVE-2026-5588 at 1.83, and the four bcprov CVEs at 1.85. It is rewritten
+// ends at 1.78, CVE-2026-5588 at 1.83, CVE-2025-14813 and CVE-2026-0636 at 1.84, and
+// CVE-2026-8763 and CVE-2026-13506 at 1.85. It is rewritten
 // all the same, because one reviewed release in the graph is easier to hold than two.
 val reviewedBouncyCastleRequests = setOf("1.85", safeBouncyCastleVersion)
 // Modules Robolectric declares with no version of its own, because the BOM it imports carries

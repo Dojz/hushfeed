@@ -43,4 +43,5 @@ public class AlwaysShowPublishDatePatchTest {
         assertTrue(AlwaysShowPublishDatePatch.showPostTimeForMainFeeds(true));
         assertFalse(AlwaysShowPublishDatePatch.showPostTimeForMainFeeds(false));
     }
+
 }
