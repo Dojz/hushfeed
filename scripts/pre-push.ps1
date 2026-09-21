@@ -297,36 +297,19 @@ try {
         $_ -eq '.github/ISSUE_TEMPLATE/bug_report.yml'
     }).Count -gt 0
 
-    if ($touchesScripts) {
-        Write-Step 'scripts changed, running their contract tests'
-        & (Join-Path $Root 'scripts/test-script-contracts.ps1') -Root $Root
-        if ($LASTEXITCODE -ne 0) { throw 'The script contract tests did not pass.' }
-    }
-
-    if ($touchesInjectedRegisterVerifier) {
-        Write-Step 'injected-register verifier changed, running its fixture tests'
-        & (Join-Path $Root 'scripts/test-injected-registers.ps1') -Root $Root
-        if ($LASTEXITCODE -ne 0) { throw 'The injected-register verifier fixture tests did not pass.' }
-    }
-
-    if ($touchesInjectedRegisterDevice) {
-        Write-Step 'injected-register device helper changed, running its cleanup fixtures'
-        & (Join-Path $Root 'scripts/test-injected-register-device.ps1') -Root $Root
-        if ($LASTEXITCODE -ne 0) { throw 'The injected-register device cleanup fixtures did not pass.' }
-    }
-
-    # Both gates below check each pushed commit, and check it in place only when it is HEAD and
+    # Every gate below checks each pushed commit, and checks it in place only when it is HEAD and
     # nothing in the working tree differs from it. Everything else goes to a clean worktree of the
     # commit. Uncommitted work that isn't in the push can fail it (another agent's did, twice on
     # 2026-09-21) or pass it, and a push of anything but HEAD would otherwise have HEAD checked in
     # its place. The whole tree counts: the tests read README.md, patches-list.json, the artwork
-    # and NOTICE as well as the sources, and the release facts are those same files.
+    # and NOTICE as well as the sources, the release facts are those same files, and the script
+    # contract tests copy them into their fixtures.
     if ($PSBoundParameters.ContainsKey('ChangedPaths')) {
         # A run by hand names its paths itself and checks this working tree as it stands.
         $head = $null
         $dirty = @()
         $gateCommits = @($null)
-    } elseif ($touchesCode -or $touchesRelease) {
+    } elseif ($touchesCode -or $touchesRelease -or $touchesScripts) {
         $head = ([string](Invoke-HookGit @('-C', $Root, 'rev-parse', 'HEAD') | Select-Object -Last 1)).Trim()
         $dirty = @(Invoke-HookGit @('-C', $Root, 'status', '--porcelain', '--untracked-files=all'))
         $gateCommits = @($script:pushedCommits)
@@ -339,6 +322,67 @@ try {
     }
     # A commit is checked in place when it is HEAD of a clean tree, or when a run by hand names none.
     function Test-InPlace([string]$Commit) { return -not $Commit -or ($dirty.Count -eq 0 -and $Commit -eq $head) }
+    # An in-place check reads this working tree, and another agent can change it during a build
+    # that takes minutes. The result then covers the commit plus that edit, so the tree is read
+    # again after each in-place step and the push stops if it moved. A run by hand checks the
+    # tree as it stands and has nothing to compare.
+    function Assert-TreeUnchanged([string]$Step) {
+        if (-not $head) { return }
+        $nowHead = ([string](Invoke-HookGit @('-C', $Root, 'rev-parse', 'HEAD') | Select-Object -Last 1)).Trim()
+        $nowDirty = @(Invoke-HookGit @('-C', $Root, 'status', '--porcelain', '--untracked-files=all'))
+        if ($nowHead -eq $head -and $nowDirty.Count -eq 0) { return }
+        $moved = if ($nowHead -ne $head) { "HEAD moved from $head to $nowHead" } else {
+            @($nowDirty | Select-Object -First 5 | ForEach-Object { $_.Trim() }) -join '; '
+        }
+        throw ("The working tree changed while $Step ran in place ($moved), so the result covers " +
+            'more than the pushed commit. Push again: a tree with uncommitted changes is checked ' +
+            'in a clean worktree of the commit instead.')
+    }
+
+    if ($touchesScripts) {
+        # Script, notice, failure message. The two injected-register suites run only when their
+        # own files moved; each one is the pushed commit's copy, run against that commit.
+        $suites = @(, @('scripts/test-script-contracts.ps1', 'scripts changed, running their contract tests',
+            'The script contract tests did not pass.'))
+        if ($touchesInjectedRegisterVerifier) {
+            $suites += , @('scripts/test-injected-registers.ps1', 'injected-register verifier changed, running its fixture tests',
+                'The injected-register verifier fixture tests did not pass.')
+        }
+        if ($touchesInjectedRegisterDevice) {
+            $suites += , @('scripts/test-injected-register-device.ps1', 'injected-register device helper changed, running its cleanup fixtures',
+                'The injected-register device cleanup fixtures did not pass.')
+        }
+        $scriptsLock = $null
+        try {
+            foreach ($scriptsCommit in $gateCommits) {
+                if (Test-InPlace $scriptsCommit) {
+                    $scriptsRoot = $Root
+                } else {
+                    if (-not $scriptsLock) { $scriptsLock = Enter-GateLock }
+                    $scriptsRoot = Get-GateWorktree -Commit $scriptsCommit
+                }
+                foreach ($suite in $suites) {
+                    $suiteScript = Join-Path $scriptsRoot $suite[0]
+                    if (-not (Test-Path -LiteralPath $suiteScript -PathType Leaf)) {
+                        # An older commit in the pushed range, from before the suite existed.
+                        Write-Step "$($suite[0]) is not in $scriptsCommit, so it has nothing to run there"
+                        continue
+                    }
+                    $where = if ($scriptsRoot -eq $Root) { '' } else { " for $scriptsCommit in $scriptsRoot" }
+                    Write-Step ($suite[1] + $where)
+                    $global:LASTEXITCODE = 0
+                    Invoke-WithoutGitEnvironment { & $suiteScript -Root $scriptsRoot }
+                    if ($LASTEXITCODE -ne 0) { throw $suite[2] }
+                }
+                if ($scriptsRoot -eq $Root) { Assert-TreeUnchanged 'the script tests' }
+            }
+        } finally {
+            if ($scriptsLock) {
+                $scriptsLock.ReleaseMutex()
+                $scriptsLock.Dispose()
+            }
+        }
+    }
 
     if ($touchesCode) {
         Write-Step 'extension or patch sources changed, running the runtime tests and the API level check'
@@ -404,6 +448,7 @@ try {
                         'test failed, an API level above the payload floor was reached, or the build could ' +
                         'not start. Push anyway with HUSHFEED_SKIP_PRE_PUSH=1.')
                 }
+                if ($gateRoot -eq $Root) { Assert-TreeUnchanged 'the runtime test build' }
             }
         } finally {
             if ($gateLock) {
@@ -451,6 +496,7 @@ try {
                 & $validate -Root $Root
             }
             if ($LASTEXITCODE -ne 0) { throw $factsFailed }
+            Assert-TreeUnchanged 'the release facts check'
         } else {
             # Every other push checks the files it carries, against the published index it leaves
             # alone. The indexed URL is still fetched; only the byte-for-byte hash comparison needs
@@ -478,6 +524,7 @@ try {
                     $global:LASTEXITCODE = 0
                     & $validate -Root $factsRoot @arguments
                     if ($LASTEXITCODE -ne 0) { throw $factsFailed }
+                    if ($factsRoot -eq $Root) { Assert-TreeUnchanged 'the release facts check' }
                 }
             } finally {
                 if ($factsLock) {

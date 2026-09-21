@@ -1389,6 +1389,26 @@ try {
             Assert-True ((Get-Content -LiteralPath $gateMarker -Raw) -like "*dir=$gateRepo marker=good*") `
                 'A clean tree was not built in place.'
 
+            # A tree that changes while it is built in place: an edit landing mid-build was tested
+            # along with the commit, so that build says nothing about the commit alone.
+            $meddler = Join-Path $hookRoot 'gate-wrapper-meddles.ps1'
+            $meddled = Join-Path $gateRepo 'README.md'
+            Set-Content -LiteralPath $meddler -Encoding UTF8 -Value @(
+                'param([string]$ProjectDir, [string[]]$Tasks)',
+                'Set-Content -LiteralPath (Join-Path $ProjectDir ''README.md'') -Value ''edited mid-build'' -Encoding ASCII',
+                'exit 0')
+            $env:HUSHFEED_BUILD_WRAPPER = $meddler
+            try {
+                Assert-Throws { & $prePushScript -Root $gateRepo -PushedRefs "refs/heads/main $fixed refs/heads/main $broken" 6> $null } `
+                    '*changed while the runtime test build ran in place*' `
+                    'A working tree that changed during an in-place build passed on that build.'
+            } finally {
+                $env:HUSHFEED_BUILD_WRAPPER = $gateStub
+                Remove-Item -LiteralPath $meddled -Force -ErrorAction SilentlyContinue
+            }
+            & $prePushScript -Root $gateRepo -PushedRefs "refs/heads/main $fixed refs/heads/main $broken" 6> $null
+            Assert-True ($LASTEXITCODE -eq 0) 'A clean tree failed once the mid-build edit was gone.'
+
             # But only for HEAD. A clean tree whose HEAD is good says nothing about an older commit
             # pushed by name, or another branch, and those used to have HEAD built in their place.
             Assert-Throws { & $prePushScript -Root $gateRepo -PushedRefs "refs/heads/other $broken refs/heads/other $good" 6> $null } `
@@ -1514,6 +1534,35 @@ try {
             $checked = Get-Content -LiteralPath $gateFacts -Raw
             Assert-True ($LASTEXITCODE -eq 0 -and $checked -like "*root=$gateRepo readme=good results=True*") `
                 "A clean tree pushing HEAD was not checked in place: $checked"
+
+            # The script suites are the pushed commit's too, run against that commit: they copy the
+            # root files into their fixtures, and ran from the working tree until 2026-09-21. A stub
+            # suite records where it ran and the state it was committed with.
+            $gateContracts = Join-Path $hookRoot 'gate-contracts-ran.txt'
+            $contractsStub = Join-Path $gateRepo 'scripts/test-script-contracts.ps1'
+            function Save-GateContracts([string]$State) {
+                Set-Content -LiteralPath $contractsStub -Encoding UTF8 -Value @(
+                    'param([string]$Root)',
+                    "Set-Content -LiteralPath '$gateContracts' -Value (`"root=`$Root state=$State`")",
+                    $(if ($State -eq 'broken') { 'exit 1' } else { 'exit 0' }))
+                & git -C $gateRepo add scripts/test-script-contracts.ps1
+                & git -C $gateRepo commit --quiet -m "contracts $State"
+                return (& git -C $gateRepo rev-parse HEAD).Trim()
+            }
+            $contractsGood = Save-GateContracts 'good'
+            Set-Content -LiteralPath $contractsStub -Encoding UTF8 -Value @('param([string]$Root)', 'exit 1')
+            & $prePushScript -Root $gateRepo -PushedRefs "refs/heads/main $contractsGood refs/heads/main $factsFixed" 6> $null
+            $ran = Get-Content -LiteralPath $gateContracts -Raw
+            Assert-True ($LASTEXITCODE -eq 0 -and $ran -like '*state=good*' -and $ran -notlike "*root=$gateRepo *") `
+                "The script contract tests ran from the working tree instead of the pushed commit: $ran"
+            & git -C $gateRepo checkout --quiet -- scripts/test-script-contracts.ps1
+            & $prePushScript -Root $gateRepo -PushedRefs "refs/heads/main $contractsGood refs/heads/main $factsFixed" 6> $null
+            $ran = Get-Content -LiteralPath $gateContracts -Raw
+            Assert-True ($LASTEXITCODE -eq 0 -and $ran -like "*root=$gateRepo state=good*") `
+                "A clean tree pushing HEAD did not run its script contract tests in place: $ran"
+            $contractsBroken = Save-GateContracts 'broken'
+            Assert-Throws { & $prePushScript -Root $gateRepo -PushedRefs "refs/heads/main $contractsBroken refs/heads/main $contractsGood" 6> $null } `
+                '*script contract tests did not pass*' 'A push whose own script contract tests fail was let through.'
         } finally {
             foreach ($line in @(& git -C $gateRepo worktree list --porcelain)) {
                 if ($line -like 'worktree *') {
