@@ -32,12 +32,12 @@ extensions/tiktok/src/main/java/app/morphe/extension/tiktok/featuregatelab/Featu
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/featuregatelab/FeatureGateLabRuntime.java|X.0b13
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/featuregatelab/SettingsManagerObservationRecorder.java|X.0BZ5
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/featuregatelab/SettingsManagerObservationRecorder.java|X.0Bb9
-extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|cn
+extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|d4
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|ej_
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|ej9
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|ep7
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|f7u
-extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|fb
+extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|fo
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|g6r
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|g6s
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feed/VideoOverlayHider.java|g6t

@@ -33,13 +33,19 @@ import java.util.WeakHashMap;
 /**
  * Hides controls TikTok lays over the video player.
  *
- * Ids were read off the live view hierarchy of TikTok 47.0.3 with a video paused. Where
- * 47.0.3 renamed a 46.x view, only the 47.0.3 name is looked up: TikTok hands the old short
- * names out again, and on 47.0.3 each one names some other view, which a fallback would have
- * hidden in any cell that lacked the current one.
+ * Ids were read off the live view hierarchy of TikTok 47.0.3 with a video paused, apart from
+ * the two search module ids, which were read off the module's code in the APK. Where 47.0.3
+ * renamed a 46.x view, only the 47.0.3 name is looked up: TikTok hands the old short names
+ * out again, and on 47.0.3 each one names some other view, which a fallback would have hidden
+ * in any cell that lacked the current one.
  * <pre>
- *   df_search_biz:id/fb   full screen layer the visual search prompt lives in
- *   df_search_biz:id/cn   the clickable "Search this image" pill inside it
+ *   df_search_biz:id/fo   the full screen layer the visual search prompt lives in, the root
+ *                         of the layout SearchVisualSearchContainerComponentV2 inflates.
+ *                         46.2.3 called it fb, which on 47.0.3 is a row of the visual search
+ *                         camera page
+ *   df_search_biz:id/d4   the clickable visual search pill, the root of both layouts the VTag
+ *                         processors inflate. 46.2.3 called it cn, which on 47.0.3 is a row of
+ *                         the floating card in search results
  *   id/k_5                the Live entrance, top left, 158 px square, no description
  *   id/liy                the interaction area over the video: the right-hand column's slots,
  *                         the caption block and the music row
@@ -69,7 +75,8 @@ import java.util.WeakHashMap;
 public final class VideoOverlayHider {
     private static final String APP_PACKAGE = "com.zhiliaoapp.musically";
     private static final String SEARCH_MODULE_PACKAGE = APP_PACKAGE + ".df_search_biz";
-    private static final String[] VISUAL_SEARCH_IDS = {"fb", "cn"};
+    private static final String[] VISUAL_SEARCH_LAYER_IDS = {"fo"};
+    private static final String[] VISUAL_SEARCH_PILL_IDS = {"d4"};
     private static final String[] LIVE_ENTRANCE_IDS = {"k_5"};
 
     /** The caption under the creator's name, and the music cover block beside it. */
@@ -249,9 +256,8 @@ public final class VideoOverlayHider {
             }
 
             if (Settings.HIDE_VISUAL_SEARCH.get()) {
-                for (String name : VISUAL_SEARCH_IDS) {
-                    hide(activity, SEARCH_MODULE_PACKAGE, new String[]{name});
-                }
+                hide(activity, SEARCH_MODULE_PACKAGE, VISUAL_SEARCH_LAYER_IDS);
+                hide(activity, SEARCH_MODULE_PACKAGE, VISUAL_SEARCH_PILL_IDS);
             }
             if (Settings.HIDE_LIVE_ENTRANCE.get()) {
                 hide(activity, APP_PACKAGE, LIVE_ENTRANCE_IDS);
@@ -758,6 +764,10 @@ public final class VideoOverlayHider {
     /** Lets a test stand in for a TikTok resource id, which only the real APK resolves. */
     static void resolveForTests(String name, int id) {
         RESOURCE_IDS.putForTests(APP_PACKAGE, name, id);
+    }
+
+    static void resolveSearchModuleForTests(String name, int id) {
+        RESOURCE_IDS.putForTests(SEARCH_MODULE_PACKAGE, name, id);
     }
 
     /**

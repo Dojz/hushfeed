@@ -9,7 +9,8 @@
 # owner    a class of the declared TikTok target whose code loads the id of the first name the
 #          target defines; or layout:<class>, a class whose code loads a layout that sets that id
 #          (the id is set in XML and no class with a real name loads it); or - where neither
-#          exists: only classes R8 renamed load the id or its layout
+#          exists: only classes R8 renamed load the id or its layout. A dynamic feature module's
+#          classes count: its code ships as lib/<abi>/libdex_<module>.so, which the test reads
 #
 # RuntimeViewIdAnchorsTest holds every line against the code and against the target fixture.
 # TikTok hands the same short names out again on every build, mostly to other views, so every
@@ -18,7 +19,8 @@
 # names a group to read off the new build's live view tree again. An owner shared by two groups
 # (VideoDiggAssem holds the like button and its count) shows both ids are still its own, not
 # which is which, so two names swapped between such groups pass; read those pairs off the tree.
-feed/VideoOverlayHider.java|VISUAL_SEARCH_IDS|fb,cn|df_search_biz|-
+feed/VideoOverlayHider.java|VISUAL_SEARCH_LAYER_IDS|fo|df_search_biz|com.ss.android.ugc.aweme.search.entry.visualsearch.v2.ui.SearchVisualSearchContainerComponentV2
+feed/VideoOverlayHider.java|VISUAL_SEARCH_PILL_IDS|d4|df_search_biz|com.ss.android.ugc.aweme.search.entry.visualsearch.v2.tagv3.impl.AlgoVTagProcessorV3
 feed/VideoOverlayHider.java|LIVE_ENTRANCE_IDS|k_5|app|com.bytedance.tiktok.homepage.mainfragment.inflate.HomepageIconServiceImpl
 feed/VideoOverlayHider.java|CAPTION_IDS|desc|app|com.ss.android.ugc.aweme.feed.assem.desc.VideoDescAssem
 feed/VideoOverlayHider.java|MUSIC_IDS|videomusiccoverblock|app|com.by.andInflater.common_feed_interaction_area_feed

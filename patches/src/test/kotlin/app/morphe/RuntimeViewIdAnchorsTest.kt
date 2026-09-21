@@ -4,12 +4,15 @@ import app.morphe.patches.shared.compat.AppCompatibilities
 import com.android.apksig.internal.apk.AndroidBinXmlParser
 import com.android.tools.smali.dexlib2.DexFileFactory
 import com.android.tools.smali.dexlib2.Opcodes
+import com.android.tools.smali.dexlib2.dexbacked.DexBackedDexFile
+import com.android.tools.smali.dexlib2.iface.DexFile
 import com.android.tools.smali.dexlib2.iface.instruction.NarrowLiteralInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.formats.ArrayPayload
 import java.io.File
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.util.zip.ZipFile
+import java.util.zip.ZipInputStream
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -220,13 +223,16 @@ class RuntimeViewIdAnchorsTest {
 
     private fun hex(id: Int) = "0x%08x".format(id)
 
-    /** Every literal each of [owners] loads in any of its methods, one dex file at a time. */
+    /**
+     * Every literal each of [owners] loads in any of its methods, one dex file at a time: the
+     * APK's own and each dynamic feature module's. TikTok ships a module's code as a zip holding
+     * its dex, named lib/<abi>/libdex_<module>.so, the same file under every ABI.
+     */
     private fun literalsLoadedBy(apk: File, owners: Set<String>): Map<String, Set<Int>> {
         val found = mutableMapOf<String, MutableSet<Int>>()
         if (owners.isEmpty()) return found
-        val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
-        for (entry in container.dexEntryNames) {
-            for (classDef in container.getEntry(entry)!!.dexFile.classes) {
+        fun scan(dexFile: DexFile) {
+            for (classDef in dexFile.classes) {
                 if (classDef.type !in owners) continue
                 val literals = found.getOrPut(classDef.type) { mutableSetOf() }
                 for (method in classDef.methods) {
@@ -235,6 +241,19 @@ class RuntimeViewIdAnchorsTest {
                             is NarrowLiteralInstruction -> literals += instruction.narrowLiteral
                             is ArrayPayload -> instruction.arrayElements.forEach { literals += it.toInt() }
                         }
+                    }
+                }
+            }
+        }
+        val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
+        for (entry in container.dexEntryNames) scan(container.getEntry(entry)!!.dexFile)
+        ZipFile(apk).use { zip ->
+            val modules = zip.entries().asSequence().filter { FEATURE_DEX.matches(it.name) }
+                .distinctBy { it.name.substringAfterLast('/') }.toList()
+            for (module in modules) {
+                ZipInputStream(zip.getInputStream(module)).use { inner ->
+                    generateSequence { inner.nextEntry }.filter { it.name.matches(Regex("classes\\d*\\.dex")) }.forEach {
+                        scan(DexBackedDexFile(Opcodes.getDefault(), ByteBuffer.wrap(inner.readBytes())))
                     }
                 }
             }
@@ -388,11 +407,11 @@ class RuntimeViewIdAnchorsTest {
         const val LAYOUT_OWNER = "layout:"
         const val ANDROID_ID = 0x010100d0
 
+        /** A dynamic feature module's code: `lib/arm64-v8a/libdex_df_search_biz.so`. */
+        val FEATURE_DEX = Regex("""lib/[^/]+/libdex_[^/]+\.so""")
+
         /** The groups that may look up more than one name, as `source|group|names`, and why. */
         val MORE_THAN_ONE_NAME = mapOf(
-            "feed/VideoOverlayHider.java|VISUAL_SEARCH_IDS|fb,cn" to
-                "two views of the target, each hidden on its own: the visual search layer and the " +
-                "pill inside it",
             "blockauthor/FeedVisibility.java|HOME_TAB_RESOURCE_NAMES|omq,o1k" to
                 "46.x fallback, left while FeedVisibility.java has another change open (2026-09-21)",
             "blockauthor/FeedVisibility.java|INBOX_TAB_RESOURCE_NAMES|omr,o1l" to

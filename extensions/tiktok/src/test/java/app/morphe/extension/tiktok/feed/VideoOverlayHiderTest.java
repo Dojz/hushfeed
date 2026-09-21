@@ -310,6 +310,57 @@ public class VideoOverlayHiderTest {
     }
 
     @Test
+    public void visualSearchHidesItsFortySevenLayerAndPillAndNothingTheOldNamesNameNow() {
+        // SearchVisualSearchContainerComponentV2 loads fo on 47.0.3 where it loaded fb, and the
+        // VTag processors inflate a pill whose root is d4 where it was cn. On 47.0.3 fb is a row
+        // of the visual search camera page and cn a row of the floating card in search results.
+        int layerId = 0x7e0a0a61;
+        int pillId = 0x7e0a0a62;
+        int cameraRowId = 0x7e0a0a63;
+        int floatingCardRowId = 0x7e0a0a64;
+        VideoOverlayHider.resolveSearchModuleForTests("fo", layerId);
+        VideoOverlayHider.resolveSearchModuleForTests("d4", pillId);
+        VideoOverlayHider.resolveSearchModuleForTests("fb", cameraRowId);
+        VideoOverlayHider.resolveSearchModuleForTests("cn", floatingCardRowId);
+        try (var controller = Robolectric.buildActivity(Activity.class).setup()) {
+            Activity activity = controller.get();
+            Utils.setContext(activity);
+            FrameLayout root = new FrameLayout(activity);
+            LinearLayout cameraRow = new LinearLayout(activity);
+            cameraRow.setId(cameraRowId);
+            LinearLayout floatingCardRow = new LinearLayout(activity);
+            floatingCardRow.setId(floatingCardRowId);
+            root.addView(cameraRow);
+            root.addView(floatingCardRow);
+            activity.setContentView(root);
+
+            // No prompt on screen, so there is nothing under the current names to prefer.
+            Settings.HIDE_VISUAL_SEARCH.save(true);
+            VideoOverlayHider.applyTo(activity);
+            assertEquals("a 46.2.3 name hid the camera page's row", View.VISIBLE, cameraRow.getVisibility());
+            assertEquals("a 46.2.3 name hid the floating card's row",
+                    View.VISIBLE, floatingCardRow.getVisibility());
+
+            FrameLayout layer = new FrameLayout(activity);
+            layer.setId(layerId);
+            LinearLayout pill = new LinearLayout(activity);
+            pill.setId(pillId);
+            root.addView(layer);
+            root.addView(pill);
+            VideoOverlayHider.applyTo(activity);
+            assertEquals(View.GONE, layer.getVisibility());
+            assertEquals(View.GONE, pill.getVisibility());
+            assertEquals(View.VISIBLE, cameraRow.getVisibility());
+            assertEquals(View.VISIBLE, floatingCardRow.getVisibility());
+        } finally {
+            Settings.HIDE_VISUAL_SEARCH.save(false);
+            for (String name : new String[]{"fo", "d4", "fb", "cn"}) {
+                VideoOverlayHider.resolveSearchModuleForTests(name, 0);
+            }
+        }
+    }
+
+    @Test
     public void anOrdinaryPostWithoutASurveyDoesNotReportTheBuildBroken() {
         int cellId = 0x7f0a0a22;
         int surveyId = 0x7f0a0a23;
