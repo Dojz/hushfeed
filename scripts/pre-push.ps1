@@ -19,7 +19,9 @@ param(
     [Parameter(Position = 1)][string]$RemoteUrl,
     [string]$Root,
     [string[]]$ChangedPaths,
-    [string]$PushedRefs
+    [string]$PushedRefs,
+    # How long a push waits for another push from this checkout to finish with the gate worktree.
+    [int]$GateLockTimeoutSeconds = 3600
 )
 
 $ErrorActionPreference = 'Stop'
@@ -32,8 +34,8 @@ $ErrorActionPreference = 'Stop'
 # case rather than the rare one.
 if (-not $Root) { $Root = Split-Path -Parent $PSScriptRoot }
 $zeroObject = '0' * 40
-# The commits this push carries, peeled, filled in by Get-PushedPaths. The build gate runs on these
-# when the working tree holds uncommitted changes under the paths it builds.
+# The commits this push carries, peeled, filled in by Get-PushedPaths. The build gate builds each
+# of these, and never whatever else the working tree holds.
 $script:pushedCommits = New-Object System.Collections.Generic.List[string]
 
 function Write-Step {
@@ -100,49 +102,90 @@ function Get-PushedPaths {
     return $paths
 }
 
-function Invoke-HookGit {
+function Invoke-WithoutGitEnvironment {
     <#
-        git without the hook's own GIT_* environment, returning standard output and throwing on
-        failure. Git exports GIT_DIR and its relatives to a hook, and git -C does not override
-        them, so a worktree command run with them set would act on this repository's own working
-        tree rather than the one it names. Windows PowerShell 5.1 turns a native command's
-        standard error into a terminating error under Stop, so that preference is relaxed here.
+        Runs $Action with every GIT_* variable removed, and puts them back after. Git exports
+        GIT_DIR and its relatives to a hook, and git -C does not override them, so a worktree
+        command run with them set would act on this repository's own working tree rather than the
+        one it names. A build started with them set would read this checkout's git state too.
     #>
-    param([string[]]$Arguments)
+    param([Parameter(Mandatory = $true)][scriptblock]$Action)
     $saved = @{}
     foreach ($variable in @(Get-ChildItem Env: | Where-Object { $_.Name -like 'GIT_*' })) {
         $saved[$variable.Name] = $variable.Value
         Remove-Item -LiteralPath ('Env:\' + $variable.Name)
     }
-    $preference = $ErrorActionPreference
-    $ErrorActionPreference = 'Continue'
     try {
-        $errors = New-Object System.Collections.Generic.List[string]
-        $output = @(& git @Arguments 2>&1 | ForEach-Object {
-            if ($_ -is [System.Management.Automation.ErrorRecord]) { $errors.Add($_.ToString()) } else { $_ }
-        })
-        if ($LASTEXITCODE -ne 0) { throw "git $($Arguments -join ' ') failed: $($errors -join ' ')" }
-        return $output
+        & $Action
     } finally {
-        $ErrorActionPreference = $preference
         foreach ($name in $saved.Keys) { Set-Item -LiteralPath ('Env:\' + $name) -Value $saved[$name] }
     }
 }
 
-function Get-GateWorktree {
+function Invoke-HookGit {
     <#
-        A clean worktree of $Commit in the temp directory, reused between pushes so its build
-        folder stays warm. The name follows this checkout's path, so two checkouts never share one.
+        git without the hook's own GIT_* environment, returning standard output and throwing on
+        failure. Windows PowerShell 5.1 turns a native command's standard error into a terminating
+        error under Stop, so that preference is relaxed here.
     #>
-    param([Parameter(Mandatory = $true)][string]$Commit)
+    param([string[]]$Arguments)
+    Invoke-WithoutGitEnvironment {
+        $preference = $ErrorActionPreference
+        $ErrorActionPreference = 'Continue'
+        try {
+            $errors = New-Object System.Collections.Generic.List[string]
+            $output = @(& git @Arguments 2>&1 | ForEach-Object {
+                if ($_ -is [System.Management.Automation.ErrorRecord]) { $errors.Add($_.ToString()) } else { $_ }
+            })
+            if ($LASTEXITCODE -ne 0) { throw "git $($Arguments -join ' ') failed: $($errors -join ' ')" }
+            return $output
+        } finally {
+            $ErrorActionPreference = $preference
+        }
+    }
+}
+
+function Get-GateKey {
+    # Names this checkout's gate worktree and lock, so two checkouts never share either.
     $hasher = [System.Security.Cryptography.SHA256]::Create()
     try {
         $digest = $hasher.ComputeHash([Text.Encoding]::UTF8.GetBytes([IO.Path]::GetFullPath($Root).ToLowerInvariant()))
     } finally {
         $hasher.Dispose()
     }
-    $key = -join ($digest[0..5] | ForEach-Object { $_.ToString('x2') })
-    $tree = Join-Path ([IO.Path]::GetTempPath()) "hushfeed-pre-push-$key"
+    return -join ($digest[0..5] | ForEach-Object { $_.ToString('x2') })
+}
+
+function Enter-GateLock {
+    <#
+        One push at a time through this checkout's gate worktree. Two pushes from one checkout,
+        two agents sharing a tree for instance, would otherwise share it, and the second one's
+        checkout could land while the first one's build was still reading the tree, so the first
+        verdict would describe the second commit. Returns the held mutex; release it when done.
+    #>
+    $mutex = New-Object System.Threading.Mutex($false, "Local\hushfeed-pre-push-$(Get-GateKey)")
+    $owned = $false
+    try {
+        $owned = $mutex.WaitOne([TimeSpan]::FromSeconds($GateLockTimeoutSeconds))
+    } catch [System.Threading.AbandonedMutexException] {
+        # The last holder ended without letting go. The worktree is reset before every build.
+        $owned = $true
+    }
+    if (-not $owned) {
+        $mutex.Dispose()
+        throw ("Another push from this checkout held the gate worktree for $GateLockTimeoutSeconds " +
+            'seconds. Let it finish and push again.')
+    }
+    return $mutex
+}
+
+function Get-GateWorktree {
+    <#
+        A clean worktree of $Commit in the temp directory, reused between pushes so its build
+        folder stays warm. Hold Enter-GateLock while using it.
+    #>
+    param([Parameter(Mandatory = $true)][string]$Commit)
+    $tree = Join-Path ([IO.Path]::GetTempPath()) "hushfeed-pre-push-$(Get-GateKey)"
     if (Test-Path -LiteralPath (Join-Path $tree '.git')) {
         Invoke-HookGit @('-C', $tree, 'checkout', '--detach', '--force', '--quiet', $Commit) | Out-Null
         Invoke-HookGit @('-C', $tree, 'clean', '-fdxq', '-e', 'build', '-e', '.gradle', '-e', 'local.properties') | Out-Null
@@ -293,37 +336,49 @@ try {
             throw "HUSHFEED_BUILD_WRAPPER names $wrapper, which is not there."
         }
 
-        # Gradle builds whatever tree it is pointed at, and the working tree can hold uncommitted
-        # work that is not in the push: another agent's, on 2026-09-21, failed a clean push, and an
-        # uncommitted fix would as easily pass a broken one. So when the paths this gate builds are
-        # dirty, it builds a clean worktree of each pushed commit instead. A clean tree builds in
-        # place, as it always did.
-        $gatedPaths = @('extensions', 'patches', 'gradle', 'settings.gradle.kts', 'build.gradle.kts')
-        $dirty = @(Invoke-HookGit (@('-C', $Root, 'status', '--porcelain', '--untracked-files=all', '--') + $gatedPaths))
-        if ($dirty.Count -eq 0) {
-            $gateCommits = @($null)
-        } else {
-            $gateCommits = @($script:pushedCommits)
-            if ($gateCommits.Count -eq 0) {
-                $gateCommits = @(([string](Invoke-HookGit @('-C', $Root, 'rev-parse', 'HEAD') | Select-Object -Last 1)).Trim())
-            }
+        # Gradle builds whatever tree it is pointed at, so the gate builds each pushed commit, and
+        # builds it in place only when it is HEAD and nothing in the working tree differs from it.
+        # Everything else goes to a clean worktree of the commit. Uncommitted work that isn't in the
+        # push can fail it (another agent's did, on 2026-09-21) or pass it, and a push of anything
+        # but HEAD would otherwise have HEAD tested in its place. The whole tree counts: the tests
+        # read README.md, patches-list.json, the artwork and NOTICE as well as the sources.
+        $head = ([string](Invoke-HookGit @('-C', $Root, 'rev-parse', 'HEAD') | Select-Object -Last 1)).Trim()
+        $dirty = @(Invoke-HookGit @('-C', $Root, 'status', '--porcelain', '--untracked-files=all'))
+        $gateCommits = @($script:pushedCommits)
+        if ($gateCommits.Count -eq 0) { $gateCommits = @($head) }
+        if ($dirty.Count -gt 0) {
             $shown = @($dirty | Select-Object -First 5 | ForEach-Object { $_.Trim() }) -join '; '
-            Write-Step ("uncommitted changes under the built paths ($shown), so the gate builds a " +
-                "clean worktree of the pushed commit instead of this working tree")
+            Write-Step ("uncommitted changes in the working tree ($shown), so the gate builds a clean " +
+                'worktree of each pushed commit instead of this working tree')
         }
-        foreach ($gateCommit in $gateCommits) {
-            $gateRoot = if ($gateCommit) { Get-GateWorktree -Commit $gateCommit } else { $Root }
-            if ($gateCommit) { Write-Step "building $gateCommit in $gateRoot" }
-            $global:LASTEXITCODE = 0
-            if ($wrapper) {
-                & $wrapper -ProjectDir $gateRoot -Tasks $tasks
-            } else {
-                & (Join-Path $gateRoot 'gradlew.bat') -p $gateRoot @tasks
+        $gateLock = $null
+        try {
+            foreach ($gateCommit in $gateCommits) {
+                if ($dirty.Count -eq 0 -and $gateCommit -eq $head) {
+                    $gateRoot = $Root
+                } else {
+                    if (-not $gateLock) { $gateLock = Enter-GateLock }
+                    $gateRoot = Get-GateWorktree -Commit $gateCommit
+                    Write-Step "building $gateCommit in $gateRoot"
+                }
+                $global:LASTEXITCODE = 0
+                Invoke-WithoutGitEnvironment {
+                    if ($wrapper) {
+                        & $wrapper -ProjectDir $gateRoot -Tasks $tasks
+                    } else {
+                        & (Join-Path $gateRoot 'gradlew.bat') -p $gateRoot @tasks
+                    }
+                }
+                if ($LASTEXITCODE -ne 0) {
+                    throw ('The runtime test build did not pass. Read the output above: it says whether a ' +
+                        'test failed, an API level above the payload floor was reached, or the build could ' +
+                        'not start. Push anyway with HUSHFEED_SKIP_PRE_PUSH=1.')
+                }
             }
-            if ($LASTEXITCODE -ne 0) {
-                throw ('The runtime test build did not pass. Read the output above: it says whether a ' +
-                    'test failed, an API level above the payload floor was reached, or the build could ' +
-                    'not start. Push anyway with HUSHFEED_SKIP_PRE_PUSH=1.')
+        } finally {
+            if ($gateLock) {
+                $gateLock.ReleaseMutex()
+                $gateLock.Dispose()
             }
         }
     }

@@ -1155,6 +1155,10 @@ try {
     try {
         $env:GITHUB_ACTOR = 'contract'
         $env:GITHUB_TOKEN = 'contract'
+        # The stubs, markers and remotes these cases leave beside the repository's own files are
+        # none of its content. Visible to git, they would count as uncommitted work and send this
+        # build to a gate worktree, which the cases after this one test on a repository of their own.
+        Set-Content -LiteralPath (Join-Path $hookRoot '.git/info/exclude') -Value '/*' -Encoding ASCII
         $wrapperMarker = Join-Path $hookRoot 'wrapper-ran.txt'
         $wrapperStub = Join-Path $hookRoot 'build-wrapper.ps1'
         Set-Content -LiteralPath $wrapperStub -Encoding UTF8 -Value @(
@@ -1189,7 +1193,7 @@ try {
         Set-Content -LiteralPath $gateStub -Encoding UTF8 -Value @(
             'param([string]$ProjectDir, [string[]]$Tasks)',
             '$state = (Get-Content -LiteralPath (Join-Path $ProjectDir ''extensions/marker.txt'') -Raw).Trim()',
-            "Set-Content -LiteralPath '$gateMarker' -Value (`"dir=`$ProjectDir marker=`$state`")",
+            "Set-Content -LiteralPath '$gateMarker' -Value (`"dir=`$ProjectDir marker=`$state gitdir=`$env:GIT_DIR`")",
             'if ($state -eq ''broken'') { exit 1 }',
             'exit 0')
         $env:HUSHFEED_BUILD_WRAPPER = $gateStub
@@ -1222,6 +1226,76 @@ try {
             Assert-True ($LASTEXITCODE -eq 0) 'A clean tree with a good commit did not pass.'
             Assert-True ((Get-Content -LiteralPath $gateMarker -Raw) -like "*dir=$gateRepo marker=good*") `
                 'A clean tree was not built in place.'
+
+            # But only for HEAD. A clean tree whose HEAD is good says nothing about an older commit
+            # pushed by name, or another branch, and those used to have HEAD built in their place.
+            Assert-Throws { & $prePushScript -Root $gateRepo -PushedRefs "refs/heads/other $broken refs/heads/other $good" 6> $null } `
+                '*did not pass*' 'A clean tree passed a broken commit that was pushed but is not HEAD.'
+
+            # Uncommitted files anywhere count, not only under the source folders: the tests read
+            # README.md and patches-list.json from the root.
+            $rootFile = Join-Path $gateRepo 'README.md'
+            Set-Content -LiteralPath $rootFile -Value 'uncommitted' -Encoding ASCII
+            & $prePushScript -Root $gateRepo -PushedRefs "refs/heads/main $fixed refs/heads/main $broken" 6> $null
+            $built = Get-Content -LiteralPath $gateMarker -Raw
+            Assert-True ($LASTEXITCODE -eq 0 -and $built -like '*marker=good*' -and $built -notlike "*dir=$gateRepo marker*") `
+                "An uncommitted root file was built in place with the push: $built"
+            Remove-Item -LiteralPath $rootFile -Force
+
+            # Git hands a hook GIT_DIR and GIT_WORK_TREE. Neither may steer the worktree commands
+            # into this working tree, nor reach the build.
+            Set-Content -LiteralPath $gateFile -Value 'broken' -Encoding ASCII
+            $headBefore = (& git -C $gateRepo symbolic-ref HEAD).Trim()
+            try {
+                $env:GIT_DIR = Join-Path $gateRepo '.git'
+                $env:GIT_WORK_TREE = $gateRepo
+                & $prePushScript -Root $gateRepo -PushedRefs "refs/heads/main $fixed refs/heads/main $broken" 6> $null
+            } finally {
+                Remove-Item -LiteralPath Env:\GIT_DIR, Env:\GIT_WORK_TREE -ErrorAction SilentlyContinue
+            }
+            $built = Get-Content -LiteralPath $gateMarker -Raw
+            Assert-True ($LASTEXITCODE -eq 0 -and $built.Trim() -like '*marker=good gitdir=') `
+                "The build ran with git's hook variables set: $built"
+            Assert-True ((Get-Content -LiteralPath $gateFile -Raw).Trim() -eq 'broken' -and
+                (& git -C $gateRepo symbolic-ref HEAD).Trim() -eq $headBefore) `
+                "With GIT_DIR set, building the pushed commit rewrote the working tree it was kept apart from."
+
+            # One push at a time through the gate worktree. With the lock held here, a hook in
+            # another process has to give up rather than check its commit out under a running build.
+            $gateHasher = [System.Security.Cryptography.SHA256]::Create()
+            try {
+                $gateDigest = $gateHasher.ComputeHash([Text.Encoding]::UTF8.GetBytes(
+                    [IO.Path]::GetFullPath($gateRepo).ToLowerInvariant()))
+            } finally {
+                $gateHasher.Dispose()
+            }
+            $gateKey = -join ($gateDigest[0..5] | ForEach-Object { $_.ToString('x2') })
+            $shell = (Get-Process -Id $PID).Path
+            $childRefs = "refs/heads/main $fixed refs/heads/main $broken"
+            function Invoke-ChildPush {
+                # Windows PowerShell stops on a native command's first line of standard error.
+                $preference = $ErrorActionPreference
+                $ErrorActionPreference = 'Continue'
+                try {
+                    return (& $shell -NoProfile -File $prePushScript -Root $gateRepo -PushedRefs $childRefs `
+                        -GateLockTimeoutSeconds 1 2>&1 | Out-String)
+                } finally {
+                    $ErrorActionPreference = $preference
+                }
+            }
+            $held = New-Object System.Threading.Mutex($false, "Local\hushfeed-pre-push-$gateKey")
+            Assert-True ($held.WaitOne(0)) 'The contract could not take the gate lock itself.'
+            try {
+                $waited = Invoke-ChildPush
+                Assert-True ($LASTEXITCODE -ne 0 -and $waited -like '*held the gate worktree*') `
+                    "A second push used the gate worktree while another push held it: $waited"
+            } finally {
+                $held.ReleaseMutex()
+                $held.Dispose()
+            }
+            # The control: the same child push, with the lock free, goes through.
+            $free = Invoke-ChildPush
+            Assert-True ($LASTEXITCODE -eq 0) "The child push failed with the gate lock free: $free"
         } finally {
             foreach ($line in @(& git -C $gateRepo worktree list --porcelain)) {
                 if ($line -like 'worktree *') {
