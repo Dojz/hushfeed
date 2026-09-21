@@ -69,9 +69,9 @@ function Get-PushedPaths {
             # rewrite the source index, which must keep naming the previous working bundle
             # until the new release asset exists. Trust a live advertisement, not tracking refs.
             if ($parts[2] -like 'refs/tags/*' -and $RemoteUrl) {
-                $target = git rev-parse --verify "$localSha^{commit}" 2>$null
+                $target = Invoke-GitQuietly @('rev-parse', '--verify', "$localSha^{commit}")
                 if ($LASTEXITCODE -ne 0) { throw "Could not resolve tag target $localSha." }
-                $advertised = @(git ls-remote --heads $RemoteUrl 2>$null)
+                $advertised = @(Invoke-GitQuietly @('ls-remote', '--heads', $RemoteUrl))
                 if ($LASTEXITCODE -ne 0) { throw 'Could not read remote branches to verify the tag target.' }
                 $targetPattern = '^' + [regex]::Escape(([string]$target).Trim()) + '\s+refs/heads/'
                 if (@($advertised | Where-Object { $_ -match $targetPattern }).Count -gt 0) {
@@ -83,10 +83,10 @@ function Get-PushedPaths {
             # when the branch changed only documentation. A first push is rare, and a complete
             # tree cannot be made incomplete by a deleted or force-updated remote-tracking ref.
             $range = "$localSha complete branch tree"
-            $names = git ls-tree -r --name-only $localSha 2>$null
+            $names = Invoke-GitQuietly @('ls-tree', '-r', '--name-only', $localSha)
         } else {
             $range = "$remoteSha..$localSha"
-            $names = git diff --name-only $remoteSha $localSha 2>$null
+            $names = Invoke-GitQuietly @('diff', '--name-only', $remoteSha, $localSha)
         }
         if ($LASTEXITCODE -ne 0) {
             throw "Could not read what $range changes. Fetch the remote and try again."
@@ -94,12 +94,30 @@ function Get-PushedPaths {
         foreach ($name in @($names)) {
             if (-not [string]::IsNullOrWhiteSpace($name)) { [void]$paths.Add($name.Trim()) }
         }
-        $commit = git rev-parse --verify "$localSha^{commit}" 2>$null
+        $commit = Invoke-GitQuietly @('rev-parse', '--verify', "$localSha^{commit}")
         if ($LASTEXITCODE -eq 0 -and $commit -and -not $script:pushedCommits.Contains(([string]$commit).Trim())) {
             $script:pushedCommits.Add(([string]$commit).Trim())
         }
     }
     return $paths
+}
+
+function Invoke-GitQuietly {
+    <#
+        git in this repository with its standard error dropped, returning standard output and
+        leaving $LASTEXITCODE for the caller to read. Windows PowerShell 5.1 turns a native
+        command's standard error into a terminating error under Stop even when it is redirected,
+        so a warning, or the "fatal:" a missing object prints, stopped the hook with a
+        NativeCommandError before the caller could say what went wrong.
+    #>
+    param([string[]]$Arguments)
+    $preference = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    try {
+        & git @Arguments 2>$null
+    } finally {
+        $ErrorActionPreference = $preference
+    }
 }
 
 function Invoke-WithoutGitEnvironment {
