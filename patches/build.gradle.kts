@@ -252,13 +252,14 @@ tasks {
         // The fixture tests skip when this is unset and read the folder when it is set. What the
         // folder holds is the input, not its name: a run whose APK was swapped, re-signed or
         // deleted under the same path has to run again, not come back up to date or out of the
-        // build cache with the last folder's verdict. Name only, so the folder's own path, which
-        // differs from machine to machine, does not count.
+        // build cache with the last folder's verdict. Relative, so where the folder sits on this
+        // machine does not count, and an APK moved into or out of a subfolder does: the tests
+        // read only the folder's top level, and name only would call that move no change.
         // Blank counts as unset, as Fixtures.kt reads it; File("") would be the whole project.
         val fixtureDirectory = providers.environmentVariable("HUSHFEED_FIXTURE_DIR")
         inputs.files(fixtureDirectory.map { if (it.isBlank()) emptyList() else listOf(File(it)) }.orElse(emptyList()))
             .withPropertyName("fixtures")
-            .withPathSensitivity(PathSensitivity.NAME_ONLY)
+            .withPathSensitivity(PathSensitivity.RELATIVE)
     }
     // The bundle a release publishes lives in build/release, not build/libs. The plugin's
     // buildAndroid merges the DEX payload into the jar task's own output in place, so any later
