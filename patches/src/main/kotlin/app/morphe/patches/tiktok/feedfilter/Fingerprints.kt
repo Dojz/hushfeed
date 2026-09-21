@@ -561,6 +561,41 @@ internal object TakoFeedTriggerRoofBindFingerprint : Fingerprint(
     },
 )
 
+/**
+ * The two Tako entrances on the search page, the one opened by the magnifier on the feed
+ * (issue #22). TikTok serves either a lone "Ask Tako" bubble or a "Voice | Ask Tako" pill above
+ * the keyboard, one class each, both under a base whose {@code onViewCreated} inflates a
+ * ViewStub through a single {@code (ViewStub)View} method and skips every later step when that
+ * answers null. The lone bubble's own inflater already answers null with TikTok's gate off, so
+ * null is the app's own way of saying there is no entrance. The method is named Rp, lr, yr, Qr
+ * and Mr across the five retained builds, so it is found by its shape.
+ */
+internal val takoSearchEntranceVariants = listOf(
+    "Lcom/ss/android/ugc/aweme/search/pages/middlepage/takoentrance/ui/TakoSingleRoundButtonAssem;",
+    "Lcom/ss/android/ugc/aweme/search/pages/middlepage/takoentrance/ui/MixedRoundFloatingButtonAssem;",
+)
+
+internal fun isTakoSearchEntranceInflater(method: com.android.tools.smali.dexlib2.iface.Method) =
+    method.definingClass in takoSearchEntranceVariants &&
+        method.returnType == "Landroid/view/View;" &&
+        method.parameterTypes.map(CharSequence::toString) == listOf("Landroid/view/ViewStub;") &&
+        method.implementation != null &&
+        !com.android.tools.smali.dexlib2.AccessFlags.STATIC.isSet(method.accessFlags)
+
+internal object TakoSearchBubbleInflateFingerprint : Fingerprint(
+    definingClass = takoSearchEntranceVariants[0],
+    returnType = "Landroid/view/View;",
+    parameters = listOf("Landroid/view/ViewStub;"),
+    custom = { method, _ -> isTakoSearchEntranceInflater(method) },
+)
+
+internal object TakoSearchPillInflateFingerprint : Fingerprint(
+    definingClass = takoSearchEntranceVariants[1],
+    returnType = "Landroid/view/View;",
+    parameters = listOf("Landroid/view/ViewStub;"),
+    custom = { method, _ -> isTakoSearchEntranceInflater(method) },
+)
+
 internal object FollowFeedPresenterPostProcessFingerprint : Fingerprint(
     returnType = "V",
     parameters = listOf("Lcom/ss/android/ugc/aweme/follow/presenter/FollowFeedList;"),

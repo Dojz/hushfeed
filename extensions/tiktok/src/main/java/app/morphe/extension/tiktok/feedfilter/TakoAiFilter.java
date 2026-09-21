@@ -72,6 +72,16 @@ public final class TakoAiFilter {
         }
     }
 
+    /**
+     * The Tako entrance floating over the search page (issue #22), either a lone Ask Tako bubble
+     * or a Voice and Ask Tako pill. Asked before TikTok inflates it, so nothing is built.
+     */
+    public static boolean shouldHideSearchEntrance() {
+        boolean enabled = Settings.HIDE_TAKO_AI.get();
+        HookStatus.bound(HOOK_FAMILY, "search entrance " + (enabled ? "hidden" : "left"));
+        return enabled;
+    }
+
     /** The component key TikTok gives the "Ask · topic" banner under a feed video. */
     static final String ASK_BANNER_KEY = "bottom_banner_tako";
     private static final String SEARCH_BANNER_KEY = "bottom_banner_search_rs";

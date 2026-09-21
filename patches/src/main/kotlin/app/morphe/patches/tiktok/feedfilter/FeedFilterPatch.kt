@@ -474,6 +474,20 @@ val feedFilterPatch = bytecodePatch(
             "return-void",
         )
 
+        // The Tako entrance on the search page (issue #22), a lone bubble or a Voice and Ask Tako
+        // pill depending on the account. Each inflates its ViewStub through one method, and the
+        // base class already treats a null answer as "no entrance", so that is the answer given.
+        listOf(TakoSearchBubbleInflateFingerprint, TakoSearchPillInflateFingerprint).forEach {
+            it.method.guardAtEntry(
+                "Feed filter",
+                "invoke-static {}, $TAKO_AI_FILTER_CLASS_DESCRIPTOR->shouldHideSearchEntrance()Z",
+                """
+                    const/4 v0, 0x0
+                    return-object v0
+                """,
+            )
+        }
+
         // The "Ask · topic" bar issue #6's reporter still saw on 0.40.0 is none of the Tako
         // components above. It is one of TikTok's common bottom banners, keyed bottom_banner_tako
         // and drawn by the same banner view as the "Search · topic" bar, and every banner reaches

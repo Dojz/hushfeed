@@ -46,6 +46,15 @@ public class TakoAskBarTest {
         TakoAiFilter.hideAskBar(null);
     }
 
+    /** Issue #22: the Ask Tako bubble over the search page stayed with Hide Tako AI on. */
+    @Test public void theSearchPageEntranceFollowsTheSameSwitchAndIsNamedInTheExport() {
+        assertFalse("the entrance was removed with the switch off", TakoAiFilter.shouldHideSearchEntrance());
+        assertTrue(HookStatus.report().toString(), HookStatus.report().toString().contains("tako AI: 1 found"));
+        Settings.HIDE_TAKO_AI.save(true);
+        assertTrue("the entrance was built with the switch on", TakoAiFilter.shouldHideSearchEntrance());
+        assertTrue(HookStatus.report().toString(), HookStatus.report().toString().contains("tako AI: 2 found"));
+    }
+
     @Test public void theExportNamesTheStripWhicheverWayTheSwitchIsSet() {
         TakoAiFilter.shouldHideAskBar();
         String report = HookStatus.report().toString();
