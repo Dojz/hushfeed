@@ -55,6 +55,7 @@ public final class BlockAuthorOverlay {
     private static final int BUTTON_SIZE_DP = 48;
     private static final int BUTTON_GAP_DP = 8;
     private static final long UNDO_VISIBLE_MS = 6_000L;
+    private static final long BLOCK_UNDO_VISIBLE_MS = 2_000L;
 
     /**
      * Left of TikTok's own action rail, level with the top of it.
@@ -760,10 +761,13 @@ public final class BlockAuthorOverlay {
 
         requestInFlight = true;
         setButtonEnabled(false);
+        dismissUndo();
+        BlockFeedAdvance advance = BlockFeedAdvance.capture(author);
 
         BlockAuthorService.block(author, result -> {
             requestInFlight = false;
             setButtonEnabled(true);
+            if (result == BlockAuthorService.Result.CONFIRMED && advance != null) advance.advance();
             reportBlockResult(author, result);
         });
     }
@@ -822,9 +826,52 @@ public final class BlockAuthorOverlay {
      * for a mis-tap while scrolling.
      */
     private static void showUndo(VideoAuthor author) {
-        showUndoBanner(L10n.f("Blocked %1$s", author.label()),
-                () -> BlockAuthorService.unblock(author,
-                        result -> reportUnblockResult(author, result)));
+        Activity activity = Utils.getActivity();
+        ViewGroup root = activity == null || activity.isFinishing() || activity.isDestroyed()
+                ? null : activity.findViewById(android.R.id.content);
+        if (root == null || !activity.hasWindowFocus()) {
+            Utils.showToastShort(L10n.f("Blocked %1$s", author.label()));
+            return;
+        }
+        dismissUndo();
+        TextView chip = new TextView(activity);
+        chip.setText(L10n.t(activity, "Unblock"));
+        chip.setContentDescription(L10n.f(activity, "Blocked %1$s. Unblock", author.label()));
+        chip.setTextColor(SettingsUi.OVERLAY_TEXT);
+        chip.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        chip.setGravity(Gravity.CENTER);
+        chip.setPadding(SettingsUi.dp(activity, 12), 0, SettingsUi.dp(activity, 12), 0);
+        chip.setMinimumHeight(SettingsUi.dp(activity, 48));
+        chip.setMinimumWidth(SettingsUi.dp(activity, 48));
+        chip.setBackground(new LayerDrawable(new Drawable[]{SettingsUi.overlayBanner(activity),
+                SettingsUi.overlayAction(activity, SettingsUi.RADIUS_OVERLAY)}));
+        chip.setFocusable(true);
+        chip.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
+        SettingsUi.markAsButton(chip);
+        chip.setOnClickListener(view -> {
+            dismissUndo();
+            requestInFlight = true;
+            setButtonEnabled(false);
+            BlockAuthorService.unblock(author, result -> {
+                requestInFlight = false;
+                setButtonEnabled(true);
+                reportUnblockResult(author, result);
+            });
+        });
+        Rect bars = SystemBarInsets.current(root);
+        int[] origin = new int[2];
+        root.getLocationOnScreen(origin);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(-2, -2,
+                Gravity.TOP | Gravity.LEFT);
+        params.leftMargin = Math.max(0, bars.left - origin[0]) + SettingsUi.dp(activity, 12);
+        params.topMargin = Math.max(0, bars.top - origin[1]) + SettingsUi.dp(activity, 8);
+        root.addView(chip, params);
+        undoReference = new WeakReference<>(chip);
+        final int token = ++undoGeneration;
+        // No entrance/exit animation extends the requested two-second lifetime.
+        Utils.runOnMainThreadDelayed(() -> {
+            if (token == undoGeneration) dismissUndo();
+        }, BLOCK_UNDO_VISIBLE_MS);
     }
 
     static void reportUnblockResult(VideoAuthor author, BlockAuthorService.Result result) {

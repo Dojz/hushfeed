@@ -340,6 +340,10 @@ public final class Probe extends Instrumentation {
                         String value = required(intent, "value");
                         String before = valueOf(find(key));
                         write(key, value);
+                        if ("block_author_button".equals(key)) {
+                            loader.loadClass("app.morphe.extension.tiktok.blockauthor.BlockAuthorOverlay")
+                                    .getMethod("refresh").invoke(null);
+                        }
                         Log.i(TAG, "ok set " + key + " " + before + " -> " + valueOf(find(key)));
                         break;
                     }
@@ -390,6 +394,10 @@ public final class Probe extends Instrumentation {
                             Log.i(TAG, "views[" + pieces + "] " + text.substring(at, Math.min(text.length(), at + 3000)));
                         }
                         Log.i(TAG, "ok views " + text.length() + " chars in " + pieces + " pieces");
+                        break;
+                    }
+                    case "block-flow-test": {
+                        BlockFlowProbe.run(loader, intent.getStringExtra("value"));
                         break;
                     }
                     case "like-targets": {

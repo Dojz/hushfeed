@@ -71,7 +71,8 @@ Account-sensitive name: forcing this key may affect security, login, compliance,
 Activity	Actividad
 Activity Center (PIA)	Centro de actividad (PIA)
 Add	Añadir
-Add a block button to the video player that blocks the creator of the current video in one tap. An undo action is shown after each block.	Agrega un botón de bloqueo al reproductor que bloquea al creador del video actual con un toque. Se muestra una acción de deshacer después de cada bloqueo.
+Block the creator in one tap. Once TikTok confirms, skip to the next video. A small Unblock button appears at the top left for two seconds. You can also unblock later in TikTok's Privacy > Blocked accounts.	Bloquea al creador con un toque. Cuando TikTok lo confirme, pasa al siguiente video. Aparece un botón pequeño para desbloquear arriba a la izquierda durante dos segundos. También puedes desbloquear más tarde en Privacidad > Cuentas bloqueadas de TikTok.
+Unblock	Desbloquear
 Add a button beside the block control to send feedback about the current video.	Añade un botón junto al control de bloqueo para enviar comentarios sobre el vídeo actual.
 Add a creator	Add a creator
 Add a button that hides the current creator on this phone without blocking them.	Añade un botón que oculta al creador actual en este dispositivo sin bloquearlo.
@@ -138,7 +139,8 @@ Block this creator	Bloquear a este creador
 Block this sound	Bloquear este sonido
 Blocked	Bloqueado
 Blocked %1$s	%1$s bloqueado
-Blocked %1$s, but TikTok has not confirmed it yet.	No se pudo confirmar el bloqueo de %1$s.
+Blocked %1$s. Unblock	%1$s bloqueado. Desbloquear
+Couldn't confirm the block for %1$s.	No se pudo confirmar el bloqueo de %1$s.
 Blocked caption words	Palabras bloqueadas en las descripciones
 Blocked comment words	Palabras bloqueadas en los comentarios
 Blocked creators	Creadores bloqueados
@@ -1036,7 +1038,7 @@ Start typing	Empieza a escribir
 Unavailable	No disponible
 Unblock this commenter	Desbloquear a quien comenta
 Unblocked %1$s	%1$s desbloqueado
-Unblocked %1$s, but TikTok has not confirmed it yet.	No se pudo confirmar el desbloqueo de %1$s.
+Couldn't confirm the unblock for %1$s.	No se pudo confirmar el desbloqueo de %1$s.
 Undo	Deshacer
 Undo clearing seen videos	Undo clearing seen videos
 Undo last Lab change	Deshacer el último cambio del Lab

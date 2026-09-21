@@ -74,7 +74,8 @@ Account-sensitive name: forcing this key may affect security, login, compliance,
 Activity	Aktivität
 Activity Center (PIA)	Activity Center (PIA)
 Add	Hinzufügen
-Add a block button to the video player that blocks the creator of the current video in one tap. An undo action is shown after each block.	Dem Videoplayer eine Schaltfläche hinzufügen, die den Ersteller des aktuellen Videos mit einem Tippen blockiert. Nach jeder Blockierung wird eine Rückgängig-Aktion angezeigt.
+Block the creator in one tap. Once TikTok confirms, skip to the next video. A small Unblock button appears at the top left for two seconds. You can also unblock later in TikTok's Privacy > Blocked accounts.	Blockiere den Ersteller mit einem Tippen. Sobald TikTok bestätigt, geht es zum nächsten Video. Oben links erscheint zwei Sekunden lang eine kleine Schaltfläche zum Entblocken. Später kannst du die Blockierung auch unter TikTok > Datenschutz > Blockierte Konten aufheben.
+Unblock	Entblocken
 Add a button beside the block control to send feedback about the current video.	Neben der Blockieren-Schaltfläche eine Schaltfläche hinzufügen, um Feedback zum aktuellen Video zu senden.
 Add a creator	Add a creator
 Add a button that hides the current creator on this phone without blocking them.	Eine Schaltfläche hinzufügen, die den aktuellen Creator auf diesem Gerät ausblendet, ohne ihn zu blockieren.
@@ -141,7 +142,8 @@ Block this creator	Diesen Ersteller blockieren
 Block this sound	Diesen Sound blockieren
 Blocked	Blockiert
 Blocked %1$s	%1$s blockiert
-Blocked %1$s, but TikTok has not confirmed it yet.	Die Blockierung von %1$s konnte nicht bestätigt werden.
+Blocked %1$s. Unblock	%1$s blockiert. Entblocken
+Couldn't confirm the block for %1$s.	Die Blockierung von %1$s konnte nicht bestätigt werden.
 Blocked caption words	Gesperrte Wörter in Beschreibungen
 Blocked comment words	Gesperrte Wörter in Kommentaren
 Blocked creators	Gesperrte Creator
@@ -1039,7 +1041,7 @@ Start typing	Tippe zum Suchen
 Unavailable	Nicht verfügbar
 Unblock this commenter	Blockierung dieses Kommentierenden aufheben
 Unblocked %1$s	%1$s entblockt
-Unblocked %1$s, but TikTok has not confirmed it yet.	Die Aufhebung der Blockierung von %1$s konnte nicht bestätigt werden.
+Couldn't confirm the unblock for %1$s.	Die Aufhebung der Blockierung von %1$s konnte nicht bestätigt werden.
 Undo	Rückgängig
 Undo clearing seen videos	Undo clearing seen videos
 Undo last Lab change	Letzte Lab-Änderung rückgängig machen

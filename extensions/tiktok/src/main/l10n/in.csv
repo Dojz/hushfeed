@@ -72,7 +72,8 @@ Account warning: forced client values apply to every account in this app data an
 Activity,Aktivitas
 Activity Center (PIA),Pusat Aktivitas (PIA)
 Add,Tambah
-Add a block button to the video player that blocks the creator of the current video in one tap. An undo action is shown after each block.,Tambahkan tombol blokir ke pemutar video yang memblokir kreator video saat ini dengan satu ketukan. Tindakan batalkan ditampilkan setelah setiap blokir.
+"Block the creator in one tap. Once TikTok confirms, skip to the next video. A small Unblock button appears at the top left for two seconds. You can also unblock later in TikTok's Privacy > Blocked accounts.","Blokir kreator dengan satu ketukan. Setelah TikTok mengonfirmasi, lanjut ke video berikutnya. Tombol Buka blokir kecil muncul di kiri atas selama dua detik. Anda juga bisa membuka blokir nanti di Privasi > Akun yang diblokir di TikTok."
+Unblock,Buka blokir
 Add a button beside the block control to send feedback about the current video.,Tambahkan tombol di samping kontrol blokir untuk mengirim masukan tentang video ini.
 Add a creator,Add a creator
 Add a button that hides the current creator on this phone without blocking them.,Tambahkan tombol yang menyembunyikan kreator saat ini di ponsel ini tanpa memblokirnya.
@@ -139,7 +140,8 @@ Block this creator,Blokir kreator ini
 Block this sound,Blokir suara ini
 Blocked,Diblokir
 Blocked %1$s,%1$s diblokir
-"Blocked %1$s, but TikTok has not confirmed it yet.","Pemblokiran %1$s tidak dapat dikonfirmasi."
+Blocked %1$s. Unblock,%1$s diblokir. Buka blokir
+Couldn't confirm the block for %1$s.,Pemblokiran %1$s tidak dapat dikonfirmasi.
 Blocked caption words,Kata yang diblokir di keterangan
 Blocked comment words,Kata komentar yang diblokir
 Blocked creators,Kreator yang diblokir
@@ -1037,7 +1039,7 @@ Start typing,Mulai mengetik
 Unavailable,Tidak tersedia
 Unblock this commenter,Buka blokir pengomentar ini
 Unblocked %1$s,%1$s dibuka blokirnya
-"Unblocked %1$s, but TikTok has not confirmed it yet.","Pembukaan blokir %1$s tidak dapat dikonfirmasi."
+Couldn't confirm the unblock for %1$s.,Pembukaan blokir %1$s tidak dapat dikonfirmasi.
 Undo,Urungkan
 Undo clearing seen videos,Undo clearing seen videos
 Undo last Lab change,Batalkan perubahan Lab terakhir

@@ -2,6 +2,13 @@
 
 Every Hushfeed release, newest first.
 
+## 0.57.0 (2026-09-20)
+
+Block a creator and move on.
+
+* **TikTok:** The one-tap block button now skips to the next video as soon as TikTok confirms the block. A small Unblock button appears at the top left for two seconds instead of the large bottom banner. It always reverses the original block, even after the video changes.
+* **TikTok:** If you've already scrolled or left the feed while a block is being confirmed, Hushfeed won't move you again. Failed requests don't skip a video. Other Undo notices keep their existing recovery time.
+
 ## 0.56.0 (2026-09-20)
 
 Give video controls the space used by suggested searches.

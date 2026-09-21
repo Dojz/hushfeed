@@ -35,6 +35,18 @@ import org.junit.Test
  */
 class TikTokPatchAnchorsMatchFixturesTest {
     @Test
+    fun `block skip native pager methods survive every retained fixture`() {
+        val apks = fixtures()
+        assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())
+        for (apk in apks) {
+            val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
+            val pager = container.dexEntryNames.asSequence()
+                .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }
+                .single { it.type == "Lcom/ss/android/ugc/aweme/common/widget/VerticalViewPager;" }
+            app.morphe.patches.tiktok.interaction.blockauthor.validateBlockPager(pager.methods)
+        }
+    }
+    @Test
     fun `bottom search banner model and native component key survive every retained fixture`() {
         val apks = fixtures()
         assumeTrue("no TikTok fixture on this machine", apks.isNotEmpty())

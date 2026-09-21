@@ -190,8 +190,9 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
             addPreference(new TogglePreference(
                     context,
                     "Show the block button on videos",
-                    "Add a block button to the video player that blocks the creator of the "
-                            + "current video in one tap. An undo action is shown after each block.",
+                    "Block the creator in one tap. Once TikTok confirms, skip to the next video. "
+                            + "A small Unblock button appears at the top left for two seconds. "
+                            + "You can also unblock later in TikTok's Privacy > Blocked accounts.",
                     Settings.BLOCK_AUTHOR_BUTTON
             ));
             addPreference(new TogglePreference(

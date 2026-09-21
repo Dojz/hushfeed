@@ -71,7 +71,8 @@ Account-sensitive name: forcing this key may affect security, login, compliance,
 Activity	Atividade
 Activity Center (PIA)	Centro de Atividade (PIA)
 Add	Adicionar
-Add a block button to the video player that blocks the creator of the current video in one tap. An undo action is shown after each block.	Adiciona um botão de bloqueio ao reprodutor que bloqueia o criador do video atual com um toque. Uma ação de desfazer aparece depois de cada bloqueio.
+Block the creator in one tap. Once TikTok confirms, skip to the next video. A small Unblock button appears at the top left for two seconds. You can also unblock later in TikTok's Privacy > Blocked accounts.	Bloqueie o criador com um toque. Quando o TikTok confirmar, vá para o próximo vídeo. Um pequeno botão Desbloquear aparece no canto superior esquerdo por dois segundos. Você também pode desbloquear depois em Privacidade > Contas bloqueadas do TikTok.
+Unblock	Desbloquear
 Add a button beside the block control to send feedback about the current video.	Adiciona um botão ao lado do controle de bloqueio para enviar feedback sobre o vídeo atual.
 Add a creator	Add a creator
 Add a button that hides the current creator on this phone without blocking them.	Adiciona um botão que esconde o criador atual neste aparelho sem bloqueá-lo.
@@ -138,7 +139,8 @@ Block this creator	Bloquear este criador
 Block this sound	Bloquear este som
 Blocked	Bloqueado
 Blocked %1$s	%1$s bloqueado
-Blocked %1$s, but TikTok has not confirmed it yet.	Não foi possível confirmar o bloqueio de %1$s.
+Blocked %1$s. Unblock	%1$s bloqueado. Desbloquear
+Couldn't confirm the block for %1$s.	Não foi possível confirmar o bloqueio de %1$s.
 Blocked caption words	Palavras bloqueadas nas legendas
 Blocked comment words	Palavras bloqueadas nos comentários
 Blocked creators	Criadores bloqueados
@@ -1036,7 +1038,7 @@ Start typing	Comece a digitar
 Unavailable	Indisponível
 Unblock this commenter	Desbloquear quem comentou
 Unblocked %1$s	%1$s desbloqueado
-Unblocked %1$s, but TikTok has not confirmed it yet.	Não foi possível confirmar o desbloqueio de %1$s.
+Couldn't confirm the unblock for %1$s.	Não foi possível confirmar o desbloqueio de %1$s.
 Undo	Desfazer
 Undo clearing seen videos	Undo clearing seen videos
 Undo last Lab change	Desfazer a última mudança do Lab
