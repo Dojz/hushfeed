@@ -1172,6 +1172,67 @@ try {
         $env:HUSHFEED_BUILD_WRAPPER = Join-Path $hookRoot 'no-such-wrapper.ps1'
         Assert-Throws { & $prePushScript -Root $hookRoot -ChangedPaths @('patches/build.gradle.kts') 6> $null } `
             '*HUSHFEED_BUILD_WRAPPER*' 'A build wrapper that is not there was ignored rather than reported.'
+
+        # The gate builds what is pushed, not what happens to be in the working tree. A stub build
+        # fails on any tree whose marker says broken, and records the tree it was handed.
+        $gateRepo = Join-Path ([System.IO.Path]::GetTempPath()) ("hushfeed-gate-" + [guid]::NewGuid().ToString('N'))
+        New-Item -ItemType Directory -Path (Join-Path $gateRepo 'extensions') -Force | Out-Null
+        & git -C $gateRepo init --quiet
+        $actualGateGitDir = (& git -C $gateRepo rev-parse --absolute-git-dir).Trim()
+        Assert-True ([IO.Path]::GetFullPath($actualGateGitDir).TrimEnd('\', '/') -ieq
+            [IO.Path]::GetFullPath((Join-Path $gateRepo '.git')).TrimEnd('\', '/')) `
+            'The gate fixture resolved outside its temporary repository; refusing to write.'
+        & git -C $gateRepo config user.name 'Gate Contract'
+        & git -C $gateRepo config user.email 'gate@example.invalid'
+        $gateMarker = Join-Path $hookRoot 'gate-ran.txt'
+        $gateStub = Join-Path $hookRoot 'gate-wrapper.ps1'
+        Set-Content -LiteralPath $gateStub -Encoding UTF8 -Value @(
+            'param([string]$ProjectDir, [string[]]$Tasks)',
+            '$state = (Get-Content -LiteralPath (Join-Path $ProjectDir ''extensions/marker.txt'') -Raw).Trim()',
+            "Set-Content -LiteralPath '$gateMarker' -Value (`"dir=`$ProjectDir marker=`$state`")",
+            'if ($state -eq ''broken'') { exit 1 }',
+            'exit 0')
+        $env:HUSHFEED_BUILD_WRAPPER = $gateStub
+        $gateFile = Join-Path $gateRepo 'extensions/marker.txt'
+        function Save-GateCommit([string]$State) {
+            Set-Content -LiteralPath $gateFile -Value $State -Encoding ASCII
+            & git -C $gateRepo add extensions/marker.txt
+            & git -C $gateRepo commit --quiet -m $State
+            return (& git -C $gateRepo rev-parse HEAD).Trim()
+        }
+        try {
+            $good = Save-GateCommit 'good'
+            Set-Content -LiteralPath $gateFile -Value 'broken' -Encoding ASCII
+            & $prePushScript -Root $gateRepo -PushedRefs "refs/heads/main $good refs/heads/main $('0' * 40)" 6> $null
+            Assert-True ($LASTEXITCODE -eq 0) 'An uncommitted edit in the working tree failed a clean commit.'
+            $built = Get-Content -LiteralPath $gateMarker -Raw
+            Assert-True ($built -like '*marker=good*' -and $built -notlike "*dir=$gateRepo marker*") `
+                "The gate built the working tree instead of the pushed commit: $built"
+
+            $broken = Save-GateCommit 'broken'
+            Set-Content -LiteralPath $gateFile -Value 'good' -Encoding ASCII
+            Assert-Throws { & $prePushScript -Root $gateRepo -PushedRefs "refs/heads/main $broken refs/heads/main $good" 6> $null } `
+                '*did not pass*' 'An uncommitted fix in the working tree passed a broken commit.'
+            Assert-True ((& git -C $gateRepo status --porcelain) -like '*extensions/marker.txt*') `
+                'Building the pushed commit touched the working tree it was kept apart from.'
+
+            # A clean tree still builds in place.
+            $fixed = Save-GateCommit 'good'
+            & $prePushScript -Root $gateRepo -PushedRefs "refs/heads/main $fixed refs/heads/main $broken" 6> $null
+            Assert-True ($LASTEXITCODE -eq 0) 'A clean tree with a good commit did not pass.'
+            Assert-True ((Get-Content -LiteralPath $gateMarker -Raw) -like "*dir=$gateRepo marker=good*") `
+                'A clean tree was not built in place.'
+        } finally {
+            foreach ($line in @(& git -C $gateRepo worktree list --porcelain)) {
+                if ($line -like 'worktree *') {
+                    $listed = $line.Substring('worktree '.Length)
+                    if ([IO.Path]::GetFullPath($listed).TrimEnd('\', '/') -ine [IO.Path]::GetFullPath($gateRepo).TrimEnd('\', '/')) {
+                        & git -C $gateRepo worktree remove --force $listed
+                    }
+                }
+            }
+            Remove-Item -LiteralPath $gateRepo -Recurse -Force -ErrorAction SilentlyContinue
+        }
     } finally {
         $env:HUSHFEED_BUILD_WRAPPER = $savedWrapper
         $env:GITHUB_ACTOR = $savedActor

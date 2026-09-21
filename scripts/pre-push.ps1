@@ -32,6 +32,9 @@ $ErrorActionPreference = 'Stop'
 # case rather than the rare one.
 if (-not $Root) { $Root = Split-Path -Parent $PSScriptRoot }
 $zeroObject = '0' * 40
+# The commits this push carries, peeled, filled in by Get-PushedPaths. The build gate runs on these
+# when the working tree holds uncommitted changes under the paths it builds.
+$script:pushedCommits = New-Object System.Collections.Generic.List[string]
 
 function Write-Step {
     param([string]$Message)
@@ -89,8 +92,74 @@ function Get-PushedPaths {
         foreach ($name in @($names)) {
             if (-not [string]::IsNullOrWhiteSpace($name)) { [void]$paths.Add($name.Trim()) }
         }
+        $commit = git rev-parse --verify "$localSha^{commit}" 2>$null
+        if ($LASTEXITCODE -eq 0 -and $commit -and -not $script:pushedCommits.Contains(([string]$commit).Trim())) {
+            $script:pushedCommits.Add(([string]$commit).Trim())
+        }
     }
     return $paths
+}
+
+function Invoke-HookGit {
+    <#
+        git without the hook's own GIT_* environment, returning standard output and throwing on
+        failure. Git exports GIT_DIR and its relatives to a hook, and git -C does not override
+        them, so a worktree command run with them set would act on this repository's own working
+        tree rather than the one it names. Windows PowerShell 5.1 turns a native command's
+        standard error into a terminating error under Stop, so that preference is relaxed here.
+    #>
+    param([string[]]$Arguments)
+    $saved = @{}
+    foreach ($variable in @(Get-ChildItem Env: | Where-Object { $_.Name -like 'GIT_*' })) {
+        $saved[$variable.Name] = $variable.Value
+        Remove-Item -LiteralPath ('Env:\' + $variable.Name)
+    }
+    $preference = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    try {
+        $errors = New-Object System.Collections.Generic.List[string]
+        $output = @(& git @Arguments 2>&1 | ForEach-Object {
+            if ($_ -is [System.Management.Automation.ErrorRecord]) { $errors.Add($_.ToString()) } else { $_ }
+        })
+        if ($LASTEXITCODE -ne 0) { throw "git $($Arguments -join ' ') failed: $($errors -join ' ')" }
+        return $output
+    } finally {
+        $ErrorActionPreference = $preference
+        foreach ($name in $saved.Keys) { Set-Item -LiteralPath ('Env:\' + $name) -Value $saved[$name] }
+    }
+}
+
+function Get-GateWorktree {
+    <#
+        A clean worktree of $Commit in the temp directory, reused between pushes so its build
+        folder stays warm. The name follows this checkout's path, so two checkouts never share one.
+    #>
+    param([Parameter(Mandatory = $true)][string]$Commit)
+    $hasher = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        $digest = $hasher.ComputeHash([Text.Encoding]::UTF8.GetBytes([IO.Path]::GetFullPath($Root).ToLowerInvariant()))
+    } finally {
+        $hasher.Dispose()
+    }
+    $key = -join ($digest[0..5] | ForEach-Object { $_.ToString('x2') })
+    $tree = Join-Path ([IO.Path]::GetTempPath()) "hushfeed-pre-push-$key"
+    if (Test-Path -LiteralPath (Join-Path $tree '.git')) {
+        Invoke-HookGit @('-C', $tree, 'checkout', '--detach', '--force', '--quiet', $Commit) | Out-Null
+        Invoke-HookGit @('-C', $tree, 'clean', '-fdxq', '-e', 'build', '-e', '.gradle', '-e', 'local.properties') | Out-Null
+    } else {
+        if (Test-Path -LiteralPath $tree) { Remove-Item -LiteralPath $tree -Recurse -Force }
+        Invoke-HookGit @('-C', $Root, 'worktree', 'prune') | Out-Null
+        Invoke-HookGit @('-C', $Root, 'worktree', 'add', '--detach', '--quiet', $tree, $Commit) | Out-Null
+    }
+    $properties = Join-Path $Root 'local.properties'
+    if (Test-Path -LiteralPath $properties -PathType Leaf) {
+        Copy-Item -LiteralPath $properties -Destination (Join-Path $tree 'local.properties') -Force
+    }
+    $at = ([string](Invoke-HookGit @('-C', $tree, 'rev-parse', 'HEAD') | Select-Object -Last 1)).Trim()
+    if ($at -ne $Commit) { throw "The gate worktree $tree is at $at, not $Commit." }
+    $left = @(Invoke-HookGit @('-C', $tree, 'status', '--porcelain'))
+    if ($left.Count -gt 0) { throw "The gate worktree $tree is not clean: $($left -join '; ')" }
+    return $tree
 }
 
 if ($env:HUSHFEED_SKIP_PRE_PUSH -eq '1') {
@@ -220,19 +289,42 @@ try {
         # CPU and memory between several builds points it at a governor. Unset, the Gradle
         # wrapper in the repository runs the tasks directly.
         $wrapper = $env:HUSHFEED_BUILD_WRAPPER
-        $global:LASTEXITCODE = 0
-        if ($wrapper) {
-            if (-not (Test-Path -LiteralPath $wrapper -PathType Leaf)) {
-                throw "HUSHFEED_BUILD_WRAPPER names $wrapper, which is not there."
-            }
-            & $wrapper -ProjectDir $Root -Tasks $tasks
-        } else {
-            & (Join-Path $Root 'gradlew.bat') @tasks
+        if ($wrapper -and -not (Test-Path -LiteralPath $wrapper -PathType Leaf)) {
+            throw "HUSHFEED_BUILD_WRAPPER names $wrapper, which is not there."
         }
-        if ($LASTEXITCODE -ne 0) {
-            throw ('The runtime test build did not pass. Read the output above: it says whether a ' +
-                'test failed, an API level above the payload floor was reached, or the build could ' +
-                'not start. Push anyway with HUSHFEED_SKIP_PRE_PUSH=1.')
+
+        # Gradle builds whatever tree it is pointed at, and the working tree can hold uncommitted
+        # work that is not in the push: another agent's, on 2026-09-21, failed a clean push, and an
+        # uncommitted fix would as easily pass a broken one. So when the paths this gate builds are
+        # dirty, it builds a clean worktree of each pushed commit instead. A clean tree builds in
+        # place, as it always did.
+        $gatedPaths = @('extensions', 'patches', 'gradle', 'settings.gradle.kts', 'build.gradle.kts')
+        $dirty = @(Invoke-HookGit (@('-C', $Root, 'status', '--porcelain', '--untracked-files=all', '--') + $gatedPaths))
+        if ($dirty.Count -eq 0) {
+            $gateCommits = @($null)
+        } else {
+            $gateCommits = @($script:pushedCommits)
+            if ($gateCommits.Count -eq 0) {
+                $gateCommits = @(([string](Invoke-HookGit @('-C', $Root, 'rev-parse', 'HEAD') | Select-Object -Last 1)).Trim())
+            }
+            $shown = @($dirty | Select-Object -First 5 | ForEach-Object { $_.Trim() }) -join '; '
+            Write-Step ("uncommitted changes under the built paths ($shown), so the gate builds a " +
+                "clean worktree of the pushed commit instead of this working tree")
+        }
+        foreach ($gateCommit in $gateCommits) {
+            $gateRoot = if ($gateCommit) { Get-GateWorktree -Commit $gateCommit } else { $Root }
+            if ($gateCommit) { Write-Step "building $gateCommit in $gateRoot" }
+            $global:LASTEXITCODE = 0
+            if ($wrapper) {
+                & $wrapper -ProjectDir $gateRoot -Tasks $tasks
+            } else {
+                & (Join-Path $gateRoot 'gradlew.bat') -p $gateRoot @tasks
+            }
+            if ($LASTEXITCODE -ne 0) {
+                throw ('The runtime test build did not pass. Read the output above: it says whether a ' +
+                    'test failed, an API level above the payload floor was reached, or the build could ' +
+                    'not start. Push anyway with HUSHFEED_SKIP_PRE_PUSH=1.')
+            }
         }
     }
 
