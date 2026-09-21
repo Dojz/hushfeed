@@ -9,8 +9,8 @@ extensions/tiktok/src/main/java/app/morphe/extension/tiktok/blockauthor/FeedVisi
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/blockauthor/FeedVisibility.java|pvp
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/blockauthor/FeedVisibility.java|vjb
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/blockauthor/FeedVisibility.java|wk7
-extensions/tiktok/src/main/java/app/morphe/extension/tiktok/captions/CaptionStyle.java|dfn
-extensions/tiktok/src/main/java/app/morphe/extension/tiktok/captions/CaptionStyle.java|dfu
+extensions/tiktok/src/main/java/app/morphe/extension/tiktok/captions/CaptionStyle.java|dlk
+extensions/tiktok/src/main/java/app/morphe/extension/tiktok/captions/CaptionStyle.java|dlr
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/cleardisplay/RememberClearDisplayPatch.java|LIZ
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/cleardisplay/RememberClearDisplayPatch.java|LIZIZ
 extensions/tiktok/src/main/java/app/morphe/extension/tiktok/comment/CommentTools.java|jlk

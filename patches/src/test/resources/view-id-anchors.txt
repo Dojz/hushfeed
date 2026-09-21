@@ -65,5 +65,5 @@ blockauthor/FeedVisibility.java|COMMENT_TITLE_RESOURCE_NAMES|wk7,vjb|app|com.ss.
 blockauthor/FeedVisibility.java|STORY_PAGER_RESOURCE_NAME|vp_story_collection|app|com.by.andInflater.story_layout_immersive_play_area
 comment/CommentTools.java|DISLIKE_BUTTON_IDS|k0k,jlk|app|-
 comment/CommentTools.java|DISLIKE_ICON_IDS|mmt,m3b|app|-
-captions/CaptionStyle.java|TEXT_ID|dfu|app|-
-captions/CaptionStyle.java|BACKGROUND_ID|dfn|app|-
+captions/CaptionStyle.java|TEXT_ID|dlr|app|-
+captions/CaptionStyle.java|BACKGROUND_ID|dlk|app|com.ss.android.ugc.aweme.autocaption.refactor.CLACaptionAssemV2
