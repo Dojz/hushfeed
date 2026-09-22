@@ -87,10 +87,14 @@ class RuntimeViewIdAnchorsTest {
         val anchors = anchors()
         for (apk in targets) {
             val coverage = coverage(apk, anchors, checkNotNull(compatibility.packageName))
-            val failures = coverage.filter { it.state == State.BROKEN }.map { "${it.anchor.lookup}: ${it.detail}" }
+            // Every group has had an owner since fdaec7f8. A group that only resolves passes
+            // whatever view TikTok hands its name to next, so a missing owner fails like a broken one.
+            val failures = coverage.filter { it.state != State.OWNED }.map {
+                "${it.anchor.lookup}: " +
+                    if (it.state == State.UNOWNED) "no owner holds it (${it.detail})" else it.detail
+            }
             assertEquals("${apk.name} (the declared $version target)", emptyList<String>(), failures)
-            println("${apk.name}: ${coverage.count { it.state == State.OWNED }} owners load their id; " +
-                "${coverage.count { it.state == State.UNOWNED }} groups resolve with no owner to hold them to")
+            println("${apk.name}: ${coverage.count { it.state == State.OWNED }} owners load their id")
         }
     }
 
