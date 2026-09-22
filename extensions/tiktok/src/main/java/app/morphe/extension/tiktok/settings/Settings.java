@@ -521,7 +521,10 @@ public class Settings extends BaseSettings {
                 BOTTOM_NAVIGATION_OBSERVED_TABS, DOWNLOAD_PATH, DOWNLOAD_PATHS_MIGRATED,
                 REMEMBERED_SPEED, SESSION_BUDGET_STATE, BLOCK_AUTHOR_BUTTON_POSITION,
                 LOCAL_HIDE_BUTTON_POSITION, BLOCK_SOUND_BUTTON_POSITION, NOT_INTERESTED_BUTTON_POSITION,
-                SHARE_ACTION_CATALOG, DIAGNOSTIC_REPORT_SALT);
+                SHARE_ACTION_CATALOG, DIAGNOSTIC_REPORT_SALT,
+                // The budget's day is worked out from this hour. Paused, the budget counts
+                // nothing and holds nothing, but its record still has to name the right day.
+                SESSION_BUDGET_RESET_HOUR);
         // Downloads rewrite TikTok's own save folder and file name with no switch in front, so
         // pausing cannot give TikTok its own back. They keep the reader's choice instead of
         // falling back to Hushfeed's defaults. The README lists them as not paused.

@@ -31,6 +31,12 @@ import app.morphe.extension.tiktok.settings.Settings;
 @SuppressWarnings("unused")
 public final class FollowDiagnostics {
     private static final String HOOK_FAMILY = "follow diagnostics";
+
+    static {
+        // Gated on the debug switch, which keeps its value while paused, so Pause leaves these
+        // diagnostics as they were; the export says so.
+        app.morphe.extension.shared.diagnostics.HookStatus.runsWhilePaused(HOOK_FAMILY);
+    }
     private static final int MAX_EVENTS_PER_SESSION = 160;
     private static final long READBACK_WINDOW_MS = 30_000L;
     private static final AtomicInteger eventCount = new AtomicInteger();

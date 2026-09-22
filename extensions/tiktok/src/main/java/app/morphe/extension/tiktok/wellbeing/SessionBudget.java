@@ -6,6 +6,7 @@ package app.morphe.extension.tiktok.wellbeing;
 
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
+import app.morphe.extension.shared.settings.Setting;
 import app.morphe.extension.tiktok.settings.Settings;
 
 import java.util.Calendar;
@@ -356,8 +357,13 @@ public final class SessionBudget {
         return lockRemainingMs() > 0;
     }
 
-    /** How much of the hold is left, or zero when there is none. */
+    /**
+     * How much of the hold is left, or zero when there is none. Paused, the budget is off with
+     * everything else: the hold stays in the record for when Hushfeed comes back, and answers
+     * zero meanwhile, which is also what {@link #isLocked()} goes by.
+     */
     public static long lockRemainingMs() {
+        if (Setting.isPaused()) return 0;
         synchronized (LOCK) {
             lockChecksUnderTheMonitor++;
             load();

@@ -198,30 +198,48 @@ public final class HushfeedPause {
     static boolean diedYoungFromACrash(Context context, String record) {
         String[] parts = record.trim().split(" ");
         int pid;
+        long started;
         try {
             pid = Integer.parseInt(parts[0]);
+            started = parts.length > 1 ? Long.parseLong(parts[1]) : 0L;
         } catch (RuntimeException unreadable) {
             return false;
         }
         boolean markedByHandler = parts.length > 2 && CRASHED.equals(parts[2]);
         if (Build.VERSION.SDK_INT >= 30) {
-            Integer exit = exitReasonOf(context, pid);
+            ApplicationExitInfo exit = firstExitSince(context, pid, started);
             if (exit != null) {
-                return exit == ApplicationExitInfo.REASON_CRASH
-                        || exit == ApplicationExitInfo.REASON_CRASH_NATIVE
-                        || exit == ApplicationExitInfo.REASON_ANR;
+                int reason = exit.getReason();
+                boolean crash = reason == ApplicationExitInfo.REASON_CRASH
+                        || reason == ApplicationExitInfo.REASON_CRASH_NATIVE
+                        || reason == ApplicationExitInfo.REASON_ANR;
+                // Android writes a crash down when it is reported, before any "keeps stopping"
+                // dialog holds the process open, so the first record since the start says when
+                // the crash happened. A process that lived past the minute by the clock on the
+                // wall, the device asleep or not, did not die young.
+                return crash && exit.getTimestamp() - started <= START_WINDOW_MS;
             }
         }
         return markedByHandler;
     }
 
+    /**
+     * The earliest exit Android recorded for the pid since the start, or null when there is
+     * none. A record older than the start belonged to an earlier process that had the same pid.
+     */
     @Nullable
-    private static Integer exitReasonOf(Context context, int pid) {
+    private static ApplicationExitInfo firstExitSince(Context context, int pid, long started) {
         if (Build.VERSION.SDK_INT < 30) return null;
         ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         if (manager == null) return null;
-        List<ApplicationExitInfo> exits = manager.getHistoricalProcessExitReasons(null, pid, 1);
-        return exits == null || exits.isEmpty() ? null : exits.get(0).getReason();
+        List<ApplicationExitInfo> exits = manager.getHistoricalProcessExitReasons(null, pid, 16);
+        ApplicationExitInfo first = null;
+        if (exits == null) return null;
+        for (ApplicationExitInfo exit : exits) {
+            if (exit.getPid() != pid || exit.getTimestamp() < started) continue;
+            if (first == null || exit.getTimestamp() < first.getTimestamp()) first = exit;
+        }
+        return first;
     }
 
     /**

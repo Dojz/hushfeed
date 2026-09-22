@@ -343,16 +343,17 @@ public final class LogBufferManager {
         // the reader made in "Included diagnostics" rather than printing regardless. It goes
         // through the redactor for the same reason every other section does: the next name put
         // in it may not be a literal.
-        // Paused, every family below is bound but takes TikTok's own path, and a reader of the
-        // table has to be told so or it reads as a healthy build that does nothing.
+        // Paused, every family below that reads a setting is bound but takes TikTok's own path,
+        // and a reader of the table has to be told so or it reads as a healthy build that does
+        // nothing. A family that reads no setting keeps working and is left unmarked.
         boolean paused = HushfeedPause.isPaused();
         StringBuilder hooks = new StringBuilder();
         if (includeAll || selected.contains(
                 app.morphe.extension.shared.diagnostics.DiagnosticCategory.PATCH_ERRORS.value)) {
-            for (String line : app.morphe.extension.shared.diagnostics.HookStatus.report()) {
+            for (String line : app.morphe.extension.shared.diagnostics.HookStatus.report(
+                    paused ? " (paused)" : null)) {
                 if (hooks.length() > 0) hooks.append('\n');
                 hooks.append(DiagnosticRedactor.redact(line));
-                if (paused) hooks.append(" (paused)");
             }
         }
 

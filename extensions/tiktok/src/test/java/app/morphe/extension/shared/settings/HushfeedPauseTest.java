@@ -24,6 +24,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowActivityManager;
 import org.robolectric.shadows.ShadowSystemClock;
 
 import java.io.File;
@@ -152,15 +153,25 @@ public class HushfeedPauseTest {
                 HushfeedPause.read(record).trim().endsWith("crashed"));
     }
 
+    /** An exit Android wrote down for the pid at the wall-clock moment [at]. */
+    private void exited(int pid, int reason, long at) {
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        shadowOf(manager).addApplicationExitInfo(ShadowActivityManager.ApplicationExitInfoBuilder.newBuilder()
+                .setProcessName(context.getPackageName())
+                .setPid(pid)
+                .setReason(reason)
+                .setStatus(reason == ApplicationExitInfo.REASON_CRASH ? 1 : 0)
+                .setTimestamp(at)
+                .build());
+    }
+
     @Test @Config(sdk = 30)
     public void android11CountsCrashesNativeCrashesAndHangsButNotBeingSwipedAway() {
-        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        String process = context.getPackageName();
-        shadowOf(manager).addApplicationExitInfo(process, 5101, ApplicationExitInfo.REASON_CRASH, 1);
-        shadowOf(manager).addApplicationExitInfo(process, 5102, ApplicationExitInfo.REASON_CRASH_NATIVE, 1);
-        shadowOf(manager).addApplicationExitInfo(process, 5103, ApplicationExitInfo.REASON_ANR, 1);
-        shadowOf(manager).addApplicationExitInfo(process, 5104, ApplicationExitInfo.REASON_USER_REQUESTED, 0);
-        shadowOf(manager).addApplicationExitInfo(process, 5105, ApplicationExitInfo.REASON_LOW_MEMORY, 0);
+        exited(5101, ApplicationExitInfo.REASON_CRASH, 11_000);
+        exited(5102, ApplicationExitInfo.REASON_CRASH_NATIVE, 12_000);
+        exited(5103, ApplicationExitInfo.REASON_ANR, 13_000);
+        exited(5104, ApplicationExitInfo.REASON_USER_REQUESTED, 14_000);
+        exited(5105, ApplicationExitInfo.REASON_LOW_MEMORY, 15_000);
 
         assertTrue(HushfeedPause.diedYoungFromACrash(context, "5101 1000"));
         assertTrue(HushfeedPause.diedYoungFromACrash(context, "5102 1000"));
@@ -172,6 +183,26 @@ public class HushfeedPauseTest {
         assertTrue(HushfeedPause.diedYoungFromACrash(context, "5199 1000 crashed"));
         assertFalse(HushfeedPause.diedYoungFromACrash(context, "5199 1000"));
         assertFalse(HushfeedPause.diedYoungFromACrash(context, "not a pid"));
+    }
+
+    @Test @Config(sdk = 30)
+    public void android11ReadsTheCrashOffTheFirstRecordSinceTheStart() {
+        // Held open behind "keeps stopping": Android wrote the crash down at 30 s and the kill
+        // that ended the dialog five minutes later. The first record is the crash.
+        exited(6101, ApplicationExitInfo.REASON_CRASH, 1000 + 30_000);
+        exited(6101, ApplicationExitInfo.REASON_CRASH, 1000 + 330_000);
+        assertTrue(HushfeedPause.diedYoungFromACrash(context, "6101 1000"));
+
+        // The device slept before the process saw a minute of uptime, so the record was still
+        // there when it crashed two minutes of wall time after its start: not a young crash.
+        exited(6102, ApplicationExitInfo.REASON_CRASH, 1000 + 120_000);
+        assertFalse(HushfeedPause.diedYoungFromACrash(context, "6102 1000 crashed"));
+
+        // A pid handed out again: the crash on record is older than this start, so it belonged
+        // to another process, and only the handler's mark can speak for this one.
+        exited(6103, ApplicationExitInfo.REASON_CRASH, 500);
+        assertFalse(HushfeedPause.diedYoungFromACrash(context, "6103 1000"));
+        assertTrue(HushfeedPause.diedYoungFromACrash(context, "6103 1000 crashed"));
     }
 
     @Test public void theMarkerFilePausesEveryStartUntilItIsGone() throws Exception {

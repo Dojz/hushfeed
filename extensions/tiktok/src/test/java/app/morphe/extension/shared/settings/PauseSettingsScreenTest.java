@@ -129,6 +129,53 @@ public class PauseSettingsScreenTest {
         }
     }
 
+    @Test public void turningBackOnFromTheSwitchOwesARestartToo() {
+        BaseSettings.PAUSED.save(true);
+        HushfeedPause.pauseForTests(HushfeedPause.Reason.SWITCH);
+        try (var owner = Robolectric.buildActivity(SettingsPagesTest.PageActivity.class).setup().visible()) {
+            TikTokPreferenceFragment home = openHome(owner.get());
+            SettingsStatusPreference status = (SettingsStatusPreference)
+                    home.getPreferenceScreen().findPreference(SettingsStatusPreference.KEY);
+            View card = status.getView(null, null);
+            TextView back = card.findViewWithTag(SettingsStatusPreference.TURN_BACK_ON_TAG);
+
+            assertTrue(back.performClick());
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            assertFalse(BaseSettings.PAUSED.savedValue());
+            // The store's listener reaches the page as soon as the save lands and reads the
+            // switch as never having changed; what this process runs with was put on record
+            // first, so the restart is still owed.
+            assertEquals("[" + BaseSettings.PAUSED.key + "]",
+                    String.valueOf(AbstractPreferenceFragment.restartPending));
+            assertNotNull("no restart row", home.getPreferenceScreen().findPreference(RestartPendingPreference.KEY));
+            assertFalse(((TogglePreference) home.getPreferenceScreen().findPreference(BaseSettings.PAUSED.key)).isChecked());
+            assertEquals(BACK_ON_AT_RESTART, String.valueOf(status.getSummary()));
+        }
+    }
+
+    @Test public void aFamilyThatReadsNoSettingIsNotMarkedPaused() throws Exception {
+        LogBufferManager.clearLogBuffer();
+        // The sticker save button reads no switch; loading its class says so to the export.
+        Class.forName("app.morphe.extension.tiktok.download.StickerGallerySaver");
+        HookStatus.bound("sticker saves", "sheet action buttons");
+        HookStatus.bound("comments", "jlk");
+        HushfeedPause.pauseForTests(HushfeedPause.Reason.SWITCH);
+
+        String paused = LogBufferManager.buildExportText();
+        String table = paused.substring(paused.indexOf("[HOOK STATUS]"));
+        table = table.substring(0, table.indexOf("\n\n") < 0 ? table.length() : table.indexOf("\n\n"));
+        String stickers = null;
+        String comments = null;
+        for (String line : table.split("\n")) {
+            if (line.contains("sticker saves")) stickers = line;
+            if (line.contains("comments")) comments = line;
+        }
+        assertNotNull(table, stickers);
+        assertNotNull(table, comments);
+        assertFalse("a family Pause cannot reach was marked paused: " + stickers, stickers.endsWith(" (paused)"));
+        assertTrue("a family a setting controls was not marked: " + comments, comments.endsWith(" (paused)"));
+    }
+
     @Test public void theCardFollowsThePauseSwitchWhilePaused() {
         BaseSettings.PAUSED.save(true);
         HushfeedPause.pauseForTests(HushfeedPause.Reason.SWITCH);

@@ -28,8 +28,9 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -47,9 +48,14 @@ public class LaunchCrashCleanupTest {
             "token_shared_preference", "sp_TicketGuardHelper", "com.bytedance.sdk.account_setting",
             "key_language_sp_key"};
 
-    /** A call that opens preferences by name: TikTok's cleanup deletes that file unless it's kept. */
-    private static final Pattern OPENS_BY_NAME =
-            Pattern.compile("getSharedPreferences\\(\\s*[^)\\s]|new SharedPrefCategory\\(");
+    /**
+     * A call that opens or names a preferences file: TikTok's cleanup deletes that file unless
+     * it's kept. Counted per call, so a second file opened from a class already on the list is
+     * noticed too.
+     */
+    private static final Pattern OPENS_BY_NAME = Pattern.compile(
+            "getSharedPreferences\\(\\s*[^)\\s]|new SharedPrefCategory\\(|getDefaultSharedPreferences\\("
+                    + "|getPreferences\\(\\s*[^)\\s]|setSharedPreferencesName\\(");
 
     @Test public void tiktoksListKeepsItsOrderAndGainsHushfeedsFiles() {
         String[] kept = LaunchCrashCleanup.keepHushfeedFiles(TIKTOK_KEEPS.clone());
@@ -61,15 +67,16 @@ public class LaunchCrashCleanupTest {
     }
 
     @Test public void everyPreferencesFileHushfeedOpensIsKept() throws Exception {
-        assertEquals("a file opens preferences that TikTok's launch-crash cleanup would delete; "
-                        + "add its name to LaunchCrashCleanup.HUSHFEED_FILES and to this list",
-                new TreeSet<>(Arrays.asList(
-                        "diagnostics/JavaCrashCapture.java",
-                        "featuregatelab/FeatureGateLabStore.java",
-                        "settings/CalmFeedPreset.java",
-                        "shared/settings/Setting.java",
-                        "shared/settings/preference/SharedPrefCategory.java")),
-                openersByName());
+        Map<String, Integer> expected = new TreeMap<>();
+        expected.put("diagnostics/JavaCrashCapture.java", 1);
+        expected.put("featuregatelab/FeatureGateLabStore.java", 1);
+        expected.put("settings/CalmFeedPreset.java", 1);
+        expected.put("shared/settings/Setting.java", 1);
+        expected.put("shared/settings/preference/AbstractPreferenceFragment.java", 1);
+        expected.put("shared/settings/preference/SharedPrefCategory.java", 1);
+        assertEquals("a call opens preferences that TikTok's launch-crash cleanup would delete; "
+                        + "add the file's name to LaunchCrashCleanup.HUSHFEED_FILES and the call to this list",
+                expected, openersByName());
 
         List<String> kept = Arrays.asList(LaunchCrashCleanup.HUSHFEED_FILES);
         assertTrue(kept.contains(Setting.preferences.name));
@@ -84,11 +91,15 @@ public class LaunchCrashCleanupTest {
         return (String) field.get(null);
     }
 
-    private static Set<String> openersByName() throws IOException {
-        Set<String> openers = new TreeSet<>();
+    /** Each source that opens preferences by name, with how many calls it makes. */
+    private static Map<String, Integer> openersByName() throws IOException {
+        Map<String, Integer> openers = new TreeMap<>();
         for (Path source : payloadSources()) {
             String text = new String(Files.readAllBytes(source), StandardCharsets.UTF_8);
-            if (OPENS_BY_NAME.matcher(text).find()) openers.add(relativeName(source));
+            Matcher matcher = OPENS_BY_NAME.matcher(text);
+            int calls = 0;
+            while (matcher.find()) calls++;
+            if (calls > 0) openers.put(relativeName(source), calls);
         }
         return openers;
     }

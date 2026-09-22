@@ -1149,6 +1149,12 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         if (context == null) return;
         boolean pausedBefore = BaseSettings.PAUSED.savedValue();
         boolean safeModeBefore = BaseSettings.SAFE_MODE.savedValue();
+        // What this process runs with goes on record before the save. The store's listener
+        // reaches this page as soon as the save lands and reads the value "before" the change
+        // from the setting, which by then already holds the new one, so it would record the
+        // switch as never having changed and the restart it owes would go unsaid.
+        noteRestartPending(BaseSettings.PAUSED, pausedBefore);
+        noteRestartPending(BaseSettings.SAFE_MODE, safeModeBefore);
         boolean markerGone = HushfeedPause.turnBackOn(context);
         Preference row = findPreference(BaseSettings.PAUSED.key);
         if (row instanceof TogglePreference) ((TogglePreference) row).setChecked(false);

@@ -374,7 +374,9 @@ public final class SettingsBackup {
     static boolean matchesForJournal(Snapshot expected) {
         try {
             for (Map.Entry<Setting<?>, Object> entry : expected.values.entrySet()) {
-                if (!Objects.equals(entry.getKey().get(), entry.getValue())) return false;
+                // The snapshots were written from saved values, so they are compared with saved
+                // values: paused, get() answers TikTok's own path and matches neither.
+                if (!Objects.equals(entry.getKey().savedValue(), entry.getValue())) return false;
             }
             return labSettingsMatch(expected);
         } catch (RuntimeException error) {

@@ -68,6 +68,8 @@ public class PauseAnswersUnpatchedTest {
             "remembered_speed_v2", "session_budget_state", "block_author_button_position",
             "local_hide_button_position", "block_sound_button_position",
             "not_interested_button_position", "share_action_catalog", "diagnostic_report_salt",
+            // The budget's day is worked out from this hour, paused or not.
+            "session_budget_reset_hour",
             // Downloads rewrite TikTok's folder and file name with no switch in front.
             "download_video_path", "download_photo_path", "download_sticker_path",
             "download_sticker_format", "download_video_filename_template",
@@ -198,24 +200,35 @@ public class PauseAnswersUnpatchedTest {
         assertEquals(90, values.getInt(Settings.MAX_VIDEO_SECONDS.key));
     }
 
-    @Test public void thePausedTabFilterLeavesTheReadersTabListAlone() {
+    @Test public void thePausedTabFilterKeepsTheReadersTabListTheirOwn() {
         Settings.FEED_NAVIGATION.save(true);
         Settings.FEED_NAVIGATION_TABS.save("HOT");
         Settings.FEED_NAVIGATION_OBSERVED_TABS.save("HOT");
-        Settings.FEED_NAVIGATION_BLOCK_NEW_TABS.save(false);
+        Settings.FEED_NAVIGATION_BLOCK_NEW_TABS.save(true);
 
-        // Paused, the list reads as its default, which already names every tab Hushfeed knows,
-        // so a newly seen tab adds nothing and nothing is written over the reader's list.
+        // Paused, TikTok keeps every tab it sends, and a tab Hushfeed has no name for is judged
+        // by the reader's own choices: blocked here, so the list stays as it was. Read through
+        // get(), the block would answer off and the list would answer the default, and the
+        // default plus the new tab would be written over the reader's one.
         Setting.setPausedForProcess(true);
-        List<Tab> tabs = Arrays.asList(new Tab("For You"), new Tab("Explore"));
+        List<Tab> tabs = Arrays.asList(new Tab("For You"), new Tab("Brand new"));
         assertEquals("paused, TikTok keeps every tab it sends", tabs, NavigationTabsFilter.filterTopTabs(tabs));
-        assertEquals("paused, the reader's list was rewritten", "HOT", Settings.FEED_NAVIGATION_TABS.savedValue());
+        assertEquals("a blocked new tab was written over the reader's list", "HOT",
+                Settings.FEED_NAVIGATION_TABS.savedValue());
 
-        // The control: running normally, a newly seen tab joins the list.
-        Setting.setPausedForProcess(false);
+        // With the door open, the new tab joins the reader's list and nothing else does.
+        Settings.FEED_NAVIGATION_BLOCK_NEW_TABS.save(false);
         Settings.FEED_NAVIGATION_OBSERVED_TABS.save("HOT");
         NavigationTabsFilter.filterTopTabs(tabs);
-        assertTrue(Settings.FEED_NAVIGATION_TABS.savedValue().contains("EXPLORE"));
+        String joined = Settings.FEED_NAVIGATION_TABS.savedValue();
+        assertTrue(joined, joined.startsWith("HOT,") && joined.contains("RAW:") && !joined.contains("EXPLORE"));
+
+        // The control: running normally, the same tab joins the same way.
+        Setting.setPausedForProcess(false);
+        Settings.FEED_NAVIGATION_TABS.save("HOT");
+        Settings.FEED_NAVIGATION_OBSERVED_TABS.save("HOT");
+        NavigationTabsFilter.filterTopTabs(tabs);
+        assertEquals(joined, Settings.FEED_NAVIGATION_TABS.savedValue());
     }
 
     @Test public void aClearModeToggleWhilePausedIsNotRememberedOverTheReadersChoice() {
