@@ -61,7 +61,7 @@ public final class ScreenTimePreferenceCategory extends ConditionalPreferenceCat
                         + "the auto-advance session limit under Playback, which only counts videos "
                         + "Hushfeed itself advanced past.", Settings.SESSION_BUDGET_VIDEOS, "%1$s video", "%1$s videos") {
             @Override protected String extraSummaryLine() {
-                if (Settings.SESSION_BUDGET_VIDEOS.get() <= 0) return null;
+                if (Settings.SESSION_BUDGET_VIDEOS.savedValue() <= 0) return null;
                 int seen = SessionBudget.videosSeen();
                 return L10n.quantity(getContext(), seen, "Today: %1$d video", "Today: %1$d videos");
             }
@@ -71,7 +71,7 @@ public final class ScreenTimePreferenceCategory extends ConditionalPreferenceCat
                         + "Time on messages, a profile or search does not count.",
                 Settings.SESSION_BUDGET_MINUTES, "%1$s minute", "%1$s minutes") {
             @Override protected String extraSummaryLine() {
-                if (Settings.SESSION_BUDGET_MINUTES.get() <= 0) return null;
+                if (Settings.SESSION_BUDGET_MINUTES.savedValue() <= 0) return null;
                 // Whole minutes down, so a budget of 30 never reads "Today: 30 minutes" while
                 // there is still time left on it.
                 long minutes = SessionBudget.watchedMs() / 60_000L;

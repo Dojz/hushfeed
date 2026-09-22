@@ -52,7 +52,7 @@ public class CreatorListPreference extends DialogPreference {
         setTitle(title);
         setSummary(summary);
         setKey(setting.key);
-        setValue(setting.get());
+        setValue(setting.savedValue());
     }
 
     public void setValue(String nextValue) {

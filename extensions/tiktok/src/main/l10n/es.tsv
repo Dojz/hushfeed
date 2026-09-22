@@ -1169,3 +1169,12 @@ this creator	este creador
 TikTok refused the follow with code %1$s	TikTok rechazó el seguimiento con el código %1$s
 TikTok refused the follow with code %1$s. A hidden CAPTCHA may be the cause.	TikTok rechazó el seguimiento con el código %1$s. Puede que la causa sea un CAPTCHA oculto.
 TikTok refused the follow: %1$s A hidden CAPTCHA may be the cause.	TikTok rechazó el seguimiento: %1$s Puede que la causa sea un CAPTCHA oculto.
+Hushfeed is paused	Hushfeed está en pausa
+TikTok runs as if it were not patched. Your settings stay as they are.	TikTok funciona como si no tuviera parches. Tus ajustes se quedan como están.
+TikTok closed three times within a minute of starting, so Hushfeed paused itself. Your settings stay as they are.	TikTok se cerró tres veces en el primer minuto después de abrirse, así que Hushfeed se pausó solo. Tus ajustes se quedan como están.
+A file named hushfeed-safe-mode in TikTok's folder under Android/data paused Hushfeed. Your settings stay as they are.	Un archivo llamado hushfeed-safe-mode en la carpeta de TikTok dentro de Android/data pausó Hushfeed. Tus ajustes se quedan como están.
+Turn Hushfeed back on	Volver a activar Hushfeed
+Pause Hushfeed	Pausar Hushfeed
+From the next start TikTok runs as if it were not patched, so you can tell whether a problem comes from Hushfeed. Your settings stay as they are.	Desde el próximo inicio, TikTok funciona como si no tuviera parches, así sabes si un problema viene de Hushfeed. Tus ajustes se quedan como están.
+Hushfeed turns back on when TikTok restarts.	Hushfeed vuelve a activarse cuando TikTok se reinicie.
+The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.	No se pudo quitar el archivo hushfeed-safe-mode. Bórralo de la carpeta de TikTok dentro de Android/data para volver a activar Hushfeed.

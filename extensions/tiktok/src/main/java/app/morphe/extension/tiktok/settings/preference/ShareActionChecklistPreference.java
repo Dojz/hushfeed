@@ -92,7 +92,7 @@ public final class ShareActionChecklistPreference extends DialogPreference {
         Context context = getContext();
         catalog.clear();
         catalog.addAll(ShareActionCatalog.entries(surface));
-        originalHidden = ShareModelFilter.hiddenItems(surface);
+        originalHidden = ShareModelFilter.savedHiddenItems(surface);
         selected.clear();
         selected.addAll(selectedKeys(originalHidden));
 

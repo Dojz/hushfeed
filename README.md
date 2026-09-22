@@ -95,6 +95,29 @@ That's a split bundle. Morphe Manager merges it, with one catch for AMOLED dark 
 
 Yes. Every release is patched with all of them selected before it ships, so no two refuse to go in together. The one thing to watch is memory: with AMOLED dark theme selected, raise the manager's limit as step 4 of [Install](#install) says. Mixing Hushfeed with another TikTok bundle is a different question, and [Moving from Kveld](#moving-from-kveld) covers the overlap we know about.
 
+### Is it Hushfeed? Pause it and see
+
+Hushfeed settings > Pause Hushfeed turns off everything a switch, list or limit controls, from the next start. TikTok then runs the way it ships. If the problem is still there, it isn't coming from any of that. Your settings stay exactly as they were, and switching Pause off brings every one of them back after a restart, with no patching again. A diagnostic export made while paused says so at the top.
+
+Pausing also turns off your screen-time budget, so a day you've locked refuses it until the day starts over.
+
+A few patches change TikTok with no switch in front of them, and Pause can't reach those:
+
+- Settings itself, which is how you get back to the switch.
+- AMOLED dark theme.
+- Disable screen capture detection, Disable login requirement, Fix Google login, Enable voice comments and Stop on-device AI profiling.
+- Skip the splash ad, Limit background traffic, Drop the animated image cache and Skip update checks.
+- Block P2P video relay and the four patches that take files out of the app: Remove content credential and card scanner assets, Remove unused language packs, Remove creation tools and Remove LIVE extras.
+- In Downloads, the folder and file name you picked still apply, as do the fallback to a clean video address and the save button on stickers.
+
+While paused, TikTok's own bottom bar comes back, + button included. If Remove creation tools was patched in, the camera and editor behind that button still won't work, because their files were taken out when the app was patched.
+
+### TikTok closes right after it opens
+
+If TikTok crashes within a minute of starting three times in a row, Hushfeed pauses itself on the next start. The top of Hushfeed settings then says why and offers Turn Hushfeed back on. Being swiped away or force-stopped doesn't count toward the three.
+
+If you can't reach the settings at all, create an empty file named `hushfeed-safe-mode` in `Android/data/com.zhiliaoapp.musically/files/`. From a computer with adb that's `adb shell touch /sdcard/Android/data/com.zhiliaoapp.musically/files/hushfeed-safe-mode`. Hushfeed stays paused for as long as the file is there, and Turn Hushfeed back on deletes it.
+
 ## Going back
 
 ### To plain TikTok

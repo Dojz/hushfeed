@@ -1169,3 +1169,12 @@ this creator	bu içerik üreticisi
 TikTok refused the follow with code %1$s	TikTok takibi %1$s koduyla reddetti
 TikTok refused the follow with code %1$s. A hidden CAPTCHA may be the cause.	TikTok takibi %1$s koduyla reddetti. Nedeni gizlenmiş bir CAPTCHA olabilir.
 TikTok refused the follow: %1$s A hidden CAPTCHA may be the cause.	TikTok takibi reddetti: %1$s Nedeni gizlenmiş bir CAPTCHA olabilir.
+Hushfeed is paused	Hushfeed duraklatıldı
+TikTok runs as if it were not patched. Your settings stay as they are.	TikTok yamalanmamış gibi çalışır. Ayarların olduğu gibi kalır.
+TikTok closed three times within a minute of starting, so Hushfeed paused itself. Your settings stay as they are.	TikTok açıldıktan sonraki bir dakika içinde üç kez kapandı, bu yüzden Hushfeed kendini duraklattı. Ayarların olduğu gibi kalır.
+A file named hushfeed-safe-mode in TikTok's folder under Android/data paused Hushfeed. Your settings stay as they are.	Android/data altındaki TikTok klasöründe bulunan hushfeed-safe-mode adlı bir dosya Hushfeed'i duraklattı. Ayarların olduğu gibi kalır.
+Turn Hushfeed back on	Hushfeed'i yeniden aç
+Pause Hushfeed	Hushfeed'i duraklat
+From the next start TikTok runs as if it were not patched, so you can tell whether a problem comes from Hushfeed. Your settings stay as they are.	Bir sonraki açılıştan itibaren TikTok yamalanmamış gibi çalışır, böylece bir sorunun Hushfeed'den gelip gelmediğini anlarsın. Ayarların olduğu gibi kalır.
+Hushfeed turns back on when TikTok restarts.	Hushfeed, TikTok yeniden başladığında tekrar açılır.
+The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.	hushfeed-safe-mode dosyası kaldırılamadı. Hushfeed'i yeniden açmak için onu Android/data altındaki TikTok klasöründen sil.

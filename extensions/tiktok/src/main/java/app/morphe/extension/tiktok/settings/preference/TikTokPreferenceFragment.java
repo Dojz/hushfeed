@@ -36,6 +36,7 @@ import java.util.Locale;
 
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.settings.BaseSettings;
+import app.morphe.extension.shared.settings.HushfeedPause;
 import app.morphe.extension.shared.settings.Setting;
 import app.morphe.extension.shared.settings.preference.AbstractPreferenceFragment;
 import app.morphe.extension.tiktok.blockauthor.BlockAuthorOverlay;
@@ -59,10 +60,13 @@ import app.morphe.extension.tiktok.settings.preference.categories.PrivacyPrefere
 import app.morphe.extension.tiktok.settings.preference.categories.ScreenTimePreferenceCategory;
 import app.morphe.extension.tiktok.settings.preference.categories.SharePreferenceCategory;
 import app.morphe.extension.tiktok.settings.preference.categories.SimSpoofPreferenceCategory;
+import app.morphe.extension.tiktok.wellbeing.SessionBudget;
+import app.morphe.extension.tiktok.wellbeing.SessionLockOverlay;
 
 @SuppressWarnings("deprecation")
 public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
     private static final String FEATURE_GATE_LAB_KEY = "action_feature_gate_lab";
+    private static final String PAUSE_SUMMARY = "From the next start TikTok runs as if it were not patched, so you can tell whether a problem comes from Hushfeed. Your settings stay as they are.";
     private static final int REQUEST_DOWNLOAD_PATH_FOLDER = 8841;
     private static final String ARG_SECTION = "morphe_settings_section";
     private static final String ARG_SEARCH = "morphe_settings_search";
@@ -199,35 +203,35 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         if (pref instanceof NumberInputPreference) {
             NumberInputPreference numberInputPreference = (NumberInputPreference) pref;
             if (applySettingToPreference) {
-                numberInputPreference.setValue(setting.get().toString());
+                numberInputPreference.setValue(setting.savedValue().toString());
             } else {
                 Setting.privateSetValueFromString(setting, numberInputPreference.getValue());
             }
         } else if (pref instanceof CreatorListPreference) {
             CreatorListPreference creatorListPreference = (CreatorListPreference) pref;
             if (applySettingToPreference) {
-                creatorListPreference.setValue(setting.get().toString());
+                creatorListPreference.setValue(setting.savedValue().toString());
             } else {
                 Setting.privateSetValueFromString(setting, creatorListPreference.getValue());
             }
         } else if (pref instanceof RangeValuePreference) {
             RangeValuePreference rangeValuePref = (RangeValuePreference) pref;
             if (applySettingToPreference) {
-                rangeValuePref.setValue(setting.get().toString());
+                rangeValuePref.setValue(setting.savedValue().toString());
             } else {
                 Setting.privateSetValueFromString(setting, rangeValuePref.getValue());
             }
         } else if (pref instanceof DownloadPathPreference) {
             DownloadPathPreference downloadPathPref = (DownloadPathPreference) pref;
             if (applySettingToPreference) {
-                downloadPathPref.setValue(setting.get().toString());
+                downloadPathPref.setValue(setting.savedValue().toString());
             } else {
                 Setting.privateSetValueFromString(setting, downloadPathPref.getValue());
             }
         } else if (pref instanceof TabSelectionPreference) {
             TabSelectionPreference tabSelectionPref = (TabSelectionPreference) pref;
             if (applySettingToPreference) {
-                tabSelectionPref.setValue(setting.get().toString());
+                tabSelectionPref.setValue(setting.savedValue().toString());
             } else {
                 Setting.privateSetValueFromString(setting, tabSelectionPref.getValue());
             }
@@ -246,6 +250,9 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         }
         if (!applySettingToPreference && setting == Settings.KEEP_CAPTIONS_CLEAR_DISPLAY) {
             CaptionTools.onSettingChanged();
+        }
+        if (!applySettingToPreference && setting == BaseSettings.PAUSED) {
+            refreshStatusCard();
         }
     }
 
@@ -273,8 +280,8 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
     @Override
     protected boolean preferenceShowsSettingValue(@NonNull Preference pref,
                                                   @NonNull Setting<?> setting) {
-        String expected = setting.get() instanceof Enum<?>
-                ? ((Enum<?>) setting.get()).name() : String.valueOf(setting.get());
+        String expected = setting.savedValue() instanceof Enum<?>
+                ? ((Enum<?>) setting.savedValue()).name() : String.valueOf(setting.savedValue());
         if (pref instanceof NumberInputPreference) {
             return expected.equals(((NumberInputPreference) pref).getValue());
         }
@@ -744,7 +751,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
             // A setting this build cannot reach is not on the page, so it is not something the
             // reader has turned on.
             if (setting.isAvailable()
-                    && !java.util.Objects.equals(setting.get(), setting.defaultValue)) {
+                    && !java.util.Objects.equals(setting.savedValue(), setting.defaultValue)) {
                 count++;
             }
         }
@@ -836,6 +843,15 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
                     L10n.t(context, "Settings")
             ));
         }
+        // Pause Hushfeed sits on the master menu too, and it is what a reader asking whether a
+        // problem is Hushfeed's searches for.
+        results.add(new SearchResult(
+                null,
+                BaseSettings.PAUSED.key,
+                L10n.t(context, "Pause Hushfeed"),
+                L10n.t(context, PAUSE_SUMMARY),
+                L10n.t(context, "Settings")
+        ));
         // The About row sits on the master menu beside the Lab, so it is indexed the same way.
         // Its summary carries the bundle version, which is what a reporter searches for.
         results.add(new SearchResult(
@@ -977,9 +993,11 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
     private void createMasterMenu(Context context, PreferenceScreen screen) {
         screen.addPreference(SettingsHeaderPreference.master(context, this::closeSettings));
         boolean diagnosticsAvailable = DebugPreferenceCategory.isAvailable();
-        screen.addPreference(new SettingsStatusPreference(
+        SettingsStatusPreference status = new SettingsStatusPreference(
                 context,
-                diagnosticsAvailable ? () -> openSection(Section.DIAGNOSTICS) : null));
+                diagnosticsAvailable ? () -> openSection(Section.DIAGNOSTICS) : null);
+        status.setTurnBackOnAction(this::turnHushfeedBackOn);
+        screen.addPreference(status);
 
         SettingsMenuPreference search = new SettingsMenuPreference(
                 context,
@@ -1076,6 +1094,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         if (ExtensionPreferenceCategory.isAvailable()) {
             addMenu(screen, Section.BEHAVIOR, SettingsMenuPreference.Icon.BEHAVIOR);
         }
+        screen.addPreference(pauseRow(context));
 
         if (FeatureGateLabRuntime.isInstalled()) {
             SettingsMenuPreference featureGateLab = new SettingsMenuPreference(
@@ -1105,6 +1124,55 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         // Section 7b asks that its notice reach the person using the software, and a file in the
         // repository does not reach them.
         screen.addPreference(new LicensesPreference(context));
+    }
+
+    /**
+     * Pause Hushfeed. It takes the screen-time budget off with everything else, so a locked
+     * day refuses it the same way it refuses every budget setting.
+     */
+    private TogglePreference pauseRow(Context context) {
+        TogglePreference pause = new TogglePreference(context, "Pause Hushfeed", PAUSE_SUMMARY,
+                BaseSettings.PAUSED);
+        pause.setOnPreferenceChangeListener((preference, value) -> {
+            if (!Boolean.TRUE.equals(value) || !SessionBudget.lockedToday()) return true;
+            Utils.showToastShort(L10n.f(context,
+                    "Today's budget is locked. This can be changed again at %1$s.",
+                    SessionLockOverlay.resetTimeLabel()));
+            return false;
+        });
+        return pause;
+    }
+
+    /** The paused status card's action: safe mode, the switch and the marker file all go. */
+    private void turnHushfeedBackOn() {
+        Context context = getActivity();
+        if (context == null) return;
+        boolean pausedBefore = BaseSettings.PAUSED.savedValue();
+        boolean safeModeBefore = BaseSettings.SAFE_MODE.savedValue();
+        boolean markerGone = HushfeedPause.turnBackOn(context);
+        Preference row = findPreference(BaseSettings.PAUSED.key);
+        if (row instanceof TogglePreference) ((TogglePreference) row).setChecked(false);
+        noteRestartPending(BaseSettings.PAUSED, pausedBefore);
+        noteRestartPending(BaseSettings.SAFE_MODE, safeModeBefore);
+        if (markerGone && HushfeedPause.reason() == HushfeedPause.Reason.MARKER_FILE) {
+            // The file is no setting, but the start it paused owes a restart all the same.
+            AbstractPreferenceFragment.restartPending.add(HushfeedPause.MARKER_FILE_NAME);
+            refreshRestartPending();
+        }
+        refreshStatusCard();
+        if (markerGone) {
+            SettingsActionBanner.showRestart(context,
+                    L10n.t(context, "Hushfeed turns back on when TikTok restarts."));
+        } else {
+            SettingsActionBanner.showNotice(context, L10n.t(context,
+                    "The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on."));
+        }
+    }
+
+    /** The status card says again whether the next start still runs paused. */
+    private void refreshStatusCard() {
+        Preference status = findPreference(SettingsStatusPreference.KEY);
+        if (status instanceof SettingsStatusPreference) ((SettingsStatusPreference) status).refresh();
     }
 
     /** A group heading on the master menu, which the list adapter treats as a card boundary. */
@@ -1161,7 +1229,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         if (current == null || !current.isAdded()) return;
         for (java.util.Map.Entry<Setting<?>, Object> entry : previousValues.entrySet()) {
             Setting<?> setting = entry.getKey();
-            if (setting.rebootApp && !java.util.Objects.equals(entry.getValue(), setting.get())) {
+            if (setting.rebootApp && !java.util.Objects.equals(entry.getValue(), setting.savedValue())) {
                 current.noteRestartPending(setting, entry.getValue());
             }
         }

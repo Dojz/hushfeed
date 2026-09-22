@@ -80,6 +80,7 @@ A Lab change is already running,A Lab change is already running
 A creator pattern is taking too long and was turned off: %1$s,A creator pattern is taking too long and was turned off: %1$s
 A diagnostic report is already being saved,A diagnostic report is already being saved
 A field value couldn't be read. Check the values and try again.,A field value couldn't be read. Check the values and try again.
+A file named hushfeed-safe-mode in TikTok's folder under Android/data paused Hushfeed. Your settings stay as they are.,A file named hushfeed-safe-mode in TikTok's folder under Android/data paused Hushfeed. Your settings stay as they are.
 A forced value applies to this copy of TikTok whichever account is signed in. It cannot get past a check the server makes.,A forced value applies to this copy of TikTok whichever account is signed in. It cannot get past a check the server makes.
 "A good place to stop, if you want one.","A good place to stop, if you want one."
 A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.,A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.
@@ -386,6 +387,7 @@ Forget seen videos after,Forget seen videos after
 Forget the %1$s seen videos.,Forget the %1$s seen videos.
 Forget what has been counted today and end any hold. The budgets themselves are left alone.,Forget what has been counted today and end any hold. The budgets themselves are left alone.
 Friends,Friends
+"From the next start TikTok runs as if it were not patched, so you can tell whether a problem comes from Hushfeed. Your settings stay as they are.","From the next start TikTok runs as if it were not patched, so you can tell whether a problem comes from Hushfeed. Your settings stay as they are."
 Full comment sort options,Full comment sort options
 Full license,Full license
 Full report saved to %1$s,Full report saved to %1$s
@@ -530,6 +532,8 @@ How far each edge press moves the video.,How far each edge press moves the video
 Hushfeed cannot read the creator pattern %1$s,Hushfeed cannot read the creator pattern %1$s
 Hushfeed hid a TikTok CAPTCHA. Turn off Hide CAPTCHA popups if something stops working.,Hushfeed hid a TikTok CAPTCHA. Turn off Hide CAPTCHA popups if something stops working.
 Hushfeed is active,Hushfeed is active
+Hushfeed is paused,Hushfeed is paused
+Hushfeed turns back on when TikTok restarts.,Hushfeed turns back on when TikTok restarts.
 "Ignore the creator's choice so the Duet and Stitch entries appear. Everything else the app checks still applies, and whether the upload is accepted is the server's decision.","Ignore the creator's choice so the Duet and Stitch entries appear. Everything else the app checks still applies, and whether the upload is accepted is the server's decision."
 Import finished,Import finished
 Import loaded values,Import loaded values
@@ -713,6 +717,7 @@ Overrides are disabled in the Feature Gate Lab.,Overrides are disabled in the Fe
 Overrides disabled. Restart TikTok to apply this.,Overrides disabled. Restart TikTok to apply this.
 Overrides enabled. Restart TikTok to apply this.,Overrides enabled. Restart TikTok to apply this.
 Paid partnerships,Paid partnerships
+Pause Hushfeed,Pause Hushfeed
 "People, shortcuts and sending controls","People, shortcuts and sending controls"
 Photo,Photo
 Photo and image posts,Photo and image posts
@@ -1004,6 +1009,7 @@ The export failed and the partial file couldn't be removed. Delete it from your 
 The feed does not end. This is a fine time to leave it.,The feed does not end. This is a fine time to leave it.
 The feed is open again,The feed is open again
 "The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.","The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away."
+The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.,The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.
 "The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.","The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night."
 The loaded-values file you chose couldn't be read. Try again.,The loaded-values file you chose couldn't be read. Try again.
 "The original photos aren't available, so TikTok's own save runs instead","The original photos aren't available, so TikTok's own save runs instead"
@@ -1049,6 +1055,7 @@ This video has no link to copy,This video has no link to copy
 This video has no original sound to save,This video has no original sound to save
 This video has no sound of its own,This video has no sound of its own
 Thumbs down blocks the commenter,Thumbs down blocks the commenter
+"TikTok closed three times within a minute of starting, so Hushfeed paused itself. Your settings stay as they are.","TikTok closed three times within a minute of starting, so Hushfeed paused itself. Your settings stay as they are."
 TikTok default,TikTok default
 "TikTok default (2x hold, quick share)","TikTok default (2x hold, quick share)"
 TikTok did not block %1$s. Try again in a moment.,TikTok did not block %1$s. Try again in a moment.
@@ -1061,6 +1068,7 @@ TikTok refused the follow with code %1$s,TikTok refused the follow with code %1$
 TikTok refused the follow with code %1$s. A hidden CAPTCHA may be the cause.,TikTok refused the follow with code %1$s. A hidden CAPTCHA may be the cause.
 TikTok refused the follow: %1$s,TikTok refused the follow: %1$s
 TikTok refused the follow: %1$s A hidden CAPTCHA may be the cause.,TikTok refused the follow: %1$s A hidden CAPTCHA may be the cause.
+TikTok runs as if it were not patched. Your settings stay as they are.,TikTok runs as if it were not patched. Your settings stay as they are.
 TikTok's own value,TikTok's own value
 TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.,TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.
 TikTok's size,TikTok's size
@@ -1086,6 +1094,7 @@ Tracking,Tracking
 Transparent,Transparent
 Try a different word or clear the search.,Try a different word or clear the search.
 "Try again, or go back to TikTok.","Try again, or go back to TikTok."
+Turn Hushfeed back on,Turn Hushfeed back on
 Turn on %1$s first.,Turn on %1$s first.
 Turn on overrides,Turn on overrides
 "Turn this on while you record logs for a bug report, then turn it off again. While it is on, TikTok can feel slower and may crash.","Turn this on while you record logs for a bug report, then turn it off again. While it is on, TikTok can feel slower and may crash."

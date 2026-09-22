@@ -66,7 +66,7 @@ public class NumberInputPreference extends EditTextPreference {
         this.maxValue = setting.maximum();
         setTitle(title);
         setKey(setting.key);
-        setValue(String.valueOf(clamp(setting.get())));
+        setValue(String.valueOf(clamp(setting.savedValue())));
         getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
         getEditText().setHint(L10n.t(context, "Enter a number"));
     }
@@ -305,7 +305,7 @@ public class NumberInputPreference extends EditTextPreference {
             // An empty or unreadable box is not a request for the smallest value. For
             // several of these settings the smallest value means off, so falling to it
             // would quietly turn a feature off because somebody cleared the field.
-            return clamp(setting.get());
+            return clamp(setting.savedValue());
         }
     }
 

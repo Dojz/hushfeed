@@ -47,6 +47,7 @@ import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.diagnostics.DiagnosticEvent;
 import app.morphe.extension.shared.diagnostics.DiagnosticRedactor;
 import app.morphe.extension.shared.settings.BaseSettings;
+import app.morphe.extension.shared.settings.HushfeedPause;
 
 /** Bounded structured event storage and latest sanitized crash storage. */
 public final class LogBufferManager {
@@ -342,12 +343,16 @@ public final class LogBufferManager {
         // the reader made in "Included diagnostics" rather than printing regardless. It goes
         // through the redactor for the same reason every other section does: the next name put
         // in it may not be a literal.
+        // Paused, every family below is bound but takes TikTok's own path, and a reader of the
+        // table has to be told so or it reads as a healthy build that does nothing.
+        boolean paused = HushfeedPause.isPaused();
         StringBuilder hooks = new StringBuilder();
         if (includeAll || selected.contains(
                 app.morphe.extension.shared.diagnostics.DiagnosticCategory.PATCH_ERRORS.value)) {
             for (String line : app.morphe.extension.shared.diagnostics.HookStatus.report()) {
                 if (hooks.length() > 0) hooks.append('\n');
                 hooks.append(DiagnosticRedactor.redact(line));
+                if (paused) hooks.append(" (paused)");
             }
         }
 
@@ -356,7 +361,7 @@ public final class LogBufferManager {
         // A table with a miss in it is different. Those events are the oldest in the buffer and
         // are the first evicted, so on a badly broken build the table is exactly what would be
         // dropped, and it is the thing the report exists to carry.
-        boolean worthReporting = !crash.isEmpty() || !npthCrash.isEmpty() || events.length() > 0
+        boolean worthReporting = paused || !crash.isEmpty() || !npthCrash.isEmpty() || events.length() > 0
                 || (hooks.length() > 0
                         && app.morphe.extension.shared.diagnostics.HookStatus.anyMissing());
         if (!worthReporting) return "";
@@ -368,6 +373,11 @@ public final class LogBufferManager {
                 .append("tiktok: ").append(Utils.getContext().getPackageName())
                 .append(' ').append(Utils.getAppVersionName()).append('\n')
                 .append("morphe: ").append(Utils.getPatchesReleaseVersion()).append('\n');
+        if (paused) {
+            report.append("hushfeed: paused (")
+                    .append(HushfeedPause.reason().name().toLowerCase(java.util.Locale.ROOT))
+                    .append("), every hook a setting controls takes TikTok's own path\n");
+        }
 
         if (!crash.isEmpty()) {
             report.append("\n[LATEST JAVA CRASH]\n").append(crash);

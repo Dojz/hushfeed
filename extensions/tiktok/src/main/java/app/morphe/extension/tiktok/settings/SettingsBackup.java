@@ -130,7 +130,7 @@ public final class SettingsBackup {
         JSONArray keys = new JSONArray();
         for (Setting<?> setting : Setting.allLoadedSettings()) {
             if (!included(setting)) continue;
-            Object value = defaults ? setting.defaultValue : setting.get();
+            Object value = defaults ? setting.defaultValue : setting.savedValue();
             values.put(setting.key, value instanceof Enum<?> ? ((Enum<?>) value).name() : value);
             keys.put(setting.key);
         }
@@ -492,7 +492,7 @@ public final class SettingsBackup {
             // A backup is a set of values to apply, not a picture of the whole app. A file
             // written before a setting existed says nothing about that setting, and taking the
             // silence as "put it back to its default" quietly undid whatever the device held.
-            updates.put(setting, setting.get());
+            updates.put(setting, setting.savedValue());
             absent++;
         }
         absent -= migrateDownloadPath(values, updates);

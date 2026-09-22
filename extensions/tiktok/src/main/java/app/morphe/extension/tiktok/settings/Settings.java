@@ -50,7 +50,7 @@ public class Settings extends BaseSettings {
             // of the declarations is what a settings backup writes its keys in, so it stays.
             new Setting.Availability() {
                 @Override public boolean isAvailable() {
-                    return SIM_SPOOF.get();
+                    return SIM_SPOOF.savedValue();
                 }
 
                 @Override public java.util.List<Setting<?>> getParentSettings() {
@@ -66,7 +66,7 @@ public class Settings extends BaseSettings {
             // greyed until Override SIM details is on, so a reader is never sent two steps back.
             new Setting.Availability() {
                 @Override public boolean isAvailable() {
-                    return SIM_SPOOF.get() && REGION_SPOOF.get();
+                    return SIM_SPOOF.savedValue() && REGION_SPOOF.savedValue();
                 }
 
                 @Override public java.util.List<Setting<?>> getParentSettings() {
@@ -101,7 +101,7 @@ public class Settings extends BaseSettings {
     private static final Setting.Availability YTDLNIS_ONLY = new Setting.Availability() {
         @Override
         public boolean isAvailable() {
-            return YTDLNIS_PACKAGE_NAME.equals(EXTERNAL_DOWNLOADER_PACKAGE.get().trim());
+            return YTDLNIS_PACKAGE_NAME.equals(EXTERNAL_DOWNLOADER_PACKAGE.savedValue().trim());
         }
 
         @Override
@@ -514,8 +514,23 @@ public class Settings extends BaseSettings {
     );
 
     static {
-        if (!DOWNLOAD_PATHS_MIGRATED.get()) {
-            String legacyPath = DOWNLOAD_PATH.get();
+        // Hushfeed's own state: remembered positions and choices, lists it observed, counters.
+        // They keep their values while Hushfeed is paused; every other setting answers its
+        // unpatched value then (Setting#get).
+        Setting.keepWhenPaused(LAUNCHER_SHORTCUTS_REMOVED, FEED_NAVIGATION_OBSERVED_TABS,
+                BOTTOM_NAVIGATION_OBSERVED_TABS, DOWNLOAD_PATH, DOWNLOAD_PATHS_MIGRATED,
+                REMEMBERED_SPEED, SESSION_BUDGET_STATE, BLOCK_AUTHOR_BUTTON_POSITION,
+                LOCAL_HIDE_BUTTON_POSITION, BLOCK_SOUND_BUTTON_POSITION, NOT_INTERESTED_BUTTON_POSITION,
+                SHARE_ACTION_CATALOG, DIAGNOSTIC_REPORT_SALT);
+        // Downloads rewrite TikTok's own save folder and file name with no switch in front, so
+        // pausing cannot give TikTok its own back. They keep the reader's choice instead of
+        // falling back to Hushfeed's defaults. The README lists them as not paused.
+        Setting.keepWhenPaused(DOWNLOAD_VIDEO_PATH, DOWNLOAD_PHOTO_PATH, DOWNLOAD_STICKER_PATH,
+                DOWNLOAD_STICKER_FORMAT, DOWNLOAD_VIDEO_FILENAME_TEMPLATE, DOWNLOAD_PHOTO_FILENAME_TEMPLATE,
+                DOWNLOAD_COMMENT_MEDIA_FILENAME_TEMPLATE);
+
+        if (!DOWNLOAD_PATHS_MIGRATED.savedValue()) {
+            String legacyPath = DOWNLOAD_PATH.savedValue();
             DOWNLOAD_VIDEO_PATH.save(legacyPath);
             DOWNLOAD_PHOTO_PATH.save(legacyPath);
             DOWNLOAD_STICKER_PATH.save(legacyPath);
