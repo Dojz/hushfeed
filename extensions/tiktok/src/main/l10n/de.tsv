@@ -61,7 +61,6 @@ A diagnostic report is already being saved	Ein Diagnosebericht wird gerade gespe
 A field value couldn't be read. Check the values and try again.	Ein Feldwert konnte nicht gelesen werden. Prüfe die Werte und versuche es erneut.
 A good place to stop, if you want one.	Ein guter Moment zum Aufhören, falls du einen suchst.
 A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.	Ein grüner Punkt in der oberen Ecke, solange TikTok die Kamera geöffnet hat, und ein oranger, solange es Ton aufnimmt. Sie verschwinden, wenn der Zugriff endet.
-A hidden CAPTCHA may be the cause.	Ein ausgeblendetes CAPTCHA kann die Ursache sein.
 A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.	Ein Host, der beim Teilen oder Kopieren an die Stelle von tiktok.com tritt, zum Beispiel vxtiktok.com. Leer lassen, um TikToks eigene Links zu teilen. Geändert werden nur TikTok-Links und nur der Host, es wird nichts irgendwohin geschickt.
 A newer clear replaced that undo. Tap the row again to undo.	Ein neueres Löschen hat dieses Rückgängig ersetzt. Tippe erneut auf die Zeile, um es rückgängig zu machen.
 A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.	Ein kleines Label im Feed zeigt die verbleibenden Minuten oder Videos des heutigen Budgets.
@@ -248,7 +247,6 @@ Current %1$s	Aktuell %1$s
 Current cache unavailable: %1$s	Aktueller Cache nicht verfügbar: %1$s
 Current state	Aktueller Zustand
 Current: %1$s	Aktuell: %1$s
-Current: %1$s %2$s	Aktuell: %1$s %2$s
 Custom SIM details	Eigene SIM-Angaben
 Custom value	Benutzerdefinierter Wert
 Custom value...	Benutzerdefinierter Wert...
@@ -1099,31 +1097,8 @@ Zero shows the notice and leaves the feed alone. Anything else covers the feed f
 Zero switches this off. A short reminder after that many minutes of watching, and again after the same again. Time on messages, a profile or search does not count, and nothing is shown while the feed is on hold.	Null schaltet das aus. Eine kurze Erinnerung nach so vielen Minuten Zuschauen und danach jeweils wieder. Zeit in Nachrichten, auf einem Profil oder in der Suche zählt nicht, und während der Feed pausiert ist, wird nichts angezeigt.
 Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.	Null schaltet das aus. Zählt jedes Video, das im Feed auftaucht, egal wie du dort gelandet bist, und sagt Bescheid, sobald die Zahl erreicht ist. Das ist unabhängig vom Sitzungslimit für automatisches Weiterblättern unter Wiedergabe, das nur Videos zählt, die Hushfeed selbst weitergeschaltet hat.
 Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.	Null schaltet das aus. Zählt die Minuten, die der Player im Feed läuft. Zeit in Nachrichten, auf einem Profil oder in der Suche zählt nicht.
-code %1$s	Code %1$s
 collapsed	Eingeklappt
-day	Tag
-days	Tage
-dp	dp
 expanded	Ausgeklappt
-millisecond	Millisekunde
-milliseconds	Millisekunden
-minute	Minute
-minutes	Minuten
-ms	ms
-or	oder
-point	Punkt
-points	Punkte
-s	s
-second	Sekunde
-seconds	Sekunden
-time	Mal
-times	Mal
-video	Video
-videos	Videos
-view per comment	Aufruf pro Kommentar
-view per like	Aufruf pro Like
-views per comment	Aufrufe pro Kommentar
-views per like	Aufrufe pro Like
 Already active	Bereits aktiv
 Applying Calm feed	„Ruhiger Feed“ wird angewendet
 Calm feed	Ruhiger Feed
@@ -1171,3 +1146,29 @@ Show the switch	Schalter anzeigen
 Restart TikTok to apply this	TikTok neu starten, damit das gilt
 
 this creator	dieser Creator
+
+%1$s day	%1$s Tag
+%1$s days	%1$s Tage
+%1$s dp	%1$s dp
+%1$s millisecond	%1$s Millisekunde
+%1$s milliseconds	%1$s Millisekunden
+%1$s minute	%1$s Minute
+%1$s minutes	%1$s Minuten
+%1$s point	%1$s Punkt
+%1$s points	%1$s Punkte
+%1$s s	%1$s s
+%1$s second	%1$s Sekunde
+%1$s seconds	%1$s Sekunden
+%1$s time	%1$s Mal
+%1$s times	%1$s Mal
+%1$s video	%1$s Video
+%1$s videos	%1$s Videos
+%1$s view per comment	%1$s Aufruf pro Kommentar
+%1$s views per comment	%1$s Aufrufe pro Kommentar
+%1$s view per like	%1$s Aufruf pro Like
+%1$s views per like	%1$s Aufrufe pro Like
+%1$s, %2$s, %3$s or %4$s	%1$s, %2$s, %3$s oder %4$s
+%1$s, %2$s or %3$s	%1$s, %2$s oder %3$s
+TikTok refused the follow with code %1$s	TikTok hat das Folgen mit Code %1$s abgelehnt
+TikTok refused the follow with code %1$s. A hidden CAPTCHA may be the cause.	TikTok hat das Folgen mit Code %1$s abgelehnt. Ein ausgeblendetes CAPTCHA kann die Ursache sein.
+TikTok refused the follow: %1$s A hidden CAPTCHA may be the cause.	TikTok hat das Folgen abgelehnt: %1$s Ein ausgeblendetes CAPTCHA kann die Ursache sein.

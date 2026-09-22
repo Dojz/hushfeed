@@ -59,7 +59,6 @@ A diagnostic report is already being saved,Laporan diagnostik sedang disimpan
 A field value couldn't be read. Check the values and try again.,Nilai kolom tidak dapat dibaca. Periksa nilainya lalu coba lagi.
 "A good place to stop, if you want one.","Tempat yang bagus untuk berhenti, kalau kamu mencarinya."
 A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.,Titik hijau di sudut atas selama TikTok membuka kamera dan titik oranye selama merekam suara. Keduanya hilang saat akses berakhir.
-A hidden CAPTCHA may be the cause.,CAPTCHA yang disembunyikan bisa jadi penyebabnya.
 "A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.","Host pengganti tiktok.com saat kamu membagikan atau menyalin tautan, misalnya vxtiktok.com. Kosongkan untuk membagikan tautan TikTok sendiri. Hanya tautan TikTok yang diubah, dan hanya bagian host-nya, tidak ada yang dikirim ke mana pun."
 A newer clear replaced that undo. Tap the row again to undo.,Penghapusan yang lebih baru menggantikan pengurungan itu. Ketuk barisnya lagi untuk mengurungkan.
 "A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.",Label kecil di feed menunjukkan menit atau video yang tersisa dari anggaran hari ini.
@@ -246,7 +245,6 @@ Current %1$s,Saat ini %1$s
 Current cache unavailable: %1$s,Cache saat ini tidak tersedia: %1$s
 Current state,Kondisi saat ini
 Current: %1$s,Saat ini: %1$s
-Current: %1$s %2$s,Saat ini: %1$s %2$s
 Custom SIM details,Detail SIM khusus
 Custom value,Nilai kustom
 Custom value...,Nilai khusus...
@@ -1097,31 +1095,8 @@ Your filters hid everything TikTok just sent. Most were %1$s.,Filtermu menyembun
 "Zero switches this off. A short reminder after that many minutes of watching, and again after the same again. Time on messages, a profile or search does not count, and nothing is shown while the feed is on hold.","Nol mematikan ini. Pengingat singkat setelah sekian menit menonton, lalu lagi setelah selang yang sama. Waktu di pesan, profil, atau pencarian tidak dihitung, dan tidak ada yang muncul selama feed ditahan."
 "Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.","Nol mematikan ini. Menghitung setiap video yang muncul di feed, bagaimanapun kamu sampai ke sana, dan memberi tahu begitu jumlahnya tercapai. Ini terpisah dari batas sesi maju otomatis di Pemutaran, yang hanya menghitung video yang dilewati Hushfeed sendiri."
 "Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.","Nol mematikan ini. Menghitung menit saat pemutar berjalan di feed. Waktu di pesan, profil, atau pencarian tidak dihitung."
-code %1$s,kode %1$s
 collapsed,Diciutkan
-day,hari
-days,hari
-dp,dp
 expanded,Diperluas
-millisecond,milidetik
-milliseconds,milidetik
-minute,menit
-minutes,menit
-ms,ms
-or,atau
-point,poin
-points,poin
-s,d
-second,detik
-seconds,detik
-time,kali
-times,kali
-video,video
-videos,video
-view per comment,tayangan per komentar
-view per like,tayangan per like
-views per comment,tayangan per komentar
-views per like,tayangan per like
 "Already active","Sudah aktif"
 "Applying Calm feed","Menerapkan Feed tenang"
 "Calm feed","Feed tenang"
@@ -1169,3 +1144,29 @@ Show the switch,Tampilkan sakelarnya
 Restart TikTok to apply this,Mulai ulang TikTok agar berlaku
 
 this creator,kreator ini
+
+%1$s day,%1$s hari
+%1$s days,%1$s hari
+%1$s dp,%1$s dp
+%1$s millisecond,%1$s milidetik
+%1$s milliseconds,%1$s milidetik
+%1$s minute,%1$s menit
+%1$s minutes,%1$s menit
+%1$s point,%1$s poin
+%1$s points,%1$s poin
+%1$s s,%1$s d
+%1$s second,%1$s detik
+%1$s seconds,%1$s detik
+%1$s time,%1$s kali
+%1$s times,%1$s kali
+%1$s video,%1$s video
+%1$s videos,%1$s video
+%1$s view per comment,%1$s tayangan per komentar
+%1$s views per comment,%1$s tayangan per komentar
+%1$s view per like,%1$s tayangan per like
+%1$s views per like,%1$s tayangan per like
+"%1$s, %2$s, %3$s or %4$s","%1$s, %2$s, %3$s, atau %4$s"
+"%1$s, %2$s or %3$s","%1$s, %2$s, atau %3$s"
+TikTok refused the follow with code %1$s,TikTok menolak permintaan mengikuti dengan kode %1$s
+TikTok refused the follow with code %1$s. A hidden CAPTCHA may be the cause.,TikTok menolak permintaan mengikuti dengan kode %1$s. CAPTCHA yang disembunyikan bisa jadi penyebabnya.
+TikTok refused the follow: %1$s A hidden CAPTCHA may be the cause.,TikTok menolak permintaan mengikuti: %1$s CAPTCHA yang disembunyikan bisa jadi penyebabnya.

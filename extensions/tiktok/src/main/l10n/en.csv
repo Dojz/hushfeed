@@ -25,7 +25,10 @@ source,target
 %1$s and above,%1$s and above
 %1$s appears more than once in this file.,%1$s appears more than once in this file.
 %1$s changed,%1$s changed
+%1$s day,%1$s day
+%1$s days,%1$s days
 %1$s destinations must start with %2$s,%1$s destinations must start with %2$s
+%1$s dp,%1$s dp
 %1$s has an invalid value. %2$s,%1$s has an invalid value. %2$s
 "%1$s has type %2$s, but the file says %3$s.","%1$s has type %2$s, but the file says %3$s."
 "%1$s hid everything TikTok sent, %2$d times in a row. Turn it off if that's not what you wanted.","%1$s hid everything TikTok sent, %2$d times in a row. Turn it off if that's not what you wanted."
@@ -35,10 +38,29 @@ source,target
 %1$s is not in this Lab catalog.,%1$s is not in this Lab catalog.
 %1$s isn't installed or doesn't take links,%1$s isn't installed or doesn't take links
 %1$s left,%1$s left
+%1$s millisecond,%1$s millisecond
+%1$s milliseconds,%1$s milliseconds
 %1$s min left,%1$s min left
+%1$s minute,%1$s minute
+%1$s minutes,%1$s minutes
+%1$s point,%1$s point
+%1$s points,%1$s points
+%1$s s,%1$s s
+%1$s second,%1$s second
+%1$s seconds,%1$s seconds
+%1$s time,%1$s time
+%1$s times,%1$s times
 %1$s to %2$s,%1$s to %2$s
+%1$s video,%1$s video
+%1$s videos,%1$s videos
 %1$s videos left,%1$s videos left
+%1$s view per comment,%1$s view per comment
+%1$s view per like,%1$s view per like
+%1$s views per comment,%1$s views per comment
+%1$s views per like,%1$s views per like
 %1$s was rejected. %2$s,%1$s was rejected. %2$s
+"%1$s, %2$s or %3$s","%1$s, %2$s or %3$s"
+"%1$s, %2$s, %3$s or %4$s","%1$s, %2$s, %3$s or %4$s"
 "%1$s, %2$s, %3$s, %4$s, %5$s","%1$s, %2$s, %3$s, %4$s, %5$s"
 "%1$s, selected","%1$s, selected"
 %1$s. %2$s,%1$s. %2$s
@@ -61,7 +83,6 @@ A field value couldn't be read. Check the values and try again.,A field value co
 A forced value applies to this copy of TikTok whichever account is signed in. It cannot get past a check the server makes.,A forced value applies to this copy of TikTok whichever account is signed in. It cannot get past a check the server makes.
 "A good place to stop, if you want one.","A good place to stop, if you want one."
 A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.,A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.
-A hidden CAPTCHA may be the cause.,A hidden CAPTCHA may be the cause.
 "A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.","A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new."
 A newer clear replaced that undo. Tap the row again to undo.,A newer clear replaced that undo. Tap the row again to undo.
 "A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.","A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out."
@@ -261,7 +282,6 @@ Current %1$s,Current %1$s
 Current cache unavailable: %1$s,Current cache unavailable: %1$s
 Current state,Current state
 Current: %1$s,Current: %1$s
-Current: %1$s %2$s,Current: %1$s %2$s
 Custom SIM details,Custom SIM details
 Custom value,Custom value
 Custom value...,Custom value...
@@ -1037,7 +1057,10 @@ TikTok didn't accept the feedback. Try again later.,TikTok didn't accept the fee
 "TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.","TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back."
 TikTok read it,TikTok read it
 "TikTok read it, but the override couldn't be applied. Reset it and save it again.","TikTok read it, but the override couldn't be applied. Reset it and save it again."
+TikTok refused the follow with code %1$s,TikTok refused the follow with code %1$s
+TikTok refused the follow with code %1$s. A hidden CAPTCHA may be the cause.,TikTok refused the follow with code %1$s. A hidden CAPTCHA may be the cause.
 TikTok refused the follow: %1$s,TikTok refused the follow: %1$s
+TikTok refused the follow: %1$s A hidden CAPTCHA may be the cause.,TikTok refused the follow: %1$s A hidden CAPTCHA may be the cause.
 TikTok's own value,TikTok's own value
 TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.,TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.
 TikTok's size,TikTok's size
@@ -1141,29 +1164,6 @@ Your previous feed setup is back. Restart TikTok to apply every change.,Your pre
 "Zero switches this off. A short reminder after that many minutes of watching, and again after the same again. Time on messages, a profile or search does not count, and nothing is shown while the feed is on hold.","Zero switches this off. A short reminder after that many minutes of watching, and again after the same again. Time on messages, a profile or search does not count, and nothing is shown while the feed is on hold."
 "Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.","Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past."
 "Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.","Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count."
-code %1$s,code %1$s
 collapsed,collapsed
-day,day
-days,days
-dp,dp
 expanded,expanded
-millisecond,millisecond
-milliseconds,milliseconds
-minute,minute
-minutes,minutes
-ms,ms
-or,or
-point,point
-points,points
-s,s
-second,second
-seconds,seconds
 this creator,this creator
-time,time
-times,times
-video,video
-videos,videos
-view per comment,view per comment
-view per like,view per like
-views per comment,views per comment
-views per like,views per like

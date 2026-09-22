@@ -143,12 +143,12 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
 
     private void addLimits(Context context) {
         addPreference(new SectionHeadingPreference(context, "Limits"));
-        addPreference(new NumberInputPreference(context, "Maximum video length", "Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed is not empty.", Settings.MAX_VIDEO_SECONDS, "second", "seconds").zeroMeansOff());
+        addPreference(new NumberInputPreference(context, "Maximum video length", "Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed is not empty.", Settings.MAX_VIDEO_SECONDS, "%1$s second", "%1$s seconds").zeroMeansOff());
         addPreference(new NumberInputPreference(context, "Maximum post age",
                 "Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible.",
-                Settings.MAX_PUBLICATION_AGE_DAYS, "day", "days").zeroMeansOff());
-        addPreference(new NumberInputPreference(context, "Maximum views per like", "Hide videos with a lot of views and few likes. Lower numbers are stricter, zero turns the rule off, and one video is kept back if everything the feed just sent would go.", Settings.MAX_VIEWS_PER_LIKE, "view per like", "views per like").zeroMeansOff());
-        addPreference(new NumberInputPreference(context, "Maximum views per comment", "Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.", Settings.MAX_VIEWS_PER_COMMENT, "view per comment", "views per comment").zeroMeansOff());
+                Settings.MAX_PUBLICATION_AGE_DAYS, "%1$s day", "%1$s days").zeroMeansOff());
+        addPreference(new NumberInputPreference(context, "Maximum views per like", "Hide videos with a lot of views and few likes. Lower numbers are stricter, zero turns the rule off, and one video is kept back if everything the feed just sent would go.", Settings.MAX_VIEWS_PER_LIKE, "%1$s view per like", "%1$s views per like").zeroMeansOff());
+        addPreference(new NumberInputPreference(context, "Maximum views per comment", "Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.", Settings.MAX_VIEWS_PER_COMMENT, "%1$s view per comment", "%1$s views per comment").zeroMeansOff());
         addPreference(new RangeValuePreference(
                 context,
                 "Views range", "Show only videos with this many views.",
@@ -269,7 +269,7 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
                 "Forget seen videos after",
                 L10n.f(context, "Days to remember a video. Zero removes the age limit. History keeps at most %1$s videos.",
                         NumberFormat.getInstance().format(SeenVideoHistory.MAX_RECORDS)),
-                Settings.SEEN_VIDEO_RETENTION_DAYS, "day", "days"
+                Settings.SEEN_VIDEO_RETENTION_DAYS, "%1$s day", "%1$s days"
         ).zeroMeansOff());
         addPreference(new ClearSeenVideoHistoryPreference(context));
     }

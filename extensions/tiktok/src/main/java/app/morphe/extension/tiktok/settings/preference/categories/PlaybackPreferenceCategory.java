@@ -51,7 +51,7 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
                     "Zero means no limit. Counts the videos Hushfeed advanced past for you, "
                             + "not the ones you swiped yourself, and starts again when the feed "
                             + "is rebuilt or you change this number.",
-                    Settings.AUTO_ADVANCE_LIMIT, "video", "videos").zeroMeansOff());
+                    Settings.AUTO_ADVANCE_LIMIT, "%1$s video", "%1$s videos").zeroMeansOff());
         }
         if (SettingsStatus.commentToolsEnabled) {
             addPreference(new TogglePreference(context, "Silence the feed while comments are open",

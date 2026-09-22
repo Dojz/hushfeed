@@ -25,6 +25,11 @@ translated yet reaches Weblate only once it is in one of them. What holds every 
 a table is SettingsL10nTest.everySettingsStringHasATranslationEntry, which builds the real
 preference rows and demands each rendered string be a key. This script cannot see those rows.
 
+Context. A .tsv table may carry a comment line above a row, "# context: what the row is and
+where it shows", and the reader skips it; a key is a whole sentence or phrase, never a lone
+unit or conjunction, so a translator sees the sentence the words sit in ("%1$s days", not
+"days"; "%1$s, %2$s or %3$s", not "or").
+
 Plurals. A count is written as two English keys, the one form ("1 result") and the other form
 ("%1$d results"), and L10n.quantity picks between them by the phone language's CLDR plural rule
 rather than by count == 1. The five shipped languages have at most those two forms. A language

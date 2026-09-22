@@ -58,7 +58,6 @@ A diagnostic report is already being saved	Bir tanılama raporu zaten kaydediliy
 A field value couldn't be read. Check the values and try again.	Bir alan değeri okunamadı. Değerleri kontrol edip tekrar dene.
 A good place to stop, if you want one.	İstersen, durmak için iyi bir an.
 A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.	TikTok kamerayı açık tuttuğu sürece üst köşede yeşil bir nokta, ses kaydederken de turuncu bir nokta görünür. Erişim bitince kaybolurlar.
-A hidden CAPTCHA may be the cause.	Nedeni gizlenmiş bir CAPTCHA olabilir.
 A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.	Bir bağlantıyı paylaşırken veya kopyalarken tiktok.com yerine konacak alan adı, örneğin vxtiktok.com. TikTok'un kendi bağlantılarını paylaşmak için boş bırak. Yalnızca TikTok bağlantıları değişir, onların da yalnızca alan adı: hiçbir yere yeni bir şey gönderilmez.
 A newer clear replaced that undo. Tap the row again to undo.	Daha yeni bir temizleme o geri almanın yerini aldı. Geri almak için satıra tekrar dokun.
 A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.	Akıştaki küçük bir etiket, bugünkü bütçenden kalan dakikayı veya video sayısını gösterir, hangisi bitmeye daha yakınsa onu.
@@ -256,7 +255,6 @@ Current %1$s	Mevcut %1$s
 Current cache unavailable: %1$s	Mevcut önbellek kullanılamıyor: %1$s
 Current state	Mevcut durum
 Current: %1$s	Mevcut: %1$s
-Current: %1$s %2$s	Mevcut: %1$s %2$s
 Custom SIM details	Özel SIM bilgileri
 Custom value	Özel değer
 Custom value...	Özel değer...
@@ -1137,34 +1135,37 @@ Zero shows the notice and leaves the feed alone. Anything else covers the feed f
 Zero switches this off. A short reminder after that many minutes of watching, and again after the same again. Time on messages, a profile or search does not count, and nothing is shown while the feed is on hold.	Sıfır bunu kapatır. O kadar dakika izledikten sonra kısa bir hatırlatma gelir, aynı süre geçince bir tane daha. Mesajlarda, bir profilde veya aramada geçen süre sayılmaz ve akış bekletmedeyken hiçbir şey gösterilmez.
 Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.	Sıfır bunu kapatır. Akışta karşına çıkan her videoyu, ona nasıl ulaşmış olursan ol say ve sayıya ulaşılınca bunu bildir. Bu, Oynatma altındaki otomatik geçiş oturum sınırından ayrıdır, o yalnızca Hushfeed'in kendisinin geçtiği videoları sayar.
 Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.	Sıfır bunu kapatır. Oynatıcının akışta çalışarak geçirdiği dakikaları say. Mesajlarda, bir profilde veya aramada geçen süre sayılmaz.
-code %1$s	kod %1$s
 collapsed	daraltıldı
-day	gün
-days	gün
-dp	dp
 expanded	genişletildi
-millisecond	milisaniye
-milliseconds	milisaniye
-minute	dakika
-minutes	dakika
-ms	ms
-or	veya
-point	punto
-points	punto
-s	s
-second	saniye
-seconds	saniye
-time	kez
-times	kez
-video	video
-videos	video
-view per comment	yorum başına görüntülenme
-view per like	beğeni başına görüntülenme
-views per comment	yorum başına görüntülenme
-views per like	beğeni başına görüntülenme
 %1$s hid everything TikTok sent, %2$d times in a row. Turn it off if that's not what you wanted.	%1$s, TikTok'un gönderdiği her şeyi art arda %2$d kez gizledi. İstediğin bu değilse kapat.
 Show the switch	Ayarı göster
 
 Restart TikTok to apply this	Bunu uygulamak için TikTok'u yeniden başlat
 
 this creator	bu içerik üreticisi
+
+%1$s day	%1$s gün
+%1$s days	%1$s gün
+%1$s dp	%1$s dp
+%1$s millisecond	%1$s milisaniye
+%1$s milliseconds	%1$s milisaniye
+%1$s minute	%1$s dakika
+%1$s minutes	%1$s dakika
+%1$s point	%1$s punto
+%1$s points	%1$s punto
+%1$s s	%1$s s
+%1$s second	%1$s saniye
+%1$s seconds	%1$s saniye
+%1$s time	%1$s kez
+%1$s times	%1$s kez
+%1$s video	%1$s video
+%1$s videos	%1$s video
+%1$s view per comment	yorum başına %1$s görüntülenme
+%1$s views per comment	yorum başına %1$s görüntülenme
+%1$s view per like	beğeni başına %1$s görüntülenme
+%1$s views per like	beğeni başına %1$s görüntülenme
+%1$s, %2$s, %3$s or %4$s	%1$s, %2$s, %3$s veya %4$s
+%1$s, %2$s or %3$s	%1$s, %2$s veya %3$s
+TikTok refused the follow with code %1$s	TikTok takibi %1$s koduyla reddetti
+TikTok refused the follow with code %1$s. A hidden CAPTCHA may be the cause.	TikTok takibi %1$s koduyla reddetti. Nedeni gizlenmiş bir CAPTCHA olabilir.
+TikTok refused the follow: %1$s A hidden CAPTCHA may be the cause.	TikTok takibi reddetti: %1$s Nedeni gizlenmiş bir CAPTCHA olabilir.

@@ -306,7 +306,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             NumberInputPreference captionSize = new NumberInputPreference(context, "Caption text size",
                     L10n.f(context, "Use 0 for TikTok's size, or %1$d to %2$d. Applies to the next caption.",
                             CaptionStyle.MIN_TEXT_SIZE, CaptionStyle.MAX_TEXT_SIZE),
-                    Settings.CAPTION_TEXT_SIZE, "point", "points") {
+                    Settings.CAPTION_TEXT_SIZE, "%1$s point", "%1$s points") {
                 @Override protected int clamp(int value) { return CaptionStyle.clampSize(value); }
             };
             captionSize.zeroMeans("TikTok's size");
@@ -345,7 +345,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                     "Hide controls after each video starts. Tap to restore them.", Settings.AUTOMATIC_CLEAR_DISPLAY));
             NumberInputPreference delay = new NumberInputPreference(context, "Clear display delay",
                     "Wait before hiding the controls.", Settings.AUTOMATIC_CLEAR_DISPLAY_DELAY,
-                    "millisecond", "milliseconds");
+                    "%1$s millisecond", "%1$s milliseconds");
             delay.zeroMeans("No delay");
             addPreference(delay);
         }
@@ -375,7 +375,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                     "Press and hold the left or right third of the screen to jump back or forward. "
                             + "The middle third keeps the Long press action.", Settings.EDGE_SEEK));
             addPreference(new NumberInputPreference(context, "Seek by",
-                    "How far each edge press moves the video.", Settings.EDGE_SEEK_SECONDS, "s"));
+                    "How far each edge press moves the video.", Settings.EDGE_SEEK_SECONDS, "%1$s s"));
         }
         // Three more long presses, each its own patch. They sat under Player on the App page,
         // two pages away from the Long press row they belong beside.

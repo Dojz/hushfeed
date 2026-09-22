@@ -58,7 +58,6 @@ A diagnostic report is already being saved	Um relatório de diagnóstico já est
 A field value couldn't be read. Check the values and try again.	Não foi possível ler o valor de um campo. Verifique os valores e tente novamente.
 A good place to stop, if you want one.	Uma boa hora para parar, se você quiser uma.
 A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.	Um ponto verde no canto superior enquanto o TikTok está com a câmera aberta e um laranja enquanto grava som. Eles somem quando o acesso termina.
-A hidden CAPTCHA may be the cause.	Talvez a causa seja um CAPTCHA escondido.
 A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.	Um host para colocar no lugar de tiktok.com ao compartilhar ou copiar um link, como vxtiktok.com. Deixe vazio para compartilhar os links do próprio TikTok. Só os links do TikTok mudam, e só o host: nada é enviado para nenhum lugar novo.
 A newer clear replaced that undo. Tap the row again to undo.	Uma limpeza mais recente substituiu esse desfazer. Toque na linha de novo para desfazer.
 A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.	Um rótulo pequeno no feed mostra os minutos ou vídeos restantes do orçamento de hoje.
@@ -245,7 +244,6 @@ Current %1$s	Atual: %1$s
 Current cache unavailable: %1$s	O cache atual não está disponível: %1$s
 Current state	Estado atual
 Current: %1$s	Agora: %1$s
-Current: %1$s %2$s	Agora: %1$s %2$s
 Custom SIM details	Dados de SIM personalizados
 Custom value	Valor personalizado
 Custom value...	Valor personalizado...
@@ -1096,31 +1094,8 @@ Zero shows the notice and leaves the feed alone. Anything else covers the feed f
 Zero switches this off. A short reminder after that many minutes of watching, and again after the same again. Time on messages, a profile or search does not count, and nothing is shown while the feed is on hold.	Zero desliga isso. Um lembrete curto depois desses minutos assistindo, e de novo após o mesmo intervalo. Tempo em mensagens, num perfil ou na busca não conta, e nada aparece enquanto o feed está em espera.
 Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.	Zero desliga isso. Conta cada vídeo que aparece no feed, não importa como você chegou nele, e avisa assim que a contagem for atingida. É separado do limite de sessão do avanço automático, em Reprodução, que só conta os vídeos que o Hushfeed passou por você.
 Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.	Zero desliga isso. Conta os minutos que o player passa rodando no feed. Tempo em mensagens, num perfil ou na busca não conta.
-code %1$s	código %1$s
 collapsed	Recolhido
-day	dia
-days	dias
-dp	dp
 expanded	Expandido
-millisecond	milissegundo
-milliseconds	milissegundos
-minute	minuto
-minutes	minutos
-ms	ms
-or	ou
-point	ponto
-points	pontos
-s	s
-second	segundo
-seconds	segundos
-time	vez
-times	vezes
-video	vídeo
-videos	vídeos
-view per comment	visualização por comentário
-view per like	visualização por curtida
-views per comment	visualizações por comentário
-views per like	visualizações por curtida
 Already active	Já está ativo
 Applying Calm feed	Aplicando Feed tranquilo
 Calm feed	Feed tranquilo
@@ -1168,3 +1143,29 @@ Show the switch	Mostrar a opção
 Restart TikTok to apply this	Reinicie o TikTok para aplicar
 
 this creator	este criador
+
+%1$s day	%1$s dia
+%1$s days	%1$s dias
+%1$s dp	%1$s dp
+%1$s millisecond	%1$s milissegundo
+%1$s milliseconds	%1$s milissegundos
+%1$s minute	%1$s minuto
+%1$s minutes	%1$s minutos
+%1$s point	%1$s ponto
+%1$s points	%1$s pontos
+%1$s s	%1$s s
+%1$s second	%1$s segundo
+%1$s seconds	%1$s segundos
+%1$s time	%1$s vez
+%1$s times	%1$s vezes
+%1$s video	%1$s vídeo
+%1$s videos	%1$s vídeos
+%1$s view per comment	%1$s visualização por comentário
+%1$s views per comment	%1$s visualizações por comentário
+%1$s view per like	%1$s visualização por curtida
+%1$s views per like	%1$s visualizações por curtida
+%1$s, %2$s, %3$s or %4$s	%1$s, %2$s, %3$s ou %4$s
+%1$s, %2$s or %3$s	%1$s, %2$s ou %3$s
+TikTok refused the follow with code %1$s	O TikTok recusou o seguir com o código %1$s
+TikTok refused the follow with code %1$s. A hidden CAPTCHA may be the cause.	O TikTok recusou o seguir com o código %1$s. Talvez a causa seja um CAPTCHA escondido.
+TikTok refused the follow: %1$s A hidden CAPTCHA may be the cause.	O TikTok recusou o seguir: %1$s Talvez a causa seja um CAPTCHA escondido.

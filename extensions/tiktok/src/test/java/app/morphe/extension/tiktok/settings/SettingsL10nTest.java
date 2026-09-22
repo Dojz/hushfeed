@@ -831,7 +831,7 @@ public class SettingsL10nTest {
         Utils.setContext(RuntimeEnvironment.getApplication());
         assertEquals("Hide the caption", L10n.t("Hide the caption"));
         assertEquals("Not a settings string", L10n.t("Not a settings string"));
-        assertEquals("Current: 3 videos", L10n.f("Current: %1$s %2$s", "3", L10n.t("videos")));
+        assertEquals("Current: 3 videos", L10n.f("Current: %1$s", L10n.quantity(Utils.getContext(), 3, "%1$s video", "%1$s videos", "3")));
     }
 
     @Test
@@ -845,7 +845,7 @@ public class SettingsL10nTest {
             assertEquals("Beschreibung ausblenden", toggle.getTitle().toString());
             assertEquals("Die Beschreibung unter dem Namen des Creators im Feed ausblenden.",
                     toggle.getSummary().toString());
-            assertEquals("Aktuell: 3 Videos", L10n.f(activity, "Current: %1$s %2$s", "3", L10n.t(activity, "videos")));
+            assertEquals("Aktuell: 3 Videos", L10n.f(activity, "Current: %1$s", L10n.quantity(activity, 3, "%1$s video", "%1$s videos", "3")));
         }
     }
 
@@ -861,7 +861,7 @@ public class SettingsL10nTest {
             assertEquals("Sembunyikan deskripsi di bawah nama kreator pada feed.",
                     toggle.getSummary().toString());
             assertEquals("Saat ini: 3 video",
-                    L10n.f(activity, "Current: %1$s %2$s", "3", L10n.t(activity, "videos")));
+                    L10n.f(activity, "Current: %1$s", L10n.quantity(activity, 3, "%1$s video", "%1$s videos", "3")));
         }
     }
 
@@ -899,6 +899,24 @@ public class SettingsL10nTest {
             }
             assertEquals("keys of " + language, sourceKeys(GERMAN), plain);
         }
+    }
+
+    /**
+     * A key is a whole phrase, never a lone unit or conjunction. "days", "dp", "or" and "view
+     * per like" were keys assembled into sentences in code, which fixed the word order and the
+     * agreement to English; each is now a phrase with its number or its list in it.
+     */
+    @Test public void noKeyIsALoneUnitOrConjunction() throws Exception {
+        // Words that stand alone on purpose: a state a screen reader speaks for a row.
+        Set<String> standalone = new LinkedHashSet<>(List.of("collapsed", "expanded"));
+        java.util.regex.Pattern lone = java.util.regex.Pattern.compile(
+                "^(?:[a-z]+|[a-z]+ per [a-z ]+)$");
+        List<String> offenders = new ArrayList<>();
+        for (String key : readTable(ENGLISH_BASE).keySet()) {
+            if (lone.matcher(key).matches() && !standalone.contains(key)) offenders.add(key);
+        }
+        assertEquals("keys that are a lone unit or conjunction:\n" + String.join("\n", offenders),
+                0, offenders.size());
     }
 
     /** The gates read a {@code |category} row as its other form, and nothing else as one. */
