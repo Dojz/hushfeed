@@ -887,8 +887,6 @@ public final class L10nTranslations {
                 "TikTok-Shop-Updates und Gutschein-Nachrichten ausblenden.");
         table.put("Hide TikTok's \"Search: ...\" banner above the comment count. This doesn't hide the comments or Hushfeed's comment-search box.",
                 "Blende TikToks Banner „Suchen: ...“ über der Kommentaranzahl aus. Die Kommentare und das Hushfeed-Suchfeld für Kommentare bleiben sichtbar.");
-        table.put("Hide TikTok's exposed quick emoji row in supported comment inputs.",
-                "TikToks Schnell-Emoji-Zeile in unterstützten Kommentarfeldern ausblenden.");
         table.put("Hide activity",
                 "Aktivität ausblenden");
         table.put("Hide activity status",
@@ -907,6 +905,8 @@ public final class L10nTranslations {
                 "Kommentarumfragen ausblenden");
         table.put("Hide comment popup ads",
                 "Werbe-Popups in Kommentaren ausblenden");
+        table.put("Hide comment typing suggestions",
+                "Kommentarvorschläge beim Tippen ausblenden");
         table.put("Hide comments made of an image or a sticker instead of words.",
                 "Kommentare ausblenden, die aus einem Bild oder Sticker statt aus Worten bestehen.");
         table.put("Hide comments that contain any of the words below, or that come from the accounts below.",
@@ -952,8 +952,6 @@ public final class L10nTranslations {
                 "Playlist-Videos ausblenden");
         table.put("Hide promotional music",
                 "Werbemusik ausblenden");
-        table.put("Hide quick comment reactions",
-                "Schnelle Kommentar-Reaktionen ausblenden");
         table.put("Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.",
                 "Blende empfohlene Suchen auf TikToks Suchseite aus, bevor du etwas eingibst. Dein Suchverlauf bleibt erhalten. Vorschläge über Kommentaren werden dadurch nicht ausgeblendet.");
         table.put("Hide rows by title",
@@ -1052,6 +1050,8 @@ public final class L10nTranslations {
                 "Die violette Belohnungs-Schaltfläche neben „Freunde hinzufügen“ in deinem Profil ausblenden.");
         table.put("Hide the question cards TikTok slides over a video near its end.",
                 "Die Fragekarten ausblenden, die TikTok gegen Ende eines Videos einblendet.");
+        table.put("Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.",
+                "Blende die Schnell-Emoji-Zeile und automatische Sticker-Vorschläge aus, die beim Tippen erscheinen. Die Emoji- und Sticker-Schaltflächen funktionieren weiterhin.");
         table.put("Hide the rewards shortcut",
                 "Belohnungs-Schaltfläche ausblenden");
         table.put("Hide the right column",
@@ -3302,8 +3302,6 @@ public final class L10nTranslations {
                 "Ocultar las novedades de TikTok Shop y los mensajes de cupones.");
         table.put("Hide TikTok's \"Search: ...\" banner above the comment count. This doesn't hide the comments or Hushfeed's comment-search box.",
                 "Oculta el banner «Buscar: ...» de TikTok sobre el número de comentarios. No oculta los comentarios ni el cuadro de búsqueda de comentarios de Hushfeed.");
-        table.put("Hide TikTok's exposed quick emoji row in supported comment inputs.",
-                "Ocultar la fila de emojis rápidos que TikTok deja a la vista en los campos de comentario compatibles.");
         table.put("Hide activity",
                 "Ocultar la actividad");
         table.put("Hide activity status",
@@ -3322,6 +3320,8 @@ public final class L10nTranslations {
                 "Ocultar las encuestas en los comentarios");
         table.put("Hide comment popup ads",
                 "Ocultar los anuncios emergentes de los comentarios");
+        table.put("Hide comment typing suggestions",
+                "Ocultar sugerencias al escribir comentarios");
         table.put("Hide comments made of an image or a sticker instead of words.",
                 "Ocultar los comentarios hechos con una imagen o un sticker en vez de con palabras.");
         table.put("Hide comments that contain any of the words below, or that come from the accounts below.",
@@ -3367,8 +3367,6 @@ public final class L10nTranslations {
                 "Ocultar los vídeos de listas de reproducción");
         table.put("Hide promotional music",
                 "Ocultar la música promocional");
-        table.put("Hide quick comment reactions",
-                "Ocultar las reacciones rápidas a los comentarios");
         table.put("Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.",
                 "Oculta las búsquedas recomendadas antes de escribir en la página de búsqueda de TikTok. Tu historial de búsqueda se conserva. No oculta las sugerencias sobre los comentarios.");
         table.put("Hide rows by title",
@@ -3467,6 +3465,8 @@ public final class L10nTranslations {
                 "Oculta el botón morado de recompensas junto a Añadir amigos en tu perfil.");
         table.put("Hide the question cards TikTok slides over a video near its end.",
                 "Ocultar las tarjetas con preguntas que TikTok desliza sobre un vídeo cerca del final.");
+        table.put("Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.",
+                "Oculta la fila de emojis rápidos y las sugerencias automáticas de stickers que aparecen mientras escribes. Los botones de emojis y stickers siguen funcionando.");
         table.put("Hide the rewards shortcut",
                 "Ocultar el acceso a recompensas");
         table.put("Hide the right column",
@@ -5717,8 +5717,6 @@ public final class L10nTranslations {
                 "Sembunyikan info terbaru TikTok Shop dan pesan kupon.");
         table.put("Hide TikTok's \"Search: ...\" banner above the comment count. This doesn't hide the comments or Hushfeed's comment-search box.",
                 "Sembunyikan banner \"Cari: ...\" TikTok di atas jumlah komentar. Ini tidak menyembunyikan komentar atau kotak pencarian komentar Hushfeed.");
-        table.put("Hide TikTok's exposed quick emoji row in supported comment inputs.",
-                "Sembunyikan baris emoji cepat yang TikTok tampilkan di kolom komentar yang mendukungnya.");
         table.put("Hide activity",
                 "Sembunyikan aktivitas");
         table.put("Hide activity status",
@@ -5737,6 +5735,8 @@ public final class L10nTranslations {
                 "Sembunyikan jajak pendapat komentar");
         table.put("Hide comment popup ads",
                 "Sembunyikan iklan popup di komentar");
+        table.put("Hide comment typing suggestions",
+                "Sembunyikan saran saat mengetik komentar");
         table.put("Hide comments made of an image or a sticker instead of words.",
                 "Sembunyikan komentar yang berupa gambar atau stiker, bukan kata-kata.");
         table.put("Hide comments that contain any of the words below, or that come from the accounts below.",
@@ -5782,8 +5782,6 @@ public final class L10nTranslations {
                 "Sembunyikan video playlist");
         table.put("Hide promotional music",
                 "Sembunyikan musik promosi");
-        table.put("Hide quick comment reactions",
-                "Sembunyikan reaksi komentar cepat");
         table.put("Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.",
                 "Sembunyikan pencarian yang direkomendasikan sebelum mengetik di halaman pencarian TikTok. Riwayat pencarian tetap ada. Ini tidak menyembunyikan saran di atas komentar.");
         table.put("Hide rows by title",
@@ -5882,6 +5880,8 @@ public final class L10nTranslations {
                 "Sembunyikan tombol hadiah ungu di samping Tambah teman di profilmu.");
         table.put("Hide the question cards TikTok slides over a video near its end.",
                 "Sembunyikan kartu pertanyaan yang TikTok munculkan menjelang akhir video.");
+        table.put("Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.",
+                "Sembunyikan baris emoji cepat dan saran stiker otomatis yang muncul saat Anda mengetik. Tombol emoji dan stiker tetap berfungsi.");
         table.put("Hide the rewards shortcut",
                 "Sembunyikan pintasan hadiah");
         table.put("Hide the right column",
@@ -8132,8 +8132,6 @@ public final class L10nTranslations {
                 "Esconder as novidades do TikTok Shop e as mensagens de cupom.");
         table.put("Hide TikTok's \"Search: ...\" banner above the comment count. This doesn't hide the comments or Hushfeed's comment-search box.",
                 "Oculte o banner \"Pesquisar: ...\" do TikTok acima da contagem de comentários. Isso não oculta os comentários nem a caixa de pesquisa de comentários do Hushfeed.");
-        table.put("Hide TikTok's exposed quick emoji row in supported comment inputs.",
-                "Esconder a linha de emojis rápidos que o TikTok deixa à mostra nos campos de comentário compatíveis.");
         table.put("Hide activity",
                 "Esconder a atividade");
         table.put("Hide activity status",
@@ -8152,6 +8150,8 @@ public final class L10nTranslations {
                 "Esconder enquetes nos comentários");
         table.put("Hide comment popup ads",
                 "Esconder os anúncios pop-up dos comentários");
+        table.put("Hide comment typing suggestions",
+                "Ocultar sugestões ao digitar comentários");
         table.put("Hide comments made of an image or a sticker instead of words.",
                 "Esconder os comentários feitos com imagem ou sticker em vez de palavras.");
         table.put("Hide comments that contain any of the words below, or that come from the accounts below.",
@@ -8197,8 +8197,6 @@ public final class L10nTranslations {
                 "Esconder os vídeos de playlists");
         table.put("Hide promotional music",
                 "Esconder a música promocional");
-        table.put("Hide quick comment reactions",
-                "Esconder as reações rápidas aos comentários");
         table.put("Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.",
                 "Oculte as pesquisas recomendadas antes de digitar na página de pesquisa do TikTok. Seu histórico de pesquisa é mantido. Isso não oculta as sugestões acima dos comentários.");
         table.put("Hide rows by title",
@@ -8297,6 +8295,8 @@ public final class L10nTranslations {
                 "Ocultar o botão roxo de recompensas ao lado de Adicionar amigos no seu perfil.");
         table.put("Hide the question cards TikTok slides over a video near its end.",
                 "Esconder os cards com perguntas que o TikTok desliza sobre o vídeo perto do fim.");
+        table.put("Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.",
+                "Oculte a fileira de emojis rápidos e as sugestões automáticas de figurinhas que aparecem enquanto você digita. Os botões de emoji e figurinha continuam funcionando.");
         table.put("Hide the rewards shortcut",
                 "Ocultar o atalho de recompensas");
         table.put("Hide the right column",
@@ -10547,8 +10547,6 @@ public final class L10nTranslations {
                 "TikTok Shop güncellemelerini ve kupon mesajlarını gizle.");
         table.put("Hide TikTok's \"Search: ...\" banner above the comment count. This doesn't hide the comments or Hushfeed's comment-search box.",
                 "Yorum sayısının üzerindeki TikTok'un \"Ara: ...\" bandını gizle. Bu, yorumları veya Hushfeed'in yorum arama kutusunu gizlemez.");
-        table.put("Hide TikTok's exposed quick emoji row in supported comment inputs.",
-                "Desteklenen yorum giriş alanlarında TikTok'un açıkta duran hızlı emoji satırını gizle.");
         table.put("Hide activity",
                 "Etkinliği gizle");
         table.put("Hide activity status",
@@ -10567,6 +10565,8 @@ public final class L10nTranslations {
                 "Yorum anketlerini gizle");
         table.put("Hide comment popup ads",
                 "Yorumlardaki açılır reklamları gizle");
+        table.put("Hide comment typing suggestions",
+                "Yorum yazma önerilerini gizle");
         table.put("Hide comments made of an image or a sticker instead of words.",
                 "Kelimeler yerine bir görselden veya çıkartmadan oluşan yorumları gizle.");
         table.put("Hide comments that contain any of the words below, or that come from the accounts below.",
@@ -10612,8 +10612,6 @@ public final class L10nTranslations {
                 "Oynatma listesi videolarını gizle");
         table.put("Hide promotional music",
                 "Tanıtım amaçlı müzikleri gizle");
-        table.put("Hide quick comment reactions",
-                "Hızlı yorum tepkilerini gizle");
         table.put("Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.",
                 "TikTok'un arama sayfasında sen yazmadan önce çıkan önerilen aramaları gizle. Arama geçmişin kalır. Bu, yorumların üzerindeki önerileri gizlemez.");
         table.put("Hide rows by title",
@@ -10712,6 +10710,8 @@ public final class L10nTranslations {
                 "Profilinde Arkadaş ekle'nin yanındaki mor ödül düğmesini gizle.");
         table.put("Hide the question cards TikTok slides over a video near its end.",
                 "TikTok'un bir videonun sonuna doğru üzerine kaydırdığı soru kartlarını gizle.");
+        table.put("Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.",
+                "Yazarken görünen hızlı emoji satırını ve otomatik çıkartma önerilerini gizle. Emoji ve çıkartma düğmeleri çalışmaya devam eder.");
         table.put("Hide the rewards shortcut",
                 "Ödül kısayolunu gizle");
         table.put("Hide the right column",

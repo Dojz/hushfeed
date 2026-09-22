@@ -229,9 +229,12 @@ public final class FeedVisibility {
     /**
      * @return true while TikTok's comment sheet is visibly covering the feed.
      *
-     * <p>The sheet stays inflated and translated below the screen while another panel is open,
-     * so the root and its title must both be shown. Using both ids also avoids treating an
-     * unrelated layout that happens to reuse one obfuscated id as the comment sheet.
+     * <p>The sheet stays inflated and translated below the screen after it closes, so a shown
+     * flag alone is not enough. The root has to remain inside TikTok's own clipped layout.
+     * The title only identifies the sheet: Hushfeed's compact-header setting deliberately makes
+     * that view {@link View#GONE}, and requiring it to be shown put the block button over the
+     * comment list and send action. Using both ids still avoids treating an unrelated layout
+     * that happens to reuse one obfuscated id as the comment sheet.
      */
     public static boolean isCommentSheetVisible(Activity activity) {
         View sheet = namedView(activity, COMMENT_SHEET_RESOURCE_NAMES, commentSheetReference,
@@ -240,7 +243,7 @@ public final class FeedVisibility {
         View title = namedView(activity, COMMENT_TITLE_RESOURCE_NAMES, commentTitleReference,
                 reference -> commentTitleReference = reference, "comments sheet",
                 "title (" + joinResourceNames(COMMENT_TITLE_RESOURCE_NAMES) + ")");
-        return sheet != null && title != null && sheet.isShown() && title.isShown();
+        return sheet != null && title != null && sheet.isShown() && !isScrolledAway(sheet);
     }
 
     /**

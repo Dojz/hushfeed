@@ -396,7 +396,6 @@ Hide TikTok Shop,Hide TikTok Shop
 Hide TikTok Shop posts from the feed.,Hide TikTok Shop posts from the feed.
 Hide TikTok Shop updates and coupon messages.,Hide TikTok Shop updates and coupon messages.
 "Hide TikTok's ""Search: ..."" banner above the comment count. This doesn't hide the comments or Hushfeed's comment-search box.","Hide TikTok's ""Search: ..."" banner above the comment count. This doesn't hide the comments or Hushfeed's comment-search box."
-Hide TikTok's exposed quick emoji row in supported comment inputs.,Hide TikTok's exposed quick emoji row in supported comment inputs.
 Hide activity,Hide activity
 Hide activity status,Hide activity status
 "Hide ads, Shop posts, LIVE videos and replays, promotional music, and paid partnerships.","Hide ads, Shop posts, LIVE videos and replays, promotional music, and paid partnerships."
@@ -406,6 +405,7 @@ Hide bottom tabs TikTok adds later unless you allow them.,Hide bottom tabs TikTo
 Hide buttons in the right column,Hide buttons in the right column
 Hide comment polls,Hide comment polls
 Hide comment popup ads,Hide comment popup ads
+Hide comment typing suggestions,Hide comment typing suggestions
 Hide comments made of an image or a sticker instead of words.,Hide comments made of an image or a sticker instead of words.
 "Hide comments that contain any of the words below, or that come from the accounts below.","Hide comments that contain any of the words below, or that come from the accounts below."
 Hide controls after each video starts. Tap to restore them.,Hide controls after each video starts. Tap to restore them.
@@ -427,7 +427,6 @@ Hide picture comments,Hide picture comments
 "Hide place badges on videos, including cards with multiple places. Videos and your location permissions stay unchanged.","Hide place badges on videos, including cards with multiple places. Videos and your location permissions stay unchanged."
 Hide playlist videos,Hide playlist videos
 Hide promotional music,Hide promotional music
-Hide quick comment reactions,Hide quick comment reactions
 Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.,Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.
 Hide rows by title,Hide rows by title
 Hide search rewards,Hide search rewards
@@ -477,6 +476,7 @@ Hide the plus button under the creator's picture in the right column. Ticking Av
 "Hide the points banner under the search box and the coin counter floating over search results, which TikTok shows in some regions. Searching works as before.","Hide the points banner under the search box and the coin counter floating over search results, which TikTok shows in some regions. Searching works as before."
 Hide the purple rewards button beside Add friends on your profile.,Hide the purple rewards button beside Add friends on your profile.
 Hide the question cards TikTok slides over a video near its end.,Hide the question cards TikTok slides over a video near its end.
+Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.,Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.
 Hide the rewards shortcut,Hide the rewards shortcut
 Hide the right column,Hide the right column
 Hide the row of story avatars across the top of the Inbox.,Hide the row of story avatars across the top of the Inbox.
