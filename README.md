@@ -35,6 +35,8 @@ Feed screen has separate options to hide the **Full screen button** and **locati
 
 Want to skip those videos entirely? Turn on **Filter location-tagged videos** under Feed filter > Ads. It's independent of badge hiding and includes posts that aren't paid ads. These options are off by default and need a restart.
 
+If one Feed filter switch (Hide Series, say, or Hide playlist videos) empties three lists of five or more in a row, a banner names that switch and its button opens the row. A filter that has started matching everything shouldn't read as TikTok breaking. Nothing gets switched off for you.
+
 **Hide the search bar below videos**, under Feed screen, removes the suggested-search strip above the bottom tabs. Video details and side controls can use its space. The top search button and comment suggestions have their own switches. This option is off by default and needs a restart.
 
 Some regions get extras the rest never see. **Hide the Report button on videos**, under Feed screen, removes the flag button above the creator's picture. **Hide search rewards**, under App, removes the points banner under the search box and the coin counter floating over results. Both are off by default, and neither could be tried on our own phones, so reports on how they behave are welcome.

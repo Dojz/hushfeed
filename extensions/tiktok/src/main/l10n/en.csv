@@ -29,6 +29,7 @@ source,target
 %1$s has an invalid value. %2$s,%1$s has an invalid value. %2$s
 %1$s has no supported override boundary in this Lab build.,%1$s has no supported override boundary in this Lab build.
 "%1$s has type %2$s, but the file says %3$s.","%1$s has type %2$s, but the file says %3$s."
+"%1$s hid everything TikTok sent, %2$d times in a row. Turn it off if that's not what you wanted.","%1$s hid everything TikTok sent, %2$d times in a row. Turn it off if that's not what you wanted."
 %1$s is already hidden,%1$s is already hidden
 "%1$s is not a country code, so no video would ever match it. Use two letters, like GB, IE or US.","%1$s is not a country code, so no video would ever match it. Use two letters, like GB, IE or US."
 %1$s is not in this Lab catalog.,%1$s is not in this Lab catalog.
@@ -877,6 +878,7 @@ Show the hide button on videos,Show the hide button on videos
 Show the progress bar,Show the progress bar
 Show the progress bar thumbnail,Show the progress bar thumbnail
 "Show the search entry inside TikTok's LIVE drawer, where available. This doesn't add a search box to video comments.","Show the search entry inside TikTok's LIVE drawer, where available. This doesn't add a search box to video comments."
+Show the switch,Show the switch
 Show the whole Activity and New followers lists instead of stopping at a View all button.,Show the whole Activity and New followers lists instead of stopping at a View all button.
 "Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off.","Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off."
 Show what is left of the budget,Show what is left of the budget
