@@ -62,7 +62,7 @@ A hidden CAPTCHA may be the cause.	Talvez a causa seja um CAPTCHA escondido.
 A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.	Um host para colocar no lugar de tiktok.com ao compartilhar ou copiar um link, como vxtiktok.com. Deixe vazio para compartilhar os links do próprio TikTok. Só os links do TikTok mudam, e só o host: nada é enviado para nenhum lugar novo.
 A newer clear replaced that undo. Tap the row again to undo.	Uma limpeza mais recente substituiu esse desfazer. Toque na linha de novo para desfazer.
 A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.	Um rótulo pequeno no feed mostra os minutos ou vídeos restantes do orçamento de hoje.
-A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.	Tocar em alguém na linha Enviar para apenas seleciona a pessoa. Um segundo toque na mesma pessoa dentro de quatro segundos envia o vídeo.
+A tap on a person in the Send to row only selects them. A second tap on the same person within %1$d seconds sends the video.	Tocar em alguém na linha Enviar para apenas seleciona a pessoa. Um segundo toque na mesma pessoa dentro de %1$d segundos envia o vídeo.
 A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.	Um endereço da web deixado em um comentário pode ser tocado em vez de copiado na mão. Tocar em qualquer outra parte do comentário continua fazendo o de sempre.
 AI-generated posts	Publicações geradas por IA
 About	Sobre
@@ -158,7 +158,7 @@ Caption text size	Tamanho do texto das legendas
 Captions	Legendas
 Captions, gestures and on-screen controls	Legendas, gestos e controles na tela
 Capture crash reports locally	Guardar os relatórios de falha no aparelho
-Choose 1-1000 videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.	Escolha entre 1 e 1000 vídeos. Valores fora dessa faixa usam o limite válido mais próximo. Reinicie o TikTok para aplicar.
+Choose %1$d to %2$d videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.	Escolha entre %1$d e %2$d vídeos. Valores fora dessa faixa usam o limite válido mais próximo. Reinicie o TikTok para aplicar.
 Choose a backup file. Your current settings are kept for Undo.	Escolha um arquivo de backup. Suas configurações atuais ficam guardadas para Desfazer.
 Choose a folder on internal storage. SD cards are not supported.	Só há suporte para pastas do armazenamento interno.
 Choose a preset to fill the SIM details.	Escolha uma predefinição para preencher os dados do SIM.
@@ -255,7 +255,7 @@ Daily budgets, reminders and the hold	Limites diários, lembretes e a pausa
 Daily time budget	Limite diário de tempo
 Daily video budget	Limite diário de vídeos
 Dark	Escuro
-Days to remember a video. Zero removes the age limit. History keeps at most 10,000 videos.	Dias para lembrar de um vídeo. Zero tira o limite de idade. O histórico guarda no máximo 10.000 vídeos.
+Days to remember a video. Zero removes the age limit. History keeps at most %1$s videos.	Dias para lembrar de um vídeo. Zero tira o limite de idade. O histórico guarda no máximo %1$s vídeos.
 Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible.	Dias. Zero aceita qualquer idade. Publicações sem uma data utilizável, inclusive as futuras, continuam visíveis.
 Default	Padrão
 Default playback speed	Velocidade de reprodução padrão
@@ -302,7 +302,7 @@ Enter a valid two-letter country code	Digite um código de país válido de duas
 Enter a whole number, or one like 20K, 1.5M or 2B	Digite um número inteiro, ou um como 20K, 1.5M ou 2B
 Enter a whole number.	Insira um número inteiro.
 Enter true or false.	Digite true ou false.
-Enter up to 8 comma-separated speeds from 0.5 to 3	Digite até 8 velocidades separadas por vírgula, de 0.5 a 3
+Enter up to %1$d comma-separated speeds from %2$s to %3$s	Digite até %1$d velocidades separadas por vírgula, de %2$s a %3$s
 Enter valid JSON.	Digite um JSON válido.
 Entry %1$d has a field with the wrong data type.	A entrada %1$d tem um campo com o tipo de dados incorreto.
 Entry %1$d is not an object.	A entrada %1$d não é um objeto.
@@ -503,7 +503,7 @@ Keep the clock and status icons off the screen while TikTok is open. Swipe down 
 Keep the screen's refresh rate	Manter a taxa de atualização da tela
 Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only.	Mantém a velocidade escolhida para o próximo vídeo. Desligado, cada vídeo novo começa em 1x e uma escolha manual vale só para aquele vídeo.
 Keep this string to %1$s characters or fewer.	Mantenha esta string com %1$s caracteres ou menos.
-Keep this structured value to 64 KB or less.	Limite este valor estruturado a 64 KB ou menos.
+Keep this structured value to %1$s KB or less.	Limite este valor estruturado a %1$s KB ou menos.
 Kept to %1$s, the nearest value this row allows	Ajustado para %1$s, o valor mais próximo que esta linha aceita
 Kinds of post	Tipos de post
 LIVE	LIVE
@@ -734,7 +734,7 @@ Restart TikTok to apply %1$d changes	Reinicie o TikTok para aplicar %1$d altera�
 Restart TikTok to apply this change	Reinicie o TikTok para aplicar esta alteração
 Restart TikTok to apply this.	Reinicie o TikTok para aplicar.
 Restart pending	Reinício pendente
-Restore defaults immediately. Your current settings are kept for Undo.	Restaurar os padrões agora mesmo. Suas configurações atuais ficam guardadas para Desfazer.
+Put every setting back to its default straight away. Your current settings are kept for Undo.	Voltar cada configuração ao padrão agora mesmo. Suas configurações atuais ficam guardadas para Desfazer.
 Restore failed. Some settings may still be changed.	A restauração falhou. Algumas configurações podem ter mudado mesmo assim.
 Restore failed. Some settings may still be changed. Use Undo to put them back.	A restauração falhou. Algumas configurações podem ter mudado mesmo assim. Use Desfazer para trazê-las de volta.
 Restore settings	Restaurar as configurações
@@ -900,8 +900,8 @@ Tap %1$s again to send	Toque em %1$s de novo para enviar
 Tap again to follow	Toque de novo para seguir
 Tap again to like	Toque de novo para curtir
 Tap again to send	Toque de novo para enviar
-Tap the feed Follow button twice within four seconds.	Toque no botão Seguir do feed duas vezes dentro de quatro segundos.
-Tap the like heart twice within four seconds. Removing a like stays immediate.	Toque no coração de curtir duas vezes dentro de quatro segundos. Tirar uma curtida continua sendo imediato.
+Tap the feed Follow button twice within %1$d seconds.	Toque no botão Seguir do feed duas vezes dentro de %1$d segundos.
+Tap the like heart twice within %1$d seconds. Removing a like stays immediate.	Toque no coração de curtir duas vezes dentro de %1$d segundos. Tirar uma curtida continua sendo imediato.
 Tap to start the feed	Toque para iniciar o feed
 Technical details	Detalhes técnicos
 Technical details, %1$s	Detalhes técnicos, %1$s
@@ -919,8 +919,8 @@ That is not a Hushfeed settings backup. Nothing was altered.	Isso não é um bac
 That is not an app name. Try something like com.example.downloader, or leave the box empty to keep saving in TikTok.	Isso não é um nome de app. Tente algo como com.example.downloader, ou deixe o campo vazio para continuar salvando no TikTok.
 That is one minute today	Isso dá um minuto hoje
 That is one video today	Isso dá um vídeo hoje
-That list has too many entries. Keep it to 10,000 or fewer.	Essa lista tem entradas demais. Limite-a a 10.000 ou menos.
-That list is too large. Keep it to 256 KB or less.	Essa lista é grande demais. Limite-a a 256 KB ou menos.
+That list has too many entries. Keep it to %1$s or fewer.	Essa lista tem entradas demais. Limite-a a %1$s ou menos.
+That list is too large. Keep it to %1$s KB or less.	Essa lista é grande demais. Limite-a a %1$s KB ou menos.
 That preset is not recognized. Choose another.	Predefinição de SIM inválida.
 That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.	Esse backup de configurações contém uma lista de regras do feed maior do que o Hushfeed aceita. Nada foi alterado.
 That settings backup holds a value Hushfeed cannot read. Nothing was altered.	Esse backup tem um valor que o Hushfeed não consegue ler. Nada foi alterado.
@@ -1044,8 +1044,8 @@ Undo last Lab change	Desfazer a última mudança do Lab
 Undo last restore or reset	Desfazer a última restauração ou redefinição
 Undoing the last change	Desfazendo a última mudança
 Until you choose here, this sheet follows your choices under Hide share actions.	Até você escolher aqui, este menu segue suas escolhas em Esconder ações de compartilhamento.
-Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.	Até 8 velocidades de 0.5 a 3, separadas por vírgula. Por exemplo: 0.5, 1, 1.5, 2, 2.5, 3. Deixe vazio para a lista do TikTok. Reinicie o TikTok para aplicar.
-Use 0 for TikTok's size, or 12 to 48. Applies to the next caption.	Use 0 para o tamanho do TikTok, ou de 12 a 48. Vale para a próxima legenda.
+Up to %1$d speeds from %2$s to %3$s, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.	Até %1$d velocidades de %2$s a %3$s, separadas por vírgula. Por exemplo: 0.5, 1, 1.5, 2, 2.5, 3. Deixe vazio para a lista do TikTok. Reinicie o TikTok para aplicar.
+Use 0 for TikTok's size, or %1$d to %2$d. Applies to the next caption.	Use 0 para o tamanho do TikTok, ou de %1$d a %2$d. Vale para a próxima legenda.
 Use Save JSON for this large report	Use Salvar JSON para este relatório grande
 Use TikTok's own hold, slide down and release gesture to lock 2x speed.	Usar o gesto do próprio TikTok de segurar, deslizar para baixo e soltar para travar a velocidade 2x.
 Use a default playback speed	Usar uma velocidade de reprodução padrão

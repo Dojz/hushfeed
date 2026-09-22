@@ -65,7 +65,7 @@ A hidden CAPTCHA may be the cause.,A hidden CAPTCHA may be the cause.
 "A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.","A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new."
 A newer clear replaced that undo. Tap the row again to undo.,A newer clear replaced that undo. Tap the row again to undo.
 "A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.","A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out."
-A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.,A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.
+A tap on a person in the Send to row only selects them. A second tap on the same person within %1$d seconds sends the video.,A tap on a person in the Send to row only selects them. A second tap on the same person within %1$d seconds sends the video.
 A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.,A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.
 AI-generated posts,AI-generated posts
 About,About
@@ -169,7 +169,7 @@ Captions,Captions
 "Captions, gestures and on-screen controls","Captions, gestures and on-screen controls"
 Capture crash reports locally,Capture crash reports locally
 Changed,Changed
-Choose 1-1000 videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.,Choose 1-1000 videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.
+Choose %1$d to %2$d videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.,Choose %1$d to %2$d videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.
 Choose a backup file. Your current settings are kept for Undo.,Choose a backup file. Your current settings are kept for Undo.
 Choose a folder on internal storage. SD cards are not supported.,Choose a folder on internal storage. SD cards are not supported.
 Choose a preset to fill the SIM details.,Choose a preset to fill the SIM details.
@@ -271,7 +271,7 @@ Daily budget,Daily budget
 Daily time budget,Daily time budget
 Daily video budget,Daily video budget
 Dark,Dark
-"Days to remember a video. Zero removes the age limit. History keeps at most 10,000 videos.","Days to remember a video. Zero removes the age limit. History keeps at most 10,000 videos."
+Days to remember a video. Zero removes the age limit. History keeps at most %1$s videos.,Days to remember a video. Zero removes the age limit. History keeps at most %1$s videos.
 "Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible.","Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible."
 Default,Default
 Default playback speed,Default playback speed
@@ -312,7 +312,7 @@ Enter a valid two-letter country code,Enter a valid two-letter country code
 "Enter a whole number, or one like 20K, 1.5M or 2B","Enter a whole number, or one like 20K, 1.5M or 2B"
 Enter a whole number.,Enter a whole number.
 Enter true or false.,Enter true or false.
-Enter up to 8 comma-separated speeds from 0.5 to 3,Enter up to 8 comma-separated speeds from 0.5 to 3
+Enter up to %1$d comma-separated speeds from %2$s to %3$s,Enter up to %1$d comma-separated speeds from %2$s to %3$s
 Enter valid JSON.,Enter valid JSON.
 Entry %1$d has a field with the wrong data type.,Entry %1$d has a field with the wrong data type.
 Entry %1$d is not an object.,Entry %1$d is not an object.
@@ -530,7 +530,7 @@ Keep the clock and status icons off the screen while TikTok is open. Swipe down 
 Keep the screen's refresh rate,Keep the screen's refresh rate
 "Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only.","Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only."
 Keep this string to %1$s characters or fewer.,Keep this string to %1$s characters or fewer.
-Keep this structured value to 64 KB or less.,Keep this structured value to 64 KB or less.
+Keep this structured value to %1$s KB or less.,Keep this structured value to %1$s KB or less.
 "Kept to %1$s, the nearest value this row allows","Kept to %1$s, the nearest value this row allows"
 Kinds of post,Kinds of post
 LIVE,LIVE
@@ -720,6 +720,7 @@ Profile share actions,Profile share actions
 Promotional music,Promotional music
 Proof,Proof
 Put back the settings saved before the last restore or reset.,Put back the settings saved before the last restore or reset.
+Put every setting back to its default straight away. Your current settings are kept for Undo.,Put every setting back to its default straight away. Your current settings are kept for Undo.
 Putting the settings back to their defaults,Putting the settings back to their defaults
 Quality,Quality
 "Quality, files, subtitles and hand-off","Quality, files, subtitles and hand-off"
@@ -761,7 +762,6 @@ Restart TikTok to apply this change,Restart TikTok to apply this change
 Restart TikTok to apply this.,Restart TikTok to apply this.
 Restart now,Restart now
 Restart pending,Restart pending
-Restore defaults immediately. Your current settings are kept for Undo.,Restore defaults immediately. Your current settings are kept for Undo.
 Restore failed. Some settings may still be changed.,Restore failed. Some settings may still be changed.
 Restore failed. Some settings may still be changed. Use Undo to put them back.,Restore failed. Some settings may still be changed. Use Undo to put them back.
 Restore settings,Restore settings
@@ -935,8 +935,8 @@ Tap %1$s again to send,Tap %1$s again to send
 Tap again to follow,Tap again to follow
 Tap again to like,Tap again to like
 Tap again to send,Tap again to send
-Tap the feed Follow button twice within four seconds.,Tap the feed Follow button twice within four seconds.
-Tap the like heart twice within four seconds. Removing a like stays immediate.,Tap the like heart twice within four seconds. Removing a like stays immediate.
+Tap the feed Follow button twice within %1$d seconds.,Tap the feed Follow button twice within %1$d seconds.
+Tap the like heart twice within %1$d seconds. Removing a like stays immediate.,Tap the like heart twice within %1$d seconds. Removing a like stays immediate.
 Tap to start the feed,Tap to start the feed
 Technical details,Technical details
 "Technical details, %1$s","Technical details, %1$s"
@@ -954,8 +954,8 @@ That is not a Hushfeed settings backup. Nothing was altered.,That is not a Hushf
 "That is not an app name. Try something like com.example.downloader, or leave the box empty to keep saving in TikTok.","That is not an app name. Try something like com.example.downloader, or leave the box empty to keep saving in TikTok."
 That is one minute today,That is one minute today
 That is one video today,That is one video today
-"That list has too many entries. Keep it to 10,000 or fewer.","That list has too many entries. Keep it to 10,000 or fewer."
-That list is too large. Keep it to 256 KB or less.,That list is too large. Keep it to 256 KB or less.
+That list has too many entries. Keep it to %1$s or fewer.,That list has too many entries. Keep it to %1$s or fewer.
+That list is too large. Keep it to %1$s KB or less.,That list is too large. Keep it to %1$s KB or less.
 That preset is not recognized. Choose another.,That preset is not recognized. Choose another.
 That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.,That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.
 That settings backup holds a value Hushfeed cannot read. Nothing was altered.,That settings backup holds a value Hushfeed cannot read. Nothing was altered.
@@ -1082,8 +1082,8 @@ Undo last Lab change,Undo last Lab change
 Undo last restore or reset,Undo last restore or reset
 Undoing the last change,Undoing the last change
 "Until you choose here, this sheet follows your choices under Hide share actions.","Until you choose here, this sheet follows your choices under Hide share actions."
-"Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.","Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this."
-"Use 0 for TikTok's size, or 12 to 48. Applies to the next caption.","Use 0 for TikTok's size, or 12 to 48. Applies to the next caption."
+"Up to %1$d speeds from %2$s to %3$s, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.","Up to %1$d speeds from %2$s to %3$s, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this."
+"Use 0 for TikTok's size, or %1$d to %2$d. Applies to the next caption.","Use 0 for TikTok's size, or %1$d to %2$d. Applies to the next caption."
 Use Calm feed,Use Calm feed
 Use Save JSON for this large report,Use Save JSON for this large report
 "Use TikTok's own hold, slide down and release gesture to lock 2x speed.","Use TikTok's own hold, slide down and release gesture to lock 2x speed."

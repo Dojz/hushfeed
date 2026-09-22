@@ -76,7 +76,7 @@ public final class SettingsBackupPreference extends Preference
                 {IMPORT, "Restore settings",
                         "Choose a backup file. Your current settings are kept for Undo."},
                 {RESET, "Reset settings",
-                        "Restore defaults immediately. Your current settings are kept for Undo."},
+                        "Put every setting back to its default straight away. Your current settings are kept for Undo."},
                 {UNDO, "Undo last restore or reset", UNDO_SUMMARY},
         }) {
             SettingsBackupPreference preference = new SettingsBackupPreference(

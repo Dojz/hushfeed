@@ -9,6 +9,10 @@ package app.morphe.extension.tiktok.settings.preference.categories;
 import android.content.Context;
 import android.preference.PreferenceScreen;
 
+import java.text.NumberFormat;
+
+import app.morphe.extension.tiktok.seen.SeenVideoHistory;
+import app.morphe.extension.tiktok.settings.L10n;
 import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
 import app.morphe.extension.tiktok.settings.preference.RangeValuePreference;
@@ -263,7 +267,8 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
         addPreference(new NumberInputPreference(
                 context,
                 "Forget seen videos after",
-                "Days to remember a video. Zero removes the age limit. History keeps at most 10,000 videos.",
+                L10n.f(context, "Days to remember a video. Zero removes the age limit. History keeps at most %1$s videos.",
+                        NumberFormat.getInstance().format(SeenVideoHistory.MAX_RECORDS)),
                 Settings.SEEN_VIDEO_RETENTION_DAYS, "day", "days"
         ).zeroMeansOff());
         addPreference(new ClearSeenVideoHistoryPreference(context));

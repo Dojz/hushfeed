@@ -63,7 +63,7 @@ A hidden CAPTCHA may be the cause.,CAPTCHA yang disembunyikan bisa jadi penyebab
 "A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.","Host pengganti tiktok.com saat kamu membagikan atau menyalin tautan, misalnya vxtiktok.com. Kosongkan untuk membagikan tautan TikTok sendiri. Hanya tautan TikTok yang diubah, dan hanya bagian host-nya, tidak ada yang dikirim ke mana pun."
 A newer clear replaced that undo. Tap the row again to undo.,Penghapusan yang lebih baru menggantikan pengurungan itu. Ketuk barisnya lagi untuk mengurungkan.
 "A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.",Label kecil di feed menunjukkan menit atau video yang tersisa dari anggaran hari ini.
-A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.,Satu ketukan pada orang di baris Kirim ke hanya memilihnya. Ketukan kedua pada orang yang sama dalam empat detik mengirim videonya.
+A tap on a person in the Send to row only selects them. A second tap on the same person within %1$d seconds sends the video.,Satu ketukan pada orang di baris Kirim ke hanya memilihnya. Ketukan kedua pada orang yang sama dalam %1$d detik mengirim videonya.
 A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.,"Alamat web yang ditulis seseorang di komentar bisa diketuk, bukan disalin manual. Mengetuk bagian lain dari komentar tetap seperti sebelumnya."
 AI-generated posts,Kiriman buatan AI
 About,Tentang
@@ -159,7 +159,7 @@ Caption text size,Ukuran teks keterangan
 Captions,Teks
 "Captions, gestures and on-screen controls","Keterangan, gestur, dan kontrol di layar"
 Capture crash reports locally,Rekam laporan mogok di perangkat
-Choose 1-1000 videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.,Pilih 1-1000 video. Nilai di luar rentang ini memakai batas valid terdekat. Mulai ulang TikTok agar berlaku.
+Choose %1$d to %2$d videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.,Pilih %1$d sampai %2$d video. Nilai di luar rentang ini memakai batas valid terdekat. Mulai ulang TikTok agar berlaku.
 Choose a backup file. Your current settings are kept for Undo.,Pilih berkas cadangan. Pengaturanmu yang sekarang disimpan untuk Urungkan.
 Choose a folder on internal storage. SD cards are not supported.,Hanya folder penyimpanan internal yang didukung.
 Choose a preset to fill the SIM details.,Pilih preset untuk mengisi detail SIM.
@@ -256,7 +256,7 @@ Daily budget,Anggaran harian
 Daily time budget,Anggaran waktu harian
 Daily video budget,Anggaran video harian
 Dark,Gelap
-"Days to remember a video. Zero removes the age limit. History keeps at most 10,000 videos.",Jumlah hari sebuah video diingat. Nol menghapus batas usia. Riwayat menyimpan paling banyak 10.000 video.
+Days to remember a video. Zero removes the age limit. History keeps at most %1$s videos.,Jumlah hari sebuah video diingat. Nol menghapus batas usia. Riwayat menyimpan paling banyak %1$s video.
 "Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible.","Hari. Nol menampilkan semua umur. Kiriman tanpa stempel waktu yang bisa dipakai, termasuk kiriman mendatang, tetap ditampilkan."
 Default,Bawaan
 Default playback speed,Kecepatan pemutaran bawaan
@@ -303,7 +303,7 @@ Enter a valid two-letter country code,Masukkan kode negara dua huruf yang sah
 "Enter a whole number, or one like 20K, 1.5M or 2B","Masukkan bilangan bulat, atau seperti 20K, 1.5M atau 2B"
 Enter a whole number.,Masukkan bilangan bulat.
 Enter true or false.,Masukkan true atau false.
-Enter up to 8 comma-separated speeds from 0.5 to 3,"Masukkan sampai 8 kecepatan dari 0.5 hingga 3, dipisahkan koma"
+Enter up to %1$d comma-separated speeds from %2$s to %3$s,"Masukkan sampai %1$d kecepatan dari %2$s hingga %3$s, dipisahkan koma"
 Enter valid JSON.,Masukkan JSON yang valid.
 Entry %1$d has a field with the wrong data type.,Entri %1$d memiliki kolom dengan tipe data yang salah.
 Entry %1$d is not an object.,Entri %1$d bukan objek.
@@ -504,7 +504,7 @@ Keep the clock and status icons off the screen while TikTok is open. Swipe down 
 Keep the screen's refresh rate,Pertahankan laju penyegaran layar
 "Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only.","Menyimpan kecepatan yang dipilih untuk video berikutnya. Mati, setiap video baru dimulai dari 1x dan pilihan manual hanya berlaku untuk video itu."
 Keep this string to %1$s characters or fewer.,Jaga string ini %1$s karakter atau kurang.
-Keep this structured value to 64 KB or less.,Batasi nilai terstruktur ini hingga 64 KB atau kurang.
+Keep this structured value to %1$s KB or less.,Batasi nilai terstruktur ini hingga %1$s KB atau kurang.
 "Kept to %1$s, the nearest value this row allows","Disetel ke %1$s, nilai terdekat yang diizinkan baris ini"
 Kinds of post,Jenis postingan
 LIVE,LIVE
@@ -735,7 +735,7 @@ Restart TikTok to apply %1$d changes,Mulai ulang TikTok untuk menerapkan %1$d pe
 Restart TikTok to apply this change,Mulai ulang TikTok untuk menerapkan perubahan ini
 Restart TikTok to apply this.,Mulai ulang TikTok agar berlaku.
 Restart pending,Menunggu mulai ulang
-Restore defaults immediately. Your current settings are kept for Undo.,Kembalikan ke bawaan sekarang juga. Pengaturanmu yang sekarang disimpan untuk Urungkan.
+Put every setting back to its default straight away. Your current settings are kept for Undo.,Kembalikan setiap pengaturan ke bawaannya sekarang juga. Pengaturanmu yang sekarang disimpan untuk Urungkan.
 Restore failed. Some settings may still be changed.,Pemulihan gagal. Beberapa pengaturan mungkin masih berubah.
 Restore failed. Some settings may still be changed. Use Undo to put them back.,Pemulihan gagal. Beberapa pengaturan mungkin masih berubah. Gunakan Urungkan untuk mengembalikannya.
 Restore settings,Pulihkan pengaturan
@@ -901,8 +901,8 @@ Tap %1$s again to send,Ketuk %1$s lagi untuk mengirim
 Tap again to follow,Ketuk lagi untuk mengikuti
 Tap again to like,Ketuk lagi untuk menyukai
 Tap again to send,Ketuk lagi untuk mengirim
-Tap the feed Follow button twice within four seconds.,Ketuk tombol Ikuti di feed dua kali dalam empat detik.
-Tap the like heart twice within four seconds. Removing a like stays immediate.,Ketuk ikon hati dua kali dalam empat detik. Membatalkan suka tetap langsung berlaku.
+Tap the feed Follow button twice within %1$d seconds.,Ketuk tombol Ikuti di feed dua kali dalam %1$d detik.
+Tap the like heart twice within %1$d seconds. Removing a like stays immediate.,Ketuk ikon hati dua kali dalam %1$d detik. Membatalkan suka tetap langsung berlaku.
 Tap to start the feed,Ketuk untuk memulai feed
 Technical details,Detail teknis
 "Technical details, %1$s","Detail teknis, %1$s"
@@ -920,8 +920,8 @@ That is not a Hushfeed settings backup. Nothing was altered.,Itu bukan cadangan 
 "That is not an app name. Try something like com.example.downloader, or leave the box empty to keep saving in TikTok.","Itu bukan nama aplikasi. Coba seperti com.example.downloader, atau kosongkan saja biar tetap disimpan di TikTok."
 That is one minute today,Itu satu menit hari ini
 That is one video today,Itu satu video hari ini
-"That list has too many entries. Keep it to 10,000 or fewer.",Daftar itu memiliki terlalu banyak entri. Batasi hingga 10.000 entri atau kurang.
-That list is too large. Keep it to 256 KB or less.,Daftar itu terlalu besar. Batasi ukurannya hingga 256 KB atau kurang.
+That list has too many entries. Keep it to %1$s or fewer.,Daftar itu memiliki terlalu banyak entri. Batasi hingga %1$s entri atau kurang.
+That list is too large. Keep it to %1$s KB or less.,Daftar itu terlalu besar. Batasi ukurannya hingga %1$s KB atau kurang.
 That preset is not recognized. Choose another.,Pratata SIM tidak sah.
 That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.,Cadangan pengaturan itu berisi daftar aturan feed yang lebih besar dari batas Hushfeed. Tidak ada yang diubah.
 That settings backup holds a value Hushfeed cannot read. Nothing was altered.,Cadangan pengaturan itu memuat nilai yang tidak dapat dibaca Hushfeed. Tidak ada yang diubah.
@@ -1045,8 +1045,8 @@ Undo last Lab change,Batalkan perubahan Lab terakhir
 Undo last restore or reset,Urungkan pemulihan atau reset terakhir
 Undoing the last change,Membatalkan perubahan terakhir
 "Until you choose here, this sheet follows your choices under Hide share actions.","Sampai Anda memilih di sini, lembar ini mengikuti pilihan Anda di Sembunyikan tindakan berbagi."
-"Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.","Sampai 8 kecepatan dari 0.5 hingga 3, dipisah koma. Contoh: 0.5, 1, 1.5, 2, 2.5, 3. Kosongkan untuk daftar TikTok. Mulai ulang TikTok agar berlaku."
-"Use 0 for TikTok's size, or 12 to 48. Applies to the next caption.","Gunakan 0 untuk ukuran TikTok, atau 12 sampai 48. Berlaku untuk teks berikutnya."
+"Up to %1$d speeds from %2$s to %3$s, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.","Sampai %1$d kecepatan dari %2$s hingga %3$s, dipisah koma. Contoh: 0.5, 1, 1.5, 2, 2.5, 3. Kosongkan untuk daftar TikTok. Mulai ulang TikTok agar berlaku."
+"Use 0 for TikTok's size, or %1$d to %2$d. Applies to the next caption.","Gunakan 0 untuk ukuran TikTok, atau %1$d sampai %2$d. Berlaku untuk teks berikutnya."
 Use Save JSON for this large report,Pakai Simpan JSON untuk laporan sebesar ini
 "Use TikTok's own hold, slide down and release gesture to lock 2x speed.","Pakai gestur bawaan TikTok, tahan lalu geser ke bawah dan lepas, untuk mengunci kecepatan 2x."
 Use a default playback speed,Pakai kecepatan pemutaran bawaan

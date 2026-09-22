@@ -85,10 +85,11 @@ final class FeatureGateLabText {
             case STRING_TOO_LONG:
                 return L10n.f(context,
                         "Keep this string to %1$s characters or fewer.",
-                        java.text.NumberFormat.getInstance().format(4096));
+                        java.text.NumberFormat.getInstance().format(FeatureGateLabStore.MAX_STRING_CHARS));
             case STRUCTURED_VALUE_TOO_LARGE:
-                return L10n.t(context,
-                        "Keep this structured value to 64 KB or less.");
+                return L10n.f(context,
+                        "Keep this structured value to %1$s KB or less.",
+                        java.text.NumberFormat.getInstance().format(FeatureGateLabStore.MAX_STRUCTURED_CHARS / 1024));
             case SELECT_AT_LEAST_ONE_FIELD:
                 return L10n.t(context, "Select at least one field.");
             case UNSUPPORTED_TYPE:

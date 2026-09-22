@@ -341,6 +341,23 @@ public class SettingsL10nTest {
                 0, offenders.size());
     }
 
+    /**
+     * A limit the reader is told about is formatted in from the constant that enforces it, so
+     * no key carries the number itself. The example list on the speed row is the one place
+     * numbers are words rather than a limit.
+     */
+    @Test public void noKeyCarriesALimitThatLivesInACodeConstant() throws Exception {
+        java.util.regex.Pattern limit = java.util.regex.Pattern.compile(
+                "\\bfour seconds\\b|\\b4,?096\\b|\\b10,?000\\b|\\b256 KB\\b|\\b64 KB\\b|\\b1-1000\\b"
+                        + "|\\b12 to 48\\b|\\b0\\.5 to 3\\b|\\b8 (?:comma-separated )?speeds\\b");
+        List<String> offenders = new ArrayList<>();
+        for (String key : readTable(ENGLISH_BASE).keySet()) {
+            if (limit.matcher(key).find()) offenders.add(key);
+        }
+        assertEquals("keys that type a limit the code holds in a constant:\n"
+                + String.join("\n", offenders), 0, offenders.size());
+    }
+
     @Test public void everyTranslationKeepsTheShapeOfItsKey() {
         // Defects the key-set checks cannot see. A placeholder that changed, was dropped or was
         // invented; a sentence that lost or gained its terminator; a quote pair that does not
@@ -836,6 +853,7 @@ public class SettingsL10nTest {
         assertTrue("the restart sentence itself is not in the table",
                 english.contains(TogglePreference.RESTART_SENTENCE));
 
+        List<java.util.regex.Pattern> templates = templates(english);
         for (String text : shown) {
             // Whole first. Plenty of summaries were written with the restart sentence in them
             // and are one key including it, so splitting before looking would break those.
@@ -850,16 +868,49 @@ public class SettingsL10nTest {
                 body = body.substring(0,
                         body.length() - TogglePreference.RESTART_SENTENCE.length() - 1);
             }
-            // Text built at runtime from a placeholder, and text spanning lines, are assembled
-            // from parts that are entries of their own. Exempting anything merely carrying a
-            // digit or a slash let 63 of 619 strings through, including every message with a
-            // value in it.
+            // Text spanning lines is assembled from parts that are entries of their own.
+            // Exempting anything merely carrying a digit or a slash let 63 of 619 strings
+            // through, including every message with a value in it. Text a placeholder key
+            // produces (a limit formatted in from a constant) is accepted only when one of
+            // those keys matches it whole, not because it carries a number.
             boolean composed = body.contains("\n") || body.matches("(?s).*%\\d\\$.*");
-            if (!composed && !isValueRatherThanProse(body) && !english.contains(body)) {
+            if (!composed && !isValueRatherThanProse(body) && !english.contains(body)
+                    && !producedByAKey(body, templates)) {
                 missing.add(body);
             }
         }
         assertEquals("settings text without a translation entry: " + missing, 0, missing.size());
+    }
+
+    /** The keys with placeholders, as patterns for the text they can produce. */
+    private static List<java.util.regex.Pattern> templates(Set<String> keys) {
+        List<java.util.regex.Pattern> found = new ArrayList<>();
+        java.util.regex.Pattern placeholder = java.util.regex.Pattern.compile("%\\d\\$([sd])");
+        for (String key : keys) {
+            java.util.regex.Matcher match = placeholder.matcher(key);
+            if (!match.find()) continue;
+            // A key that is nearly all placeholder would accept nearly anything, which would
+            // make this check say nothing.
+            if (key.replaceAll("%\\d\\$[sd]", "").trim().length() < 8) continue;
+            StringBuilder regex = new StringBuilder("(?s)");
+            int last = 0;
+            do {
+                regex.append(java.util.regex.Pattern.quote(key.substring(last, match.start())));
+                // A number the way NumberFormat writes it, or any text at all for %s.
+                regex.append("d".equals(match.group(1)) ? "-?[\\d,.]+" : ".+?");
+                last = match.end();
+            } while (match.find());
+            regex.append(java.util.regex.Pattern.quote(key.substring(last)));
+            found.add(java.util.regex.Pattern.compile(regex.toString()));
+        }
+        return found;
+    }
+
+    private static boolean producedByAKey(String text, List<java.util.regex.Pattern> templates) {
+        for (java.util.regex.Pattern template : templates) {
+            if (template.matcher(text).matches()) return true;
+        }
+        return false;
     }
 
     /**

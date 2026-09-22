@@ -210,8 +210,8 @@ public final class L10nTranslations {
                 "Ein neueres Löschen hat dieses Rückgängig ersetzt. Tippe erneut auf die Zeile, um es rückgängig zu machen.");
         table.put("A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.",
                 "Ein kleines Label im Feed zeigt die verbleibenden Minuten oder Videos des heutigen Budgets.");
-        table.put("A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.",
-                "Ein Tippen auf eine Person in der Zeile „Senden an“ wählt sie nur aus. Ein zweites Tippen auf dieselbe Person innerhalb von vier Sekunden sendet das Video.");
+        table.put("A tap on a person in the Send to row only selects them. A second tap on the same person within %1$d seconds sends the video.",
+                "Ein Tippen auf eine Person in der Zeile „Senden an“ wählt sie nur aus. Ein zweites Tippen auf dieselbe Person innerhalb von %1$d Sekunden sendet das Video.");
         table.put("A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.",
                 "Eine Webadresse in einem Kommentar lässt sich antippen, statt sie von Hand herauszukopieren. Ein Tippen an anderer Stelle im Kommentar tut weiterhin das, was es vorher tat.");
         table.put("AI-generated posts",
@@ -421,8 +421,8 @@ public final class L10nTranslations {
                 "Absturzberichte lokal speichern");
         table.put("Changed",
                 "Geändert");
-        table.put("Choose 1-1000 videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.",
-                "1 bis 1000 Videos wählen. Werte außerhalb dieses Bereichs nehmen die nächste gültige Grenze. TikTok neu starten, damit das gilt.");
+        table.put("Choose %1$d to %2$d videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.",
+                "%1$d bis %2$d Videos wählen. Werte außerhalb dieses Bereichs nehmen die nächste gültige Grenze. TikTok neu starten, damit das gilt.");
         table.put("Choose a backup file. Your current settings are kept for Undo.",
                 "Wähle eine Sicherungsdatei. Deine aktuellen Einstellungen bleiben zum Rückgängigmachen erhalten.");
         table.put("Choose a folder on internal storage. SD cards are not supported.",
@@ -631,8 +631,8 @@ public final class L10nTranslations {
                 "Tägliches Videobudget");
         table.put("Dark",
                 "Dunkel");
-        table.put("Days to remember a video. Zero removes the age limit. History keeps at most 10,000 videos.",
-                "Tage, die ein Video gemerkt wird. Null hebt die Altersgrenze auf. Der Verlauf behält höchstens 10.000 Videos.");
+        table.put("Days to remember a video. Zero removes the age limit. History keeps at most %1$s videos.",
+                "Tage, die ein Video gemerkt wird. Null hebt die Altersgrenze auf. Der Verlauf behält höchstens %1$s Videos.");
         table.put("Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible.",
                 "Tage. Null lässt jedes Alter zu. Beiträge ohne brauchbaren Zeitstempel, auch zukünftige, bleiben sichtbar.");
         table.put("Default",
@@ -716,8 +716,8 @@ public final class L10nTranslations {
                 "Gib eine ganze Zahl ein.");
         table.put("Enter true or false.",
                 "Gib true oder false ein.");
-        table.put("Enter up to 8 comma-separated speeds from 0.5 to 3",
-                "Bis zu 8 durch Kommas getrennte Geschwindigkeiten von 0.5 bis 3 eingeben");
+        table.put("Enter up to %1$d comma-separated speeds from %2$s to %3$s",
+                "Bis zu %1$d durch Kommas getrennte Geschwindigkeiten von %2$s bis %3$s eingeben");
         table.put("Enter valid JSON.",
                 "Gib gültiges JSON ein.");
         table.put("Entry %1$d has a field with the wrong data type.",
@@ -1161,8 +1161,8 @@ public final class L10nTranslations {
                 "Behalte die gewählte Geschwindigkeit für das nächste Video. Aus, startet jedes neue Video mit 1x und eine manuelle Wahl gilt nur für dieses Video.");
         table.put("Keep this string to %1$s characters or fewer.",
                 "Halte diese Zeichenkette bei %1$s Zeichen oder weniger.");
-        table.put("Keep this structured value to 64 KB or less.",
-                "Begrenze diesen strukturierten Wert auf höchstens 64 KB.");
+        table.put("Keep this structured value to %1$s KB or less.",
+                "Begrenze diesen strukturierten Wert auf höchstens %1$s KB.");
         table.put("Kept to %1$s, the nearest value this row allows",
                 "Auf %1$s gesetzt, den nächsten Wert, den diese Zeile zulässt");
         table.put("Kinds of post",
@@ -1553,6 +1553,8 @@ public final class L10nTranslations {
     private static void fillDe12(Map<String, String> table) {
         table.put("Put back the settings saved before the last restore or reset.",
                 "Die Einstellungen zurückholen, die vor der letzten Wiederherstellung oder Zurücksetzung gespeichert wurden.");
+        table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
+                "Jede Einstellung sofort auf ihren Standardwert zurücksetzen. Deine aktuellen Einstellungen bleiben zum Rückgängigmachen erhalten.");
         table.put("Putting the settings back to their defaults",
                 "Einstellungen werden auf die Standardwerte zurückgesetzt");
         table.put("Quality",
@@ -1635,8 +1637,6 @@ public final class L10nTranslations {
                 "Jetzt neu starten");
         table.put("Restart pending",
                 "Neustart ausstehend");
-        table.put("Restore defaults immediately. Your current settings are kept for Undo.",
-                "Standardwerte sofort wiederherstellen. Deine aktuellen Einstellungen bleiben zum Rückgängigmachen erhalten.");
         table.put("Restore failed. Some settings may still be changed.",
                 "Wiederherstellung fehlgeschlagen. Einige Einstellungen können noch geändert sein.");
         table.put("Restore failed. Some settings may still be changed. Use Undo to put them back.",
@@ -1992,10 +1992,10 @@ public final class L10nTranslations {
                 "Noch einmal tippen zum Liken");
         table.put("Tap again to send",
                 "Zum Senden noch einmal tippen");
-        table.put("Tap the feed Follow button twice within four seconds.",
-                "Tippe die Folgen-Schaltfläche im Feed innerhalb von vier Sekunden zweimal an.");
-        table.put("Tap the like heart twice within four seconds. Removing a like stays immediate.",
-                "Tippe das Like-Herz innerhalb von vier Sekunden zweimal an. Das Entfernen eines Likes bleibt sofort.");
+        table.put("Tap the feed Follow button twice within %1$d seconds.",
+                "Tippe die Folgen-Schaltfläche im Feed innerhalb von %1$d Sekunden zweimal an.");
+        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
+                "Tippe das Like-Herz innerhalb von %1$d Sekunden zweimal an. Das Entfernen eines Likes bleibt sofort.");
         table.put("Tap to start the feed",
                 "Zum Starten des Feeds tippen");
         table.put("Technical details",
@@ -2030,10 +2030,10 @@ public final class L10nTranslations {
                 "Das ist eine Minute heute");
         table.put("That is one video today",
                 "Das ist ein Video heute");
-        table.put("That list has too many entries. Keep it to 10,000 or fewer.",
-                "Diese Liste enthält zu viele Einträge. Begrenze sie auf höchstens 10.000.");
-        table.put("That list is too large. Keep it to 256 KB or less.",
-                "Diese Liste ist zu groß. Begrenze sie auf höchstens 256 KB.");
+        table.put("That list has too many entries. Keep it to %1$s or fewer.",
+                "Diese Liste enthält zu viele Einträge. Begrenze sie auf höchstens %1$s.");
+        table.put("That list is too large. Keep it to %1$s KB or less.",
+                "Diese Liste ist zu groß. Begrenze sie auf höchstens %1$s KB.");
         table.put("That preset is not recognized. Choose another.",
                 "Ungültige SIM-Vorlage.");
         table.put("That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.",
@@ -2295,10 +2295,10 @@ public final class L10nTranslations {
                 "Die letzte Änderung wird rückgängig gemacht");
         table.put("Until you choose here, this sheet follows your choices under Hide share actions.",
                 "Bis du hier eine Auswahl triffst, folgt dieses Menü deinen Einstellungen unter „Share-Aktionen ausblenden“.");
-        table.put("Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.",
-                "Bis zu 8 Geschwindigkeiten von 0.5 bis 3, durch Kommas getrennt. Beispiel: 0.5, 1, 1.5, 2, 2.5, 3. Leer lassen für TikToks Liste. TikTok neu starten, damit das gilt.");
-        table.put("Use 0 for TikTok's size, or 12 to 48. Applies to the next caption.",
-                "0 für TikToks Größe, sonst 12 bis 48. Gilt ab dem nächsten Untertitel.");
+        table.put("Up to %1$d speeds from %2$s to %3$s, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.",
+                "Bis zu %1$d Geschwindigkeiten von %2$s bis %3$s, durch Kommas getrennt. Beispiel: 0.5, 1, 1.5, 2, 2.5, 3. Leer lassen für TikToks Liste. TikTok neu starten, damit das gilt.");
+        table.put("Use 0 for TikTok's size, or %1$d to %2$d. Applies to the next caption.",
+                "0 für TikToks Größe, sonst %1$d bis %2$d. Gilt ab dem nächsten Untertitel.");
         table.put("Use Calm feed",
                 "„Ruhiger Feed“ verwenden");
         table.put("Use Save JSON for this large report",
@@ -2631,8 +2631,8 @@ public final class L10nTranslations {
                 "Un borrado más reciente sustituyó ese deshacer. Toca la fila otra vez para deshacerlo.");
         table.put("A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.",
                 "Una pequeña etiqueta en el feed muestra los minutos o videos restantes del presupuesto de hoy.");
-        table.put("A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.",
-                "Al tocar a una persona en la fila Enviar a solo se la selecciona. Un segundo toque sobre la misma persona antes de cuatro segundos envía el vídeo.");
+        table.put("A tap on a person in the Send to row only selects them. A second tap on the same person within %1$d seconds sends the video.",
+                "Al tocar a una persona en la fila Enviar a solo se la selecciona. Un segundo toque sobre la misma persona antes de %1$d segundos envía el vídeo.");
         table.put("A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.",
                 "Una dirección web escrita en un comentario se puede tocar en lugar de copiarla a mano. Tocar en cualquier otra parte del comentario sigue haciendo lo de siempre.");
         table.put("AI-generated posts",
@@ -2842,8 +2842,8 @@ public final class L10nTranslations {
                 "Guardar los informes de fallo en el dispositivo");
         table.put("Changed",
                 "Cambiado");
-        table.put("Choose 1-1000 videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.",
-                "Elige entre 1 y 1000 vídeos. Los valores fuera de ese rango usan el límite válido más cercano. Reinicia TikTok para que se aplique.");
+        table.put("Choose %1$d to %2$d videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.",
+                "Elige entre %1$d y %2$d vídeos. Los valores fuera de ese rango usan el límite válido más cercano. Reinicia TikTok para que se aplique.");
         table.put("Choose a backup file. Your current settings are kept for Undo.",
                 "Elige un archivo de copia de seguridad. Tus ajustes actuales se guardan para Deshacer.");
         table.put("Choose a folder on internal storage. SD cards are not supported.",
@@ -3052,8 +3052,8 @@ public final class L10nTranslations {
                 "Presupuesto diario de vídeos");
         table.put("Dark",
                 "Oscuro");
-        table.put("Days to remember a video. Zero removes the age limit. History keeps at most 10,000 videos.",
-                "Días que se recuerda un vídeo. Cero quita el límite de antigüedad. El historial guarda como mucho 10.000 vídeos.");
+        table.put("Days to remember a video. Zero removes the age limit. History keeps at most %1$s videos.",
+                "Días que se recuerda un vídeo. Cero quita el límite de antigüedad. El historial guarda como mucho %1$s vídeos.");
         table.put("Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible.",
                 "Días. Cero acepta cualquier antigüedad. Las publicaciones sin una fecha utilizable, incluidas las futuras, siguen visibles.");
         table.put("Default",
@@ -3137,8 +3137,8 @@ public final class L10nTranslations {
                 "Ingresa un número entero.");
         table.put("Enter true or false.",
                 "Introduce true o false.");
-        table.put("Enter up to 8 comma-separated speeds from 0.5 to 3",
-                "Escribe hasta 8 velocidades separadas por comas, de 0.5 a 3");
+        table.put("Enter up to %1$d comma-separated speeds from %2$s to %3$s",
+                "Escribe hasta %1$d velocidades separadas por comas, de %2$s a %3$s");
         table.put("Enter valid JSON.",
                 "Introduce JSON válido.");
         table.put("Entry %1$d has a field with the wrong data type.",
@@ -3582,8 +3582,8 @@ public final class L10nTranslations {
                 "Mantiene la velocidad elegida para el siguiente video. Desactivado, cada video nuevo empieza a 1x y una elección manual dura solo ese video.");
         table.put("Keep this string to %1$s characters or fewer.",
                 "Mantén esta cadena en %1$s caracteres o menos.");
-        table.put("Keep this structured value to 64 KB or less.",
-                "Limita este valor estructurado a 64 KB o menos.");
+        table.put("Keep this structured value to %1$s KB or less.",
+                "Limita este valor estructurado a %1$s KB o menos.");
         table.put("Kept to %1$s, the nearest value this row allows",
                 "Ajustado a %1$s, el valor más cercano que permite esta fila");
         table.put("Kinds of post",
@@ -3974,6 +3974,8 @@ public final class L10nTranslations {
     private static void fillEs12(Map<String, String> table) {
         table.put("Put back the settings saved before the last restore or reset.",
                 "Recuperar los ajustes guardados antes de la última restauración o reinicio.");
+        table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
+                "Devolver cada ajuste a su valor de fábrica ahora mismo. Tus ajustes actuales se guardan para Deshacer.");
         table.put("Putting the settings back to their defaults",
                 "Devolviendo los ajustes a sus valores de fábrica");
         table.put("Quality",
@@ -4056,8 +4058,6 @@ public final class L10nTranslations {
                 "Reiniciar ahora");
         table.put("Restart pending",
                 "Reinicio pendiente");
-        table.put("Restore defaults immediately. Your current settings are kept for Undo.",
-                "Restaurar los valores de fábrica ahora mismo. Tus ajustes actuales se guardan para Deshacer.");
         table.put("Restore failed. Some settings may still be changed.",
                 "La restauración falló. Puede que algunos ajustes hayan cambiado igualmente.");
         table.put("Restore failed. Some settings may still be changed. Use Undo to put them back.",
@@ -4413,10 +4413,10 @@ public final class L10nTranslations {
                 "Toca otra vez para dar me gusta");
         table.put("Tap again to send",
                 "Toca otra vez para enviar");
-        table.put("Tap the feed Follow button twice within four seconds.",
-                "Toca el botón Seguir del feed dos veces en menos de cuatro segundos.");
-        table.put("Tap the like heart twice within four seconds. Removing a like stays immediate.",
-                "Toca el corazón de me gusta dos veces en menos de cuatro segundos. Quitar un me gusta sigue siendo inmediato.");
+        table.put("Tap the feed Follow button twice within %1$d seconds.",
+                "Toca el botón Seguir del feed dos veces en menos de %1$d segundos.");
+        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
+                "Toca el corazón de me gusta dos veces en menos de %1$d segundos. Quitar un me gusta sigue siendo inmediato.");
         table.put("Tap to start the feed",
                 "Toca para poner el feed en marcha");
         table.put("Technical details",
@@ -4451,10 +4451,10 @@ public final class L10nTranslations {
                 "Eso es un minuto hoy");
         table.put("That is one video today",
                 "Eso es un vídeo hoy");
-        table.put("That list has too many entries. Keep it to 10,000 or fewer.",
-                "Esa lista tiene demasiadas entradas. Limítala a 10.000 o menos.");
-        table.put("That list is too large. Keep it to 256 KB or less.",
-                "Esa lista es demasiado grande. Limítala a 256 KB o menos.");
+        table.put("That list has too many entries. Keep it to %1$s or fewer.",
+                "Esa lista tiene demasiadas entradas. Limítala a %1$s o menos.");
+        table.put("That list is too large. Keep it to %1$s KB or less.",
+                "Esa lista es demasiado grande. Limítala a %1$s KB o menos.");
         table.put("That preset is not recognized. Choose another.",
                 "Ajuste preestablecido de SIM no válido.");
         table.put("That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.",
@@ -4716,10 +4716,10 @@ public final class L10nTranslations {
                 "Deshaciendo el último cambio");
         table.put("Until you choose here, this sheet follows your choices under Hide share actions.",
                 "Hasta que elijas aquí, esta hoja sigue tus opciones en Ocultar acciones de compartir.");
-        table.put("Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.",
-                "Hasta 8 velocidades de 0.5 a 3, separadas por comas. Por ejemplo: 0.5, 1, 1.5, 2, 2.5, 3. Déjalo vacío para la lista de TikTok. Reinicia TikTok para que se aplique.");
-        table.put("Use 0 for TikTok's size, or 12 to 48. Applies to the next caption.",
-                "Usa 0 para el tamaño de TikTok, o de 12 a 48. Se aplica al siguiente subtítulo.");
+        table.put("Up to %1$d speeds from %2$s to %3$s, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.",
+                "Hasta %1$d velocidades de %2$s a %3$s, separadas por comas. Por ejemplo: 0.5, 1, 1.5, 2, 2.5, 3. Déjalo vacío para la lista de TikTok. Reinicia TikTok para que se aplique.");
+        table.put("Use 0 for TikTok's size, or %1$d to %2$d. Applies to the next caption.",
+                "Usa 0 para el tamaño de TikTok, o de %1$d a %2$d. Se aplica al siguiente subtítulo.");
         table.put("Use Calm feed",
                 "Usar Feed tranquilo");
         table.put("Use Save JSON for this large report",
@@ -5052,8 +5052,8 @@ public final class L10nTranslations {
                 "Penghapusan yang lebih baru menggantikan pengurungan itu. Ketuk barisnya lagi untuk mengurungkan.");
         table.put("A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.",
                 "Label kecil di feed menunjukkan menit atau video yang tersisa dari anggaran hari ini.");
-        table.put("A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.",
-                "Satu ketukan pada orang di baris Kirim ke hanya memilihnya. Ketukan kedua pada orang yang sama dalam empat detik mengirim videonya.");
+        table.put("A tap on a person in the Send to row only selects them. A second tap on the same person within %1$d seconds sends the video.",
+                "Satu ketukan pada orang di baris Kirim ke hanya memilihnya. Ketukan kedua pada orang yang sama dalam %1$d detik mengirim videonya.");
         table.put("A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.",
                 "Alamat web yang ditulis seseorang di komentar bisa diketuk, bukan disalin manual. Mengetuk bagian lain dari komentar tetap seperti sebelumnya.");
         table.put("AI-generated posts",
@@ -5263,8 +5263,8 @@ public final class L10nTranslations {
                 "Rekam laporan mogok di perangkat");
         table.put("Changed",
                 "Diubah");
-        table.put("Choose 1-1000 videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.",
-                "Pilih 1-1000 video. Nilai di luar rentang ini memakai batas valid terdekat. Mulai ulang TikTok agar berlaku.");
+        table.put("Choose %1$d to %2$d videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.",
+                "Pilih %1$d sampai %2$d video. Nilai di luar rentang ini memakai batas valid terdekat. Mulai ulang TikTok agar berlaku.");
         table.put("Choose a backup file. Your current settings are kept for Undo.",
                 "Pilih berkas cadangan. Pengaturanmu yang sekarang disimpan untuk Urungkan.");
         table.put("Choose a folder on internal storage. SD cards are not supported.",
@@ -5473,8 +5473,8 @@ public final class L10nTranslations {
                 "Anggaran video harian");
         table.put("Dark",
                 "Gelap");
-        table.put("Days to remember a video. Zero removes the age limit. History keeps at most 10,000 videos.",
-                "Jumlah hari sebuah video diingat. Nol menghapus batas usia. Riwayat menyimpan paling banyak 10.000 video.");
+        table.put("Days to remember a video. Zero removes the age limit. History keeps at most %1$s videos.",
+                "Jumlah hari sebuah video diingat. Nol menghapus batas usia. Riwayat menyimpan paling banyak %1$s video.");
         table.put("Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible.",
                 "Hari. Nol menampilkan semua umur. Kiriman tanpa stempel waktu yang bisa dipakai, termasuk kiriman mendatang, tetap ditampilkan.");
         table.put("Default",
@@ -5558,8 +5558,8 @@ public final class L10nTranslations {
                 "Masukkan bilangan bulat.");
         table.put("Enter true or false.",
                 "Masukkan true atau false.");
-        table.put("Enter up to 8 comma-separated speeds from 0.5 to 3",
-                "Masukkan sampai 8 kecepatan dari 0.5 hingga 3, dipisahkan koma");
+        table.put("Enter up to %1$d comma-separated speeds from %2$s to %3$s",
+                "Masukkan sampai %1$d kecepatan dari %2$s hingga %3$s, dipisahkan koma");
         table.put("Enter valid JSON.",
                 "Masukkan JSON yang valid.");
         table.put("Entry %1$d has a field with the wrong data type.",
@@ -6003,8 +6003,8 @@ public final class L10nTranslations {
                 "Menyimpan kecepatan yang dipilih untuk video berikutnya. Mati, setiap video baru dimulai dari 1x dan pilihan manual hanya berlaku untuk video itu.");
         table.put("Keep this string to %1$s characters or fewer.",
                 "Jaga string ini %1$s karakter atau kurang.");
-        table.put("Keep this structured value to 64 KB or less.",
-                "Batasi nilai terstruktur ini hingga 64 KB atau kurang.");
+        table.put("Keep this structured value to %1$s KB or less.",
+                "Batasi nilai terstruktur ini hingga %1$s KB atau kurang.");
         table.put("Kept to %1$s, the nearest value this row allows",
                 "Disetel ke %1$s, nilai terdekat yang diizinkan baris ini");
         table.put("Kinds of post",
@@ -6395,6 +6395,8 @@ public final class L10nTranslations {
     private static void fillIn12(Map<String, String> table) {
         table.put("Put back the settings saved before the last restore or reset.",
                 "Kembalikan pengaturan yang tersimpan sebelum pemulihan atau penyetelan ulang terakhir.");
+        table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
+                "Kembalikan setiap pengaturan ke bawaannya sekarang juga. Pengaturanmu yang sekarang disimpan untuk Urungkan.");
         table.put("Putting the settings back to their defaults",
                 "Mengembalikan pengaturan ke bawaan");
         table.put("Quality",
@@ -6477,8 +6479,6 @@ public final class L10nTranslations {
                 "Mulai ulang sekarang");
         table.put("Restart pending",
                 "Menunggu mulai ulang");
-        table.put("Restore defaults immediately. Your current settings are kept for Undo.",
-                "Kembalikan ke bawaan sekarang juga. Pengaturanmu yang sekarang disimpan untuk Urungkan.");
         table.put("Restore failed. Some settings may still be changed.",
                 "Pemulihan gagal. Beberapa pengaturan mungkin masih berubah.");
         table.put("Restore failed. Some settings may still be changed. Use Undo to put them back.",
@@ -6834,10 +6834,10 @@ public final class L10nTranslations {
                 "Ketuk lagi untuk menyukai");
         table.put("Tap again to send",
                 "Ketuk lagi untuk mengirim");
-        table.put("Tap the feed Follow button twice within four seconds.",
-                "Ketuk tombol Ikuti di feed dua kali dalam empat detik.");
-        table.put("Tap the like heart twice within four seconds. Removing a like stays immediate.",
-                "Ketuk ikon hati dua kali dalam empat detik. Membatalkan suka tetap langsung berlaku.");
+        table.put("Tap the feed Follow button twice within %1$d seconds.",
+                "Ketuk tombol Ikuti di feed dua kali dalam %1$d detik.");
+        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
+                "Ketuk ikon hati dua kali dalam %1$d detik. Membatalkan suka tetap langsung berlaku.");
         table.put("Tap to start the feed",
                 "Ketuk untuk memulai feed");
         table.put("Technical details",
@@ -6872,10 +6872,10 @@ public final class L10nTranslations {
                 "Itu satu menit hari ini");
         table.put("That is one video today",
                 "Itu satu video hari ini");
-        table.put("That list has too many entries. Keep it to 10,000 or fewer.",
-                "Daftar itu memiliki terlalu banyak entri. Batasi hingga 10.000 entri atau kurang.");
-        table.put("That list is too large. Keep it to 256 KB or less.",
-                "Daftar itu terlalu besar. Batasi ukurannya hingga 256 KB atau kurang.");
+        table.put("That list has too many entries. Keep it to %1$s or fewer.",
+                "Daftar itu memiliki terlalu banyak entri. Batasi hingga %1$s entri atau kurang.");
+        table.put("That list is too large. Keep it to %1$s KB or less.",
+                "Daftar itu terlalu besar. Batasi ukurannya hingga %1$s KB atau kurang.");
         table.put("That preset is not recognized. Choose another.",
                 "Pratata SIM tidak sah.");
         table.put("That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.",
@@ -7137,10 +7137,10 @@ public final class L10nTranslations {
                 "Membatalkan perubahan terakhir");
         table.put("Until you choose here, this sheet follows your choices under Hide share actions.",
                 "Sampai Anda memilih di sini, lembar ini mengikuti pilihan Anda di Sembunyikan tindakan berbagi.");
-        table.put("Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.",
-                "Sampai 8 kecepatan dari 0.5 hingga 3, dipisah koma. Contoh: 0.5, 1, 1.5, 2, 2.5, 3. Kosongkan untuk daftar TikTok. Mulai ulang TikTok agar berlaku.");
-        table.put("Use 0 for TikTok's size, or 12 to 48. Applies to the next caption.",
-                "Gunakan 0 untuk ukuran TikTok, atau 12 sampai 48. Berlaku untuk teks berikutnya.");
+        table.put("Up to %1$d speeds from %2$s to %3$s, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.",
+                "Sampai %1$d kecepatan dari %2$s hingga %3$s, dipisah koma. Contoh: 0.5, 1, 1.5, 2, 2.5, 3. Kosongkan untuk daftar TikTok. Mulai ulang TikTok agar berlaku.");
+        table.put("Use 0 for TikTok's size, or %1$d to %2$d. Applies to the next caption.",
+                "Gunakan 0 untuk ukuran TikTok, atau %1$d sampai %2$d. Berlaku untuk teks berikutnya.");
         table.put("Use Calm feed",
                 "Gunakan Feed tenang");
         table.put("Use Save JSON for this large report",
@@ -7473,8 +7473,8 @@ public final class L10nTranslations {
                 "Uma limpeza mais recente substituiu esse desfazer. Toque na linha de novo para desfazer.");
         table.put("A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.",
                 "Um rótulo pequeno no feed mostra os minutos ou vídeos restantes do orçamento de hoje.");
-        table.put("A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.",
-                "Tocar em alguém na linha Enviar para apenas seleciona a pessoa. Um segundo toque na mesma pessoa dentro de quatro segundos envia o vídeo.");
+        table.put("A tap on a person in the Send to row only selects them. A second tap on the same person within %1$d seconds sends the video.",
+                "Tocar em alguém na linha Enviar para apenas seleciona a pessoa. Um segundo toque na mesma pessoa dentro de %1$d segundos envia o vídeo.");
         table.put("A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.",
                 "Um endereço da web deixado em um comentário pode ser tocado em vez de copiado na mão. Tocar em qualquer outra parte do comentário continua fazendo o de sempre.");
         table.put("AI-generated posts",
@@ -7684,8 +7684,8 @@ public final class L10nTranslations {
                 "Guardar os relatórios de falha no aparelho");
         table.put("Changed",
                 "Alterado");
-        table.put("Choose 1-1000 videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.",
-                "Escolha entre 1 e 1000 vídeos. Valores fora dessa faixa usam o limite válido mais próximo. Reinicie o TikTok para aplicar.");
+        table.put("Choose %1$d to %2$d videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.",
+                "Escolha entre %1$d e %2$d vídeos. Valores fora dessa faixa usam o limite válido mais próximo. Reinicie o TikTok para aplicar.");
         table.put("Choose a backup file. Your current settings are kept for Undo.",
                 "Escolha um arquivo de backup. Suas configurações atuais ficam guardadas para Desfazer.");
         table.put("Choose a folder on internal storage. SD cards are not supported.",
@@ -7894,8 +7894,8 @@ public final class L10nTranslations {
                 "Limite diário de vídeos");
         table.put("Dark",
                 "Escuro");
-        table.put("Days to remember a video. Zero removes the age limit. History keeps at most 10,000 videos.",
-                "Dias para lembrar de um vídeo. Zero tira o limite de idade. O histórico guarda no máximo 10.000 vídeos.");
+        table.put("Days to remember a video. Zero removes the age limit. History keeps at most %1$s videos.",
+                "Dias para lembrar de um vídeo. Zero tira o limite de idade. O histórico guarda no máximo %1$s vídeos.");
         table.put("Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible.",
                 "Dias. Zero aceita qualquer idade. Publicações sem uma data utilizável, inclusive as futuras, continuam visíveis.");
         table.put("Default",
@@ -7979,8 +7979,8 @@ public final class L10nTranslations {
                 "Insira um número inteiro.");
         table.put("Enter true or false.",
                 "Digite true ou false.");
-        table.put("Enter up to 8 comma-separated speeds from 0.5 to 3",
-                "Digite até 8 velocidades separadas por vírgula, de 0.5 a 3");
+        table.put("Enter up to %1$d comma-separated speeds from %2$s to %3$s",
+                "Digite até %1$d velocidades separadas por vírgula, de %2$s a %3$s");
         table.put("Enter valid JSON.",
                 "Digite um JSON válido.");
         table.put("Entry %1$d has a field with the wrong data type.",
@@ -8424,8 +8424,8 @@ public final class L10nTranslations {
                 "Mantém a velocidade escolhida para o próximo vídeo. Desligado, cada vídeo novo começa em 1x e uma escolha manual vale só para aquele vídeo.");
         table.put("Keep this string to %1$s characters or fewer.",
                 "Mantenha esta string com %1$s caracteres ou menos.");
-        table.put("Keep this structured value to 64 KB or less.",
-                "Limite este valor estruturado a 64 KB ou menos.");
+        table.put("Keep this structured value to %1$s KB or less.",
+                "Limite este valor estruturado a %1$s KB ou menos.");
         table.put("Kept to %1$s, the nearest value this row allows",
                 "Ajustado para %1$s, o valor mais próximo que esta linha aceita");
         table.put("Kinds of post",
@@ -8816,6 +8816,8 @@ public final class L10nTranslations {
     private static void fillPt_rBR12(Map<String, String> table) {
         table.put("Put back the settings saved before the last restore or reset.",
                 "Trazer de volta as configurações salvas antes da última restauração ou redefinição.");
+        table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
+                "Voltar cada configuração ao padrão agora mesmo. Suas configurações atuais ficam guardadas para Desfazer.");
         table.put("Putting the settings back to their defaults",
                 "Voltando as configurações para os padrões");
         table.put("Quality",
@@ -8898,8 +8900,6 @@ public final class L10nTranslations {
                 "Reiniciar agora");
         table.put("Restart pending",
                 "Reinício pendente");
-        table.put("Restore defaults immediately. Your current settings are kept for Undo.",
-                "Restaurar os padrões agora mesmo. Suas configurações atuais ficam guardadas para Desfazer.");
         table.put("Restore failed. Some settings may still be changed.",
                 "A restauração falhou. Algumas configurações podem ter mudado mesmo assim.");
         table.put("Restore failed. Some settings may still be changed. Use Undo to put them back.",
@@ -9255,10 +9255,10 @@ public final class L10nTranslations {
                 "Toque de novo para curtir");
         table.put("Tap again to send",
                 "Toque de novo para enviar");
-        table.put("Tap the feed Follow button twice within four seconds.",
-                "Toque no botão Seguir do feed duas vezes dentro de quatro segundos.");
-        table.put("Tap the like heart twice within four seconds. Removing a like stays immediate.",
-                "Toque no coração de curtir duas vezes dentro de quatro segundos. Tirar uma curtida continua sendo imediato.");
+        table.put("Tap the feed Follow button twice within %1$d seconds.",
+                "Toque no botão Seguir do feed duas vezes dentro de %1$d segundos.");
+        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
+                "Toque no coração de curtir duas vezes dentro de %1$d segundos. Tirar uma curtida continua sendo imediato.");
         table.put("Tap to start the feed",
                 "Toque para iniciar o feed");
         table.put("Technical details",
@@ -9293,10 +9293,10 @@ public final class L10nTranslations {
                 "Isso dá um minuto hoje");
         table.put("That is one video today",
                 "Isso dá um vídeo hoje");
-        table.put("That list has too many entries. Keep it to 10,000 or fewer.",
-                "Essa lista tem entradas demais. Limite-a a 10.000 ou menos.");
-        table.put("That list is too large. Keep it to 256 KB or less.",
-                "Essa lista é grande demais. Limite-a a 256 KB ou menos.");
+        table.put("That list has too many entries. Keep it to %1$s or fewer.",
+                "Essa lista tem entradas demais. Limite-a a %1$s ou menos.");
+        table.put("That list is too large. Keep it to %1$s KB or less.",
+                "Essa lista é grande demais. Limite-a a %1$s KB ou menos.");
         table.put("That preset is not recognized. Choose another.",
                 "Predefinição de SIM inválida.");
         table.put("That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.",
@@ -9558,10 +9558,10 @@ public final class L10nTranslations {
                 "Desfazendo a última mudança");
         table.put("Until you choose here, this sheet follows your choices under Hide share actions.",
                 "Até você escolher aqui, este menu segue suas escolhas em Esconder ações de compartilhamento.");
-        table.put("Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.",
-                "Até 8 velocidades de 0.5 a 3, separadas por vírgula. Por exemplo: 0.5, 1, 1.5, 2, 2.5, 3. Deixe vazio para a lista do TikTok. Reinicie o TikTok para aplicar.");
-        table.put("Use 0 for TikTok's size, or 12 to 48. Applies to the next caption.",
-                "Use 0 para o tamanho do TikTok, ou de 12 a 48. Vale para a próxima legenda.");
+        table.put("Up to %1$d speeds from %2$s to %3$s, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.",
+                "Até %1$d velocidades de %2$s a %3$s, separadas por vírgula. Por exemplo: 0.5, 1, 1.5, 2, 2.5, 3. Deixe vazio para a lista do TikTok. Reinicie o TikTok para aplicar.");
+        table.put("Use 0 for TikTok's size, or %1$d to %2$d. Applies to the next caption.",
+                "Use 0 para o tamanho do TikTok, ou de %1$d a %2$d. Vale para a próxima legenda.");
         table.put("Use Calm feed",
                 "Usar Feed tranquilo");
         table.put("Use Save JSON for this large report",
@@ -9894,8 +9894,8 @@ public final class L10nTranslations {
                 "Daha yeni bir temizleme o geri almanın yerini aldı. Geri almak için satıra tekrar dokun.");
         table.put("A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.",
                 "Akıştaki küçük bir etiket, bugünkü bütçenden kalan dakikayı veya video sayısını gösterir, hangisi bitmeye daha yakınsa onu.");
-        table.put("A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.",
-                "Şuraya gönder satırındaki bir kişiye dokunmak onu yalnızca seçer. Aynı kişiye dört saniye içinde ikinci kez dokunmak videoyu gönderir.");
+        table.put("A tap on a person in the Send to row only selects them. A second tap on the same person within %1$d seconds sends the video.",
+                "Şuraya gönder satırındaki bir kişiye dokunmak onu yalnızca seçer. Aynı kişiye %1$d saniye içinde ikinci kez dokunmak videoyu gönderir.");
         table.put("A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.",
                 "Birinin yoruma bıraktığı web adresine, elle kopyalamak yerine dokunulabilir. Yorumun başka bir yerine dokunmak yine eskiden ne yapıyorsa onu yapar.");
         table.put("AI-generated posts",
@@ -10105,8 +10105,8 @@ public final class L10nTranslations {
                 "Çökme raporlarını yerel olarak kaydet");
         table.put("Changed",
                 "Değişti");
-        table.put("Choose 1-1000 videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.",
-                "1-1000 arasında bir video sayısı seç. Bu aralığın dışındaki değerler en yakın geçerli sınırı kullanır. Bunu uygulamak için TikTok'u yeniden başlat.");
+        table.put("Choose %1$d to %2$d videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.",
+                "%1$d ile %2$d arasında bir video sayısı seç. Bu aralığın dışındaki değerler en yakın geçerli sınırı kullanır. Bunu uygulamak için TikTok'u yeniden başlat.");
         table.put("Choose a backup file. Your current settings are kept for Undo.",
                 "Bir yedek dosyası seç. Mevcut ayarların Geri al için saklanır.");
         table.put("Choose a folder on internal storage. SD cards are not supported.",
@@ -10315,8 +10315,8 @@ public final class L10nTranslations {
                 "Günlük video bütçesi");
         table.put("Dark",
                 "Koyu");
-        table.put("Days to remember a video. Zero removes the age limit. History keeps at most 10,000 videos.",
-                "Bir videonun kaç gün hatırlanacağı. Sıfır, yaş sınırını kaldırır. Geçmiş en fazla 10.000 video tutar.");
+        table.put("Days to remember a video. Zero removes the age limit. History keeps at most %1$s videos.",
+                "Bir videonun kaç gün hatırlanacağı. Sıfır, yaş sınırını kaldırır. Geçmiş en fazla %1$s video tutar.");
         table.put("Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible.",
                 "Gün. Sıfır her yaştaki gönderiyi tutar. Gelecek tarihli gönderiler dahil, kullanılabilir bir zaman damgası olmayan gönderiler görünür kalır.");
         table.put("Default",
@@ -10400,8 +10400,8 @@ public final class L10nTranslations {
                 "Bir tam sayı gir.");
         table.put("Enter true or false.",
                 "true veya false gir.");
-        table.put("Enter up to 8 comma-separated speeds from 0.5 to 3",
-                "0.5 ile 3 arasında, virgülle ayrılmış en fazla 8 hız gir");
+        table.put("Enter up to %1$d comma-separated speeds from %2$s to %3$s",
+                "%2$s ile %3$s arasında, virgülle ayrılmış en fazla %1$d hız gir");
         table.put("Enter valid JSON.",
                 "Geçerli bir JSON gir.");
         table.put("Entry %1$d has a field with the wrong data type.",
@@ -10845,8 +10845,8 @@ public final class L10nTranslations {
                 "Seçtiğin hızı sonraki videoda da koru. Kapalıyken her yeni video 1x hızında başlar ve elle yapılan seçim yalnızca o video için geçerli olur.");
         table.put("Keep this string to %1$s characters or fewer.",
                 "Bu metni en fazla %1$s karakterle sınırla.");
-        table.put("Keep this structured value to 64 KB or less.",
-                "Bu yapılandırılmış değeri en fazla 64 KB ile sınırla.");
+        table.put("Keep this structured value to %1$s KB or less.",
+                "Bu yapılandırılmış değeri en fazla %1$s KB ile sınırla.");
         table.put("Kept to %1$s, the nearest value this row allows",
                 "%1$s olarak ayarlandı, bu satırın izin verdiği en yakın değer");
         table.put("Kinds of post",
@@ -11237,6 +11237,8 @@ public final class L10nTranslations {
     private static void fillTr12(Map<String, String> table) {
         table.put("Put back the settings saved before the last restore or reset.",
                 "Son geri yükleme veya sıfırlamadan önce kaydedilen ayarları geri koy.");
+        table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
+                "Her ayarı hemen varsayılanına döndür. Geçerli ayarların Geri al için saklanır.");
         table.put("Putting the settings back to their defaults",
                 "Ayarlar varsayılanlarına döndürülüyor");
         table.put("Quality",
@@ -11319,8 +11321,6 @@ public final class L10nTranslations {
                 "Şimdi yeniden başlat");
         table.put("Restart pending",
                 "Yeniden başlatma bekleniyor");
-        table.put("Restore defaults immediately. Your current settings are kept for Undo.",
-                "Varsayılanları hemen geri yükle. Geçerli ayarların Geri al için saklanır.");
         table.put("Restore failed. Some settings may still be changed.",
                 "Geri yükleme başarısız oldu. Bazı ayarlar yine de değişmiş olabilir.");
         table.put("Restore failed. Some settings may still be changed. Use Undo to put them back.",
@@ -11676,10 +11676,10 @@ public final class L10nTranslations {
                 "Beğenmek için yeniden dokun");
         table.put("Tap again to send",
                 "Göndermek için yeniden dokun");
-        table.put("Tap the feed Follow button twice within four seconds.",
-                "Akıştaki Takip et düğmesine dört saniye içinde iki kez dokun.");
-        table.put("Tap the like heart twice within four seconds. Removing a like stays immediate.",
-                "Beğeni kalbine dört saniye içinde iki kez dokun. Beğeniyi kaldırmak yine anında olur.");
+        table.put("Tap the feed Follow button twice within %1$d seconds.",
+                "Akıştaki Takip et düğmesine %1$d saniye içinde iki kez dokun.");
+        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
+                "Beğeni kalbine %1$d saniye içinde iki kez dokun. Beğeniyi kaldırmak yine anında olur.");
         table.put("Tap to start the feed",
                 "Akışı başlatmak için dokun");
         table.put("Technical details",
@@ -11714,10 +11714,10 @@ public final class L10nTranslations {
                 "Bugün bir dakika etti");
         table.put("That is one video today",
                 "Bugün bir video etti");
-        table.put("That list has too many entries. Keep it to 10,000 or fewer.",
-                "Bu listede çok fazla giriş var. 10.000 veya daha az olsun.");
-        table.put("That list is too large. Keep it to 256 KB or less.",
-                "Bu liste çok büyük. 256 KB veya daha küçük olsun.");
+        table.put("That list has too many entries. Keep it to %1$s or fewer.",
+                "Bu listede çok fazla giriş var. %1$s veya daha az olsun.");
+        table.put("That list is too large. Keep it to %1$s KB or less.",
+                "Bu liste çok büyük. %1$s KB veya daha küçük olsun.");
         table.put("That preset is not recognized. Choose another.",
                 "Bu hazır ayar tanınmıyor. Başka birini seç.");
         table.put("That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.",
@@ -11979,10 +11979,10 @@ public final class L10nTranslations {
                 "Son değişiklik geri alınıyor");
         table.put("Until you choose here, this sheet follows your choices under Hide share actions.",
                 "Burada bir seçim yapana kadar bu menü, Paylaşım işlemlerini gizle altındaki seçimlerine uyar.");
-        table.put("Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.",
-                "0.5 ile 3 arasında, virgülle ayrılmış en fazla 8 hız. Örnek: 0.5, 1, 1.5, 2, 2.5, 3. TikTok'un listesi için boş bırak. Bunu uygulamak için TikTok'u yeniden başlat.");
-        table.put("Use 0 for TikTok's size, or 12 to 48. Applies to the next caption.",
-                "TikTok'un boyutu için 0, ya da 12 ile 48 arasında bir değer kullan. Bir sonraki altyazıya uygulanır.");
+        table.put("Up to %1$d speeds from %2$s to %3$s, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.",
+                "%2$s ile %3$s arasında, virgülle ayrılmış en fazla %1$d hız. Örnek: 0.5, 1, 1.5, 2, 2.5, 3. TikTok'un listesi için boş bırak. Bunu uygulamak için TikTok'u yeniden başlat.");
+        table.put("Use 0 for TikTok's size, or %1$d to %2$d. Applies to the next caption.",
+                "TikTok'un boyutu için 0, ya da %1$d ile %2$d arasında bir değer kullan. Bir sonraki altyazıya uygulanır.");
         table.put("Use Calm feed",
                 "Sakin akışı kullan");
         table.put("Use Save JSON for this large report",

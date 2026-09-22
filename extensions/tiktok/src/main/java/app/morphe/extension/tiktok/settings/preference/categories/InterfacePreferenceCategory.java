@@ -10,6 +10,8 @@ import android.preference.PreferenceScreen;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.morphe.extension.tiktok.captions.CaptionStyle;
+import app.morphe.extension.tiktok.interaction.TapConfirmation;
 import app.morphe.extension.tiktok.settings.L10n;
 import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
@@ -302,8 +304,10 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
         if (SettingsStatus.subtitleToolsEnabled) {
             addPreference(new SectionHeadingPreference(context, "Captions"));
             NumberInputPreference captionSize = new NumberInputPreference(context, "Caption text size",
-                    "Use 0 for TikTok's size, or 12 to 48. Applies to the next caption.", Settings.CAPTION_TEXT_SIZE, "point", "points") {
-                @Override protected int clamp(int value) { return value <= 0 ? 0 : Math.max(12, Math.min(48, value)); }
+                    L10n.f(context, "Use 0 for TikTok's size, or %1$d to %2$d. Applies to the next caption.",
+                            CaptionStyle.MIN_TEXT_SIZE, CaptionStyle.MAX_TEXT_SIZE),
+                    Settings.CAPTION_TEXT_SIZE, "point", "points") {
+                @Override protected int clamp(int value) { return CaptionStyle.clampSize(value); }
             };
             captionSize.zeroMeans("TikTok's size");
             addPreference(captionSize);
@@ -400,8 +404,14 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             ));
         }
         if (SettingsStatus.confirmInteractionsEnabled) {
-            addPreference(new TogglePreference(context, "Confirm before following", "Tap the feed Follow button twice within four seconds.", Settings.CONFIRM_FOLLOW));
-            addPreference(new TogglePreference(context, "Confirm before liking", "Tap the like heart twice within four seconds. Removing a like stays immediate.", Settings.CONFIRM_LIKE));
+            addPreference(new TogglePreference(context, "Confirm before following",
+                    L10n.f(context, "Tap the feed Follow button twice within %1$d seconds.",
+                            TapConfirmation.CONFIRM_WINDOW_SECONDS),
+                    Settings.CONFIRM_FOLLOW));
+            addPreference(new TogglePreference(context, "Confirm before liking",
+                    L10n.f(context, "Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
+                            TapConfirmation.CONFIRM_WINDOW_SECONDS),
+                    Settings.CONFIRM_LIKE));
         }
     }
 }

@@ -62,7 +62,7 @@ A hidden CAPTCHA may be the cause.	Nedeni gizlenmiş bir CAPTCHA olabilir.
 A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.	Bir bağlantıyı paylaşırken veya kopyalarken tiktok.com yerine konacak alan adı, örneğin vxtiktok.com. TikTok'un kendi bağlantılarını paylaşmak için boş bırak. Yalnızca TikTok bağlantıları değişir, onların da yalnızca alan adı: hiçbir yere yeni bir şey gönderilmez.
 A newer clear replaced that undo. Tap the row again to undo.	Daha yeni bir temizleme o geri almanın yerini aldı. Geri almak için satıra tekrar dokun.
 A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.	Akıştaki küçük bir etiket, bugünkü bütçenden kalan dakikayı veya video sayısını gösterir, hangisi bitmeye daha yakınsa onu.
-A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.	Şuraya gönder satırındaki bir kişiye dokunmak onu yalnızca seçer. Aynı kişiye dört saniye içinde ikinci kez dokunmak videoyu gönderir.
+A tap on a person in the Send to row only selects them. A second tap on the same person within %1$d seconds sends the video.	Şuraya gönder satırındaki bir kişiye dokunmak onu yalnızca seçer. Aynı kişiye %1$d saniye içinde ikinci kez dokunmak videoyu gönderir.
 A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.	Birinin yoruma bıraktığı web adresine, elle kopyalamak yerine dokunulabilir. Yorumun başka bir yerine dokunmak yine eskiden ne yapıyorsa onu yapar.
 AI-generated posts	Yapay zeka ile üretilmiş gönderiler
 About	Hakkında
@@ -166,7 +166,7 @@ Captions	Altyazılar
 Captions, gestures and on-screen controls	Altyazılar, hareketler ve ekran kontrolleri
 Capture crash reports locally	Çökme raporlarını yerel olarak kaydet
 Changed	Değişti
-Choose 1-1000 videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.	1-1000 arasında bir video sayısı seç. Bu aralığın dışındaki değerler en yakın geçerli sınırı kullanır. Bunu uygulamak için TikTok'u yeniden başlat.
+Choose %1$d to %2$d videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.	%1$d ile %2$d arasında bir video sayısı seç. Bu aralığın dışındaki değerler en yakın geçerli sınırı kullanır. Bunu uygulamak için TikTok'u yeniden başlat.
 Choose a backup file. Your current settings are kept for Undo.	Bir yedek dosyası seç. Mevcut ayarların Geri al için saklanır.
 Choose a folder on internal storage. SD cards are not supported.	Dahili depolamada bir klasör seç. SD kartlar desteklenmez.
 Choose a preset to fill the SIM details.	SIM bilgilerini doldurmak için bir hazır ayar seç.
@@ -266,7 +266,7 @@ Daily budgets, reminders and the hold	Günlük bütçeler, hatırlatmalar ve bek
 Daily time budget	Günlük süre bütçesi
 Daily video budget	Günlük video bütçesi
 Dark	Koyu
-Days to remember a video. Zero removes the age limit. History keeps at most 10,000 videos.	Bir videonun kaç gün hatırlanacağı. Sıfır, yaş sınırını kaldırır. Geçmiş en fazla 10.000 video tutar.
+Days to remember a video. Zero removes the age limit. History keeps at most %1$s videos.	Bir videonun kaç gün hatırlanacağı. Sıfır, yaş sınırını kaldırır. Geçmiş en fazla %1$s video tutar.
 Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible.	Gün. Sıfır her yaştaki gönderiyi tutar. Gelecek tarihli gönderiler dahil, kullanılabilir bir zaman damgası olmayan gönderiler görünür kalır.
 Default	Varsayılan
 Default playback speed	Varsayılan oynatma hızı
@@ -314,7 +314,7 @@ Enter a valid two-letter country code	Geçerli bir iki harfli ülke kodu gir
 Enter a whole number, or one like 20K, 1.5M or 2B	Bir tam sayı ya da 20K, 1.5M veya 2B gibi bir değer gir
 Enter a whole number.	Bir tam sayı gir.
 Enter true or false.	true veya false gir.
-Enter up to 8 comma-separated speeds from 0.5 to 3	0.5 ile 3 arasında, virgülle ayrılmış en fazla 8 hız gir
+Enter up to %1$d comma-separated speeds from %2$s to %3$s	%2$s ile %3$s arasında, virgülle ayrılmış en fazla %1$d hız gir
 Enter valid JSON.	Geçerli bir JSON gir.
 Entry %1$d has a field with the wrong data type.	%1$d numaralı girdide veri türü yanlış olan bir alan var.
 Entry %1$d is not an object.	%1$d numaralı girdi bir nesne değil.
@@ -530,7 +530,7 @@ Keep the clock and status icons off the screen while TikTok is open. Swipe down 
 Keep the screen's refresh rate	Ekranın yenileme hızını koru
 Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only.	Seçtiğin hızı sonraki videoda da koru. Kapalıyken her yeni video 1x hızında başlar ve elle yapılan seçim yalnızca o video için geçerli olur.
 Keep this string to %1$s characters or fewer.	Bu metni en fazla %1$s karakterle sınırla.
-Keep this structured value to 64 KB or less.	Bu yapılandırılmış değeri en fazla 64 KB ile sınırla.
+Keep this structured value to %1$s KB or less.	Bu yapılandırılmış değeri en fazla %1$s KB ile sınırla.
 Kept to %1$s, the nearest value this row allows	%1$s olarak ayarlandı, bu satırın izin verdiği en yakın değer
 Kinds of post	Gönderi türleri
 LIVE	CANLI
@@ -766,7 +766,7 @@ Restart TikTok to apply this change	Bu değişikliği uygulamak için TikTok'u y
 Restart TikTok to apply this.	Bunu uygulamak için TikTok'u yeniden başlat.
 Restart now	Şimdi yeniden başlat
 Restart pending	Yeniden başlatma bekleniyor
-Restore defaults immediately. Your current settings are kept for Undo.	Varsayılanları hemen geri yükle. Geçerli ayarların Geri al için saklanır.
+Put every setting back to its default straight away. Your current settings are kept for Undo.	Her ayarı hemen varsayılanına döndür. Geçerli ayarların Geri al için saklanır.
 Restore failed. Some settings may still be changed.	Geri yükleme başarısız oldu. Bazı ayarlar yine de değişmiş olabilir.
 Restore failed. Some settings may still be changed. Use Undo to put them back.	Geri yükleme başarısız oldu. Bazı ayarlar yine de değişmiş olabilir. Geri koymak için Geri al'ı kullan.
 Restore settings	Ayarları geri yükle
@@ -936,8 +936,8 @@ Tap %1$s again to send	Göndermek için yeniden dokun: %1$s
 Tap again to follow	Takip etmek için yeniden dokun
 Tap again to like	Beğenmek için yeniden dokun
 Tap again to send	Göndermek için yeniden dokun
-Tap the feed Follow button twice within four seconds.	Akıştaki Takip et düğmesine dört saniye içinde iki kez dokun.
-Tap the like heart twice within four seconds. Removing a like stays immediate.	Beğeni kalbine dört saniye içinde iki kez dokun. Beğeniyi kaldırmak yine anında olur.
+Tap the feed Follow button twice within %1$d seconds.	Akıştaki Takip et düğmesine %1$d saniye içinde iki kez dokun.
+Tap the like heart twice within %1$d seconds. Removing a like stays immediate.	Beğeni kalbine %1$d saniye içinde iki kez dokun. Beğeniyi kaldırmak yine anında olur.
 Tap to start the feed	Akışı başlatmak için dokun
 Technical details	Teknik ayrıntılar
 Technical details, %1$s	Teknik ayrıntılar, %1$s
@@ -955,8 +955,8 @@ That is not a Hushfeed settings backup. Nothing was altered.	Bu bir Hushfeed aya
 That is not an app name. Try something like com.example.downloader, or leave the box empty to keep saving in TikTok.	Bu bir uygulama adı değil. com.example.downloader gibi bir şey dene ya da TikTok'a kaydetmeye devam etmek için kutuyu boş bırak.
 That is one minute today	Bugün bir dakika etti
 That is one video today	Bugün bir video etti
-That list has too many entries. Keep it to 10,000 or fewer.	Bu listede çok fazla giriş var. 10.000 veya daha az olsun.
-That list is too large. Keep it to 256 KB or less.	Bu liste çok büyük. 256 KB veya daha küçük olsun.
+That list has too many entries. Keep it to %1$s or fewer.	Bu listede çok fazla giriş var. %1$s veya daha az olsun.
+That list is too large. Keep it to %1$s KB or less.	Bu liste çok büyük. %1$s KB veya daha küçük olsun.
 That preset is not recognized. Choose another.	Bu hazır ayar tanınmıyor. Başka birini seç.
 That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.	Bu ayar yedeği, Hushfeed'in kabul ettiğinden büyük bir akış kuralı listesi içeriyor. Hiçbir şey değiştirilmedi.
 That settings backup holds a value Hushfeed cannot read. Nothing was altered.	Bu ayar yedeğinde Hushfeed'in okuyamadığı bir değer var. Hiçbir şey değiştirilmedi.
@@ -1079,8 +1079,8 @@ Undo last Lab change	Son Lab değişikliğini geri al
 Undo last restore or reset	Son geri yüklemeyi veya sıfırlamayı geri al
 Undoing the last change	Son değişiklik geri alınıyor
 Until you choose here, this sheet follows your choices under Hide share actions.	Burada bir seçim yapana kadar bu menü, Paylaşım işlemlerini gizle altındaki seçimlerine uyar.
-Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.	0.5 ile 3 arasında, virgülle ayrılmış en fazla 8 hız. Örnek: 0.5, 1, 1.5, 2, 2.5, 3. TikTok'un listesi için boş bırak. Bunu uygulamak için TikTok'u yeniden başlat.
-Use 0 for TikTok's size, or 12 to 48. Applies to the next caption.	TikTok'un boyutu için 0, ya da 12 ile 48 arasında bir değer kullan. Bir sonraki altyazıya uygulanır.
+Up to %1$d speeds from %2$s to %3$s, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.	%2$s ile %3$s arasında, virgülle ayrılmış en fazla %1$d hız. Örnek: 0.5, 1, 1.5, 2, 2.5, 3. TikTok'un listesi için boş bırak. Bunu uygulamak için TikTok'u yeniden başlat.
+Use 0 for TikTok's size, or %1$d to %2$d. Applies to the next caption.	TikTok'un boyutu için 0, ya da %1$d ile %2$d arasında bir değer kullan. Bir sonraki altyazıya uygulanır.
 Use Calm feed	Sakin akışı kullan
 Use Save JSON for this large report	Bu büyük rapor için JSON'u kaydet seçeneğini kullan
 Use TikTok's own hold, slide down and release gesture to lock 2x speed.	2x hızı kilitlemek için TikTok'un kendi basılı tut, aşağı kaydır ve bırak hareketini kullan.

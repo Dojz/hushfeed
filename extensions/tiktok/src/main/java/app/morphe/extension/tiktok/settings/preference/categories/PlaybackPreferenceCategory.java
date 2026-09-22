@@ -72,14 +72,18 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
             addPreference(new ChoicePreference(context, "Default playback speed", Settings.DEFAULT_SPEED,
                     new String[]{"0.5x", "0.75x", "1x", "1.25x", "1.5x", "1.75x", "2x", "2.5x", "3x"},
                     new String[]{"0.5", "0.75", "1", "1.25", "1.5", "1.75", "2", "2.5", "3"}));
+            String slowest = PlaybackSpeedPatch.speedLabel(PlaybackSpeedPatch.MIN_SPEED);
+            String fastest = PlaybackSpeedPatch.speedLabel(PlaybackSpeedPatch.MAX_SPEED);
             InputTextPreference speeds = new InputTextPreference(context, "Speed menu choices",
-                    "Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.",
+                    L10n.f(context, "Up to %1$d speeds from %2$s to %3$s, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.",
+                            PlaybackSpeedPatch.MAX_MENU_SPEEDS, slowest, fastest),
                     Settings.CUSTOM_SPEEDS);
             speeds.withCheck(value -> {
                 if (value == null || value.isEmpty()) return null;
                 try { PlaybackSpeedPatch.parseMenuSpeeds(value); return null; }
                 catch (IllegalArgumentException error) {
-                    return L10n.t(context, "Enter up to 8 comma-separated speeds from 0.5 to 3");
+                    return L10n.f(context, "Enter up to %1$d comma-separated speeds from %2$s to %3$s",
+                            PlaybackSpeedPatch.MAX_MENU_SPEEDS, slowest, fastest);
                 }
             });
             speeds.setOnPreferenceChangeListener((preference, value) -> {
