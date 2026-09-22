@@ -697,7 +697,7 @@ Silence the feed while comments are open	Silenciar el feed mientras los comentar
 Reading	Lectura
 Recorded gate reads (%1$d)	Lecturas de interruptores registradas (%1$d)
 Recording gate reads. Use a feature, then return here to stop.	Registrando las lecturas de los interruptores. Usa una función y vuelve aquí para parar.
-Recover the settings saved before the last restore or reset.	Recuperar los ajustes guardados antes de la última restauración o reinicio.
+Put back the settings saved before the last restore or reset.	Restaurar los ajustes guardados antes de la última restauración o reinicio.
 Recovered an interrupted settings change. Restart TikTok to apply this.	Se recuperó un cambio de ajustes interrumpido. Reinicia TikTok para que se aplique.
 Refresh values	Actualizar los valores
 Refreshing current TikTok cache...	Actualizando la caché actual de TikTok...
@@ -737,9 +737,9 @@ Restart TikTok to apply this.	Reinicia TikTok para que se aplique.
 Restart pending	Reinicio pendiente
 Restore defaults immediately. Your current settings are kept for Undo.	Restaurar los valores de fábrica ahora mismo. Tus ajustes actuales se guardan para Deshacer.
 Restore failed. Some settings may still be changed.	La restauración falló. Puede que algunos ajustes hayan cambiado igualmente.
-Restore failed. Some settings may still be changed. Use Undo to recover.	La restauración falló. Puede que algunos ajustes hayan cambiado igualmente. Usa Deshacer para recuperarlos.
+Restore failed. Some settings may still be changed. Use Undo to put them back.	La restauración falló. Puede que algunos ajustes hayan cambiado igualmente. Usa Deshacer para restaurarlos.
 Restore settings	Restaurar los ajustes
-Restored the previous Lab settings. Restart TikTok to apply this.	Se restauraron los ajustes anteriores del Lab. Reinicia TikTok para que se aplique.
+Lab settings put back. Restart TikTok to apply this.	Se restauraron los ajustes del Lab. Reinicia TikTok para que se aplique.
 Restoring your settings	Restaurando tus ajustes
 Resume videos after scrolling	Continuar los vídeos después de desplazarte
 Retry	Reintentar
@@ -943,8 +943,8 @@ The feed does not end. This is a fine time to leave it.	El feed no se acaba. Est
 The feed is open again	El feed está abierto otra vez
 The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.	El feed espera un toque antes de reproducirse de nuevo cuando vuelves a la app. Mensajes, perfiles y búsqueda siguen a un toque.
 The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.	La hora a la que se reinician ambos límites, en formato de 24 horas. Las cuatro de la madrugada por defecto, porque quien sigue deslizando a la una todavía está en la noche anterior.
-The last change is undone. Restart TikTok to apply all changes.	El último cambio está deshecho. Reinicia TikTok para aplicar todos los cambios.
-The last change is undone. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.	El último cambio está deshecho. Las reglas del Laboratorio de interruptores eran de otra versión de TikTok y se dejaron fuera. Reinicia TikTok para aplicar todos los cambios.
+Last change put back. Restart TikTok to apply all changes.	Se restauró el último cambio. Reinicia TikTok para aplicar todos los cambios.
+Last change put back. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.	Se restauró el último cambio. Las reglas del Laboratorio de interruptores eran de otra versión de TikTok y se dejaron fuera. Reinicia TikTok para aplicar todos los cambios.
 The minimum or maximum comments on a video to show.	El mínimo o el máximo de comentarios que ha de tener un vídeo para mostrarlo.
 The minimum or maximum favorites of a video to show.	El mínimo o el máximo de favoritos que ha de tener un vídeo para mostrarlo.
 The minimum or maximum likes of a video to show.	El mínimo o el máximo de me gusta que ha de tener un vídeo para mostrarlo.

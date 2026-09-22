@@ -697,7 +697,7 @@ Silence the feed while comments are open	Silenciar o feed enquanto os comentári
 Reading	Leitura
 Recorded gate reads (%1$d)	Leituras de gates registradas (%1$d)
 Recording gate reads. Use a feature, then return here to stop.	Gravando as leituras dos gates. Use um recurso e volte aqui para parar.
-Recover the settings saved before the last restore or reset.	Recuperar as configurações salvas antes da última restauração ou redefinição.
+Put back the settings saved before the last restore or reset.	Restaurar as configurações salvas antes da última restauração ou redefinição.
 Recovered an interrupted settings change. Restart TikTok to apply this.	Uma mudança de configuração interrompida foi recuperada. Reinicie o TikTok para aplicar.
 Refresh values	Atualizar os valores
 Refreshing current TikTok cache...	Atualizando o cache atual do TikTok...
@@ -737,9 +737,9 @@ Restart TikTok to apply this.	Reinicie o TikTok para aplicar.
 Restart pending	Reinício pendente
 Restore defaults immediately. Your current settings are kept for Undo.	Restaurar os padrões agora mesmo. Suas configurações atuais ficam guardadas para Desfazer.
 Restore failed. Some settings may still be changed.	A restauração falhou. Algumas configurações podem ter mudado mesmo assim.
-Restore failed. Some settings may still be changed. Use Undo to recover.	A restauração falhou. Algumas configurações podem ter mudado mesmo assim. Use Desfazer para recuperá-las.
+Restore failed. Some settings may still be changed. Use Undo to put them back.	A restauração falhou. Algumas configurações podem ter mudado mesmo assim. Use Desfazer para restaurá-las.
 Restore settings	Restaurar as configurações
-Restored the previous Lab settings. Restart TikTok to apply this.	As configurações anteriores do Lab foram restauradas. Reinicie o TikTok para aplicar.
+Lab settings put back. Restart TikTok to apply this.	Configurações do Lab restauradas. Reinicie o TikTok para aplicar.
 Restoring your settings	Restaurando suas configurações
 Resume videos after scrolling	Continuar os vídeos depois de rolar
 Retry	Tentar novamente
@@ -943,8 +943,8 @@ The feed does not end. This is a fine time to leave it.	O feed não acaba. Esta 
 The feed is open again	O feed está aberto de novo
 The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.	O feed espera um toque antes de reproduzir de novo quando você volta ao app. Mensagens, perfis e busca continuam a um toque.
 The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.	A hora em que os dois limites zeram, no relógio de 24 horas. Quatro da manhã por padrão, porque quem ainda está rolando à uma continua na noite anterior.
-The last change is undone. Restart TikTok to apply all changes.	A última mudança foi desfeita. Reinicie o TikTok para aplicar todas as mudanças.
-The last change is undone. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.	A última mudança foi desfeita. As regras do Laboratório de gates eram de outra versão do TikTok e ficaram de fora. Reinicie o TikTok para aplicar todas as mudanças.
+Last change put back. Restart TikTok to apply all changes.	Última mudança restaurada. Reinicie o TikTok para aplicar todas as mudanças.
+Last change put back. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.	Última mudança restaurada. As regras do Laboratório de gates eram de outra versão do TikTok e ficaram de fora. Reinicie o TikTok para aplicar todas as mudanças.
 The minimum or maximum comments on a video to show.	O mínimo ou o máximo de comentários que um vídeo precisa ter para aparecer.
 The minimum or maximum favorites of a video to show.	O mínimo ou o máximo de favoritos que um vídeo precisa ter para aparecer.
 The minimum or maximum likes of a video to show.	O mínimo ou o máximo de curtidas que um vídeo precisa ter para aparecer.

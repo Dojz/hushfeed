@@ -271,7 +271,7 @@ public class FeatureGateLabActionsTest {
             waitFor("Lab overrides reset.");
             assertTrue(FeatureGateLabStore.rules().isEmpty());
             action(fragment, 6);
-            waitFor("Restored the previous Lab settings.");
+            waitFor("Lab settings put back.");
             assertEquals(1, FeatureGateLabStore.rules().size());
             action(fragment, 5);
             waitFor("Lab data reset.");
@@ -318,7 +318,7 @@ public class FeatureGateLabActionsTest {
             assertEquals(1, FeatureGateLabStore.rules().size());
             assertFalse("the result dialog was dismissed", ShadowDialog.getLatestDialog().isShowing());
             action(fragment, 6);
-            waitFor("Restored the previous Lab settings.");
+            waitFor("Lab settings put back.");
             assertTrue(FeatureGateLabStore.rules().isEmpty());
         }
     }

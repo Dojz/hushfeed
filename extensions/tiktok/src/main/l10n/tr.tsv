@@ -728,7 +728,7 @@ Quick setup	Hızlı kurulum
 Reading	Okuma
 Recorded gate reads (%1$d)	Kaydedilen özellik kapısı okumaları (%1$d)
 Recording gate reads. Use a feature, then return here to stop.	Özellik kapısı okumaları kaydediliyor. Bir özellik kullan, sonra durdurmak için buraya dön.
-Recover the settings saved before the last restore or reset.	Son geri yükleme veya sıfırlamadan önce kaydedilen ayarları kurtar.
+Put back the settings saved before the last restore or reset.	Son geri yükleme veya sıfırlamadan önce kaydedilen ayarları geri koy.
 Recovered an interrupted settings change. Restart TikTok to apply this.	Yarıda kalan bir ayar değişikliği kurtarıldı. Bunu uygulamak için TikTok'u yeniden başlat.
 Refresh values	Değerleri yenile
 Refreshing current TikTok cache...	Geçerli TikTok önbelleği yenileniyor...
@@ -769,10 +769,10 @@ Restart now	Şimdi yeniden başlat
 Restart pending	Yeniden başlatma bekleniyor
 Restore defaults immediately. Your current settings are kept for Undo.	Varsayılanları hemen geri yükle. Geçerli ayarların Geri al için saklanır.
 Restore failed. Some settings may still be changed.	Geri yükleme başarısız oldu. Bazı ayarlar yine de değişmiş olabilir.
-Restore failed. Some settings may still be changed. Use Undo to recover.	Geri yükleme başarısız oldu. Bazı ayarlar yine de değişmiş olabilir. Kurtarmak için Geri al'ı kullan.
+Restore failed. Some settings may still be changed. Use Undo to put them back.	Geri yükleme başarısız oldu. Bazı ayarlar yine de değişmiş olabilir. Geri koymak için Geri al'ı kullan.
 Restore settings	Ayarları geri yükle
 Restore setup	Düzeni geri yükle
-Restored the previous Lab settings. Restart TikTok to apply this.	Önceki Lab ayarları geri yüklendi. Bunu uygulamak için TikTok'u yeniden başlat.
+Lab settings put back. Restart TikTok to apply this.	Lab ayarları geri kondu. Bunu uygulamak için TikTok'u yeniden başlat.
 Restoring setup	Düzen geri yükleniyor
 Restoring your settings	Ayarların geri yükleniyor
 Resume videos after scrolling	Kaydırdıktan sonra videoları sürdür
@@ -979,8 +979,8 @@ The feed does not end. This is a fine time to leave it.	Akışın sonu yok. Şim
 The feed is open again	Akış yeniden açık
 The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.	Uygulamaya döndüğünde akış yeniden oynamaya başlamadan önce tek bir dokunuş bekler. Mesajlar, profiller ve arama hâlâ bir dokunuş uzakta.
 The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.	İki bütçenin de sıfırlandığı saat, 24 saatlik düzende. Varsayılan sabahın dördüdür, çünkü saat birde hâlâ kaydıran biri dün geceyi yaşıyordur.
-The last change is undone. Restart TikTok to apply all changes.	Son değişiklik geri alındı. Tüm değişiklikleri uygulamak için TikTok'u yeniden başlat.
-The last change is undone. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.	Son değişiklik geri alındı. Feature Gate Lab kuralları başka bir TikTok sürümü içindi ve dışarıda bırakıldı. Tüm değişiklikleri uygulamak için TikTok'u yeniden başlat.
+Last change put back. Restart TikTok to apply all changes.	Son değişiklik geri kondu. Tüm değişiklikleri uygulamak için TikTok'u yeniden başlat.
+Last change put back. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.	Son değişiklik geri kondu. Feature Gate Lab kuralları başka bir TikTok sürümü içindi ve dışarıda bırakıldı. Tüm değişiklikleri uygulamak için TikTok'u yeniden başlat.
 The minimum or maximum comments on a video to show.	Bir videonun gösterilmesi için en az veya en fazla yorum sayısı.
 The minimum or maximum favorites of a video to show.	Bir videonun gösterilmesi için en az veya en fazla favori sayısı.
 The minimum or maximum likes of a video to show.	Bir videonun gösterilmesi için en az veya en fazla beğeni sayısı.

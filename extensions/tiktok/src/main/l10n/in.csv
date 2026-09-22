@@ -698,7 +698,7 @@ Silence the feed while comments are open,Senyapkan feed saat komentar terbuka
 Reading,Membaca
 Recorded gate reads (%1$d),Pembacaan gate yang terekam (%1$d)
 "Recording gate reads. Use a feature, then return here to stop.","Merekam pembacaan gate. Pakai sebuah fitur, lalu kembali ke sini untuk berhenti."
-Recover the settings saved before the last restore or reset.,Ambil kembali pengaturan yang tersimpan sebelum pemulihan atau penyetelan ulang terakhir.
+Put back the settings saved before the last restore or reset.,Kembalikan pengaturan yang tersimpan sebelum pemulihan atau penyetelan ulang terakhir.
 Recovered an interrupted settings change. Restart TikTok to apply this.,Perubahan pengaturan yang terhenti telah dipulihkan. Mulai ulang TikTok agar berlaku.
 Refresh values,Segarkan nilai
 Refreshing current TikTok cache...,Menyegarkan cache TikTok saat ini...
@@ -738,9 +738,9 @@ Restart TikTok to apply this.,Mulai ulang TikTok agar berlaku.
 Restart pending,Menunggu mulai ulang
 Restore defaults immediately. Your current settings are kept for Undo.,Kembalikan ke bawaan sekarang juga. Pengaturanmu yang sekarang disimpan untuk Urungkan.
 Restore failed. Some settings may still be changed.,Pemulihan gagal. Beberapa pengaturan mungkin masih berubah.
-Restore failed. Some settings may still be changed. Use Undo to recover.,Pemulihan gagal. Beberapa pengaturan mungkin masih berubah. Gunakan Urungkan untuk memulihkannya.
+Restore failed. Some settings may still be changed. Use Undo to put them back.,Pemulihan gagal. Beberapa pengaturan mungkin masih berubah. Gunakan Urungkan untuk mengembalikannya.
 Restore settings,Pulihkan pengaturan
-Restored the previous Lab settings. Restart TikTok to apply this.,Pengaturan Lab sebelumnya dipulihkan. Mulai ulang TikTok agar berlaku.
+Lab settings put back. Restart TikTok to apply this.,Pengaturan Lab dikembalikan. Mulai ulang TikTok agar berlaku.
 Restoring your settings,Memulihkan pengaturan Anda
 Resume videos after scrolling,Lanjutkan video setelah menggulir
 Retry,Coba lagi
@@ -944,8 +944,8 @@ The feed does not end. This is a fine time to leave it.,Feed tidak ada habisnya.
 The feed is open again,Feed terbuka lagi
 "The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.","Feed menunggu satu ketukan sebelum mulai memutar lagi saat kamu kembali ke aplikasi. Pesan, profil, dan pencarian tetap satu ketukan."
 "The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.","Jam saat kedua batas disetel ulang, dalam format 24 jam. Pukul empat pagi secara bawaan, karena orang yang masih menggulir pukul satu sebenarnya masih di malam sebelumnya."
-The last change is undone. Restart TikTok to apply all changes.,Perubahan terakhir sudah dibatalkan. Mulai ulang TikTok untuk menerapkan semua perubahan.
-The last change is undone. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.,Perubahan terakhir sudah dibatalkan. Aturan Feature Gate Lab dibuat untuk versi TikTok lain dan tidak disertakan. Mulai ulang TikTok untuk menerapkan semua perubahan.
+Last change put back. Restart TikTok to apply all changes.,Perubahan terakhir dikembalikan. Mulai ulang TikTok untuk menerapkan semua perubahan.
+Last change put back. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.,Perubahan terakhir dikembalikan. Aturan Feature Gate Lab dibuat untuk versi TikTok lain dan tidak disertakan. Mulai ulang TikTok untuk menerapkan semua perubahan.
 The minimum or maximum comments on a video to show.,Jumlah komentar minimum atau maksimum agar video ditampilkan.
 The minimum or maximum favorites of a video to show.,Jumlah favorit minimum atau maksimum yang harus dimiliki video agar tampil.
 The minimum or maximum likes of a video to show.,Jumlah suka minimum atau maksimum agar video ditampilkan.

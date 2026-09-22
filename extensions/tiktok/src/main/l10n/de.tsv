@@ -700,7 +700,7 @@ Silence the feed while comments are open	Feed stummschalten, solange Kommentare 
 Reading	Lesen
 Recorded gate reads (%1$d)	Aufgezeichnete Gate-Zugriffe (%1$d)
 Recording gate reads. Use a feature, then return here to stop.	Gate-Zugriffe werden aufgezeichnet. Nutze eine Funktion und komm zum Beenden zurück.
-Recover the settings saved before the last restore or reset.	Die vor der letzten Wiederherstellung oder Zurücksetzung gespeicherten Einstellungen zurückholen.
+Put back the settings saved before the last restore or reset.	Die vor der letzten Wiederherstellung oder Zurücksetzung gespeicherten Einstellungen wiederherstellen.
 Recovered an interrupted settings change. Restart TikTok to apply this.	Eine unterbrochene Einstellungsänderung wurde wiederhergestellt. TikTok neu starten, damit das gilt.
 Refresh values	Werte aktualisieren
 Refreshing current TikTok cache...	Aktueller TikTok-Cache wird aktualisiert ...
@@ -740,9 +740,9 @@ Restart TikTok to apply this.	TikTok neu starten, damit das gilt.
 Restart pending	Neustart ausstehend
 Restore defaults immediately. Your current settings are kept for Undo.	Standardwerte sofort wiederherstellen. Deine aktuellen Einstellungen bleiben zum Rückgängigmachen erhalten.
 Restore failed. Some settings may still be changed.	Wiederherstellung fehlgeschlagen. Einige Einstellungen können noch geändert sein.
-Restore failed. Some settings may still be changed. Use Undo to recover.	Wiederherstellung fehlgeschlagen. Einige Einstellungen können noch geändert sein. Nutze „Rückgängig“, um sie wiederherzustellen.
+Restore failed. Some settings may still be changed. Use Undo to put them back.	Wiederherstellung fehlgeschlagen. Einige Einstellungen können noch geändert sein. Nutze „Rückgängig“, um sie wiederherzustellen.
 Restore settings	Einstellungen wiederherstellen
-Restored the previous Lab settings. Restart TikTok to apply this.	Die vorherigen Lab-Einstellungen sind wiederhergestellt. TikTok neu starten, damit das gilt.
+Lab settings put back. Restart TikTok to apply this.	Lab-Einstellungen wiederhergestellt. TikTok neu starten, damit das gilt.
 Restoring your settings	Einstellungen werden wiederhergestellt
 Resume videos after scrolling	Videos nach dem Scrollen fortsetzen
 Retry	Erneut versuchen
@@ -946,8 +946,8 @@ The feed does not end. This is a fine time to leave it.	Der Feed hört nicht auf
 The feed is open again	Der Feed ist wieder offen
 The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.	Der Feed wartet auf ein Tippen, bevor er wieder abspielt, wenn du zur App zurückkehrst. Nachrichten, Profile und Suche bleiben einen Tipp entfernt.
 The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.	Die Stunde, zu der beide Limits zurückgesetzt werden, im 24-Stunden-Format. Standardmäßig vier Uhr morgens, denn wer um eins noch scrollt, hat immer noch gestern Abend.
-The last change is undone. Restart TikTok to apply all changes.	Die letzte Änderung ist rückgängig gemacht. TikTok neu starten, um alle Änderungen zu übernehmen.
-The last change is undone. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.	Die letzte Änderung ist rückgängig gemacht. Die Regeln des Feature Gate Labs galten für eine andere TikTok-Version und wurden ausgelassen. TikTok neu starten, um alle Änderungen zu übernehmen.
+Last change put back. Restart TikTok to apply all changes.	Letzte Änderung wiederhergestellt. TikTok neu starten, um alle Änderungen zu übernehmen.
+Last change put back. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.	Letzte Änderung wiederhergestellt. Die Regeln des Feature Gate Labs galten für eine andere TikTok-Version und wurden ausgelassen. TikTok neu starten, um alle Änderungen zu übernehmen.
 The minimum or maximum comments on a video to show.	Mindest- oder Höchstzahl an Kommentaren, damit ein Video gezeigt wird.
 The minimum or maximum favorites of a video to show.	Das Minimum oder Maximum an Favoriten, das ein Video haben muss, um gezeigt zu werden.
 The minimum or maximum likes of a video to show.	Die Mindest- oder Höchstzahl an Likes, damit ein Video gezeigt wird.

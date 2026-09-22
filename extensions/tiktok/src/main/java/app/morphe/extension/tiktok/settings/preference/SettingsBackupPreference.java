@@ -43,7 +43,7 @@ public final class SettingsBackupPreference extends Preference
     /** The line this row shows while it is the one running, else null. */
     private String busyLine;
 
-    static final String UNDO_SUMMARY = "Recover the settings saved before the last restore or reset.";
+    static final String UNDO_SUMMARY = "Put back the settings saved before the last restore or reset.";
 
     private SettingsBackupPreference(TikTokPreferenceFragment fragment, int action, String title, String summary) {
         super(fragment.getActivity());
@@ -218,8 +218,8 @@ public final class SettingsBackupPreference extends Preference
                                 : action == RESET
                                 ? "Settings are back to their defaults. Restart TikTok to apply all changes."
                                 : labRulesSkipped
-                                ? "The last change is undone. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes."
-                                : "The last change is undone. Restart TikTok to apply all changes."));
+                                ? "Last change put back. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes."
+                                : "Last change put back. Restart TikTok to apply all changes."));
             } catch (Exception error) {
                 Logger.printException(() -> "Settings backup operation failed", error);
                 Utils.showToastLong(L10n.t(failureMessage(action, error)));
@@ -286,7 +286,7 @@ public final class SettingsBackupPreference extends Preference
                     return "That settings change did not go through. Nothing was altered.";
                 case RECOVERY_REQUIRED:
                     return restore.isRecoveryAvailable()
-                            ? "Restore failed. Some settings may still be changed. Use Undo to recover."
+                            ? "Restore failed. Some settings may still be changed. Use Undo to put them back."
                             : "Restore failed. Some settings may still be changed.";
                 default:
                     break;

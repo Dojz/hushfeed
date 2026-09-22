@@ -1230,7 +1230,7 @@ public final class FeatureGateLabFragment extends Fragment {
                         case 4: reset(true); break;
                         default:
                             runLabChange(FeatureGateLabUndo::undo, L10n.t(getContext(),
-                                    "Restored the previous Lab settings. Restart TikTok to apply this."));
+                                    "Lab settings put back. Restart TikTok to apply this."));
                             break;
                     }
                 })
@@ -1473,7 +1473,7 @@ public final class FeatureGateLabFragment extends Fragment {
                 .setPositiveButton(L10n.t(activity, "Done"), null)
                 .setNegativeButton(L10n.t(activity, "Undo"), (ignored, which) -> runLabChange(
                         FeatureGateLabUndo::undo,
-                        L10n.t(activity, "Restored the previous Lab settings. Restart TikTok to apply this.")))
+                        L10n.t(activity, "Lab settings put back. Restart TikTok to apply this.")))
                 .create();
         showStyled(dialog);
     }

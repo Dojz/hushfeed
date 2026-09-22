@@ -543,7 +543,10 @@ LIVE videos,LIVE videos
 Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.,Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.
 "Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this.","Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this."
 Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok to apply this.,Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok to apply this.
+Lab settings put back. Restart TikTok to apply this.,Lab settings put back. Restart TikTok to apply this.
 Larger (1.25x),Larger (1.25x)
+Last change put back. Restart TikTok to apply all changes.,Last change put back. Restart TikTok to apply all changes.
+Last change put back. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.,Last change put back. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.
 Last original value,Last original value
 Last recording: %1$d gates.,Last recording: %1$d gates.
 Last recording: 1 gate.,Last recording: 1 gate.
@@ -722,6 +725,7 @@ Profile share actions,Profile share actions
 Promotional music,Promotional music
 Proof,Proof
 Publication age,Publication age
+Put back the settings saved before the last restore or reset.,Put back the settings saved before the last restore or reset.
 Putting the settings back to their defaults,Putting the settings back to their defaults
 Quality,Quality
 "Quality, files, subtitles and hand-off","Quality, files, subtitles and hand-off"
@@ -730,7 +734,6 @@ Quick setup,Quick setup
 Reading,Reading
 Recorded gate reads (%1$d),Recorded gate reads (%1$d)
 "Recording gate reads. Use a feature, then return here to stop.","Recording gate reads. Use a feature, then return here to stop."
-Recover the settings saved before the last restore or reset.,Recover the settings saved before the last restore or reset.
 Recovered an interrupted settings change. Restart TikTok to apply this.,Recovered an interrupted settings change. Restart TikTok to apply this.
 Refresh values,Refresh values
 Refreshing current TikTok cache...,Refreshing current TikTok cache...
@@ -771,10 +774,9 @@ Restart now,Restart now
 Restart pending,Restart pending
 Restore defaults immediately. Your current settings are kept for Undo.,Restore defaults immediately. Your current settings are kept for Undo.
 Restore failed. Some settings may still be changed.,Restore failed. Some settings may still be changed.
-Restore failed. Some settings may still be changed. Use Undo to recover.,Restore failed. Some settings may still be changed. Use Undo to recover.
+Restore failed. Some settings may still be changed. Use Undo to put them back.,Restore failed. Some settings may still be changed. Use Undo to put them back.
 Restore settings,Restore settings
 Restore setup,Restore setup
-Restored the previous Lab settings. Restart TikTok to apply this.,Restored the previous Lab settings. Restart TikTok to apply this.
 Restoring setup,Restoring setup
 Restoring your settings,Restoring your settings
 Resume videos after scrolling,Resume videos after scrolling
@@ -982,8 +984,6 @@ The feed does not end. This is a fine time to leave it.,The feed does not end. T
 The feed is open again,The feed is open again
 "The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.","The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away."
 "The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.","The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night."
-The last change is undone. Restart TikTok to apply all changes.,The last change is undone. Restart TikTok to apply all changes.
-The last change is undone. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.,The last change is undone. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.
 The minimum or maximum comments on a video to show.,The minimum or maximum comments on a video to show.
 The minimum or maximum favorites of a video to show.,The minimum or maximum favorites of a video to show.
 The minimum or maximum likes of a video to show.,The minimum or maximum likes of a video to show.
