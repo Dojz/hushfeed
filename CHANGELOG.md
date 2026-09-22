@@ -7,6 +7,7 @@ Every Hushfeed release, newest first.
 * **Compatibility:** Every runtime view ID Hushfeed uses is now tied to TikTok 47.0.3 code, including share actions, comment dislike controls and caption text.
 * **TikTok:** In-app browser privacy guard now protects external websites without breaking Activity center, Watch history, shop checkout or CAPTCHA. Its Privacy switch has clearer wording and still starts off.
 * **TikTok:** New Pause Hushfeed switch at the top of Hushfeed settings. From the next start TikTok runs as if it weren't patched, which answers "is it Hushfeed?" without turning things off one at a time, and your settings stay put for when you switch it back. Hushfeed also pauses itself after TikTok crashes within a minute of starting three times in a row. If the settings can't be reached at all, an empty file named `hushfeed-safe-mode` in TikTok's folder under Android/data pauses it too.
+* **TikTok:** Foldable split comment view now follows the fold while TikTok is open. Unfolding past your width setting refreshes the feed so comments can sit beside the video, and folding back refreshes it again. Before, it only took effect if TikTok was started already unfolded. (#26)
 * **TikTok:** Hushfeed's settings now survive TikTok's own crash recovery. After three crashes in a row at launch, TikTok deletes every settings file it doesn't recognize, and that used to take all of Hushfeed's settings with it, Lab rules and the Calm feed undo included.
 
 ## 0.58.0 (2026-09-21)

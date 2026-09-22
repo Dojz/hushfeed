@@ -325,7 +325,7 @@ Advanced downloads can send a sanitized TikTok link to another installed app. En
 
 Photo filename templates can use `{index}`. TikTok's own Photo Mode saver numbers each image from 1 and starts over when the post has finished saving, including on Android versions that write straight to a shared folder.
 
-Foldable controls are on the App page. Settings save immediately, including when an older settings page is still open. A banner offers Restart now when a change needs it, and a pinned row keeps the action available until TikTok restarts.
+Foldable controls are on the App page. Settings save immediately, including when an older settings page is still open. A banner offers Restart now when a change needs it, and a pinned row keeps the action available until TikTok restarts. With the split view on, unfolding past your width with TikTok already open refreshes the feed once so the side-by-side layout can take over, and folding back refreshes it again.
 
 Numeric feed limits show their actual unit with language-aware singular and plural labels.
 
