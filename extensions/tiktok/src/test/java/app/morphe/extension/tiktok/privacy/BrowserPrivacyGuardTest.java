@@ -12,6 +12,7 @@ import static org.junit.Assert.assertTrue;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Looper;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 
@@ -49,41 +50,150 @@ public class BrowserPrivacyGuardTest {
         BrowserPrivacyGuard.resetForTests();
     }
 
-    @Test public void onlyNamedFirstPartyAppPagesKeepTheBridge() {
-        assertTrue(BrowserPrivacyGuard.isTrustedAppPage(
-                "https://inapp.tiktokv.com/tpp/inapp/pns_product_activity_center/ac/watch_history"));
-        assertTrue(BrowserPrivacyGuard.isTrustedAppPage(
-                "https://verify-sg.tiktokv.com/captcha/verify"));
-        assertTrue(BrowserPrivacyGuard.isTrustedAppPage(
-                "https://checkout.pipopayment.com/pay"));
-        assertTrue(BrowserPrivacyGuard.isTrustedAppPage(
-                "https://fp.pipopayment.us/device"));
-        assertTrue(BrowserPrivacyGuard.isTrustedAppPage(
-                "https://pipo-wallet.tiktokv.com/wallet"));
-        assertTrue(BrowserPrivacyGuard.isTrustedAppPage(
-                "https://eu.pipopay.com/checkout"));
-        assertTrue(BrowserPrivacyGuard.isTrustedAppPage(
-                "https://shop-sg.tiktok.com/order"));
-        assertTrue(BrowserPrivacyGuard.isTrustedAppPage(
-                "https://www.tiktok.com/verifycenter/authentication"));
-        assertTrue(BrowserPrivacyGuard.isTrustedAppPage(
-                "https://www.tiktok.com/verifycenter/ttcaptcha/"));
+    @Test public void tiktokOwnDomainsKeepTheBridgeAndLookalikesDoNot() {
+        for (String page : new String[] {
+                "https://inapp.tiktokv.com/tpp/inapp/pns_product_activity_center/ac/watch_history",
+                "https://verify-sg.tiktokv.com/captcha/verify",
+                "https://checkout.pipopayment.com/pay",
+                "https://fp.pipopayment.us/device",
+                "https://pipo-wallet.tiktokv.com/wallet",
+                "https://eu.pipopay.com/checkout",
+                "https://shop-sg.tiktok.com/order",
+                "https://www.tiktok.com/verifycenter/authentication",
+                "https://www.tiktok.com/verifycenter/ttcaptcha/",
+                // TikTok pages the 47.0.3 APK opens that a list of hosts had missed.
+                "https://inapp-va.tiktokv.com/falcon/webcast_mt/page/appeal/index.html",
+                "https://oec-api.tiktokv.com/view/fe_tiktok_ecommerce_order_detail",
+                "https://www.tiktok.com/tns-inapp/pages/account_status",
+                "https://www.tiktok.com/falcon/communitysafety/page/violation-appeal",
+                "https://www.tiktok.com/inapp/filtered_comments/posts",
+                "https://www.tiktok.com/ucenter_web/account_protect",
+                "https://feedback.tiktokv.com/feedback/report",
+                "https://webcast16-normal-useast5.tiktokv.us/falcon/page",
+                "https://WWW.TIKTOK.COM./tns-inapp/pages/account_status",
+        }) {
+            assertTrue(page, BrowserPrivacyGuard.isTrustedAppPage(page));
+        }
 
-        assertFalse(BrowserPrivacyGuard.isTrustedAppPage(
-                "https://www.tiktoklinksafety.us/link/?target=example.com"));
-        assertFalse(BrowserPrivacyGuard.isTrustedAppPage("https://example.com"));
-        assertFalse(BrowserPrivacyGuard.isTrustedAppPage(
-                "https://inapp.tiktokv.com.example.com/watch_history"));
-        assertFalse(BrowserPrivacyGuard.isTrustedAppPage(
-                "https://shop-sg.tiktok.com.example.com/order"));
-        assertFalse(BrowserPrivacyGuard.isTrustedAppPage(
-                "https://shop-sg.evil.tiktok.com/order"));
-        assertFalse(BrowserPrivacyGuard.isTrustedAppPage(
-                "https://us.pipopay.com/checkout"));
-        assertFalse(BrowserPrivacyGuard.isTrustedAppPage(
-                "http://inapp.tiktokv.com/watch_history"));
-        assertFalse(BrowserPrivacyGuard.isTrustedAppPage("javascript:alert(1)"));
+        for (String page : new String[] {
+                "https://www.tiktoklinksafety.us/link/?target=example.com",
+                "https://www.tiktoklinksafety.com/link/",
+                "https://example.com",
+                "https://inapp.tiktokv.com.example.com/watch_history",
+                "https://shop-sg.tiktok.com.example.com/order",
+                "https://eviltiktok.com/",
+                "https://tiktok-minis.com/app",
+                "https://us.pipopay.com/checkout",
+                "http://inapp.tiktokv.com/watch_history",
+                // Addresses Chromium and android.net.Uri would read as different hosts. Uri
+                // decodes the escaped @ into the host; Chromium refuses the address.
+                "https://evil.com%40a.tiktok.com/",
+                "https://example.com\\@inapp.tiktokv.com/",
+                "https://example.com\\.tiktok.com/",
+                "https://inapp.tiktokv.com\t.example.com/",
+                "https://inapp.tiktokv.com@example.com/",
+                "https://anyone@inapp.tiktokv.com/",
+                "https://tіktok.com/",
+                "javascript:alert(1)",
+                "aweme://detail/123",
+        }) {
+            assertFalse(page, BrowserPrivacyGuard.isTrustedAppPage(page));
+        }
         assertFalse(BrowserPrivacyGuard.isTrustedAppPage(null));
+    }
+
+    @Test public void aLinkToAnotherAppLeavesThePageItsBridge() {
+        Settings.BLOCK_WEBVIEW_JS_INTERFACES.save(true);
+        WebView webView = new WebView(context);
+        ShadowWebView shadow = Shadows.shadowOf(webView);
+        Object bridge = new Object();
+        BrowserPrivacyGuard.filterJsInterface(webView, bridge, "bridge");
+        BrowserPrivacyGuard.onPageStarted(webView,
+                "https://inapp.tiktokv.com/tpp/inapp/pns_product_activity_center/ac/watch_history");
+
+        // Watch history opens a video through TikTok's own scheme; the page never leaves.
+        BrowserPrivacyGuard.onPageRequested(webView, "aweme://detail/7228647995380862254");
+        BrowserPrivacyGuard.onPageRequested(webView,
+                request("snssdk1233://webview?url=https%3A%2F%2Fexample.com", true));
+        BrowserPrivacyGuard.onPageRequested(webView, "intent://scan/#Intent;scheme=zxing;end");
+        assertSame(bridge, shadow.getJavascriptInterface("bridge"));
+
+        BrowserPrivacyGuard.onPageRequested(webView, "https://example.com/");
+        assertNull(shadow.getJavascriptInterface("bridge"));
+    }
+
+    @Test public void historyStepsDecideByThePageTheyReturnTo() {
+        Settings.BLOCK_WEBVIEW_JS_INTERFACES.save(true);
+        WebView webView = new WebView(context);
+        ShadowWebView shadow = Shadows.shadowOf(webView);
+        Object bridge = new Object();
+        BrowserPrivacyGuard.filterJsInterface(webView, bridge, "bridge");
+        shadow.pushEntryToHistory("https://inapp.tiktokv.com/activity");
+        shadow.pushEntryToHistory("https://example.com/landing");
+        BrowserPrivacyGuard.onPageStarted(webView, "https://example.com/landing");
+        assertNull(shadow.getJavascriptInterface("bridge"));
+
+        // Back from an external page to Activity center: Chromium asks no client about it.
+        BrowserPrivacyGuard.goBack(webView);
+        assertSame(bridge, shadow.getJavascriptInterface("bridge"));
+        assertEquals(1, shadow.getGoBackInvocations());
+
+        BrowserPrivacyGuard.goForward(webView);
+        assertNull(shadow.getJavascriptInterface("bridge"));
+        assertEquals(1, shadow.getGoForwardInvocations());
+
+        BrowserPrivacyGuard.goBackOrForward(webView, -1);
+        assertSame(bridge, shadow.getJavascriptInterface("bridge"));
+
+        // A step past either end loads nothing, so it changes nothing.
+        BrowserPrivacyGuard.goBackOrForward(webView, -5);
+        assertSame(bridge, shadow.getJavascriptInterface("bridge"));
+    }
+
+    @Test public void aReloadThroughTikTokInterfaceDecidesByTheCurrentPage() {
+        Settings.BLOCK_WEBVIEW_JS_INTERFACES.save(true);
+        WebView webView = new WebView(context);
+        ShadowWebView shadow = Shadows.shadowOf(webView);
+        Object bridge = new Object();
+        BrowserPrivacyGuard.filterJsInterface(webView, bridge, "bridge");
+        BrowserPrivacyGuard.loadUrl(webView, "https://inapp.tiktokv.com/activity");
+        // Something left the bridge withheld while the trusted page stayed on screen.
+        BrowserPrivacyGuard.onPageRequested(webView, "https://example.com/");
+        assertNull(shadow.getJavascriptInterface("bridge"));
+
+        BrowserPrivacyGuard.beforeInterfaceReload(webView);
+        assertSame(bridge, shadow.getJavascriptInterface("bridge"));
+
+        // The same interface is implemented by Lynx views, which are not WebViews.
+        BrowserPrivacyGuard.beforeInterfaceReload(new Object());
+        BrowserPrivacyGuard.beforeInterfaceReload(null);
+    }
+
+    @Test public void aMainFrameRequestDecidesBeforeItLeavesEvenFromAnotherThread() throws Exception {
+        Settings.BLOCK_WEBVIEW_JS_INTERFACES.save(true);
+        WebView webView = new WebView(context);
+        ShadowWebView shadow = Shadows.shadowOf(webView);
+        Object bridge = new Object();
+        BrowserPrivacyGuard.filterJsInterface(webView, bridge, "bridge");
+        BrowserPrivacyGuard.loadUrl(webView, "https://inapp.tiktokv.com/checkout");
+
+        // Subresources, other apps' schemes and the WebView's own thread.
+        BrowserPrivacyGuard.onRequestIntercepted(webView, request("https://example.com/pixel.gif", false));
+        BrowserPrivacyGuard.onRequestIntercepted(webView, request("aweme://detail/1", true));
+        assertSame(bridge, shadow.getJavascriptInterface("bridge"));
+        BrowserPrivacyGuard.onRequestIntercepted(webView, request("https://bank.example/3ds", true));
+        assertNull(shadow.getJavascriptInterface("bridge"));
+
+        // A form post back to TikTok arrives on one of the WebView's background threads, and the
+        // request has to wait until the bridge is back on the WebView's own thread.
+        Thread requestThread = new Thread(() -> BrowserPrivacyGuard.onRequestIntercepted(webView,
+                request("https://oec-api.tiktokv.com/view/fe_tiktok_ecommerce_order_detail", true)));
+        requestThread.start();
+        while (requestThread.isAlive()) {
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            requestThread.join(5);
+        }
+        assertSame(bridge, shadow.getJavascriptInterface("bridge"));
     }
 
     @Test public void externalLoadsRemoveEveryBridgeAndFirstPartyLoadsRestoreThem() {

@@ -33,6 +33,10 @@ private val navigationMethods = mapOf(
     "->loadDataWithBaseURL(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" to
         "$EXTENSION->loadDataWithBaseURL(${WEB_VIEW}Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
     "->reload()V" to "$EXTENSION->reload(${WEB_VIEW})V",
+    // A history step loads the page it returns to, and Chromium asks no WebViewClient about it.
+    "->goBack()V" to "$EXTENSION->goBack(${WEB_VIEW})V",
+    "->goForward()V" to "$EXTENSION->goForward(${WEB_VIEW})V",
+    "->goBackOrForward(I)V" to "$EXTENSION->goBackOrForward(${WEB_VIEW}I)V",
 )
 
 @Suppress("unused")
@@ -79,20 +83,32 @@ val browserPrivacyGuardPatch = bytecodePatch(
         }
         replaceSites(navigationSites, navigationReplacements)
 
+        // TikTok's hybrid view interface (LX/0EFO on 47.0.3) declares reload(), and WebKitView
+        // implements it along with Lynx views that are not WebViews at all. A reload through it
+        // never names WebView, so the call is kept and the guard runs just before it. These
+        // insertions shift instruction indices, so they go after every in-place replacement.
+        val reloadTargets = interfacesOf(webViewTypes).map { "$it->reload()V" }.toSet()
+        val interfaceReloads = invokeSitesOf(reloadTargets, throughInterface = true)
+        prefixSites(interfaceReloads, "$EXTENSION->beforeInterfaceReload(Ljava/lang/Object;)V")
+
         val callbacks = webViewClientCallbacks()
         val pageStarts = callbacks.count { it.method.name == "onPageStarted" }
-        val pageRequests = callbacks.size - pageStarts
-        if (pageStarts == 0 || pageRequests == 0) {
+        val requestIntercepts = callbacks.count { it.method.name == "shouldInterceptRequest" }
+        val pageRequests = callbacks.size - pageStarts - requestIntercepts
+        if (pageStarts == 0 || pageRequests == 0 || requestIntercepts == 0) {
             throw PatchException(
-                "In-app browser privacy guard: found $pageStarts page-start and " +
-                    "$pageRequests page-request WebViewClient callbacks.",
+                "In-app browser privacy guard: found $pageStarts page-start, " +
+                    "$pageRequests page-request and $requestIntercepts request-intercept " +
+                    "WebViewClient callbacks.",
             )
         }
         callbacks.forEach { callback ->
-            val bridge = when (callback.method.parameterTypes[1].toString()) {
-                "Ljava/lang/String;" ->
-                    if (callback.method.name == "onPageStarted") "onPageStarted" else "onPageRequested"
-                "Landroid/webkit/WebResourceRequest;" -> "onPageRequested"
+            val bridge = when {
+                callback.method.name == "shouldInterceptRequest" -> "onRequestIntercepted"
+                callback.method.name == "onPageStarted" -> "onPageStarted"
+                callback.method.parameterTypes[1].toString() == "Ljava/lang/String;" ||
+                    callback.method.parameterTypes[1].toString() == "Landroid/webkit/WebResourceRequest;" ->
+                    "onPageRequested"
                 else -> error("unrecognised WebViewClient callback ${callback.method}")
             }
             val secondType = callback.method.parameterTypes[1]
@@ -104,10 +120,25 @@ val browserPrivacyGuardPatch = bytecodePatch(
         }
         println(
             "[Browser privacy guard] Intercepted ${interfaceSites.size} bridge sites, " +
-                "${navigationSites.size} navigation sites and ${callbacks.size} navigation " +
-                "callbacks across ${webViewTypes.size} WebView types.",
+                "${navigationSites.size} navigation sites, ${interfaceReloads.size} interface " +
+                "reloads and ${callbacks.size} navigation callbacks across ${webViewTypes.size} " +
+                "WebView types.",
         )
     }
+}
+
+/** Every interface the given classes implement, with the interfaces those extend. */
+private fun BytecodePatchContext.interfacesOf(types: Set<String>): Set<String> {
+    val byType = HashMap<String, ClassDef>()
+    classDefForEach { byType[it.type] = it }
+    val found = mutableSetOf<String>()
+    val pending = ArrayDeque<String>()
+    types.forEach { type -> byType[type]?.interfaces?.let(pending::addAll) }
+    while (pending.isNotEmpty()) {
+        val type = pending.removeFirst()
+        if (found.add(type)) byType[type]?.interfaces?.let(pending::addAll)
+    }
+    return found
 }
 
 private data class ClientCallback(val owner: ClassDef, val method: Method)
@@ -132,9 +163,7 @@ private fun BytecodePatchContext.webViewClientCallbacks(): List<ClientCallback> 
             return@classDefForEach
         }
         owner.methods.forEach { method ->
-            if (method.implementation == null || method.returnType != "V" && method.returnType != "Z") {
-                return@forEach
-            }
+            if (method.implementation == null) return@forEach
             val parameters = method.parameterTypes.map(CharSequence::toString)
             val pageStart = method.name == "onPageStarted" && method.returnType == "V" &&
                 parameters == listOf(
@@ -145,7 +174,11 @@ private fun BytecodePatchContext.webViewClientCallbacks(): List<ClientCallback> 
             val pageRequest = method.name == "shouldOverrideUrlLoading" && method.returnType == "Z" &&
                 (parameters == listOf(WEB_VIEW, "Ljava/lang/String;") ||
                     parameters == listOf(WEB_VIEW, "Landroid/webkit/WebResourceRequest;"))
-            if (pageStart || pageRequest) callbacks += ClientCallback(owner, method)
+            // The request form only: the string form cannot tell a page from its images.
+            val requestIntercept = method.name == "shouldInterceptRequest" &&
+                method.returnType == "Landroid/webkit/WebResourceResponse;" &&
+                parameters == listOf(WEB_VIEW, "Landroid/webkit/WebResourceRequest;")
+            if (pageStart || pageRequest || requestIntercept) callbacks += ClientCallback(owner, method)
         }
     }
     return callbacks
