@@ -35,7 +35,7 @@ public final class FeatureGateLabStore {
     public static final String MANAGER_SETTINGS_MANAGER = "settings_manager";
     public static final String MANAGER_VE_CONFIG = "ve_config";
 
-    private static final String PREFS_NAME = "morphe_feature_gate_lab";
+    public static final String PREFS_NAME = "morphe_feature_gate_lab";
     private static final String MASTER_KEY = "master_enabled";
     private static final String WARNING_ACK_KEY = "warning_acknowledged";
     private static final String RULE_IDS_KEY = "rule_ids";

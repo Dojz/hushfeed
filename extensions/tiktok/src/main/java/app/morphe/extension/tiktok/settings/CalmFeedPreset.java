@@ -19,7 +19,7 @@ import java.util.Map;
 
 /** A conservative, reversible starting point for a less commercial feed. */
 public final class CalmFeedPreset {
-    private static final String PREFERENCES = "hushfeed-calm-feed-preset";
+    static final String PREFERENCES = "hushfeed-calm-feed-preset";
     private static final String HAS_SNAPSHOT = "has_snapshot";
     private static final String SNAPSHOT_MASK = "snapshot_mask";
     private static final String SNAPSHOT_SCHEMA = "snapshot_schema";

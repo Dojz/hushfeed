@@ -116,6 +116,8 @@ While paused, TikTok's own bottom bar comes back, + button included. If Remove c
 
 If TikTok crashes within a minute of starting three times in a row, Hushfeed pauses itself on the next start. The top of Hushfeed settings then says why and offers Turn Hushfeed back on. Being swiped away or force-stopped doesn't count toward the three.
 
+TikTok has a recovery of its own for this. On the third crash in a row at launch it clears most of what it has saved, so you may see its interest picker again. Hushfeed's settings are on the short list it keeps, so they're all still there when you turn Hushfeed back on.
+
 If you can't reach the settings at all, create an empty file named `hushfeed-safe-mode` in `Android/data/com.zhiliaoapp.musically/files/`. From a computer with adb that's `adb shell touch /sdcard/Android/data/com.zhiliaoapp.musically/files/hushfeed-safe-mode`. Hushfeed stays paused for as long as the file is there, and Turn Hushfeed back on deletes it.
 
 ## Going back

@@ -132,9 +132,15 @@ public abstract class Setting<T> {
     private static final Map<String, Setting<?>> PATH_TO_SETTINGS = new HashMap<>();
 
     /**
+     * The preferences file every setting is saved to. A constant, so code that runs before
+     * Hushfeed has a context can name the file without loading this class.
+     */
+    public static final String PREFERENCES_NAME = "morphe_prefs";
+
+    /**
      * Preference all instances are saved to.
      */
-    public static final SharedPrefCategory preferences = new SharedPrefCategory("morphe_prefs");
+    public static final SharedPrefCategory preferences = new SharedPrefCategory(PREFERENCES_NAME);
 
     @Nullable
     public static Setting<?> getSettingFromPath(String str) {
