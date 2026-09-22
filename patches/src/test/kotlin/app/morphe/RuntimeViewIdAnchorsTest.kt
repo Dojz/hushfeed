@@ -411,15 +411,7 @@ class RuntimeViewIdAnchorsTest {
         val FEATURE_DEX = Regex("""lib/[^/]+/libdex_[^/]+\.so""")
 
         /** The groups that may look up more than one name, as `source|group|names`, and why. */
-        val MORE_THAN_ONE_NAME = mapOf(
-            "blockauthor/FeedVisibility.java|HOME_TAB_RESOURCE_NAMES|omq,o1k" to
-                "46.x fallback, left while FeedVisibility.java has another change open (2026-09-21)",
-            "blockauthor/FeedVisibility.java|INBOX_TAB_RESOURCE_NAMES|omr,o1l" to
-                "46.x fallback, left while FeedVisibility.java has another change open (2026-09-21)",
-            "blockauthor/FeedVisibility.java|COMMENT_SHEET_RESOURCE_NAMES|pvp,p_5" to
-                "46.x fallback, left while FeedVisibility.java has another change open (2026-09-21)",
-            "blockauthor/FeedVisibility.java|COMMENT_TITLE_RESOURCE_NAMES|wk7,vjb" to
-                "46.x fallback, left while FeedVisibility.java has another change open (2026-09-21)",
+        val MORE_THAN_ONE_NAME = mapOf<String, String>(
         )
     }
 }

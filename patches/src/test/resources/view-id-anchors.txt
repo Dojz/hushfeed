@@ -64,10 +64,10 @@ share/ShareSheetTools.java|CONTACTS_SECTION_IDS|ip5|app|com.ss.android.ugc.aweme
 share/ShareSheetTools.java|CONTACTS_LIST_IDS|v3j|app|com.ss.android.ugc.aweme.internalshare.impl.refactor.assem.SharePanelContactRootAssem
 share/ShareSheetTools.java|CHANNELS_LIST_IDS|dwr|app|com.ss.android.ugc.aweme.internalshare.impl.fragment.DownloadAndShareFragment
 share/ShareSheetTools.java|ACTIONS_LIST_IDS|a5t|app|-
-blockauthor/FeedVisibility.java|HOME_TAB_RESOURCE_NAMES|omq,o1k|app|com.ss.android.ugc.aweme.homepage.ui.view.tab.bottom.hometab.HomeTabProtocol
-blockauthor/FeedVisibility.java|INBOX_TAB_RESOURCE_NAMES|omr,o1l|app|com.ss.android.ugc.aweme.notification.view.NotificationTabProtocol
-blockauthor/FeedVisibility.java|COMMENT_SHEET_RESOURCE_NAMES|pvp,p_5|app|layout:com.ss.android.ugc.aweme.commentv2.commentpage.commonvideo.DefaultCommentPageContainerFragment
-blockauthor/FeedVisibility.java|COMMENT_TITLE_RESOURCE_NAMES|wk7,vjb|app|com.ss.android.ugc.aweme.commentv2.actionbar.CommentPageActionBarAssem
+blockauthor/FeedVisibility.java|HOME_TAB_RESOURCE_NAMES|omq|app|com.ss.android.ugc.aweme.homepage.ui.view.tab.bottom.hometab.HomeTabProtocol
+blockauthor/FeedVisibility.java|INBOX_TAB_RESOURCE_NAMES|omr|app|com.ss.android.ugc.aweme.notification.view.NotificationTabProtocol
+blockauthor/FeedVisibility.java|COMMENT_SHEET_RESOURCE_NAMES|pvp|app|layout:com.ss.android.ugc.aweme.commentv2.commentpage.commonvideo.DefaultCommentPageContainerFragment
+blockauthor/FeedVisibility.java|COMMENT_TITLE_RESOURCE_NAMES|wk7|app|com.ss.android.ugc.aweme.commentv2.actionbar.CommentPageActionBarAssem
 blockauthor/FeedVisibility.java|STORY_PAGER_RESOURCE_NAME|vp_story_collection|app|com.by.andInflater.story_layout_immersive_play_area
 comment/CommentTools.java|DISLIKE_BUTTON_IDS|k0k|app|-
 comment/CommentTools.java|DISLIKE_ICON_IDS|mmt|app|-
