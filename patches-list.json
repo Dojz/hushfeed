@@ -252,7 +252,7 @@
     {
       "name": "Block P2P video relay",
       "description": "Strips TikTok's peer-to-peer CDN libraries so your phone is not used as a relay node for other people's video traffic. Saves battery and mobile data.",
-      "category": null,
+      "category": "Performance",
       "use": false,
       "dependencies": [],
       "compatiblePackages": {
@@ -2028,7 +2028,7 @@
     {
       "name": "Hide the risk control CAPTCHA",
       "description": "Hides TikTok's risk control CAPTCHA dialog, raised by its BdTuring service, which the browsing CAPTCHA patch does not cover. Answers the Hide CAPTCHA popups setting, never touches SMS or two factor verification, and never hides a check the server raised over a follow, like, comment or repost. Off by default.",
-      "category": null,
+      "category": "Feed",
       "use": false,
       "dependencies": [
         "BytecodePatch",
@@ -2651,7 +2651,7 @@
     {
       "name": "Remove LIVE extras",
       "description": "Empties TikTok's link-mic and LIVE match or minigame assets, then skips its gift-effect widget setup. Co-hosting, games and animated gifts may stop.",
-      "category": null,
+      "category": "Performance",
       "use": false,
       "dependencies": [
         "BytecodePatch"
@@ -2689,7 +2689,7 @@
     {
       "name": "Remove content credential and card scanner assets",
       "description": "Empties TikTok's bundled C2PA and Microblink card-scanning assets, the Pitaya AI model libraries, the live-cast dynamic feature, and the ART log monitor probe.",
-      "category": null,
+      "category": "Performance",
       "use": false,
       "dependencies": [],
       "compatiblePackages": {
@@ -2725,7 +2725,7 @@
     {
       "name": "Remove creation tools",
       "description": "Empties TikTok's reviewed editor, camera-effect and face-model assets. The Create tab and all recording, editing and effects tools stop working. Switch: Hushfeed settings > App behavior.",
-      "category": null,
+      "category": "Performance",
       "use": false,
       "dependencies": [],
       "compatiblePackages": {
@@ -2761,7 +2761,7 @@
     {
       "name": "Remove unused language packs",
       "description": "Empties unselected TikTok language bundles while always keeping English. Selected language codes are checked before any file changes.",
-      "category": null,
+      "category": "Performance",
       "use": false,
       "dependencies": [],
       "compatiblePackages": {
