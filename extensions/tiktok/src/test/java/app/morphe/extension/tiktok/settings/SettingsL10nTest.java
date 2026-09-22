@@ -329,7 +329,7 @@ public class SettingsL10nTest {
      * is what the reader sets, a rule is a saved override. "Flag" and "getter" reached the
      * settings home row, two warnings and the override note before this held them out.
      */
-    @Test public void labVocabularyStaysOutOfTheTranslatedStrings() throws Exception {
+    @Test public void labVocabularyStaysOutOfTheSourceStrings() throws Exception {
         java.util.regex.Pattern jargon = java.util.regex.Pattern.compile(
                 "(?i)\\bgetters?\\b|\\bgate flags?\\b|\\bflags\\b|\\boverride boundary\\b"
                         + "|\\bconfiguration object\\b|\\btype-checked\\b");
@@ -580,8 +580,11 @@ public class SettingsL10nTest {
     private static java.util.List<String> toastLiteralsIn(String text) {
         byte[] kind = classify(text);
         java.util.List<String> found = new java.util.ArrayList<>();
+        // The settings banners (showNotice, showUndo) and the feed's undo banner are toasts in
+        // every way that matters to a reader, so they answer to the same rule.
         java.util.regex.Matcher call = java.util.regex.Pattern
-                .compile("(?:\\b\\w*[Tt]oast\\w*|Toast\\s*\\.\\s*makeText)\\s*\\(").matcher(text);
+                .compile("(?:\\b\\w*[Tt]oast\\w*|Toast\\s*\\.\\s*makeText|\\bshowNotice|\\bshowUndo(?:Banner)?)\\s*\\(")
+                .matcher(text);
         while (call.find()) {
             int open = call.end() - 1;
             if (kind[call.start()] != CODE) continue;
@@ -1102,18 +1105,48 @@ public class SettingsL10nTest {
      */
     @Test public void rowSummariesSayHideForWhatIsKeptOutOfView() throws Exception {
         List<String[]> rows = settingsRowArguments();
-        java.util.regex.Pattern stray = java.util.regex.Pattern.compile(
-                "\\b(?:[Dd]rop(?:s|ped|ping)?|[Tt]ake[sn]? away|[Tt]aken away|skipped)\\b");
         List<String> offenders = new ArrayList<>();
         for (String[] row : rows) {
             for (String text : row) {
-                if (text != null && stray.matcher(text).find()) offenders.add(text);
+                if (text != null && STRAY_HIDE_VERB.matcher(text).find()) offenders.add(text);
             }
         }
         assertTrue("the scan found too few settings rows to mean anything: " + rows.size(),
                 rows.size() > 100);
-        assertEquals("rows that say drop, take away or skipped where the rest say hide:\n"
+        assertEquals("rows that say drop, take away or skip where the rest say hide:\n"
                 + String.join("\n", offenders), 0, offenders.size());
+    }
+
+    /**
+     * The verbs the rows used for hiding before they said hide. "Skip" on its own stays: the
+     * sound button skips the video playing and the warnings row skips a dialog, which is what
+     * skip means. It is a video kept out of the feed that must not be "skipped".
+     */
+    private static final java.util.regex.Pattern STRAY_HIDE_VERB = java.util.regex.Pattern.compile(
+            "\\b(?:[Dd]rop(?:s|ped|ping)?|[Tt]ake[sn]? away|skipped"
+                    + "|[Ss]kip (?:feed |recorded )?(?:videos|LIVE|posts))\\b");
+
+    /** The verb rule catches the seven rows it was written for and lets the two real skips by. */
+    @Test public void theHideVerbRuleCanActuallyFail() {
+        for (String old : new String[]{
+                "These accounts are always skipped.",
+                "Matching captions are skipped.",
+                "Drop the notification saying somebody new followed you before it reaches the drawer.",
+                "Take away the streak button in a chat and the reminder message that goes with it.",
+                "Skip feed videos with place badges, even when they aren't paid ads.",
+                "Skip recorded LIVE broadcasts in the feed.",
+                "Skip videos marked as using promotional music.",
+                "Skip videos that use a sound blocked with the player's sound button, or named below.",
+                "Keep a local record of what you have watched and drop those videos from later feed pages."}) {
+            assertTrue(old, STRAY_HIDE_VERB.matcher(old).find());
+        }
+        for (String kept : new String[]{
+                "Block this sound",
+                "Skip content warnings",
+                "Add a separate button that skips videos using the current sound.",
+                "Hide recorded LIVE broadcasts from the feed."}) {
+            assertFalse(kept, STRAY_HIDE_VERB.matcher(kept).find());
+        }
     }
 
     /** Every settings row the category sources build, as {@code [title, summary]}. */

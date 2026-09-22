@@ -220,8 +220,8 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
         if (SettingsStatus.feedFilterEnabled) {
             addPreference(new TogglePreference(
                     context,
-                    "Skip blocked sounds",
-                    "Skip videos that use a sound blocked with the player's sound button, or named below.",
+                    "Hide videos with blocked sounds",
+                    "Hide videos that use a sound blocked with the player's sound button, or named below.",
                     Settings.HIDE_BLOCKED_SOUNDS
             ));
             addPreference(new InputTextPreference(
