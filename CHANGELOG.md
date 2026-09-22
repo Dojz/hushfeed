@@ -4,6 +4,7 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **Compatibility:** Every runtime view ID Hushfeed uses is now tied to TikTok 47.0.3 code, including share actions, comment dislike controls and caption text.
 * **TikTok:** In-app browser privacy guard now protects external websites without breaking Activity center, Watch history, shop checkout or CAPTCHA. Its Privacy switch has clearer wording and still starts off.
 
 ## 0.58.0 (2026-09-21)
