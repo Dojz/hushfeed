@@ -93,6 +93,7 @@ private fun generatePatchList(version: String, patches: Set<Patch<*>>) {
         JsonPatch(
             it.name!!,
             it.description,
+            it.category,
             it.use,
             // The patch's own name, not its Kotlin class. Every entry used to read
             // "BytecodePatch", which made the only machine-readable dependency record say
@@ -178,6 +179,7 @@ private class JsonAppTarget(
 private class JsonPatch(
     val name: String? = null,
     val description: String? = null,
+    val category: String? = null,
     val use: Boolean = true,
     val dependencies: List<String>,
     val compatiblePackages: Map<PackageName, Set<VersionName>?>? = null,
