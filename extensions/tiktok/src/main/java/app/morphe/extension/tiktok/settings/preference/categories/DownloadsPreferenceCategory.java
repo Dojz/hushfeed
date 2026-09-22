@@ -117,7 +117,7 @@ public class DownloadsPreferenceCategory extends ConditionalPreferenceCategory {
         }
         if (SettingsStatus.advancedDownloadsEnabled) {
             addPreference(new TogglePreference(context, "Download original photos",
-                    "Save every photo in the post directly from its source URL, without rendering it again.", Settings.DOWNLOAD_ORIGINAL_PHOTOS));
+                    "Save every photo in the post as TikTok received it, not as the screen shows it.", Settings.DOWNLOAD_ORIGINAL_PHOTOS));
         }
         if (SettingsStatus.downloadEnabled) {
             addPreference(new ChoicePreference(context, "Animated sticker format", Settings.DOWNLOAD_STICKER_FORMAT,

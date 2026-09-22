@@ -316,18 +316,18 @@ final class FeedFilterFeedback {
         if ("PaidPartnershipFilter".equals(reason)) return "Paid partnerships";
         if ("LocationBadgeFilter".equals(reason)) return "Location-tagged videos";
         if ("AiGeneratedFilter".equals(reason)) return "AI-generated posts";
-        if ("VerifiedFilter".equals(reason)) return "Verified creators";
+        if ("VerifiedFilter".equals(reason)) return "Verified accounts";
         if ("SeriesFilter".equals(reason)) return "Series posts";
         if ("PlaylistFilter".equals(reason)) return "Playlist posts";
         if ("InsertedCardFilter".equals(reason)) return "Inserted cards";
         if ("MidAdFilter".equals(reason)) return "Mid-roll ads";
         if ("SeenVideoFilter".equals(reason)) return "Seen videos";
         if ("KeywordFilter".equals(reason)) return "Blocked caption words";
-        if ("CreatorFilter".equals(reason)) return "Hidden creators";
+        if ("CreatorFilter".equals(reason)) return "Blocked and hidden creators";
         if ("PromotionalMusicFilter".equals(reason)) return "Promotional music";
         if ("LiveReplayFilter".equals(reason)) return "LIVE replays";
-        if ("RegionFilter".equals(reason)) return "Region rules";
-        if ("PublicationAgeFilter".equals(reason)) return "Publication age";
+        if ("RegionFilter".equals(reason)) return "Country filters";
+        if ("PublicationAgeFilter".equals(reason)) return "Post age";
         if ("QualityFilter".equals(reason)) return "Length and views per like";
         return OTHER_REASON;
     }

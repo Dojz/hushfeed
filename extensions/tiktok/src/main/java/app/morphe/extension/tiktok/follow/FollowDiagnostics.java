@@ -616,7 +616,7 @@ public final class FollowDiagnostics {
                 : context.statusMsg;
         String message = L10n.f("TikTok refused the follow: %1$s", reason);
         if (!"none".equals(context.riskCheck)) {
-            message += " " + L10n.t("A hidden puzzle may be the cause.");
+            message += " " + L10n.t("A hidden CAPTCHA may be the cause.");
         }
         Utils.showToastLong(message);
         Logger.printInfo(() -> "[Morphe TikTok FollowProbe] refused"

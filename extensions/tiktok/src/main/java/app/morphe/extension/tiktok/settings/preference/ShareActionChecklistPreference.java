@@ -154,7 +154,7 @@ public final class ShareActionChecklistPreference extends DialogPreference {
         String normalized = query == null ? "" : query.trim().toLowerCase(Locale.ROOT);
         if (catalog.isEmpty()) {
             SettingsUi.setResultCount(resultCount, 0);
-            addState("No share actions have been observed yet",
+            addState("No share actions have been seen yet",
                     "Open a share sheet once, then return here to choose its actions.");
             return;
         }

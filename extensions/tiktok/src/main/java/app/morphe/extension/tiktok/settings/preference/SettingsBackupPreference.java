@@ -72,7 +72,7 @@ public final class SettingsBackupPreference extends Preference
         int order = screen.getPreferenceCount();
         for (Object[] row : new Object[][]{
                 {EXPORT, "Back up settings",
-                        "Save patch settings and Feature Gate Lab rules to a JSON file."},
+                        "Save Hushfeed settings and Feature Gate Lab rules to a JSON file."},
                 {IMPORT, "Restore settings",
                         "Choose a backup file. Your current settings are kept for Undo."},
                 {RESET, "Reset settings",

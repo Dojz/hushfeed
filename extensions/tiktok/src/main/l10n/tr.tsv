@@ -58,7 +58,7 @@ A diagnostic report is already being saved	Bir tanılama raporu zaten kaydediliy
 A field value could not be read. Check the values and try again.	Bir alan değeri okunamadı. Değerleri kontrol edip tekrar dene.
 A good place to stop, if you want one.	İstersen, durmak için iyi bir an.
 A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.	TikTok kamerayı açık tuttuğu sürece üst köşede yeşil bir nokta, ses kaydederken de turuncu bir nokta görünür. Erişim bitince kaybolurlar.
-A hidden puzzle may be the cause.	Nedeni gizli bir bulmaca olabilir.
+A hidden CAPTCHA may be the cause.	Nedeni gizlenmiş bir CAPTCHA olabilir.
 A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.	Bir bağlantıyı paylaşırken veya kopyalarken tiktok.com yerine konacak alan adı, örneğin vxtiktok.com. TikTok'un kendi bağlantılarını paylaşmak için boş bırak. Yalnızca TikTok bağlantıları değişir, onların da yalnızca alan adı: hiçbir yere yeni bir şey gönderilmez.
 A newer clear replaced that undo. Tap the row again to undo.	Daha yeni bir temizleme o geri almanın yerini aldı. Geri almak için satıra tekrar dokun.
 A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.	Akıştaki küçük bir etiket, bugünkü bütçenden kalan dakikayı veya video sayısını gösterir, hangisi bitmeye daha yakınsa onu.
@@ -178,7 +178,7 @@ Choose which rows and controls appear	Hangi satırların ve kontrollerin görün
 Clear all	Tümünü temizle
 Clear all Lab data (overrides, switch, recordings)	Tüm Lab verilerini temizle (geçersiz kılmalar, anahtar, kayıtlar)
 Clear all suggested accounts	Önerilen tüm hesapları temizle
-Clear buffered events, saved crash reports and the hook status above.	Arabelleğe alınan olayları, kaydedilen çökme raporlarını ve yukarıdaki kanca durumunu temizle.
+Clear the recent events, saved crash reports and the hook status above.	Son olayları, kaydedilen çökme raporlarını ve yukarıdaki kanca durumunu temizle.
 Clear diagnostic data	Tanılama verilerini temizle
 Clear display	Temiz ekran
 Clear display delay	Temiz ekran gecikmesi
@@ -344,7 +344,7 @@ Filter bottom tabs	Alt sekmeleri filtrele
 Filter comments by keyword	Yorumları anahtar kelimeye göre filtrele
 Filter feed tabs	Akış sekmelerini filtrele
 Filter location-tagged videos	Konum etiketli videoları filtrele
-Filter offline fallback videos	Çevrimdışı yedek videoları filtrele
+Filter TikTok's offline videos	TikTok'un çevrimdışı videolarını filtrele
 Filter settings	Filtre ayarları
 Filter the list	Listeyi filtrele
 Filter: %1$s	Filtre: %1$s
@@ -381,7 +381,7 @@ Hand-off	Aktarım
 Handle or id	Kullanıcı adı veya kimlik
 Hidden %1$s on this phone	%1$s bu telefonda gizlendi
 Hidden commenters	Gizlenen yorumcular
-Hidden creators	Gizlenen içerik üreticileri
+Blocked and hidden creators	Engellenen ve gizlenen içerik üreticileri
 Hidden: %1$s	Gizlenen: %1$s
 Hide	Gizle
 Hide AI-generated videos	Yapay zeka ile üretilmiş videoları gizle
@@ -401,7 +401,7 @@ Hide activity status	Etkinlik durumunu gizle
 Hide ads, Shop posts, LIVE videos and replays, promotional music, and paid partnerships.	Reklamları, Mağaza gönderilerini, CANLI videolarını ve tekrarlarını, tanıtım amaçlı müzikleri ve ücretli ortaklıkları gizle.
 Hide archive	Arşivi gizle
 Hide bottom tabs TikTok adds later unless you allow them.	TikTok'un sonradan eklediği alt sekmeleri, sen izin vermedikçe gizle.
-Hide browsing and LIVE puzzle dialogs. Login, account verification and any puzzle raised over a follow, like, comment or repost stay visible.	Gezinme ve CANLI sırasında çıkan bulmaca pencerelerini gizle. Giriş, hesap doğrulama ve bir takip, beğeni, yorum veya yeniden yayınlama yüzünden çıkan bulmacalar görünür kalır.
+Hide the CAPTCHA dialogs raised while you browse or watch LIVE. Login, account verification and any CAPTCHA raised over a follow, like, comment or repost stay visible.	Gezinirken veya CANLI izlerken çıkan CAPTCHA pencerelerini gizle. Giriş, hesap doğrulama ve bir takip, beğeni, yorum veya yeniden yayınlama yüzünden çıkan CAPTCHA'lar görünür kalır.
 Hide buttons in the right column	Sağ sütundaki düğmeleri gizle
 Hide comment polls	Yorum anketlerini gizle
 Hide comment popup ads	Yorumlardaki açılır reklamları gizle
@@ -480,7 +480,7 @@ Hide the rewards shortcut	Ödül kısayolunu gizle
 Hide the right column	Sağ sütunu gizle
 The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.	Gelen Kutusu'nun üst kısmındaki hikaye avatarları satırı kalkar. Hikayeler akıştan ve profillerden oynatılmaya devam eder.
 Hide the save button on the feed	Akıştaki kaydet düğmesini gizle
-Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.	Kaydet düğmesini yerel görünürlük kancası üzerinden gizle. Yukarıdaki listede Kaydet'i işaretlemek aynı düğmeyi katman üzerinden gizler.
+Hide the save button in the right column. Ticking Save in the list above hides it too.	Sağ sütundaki kaydet düğmesini gizle. Yukarıdaki listede Kaydet'i işaretlemek de onu gizler.
 Hide the search bar below videos	Videoların altındaki arama çubuğunu gizle
 Hide the search button on the feed	Akıştaki arama düğmesini gizle
 Hide the share prompt after a like	Beğeniden sonra çıkan paylaşım istemini gizle
@@ -496,7 +496,7 @@ Hide videos posted as part of a playlist.	Bir oynatma listesinin parçası olara
 Hide videos posted by verified accounts.	Doğrulanmış hesapların paylaştığı videoları gizle.
 Hide videos that belong to a paid Series.	Ücretli bir Seri'ye ait videoları gizle.
 Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.	Görüntülenmesi çok, yorumu az olan videoları gizle. Beğeni başına görüntülenme ile aynı şekilde çalışır. Sıfır bunu kapatır.
-Hide videos with a lot of views and few likes. Lower numbers are stricter, zero turns the rule off, and one video is kept back if a whole batch would go.	Görüntülenmesi çok, beğenisi az olan videoları gizle. Düşük sayılar daha katıdır, sıfır kuralı kapatır ve bütün bir grup gidecek olursa bir video bırakılır.
+Hide videos with a lot of views and few likes. Lower numbers are stricter, zero turns the rule off, and one video is kept back if everything the feed just sent would go.	Görüntülenmesi çok, beğenisi az olan videoları gizle. Düşük sayılar daha katıdır, sıfır kuralı kapatır ve akışın az önce gönderdiği her şey gidecek olursa bir video bırakılır.
 Hide videos you have already seen	Daha önce gördüğün videoları gizle
 Hide voting cards and poll results above the comments, including polls that have ended.	Yorumların üzerindeki oylama kartlarını ve anket sonuçlarını, sona ermiş anketler dahil gizle.
 Hiding	Gizleme
@@ -509,7 +509,7 @@ Home	Ana Sayfa
 Hook status	Kanca durumu
 How far each edge press moves the video.	Kenara her basışın videoyu ne kadar sardığı.
 Hushfeed cannot read the creator pattern %1$s	Hushfeed, %1$s içerik üreticisi kalıbını okuyamıyor
-Hushfeed hid a TikTok puzzle. Turn off Hide CAPTCHA popups if something stops working.	Hushfeed bir TikTok bulmacasını gizledi. Bir şey çalışmazsa CAPTCHA pencerelerini gizle ayarını kapat.
+Hushfeed hid a TikTok CAPTCHA. Turn off Hide CAPTCHA popups if something stops working.	Hushfeed bir TikTok CAPTCHA'sını gizledi. Bir şey çalışmazsa CAPTCHA pencerelerini gizle ayarını kapat.
 Hushfeed is active	Hushfeed etkin
 Ignore the creator's choice so the Duet and Stitch entries appear. Everything else the app checks still applies, and whether the upload is accepted is the server's decision.	Düet ve Stitch seçeneklerinin görünmesi için içerik üreticisinin tercihini yok say. Uygulamanın kontrol ettiği diğer her şey yine geçerlidir ve yüklemenin kabul edilip edilmeyeceğine sunucu karar verir.
 Import finished	İçe aktarma tamamlandı
@@ -618,7 +618,7 @@ No matching settings	Eşleşen ayar yok
 No preset selected. Choose a preset above.	Hazır ayar seçilmedi. Yukarıdan bir hazır ayar seç.
 No recording yet. Start one, use a feature, then return here.	Henüz kayıt yok. Bir kayıt başlat, bir özellik kullan, sonra buraya dön.
 No seen videos recorded yet.	Henüz görülen video kaydedilmedi.
-No share actions have been observed yet	Henüz hiçbir paylaşım eylemi görülmedi
+No share actions have been seen yet	Henüz hiçbir paylaşım eylemi görülmedi
 No share actions match this search	Bu aramayla eşleşen paylaşım eylemi yok
 No sound to block on this video	Bu videoda engellenecek ses yok
 No suggested accounts to clear	Temizlenecek önerilen hesap yok
@@ -718,7 +718,7 @@ Profile picture saved to %1$s	Profil fotoğrafı %1$s konumuna kaydedildi
 Profile share actions	Profil paylaşım eylemleri
 Promotional music	Tanıtım müziği
 Proof	Kanıt
-Publication age	Yayınlanalı geçen süre
+Post age	Gönderi yaşı
 Putting the settings back to their defaults	Ayarlar varsayılanlarına döndürülüyor
 Quality	Kalite
 Quality, files, subtitles and hand-off	Kalite, dosyalar, altyazılar ve başka uygulamaya aktarma
@@ -732,7 +732,7 @@ Recovered an interrupted settings change. Restart TikTok to apply this.	Yarıda 
 Refresh values	Değerleri yenile
 Refreshing current TikTok cache...	Geçerli TikTok önbelleği yenileniyor...
 Region	Bölge
-Region rules	Bölge kuralları
+Country filters	Ülke filtreleri
 Remember the last speed	Son hızı hatırla
 Remind me every	Hatırlatma aralığı
 Remove	Kaldır
@@ -789,11 +789,11 @@ Save JSON	JSON'u kaydet
 Save SRT files with the video. Paired saves use Movies on Android 11+, Download on Android 10, and your video folder on older versions.	SRT dosyalarını videoyla birlikte kaydet. Eşli kayıtlar Android 11+ sürümlerinde Movies, Android 10'da Download, daha eski sürümlerde ise video klasörünü kullanır.
 Save a profile picture on a long press	Uzun basınca profil fotoğrafını kaydet
 Save a story on a long press	Uzun basınca hikayeyi kaydet
-Save every photo in the post directly from its source URL, without rendering it again.	Gönderideki her fotoğrafı yeniden işlemeden doğrudan kaynak URL'sinden kaydet.
+Save every photo in the post as TikTok received it, not as the screen shows it.	Gönderideki her fotoğrafı ekranın gösterdiği gibi değil, TikTok'un aldığı gibi kaydet.
 Save field values	Alan değerlerini kaydet
 Save full report	Raporun tamamını kaydet
 Save media	Medyayı kaydet
-Save patch settings and Feature Gate Lab rules to a JSON file.	Yama ayarlarını ve Feature Gate Lab kurallarını bir JSON dosyasına kaydet.
+Save Hushfeed settings and Feature Gate Lab rules to a JSON file.	Hushfeed ayarlarını ve Feature Gate Lab kurallarını bir JSON dosyasına kaydet.
 Save subtitles beside videos	Altyazıları videoların yanına kaydet
 Save the latest available TikTok crash report for diagnostic export.	Tanılama dışa aktarımı için mevcut en son TikTok çökme raporunu kaydet.
 Save the original sound	Orijinal sesi kaydet
@@ -829,7 +829,7 @@ Search share actions	Paylaşım eylemlerinde ara
 Search these comments	Bu yorumlarda ara
 Search translated titles and descriptions, then open the original setting.	Çevrilmiş başlık ve açıklamalarda ara, sonra asıl ayarı aç.
 Search within comments	Yorumların içinde ara
-Seconds. Zero keeps every length. If a whole batch would be filtered out, the video closest to your limit is kept so the feed is not empty.	Saniye. Sıfır, her uzunluğu tutar. Bir grubun tamamı filtrelenecekse akış boş kalmasın diye sınırına en yakın video tutulur.
+Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed is not empty.	Saniye. Sıfır, her uzunluğu tutar. Akışın az önce gönderdiği her şey filtrelenecekse akış boş kalmasın diye sınırına en yakın video tutulur.
 Seek by	Sarma miktarı
 Seek from the edges	Kenarlardan sar
 Seen	Görüldü
@@ -1083,7 +1083,7 @@ Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5,
 Use 0 for TikTok's size, or 12 to 48. Applies to the next caption.	TikTok'un boyutu için 0, ya da 12 ile 48 arasında bir değer kullan. Bir sonraki altyazıya uygulanır.
 Use Calm feed	Sakin akışı kullan
 Use Save JSON for this large report	Bu büyük rapor için JSON'u kaydet seçeneğini kullan
-Use TikTok's native hold, slide down, and release gesture to lock 2x speed.	2x hızı kilitlemek için TikTok'un kendi basılı tut, aşağı kaydır ve bırak hareketini kullan.
+Use TikTok's own hold, slide down and release gesture to lock 2x speed.	2x hızı kilitlemek için TikTok'un kendi basılı tut, aşağı kaydır ve bırak hareketini kullan.
 Use a default playback speed	Varsayılan bir oynatma hızı kullan
 Use non-personalized search	Kişiselleştirilmemiş aramayı kullan
 Use system font	Sistem yazı tipini kullan
@@ -1096,7 +1096,7 @@ Use your own offline videos limit	Kendi çevrimdışı video sınırını kullan
 Using TikTok's value	TikTok'un değeri kullanılıyor
 Value	Değer
 Value to return	Döndürülecek değer
-Verified creators	Doğrulanmış içerik üreticileri
+Verified accounts	Doğrulanmış hesaplar
 Version %1$s	Sürüm %1$s
 Version %1$s for TikTok %2$s	Sürüm %1$s, TikTok %2$s için
 Video	Video

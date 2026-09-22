@@ -120,7 +120,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             addPreference(new TogglePreference(
                     context,
                     "Hide the save button on the feed",
-                    "Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.",
+                    "Hide the save button in the right column. Ticking Save in the list above hides it too.",
                     Settings.HIDE_FEED_SAVE_BUTTON
             ));
         }
@@ -275,7 +275,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             addPreference(new TogglePreference(
                     context,
                     "Hide CAPTCHA popups",
-                    "Hide browsing and LIVE puzzle dialogs. Login, account verification and any puzzle raised over a follow, like, comment or repost stay visible.",
+                    "Hide the CAPTCHA dialogs raised while you browse or watch LIVE. Login, account verification and any CAPTCHA raised over a follow, like, comment or repost stay visible.",
                     Settings.HIDE_CAPTCHA_POPUPS
             ));
         }
@@ -379,7 +379,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             addPreference(new TogglePreference(
                     context,
                     "Lock 2x speed with hold and slide",
-                    "Use TikTok's native hold, slide down, and release gesture to lock 2x speed.",
+                    "Use TikTok's own hold, slide down and release gesture to lock 2x speed.",
                     Settings.ENABLE_LONG_PRESS_SPEED_LOCK
             ));
         }

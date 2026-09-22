@@ -58,7 +58,7 @@ A diagnostic report is already being saved	Um relatório de diagnóstico já est
 A field value could not be read. Check the values and try again.	Não foi possível ler o valor de um campo. Verifique os valores e tente novamente.
 A good place to stop, if you want one.	Uma boa hora para parar, se você quiser uma.
 A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.	Um ponto verde no canto superior enquanto o TikTok está com a câmera aberta e um laranja enquanto grava som. Eles somem quando o acesso termina.
-A hidden puzzle may be the cause.	Talvez a causa seja um quebra-cabeça escondido.
+A hidden CAPTCHA may be the cause.	Talvez a causa seja um CAPTCHA escondido.
 A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.	Um host para colocar no lugar de tiktok.com ao compartilhar ou copiar um link, como vxtiktok.com. Deixe vazio para compartilhar os links do próprio TikTok. Só os links do TikTok mudam, e só o host: nada é enviado para nenhum lugar novo.
 A newer clear replaced that undo. Tap the row again to undo.	Uma limpeza mais recente substituiu esse desfazer. Toque na linha de novo para desfazer.
 A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.	Um rótulo pequeno no feed mostra os minutos ou vídeos restantes do orçamento de hoje.
@@ -171,7 +171,7 @@ Choose which rows and controls appear	Escolha quais linhas e controles aparecem
 Clear all	Limpar tudo
 Clear all Lab data (overrides, switch, recordings)	Limpar todos os dados do Lab (substituições, interruptor, gravações)
 Clear all suggested accounts	Limpar todas as contas sugeridas
-Clear buffered events, saved crash reports and the hook status above.	Limpa os eventos em memória, os relatórios de falha salvos e o estado dos ganchos acima.
+Clear the recent events, saved crash reports and the hook status above.	Limpa os eventos recentes, os relatórios de falha salvos e o estado dos ganchos acima.
 Clear diagnostic data	Limpar os dados de diagnóstico
 Clear display	Tela limpa
 Clear display delay	Espera para limpar a tela
@@ -329,7 +329,7 @@ Files	Arquivos
 Filter bottom tabs	Filtrar as abas de baixo
 Filter comments by keyword	Filtrar comentários por palavra
 Filter feed tabs	Filtrar as abas do feed
-Filter offline fallback videos	Filtrar os vídeos offline de reserva
+Filter TikTok's offline videos	Filtrar os vídeos offline do TikTok
 Filter settings	Ajustes de filtros
 Filter the list	Filtrar a lista
 Filter: %1$s	Filtro: %1$s
@@ -366,7 +366,7 @@ Hand-off	Passagem
 Handle or id	Nome de usuário ou id
 Hidden %1$s on this phone	%1$s escondido neste aparelho
 Hidden commenters	Comentaristas escondidos
-Hidden creators	Criadores escondidos
+Blocked and hidden creators	Criadores bloqueados e escondidos
 Hidden: %1$s	Ocultos: %1$s
 Hide	Esconder
 Hide AI-generated videos	Esconder vídeos gerados por IA
@@ -384,7 +384,7 @@ Hide activity	Esconder a atividade
 Hide activity status	Esconder o status de atividade
 Hide archive	Esconder o arquivo
 Hide bottom tabs TikTok adds later unless you allow them.	Esconder as abas de baixo que o TikTok adicionar depois, a menos que você as permita.
-Hide browsing and LIVE puzzle dialogs. Login, account verification and any puzzle raised over a follow, like, comment or repost stay visible.	Esconder os quebra-cabeças de navegação e de LIVE. Os de login, os de verificação de conta e qualquer um que apareça ao seguir, curtir, comentar ou repostar continuam visíveis.
+Hide the CAPTCHA dialogs raised while you browse or watch LIVE. Login, account verification and any CAPTCHA raised over a follow, like, comment or repost stay visible.	Esconder os CAPTCHAs que aparecem enquanto você navega ou assiste a um LIVE. Os de login, os de verificação de conta e qualquer um que apareça ao seguir, curtir, comentar ou repostar continuam visíveis.
 Hide buttons in the right column	Ocultar botões da coluna da direita
 Hide comment polls	Esconder enquetes nos comentários
 Hide comment popup ads	Esconder os anúncios pop-up dos comentários
@@ -450,7 +450,7 @@ Hide the question cards TikTok slides over a video near its end.	Esconder os car
 Hide the rewards shortcut	Ocultar o atalho de recompensas
 Hide the right column	Esconder a coluna da direita
 The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.	A linha de fotos de stories no topo da caixa de entrada some. Os stories continuam abrindo no feed e nos perfis.
-Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.	Ocultar o botao de salvar atraves de seu hook de visibilidade nativo. Marcar Salvar na lista acima oculta o mesmo botao pela sobreposicao.
+Hide the save button in the right column. Ticking Save in the list above hides it too.	Esconder o botão de salvar da coluna direita. Marcar Salvar na lista acima também o esconde.
 Hide the magnifying glass at the top right of the feed. Search in Inbox and suggestions above comments stay unchanged.	Oculte a lupa no canto superior direito do feed. A pesquisa na Caixa de entrada e as sugestões acima dos comentários não mudam.
 Hide the magnifying glass at the top of Inbox. Search on the feed and in comments is unchanged.	Esconder a lupa na parte superior da caixa de entrada. A pesquisa no feed e nos comentários não muda.
 Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.	Oculte as pesquisas recomendadas antes de digitar na página de pesquisa do TikTok. Seu histórico de pesquisa é mantido. Isso não oculta as sugestões acima dos comentários.
@@ -468,7 +468,7 @@ Hide videos posted as part of a playlist.	Esconder os vídeos publicados dentro 
 Hide videos posted by verified accounts.	Esconder os vídeos publicados por contas verificadas.
 Hide videos that belong to a paid Series.	Esconder os vídeos que fazem parte de uma Série paga.
 Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.	Oculta vídeos com muitas visualizações e poucos comentários. Funciona do mesmo jeito que visualizações por curtida. Zero desliga.
-Hide videos with a lot of views and few likes. Lower numbers are stricter, zero turns the rule off, and one video is kept back if a whole batch would go.	Esconder os vídeos com muitas visualizações e poucas curtidas. Números mais baixos são mais rígidos, zero desliga a regra, e um vídeo é guardado se um lote inteiro fosse embora.
+Hide videos with a lot of views and few likes. Lower numbers are stricter, zero turns the rule off, and one video is kept back if everything the feed just sent would go.	Esconder os vídeos com muitas visualizações e poucas curtidas. Números mais baixos são mais rígidos, zero desliga a regra, e um vídeo é guardado se tudo o que o feed acabou de enviar fosse embora.
 Hide videos you have already seen	Esconder os vídeos que você já viu
 Hide Search this image prompts	Ocultar avisos de Pesquisar esta imagem
 Hiding	Ocultar
@@ -481,7 +481,7 @@ Home	Início
 Hook status	Verificação de recursos
 How far each edge press moves the video.	Quanto o vídeo anda a cada toque na borda.
 Hushfeed cannot read the creator pattern %1$s	O Hushfeed não consegue ler o padrão de criador %1$s
-Hushfeed hid a TikTok puzzle. Turn off Hide CAPTCHA popups if something stops working.	O Hushfeed escondeu um quebra-cabeça do TikTok. Desligue Esconder as janelas de CAPTCHA se alguma coisa parar de funcionar.
+Hushfeed hid a TikTok CAPTCHA. Turn off Hide CAPTCHA popups if something stops working.	O Hushfeed escondeu um CAPTCHA do TikTok. Desligue Esconder as janelas de CAPTCHA se alguma coisa parar de funcionar.
 Hushfeed is active	O Hushfeed está ativo
 Ignore the creator's choice so the Duet and Stitch entries appear. Everything else the app checks still applies, and whether the upload is accepted is the server's decision.	Ignorar a escolha do criador para que as entradas de Dueto e Costura apareçam. Todo o resto que o app verifica continua valendo, e se o envio é aceito quem decide é o servidor.
 Import finished	Importação concluída
@@ -590,7 +590,7 @@ No matching settings	Nenhuma configuração combina
 No preset selected. Choose a preset above.	Nenhum preset selecionado. Escolha um preset acima.
 No recording yet. Start one, use a feature, then return here.	Nenhuma gravação ainda. Inicie uma, use um recurso e volte aqui.
 No seen videos recorded yet.	Nenhum vídeo visto registrado ainda.
-No share actions have been observed yet	Nenhuma ação de compartilhamento foi vista ainda
+No share actions have been seen yet	Nenhuma ação de compartilhamento foi vista ainda
 No share actions match this search	Nenhuma ação de compartilhamento combina com esta busca
 No sound to block on this video	Não há som para bloquear neste vídeo
 No suggested accounts to clear	Não há contas sugeridas para limpar
@@ -686,7 +686,7 @@ Profile picture saved to %1$s	Foto de perfil salva em %1$s
 Profile share actions	Ações de compartilhamento do perfil
 Promotional music	Música promocional
 Proof	Comprovação
-Publication age	Idade da publicação
+Post age	Idade da publicação
 Add a search box that filters comments already loaded on this video by text or username. It doesn't search all of TikTok or remove TikTok's suggested-search banner.	Adicione uma caixa de pesquisa que filtra os comentários já carregados neste vídeo por texto ou nome de usuário. Ela não pesquisa em todo o TikTok nem remove o banner de sugestões de pesquisa.
 Putting the settings back to their defaults	Voltando as configurações para os padrões
 Quality	Qualidade
@@ -701,7 +701,7 @@ Recovered an interrupted settings change. Restart TikTok to apply this.	Uma muda
 Refresh values	Atualizar os valores
 Refreshing current TikTok cache...	Atualizando o cache atual do TikTok...
 Region	Região
-Region rules	Regras da região
+Country filters	Filtros por país
 Remember the last speed	Lembrar a última velocidade
 Remind me every	Me lembrar a cada
 Remove	Remover
@@ -755,11 +755,11 @@ Save JSON	Salvar JSON
 Save SRT files with the video. Paired saves use Movies on Android 11+, Download on Android 10, and your video folder on older versions.	Salvar os arquivos SRT junto com o vídeo. Os salvamentos em par usam Movies no Android 11 ou superior, Download no Android 10, e sua pasta de vídeos em versões mais antigas.
 Save a profile picture on a long press	Salvar uma foto de perfil com um toque longo
 Save a story on a long press	Salvar um story com um toque longo
-Save every photo in the post directly from its source URL, without rendering it again.	Salvar cada foto da publicação direto da URL de origem, sem renderizar de novo.
+Save every photo in the post as TikTok received it, not as the screen shows it.	Salvar cada foto da publicação como o TikTok a recebeu, não como a tela a mostra.
 Save field values	Salvar os valores dos campos
 Save full report	Salvar relatório completo
 Save media	Salvar a mídia
-Save patch settings and Feature Gate Lab rules to a JSON file.	Salvar as configurações dos patches e as regras do Laboratório de gates em um arquivo JSON.
+Save Hushfeed settings and Feature Gate Lab rules to a JSON file.	Salvar as configurações do Hushfeed e as regras do Laboratório de gates em um arquivo JSON.
 Save subtitles beside videos	Salvar as legendas junto com os vídeos
 Save the latest available TikTok crash report for diagnostic export.	Guardar o último relatório de falha do TikTok disponível para exportar com o diagnóstico.
 Save the original sound	Salvar o som original
@@ -796,7 +796,7 @@ Search these comments	Buscar nestes comentários
 Search translated titles and descriptions, then open the original setting.	Buscar entre os títulos e descrições traduzidos e depois abrir a configuração original.
 Ask TikTok for search results that aren't personalized to your account. This changes results, not search buttons or suggestions.	Peça ao TikTok resultados de pesquisa que não sejam personalizados para sua conta. Isso muda os resultados, não os botões nem as sugestões de pesquisa.
 Search by name or gate key	Buscar por nome ou chave do gate
-Seconds. Zero keeps every length. If a whole batch would be filtered out, the video closest to your limit is kept so the feed is not empty.	Segundos. Zero aceita qualquer duração. Se um lote inteiro fosse filtrado, o vídeo mais perto do seu limite fica para o feed não ficar vazio.
+Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed is not empty.	Segundos. Zero aceita qualquer duração. Se tudo o que o feed acabou de enviar fosse filtrado, o vídeo mais perto do seu limite fica para o feed não ficar vazio.
 Seek by	Avançar
 Seek from the edges	Avançar pelas bordas
 Seen	Vistos
@@ -1047,7 +1047,7 @@ Until you choose here, this sheet follows your choices under Hide share actions.
 Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.	Até 8 velocidades de 0.5 a 3, separadas por vírgula. Por exemplo: 0.5, 1, 1.5, 2, 2.5, 3. Deixe vazio para a lista do TikTok. Reinicie o TikTok para aplicar.
 Use 0 for TikTok's size, or 12 to 48. Applies to the next caption.	Use 0 para o tamanho do TikTok, ou de 12 a 48. Vale para a próxima legenda.
 Use Save JSON for this large report	Use Salvar JSON para este relatório grande
-Use TikTok's native hold, slide down, and release gesture to lock 2x speed.	Usar o gesto nativo do TikTok de segurar, deslizar para baixo e soltar para travar a velocidade 2x.
+Use TikTok's own hold, slide down and release gesture to lock 2x speed.	Usar o gesto do próprio TikTok de segurar, deslizar para baixo e soltar para travar a velocidade 2x.
 Use a default playback speed	Usar uma velocidade de reprodução padrão
 Use non-personalized search	Usar a busca sem personalização
 Use system font	Usar a fonte do sistema
@@ -1060,7 +1060,7 @@ Use your own offline videos limit	Usar o seu próprio limite de vídeos offline
 Using TikTok's value	Usando o valor do TikTok
 Value	Valor
 Value to return	Valor devolvido
-Verified creators	Criadores verificados
+Verified accounts	Contas verificadas
 Version %1$s	Versão %1$s
 Version %1$s for TikTok %2$s	Versão %1$s para TikTok %2$s
 Video	Vídeo

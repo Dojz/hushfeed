@@ -139,11 +139,11 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
 
     private void addLimits(Context context) {
         addPreference(new SectionHeadingPreference(context, "Limits"));
-        addPreference(new NumberInputPreference(context, "Maximum video length", "Seconds. Zero keeps every length. If a whole batch would be filtered out, the video closest to your limit is kept so the feed is not empty.", Settings.MAX_VIDEO_SECONDS, "second", "seconds").zeroMeansOff());
+        addPreference(new NumberInputPreference(context, "Maximum video length", "Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed is not empty.", Settings.MAX_VIDEO_SECONDS, "second", "seconds").zeroMeansOff());
         addPreference(new NumberInputPreference(context, "Maximum post age",
                 "Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible.",
                 Settings.MAX_PUBLICATION_AGE_DAYS, "day", "days").zeroMeansOff());
-        addPreference(new NumberInputPreference(context, "Maximum views per like", "Hide videos with a lot of views and few likes. Lower numbers are stricter, zero turns the rule off, and one video is kept back if a whole batch would go.", Settings.MAX_VIEWS_PER_LIKE, "view per like", "views per like").zeroMeansOff());
+        addPreference(new NumberInputPreference(context, "Maximum views per like", "Hide videos with a lot of views and few likes. Lower numbers are stricter, zero turns the rule off, and one video is kept back if everything the feed just sent would go.", Settings.MAX_VIEWS_PER_LIKE, "view per like", "views per like").zeroMeansOff());
         addPreference(new NumberInputPreference(context, "Maximum views per comment", "Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.", Settings.MAX_VIEWS_PER_COMMENT, "view per comment", "views per comment").zeroMeansOff());
         addPreference(new RangeValuePreference(
                 context,
@@ -273,7 +273,7 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
         addPreference(new SectionHeadingPreference(context, "Advanced"));
         addPreference(new TogglePreference(
                 context,
-                "Filter offline fallback videos",
+                "Filter TikTok's offline videos",
                 "Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.",
                 Settings.FILTER_OFFLINE_FALLBACK_VIDEOS
         ));

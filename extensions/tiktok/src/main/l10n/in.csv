@@ -59,7 +59,7 @@ A diagnostic report is already being saved,Laporan diagnostik sedang disimpan
 A field value could not be read. Check the values and try again.,Nilai kolom tidak dapat dibaca. Periksa nilainya lalu coba lagi.
 "A good place to stop, if you want one.","Tempat yang bagus untuk berhenti, kalau kamu mencarinya."
 A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.,Titik hijau di sudut atas selama TikTok membuka kamera dan titik oranye selama merekam suara. Keduanya hilang saat akses berakhir.
-A hidden puzzle may be the cause.,Teka-teki yang disembunyikan bisa jadi penyebabnya.
+A hidden CAPTCHA may be the cause.,CAPTCHA yang disembunyikan bisa jadi penyebabnya.
 "A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.","Host pengganti tiktok.com saat kamu membagikan atau menyalin tautan, misalnya vxtiktok.com. Kosongkan untuk membagikan tautan TikTok sendiri. Hanya tautan TikTok yang diubah, dan hanya bagian host-nya, tidak ada yang dikirim ke mana pun."
 A newer clear replaced that undo. Tap the row again to undo.,Penghapusan yang lebih baru menggantikan pengurungan itu. Ketuk barisnya lagi untuk mengurungkan.
 "A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.",Label kecil di feed menunjukkan menit atau video yang tersisa dari anggaran hari ini.
@@ -172,7 +172,7 @@ Choose which rows and controls appear,Pilih baris dan kontrol yang muncul
 Clear all,Hapus semua
 "Clear all Lab data (overrides, switch, recordings)","Hapus semua data Lab (penggantian, sakelar, rekaman)"
 Clear all suggested accounts,Hapus semua akun yang disarankan
-"Clear buffered events, saved crash reports and the hook status above.","Hapus peristiwa yang tersimpan, laporan crash dan status hook di atas."
+"Clear the recent events, saved crash reports and the hook status above.","Hapus peristiwa terbaru, laporan crash yang tersimpan, dan status hook di atas."
 Clear diagnostic data,Hapus data diagnostik
 Clear display,Tampilan bersih
 Clear display delay,Jeda tampilan bersih
@@ -330,7 +330,7 @@ Files,Berkas
 Filter bottom tabs,Filter tab bawah
 Filter comments by keyword,Filter komentar berdasarkan kata kunci
 Filter feed tabs,Filter tab feed
-Filter offline fallback videos,Filter video offline cadangan
+Filter TikTok's offline videos,Filter video offline TikTok
 Filter settings,Pengaturan filter
 Filter the list,Saring daftar
 Filter: %1$s,Filter: %1$s
@@ -367,7 +367,7 @@ Hand-off,Penerusan
 Handle or id,Nama pengguna atau id
 Hidden %1$s on this phone,%1$s disembunyikan di ponsel ini
 Hidden commenters,Pengomentar yang disembunyikan
-Hidden creators,Kreator tersembunyi
+Blocked and hidden creators,Kreator yang diblokir dan disembunyikan
 Hidden: %1$s,Disembunyikan: %1$s
 Hide,Sembunyikan
 Hide AI-generated videos,Sembunyikan video buatan AI
@@ -385,7 +385,7 @@ Hide activity,Sembunyikan aktivitas
 Hide activity status,Sembunyikan status aktivitas
 Hide archive,Sembunyikan arsip
 Hide bottom tabs TikTok adds later unless you allow them.,"Sembunyikan tab bawah yang TikTok tambahkan kemudian, kecuali kamu mengizinkannya."
-"Hide browsing and LIVE puzzle dialogs. Login, account verification and any puzzle raised over a follow, like, comment or repost stay visible.","Sembunyikan dialog teka-teki saat menjelajah dan saat LIVE. Teka-teki untuk masuk, verifikasi akun, dan yang muncul saat mengikuti, menyukai, berkomentar, atau membagikan ulang tetap terlihat."
+"Hide the CAPTCHA dialogs raised while you browse or watch LIVE. Login, account verification and any CAPTCHA raised over a follow, like, comment or repost stay visible.","Sembunyikan dialog CAPTCHA yang muncul saat menjelajah atau menonton LIVE. CAPTCHA untuk masuk, verifikasi akun, dan yang muncul saat mengikuti, menyukai, berkomentar, atau membagikan ulang tetap terlihat."
 Hide buttons in the right column,Sembunyikan tombol di kolom kanan
 Hide comment polls,Sembunyikan jajak pendapat komentar
 Hide comment popup ads,Sembunyikan iklan popup di komentar
@@ -451,7 +451,7 @@ Hide the question cards TikTok slides over a video near its end.,Sembunyikan kar
 Hide the rewards shortcut,Sembunyikan pintasan hadiah
 Hide the right column,Sembunyikan kolom kanan
 The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.,Baris foto profil Story di bagian atas Kotak Masuk hilang. Story tetap bisa diputar dari feed dan dari profil.
-"Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.","Sembunyikan tombol simpan melalui hook visibilitas aslinya. Mencentang Simpan di daftar di atas menyembunyikan tombol yang sama melalui overlay."
+Hide the save button in the right column. Ticking Save in the list above hides it too.,Sembunyikan tombol simpan di kolom kanan. Mencentang Simpan di daftar di atas juga menyembunyikannya.
 Hide the magnifying glass at the top right of the feed. Search in Inbox and suggestions above comments stay unchanged.,Sembunyikan ikon kaca pembesar di kanan atas feed. Pencarian di Kotak Masuk dan saran di atas komentar tetap sama.
 Hide the magnifying glass at the top of Inbox. Search on the feed and in comments is unchanged.,Sembunyikan ikon kaca pembesar di bagian atas Kotak Masuk. Pencarian di feed dan di komentar tidak berubah.
 Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.,Sembunyikan pencarian yang direkomendasikan sebelum mengetik di halaman pencarian TikTok. Riwayat pencarian tetap ada. Ini tidak menyembunyikan saran di atas komentar.
@@ -469,7 +469,7 @@ Hide videos posted as part of a playlist.,Sembunyikan video yang diunggah sebaga
 Hide videos posted by verified accounts.,Sembunyikan video yang diunggah akun terverifikasi.
 Hide videos that belong to a paid Series.,Sembunyikan video yang termasuk Series berbayar.
 Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.,Sembunyikan video dengan banyak tayangan dan sedikit komentar. Bekerja sama seperti tayangan per suka. Nol mematikannya.
-"Hide videos with a lot of views and few likes. Lower numbers are stricter, zero turns the rule off, and one video is kept back if a whole batch would go.","Sembunyikan video dengan banyak penayangan dan sedikit suka. Angka lebih kecil lebih ketat, nol mematikan aturannya, dan satu video disisakan kalau satu batch penuh akan hilang."
+"Hide videos with a lot of views and few likes. Lower numbers are stricter, zero turns the rule off, and one video is kept back if everything the feed just sent would go.","Sembunyikan video dengan banyak penayangan dan sedikit suka. Angka lebih kecil lebih ketat, nol mematikan aturannya, dan satu video disisakan kalau semua yang baru dikirim feed akan hilang."
 Hide videos you have already seen,Sembunyikan video yang sudah kamu tonton
 Hide Search this image prompts,Sembunyikan ajakan Cari gambar ini
 Hiding,Menyembunyikan
@@ -482,7 +482,7 @@ Home,Beranda
 Hook status,Pemeriksaan fitur
 How far each edge press moves the video.,Seberapa jauh setiap tekanan di tepi memindahkan video.
 Hushfeed cannot read the creator pattern %1$s,Hushfeed tidak bisa membaca pola kreator %1$s
-Hushfeed hid a TikTok puzzle. Turn off Hide CAPTCHA popups if something stops working.,Hushfeed menyembunyikan satu teka-teki TikTok. Matikan Sembunyikan popup CAPTCHA kalau ada yang berhenti berfungsi.
+Hushfeed hid a TikTok CAPTCHA. Turn off Hide CAPTCHA popups if something stops working.,Hushfeed menyembunyikan satu CAPTCHA TikTok. Matikan Sembunyikan popup CAPTCHA kalau ada yang berhenti berfungsi.
 Hushfeed is active,Hushfeed aktif
 "Ignore the creator's choice so the Duet and Stitch entries appear. Everything else the app checks still applies, and whether the upload is accepted is the server's decision.","Abaikan pilihan pembuat video supaya entri Duet dan Stitch muncul. Semua pemeriksaan lain di aplikasi tetap berlaku, dan diterima atau tidaknya unggahan adalah keputusan server."
 Import finished,Impor selesai
@@ -591,7 +591,7 @@ No matching settings,Tidak ada setelan yang cocok
 No preset selected. Choose a preset above.,Tidak ada preset yang dipilih. Pilih preset di atas.
 "No recording yet. Start one, use a feature, then return here.","Belum ada rekaman. Mulai satu, pakai sebuah fitur, lalu kembali ke sini."
 No seen videos recorded yet.,Belum ada video yang dilihat tercatat.
-No share actions have been observed yet,Belum ada tindakan berbagi yang diamati
+No share actions have been seen yet,Belum ada tindakan berbagi yang terlihat
 No share actions match this search,Tidak ada tindakan berbagi yang cocok dengan pencarian ini
 No sound to block on this video,Tidak ada suara untuk diblokir di video ini
 No suggested accounts to clear,Tidak ada akun saran yang bisa dihapus
@@ -687,7 +687,7 @@ Profile picture saved to %1$s,Foto profil disimpan ke %1$s
 Profile share actions,Tindakan berbagi profil
 Promotional music,Musik promosi
 Proof,Bukti
-Publication age,Usia kiriman
+Post age,Usia kiriman
 Add a search box that filters comments already loaded on this video by text or username. It doesn't search all of TikTok or remove TikTok's suggested-search banner.,Tambahkan kotak pencarian untuk memfilter komentar yang sudah dimuat pada video ini berdasarkan teks atau nama pengguna. Ini tidak mencari di seluruh TikTok atau menghapus banner saran pencarian TikTok.
 Putting the settings back to their defaults,Mengembalikan pengaturan ke bawaan
 Quality,Kualitas
@@ -702,7 +702,7 @@ Recovered an interrupted settings change. Restart TikTok to apply this.,Perubaha
 Refresh values,Segarkan nilai
 Refreshing current TikTok cache...,Menyegarkan cache TikTok saat ini...
 Region,Wilayah
-Region rules,Aturan wilayah
+Country filters,Filter negara
 Remember the last speed,Ingat kecepatan terakhir
 Remind me every,Ingatkan saya setiap
 Remove,Hapus
@@ -756,11 +756,11 @@ Save JSON,Simpan JSON
 "Save SRT files with the video. Paired saves use Movies on Android 11+, Download on Android 10, and your video folder on older versions.","Simpan berkas SRT bersama videonya. Penyimpanan berpasangan memakai Movies di Android 11+, Download di Android 10, dan folder videomu di versi lama."
 Save a profile picture on a long press,Simpan foto profil dengan tekan lama
 Save a story on a long press,Simpan Story dengan tekan lama
-"Save every photo in the post directly from its source URL, without rendering it again.","Simpan setiap foto dalam unggahan langsung dari URL sumbernya, tanpa dirender ulang."
+"Save every photo in the post as TikTok received it, not as the screen shows it.","Simpan setiap foto dalam unggahan seperti yang diterima TikTok, bukan seperti yang ditampilkan layar."
 Save field values,Simpan nilai bidang
 Save full report,Simpan laporan lengkap
 Save media,Simpan media
-Save patch settings and Feature Gate Lab rules to a JSON file.,Simpan pengaturan patch dan aturan Feature Gate Lab ke berkas JSON.
+Save Hushfeed settings and Feature Gate Lab rules to a JSON file.,Simpan pengaturan Hushfeed dan aturan Feature Gate Lab ke berkas JSON.
 Save subtitles beside videos,Simpan subtitle bersama video
 Save the latest available TikTok crash report for diagnostic export.,Simpan laporan mogok TikTok terbaru yang tersedia untuk diekspor sebagai diagnostik.
 Save the original sound,Simpan suara asli
@@ -797,7 +797,7 @@ Search these comments,Cari di komentar ini
 "Search translated titles and descriptions, then open the original setting.","Cari judul dan deskripsi terjemahan, lalu buka setelan asli."
 "Ask TikTok for search results that aren't personalized to your account. This changes results, not search buttons or suggestions.","Minta hasil pencarian TikTok yang tidak dipersonalisasi untuk akunmu. Ini mengubah hasil, bukan tombol atau saran pencarian."
 Search by name or gate key,Cari berdasarkan nama atau kunci gate
-"Seconds. Zero keeps every length. If a whole batch would be filtered out, the video closest to your limit is kept so the feed is not empty.","Detik. Nol menyimpan semua durasi. Kalau satu batch penuh akan tersaring habis, video yang paling dekat dengan batasmu tetap ada agar feed tidak kosong."
+"Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed is not empty.","Detik. Nol menyimpan semua durasi. Kalau semua yang baru dikirim feed akan tersaring habis, video yang paling dekat dengan batasmu tetap ada agar feed tidak kosong."
 Seek by,Jarak lompatan
 Seek from the edges,Lompat dari tepi layar
 Seen,Terlihat
@@ -1048,7 +1048,7 @@ Undoing the last change,Membatalkan perubahan terakhir
 "Up to 8 speeds from 0.5 to 3, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.","Sampai 8 kecepatan dari 0.5 hingga 3, dipisah koma. Contoh: 0.5, 1, 1.5, 2, 2.5, 3. Kosongkan untuk daftar TikTok. Mulai ulang TikTok agar berlaku."
 "Use 0 for TikTok's size, or 12 to 48. Applies to the next caption.","Gunakan 0 untuk ukuran TikTok, atau 12 sampai 48. Berlaku untuk teks berikutnya."
 Use Save JSON for this large report,Pakai Simpan JSON untuk laporan sebesar ini
-"Use TikTok's native hold, slide down, and release gesture to lock 2x speed.","Pakai gestur bawaan TikTok, tahan lalu geser ke bawah dan lepas, untuk mengunci kecepatan 2x."
+"Use TikTok's own hold, slide down and release gesture to lock 2x speed.","Pakai gestur bawaan TikTok, tahan lalu geser ke bawah dan lepas, untuk mengunci kecepatan 2x."
 Use a default playback speed,Pakai kecepatan pemutaran bawaan
 Use non-personalized search,Pakai pencarian nonpersonal
 Use system font,Gunakan font sistem
@@ -1061,7 +1061,7 @@ Use your own offline videos limit,Gunakan batas video offline Anda sendiri
 Using TikTok's value,Memakai nilai TikTok
 Value,Nilai
 Value to return,Nilai yang dikembalikan
-Verified creators,Kreator terverifikasi
+Verified accounts,Akun terverifikasi
 Version %1$s,Versi %1$s
 Version %1$s for TikTok %2$s,Versi %1$s untuk TikTok %2$s
 Video,Video
