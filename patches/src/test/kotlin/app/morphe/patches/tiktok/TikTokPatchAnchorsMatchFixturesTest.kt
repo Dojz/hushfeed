@@ -1,7 +1,11 @@
 package app.morphe.patches.tiktok
 
 import app.morphe.Fixtures
+import app.morphe.patches.tiktok.feedfilter.COMMENT_TOP_BAR_BRIDGE_BASE
+import app.morphe.patches.tiktok.feedfilter.TAKO_COMMENT_TOP_BAR_BRIDGE
+import app.morphe.patches.tiktok.feedfilter.TAKO_COMMENT_TOP_BAR_SERVICE
 import app.morphe.patches.tiktok.feedfilter.countColdStartFeedItemListStores
+import app.morphe.patches.tiktok.feedfilter.isCommentTopBarCanShow
 import app.morphe.patches.tiktok.feedfilter.isTakoSearchEntranceInflater
 import app.morphe.patches.tiktok.feedfilter.takoSearchEntranceVariants
 import app.morphe.patches.tiktok.interaction.downloads.drawsCommentImageWatermark
@@ -143,6 +147,45 @@ class TikTokPatchAnchorsMatchFixturesTest {
                             second.opcode == Opcode.RETURN_OBJECT
                     })
             }
+        }
+    }
+
+    /**
+     * The Tako bar inside the comments sheet. Both services that can serve it keep one canShow
+     * of the guarded shape on every build, with a local for the guard's answer; the Tako bridge
+     * still sits on the base whose canShow is guarded, and the Tako service already answers
+     * false itself, so the guard's false is one the sheet's resolver handles.
+     */
+    @Test
+    fun `both comment sheet Tako top bar gates stay unique and guardable on every retained fixture`() {
+        val apks = fixtures()
+        for (apk in apks) {
+            val container = DexFileFactory.loadDexContainer(apk, Opcodes.getDefault())
+            val wanted = setOf(TAKO_COMMENT_TOP_BAR_SERVICE, COMMENT_TOP_BAR_BRIDGE_BASE, TAKO_COMMENT_TOP_BAR_BRIDGE)
+            val classes = container.dexEntryNames.asSequence()
+                .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }
+                .filter { it.type in wanted }.associateBy { it.type }
+            assertEquals("${apk.name}: named Tako comment services", wanted, classes.keys)
+            val bridge = classes.getValue(TAKO_COMMENT_TOP_BAR_BRIDGE)
+            assertEquals("${apk.name}: the Tako bridge extends the guarded base",
+                COMMENT_TOP_BAR_BRIDGE_BASE, bridge.superclass)
+            assertEquals("${apk.name}: the bridge has no canShow of its own", 0,
+                bridge.methods.count { it.name == "canShow" })
+            assertEquals("${apk.name}: the bridge names its Tako service", 1,
+                bridge.methods.count { it.name == "bridgeTopBar" && it.parameterTypes.isEmpty() })
+            for (type in listOf(TAKO_COMMENT_TOP_BAR_SERVICE, COMMENT_TOP_BAR_BRIDGE_BASE)) {
+                val gates = classes.getValue(type).methods.filter(::isCommentTopBarCanShow)
+                assertEquals("${apk.name}: $type canShow", 1, gates.size)
+                val body = gates.single().implementation!!
+                // this plus five parameters; the guard writes its answer to v0.
+                assertTrue("${apk.name}: $type canShow has no local for the guard",
+                    body.registerCount - 6 >= 1)
+            }
+            val takoGate = classes.getValue(TAKO_COMMENT_TOP_BAR_SERVICE).methods.single(::isCommentTopBarCanShow)
+            assertTrue("${apk.name}: the Tako service never answers false itself",
+                takoGate.implementation!!.instructions.any {
+                    it.opcode == Opcode.CONST_4 && (it as NarrowLiteralInstruction).narrowLiteral == 0
+                })
         }
     }
 

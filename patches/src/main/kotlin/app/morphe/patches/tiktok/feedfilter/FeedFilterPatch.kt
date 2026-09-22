@@ -489,6 +489,38 @@ val feedFilterPatch = bytecodePatch(
             )
         }
 
+        // The Tako bar inside the comments sheet, the "related words" strip above the comment
+        // list. It is a server-driven top bar component of biz type SEARCH_TAKO (the service in
+        // the Tako package) or SEARCH_TAKO_BG (the commentv2 bridge to the same Tako service).
+        // The header resolver asks the service canShow before it builds the component and treats
+        // false as a business condition not met, so false is an answer it already handles. The
+        // bridge base's canShow serves nine bridges (ads, shop, POI, search and the rest), so
+        // that guard hands the service over and the extension answers only for the Tako one;
+        // the class-name check below keeps that comparison honest against the build.
+        TakoCommentTopBarCanShowFingerprint.method.guardAtEntry(
+            "Feed filter",
+            "invoke-static {}, $TAKO_AI_FILTER_CLASS_DESCRIPTOR->shouldHideCommentTopBar()Z",
+            """
+                const/4 v0, 0x0
+                return v0
+            """,
+        )
+        val takoBridge = TakoCommentTopBarBridgeFingerprint.originalClassDef
+        if (takoBridge.superclass != COMMENT_TOP_BAR_BRIDGE_BASE) {
+            throw PatchException(
+                "Feed filter: ${takoBridge.type} extends ${takoBridge.superclass}, not the bridge " +
+                    "base whose canShow is guarded, so the comments Tako bar would be left standing.",
+            )
+        }
+        CommentTopBarBridgeCanShowFingerprint.method.guardAtEntry(
+            "Feed filter",
+            "invoke-static {p0}, $TAKO_AI_FILTER_CLASS_DESCRIPTOR->shouldHideBridgedCommentTopBar(Ljava/lang/Object;)Z",
+            """
+                const/4 v0, 0x0
+                return v0
+            """,
+        )
+
         // The "Ask · topic" bar issue #6's reporter still saw on 0.40.0 is none of the Tako
         // components above. It is one of TikTok's common bottom banners, keyed bottom_banner_tako
         // and drawn by the same banner view as the "Search · topic" bar, and every banner reaches

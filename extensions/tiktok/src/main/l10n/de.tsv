@@ -431,7 +431,7 @@ Hide LIVE videos from the feed.	LIVE-Videos aus dem Feed ausblenden.
 Hide the Message requests row.	Die Zeile „Nachrichtenanfragen“ ausblenden.
 Hide the New followers row.	Die Zeile „Neue Follower“ ausblenden.
 Hide the Send to row	Zeile „Senden an“ ausblenden
-Hide the Tako AI bubble above the profile button, the Ask bar under videos and the Ask Tako button on the search page.	Die Tako-AI-Blase über der Profil-Schaltfläche, die Tako-Leiste unter Videos und die Schaltfläche „Tako fragen“ auf der Suchseite ausblenden.
+Hide the Tako AI bubble above the profile button, the Ask bar under videos, the Ask Tako button on the search page and the Tako bar above comments.	Die Tako-AI-Blase über der Profil-Schaltfläche, die Tako-Leiste unter Videos, die Schaltfläche „Tako fragen“ auf der Suchseite und die Tako-Leiste über den Kommentaren ausblenden.
 Hide the Tako assistant conversation in Inbox.	Die Unterhaltung mit dem Tako-Assistenten im Posteingang ausblenden.
 Hide the activity status control in the Inbox header.	Das Element für den Aktivitätsstatus in der Kopfzeile des Posteingangs ausblenden.
 Hide the add people icon	Symbol Personen hinzufügen ausblenden

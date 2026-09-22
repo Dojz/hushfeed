@@ -1006,8 +1006,8 @@ public final class L10nTranslations {
                 "Melden-Schaltfläche auf Videos ausblenden");
         table.put("Hide the Send to row",
                 "Zeile „Senden an“ ausblenden");
-        table.put("Hide the Tako AI bubble above the profile button, the Ask bar under videos and the Ask Tako button on the search page.",
-                "Die Tako-AI-Blase über der Profil-Schaltfläche, die Tako-Leiste unter Videos und die Schaltfläche „Tako fragen“ auf der Suchseite ausblenden.");
+        table.put("Hide the Tako AI bubble above the profile button, the Ask bar under videos, the Ask Tako button on the search page and the Tako bar above comments.",
+                "Die Tako-AI-Blase über der Profil-Schaltfläche, die Tako-Leiste unter Videos, die Schaltfläche „Tako fragen“ auf der Suchseite und die Tako-Leiste über den Kommentaren ausblenden.");
         table.put("Hide the Tako assistant conversation in Inbox.",
                 "Die Unterhaltung mit dem Tako-Assistenten im Posteingang ausblenden.");
         table.put("Hide the Tako bubble",
@@ -3425,8 +3425,8 @@ public final class L10nTranslations {
                 "Ocultar el botón Denunciar en los videos");
         table.put("Hide the Send to row",
                 "Ocultar la fila Enviar a");
-        table.put("Hide the Tako AI bubble above the profile button, the Ask bar under videos and the Ask Tako button on the search page.",
-                "Ocultar la burbuja de Tako AI encima del botón de perfil, la barra de Tako debajo de los videos y el botón Preguntar a Tako en la página de búsqueda.");
+        table.put("Hide the Tako AI bubble above the profile button, the Ask bar under videos, the Ask Tako button on the search page and the Tako bar above comments.",
+                "Ocultar la burbuja de Tako AI encima del botón de perfil, la barra de Tako debajo de los videos, el botón Preguntar a Tako en la página de búsqueda y la barra de Tako encima de los comentarios.");
         table.put("Hide the Tako assistant conversation in Inbox.",
                 "Ocultar la conversación del asistente Tako en Recibidos.");
         table.put("Hide the Tako bubble",
@@ -5844,8 +5844,8 @@ public final class L10nTranslations {
                 "Sembunyikan tombol Laporkan di video");
         table.put("Hide the Send to row",
                 "Sembunyikan baris Kirim ke");
-        table.put("Hide the Tako AI bubble above the profile button, the Ask bar under videos and the Ask Tako button on the search page.",
-                "Sembunyikan gelembung Tako AI di atas tombol profil, bilah Tako di bawah video, dan tombol Tanya Tako di halaman pencarian.");
+        table.put("Hide the Tako AI bubble above the profile button, the Ask bar under videos, the Ask Tako button on the search page and the Tako bar above comments.",
+                "Sembunyikan gelembung Tako AI di atas tombol profil, bilah Tako di bawah video, tombol Tanya Tako di halaman pencarian, dan bilah Tako di atas komentar.");
         table.put("Hide the Tako assistant conversation in Inbox.",
                 "Sembunyikan percakapan asisten Tako di Kotak Masuk.");
         table.put("Hide the Tako bubble",
@@ -8263,8 +8263,8 @@ public final class L10nTranslations {
                 "Esconder o botão Denunciar nos vídeos");
         table.put("Hide the Send to row",
                 "Esconder a linha Enviar para");
-        table.put("Hide the Tako AI bubble above the profile button, the Ask bar under videos and the Ask Tako button on the search page.",
-                "Esconder a bolha do Tako AI acima do botão de perfil, a barra do Tako abaixo dos vídeos e o botão Perguntar ao Tako na página de busca.");
+        table.put("Hide the Tako AI bubble above the profile button, the Ask bar under videos, the Ask Tako button on the search page and the Tako bar above comments.",
+                "Esconder a bolha do Tako AI acima do botão de perfil, a barra do Tako abaixo dos vídeos, o botão Perguntar ao Tako na página de busca e a barra do Tako acima dos comentários.");
         table.put("Hide the Tako assistant conversation in Inbox.",
                 "Esconder a conversa com o assistente Tako na Caixa de entrada.");
         table.put("Hide the Tako bubble",
@@ -10682,8 +10682,8 @@ public final class L10nTranslations {
                 "Videolardaki Bildir düğmesini gizle");
         table.put("Hide the Send to row",
                 "Şuraya gönder satırını gizle");
-        table.put("Hide the Tako AI bubble above the profile button, the Ask bar under videos and the Ask Tako button on the search page.",
-                "Profil düğmesinin üzerindeki Tako AI balonunu, videoların altındaki Sor çubuğunu ve arama sayfasındaki Tako'ya Sor düğmesini gizle.");
+        table.put("Hide the Tako AI bubble above the profile button, the Ask bar under videos, the Ask Tako button on the search page and the Tako bar above comments.",
+                "Profil düğmesinin üzerindeki Tako AI balonunu, videoların altındaki Sor çubuğunu, arama sayfasındaki Tako'ya Sor düğmesini ve yorumların üstündeki Tako çubuğunu gizle.");
         table.put("Hide the Tako assistant conversation in Inbox.",
                 "Gelen Kutusu'ndaki Tako asistan sohbetini gizle.");
         table.put("Hide the Tako bubble",

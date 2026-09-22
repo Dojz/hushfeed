@@ -39,6 +39,8 @@ If one Feed filter switch (Hide Series, say, or Hide playlist videos) empties th
 
 **Hide the search bar below videos**, under Feed screen, removes the suggested-search strip above the bottom tabs. Video details and side controls can use its space. The top search button and comment suggestions have their own switches. This option is off by default and needs a restart.
 
+**Hide the Tako bubble**, under Feed tabs, also covers the Tako bar TikTok draws above the comment list, the strip of suggested questions and image prompts. Same switch, nothing extra to turn on. Restart TikTok after changing it.
+
 Some regions get extras the rest never see. **Hide the Report button on videos**, under Feed screen, removes the flag button above the creator's picture. **Hide search rewards**, under App, removes the points banner under the search box and the coin counter floating over results. Both are off by default, and neither could be tried on our own phones, so reports on how they behave are welcome.
 
 The settings screen comes in English, German, Spanish, Indonesian, Brazilian Portuguese and Turkish. It follows the language TikTok runs in, which is your phone's language unless you've picked another one for the app.

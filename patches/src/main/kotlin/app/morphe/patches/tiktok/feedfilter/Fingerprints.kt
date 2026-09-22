@@ -596,6 +596,58 @@ internal object TakoSearchPillInflateFingerprint : Fingerprint(
     custom = { method, _ -> isTakoSearchEntranceInflater(method) },
 )
 
+/**
+ * The Tako bar inside the comments sheet, the "related words" strip TikTok draws above the
+ * comment list. It is one of the sheet's server-driven top bar components, served under biz
+ * type SEARCH_TAKO (this service, in the Tako package) or SEARCH_TAKO_BG (the commentv2 bridge
+ * below, which hands the same Tako service its questions). The header resolver asks the
+ * service `canShow` before it builds the component and treats false as a business condition
+ * not met, which is the answer the guard gives. The first and last parameters are R8 types that
+ * change on every build; the three in the middle are real named on all five retained builds.
+ */
+internal const val TAKO_COMMENT_TOP_BAR_SERVICE =
+    "Lcom/ss/android/ugc/aweme/tako/detail/related/TakoCommentTopBarServiceImpl;"
+internal const val COMMENT_TOP_BAR_BRIDGE_BASE =
+    "Lcom/ss/android/ugc/aweme/commentv2/headeranchor/common/bridge/BaseTopBarBridgeServiceImpl;"
+internal const val TAKO_COMMENT_TOP_BAR_BRIDGE =
+    "Lcom/ss/android/ugc/aweme/commentv2/headeranchor/common/bridge/BgTakoTopBarServiceImpl;"
+
+internal fun isCommentTopBarCanShow(method: com.android.tools.smali.dexlib2.iface.Method): Boolean {
+    val parameters = method.parameterTypes.map(CharSequence::toString)
+    return method.name == "canShow" &&
+        method.returnType == "Z" &&
+        method.implementation != null &&
+        parameters.size == 5 &&
+        parameters[1] == "Lcom/ss/android/ugc/aweme/feed/model/CommentTopBarComponent;" &&
+        parameters[2] == "Lcom/ss/android/ugc/aweme/feed/model/Aweme;" &&
+        parameters[3] == "Ljava/lang/String;"
+}
+
+internal object TakoCommentTopBarCanShowFingerprint : Fingerprint(
+    definingClass = TAKO_COMMENT_TOP_BAR_SERVICE,
+    name = "canShow",
+    returnType = "Z",
+    custom = { method, _ -> isCommentTopBarCanShow(method) },
+)
+
+/**
+ * The bridge base serves nine commentv2 bridges (ads, shop, POI, search, activity and the
+ * rest), so its `canShow` is guarded with the service itself handed over and the extension
+ * answers only for the Tako bridge, whose class name the fingerprint below pins.
+ */
+internal object CommentTopBarBridgeCanShowFingerprint : Fingerprint(
+    definingClass = COMMENT_TOP_BAR_BRIDGE_BASE,
+    name = "canShow",
+    returnType = "Z",
+    custom = { method, _ -> isCommentTopBarCanShow(method) },
+)
+
+internal object TakoCommentTopBarBridgeFingerprint : Fingerprint(
+    definingClass = TAKO_COMMENT_TOP_BAR_BRIDGE,
+    name = "bridgeTopBar",
+    parameters = emptyList(),
+)
+
 internal object FollowFeedPresenterPostProcessFingerprint : Fingerprint(
     returnType = "V",
     parameters = listOf("Lcom/ss/android/ugc/aweme/follow/presenter/FollowFeedList;"),
