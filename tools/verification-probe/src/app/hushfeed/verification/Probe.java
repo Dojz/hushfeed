@@ -427,17 +427,32 @@ public final class Probe extends Instrumentation {
                         if (aweme == null) throw new IllegalStateException("no current video");
                         // The resolver reads AwemeCommentConfig.commentTopBarComponent; the
                         // model's own getCommentTopBarStructList is a different, older list.
-                        Object config = aweme.getClass().getMethod("getCommentConfig").invoke(aweme);
-                        Object components = null;
-                        if (config != null) {
-                            Field field = config.getClass().getField("commentTopBarComponent");
-                            components = field.get(config);
+                        // Each member is looked up on its own, so a build that renames one
+                        // still reports the others rather than nothing at all.
+                        Object config = null, components = null, legacy = null;
+                        String configState;
+                        try {
+                            config = aweme.getClass().getMethod("getCommentConfig").invoke(aweme);
+                            configState = config == null ? "null" : "present";
+                        } catch (NoSuchMethodException missing) {
+                            configState = "no getter";
                         }
-                        Object legacy = aweme.getClass()
-                                .getMethod("getCommentTopBarStructList").invoke(aweme);
-                        StringBuilder out = new StringBuilder("config=")
-                                .append(config == null ? "null" : "present")
-                                .append(" legacyList=").append(legacy == null ? "null" : ((List<?>) legacy).size())
+                        if (config != null) {
+                            try {
+                                components = config.getClass().getField("commentTopBarComponent").get(config);
+                            } catch (NoSuchFieldException missing) {
+                                configState += ", no commentTopBarComponent field";
+                            }
+                        }
+                        String legacyState;
+                        try {
+                            legacy = aweme.getClass().getMethod("getCommentTopBarStructList").invoke(aweme);
+                            legacyState = legacy == null ? "null" : String.valueOf(((List<?>) legacy).size());
+                        } catch (NoSuchMethodException missing) {
+                            legacyState = "no getter";
+                        }
+                        StringBuilder out = new StringBuilder("config=").append(configState)
+                                .append(" legacyList=").append(legacyState)
                                 .append(" components=");
                         if (components == null) {
                             out.append("null");
@@ -458,6 +473,22 @@ public final class Probe extends Instrumentation {
                             }
                         }
                         Log.i(TAG, "ok topbar\n" + out);
+                        break;
+                    }
+                    case "videoinfo": {
+                        // Technical facts about the current video that decide which surfaces
+                        // TikTok offers on it: the caption's language code and whether TikTok
+                        // marks the caption as translatable. No caption text, id or creator.
+                        Class<?> author = loader.loadClass(
+                                "app.morphe.extension.tiktok.blockauthor.CurrentVideoAuthor");
+                        Object aweme = author.getMethod("getAweme").invoke(null);
+                        if (aweme == null) throw new IllegalStateException("no current video");
+                        Object language = aweme.getClass().getMethod("getDescLanguage").invoke(aweme);
+                        Object translatable = aweme.getClass().getMethod("isDescTranslatable").invoke(aweme);
+                        Object desc = aweme.getClass().getMethod("getDesc").invoke(aweme);
+                        Log.i(TAG, "ok videoinfo descLanguage=" + language
+                                + " descTranslatable=" + translatable
+                                + " hasDesc=" + (desc != null && String.valueOf(desc).trim().length() > 0));
                         break;
                     }
                     case "doubletap": {
