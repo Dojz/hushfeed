@@ -128,7 +128,7 @@ final class FeatureGateLabText {
                 return L10n.f(context, "%1$s is not in this Lab catalog.", rejection.key);
             case UNSUPPORTED_BOUNDARY:
                 return L10n.f(context,
-                        "%1$s has no supported override boundary in this Lab build.",
+                        "%1$s cannot be overridden in this build.",
                         rejection.key);
             case TYPE_MISMATCH:
                 return L10n.f(context,

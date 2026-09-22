@@ -324,6 +324,23 @@ public class SettingsL10nTest {
         }
     }
 
+    /**
+     * The Lab's own words stay in the Lab's technical block. A gate is the thing, an override
+     * is what the reader sets, a rule is a saved override. "Flag" and "getter" reached the
+     * settings home row, two warnings and the override note before this held them out.
+     */
+    @Test public void labVocabularyStaysOutOfTheTranslatedStrings() throws Exception {
+        java.util.regex.Pattern jargon = java.util.regex.Pattern.compile(
+                "(?i)\\bgetters?\\b|\\bgate flags?\\b|\\bflags\\b|\\boverride boundary\\b"
+                        + "|\\bconfiguration object\\b|\\btype-checked\\b");
+        List<String> offenders = new ArrayList<>();
+        for (String key : readTable(ENGLISH_BASE).keySet()) {
+            if (jargon.matcher(key).find()) offenders.add(key);
+        }
+        assertEquals("Lab vocabulary in a translated string:\n" + String.join("\n", offenders),
+                0, offenders.size());
+    }
+
     @Test public void everyTranslationKeepsTheShapeOfItsKey() {
         // Defects the key-set checks cannot see. A placeholder that changed, was dropped or was
         // invented; a sentence that lost or gained its terminator; a quote pair that does not

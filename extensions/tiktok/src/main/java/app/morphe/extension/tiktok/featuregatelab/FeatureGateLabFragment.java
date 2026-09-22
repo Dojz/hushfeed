@@ -258,7 +258,7 @@ public final class FeatureGateLabFragment extends Fragment {
         controls.addView(masterRow, FeatureGateLabUi.matchWrap());
 
         View warning = SettingsUi.inlineNotice(context,
-                L10n.t(context, "Account warning: forced client values apply to every account in this app data and cannot bypass server controls."),
+                L10n.t(context, "A forced value applies to every account signed in on this phone. It cannot get past a check the server makes."),
                 SettingsUi.attentionColor());
         LinearLayout.LayoutParams warningParams = FeatureGateLabUi.matchWrap();
         int noticeMargin = FeatureGateLabUi.dp(context, SettingsUi.NOTICE_MARGIN);

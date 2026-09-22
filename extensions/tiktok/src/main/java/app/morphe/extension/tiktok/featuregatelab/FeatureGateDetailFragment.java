@@ -217,7 +217,7 @@ public final class FeatureGateDetailFragment extends Fragment {
         effectiveValue = addInfo(currentState, L10n.t(context, "What TikTok gets"), effectiveValueText());
         TextView cacheNote = FeatureGateLabUi.label(
                 context,
-                L10n.t(context, "An override changes the value returned by the getter. It does not rewrite TikTok's cached value or prove the named feature changed.")
+                L10n.t(context, "An override changes the value TikTok reads from this gate. It does not rewrite TikTok's cached value or prove the named feature changed.")
         );
         LinearLayout.LayoutParams cacheNoteParams = FeatureGateLabUi.matchWrap();
         cacheNoteParams.setMargins(0, FeatureGateLabUi.dp(context, 8), 0, 0);
@@ -225,7 +225,7 @@ public final class FeatureGateDetailFragment extends Fragment {
 
         if (isSensitiveKey(entry.key)) {
             View sensitive = SettingsUi.inlineNotice(context,
-                    L10n.t(context, "Account-sensitive name: forcing this key may affect security, login, compliance, region, payment, or account safety behavior."),
+                    L10n.t(context, "This key touches account safety. Forcing it can change login, region, payment or security checks."),
                     SettingsUi.attentionColor());
             LinearLayout.LayoutParams params = FeatureGateLabUi.matchWrap();
             int noticeMargin = FeatureGateLabUi.dp(context, SettingsUi.NOTICE_MARGIN);
@@ -278,7 +278,7 @@ public final class FeatureGateDetailFragment extends Fragment {
             LinearLayout forceRow = FeatureGateLabUi.switchRow(
                     context,
                     L10n.t(context, "Override this configuration"),
-                    L10n.t(context, "Return a copy of this configuration with the fields below changed"),
+                    L10n.t(context, "Return a copy with the fields below changed"),
                     force
             );
             content.addView(forceRow, FeatureGateLabUi.matchWrap());
@@ -330,7 +330,7 @@ public final class FeatureGateDetailFragment extends Fragment {
             LinearLayout valueRow = FeatureGateLabUi.switchRow(
                     context,
                     L10n.t(context, "Forced result"),
-                    L10n.t(context, "Off forces false; on forces true. Reset returns control to TikTok"),
+                    L10n.t(context, "Off forces false, on forces true. Reset hands the choice back to TikTok."),
                     booleanValue
             );
             valueRow.setBackground(SettingsUi.groupedRow(context, false, true));
@@ -946,7 +946,7 @@ public final class FeatureGateDetailFragment extends Fragment {
 
         TextView explanation = FeatureGateLabUi.label(
                 root.getContext(),
-                L10n.t(root.getContext(), "Only fields that can be type-checked and applied to a copied configuration object are shown.")
+                L10n.t(root.getContext(), "Only fields the Lab can check and copy safely are shown.")
         );
         LinearLayout.LayoutParams explanationParams = FeatureGateLabUi.matchWrap();
         explanationParams.setMargins(0, FeatureGateLabUi.dp(root.getContext(), 6), 0, 0);
