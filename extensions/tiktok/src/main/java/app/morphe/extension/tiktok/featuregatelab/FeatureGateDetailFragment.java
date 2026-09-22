@@ -467,7 +467,7 @@ public final class FeatureGateDetailFragment extends Fragment {
                     fillingFields = false;
                 }
                 setFieldsDirty(false);
-                Utils.showToastShort(L10n.t(getContext(), "Field edits were discarded."));
+                Utils.showToastShort(L10n.t(getContext(), "Field edits were discarded"));
             });
         }
         watchObjectEditors();
@@ -597,7 +597,7 @@ public final class FeatureGateDetailFragment extends Fragment {
     private void leaveDetail() {
         // Not a confirmation dialog: the house rule is one line of feedback and the action goes
         // through. What was typed is not saved, and now that is said rather than silent.
-        if (fieldsDirty) Utils.showToastShort(L10n.t(getContext(), "Field edits were not saved."));
+        if (fieldsDirty) Utils.showToastShort(L10n.t(getContext(), "Field edits were not saved"));
         if (getFragmentManager() != null) getFragmentManager().popBackStack();
     }
 

@@ -1323,7 +1323,7 @@ public final class FeatureGateLabFragment extends Fragment {
                 // used to be reported as invalid or too large, the same as a corrupt one.
                 postToast(throwable instanceof ImportRefused
                         ? throwable.getMessage()
-                        : L10n.t(Utils.getContext(), "That file is not a loaded-values export, or it is larger than the Lab accepts."));
+                        : L10n.t(Utils.getContext(), "That file is not a loaded-values export, or it is larger than the Lab accepts"));
             }
         });
     }

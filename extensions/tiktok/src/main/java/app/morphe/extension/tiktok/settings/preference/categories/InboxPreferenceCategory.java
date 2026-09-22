@@ -113,7 +113,7 @@ public final class InboxPreferenceCategory extends ConditionalPreferenceCategory
         addPreference(new TogglePreference(
                 context,
                 "Hide stories tray",
-                "Hide the row of story avatars across the top of the Inbox.",
+                "The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.",
                 Settings.HIDE_INBOX_STORIES
         ));
         }

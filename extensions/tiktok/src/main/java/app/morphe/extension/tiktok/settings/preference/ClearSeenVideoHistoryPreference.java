@@ -50,11 +50,11 @@ public final class ClearSeenVideoHistoryPreference extends Preference
         SeenVideoHistory.undoClear(result -> {
             String message;
             if (result == SeenVideoHistory.UndoResult.RESTORED) {
-                message = "Seen videos restored.";
+                message = "Seen videos put back";
             } else if (result == SeenVideoHistory.UndoResult.FAILED) {
                 message = FAILED;
             } else if (result == SeenVideoHistory.UndoResult.EMPTY) {
-                message = "There was nothing to undo.";
+                message = "There was nothing to put back";
             } else if (result == SeenVideoHistory.UndoResult.SUPERSEDED) {
                 message = "A newer clear replaced that undo. Tap the row again to undo.";
             } else {

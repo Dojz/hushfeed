@@ -61,7 +61,7 @@ A field value could not be read. Check the values and try again.,Nilai kolom tid
 A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.,Titik hijau di sudut atas selama TikTok membuka kamera dan titik oranye selama merekam suara. Keduanya hilang saat akses berakhir.
 A hidden puzzle may be the cause.,Teka-teki yang disembunyikan bisa jadi penyebabnya.
 "A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.","Host pengganti tiktok.com saat kamu membagikan atau menyalin tautan, misalnya vxtiktok.com. Kosongkan untuk membagikan tautan TikTok sendiri. Hanya tautan TikTok yang diubah, dan hanya bagian host-nya, tidak ada yang dikirim ke mana pun."
-A newer clear replaced that undo. Tap the row again to undo.,A newer clear replaced that undo. Tap the row again to undo.
+A newer clear replaced that undo. Tap the row again to undo.,Penghapusan yang lebih baru menggantikan pengurungan itu. Ketuk barisnya lagi untuk mengurungkan.
 "A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.",Label kecil di feed menunjukkan menit atau video yang tersisa dari anggaran hari ini.
 A tap on a person in the Send to row only selects them. A second tap on the same person within four seconds sends the video.,Satu ketukan pada orang di baris Kirim ke hanya memilihnya. Ketukan kedua pada orang yang sama dalam empat detik mengirim videonya.
 A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.,"Alamat web yang ditulis seseorang di komentar bisa diketuk, bukan disalin manual. Mengetuk bagian lain dari komentar tetap seperti sebelumnya."
@@ -75,7 +75,7 @@ Add,Tambah
 "Block the creator in one tap. Once TikTok confirms, skip to the next video. A small Unblock button appears at the top left for two seconds. You can also unblock later in TikTok's Privacy > Blocked accounts.","Blokir kreator dengan satu ketukan. Setelah TikTok mengonfirmasi, lanjut ke video berikutnya. Tombol Buka blokir kecil muncul di kiri atas selama dua detik. Anda juga bisa membuka blokir nanti di Privasi > Akun yang diblokir di TikTok."
 Unblock,Buka blokir
 Add a button beside the block control to send feedback about the current video.,Tambahkan tombol di samping kontrol blokir untuk mengirim masukan tentang video ini.
-Add a creator,Add a creator
+Add a creator,Tambah kreator
 Add a button that hides the current creator on this phone without blocking them.,Tambahkan tombol yang menyembunyikan kreator saat ini di ponsel ini tanpa memblokirnya.
 Add a separate button that skips videos using the current sound.,Tambahkan tombol terpisah yang melewati video yang menggunakan suara saat ini.
 Add hidden creator,Tambah kreator tersembunyi
@@ -114,7 +114,7 @@ Applies to both video and photo downloads.,Berlaku untuk unduhan video dan foto.
 Apply,Terapkan
 Around the video,Di sekitar video
 Arrange your feed and bottom tabs,Atur feed dan tab bawahmu
-Attention,Attention
+Attention,Perhatian
 Audio,Audio
 Auto translate comments,Terjemahkan komentar otomatis
 Auto-advance session limit,Batas lanjut otomatis per sesi
@@ -178,9 +178,9 @@ Clear display,Tampilan bersih
 Clear display delay,Jeda tampilan bersih
 Clear preset,Hapus preset
 Clear search,Hapus pencarian
-Clear seen videos,Clear seen videos
+Clear seen videos,Hapus video yang dilihat
 Clear the search,Hapus pencarian
-Cleared. Tap to undo before TikTok closes.,Cleared. Tap to undo before TikTok closes.
+Cleared. Tap to undo before TikTok closes.,Sudah dihapus. Ketuk untuk mengurungkan sebelum TikTok ditutup.
 Clearing,Menghapus
 Clearing suggested accounts,Menghapus akun yang disarankan
 "Clearing, %1$d so far","Membersihkan, %1$d sejauh ini"
@@ -234,7 +234,7 @@ Could not start the Lab change. Try again shortly.,Perubahan Lab tidak bisa dimu
 Could not start the report export. Try again shortly.,Ekspor laporan tidak bisa dimulai. Coba lagi sebentar.
 Could not start the settings operation. Try again shortly.,Proses pengaturan tidak bisa dimulai. Coba lagi sebentar.
 Could not tell which folder to update. Choose it again.,Tidak diketahui folder mana yang harus diubah. Pilih lagi.
-Could not undo the clear. Try again.,Could not undo the clear. Try again.
+Could not undo the clear. Try again.,Penghapusan tidak bisa diurungkan. Coba lagi.
 Country code,Kode negara
 Country and network preferences,Preferensi negara dan jaringan
 Counts under the buttons,Angka di bawah tombol
@@ -324,8 +324,8 @@ Feed filter,Filter feed
 Feed screen,Layar feed
 Feed tabs,Tab feed
 "Field %1$s can't be changed on this build. Take it out of the override, or reset the override.","Field %1$s tidak bisa diubah di build ini. Keluarkan dari penimpaan, atau setel ulang penimpaan."
-Field edits were discarded.,Perubahan bidang dibuang.
-Field edits were not saved.,Perubahan bidang tidak disimpan.
+Field edits were discarded,Perubahan bidang dibuang
+Field edits were not saved,Perubahan bidang tidak disimpan
 Files,Berkas
 Filter bottom tabs,Filter tab bawah
 Filter comments by keyword,Filter komentar berdasarkan kata kunci
@@ -351,7 +351,7 @@ Forced 1 gate of %1$d; the rest do not take a true or false value. Restart TikTo
 Forced 1 gate. Restart TikTok to apply this.,1 gate dipaksakan. Mulai ulang TikTok agar berlaku.
 Forced result,Hasil yang dipaksakan
 Forget seen videos after,Lupakan video yang sudah ditonton setelah
-Forget the %1$s seen videos.,Forget the %1$s seen videos.
+Forget the %1$s seen videos.,Lupakan %1$s video yang dilihat.
 Forget what has been counted today and end any hold. The budgets themselves are left alone.,Lupakan yang sudah dihitung hari ini dan akhiri penahanan apa pun. Anggarannya sendiri tidak diubah.
 Friends,Teman
 Full comment sort options,Opsi urutan komentar lengkap
@@ -364,7 +364,7 @@ Generated defaults,Nilai bawaan yang dihasilkan
 Gestures,Gerakan
 Ghost mode,Mode siluman
 Hand-off,Penerusan
-Handle or id,Handle or id
+Handle or id,Nama pengguna atau id
 Hidden %1$s on this phone,%1$s disembunyikan di ponsel ini
 Hidden commenters,Pengomentar yang disembunyikan
 Hidden creators,Kreator tersembunyi
@@ -450,7 +450,7 @@ Hide the purple rewards button beside Add friends on your profile.,Sembunyikan t
 Hide the question cards TikTok slides over a video near its end.,Sembunyikan kartu pertanyaan yang TikTok munculkan menjelang akhir video.
 Hide the rewards shortcut,Sembunyikan pintasan hadiah
 Hide the right column,Sembunyikan kolom kanan
-Hide the row of story avatars across the top of the Inbox.,Sembunyikan baris foto profil Story di bagian atas Kotak Masuk.
+The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.,Baris foto profil Story di bagian atas Kotak Masuk hilang. Story tetap bisa diputar dari feed dan dari profil.
 "Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.","Sembunyikan tombol simpan melalui hook visibilitas aslinya. Mencentang Simpan di daftar di atas menyembunyikan tombol yang sama melalui overlay."
 Hide the magnifying glass at the top right of the feed. Search in Inbox and suggestions above comments stay unchanged.,Sembunyikan ikon kaca pembesar di kanan atas feed. Pencarian di Kotak Masuk dan saran di atas komentar tetap sama.
 Remove the magnifying glass at the top of Inbox. It doesn't hide search on the feed or in comments.,Hapus ikon kaca pembesar di bagian atas Kotak Masuk. Ini tidak menyembunyikan pencarian di feed atau komentar.
@@ -476,7 +476,7 @@ Hiding,Menyembunyikan
 Highest,Tertinggi
 Historical,Historis
 Historical values,Nilai historis
-Hold a gate to choose several,Hold a gate to choose several
+Hold a gate to choose several,Tahan sebuah gate untuk memilih beberapa
 Hold the feed after the budget,Tahan feed setelah anggaran habis
 Home,Beranda
 Hook status,Pemeriksaan fitur
@@ -498,7 +498,7 @@ Inserted cards,Kartu yang disisipkan
 Keep a local record of what you have watched and drop those videos from later feed pages.,Simpan catatan tontonanmu di perangkat dan buang video itu dari halaman feed berikutnya.
 "Move to the next video when the current one ends. Pauses, open dialogs and screen-time holds stop it. Restart TikTok after changing this.","Pindah ke video berikutnya saat video saat ini berakhir. Jeda, dialog terbuka, dan batas waktu layar akan menghentikannya. Mulai ulang TikTok setelah mengubah setelan ini."
 Keep captions in clear display,Pertahankan keterangan saat tampilan bersih
-Keep going,Keep going
+Keep going,Lanjutkan
 Keep the Favorites tab,Pertahankan tab Favorit
 Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.,Sembunyikan jam dan ikon status selama TikTok terbuka. Geser dari atas untuk mengintipnya.
 Keep the screen's refresh rate,Pertahankan laju penyegaran layar
@@ -590,7 +590,7 @@ No matching diagnostics found,Tidak ada diagnostik yang cocok
 No matching settings,Tidak ada setelan yang cocok
 No preset selected. Choose a preset above.,Tidak ada preset yang dipilih. Pilih preset di atas.
 "No recording yet. Start one, use a feature, then return here.","Belum ada rekaman. Mulai satu, pakai sebuah fitur, lalu kembali ke sini."
-No seen videos recorded yet.,No seen videos recorded yet.
+No seen videos recorded yet.,Belum ada video yang dilihat tercatat.
 No share actions have been observed yet,Belum ada tindakan berbagi yang diamati
 No share actions match this search,Tidak ada tindakan berbagi yang cocok dengan pencarian ini
 No sound to block on this video,Tidak ada suara untuk diblokir di video ini
@@ -775,7 +775,7 @@ Saved %1$s original photos,%1$s foto asli tersimpan
 Saved one original photo,Satu foto asli disimpan
 "Saved, override off","Disimpan, penggantian mati"
 Saved. Restart TikTok to apply this.,Tersimpan. Mulai ulang TikTok agar berlaku.
-Saving,Saving
+Saving,Menyimpan
 Saving %1$s original photos,Menyimpan %1$s foto asli
 Saving settings backup,Menyimpan cadangan pengaturan
 Saving sticker,Menyimpan stiker
@@ -803,9 +803,9 @@ Seek from the edges,Lompat dari tepi layar
 Seen,Terlihat
 Seen this session,Terlihat di sesi ini
 Seen videos,Video yang sudah dilihat
-Seen videos cleared. You can undo until TikTok closes.,Video yang dilihat telah dihapus. Anda dapat mengurungkannya sampai TikTok ditutup.
-Seen videos restored.,Seen videos restored.
-Select,Select
+Seen videos cleared. You can undo until TikTok closes.,Video yang dilihat sudah dihapus. Kamu bisa mengurungkannya sampai TikTok ditutup.
+Seen videos put back,Video yang dilihat dikembalikan
+Select,Pilih
 Select at least one field.,Pilih setidaknya satu kolom.
 Select every tab,Pilih semua tab
 Selected,Dipilih
@@ -910,7 +910,7 @@ That backup was written by a newer Hushfeed than this one. Nothing was altered.,
 That creator is already in the list,Kreator itu sudah ada di daftar
 "That creator pattern is too long to use, so it was skipped: %1$s","Pola kreator itu terlalu panjang, jadi dilewati: %1$s"
 "That creator pattern is too long, so it was not added: %1$s","Pola kreator itu terlalu panjang, jadi tidak ditambahkan: %1$s"
-"That file is not a loaded-values export, or it is larger than the Lab accepts.","Berkas nilai yang dimuat tidak valid atau terlalu besar."
+"That file is not a loaded-values export, or it is larger than the Lab accepts","Berkas itu bukan ekspor nilai yang dimuat, atau lebih besar dari yang diterima Lab"
 "That file is not readable text, so it may have been damaged in transit. Nothing was altered.","Berkas itu bukan teks yang dapat dibaca, jadi mungkin rusak saat dikirim. Tidak ada yang diubah."
 That file is too large to be a settings backup. Nothing was altered.,Berkas itu terlalu besar untuk sebuah cadangan pengaturan. Tidak ada yang diubah.
 "That folder name has a character Android does not allow. Use letters, numbers, spaces or dashes.","Ada nama folder yang tidak sah di tujuannya."
@@ -931,7 +931,7 @@ That settings backup is damaged or only partly downloaded. Nothing was altered.,
 That settings change did not go through. Nothing was altered.,Perubahan itu tidak berhasil. Tidak ada yang diubah.
 That sticker is in a format Hushfeed cannot read,Stiker itu formatnya tidak bisa dibaca Hushfeed
 The Lab can't check this. TikTok gets it exactly as typed.,Lab tidak bisa memeriksa ini. TikTok menerimanya persis seperti yang Anda ketik.
-The Lab could not open. Go back and open it again.,Feature Gate Lab tidak menemukan wadah pengaturan.
+The Lab could not open. Go back and open it again.,Lab tidak bisa dibuka. Kembali lalu buka lagi.
 "The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.","Lab menyimpan paling banyak %1$s aturan. Perubahan ini akan membuat jumlahnya %2$s, jadi tidak ada yang diubah."
 The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.,Katalog menyebut kunci ini %1$s dan penimpaan ini %2$s. Setel ulang penimpaan lalu buat yang baru.
 The diagnostic report could not be saved yet. Try again in a moment.,Laporan diagnostik belum bisa disimpan. Coba lagi sebentar.
@@ -969,7 +969,7 @@ The story couldn't be saved. Try again.,Story-nya tidak bisa disimpan.
 There is no Lab change to undo.,Tidak ada perubahan Lab yang bisa dibatalkan.
 There is no diagnostic data to clear,Tidak ada data diagnostik yang perlu dihapus
 There is no diagnostic data to put back,Tidak ada data diagnostik yang dapat dikembalikan
-There was nothing to undo.,There was nothing to undo.
+There was nothing to put back,Tidak ada yang bisa dikembalikan
 These loaded values are for a different TikTok version.,Nilai yang dimuat ini untuk versi TikTok yang berbeda.
 This catalog entry is no longer available. Refresh the Lab and try again.,Entri katalog ini sudah tidak tersedia. Segarkan Lab dan coba lagi.
 This change couldn't be saved. Try again.,Perubahan ini tidak dapat disimpan. Coba lagi.
@@ -1040,7 +1040,7 @@ Unblock this commenter,Buka blokir pengomentar ini
 Unblocked %1$s,%1$s dibuka blokirnya
 Couldn't confirm the unblock for %1$s. Open their profile to check.,Pembukaan blokir %1$s tidak dapat dikonfirmasi. Buka profilnya untuk memeriksa.
 Undo,Urungkan
-Undo clearing seen videos,Undo clearing seen videos
+Undo clearing seen videos,Urungkan penghapusan video yang dilihat
 Undo last Lab change,Batalkan perubahan Lab terakhir
 Undo last restore or reset,Urungkan pemulihan atau reset terakhir
 Undoing the last change,Membatalkan perubahan terakhir

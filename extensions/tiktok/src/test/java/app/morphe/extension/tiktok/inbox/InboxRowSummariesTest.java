@@ -67,7 +67,9 @@ public class InboxRowSummariesTest {
                     restating.add(row.getTitle() + " / " + row.getSummary());
                 }
             }
-            assertTrue("too few Inbox rows to mean anything: " + rows, rows >= 12);
+            // The page builds sixteen rows with every flag on. A floor at that number means a
+            // row that stops being built is noticed here rather than slipping past the rule.
+            assertTrue("too few Inbox rows to mean anything: " + rows, rows >= 16);
             assertEquals("Inbox summaries that open by saying the title again:\n"
                     + String.join("\n", restating), 0, restating.size());
         } finally {
@@ -88,6 +90,11 @@ public class InboxRowSummariesTest {
                 "Hide the activity status control in the Inbox header."));
         assertFalse(opensWithItsTitle("Hide archive",
                 "The Archive row leaves the Inbox. Archived chats are kept."));
+        assertFalse(opensWithItsTitle("Hide stories tray",
+                "The row of story avatars across the top of the Inbox goes."));
+        // The rule reads words, not meaning: a summary that says the title over again in other
+        // words gets through it. That is why the page's summaries each name a consequence, and
+        // why this one was reworded rather than blessed here.
         assertFalse(opensWithItsTitle("Hide stories tray",
                 "Hide the row of story avatars across the top of the Inbox."));
     }

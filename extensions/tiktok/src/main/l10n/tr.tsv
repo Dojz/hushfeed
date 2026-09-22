@@ -337,8 +337,8 @@ Feed screen	Akış ekranı
 Feed tabs	Akış sekmeleri
 Feed tabs to keep	Kalacak akış sekmeleri
 Field %1$s can't be changed on this build. Take it out of the override, or reset the override.	%1$s alanı bu sürümde değiştirilemez. Onu geçersiz kılmadan çıkar veya geçersiz kılmayı sıfırla.
-Field edits were discarded.	Alan düzenlemelerinden vazgeçildi.
-Field edits were not saved.	Alan düzenlemeleri kaydedilmedi.
+Field edits were discarded	Alan düzenlemelerinden vazgeçildi
+Field edits were not saved	Alan düzenlemeleri kaydedilmedi
 Files	Dosyalar
 Filter bottom tabs	Alt sekmeleri filtrele
 Filter comments by keyword	Yorumları anahtar kelimeye göre filtrele
@@ -478,7 +478,7 @@ Hide the purple rewards button beside Add friends on your profile.	Profilinde Ar
 Hide the question cards TikTok slides over a video near its end.	TikTok'un bir videonun sonuna doğru üzerine kaydırdığı soru kartlarını gizle.
 Hide the rewards shortcut	Ödül kısayolunu gizle
 Hide the right column	Sağ sütunu gizle
-Hide the row of story avatars across the top of the Inbox.	Gelen Kutusu'nun üst kısmındaki hikaye avatarları satırını gizle.
+The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.	Gelen Kutusu'nun üst kısmındaki hikaye avatarları satırı kalkar. Hikayeler akıştan ve profillerden oynatılmaya devam eder.
 Hide the save button on the feed	Akıştaki kaydet düğmesini gizle
 Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.	Kaydet düğmesini yerel görünürlük kancası üzerinden gizle. Yukarıdaki listede Kaydet'i işaretlemek aynı düğmeyi katman üzerinden gizler.
 Hide the search bar below videos	Videoların altındaki arama çubuğunu gizle
@@ -836,7 +836,7 @@ Seen	Görüldü
 Seen this session	Bu oturumda görüldü
 Seen videos	Görülen videolar
 Seen videos cleared. You can undo until TikTok closes.	Görülen videolar temizlendi. TikTok kapanana kadar geri alabilirsin.
-Seen videos restored.	Görülen videolar geri yüklendi.
+Seen videos put back	Görülen videolar geri kondu
 Select	Seç
 Select at least one field.	En az bir alan seç.
 Select every tab	Tüm sekmeleri seç
@@ -945,7 +945,7 @@ That backup was written by a newer Hushfeed than this one. Nothing was altered.	
 That creator is already in the list	Bu içerik üreticisi zaten listede
 That creator pattern is too long to use, so it was skipped: %1$s	Bu içerik üreticisi kalıbı kullanılamayacak kadar uzun olduğu için atlandı: %1$s
 That creator pattern is too long, so it was not added: %1$s	Bu içerik üreticisi kalıbı çok uzun olduğu için eklenmedi: %1$s
-That file is not a loaded-values export, or it is larger than the Lab accepts.	Bu dosya bir yüklenen değerler dışa aktarımı değil ya da Lab'in kabul ettiğinden büyük.
+That file is not a loaded-values export, or it is larger than the Lab accepts	Bu dosya bir yüklenen değerler dışa aktarımı değil ya da Lab'in kabul ettiğinden büyük
 That file is not readable text, so it may have been damaged in transit. Nothing was altered.	Bu dosya okunabilir bir metin değil, aktarım sırasında zarar görmüş olabilir. Hiçbir şey değiştirilmedi.
 That file is too large to be a settings backup. Nothing was altered.	Bu dosya bir ayar yedeği olamayacak kadar büyük. Hiçbir şey değiştirilmedi.
 That folder name has a character Android does not allow. Use letters, numbers, spaces or dashes.	Bu klasör adında Android'in izin vermediği bir karakter var. Harf, rakam, boşluk veya kısa çizgi kullan.
@@ -1004,7 +1004,7 @@ The video couldn't be saved. Try again, or choose Automatic.	Video kaydedilemedi
 There is no Lab change to undo.	Geri alınacak bir Lab değişikliği yok.
 There is no diagnostic data to clear	Temizlenecek tanılama verisi yok
 There is no diagnostic data to put back	Geri konacak tanılama verisi yok
-There was nothing to undo.	Geri alınacak bir şey yoktu.
+There was nothing to put back	Geri konacak bir şey yoktu
 These loaded values are for a different TikTok version.	Bu yüklenen değerler farklı bir TikTok sürümüne ait.
 This catalog entry is no longer available. Refresh the Lab and try again.	Bu katalog girişi artık kullanılamıyor. Lab'i yenile ve yeniden dene.
 This change couldn't be saved. Try again.	Bu değişiklik kaydedilemedi. Yeniden dene.

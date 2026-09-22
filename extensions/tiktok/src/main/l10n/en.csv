@@ -336,8 +336,8 @@ Feed screen,Feed screen
 Feed tabs,Feed tabs
 Feed tabs to keep,Feed tabs to keep
 "Field %1$s can't be changed on this build. Take it out of the override, or reset the override.","Field %1$s can't be changed on this build. Take it out of the override, or reset the override."
-Field edits were discarded.,Field edits were discarded.
-Field edits were not saved.,Field edits were not saved.
+Field edits were discarded,Field edits were discarded
+Field edits were not saved,Field edits were not saved
 Files,Files
 Filter bottom tabs,Filter bottom tabs
 Filter comments by keyword,Filter comments by keyword
@@ -468,7 +468,6 @@ Hide the question cards TikTok slides over a video near its end.,Hide the questi
 Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.,Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.
 Hide the rewards shortcut,Hide the rewards shortcut
 Hide the right column,Hide the right column
-Hide the row of story avatars across the top of the Inbox.,Hide the row of story avatars across the top of the Inbox.
 Hide the save button on the feed,Hide the save button on the feed
 Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.,Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.
 Hide the search bar below videos,Hide the search bar below videos
@@ -828,7 +827,7 @@ Seen,Seen
 Seen this session,Seen this session
 Seen videos,Seen videos
 Seen videos cleared. You can undo until TikTok closes.,Seen videos cleared. You can undo until TikTok closes.
-Seen videos restored.,Seen videos restored.
+Seen videos put back,Seen videos put back
 Select,Select
 Select at least one field.,Select at least one field.
 Select every tab,Select every tab
@@ -946,7 +945,7 @@ That backup was written by a newer Hushfeed than this one. Nothing was altered.,
 That creator is already in the list,That creator is already in the list
 "That creator pattern is too long to use, so it was skipped: %1$s","That creator pattern is too long to use, so it was skipped: %1$s"
 "That creator pattern is too long, so it was not added: %1$s","That creator pattern is too long, so it was not added: %1$s"
-"That file is not a loaded-values export, or it is larger than the Lab accepts.","That file is not a loaded-values export, or it is larger than the Lab accepts."
+"That file is not a loaded-values export, or it is larger than the Lab accepts","That file is not a loaded-values export, or it is larger than the Lab accepts"
 "That file is not readable text, so it may have been damaged in transit. Nothing was altered.","That file is not readable text, so it may have been damaged in transit. Nothing was altered."
 That file is too large to be a settings backup. Nothing was altered.,That file is too large to be a settings backup. Nothing was altered.
 "That folder name has a character Android does not allow. Use letters, numbers, spaces or dashes.","That folder name has a character Android does not allow. Use letters, numbers, spaces or dashes."
@@ -994,6 +993,7 @@ The feed is open again,The feed is open again
 The profile picture couldn't be saved. Try again.,The profile picture couldn't be saved. Try again.
 "The record of an interrupted settings change could not be read, so it was set aside. Check your settings.","The record of an interrupted settings change could not be read, so it was set aside. Check your settings."
 The report couldn't be saved. Try again.,The report couldn't be saved. Try again.
+The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.,The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.
 The selected loaded-values file could not be read. Try again.,The selected loaded-values file could not be read. Try again.
 The setting couldn't finish updating. Its saved value is shown.,The setting couldn't finish updating. Its saved value is shown.
 The settings backup was rejected. Nothing was altered.,The settings backup was rejected. Nothing was altered.
@@ -1006,7 +1006,7 @@ The story couldn't be saved. Try again.,The story couldn't be saved. Try again.
 There is no Lab change to undo.,There is no Lab change to undo.
 There is no diagnostic data to clear,There is no diagnostic data to clear
 There is no diagnostic data to put back,There is no diagnostic data to put back
-There was nothing to undo.,There was nothing to undo.
+There was nothing to put back,There was nothing to put back
 These loaded values are for a different TikTok version.,These loaded values are for a different TikTok version.
 This catalog entry is no longer available. Refresh the Lab and try again.,This catalog entry is no longer available. Refresh the Lab and try again.
 This change couldn't be saved. Try again.,This change couldn't be saved. Try again.

@@ -513,7 +513,36 @@ public class SettingsL10nTest {
                 + String.join("\n", offenders), offenders.isEmpty());
     }
 
-    /** The literal handed to L10n.t or L10n.f directly inside a toast call, per call. */
+    /** The scan sees every shape a toast call takes, and the rule can fail. */
+    @Test public void theToastPunctuationRuleCanActuallyFail() {
+        String source = "class T {\n"
+                + "  void a() { Utils.showToastShort(L10n.t(getContext(), \"Field edits were not saved.\")); }\n"
+                + "  void b() { postToast(refused ? L10n.t(context, \"Refused\")\n"
+                + "      : L10n.t(Utils.getContext(), \"That file is too large.\")); }\n"
+                + "  void c() { Utils.showToastLong(L10n.f(\"Saved %1$s\", name)); }\n"
+                + "  // Utils.showToastShort(L10n.t(context, \"Inside a comment.\"));\n"
+                + "}\n";
+        assertEquals(java.util.Arrays.asList("Field edits were not saved.", "Refused",
+                "That file is too large.", "Saved %1$s"), toastLiteralsIn(source));
+
+        assertNotNull(punctuationFault("Diagnostic data put back."));
+        assertNotNull(punctuationFault("Done!"));
+        assertNotNull(punctuationFault("Copied 3 lines. 12 were skipped"));
+        assertNotNull(punctuationFault("Saved. nothing else changed"));
+        assertNull(punctuationFault("Seen videos put back"));
+        assertNull(punctuationFault("Could not undo the clear. Try again."));
+        assertNull(punctuationFault("Enter a whole number, or one like 20K, 1.5M or 2B"));
+    }
+
+    /**
+     * Every literal handed to L10n.t or L10n.f directly inside a toast call.
+     *
+     * <p>The context argument may be a name, a call such as {@code getContext()} or a
+     * qualified call such as {@code Utils.getContext()}: the first version of this scan took
+     * a bare name only, and three Lab toasts written with a call walked past it carrying full
+     * stops. Every literal in the call is taken, not the first, because a toast that chooses
+     * between two messages with a ternary has two.
+     */
     private static java.util.List<String> toastLiteralsIn(String text) {
         byte[] kind = classify(text);
         java.util.List<String> found = new java.util.ArrayList<>();
@@ -525,9 +554,9 @@ public class SettingsL10nTest {
             int close = closingBracket(text, kind, open);
             if (close < 0) continue;
             java.util.regex.Matcher literal = java.util.regex.Pattern
-                    .compile("L10n\\.[tf]\\(\\s*(?:\\w+\\s*,\\s*)?\"((?:[^\"\\\\]|\\\\.)*)\"")
+                    .compile("L10n\\.[tf]\\(\\s*(?:[\\w.]+\\s*(?:\\(\\s*\\))?\\s*,\\s*)?\"((?:[^\"\\\\]|\\\\.)*)\"")
                     .matcher(text.substring(open, close));
-            if (literal.find()) found.add(unescape(literal.group(1)));
+            while (literal.find()) found.add(unescape(literal.group(1)));
         }
         return found;
     }
@@ -536,10 +565,12 @@ public class SettingsL10nTest {
     static String punctuationFault(String message) {
         String trimmed = message.trim();
         if (trimmed.isEmpty()) return null;
-        // A sentence boundary is a terminator followed by a space and a capital or a quote.
-        boolean several = trimmed.matches("(?s).*[.!?][\"”']?\\s+[A-Z\"“%].*");
+        // A sentence boundary is a terminator followed by a space and the start of the next
+        // sentence, whatever it starts with: a capital, a quote, a placeholder, a number or a
+        // word left in lower case by mistake.
+        boolean several = trimmed.matches("(?s).*[.!?][\"”']?\\s+[A-Za-z0-9\"“%].*");
         boolean ends = trimmed.matches("(?s).*[.!?][\"”']?$");
-        if (!several && trimmed.endsWith(".")) return "one sentence ends with a full stop";
+        if (!several && ends) return "one sentence ends with a stop";
         if (several && !ends) return "several sentences and the last has no stop";
         return null;
     }
