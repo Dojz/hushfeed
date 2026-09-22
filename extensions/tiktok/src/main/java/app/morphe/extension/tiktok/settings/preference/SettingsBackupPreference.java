@@ -135,7 +135,7 @@ public final class SettingsBackupPreference extends Preference
         catch (RuntimeException error) {
             Logger.printException(() -> "Could not open settings file picker", error);
             Utils.showToastLong(L10n.t(
-                    "This phone has no file picker, so there is no way to choose a file here."));
+                    "This phone has no file picker, so there is no way to choose a file here"));
         }
     }
 
@@ -196,10 +196,10 @@ public final class SettingsBackupPreference extends Preference
                 // default, download folders included, without a word.
                 if (keptAsTheyWere == 1) {
                     Utils.showToastLong(L10n.f(
-                            "%1$d setting was not in that file and was left as it is.", keptAsTheyWere));
+                            "%1$d setting was not in that file and was left as it is", keptAsTheyWere));
                 } else if (keptAsTheyWere > 1) {
                     Utils.showToastLong(L10n.f(
-                            "%1$d settings were not in that file and were left as they are.", keptAsTheyWere));
+                            "%1$d settings were not in that file and were left as they are", keptAsTheyWere));
                 }
                 // Each of these is one literal, because the translation gate reads the literal
                 // handed to L10n and a string built from two of them is two entries it cannot find.

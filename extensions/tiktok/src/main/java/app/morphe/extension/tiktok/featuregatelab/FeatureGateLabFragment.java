@@ -86,7 +86,7 @@ public final class FeatureGateLabFragment extends Fragment {
         return translated;
     }
     private static final String[] SOURCE_LABELS = {
-            "All", "App AB", "Config", "Player", "Live", "Media", "Activity"
+            "All", "App AB", "Config", "Player", "LIVE", "Media", "Activity"
     };
     private static final String[] SOURCE_MANAGERS = {
             null,

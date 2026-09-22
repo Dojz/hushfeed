@@ -483,6 +483,68 @@ public class SettingsL10nTest {
     }
 
     /**
+     * A toast of one sentence takes no full stop; a toast of several ends every sentence with
+     * one. "Diagnostic data put back." next to "Seen video history put back" was the same pair
+     * of toasts punctuated two ways, and nothing held them to one rule.
+     */
+    @Test public void everyToastFollowsThePunctuationRule() throws Exception {
+        java.io.File root = new java.io.File("src/main/java/app/morphe/extension/tiktok");
+        if (!root.isDirectory()) root = new java.io.File(
+                "extensions/tiktok/src/main/java/app/morphe/extension/tiktok");
+        assertTrue(root.isDirectory());
+        java.util.List<String> offenders = new java.util.ArrayList<>();
+        int toasts = 0;
+        java.nio.file.Path base = root.toPath();
+        try (java.util.stream.Stream<java.nio.file.Path> files = java.nio.file.Files.walk(base)) {
+            for (java.nio.file.Path file : files.filter(p -> p.toString().endsWith(".java"))
+                    .collect(java.util.stream.Collectors.toList())) {
+                if (file.getFileName().toString().equals("L10nTranslations.java")) continue;
+                String text = new String(java.nio.file.Files.readAllBytes(file),
+                        java.nio.charset.StandardCharsets.UTF_8);
+                for (String message : toastLiteralsIn(text)) {
+                    toasts++;
+                    String fault = punctuationFault(message);
+                    if (fault != null) offenders.add(base.relativize(file) + ": " + fault + "  \"" + message + "\"");
+                }
+            }
+        }
+        assertTrue("the scan found too few toasts to mean anything: " + toasts, toasts > 40);
+        assertTrue("one sentence takes no full stop, several take one each:\n"
+                + String.join("\n", offenders), offenders.isEmpty());
+    }
+
+    /** The literal handed to L10n.t or L10n.f directly inside a toast call, per call. */
+    private static java.util.List<String> toastLiteralsIn(String text) {
+        byte[] kind = classify(text);
+        java.util.List<String> found = new java.util.ArrayList<>();
+        java.util.regex.Matcher call = java.util.regex.Pattern
+                .compile("(?:\\b\\w*[Tt]oast\\w*|Toast\\s*\\.\\s*makeText)\\s*\\(").matcher(text);
+        while (call.find()) {
+            int open = call.end() - 1;
+            if (kind[call.start()] != CODE) continue;
+            int close = closingBracket(text, kind, open);
+            if (close < 0) continue;
+            java.util.regex.Matcher literal = java.util.regex.Pattern
+                    .compile("L10n\\.[tf]\\(\\s*(?:\\w+\\s*,\\s*)?\"((?:[^\"\\\\]|\\\\.)*)\"")
+                    .matcher(text.substring(open, close));
+            if (literal.find()) found.add(unescape(literal.group(1)));
+        }
+        return found;
+    }
+
+    /** Null when the message follows the rule, otherwise what it gets wrong. */
+    static String punctuationFault(String message) {
+        String trimmed = message.trim();
+        if (trimmed.isEmpty()) return null;
+        // A sentence boundary is a terminator followed by a space and a capital or a quote.
+        boolean several = trimmed.matches("(?s).*[.!?][\"”']?\\s+[A-Z\"“%].*");
+        boolean ends = trimmed.matches("(?s).*[.!?][\"”']?$");
+        if (!several && trimmed.endsWith(".")) return "one sentence ends with a full stop";
+        if (several && !ends) return "several sentences and the last has no stop";
+        return null;
+    }
+
+    /**
      * Anything that puts words on the screen. Any method with "toast" in its name,
      * however it is spelled, plus the platform call those wrap and the undo banner,
      * which is a toast in every way that matters to a reader.

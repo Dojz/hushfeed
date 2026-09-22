@@ -9,8 +9,8 @@
 %1$d results so far	Şimdiye kadar %1$d sonuç
 %1$d results so far, and more not counted	Şimdiye kadar %1$d sonuç, sayılmayan başkaları da var
 %1$d results, filtered to %2$s	%1$d sonuç, filtre: %2$s
-%1$d setting was not in that file and was left as it is.	%1$d ayar o dosyada yoktu ve olduğu gibi bırakıldı.
-%1$d settings were not in that file and were left as they are.	%1$d ayar o dosyada yoktu ve oldukları gibi bırakıldı.
+%1$d setting was not in that file and was left as it is	%1$d ayar o dosyada yoktu ve olduğu gibi bırakıldı
+%1$d settings were not in that file and were left as they are	%1$d ayar o dosyada yoktu ve oldukları gibi bırakıldı
 %1$d unavailable	%1$d kullanılamıyor
 %1$s (%2$s)	%1$s (%2$s)
 %1$s (TikTok value)	%1$s (TikTok değeri)
@@ -54,7 +54,7 @@
 1 video left	1 video kaldı
 A Lab change is already running	Bir Lab değişikliği zaten sürüyor
 A creator pattern is taking too long and was switched off: %1$s	Bir içerik üreticisi kalıbı çok uzun sürdüğü için kapatıldı: %1$s
-A diagnostic report is already being saved.	Bir tanılama raporu zaten kaydediliyor.
+A diagnostic report is already being saved	Bir tanılama raporu zaten kaydediliyor
 A field value could not be read. Check the values and try again.	Bir alan değeri okunamadı. Değerleri kontrol edip tekrar dene.
 A good place to stop, if you want one.	İstersen, durmak için iyi bir an.
 A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.	TikTok kamerayı açık tuttuğu sürece üst köşede yeşil bir nokta, ses kaydederken de turuncu bir nokta görünür. Erişim bitince kaybolurlar.
@@ -69,7 +69,7 @@ About	Hakkında
 Account warning: forced client values apply to every account in this app data and cannot bypass server controls.	Hesap uyarısı: zorlanan istemci değerleri bu uygulama verisindeki her hesaba uygulanır ve sunucu denetimlerini aşamaz.
 Account-sensitive name: forcing this key may affect security, login, compliance, region, payment, or account safety behavior.	Hesap açısından hassas ad: bu anahtarı zorlamak güvenlik, giriş, uyumluluk, bölge, ödeme veya hesap güvenliği davranışını etkileyebilir.
 Activity	Etkinlik
-Activity Center (PIA)	Etkinlik merkezi (PIA)
+Activity center (PIA)	Etkinlik merkezi (PIA)
 Add	Ekle
 Add a button beside the block control to send feedback about the current video.	Engelleme düğmesinin yanına, o anki video hakkında geri bildirim göndermek için bir düğme ekle.
 Add a button that hides the current creator on this phone without blocking them.	O anki içerik üreticisini engellemeden bu telefonda gizleyen bir düğme ekle.
@@ -87,9 +87,9 @@ All events	Tüm olaylar
 All loaded tabs	Yüklenen tüm sekmeler
 Allow Duet and Stitch anyway	Yine de Düet ve Stitch'e izin ver
 Allow screenshots and Circle to Search	Ekran görüntüsüne ve Circle to Search'e izin ver
-Allow storage for TikTok in Android settings to save profile pictures.	Profil fotoğraflarını kaydetmek için Android ayarlarında TikTok'a depolama izni ver.
-Allow storage for TikTok in Android settings to save sounds.	Sesleri kaydetmek için Android ayarlarında TikTok'a depolama izni ver.
-Allow storage for TikTok in Android settings to save stories.	Hikayeleri kaydetmek için Android ayarlarında TikTok'a depolama izni ver.
+Allow storage for TikTok in Android settings to save profile pictures	Profil fotoğraflarını kaydetmek için Android ayarlarında TikTok'a depolama izni ver
+Allow storage for TikTok in Android settings to save sounds	Sesleri kaydetmek için Android ayarlarında TikTok'a depolama izni ver
+Allow storage for TikTok in Android settings to save stories	Hikayeleri kaydetmek için Android ayarlarında TikTok'a depolama izni ver
 Already active	Zaten etkin
 Already marked as not interested	Zaten İlgilenmiyorum olarak işaretlendi
 Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.	Bu filtreleri, akış yeterince yeni öğe yükleyemediğinde TikTok'un kullandığı indirilmiş videolara da uygula.
@@ -274,8 +274,8 @@ Destination updated	Hedef güncellendi
 Device access	Cihaz erişimi
 Device language, then original	Önce cihaz dili, sonra orijinal
 Diagnostic data cleared. Tap again to put it back.	Tanılama verileri temizlendi. Geri koymak için tekrar dokun.
-Diagnostic data put back.	Tanılama verileri geri kondu.
-Diagnostic report copied to the clipboard.	Tanılama raporu panoya kopyalandı.
+Diagnostic data put back	Tanılama verileri geri kondu
+Diagnostic report copied to the clipboard	Tanılama raporu panoya kopyalandı
 Diagnostics	Tanılama
 Disable	Devre dışı bırak
 Disable analytics and tracking	Analitiği ve izlemeyi devre dışı bırak
@@ -559,7 +559,6 @@ Limits	Sınırlar
 Link copied	Bağlantı kopyalandı
 Links	Bağlantılar
 Links in comments open	Yorumlardaki bağlantıların açılacağı yer
-Live	Canlı
 Loaded current values. Loading all known gates...	Geçerli değerler yüklendi. Bilinen tüm kapılar yükleniyor...
 Loaded values are still being read. Try again in a moment.	Yüklenen değerler hâlâ okunuyor. Birazdan yeniden dene.
 Loaded-value file export failed	Yüklenen değer dosyası dışa aktarılamadı
@@ -580,7 +579,7 @@ Maximum video length	Maksimum video süresi
 Maximum views per comment	Yorum başına maksimum görüntülenme
 Maximum views per like	Beğeni başına maksimum görüntülenme
 Media	Medya
-Media Config (VE)	Medya Yapılandırması (VE)
+Media config (VE)	Medya yapılandırması (VE)
 Messages, profiles and search still work.	Mesajlar, profiller ve arama çalışmaya devam eder.
 Microphone in use	Mikrofon kullanımda
 Min/Max comments	Min/Maks yorum
@@ -614,7 +613,7 @@ No hidden creators match this search. Clear the search to see them all.	Bu arama
 No limit	Sınır yok
 No matching comments. Try a different word, or clear the search with the X in the box.	Eşleşen yorum yok. Başka bir kelime dene veya kutudaki X ile aramayı temizle.
 No matching countries. Try a country name or a two-letter code.	Eşleşen ülke yok. Bir ülke adı veya iki harfli bir kod dene.
-No matching diagnostics found.	Eşleşen tanılama bulunamadı.
+No matching diagnostics found	Eşleşen tanılama bulunamadı
 No matching settings	Eşleşen ayar yok
 No preset selected. Choose a preset above.	Hazır ayar seçilmedi. Yukarıdan bir hazır ayar seç.
 No recording yet. Start one, use a feature, then return here.	Henüz kayıt yok. Bir kayıt başlat, bir özellik kullan, sonra buraya dön.
@@ -703,7 +702,7 @@ Pick the buttons to take off the column. The rest stay where they are.	Sütundan
 Play videos TikTok has classified without the overlay asking to be tapped through first.	TikTok'un sınıflandırdığı videoları, önce dokunup geçmeni isteyen katman olmadan oynat.
 Playback	Oynatma
 Player	Oynatıcı
-Player Config	Oynatıcı yapılandırması
+Player config	Oynatıcı yapılandırması
 Playlist posts	Oynatma listesi gönderileri
 Popular	Popüler
 Popups	Açılır pencereler
@@ -1003,8 +1002,8 @@ The story couldn't be saved. Try again.	Hikaye kaydedilemedi. Yeniden dene.
 The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.	Her yorumdaki aşağı başparmak, beğenmemek yerine yorumu yazanı engeller. Yorum soluklaşır, ardından bir geri alma şeridi çıkar ve ikinci bir dokunuş engeli kaldırır.
 The video couldn't be saved. Try again, or choose Automatic.	Video kaydedilemedi. Yeniden dene ya da Otomatik'i seç.
 There is no Lab change to undo.	Geri alınacak bir Lab değişikliği yok.
-There is no diagnostic data to clear.	Temizlenecek tanılama verisi yok.
-There is no diagnostic data to put back.	Geri konacak tanılama verisi yok.
+There is no diagnostic data to clear	Temizlenecek tanılama verisi yok
+There is no diagnostic data to put back	Geri konacak tanılama verisi yok
 There was nothing to undo.	Geri alınacak bir şey yoktu.
 These loaded values are for a different TikTok version.	Bu yüklenen değerler farklı bir TikTok sürümüne ait.
 This catalog entry is no longer available. Refresh the Lab and try again.	Bu katalog girişi artık kullanılamıyor. Lab'i yenile ve yeniden dene.
@@ -1016,7 +1015,7 @@ This file isn't a loaded-values export from the Feature Gate Lab.	Bu dosya Featu
 This gate type is not supported.	Bu özellik kapısı türü desteklenmiyor.
 This key isn't in the local catalog, so its type can't be checked. Reset the override.	Bu anahtar yerel katalogda olmadığı için türü denetlenemiyor. Geçersiz kılmayı sıfırla.
 This line opens a rule and does not finish it: %1$s. Write two phrases as "a" & "b" for both, or "a" !& "b" for the first without the second.	Bu satır bir kural açıyor ama bitirmiyor: %1$s. İki ifadeyi, ikisi birden için "a" & "b", ikincisi olmadan birincisi için "a" !& "b" biçiminde yaz.
-This phone has no file picker, so there is no way to choose a file here.	Bu telefonda dosya seçici yok, bu yüzden burada dosya seçmenin bir yolu yok.
+This phone has no file picker, so there is no way to choose a file here	Bu telefonda dosya seçici yok, bu yüzden burada dosya seçmenin bir yolu yok
 This phone has no folder picker. Type the folder into the row instead.	Bu telefonda klasör seçici yok. Bunun yerine klasörü satıra yaz.
 This profile picture isn't available to save	Bu profil fotoğrafı kaydedilemiyor
 This quality isn't available as a complete file, so TikTok's own save runs instead	Bu kalite tam bir dosya olarak sunulmuyor, bu yüzden TikTok'un kendi kaydetme işlemi çalışıyor
@@ -1165,3 +1164,5 @@ views per comment	yorum başına görüntülenme
 views per like	beğeni başına görüntülenme
 %1$s hid everything TikTok sent, %2$d times in a row. Turn it off if that's not what you wanted.	%1$s, TikTok'un gönderdiği her şeyi art arda %2$d kez gizledi. İstediğin bu değilse kapat.
 Show the switch	Ayarı göster
+
+Restart TikTok to apply this	Bunu uygulamak için TikTok'u yeniden başlat

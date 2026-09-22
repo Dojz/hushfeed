@@ -356,26 +356,26 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         app.morphe.extension.shared.settings.preference.LogBufferManager.clearedMessage =
                 L10n.t(context, "Diagnostic data cleared. Tap again to put it back.");
         app.morphe.extension.shared.settings.preference.LogBufferManager.nothingToClearMessage =
-                L10n.t(context, "There is no diagnostic data to clear.");
+                L10n.t(context, "There is no diagnostic data to clear");
         app.morphe.extension.shared.settings.preference.LogBufferManager.restoredMessage =
-                L10n.t(context, "Diagnostic data put back.");
+                L10n.t(context, "Diagnostic data put back");
         app.morphe.extension.shared.settings.preference.LogBufferManager.nothingToRestoreMessage =
-                L10n.t(context, "There is no diagnostic data to put back.");
+                L10n.t(context, "There is no diagnostic data to put back");
         app.morphe.extension.shared.settings.preference.LogBufferManager.restoreFailedMessage =
                 L10n.t(context, "Could not put back the diagnostic data. Try again.");
         // The rest of what the shared export path says, on a German phone in German. Every one
         // of these reached the reader in English, branded for the library rather than the
         // bundle, and two of them carried an exception's text.
         app.morphe.extension.shared.settings.preference.LogBufferManager.nothingToExportMessage =
-                L10n.t(context, "No matching diagnostics found.");
+                L10n.t(context, "No matching diagnostics found");
         app.morphe.extension.shared.settings.preference.LogBufferManager.copiedMessage =
-                L10n.t(context, "Diagnostic report copied to the clipboard.");
+                L10n.t(context, "Diagnostic report copied to the clipboard");
         app.morphe.extension.shared.settings.preference.LogBufferManager.exportFailedMessage =
                 L10n.t(context, "The diagnostic report could not be saved. Try again.");
         app.morphe.extension.shared.settings.preference.LogBufferManager.noContextMessage =
                 L10n.t(context, "The diagnostic report could not be saved yet. Try again in a moment.");
         app.morphe.extension.shared.settings.preference.LogBufferManager.alreadySavingMessage =
-                L10n.t(context, "A diagnostic report is already being saved.");
+                L10n.t(context, "A diagnostic report is already being saved");
         app.morphe.extension.shared.settings.preference.LogBufferManager.savedToMessage =
                 L10n.t(context, "Full report saved to %1$s");
         app.morphe.extension.shared.settings.preference.LogBufferManager.couldNotStartMessage =

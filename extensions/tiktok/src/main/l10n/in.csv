@@ -10,8 +10,8 @@ source,target
 %1$d results so far,%1$d hasil sejauh ini
 "%1$d results so far, and more not counted","%1$d hasil sejauh ini, lainnya tidak dihitung"
 "%1$d results, filtered to %2$s","%1$d hasil, difilter menurut %2$s"
-%1$d setting was not in that file and was left as it is.,%1$d pengaturan tidak ada di berkas itu dan dibiarkan apa adanya.
-%1$d settings were not in that file and were left as they are.,%1$d pengaturan tidak ada di berkas itu dan dibiarkan apa adanya.
+%1$d setting was not in that file and was left as it is,%1$d pengaturan tidak ada di berkas itu dan dibiarkan apa adanya
+%1$d settings were not in that file and were left as they are,%1$d pengaturan tidak ada di berkas itu dan dibiarkan apa adanya
 %1$d unavailable,%1$d tidak tersedia
 %1$s (%2$s),%1$s (%2$s)
 %1$s (TikTok value),%1$s (nilai TikTok)
@@ -55,7 +55,7 @@ source,target
 1 video left,Sisa 1 video
 A Lab change is already running,Perubahan Lab sedang berjalan
 A creator pattern is taking too long and was switched off: %1$s,"Ada pola kreator yang terlalu lama, jadi dimatikan: %1$s"
-A diagnostic report is already being saved.,Laporan diagnostik sedang disimpan.
+A diagnostic report is already being saved,Laporan diagnostik sedang disimpan
 A field value could not be read. Check the values and try again.,Nilai kolom tidak dapat dibaca. Periksa nilainya lalu coba lagi.
 "A good place to stop, if you want one.","Tempat yang bagus untuk berhenti, kalau kamu mencarinya."
 A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.,Titik hijau di sudut atas selama TikTok membuka kamera dan titik oranye selama merekam suara. Keduanya hilang saat akses berakhir.
@@ -70,7 +70,7 @@ About,Tentang
 Account warning: forced client values apply to every account in this app data and cannot bypass server controls.,Peringatan akun: nilai yang dipaksa di klien berlaku untuk setiap akun di data aplikasi ini dan tidak bisa menembus kontrol server.
 "Account-sensitive name: forcing this key may affect security, login, compliance, region, payment, or account safety behavior.","Nama sensitif akun: memaksa kunci ini bisa memengaruhi keamanan, login, kepatuhan, wilayah, pembayaran atau perilaku keselamatan akun."
 Activity,Aktivitas
-Activity Center (PIA),Pusat Aktivitas (PIA)
+Activity center (PIA),Pusat aktivitas (PIA)
 Add,Tambah
 "Block the creator in one tap. Once TikTok confirms, skip to the next video. A small Unblock button appears at the top left for two seconds. You can also unblock later in TikTok's Privacy > Blocked accounts.","Blokir kreator dengan satu ketukan. Setelah TikTok mengonfirmasi, lanjut ke video berikutnya. Tombol Buka blokir kecil muncul di kiri atas selama dua detik. Anda juga bisa membuka blokir nanti di Privasi > Akun yang diblokir di TikTok."
 Unblock,Buka blokir
@@ -90,9 +90,9 @@ All events,Semua peristiwa
 All loaded tabs,Semua tab yang dimuat
 Allow Duet and Stitch anyway,Tetap izinkan Duet dan Stitch
 Allow screenshots and Circle to Search,Izinkan tangkapan layar dan Circle to Search
-Allow storage for TikTok in Android settings to save profile pictures.,Izin penyimpanan dibutuhkan untuk menyimpan foto profil.
-Allow storage for TikTok in Android settings to save sounds.,Izin penyimpanan dibutuhkan untuk menyimpan suara.
-Allow storage for TikTok in Android settings to save stories.,Izin penyimpanan dibutuhkan untuk menyimpan Story.
+Allow storage for TikTok in Android settings to save profile pictures,Izin penyimpanan dibutuhkan untuk menyimpan foto profil
+Allow storage for TikTok in Android settings to save sounds,Izin penyimpanan dibutuhkan untuk menyimpan suara
+Allow storage for TikTok in Android settings to save stories,Izin penyimpanan dibutuhkan untuk menyimpan Story
 Bottom tabs to keep,Tab bawah yang dipertahankan
 Already marked as not interested,Sudah ditandai sebagai tidak tertarik
 Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.,Terapkan filter ini juga ke video terunduh yang TikTok pakai saat feed tidak bisa memuat cukup konten baru.
@@ -263,8 +263,8 @@ Default playback speed,Kecepatan pemutaran bawaan
 Device access,Akses perangkat
 "Device language, then original","Bahasa perangkat, lalu bahasa asli"
 Diagnostic data cleared. Tap again to put it back.,Data diagnostik dihapus. Ketuk lagi untuk mengembalikannya.
-Diagnostic data put back.,Data diagnostik dikembalikan.
-Diagnostic report copied to the clipboard.,Laporan diagnostik disalin ke papan klip.
+Diagnostic data put back,Data diagnostik dikembalikan
+Diagnostic report copied to the clipboard,Laporan diagnostik disalin ke papan klip
 Diagnostics,Diagnostik
 Disable,Matikan
 Disable analytics and tracking,Matikan analitik dan pelacakan
@@ -533,7 +533,6 @@ Limits,Batas
 Link copied,Tautan disalin
 Links,Tautan
 Links in comments open,Tautan di komentar bisa dibuka
-Live,LIVE
 Loaded current values. Loading all known gates...,Nilai saat ini dimuat. Memuat semua gate yang diketahui...
 Loaded values are still being read. Try again in a moment.,Nilai yang dimuat masih dibaca. Coba lagi sebentar lagi.
 Loaded-value file export failed,Ekspor berkas nilai yang dimuat gagal
@@ -554,7 +553,7 @@ Maximum video length,Durasi video maksimum
 Maximum views per comment,Maksimum tayangan per komentar
 Maximum views per like,Tayangan maksimum per suka
 Media,Media
-Media Config (VE),Konfigurasi Media (VE)
+Media config (VE),Konfigurasi media (VE)
 "Messages, profiles and search still work.","Pesan, profil dan pencarian masih berfungsi."
 Microphone in use,Mikrofon sedang dipakai
 Min/Max comments,Komentar min/maks
@@ -587,7 +586,7 @@ No hidden creators match this search. Clear the search to see them all.,Tidak ad
 No limit,Tanpa batas
 "No matching comments. Try a different word, or clear the search with the X in the box.",Tidak ada komentar yang cocok. Coba kata lain atau hapus pencarian dengan X di kotak.
 No matching countries. Try a country name or a two-letter code.,Tidak ada negara yang cocok. Coba nama negara atau kode dua huruf.
-No matching diagnostics found.,Tidak ada diagnostik yang cocok.
+No matching diagnostics found,Tidak ada diagnostik yang cocok
 No matching settings,Tidak ada setelan yang cocok
 No preset selected. Choose a preset above.,Tidak ada preset yang dipilih. Pilih preset di atas.
 "No recording yet. Start one, use a feature, then return here.","Belum ada rekaman. Mulai satu, pakai sebuah fitur, lalu kembali ke sini."
@@ -673,7 +672,7 @@ Pick the buttons to take off the column. The rest stay where they are.,Pilih tom
 Play videos TikTok has classified without the overlay asking to be tapped through first.,Putar video yang diklasifikasi TikTok tanpa lapisan yang harus diketuk lebih dulu.
 Playback,Pemutaran
 Player,Pemutar
-Player Config,Konfigurasi Pemutar
+Player config,Konfigurasi pemutar
 Playlist posts,Kiriman playlist
 Popular,Populer
 Popups,Pop-up
@@ -968,8 +967,8 @@ The story couldn't be saved. Try again.,Story-nya tidak bisa disimpan.
 "The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.","Tombol tidak suka di setiap komentar memblokir komentator alih-alih tidak menyukai. Komentar meredup, banner batalkan mengikuti, dan ketukan kedua membuka blokir."
 "The video couldn't be saved. Try again, or choose Automatic.","Videonya tidak bisa disimpan. Coba lagi, atau pilih Otomatis."
 There is no Lab change to undo.,Tidak ada perubahan Lab yang bisa dibatalkan.
-There is no diagnostic data to clear.,Tidak ada data diagnostik yang perlu dihapus.
-There is no diagnostic data to put back.,Tidak ada data diagnostik yang dapat dikembalikan.
+There is no diagnostic data to clear,Tidak ada data diagnostik yang perlu dihapus
+There is no diagnostic data to put back,Tidak ada data diagnostik yang dapat dikembalikan
 There was nothing to undo.,There was nothing to undo.
 These loaded values are for a different TikTok version.,Nilai yang dimuat ini untuk versi TikTok yang berbeda.
 This catalog entry is no longer available. Refresh the Lab and try again.,Entri katalog ini sudah tidak tersedia. Segarkan Lab dan coba lagi.
@@ -981,7 +980,7 @@ This file isn't a loaded-values export from the Feature Gate Lab.,Berkas ini buk
 This gate type is not supported.,Tipe gate ini tidak didukung.
 "This key isn't in the local catalog, so its type can't be checked. Reset the override.","Kunci ini tidak ada di katalog lokal, jadi tipenya tidak bisa diperiksa. Setel ulang penimpaan."
 "This line opens a rule and does not finish it: %1$s. Write two phrases as ""a"" & ""b"" for both, or ""a"" !& ""b"" for the first without the second.","Baris ini memulai sebuah aturan dan tidak menyelesaikannya: %1$s. Tulis dua frasa sebagai ""a"" & ""b"" untuk keduanya, atau ""a"" !& ""b"" untuk yang pertama tanpa yang kedua."
-"This phone has no file picker, so there is no way to choose a file here.","Ponsel ini tidak punya pemilih berkas, jadi tidak ada cara memilih berkas di sini."
+"This phone has no file picker, so there is no way to choose a file here","Ponsel ini tidak punya pemilih berkas, jadi tidak ada cara memilih berkas di sini"
 This phone has no folder picker. Type the folder into the row instead.,Ponsel ini tidak punya pemilih folder. Ketik saja foldernya di baris itu.
 This profile picture isn't available to save,Foto profil ini tidak bisa disimpan
 "This quality isn't available as a complete file, so TikTok's own save runs instead","Kualitas ini tidak tersedia sebagai berkas utuh, jadi TikTok yang menyimpannya"
@@ -1166,3 +1165,5 @@ Location-tagged videos,Video berlabel lokasi
 "Hide the points banner under the search box and the coin counter floating over search results, which TikTok shows in some regions. Searching works as before.","Sembunyikan banner poin di bawah kotak pencarian dan penghitung koin yang melayang di atas hasil pencarian, yang ditampilkan TikTok di beberapa wilayah. Pencarian tetap berfungsi seperti biasa."
 "%1$s hid everything TikTok sent, %2$d times in a row. Turn it off if that's not what you wanted.","%1$s menyembunyikan semua yang dikirim TikTok, %2$d kali berturut-turut. Matikan jika bukan itu yang kamu inginkan."
 Show the switch,Tampilkan sakelarnya
+
+Restart TikTok to apply this,Mulai ulang TikTok agar berlaku

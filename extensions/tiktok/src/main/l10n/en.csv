@@ -10,8 +10,8 @@ source,target
 %1$d results so far,%1$d results so far
 "%1$d results so far, and more not counted","%1$d results so far, and more not counted"
 "%1$d results, filtered to %2$s","%1$d results, filtered to %2$s"
-%1$d setting was not in that file and was left as it is.,%1$d setting was not in that file and was left as it is.
-%1$d settings were not in that file and were left as they are.,%1$d settings were not in that file and were left as they are.
+%1$d setting was not in that file and was left as it is,%1$d setting was not in that file and was left as it is
+%1$d settings were not in that file and were left as they are,%1$d settings were not in that file and were left as they are
 %1$d unavailable,%1$d unavailable
 %1$s (%2$s),%1$s (%2$s)
 %1$s (TikTok value),%1$s (TikTok value)
@@ -56,7 +56,7 @@ source,target
 1 video left,1 video left
 A Lab change is already running,A Lab change is already running
 A creator pattern is taking too long and was switched off: %1$s,A creator pattern is taking too long and was switched off: %1$s
-A diagnostic report is already being saved.,A diagnostic report is already being saved.
+A diagnostic report is already being saved,A diagnostic report is already being saved
 A field value could not be read. Check the values and try again.,A field value could not be read. Check the values and try again.
 "A good place to stop, if you want one.","A good place to stop, if you want one."
 A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.,A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.
@@ -71,7 +71,7 @@ About,About
 Account warning: forced client values apply to every account in this app data and cannot bypass server controls.,Account warning: forced client values apply to every account in this app data and cannot bypass server controls.
 "Account-sensitive name: forcing this key may affect security, login, compliance, region, payment, or account safety behavior.","Account-sensitive name: forcing this key may affect security, login, compliance, region, payment, or account safety behavior."
 Activity,Activity
-Activity Center (PIA),Activity Center (PIA)
+Activity center (PIA),Activity center (PIA)
 Add,Add
 Add a button beside the block control to send feedback about the current video.,Add a button beside the block control to send feedback about the current video.
 Add a button that hides the current creator on this phone without blocking them.,Add a button that hides the current creator on this phone without blocking them.
@@ -89,9 +89,9 @@ All events,All events
 All loaded tabs,All loaded tabs
 Allow Duet and Stitch anyway,Allow Duet and Stitch anyway
 Allow screenshots and Circle to Search,Allow screenshots and Circle to Search
-Allow storage for TikTok in Android settings to save profile pictures.,Allow storage for TikTok in Android settings to save profile pictures.
-Allow storage for TikTok in Android settings to save sounds.,Allow storage for TikTok in Android settings to save sounds.
-Allow storage for TikTok in Android settings to save stories.,Allow storage for TikTok in Android settings to save stories.
+Allow storage for TikTok in Android settings to save profile pictures,Allow storage for TikTok in Android settings to save profile pictures
+Allow storage for TikTok in Android settings to save sounds,Allow storage for TikTok in Android settings to save sounds
+Allow storage for TikTok in Android settings to save stories,Allow storage for TikTok in Android settings to save stories
 Already active,Already active
 Already marked as not interested,Already marked as not interested
 Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.,Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.
@@ -276,8 +276,8 @@ Destination updated,Destination updated
 Device access,Device access
 "Device language, then original","Device language, then original"
 Diagnostic data cleared. Tap again to put it back.,Diagnostic data cleared. Tap again to put it back.
-Diagnostic data put back.,Diagnostic data put back.
-Diagnostic report copied to the clipboard.,Diagnostic report copied to the clipboard.
+Diagnostic data put back,Diagnostic data put back
+Diagnostic report copied to the clipboard,Diagnostic report copied to the clipboard
 Diagnostics,Diagnostics
 Disable,Disable
 Disable analytics and tracking,Disable analytics and tracking
@@ -564,7 +564,6 @@ Limits,Limits
 Link copied,Link copied
 Links,Links
 Links in comments open,Links in comments open
-Live,Live
 Loaded current values. Loading all known gates...,Loaded current values. Loading all known gates...
 Loaded values are still being read. Try again in a moment.,Loaded values are still being read. Try again in a moment.
 Loaded-value file export failed,Loaded-value file export failed
@@ -585,7 +584,7 @@ Maximum video length,Maximum video length
 Maximum views per comment,Maximum views per comment
 Maximum views per like,Maximum views per like
 Media,Media
-Media Config (VE),Media Config (VE)
+Media config (VE),Media config (VE)
 "Messages, profiles and search still work.","Messages, profiles and search still work."
 Microphone in use,Microphone in use
 Min/Max comments,Min/Max comments
@@ -619,7 +618,7 @@ No hidden creators match this search. Clear the search to see them all.,No hidde
 No limit,No limit
 "No matching comments. Try a different word, or clear the search with the X in the box.","No matching comments. Try a different word, or clear the search with the X in the box."
 No matching countries. Try a country name or a two-letter code.,No matching countries. Try a country name or a two-letter code.
-No matching diagnostics found.,No matching diagnostics found.
+No matching diagnostics found,No matching diagnostics found
 No matching settings,No matching settings
 No preset selected. Choose a preset above.,No preset selected. Choose a preset above.
 "No recording yet. Start one, use a feature, then return here.","No recording yet. Start one, use a feature, then return here."
@@ -708,7 +707,7 @@ Pick the buttons to take off the column. The rest stay where they are.,Pick the 
 Play videos TikTok has classified without the overlay asking to be tapped through first.,Play videos TikTok has classified without the overlay asking to be tapped through first.
 Playback,Playback
 Player,Player
-Player Config,Player Config
+Player config,Player config
 Playlist posts,Playlist posts
 Popular,Popular
 Popups,Popups
@@ -768,6 +767,7 @@ Reset override,Reset override
 Reset position,Reset position
 Reset settings,Reset settings
 Restart TikTok to apply %1$d changes,Restart TikTok to apply %1$d changes
+Restart TikTok to apply this,Restart TikTok to apply this
 Restart TikTok to apply this change,Restart TikTok to apply this change
 Restart TikTok to apply this.,Restart TikTok to apply this.
 Restart now,Restart now
@@ -1006,8 +1006,8 @@ The story couldn't be saved. Try again.,The story couldn't be saved. Try again.
 "The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.","The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks."
 "The video couldn't be saved. Try again, or choose Automatic.","The video couldn't be saved. Try again, or choose Automatic."
 There is no Lab change to undo.,There is no Lab change to undo.
-There is no diagnostic data to clear.,There is no diagnostic data to clear.
-There is no diagnostic data to put back.,There is no diagnostic data to put back.
+There is no diagnostic data to clear,There is no diagnostic data to clear
+There is no diagnostic data to put back,There is no diagnostic data to put back
 There was nothing to undo.,There was nothing to undo.
 These loaded values are for a different TikTok version.,These loaded values are for a different TikTok version.
 This catalog entry is no longer available. Refresh the Lab and try again.,This catalog entry is no longer available. Refresh the Lab and try again.
@@ -1019,7 +1019,7 @@ This file isn't a loaded-values export from the Feature Gate Lab.,This file isn'
 This gate type is not supported.,This gate type is not supported.
 "This key isn't in the local catalog, so its type can't be checked. Reset the override.","This key isn't in the local catalog, so its type can't be checked. Reset the override."
 "This line opens a rule and does not finish it: %1$s. Write two phrases as ""a"" & ""b"" for both, or ""a"" !& ""b"" for the first without the second.","This line opens a rule and does not finish it: %1$s. Write two phrases as ""a"" & ""b"" for both, or ""a"" !& ""b"" for the first without the second."
-"This phone has no file picker, so there is no way to choose a file here.","This phone has no file picker, so there is no way to choose a file here."
+"This phone has no file picker, so there is no way to choose a file here","This phone has no file picker, so there is no way to choose a file here"
 This phone has no folder picker. Type the folder into the row instead.,This phone has no folder picker. Type the folder into the row instead.
 This profile picture isn't available to save,This profile picture isn't available to save
 "This quality isn't available as a complete file, so TikTok's own save runs instead","This quality isn't available as a complete file, so TikTok's own save runs instead"

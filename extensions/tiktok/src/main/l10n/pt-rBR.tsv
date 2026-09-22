@@ -9,8 +9,8 @@
 %1$d results so far	%1$d resultados até agora
 %1$d results so far, and more not counted	%1$d resultados até agora, e mais não contados
 %1$d results, filtered to %2$s	%1$d resultados, filtrados por %2$s
-%1$d setting was not in that file and was left as it is.	%1$d configuração não estava nesse arquivo e ficou como estava.
-%1$d settings were not in that file and were left as they are.	%1$d configurações não estavam nesse arquivo e ficaram como estavam.
+%1$d setting was not in that file and was left as it is	%1$d configuração não estava nesse arquivo e ficou como estava
+%1$d settings were not in that file and were left as they are	%1$d configurações não estavam nesse arquivo e ficaram como estavam
 %1$d unavailable	%1$d indisponíveis
 %1$s (%2$s)	%1$s (%2$s)
 %1$s (TikTok value)	%1$s (valor do TikTok)
@@ -54,7 +54,7 @@
 1 video left	Resta 1 vídeo
 A Lab change is already running	Já há uma mudança do Lab em andamento
 A creator pattern is taking too long and was switched off: %1$s	Um padrão de criador está demorando demais e foi desligado: %1$s
-A diagnostic report is already being saved.	Um relatório de diagnóstico já está sendo salvo.
+A diagnostic report is already being saved	Um relatório de diagnóstico já está sendo salvo
 A field value could not be read. Check the values and try again.	Não foi possível ler o valor de um campo. Verifique os valores e tente novamente.
 A good place to stop, if you want one.	Uma boa hora para parar, se você quiser uma.
 A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.	Um ponto verde no canto superior enquanto o TikTok está com a câmera aberta e um laranja enquanto grava som. Eles somem quando o acesso termina.
@@ -69,7 +69,7 @@ About	Sobre
 Account warning: forced client values apply to every account in this app data and cannot bypass server controls.	Aviso sobre a conta: os valores forçados no aparelho valem para todas as contas nestes dados do app e não passam por cima dos controles do servidor.
 Account-sensitive name: forcing this key may affect security, login, compliance, region, payment, or account safety behavior.	Nome sensível para a conta: forçar esta chave pode afetar a segurança, o login, a conformidade, a região, os pagamentos ou a proteção da conta.
 Activity	Atividade
-Activity Center (PIA)	Centro de Atividade (PIA)
+Activity center (PIA)	Centro de atividade (PIA)
 Add	Adicionar
 Block the creator in one tap. Once TikTok confirms, skip to the next video. A small Unblock button appears at the top left for two seconds. You can also unblock later in TikTok's Privacy > Blocked accounts.	Bloqueie o criador com um toque. Quando o TikTok confirmar, vá para o próximo vídeo. Um pequeno botão Desbloquear aparece no canto superior esquerdo por dois segundos. Você também pode desbloquear depois em Privacidade > Contas bloqueadas do TikTok.
 Unblock	Desbloquear
@@ -89,9 +89,9 @@ All events	Todos os eventos
 All loaded tabs	Todas as abas carregadas
 Allow Duet and Stitch anyway	Permitir Dueto e Costura mesmo assim
 Allow screenshots and Circle to Search	Permitir capturas de tela e Círculo para pesquisar
-Allow storage for TikTok in Android settings to save profile pictures.	É preciso permissão de armazenamento para salvar uma foto de perfil.
-Allow storage for TikTok in Android settings to save sounds.	É preciso permissão de armazenamento para salvar um som.
-Allow storage for TikTok in Android settings to save stories.	É preciso permissão de armazenamento para salvar um story.
+Allow storage for TikTok in Android settings to save profile pictures	É preciso permissão de armazenamento para salvar uma foto de perfil
+Allow storage for TikTok in Android settings to save sounds	É preciso permissão de armazenamento para salvar um som
+Allow storage for TikTok in Android settings to save stories	É preciso permissão de armazenamento para salvar um story
 Bottom tabs to keep	Abas inferiores para manter
 Already marked as not interested	Já marcado como não tenho interesse
 Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.	Aplicar esses filtros também aos vídeos baixados que o TikTok usa quando o feed não consegue carregar itens novos suficientes.
@@ -262,8 +262,8 @@ Default playback speed	Velocidade de reprodução padrão
 Device access	Acesso ao dispositivo
 Device language, then original	Idioma do aparelho, depois o original
 Diagnostic data cleared. Tap again to put it back.	Dados de diagnóstico apagados. Toque novamente para restaurá-los.
-Diagnostic data put back.	Dados de diagnóstico restaurados.
-Diagnostic report copied to the clipboard.	Relatório de diagnóstico copiado para a área de transferência.
+Diagnostic data put back	Dados de diagnóstico restaurados
+Diagnostic report copied to the clipboard	Relatório de diagnóstico copiado para a área de transferência
 Diagnostics	Diagnóstico
 Disable	Desligar
 Disable analytics and tracking	Desligar a análise de uso e o rastreamento
@@ -532,7 +532,6 @@ Limits	Limites
 Link copied	Link copiado
 Links	Links
 Links in comments open	Os links nos comentários abrem
-Live	LIVE
 Loaded current values. Loading all known gates...	Valores atuais carregados. Carregando todos os gates conhecidos...
 Loaded values are still being read. Try again in a moment.	Os valores carregados ainda estão sendo lidos. Tente novamente em instantes.
 Loaded-value file export failed	A exportação do arquivo de valores carregados falhou
@@ -553,7 +552,7 @@ Maximum video length	Duração máxima do vídeo
 Maximum views per comment	Máximo de visualizações por comentário
 Maximum views per like	Visualizações máximas por curtida
 Media	Mídia
-Media Config (VE)	Configuração de Mídia (VE)
+Media config (VE)	Configuração de mídia (VE)
 Messages, profiles and search still work.	As mensagens, os perfis e a busca continuam funcionando.
 Microphone in use	Microfone em uso
 Min/Max comments	Comentários mín./máx.
@@ -586,7 +585,7 @@ No hidden creators match this search. Clear the search to see them all.	Nenhum c
 No limit	Sem limite
 No matching comments. Try a different word, or clear the search with the X in the box.	Nenhum comentário encontrado. Tente outra palavra ou limpe a pesquisa com o X no campo.
 No matching countries. Try a country name or a two-letter code.	Nenhum pais corresponde. Tente um nome de pais ou um codigo de duas letras.
-No matching diagnostics found.	Nenhum diagnóstico correspondente foi encontrado.
+No matching diagnostics found	Nenhum diagnóstico correspondente foi encontrado
 No matching settings	Nenhuma configuração combina
 No preset selected. Choose a preset above.	Nenhum preset selecionado. Escolha um preset acima.
 No recording yet. Start one, use a feature, then return here.	Nenhuma gravação ainda. Inicie uma, use um recurso e volte aqui.
@@ -672,7 +671,7 @@ Pick the buttons to take off the column. The rest stay where they are.	Escolha o
 Play videos TikTok has classified without the overlay asking to be tapped through first.	Tocar os vídeos que o TikTok classificou sem a camada que pede um toque para passar.
 Playback	Reprodução
 Player	Reprodutor
-Player Config	Configuração do player
+Player config	Configuração do player
 Playlist posts	Publicações de playlists
 Popular	Populares
 Popups	Pop-ups
@@ -967,8 +966,8 @@ The story couldn't be saved. Try again.	Não foi possível salvar o story.
 The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.	O polegar para baixo em cada comentário bloqueia o comentarista em vez de dar Não gostei. O comentário escurece, um banner de desfazer segue, e um segundo toque desbloqueia.
 The video couldn't be saved. Try again, or choose Automatic.	Não foi possível salvar o vídeo. Tente de novo, ou escolha Automático.
 There is no Lab change to undo.	Não há nenhuma alteração do Lab para desfazer.
-There is no diagnostic data to clear.	Não há dados de diagnóstico para apagar.
-There is no diagnostic data to put back.	Não há dados de diagnóstico para restaurar.
+There is no diagnostic data to clear	Não há dados de diagnóstico para apagar
+There is no diagnostic data to put back	Não há dados de diagnóstico para restaurar
 There was nothing to undo.	There was nothing to undo.
 These loaded values are for a different TikTok version.	Estes valores carregados são de outra versão do TikTok.
 This catalog entry is no longer available. Refresh the Lab and try again.	Esta entrada do catálogo não está mais disponível. Atualize o Laboratório e tente de novo.
@@ -980,7 +979,7 @@ This file isn't a loaded-values export from the Feature Gate Lab.	Este arquivo n
 This gate type is not supported.	Este tipo de gate não é compatível.
 This key isn't in the local catalog, so its type can't be checked. Reset the override.	Esta chave não está no catálogo local, então o tipo dela não pode ser conferido. Redefina a substituição.
 This line opens a rule and does not finish it: %1$s. Write two phrases as "a" & "b" for both, or "a" !& "b" for the first without the second.	Esta linha abre uma regra e não a fecha: %1$s. Escreva duas frases como "a" & "b" para pedir as duas, ou "a" !& "b" para a primeira sem a segunda.
-This phone has no file picker, so there is no way to choose a file here.	Este celular não tem seletor de arquivos, então não dá para escolher um aqui.
+This phone has no file picker, so there is no way to choose a file here	Este celular não tem seletor de arquivos, então não dá para escolher um aqui
 This phone has no folder picker. Type the folder into the row instead.	Este celular não tem seletor de pastas. Digite a pasta na linha.
 This profile picture isn't available to save	Esta foto de perfil não está disponível para salvar
 This quality isn't available as a complete file, so TikTok's own save runs instead	Esta qualidade não está disponível como arquivo completo, então o salvamento do próprio TikTok é usado
@@ -1165,3 +1164,5 @@ Hide search rewards	Esconder as recompensas de busca
 Hide the points banner under the search box and the coin counter floating over search results, which TikTok shows in some regions. Searching works as before.	Esconde o aviso de pontos abaixo da caixa de busca e o contador de moedas que flutua sobre os resultados, que o TikTok mostra em algumas regiões. A busca funciona como antes.
 %1$s hid everything TikTok sent, %2$d times in a row. Turn it off if that's not what you wanted.	%1$s escondeu tudo o que o TikTok enviou, %2$d vezes seguidas. Desative se não era isso que você queria.
 Show the switch	Mostrar a opção
+
+Restart TikTok to apply this	Reinicie o TikTok para aplicar

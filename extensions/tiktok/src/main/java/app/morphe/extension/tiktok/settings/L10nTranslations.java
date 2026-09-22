@@ -97,10 +97,10 @@ public final class L10nTranslations {
                 "%1$d Ergebnisse bisher, weitere nicht gezählt");
         table.put("%1$d results, filtered to %2$s",
                 "%1$d Ergebnisse, gefiltert nach %2$s");
-        table.put("%1$d setting was not in that file and was left as it is.",
-                "%1$d Einstellung stand nicht in dieser Datei und bleibt unverändert.");
-        table.put("%1$d settings were not in that file and were left as they are.",
-                "%1$d Einstellungen standen nicht in dieser Datei und bleiben unverändert.");
+        table.put("%1$d setting was not in that file and was left as it is",
+                "%1$d Einstellung stand nicht in dieser Datei und bleibt unverändert");
+        table.put("%1$d settings were not in that file and were left as they are",
+                "%1$d Einstellungen standen nicht in dieser Datei und bleiben unverändert");
         table.put("%1$d unavailable",
                 "%1$d nicht verfügbar");
         table.put("%1$s (%2$s)",
@@ -189,8 +189,8 @@ public final class L10nTranslations {
                 "Eine Lab-Änderung läuft bereits");
         table.put("A creator pattern is taking too long and was switched off: %1$s",
                 "Ein Kreator-Muster braucht zu lange und wurde abgeschaltet: %1$s");
-        table.put("A diagnostic report is already being saved.",
-                "Ein Diagnosebericht wird gerade gespeichert.");
+        table.put("A diagnostic report is already being saved",
+                "Ein Diagnosebericht wird gerade gespeichert");
         table.put("A field value could not be read. Check the values and try again.",
                 "Ein Feldwert konnte nicht gelesen werden. Prüfe die Werte und versuche es erneut.");
         table.put("A good place to stop, if you want one.",
@@ -222,7 +222,7 @@ public final class L10nTranslations {
                 "Kontosensibler Name: Diesen Schlüssel zu erzwingen kann Sicherheit, Anmeldung, Compliance, Region, Zahlungen oder den Kontoschutz beeinflussen.");
         table.put("Activity",
                 "Aktivität");
-        table.put("Activity Center (PIA)",
+        table.put("Activity center (PIA)",
                 "Activity Center (PIA)");
         table.put("Add",
                 "Hinzufügen");
@@ -258,12 +258,12 @@ public final class L10nTranslations {
                 "Duett und Stitch trotzdem erlauben");
         table.put("Allow screenshots and Circle to Search",
                 "Screenshots und Circle to Search erlauben");
-        table.put("Allow storage for TikTok in Android settings to save profile pictures.",
-                "Zum Speichern eines Profilbilds wird die Speicherberechtigung gebraucht.");
-        table.put("Allow storage for TikTok in Android settings to save sounds.",
-                "Zum Speichern eines Sounds wird die Speicherberechtigung gebraucht.");
-        table.put("Allow storage for TikTok in Android settings to save stories.",
-                "Zum Speichern einer Story wird die Speicherberechtigung gebraucht.");
+        table.put("Allow storage for TikTok in Android settings to save profile pictures",
+                "Zum Speichern eines Profilbilds wird die Speicherberechtigung gebraucht");
+        table.put("Allow storage for TikTok in Android settings to save sounds",
+                "Zum Speichern eines Sounds wird die Speicherberechtigung gebraucht");
+        table.put("Allow storage for TikTok in Android settings to save stories",
+                "Zum Speichern einer Story wird die Speicherberechtigung gebraucht");
         table.put("Already active",
                 "Bereits aktiv");
         table.put("Already marked as not interested",
@@ -641,10 +641,10 @@ public final class L10nTranslations {
                 "Gerätesprache, dann Original");
         table.put("Diagnostic data cleared. Tap again to put it back.",
                 "Diagnosedaten gelöscht. Tippe erneut, um sie wiederherzustellen.");
-        table.put("Diagnostic data put back.",
-                "Diagnosedaten wiederhergestellt.");
-        table.put("Diagnostic report copied to the clipboard.",
-                "Diagnosebericht in die Zwischenablage kopiert.");
+        table.put("Diagnostic data put back",
+                "Diagnosedaten wiederhergestellt");
+        table.put("Diagnostic report copied to the clipboard",
+                "Diagnosebericht in die Zwischenablage kopiert");
         table.put("Diagnostics",
                 "Diagnose");
         table.put("Disable",
@@ -1232,8 +1232,6 @@ public final class L10nTranslations {
                 "Links");
         table.put("Links in comments open",
                 "Links in Kommentaren lassen sich öffnen");
-        table.put("Live",
-                "LIVE");
         table.put("Loaded current values. Loading all known gates...",
                 "Aktuelle Werte geladen. Alle bekannten Schalter werden geladen ...");
         table.put("Loaded values are still being read. Try again in a moment.",
@@ -1274,7 +1272,7 @@ public final class L10nTranslations {
                 "Maximale Aufrufe pro Like");
         table.put("Media",
                 "Medien");
-        table.put("Media Config (VE)",
+        table.put("Media config (VE)",
                 "Medienkonfiguration (VE)");
         table.put("Messages, profiles and search still work.",
                 "Nachrichten, Profile und die Suche funktionieren weiterhin.");
@@ -1302,11 +1300,11 @@ public final class L10nTranslations {
                 "Nach rechts verschieben");
         table.put("Move to the next video when the current one ends. Pauses, open dialogs and screen-time holds stop it. Restart TikTok after changing this.",
                 "Zum nächsten Video wechseln, wenn das aktuelle endet. Pausen, offene Dialoge und Bildschirmzeit-Sperren halten dies an. Starte TikTok nach einer Änderung neu.");
+        table.put("Move up",
+                "Nach oben verschieben");
     }
 
     private static void fillDe10(Map<String, String> table) {
-        table.put("Move up",
-                "Nach oben verschieben");
         table.put("Music disc",
                 "Musikscheibe");
         table.put("Mutes the video behind the comment sheet while you read. Sound comes back when the sheet closes.",
@@ -1345,8 +1343,8 @@ public final class L10nTranslations {
                 "Keine passenden Kommentare. Versuche es mit einem anderen Wort oder lösche die Suche mit dem X im Feld.");
         table.put("No matching countries. Try a country name or a two-letter code.",
                 "Keine passenden Laender. Versuche einen Laendernamen oder einen Zwei-Buchstaben-Code.");
-        table.put("No matching diagnostics found.",
-                "Keine passenden Diagnosedaten gefunden.");
+        table.put("No matching diagnostics found",
+                "Keine passenden Diagnosedaten gefunden");
         table.put("No matching settings",
                 "Keine passenden Einstellungen");
         table.put("No preset selected. Choose a preset above.",
@@ -1425,11 +1423,11 @@ public final class L10nTranslations {
                 "Aktiv. Mit „Wiederherstellen“ wird deine vorherige Feed-Einrichtung zurückgesetzt.");
         table.put("Once today's budget runs out, the hold stays and cannot be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out.",
                 "Sobald das heutige Budget aufgebraucht ist, bleibt die Sperre bestehen. Die Budgeteinstellungen sind bis zum nächsten Tag gesperrt. Schalte dies jederzeit vor Ablauf des Budgets aus.");
+        table.put("One area was checked and everything it needs is here.",
+                "Ein Bereich wurde geprüft und alles, was er braucht, ist vorhanden.");
     }
 
     private static void fillDe11(Map<String, String> table) {
-        table.put("One area was checked and everything it needs is here.",
-                "Ein Bereich wurde geprüft und alles, was er braucht, ist vorhanden.");
         table.put("One minute left",
                 "Noch eine Minute");
         table.put("One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out.",
@@ -1526,7 +1524,7 @@ public final class L10nTranslations {
                 "Wiedergabe");
         table.put("Player",
                 "Wiedergabe");
-        table.put("Player Config",
+        table.put("Player config",
                 "Player-Konfiguration");
         table.put("Playlist posts",
                 "Playlist-Beiträge");
@@ -1548,11 +1546,11 @@ public final class L10nTranslations {
                 "Datenschutz");
         table.put("Privacy and system",
                 "Datenschutz und System");
+        table.put("Profile",
+                "Profil");
     }
 
     private static void fillDe12(Map<String, String> table) {
-        table.put("Profile",
-                "Profil");
         table.put("Profile picture saved to %1$s",
                 "Profilbild gespeichert unter %1$s");
         table.put("Profile share actions",
@@ -1649,6 +1647,8 @@ public final class L10nTranslations {
                 "Einstellungen zurücksetzen");
         table.put("Restart TikTok to apply %1$d changes",
                 "TikTok neu starten, um %1$d Änderungen anzuwenden");
+        table.put("Restart TikTok to apply this",
+                "TikTok neu starten, damit das gilt");
         table.put("Restart TikTok to apply this change",
                 "TikTok neu starten, um diese Änderung anzuwenden");
         table.put("Restart TikTok to apply this.",
@@ -2137,10 +2137,10 @@ public final class L10nTranslations {
                 "Das Video konnte nicht gespeichert werden. Versuche es noch einmal oder wähle Automatisch.");
         table.put("There is no Lab change to undo.",
                 "Es gibt keine Lab-Änderung, die sich rückgängig machen ließe.");
-        table.put("There is no diagnostic data to clear.",
-                "Es gibt keine Diagnosedaten zum Löschen.");
-        table.put("There is no diagnostic data to put back.",
-                "Es gibt keine Diagnosedaten zum Wiederherstellen.");
+        table.put("There is no diagnostic data to clear",
+                "Es gibt keine Diagnosedaten zum Löschen");
+        table.put("There is no diagnostic data to put back",
+                "Es gibt keine Diagnosedaten zum Wiederherstellen");
         table.put("There was nothing to undo.",
                 "There was nothing to undo.");
         table.put("These loaded values are for a different TikTok version.",
@@ -2166,8 +2166,8 @@ public final class L10nTranslations {
     }
 
     private static void fillDe17(Map<String, String> table) {
-        table.put("This phone has no file picker, so there is no way to choose a file here.",
-                "Dieses Telefon hat keine Dateiauswahl, hier lässt sich also keine Datei wählen.");
+        table.put("This phone has no file picker, so there is no way to choose a file here",
+                "Dieses Telefon hat keine Dateiauswahl, hier lässt sich also keine Datei wählen");
         table.put("This phone has no folder picker. Type the folder into the row instead.",
                 "Dieses Telefon hat keine Ordnerauswahl. Den Ordner stattdessen in die Zeile eintippen.");
         table.put("This profile picture isn't available to save",
@@ -2516,10 +2516,10 @@ public final class L10nTranslations {
                 "%1$d resultados hasta ahora, y más sin contar");
         table.put("%1$d results, filtered to %2$s",
                 "%1$d resultados, filtrados por %2$s");
-        table.put("%1$d setting was not in that file and was left as it is.",
-                "%1$d ajuste no estaba en ese archivo y se dejó como estaba.");
-        table.put("%1$d settings were not in that file and were left as they are.",
-                "%1$d ajustes no estaban en ese archivo y se dejaron como estaban.");
+        table.put("%1$d setting was not in that file and was left as it is",
+                "%1$d ajuste no estaba en ese archivo y se dejó como estaba");
+        table.put("%1$d settings were not in that file and were left as they are",
+                "%1$d ajustes no estaban en ese archivo y se dejaron como estaban");
         table.put("%1$d unavailable",
                 "%1$d no disponibles");
         table.put("%1$s (%2$s)",
@@ -2608,8 +2608,8 @@ public final class L10nTranslations {
                 "Ya se está ejecutando un cambio del Lab");
         table.put("A creator pattern is taking too long and was switched off: %1$s",
                 "Un patrón de creador tarda demasiado y se ha desactivado: %1$s");
-        table.put("A diagnostic report is already being saved.",
-                "Ya se está guardando un informe de diagnóstico.");
+        table.put("A diagnostic report is already being saved",
+                "Ya se está guardando un informe de diagnóstico");
         table.put("A field value could not be read. Check the values and try again.",
                 "No se pudo leer el valor de un campo. Revisa los valores e inténtalo de nuevo.");
         table.put("A good place to stop, if you want one.",
@@ -2641,7 +2641,7 @@ public final class L10nTranslations {
                 "Nombre sensible para la cuenta: forzar esta clave puede afectar a la seguridad, el inicio de sesión, el cumplimiento, la región, los pagos o la protección de la cuenta.");
         table.put("Activity",
                 "Actividad");
-        table.put("Activity Center (PIA)",
+        table.put("Activity center (PIA)",
                 "Centro de actividad (PIA)");
         table.put("Add",
                 "Añadir");
@@ -2677,12 +2677,12 @@ public final class L10nTranslations {
                 "Permitir Dúo y Unir de todas formas");
         table.put("Allow screenshots and Circle to Search",
                 "Permitir capturas de pantalla y Círculo para buscar");
-        table.put("Allow storage for TikTok in Android settings to save profile pictures.",
-                "Hace falta permiso de almacenamiento para guardar una foto de perfil.");
-        table.put("Allow storage for TikTok in Android settings to save sounds.",
-                "Hace falta permiso de almacenamiento para guardar un sonido.");
-        table.put("Allow storage for TikTok in Android settings to save stories.",
-                "Hace falta permiso de almacenamiento para guardar una historia.");
+        table.put("Allow storage for TikTok in Android settings to save profile pictures",
+                "Hace falta permiso de almacenamiento para guardar una foto de perfil");
+        table.put("Allow storage for TikTok in Android settings to save sounds",
+                "Hace falta permiso de almacenamiento para guardar un sonido");
+        table.put("Allow storage for TikTok in Android settings to save stories",
+                "Hace falta permiso de almacenamiento para guardar una historia");
         table.put("Already active",
                 "Ya está activo");
         table.put("Already marked as not interested",
@@ -3060,10 +3060,10 @@ public final class L10nTranslations {
                 "Idioma del dispositivo, después el original");
         table.put("Diagnostic data cleared. Tap again to put it back.",
                 "Se borraron los datos de diagnóstico. Toca de nuevo para restaurarlos.");
-        table.put("Diagnostic data put back.",
-                "Se restauraron los datos de diagnóstico.");
-        table.put("Diagnostic report copied to the clipboard.",
-                "Informe de diagnóstico copiado al portapapeles.");
+        table.put("Diagnostic data put back",
+                "Se restauraron los datos de diagnóstico");
+        table.put("Diagnostic report copied to the clipboard",
+                "Informe de diagnóstico copiado al portapapeles");
         table.put("Diagnostics",
                 "Diagnóstico");
         table.put("Disable",
@@ -3651,8 +3651,6 @@ public final class L10nTranslations {
                 "Enlaces");
         table.put("Links in comments open",
                 "Los enlaces de los comentarios se abren");
-        table.put("Live",
-                "LIVE");
         table.put("Loaded current values. Loading all known gates...",
                 "Valores actuales cargados. Cargando todos los interruptores conocidos...");
         table.put("Loaded values are still being read. Try again in a moment.",
@@ -3693,7 +3691,7 @@ public final class L10nTranslations {
                 "Visualizaciones máximas por me gusta");
         table.put("Media",
                 "Contenido");
-        table.put("Media Config (VE)",
+        table.put("Media config (VE)",
                 "Configuración de medios (VE)");
         table.put("Messages, profiles and search still work.",
                 "Los mensajes, los perfiles y la búsqueda siguen funcionando.");
@@ -3721,11 +3719,11 @@ public final class L10nTranslations {
                 "Mover hacia la derecha");
         table.put("Move to the next video when the current one ends. Pauses, open dialogs and screen-time holds stop it. Restart TikTok after changing this.",
                 "Pasa al siguiente vídeo cuando termine el actual. Las pausas, los diálogos abiertos y los bloqueos de tiempo de pantalla lo detienen. Reinicia TikTok después de cambiar este ajuste.");
+        table.put("Move up",
+                "Mover hacia arriba");
     }
 
     private static void fillEs10(Map<String, String> table) {
-        table.put("Move up",
-                "Mover hacia arriba");
         table.put("Music disc",
                 "Disco de música");
         table.put("Mutes the video behind the comment sheet while you read. Sound comes back when the sheet closes.",
@@ -3764,8 +3762,8 @@ public final class L10nTranslations {
                 "No hay comentarios que coincidan. Prueba otra palabra o borra la búsqueda con la X del campo.");
         table.put("No matching countries. Try a country name or a two-letter code.",
                 "No hay paises coincidentes. Prueba un nombre de pais o un codigo de dos letras.");
-        table.put("No matching diagnostics found.",
-                "No se encontraron diagnósticos que coincidan.");
+        table.put("No matching diagnostics found",
+                "No se encontraron diagnósticos que coincidan");
         table.put("No matching settings",
                 "Ningún ajuste coincide");
         table.put("No preset selected. Choose a preset above.",
@@ -3844,11 +3842,11 @@ public final class L10nTranslations {
                 "Activado. Restaurar recupera la configuración del feed que tenías antes.");
         table.put("Once today's budget runs out, the hold stays and cannot be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out.",
                 "Una vez que se agote el presupuesto de hoy, la pausa se queda y no se puede cerrar. Los ajustes de presupuesto se bloquean hasta que comience el nuevo día. Desactiva esto en cualquier momento antes de que se agote.");
+        table.put("One area was checked and everything it needs is here.",
+                "Se comprobó un área y está todo lo que necesita.");
     }
 
     private static void fillEs11(Map<String, String> table) {
-        table.put("One area was checked and everything it needs is here.",
-                "Se comprobó un área y está todo lo que necesita.");
         table.put("One minute left",
                 "Queda un minuto");
         table.put("One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out.",
@@ -3945,7 +3943,7 @@ public final class L10nTranslations {
                 "Reproducción");
         table.put("Player",
                 "Reproductor");
-        table.put("Player Config",
+        table.put("Player config",
                 "Configuración del reproductor");
         table.put("Playlist posts",
                 "Publicaciones de listas de reproducción");
@@ -3967,11 +3965,11 @@ public final class L10nTranslations {
                 "Privacidad");
         table.put("Privacy and system",
                 "Privacidad y sistema");
+        table.put("Profile",
+                "Perfil");
     }
 
     private static void fillEs12(Map<String, String> table) {
-        table.put("Profile",
-                "Perfil");
         table.put("Profile picture saved to %1$s",
                 "Foto de perfil guardada en %1$s");
         table.put("Profile share actions",
@@ -4068,6 +4066,8 @@ public final class L10nTranslations {
                 "Reiniciar los ajustes");
         table.put("Restart TikTok to apply %1$d changes",
                 "Reinicia TikTok para aplicar %1$d cambios");
+        table.put("Restart TikTok to apply this",
+                "Reinicia TikTok para que se aplique");
         table.put("Restart TikTok to apply this change",
                 "Reinicia TikTok para aplicar este cambio");
         table.put("Restart TikTok to apply this.",
@@ -4556,10 +4556,10 @@ public final class L10nTranslations {
                 "No se pudo guardar el vídeo. Inténtalo otra vez, o elige Automático.");
         table.put("There is no Lab change to undo.",
                 "No hay ningún cambio del Lab que deshacer.");
-        table.put("There is no diagnostic data to clear.",
-                "No hay datos de diagnóstico que borrar.");
-        table.put("There is no diagnostic data to put back.",
-                "No hay datos de diagnóstico que restaurar.");
+        table.put("There is no diagnostic data to clear",
+                "No hay datos de diagnóstico que borrar");
+        table.put("There is no diagnostic data to put back",
+                "No hay datos de diagnóstico que restaurar");
         table.put("There was nothing to undo.",
                 "There was nothing to undo.");
         table.put("These loaded values are for a different TikTok version.",
@@ -4585,8 +4585,8 @@ public final class L10nTranslations {
     }
 
     private static void fillEs17(Map<String, String> table) {
-        table.put("This phone has no file picker, so there is no way to choose a file here.",
-                "Este teléfono no tiene selector de archivos, así que aquí no se puede elegir uno.");
+        table.put("This phone has no file picker, so there is no way to choose a file here",
+                "Este teléfono no tiene selector de archivos, así que aquí no se puede elegir uno");
         table.put("This phone has no folder picker. Type the folder into the row instead.",
                 "Este teléfono no tiene selector de carpetas. Escribe la carpeta en la fila.");
         table.put("This profile picture isn't available to save",
@@ -4935,10 +4935,10 @@ public final class L10nTranslations {
                 "%1$d hasil sejauh ini, lainnya tidak dihitung");
         table.put("%1$d results, filtered to %2$s",
                 "%1$d hasil, difilter menurut %2$s");
-        table.put("%1$d setting was not in that file and was left as it is.",
-                "%1$d pengaturan tidak ada di berkas itu dan dibiarkan apa adanya.");
-        table.put("%1$d settings were not in that file and were left as they are.",
-                "%1$d pengaturan tidak ada di berkas itu dan dibiarkan apa adanya.");
+        table.put("%1$d setting was not in that file and was left as it is",
+                "%1$d pengaturan tidak ada di berkas itu dan dibiarkan apa adanya");
+        table.put("%1$d settings were not in that file and were left as they are",
+                "%1$d pengaturan tidak ada di berkas itu dan dibiarkan apa adanya");
         table.put("%1$d unavailable",
                 "%1$d tidak tersedia");
         table.put("%1$s (%2$s)",
@@ -5027,8 +5027,8 @@ public final class L10nTranslations {
                 "Perubahan Lab sedang berjalan");
         table.put("A creator pattern is taking too long and was switched off: %1$s",
                 "Ada pola kreator yang terlalu lama, jadi dimatikan: %1$s");
-        table.put("A diagnostic report is already being saved.",
-                "Laporan diagnostik sedang disimpan.");
+        table.put("A diagnostic report is already being saved",
+                "Laporan diagnostik sedang disimpan");
         table.put("A field value could not be read. Check the values and try again.",
                 "Nilai kolom tidak dapat dibaca. Periksa nilainya lalu coba lagi.");
         table.put("A good place to stop, if you want one.",
@@ -5060,8 +5060,8 @@ public final class L10nTranslations {
                 "Nama sensitif akun: memaksa kunci ini bisa memengaruhi keamanan, login, kepatuhan, wilayah, pembayaran atau perilaku keselamatan akun.");
         table.put("Activity",
                 "Aktivitas");
-        table.put("Activity Center (PIA)",
-                "Pusat Aktivitas (PIA)");
+        table.put("Activity center (PIA)",
+                "Pusat aktivitas (PIA)");
         table.put("Add",
                 "Tambah");
         table.put("Add a button beside the block control to send feedback about the current video.",
@@ -5096,12 +5096,12 @@ public final class L10nTranslations {
                 "Tetap izinkan Duet dan Stitch");
         table.put("Allow screenshots and Circle to Search",
                 "Izinkan tangkapan layar dan Circle to Search");
-        table.put("Allow storage for TikTok in Android settings to save profile pictures.",
-                "Izin penyimpanan dibutuhkan untuk menyimpan foto profil.");
-        table.put("Allow storage for TikTok in Android settings to save sounds.",
-                "Izin penyimpanan dibutuhkan untuk menyimpan suara.");
-        table.put("Allow storage for TikTok in Android settings to save stories.",
-                "Izin penyimpanan dibutuhkan untuk menyimpan Story.");
+        table.put("Allow storage for TikTok in Android settings to save profile pictures",
+                "Izin penyimpanan dibutuhkan untuk menyimpan foto profil");
+        table.put("Allow storage for TikTok in Android settings to save sounds",
+                "Izin penyimpanan dibutuhkan untuk menyimpan suara");
+        table.put("Allow storage for TikTok in Android settings to save stories",
+                "Izin penyimpanan dibutuhkan untuk menyimpan Story");
         table.put("Already active",
                 "Sudah aktif");
         table.put("Already marked as not interested",
@@ -5479,10 +5479,10 @@ public final class L10nTranslations {
                 "Bahasa perangkat, lalu bahasa asli");
         table.put("Diagnostic data cleared. Tap again to put it back.",
                 "Data diagnostik dihapus. Ketuk lagi untuk mengembalikannya.");
-        table.put("Diagnostic data put back.",
-                "Data diagnostik dikembalikan.");
-        table.put("Diagnostic report copied to the clipboard.",
-                "Laporan diagnostik disalin ke papan klip.");
+        table.put("Diagnostic data put back",
+                "Data diagnostik dikembalikan");
+        table.put("Diagnostic report copied to the clipboard",
+                "Laporan diagnostik disalin ke papan klip");
         table.put("Diagnostics",
                 "Diagnostik");
         table.put("Disable",
@@ -6070,8 +6070,6 @@ public final class L10nTranslations {
                 "Tautan");
         table.put("Links in comments open",
                 "Tautan di komentar bisa dibuka");
-        table.put("Live",
-                "LIVE");
         table.put("Loaded current values. Loading all known gates...",
                 "Nilai saat ini dimuat. Memuat semua gate yang diketahui...");
         table.put("Loaded values are still being read. Try again in a moment.",
@@ -6112,8 +6110,8 @@ public final class L10nTranslations {
                 "Tayangan maksimum per suka");
         table.put("Media",
                 "Media");
-        table.put("Media Config (VE)",
-                "Konfigurasi Media (VE)");
+        table.put("Media config (VE)",
+                "Konfigurasi media (VE)");
         table.put("Messages, profiles and search still work.",
                 "Pesan, profil dan pencarian masih berfungsi.");
         table.put("Microphone in use",
@@ -6140,11 +6138,11 @@ public final class L10nTranslations {
                 "Pindahkan ke kanan");
         table.put("Move to the next video when the current one ends. Pauses, open dialogs and screen-time holds stop it. Restart TikTok after changing this.",
                 "Pindah ke video berikutnya saat video saat ini berakhir. Jeda, dialog terbuka, dan batas waktu layar akan menghentikannya. Mulai ulang TikTok setelah mengubah setelan ini.");
+        table.put("Move up",
+                "Pindahkan ke atas");
     }
 
     private static void fillIn10(Map<String, String> table) {
-        table.put("Move up",
-                "Pindahkan ke atas");
         table.put("Music disc",
                 "Piringan musik");
         table.put("Mutes the video behind the comment sheet while you read. Sound comes back when the sheet closes.",
@@ -6183,8 +6181,8 @@ public final class L10nTranslations {
                 "Tidak ada komentar yang cocok. Coba kata lain atau hapus pencarian dengan X di kotak.");
         table.put("No matching countries. Try a country name or a two-letter code.",
                 "Tidak ada negara yang cocok. Coba nama negara atau kode dua huruf.");
-        table.put("No matching diagnostics found.",
-                "Tidak ada diagnostik yang cocok.");
+        table.put("No matching diagnostics found",
+                "Tidak ada diagnostik yang cocok");
         table.put("No matching settings",
                 "Tidak ada setelan yang cocok");
         table.put("No preset selected. Choose a preset above.",
@@ -6263,11 +6261,11 @@ public final class L10nTranslations {
                 "Aktif. Pulihkan akan mengembalikan pengaturan feed Anda sebelumnya.");
         table.put("Once today's budget runs out, the hold stays and cannot be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out.",
                 "Setelah anggaran hari ini habis, jeda tetap ada dan tidak bisa ditutup. Pengaturan anggaran dikunci sampai hari baru dimulai. Matikan ini kapan saja sebelum anggaranmu habis.");
+        table.put("One area was checked and everything it needs is here.",
+                "Satu area diperiksa dan semua yang dibutuhkannya ada.");
     }
 
     private static void fillIn11(Map<String, String> table) {
-        table.put("One area was checked and everything it needs is here.",
-                "Satu area diperiksa dan semua yang dibutuhkannya ada.");
         table.put("One minute left",
                 "Satu menit lagi");
         table.put("One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out.",
@@ -6364,8 +6362,8 @@ public final class L10nTranslations {
                 "Pemutaran");
         table.put("Player",
                 "Pemutar");
-        table.put("Player Config",
-                "Konfigurasi Pemutar");
+        table.put("Player config",
+                "Konfigurasi pemutar");
         table.put("Playlist posts",
                 "Kiriman playlist");
         table.put("Popular",
@@ -6386,11 +6384,11 @@ public final class L10nTranslations {
                 "Privasi");
         table.put("Privacy and system",
                 "Privasi dan sistem");
+        table.put("Profile",
+                "Profil");
     }
 
     private static void fillIn12(Map<String, String> table) {
-        table.put("Profile",
-                "Profil");
         table.put("Profile picture saved to %1$s",
                 "Foto profil disimpan ke %1$s");
         table.put("Profile share actions",
@@ -6487,6 +6485,8 @@ public final class L10nTranslations {
                 "Setel ulang pengaturan");
         table.put("Restart TikTok to apply %1$d changes",
                 "Mulai ulang TikTok untuk menerapkan %1$d perubahan");
+        table.put("Restart TikTok to apply this",
+                "Mulai ulang TikTok agar berlaku");
         table.put("Restart TikTok to apply this change",
                 "Mulai ulang TikTok untuk menerapkan perubahan ini");
         table.put("Restart TikTok to apply this.",
@@ -6975,10 +6975,10 @@ public final class L10nTranslations {
                 "Videonya tidak bisa disimpan. Coba lagi, atau pilih Otomatis.");
         table.put("There is no Lab change to undo.",
                 "Tidak ada perubahan Lab yang bisa dibatalkan.");
-        table.put("There is no diagnostic data to clear.",
-                "Tidak ada data diagnostik yang perlu dihapus.");
-        table.put("There is no diagnostic data to put back.",
-                "Tidak ada data diagnostik yang dapat dikembalikan.");
+        table.put("There is no diagnostic data to clear",
+                "Tidak ada data diagnostik yang perlu dihapus");
+        table.put("There is no diagnostic data to put back",
+                "Tidak ada data diagnostik yang dapat dikembalikan");
         table.put("There was nothing to undo.",
                 "There was nothing to undo.");
         table.put("These loaded values are for a different TikTok version.",
@@ -7004,8 +7004,8 @@ public final class L10nTranslations {
     }
 
     private static void fillIn17(Map<String, String> table) {
-        table.put("This phone has no file picker, so there is no way to choose a file here.",
-                "Ponsel ini tidak punya pemilih berkas, jadi tidak ada cara memilih berkas di sini.");
+        table.put("This phone has no file picker, so there is no way to choose a file here",
+                "Ponsel ini tidak punya pemilih berkas, jadi tidak ada cara memilih berkas di sini");
         table.put("This phone has no folder picker. Type the folder into the row instead.",
                 "Ponsel ini tidak punya pemilih folder. Ketik saja foldernya di baris itu.");
         table.put("This profile picture isn't available to save",
@@ -7354,10 +7354,10 @@ public final class L10nTranslations {
                 "%1$d resultados até agora, e mais não contados");
         table.put("%1$d results, filtered to %2$s",
                 "%1$d resultados, filtrados por %2$s");
-        table.put("%1$d setting was not in that file and was left as it is.",
-                "%1$d configuração não estava nesse arquivo e ficou como estava.");
-        table.put("%1$d settings were not in that file and were left as they are.",
-                "%1$d configurações não estavam nesse arquivo e ficaram como estavam.");
+        table.put("%1$d setting was not in that file and was left as it is",
+                "%1$d configuração não estava nesse arquivo e ficou como estava");
+        table.put("%1$d settings were not in that file and were left as they are",
+                "%1$d configurações não estavam nesse arquivo e ficaram como estavam");
         table.put("%1$d unavailable",
                 "%1$d indisponíveis");
         table.put("%1$s (%2$s)",
@@ -7446,8 +7446,8 @@ public final class L10nTranslations {
                 "Já há uma mudança do Lab em andamento");
         table.put("A creator pattern is taking too long and was switched off: %1$s",
                 "Um padrão de criador está demorando demais e foi desligado: %1$s");
-        table.put("A diagnostic report is already being saved.",
-                "Um relatório de diagnóstico já está sendo salvo.");
+        table.put("A diagnostic report is already being saved",
+                "Um relatório de diagnóstico já está sendo salvo");
         table.put("A field value could not be read. Check the values and try again.",
                 "Não foi possível ler o valor de um campo. Verifique os valores e tente novamente.");
         table.put("A good place to stop, if you want one.",
@@ -7479,8 +7479,8 @@ public final class L10nTranslations {
                 "Nome sensível para a conta: forçar esta chave pode afetar a segurança, o login, a conformidade, a região, os pagamentos ou a proteção da conta.");
         table.put("Activity",
                 "Atividade");
-        table.put("Activity Center (PIA)",
-                "Centro de Atividade (PIA)");
+        table.put("Activity center (PIA)",
+                "Centro de atividade (PIA)");
         table.put("Add",
                 "Adicionar");
         table.put("Add a button beside the block control to send feedback about the current video.",
@@ -7515,12 +7515,12 @@ public final class L10nTranslations {
                 "Permitir Dueto e Costura mesmo assim");
         table.put("Allow screenshots and Circle to Search",
                 "Permitir capturas de tela e Círculo para pesquisar");
-        table.put("Allow storage for TikTok in Android settings to save profile pictures.",
-                "É preciso permissão de armazenamento para salvar uma foto de perfil.");
-        table.put("Allow storage for TikTok in Android settings to save sounds.",
-                "É preciso permissão de armazenamento para salvar um som.");
-        table.put("Allow storage for TikTok in Android settings to save stories.",
-                "É preciso permissão de armazenamento para salvar um story.");
+        table.put("Allow storage for TikTok in Android settings to save profile pictures",
+                "É preciso permissão de armazenamento para salvar uma foto de perfil");
+        table.put("Allow storage for TikTok in Android settings to save sounds",
+                "É preciso permissão de armazenamento para salvar um som");
+        table.put("Allow storage for TikTok in Android settings to save stories",
+                "É preciso permissão de armazenamento para salvar um story");
         table.put("Already active",
                 "Já está ativo");
         table.put("Already marked as not interested",
@@ -7898,10 +7898,10 @@ public final class L10nTranslations {
                 "Idioma do aparelho, depois o original");
         table.put("Diagnostic data cleared. Tap again to put it back.",
                 "Dados de diagnóstico apagados. Toque novamente para restaurá-los.");
-        table.put("Diagnostic data put back.",
-                "Dados de diagnóstico restaurados.");
-        table.put("Diagnostic report copied to the clipboard.",
-                "Relatório de diagnóstico copiado para a área de transferência.");
+        table.put("Diagnostic data put back",
+                "Dados de diagnóstico restaurados");
+        table.put("Diagnostic report copied to the clipboard",
+                "Relatório de diagnóstico copiado para a área de transferência");
         table.put("Diagnostics",
                 "Diagnóstico");
         table.put("Disable",
@@ -8489,8 +8489,6 @@ public final class L10nTranslations {
                 "Links");
         table.put("Links in comments open",
                 "Os links nos comentários abrem");
-        table.put("Live",
-                "LIVE");
         table.put("Loaded current values. Loading all known gates...",
                 "Valores atuais carregados. Carregando todos os gates conhecidos...");
         table.put("Loaded values are still being read. Try again in a moment.",
@@ -8531,8 +8529,8 @@ public final class L10nTranslations {
                 "Visualizações máximas por curtida");
         table.put("Media",
                 "Mídia");
-        table.put("Media Config (VE)",
-                "Configuração de Mídia (VE)");
+        table.put("Media config (VE)",
+                "Configuração de mídia (VE)");
         table.put("Messages, profiles and search still work.",
                 "As mensagens, os perfis e a busca continuam funcionando.");
         table.put("Microphone in use",
@@ -8559,11 +8557,11 @@ public final class L10nTranslations {
                 "Mover para a direita");
         table.put("Move to the next video when the current one ends. Pauses, open dialogs and screen-time holds stop it. Restart TikTok after changing this.",
                 "Avance para o próximo vídeo quando o atual terminar. Pausas, caixas de diálogo abertas e bloqueios de tempo de tela interrompem o avanço. Reinicie o TikTok depois de mudar esta configuração.");
+        table.put("Move up",
+                "Mover para cima");
     }
 
     private static void fillPt_rBR10(Map<String, String> table) {
-        table.put("Move up",
-                "Mover para cima");
         table.put("Music disc",
                 "Disco de música");
         table.put("Mutes the video behind the comment sheet while you read. Sound comes back when the sheet closes.",
@@ -8602,8 +8600,8 @@ public final class L10nTranslations {
                 "Nenhum comentário encontrado. Tente outra palavra ou limpe a pesquisa com o X no campo.");
         table.put("No matching countries. Try a country name or a two-letter code.",
                 "Nenhum pais corresponde. Tente um nome de pais ou um codigo de duas letras.");
-        table.put("No matching diagnostics found.",
-                "Nenhum diagnóstico correspondente foi encontrado.");
+        table.put("No matching diagnostics found",
+                "Nenhum diagnóstico correspondente foi encontrado");
         table.put("No matching settings",
                 "Nenhuma configuração combina");
         table.put("No preset selected. Choose a preset above.",
@@ -8682,11 +8680,11 @@ public final class L10nTranslations {
                 "Ativado. Restaurar recupera a configuração de feed que você usava antes.");
         table.put("Once today's budget runs out, the hold stays and cannot be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out.",
                 "Quando o orçamento de hoje acaba, a pausa fica e não pode ser fechada. As configurações de orçamento ficam bloqueadas até o dia recomeçar. Desative isso a qualquer momento antes do orçamento acabar.");
+        table.put("One area was checked and everything it needs is here.",
+                "Uma área foi verificada e tudo de que ela precisa está aqui.");
     }
 
     private static void fillPt_rBR11(Map<String, String> table) {
-        table.put("One area was checked and everything it needs is here.",
-                "Uma área foi verificada e tudo de que ela precisa está aqui.");
         table.put("One minute left",
                 "Resta um minuto");
         table.put("One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out.",
@@ -8783,7 +8781,7 @@ public final class L10nTranslations {
                 "Reprodução");
         table.put("Player",
                 "Reprodutor");
-        table.put("Player Config",
+        table.put("Player config",
                 "Configuração do player");
         table.put("Playlist posts",
                 "Publicações de playlists");
@@ -8805,11 +8803,11 @@ public final class L10nTranslations {
                 "Privacidade");
         table.put("Privacy and system",
                 "Privacidade e sistema");
+        table.put("Profile",
+                "Perfil");
     }
 
     private static void fillPt_rBR12(Map<String, String> table) {
-        table.put("Profile",
-                "Perfil");
         table.put("Profile picture saved to %1$s",
                 "Foto de perfil salva em %1$s");
         table.put("Profile share actions",
@@ -8906,6 +8904,8 @@ public final class L10nTranslations {
                 "Redefinir as configurações");
         table.put("Restart TikTok to apply %1$d changes",
                 "Reinicie o TikTok para aplicar %1$d alterações");
+        table.put("Restart TikTok to apply this",
+                "Reinicie o TikTok para aplicar");
         table.put("Restart TikTok to apply this change",
                 "Reinicie o TikTok para aplicar esta alteração");
         table.put("Restart TikTok to apply this.",
@@ -9394,10 +9394,10 @@ public final class L10nTranslations {
                 "Não foi possível salvar o vídeo. Tente de novo, ou escolha Automático.");
         table.put("There is no Lab change to undo.",
                 "Não há nenhuma alteração do Lab para desfazer.");
-        table.put("There is no diagnostic data to clear.",
-                "Não há dados de diagnóstico para apagar.");
-        table.put("There is no diagnostic data to put back.",
-                "Não há dados de diagnóstico para restaurar.");
+        table.put("There is no diagnostic data to clear",
+                "Não há dados de diagnóstico para apagar");
+        table.put("There is no diagnostic data to put back",
+                "Não há dados de diagnóstico para restaurar");
         table.put("There was nothing to undo.",
                 "There was nothing to undo.");
         table.put("These loaded values are for a different TikTok version.",
@@ -9423,8 +9423,8 @@ public final class L10nTranslations {
     }
 
     private static void fillPt_rBR17(Map<String, String> table) {
-        table.put("This phone has no file picker, so there is no way to choose a file here.",
-                "Este celular não tem seletor de arquivos, então não dá para escolher um aqui.");
+        table.put("This phone has no file picker, so there is no way to choose a file here",
+                "Este celular não tem seletor de arquivos, então não dá para escolher um aqui");
         table.put("This phone has no folder picker. Type the folder into the row instead.",
                 "Este celular não tem seletor de pastas. Digite a pasta na linha.");
         table.put("This profile picture isn't available to save",
@@ -9773,10 +9773,10 @@ public final class L10nTranslations {
                 "Şimdiye kadar %1$d sonuç, sayılmayan başkaları da var");
         table.put("%1$d results, filtered to %2$s",
                 "%1$d sonuç, filtre: %2$s");
-        table.put("%1$d setting was not in that file and was left as it is.",
-                "%1$d ayar o dosyada yoktu ve olduğu gibi bırakıldı.");
-        table.put("%1$d settings were not in that file and were left as they are.",
-                "%1$d ayar o dosyada yoktu ve oldukları gibi bırakıldı.");
+        table.put("%1$d setting was not in that file and was left as it is",
+                "%1$d ayar o dosyada yoktu ve olduğu gibi bırakıldı");
+        table.put("%1$d settings were not in that file and were left as they are",
+                "%1$d ayar o dosyada yoktu ve oldukları gibi bırakıldı");
         table.put("%1$d unavailable",
                 "%1$d kullanılamıyor");
         table.put("%1$s (%2$s)",
@@ -9865,8 +9865,8 @@ public final class L10nTranslations {
                 "Bir Lab değişikliği zaten sürüyor");
         table.put("A creator pattern is taking too long and was switched off: %1$s",
                 "Bir içerik üreticisi kalıbı çok uzun sürdüğü için kapatıldı: %1$s");
-        table.put("A diagnostic report is already being saved.",
-                "Bir tanılama raporu zaten kaydediliyor.");
+        table.put("A diagnostic report is already being saved",
+                "Bir tanılama raporu zaten kaydediliyor");
         table.put("A field value could not be read. Check the values and try again.",
                 "Bir alan değeri okunamadı. Değerleri kontrol edip tekrar dene.");
         table.put("A good place to stop, if you want one.",
@@ -9898,7 +9898,7 @@ public final class L10nTranslations {
                 "Hesap açısından hassas ad: bu anahtarı zorlamak güvenlik, giriş, uyumluluk, bölge, ödeme veya hesap güvenliği davranışını etkileyebilir.");
         table.put("Activity",
                 "Etkinlik");
-        table.put("Activity Center (PIA)",
+        table.put("Activity center (PIA)",
                 "Etkinlik merkezi (PIA)");
         table.put("Add",
                 "Ekle");
@@ -9934,12 +9934,12 @@ public final class L10nTranslations {
                 "Yine de Düet ve Stitch'e izin ver");
         table.put("Allow screenshots and Circle to Search",
                 "Ekran görüntüsüne ve Circle to Search'e izin ver");
-        table.put("Allow storage for TikTok in Android settings to save profile pictures.",
-                "Profil fotoğraflarını kaydetmek için Android ayarlarında TikTok'a depolama izni ver.");
-        table.put("Allow storage for TikTok in Android settings to save sounds.",
-                "Sesleri kaydetmek için Android ayarlarında TikTok'a depolama izni ver.");
-        table.put("Allow storage for TikTok in Android settings to save stories.",
-                "Hikayeleri kaydetmek için Android ayarlarında TikTok'a depolama izni ver.");
+        table.put("Allow storage for TikTok in Android settings to save profile pictures",
+                "Profil fotoğraflarını kaydetmek için Android ayarlarında TikTok'a depolama izni ver");
+        table.put("Allow storage for TikTok in Android settings to save sounds",
+                "Sesleri kaydetmek için Android ayarlarında TikTok'a depolama izni ver");
+        table.put("Allow storage for TikTok in Android settings to save stories",
+                "Hikayeleri kaydetmek için Android ayarlarında TikTok'a depolama izni ver");
         table.put("Already active",
                 "Zaten etkin");
         table.put("Already marked as not interested",
@@ -10317,10 +10317,10 @@ public final class L10nTranslations {
                 "Önce cihaz dili, sonra orijinal");
         table.put("Diagnostic data cleared. Tap again to put it back.",
                 "Tanılama verileri temizlendi. Geri koymak için tekrar dokun.");
-        table.put("Diagnostic data put back.",
-                "Tanılama verileri geri kondu.");
-        table.put("Diagnostic report copied to the clipboard.",
-                "Tanılama raporu panoya kopyalandı.");
+        table.put("Diagnostic data put back",
+                "Tanılama verileri geri kondu");
+        table.put("Diagnostic report copied to the clipboard",
+                "Tanılama raporu panoya kopyalandı");
         table.put("Diagnostics",
                 "Tanılama");
         table.put("Disable",
@@ -10908,8 +10908,6 @@ public final class L10nTranslations {
                 "Bağlantılar");
         table.put("Links in comments open",
                 "Yorumlardaki bağlantıların açılacağı yer");
-        table.put("Live",
-                "Canlı");
         table.put("Loaded current values. Loading all known gates...",
                 "Geçerli değerler yüklendi. Bilinen tüm kapılar yükleniyor...");
         table.put("Loaded values are still being read. Try again in a moment.",
@@ -10950,8 +10948,8 @@ public final class L10nTranslations {
                 "Beğeni başına maksimum görüntülenme");
         table.put("Media",
                 "Medya");
-        table.put("Media Config (VE)",
-                "Medya Yapılandırması (VE)");
+        table.put("Media config (VE)",
+                "Medya yapılandırması (VE)");
         table.put("Messages, profiles and search still work.",
                 "Mesajlar, profiller ve arama çalışmaya devam eder.");
         table.put("Microphone in use",
@@ -10978,11 +10976,11 @@ public final class L10nTranslations {
                 "Sağa taşı");
         table.put("Move to the next video when the current one ends. Pauses, open dialogs and screen-time holds stop it. Restart TikTok after changing this.",
                 "Geçerli video bitince sonraki videoya geç. Duraklatmalar, açık iletişim kutuları ve ekran süresi bekletmeleri bunu durdurur. Bunu değiştirdikten sonra TikTok'u yeniden başlat.");
+        table.put("Move up",
+                "Yukarı taşı");
     }
 
     private static void fillTr10(Map<String, String> table) {
-        table.put("Move up",
-                "Yukarı taşı");
         table.put("Music disc",
                 "Müzik diski");
         table.put("Mutes the video behind the comment sheet while you read. Sound comes back when the sheet closes.",
@@ -11021,8 +11019,8 @@ public final class L10nTranslations {
                 "Eşleşen yorum yok. Başka bir kelime dene veya kutudaki X ile aramayı temizle.");
         table.put("No matching countries. Try a country name or a two-letter code.",
                 "Eşleşen ülke yok. Bir ülke adı veya iki harfli bir kod dene.");
-        table.put("No matching diagnostics found.",
-                "Eşleşen tanılama bulunamadı.");
+        table.put("No matching diagnostics found",
+                "Eşleşen tanılama bulunamadı");
         table.put("No matching settings",
                 "Eşleşen ayar yok");
         table.put("No preset selected. Choose a preset above.",
@@ -11101,11 +11099,11 @@ public final class L10nTranslations {
                 "Açık. Geri yükle, daha önceki akış düzenini geri getirir.");
         table.put("Once today's budget runs out, the hold stays and cannot be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out.",
                 "Bugünün bütçesi bitince bekletme ekranı kalır ve kapatılamaz. Bütçe ayarları gün yeniden başlayana kadar kilitlenir. Bütçe bitmeden önce bunu istediğin zaman kapatabilirsin.");
+        table.put("One area was checked and everything it needs is here.",
+                "Bir alan denetlendi ve ihtiyaç duyduğu her şey burada.");
     }
 
     private static void fillTr11(Map<String, String> table) {
-        table.put("One area was checked and everything it needs is here.",
-                "Bir alan denetlendi ve ihtiyaç duyduğu her şey burada.");
         table.put("One minute left",
                 "Bir dakika kaldı");
         table.put("One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out.",
@@ -11202,7 +11200,7 @@ public final class L10nTranslations {
                 "Oynatma");
         table.put("Player",
                 "Oynatıcı");
-        table.put("Player Config",
+        table.put("Player config",
                 "Oynatıcı yapılandırması");
         table.put("Playlist posts",
                 "Oynatma listesi gönderileri");
@@ -11224,11 +11222,11 @@ public final class L10nTranslations {
                 "Gizlilik");
         table.put("Privacy and system",
                 "Gizlilik ve sistem");
+        table.put("Profile",
+                "Profil");
     }
 
     private static void fillTr12(Map<String, String> table) {
-        table.put("Profile",
-                "Profil");
         table.put("Profile picture saved to %1$s",
                 "Profil fotoğrafı %1$s konumuna kaydedildi");
         table.put("Profile share actions",
@@ -11325,6 +11323,8 @@ public final class L10nTranslations {
                 "Ayarları sıfırla");
         table.put("Restart TikTok to apply %1$d changes",
                 "%1$d değişikliği uygulamak için TikTok'u yeniden başlat");
+        table.put("Restart TikTok to apply this",
+                "Bunu uygulamak için TikTok'u yeniden başlat");
         table.put("Restart TikTok to apply this change",
                 "Bu değişikliği uygulamak için TikTok'u yeniden başlat");
         table.put("Restart TikTok to apply this.",
@@ -11813,10 +11813,10 @@ public final class L10nTranslations {
                 "Video kaydedilemedi. Yeniden dene ya da Otomatik'i seç.");
         table.put("There is no Lab change to undo.",
                 "Geri alınacak bir Lab değişikliği yok.");
-        table.put("There is no diagnostic data to clear.",
-                "Temizlenecek tanılama verisi yok.");
-        table.put("There is no diagnostic data to put back.",
-                "Geri konacak tanılama verisi yok.");
+        table.put("There is no diagnostic data to clear",
+                "Temizlenecek tanılama verisi yok");
+        table.put("There is no diagnostic data to put back",
+                "Geri konacak tanılama verisi yok");
         table.put("There was nothing to undo.",
                 "Geri alınacak bir şey yoktu.");
         table.put("These loaded values are for a different TikTok version.",
@@ -11842,8 +11842,8 @@ public final class L10nTranslations {
     }
 
     private static void fillTr17(Map<String, String> table) {
-        table.put("This phone has no file picker, so there is no way to choose a file here.",
-                "Bu telefonda dosya seçici yok, bu yüzden burada dosya seçmenin bir yolu yok.");
+        table.put("This phone has no file picker, so there is no way to choose a file here",
+                "Bu telefonda dosya seçici yok, bu yüzden burada dosya seçmenin bir yolu yok");
         table.put("This phone has no folder picker. Type the folder into the row instead.",
                 "Bu telefonda klasör seçici yok. Bunun yerine klasörü satıra yaz.");
         table.put("This profile picture isn't available to save",

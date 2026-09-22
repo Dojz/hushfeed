@@ -161,16 +161,16 @@ final class FeatureGateLabText {
 
     private static String sourceName(Context context, String manager) {
         if (FeatureGateLabStore.MANAGER_PIA_ACTIVITY_CENTER.equals(manager)) {
-            return L10n.t(context, "Activity Center (PIA)");
+            return L10n.t(context, "Activity center (PIA)");
         }
         if (FeatureGateLabStore.MANAGER_PLAYER_CONFIG.equals(manager)) {
-            return L10n.t(context, "Player Config");
+            return L10n.t(context, "Player config");
         }
         if (FeatureGateLabStore.MANAGER_LIVE.equals(manager)) {
             return L10n.t(context, "LIVE settings");
         }
         if (FeatureGateLabStore.MANAGER_VE_CONFIG.equals(manager)) {
-            return L10n.t(context, "Media Config (VE)");
+            return L10n.t(context, "Media config (VE)");
         }
         if (FeatureGateLabStore.MANAGER_SETTINGS_MANAGER.equals(manager)) {
             return L10n.t(context, "Config (Settings Manager)");
