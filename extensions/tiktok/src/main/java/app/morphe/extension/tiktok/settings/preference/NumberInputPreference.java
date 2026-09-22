@@ -94,7 +94,7 @@ public class NumberInputPreference extends EditTextPreference {
         setText(text);
         boolean labeled = zeroLabel != null && clampedValue == 0;
         String shown = labeled ? L10n.t(getContext(), zeroLabel) : displayValue(clampedValue);
-        String unit = labeled ? "" : L10n.t(getContext(), unitForValue(clampedValue));
+        String unit = labeled ? "" : unitForValue(clampedValue);
         // The range is read off the setting, so every one of these rows states it without each
         // of them growing a sentence of its own. Twelve of the fourteen said nothing about it
         // and pulled an out of range number to the nearest end without a word.
@@ -126,8 +126,9 @@ public class NumberInputPreference extends EditTextPreference {
         return String.valueOf(value);
     }
 
+    /** The unit in the reader's language, chosen by that language's plural rule for the value. */
     private String unitForValue(int value) {
-        return value == 1 ? singularUnit : pluralUnit;
+        return L10n.quantity(getContext(), value, singularUnit, pluralUnit);
     }
 
     @Override

@@ -344,9 +344,9 @@ Following	Seguindo
 For You	Para você
 For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.	Só para com.deniscerri.ytdl. Pedir áudio ou vídeo ao YTDLnis quando o botão de salvar passar um link.
 For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.	Só para com.deniscerri.ytdl. Esconder o card de download dele e começar a passagem em segundo plano.
-Forced %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.	%1$d de %2$d gates forçados; os demais não aceitam um valor true ou false. Reinicie o TikTok para aplicar.
+Forced %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.	%1$d de %2$d gates forçados. Os demais não aceitam um valor true ou false. Reinicie o TikTok para aplicar.
 Forced %1$d gates. Restart TikTok to apply this.	%1$d gates forçados. Reinicie o TikTok para aplicar.
-Forced 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.	1 de %1$d gates forçado; os demais não aceitam um valor true ou false. Reinicie o TikTok para aplicar.
+Forced 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.	1 de %2$d gates forçado. Os demais não aceitam um valor true ou false. Reinicie o TikTok para aplicar.
 Forced 1 gate. Restart TikTok to apply this.	1 gate forçado. Reinicie o TikTok para aplicar.
 Forced result	Resultado forçado
 Forget seen videos after	Esquecer os vídeos vistos depois de
@@ -724,7 +724,7 @@ Researched values	Valores pesquisados
 Reset	Redefinir
 Reset %1$d gates of %2$d. Restart TikTok to apply this.	%1$d de %2$d gates redefinidos. Reinicie o TikTok para aplicar.
 Reset %1$d gates. Restart TikTok to apply this.	%1$d gates redefinidos. Reinicie o TikTok para aplicar.
-Reset 1 gate of %1$d. Restart TikTok to apply this.	1 de %1$d gates redefinido. Reinicie o TikTok para aplicar.
+Reset 1 gate of %2$d. Restart TikTok to apply this.	1 de %2$d gates redefinido. Reinicie o TikTok para aplicar.
 Reset 1 gate. Restart TikTok to apply this.	1 gate redefinido. Reinicie o TikTok para aplicar.
 Reset override	Redefinir a substituição
 Reset position	Redefinir a posição
@@ -1027,9 +1027,9 @@ Try a different word or clear the search.	Tente outra palavra ou limpe a busca.
 Try again, or go back to TikTok.	Tente novamente ou volte ao TikTok.
 Turn on %1$s first.	Ative %1$s primeiro.
 Turn on overrides	Ativar as substituições
-Turned off %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.	%1$d de %2$d gates desligados; os demais não aceitam um valor true ou false. Reinicie o TikTok para aplicar.
+Turned off %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.	%1$d de %2$d gates desligados. Os demais não aceitam um valor true ou false. Reinicie o TikTok para aplicar.
 Turned off %1$d gates. Restart TikTok to apply this.	%1$d gates desligados. Reinicie o TikTok para aplicar.
-Turned off 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.	1 de %1$d gates desligado; os demais não aceitam um valor true ou false. Reinicie o TikTok para aplicar.
+Turned off 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.	1 de %2$d gates desligado. Os demais não aceitam um valor true ou false. Reinicie o TikTok para aplicar.
 Turned off 1 gate. Restart TikTok to apply this.	1 gate desligado. Reinicie o TikTok para aplicar.
 Two letters, like us, gb or jp.	Duas letras, como us, gb ou jp.
 Type	Tipo

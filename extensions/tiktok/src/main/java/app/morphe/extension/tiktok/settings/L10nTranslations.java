@@ -808,15 +808,15 @@ public final class L10nTranslations {
                 "Nur für com.deniscerri.ytdl. Beim Übergeben eines Links kann die Speichertaste YTDLnis um Audio oder Video bitten.");
         table.put("For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.",
                 "Nur für com.deniscerri.ytdl. Die Downloadkarte wird ausgeblendet und die Übergabe im Hintergrund gestartet.");
-        table.put("Forced %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.",
-                "%1$d von %2$d Schaltern erzwungen; die übrigen nehmen kein true oder false. TikTok neu starten, damit das gilt.");
+        table.put("Forced %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                "%1$d von %2$d Schaltern erzwungen. Die übrigen nehmen kein true oder false. TikTok neu starten, damit das gilt.");
     }
 
     private static void fillDe6(Map<String, String> table) {
         table.put("Forced %1$d gates. Restart TikTok to apply this.",
                 "%1$d Schalter erzwungen. TikTok neu starten, damit das gilt.");
-        table.put("Forced 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.",
-                "1 von %1$d Schaltern erzwungen; die übrigen nehmen kein true oder false. TikTok neu starten, damit das gilt.");
+        table.put("Forced 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                "1 von %2$d Schaltern erzwungen. Die übrigen nehmen kein true oder false. TikTok neu starten, damit das gilt.");
         table.put("Forced 1 gate. Restart TikTok to apply this.",
                 "1 Schalter erzwungen. TikTok neu starten, damit das gilt.");
         table.put("Forced result",
@@ -1619,8 +1619,8 @@ public final class L10nTranslations {
                 "%1$d von %2$d Schaltern zurückgesetzt. TikTok neu starten, damit das gilt.");
         table.put("Reset %1$d gates. Restart TikTok to apply this.",
                 "%1$d Schalter zurückgesetzt. TikTok neu starten, damit das gilt.");
-        table.put("Reset 1 gate of %1$d. Restart TikTok to apply this.",
-                "1 von %1$d Schaltern zurückgesetzt. TikTok neu starten, damit das gilt.");
+        table.put("Reset 1 gate of %2$d. Restart TikTok to apply this.",
+                "1 von %2$d Schaltern zurückgesetzt. TikTok neu starten, damit das gilt.");
         table.put("Reset 1 gate. Restart TikTok to apply this.",
                 "1 Schalter zurückgesetzt. TikTok neu starten, damit das gilt.");
         table.put("Reset override",
@@ -2260,12 +2260,12 @@ public final class L10nTranslations {
                 "Überschreibungen einschalten");
         table.put("Turn this on while you record logs for a bug report, then turn it off again. While it is on, TikTok can feel slower and may crash.",
                 "Schalte das ein, während du Protokolle für eine Fehlermeldung aufzeichnest, und danach wieder aus. Solange es an ist, kann TikTok träge wirken und abstürzen.");
-        table.put("Turned off %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.",
-                "%1$d von %2$d Schaltern ausgeschaltet; die übrigen nehmen kein true oder false. TikTok neu starten, damit das gilt.");
+        table.put("Turned off %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                "%1$d von %2$d Schaltern ausgeschaltet. Die übrigen nehmen kein true oder false. TikTok neu starten, damit das gilt.");
         table.put("Turned off %1$d gates. Restart TikTok to apply this.",
                 "%1$d Schalter ausgeschaltet. TikTok neu starten, damit das gilt.");
-        table.put("Turned off 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.",
-                "1 von %1$d Schaltern ausgeschaltet; die übrigen nehmen kein true oder false. TikTok neu starten, damit das gilt.");
+        table.put("Turned off 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                "1 von %2$d Schaltern ausgeschaltet. Die übrigen nehmen kein true oder false. TikTok neu starten, damit das gilt.");
         table.put("Turned off 1 gate. Restart TikTok to apply this.",
                 "1 Schalter ausgeschaltet. TikTok neu starten, damit das gilt.");
         table.put("Two letters, like us, gb or jp.",
@@ -3229,15 +3229,15 @@ public final class L10nTranslations {
                 "Solo para com.deniscerri.ytdl. Pedir a YTDLnis audio o vídeo cuando el botón de guardar le pasa un enlace.");
         table.put("For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.",
                 "Solo para com.deniscerri.ytdl. Ocultar su tarjeta de descarga y empezar el traspaso en segundo plano.");
-        table.put("Forced %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.",
-                "%1$d interruptores de %2$d forzados; los demás no aceptan un valor true o false. Reinicia TikTok para aplicar esto.");
+        table.put("Forced %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                "%1$d interruptores de %2$d forzados. Los demás no aceptan un valor true o false. Reinicia TikTok para aplicar esto.");
     }
 
     private static void fillEs6(Map<String, String> table) {
         table.put("Forced %1$d gates. Restart TikTok to apply this.",
                 "%1$d interruptores forzados. Reinicia TikTok para aplicar esto.");
-        table.put("Forced 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.",
-                "1 interruptor de %1$d forzado; los demás no aceptan un valor true o false. Reinicia TikTok para aplicar esto.");
+        table.put("Forced 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                "1 interruptor de %2$d forzado. Los demás no aceptan un valor true o false. Reinicia TikTok para aplicar esto.");
         table.put("Forced 1 gate. Restart TikTok to apply this.",
                 "1 interruptor forzado. Reinicia TikTok para aplicar esto.");
         table.put("Forced result",
@@ -4040,8 +4040,8 @@ public final class L10nTranslations {
                 "%1$d interruptores de %2$d restablecidos. Reinicia TikTok para aplicar esto.");
         table.put("Reset %1$d gates. Restart TikTok to apply this.",
                 "%1$d interruptores restablecidos. Reinicia TikTok para aplicar esto.");
-        table.put("Reset 1 gate of %1$d. Restart TikTok to apply this.",
-                "1 interruptor de %1$d restablecido. Reinicia TikTok para aplicar esto.");
+        table.put("Reset 1 gate of %2$d. Restart TikTok to apply this.",
+                "1 interruptor de %2$d restablecido. Reinicia TikTok para aplicar esto.");
         table.put("Reset 1 gate. Restart TikTok to apply this.",
                 "1 interruptor restablecido. Reinicia TikTok para aplicar esto.");
         table.put("Reset override",
@@ -4681,12 +4681,12 @@ public final class L10nTranslations {
                 "Activar las sustituciones");
         table.put("Turn this on while you record logs for a bug report, then turn it off again. While it is on, TikTok can feel slower and may crash.",
                 "Actívalo mientras grabas registros para informar de un problema y luego vuelve a apagarlo. Mientras esté activado, TikTok puede ir más lento y fallar.");
-        table.put("Turned off %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.",
-                "%1$d interruptores de %2$d apagados; los demás no aceptan un valor true o false. Reinicia TikTok para aplicar esto.");
+        table.put("Turned off %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                "%1$d interruptores de %2$d apagados. Los demás no aceptan un valor true o false. Reinicia TikTok para aplicar esto.");
         table.put("Turned off %1$d gates. Restart TikTok to apply this.",
                 "%1$d interruptores apagados. Reinicia TikTok para aplicar esto.");
-        table.put("Turned off 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.",
-                "1 interruptor de %1$d apagado; los demás no aceptan un valor true o false. Reinicia TikTok para aplicar esto.");
+        table.put("Turned off 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                "1 interruptor de %2$d apagado. Los demás no aceptan un valor true o false. Reinicia TikTok para aplicar esto.");
         table.put("Turned off 1 gate. Restart TikTok to apply this.",
                 "1 interruptor apagado. Reinicia TikTok para aplicar esto.");
         table.put("Two letters, like us, gb or jp.",
@@ -5650,15 +5650,15 @@ public final class L10nTranslations {
                 "Hanya untuk com.deniscerri.ytdl. Saat tombol simpan meneruskan tautan, minta YTDLnis mengunduh audio atau video.");
         table.put("For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.",
                 "Hanya untuk com.deniscerri.ytdl. Sembunyikan kartu unduhan dan mulai penerusan di latar belakang.");
-        table.put("Forced %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.",
-                "%1$d dari %2$d gate dipaksakan; sisanya tidak menerima nilai true atau false. Mulai ulang TikTok agar berlaku.");
+        table.put("Forced %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                "%1$d dari %2$d gate dipaksakan. Sisanya tidak menerima nilai true atau false. Mulai ulang TikTok agar berlaku.");
     }
 
     private static void fillIn6(Map<String, String> table) {
         table.put("Forced %1$d gates. Restart TikTok to apply this.",
                 "%1$d gate dipaksakan. Mulai ulang TikTok agar berlaku.");
-        table.put("Forced 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.",
-                "1 dari %1$d gate dipaksakan; sisanya tidak menerima nilai true atau false. Mulai ulang TikTok agar berlaku.");
+        table.put("Forced 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                "1 dari %2$d gate dipaksakan. Sisanya tidak menerima nilai true atau false. Mulai ulang TikTok agar berlaku.");
         table.put("Forced 1 gate. Restart TikTok to apply this.",
                 "1 gate dipaksakan. Mulai ulang TikTok agar berlaku.");
         table.put("Forced result",
@@ -6461,8 +6461,8 @@ public final class L10nTranslations {
                 "%1$d dari %2$d gate diatur ulang. Mulai ulang TikTok agar berlaku.");
         table.put("Reset %1$d gates. Restart TikTok to apply this.",
                 "%1$d gate diatur ulang. Mulai ulang TikTok agar berlaku.");
-        table.put("Reset 1 gate of %1$d. Restart TikTok to apply this.",
-                "1 dari %1$d gate diatur ulang. Mulai ulang TikTok agar berlaku.");
+        table.put("Reset 1 gate of %2$d. Restart TikTok to apply this.",
+                "1 dari %2$d gate diatur ulang. Mulai ulang TikTok agar berlaku.");
         table.put("Reset 1 gate. Restart TikTok to apply this.",
                 "1 gate diatur ulang. Mulai ulang TikTok agar berlaku.");
         table.put("Reset override",
@@ -7102,12 +7102,12 @@ public final class L10nTranslations {
                 "Nyalakan penimpaan");
         table.put("Turn this on while you record logs for a bug report, then turn it off again. While it is on, TikTok can feel slower and may crash.",
                 "Nyalakan saat merekam log untuk laporan masalah, lalu matikan lagi. Selama menyala, TikTok bisa terasa lebih lambat dan berpotensi mogok.");
-        table.put("Turned off %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.",
-                "%1$d dari %2$d gate dimatikan; sisanya tidak menerima nilai true atau false. Mulai ulang TikTok agar berlaku.");
+        table.put("Turned off %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                "%1$d dari %2$d gate dimatikan. Sisanya tidak menerima nilai true atau false. Mulai ulang TikTok agar berlaku.");
         table.put("Turned off %1$d gates. Restart TikTok to apply this.",
                 "%1$d gate dimatikan. Mulai ulang TikTok agar berlaku.");
-        table.put("Turned off 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.",
-                "1 dari %1$d gate dimatikan; sisanya tidak menerima nilai true atau false. Mulai ulang TikTok agar berlaku.");
+        table.put("Turned off 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                "1 dari %2$d gate dimatikan. Sisanya tidak menerima nilai true atau false. Mulai ulang TikTok agar berlaku.");
         table.put("Turned off 1 gate. Restart TikTok to apply this.",
                 "1 gate dimatikan. Mulai ulang TikTok agar berlaku.");
         table.put("Two letters, like us, gb or jp.",
@@ -8071,15 +8071,15 @@ public final class L10nTranslations {
                 "Só para com.deniscerri.ytdl. Pedir áudio ou vídeo ao YTDLnis quando o botão de salvar passar um link.");
         table.put("For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.",
                 "Só para com.deniscerri.ytdl. Esconder o card de download dele e começar a passagem em segundo plano.");
-        table.put("Forced %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.",
-                "%1$d de %2$d gates forçados; os demais não aceitam um valor true ou false. Reinicie o TikTok para aplicar.");
+        table.put("Forced %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                "%1$d de %2$d gates forçados. Os demais não aceitam um valor true ou false. Reinicie o TikTok para aplicar.");
     }
 
     private static void fillPt_rBR6(Map<String, String> table) {
         table.put("Forced %1$d gates. Restart TikTok to apply this.",
                 "%1$d gates forçados. Reinicie o TikTok para aplicar.");
-        table.put("Forced 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.",
-                "1 de %1$d gates forçado; os demais não aceitam um valor true ou false. Reinicie o TikTok para aplicar.");
+        table.put("Forced 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                "1 de %2$d gates forçado. Os demais não aceitam um valor true ou false. Reinicie o TikTok para aplicar.");
         table.put("Forced 1 gate. Restart TikTok to apply this.",
                 "1 gate forçado. Reinicie o TikTok para aplicar.");
         table.put("Forced result",
@@ -8882,8 +8882,8 @@ public final class L10nTranslations {
                 "%1$d de %2$d gates redefinidos. Reinicie o TikTok para aplicar.");
         table.put("Reset %1$d gates. Restart TikTok to apply this.",
                 "%1$d gates redefinidos. Reinicie o TikTok para aplicar.");
-        table.put("Reset 1 gate of %1$d. Restart TikTok to apply this.",
-                "1 de %1$d gates redefinido. Reinicie o TikTok para aplicar.");
+        table.put("Reset 1 gate of %2$d. Restart TikTok to apply this.",
+                "1 de %2$d gates redefinido. Reinicie o TikTok para aplicar.");
         table.put("Reset 1 gate. Restart TikTok to apply this.",
                 "1 gate redefinido. Reinicie o TikTok para aplicar.");
         table.put("Reset override",
@@ -9523,12 +9523,12 @@ public final class L10nTranslations {
                 "Ativar as substituições");
         table.put("Turn this on while you record logs for a bug report, then turn it off again. While it is on, TikTok can feel slower and may crash.",
                 "Ligue enquanto grava registros para relatar um problema e depois desligue de novo. Enquanto estiver ligado, o TikTok pode ficar mais lento e travar.");
-        table.put("Turned off %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.",
-                "%1$d de %2$d gates desligados; os demais não aceitam um valor true ou false. Reinicie o TikTok para aplicar.");
+        table.put("Turned off %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                "%1$d de %2$d gates desligados. Os demais não aceitam um valor true ou false. Reinicie o TikTok para aplicar.");
         table.put("Turned off %1$d gates. Restart TikTok to apply this.",
                 "%1$d gates desligados. Reinicie o TikTok para aplicar.");
-        table.put("Turned off 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.",
-                "1 de %1$d gates desligado; os demais não aceitam um valor true ou false. Reinicie o TikTok para aplicar.");
+        table.put("Turned off 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                "1 de %2$d gates desligado. Os demais não aceitam um valor true ou false. Reinicie o TikTok para aplicar.");
         table.put("Turned off 1 gate. Restart TikTok to apply this.",
                 "1 gate desligado. Reinicie o TikTok para aplicar.");
         table.put("Two letters, like us, gb or jp.",
@@ -10492,15 +10492,15 @@ public final class L10nTranslations {
                 "Yalnızca com.deniscerri.ytdl için. Kaydet düğmesi bir bağlantı aktardığında YTDLnis'ten ses veya video iste.");
         table.put("For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.",
                 "Yalnızca com.deniscerri.ytdl için. İndirme kartını gizle ve aktarımı arka planda başlat.");
-        table.put("Forced %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.",
-                "%1$d / %2$d kapı zorlandı, geri kalanı true veya false değeri almıyor. Uygulamak için TikTok'u yeniden başlat.");
+        table.put("Forced %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                "%1$d / %2$d kapı zorlandı. Geri kalanı true veya false değeri almıyor. Uygulamak için TikTok'u yeniden başlat.");
     }
 
     private static void fillTr6(Map<String, String> table) {
         table.put("Forced %1$d gates. Restart TikTok to apply this.",
                 "%1$d kapı zorlandı. Uygulamak için TikTok'u yeniden başlat.");
-        table.put("Forced 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.",
-                "1 / %1$d kapı zorlandı, geri kalanı true veya false değeri almıyor. Uygulamak için TikTok'u yeniden başlat.");
+        table.put("Forced 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                "1 / %2$d kapı zorlandı. Geri kalanı true veya false değeri almıyor. Uygulamak için TikTok'u yeniden başlat.");
         table.put("Forced 1 gate. Restart TikTok to apply this.",
                 "1 kapı zorlandı. Uygulamak için TikTok'u yeniden başlat.");
         table.put("Forced result",
@@ -11303,8 +11303,8 @@ public final class L10nTranslations {
                 "%1$d / %2$d özellik kapısı sıfırlandı. Bunu uygulamak için TikTok'u yeniden başlat.");
         table.put("Reset %1$d gates. Restart TikTok to apply this.",
                 "%1$d özellik kapısı sıfırlandı. Bunu uygulamak için TikTok'u yeniden başlat.");
-        table.put("Reset 1 gate of %1$d. Restart TikTok to apply this.",
-                "1 / %1$d özellik kapısı sıfırlandı. Bunu uygulamak için TikTok'u yeniden başlat.");
+        table.put("Reset 1 gate of %2$d. Restart TikTok to apply this.",
+                "1 / %2$d özellik kapısı sıfırlandı. Bunu uygulamak için TikTok'u yeniden başlat.");
         table.put("Reset 1 gate. Restart TikTok to apply this.",
                 "1 özellik kapısı sıfırlandı. Bunu uygulamak için TikTok'u yeniden başlat.");
         table.put("Reset override",
@@ -11944,12 +11944,12 @@ public final class L10nTranslations {
                 "Geçersiz kılmaları aç");
         table.put("Turn this on while you record logs for a bug report, then turn it off again. While it is on, TikTok can feel slower and may crash.",
                 "Bunu bir sorunu bildirmek için günlük kaydederken aç, sonra yeniden kapat. Açıkken TikTok yavaşlayabilir ve çökebilir.");
-        table.put("Turned off %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.",
-                "%1$d / %2$d özellik kapısı kapatıldı, geri kalanı doğru ya da yanlış değeri almıyor. Bunu uygulamak için TikTok'u yeniden başlat.");
+        table.put("Turned off %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                "%1$d / %2$d özellik kapısı kapatıldı. Geri kalanı true veya false değeri almıyor. Bunu uygulamak için TikTok'u yeniden başlat.");
         table.put("Turned off %1$d gates. Restart TikTok to apply this.",
                 "%1$d özellik kapısı kapatıldı. Bunu uygulamak için TikTok'u yeniden başlat.");
-        table.put("Turned off 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.",
-                "1 / %1$d özellik kapısı kapatıldı, geri kalanı doğru ya da yanlış değeri almıyor. Bunu uygulamak için TikTok'u yeniden başlat.");
+        table.put("Turned off 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                "1 / %2$d özellik kapısı kapatıldı. Geri kalanı true veya false değeri almıyor. Bunu uygulamak için TikTok'u yeniden başlat.");
         table.put("Turned off 1 gate. Restart TikTok to apply this.",
                 "1 özellik kapısı kapatıldı. Bunu uygulamak için TikTok'u yeniden başlat.");
         table.put("Two letters, like us, gb or jp.",

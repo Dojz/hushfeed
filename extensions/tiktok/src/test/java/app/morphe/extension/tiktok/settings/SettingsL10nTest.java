@@ -306,7 +306,12 @@ public class SettingsL10nTest {
         // translators keep being asked for text nothing shows any more.
         java.util.Map<String, String> base = readTable(ENGLISH_BASE);
         java.util.Set<String> carried = new java.util.TreeSet<>();
-        for (String language : languages()) carried.addAll(readTable(language).keySet());
+        for (String language : languages()) {
+            for (String key : readTable(language).keySet()) {
+                // A |category row is a translation of a key the base lists, not a source string.
+                if (pluralBase(key).equals(key)) carried.add(key);
+            }
+        }
 
         java.util.Set<String> missing = new java.util.TreeSet<>(carried);
         missing.removeAll(base.keySet());
@@ -396,7 +401,9 @@ public class SettingsL10nTest {
         for (String language : L10nTranslations.LANGUAGES) {
             for (java.util.Map.Entry<String, String> row
                     : L10nTranslations.of(language).entrySet()) {
-                String key = row.getKey();
+                // A |category row is one language's extra plural form of the other form, so
+                // it is held to that form's shape.
+                String key = pluralBase(row.getKey());
                 String value = row.getValue();
 
                 // Both directions and both spellings, so a dropped, changed or added
@@ -616,10 +623,19 @@ public class SettingsL10nTest {
             if (kind[call.start()] != CODE) continue;
             int close = closingBracket(text, kind, open);
             if (close < 0) continue;
-            java.util.regex.Matcher literal = java.util.regex.Pattern
-                    .compile("L10n\\.[tf]\\(\\s*(?:[\\w.]+\\s*(?:\\(\\s*\\))?\\s*,\\s*)?\"((?:[^\"\\\\]|\\\\.)*)\"")
-                    .matcher(text.substring(open, close));
-            while (literal.find()) found.add(unescape(literal.group(1)));
+            // Every L10n call inside the toast's brackets, and every literal inside each of
+            // those calls: t and f carry one, quantity carries the one and the other form.
+            java.util.regex.Matcher lookup = java.util.regex.Pattern
+                    .compile("L10n\\s*\\.\\s*(?:t|f|quantity)\\s*\\(").matcher(text);
+            lookup.region(open, close);
+            while (lookup.find()) {
+                int lookupOpen = lookup.end() - 1;
+                int lookupClose = closingBracket(text, kind, lookupOpen);
+                if (lookupClose < 0 || lookupClose > close) continue;
+                // arguments, not literalsIn: a message written across lines with a plus is one
+                // message, and its halves would each fail the rule on their own.
+                found.addAll(arguments(text, kind, lookupOpen, lookupClose));
+            }
         }
         return found;
     }
@@ -749,8 +765,10 @@ public class SettingsL10nTest {
             else break;
         }
         String name = text.substring(start, end);
-        return name.equals("L10n.t") || name.equals("L10n.f")
-                || name.endsWith(".L10n.t") || name.endsWith(".L10n.f");
+        for (String lookup : new String[]{"L10n.t", "L10n.f", "L10n.quantity"}) {
+            if (name.equals(lookup) || name.endsWith("." + lookup)) return true;
+        }
+        return false;
     }
 
     private static int lineOf(String text, int index) {
@@ -865,14 +883,53 @@ public class SettingsL10nTest {
     @Test
     public void everyTableCoversTheSameEnglish() {
         // A language that is missing entries the others have would show a half English screen.
+        // The extra plural rows a language may carry are its own and are left out of the
+        // comparison, but each has to belong to a key the language also carries plainly.
         for (String language : L10nTranslations.LANGUAGES) {
-            assertEquals("keys of " + language, GERMAN.keySet(), L10nTranslations.of(language).keySet());
+            Map<String, String> table = L10nTranslations.of(language);
+            Set<String> plain = new LinkedHashSet<>();
+            for (String key : table.keySet()) {
+                String base = pluralBase(key);
+                if (base.equals(key)) {
+                    plain.add(key);
+                } else {
+                    assertTrue(language + " carries " + key + " without its other form " + base,
+                            table.containsKey(base));
+                }
+            }
+            assertEquals("keys of " + language, sourceKeys(GERMAN), plain);
         }
+    }
+
+    /** The gates read a {@code |category} row as its other form, and nothing else as one. */
+    @Test public void aPluralVariantRowBelongsToItsOtherForm() {
+        assertEquals("%1$d results", pluralBase("%1$d results|few"));
+        assertEquals("%1$d results", pluralBase("%1$d results|many"));
+        assertEquals("Filter: %1$s", pluralBase("Filter: %1$s"));
+        // Only a CLDR category counts; a bar inside ordinary text is text.
+        assertEquals("a|b", pluralBase("a|b"));
+        assertEquals("Something|other", pluralBase("Something|other"));
+    }
+
+    /** The other form a {@code |category} row belongs to, or the key itself. */
+    static String pluralBase(String key) {
+        java.util.regex.Matcher variant = java.util.regex.Pattern
+                .compile("^(.+)\\|(?:zero|one|two|few|many)$").matcher(key);
+        return variant.matches() ? variant.group(1) : key;
+    }
+
+    /** A table's keys without the {@code |category} rows: the strings the code says. */
+    private static Set<String> sourceKeys(Map<String, String> table) {
+        Set<String> keys = new LinkedHashSet<>();
+        for (String key : table.keySet()) {
+            if (pluralBase(key).equals(key)) keys.add(key);
+        }
+        return keys;
     }
 
     @Test
     public void everySettingsStringHasATranslationEntry() throws Exception {
-        Set<String> english = new LinkedHashSet<>(GERMAN.keySet());
+        Set<String> english = new LinkedHashSet<>(sourceKeys(GERMAN));
         Set<String> shown = collectEverything();
         List<String> missing = new ArrayList<>();
 
@@ -967,10 +1024,13 @@ public class SettingsL10nTest {
         Set<String> shown = new LinkedHashSet<>(collectEverything());
         shown.addAll(runtimeStringsInSource());
 
-        List<String> orphaned = new ArrayList<>();
-        for (String english : GERMAN.keySet()) {
-            if (!shown.contains(english)) {
-                orphaned.add(english);
+        Set<String> orphaned = new LinkedHashSet<>();
+        for (String language : L10nTranslations.LANGUAGES) {
+            for (String english : L10nTranslations.of(language).keySet()) {
+                // A |category row lives or dies with the other form it belongs to.
+                if (!shown.contains(pluralBase(english))) {
+                    orphaned.add(english);
+                }
             }
         }
 
@@ -989,7 +1049,7 @@ public class SettingsL10nTest {
                 "extensions/tiktok/src/main/java/app/morphe/extension/tiktok");
         assertTrue("could not find the source tree", root.isDirectory());
 
-        java.util.regex.Pattern call = java.util.regex.Pattern.compile("L10n\\s*\\.\\s*[tf]\\s*\\(");
+        java.util.regex.Pattern call = java.util.regex.Pattern.compile("L10n\\s*\\.\\s*(?:t|f|quantity)\\s*\\(");
         List<String> missing = new ArrayList<>();
         int found = 0;
         try (java.util.stream.Stream<java.nio.file.Path> files =
@@ -1748,7 +1808,7 @@ public class SettingsL10nTest {
      */
     private static byte[] withoutL10nCalls(String text, byte[] kind) {
         byte[] outside = kind.clone();
-        java.util.regex.Pattern l10n = java.util.regex.Pattern.compile("L10n\\s*\\.\\s*[tf]\\s*\\(");
+        java.util.regex.Pattern l10n = java.util.regex.Pattern.compile("L10n\\s*\\.\\s*(?:t|f|quantity)\\s*\\(");
         java.util.regex.Matcher match = l10n.matcher(text);
         while (match.find()) {
             if (kind[match.start()] != CODE) continue;

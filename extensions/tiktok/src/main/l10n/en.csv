@@ -358,9 +358,9 @@ Following,Following
 For You,For You
 For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.,For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.
 For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.,For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.
-Forced %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.,Forced %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.
+Forced %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.,Forced %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.
 Forced %1$d gates. Restart TikTok to apply this.,Forced %1$d gates. Restart TikTok to apply this.
-Forced 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.,Forced 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.
+Forced 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.,Forced 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.
 Forced 1 gate. Restart TikTok to apply this.,Forced 1 gate. Restart TikTok to apply this.
 Forced result,Forced result
 Forget seen videos after,Forget seen videos after
@@ -753,7 +753,7 @@ Researched values,Researched values
 Reset,Reset
 Reset %1$d gates of %2$d. Restart TikTok to apply this.,Reset %1$d gates of %2$d. Restart TikTok to apply this.
 Reset %1$d gates. Restart TikTok to apply this.,Reset %1$d gates. Restart TikTok to apply this.
-Reset 1 gate of %1$d. Restart TikTok to apply this.,Reset 1 gate of %1$d. Restart TikTok to apply this.
+Reset 1 gate of %2$d. Restart TikTok to apply this.,Reset 1 gate of %2$d. Restart TikTok to apply this.
 Reset 1 gate. Restart TikTok to apply this.,Reset 1 gate. Restart TikTok to apply this.
 Reset override,Reset override
 Reset position,Reset position
@@ -1066,9 +1066,9 @@ Try a different word or clear the search.,Try a different word or clear the sear
 Turn on %1$s first.,Turn on %1$s first.
 Turn on overrides,Turn on overrides
 "Turn this on while you record logs for a bug report, then turn it off again. While it is on, TikTok can feel slower and may crash.","Turn this on while you record logs for a bug report, then turn it off again. While it is on, TikTok can feel slower and may crash."
-Turned off %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.,Turned off %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.
+Turned off %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.,Turned off %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.
 Turned off %1$d gates. Restart TikTok to apply this.,Turned off %1$d gates. Restart TikTok to apply this.
-Turned off 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.,Turned off 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.
+Turned off 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.,Turned off 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.
 Turned off 1 gate. Restart TikTok to apply this.,Turned off 1 gate. Restart TikTok to apply this.
 "Two letters, like us, gb or jp.","Two letters, like us, gb or jp."
 Type,Type

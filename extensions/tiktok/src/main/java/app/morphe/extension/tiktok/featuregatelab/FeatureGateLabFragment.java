@@ -1080,9 +1080,8 @@ public final class FeatureGateLabFragment extends Fragment {
                     list.getPaddingRight(), bottomPad);
         }
         if (selectionCount != null) {
-            selectionCount.setText(selection.size() == 1
-                    ? L10n.t(getContext(), "1 gate selected")
-                    : L10n.f(getContext(), "%1$d gates selected", selection.size()));
+            selectionCount.setText(L10n.quantity(getContext(), selection.size(),
+                    "1 gate selected", "%1$d gates selected"));
         }
         if (adapter != null) adapter.notifyDataSetChanged();
     }
@@ -1106,24 +1105,25 @@ public final class FeatureGateLabFragment extends Fragment {
             android.content.Context context = Utils.getContext();
             if (written == total) {
                 if (value) {
-                    return written == 1
-                            ? L10n.t(context, "Forced 1 gate. Restart TikTok to apply this.")
-                            : L10n.f(context, "Forced %1$d gates. Restart TikTok to apply this.",
-                                    written);
+                    return L10n.quantity(context, written,
+                            "Forced 1 gate. Restart TikTok to apply this.",
+                            "Forced %1$d gates. Restart TikTok to apply this.");
                 }
-                return written == 1
-                        ? L10n.t(context, "Turned off 1 gate. Restart TikTok to apply this.")
-                        : L10n.f(context, "Turned off %1$d gates. Restart TikTok to apply this.",
-                                written);
+                return L10n.quantity(context, written,
+                        "Turned off 1 gate. Restart TikTok to apply this.",
+                        "Turned off %1$d gates. Restart TikTok to apply this.");
             }
+            // Both forms take (written, total); the one form leaves the first unused.
             if (value) {
-                return written == 1
-                        ? L10n.f(context, "Forced 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.", total)
-                        : L10n.f(context, "Forced %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.", written, total);
+                return L10n.quantity(context, written,
+                        "Forced 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                        "Forced %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                        written, total);
             }
-            return written == 1
-                    ? L10n.f(context, "Turned off 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.", total)
-                    : L10n.f(context, "Turned off %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.", written, total);
+            return L10n.quantity(context, written,
+                    "Turned off 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                    "Turned off %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
+                    written, total);
         });
         if (started) {
             selection.clear();
@@ -1145,16 +1145,14 @@ public final class FeatureGateLabFragment extends Fragment {
             // rows no table could hold, and the plural rule of the language never got a say.
             android.content.Context context = Utils.getContext();
             if (dropped == total) {
-                return dropped == 1
-                        ? L10n.t(context, "Reset 1 gate. Restart TikTok to apply this.")
-                        : L10n.f(context, "Reset %1$d gates. Restart TikTok to apply this.",
-                                dropped);
+                return L10n.quantity(context, dropped,
+                        "Reset 1 gate. Restart TikTok to apply this.",
+                        "Reset %1$d gates. Restart TikTok to apply this.");
             }
-            return dropped == 1
-                    ? L10n.f(context, "Reset 1 gate of %1$d. Restart TikTok to apply this.",
-                            total)
-                    : L10n.f(context, "Reset %1$d gates of %2$d. Restart TikTok to apply this.",
-                            dropped, total);
+            return L10n.quantity(context, dropped,
+                    "Reset 1 gate of %2$d. Restart TikTok to apply this.",
+                    "Reset %1$d gates of %2$d. Restart TikTok to apply this.",
+                    dropped, total);
         });
         if (started) {
             selection.clear();
@@ -1288,10 +1286,8 @@ public final class FeatureGateLabFragment extends Fragment {
                     if (output == null) throw new IllegalStateException("Document provider returned no output stream");
                     output.write(payload.gzipBytes);
                 }
-                postToast(payload.count == 1
-                        ? L10n.t(Utils.getContext(), "Exported 1 loaded value")
-                        : L10n.f(Utils.getContext(), "Exported %1$d loaded values",
-                                payload.count));
+                postToast(L10n.quantity(Utils.getContext(), payload.count,
+                        "Exported 1 loaded value", "Exported %1$d loaded values"));
             } catch (Throwable throwable) {
                 Logger.printException(() -> "Loaded-value file export failed", throwable);
                 postToast(L10n.t(Utils.getContext(), deleteCreatedDocument(resolver, uri)

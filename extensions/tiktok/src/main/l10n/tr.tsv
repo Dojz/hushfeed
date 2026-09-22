@@ -359,9 +359,9 @@ Following	Takip Edilenler
 For You	Senin İçin
 For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.	Yalnızca com.deniscerri.ytdl için. Kaydet düğmesi bir bağlantı aktardığında YTDLnis'ten ses veya video iste.
 For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.	Yalnızca com.deniscerri.ytdl için. İndirme kartını gizle ve aktarımı arka planda başlat.
-Forced %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.	%1$d / %2$d kapı zorlandı, geri kalanı true veya false değeri almıyor. Uygulamak için TikTok'u yeniden başlat.
+Forced %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.	%1$d / %2$d kapı zorlandı. Geri kalanı true veya false değeri almıyor. Uygulamak için TikTok'u yeniden başlat.
 Forced %1$d gates. Restart TikTok to apply this.	%1$d kapı zorlandı. Uygulamak için TikTok'u yeniden başlat.
-Forced 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.	1 / %1$d kapı zorlandı, geri kalanı true veya false değeri almıyor. Uygulamak için TikTok'u yeniden başlat.
+Forced 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.	1 / %2$d kapı zorlandı. Geri kalanı true veya false değeri almıyor. Uygulamak için TikTok'u yeniden başlat.
 Forced 1 gate. Restart TikTok to apply this.	1 kapı zorlandı. Uygulamak için TikTok'u yeniden başlat.
 Forced result	Zorlanan sonuç
 Forget seen videos after	Görülen videoları şu süreden sonra unut
@@ -756,7 +756,7 @@ Researched values	Araştırılmış değerler
 Reset	Sıfırla
 Reset %1$d gates of %2$d. Restart TikTok to apply this.	%1$d / %2$d özellik kapısı sıfırlandı. Bunu uygulamak için TikTok'u yeniden başlat.
 Reset %1$d gates. Restart TikTok to apply this.	%1$d özellik kapısı sıfırlandı. Bunu uygulamak için TikTok'u yeniden başlat.
-Reset 1 gate of %1$d. Restart TikTok to apply this.	1 / %1$d özellik kapısı sıfırlandı. Bunu uygulamak için TikTok'u yeniden başlat.
+Reset 1 gate of %2$d. Restart TikTok to apply this.	1 / %2$d özellik kapısı sıfırlandı. Bunu uygulamak için TikTok'u yeniden başlat.
 Reset 1 gate. Restart TikTok to apply this.	1 özellik kapısı sıfırlandı. Bunu uygulamak için TikTok'u yeniden başlat.
 Reset override	Geçersiz kılmayı sıfırla
 Reset position	Konumu sıfırla
@@ -1063,9 +1063,9 @@ Try a different word or clear the search.	Başka bir kelime dene ya da aramayı 
 Try again, or go back to TikTok.	Yeniden dene ya da TikTok'a geri dön.
 Turn on %1$s first.	Önce %1$s ayarını aç.
 Turn on overrides	Geçersiz kılmaları aç
-Turned off %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.	%1$d / %2$d özellik kapısı kapatıldı, geri kalanı doğru ya da yanlış değeri almıyor. Bunu uygulamak için TikTok'u yeniden başlat.
+Turned off %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.	%1$d / %2$d özellik kapısı kapatıldı. Geri kalanı true veya false değeri almıyor. Bunu uygulamak için TikTok'u yeniden başlat.
 Turned off %1$d gates. Restart TikTok to apply this.	%1$d özellik kapısı kapatıldı. Bunu uygulamak için TikTok'u yeniden başlat.
-Turned off 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.	1 / %1$d özellik kapısı kapatıldı, geri kalanı doğru ya da yanlış değeri almıyor. Bunu uygulamak için TikTok'u yeniden başlat.
+Turned off 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.	1 / %2$d özellik kapısı kapatıldı. Geri kalanı true veya false değeri almıyor. Bunu uygulamak için TikTok'u yeniden başlat.
 Turned off 1 gate. Restart TikTok to apply this.	1 özellik kapısı kapatıldı. Bunu uygulamak için TikTok'u yeniden başlat.
 Two letters, like us, gb or jp.	us, gb veya jp gibi iki harf.
 Type	Tür

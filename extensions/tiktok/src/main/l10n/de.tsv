@@ -347,9 +347,9 @@ Following	Gefolgt
 For You	Für dich
 For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.	Nur für com.deniscerri.ytdl. Beim Übergeben eines Links kann die Speichertaste YTDLnis um Audio oder Video bitten.
 For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.	Nur für com.deniscerri.ytdl. Die Downloadkarte wird ausgeblendet und die Übergabe im Hintergrund gestartet.
-Forced %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.	%1$d von %2$d Schaltern erzwungen; die übrigen nehmen kein true oder false. TikTok neu starten, damit das gilt.
+Forced %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.	%1$d von %2$d Schaltern erzwungen. Die übrigen nehmen kein true oder false. TikTok neu starten, damit das gilt.
 Forced %1$d gates. Restart TikTok to apply this.	%1$d Schalter erzwungen. TikTok neu starten, damit das gilt.
-Forced 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.	1 von %1$d Schaltern erzwungen; die übrigen nehmen kein true oder false. TikTok neu starten, damit das gilt.
+Forced 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.	1 von %2$d Schaltern erzwungen. Die übrigen nehmen kein true oder false. TikTok neu starten, damit das gilt.
 Forced 1 gate. Restart TikTok to apply this.	1 Schalter erzwungen. TikTok neu starten, damit das gilt.
 Forced result	Erzwungenes Ergebnis
 Forget seen videos after	Gesehene Videos vergessen nach
@@ -727,7 +727,7 @@ Researched values	Recherchierte Werte
 Reset	Zurücksetzen
 Reset %1$d gates of %2$d. Restart TikTok to apply this.	%1$d von %2$d Schaltern zurückgesetzt. TikTok neu starten, damit das gilt.
 Reset %1$d gates. Restart TikTok to apply this.	%1$d Schalter zurückgesetzt. TikTok neu starten, damit das gilt.
-Reset 1 gate of %1$d. Restart TikTok to apply this.	1 von %1$d Schaltern zurückgesetzt. TikTok neu starten, damit das gilt.
+Reset 1 gate of %2$d. Restart TikTok to apply this.	1 von %2$d Schaltern zurückgesetzt. TikTok neu starten, damit das gilt.
 Reset 1 gate. Restart TikTok to apply this.	1 Schalter zurückgesetzt. TikTok neu starten, damit das gilt.
 Reset override	Überschreibung zurücksetzen
 Reset position	Position zurücksetzen
@@ -1030,9 +1030,9 @@ Try a different word or clear the search.	Versuche ein anderes Wort oder lösche
 Try again, or go back to TikTok.	Versuche es erneut oder kehre zu TikTok zurück.
 Turn on %1$s first.	Zuerst %1$s einschalten.
 Turn on overrides	Überschreibungen einschalten
-Turned off %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.	%1$d von %2$d Schaltern ausgeschaltet; die übrigen nehmen kein true oder false. TikTok neu starten, damit das gilt.
+Turned off %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.	%1$d von %2$d Schaltern ausgeschaltet. Die übrigen nehmen kein true oder false. TikTok neu starten, damit das gilt.
 Turned off %1$d gates. Restart TikTok to apply this.	%1$d Schalter ausgeschaltet. TikTok neu starten, damit das gilt.
-Turned off 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.	1 von %1$d Schaltern ausgeschaltet; die übrigen nehmen kein true oder false. TikTok neu starten, damit das gilt.
+Turned off 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.	1 von %2$d Schaltern ausgeschaltet. Die übrigen nehmen kein true oder false. TikTok neu starten, damit das gilt.
 Turned off 1 gate. Restart TikTok to apply this.	1 Schalter ausgeschaltet. TikTok neu starten, damit das gilt.
 Two letters, like us, gb or jp.	Zwei Buchstaben, etwa us, gb oder jp.
 Type	Typ

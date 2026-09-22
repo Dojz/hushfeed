@@ -63,9 +63,7 @@ public final class ScreenTimePreferenceCategory extends ConditionalPreferenceCat
             @Override protected String extraSummaryLine() {
                 if (Settings.SESSION_BUDGET_VIDEOS.get() <= 0) return null;
                 int seen = SessionBudget.videosSeen();
-                return seen == 1
-                        ? L10n.f(getContext(), "Today: %1$d video", seen)
-                        : L10n.f(getContext(), "Today: %1$d videos", seen);
+                return L10n.quantity(getContext(), seen, "Today: %1$d video", "Today: %1$d videos");
             }
         }.zeroMeansOff());
         addPreference(new NumberInputPreference(context, "Daily time budget",
@@ -77,9 +75,7 @@ public final class ScreenTimePreferenceCategory extends ConditionalPreferenceCat
                 // Whole minutes down, so a budget of 30 never reads "Today: 30 minutes" while
                 // there is still time left on it.
                 long minutes = SessionBudget.watchedMs() / 60_000L;
-                return minutes == 1
-                        ? L10n.f(getContext(), "Today: %1$d minute", minutes)
-                        : L10n.f(getContext(), "Today: %1$d minutes", minutes);
+                return L10n.quantity(getContext(), minutes, "Today: %1$d minute", "Today: %1$d minutes");
             }
         }.zeroMeansOff());
         addPreference(new NumberInputPreference(context, "Remind me every",

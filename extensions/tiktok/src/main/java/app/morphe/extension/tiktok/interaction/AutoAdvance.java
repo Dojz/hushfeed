@@ -110,10 +110,8 @@ public final class AutoAdvance {
         if (!completedId.equals(current)) return;
         if (!control.recordCompletion(completedId)) return;
         if (control.limitReached() && control.claimLimitNotice()) {
-            String message = control.completedCount == 1
-                    ? L10n.t("Auto-advance stopped after one video")
-                    : L10n.f("Auto-advance stopped after %1$d videos",
-                            control.completedCount);
+            String message = L10n.quantity(Utils.getContext(), control.completedCount,
+                    "Auto-advance stopped after one video", "Auto-advance stopped after %1$d videos");
             BlockAuthorOverlay.showActionBanner(message,
                     L10n.t("Keep going"), () -> {
                         control.completedCount = 0;

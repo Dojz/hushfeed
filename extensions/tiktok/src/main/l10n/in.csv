@@ -345,9 +345,9 @@ Following,Mengikuti
 For You,Untuk Kamu
 For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.,"Hanya untuk com.deniscerri.ytdl. Saat tombol simpan meneruskan tautan, minta YTDLnis mengunduh audio atau video."
 For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.,Hanya untuk com.deniscerri.ytdl. Sembunyikan kartu unduhan dan mulai penerusan di latar belakang.
-Forced %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.,%1$d dari %2$d gate dipaksakan; sisanya tidak menerima nilai true atau false. Mulai ulang TikTok agar berlaku.
+Forced %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.,%1$d dari %2$d gate dipaksakan. Sisanya tidak menerima nilai true atau false. Mulai ulang TikTok agar berlaku.
 Forced %1$d gates. Restart TikTok to apply this.,%1$d gate dipaksakan. Mulai ulang TikTok agar berlaku.
-Forced 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.,1 dari %1$d gate dipaksakan; sisanya tidak menerima nilai true atau false. Mulai ulang TikTok agar berlaku.
+Forced 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.,1 dari %2$d gate dipaksakan. Sisanya tidak menerima nilai true atau false. Mulai ulang TikTok agar berlaku.
 Forced 1 gate. Restart TikTok to apply this.,1 gate dipaksakan. Mulai ulang TikTok agar berlaku.
 Forced result,Hasil yang dipaksakan
 Forget seen videos after,Lupakan video yang sudah ditonton setelah
@@ -725,7 +725,7 @@ Researched values,Nilai hasil riset
 Reset,Atur ulang
 Reset %1$d gates of %2$d. Restart TikTok to apply this.,%1$d dari %2$d gate diatur ulang. Mulai ulang TikTok agar berlaku.
 Reset %1$d gates. Restart TikTok to apply this.,%1$d gate diatur ulang. Mulai ulang TikTok agar berlaku.
-Reset 1 gate of %1$d. Restart TikTok to apply this.,1 dari %1$d gate diatur ulang. Mulai ulang TikTok agar berlaku.
+Reset 1 gate of %2$d. Restart TikTok to apply this.,1 dari %2$d gate diatur ulang. Mulai ulang TikTok agar berlaku.
 Reset 1 gate. Restart TikTok to apply this.,1 gate diatur ulang. Mulai ulang TikTok agar berlaku.
 Reset override,Setel ulang penggantian
 Reset position,Atur ulang posisi
@@ -1028,9 +1028,9 @@ Try a different word or clear the search.,Coba kata lain atau hapus pencarian.
 "Try again, or go back to TikTok.","Coba lagi, atau kembali ke TikTok."
 Turn on %1$s first.,Nyalakan %1$s dulu.
 Turn on overrides,Nyalakan penimpaan
-Turned off %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.,%1$d dari %2$d gate dimatikan; sisanya tidak menerima nilai true atau false. Mulai ulang TikTok agar berlaku.
+Turned off %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.,%1$d dari %2$d gate dimatikan. Sisanya tidak menerima nilai true atau false. Mulai ulang TikTok agar berlaku.
 Turned off %1$d gates. Restart TikTok to apply this.,%1$d gate dimatikan. Mulai ulang TikTok agar berlaku.
-Turned off 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.,1 dari %1$d gate dimatikan; sisanya tidak menerima nilai true atau false. Mulai ulang TikTok agar berlaku.
+Turned off 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.,1 dari %2$d gate dimatikan. Sisanya tidak menerima nilai true atau false. Mulai ulang TikTok agar berlaku.
 Turned off 1 gate. Restart TikTok to apply this.,1 gate dimatikan. Mulai ulang TikTok agar berlaku.
 "Two letters, like us, gb or jp.","Dua huruf, misalnya us, gb atau jp."
 Type,Tipe
