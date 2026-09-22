@@ -50,7 +50,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildDe() {
-        Map<String, String> table = new HashMap<>(2334);
+        Map<String, String> table = new HashMap<>(2336);
         fillDe0(table);
         fillDe1(table);
         fillDe2(table);
@@ -581,10 +581,10 @@ public final class L10nTranslations {
                 "Nicht erkennbar, welcher Ordner geändert werden soll. Bitte erneut auswählen.");
         table.put("Could not undo the clear. Try again.",
                 "Could not undo the clear. Try again.");
-        table.put("Couldn't confirm the block for %1$s.",
-                "Die Blockierung von %1$s konnte nicht bestätigt werden.");
-        table.put("Couldn't confirm the unblock for %1$s.",
-                "Die Aufhebung der Blockierung von %1$s konnte nicht bestätigt werden.");
+        table.put("Couldn't confirm the block for %1$s. Open their profile to check.",
+                "Die Blockierung von %1$s konnte nicht bestätigt werden. Öffne das Profil, um nachzusehen.");
+        table.put("Couldn't confirm the unblock for %1$s. Open their profile to check.",
+                "Die Aufhebung der Blockierung von %1$s konnte nicht bestätigt werden. Öffne das Profil, um nachzusehen.");
         table.put("Country and network preferences",
                 "Land und Netzwerkeinstellungen");
         table.put("Country code",
@@ -2191,9 +2191,9 @@ public final class L10nTranslations {
         table.put("TikTok default (2x hold, quick share)",
                 "TikTok-Standard (2x halten, schnelles Teilen)");
         table.put("TikTok did not block %1$s. Try again in a moment.",
-                "TikTok hat die Anfrage zum Blockieren von %1$s abgelehnt.");
+                "TikTok hat %1$s nicht blockiert. Versuch es gleich noch einmal.");
         table.put("TikTok did not unblock %1$s. Try again in a moment.",
-                "TikTok hat die Anfrage zum Entblocken von %1$s abgelehnt.");
+                "TikTok hat die Blockierung von %1$s nicht aufgehoben. Versuch es gleich noch einmal.");
         table.put("TikTok didn't accept the feedback. Try again later.",
                 "TikTok hat die Rückmeldung nicht angenommen. Versuche es später noch einmal.");
         table.put("TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.",
@@ -2450,6 +2450,8 @@ public final class L10nTranslations {
                 "Sekunde");
         table.put("seconds",
                 "Sekunden");
+        table.put("this creator",
+                "dieser Creator");
         table.put("time",
                 "Mal");
         table.put("times",
@@ -2469,7 +2471,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildEs() {
-        Map<String, String> table = new HashMap<>(2334);
+        Map<String, String> table = new HashMap<>(2336);
         fillEs0(table);
         fillEs1(table);
         fillEs2(table);
@@ -3000,10 +3002,10 @@ public final class L10nTranslations {
                 "No se pudo saber qué carpeta actualizar. Vuelve a elegirla.");
         table.put("Could not undo the clear. Try again.",
                 "Could not undo the clear. Try again.");
-        table.put("Couldn't confirm the block for %1$s.",
-                "No se pudo confirmar el bloqueo de %1$s.");
-        table.put("Couldn't confirm the unblock for %1$s.",
-                "No se pudo confirmar el desbloqueo de %1$s.");
+        table.put("Couldn't confirm the block for %1$s. Open their profile to check.",
+                "No se pudo confirmar el bloqueo de %1$s. Abre su perfil para comprobarlo.");
+        table.put("Couldn't confirm the unblock for %1$s. Open their profile to check.",
+                "No se pudo confirmar el desbloqueo de %1$s. Abre su perfil para comprobarlo.");
         table.put("Country and network preferences",
                 "Preferencias de país y de red");
         table.put("Country code",
@@ -4610,9 +4612,9 @@ public final class L10nTranslations {
         table.put("TikTok default (2x hold, quick share)",
                 "Predeterminado de TikTok (mantener para 2x, compartir rápido)");
         table.put("TikTok did not block %1$s. Try again in a moment.",
-                "TikTok rechazó la solicitud de bloquear a %1$s.");
+                "TikTok no bloqueó a %1$s. Inténtalo de nuevo en un momento.");
         table.put("TikTok did not unblock %1$s. Try again in a moment.",
-                "TikTok rechazó la solicitud de desbloquear a %1$s.");
+                "TikTok no desbloqueó a %1$s. Inténtalo de nuevo en un momento.");
         table.put("TikTok didn't accept the feedback. Try again later.",
                 "TikTok no aceptó el comentario. Inténtalo más tarde.");
         table.put("TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.",
@@ -4869,6 +4871,8 @@ public final class L10nTranslations {
                 "segundo");
         table.put("seconds",
                 "segundos");
+        table.put("this creator",
+                "este creador");
         table.put("time",
                 "vez");
         table.put("times",
@@ -4888,7 +4892,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIn() {
-        Map<String, String> table = new HashMap<>(2334);
+        Map<String, String> table = new HashMap<>(2336);
         fillIn0(table);
         fillIn1(table);
         fillIn2(table);
@@ -5419,10 +5423,10 @@ public final class L10nTranslations {
                 "Tidak diketahui folder mana yang harus diubah. Pilih lagi.");
         table.put("Could not undo the clear. Try again.",
                 "Could not undo the clear. Try again.");
-        table.put("Couldn't confirm the block for %1$s.",
-                "Pemblokiran %1$s tidak dapat dikonfirmasi.");
-        table.put("Couldn't confirm the unblock for %1$s.",
-                "Pembukaan blokir %1$s tidak dapat dikonfirmasi.");
+        table.put("Couldn't confirm the block for %1$s. Open their profile to check.",
+                "Pemblokiran %1$s tidak dapat dikonfirmasi. Buka profilnya untuk memeriksa.");
+        table.put("Couldn't confirm the unblock for %1$s. Open their profile to check.",
+                "Pembukaan blokir %1$s tidak dapat dikonfirmasi. Buka profilnya untuk memeriksa.");
         table.put("Country and network preferences",
                 "Preferensi negara dan jaringan");
         table.put("Country code",
@@ -7029,9 +7033,9 @@ public final class L10nTranslations {
         table.put("TikTok default (2x hold, quick share)",
                 "Bawaan TikTok (tahan 2x, bagikan cepat)");
         table.put("TikTok did not block %1$s. Try again in a moment.",
-                "TikTok menolak permintaan untuk memblokir %1$s.");
+                "TikTok tidak memblokir %1$s. Coba lagi sebentar lagi.");
         table.put("TikTok did not unblock %1$s. Try again in a moment.",
-                "TikTok menolak permintaan untuk membuka blokir %1$s.");
+                "TikTok tidak membuka blokir %1$s. Coba lagi sebentar lagi.");
         table.put("TikTok didn't accept the feedback. Try again later.",
                 "TikTok tidak menerima masukannya. Coba lagi nanti.");
         table.put("TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.",
@@ -7288,6 +7292,8 @@ public final class L10nTranslations {
                 "detik");
         table.put("seconds",
                 "detik");
+        table.put("this creator",
+                "kreator ini");
         table.put("time",
                 "kali");
         table.put("times",
@@ -7307,7 +7313,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildPt_rBR() {
-        Map<String, String> table = new HashMap<>(2334);
+        Map<String, String> table = new HashMap<>(2336);
         fillPt_rBR0(table);
         fillPt_rBR1(table);
         fillPt_rBR2(table);
@@ -7838,10 +7844,10 @@ public final class L10nTranslations {
                 "Não deu para saber qual pasta atualizar. Escolha de novo.");
         table.put("Could not undo the clear. Try again.",
                 "Could not undo the clear. Try again.");
-        table.put("Couldn't confirm the block for %1$s.",
-                "Não foi possível confirmar o bloqueio de %1$s.");
-        table.put("Couldn't confirm the unblock for %1$s.",
-                "Não foi possível confirmar o desbloqueio de %1$s.");
+        table.put("Couldn't confirm the block for %1$s. Open their profile to check.",
+                "Não foi possível confirmar o bloqueio de %1$s. Abra o perfil para conferir.");
+        table.put("Couldn't confirm the unblock for %1$s. Open their profile to check.",
+                "Não foi possível confirmar o desbloqueio de %1$s. Abra o perfil para conferir.");
         table.put("Country and network preferences",
                 "Preferências de país e de rede");
         table.put("Country code",
@@ -9448,9 +9454,9 @@ public final class L10nTranslations {
         table.put("TikTok default (2x hold, quick share)",
                 "Padrão do TikTok (segurar para 2x, compartilhamento rápido)");
         table.put("TikTok did not block %1$s. Try again in a moment.",
-                "O TikTok rejeitou a solicitação para bloquear %1$s.");
+                "O TikTok não bloqueou %1$s. Tente de novo daqui a pouco.");
         table.put("TikTok did not unblock %1$s. Try again in a moment.",
-                "O TikTok rejeitou a solicitação para desbloquear %1$s.");
+                "O TikTok não desbloqueou %1$s. Tente de novo daqui a pouco.");
         table.put("TikTok didn't accept the feedback. Try again later.",
                 "O TikTok não aceitou o feedback. Tente mais tarde.");
         table.put("TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.",
@@ -9707,6 +9713,8 @@ public final class L10nTranslations {
                 "segundo");
         table.put("seconds",
                 "segundos");
+        table.put("this creator",
+                "este criador");
         table.put("time",
                 "vez");
         table.put("times",
@@ -9726,7 +9734,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildTr() {
-        Map<String, String> table = new HashMap<>(2334);
+        Map<String, String> table = new HashMap<>(2336);
         fillTr0(table);
         fillTr1(table);
         fillTr2(table);
@@ -10257,10 +10265,10 @@ public final class L10nTranslations {
                 "Hangi klasörün güncelleneceği anlaşılamadı. Yeniden seç.");
         table.put("Could not undo the clear. Try again.",
                 "Temizleme geri alınamadı. Tekrar dene.");
-        table.put("Couldn't confirm the block for %1$s.",
-                "%1$s için engelleme doğrulanamadı.");
-        table.put("Couldn't confirm the unblock for %1$s.",
-                "%1$s için engelin kaldırıldığı doğrulanamadı.");
+        table.put("Couldn't confirm the block for %1$s. Open their profile to check.",
+                "%1$s için engelleme doğrulanamadı. Kontrol etmek için profilini aç.");
+        table.put("Couldn't confirm the unblock for %1$s. Open their profile to check.",
+                "%1$s için engelin kaldırıldığı doğrulanamadı. Kontrol etmek için profilini aç.");
         table.put("Country and network preferences",
                 "Ülke ve ağ tercihleri");
         table.put("Country code",
@@ -12126,6 +12134,8 @@ public final class L10nTranslations {
                 "saniye");
         table.put("seconds",
                 "saniye");
+        table.put("this creator",
+                "bu içerik üreticisi");
         table.put("time",
                 "kez");
         table.put("times",

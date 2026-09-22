@@ -246,8 +246,8 @@ Could not start the report export. Try again shortly.,Could not start the report
 Could not start the settings operation. Try again shortly.,Could not start the settings operation. Try again shortly.
 Could not tell which folder to update. Choose it again.,Could not tell which folder to update. Choose it again.
 Could not undo the clear. Try again.,Could not undo the clear. Try again.
-Couldn't confirm the block for %1$s.,Couldn't confirm the block for %1$s.
-Couldn't confirm the unblock for %1$s.,Couldn't confirm the unblock for %1$s.
+Couldn't confirm the block for %1$s. Open their profile to check.,Couldn't confirm the block for %1$s. Open their profile to check.
+Couldn't confirm the unblock for %1$s. Open their profile to check.,Couldn't confirm the unblock for %1$s. Open their profile to check.
 Country and network preferences,Country and network preferences
 Country code,Country code
 Counts under the buttons,Counts under the buttons
@@ -1158,6 +1158,7 @@ points,points
 s,s
 second,second
 seconds,seconds
+this creator,this creator
 time,time
 times,times
 video,video

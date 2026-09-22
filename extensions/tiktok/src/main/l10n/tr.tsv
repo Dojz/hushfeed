@@ -242,8 +242,8 @@ Could not start the report export. Try again shortly.	Rapor dışa aktarımı ba
 Could not start the settings operation. Try again shortly.	Ayar işlemi başlatılamadı. Birazdan tekrar dene.
 Could not tell which folder to update. Choose it again.	Hangi klasörün güncelleneceği anlaşılamadı. Yeniden seç.
 Could not undo the clear. Try again.	Temizleme geri alınamadı. Tekrar dene.
-Couldn't confirm the block for %1$s.	%1$s için engelleme doğrulanamadı.
-Couldn't confirm the unblock for %1$s.	%1$s için engelin kaldırıldığı doğrulanamadı.
+Couldn't confirm the block for %1$s. Open their profile to check.	%1$s için engelleme doğrulanamadı. Kontrol etmek için profilini aç.
+Couldn't confirm the unblock for %1$s. Open their profile to check.	%1$s için engelin kaldırıldığı doğrulanamadı. Kontrol etmek için profilini aç.
 Country and network preferences	Ülke ve ağ tercihleri
 Country code	Ülke kodu
 Counts under the buttons	Düğmelerin altındaki sayılar
@@ -1166,3 +1166,5 @@ views per like	beğeni başına görüntülenme
 Show the switch	Ayarı göster
 
 Restart TikTok to apply this	Bunu uygulamak için TikTok'u yeniden başlat
+
+this creator	bu içerik üreticisi

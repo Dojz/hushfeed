@@ -143,7 +143,7 @@ Block this sound	Diesen Sound blockieren
 Blocked	Blockiert
 Blocked %1$s	%1$s blockiert
 Blocked %1$s. Unblock	%1$s blockiert. Entblocken
-Couldn't confirm the block for %1$s.	Die Blockierung von %1$s konnte nicht bestätigt werden.
+Couldn't confirm the block for %1$s. Open their profile to check.	Die Blockierung von %1$s konnte nicht bestätigt werden. Öffne das Profil, um nachzusehen.
 Blocked caption words	Gesperrte Wörter in Beschreibungen
 Blocked comment words	Gesperrte Wörter in Kommentaren
 Blocked creators	Gesperrte Creator
@@ -996,8 +996,8 @@ This video has no sound of its own	Dieses Video hat keinen eigenen Sound
 Thumbs down blocks the commenter	Daumen runter blockiert den Kommentierenden
 TikTok default	TikTok-Standard
 TikTok default (2x hold, quick share)	TikTok-Standard (2x halten, schnelles Teilen)
-TikTok did not block %1$s. Try again in a moment.	TikTok hat die Anfrage zum Blockieren von %1$s abgelehnt.
-TikTok did not unblock %1$s. Try again in a moment.	TikTok hat die Anfrage zum Entblocken von %1$s abgelehnt.
+TikTok did not block %1$s. Try again in a moment.	TikTok hat %1$s nicht blockiert. Versuch es gleich noch einmal.
+TikTok did not unblock %1$s. Try again in a moment.	TikTok hat die Blockierung von %1$s nicht aufgehoben. Versuch es gleich noch einmal.
 TikTok didn't accept the feedback. Try again later.	TikTok hat die Rückmeldung nicht angenommen. Versuche es später noch einmal.
 TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.	TikTok hat dieser Einstellung noch kein Objekt zum Ändern übergeben. Öffne den Teil der App, der sie verwendet, und komm dann zurück.
 TikTok read it	TikTok hat ihn gelesen
@@ -1040,7 +1040,7 @@ Start typing	Tippe zum Suchen
 Unavailable	Nicht verfügbar
 Unblock this commenter	Blockierung dieses Kommentierenden aufheben
 Unblocked %1$s	%1$s entblockt
-Couldn't confirm the unblock for %1$s.	Die Aufhebung der Blockierung von %1$s konnte nicht bestätigt werden.
+Couldn't confirm the unblock for %1$s. Open their profile to check.	Die Aufhebung der Blockierung von %1$s konnte nicht bestätigt werden. Öffne das Profil, um nachzusehen.
 Undo	Rückgängig
 Undo clearing seen videos	Undo clearing seen videos
 Undo last Lab change	Letzte Lab-Änderung rückgängig machen
@@ -1169,3 +1169,5 @@ Hide the points banner under the search box and the coin counter floating over s
 Show the switch	Schalter anzeigen
 
 Restart TikTok to apply this	TikTok neu starten, damit das gilt
+
+this creator	dieser Creator

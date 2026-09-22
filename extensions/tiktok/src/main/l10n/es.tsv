@@ -140,7 +140,7 @@ Block this sound	Bloquear este sonido
 Blocked	Bloqueado
 Blocked %1$s	%1$s bloqueado
 Blocked %1$s. Unblock	%1$s bloqueado. Desbloquear
-Couldn't confirm the block for %1$s.	No se pudo confirmar el bloqueo de %1$s.
+Couldn't confirm the block for %1$s. Open their profile to check.	No se pudo confirmar el bloqueo de %1$s. Abre su perfil para comprobarlo.
 Blocked caption words	Palabras bloqueadas en las descripciones
 Blocked comment words	Palabras bloqueadas en los comentarios
 Blocked creators	Creadores bloqueados
@@ -993,8 +993,8 @@ This video has no sound of its own	Este vídeo no tiene sonido propio
 Thumbs down blocks the commenter	El pulgar hacia abajo bloquea a quien comenta
 TikTok default	Predeterminado de TikTok
 TikTok default (2x hold, quick share)	Predeterminado de TikTok (mantener para 2x, compartir rápido)
-TikTok did not block %1$s. Try again in a moment.	TikTok rechazó la solicitud de bloquear a %1$s.
-TikTok did not unblock %1$s. Try again in a moment.	TikTok rechazó la solicitud de desbloquear a %1$s.
+TikTok did not block %1$s. Try again in a moment.	TikTok no bloqueó a %1$s. Inténtalo de nuevo en un momento.
+TikTok did not unblock %1$s. Try again in a moment.	TikTok no desbloqueó a %1$s. Inténtalo de nuevo en un momento.
 TikTok didn't accept the feedback. Try again later.	TikTok no aceptó el comentario. Inténtalo más tarde.
 TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.	TikTok todavía no le ha dado a este ajuste un objeto que cambiar. Abre la parte de la app que lo usa y vuelve aquí.
 TikTok read it	TikTok lo leyó
@@ -1037,7 +1037,7 @@ Start typing	Empieza a escribir
 Unavailable	No disponible
 Unblock this commenter	Desbloquear a quien comenta
 Unblocked %1$s	%1$s desbloqueado
-Couldn't confirm the unblock for %1$s.	No se pudo confirmar el desbloqueo de %1$s.
+Couldn't confirm the unblock for %1$s. Open their profile to check.	No se pudo confirmar el desbloqueo de %1$s. Abre su perfil para comprobarlo.
 Undo	Deshacer
 Undo clearing seen videos	Undo clearing seen videos
 Undo last Lab change	Deshacer el último cambio del Lab
@@ -1166,3 +1166,5 @@ Hide the points banner under the search box and the coin counter floating over s
 Show the switch	Mostrar el ajuste
 
 Restart TikTok to apply this	Reinicia TikTok para que se aplique
+
+this creator	este creador
