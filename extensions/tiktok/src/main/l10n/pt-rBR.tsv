@@ -247,7 +247,7 @@ Current: %1$s	Agora: %1$s
 Custom SIM details	Dados de SIM personalizados
 Custom value	Valor personalizado
 Custom value...	Valor personalizado...
-Cut the in-app browser off from TikTok	Desconectar o navegador interno do TikTok
+Protect external pages in TikTok's browser	Proteger páginas externas no navegador do TikTok
 Daily budget	Limite diário
 Daily budgets, reminders and the hold	Limites diários, lembretes e a pausa
 Daily time budget	Limite diário de tempo
@@ -881,7 +881,7 @@ Stop a long press on Share from opening TikTok's quick share action.	Impedir que
 Stop feature gate recording	Parar de gravar os gates
 Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.	Parar a animação de marca que aparece sobre os comentários quando o que alguém escreveu bate com o gatilho de um anunciante.
 Stop the bubble that asks you to share a video with friends after you like it.	Para a bolha que pede para compartilhar um vídeo com amigos depois de curtir.
-Stop the in-app browser handing TikTok's JavaScript bridge to the pages it loads. TikTok's own pages need that bridge too. With this on, Activity center and Watch history stop responding, and the shop checkout and the CAPTCHA page break. Leave it off unless you want those cut off as well.	Impede que o navegador interno entregue a ponte JavaScript do TikTok às páginas que carrega. As páginas do próprio TikTok também precisam dessa ponte. Com isto ligado, a Central de atividades e o Histórico de exibição param de responder, e o checkout da loja e a página do CAPTCHA deixam de funcionar. Deixe desligado a menos que queira desconectá-las também.
+Keep websites outside TikTok from using its connection back into the app. TikTok pages such as Activity center, Watch history, shop checkout and CAPTCHA keep working.	Impeça sites de fora do TikTok de usar a conexão dele com o app. As páginas do TikTok, como a Central de atividades, o Histórico de exibição, o checkout da loja e o CAPTCHA, continuam funcionando.
 Stop video looping	Parar a repetição dos vídeos
 Stop videos at the end instead of replaying them.	Parar os vídeos no fim em vez de tocá-los de novo.
 Stopped after dismissing %1$s suggested accounts	Parou após dispensar %1$s contas sugeridas

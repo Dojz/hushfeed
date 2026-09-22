@@ -278,6 +278,75 @@ public final class Probe extends Instrumentation {
                         Log.i(TAG, "ok webviews\n" + out);
                         break;
                     }
+                    case "webview-bridges": {
+                        // BrowserPrivacyGuard keeps the objects so it can restore them on the
+                        // next trusted page. Read only their registered names, then ask the live
+                        // page which names resolve. The probe never calls a bridge or reads page
+                        // content. Interface names are technical APK anchors, not account data.
+                        Class<?> guard = loader.loadClass(
+                                "app.morphe.extension.tiktok.privacy.BrowserPrivacyGuard");
+                        Field statesField = guard.getDeclaredField("STATES");
+                        statesField.setAccessible(true);
+                        Map<?, ?> states = (Map<?, ?>) statesField.get(null);
+                        int scheduled = 0;
+                        for (android.view.View root : windowRoots()) {
+                            java.util.ArrayDeque<android.view.View> queue = new java.util.ArrayDeque<>();
+                            queue.add(root);
+                            while (!queue.isEmpty()) {
+                                android.view.View view = queue.poll();
+                                if (view instanceof android.webkit.WebView) {
+                                    android.webkit.WebView web = (android.webkit.WebView) view;
+                                    List<String> names = new ArrayList<>();
+                                    Object state = null;
+                                    synchronized (states) {
+                                        Object reference = states.get(web);
+                                        if (reference instanceof java.lang.ref.WeakReference) {
+                                            state = ((java.lang.ref.WeakReference<?>) reference).get();
+                                        }
+                                    }
+                                    if (state != null) {
+                                        Field interfacesField = state.getClass().getDeclaredField("interfaces");
+                                        interfacesField.setAccessible(true);
+                                        synchronized (state) {
+                                            Map<?, ?> interfaces = (Map<?, ?>) interfacesField.get(state);
+                                            for (Object name : interfaces.keySet()) {
+                                                if (name instanceof String) names.add((String) name);
+                                            }
+                                        }
+                                    }
+
+                                    StringBuilder script = new StringBuilder(
+                                            "(function(){var n=[");
+                                    for (int i = 0; i < names.size(); i++) {
+                                        if (i > 0) script.append(',');
+                                        script.append(JSONObject.quote(names.get(i)));
+                                    }
+                                    script.append("];var exposed=[];for(var i=0;i<n.length;i++){"
+                                            + "if(typeof window[n[i]]!=='undefined'){var v=window[n[i]],k=[];"
+                                            + "try{k=Object.getOwnPropertyNames(v).sort();}catch(e){}"
+                                            + "exposed.push([n[i],typeof v,Object.prototype.toString.call(v),k]);}}"
+                                            + "return JSON.stringify(exposed);})()");
+                                    final int index = ++scheduled;
+                                    final int tracked = names.size();
+                                    final String origin = hostAndPath(web.getUrl() == null
+                                            ? null : android.net.Uri.parse(web.getUrl()));
+                                    final String javascript = script.toString();
+                                    web.post(() -> web.evaluateJavascript(javascript, value ->
+                                            Log.i(TAG, "bridge-exposure webview=" + index
+                                                    + " origin=" + origin + " tracked=" + tracked
+                                                    + " exposed=" + value)));
+                                }
+                                if (view instanceof android.view.ViewGroup) {
+                                    android.view.ViewGroup group = (android.view.ViewGroup) view;
+                                    for (int i = 0; i < group.getChildCount(); i++) {
+                                        queue.add(group.getChildAt(i));
+                                    }
+                                }
+                            }
+                        }
+                        Log.i(TAG, "ok webview-bridges scheduled=" + scheduled);
+                        break;
+                    }
                     case "series-evidence":
                         Log.i(TAG, "ok series-evidence\n" + seriesEvidence());
                         break;

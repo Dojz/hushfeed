@@ -2,6 +2,10 @@
 
 Every Hushfeed release, newest first.
 
+## Unreleased
+
+* **TikTok:** In-app browser privacy guard now protects external websites without breaking Activity center, Watch history, shop checkout or CAPTCHA. Its Privacy switch has clearer wording and still starts off.
+
 ## 0.58.0 (2026-09-21)
 
 This week's bug reports, two requested switches and Turkish.

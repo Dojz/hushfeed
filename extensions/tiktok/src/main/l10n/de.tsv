@@ -250,7 +250,7 @@ Current: %1$s	Aktuell: %1$s
 Custom SIM details	Eigene SIM-Angaben
 Custom value	Benutzerdefinierter Wert
 Custom value...	Benutzerdefinierter Wert...
-Cut the in-app browser off from TikTok	In-App-Browser von TikTok abkoppeln
+Protect external pages in TikTok's browser	Externe Seiten in TikToks Browser schützen
 Daily budget	Tagesbudget
 Daily budgets, reminders and the hold	Tagesbudgets, Erinnerungen und die Pause
 Daily time budget	Tägliches Zeitbudget
@@ -884,7 +884,7 @@ Stop a long press on Share from opening TikTok's quick share action.	Verhindern,
 Stop feature gate recording	Feature-Gate-Aufzeichnung beenden
 Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.	Stoppt die Markenanimation über den Kommentaren, wenn das Getippte zu einem Werbe-Auslöser passt.
 Stop the bubble that asks you to share a video with friends after you like it.	Stoppt die Blase, die dich auffordert, ein Video nach dem Liken mit Freunden zu teilen.
-Stop the in-app browser handing TikTok's JavaScript bridge to the pages it loads. TikTok's own pages need that bridge too. With this on, Activity center and Watch history stop responding, and the shop checkout and the CAPTCHA page break. Leave it off unless you want those cut off as well.	Verhindert, dass der In-App-Browser den Seiten, die er lädt, TikToks JavaScript-Brücke übergibt. Auch TikToks eigene Seiten brauchen diese Brücke. Ist das an, reagieren das Aktivitätscenter und der Wiedergabeverlauf nicht mehr, und die Shop-Kasse und die CAPTCHA-Seite funktionieren nicht. Lass es aus, wenn du diese Seiten nicht ebenfalls abkoppeln willst.
+Keep websites outside TikTok from using its connection back into the app. TikTok pages such as Activity center, Watch history, shop checkout and CAPTCHA keep working.	Verhindere, dass Websites außerhalb von TikTok dessen Verbindung zurück zur App verwenden. TikTok-Seiten wie Aktivitätscenter, Wiedergabeverlauf, Shop-Kasse und CAPTCHA funktionieren weiter.
 Stop video looping	Videoschleife beenden
 Stop videos at the end instead of replaying them.	Videos am Ende anhalten, statt sie zu wiederholen.
 Stopped after dismissing %1$s suggested accounts	Nach %1$s entfernten Kontovorschlägen gestoppt

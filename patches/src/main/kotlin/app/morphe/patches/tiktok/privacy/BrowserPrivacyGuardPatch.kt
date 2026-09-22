@@ -6,20 +6,39 @@ package app.morphe.patches.tiktok.privacy
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
 import app.morphe.patcher.patch.PatchException
+import app.morphe.patcher.patch.BytecodePatchContext
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.tiktok.misc.extension.sharedExtensionPatch
 import app.morphe.patches.tiktok.misc.settings.SettingsStatusLoadFingerprint
 import app.morphe.patches.tiktok.misc.settings.settingsPatch
+import app.morphe.util.findMutableMethodOf
+import com.android.tools.smali.dexlib2.iface.ClassDef
+import com.android.tools.smali.dexlib2.iface.Method
 
 private const val EXTENSION = "Lapp/morphe/extension/tiktok/privacy/BrowserPrivacyGuard;"
 private const val WEB_VIEW = "Landroid/webkit/WebView;"
+private const val WEB_VIEW_CLIENT = "Landroid/webkit/WebViewClient;"
 private const val ADD_INTERFACE = "->addJavascriptInterface(Ljava/lang/Object;Ljava/lang/String;)V"
+
+private val navigationMethods = mapOf(
+    "->loadUrl(Ljava/lang/String;)V" to
+        "$EXTENSION->loadUrl(${WEB_VIEW}Ljava/lang/String;)V",
+    "->loadUrl(Ljava/lang/String;Ljava/util/Map;)V" to
+        "$EXTENSION->loadUrl(${WEB_VIEW}Ljava/lang/String;Ljava/util/Map;)V",
+    "->postUrl(Ljava/lang/String;[B)V" to
+        "$EXTENSION->postUrl(${WEB_VIEW}Ljava/lang/String;[B)V",
+    "->loadData(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" to
+        "$EXTENSION->loadData(${WEB_VIEW}Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
+    "->loadDataWithBaseURL(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" to
+        "$EXTENSION->loadDataWithBaseURL(${WEB_VIEW}Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
+    "->reload()V" to "$EXTENSION->reload(${WEB_VIEW})V",
+)
 
 @Suppress("unused")
 val browserPrivacyGuardPatch = bytecodePatch(
     name = "In-app browser privacy guard",
-    description = "Can stop TikTok's in-app browser handing its JavaScript bridge to the pages it loads. TikTok's own pages need that bridge too, so turning it on also breaks Activity center, Watch history, the shop checkout and the CAPTCHA page. The switch is off until you turn it on. Switch: Hushfeed settings > Privacy.",
+    description = "Keeps TikTok's JavaScript bridge off external pages in its in-app browser while leaving Activity center, Watch history, shop checkout and CAPTCHA working. The switch is off until you turn it on. Switch: Hushfeed settings > Privacy.",
     default = false,
 ) {
     category("Privacy")
@@ -37,21 +56,97 @@ val browserPrivacyGuardPatch = bytecodePatch(
         // subclass is found rather than named, because its name changes with every build. The
         // invoke-super inside the override is left alone: it is the pass-through path, and
         // rewriting it to a static that dispatches virtually again would recurse.
-        val webViewTypes = mutableSetOf(WEB_VIEW)
-        var grew = true
-        while (grew) {
-            grew = false
-            classDefForEach { classDef ->
-                if (classDef.superclass in webViewTypes && webViewTypes.add(classDef.type)) grew = true
-            }
+        val webViewTypes = descendantsOf(WEB_VIEW)
+        val interfaceReplacement =
+            "$EXTENSION->filterJsInterface(${WEB_VIEW}Ljava/lang/Object;Ljava/lang/String;)V"
+        val interfaceReplacements = webViewTypes.associate { type ->
+            "$type$ADD_INTERFACE" to interfaceReplacement
         }
-        val replacement = "$EXTENSION->filterJsInterface(${WEB_VIEW}Ljava/lang/Object;Ljava/lang/String;)V"
-        val replacements = webViewTypes.associate { type -> "$type$ADD_INTERFACE" to replacement }
-        val sites = invokeSitesOf(replacements.keys)
-        if (sites.isEmpty()) {
+        val interfaceSites = invokeSitesOf(interfaceReplacements.keys)
+        if (interfaceSites.isEmpty()) {
             throw PatchException("In-app browser privacy guard: no addJavascriptInterface call site was found.")
         }
-        replaceSites(sites, replacements)
-        println("[Browser privacy guard] Intercepted ${sites.size} WebView JS interface sites across ${webViewTypes.size} WebView types.")
+        replaceSites(interfaceSites, interfaceReplacements)
+
+        val navigationReplacements = buildMap {
+            for (type in webViewTypes) {
+                for ((suffix, replacement) in navigationMethods) put("$type$suffix", replacement)
+            }
+        }
+        val navigationSites = invokeSitesOf(navigationReplacements.keys)
+        if (navigationSites.isEmpty()) {
+            throw PatchException("In-app browser privacy guard: no WebView navigation call site was found.")
+        }
+        replaceSites(navigationSites, navigationReplacements)
+
+        val callbacks = webViewClientCallbacks()
+        val pageStarts = callbacks.count { it.method.name == "onPageStarted" }
+        val pageRequests = callbacks.size - pageStarts
+        if (pageStarts == 0 || pageRequests == 0) {
+            throw PatchException(
+                "In-app browser privacy guard: found $pageStarts page-start and " +
+                    "$pageRequests page-request WebViewClient callbacks.",
+            )
+        }
+        callbacks.forEach { callback ->
+            val bridge = when (callback.method.parameterTypes[1].toString()) {
+                "Ljava/lang/String;" ->
+                    if (callback.method.name == "onPageStarted") "onPageStarted" else "onPageRequested"
+                "Landroid/webkit/WebResourceRequest;" -> "onPageRequested"
+                else -> error("unrecognised WebViewClient callback ${callback.method}")
+            }
+            val secondType = callback.method.parameterTypes[1]
+            mutableClassDefBy(callback.owner).findMutableMethodOf(callback.method).addInstruction(
+                0,
+                "invoke-static/range { p1 .. p2 }, $EXTENSION->$bridge" +
+                    "(${WEB_VIEW}$secondType)V",
+            )
+        }
+        println(
+            "[Browser privacy guard] Intercepted ${interfaceSites.size} bridge sites, " +
+                "${navigationSites.size} navigation sites and ${callbacks.size} navigation " +
+                "callbacks across ${webViewTypes.size} WebView types.",
+        )
     }
+}
+
+private data class ClientCallback(val owner: ClassDef, val method: Method)
+
+private fun BytecodePatchContext.descendantsOf(baseType: String): Set<String> {
+    val types = mutableSetOf(baseType)
+    var grew = true
+    while (grew) {
+        grew = false
+        classDefForEach { classDef ->
+            if (classDef.superclass in types && types.add(classDef.type)) grew = true
+        }
+    }
+    return types
+}
+
+private fun BytecodePatchContext.webViewClientCallbacks(): List<ClientCallback> {
+    val clientTypes = descendantsOf(WEB_VIEW_CLIENT)
+    val callbacks = mutableListOf<ClientCallback>()
+    classDefForEach { owner ->
+        if (owner.type !in clientTypes || owner.type.startsWith("Lapp/morphe/extension/")) {
+            return@classDefForEach
+        }
+        owner.methods.forEach { method ->
+            if (method.implementation == null || method.returnType != "V" && method.returnType != "Z") {
+                return@forEach
+            }
+            val parameters = method.parameterTypes.map(CharSequence::toString)
+            val pageStart = method.name == "onPageStarted" && method.returnType == "V" &&
+                parameters == listOf(
+                    WEB_VIEW,
+                    "Ljava/lang/String;",
+                    "Landroid/graphics/Bitmap;",
+                )
+            val pageRequest = method.name == "shouldOverrideUrlLoading" && method.returnType == "Z" &&
+                (parameters == listOf(WEB_VIEW, "Ljava/lang/String;") ||
+                    parameters == listOf(WEB_VIEW, "Landroid/webkit/WebResourceRequest;"))
+            if (pageStart || pageRequest) callbacks += ClientCallback(owner, method)
+        }
+    }
+    return callbacks
 }

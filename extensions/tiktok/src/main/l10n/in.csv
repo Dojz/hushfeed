@@ -248,7 +248,7 @@ Current: %1$s,Saat ini: %1$s
 Custom SIM details,Detail SIM khusus
 Custom value,Nilai kustom
 Custom value...,Nilai khusus...
-Cut the in-app browser off from TikTok,Putuskan peramban dalam aplikasi dari TikTok
+Protect external pages in TikTok's browser,Lindungi halaman eksternal di browser TikTok
 Daily budget,Anggaran harian
 "Daily budgets, reminders and the hold","Anggaran harian, pengingat, dan jeda"
 Daily time budget,Anggaran waktu harian
@@ -882,7 +882,7 @@ Stop a long press on Share from opening TikTok's quick share action.,Cegah tekan
 Stop feature gate recording,Hentikan rekaman feature gate
 Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.,Hentikan animasi merek yang muncul di atas komentar saat ketikan seseorang cocok dengan pemicu pengiklan.
 Stop the bubble that asks you to share a video with friends after you like it.,Menghentikan gelembung yang meminta kamu berbagi video dengan teman setelah menyukainya.
-"Stop the in-app browser handing TikTok's JavaScript bridge to the pages it loads. TikTok's own pages need that bridge too. With this on, Activity center and Watch history stop responding, and the shop checkout and the CAPTCHA page break. Leave it off unless you want those cut off as well.","Mencegah peramban dalam aplikasi menyerahkan jembatan JavaScript TikTok ke halaman yang dimuatnya. Halaman milik TikTok sendiri juga memerlukan jembatan itu. Jika ini aktif, Pusat aktivitas dan Riwayat tontonan berhenti merespons, dan kasir toko serta halaman CAPTCHA tidak berfungsi. Biarkan mati kecuali kamu ingin memutus halaman itu juga."
+"Keep websites outside TikTok from using its connection back into the app. TikTok pages such as Activity center, Watch history, shop checkout and CAPTCHA keep working.","Cegah situs web di luar TikTok menggunakan koneksinya kembali ke aplikasi. Halaman TikTok seperti Pusat aktivitas, Riwayat tontonan, pembayaran toko, dan CAPTCHA tetap berfungsi."
 Stop video looping,Hentikan pengulangan video
 Stop videos at the end instead of replaying them.,"Hentikan video di akhir, bukan memutarnya ulang."
 Stopped after dismissing %1$s suggested accounts,Berhenti setelah menutup %1$s akun yang disarankan

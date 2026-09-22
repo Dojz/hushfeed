@@ -247,7 +247,7 @@ Current: %1$s	Ahora: %1$s
 Custom SIM details	Datos de SIM personalizados
 Custom value	Valor personalizado
 Custom value...	Valor personalizado...
-Cut the in-app browser off from TikTok	Desconectar el navegador integrado de TikTok
+Protect external pages in TikTok's browser	Proteger páginas externas en el navegador de TikTok
 Daily budget	Presupuesto diario
 Daily budgets, reminders and the hold	Presupuestos diarios, recordatorios y la pausa
 Daily time budget	Presupuesto diario de tiempo
@@ -881,7 +881,7 @@ Stop a long press on Share from opening TikTok's quick share action.	Impedir que
 Stop feature gate recording	Parar de grabar los interruptores
 Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.	Parar la animación de marca que sale sobre los comentarios cuando lo que alguien escribió coincide con el disparador de un anunciante.
 Stop the bubble that asks you to share a video with friends after you like it.	Detiene la burbuja que pide compartir un video con amigos tras darle me gusta.
-Stop the in-app browser handing TikTok's JavaScript bridge to the pages it loads. TikTok's own pages need that bridge too. With this on, Activity center and Watch history stop responding, and the shop checkout and the CAPTCHA page break. Leave it off unless you want those cut off as well.	Impide que el navegador integrado entregue el puente de JavaScript de TikTok a las páginas que carga. Las páginas del propio TikTok también necesitan ese puente. Con esto activado, el Centro de actividades y el Historial de reproducciones dejan de responder, y la caja de la tienda y la página del CAPTCHA fallan. Déjalo apagado a menos que quieras desconectarlas también.
+Keep websites outside TikTok from using its connection back into the app. TikTok pages such as Activity center, Watch history, shop checkout and CAPTCHA keep working.	Impide que los sitios web ajenos a TikTok usen su conexión con la aplicación. Las páginas de TikTok, como el Centro de actividades, el Historial de reproducciones, la caja de la tienda y el CAPTCHA, siguen funcionando.
 Stop video looping	Parar la repetición de los vídeos
 Stop videos at the end instead of replaying them.	Parar los vídeos al final en vez de volver a reproducirlos.
 Stopped after dismissing %1$s suggested accounts	Se detuvo tras descartar %1$s cuentas sugeridas

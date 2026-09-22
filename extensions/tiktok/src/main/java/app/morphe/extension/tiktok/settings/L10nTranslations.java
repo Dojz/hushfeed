@@ -659,8 +659,6 @@ public final class L10nTranslations {
                 "Benutzerdefinierter Wert");
         table.put("Custom value...",
                 "Benutzerdefinierter Wert...");
-        table.put("Cut the in-app browser off from TikTok",
-                "In-App-Browser von TikTok abkoppeln");
         table.put("Daily budget",
                 "Tagesbudget");
         table.put("Daily budgets, reminders and the hold",
@@ -687,11 +685,11 @@ public final class L10nTranslations {
                 "Gerätesprache, dann Original");
         table.put("Diagnostic data cleared. Tap again to put it back.",
                 "Diagnosedaten gelöscht. Tippe erneut, um sie wiederherzustellen.");
+        table.put("Diagnostic data put back",
+                "Diagnosedaten wiederhergestellt");
     }
 
     private static void fillDe5(Map<String, String> table) {
-        table.put("Diagnostic data put back",
-                "Diagnosedaten wiederhergestellt");
         table.put("Diagnostic report copied to the clipboard",
                 "Diagnosebericht in die Zwischenablage kopiert");
         table.put("Diagnostics",
@@ -810,11 +808,11 @@ public final class L10nTranslations {
                 "Die Feldänderungen wurden nicht gespeichert");
         table.put("Files",
                 "Dateien");
+        table.put("Filter TikTok's offline videos",
+                "TikToks Offline-Videos filtern");
     }
 
     private static void fillDe6(Map<String, String> table) {
-        table.put("Filter TikTok's offline videos",
-                "TikToks Offline-Videos filtern");
         table.put("Filter bottom tabs",
                 "Untere Tabs filtern");
         table.put("Filter comments by keyword",
@@ -933,11 +931,11 @@ public final class L10nTranslations {
                 "Schaltflächen in der rechten Spalte ausblenden");
         table.put("Hide comment polls",
                 "Kommentarumfragen ausblenden");
+        table.put("Hide comment popup ads",
+                "Werbe-Popups in Kommentaren ausblenden");
     }
 
     private static void fillDe7(Map<String, String> table) {
-        table.put("Hide comment popup ads",
-                "Werbe-Popups in Kommentaren ausblenden");
         table.put("Hide comment typing suggestions",
                 "Kommentarvorschläge beim Tippen ausblenden");
         table.put("Hide comments made of an image or a sticker instead of words.",
@@ -1056,11 +1054,11 @@ public final class L10nTranslations {
                 "Folgen-Knopf im Feed ausblenden");
         table.put("Hide the friend recommendation card and the other cards TikTok slots between videos.",
                 "Die Freundesvorschlagskarte und die anderen Karten ausblenden, die TikTok zwischen Videos einschiebt.");
+        table.put("Hide the launcher shortcuts",
+                "Launcher-Verknüpfungen ausblenden");
     }
 
     private static void fillDe8(Map<String, String> table) {
-        table.put("Hide the launcher shortcuts",
-                "Launcher-Verknüpfungen ausblenden");
         table.put("Hide the magnifying glass at the top of Inbox. Search on the feed and in comments is unchanged.",
                 "Die Lupe oben im Posteingang ausblenden. Die Suche im Feed und in Kommentaren bleibt unverändert.");
         table.put("Hide the magnifying glass at the top right of the feed. Search in Inbox and suggestions above comments stay unchanged.",
@@ -1179,11 +1177,11 @@ public final class L10nTranslations {
                 "Diagnoseereignisse einschließen");
         table.put("Included diagnostics",
                 "Enthaltene Diagnosedaten");
+        table.put("Includes all diagnostic events.",
+                "Enthält alle Diagnoseereignisse.");
     }
 
     private static void fillDe9(Map<String, String> table) {
-        table.put("Includes all diagnostic events.",
-                "Enthält alle Diagnoseereignisse.");
         table.put("Includes these events: %1$s",
                 "Enthält diese Ereignisse: %1$s");
         table.put("Inserted cards",
@@ -1210,6 +1208,8 @@ public final class L10nTranslations {
                 "Halte diese Zeichenkette bei %1$s Zeichen oder weniger.");
         table.put("Keep this structured value to %1$s KB or less.",
                 "Begrenze diesen strukturierten Wert auf höchstens %1$s KB.");
+        table.put("Keep websites outside TikTok from using its connection back into the app. TikTok pages such as Activity center, Watch history, shop checkout and CAPTCHA keep working.",
+                "Verhindere, dass Websites außerhalb von TikTok dessen Verbindung zurück zur App verwenden. TikTok-Seiten wie Aktivitätscenter, Wiedergabeverlauf, Shop-Kasse und CAPTCHA funktionieren weiter.");
         table.put("Kept to %1$s, the nearest value this row allows",
                 "Auf %1$s gesetzt, den nächsten Wert, den diese Zeile zulässt");
         table.put("Kinds of post",
@@ -1595,6 +1595,8 @@ public final class L10nTranslations {
                 "Werbemusik");
         table.put("Proof",
                 "Beleg");
+        table.put("Protect external pages in TikTok's browser",
+                "Externe Seiten in TikToks Browser schützen");
         table.put("Put back the settings saved before the last restore or reset.",
                 "Die Einstellungen zurückholen, die vor der letzten Wiederherstellung oder Zurücksetzung gespeichert wurden.");
         table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
@@ -1669,11 +1671,11 @@ public final class L10nTranslations {
                 "Position zurücksetzen");
         table.put("Reset settings",
                 "Einstellungen zurücksetzen");
-        table.put("Restart TikTok to apply %1$d changes",
-                "TikTok neu starten, um %1$d Änderungen anzuwenden");
     }
 
     private static void fillDe13(Map<String, String> table) {
+        table.put("Restart TikTok to apply %1$d changes",
+                "TikTok neu starten, um %1$d Änderungen anzuwenden");
         table.put("Restart TikTok to apply this",
                 "TikTok neu starten, damit das gilt");
         table.put("Restart TikTok to apply this change",
@@ -1792,11 +1794,11 @@ public final class L10nTranslations {
                 "Nach Name oder Gate-Schlüssel suchen");
         table.put("Search by name, description or category.",
                 "Nach Name, Beschreibung oder Kategorie suchen.");
-        table.put("Search countries or operators",
-                "Nach Ländern oder Anbietern suchen");
     }
 
     private static void fillDe14(Map<String, String> table) {
+        table.put("Search countries or operators",
+                "Nach Ländern oder Anbietern suchen");
         table.put("Search hidden creators",
                 "Ausgeblendete Creator durchsuchen");
         table.put("Search settings",
@@ -1915,11 +1917,11 @@ public final class L10nTranslations {
                 "Vorschaubild im Fortschrittsbalken anzeigen");
         table.put("Show the search entry inside TikTok's LIVE drawer, where available. This doesn't add a search box to video comments.",
                 "Zeige die Suchfunktion im LIVE-Seitenmenü von TikTok an, sofern verfügbar. Dadurch wird kein Suchfeld zu Videokommentaren hinzugefügt.");
-        table.put("Show the switch",
-                "Schalter anzeigen");
     }
 
     private static void fillDe15(Map<String, String> table) {
+        table.put("Show the switch",
+                "Schalter anzeigen");
         table.put("Show the whole Activity and New followers lists instead of stopping at a View all button.",
                 "Die vollständigen Listen „Aktivität“ und „Neue Follower“ anzeigen, statt bei einer Schaltfläche „Alle anzeigen“ zu enden.");
         table.put("Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off.",
@@ -2002,8 +2004,6 @@ public final class L10nTranslations {
                 "Stoppt die Markenanimation über den Kommentaren, wenn das Getippte zu einem Werbe-Auslöser passt.");
         table.put("Stop the bubble that asks you to share a video with friends after you like it.",
                 "Stoppt die Blase, die dich auffordert, ein Video nach dem Liken mit Freunden zu teilen.");
-        table.put("Stop the in-app browser handing TikTok's JavaScript bridge to the pages it loads. TikTok's own pages need that bridge too. With this on, Activity center and Watch history stop responding, and the shop checkout and the CAPTCHA page break. Leave it off unless you want those cut off as well.",
-                "Verhindert, dass der In-App-Browser den Seiten, die er lädt, TikToks JavaScript-Brücke übergibt. Auch TikToks eigene Seiten brauchen diese Brücke. Ist das an, reagieren das Aktivitätscenter und der Wiedergabeverlauf nicht mehr, und die Shop-Kasse und die CAPTCHA-Seite funktionieren nicht. Lass es aus, wenn du diese Seiten nicht ebenfalls abkoppeln willst.");
         table.put("Stop video looping",
                 "Videoschleife beenden");
         table.put("Stop videos at the end instead of replaying them.",
@@ -3080,8 +3080,6 @@ public final class L10nTranslations {
                 "Valor personalizado");
         table.put("Custom value...",
                 "Valor personalizado...");
-        table.put("Cut the in-app browser off from TikTok",
-                "Desconectar el navegador integrado de TikTok");
         table.put("Daily budget",
                 "Presupuesto diario");
         table.put("Daily budgets, reminders and the hold",
@@ -3108,11 +3106,11 @@ public final class L10nTranslations {
                 "Idioma del dispositivo, después el original");
         table.put("Diagnostic data cleared. Tap again to put it back.",
                 "Se borraron los datos de diagnóstico. Toca de nuevo para restaurarlos.");
+        table.put("Diagnostic data put back",
+                "Se restauraron los datos de diagnóstico");
     }
 
     private static void fillEs5(Map<String, String> table) {
-        table.put("Diagnostic data put back",
-                "Se restauraron los datos de diagnóstico");
         table.put("Diagnostic report copied to the clipboard",
                 "Informe de diagnóstico copiado al portapapeles");
         table.put("Diagnostics",
@@ -3231,11 +3229,11 @@ public final class L10nTranslations {
                 "Los cambios de los campos no se guardaron");
         table.put("Files",
                 "Archivos");
+        table.put("Filter TikTok's offline videos",
+                "Filtrar los vídeos sin conexión de TikTok");
     }
 
     private static void fillEs6(Map<String, String> table) {
-        table.put("Filter TikTok's offline videos",
-                "Filtrar los vídeos sin conexión de TikTok");
         table.put("Filter bottom tabs",
                 "Filtrar las pestañas inferiores");
         table.put("Filter comments by keyword",
@@ -3354,11 +3352,11 @@ public final class L10nTranslations {
                 "Ocultar botones de la columna derecha");
         table.put("Hide comment polls",
                 "Ocultar las encuestas en los comentarios");
+        table.put("Hide comment popup ads",
+                "Ocultar los anuncios emergentes de los comentarios");
     }
 
     private static void fillEs7(Map<String, String> table) {
-        table.put("Hide comment popup ads",
-                "Ocultar los anuncios emergentes de los comentarios");
         table.put("Hide comment typing suggestions",
                 "Ocultar sugerencias al escribir comentarios");
         table.put("Hide comments made of an image or a sticker instead of words.",
@@ -3477,11 +3475,11 @@ public final class L10nTranslations {
                 "Ocultar el botón de seguir del feed");
         table.put("Hide the friend recommendation card and the other cards TikTok slots between videos.",
                 "Ocultar la tarjeta de amigos recomendados y las demás tarjetas que TikTok mete entre vídeos.");
+        table.put("Hide the launcher shortcuts",
+                "Ocultar los accesos directos del lanzador");
     }
 
     private static void fillEs8(Map<String, String> table) {
-        table.put("Hide the launcher shortcuts",
-                "Ocultar los accesos directos del lanzador");
         table.put("Hide the magnifying glass at the top of Inbox. Search on the feed and in comments is unchanged.",
                 "Ocultar la lupa de la parte superior de la bandeja de entrada. La búsqueda en el feed y en los comentarios no cambia.");
         table.put("Hide the magnifying glass at the top right of the feed. Search in Inbox and suggestions above comments stay unchanged.",
@@ -3600,11 +3598,11 @@ public final class L10nTranslations {
                 "Incluir eventos de diagnóstico");
         table.put("Included diagnostics",
                 "Diagnóstico incluido");
+        table.put("Includes all diagnostic events.",
+                "Incluye todos los eventos de diagnóstico.");
     }
 
     private static void fillEs9(Map<String, String> table) {
-        table.put("Includes all diagnostic events.",
-                "Incluye todos los eventos de diagnóstico.");
         table.put("Includes these events: %1$s",
                 "Incluye estos eventos: %1$s");
         table.put("Inserted cards",
@@ -3631,6 +3629,8 @@ public final class L10nTranslations {
                 "Mantén esta cadena en %1$s caracteres o menos.");
         table.put("Keep this structured value to %1$s KB or less.",
                 "Limita este valor estructurado a %1$s KB o menos.");
+        table.put("Keep websites outside TikTok from using its connection back into the app. TikTok pages such as Activity center, Watch history, shop checkout and CAPTCHA keep working.",
+                "Impide que los sitios web ajenos a TikTok usen su conexión con la aplicación. Las páginas de TikTok, como el Centro de actividades, el Historial de reproducciones, la caja de la tienda y el CAPTCHA, siguen funcionando.");
         table.put("Kept to %1$s, the nearest value this row allows",
                 "Ajustado a %1$s, el valor más cercano que permite esta fila");
         table.put("Kinds of post",
@@ -4016,6 +4016,8 @@ public final class L10nTranslations {
                 "Música promocional");
         table.put("Proof",
                 "Prueba");
+        table.put("Protect external pages in TikTok's browser",
+                "Proteger páginas externas en el navegador de TikTok");
         table.put("Put back the settings saved before the last restore or reset.",
                 "Recuperar los ajustes guardados antes de la última restauración o reinicio.");
         table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
@@ -4090,11 +4092,11 @@ public final class L10nTranslations {
                 "Restablecer la posición");
         table.put("Reset settings",
                 "Reiniciar los ajustes");
-        table.put("Restart TikTok to apply %1$d changes",
-                "Reinicia TikTok para aplicar %1$d cambios");
     }
 
     private static void fillEs13(Map<String, String> table) {
+        table.put("Restart TikTok to apply %1$d changes",
+                "Reinicia TikTok para aplicar %1$d cambios");
         table.put("Restart TikTok to apply this",
                 "Reinicia TikTok para que se aplique");
         table.put("Restart TikTok to apply this change",
@@ -4213,11 +4215,11 @@ public final class L10nTranslations {
                 "Buscar por nombre o clave de gate");
         table.put("Search by name, description or category.",
                 "Busca por nombre, descripción o categoría.");
-        table.put("Search countries or operators",
-                "Buscar países u operadores");
     }
 
     private static void fillEs14(Map<String, String> table) {
+        table.put("Search countries or operators",
+                "Buscar países u operadores");
         table.put("Search hidden creators",
                 "Buscar creadores ocultos");
         table.put("Search settings",
@@ -4336,11 +4338,11 @@ public final class L10nTranslations {
                 "Mostrar la miniatura de la barra de progreso");
         table.put("Show the search entry inside TikTok's LIVE drawer, where available. This doesn't add a search box to video comments.",
                 "Muestra la opción de búsqueda en el panel de LIVE de TikTok, si está disponible. No añade un cuadro de búsqueda a los comentarios de videos.");
-        table.put("Show the switch",
-                "Mostrar el ajuste");
     }
 
     private static void fillEs15(Map<String, String> table) {
+        table.put("Show the switch",
+                "Mostrar el ajuste");
         table.put("Show the whole Activity and New followers lists instead of stopping at a View all button.",
                 "Mostrar las listas completas de Actividad y Nuevos seguidores en vez de pararse en un botón de Ver todo.");
         table.put("Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off.",
@@ -4423,8 +4425,6 @@ public final class L10nTranslations {
                 "Parar la animación de marca que sale sobre los comentarios cuando lo que alguien escribió coincide con el disparador de un anunciante.");
         table.put("Stop the bubble that asks you to share a video with friends after you like it.",
                 "Detiene la burbuja que pide compartir un video con amigos tras darle me gusta.");
-        table.put("Stop the in-app browser handing TikTok's JavaScript bridge to the pages it loads. TikTok's own pages need that bridge too. With this on, Activity center and Watch history stop responding, and the shop checkout and the CAPTCHA page break. Leave it off unless you want those cut off as well.",
-                "Impide que el navegador integrado entregue el puente de JavaScript de TikTok a las páginas que carga. Las páginas del propio TikTok también necesitan ese puente. Con esto activado, el Centro de actividades y el Historial de reproducciones dejan de responder, y la caja de la tienda y la página del CAPTCHA fallan. Déjalo apagado a menos que quieras desconectarlas también.");
         table.put("Stop video looping",
                 "Parar la repetición de los vídeos");
         table.put("Stop videos at the end instead of replaying them.",
@@ -5501,8 +5501,6 @@ public final class L10nTranslations {
                 "Nilai kustom");
         table.put("Custom value...",
                 "Nilai khusus...");
-        table.put("Cut the in-app browser off from TikTok",
-                "Putuskan peramban dalam aplikasi dari TikTok");
         table.put("Daily budget",
                 "Anggaran harian");
         table.put("Daily budgets, reminders and the hold",
@@ -5529,11 +5527,11 @@ public final class L10nTranslations {
                 "Bahasa perangkat, lalu bahasa asli");
         table.put("Diagnostic data cleared. Tap again to put it back.",
                 "Data diagnostik dihapus. Ketuk lagi untuk mengembalikannya.");
+        table.put("Diagnostic data put back",
+                "Data diagnostik dikembalikan");
     }
 
     private static void fillIn5(Map<String, String> table) {
-        table.put("Diagnostic data put back",
-                "Data diagnostik dikembalikan");
         table.put("Diagnostic report copied to the clipboard",
                 "Laporan diagnostik disalin ke papan klip");
         table.put("Diagnostics",
@@ -5652,11 +5650,11 @@ public final class L10nTranslations {
                 "Perubahan bidang tidak disimpan");
         table.put("Files",
                 "Berkas");
+        table.put("Filter TikTok's offline videos",
+                "Filter video offline TikTok");
     }
 
     private static void fillIn6(Map<String, String> table) {
-        table.put("Filter TikTok's offline videos",
-                "Filter video offline TikTok");
         table.put("Filter bottom tabs",
                 "Filter tab bawah");
         table.put("Filter comments by keyword",
@@ -5775,11 +5773,11 @@ public final class L10nTranslations {
                 "Sembunyikan tombol di kolom kanan");
         table.put("Hide comment polls",
                 "Sembunyikan jajak pendapat komentar");
+        table.put("Hide comment popup ads",
+                "Sembunyikan iklan popup di komentar");
     }
 
     private static void fillIn7(Map<String, String> table) {
-        table.put("Hide comment popup ads",
-                "Sembunyikan iklan popup di komentar");
         table.put("Hide comment typing suggestions",
                 "Sembunyikan saran saat mengetik komentar");
         table.put("Hide comments made of an image or a sticker instead of words.",
@@ -5898,11 +5896,11 @@ public final class L10nTranslations {
                 "Sembunyikan tombol ikuti di feed");
         table.put("Hide the friend recommendation card and the other cards TikTok slots between videos.",
                 "Sembunyikan kartu rekomendasi teman dan kartu lain yang TikTok selipkan di antara video.");
+        table.put("Hide the launcher shortcuts",
+                "Sembunyikan pintasan peluncur");
     }
 
     private static void fillIn8(Map<String, String> table) {
-        table.put("Hide the launcher shortcuts",
-                "Sembunyikan pintasan peluncur");
         table.put("Hide the magnifying glass at the top of Inbox. Search on the feed and in comments is unchanged.",
                 "Sembunyikan ikon kaca pembesar di bagian atas Kotak Masuk. Pencarian di feed dan di komentar tidak berubah.");
         table.put("Hide the magnifying glass at the top right of the feed. Search in Inbox and suggestions above comments stay unchanged.",
@@ -6021,11 +6019,11 @@ public final class L10nTranslations {
                 "Sertakan peristiwa diagnostik");
         table.put("Included diagnostics",
                 "Diagnostik yang disertakan");
+        table.put("Includes all diagnostic events.",
+                "Termasuk semua peristiwa diagnostik.");
     }
 
     private static void fillIn9(Map<String, String> table) {
-        table.put("Includes all diagnostic events.",
-                "Termasuk semua peristiwa diagnostik.");
         table.put("Includes these events: %1$s",
                 "Termasuk peristiwa berikut: %1$s");
         table.put("Inserted cards",
@@ -6052,6 +6050,8 @@ public final class L10nTranslations {
                 "Jaga string ini %1$s karakter atau kurang.");
         table.put("Keep this structured value to %1$s KB or less.",
                 "Batasi nilai terstruktur ini hingga %1$s KB atau kurang.");
+        table.put("Keep websites outside TikTok from using its connection back into the app. TikTok pages such as Activity center, Watch history, shop checkout and CAPTCHA keep working.",
+                "Cegah situs web di luar TikTok menggunakan koneksinya kembali ke aplikasi. Halaman TikTok seperti Pusat aktivitas, Riwayat tontonan, pembayaran toko, dan CAPTCHA tetap berfungsi.");
         table.put("Kept to %1$s, the nearest value this row allows",
                 "Disetel ke %1$s, nilai terdekat yang diizinkan baris ini");
         table.put("Kinds of post",
@@ -6437,6 +6437,8 @@ public final class L10nTranslations {
                 "Musik promosi");
         table.put("Proof",
                 "Bukti");
+        table.put("Protect external pages in TikTok's browser",
+                "Lindungi halaman eksternal di browser TikTok");
         table.put("Put back the settings saved before the last restore or reset.",
                 "Kembalikan pengaturan yang tersimpan sebelum pemulihan atau penyetelan ulang terakhir.");
         table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
@@ -6511,11 +6513,11 @@ public final class L10nTranslations {
                 "Atur ulang posisi");
         table.put("Reset settings",
                 "Setel ulang pengaturan");
-        table.put("Restart TikTok to apply %1$d changes",
-                "Mulai ulang TikTok untuk menerapkan %1$d perubahan");
     }
 
     private static void fillIn13(Map<String, String> table) {
+        table.put("Restart TikTok to apply %1$d changes",
+                "Mulai ulang TikTok untuk menerapkan %1$d perubahan");
         table.put("Restart TikTok to apply this",
                 "Mulai ulang TikTok agar berlaku");
         table.put("Restart TikTok to apply this change",
@@ -6634,11 +6636,11 @@ public final class L10nTranslations {
                 "Cari berdasarkan nama atau kunci gate");
         table.put("Search by name, description or category.",
                 "Cari berdasarkan nama, deskripsi, atau kategori.");
-        table.put("Search countries or operators",
-                "Cari negara atau operator");
     }
 
     private static void fillIn14(Map<String, String> table) {
+        table.put("Search countries or operators",
+                "Cari negara atau operator");
         table.put("Search hidden creators",
                 "Cari kreator tersembunyi");
         table.put("Search settings",
@@ -6757,11 +6759,11 @@ public final class L10nTranslations {
                 "Tampilkan miniatur bilah progres");
         table.put("Show the search entry inside TikTok's LIVE drawer, where available. This doesn't add a search box to video comments.",
                 "Tampilkan opsi pencarian di panel LIVE TikTok jika tersedia. Ini tidak menambahkan kotak pencarian ke komentar video.");
-        table.put("Show the switch",
-                "Tampilkan sakelarnya");
     }
 
     private static void fillIn15(Map<String, String> table) {
+        table.put("Show the switch",
+                "Tampilkan sakelarnya");
         table.put("Show the whole Activity and New followers lists instead of stopping at a View all button.",
                 "Tampilkan seluruh daftar Aktivitas dan Pengikut baru, bukan berhenti di tombol Lihat semua.");
         table.put("Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off.",
@@ -6844,8 +6846,6 @@ public final class L10nTranslations {
                 "Hentikan animasi merek yang muncul di atas komentar saat ketikan seseorang cocok dengan pemicu pengiklan.");
         table.put("Stop the bubble that asks you to share a video with friends after you like it.",
                 "Menghentikan gelembung yang meminta kamu berbagi video dengan teman setelah menyukainya.");
-        table.put("Stop the in-app browser handing TikTok's JavaScript bridge to the pages it loads. TikTok's own pages need that bridge too. With this on, Activity center and Watch history stop responding, and the shop checkout and the CAPTCHA page break. Leave it off unless you want those cut off as well.",
-                "Mencegah peramban dalam aplikasi menyerahkan jembatan JavaScript TikTok ke halaman yang dimuatnya. Halaman milik TikTok sendiri juga memerlukan jembatan itu. Jika ini aktif, Pusat aktivitas dan Riwayat tontonan berhenti merespons, dan kasir toko serta halaman CAPTCHA tidak berfungsi. Biarkan mati kecuali kamu ingin memutus halaman itu juga.");
         table.put("Stop video looping",
                 "Hentikan pengulangan video");
         table.put("Stop videos at the end instead of replaying them.",
@@ -7922,8 +7922,6 @@ public final class L10nTranslations {
                 "Valor personalizado");
         table.put("Custom value...",
                 "Valor personalizado...");
-        table.put("Cut the in-app browser off from TikTok",
-                "Desconectar o navegador interno do TikTok");
         table.put("Daily budget",
                 "Limite diário");
         table.put("Daily budgets, reminders and the hold",
@@ -7950,11 +7948,11 @@ public final class L10nTranslations {
                 "Idioma do aparelho, depois o original");
         table.put("Diagnostic data cleared. Tap again to put it back.",
                 "Dados de diagnóstico apagados. Toque novamente para restaurá-los.");
+        table.put("Diagnostic data put back",
+                "Dados de diagnóstico restaurados");
     }
 
     private static void fillPt_rBR5(Map<String, String> table) {
-        table.put("Diagnostic data put back",
-                "Dados de diagnóstico restaurados");
         table.put("Diagnostic report copied to the clipboard",
                 "Relatório de diagnóstico copiado para a área de transferência");
         table.put("Diagnostics",
@@ -8073,11 +8071,11 @@ public final class L10nTranslations {
                 "As edições dos campos não foram salvas");
         table.put("Files",
                 "Arquivos");
+        table.put("Filter TikTok's offline videos",
+                "Filtrar os vídeos offline do TikTok");
     }
 
     private static void fillPt_rBR6(Map<String, String> table) {
-        table.put("Filter TikTok's offline videos",
-                "Filtrar os vídeos offline do TikTok");
         table.put("Filter bottom tabs",
                 "Filtrar as abas de baixo");
         table.put("Filter comments by keyword",
@@ -8196,11 +8194,11 @@ public final class L10nTranslations {
                 "Ocultar botões da coluna da direita");
         table.put("Hide comment polls",
                 "Esconder enquetes nos comentários");
+        table.put("Hide comment popup ads",
+                "Esconder os anúncios pop-up dos comentários");
     }
 
     private static void fillPt_rBR7(Map<String, String> table) {
-        table.put("Hide comment popup ads",
-                "Esconder os anúncios pop-up dos comentários");
         table.put("Hide comment typing suggestions",
                 "Ocultar sugestões ao digitar comentários");
         table.put("Hide comments made of an image or a sticker instead of words.",
@@ -8319,11 +8317,11 @@ public final class L10nTranslations {
                 "Esconder o botão de seguir do feed");
         table.put("Hide the friend recommendation card and the other cards TikTok slots between videos.",
                 "Esconder o card de amigos recomendados e os outros cards que o TikTok encaixa entre os vídeos.");
+        table.put("Hide the launcher shortcuts",
+                "Ocultar os atalhos do inicializador");
     }
 
     private static void fillPt_rBR8(Map<String, String> table) {
-        table.put("Hide the launcher shortcuts",
-                "Ocultar os atalhos do inicializador");
         table.put("Hide the magnifying glass at the top of Inbox. Search on the feed and in comments is unchanged.",
                 "Esconder a lupa na parte superior da caixa de entrada. A pesquisa no feed e nos comentários não muda.");
         table.put("Hide the magnifying glass at the top right of the feed. Search in Inbox and suggestions above comments stay unchanged.",
@@ -8442,11 +8440,11 @@ public final class L10nTranslations {
                 "Incluir eventos de diagnóstico");
         table.put("Included diagnostics",
                 "Diagnóstico incluído");
+        table.put("Includes all diagnostic events.",
+                "Inclui todos os eventos de diagnóstico.");
     }
 
     private static void fillPt_rBR9(Map<String, String> table) {
-        table.put("Includes all diagnostic events.",
-                "Inclui todos os eventos de diagnóstico.");
         table.put("Includes these events: %1$s",
                 "Inclui estes eventos: %1$s");
         table.put("Inserted cards",
@@ -8473,6 +8471,8 @@ public final class L10nTranslations {
                 "Mantenha esta string com %1$s caracteres ou menos.");
         table.put("Keep this structured value to %1$s KB or less.",
                 "Limite este valor estruturado a %1$s KB ou menos.");
+        table.put("Keep websites outside TikTok from using its connection back into the app. TikTok pages such as Activity center, Watch history, shop checkout and CAPTCHA keep working.",
+                "Impeça sites de fora do TikTok de usar a conexão dele com o app. As páginas do TikTok, como a Central de atividades, o Histórico de exibição, o checkout da loja e o CAPTCHA, continuam funcionando.");
         table.put("Kept to %1$s, the nearest value this row allows",
                 "Ajustado para %1$s, o valor mais próximo que esta linha aceita");
         table.put("Kinds of post",
@@ -8858,6 +8858,8 @@ public final class L10nTranslations {
                 "Música promocional");
         table.put("Proof",
                 "Comprovação");
+        table.put("Protect external pages in TikTok's browser",
+                "Proteger páginas externas no navegador do TikTok");
         table.put("Put back the settings saved before the last restore or reset.",
                 "Trazer de volta as configurações salvas antes da última restauração ou redefinição.");
         table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
@@ -8932,11 +8934,11 @@ public final class L10nTranslations {
                 "Redefinir a posição");
         table.put("Reset settings",
                 "Redefinir as configurações");
-        table.put("Restart TikTok to apply %1$d changes",
-                "Reinicie o TikTok para aplicar %1$d alterações");
     }
 
     private static void fillPt_rBR13(Map<String, String> table) {
+        table.put("Restart TikTok to apply %1$d changes",
+                "Reinicie o TikTok para aplicar %1$d alterações");
         table.put("Restart TikTok to apply this",
                 "Reinicie o TikTok para aplicar");
         table.put("Restart TikTok to apply this change",
@@ -9055,11 +9057,11 @@ public final class L10nTranslations {
                 "Buscar por nome ou chave do gate");
         table.put("Search by name, description or category.",
                 "Busque por nome, descrição ou categoria.");
-        table.put("Search countries or operators",
-                "Buscar países ou operadoras");
     }
 
     private static void fillPt_rBR14(Map<String, String> table) {
+        table.put("Search countries or operators",
+                "Buscar países ou operadoras");
         table.put("Search hidden creators",
                 "Buscar criadores escondidos");
         table.put("Search settings",
@@ -9178,11 +9180,11 @@ public final class L10nTranslations {
                 "Mostrar a miniatura da barra de progresso");
         table.put("Show the search entry inside TikTok's LIVE drawer, where available. This doesn't add a search box to video comments.",
                 "Mostre a opção de pesquisa no painel LIVE do TikTok, quando disponível. Isso não adiciona uma caixa de pesquisa aos comentários de vídeos.");
-        table.put("Show the switch",
-                "Mostrar a opção");
     }
 
     private static void fillPt_rBR15(Map<String, String> table) {
+        table.put("Show the switch",
+                "Mostrar a opção");
         table.put("Show the whole Activity and New followers lists instead of stopping at a View all button.",
                 "Mostrar as listas completas de Atividade e Novos seguidores em vez de parar num botão de Ver tudo.");
         table.put("Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off.",
@@ -9265,8 +9267,6 @@ public final class L10nTranslations {
                 "Parar a animação de marca que aparece sobre os comentários quando o que alguém escreveu bate com o gatilho de um anunciante.");
         table.put("Stop the bubble that asks you to share a video with friends after you like it.",
                 "Para a bolha que pede para compartilhar um vídeo com amigos depois de curtir.");
-        table.put("Stop the in-app browser handing TikTok's JavaScript bridge to the pages it loads. TikTok's own pages need that bridge too. With this on, Activity center and Watch history stop responding, and the shop checkout and the CAPTCHA page break. Leave it off unless you want those cut off as well.",
-                "Impede que o navegador interno entregue a ponte JavaScript do TikTok às páginas que carrega. As páginas do próprio TikTok também precisam dessa ponte. Com isto ligado, a Central de atividades e o Histórico de exibição param de responder, e o checkout da loja e a página do CAPTCHA deixam de funcionar. Deixe desligado a menos que queira desconectá-las também.");
         table.put("Stop video looping",
                 "Parar a repetição dos vídeos");
         table.put("Stop videos at the end instead of replaying them.",
@@ -10343,8 +10343,6 @@ public final class L10nTranslations {
                 "Özel değer");
         table.put("Custom value...",
                 "Özel değer...");
-        table.put("Cut the in-app browser off from TikTok",
-                "Uygulama içi tarayıcının TikTok ile bağını kes");
         table.put("Daily budget",
                 "Günlük bütçe");
         table.put("Daily budgets, reminders and the hold",
@@ -10371,11 +10369,11 @@ public final class L10nTranslations {
                 "Önce cihaz dili, sonra orijinal");
         table.put("Diagnostic data cleared. Tap again to put it back.",
                 "Tanılama verileri temizlendi. Geri koymak için tekrar dokun.");
+        table.put("Diagnostic data put back",
+                "Tanılama verileri geri kondu");
     }
 
     private static void fillTr5(Map<String, String> table) {
-        table.put("Diagnostic data put back",
-                "Tanılama verileri geri kondu");
         table.put("Diagnostic report copied to the clipboard",
                 "Tanılama raporu panoya kopyalandı");
         table.put("Diagnostics",
@@ -10494,11 +10492,11 @@ public final class L10nTranslations {
                 "Alan düzenlemeleri kaydedilmedi");
         table.put("Files",
                 "Dosyalar");
+        table.put("Filter TikTok's offline videos",
+                "TikTok'un çevrimdışı videolarını filtrele");
     }
 
     private static void fillTr6(Map<String, String> table) {
-        table.put("Filter TikTok's offline videos",
-                "TikTok'un çevrimdışı videolarını filtrele");
         table.put("Filter bottom tabs",
                 "Alt sekmeleri filtrele");
         table.put("Filter comments by keyword",
@@ -10617,11 +10615,11 @@ public final class L10nTranslations {
                 "Sağ sütundaki düğmeleri gizle");
         table.put("Hide comment polls",
                 "Yorum anketlerini gizle");
+        table.put("Hide comment popup ads",
+                "Yorumlardaki açılır reklamları gizle");
     }
 
     private static void fillTr7(Map<String, String> table) {
-        table.put("Hide comment popup ads",
-                "Yorumlardaki açılır reklamları gizle");
         table.put("Hide comment typing suggestions",
                 "Yorum yazma önerilerini gizle");
         table.put("Hide comments made of an image or a sticker instead of words.",
@@ -10740,11 +10738,11 @@ public final class L10nTranslations {
                 "Akıştaki takip et düğmesini gizle");
         table.put("Hide the friend recommendation card and the other cards TikTok slots between videos.",
                 "Arkadaş öneri kartını ve TikTok'un videoların arasına yerleştirdiği diğer kartları gizle.");
+        table.put("Hide the launcher shortcuts",
+                "Başlatıcı kısayollarını gizle");
     }
 
     private static void fillTr8(Map<String, String> table) {
-        table.put("Hide the launcher shortcuts",
-                "Başlatıcı kısayollarını gizle");
         table.put("Hide the magnifying glass at the top of Inbox. Search on the feed and in comments is unchanged.",
                 "Gelen Kutusu'nun üstündeki büyüteci gizle. Akıştaki ve yorumlardaki arama değişmez.");
         table.put("Hide the magnifying glass at the top right of the feed. Search in Inbox and suggestions above comments stay unchanged.",
@@ -10863,11 +10861,11 @@ public final class L10nTranslations {
                 "Tanılama olaylarını dahil et");
         table.put("Included diagnostics",
                 "Dahil edilen tanılama");
+        table.put("Includes all diagnostic events.",
+                "Tüm tanılama olaylarını içerir.");
     }
 
     private static void fillTr9(Map<String, String> table) {
-        table.put("Includes all diagnostic events.",
-                "Tüm tanılama olaylarını içerir.");
         table.put("Includes these events: %1$s",
                 "Şu olayları içerir: %1$s");
         table.put("Inserted cards",
@@ -10894,6 +10892,8 @@ public final class L10nTranslations {
                 "Bu metni en fazla %1$s karakterle sınırla.");
         table.put("Keep this structured value to %1$s KB or less.",
                 "Bu yapılandırılmış değeri en fazla %1$s KB ile sınırla.");
+        table.put("Keep websites outside TikTok from using its connection back into the app. TikTok pages such as Activity center, Watch history, shop checkout and CAPTCHA keep working.",
+                "TikTok dışındaki web sitelerinin uygulamayla olan bağlantısını kullanmasını engelle. Etkinlik merkezi, İzleme geçmişi, mağaza ödeme sayfası ve CAPTCHA gibi TikTok sayfaları çalışmaya devam eder.");
         table.put("Kept to %1$s, the nearest value this row allows",
                 "%1$s olarak ayarlandı, bu satırın izin verdiği en yakın değer");
         table.put("Kinds of post",
@@ -11279,6 +11279,8 @@ public final class L10nTranslations {
                 "Tanıtım müziği");
         table.put("Proof",
                 "Kanıt");
+        table.put("Protect external pages in TikTok's browser",
+                "TikTok tarayıcısındaki harici sayfaları koru");
         table.put("Put back the settings saved before the last restore or reset.",
                 "Son geri yükleme veya sıfırlamadan önce kaydedilen ayarları geri koy.");
         table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
@@ -11353,11 +11355,11 @@ public final class L10nTranslations {
                 "Konumu sıfırla");
         table.put("Reset settings",
                 "Ayarları sıfırla");
-        table.put("Restart TikTok to apply %1$d changes",
-                "%1$d değişikliği uygulamak için TikTok'u yeniden başlat");
     }
 
     private static void fillTr13(Map<String, String> table) {
+        table.put("Restart TikTok to apply %1$d changes",
+                "%1$d değişikliği uygulamak için TikTok'u yeniden başlat");
         table.put("Restart TikTok to apply this",
                 "Bunu uygulamak için TikTok'u yeniden başlat");
         table.put("Restart TikTok to apply this change",
@@ -11476,11 +11478,11 @@ public final class L10nTranslations {
                 "Ada veya özellik kapısı anahtarına göre ara");
         table.put("Search by name, description or category.",
                 "Ada, açıklamaya veya kategoriye göre ara.");
-        table.put("Search countries or operators",
-                "Ülke veya operatör ara");
     }
 
     private static void fillTr14(Map<String, String> table) {
+        table.put("Search countries or operators",
+                "Ülke veya operatör ara");
         table.put("Search hidden creators",
                 "Gizlenen içerik üreticilerinde ara");
         table.put("Search settings",
@@ -11599,11 +11601,11 @@ public final class L10nTranslations {
                 "İlerleme çubuğu küçük resmini göster");
         table.put("Show the search entry inside TikTok's LIVE drawer, where available. This doesn't add a search box to video comments.",
                 "TikTok'un CANLI çekmecesindeki arama girişini, mümkün olan yerlerde göster. Bu, video yorumlarına bir arama kutusu eklemez.");
-        table.put("Show the switch",
-                "Ayarı göster");
     }
 
     private static void fillTr15(Map<String, String> table) {
+        table.put("Show the switch",
+                "Ayarı göster");
         table.put("Show the whole Activity and New followers lists instead of stopping at a View all button.",
                 "Tümünü gör düğmesinde durmak yerine Etkinlik ve Yeni takipçiler listelerinin tamamını göster.");
         table.put("Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off.",
@@ -11686,8 +11688,6 @@ public final class L10nTranslations {
                 "Birinin yazdığı şey bir reklamverenin tetikleyicisiyle eşleştiğinde yorumların üzerinde oynayan marka animasyonunu durdur.");
         table.put("Stop the bubble that asks you to share a video with friends after you like it.",
                 "Bir videoyu beğendikten sonra onu arkadaşlarınla paylaşmanı isteyen balonu durdur.");
-        table.put("Stop the in-app browser handing TikTok's JavaScript bridge to the pages it loads. TikTok's own pages need that bridge too. With this on, Activity center and Watch history stop responding, and the shop checkout and the CAPTCHA page break. Leave it off unless you want those cut off as well.",
-                "Uygulama içi tarayıcının, yüklediği sayfalara TikTok'un JavaScript köprüsünü vermesini durdur. TikTok'un kendi sayfalarının da bu köprüye ihtiyacı var. Bu açıkken Etkinlik merkezi ve İzleme geçmişi yanıt vermez, mağaza ödeme sayfası ve CAPTCHA sayfası bozulur. Bunların da kesilmesini istemiyorsan kapalı bırak.");
         table.put("Stop video looping",
                 "Video döngüsünü durdur");
         table.put("Stop videos at the end instead of replaying them.",

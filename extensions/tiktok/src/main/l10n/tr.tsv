@@ -258,7 +258,7 @@ Current: %1$s	Mevcut: %1$s
 Custom SIM details	Özel SIM bilgileri
 Custom value	Özel değer
 Custom value...	Özel değer...
-Cut the in-app browser off from TikTok	Uygulama içi tarayıcının TikTok ile bağını kes
+Protect external pages in TikTok's browser	TikTok tarayıcısındaki harici sayfaları koru
 Daily budget	Günlük bütçe
 Daily budgets, reminders and the hold	Günlük bütçeler, hatırlatmalar ve bekletme
 Daily time budget	Günlük süre bütçesi
@@ -918,7 +918,7 @@ Stop a long press on Share from opening TikTok's quick share action.	Paylaş'a u
 Stop feature gate recording	Özellik kapısı kaydını durdur
 Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.	Birinin yazdığı şey bir reklamverenin tetikleyicisiyle eşleştiğinde yorumların üzerinde oynayan marka animasyonunu durdur.
 Stop the bubble that asks you to share a video with friends after you like it.	Bir videoyu beğendikten sonra onu arkadaşlarınla paylaşmanı isteyen balonu durdur.
-Stop the in-app browser handing TikTok's JavaScript bridge to the pages it loads. TikTok's own pages need that bridge too. With this on, Activity center and Watch history stop responding, and the shop checkout and the CAPTCHA page break. Leave it off unless you want those cut off as well.	Uygulama içi tarayıcının, yüklediği sayfalara TikTok'un JavaScript köprüsünü vermesini durdur. TikTok'un kendi sayfalarının da bu köprüye ihtiyacı var. Bu açıkken Etkinlik merkezi ve İzleme geçmişi yanıt vermez, mağaza ödeme sayfası ve CAPTCHA sayfası bozulur. Bunların da kesilmesini istemiyorsan kapalı bırak.
+Keep websites outside TikTok from using its connection back into the app. TikTok pages such as Activity center, Watch history, shop checkout and CAPTCHA keep working.	TikTok dışındaki web sitelerinin uygulamayla olan bağlantısını kullanmasını engelle. Etkinlik merkezi, İzleme geçmişi, mağaza ödeme sayfası ve CAPTCHA gibi TikTok sayfaları çalışmaya devam eder.
 Stop video looping	Video döngüsünü durdur
 Stop videos at the end instead of replaying them.	Videoları yeniden oynatmak yerine sonunda durdur.
 Stopped after dismissing %1$s suggested accounts	Önerilen %1$s hesap kapatıldıktan sonra durdu

@@ -285,7 +285,6 @@ Current: %1$s,Current: %1$s
 Custom SIM details,Custom SIM details
 Custom value,Custom value
 Custom value...,Custom value...
-Cut the in-app browser off from TikTok,Cut the in-app browser off from TikTok
 Daily budget,Daily budget
 "Daily budgets, reminders and the hold","Daily budgets, reminders and the hold"
 Daily time budget,Daily time budget
@@ -553,6 +552,7 @@ Keep the screen's refresh rate,Keep the screen's refresh rate
 "Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only.","Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only."
 Keep this string to %1$s characters or fewer.,Keep this string to %1$s characters or fewer.
 Keep this structured value to %1$s KB or less.,Keep this structured value to %1$s KB or less.
+"Keep websites outside TikTok from using its connection back into the app. TikTok pages such as Activity center, Watch history, shop checkout and CAPTCHA keep working.","Keep websites outside TikTok from using its connection back into the app. TikTok pages such as Activity center, Watch history, shop checkout and CAPTCHA keep working."
 "Kept to %1$s, the nearest value this row allows","Kept to %1$s, the nearest value this row allows"
 Kinds of post,Kinds of post
 LIVE,LIVE
@@ -741,6 +741,7 @@ Profile picture saved to %1$s,Profile picture saved to %1$s
 Profile share actions,Profile share actions
 Promotional music,Promotional music
 Proof,Proof
+Protect external pages in TikTok's browser,Protect external pages in TikTok's browser
 Put back the settings saved before the last restore or reset.,Put back the settings saved before the last restore or reset.
 Put every setting back to its default straight away. Your current settings are kept for Undo.,Put every setting back to its default straight away. Your current settings are kept for Undo.
 Putting the settings back to their defaults,Putting the settings back to their defaults
@@ -940,7 +941,6 @@ Stop analytics and tracking,Stop analytics and tracking
 Stop feature gate recording,Stop feature gate recording
 Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.,Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.
 Stop the bubble that asks you to share a video with friends after you like it.,Stop the bubble that asks you to share a video with friends after you like it.
-"Stop the in-app browser handing TikTok's JavaScript bridge to the pages it loads. TikTok's own pages need that bridge too. With this on, Activity center and Watch history stop responding, and the shop checkout and the CAPTCHA page break. Leave it off unless you want those cut off as well.","Stop the in-app browser handing TikTok's JavaScript bridge to the pages it loads. TikTok's own pages need that bridge too. With this on, Activity center and Watch history stop responding, and the shop checkout and the CAPTCHA page break. Leave it off unless you want those cut off as well."
 Stop video looping,Stop video looping
 Stop videos at the end instead of replaying them.,Stop videos at the end instead of replaying them.
 Stopped after dismissing %1$s suggested accounts,Stopped after dismissing %1$s suggested accounts

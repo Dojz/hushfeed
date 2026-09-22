@@ -2144,7 +2144,7 @@
     },
     {
       "name": "In-app browser privacy guard",
-      "description": "Can stop TikTok's in-app browser handing its JavaScript bridge to the pages it loads. TikTok's own pages need that bridge too, so turning it on also breaks Activity center, Watch history, the shop checkout and the CAPTCHA page. The switch is off until you turn it on. Switch: Hushfeed settings > Privacy.",
+      "description": "Keeps TikTok's JavaScript bridge off external pages in its in-app browser while leaving Activity center, Watch history, shop checkout and CAPTCHA working. The switch is off until you turn it on. Switch: Hushfeed settings > Privacy.",
       "category": "Privacy",
       "use": false,
       "dependencies": [
