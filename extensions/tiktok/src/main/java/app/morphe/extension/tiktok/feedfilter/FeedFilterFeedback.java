@@ -102,6 +102,8 @@ final class FeedFilterFeedback {
     private static final class Streak {
         final String filter;
         int lists;
+        /** Named once per run: the export keeps counting, the banner does not repeat. */
+        boolean announced;
 
         Streak(String filter) {
             this.filter = filter;
@@ -132,6 +134,8 @@ final class FeedFilterFeedback {
     private static long windowStartedAt = NO_WINDOW;
     private static long lastNoticeAt = Long.MIN_VALUE;
     private static boolean noticePending;
+    /** Whether the last notice named a switch, so a second named one waits out the cooldown. */
+    private static boolean lastNoticeNamed;
 
     private FeedFilterFeedback() {
     }
@@ -161,16 +165,17 @@ final class FeedFilterFeedback {
             }
             filteredBatches++;
             addReasonsLocked(batchReasons);
-            if (noticePending) return null;
             boolean coolingDown = lastNoticeAt != Long.MIN_VALUE
                     && (nowMs < lastNoticeAt || nowMs - lastNoticeAt < NOTICE_COOLDOWN_MS);
 
             // A named switch beats the generic count: the reader who gets "Hide Series did
-            // this" has no use for "your filters did this" a moment later. The first time a
-            // run gets long enough it also beats the cooldown, since a banner replaces the one
-            // before it and the generic notice a few seconds earlier said less.
-            if (suspect != null && suspect.lists >= SUSPECT_AFTER_LISTS
-                    && (!coolingDown || suspect.lists == SUSPECT_AFTER_LISTS)) {
+            // this" has no use for "your filters did this" a moment later. A run is named once,
+            // and the first named notice also beats a generic one still pending or inside its
+            // cooldown, since a banner replaces the one before it and the generic notice a few
+            // seconds earlier said less. A second run of the same kind waits the cooldown out.
+            if (suspect != null && suspect.lists >= SUSPECT_AFTER_LISTS && !suspect.announced
+                    && !(coolingDown && lastNoticeNamed)) {
+                suspect.announced = true;
                 MarkerSwitch named = MARKER_SWITCHES.get(suspect.filter);
                 String message = L10n.f(
                         "%1$s hid everything TikTok sent, %2$d times in a row. Turn it off if that's not what you wanted.",
@@ -178,15 +183,17 @@ final class FeedFilterFeedback {
                         suspect.lists
                 );
                 lastNoticeAt = nowMs;
+                lastNoticeNamed = true;
                 noticePending = true;
                 resetWindowLocked();
                 return new Notice(message, named);
             }
 
-            if (coolingDown || filteredBatches < NOTICE_AFTER_BATCHES) return null;
+            if (noticePending || coolingDown || filteredBatches < NOTICE_AFTER_BATCHES) return null;
 
             String message = formatMessageLocked();
             lastNoticeAt = nowMs;
+            lastNoticeNamed = false;
             noticePending = true;
             resetWindowLocked();
             return new Notice(message, null);
@@ -369,6 +376,7 @@ final class FeedFilterFeedback {
             resetWindowLocked();
             streaks.clear();
             lastNoticeAt = Long.MIN_VALUE;
+            lastNoticeNamed = false;
             noticePending = false;
         }
     }
