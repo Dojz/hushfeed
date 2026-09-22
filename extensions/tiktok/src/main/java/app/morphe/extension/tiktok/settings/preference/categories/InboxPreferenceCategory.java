@@ -92,7 +92,7 @@ public final class InboxPreferenceCategory extends ConditionalPreferenceCategory
             addPreference(new TogglePreference(
                     context,
                     "Hide the Inbox search button",
-                    "Remove the magnifying glass at the top of Inbox. It doesn't hide search on the feed or in comments.",
+                    "Hide the magnifying glass at the top of Inbox. Search on the feed and in comments is unchanged.",
                     Settings.HIDE_INBOX_SEARCH
             ));
             addPreference(new TogglePreference(
@@ -132,7 +132,7 @@ public final class InboxPreferenceCategory extends ConditionalPreferenceCategory
             addPreference(new TogglePreference(
                     context,
                     "Hide new follower notifications",
-                    "Drop the notification saying somebody new followed you before it reaches "
+                    "Hide the notification saying somebody new followed you before it reaches "
                             + "the drawer. Every other notification is left alone, and the "
                             + "follower still appears in the Inbox.",
                     Settings.HIDE_FOLLOWER_NOTIFICATIONS
@@ -140,7 +140,7 @@ public final class InboxPreferenceCategory extends ConditionalPreferenceCategory
             addPreference(new TogglePreference(
                     context,
                     "Hide message streaks",
-                    "Take away the streak button in a chat and the reminder message that goes "
+                    "Hide the streak button in a chat and the reminder message that goes "
                             + "with it.",
                     Settings.HIDE_MESSAGE_STREAKS
             ));

@@ -194,14 +194,14 @@ Clearing,Clearing
 Clearing suggested accounts,Clearing suggested accounts
 "Clearing, %1$d so far","Clearing, %1$d so far"
 Close,Close
-"Comma separated account handles or user ids. These accounts are always skipped. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.","Comma separated account handles or user ids. These accounts are always skipped. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name."
+"Comma separated account handles or user ids. Videos from these accounts are always hidden. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.","Comma separated account handles or user ids. Videos from these accounts are always hidden. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name."
 "Comma separated country codes, like GB, IE. Videos posted from anywhere else are hidden. Leave empty for all countries.","Comma separated country codes, like GB, IE. Videos posted from anywhere else are hidden. Leave empty for all countries."
 "Comma separated country codes. Videos posted from these are hidden, whatever the list above says.","Comma separated country codes. Videos posted from these are hidden, whatever the list above says."
 "Comma separated list of any other Inbox row titles to hide, matched exactly. Use this for anything not listed above.","Comma separated list of any other Inbox row titles to hide, matched exactly. Use this for anything not listed above."
 "Comma separated names exactly as the share sheet shows them: friends in the Send to row, share targets such as Facebook, and actions such as Create group or Repost. Stable keys such as copy, save and dislike also work before the sheet opens.","Comma separated names exactly as the share sheet shows them: friends in the Send to row, share targets such as Facebook, and actions such as Create group or Repost. Stable keys such as copy, save and dislike also work before the sheet opens."
 Comma separated sound ids recorded by the player's sound button. Remove one to unblock it.,Comma separated sound ids recorded by the player's sound button. Remove one to unblock it.
 Comma separated usernames or display names whose comments are hidden.,Comma separated usernames or display names whose comments are hidden.
-"Comma separated words or phrases. Matching captions are skipped. Case does not matter. Two phrases in quotes can be joined: ""a"" & ""b"" needs both, ""a"" !& ""b"" needs the first without the second.","Comma separated words or phrases. Matching captions are skipped. Case does not matter. Two phrases in quotes can be joined: ""a"" & ""b"" needs both, ""a"" !& ""b"" needs the first without the second."
+"Comma separated words or phrases. Videos whose caption matches are hidden. Case does not matter. Two phrases in quotes can be joined: ""a"" & ""b"" needs both, ""a"" !& ""b"" needs the first without the second.","Comma separated words or phrases. Videos whose caption matches are hidden. Case does not matter. Two phrases in quotes can be joined: ""a"" & ""b"" needs both, ""a"" !& ""b"" needs the first without the second."
 "Comma separated words to match against a sound's name, like saxophone. Case does not matter.","Comma separated words to match against a sound's name, like saxophone. Case does not matter."
 "Comma separated. A comment is hidden if its text contains any of them. Case does not matter. Two phrases in quotes can be joined: ""a"" & ""b"" needs both, ""a"" !& ""b"" needs the first without the second.","Comma separated. A comment is hidden if its text contains any of them. Case does not matter. Two phrases in quotes can be joined: ""a"" & ""b"" needs both, ""a"" !& ""b"" needs the first without the second."
 Comment media filename,Comment media filename
@@ -295,7 +295,6 @@ Downloads,Downloads
 "Drag to move, release to place","Drag to move, release to place"
 Drama and Series,Drama and Series
 "Draw TikTok's text in your device's font instead of TikTok Sans. Icons, gift animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this.","Draw TikTok's text in your device's font instead of TikTok Sans. Icons, gift animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this."
-"Drop the notification saying somebody new followed you before it reaches the drawer. Every other notification is left alone, and the follower still appears in the Inbox.","Drop the notification saying somebody new followed you before it reaches the drawer. Every other notification is left alone, and the follower still appears in the Inbox."
 "Each area, how many of the things it looks for are in this build and how many are not.","Each area, how many of the things it looks for are in this build and how many are not."
 Easier comment likes,Easier comment likes
 Empty,Empty
@@ -408,6 +407,7 @@ Hide comments made of an image or a sticker instead of words.,Hide comments made
 Hide controls after each video starts. Tap to restore them.,Hide controls after each video starts. Tap to restore them.
 Hide conversations,Hide conversations
 Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still turned on.,Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still turned on.
+"Hide feed videos with place badges, even when they aren't paid ads. To keep the video and hide only its badge, use Hide location labels in Feed screen.","Hide feed videos with place badges, even when they aren't paid ads. To keep the video and hide only its badge, use Hide location labels in Feed screen."
 "Hide floating promotion badges, coins, and timer banners on the feed.","Hide floating promotion badges, coins, and timer banners on the feed."
 Hide floating promotions,Hide floating promotions
 Hide inserted cards,Hide inserted cards
@@ -425,6 +425,7 @@ Hide picture comments,Hide picture comments
 Hide playlist videos,Hide playlist videos
 Hide promotional music,Hide promotional music
 Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.,Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.
+Hide recorded LIVE broadcasts from the feed.,Hide recorded LIVE broadcasts from the feed.
 Hide rows by title,Hide rows by title
 Hide search rewards,Hide search rewards
 Hide search suggestions above comments,Hide search suggestions above comments
@@ -445,9 +446,11 @@ Hide the LIVE button,Hide the LIVE button
 Hide the LIVE button in the top left corner of the feed.,Hide the LIVE button in the top left corner of the feed.
 Hide the Report button on videos,Hide the Report button on videos
 Hide the Send to row,Hide the Send to row
+Hide the Share via row.,Hide the Share via row.
 "Hide the Tako AI bubble above the profile button, the Ask bar under videos, the Ask Tako button on the search page and the Tako bar above comments.","Hide the Tako AI bubble above the profile button, the Ask bar under videos, the Ask Tako button on the search page and the Tako bar above comments."
 Hide the Tako bubble,Hide the Tako bubble
 Hide the Tako chat,Hide the Tako chat
+Hide the actions row of the share sheet.,Hide the actions row of the share sheet.
 Hide the add people icon,Hide the add people icon
 Hide the caption,Hide the caption
 Hide the description under the creator's name on the feed.,Hide the description under the creator's name on the feed.
@@ -457,8 +460,10 @@ Hide the floating promotional badge over the feed.,Hide the floating promotional
 Hide the follow button on the feed,Hide the follow button on the feed
 Hide the friend recommendation card and the other cards TikTok slots between videos.,Hide the friend recommendation card and the other cards TikTok slots between videos.
 Hide the launcher shortcuts,Hide the launcher shortcuts
+Hide the magnifying glass at the top of Inbox. Search on the feed and in comments is unchanged.,Hide the magnifying glass at the top of Inbox. Search on the feed and in comments is unchanged.
 Hide the magnifying glass at the top right of the feed. Search in Inbox and suggestions above comments stay unchanged.,Hide the magnifying glass at the top right of the feed. Search in Inbox and suggestions above comments stay unchanged.
 Hide the music line,Hide the music line
+"Hide the notification saying somebody new followed you before it reaches the drawer. Every other notification is left alone, and the follower still appears in the Inbox.","Hide the notification saying somebody new followed you before it reaches the drawer. Every other notification is left alone, and the follower still appears in the Inbox."
 Hide the playlist bar,Hide the playlist bar
 Hide the playlist bar along the bottom of videos that belong to a series.,Hide the playlist bar along the bottom of videos that belong to a series.
 Hide the plus button under the creator's picture in the right column. Ticking Avatar and follow button above hides the picture with it.,Hide the plus button under the creator's picture in the right column. Ticking Avatar and follow button above hides the picture with it.
@@ -468,6 +473,7 @@ Hide the question cards TikTok slides over a video near its end.,Hide the questi
 Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.,Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.
 Hide the rewards shortcut,Hide the rewards shortcut
 Hide the right column,Hide the right column
+Hide the row of friends at the top of the share sheet.,Hide the row of friends at the top of the share sheet.
 Hide the save button on the feed,Hide the save button on the feed
 Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.,Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.
 Hide the search bar below videos,Hide the search bar below videos
@@ -475,12 +481,15 @@ Hide the search button on the feed,Hide the search button on the feed
 Hide the share prompt after a like,Hide the share prompt after a like
 Hide the spinning music cover and the track name beside the caption.,Hide the spinning music cover and the track name beside the caption.
 Hide the status bar,Hide the status bar
+Hide the streak button in a chat and the reminder message that goes with it.,Hide the streak button in a chat and the reminder message that goes with it.
+Hide the suggested-search strip above the bottom tabs and let video details and side controls use its space. The top search button and comments stay unchanged.,Hide the suggested-search strip above the bottom tabs and let video details and side controls use its space. The top search button and comments stay unchanged.
 "Hide the whole column on the right, from the avatar down to the music disc.","Hide the whole column on the right, from the avatar down to the music disc."
 Hide this creator on this phone,Hide this creator on this phone
 Hide verified accounts,Hide verified accounts
 Hide video actions,Hide video actions
 Hide videos carrying TikTok's AI-generated label.,Hide videos carrying TikTok's AI-generated label.
 Hide videos marked as paid partnership or branded content.,Hide videos marked as paid partnership or branded content.
+Hide videos marked as using promotional music.,Hide videos marked as using promotional music.
 Hide videos posted as part of a playlist.,Hide videos posted as part of a playlist.
 Hide videos posted by verified accounts.,Hide videos posted by verified accounts.
 Hide videos that belong to a paid Series.,Hide videos that belong to a paid Series.
@@ -511,7 +520,7 @@ Included diagnostics,Included diagnostics
 Includes all diagnostic events.,Includes all diagnostic events.
 Includes these events: %1$s,Includes these events: %1$s
 Inserted cards,Inserted cards
-Keep a local record of what you have watched and drop those videos from later feed pages.,Keep a local record of what you have watched and drop those videos from later feed pages.
+Keep a local record of what you have watched and hide those videos when the feed sends them again.,Keep a local record of what you have watched and hide those videos when the feed sends them again.
 Keep captions in clear display,Keep captions in clear display
 Keep going,Keep going
 Keep long press from quick sharing,Keep long press from quick sharing
@@ -731,11 +740,6 @@ Remove %1$s,Remove %1$s
 Remove all overrides,Remove all overrides
 Remove feed ads,Remove feed ads
 "Remove feed ads, creator commission posts, paid partnerships, and branded content.","Remove feed ads, creator commission posts, paid partnerships, and branded content."
-Remove the Share via row.,Remove the Share via row.
-Remove the actions row from the share sheet.,Remove the actions row from the share sheet.
-Remove the magnifying glass at the top of Inbox. It doesn't hide search on the feed or in comments.,Remove the magnifying glass at the top of Inbox. It doesn't hide search on the feed or in comments.
-Remove the row of friends from the top of the share sheet.,Remove the row of friends from the top of the share sheet.
-Remove the suggested-search strip above the bottom tabs and let video details and side controls use its space. The top search button and comments stay unchanged.,Remove the suggested-search strip above the bottom tabs and let video details and side controls use its space. The top search button and comments stay unchanged.
 Remove tracking parameters from shared links.,Remove tracking parameters from shared links.
 Remove watermark,Remove watermark
 Removed %1$s,Removed %1$s
@@ -883,9 +887,6 @@ Showing %1$s again,Showing %1$s again
 Silence the feed while comments are open,Silence the feed while comments are open
 Skip blocked sounds,Skip blocked sounds
 Skip content warnings,Skip content warnings
-"Skip feed videos with place badges, even when they aren't paid ads. To keep the video and hide only its badge, use Hide location labels in Feed screen.","Skip feed videos with place badges, even when they aren't paid ads. To keep the video and hide only its badge, use Hide location labels in Feed screen."
-Skip recorded LIVE broadcasts in the feed.,Skip recorded LIVE broadcasts in the feed.
-Skip videos marked as using promotional music.,Skip videos marked as using promotional music.
 "Skip videos that use a sound blocked with the player's sound button, or named below.","Skip videos that use a sound blocked with the player's sound button, or named below."
 Skipping videos with %1$s,Skipping videos with %1$s
 Some Calm feed settings changed. Restore still puts back your earlier setup.,Some Calm feed settings changed. Restore still puts back your earlier setup.
@@ -931,7 +932,6 @@ Structured value observed,Structured value observed
 Subtitle language,Subtitle language
 Subtitles,Subtitles
 System,System
-Take away the streak button in a chat and the reminder message that goes with it.,Take away the streak button in a chat and the reminder message that goes with it.
 Tap %1$s again to send,Tap %1$s again to send
 Tap again to follow,Tap again to follow
 Tap again to like,Tap again to like

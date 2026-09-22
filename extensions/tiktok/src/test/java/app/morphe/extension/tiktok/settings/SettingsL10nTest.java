@@ -1026,6 +1026,28 @@ public class SettingsL10nTest {
                 + String.join("\n", wrong), 0, wrong.size());
     }
 
+    /**
+     * One verb per outcome on the settings rows. Hide is a video or a control kept out of
+     * view, remove is data taken out (ads, tracking parameters, the watermark), skip is the
+     * feed moving past a video (a blocked sound, the budget). "Skipped", "drop" and "take
+     * away" were used for the first of those in seven rows beside 137 that said hide.
+     */
+    @Test public void rowSummariesSayHideForWhatIsKeptOutOfView() throws Exception {
+        List<String[]> rows = settingsRowArguments();
+        java.util.regex.Pattern stray = java.util.regex.Pattern.compile(
+                "\\b(?:[Dd]rop(?:s|ped|ping)?|[Tt]ake[sn]? away|[Tt]aken away|skipped)\\b");
+        List<String> offenders = new ArrayList<>();
+        for (String[] row : rows) {
+            for (String text : row) {
+                if (text != null && stray.matcher(text).find()) offenders.add(text);
+            }
+        }
+        assertTrue("the scan found too few settings rows to mean anything: " + rows.size(),
+                rows.size() > 100);
+        assertEquals("rows that say drop, take away or skipped where the rest say hide:\n"
+                + String.join("\n", offenders), 0, offenders.size());
+    }
+
     /** Every settings row the category sources build, as {@code [title, summary]}. */
     private static List<String[]> settingsRowArguments() throws Exception {
         java.io.File categories = new java.io.File(

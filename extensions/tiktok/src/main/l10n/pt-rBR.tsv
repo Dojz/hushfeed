@@ -184,14 +184,14 @@ Clearing	Limpando
 Clearing suggested accounts	Limpando as contas sugeridas
 Clearing, %1$d so far	Limpando, %1$d até agora
 Close	Fechar
-Comma separated account handles or user ids. These accounts are always skipped. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.	Nomes de usuário ou ids separados por vírgula. Essas contas são sempre puladas. Uma entrada entre barras, como /^news_/, é um padrão comparado com o nome de usuário e com o nome de exibição.
+Comma separated account handles or user ids. Videos from these accounts are always hidden. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.	Nomes de usuário ou ids separados por vírgula. Os vídeos dessas contas são sempre escondidos. Uma entrada entre barras, como /^news_/, é um padrão comparado com o nome de usuário e com o nome de exibição.
 Comma separated country codes, like GB, IE. Videos posted from anywhere else are hidden. Leave empty for all countries.	Códigos de país separados por vírgula, como GB, IE. Vídeos publicados de qualquer outro lugar ficam escondidos. Deixe vazio para todos os países.
 Comma separated country codes. Videos posted from these are hidden, whatever the list above says.	Códigos de país separados por vírgula. Vídeos publicados a partir deles ficam escondidos, não importa o que a lista acima diga.
 Comma separated list of any other Inbox row titles to hide, matched exactly. Use this for anything not listed above.	Lista separada por vírgula de outros títulos de linha da caixa de entrada para esconder, com correspondência exata. Use para o que não estiver acima.
 Comma separated names exactly as the share sheet shows them: friends in the Send to row, share targets such as Facebook, and actions such as Create group or Repost. Stable keys such as copy, save and dislike also work before the sheet opens.	Nomes separados por vírgula, exatamente como a folha de compartilhamento mostra: amigos da linha Enviar para, destinos como Facebook e ações como Criar grupo ou Repostar. Chaves estáveis como copy, save e dislike também funcionam antes de a folha abrir.
 Comma separated sound ids recorded by the player's sound button. Remove one to unblock it.	Ids de som separados por vírgula, registrados pelo botão de som do player. Tire um para desbloquear.
 Comma separated usernames or display names whose comments are hidden.	Nomes de usuário ou nomes de exibição separados por vírgula cujos comentários ficam escondidos.
-Comma separated words or phrases. Matching captions are skipped. Case does not matter. Two phrases in quotes can be joined: "a" & "b" needs both, "a" !& "b" needs the first without the second.	Palavras ou frases separadas por vírgula. Legendas que combinarem são puladas. Maiúsculas e minúsculas não importam. Duas frases entre aspas podem ser juntadas: "a" & "b" pede as duas, "a" !& "b" pede a primeira sem a segunda.
+Comma separated words or phrases. Videos whose caption matches are hidden. Case does not matter. Two phrases in quotes can be joined: "a" & "b" needs both, "a" !& "b" needs the first without the second.	Palavras ou frases separadas por vírgula. Vídeos cuja legenda combinar são escondidos. Maiúsculas e minúsculas não importam. Duas frases entre aspas podem ser juntadas: "a" & "b" pede as duas, "a" !& "b" pede a primeira sem a segunda.
 Comma separated words to match against a sound's name, like saxophone. Case does not matter.	Palavras separadas por vírgula para comparar com o nome de um som, como saxofone. Maiúsculas e minúsculas não importam.
 Comma separated. A comment is hidden if its text contains any of them. Case does not matter. Two phrases in quotes can be joined: "a" & "b" needs both, "a" !& "b" needs the first without the second.	Separadas por vírgula. Um comentário fica escondido se o texto tiver qualquer uma delas. Maiúsculas e minúsculas não importam. Duas frases entre aspas podem ser juntadas: "a" & "b" pede as duas, "a" !& "b" pede a primeira sem a segunda.
 Comment media filename	Nome do arquivo da mídia do comentário
@@ -283,7 +283,7 @@ Downloads	Downloads
 Drag to move, release to place	Arraste para mover, solte para posicionar
 Drama and Series	Drama e séries
 Draw TikTok's text in your device's font instead of TikTok Sans. Icons, gift animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this.	Mostra o texto do TikTok na fonte do seu aparelho em vez da TikTok Sans. Os ícones, as animações de presentes e os símbolos @ e # mantêm a própria fonte. Reinicie o TikTok para aplicar.
-Drop the notification saying somebody new followed you before it reaches the drawer. Every other notification is left alone, and the follower still appears in the Inbox.	Descarta a notificação que diz que alguém novo passou a seguir você antes de ela chegar à gaveta. As outras notificações ficam como estão, e o seguidor continua aparecendo na caixa de entrada.
+Hide the notification saying somebody new followed you before it reaches the drawer. Every other notification is left alone, and the follower still appears in the Inbox.	Esconde a notificação que diz que alguém novo passou a seguir você antes de ela chegar à gaveta. As outras notificações ficam como estão, e o seguidor continua aparecendo na caixa de entrada.
 Each area, how many of the things it looks for are in this build and how many are not.	Cada área, quantas das coisas que ela procura estão nesta build e quantas não estão.
 Empty	Vazio
 Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.	Esvaziar o menu que abre ao manter pressionado o ícone do TikTok na tela inicial. Ao desativar, o TikTok é solicitado a criá-los novamente. Tocar no ícone continua abrindo o app, e um atalho fixado por você permanece onde foi colocado.
@@ -452,7 +452,7 @@ Hide the right column	Esconder a coluna da direita
 The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.	A linha de fotos de stories no topo da caixa de entrada some. Os stories continuam abrindo no feed e nos perfis.
 Hide the save button through its native visibility hook. Ticking Save in the checklist above hides the same button through the overlay.	Ocultar o botao de salvar atraves de seu hook de visibilidade nativo. Marcar Salvar na lista acima oculta o mesmo botao pela sobreposicao.
 Hide the magnifying glass at the top right of the feed. Search in Inbox and suggestions above comments stay unchanged.	Oculte a lupa no canto superior direito do feed. A pesquisa na Caixa de entrada e as sugestões acima dos comentários não mudam.
-Remove the magnifying glass at the top of Inbox. It doesn't hide search on the feed or in comments.	Remova a lupa na parte superior da Caixa de entrada. Isso não oculta a pesquisa no feed nem nos comentários.
+Hide the magnifying glass at the top of Inbox. Search on the feed and in comments is unchanged.	Esconder a lupa na parte superior da caixa de entrada. A pesquisa no feed e nos comentários não muda.
 Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.	Oculte as pesquisas recomendadas antes de digitar na página de pesquisa do TikTok. Seu histórico de pesquisa é mantido. Isso não oculta as sugestões acima dos comentários.
 Hide the share prompt after a like	Ocultar o pedido de compartilhar depois de curtir
 Hide the spinning music cover and the track name beside the caption.	Esconder a capa giratória da música e o nome da faixa ao lado da legenda.
@@ -494,7 +494,7 @@ Included diagnostics	Diagnóstico incluído
 Includes all diagnostic events.	Inclui todos os eventos de diagnóstico.
 Includes these events: %1$s	Inclui estes eventos: %1$s
 Inserted cards	Cards inseridos
-Keep a local record of what you have watched and drop those videos from later feed pages.	Guardar no aparelho um registro do que você viu e tirar esses vídeos das próximas páginas do feed.
+Keep a local record of what you have watched and hide those videos when the feed sends them again.	Guardar no aparelho um registro do que você viu e esconder esses vídeos quando o feed os enviar de novo.
 Move to the next video when the current one ends. Pauses, open dialogs and screen-time holds stop it. Restart TikTok after changing this.	Avance para o próximo vídeo quando o atual terminar. Pausas, caixas de diálogo abertas e bloqueios de tempo de tela interrompem o avanço. Reinicie o TikTok depois de mudar esta configuração.
 Keep captions in clear display	Manter as legendas com a tela limpa
 Keep going	Continuar
@@ -710,9 +710,9 @@ Remove all overrides	Remover todas as substituições
 Remove feed ads	Remover os anúncios do feed
 Remove feed ads, creator commission posts, paid partnerships, and branded content.	Remover anúncios do feed, posts com comissão do criador, parcerias pagas e conteúdo de marca.
 Hide voting cards and poll results above the comments, including polls that have ended.	Oculte os cartões de votação e os resultados acima dos comentários, incluindo enquetes encerradas.
-Remove the Share via row.	Remover a linha Compartilhar via.
-Remove the actions row from the share sheet.	Remover a linha de ações da folha de compartilhamento.
-Remove the row of friends from the top of the share sheet.	Remover a linha de amigos do topo da folha de compartilhamento.
+Hide the Share via row.	Esconder a linha Compartilhar via.
+Hide the actions row of the share sheet.	Esconder a linha de ações da folha de compartilhamento.
+Hide the row of friends at the top of the share sheet.	Esconder a linha de amigos no topo da folha de compartilhamento.
 Remove tracking parameters from shared links.	Remover os parâmetros de rastreamento dos links compartilhados.
 Remove watermark	Remover a marca d'água
 Removed %1$s	%1$s removido
@@ -851,8 +851,8 @@ Show where a video was posted	Mostrar de onde o vídeo foi publicado
 Showing %1$s again	Mostrando %1$s de novo
 Skip blocked sounds	Pular os sons bloqueados
 Skip content warnings	Pular os avisos de conteúdo
-Skip recorded LIVE broadcasts in the feed.	Pular no feed as transmissões LIVE gravadas.
-Skip videos marked as using promotional music.	Pular os vídeos marcados como usando música promocional.
+Hide recorded LIVE broadcasts from the feed.	Esconder do feed as transmissões LIVE gravadas.
+Hide videos marked as using promotional music.	Esconder os vídeos marcados como usando música promocional.
 Skip videos that use a sound blocked with the player's sound button, or named below.	Pular os vídeos que usam um som bloqueado pelo botão de som do player, ou citado abaixo.
 Skipping videos with %1$s	Pulando os vídeos com %1$s
 Something is missing from %1$s. Tap for the whole report.	Falta alguma coisa em %1$s. Toque para ver o relatório inteiro.
@@ -895,7 +895,7 @@ Subtitle language	Idioma das legendas
 Subtitles	Legendas
 System	Sistema
 Feed tabs to keep	Abas do feed para manter
-Take away the streak button in a chat and the reminder message that goes with it.	Tirar o botão de sequência de um chat e a mensagem de lembrete que vem com ele.
+Hide the streak button in a chat and the reminder message that goes with it.	Esconder o botão de sequência de um chat e a mensagem de lembrete que vem com ele.
 Tap %1$s again to send	Toque em %1$s de novo para enviar
 Tap again to follow	Toque de novo para seguir
 Tap again to like	Toque de novo para curtir
@@ -1150,10 +1150,10 @@ Hide the Full screen button	Ocultar o botão de tela cheia
 Hide the Full screen button over videos. Playback and automatic rotation keep working as before.	Oculte o botão de tela cheia sobre os vídeos. A reprodução e a rotação automática continuam funcionando como antes.
 Hide location labels	Ocultar etiquetas de localização
 Hide the search bar below videos	Ocultar a barra de pesquisa abaixo dos vídeos
-Remove the suggested-search strip above the bottom tabs and let video details and side controls use its space. The top search button and comments stay unchanged.	Remova a barra de pesquisas sugeridas acima das abas inferiores para que os detalhes do vídeo e os controles laterais usem esse espaço. O botão de pesquisa no topo e os comentários não mudam.
+Hide the suggested-search strip above the bottom tabs and let video details and side controls use its space. The top search button and comments stay unchanged.	Esconda a barra de pesquisas sugeridas acima das abas inferiores para que os detalhes do vídeo e os controles laterais usem esse espaço. O botão de pesquisa no topo e os comentários não mudam.
 Hide place badges on videos, including cards with multiple places. Videos and your location permissions stay unchanged.	Oculte etiquetas de localização nos vídeos, incluindo cartões com vários lugares. Os vídeos e suas permissões de localização não mudam.
 Filter location-tagged videos	Filtrar vídeos com localização
-Skip feed videos with place badges, even when they aren't paid ads. To keep the video and hide only its badge, use Hide location labels in Feed screen.	Pule vídeos do feed com etiquetas de localização, mesmo que não sejam anúncios pagos. Para manter o vídeo e ocultar só a etiqueta, use Ocultar etiquetas de localização em Tela do feed.
+Hide feed videos with place badges, even when they aren't paid ads. To keep the video and hide only its badge, use Hide location labels in Feed screen.	Esconda vídeos do feed com etiquetas de localização, mesmo que não sejam anúncios pagos. Para manter o vídeo e ocultar só a etiqueta, use Ocultar etiquetas de localização em Tela do feed.
 Location-tagged videos	Vídeos com localização
 Extend the heart's touch area into nearby blank space. The icon and row spacing stay the same. Text, Reply and other controls keep their own space.	Amplie a área de toque do coração para o espaço vazio ao redor. O ícone e o espaçamento entre as linhas não mudam. O texto, Responder e os outros controles mantêm sua própria área.
 Start with comments. Hide the comment count, sort and close buttons, plus the suggestion area above them. Use Back or swipe down to close comments.	Comece direto nos comentários. Oculte a contagem, os botões de ordenar e fechar e a área de sugestões acima deles. Use Voltar ou deslize para baixo para fechar os comentários.

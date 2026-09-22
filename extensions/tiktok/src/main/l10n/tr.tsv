@@ -191,14 +191,14 @@ Clearing	Temizleniyor
 Clearing suggested accounts	Önerilen hesaplar temizleniyor
 Clearing, %1$d so far	Temizleniyor, şimdiye kadar %1$d
 Close	Kapat
-Comma separated account handles or user ids. These accounts are always skipped. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.	Virgülle ayrılmış hesap kullanıcı adları veya kullanıcı kimlikleri. Bu hesaplar her zaman atlanır. /^news_/ gibi iki eğik çizgi arasındaki bir giriş, kullanıcı adı ve görünen adla eşleştirilen bir kalıptır.
+Comma separated account handles or user ids. Videos from these accounts are always hidden. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.	Virgülle ayrılmış hesap kullanıcı adları veya kullanıcı kimlikleri. Bu hesapların videoları her zaman gizlenir. /^news_/ gibi iki eğik çizgi arasındaki bir giriş, kullanıcı adı ve görünen adla eşleştirilen bir kalıptır.
 Comma separated country codes, like GB, IE. Videos posted from anywhere else are hidden. Leave empty for all countries.	Virgülle ayrılmış ülke kodları, örneğin GB, IE. Başka herhangi bir yerden paylaşılan videolar gizlenir. Tüm ülkeler için boş bırak.
 Comma separated country codes. Videos posted from these are hidden, whatever the list above says.	Virgülle ayrılmış ülke kodları. Yukarıdaki liste ne derse desin, bu ülkelerden paylaşılan videolar gizlenir.
 Comma separated list of any other Inbox row titles to hide, matched exactly. Use this for anything not listed above.	Gizlenecek diğer Gelen Kutusu satır başlıklarının virgülle ayrılmış listesi, birebir eşleştirilir. Yukarıda listelenmeyen her şey için bunu kullan.
 Comma separated names exactly as the share sheet shows them: friends in the Send to row, share targets such as Facebook, and actions such as Create group or Repost. Stable keys such as copy, save and dislike also work before the sheet opens.	Paylaşım menüsünde göründükleri şekliyle, virgülle ayrılmış adlar: Şuraya gönder satırındaki arkadaşlar, Facebook gibi paylaşım hedefleri ve Grup oluştur veya Yeniden yayınla gibi eylemler. copy, save ve dislike gibi sabit anahtarlar da menü açılmadan önce çalışır.
 Comma separated sound ids recorded by the player's sound button. Remove one to unblock it.	Oynatıcının ses düğmesiyle kaydedilen, virgülle ayrılmış ses kimlikleri. Engelini kaldırmak için birini sil.
 Comma separated usernames or display names whose comments are hidden.	Yorumları gizlenen, virgülle ayrılmış kullanıcı adları veya görünen adlar.
-Comma separated words or phrases. Matching captions are skipped. Case does not matter. Two phrases in quotes can be joined: "a" & "b" needs both, "a" !& "b" needs the first without the second.	Virgülle ayrılmış kelimeler veya ifadeler. Eşleşen açıklamalar atlanır. Büyük küçük harf fark etmez. Tırnak içindeki iki ifade birleştirilebilir: "a" & "b" ikisini de gerektirir, "a" !& "b" ikincisi olmadan birincisini gerektirir.
+Comma separated words or phrases. Videos whose caption matches are hidden. Case does not matter. Two phrases in quotes can be joined: "a" & "b" needs both, "a" !& "b" needs the first without the second.	Virgülle ayrılmış kelimeler veya ifadeler. Açıklaması eşleşen videolar gizlenir. Büyük küçük harf fark etmez. Tırnak içindeki iki ifade birleştirilebilir: "a" & "b" ikisini de gerektirir, "a" !& "b" ikincisi olmadan birincisini gerektirir.
 Comma separated words to match against a sound's name, like saxophone. Case does not matter.	Bir sesin adıyla eşleştirilecek, virgülle ayrılmış kelimeler, örneğin saksafon. Büyük küçük harf fark etmez.
 Comma separated. A comment is hidden if its text contains any of them. Case does not matter. Two phrases in quotes can be joined: "a" & "b" needs both, "a" !& "b" needs the first without the second.	Virgülle ayrılır. Metni bunlardan herhangi birini içeren yorum gizlenir. Büyük küçük harf fark etmez. Tırnak içindeki iki ifade birleştirilebilir: "a" & "b" ikisini de gerektirir, "a" !& "b" ikincisi olmadan birincisini gerektirir.
 Comment media filename	Yorum medyası dosya adı
@@ -294,7 +294,7 @@ Downloads	İndirilenler
 Drag to move, release to place	Taşımak için sürükle, yerleştirmek için bırak
 Drama and Series	Drama ve Seri
 Draw TikTok's text in your device's font instead of TikTok Sans. Icons, gift animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this.	TikTok'un metinlerini TikTok Sans yerine cihazının yazı tipiyle göster. Simgeler, hediye animasyonları ve @ ile # işaretleri kendi yazı tiplerini korur. Uygulamak için TikTok'u yeniden başlat.
-Drop the notification saying somebody new followed you before it reaches the drawer. Every other notification is left alone, and the follower still appears in the Inbox.	Birinin seni takip etmeye başladığını söyleyen bildirimi bildirim paneline ulaşmadan durdur. Diğer tüm bildirimlere dokunulmaz ve takipçi yine Gelen Kutusu'nda görünür.
+Hide the notification saying somebody new followed you before it reaches the drawer. Every other notification is left alone, and the follower still appears in the Inbox.	Birinin seni takip etmeye başladığını söyleyen bildirimi bildirim paneline ulaşmadan gizle. Diğer tüm bildirimlere dokunulmaz ve takipçi yine Gelen Kutusu'nda görünür.
 Each area, how many of the things it looks for are in this build and how many are not.	Her alan için, aradığı şeylerden kaçının bu sürümde bulunduğu ve kaçının bulunmadığı.
 Easier comment likes	Daha kolay yorum beğenme
 Empty	Boş
@@ -522,7 +522,7 @@ Included diagnostics	Dahil edilen tanılama
 Includes all diagnostic events.	Tüm tanılama olaylarını içerir.
 Includes these events: %1$s	Şu olayları içerir: %1$s
 Inserted cards	Araya eklenen kartlar
-Keep a local record of what you have watched and drop those videos from later feed pages.	İzlediklerinin yerel bir kaydını tut ve o videoları sonraki akış sayfalarından çıkar.
+Keep a local record of what you have watched and hide those videos when the feed sends them again.	İzlediklerinin yerel bir kaydını tut ve akış o videoları yeniden gönderdiğinde onları gizle.
 Keep captions in clear display	Temiz ekranda altyazıları koru
 Keep going	Devam et
 Keep the Favorites tab	Favoriler sekmesini koru
@@ -740,11 +740,11 @@ Remove %1$s	Kaldır: %1$s
 Remove all overrides	Tüm geçersiz kılmaları kaldır
 Remove feed ads	Akış reklamlarını kaldır
 Remove feed ads, creator commission posts, paid partnerships, and branded content.	Akış reklamlarını, içerik üreticisi komisyon gönderilerini, ücretli ortaklıkları ve markalı içerikleri kaldır.
-Remove the Share via row.	Şununla paylaş satırını kaldır.
-Remove the actions row from the share sheet.	Paylaşım menüsünden eylemler satırını kaldır.
-Remove the magnifying glass at the top of Inbox. It doesn't hide search on the feed or in comments.	Gelen Kutusu'nun üstündeki büyüteci kaldır. Akıştaki veya yorumlardaki aramayı gizlemez.
-Remove the row of friends from the top of the share sheet.	Paylaşım menüsünün üstündeki arkadaşlar satırını kaldır.
-Remove the suggested-search strip above the bottom tabs and let video details and side controls use its space. The top search button and comments stay unchanged.	Alt sekmelerin üstündeki önerilen arama şeridini kaldır ve video ayrıntılarıyla yan kontrollerin bu alanı kullanmasını sağla. Üstteki arama düğmesi ve yorumlar değişmez.
+Hide the Share via row.	Şununla paylaş satırını gizle.
+Hide the actions row of the share sheet.	Paylaşım menüsündeki eylemler satırını gizle.
+Hide the magnifying glass at the top of Inbox. Search on the feed and in comments is unchanged.	Gelen Kutusu'nun üstündeki büyüteci gizle. Akıştaki ve yorumlardaki arama değişmez.
+Hide the row of friends at the top of the share sheet.	Paylaşım menüsünün üstündeki arkadaşlar satırını gizle.
+Hide the suggested-search strip above the bottom tabs and let video details and side controls use its space. The top search button and comments stay unchanged.	Alt sekmelerin üstündeki önerilen arama şeridini gizle ve video ayrıntılarıyla yan kontrollerin bu alanı kullanmasını sağla. Üstteki arama düğmesi ve yorumlar değişmez.
 Remove tracking parameters from shared links.	Paylaşılan bağlantılardan izleme parametrelerini kaldır.
 Remove watermark	Filigranı kaldır
 Removed %1$s	%1$s kaldırıldı
@@ -884,9 +884,9 @@ Showing %1$s again	%1$s yeniden gösteriliyor
 Silence the feed while comments are open	Yorumlar açıkken akışın sesini kapat
 Skip blocked sounds	Engellenen sesleri atla
 Skip content warnings	İçerik uyarılarını atla
-Skip feed videos with place badges, even when they aren't paid ads. To keep the video and hide only its badge, use Hide location labels in Feed screen.	Ücretli reklam olmasalar bile yer rozeti taşıyan akış videolarını atla. Videoyu tutup yalnızca rozetini gizlemek için Akış ekranındaki Konum etiketlerini gizle ayarını kullan.
-Skip recorded LIVE broadcasts in the feed.	Akıştaki kaydedilmiş CANLI yayınları atla.
-Skip videos marked as using promotional music.	Tanıtım müziği kullandığı belirtilen videoları atla.
+Hide feed videos with place badges, even when they aren't paid ads. To keep the video and hide only its badge, use Hide location labels in Feed screen.	Ücretli reklam olmasalar bile yer rozeti taşıyan akış videolarını gizle. Videoyu tutup yalnızca rozetini gizlemek için Akış ekranındaki Konum etiketlerini gizle ayarını kullan.
+Hide recorded LIVE broadcasts from the feed.	Kaydedilmiş CANLI yayınları akıştan gizle.
+Hide videos marked as using promotional music.	Tanıtım müziği kullandığı belirtilen videoları gizle.
 Skip videos that use a sound blocked with the player's sound button, or named below.	Oynatıcının ses düğmesiyle engellenen veya aşağıda adı yazılan bir sesi kullanan videoları atla.
 Skipping videos with %1$s	%1$s içeren videolar atlanıyor
 Some Calm feed settings changed. Restore still puts back your earlier setup.	Bazı Sakin akış ayarları değişti. Geri yükle yine de önceki düzenini geri getirir.
@@ -931,7 +931,7 @@ Structured value observed	Yapılandırılmış değer gözlemlendi
 Subtitle language	Altyazı dili
 Subtitles	Altyazılar
 System	Sistem
-Take away the streak button in a chat and the reminder message that goes with it.	Sohbetteki seri düğmesini ve onunla birlikte gelen hatırlatma mesajını kaldır.
+Hide the streak button in a chat and the reminder message that goes with it.	Sohbetteki seri düğmesini ve onunla birlikte gelen hatırlatma mesajını gizle.
 Tap %1$s again to send	Göndermek için yeniden dokun: %1$s
 Tap again to follow	Takip etmek için yeniden dokun
 Tap again to like	Beğenmek için yeniden dokun

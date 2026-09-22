@@ -79,7 +79,7 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
                 "Hide LIVE videos", "Hide LIVE videos from the feed.",
                 Settings.HIDE_LIVE
         ));
-        addPreference(new TogglePreference(context, "Hide LIVE replays", "Skip recorded LIVE broadcasts in the feed.", Settings.HIDE_LIVE_REPLAYS));
+        addPreference(new TogglePreference(context, "Hide LIVE replays", "Hide recorded LIVE broadcasts from the feed.", Settings.HIDE_LIVE_REPLAYS));
         addPreference(new TogglePreference(
                 context,
                 "Hide stories", "Hide stories from the feed.",
@@ -131,9 +131,9 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
                 Settings.HIDE_PAID_PARTNERSHIP
         ));
         addPreference(new TogglePreference(context, "Hide promotional music",
-                "Skip videos marked as using promotional music.", Settings.HIDE_PROMOTIONAL_MUSIC));
+                "Hide videos marked as using promotional music.", Settings.HIDE_PROMOTIONAL_MUSIC));
         addPreference(new TogglePreference(context, "Filter location-tagged videos",
-                "Skip feed videos with place badges, even when they aren't paid ads. To keep the video and hide only its badge, use Hide location labels in Feed screen.",
+                "Hide feed videos with place badges, even when they aren't paid ads. To keep the video and hide only its badge, use Hide location labels in Feed screen.",
                 Settings.FILTER_LOCATION_VIDEOS));
     }
 
@@ -178,7 +178,7 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
         if (!any) return;
         addPreference(new SectionHeadingPreference(context, "Creators and sounds"));
         if (SettingsStatus.feedFilterEnabled) {
-            addPreference(new InputTextPreference(context, "Blocked creators", "Comma separated account handles or user ids. These accounts are always skipped. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.", Settings.BLOCKED_CREATORS)
+            addPreference(new InputTextPreference(context, "Blocked creators", "Comma separated account handles or user ids. Videos from these accounts are always hidden. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.", Settings.BLOCKED_CREATORS)
                     .withCheck(AdvancedFeedRules::creatorEntryProblem));
             addPreference(new CreatorListPreference(context, "Creators hidden on this phone",
                     "Creators you hid from a video. Search the list and remove one at a time.",
@@ -238,7 +238,7 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
     private void addWordsAndCountries(Context context) {
         addPreference(new SectionHeadingPreference(context, "Words and countries"));
         addPreference(new InputTextPreference(context, "Blocked caption words",
-                "Comma separated words or phrases. Matching captions are skipped. Case does not matter. Two phrases in quotes can be joined: \"a\" & \"b\" needs both, \"a\" !& \"b\" needs the first without the second.",
+                "Comma separated words or phrases. Videos whose caption matches are hidden. Case does not matter. Two phrases in quotes can be joined: \"a\" & \"b\" needs both, \"a\" !& \"b\" needs the first without the second.",
                 Settings.BLOCKED_CAPTION_WORDS)
                 .withCheck(app.morphe.extension.tiktok.feedfilter.KeywordRules::problem));
         addPreference(new InputTextPreference(context, "Only from these countries",
@@ -256,8 +256,8 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
         addPreference(new TogglePreference(
                 context,
                 "Hide videos you have already seen",
-                "Keep a local record of what you have watched and drop those videos from "
-                        + "later feed pages.",
+                "Keep a local record of what you have watched and hide those videos when "
+                        + "the feed sends them again.",
                 Settings.HIDE_SEEN_VIDEOS
         ));
         addPreference(new NumberInputPreference(
