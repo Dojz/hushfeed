@@ -29,11 +29,12 @@ import org.robolectric.annotation.Config;
  * <p>Hand-built fakes carry the values someone thought to write down. The server sends defaults
  * nobody thought of: Hide series emptied feeds three times because of that gap (#5, #20, #24), the
  * last time over an episode number of "0" on every ordinary profile post. The files under
- * {@code feed-markers/} hold what 383 real videos carried, recorded by the probe's
- * {@code marker-corpus} action with the verdicts Hushfeed gave them on the phone: 233 from four
+ * {@code feed-markers/} hold what 426 real videos carried, recorded by the probe's
+ * {@code marker-corpus} action with the verdicts Hushfeed gave them on the phone: 276 from four
  * broad routes, then paid partnership results, a search for Series and a playlist. Each file names
  * the build whose filters gave its verdicts. Every ordinary video has to stay ordinary and every
- * labelled one has to stay caught.
+ * labelled one has to stay caught. For You, profile and search were recorded again once the probe
+ * read {@code playlist_info}: no ordinary video among them carries one, default or otherwise.
  *
  * <p>The files hold shapes, never content: booleans, filter-equivalent number and text classes,
  * and capped collection sizes. {@link #theCorpusHoldsShapesAndNoContent} holds them to that.
@@ -48,6 +49,18 @@ public class ContentMarkerCorpusTest {
     private static final String[] MARKERS = {"ai", "paid", "series", "playlist"};
     private static final Set<String> TOKENS = Set.of(
             "b", "num", "txt", "obj", "n", "s", "slen", "sblank", "snum", "c", "m", "o");
+    /** Every field the probe records and, for a struct, the names inside it. Nothing else may appear. */
+    private static final Map<String, Set<String>> SHAPE_FIELDS = Map.of(
+            "aigcInfo", Set.of("aigcLabelType"),
+            "moderationAigcInfo", Set.of("moderationAigcLabelType", "moderationUserLabelStatus"),
+            "brandContentAccounts", Set.of(),
+            "commerceVideoAuthInfo", Set.of("isBrandedContent", "isBrandOrganicContent", "brandedContentType",
+                    "brandOrganicType", "ecSearchBoBcLabelText", "isCommerce"),
+            "commercialVideoInfo", Set.of(),
+            "isPaidContent", Set.of(),
+            "mPaidContentInfo", Set.of("paidCollectionId", "collectionName", "episodeNumber", "isPaidCollectionIntro"),
+            "playlist_info", Set.of("mixId"),
+            "mixInfo", Set.of("mixId", "mixName"));
 
     @Test public void noOrdinaryVideoMatchesAContentMarker() throws Exception {
         List<String> matched = new ArrayList<>();
@@ -156,9 +169,16 @@ public class ContentMarkerCorpusTest {
             for (int i = 0; i < items.length(); i++) {
                 JSONObject item = items.getJSONObject(i);
                 assertEquals(route + " #" + i + " fields", Set.of("markers", "shape"), keys(item));
+                JSONArray markers = item.getJSONArray("markers");
+                for (int m = 0; m < markers.length(); m++) {
+                    assertTrue(route + " #" + i + " carries a marker no filter gives: " + markers.get(m),
+                            Set.of(MARKERS).contains(markers.get(m)));
+                }
                 JSONObject shape = item.getJSONObject("shape");
                 for (Iterator<String> fields = shape.keys(); fields.hasNext(); ) {
                     String field = fields.next();
+                    assertTrue(route + " #" + i + " has a field the probe doesn't record: " + field,
+                            SHAPE_FIELDS.containsKey(field));
                     Object value = shape.get(field);
                     if (value == JSONObject.NULL) continue;
                     JSONObject object = (JSONObject) value;
@@ -168,6 +188,8 @@ public class ContentMarkerCorpusTest {
                     }
                     for (Iterator<String> inner = object.keys(); inner.hasNext(); ) {
                         String name = inner.next();
+                        assertTrue(route + " #" + i + " " + field + " holds a name the probe doesn't record: " + name,
+                                SHAPE_FIELDS.get(field).contains(name));
                         Object token = object.get(name);
                         if (token != JSONObject.NULL) checkToken((JSONObject) token, route + " #" + i + " " + field + "." + name);
                     }
