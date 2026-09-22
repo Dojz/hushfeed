@@ -374,6 +374,92 @@ public final class Probe extends Instrumentation {
                         Log.i(TAG, "ok hooks " + lines.size());
                         break;
                     }
+                    case "hookdetails": {
+                        // The names behind each family's counts: which anchors bound and which
+                        // were missed. "tako AI: 2 found" cannot say whether the comments bar
+                        // guard ran; "comment bar hidden" can. Technical names only, the same
+                        // as the counts above. With -e family <name> only that family prints.
+                        Class<?> status = loader.loadClass(
+                                "app.morphe.extension.shared.diagnostics.HookStatus");
+                        Field familiesField = status.getDeclaredField("FAMILIES");
+                        familiesField.setAccessible(true);
+                        Map<?, ?> families = (Map<?, ?>) familiesField.get(null);
+                        String only = intent.getStringExtra("family");
+                        List<String> names = new ArrayList<>();
+                        for (Object key : families.keySet()) names.add(String.valueOf(key));
+                        Collections.sort(names);
+                        int printed = 0;
+                        for (String name : names) {
+                            if (only != null && !only.equals(name)) continue;
+                            Object family = families.get(name);
+                            Field boundField = family.getClass().getDeclaredField("bound");
+                            boundField.setAccessible(true);
+                            Field orderField = family.getClass().getDeclaredField("order");
+                            orderField.setAccessible(true);
+                            StringBuilder line = new StringBuilder("hookdetail ").append(name)
+                                    .append(" bound=").append(boundField.get(family));
+                            List<?> misses = (List<?>) orderField.get(family);
+                            if (!misses.isEmpty()) {
+                                line.append(" missed=[");
+                                for (int i = 0; i < misses.size(); i++) {
+                                    Object miss = misses.get(i);
+                                    Field keyField = miss.getClass().getDeclaredField("key");
+                                    keyField.setAccessible(true);
+                                    if (i > 0) line.append(", ");
+                                    line.append(keyField.get(miss));
+                                }
+                                line.append(']');
+                            }
+                            Log.i(TAG, line.toString());
+                            printed++;
+                        }
+                        Log.i(TAG, "ok hookdetails " + printed);
+                        break;
+                    }
+                    case "topbar": {
+                        // The comment sheet's server-driven top bar components on the current
+                        // video, by biz type and component name only: which of them TikTok
+                        // offered says whether a guard on one of them could have run at all.
+                        // No text, id or url leaves the phone.
+                        Class<?> author = loader.loadClass(
+                                "app.morphe.extension.tiktok.blockauthor.CurrentVideoAuthor");
+                        Object aweme = author.getMethod("getAweme").invoke(null);
+                        if (aweme == null) throw new IllegalStateException("no current video");
+                        // The resolver reads AwemeCommentConfig.commentTopBarComponent; the
+                        // model's own getCommentTopBarStructList is a different, older list.
+                        Object config = aweme.getClass().getMethod("getCommentConfig").invoke(aweme);
+                        Object components = null;
+                        if (config != null) {
+                            Field field = config.getClass().getField("commentTopBarComponent");
+                            components = field.get(config);
+                        }
+                        Object legacy = aweme.getClass()
+                                .getMethod("getCommentTopBarStructList").invoke(aweme);
+                        StringBuilder out = new StringBuilder("config=")
+                                .append(config == null ? "null" : "present")
+                                .append(" legacyList=").append(legacy == null ? "null" : ((List<?>) legacy).size())
+                                .append(" components=");
+                        if (components == null) {
+                            out.append("null");
+                        } else {
+                            List<?> list = (List<?>) components;
+                            out.append(list.size());
+                            for (Object component : list) {
+                                Object bizType = null, name = null;
+                                try {
+                                    Field field = component.getClass().getField("bizType");
+                                    bizType = field.get(component);
+                                } catch (NoSuchFieldException ignored) { }
+                                try {
+                                    Field field = component.getClass().getField("name");
+                                    name = field.get(component);
+                                } catch (NoSuchFieldException ignored) { }
+                                out.append("\n  bizType=").append(bizType).append(" name=").append(name);
+                            }
+                        }
+                        Log.i(TAG, "ok topbar\n" + out);
+                        break;
+                    }
                     case "doubletap": {
                         // Two taps on TikTok's own window, timed inside the double-tap window.
                         // "input tap" twice from adb spawns a process per tap and lands inside or
