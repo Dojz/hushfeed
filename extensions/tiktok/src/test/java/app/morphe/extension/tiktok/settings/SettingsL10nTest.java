@@ -358,6 +358,32 @@ public class SettingsL10nTest {
                 + String.join("\n", offenders), 0, offenders.size());
     }
 
+    /**
+     * A failure says what happened and what to do next, as two sentences with their stops, and
+     * says "couldn't" the way the rest of the screens do. Twenty keys opened "Could not", four
+     * of them with no stop at all, and eight stopped at the failure with nothing to do about it.
+     */
+    @Test public void everyFailureMessageSaysWhatHappenedAndWhatToDoNext() throws Exception {
+        // A heading over an error row: its next step is the summary under it, not a sentence of
+        // its own, so it is the one failure allowed to be a single line.
+        Set<String> headings = new LinkedHashSet<>(List.of("Settings couldn't open"));
+        java.util.regex.Pattern failure = java.util.regex.Pattern.compile("(?i)\\bcould ?n['’]?o?t\\b");
+        java.util.regex.Pattern uncontracted = java.util.regex.Pattern.compile("(?i)\\bcould not\\b");
+        java.util.regex.Pattern boundary = java.util.regex.Pattern.compile("[.!?][\"”']?\\s+[A-Za-z0-9\"“%]");
+        List<String> offenders = new ArrayList<>();
+        int checked = 0;
+        for (String key : readTable(ENGLISH_BASE).keySet()) {
+            if (!failure.matcher(key).find() || headings.contains(key)) continue;
+            checked++;
+            if (uncontracted.matcher(key).find()) offenders.add("says could not: " + key);
+            if (!key.endsWith(".")) offenders.add("no full stop: " + key);
+            if (!boundary.matcher(key).find()) offenders.add("no next step or outcome: " + key);
+        }
+        assertTrue("the scan found too few failure messages to mean anything: " + checked, checked > 20);
+        assertEquals("failure messages that stop short:\n" + String.join("\n", offenders),
+                0, offenders.size());
+    }
+
     @Test public void everyTranslationKeepsTheShapeOfItsKey() {
         // Defects the key-set checks cannot see. A placeholder that changed, was dropped or was
         // invented; a sentence that lost or gained its terminator; a quote pair that does not
@@ -564,7 +590,7 @@ public class SettingsL10nTest {
         assertNotNull(punctuationFault("Copied 3 lines. 12 were skipped"));
         assertNotNull(punctuationFault("Saved. nothing else changed"));
         assertNull(punctuationFault("Seen videos put back"));
-        assertNull(punctuationFault("Could not undo the clear. Try again."));
+        assertNull(punctuationFault("Couldn't undo the clear. Try again."));
         assertNull(punctuationFault("Enter a whole number, or one like 20K, 1.5M or 2B"));
     }
 

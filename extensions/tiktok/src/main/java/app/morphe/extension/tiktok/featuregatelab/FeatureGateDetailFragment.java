@@ -591,7 +591,7 @@ public final class FeatureGateDetailFragment extends Fragment {
                     updateStatus();
                 },
                 L10n.t(Utils.getContext(), "Overrides enabled. Restart TikTok to apply this."),
-                L10n.t(Utils.getContext(), "Could not change Lab settings."));
+                L10n.t(Utils.getContext(), "Couldn't change the Lab settings. Try again."));
     }
 
     private void leaveDetail() {
@@ -638,7 +638,7 @@ public final class FeatureGateDetailFragment extends Fragment {
                     updateStatus();
                 },
                 L10n.t(Utils.getContext(), "Feature gate override saved"),
-                L10n.t(Utils.getContext(), "Could not save this override."));
+                L10n.t(Utils.getContext(), "Couldn't save this override. Try again."));
     }
 
     private void resetRule() {
@@ -659,7 +659,7 @@ public final class FeatureGateDetailFragment extends Fragment {
                     updateStatus();
                 },
                 L10n.t(Utils.getContext(), "Feature gate override reset"),
-                L10n.t(Utils.getContext(), "Could not reset this override."));
+                L10n.t(Utils.getContext(), "Couldn't reset this override. Try again."));
     }
 
     /**
@@ -899,7 +899,7 @@ public final class FeatureGateDetailFragment extends Fragment {
                 entry.manager, entry.key, entry.type);
         status.setText(failure != null
                 ? L10n.t(getContext(),
-                        "TikTok read it, but the override could not be applied. Reset it and save it again.")
+                        "TikTok read it, but the override couldn't be applied. Reset it and save it again.")
                 : L10n.t(getContext(), triggered
                         ? "TikTok read it" : "Not read yet"));
         status.setTextColor(triggered ? SettingsUi.accent() : FeatureGateLabUi.warningColor(getActivity()));
@@ -1106,7 +1106,7 @@ public final class FeatureGateDetailFragment extends Fragment {
         } catch (Throwable failure) {
             Logger.printException(() -> "Could not collect Feature Gate field values", failure);
             Utils.showToastLong(L10n.t(getContext(),
-                    "A field value could not be read. Check the values and try again."));
+                    "A field value couldn't be read. Check the values and try again."));
             return null;
         }
         return result.toString();

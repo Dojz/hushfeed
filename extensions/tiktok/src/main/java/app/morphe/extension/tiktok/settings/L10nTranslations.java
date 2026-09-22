@@ -191,7 +191,7 @@ public final class L10nTranslations {
                 "Ein Kreator-Muster braucht zu lange und wurde abgeschaltet: %1$s");
         table.put("A diagnostic report is already being saved",
                 "Ein Diagnosebericht wird gerade gespeichert");
-        table.put("A field value could not be read. Check the values and try again.",
+        table.put("A field value couldn't be read. Check the values and try again.",
                 "Ein Feldwert konnte nicht gelesen werden. Prüfe die Werte und versuche es erneut.");
         table.put("A forced value applies to this copy of TikTok whichever account is signed in. It cannot get past a check the server makes.",
                 "Ein erzwungener Wert gilt für diese TikTok-Installation, egal welches Konto angemeldet ist. An einer Prüfung des Servers kommt er nicht vorbei.");
@@ -276,7 +276,7 @@ public final class L10nTranslations {
                 "Das Veröffentlichungsdatum immer bei den Angaben zum Video anzeigen. TikTok neu starten, damit das gilt.");
         table.put("An app's package name, like com.dv.adm. The save button sends the video's link there instead of saving it here. Leave it empty to save here.",
                 "Der Paketname einer App, etwa com.dv.adm. Die Speichern-Schaltfläche schickt den Link des Videos dorthin, statt es hier zu speichern. Leer lassen, um hier zu speichern.");
-        table.put("An interrupted settings change could not be recovered, so its record was set aside. Check your settings or restore a backup.",
+        table.put("An interrupted settings change couldn't be recovered, so its record was set aside. Check your settings or restore a backup.",
                 "Eine unterbrochene Einstellungsänderung ließ sich nicht wiederherstellen, ihre Aufzeichnung wurde beiseitegelegt. Prüfe deine Einstellungen oder stelle eine Sicherung wieder her.");
         table.put("An operator code is five or six digits, like 310260",
                 "Ein Betreibercode hat fünf oder sechs Ziffern, zum Beispiel 310260");
@@ -540,51 +540,51 @@ public final class L10nTranslations {
                 "Soundlink kopieren");
         table.put("Copy the video link",
                 "Videolink kopieren");
-        table.put("Could not change Lab settings.",
-                "Die Lab-Einstellungen ließen sich nicht ändern.");
-        table.put("Could not clear suggested accounts",
-                "Kontovorschläge konnten nicht entfernt werden");
-        table.put("Could not copy report. Use Save JSON.",
-                "Bericht konnte nicht kopiert werden. Nutze „JSON speichern“.");
-        table.put("Could not open settings search",
-                "Einstellungsuche konnte nicht geöffnet werden");
-        table.put("Could not open settings section",
-                "Einstellungsbereich konnte nicht geöffnet werden");
-        table.put("Could not open the export file picker",
-                "Die Dateiauswahl zum Exportieren ließ sich nicht öffnen");
-        table.put("Could not open the import file picker",
-                "Die Dateiauswahl zum Importieren ließ sich nicht öffnen");
-        table.put("Could not put back the diagnostic data. Try again.",
-                "Die Diagnosedaten konnten nicht wiederhergestellt werden. Versuche es erneut.");
-        table.put("Could not read who posted this comment",
-                "Konnte nicht lesen, wer diesen Kommentar geschrieben hat");
-        table.put("Could not reset this override.",
-                "Diese Überschreibung konnte nicht zurückgesetzt werden.");
-        table.put("Could not restore settings.",
-                "Einstellungen konnten nicht wiederhergestellt werden.");
-        table.put("Could not save settings backup.",
-                "Sicherung der Einstellungen konnte nicht gespeichert werden.");
-    }
-
-    private static void fillDe4(Map<String, String> table) {
-        table.put("Could not save this override.",
-                "Diese Überschreibung konnte nicht gespeichert werden.");
-        table.put("Could not send the feedback. Try again shortly.",
-                "Die Rückmeldung konnte nicht gesendet werden. Versuche es gleich noch einmal.");
-        table.put("Could not start the Lab change. Try again shortly.",
-                "Die Lab-Änderung konnte nicht gestartet werden. Versuche es gleich noch einmal.");
-        table.put("Could not start the report export. Try again shortly.",
-                "Der Export des Berichts ließ sich nicht starten. Versuche es gleich noch einmal.");
-        table.put("Could not start the settings operation. Try again shortly.",
-                "Die Einstellungsaktion konnte nicht gestartet werden. Versuche es gleich noch einmal.");
-        table.put("Could not tell which folder to update. Choose it again.",
-                "Nicht erkennbar, welcher Ordner geändert werden soll. Bitte erneut auswählen.");
-        table.put("Could not undo the clear. Try again.",
-                "Das Löschen ließ sich nicht rückgängig machen. Versuch es noch einmal.");
+        table.put("Couldn't change the Lab settings. Try again.",
+                "Die Lab-Einstellungen ließen sich nicht ändern. Versuch es noch einmal.");
+        table.put("Couldn't clear the suggested accounts. Reopen the Inbox and try again.",
+                "Die Kontovorschläge ließen sich nicht entfernen. Öffne den Posteingang noch einmal und versuch es erneut.");
         table.put("Couldn't confirm the block for %1$s. Open their profile to check.",
                 "Die Blockierung von %1$s konnte nicht bestätigt werden. Öffne das Profil, um nachzusehen.");
         table.put("Couldn't confirm the unblock for %1$s. Open their profile to check.",
                 "Die Aufhebung der Blockierung von %1$s konnte nicht bestätigt werden. Öffne das Profil, um nachzusehen.");
+        table.put("Couldn't copy the report. Use Save JSON instead.",
+                "Der Bericht ließ sich nicht kopieren. Nutze stattdessen „JSON speichern“.");
+        table.put("Couldn't open settings search. Reopen settings and try again.",
+                "Die Einstellungssuche ließ sich nicht öffnen. Öffne die Einstellungen noch einmal und versuch es erneut.");
+        table.put("Couldn't open that settings section. Reopen settings and try again.",
+                "Dieser Einstellungsbereich ließ sich nicht öffnen. Öffne die Einstellungen noch einmal und versuch es erneut.");
+        table.put("Couldn't open the file picker to export. Try again.",
+                "Die Dateiauswahl zum Exportieren ließ sich nicht öffnen. Versuch es noch einmal.");
+        table.put("Couldn't open the file picker to import. Try again.",
+                "Die Dateiauswahl zum Importieren ließ sich nicht öffnen. Versuch es noch einmal.");
+        table.put("Couldn't put back the diagnostic data. Try again.",
+                "Die Diagnosedaten ließen sich nicht zurückholen. Versuch es noch einmal.");
+        table.put("Couldn't read who posted this comment. Open their profile and block them there.",
+                "Es ließ sich nicht lesen, wer diesen Kommentar geschrieben hat. Öffne das Profil und blockiere die Person dort.");
+        table.put("Couldn't reset this override. Try again.",
+                "Diese Überschreibung ließ sich nicht zurücksetzen. Versuch es noch einmal.");
+    }
+
+    private static void fillDe4(Map<String, String> table) {
+        table.put("Couldn't restore the settings. Try again.",
+                "Die Einstellungen ließen sich nicht wiederherstellen. Versuch es noch einmal.");
+        table.put("Couldn't save the settings backup. Try again.",
+                "Die Sicherung der Einstellungen ließ sich nicht speichern. Versuch es noch einmal.");
+        table.put("Couldn't save this override. Try again.",
+                "Diese Überschreibung ließ sich nicht speichern. Versuch es noch einmal.");
+        table.put("Couldn't send the feedback. Try again shortly.",
+                "Die Rückmeldung konnte nicht gesendet werden. Versuche es gleich noch einmal.");
+        table.put("Couldn't start the Lab change. Try again shortly.",
+                "Die Lab-Änderung konnte nicht gestartet werden. Versuche es gleich noch einmal.");
+        table.put("Couldn't start the report export. Try again shortly.",
+                "Der Export des Berichts ließ sich nicht starten. Versuche es gleich noch einmal.");
+        table.put("Couldn't start the settings change. Try again shortly.",
+                "Die Einstellungsänderung ließ sich nicht starten. Versuche es gleich noch einmal.");
+        table.put("Couldn't tell which folder to update. Choose it again.",
+                "Nicht erkennbar, welcher Ordner geändert werden soll. Bitte erneut auswählen.");
+        table.put("Couldn't undo the clear. Try again.",
+                "Das Löschen ließ sich nicht rückgängig machen. Versuch es noch einmal.");
         table.put("Country and network preferences",
                 "Land und Netzwerkeinstellungen");
         table.put("Country code",
@@ -2059,7 +2059,7 @@ public final class L10nTranslations {
                 "Die Zeile Archiv verschwindet aus dem Posteingang. Archivierte Chats bleiben erhalten.");
         table.put("The Lab can't check this. TikTok gets it exactly as typed.",
                 "Das Lab kann das nicht prüfen. TikTok bekommt es genau so, wie du es tippst.");
-        table.put("The Lab could not open. Go back and open it again.",
+        table.put("The Lab couldn't open. Go back and open it again.",
                 "Das Lab ließ sich nicht öffnen. Geh zurück und öffne es noch einmal.");
         table.put("The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.",
                 "Das Lab speichert höchstens %1$s Regeln. Diese Änderung würde %2$s ergeben, daher wurde nichts geändert.");
@@ -2077,14 +2077,14 @@ public final class L10nTranslations {
                 "Das Symbol Personen hinzufügen verschwindet aus der Kopfzeile des Posteingangs. Nur die Verknüpfung geht weg, Freundesvorschläge an anderen Stellen bleiben unverändert.");
         table.put("The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.",
                 "Der Katalog nennt für diesen Schlüssel %1$s, diese Überschreibung ist %2$s. Setze die Überschreibung zurück und leg eine neue an.");
-        table.put("The diagnostic report could not be saved yet. Try again in a moment.",
+        table.put("The diagnostic report couldn't be saved yet. Try again in a moment.",
                 "Der Diagnosebericht ließ sich noch nicht speichern. Versuche es gleich noch einmal.");
-        table.put("The diagnostic report could not be saved. Try again.",
-                "Der Diagnosebericht ließ sich nicht exportieren.");
+        table.put("The diagnostic report couldn't be saved. Try again.",
+                "Der Diagnosebericht ließ sich nicht speichern. Versuch es noch einmal.");
         table.put("The downloader app you chose isn't installed. Check Send links to another app under Downloads.",
                 "Die gewaehlte Downloader-App ist nicht installiert. Pruefe Links an andere App senden unter Downloads.");
-        table.put("The export failed and the partial file could not be removed. Delete it from your Downloads folder.",
-                "Der Export der geladenen Werte ist fehlgeschlagen; auch das Aufräumen ist fehlgeschlagen.");
+        table.put("The export failed and the partial file couldn't be removed. Delete it from your Downloads folder.",
+                "Der Export ist fehlgeschlagen, und die halbe Datei ließ sich nicht entfernen. Lösche sie aus deinem Downloads-Ordner.");
         table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
                 "Der Feed dunkelt in den letzten drei Viertelminuten vor der Sperre ab, damit man dort ankommt statt darauf zu landen. Braucht ein Zeitbudget und eine Sperre.");
         table.put("The feed does not end. This is a fine time to leave it.",
@@ -2095,6 +2095,8 @@ public final class L10nTranslations {
                 "Der Feed wartet auf ein Tippen, bevor er wieder abspielt, wenn du zur App zurückkehrst. Nachrichten, Profile und Suche bleiben einen Tipp entfernt.");
         table.put("The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.",
                 "Die Stunde, zu der beide Limits zurückgesetzt werden, im 24-Stunden-Format. Standardmäßig vier Uhr morgens, denn wer um eins noch scrollt, hat immer noch gestern Abend.");
+        table.put("The loaded-values file you chose couldn't be read. Try again.",
+                "Die gewählte Datei mit geladenen Werten ließ sich nicht lesen. Versuch es noch einmal.");
         table.put("The original photos aren't available, so TikTok's own save runs instead",
                 "Die Originalfotos sind nicht verfügbar, also speichert TikTok selbst");
         table.put("The override changes no fields. Edit the field values, or reset the override.",
@@ -2105,14 +2107,12 @@ public final class L10nTranslations {
                 "Die Überschreibung gibt nicht an, welche Liste zurückgegeben werden soll. Bearbeite die Feldwerte oder setze die Überschreibung zurück.");
         table.put("The profile picture couldn't be saved. Try again.",
                 "Das Profilbild konnte nicht gespeichert werden.");
-        table.put("The record of an interrupted settings change could not be read, so it was set aside. Check your settings.",
+        table.put("The record of an interrupted settings change couldn't be read, so it was set aside. Check your settings.",
                 "Die Aufzeichnung einer unterbrochenen Einstellungsänderung ließ sich nicht lesen und wurde beiseitegelegt. Prüfe deine Einstellungen.");
         table.put("The report couldn't be saved. Try again.",
                 "Der Bericht konnte nicht gespeichert werden. Versuch es noch einmal.");
         table.put("The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.",
                 "Die Reihe der Story-Avatare oben im Posteingang verschwindet. Stories laufen weiterhin im Feed und auf Profilen.");
-        table.put("The selected loaded-values file could not be read. Try again.",
-                "Die ausgewählte Datei mit geladenen Werten konnte nicht gelesen werden. Versuche es erneut.");
         table.put("The setting couldn't finish updating. Its saved value is shown.",
                 "Die Einstellung konnte nicht vollständig aktualisiert werden. Der gespeicherte Wert wird angezeigt.");
         table.put("The settings backup was rejected. Nothing was altered.",
@@ -2200,8 +2200,8 @@ public final class L10nTranslations {
                 "TikTok hat dieser Einstellung noch kein Objekt zum Ändern übergeben. Öffne den Teil der App, der sie verwendet, und komm dann zurück.");
         table.put("TikTok read it",
                 "TikTok hat ihn gelesen");
-        table.put("TikTok read it, but the override could not be applied. Reset it and save it again.",
-                "TikTok hat ihn gelesen, aber die strukturierte Überschreibung konnte nicht angewendet werden.");
+        table.put("TikTok read it, but the override couldn't be applied. Reset it and save it again.",
+                "TikTok hat sie gelesen, aber die Überschreibung ließ sich nicht anwenden. Setze sie zurück und speichere sie noch einmal.");
         table.put("TikTok refused the follow: %1$s",
                 "TikTok hat das Folgen abgelehnt: %1$s");
         table.put("TikTok's own value",
@@ -2612,7 +2612,7 @@ public final class L10nTranslations {
                 "Un patrón de creador tarda demasiado y se ha desactivado: %1$s");
         table.put("A diagnostic report is already being saved",
                 "Ya se está guardando un informe de diagnóstico");
-        table.put("A field value could not be read. Check the values and try again.",
+        table.put("A field value couldn't be read. Check the values and try again.",
                 "No se pudo leer el valor de un campo. Revisa los valores e inténtalo de nuevo.");
         table.put("A forced value applies to this copy of TikTok whichever account is signed in. It cannot get past a check the server makes.",
                 "Un valor forzado se aplica a esta copia de TikTok, sea cual sea la cuenta con sesión iniciada. No puede saltarse una comprobación que haga el servidor.");
@@ -2697,7 +2697,7 @@ public final class L10nTranslations {
                 "Mostrar siempre la fecha de publicación en la información del autor del vídeo. Reinicia TikTok para que se aplique.");
         table.put("An app's package name, like com.dv.adm. The save button sends the video's link there instead of saving it here. Leave it empty to save here.",
                 "El nombre de paquete de una app, como com.dv.adm. El botón de guardar envía allí el enlace del vídeo en vez de guardarlo aquí. Déjalo vacío para guardarlo aquí.");
-        table.put("An interrupted settings change could not be recovered, so its record was set aside. Check your settings or restore a backup.",
+        table.put("An interrupted settings change couldn't be recovered, so its record was set aside. Check your settings or restore a backup.",
                 "No se pudo recuperar un cambio de ajustes interrumpido, así que su registro se apartó. Revisa tus ajustes o restaura una copia de seguridad.");
         table.put("An operator code is five or six digits, like 310260",
                 "Un código de operador tiene cinco o seis dígitos, como 310260");
@@ -2961,51 +2961,51 @@ public final class L10nTranslations {
                 "Copiar el enlace del sonido");
         table.put("Copy the video link",
                 "Copiar el enlace del vídeo");
-        table.put("Could not change Lab settings.",
-                "No se han podido cambiar los ajustes del Lab.");
-        table.put("Could not clear suggested accounts",
-                "No se pudieron borrar las cuentas sugeridas");
-        table.put("Could not copy report. Use Save JSON.",
-                "No se pudo copiar el informe. Usa Guardar JSON.");
-        table.put("Could not open settings search",
-                "No se pudo abrir la búsqueda de ajustes");
-        table.put("Could not open settings section",
-                "No se pudo abrir la sección de ajustes");
-        table.put("Could not open the export file picker",
-                "No se ha podido abrir el selector de archivos para exportar");
-        table.put("Could not open the import file picker",
-                "No se ha podido abrir el selector de archivos para importar");
-        table.put("Could not put back the diagnostic data. Try again.",
-                "No se pudieron restaurar los datos de diagnóstico. Inténtalo de nuevo.");
-        table.put("Could not read who posted this comment",
-                "No se pudo leer quién publicó este comentario");
-        table.put("Could not reset this override.",
-                "No se ha podido restablecer esta sustitución.");
-        table.put("Could not restore settings.",
-                "No se pudieron restaurar los ajustes.");
-        table.put("Could not save settings backup.",
-                "No se pudo guardar la copia de seguridad de los ajustes.");
-    }
-
-    private static void fillEs4(Map<String, String> table) {
-        table.put("Could not save this override.",
-                "No se ha podido guardar esta sustitución.");
-        table.put("Could not send the feedback. Try again shortly.",
-                "No se pudo enviar la valoración. Inténtalo de nuevo en un momento.");
-        table.put("Could not start the Lab change. Try again shortly.",
-                "No se pudo iniciar el cambio del Lab. Inténtalo de nuevo en breve.");
-        table.put("Could not start the report export. Try again shortly.",
-                "No se pudo iniciar la exportación del informe. Inténtalo de nuevo en breve.");
-        table.put("Could not start the settings operation. Try again shortly.",
-                "No se pudo iniciar la operación de ajustes. Inténtalo de nuevo en breve.");
-        table.put("Could not tell which folder to update. Choose it again.",
-                "No se pudo saber qué carpeta actualizar. Vuelve a elegirla.");
-        table.put("Could not undo the clear. Try again.",
-                "No se pudo deshacer el borrado. Inténtalo de nuevo.");
+        table.put("Couldn't change the Lab settings. Try again.",
+                "No se pudieron cambiar los ajustes del Lab. Inténtalo de nuevo.");
+        table.put("Couldn't clear the suggested accounts. Reopen the Inbox and try again.",
+                "No se pudieron borrar las cuentas sugeridas. Vuelve a abrir la bandeja de entrada e inténtalo de nuevo.");
         table.put("Couldn't confirm the block for %1$s. Open their profile to check.",
                 "No se pudo confirmar el bloqueo de %1$s. Abre su perfil para comprobarlo.");
         table.put("Couldn't confirm the unblock for %1$s. Open their profile to check.",
                 "No se pudo confirmar el desbloqueo de %1$s. Abre su perfil para comprobarlo.");
+        table.put("Couldn't copy the report. Use Save JSON instead.",
+                "No se pudo copiar el informe. Usa Guardar JSON en su lugar.");
+        table.put("Couldn't open settings search. Reopen settings and try again.",
+                "No se pudo abrir la búsqueda de ajustes. Vuelve a abrir los ajustes e inténtalo de nuevo.");
+        table.put("Couldn't open that settings section. Reopen settings and try again.",
+                "No se pudo abrir esa sección de ajustes. Vuelve a abrir los ajustes e inténtalo de nuevo.");
+        table.put("Couldn't open the file picker to export. Try again.",
+                "No se pudo abrir el selector de archivos para exportar. Inténtalo de nuevo.");
+        table.put("Couldn't open the file picker to import. Try again.",
+                "No se pudo abrir el selector de archivos para importar. Inténtalo de nuevo.");
+        table.put("Couldn't put back the diagnostic data. Try again.",
+                "No se pudieron recuperar los datos de diagnóstico. Inténtalo de nuevo.");
+        table.put("Couldn't read who posted this comment. Open their profile and block them there.",
+                "No se pudo leer quién publicó este comentario. Abre su perfil y bloquéalo desde allí.");
+        table.put("Couldn't reset this override. Try again.",
+                "No se pudo restablecer esta sustitución. Inténtalo de nuevo.");
+    }
+
+    private static void fillEs4(Map<String, String> table) {
+        table.put("Couldn't restore the settings. Try again.",
+                "No se pudieron restaurar los ajustes. Inténtalo de nuevo.");
+        table.put("Couldn't save the settings backup. Try again.",
+                "No se pudo guardar la copia de seguridad de los ajustes. Inténtalo de nuevo.");
+        table.put("Couldn't save this override. Try again.",
+                "No se pudo guardar esta sustitución. Inténtalo de nuevo.");
+        table.put("Couldn't send the feedback. Try again shortly.",
+                "No se pudo enviar la valoración. Inténtalo de nuevo en un momento.");
+        table.put("Couldn't start the Lab change. Try again shortly.",
+                "No se pudo iniciar el cambio del Lab. Inténtalo de nuevo en breve.");
+        table.put("Couldn't start the report export. Try again shortly.",
+                "No se pudo iniciar la exportación del informe. Inténtalo de nuevo en breve.");
+        table.put("Couldn't start the settings change. Try again shortly.",
+                "No se pudo iniciar el cambio de ajustes. Inténtalo de nuevo en breve.");
+        table.put("Couldn't tell which folder to update. Choose it again.",
+                "No se pudo saber qué carpeta actualizar. Vuelve a elegirla.");
+        table.put("Couldn't undo the clear. Try again.",
+                "No se pudo deshacer el borrado. Inténtalo de nuevo.");
         table.put("Country and network preferences",
                 "Preferencias de país y de red");
         table.put("Country code",
@@ -4480,7 +4480,7 @@ public final class L10nTranslations {
                 "La fila Archivo desaparece de la bandeja de entrada. Los chats archivados se conservan.");
         table.put("The Lab can't check this. TikTok gets it exactly as typed.",
                 "El Lab no puede verificar esto. TikTok lo recibe exactamente como lo escribes.");
-        table.put("The Lab could not open. Go back and open it again.",
+        table.put("The Lab couldn't open. Go back and open it again.",
                 "El Lab no se pudo abrir. Vuelve atrás y ábrelo otra vez.");
         table.put("The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.",
                 "El Lab admite como máximo %1$s reglas. Este cambio daría un total de %2$s, así que no se cambió nada.");
@@ -4498,14 +4498,14 @@ public final class L10nTranslations {
                 "El icono de añadir personas desaparece de la cabecera de la bandeja de entrada. Solo se va el acceso directo, las sugerencias de amigos en otros sitios no cambian.");
         table.put("The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.",
                 "El catálogo dice que esta clave es %1$s y esta anulación es %2$s. Restablece la anulación y crea una nueva.");
-        table.put("The diagnostic report could not be saved yet. Try again in a moment.",
+        table.put("The diagnostic report couldn't be saved yet. Try again in a moment.",
                 "Todavía no se pudo guardar el informe de diagnóstico. Inténtalo de nuevo en un momento.");
-        table.put("The diagnostic report could not be saved. Try again.",
-                "No se pudo exportar el informe de diagnóstico.");
+        table.put("The diagnostic report couldn't be saved. Try again.",
+                "No se pudo guardar el informe de diagnóstico. Inténtalo de nuevo.");
         table.put("The downloader app you chose isn't installed. Check Send links to another app under Downloads.",
                 "La aplicacion de descarga que elegiste no esta instalada. Revisa Enviar enlaces a otra aplicacion en Descargas.");
-        table.put("The export failed and the partial file could not be removed. Delete it from your Downloads folder.",
-                "Ha fallado la exportación de los valores cargados y la limpieza también.");
+        table.put("The export failed and the partial file couldn't be removed. Delete it from your Downloads folder.",
+                "La exportación falló y el archivo a medias no se pudo quitar. Bórralo de tu carpeta de Descargas.");
         table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
                 "El feed se oscurece en los últimos tres cuartos de minuto antes de la pausa, para que llegues a ella en lugar de caer. Necesita un presupuesto de tiempo y una pausa.");
         table.put("The feed does not end. This is a fine time to leave it.",
@@ -4516,6 +4516,8 @@ public final class L10nTranslations {
                 "El feed espera un toque antes de reproducirse de nuevo cuando vuelves a la app. Mensajes, perfiles y búsqueda siguen a un toque.");
         table.put("The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.",
                 "La hora a la que se reinician ambos límites, en formato de 24 horas. Las cuatro de la madrugada por defecto, porque quien sigue deslizando a la una todavía está en la noche anterior.");
+        table.put("The loaded-values file you chose couldn't be read. Try again.",
+                "No se pudo leer el archivo de valores cargados que elegiste. Inténtalo de nuevo.");
         table.put("The original photos aren't available, so TikTok's own save runs instead",
                 "Las fotos originales no están disponibles, así que se usa el guardado propio de TikTok");
         table.put("The override changes no fields. Edit the field values, or reset the override.",
@@ -4526,14 +4528,12 @@ public final class L10nTranslations {
                 "La anulación no dice qué lista devolver. Edita los valores de los campos o restablece la anulación.");
         table.put("The profile picture couldn't be saved. Try again.",
                 "No se pudo guardar la foto de perfil.");
-        table.put("The record of an interrupted settings change could not be read, so it was set aside. Check your settings.",
+        table.put("The record of an interrupted settings change couldn't be read, so it was set aside. Check your settings.",
                 "No se pudo leer el registro de un cambio de ajustes interrumpido, así que se apartó. Revisa tus ajustes.");
         table.put("The report couldn't be saved. Try again.",
                 "No se pudo guardar el informe. Inténtalo otra vez.");
         table.put("The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.",
                 "La fila de fotos de historias de la parte de arriba de la bandeja de entrada desaparece. Las historias se siguen viendo en el feed y en los perfiles.");
-        table.put("The selected loaded-values file could not be read. Try again.",
-                "No se pudo leer el archivo de valores cargados seleccionado. Inténtalo de nuevo.");
         table.put("The setting couldn't finish updating. Its saved value is shown.",
                 "No se pudo terminar de actualizar el ajuste. Se muestra el valor guardado.");
         table.put("The settings backup was rejected. Nothing was altered.",
@@ -4621,8 +4621,8 @@ public final class L10nTranslations {
                 "TikTok todavía no le ha dado a este ajuste un objeto que cambiar. Abre la parte de la app que lo usa y vuelve aquí.");
         table.put("TikTok read it",
                 "TikTok lo leyó");
-        table.put("TikTok read it, but the override could not be applied. Reset it and save it again.",
-                "TikTok lo leyó, pero la sustitución estructurada no se pudo aplicar.");
+        table.put("TikTok read it, but the override couldn't be applied. Reset it and save it again.",
+                "TikTok la leyó, pero la sustitución no se pudo aplicar. Restablécela y guárdala de nuevo.");
         table.put("TikTok refused the follow: %1$s",
                 "TikTok rechazó el seguimiento: %1$s");
         table.put("TikTok's own value",
@@ -5033,7 +5033,7 @@ public final class L10nTranslations {
                 "Ada pola kreator yang terlalu lama, jadi dimatikan: %1$s");
         table.put("A diagnostic report is already being saved",
                 "Laporan diagnostik sedang disimpan");
-        table.put("A field value could not be read. Check the values and try again.",
+        table.put("A field value couldn't be read. Check the values and try again.",
                 "Nilai kolom tidak dapat dibaca. Periksa nilainya lalu coba lagi.");
         table.put("A forced value applies to this copy of TikTok whichever account is signed in. It cannot get past a check the server makes.",
                 "Nilai yang dipaksa berlaku untuk salinan TikTok ini, akun mana pun yang masuk. Nilai itu tidak bisa melewati pemeriksaan yang dilakukan server.");
@@ -5118,7 +5118,7 @@ public final class L10nTranslations {
                 "Selalu tampilkan tanggal publikasi di informasi penulis video. Mulai ulang TikTok agar berlaku.");
         table.put("An app's package name, like com.dv.adm. The save button sends the video's link there instead of saving it here. Leave it empty to save here.",
                 "Nama paket sebuah aplikasi, misalnya com.dv.adm. Tombol simpan mengirim tautan video ke sana, bukan menyimpannya di sini. Kosongkan untuk menyimpan di sini.");
-        table.put("An interrupted settings change could not be recovered, so its record was set aside. Check your settings or restore a backup.",
+        table.put("An interrupted settings change couldn't be recovered, so its record was set aside. Check your settings or restore a backup.",
                 "Perubahan pengaturan yang terputus tidak bisa dipulihkan, jadi catatannya disisihkan. Periksa pengaturan kamu atau pulihkan cadangan.");
         table.put("An operator code is five or six digits, like 310260",
                 "Kode operator itu lima atau enam angka, misalnya 310260");
@@ -5382,51 +5382,51 @@ public final class L10nTranslations {
                 "Salin tautan suara");
         table.put("Copy the video link",
                 "Salin tautan video");
-        table.put("Could not change Lab settings.",
-                "Pengaturan Lab tidak bisa diubah.");
-        table.put("Could not clear suggested accounts",
-                "Tidak dapat menghapus akun yang disarankan");
-        table.put("Could not copy report. Use Save JSON.",
-                "Laporan tidak bisa disalin. Pakai Simpan JSON.");
-        table.put("Could not open settings search",
-                "Pencarian setelan tidak bisa dibuka");
-        table.put("Could not open settings section",
-                "Bagian pengaturan tidak bisa dibuka");
-        table.put("Could not open the export file picker",
-                "Pemilih berkas untuk ekspor tidak bisa dibuka");
-        table.put("Could not open the import file picker",
-                "Pemilih berkas untuk impor tidak bisa dibuka");
-        table.put("Could not put back the diagnostic data. Try again.",
-                "Data diagnostik tidak dapat dikembalikan. Coba lagi.");
-        table.put("Could not read who posted this comment",
-                "Tidak bisa membaca siapa yang menulis komentar ini");
-        table.put("Could not reset this override.",
-                "Penggantian ini tidak bisa diatur ulang.");
-        table.put("Could not restore settings.",
-                "Pengaturan tidak dapat dipulihkan.");
-        table.put("Could not save settings backup.",
-                "Cadangan pengaturan tidak dapat disimpan.");
-    }
-
-    private static void fillIn4(Map<String, String> table) {
-        table.put("Could not save this override.",
-                "Penggantian ini tidak bisa disimpan.");
-        table.put("Could not send the feedback. Try again shortly.",
-                "Masukan tidak dapat dikirim. Coba lagi sebentar lagi.");
-        table.put("Could not start the Lab change. Try again shortly.",
-                "Perubahan Lab tidak bisa dimulai. Coba lagi sebentar.");
-        table.put("Could not start the report export. Try again shortly.",
-                "Ekspor laporan tidak bisa dimulai. Coba lagi sebentar.");
-        table.put("Could not start the settings operation. Try again shortly.",
-                "Proses pengaturan tidak bisa dimulai. Coba lagi sebentar.");
-        table.put("Could not tell which folder to update. Choose it again.",
-                "Tidak diketahui folder mana yang harus diubah. Pilih lagi.");
-        table.put("Could not undo the clear. Try again.",
-                "Penghapusan tidak bisa diurungkan. Coba lagi.");
+        table.put("Couldn't change the Lab settings. Try again.",
+                "Pengaturan Lab tidak bisa diubah. Coba lagi.");
+        table.put("Couldn't clear the suggested accounts. Reopen the Inbox and try again.",
+                "Akun yang disarankan tidak bisa dihapus. Buka lagi Kotak Masuk lalu coba lagi.");
         table.put("Couldn't confirm the block for %1$s. Open their profile to check.",
                 "Pemblokiran %1$s tidak dapat dikonfirmasi. Buka profilnya untuk memeriksa.");
         table.put("Couldn't confirm the unblock for %1$s. Open their profile to check.",
                 "Pembukaan blokir %1$s tidak dapat dikonfirmasi. Buka profilnya untuk memeriksa.");
+        table.put("Couldn't copy the report. Use Save JSON instead.",
+                "Laporan tidak bisa disalin. Pakai Simpan JSON saja.");
+        table.put("Couldn't open settings search. Reopen settings and try again.",
+                "Pencarian pengaturan tidak bisa dibuka. Buka lagi pengaturan lalu coba lagi.");
+        table.put("Couldn't open that settings section. Reopen settings and try again.",
+                "Bagian pengaturan itu tidak bisa dibuka. Buka lagi pengaturan lalu coba lagi.");
+        table.put("Couldn't open the file picker to export. Try again.",
+                "Pemilih berkas untuk ekspor tidak bisa dibuka. Coba lagi.");
+        table.put("Couldn't open the file picker to import. Try again.",
+                "Pemilih berkas untuk impor tidak bisa dibuka. Coba lagi.");
+        table.put("Couldn't put back the diagnostic data. Try again.",
+                "Data diagnostik tidak bisa dikembalikan. Coba lagi.");
+        table.put("Couldn't read who posted this comment. Open their profile and block them there.",
+                "Tidak bisa membaca siapa yang menulis komentar ini. Buka profilnya dan blokir dari sana.");
+        table.put("Couldn't reset this override. Try again.",
+                "Penggantian ini tidak bisa diatur ulang. Coba lagi.");
+    }
+
+    private static void fillIn4(Map<String, String> table) {
+        table.put("Couldn't restore the settings. Try again.",
+                "Pengaturan tidak bisa dipulihkan. Coba lagi.");
+        table.put("Couldn't save the settings backup. Try again.",
+                "Cadangan pengaturan tidak bisa disimpan. Coba lagi.");
+        table.put("Couldn't save this override. Try again.",
+                "Penggantian ini tidak bisa disimpan. Coba lagi.");
+        table.put("Couldn't send the feedback. Try again shortly.",
+                "Masukan tidak dapat dikirim. Coba lagi sebentar lagi.");
+        table.put("Couldn't start the Lab change. Try again shortly.",
+                "Perubahan Lab tidak bisa dimulai. Coba lagi sebentar.");
+        table.put("Couldn't start the report export. Try again shortly.",
+                "Ekspor laporan tidak bisa dimulai. Coba lagi sebentar.");
+        table.put("Couldn't start the settings change. Try again shortly.",
+                "Perubahan pengaturan tidak bisa dimulai. Coba lagi sebentar.");
+        table.put("Couldn't tell which folder to update. Choose it again.",
+                "Tidak diketahui folder mana yang harus diubah. Pilih lagi.");
+        table.put("Couldn't undo the clear. Try again.",
+                "Penghapusan tidak bisa diurungkan. Coba lagi.");
         table.put("Country and network preferences",
                 "Preferensi negara dan jaringan");
         table.put("Country code",
@@ -6901,7 +6901,7 @@ public final class L10nTranslations {
                 "Baris Arsip hilang dari Kotak Masuk. Obrolan yang diarsipkan tetap tersimpan.");
         table.put("The Lab can't check this. TikTok gets it exactly as typed.",
                 "Lab tidak bisa memeriksa ini. TikTok menerimanya persis seperti yang kamu ketik.");
-        table.put("The Lab could not open. Go back and open it again.",
+        table.put("The Lab couldn't open. Go back and open it again.",
                 "Lab tidak bisa dibuka. Kembali lalu buka lagi.");
         table.put("The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.",
                 "Lab menyimpan paling banyak %1$s aturan. Perubahan ini akan membuat jumlahnya %2$s, jadi tidak ada yang diubah.");
@@ -6919,14 +6919,14 @@ public final class L10nTranslations {
                 "Ikon tambah orang hilang dari bagian atas Kotak Masuk. Hanya pintasannya yang hilang, saran teman di tempat lain tidak berubah.");
         table.put("The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.",
                 "Katalog menyebut kunci ini %1$s dan penimpaan ini %2$s. Setel ulang penimpaan lalu buat yang baru.");
-        table.put("The diagnostic report could not be saved yet. Try again in a moment.",
+        table.put("The diagnostic report couldn't be saved yet. Try again in a moment.",
                 "Laporan diagnostik belum bisa disimpan. Coba lagi sebentar.");
-        table.put("The diagnostic report could not be saved. Try again.",
-                "Laporan diagnostik tidak bisa diekspor.");
+        table.put("The diagnostic report couldn't be saved. Try again.",
+                "Laporan diagnostik tidak bisa disimpan. Coba lagi.");
         table.put("The downloader app you chose isn't installed. Check Send links to another app under Downloads.",
                 "Aplikasi pengunduh yang kamu pilih tidak terpasang. Periksa Kirim tautan ke aplikasi lain di Unduhan.");
-        table.put("The export failed and the partial file could not be removed. Delete it from your Downloads folder.",
-                "Ekspor berkas nilai yang dimuat gagal; pembersihannya juga gagal.");
+        table.put("The export failed and the partial file couldn't be removed. Delete it from your Downloads folder.",
+                "Ekspor gagal dan berkas yang setengah jadi tidak bisa dihapus. Hapus dari folder Unduhan kamu.");
         table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
                 "Feed meredup selama tiga perempat menit terakhir sebelum jeda, agar kamu tiba di sana, bukan mendarat. Butuh anggaran waktu dan jeda.");
         table.put("The feed does not end. This is a fine time to leave it.",
@@ -6937,6 +6937,8 @@ public final class L10nTranslations {
                 "Feed menunggu satu ketukan sebelum mulai memutar lagi saat kamu kembali ke aplikasi. Pesan, profil, dan pencarian tetap satu ketukan.");
         table.put("The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.",
                 "Jam saat kedua batas disetel ulang, dalam format 24 jam. Pukul empat pagi secara bawaan, karena orang yang masih menggulir pukul satu sebenarnya masih di malam sebelumnya.");
+        table.put("The loaded-values file you chose couldn't be read. Try again.",
+                "Berkas nilai yang dimuat yang kamu pilih tidak bisa dibaca. Coba lagi.");
         table.put("The original photos aren't available, so TikTok's own save runs instead",
                 "Foto aslinya tidak tersedia, jadi TikTok yang menyimpannya");
         table.put("The override changes no fields. Edit the field values, or reset the override.",
@@ -6947,14 +6949,12 @@ public final class L10nTranslations {
                 "Penimpaan tidak menyebutkan daftar mana yang harus dikembalikan. Ubah nilai field, atau setel ulang penimpaan.");
         table.put("The profile picture couldn't be saved. Try again.",
                 "Foto profilnya tidak bisa disimpan.");
-        table.put("The record of an interrupted settings change could not be read, so it was set aside. Check your settings.",
+        table.put("The record of an interrupted settings change couldn't be read, so it was set aside. Check your settings.",
                 "Catatan perubahan pengaturan yang terputus tidak bisa dibaca, jadi disisihkan. Periksa pengaturan kamu.");
         table.put("The report couldn't be saved. Try again.",
                 "Laporan tidak bisa disimpan. Coba lagi.");
         table.put("The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.",
                 "Baris foto profil Story di bagian atas Kotak Masuk hilang. Story tetap bisa diputar dari feed dan dari profil.");
-        table.put("The selected loaded-values file could not be read. Try again.",
-                "Berkas nilai yang dimuat dan dipilih tidak dapat dibaca. Coba lagi.");
         table.put("The setting couldn't finish updating. Its saved value is shown.",
                 "Pengaturan ini tidak dapat selesai diperbarui. Nilai yang tersimpan ditampilkan.");
         table.put("The settings backup was rejected. Nothing was altered.",
@@ -7042,8 +7042,8 @@ public final class L10nTranslations {
                 "TikTok belum memberi setelan ini objek untuk diubah. Buka bagian aplikasi yang memakainya, lalu kembali ke sini.");
         table.put("TikTok read it",
                 "TikTok sudah membacanya");
-        table.put("TikTok read it, but the override could not be applied. Reset it and save it again.",
-                "TikTok sudah membacanya, tapi penggantian terstruktur tidak bisa diterapkan.");
+        table.put("TikTok read it, but the override couldn't be applied. Reset it and save it again.",
+                "TikTok sudah membacanya, tapi penggantian tidak bisa diterapkan. Atur ulang lalu simpan lagi.");
         table.put("TikTok refused the follow: %1$s",
                 "TikTok menolak permintaan mengikuti: %1$s");
         table.put("TikTok's own value",
@@ -7454,7 +7454,7 @@ public final class L10nTranslations {
                 "Um padrão de criador está demorando demais e foi desligado: %1$s");
         table.put("A diagnostic report is already being saved",
                 "Um relatório de diagnóstico já está sendo salvo");
-        table.put("A field value could not be read. Check the values and try again.",
+        table.put("A field value couldn't be read. Check the values and try again.",
                 "Não foi possível ler o valor de um campo. Verifique os valores e tente novamente.");
         table.put("A forced value applies to this copy of TikTok whichever account is signed in. It cannot get past a check the server makes.",
                 "Um valor forçado vale para esta cópia do TikTok, seja qual for a conta conectada. Ele não passa por cima de uma verificação feita pelo servidor.");
@@ -7539,7 +7539,7 @@ public final class L10nTranslations {
                 "Sempre mostrar a data de publicação nas informações do autor do vídeo. Reinicie o TikTok para aplicar.");
         table.put("An app's package name, like com.dv.adm. The save button sends the video's link there instead of saving it here. Leave it empty to save here.",
                 "O nome de pacote de um app, como com.dv.adm. O botão de salvar manda o link do vídeo para lá em vez de salvar aqui. Deixe vazio para salvar aqui.");
-        table.put("An interrupted settings change could not be recovered, so its record was set aside. Check your settings or restore a backup.",
+        table.put("An interrupted settings change couldn't be recovered, so its record was set aside. Check your settings or restore a backup.",
                 "Uma alteração de configurações interrompida não pôde ser recuperada, então seu registro foi posto de lado. Confira suas configurações ou restaure um backup.");
         table.put("An operator code is five or six digits, like 310260",
                 "Um código de operadora tem cinco ou seis dígitos, como 310260");
@@ -7803,51 +7803,51 @@ public final class L10nTranslations {
                 "Copiar o link do som");
         table.put("Copy the video link",
                 "Copiar o link do vídeo");
-        table.put("Could not change Lab settings.",
-                "Não foi possível alterar as configurações do Lab.");
-        table.put("Could not clear suggested accounts",
-                "Não foi possível limpar as contas sugeridas");
-        table.put("Could not copy report. Use Save JSON.",
-                "Não foi possível copiar o relatório. Use Salvar JSON.");
-        table.put("Could not open settings search",
-                "Não foi possível abrir a busca de configurações");
-        table.put("Could not open settings section",
-                "Não foi possível abrir a seção de configurações");
-        table.put("Could not open the export file picker",
-                "Não foi possível abrir o seletor de arquivos para exportar");
-        table.put("Could not open the import file picker",
-                "Não foi possível abrir o seletor de arquivos para importar");
-        table.put("Could not put back the diagnostic data. Try again.",
-                "Não foi possível restaurar os dados de diagnóstico. Tente novamente.");
-        table.put("Could not read who posted this comment",
-                "Não foi possível ler quem publicou este comentário");
-        table.put("Could not reset this override.",
-                "Não foi possível redefinir esta substituição.");
-        table.put("Could not restore settings.",
-                "Não foi possível restaurar as configurações.");
-        table.put("Could not save settings backup.",
-                "Não foi possível salvar o backup das configurações.");
-    }
-
-    private static void fillPt_rBR4(Map<String, String> table) {
-        table.put("Could not save this override.",
-                "Não foi possível salvar esta substituição.");
-        table.put("Could not send the feedback. Try again shortly.",
-                "Não foi possível enviar o comentário. Tente de novo em instantes.");
-        table.put("Could not start the Lab change. Try again shortly.",
-                "Não foi possível iniciar a mudança do Lab. Tente de novo em breve.");
-        table.put("Could not start the report export. Try again shortly.",
-                "Não foi possível iniciar a exportação do relatório. Tente de novo em breve.");
-        table.put("Could not start the settings operation. Try again shortly.",
-                "Não foi possível iniciar a operação de configurações. Tente de novo em breve.");
-        table.put("Could not tell which folder to update. Choose it again.",
-                "Não deu para saber qual pasta atualizar. Escolha de novo.");
-        table.put("Could not undo the clear. Try again.",
-                "Não foi possível desfazer a limpeza. Tente de novo.");
+        table.put("Couldn't change the Lab settings. Try again.",
+                "Não foi possível alterar as configurações do Lab. Tente de novo.");
+        table.put("Couldn't clear the suggested accounts. Reopen the Inbox and try again.",
+                "Não foi possível limpar as contas sugeridas. Abra a caixa de entrada de novo e tente outra vez.");
         table.put("Couldn't confirm the block for %1$s. Open their profile to check.",
                 "Não foi possível confirmar o bloqueio de %1$s. Abra o perfil para conferir.");
         table.put("Couldn't confirm the unblock for %1$s. Open their profile to check.",
                 "Não foi possível confirmar o desbloqueio de %1$s. Abra o perfil para conferir.");
+        table.put("Couldn't copy the report. Use Save JSON instead.",
+                "Não foi possível copiar o relatório. Use Salvar JSON no lugar.");
+        table.put("Couldn't open settings search. Reopen settings and try again.",
+                "Não foi possível abrir a busca de configurações. Abra as configurações de novo e tente outra vez.");
+        table.put("Couldn't open that settings section. Reopen settings and try again.",
+                "Não foi possível abrir essa seção de configurações. Abra as configurações de novo e tente outra vez.");
+        table.put("Couldn't open the file picker to export. Try again.",
+                "Não foi possível abrir o seletor de arquivos para exportar. Tente de novo.");
+        table.put("Couldn't open the file picker to import. Try again.",
+                "Não foi possível abrir o seletor de arquivos para importar. Tente de novo.");
+        table.put("Couldn't put back the diagnostic data. Try again.",
+                "Não foi possível trazer de volta os dados de diagnóstico. Tente de novo.");
+        table.put("Couldn't read who posted this comment. Open their profile and block them there.",
+                "Não foi possível ler quem publicou este comentário. Abra o perfil da pessoa e bloqueie por lá.");
+        table.put("Couldn't reset this override. Try again.",
+                "Não foi possível redefinir esta substituição. Tente de novo.");
+    }
+
+    private static void fillPt_rBR4(Map<String, String> table) {
+        table.put("Couldn't restore the settings. Try again.",
+                "Não foi possível restaurar as configurações. Tente de novo.");
+        table.put("Couldn't save the settings backup. Try again.",
+                "Não foi possível salvar o backup das configurações. Tente de novo.");
+        table.put("Couldn't save this override. Try again.",
+                "Não foi possível salvar esta substituição. Tente de novo.");
+        table.put("Couldn't send the feedback. Try again shortly.",
+                "Não foi possível enviar o comentário. Tente de novo em instantes.");
+        table.put("Couldn't start the Lab change. Try again shortly.",
+                "Não foi possível iniciar a mudança do Lab. Tente de novo em breve.");
+        table.put("Couldn't start the report export. Try again shortly.",
+                "Não foi possível iniciar a exportação do relatório. Tente de novo em breve.");
+        table.put("Couldn't start the settings change. Try again shortly.",
+                "Não foi possível iniciar a mudança de configurações. Tente de novo em breve.");
+        table.put("Couldn't tell which folder to update. Choose it again.",
+                "Não deu para saber qual pasta atualizar. Escolha de novo.");
+        table.put("Couldn't undo the clear. Try again.",
+                "Não foi possível desfazer a limpeza. Tente de novo.");
         table.put("Country and network preferences",
                 "Preferências de país e de rede");
         table.put("Country code",
@@ -9322,7 +9322,7 @@ public final class L10nTranslations {
                 "A linha Arquivo some da caixa de entrada. As conversas arquivadas são mantidas.");
         table.put("The Lab can't check this. TikTok gets it exactly as typed.",
                 "O Lab não consegue verificar isso. O TikTok recebe exatamente como você digitou.");
-        table.put("The Lab could not open. Go back and open it again.",
+        table.put("The Lab couldn't open. Go back and open it again.",
                 "O Lab não abriu. Volte e abra de novo.");
         table.put("The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.",
                 "O Lab mantém no máximo %1$s regras. Esta alteração resultaria em %2$s, então nada foi alterado.");
@@ -9340,14 +9340,14 @@ public final class L10nTranslations {
                 "O ícone de adicionar pessoas some do cabeçalho da caixa de entrada. Só o atalho vai embora, as sugestões de amigos em outros lugares não mudam.");
         table.put("The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.",
                 "O catálogo diz que esta chave é %1$s e esta substituição é %2$s. Redefina a substituição e crie uma nova.");
-        table.put("The diagnostic report could not be saved yet. Try again in a moment.",
+        table.put("The diagnostic report couldn't be saved yet. Try again in a moment.",
                 "O relatório de diagnóstico ainda não pôde ser salvo. Tente de novo em instantes.");
-        table.put("The diagnostic report could not be saved. Try again.",
-                "O relatório de diagnóstico não pôde ser exportado.");
+        table.put("The diagnostic report couldn't be saved. Try again.",
+                "Não foi possível salvar o relatório de diagnóstico. Tente de novo.");
         table.put("The downloader app you chose isn't installed. Check Send links to another app under Downloads.",
                 "O aplicativo de download que voce escolheu nao esta instalado. Verifique Enviar links para outro aplicativo em Downloads.");
-        table.put("The export failed and the partial file could not be removed. Delete it from your Downloads folder.",
-                "A exportação do arquivo de valores carregados falhou e a limpeza também.");
+        table.put("The export failed and the partial file couldn't be removed. Delete it from your Downloads folder.",
+                "A exportação falhou e o arquivo incompleto não pôde ser removido. Apague-o da sua pasta Downloads.");
         table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
                 "O feed escurece nos últimos três quartos de minuto antes da pausa, para que você chegue a ela em vez de cair nela. Precisa de um orçamento de tempo e uma pausa.");
         table.put("The feed does not end. This is a fine time to leave it.",
@@ -9358,6 +9358,8 @@ public final class L10nTranslations {
                 "O feed espera um toque antes de reproduzir de novo quando você volta ao app. Mensagens, perfis e busca continuam a um toque.");
         table.put("The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.",
                 "A hora em que os dois limites zeram, no relógio de 24 horas. Quatro da manhã por padrão, porque quem ainda está rolando à uma continua na noite anterior.");
+        table.put("The loaded-values file you chose couldn't be read. Try again.",
+                "Não foi possível ler o arquivo de valores carregados que você escolheu. Tente de novo.");
         table.put("The original photos aren't available, so TikTok's own save runs instead",
                 "As fotos originais não estão disponíveis, então o salvamento do próprio TikTok é usado");
         table.put("The override changes no fields. Edit the field values, or reset the override.",
@@ -9368,14 +9370,12 @@ public final class L10nTranslations {
                 "A substituição não diz qual lista devolver. Edite os valores dos campos ou redefina a substituição.");
         table.put("The profile picture couldn't be saved. Try again.",
                 "Não foi possível salvar a foto de perfil.");
-        table.put("The record of an interrupted settings change could not be read, so it was set aside. Check your settings.",
+        table.put("The record of an interrupted settings change couldn't be read, so it was set aside. Check your settings.",
                 "O registro de uma alteração de configurações interrompida não pôde ser lido, então foi posto de lado. Confira suas configurações.");
         table.put("The report couldn't be saved. Try again.",
                 "Não foi possível salvar o relatório. Tente de novo.");
         table.put("The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.",
                 "A linha de fotos de stories no topo da caixa de entrada some. Os stories continuam abrindo no feed e nos perfis.");
-        table.put("The selected loaded-values file could not be read. Try again.",
-                "Não foi possível ler o arquivo de valores carregados selecionado. Tente novamente.");
         table.put("The setting couldn't finish updating. Its saved value is shown.",
                 "Não foi possível concluir a atualização da configuração. O valor salvo está sendo exibido.");
         table.put("The settings backup was rejected. Nothing was altered.",
@@ -9463,8 +9463,8 @@ public final class L10nTranslations {
                 "O TikTok ainda não entregou a esta configuração um objeto para alterar. Abra a parte do app que a usa e volte aqui.");
         table.put("TikTok read it",
                 "O TikTok leu");
-        table.put("TikTok read it, but the override could not be applied. Reset it and save it again.",
-                "O TikTok leu, mas a substituição estruturada não pôde ser aplicada.");
+        table.put("TikTok read it, but the override couldn't be applied. Reset it and save it again.",
+                "O TikTok leu, mas a substituição não pôde ser aplicada. Redefina-a e salve de novo.");
         table.put("TikTok refused the follow: %1$s",
                 "O TikTok recusou o seguir: %1$s");
         table.put("TikTok's own value",
@@ -9875,7 +9875,7 @@ public final class L10nTranslations {
                 "Bir içerik üreticisi kalıbı çok uzun sürdüğü için kapatıldı: %1$s");
         table.put("A diagnostic report is already being saved",
                 "Bir tanılama raporu zaten kaydediliyor");
-        table.put("A field value could not be read. Check the values and try again.",
+        table.put("A field value couldn't be read. Check the values and try again.",
                 "Bir alan değeri okunamadı. Değerleri kontrol edip tekrar dene.");
         table.put("A forced value applies to this copy of TikTok whichever account is signed in. It cannot get past a check the server makes.",
                 "Zorlanan bir değer, hangi hesap oturum açmış olursa olsun bu TikTok kopyası için geçerlidir. Sunucunun yaptığı bir denetimi aşamaz.");
@@ -9960,7 +9960,7 @@ public final class L10nTranslations {
                 "Video sahibi bilgilerinde yayın tarihini her zaman göster. Bunu uygulamak için TikTok'u yeniden başlat.");
         table.put("An app's package name, like com.dv.adm. The save button sends the video's link there instead of saving it here. Leave it empty to save here.",
                 "com.dv.adm gibi bir uygulamanın paket adı. Kaydet düğmesi videoyu buraya kaydetmek yerine bağlantısını o uygulamaya gönderir. Buraya kaydetmek için boş bırak.");
-        table.put("An interrupted settings change could not be recovered, so its record was set aside. Check your settings or restore a backup.",
+        table.put("An interrupted settings change couldn't be recovered, so its record was set aside. Check your settings or restore a backup.",
                 "Yarıda kalan bir ayar değişikliği kurtarılamadı, bu yüzden kaydı bir kenara ayrıldı. Ayarlarını kontrol et veya bir yedeği geri yükle.");
         table.put("An operator code is five or six digits, like 310260",
                 "Operatör kodu beş veya altı hanelidir, örneğin 310260");
@@ -10224,51 +10224,51 @@ public final class L10nTranslations {
                 "Ses bağlantısını kopyala");
         table.put("Copy the video link",
                 "Video bağlantısını kopyala");
-        table.put("Could not change Lab settings.",
-                "Lab ayarları değiştirilemedi.");
-        table.put("Could not clear suggested accounts",
-                "Önerilen hesaplar temizlenemedi");
-        table.put("Could not copy report. Use Save JSON.",
-                "Rapor kopyalanamadı. JSON'u kaydet seçeneğini kullan.");
-        table.put("Could not open settings search",
-                "Ayarlar araması açılamadı");
-        table.put("Could not open settings section",
-                "Ayarlar bölümü açılamadı");
-        table.put("Could not open the export file picker",
-                "Dışa aktarma dosya seçicisi açılamadı");
-        table.put("Could not open the import file picker",
-                "İçe aktarma dosya seçicisi açılamadı");
-        table.put("Could not put back the diagnostic data. Try again.",
-                "Tanılama verileri geri konamadı. Tekrar dene.");
-        table.put("Could not read who posted this comment",
-                "Bu yorumu kimin yazdığı okunamadı");
-        table.put("Could not reset this override.",
-                "Bu geçersiz kılma sıfırlanamadı.");
-        table.put("Could not restore settings.",
-                "Ayarlar geri yüklenemedi.");
-        table.put("Could not save settings backup.",
-                "Ayar yedeği kaydedilemedi.");
-    }
-
-    private static void fillTr4(Map<String, String> table) {
-        table.put("Could not save this override.",
-                "Bu geçersiz kılma kaydedilemedi.");
-        table.put("Could not send the feedback. Try again shortly.",
-                "Geri bildirim gönderilemedi. Birazdan tekrar dene.");
-        table.put("Could not start the Lab change. Try again shortly.",
-                "Lab değişikliği başlatılamadı. Birazdan tekrar dene.");
-        table.put("Could not start the report export. Try again shortly.",
-                "Rapor dışa aktarımı başlatılamadı. Birazdan tekrar dene.");
-        table.put("Could not start the settings operation. Try again shortly.",
-                "Ayar işlemi başlatılamadı. Birazdan tekrar dene.");
-        table.put("Could not tell which folder to update. Choose it again.",
-                "Hangi klasörün güncelleneceği anlaşılamadı. Yeniden seç.");
-        table.put("Could not undo the clear. Try again.",
-                "Temizleme geri alınamadı. Tekrar dene.");
+        table.put("Couldn't change the Lab settings. Try again.",
+                "Lab ayarları değiştirilemedi. Tekrar dene.");
+        table.put("Couldn't clear the suggested accounts. Reopen the Inbox and try again.",
+                "Önerilen hesaplar temizlenemedi. Gelen Kutusu'nu yeniden açıp tekrar dene.");
         table.put("Couldn't confirm the block for %1$s. Open their profile to check.",
                 "%1$s için engelleme doğrulanamadı. Kontrol etmek için profilini aç.");
         table.put("Couldn't confirm the unblock for %1$s. Open their profile to check.",
                 "%1$s için engelin kaldırıldığı doğrulanamadı. Kontrol etmek için profilini aç.");
+        table.put("Couldn't copy the report. Use Save JSON instead.",
+                "Rapor kopyalanamadı. Bunun yerine JSON'u kaydet seçeneğini kullan.");
+        table.put("Couldn't open settings search. Reopen settings and try again.",
+                "Ayarlar araması açılamadı. Ayarları yeniden açıp tekrar dene.");
+        table.put("Couldn't open that settings section. Reopen settings and try again.",
+                "O ayarlar bölümü açılamadı. Ayarları yeniden açıp tekrar dene.");
+        table.put("Couldn't open the file picker to export. Try again.",
+                "Dışa aktarma dosya seçicisi açılamadı. Tekrar dene.");
+        table.put("Couldn't open the file picker to import. Try again.",
+                "İçe aktarma dosya seçicisi açılamadı. Tekrar dene.");
+        table.put("Couldn't put back the diagnostic data. Try again.",
+                "Tanılama verileri geri konamadı. Tekrar dene.");
+        table.put("Couldn't read who posted this comment. Open their profile and block them there.",
+                "Bu yorumu kimin yazdığı okunamadı. Profilini açıp oradan engelle.");
+        table.put("Couldn't reset this override. Try again.",
+                "Bu geçersiz kılma sıfırlanamadı. Tekrar dene.");
+    }
+
+    private static void fillTr4(Map<String, String> table) {
+        table.put("Couldn't restore the settings. Try again.",
+                "Ayarlar geri yüklenemedi. Tekrar dene.");
+        table.put("Couldn't save the settings backup. Try again.",
+                "Ayar yedeği kaydedilemedi. Tekrar dene.");
+        table.put("Couldn't save this override. Try again.",
+                "Bu geçersiz kılma kaydedilemedi. Tekrar dene.");
+        table.put("Couldn't send the feedback. Try again shortly.",
+                "Geri bildirim gönderilemedi. Birazdan tekrar dene.");
+        table.put("Couldn't start the Lab change. Try again shortly.",
+                "Lab değişikliği başlatılamadı. Birazdan tekrar dene.");
+        table.put("Couldn't start the report export. Try again shortly.",
+                "Rapor dışa aktarımı başlatılamadı. Birazdan tekrar dene.");
+        table.put("Couldn't start the settings change. Try again shortly.",
+                "Ayar değişikliği başlatılamadı. Birazdan tekrar dene.");
+        table.put("Couldn't tell which folder to update. Choose it again.",
+                "Hangi klasörün güncelleneceği anlaşılamadı. Yeniden seç.");
+        table.put("Couldn't undo the clear. Try again.",
+                "Temizleme geri alınamadı. Tekrar dene.");
         table.put("Country and network preferences",
                 "Ülke ve ağ tercihleri");
         table.put("Country code",
@@ -11743,7 +11743,7 @@ public final class L10nTranslations {
                 "Arşiv satırı Gelen Kutusu'ndan kalkar. Arşivlenen sohbetler korunur.");
         table.put("The Lab can't check this. TikTok gets it exactly as typed.",
                 "Lab bunu denetleyemiyor. TikTok bunu tam yazıldığı gibi alır.");
-        table.put("The Lab could not open. Go back and open it again.",
+        table.put("The Lab couldn't open. Go back and open it again.",
                 "Lab açılamadı. Geri dön ve yeniden aç.");
         table.put("The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.",
                 "Lab en fazla %1$s kural tutar. Bu değişiklikle %2$s olacaktı, bu yüzden hiçbir şey değiştirilmedi.");
@@ -11761,13 +11761,13 @@ public final class L10nTranslations {
                 "Kişi ekle simgesi Gelen Kutusu başlığından kalkar. Yalnızca kısayol gider, başka yerlerdeki arkadaş önerileri değişmez.");
         table.put("The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.",
                 "Kataloğa göre bu anahtar %1$s, bu geçersiz kılma ise %2$s. Geçersiz kılmayı sıfırla ve yenisini oluştur.");
-        table.put("The diagnostic report could not be saved yet. Try again in a moment.",
+        table.put("The diagnostic report couldn't be saved yet. Try again in a moment.",
                 "Tanılama raporu henüz kaydedilemedi. Birazdan yeniden dene.");
-        table.put("The diagnostic report could not be saved. Try again.",
+        table.put("The diagnostic report couldn't be saved. Try again.",
                 "Tanılama raporu kaydedilemedi. Yeniden dene.");
         table.put("The downloader app you chose isn't installed. Check Send links to another app under Downloads.",
                 "Seçtiğin indirme uygulaması yüklü değil. İndirmeler altındaki Bağlantıları başka bir uygulamaya gönder ayarını kontrol et.");
-        table.put("The export failed and the partial file could not be removed. Delete it from your Downloads folder.",
+        table.put("The export failed and the partial file couldn't be removed. Delete it from your Downloads folder.",
                 "Dışa aktarma başarısız oldu ve yarım kalan dosya kaldırılamadı. Dosyayı İndirilenler klasöründen sil.");
         table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
                 "Akış, bekletmeden önceki son kırk beş saniye boyunca kararır, böylece bekletmeye birden çarpmak yerine yavaşça varırsın. Bir süre bütçesi ve varılacak bir bekletme gerekir.");
@@ -11779,6 +11779,8 @@ public final class L10nTranslations {
                 "Uygulamaya döndüğünde akış yeniden oynamaya başlamadan önce tek bir dokunuş bekler. Mesajlar, profiller ve arama hâlâ bir dokunuş uzakta.");
         table.put("The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.",
                 "İki bütçenin de sıfırlandığı saat, 24 saatlik düzende. Varsayılan sabahın dördüdür, çünkü saat birde hâlâ kaydıran biri dün geceyi yaşıyordur.");
+        table.put("The loaded-values file you chose couldn't be read. Try again.",
+                "Seçtiğin yüklenen değerler dosyası okunamadı. Yeniden dene.");
         table.put("The original photos aren't available, so TikTok's own save runs instead",
                 "Orijinal fotoğraflar kullanılamıyor, bu yüzden TikTok'un kendi kaydetme işlemi çalışıyor");
         table.put("The override changes no fields. Edit the field values, or reset the override.",
@@ -11789,14 +11791,12 @@ public final class L10nTranslations {
                 "Geçersiz kılma hangi listenin döndürüleceğini belirtmiyor. Alan değerlerini düzenle ya da geçersiz kılmayı sıfırla.");
         table.put("The profile picture couldn't be saved. Try again.",
                 "Profil fotoğrafı kaydedilemedi. Yeniden dene.");
-        table.put("The record of an interrupted settings change could not be read, so it was set aside. Check your settings.",
+        table.put("The record of an interrupted settings change couldn't be read, so it was set aside. Check your settings.",
                 "Yarıda kalan bir ayar değişikliğinin kaydı okunamadığı için bir kenara ayrıldı. Ayarlarını kontrol et.");
         table.put("The report couldn't be saved. Try again.",
                 "Rapor kaydedilemedi. Yeniden dene.");
         table.put("The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.",
                 "Gelen Kutusu'nun üst kısmındaki hikaye avatarları satırı kalkar. Hikayeler akıştan ve profillerden oynatılmaya devam eder.");
-        table.put("The selected loaded-values file could not be read. Try again.",
-                "Seçilen yüklenen değerler dosyası okunamadı. Yeniden dene.");
         table.put("The setting couldn't finish updating. Its saved value is shown.",
                 "Ayarın güncellenmesi tamamlanamadı. Kayıtlı değeri gösteriliyor.");
         table.put("The settings backup was rejected. Nothing was altered.",
@@ -11884,7 +11884,7 @@ public final class L10nTranslations {
                 "TikTok bu ayara henüz değiştirilecek bir nesne vermedi. Uygulamanın bunu kullanan bölümünü aç, sonra geri gel.");
         table.put("TikTok read it",
                 "TikTok bunu okudu");
-        table.put("TikTok read it, but the override could not be applied. Reset it and save it again.",
+        table.put("TikTok read it, but the override couldn't be applied. Reset it and save it again.",
                 "TikTok bunu okudu ama geçersiz kılma uygulanamadı. Sıfırla ve yeniden kaydet.");
         table.put("TikTok refused the follow: %1$s",
                 "TikTok takibi reddetti: %1$s");

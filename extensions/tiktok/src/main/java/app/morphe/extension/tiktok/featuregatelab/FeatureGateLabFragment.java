@@ -175,7 +175,7 @@ public final class FeatureGateLabFragment extends Fragment {
         int containerId = findFragmentContainer(activity);
         if (containerId == View.NO_ID) {
             Utils.showToastLong(L10n.t(Utils.getContext(),
-                    "The Lab could not open. Go back and open it again."));
+                    "The Lab couldn't open. Go back and open it again."));
             return;
         }
         FeatureGateLabSession.begin();
@@ -1242,7 +1242,7 @@ public final class FeatureGateLabFragment extends Fragment {
     private void exportLoadedValues() {
         try {
             if (getActivity() == null) {
-                postToast(L10n.t(Utils.getContext(), "Could not open the export file picker"));
+                postToast(L10n.t(Utils.getContext(), "Couldn't open the file picker to export. Try again."));
                 return;
             }
             if (snapshot == null) {
@@ -1259,7 +1259,7 @@ public final class FeatureGateLabFragment extends Fragment {
             startActivityForResult(intent, REQUEST_EXPORT_LOADED);
         } catch (Throwable throwable) {
             Utils.showToastLong(L10n.t(Utils.getContext(),
-                    "Could not open the export file picker"));
+                    "Couldn't open the file picker to export. Try again."));
         }
     }
 
@@ -1273,7 +1273,7 @@ public final class FeatureGateLabFragment extends Fragment {
             startActivityForResult(intent, REQUEST_IMPORT_LOADED);
         } catch (Throwable throwable) {
             Utils.showToastLong(L10n.t(Utils.getContext(),
-                    "Could not open the import file picker"));
+                    "Couldn't open the file picker to import. Try again."));
         }
     }
 
@@ -1296,7 +1296,7 @@ public final class FeatureGateLabFragment extends Fragment {
                 Logger.printException(() -> "Loaded-value file export failed", throwable);
                 postToast(L10n.t(Utils.getContext(), deleteCreatedDocument(resolver, uri)
                         ? "Loaded-value file export failed"
-                        : "The export failed and the partial file could not be removed. Delete it from your Downloads folder."));
+                        : "The export failed and the partial file couldn't be removed. Delete it from your Downloads folder."));
             }
         });
     }
@@ -1306,7 +1306,7 @@ public final class FeatureGateLabFragment extends Fragment {
         ContentResolver resolver = activity == null ? null : activity.getContentResolver();
         if (resolver == null) {
             postToast(L10n.t(Utils.getContext(),
-                    "The selected loaded-values file could not be read. Try again."));
+                    "The loaded-values file you chose couldn't be read. Try again."));
             return;
         }
         FILE_IO_EXECUTOR.execute(() -> {
@@ -1656,7 +1656,7 @@ public final class FeatureGateLabFragment extends Fragment {
                 result = change.run();
             } catch (Exception error) {
                 Logger.printException(() -> "Lab change failed", error);
-                result = L10n.t(Utils.getContext(), "Could not change Lab settings.");
+                result = L10n.t(Utils.getContext(), "Couldn't change the Lab settings. Try again.");
                 tell = Utils::showToastLong;
             }
             String notice = result;
@@ -1679,7 +1679,7 @@ public final class FeatureGateLabFragment extends Fragment {
             // the reader has to tap a third time before the requested change is submitted.
             syncMasterSwitch();
             postToast(L10n.t(Utils.getContext(),
-                    "Could not start the Lab change. Try again shortly."));
+                    "Couldn't start the Lab change. Try again shortly."));
             return false;
         }
         return true;

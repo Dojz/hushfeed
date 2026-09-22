@@ -238,14 +238,14 @@ public final class SettingsBackupPreference extends Preference
             BUSY.set(false);
             setRowsBusy(0, null);
             Utils.showToastLong(L10n.t(
-                    "Could not start the settings operation. Try again shortly."));
+                    "Couldn't start the settings change. Try again shortly."));
             TikTokPreferenceFragment current = owner.get();
             if (current != null && current.isAdded()) current.refreshBackupSettings();
         }
     }
 
     static String failureMessage(int action, Exception error) {
-        if (action == EXPORT) return "Could not save settings backup.";
+        if (action == EXPORT) return "Couldn't save the settings backup. Try again.";
         if (error instanceof SettingsBackup.RestoreException) {
             SettingsBackup.RestoreException restore = (SettingsBackup.RestoreException) error;
             switch (restore.getFailure()) {
@@ -295,7 +295,7 @@ public final class SettingsBackupPreference extends Preference
         if (action == UNDO && hasCause(error, java.io.FileNotFoundException.class)) {
             return "Nothing to undo yet.";
         }
-        return "Could not restore settings.";
+        return "Couldn't restore the settings. Try again.";
     }
 
     /** Whether the throwable, or anything it wraps, is of the given kind. */

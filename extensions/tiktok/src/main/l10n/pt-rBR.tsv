@@ -55,7 +55,7 @@
 A Lab change is already running	Já há uma mudança do Lab em andamento
 A creator pattern is taking too long and was turned off: %1$s	Um padrão de criador está demorando demais e foi desligado: %1$s
 A diagnostic report is already being saved	Um relatório de diagnóstico já está sendo salvo
-A field value could not be read. Check the values and try again.	Não foi possível ler o valor de um campo. Verifique os valores e tente novamente.
+A field value couldn't be read. Check the values and try again.	Não foi possível ler o valor de um campo. Verifique os valores e tente novamente.
 A good place to stop, if you want one.	Uma boa hora para parar, se você quiser uma.
 A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.	Um ponto verde no canto superior enquanto o TikTok está com a câmera aberta e um laranja enquanto grava som. Eles somem quando o acesso termina.
 A hidden CAPTCHA may be the cause.	Talvez a causa seja um CAPTCHA escondido.
@@ -99,7 +99,7 @@ Also change the region TikTok reports internally. Keeps your interface language.
 Always show publish date	Sempre mostrar a data de publicação
 Always show the publish date in video author information. Restart TikTok to apply this.	Sempre mostrar a data de publicação nas informações do autor do vídeo. Reinicie o TikTok para aplicar.
 An app's package name, like com.dv.adm. The save button sends the video's link there instead of saving it here. Leave it empty to save here.	O nome de pacote de um app, como com.dv.adm. O botão de salvar manda o link do vídeo para lá em vez de salvar aqui. Deixe vazio para salvar aqui.
-An interrupted settings change could not be recovered, so its record was set aside. Check your settings or restore a backup.	Uma alteração de configurações interrompida não pôde ser recuperada, então seu registro foi posto de lado. Confira suas configurações ou restaure um backup.
+An interrupted settings change couldn't be recovered, so its record was set aside. Check your settings or restore a backup.	Uma alteração de configurações interrompida não pôde ser recuperada, então seu registro foi posto de lado. Confira suas configurações ou restaure um backup.
 An operator code is five or six digits, like 310260	Um código de operadora tem cinco ou seis dígitos, como 310260
 An override changes the value TikTok reads from this gate. It does not rewrite TikTok's cached value or prove the named feature changed.	Uma substituição muda o valor que o TikTok lê deste gate. Ela não reescreve o valor que o TikTok tem em cache nem prova que o recurso citado mudou.
 Animated sticker format	Formato dos stickers animados
@@ -215,25 +215,25 @@ Copy quick report	Copiar relatório rápido
 Copy report	Copiar relatório
 Copy the sound link	Copiar o link do som
 Copy the video link	Copiar o link do vídeo
-Could not change Lab settings.	Não foi possível alterar as configurações do Lab.
-Could not clear suggested accounts	Não foi possível limpar as contas sugeridas
-Could not copy report. Use Save JSON.	Não foi possível copiar o relatório. Use Salvar JSON.
-Could not open settings search	Não foi possível abrir a busca de configurações
-Could not open settings section	Não foi possível abrir a seção de configurações
-Could not open the export file picker	Não foi possível abrir o seletor de arquivos para exportar
-Could not open the import file picker	Não foi possível abrir o seletor de arquivos para importar
-Could not put back the diagnostic data. Try again.	Não foi possível restaurar os dados de diagnóstico. Tente novamente.
-Could not read who posted this comment	Não foi possível ler quem publicou este comentário
-Could not reset this override.	Não foi possível redefinir esta substituição.
-Could not restore settings.	Não foi possível restaurar as configurações.
-Could not save settings backup.	Não foi possível salvar o backup das configurações.
-Could not save this override.	Não foi possível salvar esta substituição.
-Could not send the feedback. Try again shortly.	Não foi possível enviar o comentário. Tente de novo em instantes.
-Could not start the Lab change. Try again shortly.	Não foi possível iniciar a mudança do Lab. Tente de novo em breve.
-Could not start the report export. Try again shortly.	Não foi possível iniciar a exportação do relatório. Tente de novo em breve.
-Could not start the settings operation. Try again shortly.	Não foi possível iniciar a operação de configurações. Tente de novo em breve.
-Could not tell which folder to update. Choose it again.	Não deu para saber qual pasta atualizar. Escolha de novo.
-Could not undo the clear. Try again.	Não foi possível desfazer a limpeza. Tente de novo.
+Couldn't change the Lab settings. Try again.	Não foi possível alterar as configurações do Lab. Tente de novo.
+Couldn't clear the suggested accounts. Reopen the Inbox and try again.	Não foi possível limpar as contas sugeridas. Abra a caixa de entrada de novo e tente outra vez.
+Couldn't copy the report. Use Save JSON instead.	Não foi possível copiar o relatório. Use Salvar JSON no lugar.
+Couldn't open settings search. Reopen settings and try again.	Não foi possível abrir a busca de configurações. Abra as configurações de novo e tente outra vez.
+Couldn't open that settings section. Reopen settings and try again.	Não foi possível abrir essa seção de configurações. Abra as configurações de novo e tente outra vez.
+Couldn't open the file picker to export. Try again.	Não foi possível abrir o seletor de arquivos para exportar. Tente de novo.
+Couldn't open the file picker to import. Try again.	Não foi possível abrir o seletor de arquivos para importar. Tente de novo.
+Couldn't put back the diagnostic data. Try again.	Não foi possível trazer de volta os dados de diagnóstico. Tente de novo.
+Couldn't read who posted this comment. Open their profile and block them there.	Não foi possível ler quem publicou este comentário. Abra o perfil da pessoa e bloqueie por lá.
+Couldn't reset this override. Try again.	Não foi possível redefinir esta substituição. Tente de novo.
+Couldn't restore the settings. Try again.	Não foi possível restaurar as configurações. Tente de novo.
+Couldn't save the settings backup. Try again.	Não foi possível salvar o backup das configurações. Tente de novo.
+Couldn't save this override. Try again.	Não foi possível salvar esta substituição. Tente de novo.
+Couldn't send the feedback. Try again shortly.	Não foi possível enviar o comentário. Tente de novo em instantes.
+Couldn't start the Lab change. Try again shortly.	Não foi possível iniciar a mudança do Lab. Tente de novo em breve.
+Couldn't start the report export. Try again shortly.	Não foi possível iniciar a exportação do relatório. Tente de novo em breve.
+Couldn't start the settings change. Try again shortly.	Não foi possível iniciar a mudança de configurações. Tente de novo em breve.
+Couldn't tell which folder to update. Choose it again.	Não deu para saber qual pasta atualizar. Escolha de novo.
+Couldn't undo the clear. Try again.	Não foi possível desfazer a limpeza. Tente de novo.
 Country code	Código do país
 Country and network preferences	Preferências de país e de rede
 Counts under the buttons	Números sob os botões
@@ -930,13 +930,13 @@ That settings backup is incomplete, so it may have been cut short. Nothing was a
 That settings change did not go through. Nothing was altered.	Essa mudança de configuração não chegou a valer. Nada foi alterado.
 That sticker is in a format Hushfeed cannot read	Esse sticker está num formato que o Hushfeed não consegue ler
 The Lab can't check this. TikTok gets it exactly as typed.	O Lab não consegue verificar isso. O TikTok recebe exatamente como você digitou.
-The Lab could not open. Go back and open it again.	O Lab não abriu. Volte e abra de novo.
+The Lab couldn't open. Go back and open it again.	O Lab não abriu. Volte e abra de novo.
 The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.	O Lab mantém no máximo %1$s regras. Esta alteração resultaria em %2$s, então nada foi alterado.
 The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.	O catálogo diz que esta chave é %1$s e esta substituição é %2$s. Redefina a substituição e crie uma nova.
-The diagnostic report could not be saved yet. Try again in a moment.	O relatório de diagnóstico ainda não pôde ser salvo. Tente de novo em instantes.
-The diagnostic report could not be saved. Try again.	O relatório de diagnóstico não pôde ser exportado.
+The diagnostic report couldn't be saved yet. Try again in a moment.	O relatório de diagnóstico ainda não pôde ser salvo. Tente de novo em instantes.
+The diagnostic report couldn't be saved. Try again.	Não foi possível salvar o relatório de diagnóstico. Tente de novo.
 The downloader app you chose isn't installed. Check Send links to another app under Downloads.	O aplicativo de download que voce escolheu nao esta instalado. Verifique Enviar links para outro aplicativo em Downloads.
-The export failed and the partial file could not be removed. Delete it from your Downloads folder.	A exportação do arquivo de valores carregados falhou e a limpeza também.
+The export failed and the partial file couldn't be removed. Delete it from your Downloads folder.	A exportação falhou e o arquivo incompleto não pôde ser removido. Apague-o da sua pasta Downloads.
 The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.	O feed escurece nos últimos três quartos de minuto antes da pausa, para que você chegue a ela em vez de cair nela. Precisa de um orçamento de tempo e uma pausa.
 The feed does not end. This is a fine time to leave it.	O feed não acaba. Esta é uma boa hora para largá-lo.
 The feed is open again	O feed está aberto de novo
@@ -954,9 +954,9 @@ The override changes no fields. Edit the field values, or reset the override.	A 
 The override couldn't be applied: %1$s. Edit the field values, or reset the override.	Não foi possível aplicar a substituição: %1$s. Edite os valores dos campos ou redefina a substituição.
 The override doesn't say what list to return. Edit the field values, or reset the override.	A substituição não diz qual lista devolver. Edite os valores dos campos ou redefina a substituição.
 The profile picture couldn't be saved. Try again.	Não foi possível salvar a foto de perfil.
-The record of an interrupted settings change could not be read, so it was set aside. Check your settings.	O registro de uma alteração de configurações interrompida não pôde ser lido, então foi posto de lado. Confira suas configurações.
+The record of an interrupted settings change couldn't be read, so it was set aside. Check your settings.	O registro de uma alteração de configurações interrompida não pôde ser lido, então foi posto de lado. Confira suas configurações.
 The report couldn't be saved. Try again.	Não foi possível salvar o relatório. Tente de novo.
-The selected loaded-values file could not be read. Try again.	Não foi possível ler o arquivo de valores carregados selecionado. Tente novamente.
+The loaded-values file you chose couldn't be read. Try again.	Não foi possível ler o arquivo de valores carregados que você escolheu. Tente de novo.
 The setting couldn't finish updating. Its saved value is shown.	Não foi possível concluir a atualização da configuração. O valor salvo está sendo exibido.
 The settings backup was rejected. Nothing was altered.	O backup das configurações foi recusado. Nada foi alterado.
 The smallest value is above the largest	O valor mínimo está acima do máximo
@@ -998,7 +998,7 @@ TikTok did not unblock %1$s. Try again in a moment.	O TikTok não desbloqueou %1
 TikTok didn't accept the feedback. Try again later.	O TikTok não aceitou o feedback. Tente mais tarde.
 TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.	O TikTok ainda não entregou a esta configuração um objeto para alterar. Abra a parte do app que a usa e volte aqui.
 TikTok read it	O TikTok leu
-TikTok read it, but the override could not be applied. Reset it and save it again.	O TikTok leu, mas a substituição estruturada não pôde ser aplicada.
+TikTok read it, but the override couldn't be applied. Reset it and save it again.	O TikTok leu, mas a substituição não pôde ser aplicada. Redefina-a e salve de novo.
 TikTok refused the follow: %1$s	O TikTok recusou o seguir: %1$s
 TikTok's own value	Valor do próprio TikTok
 TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.	O servidor do TikTok pode colocar uma conta em um experimento que esvazia a aba Favoritos do seu perfil. Mantém a aba e os vídeos salvos nela.

@@ -55,7 +55,7 @@
 A Lab change is already running	Bir Lab değişikliği zaten sürüyor
 A creator pattern is taking too long and was turned off: %1$s	Bir içerik üreticisi kalıbı çok uzun sürdüğü için kapatıldı: %1$s
 A diagnostic report is already being saved	Bir tanılama raporu zaten kaydediliyor
-A field value could not be read. Check the values and try again.	Bir alan değeri okunamadı. Değerleri kontrol edip tekrar dene.
+A field value couldn't be read. Check the values and try again.	Bir alan değeri okunamadı. Değerleri kontrol edip tekrar dene.
 A good place to stop, if you want one.	İstersen, durmak için iyi bir an.
 A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.	TikTok kamerayı açık tuttuğu sürece üst köşede yeşil bir nokta, ses kaydederken de turuncu bir nokta görünür. Erişim bitince kaybolurlar.
 A hidden CAPTCHA may be the cause.	Nedeni gizlenmiş bir CAPTCHA olabilir.
@@ -97,7 +97,7 @@ Also change the region TikTok reports internally. Keeps your interface language.
 Always show publish date	Yayın tarihini her zaman göster
 Always show the publish date in video author information. Restart TikTok to apply this.	Video sahibi bilgilerinde yayın tarihini her zaman göster. Bunu uygulamak için TikTok'u yeniden başlat.
 An app's package name, like com.dv.adm. The save button sends the video's link there instead of saving it here. Leave it empty to save here.	com.dv.adm gibi bir uygulamanın paket adı. Kaydet düğmesi videoyu buraya kaydetmek yerine bağlantısını o uygulamaya gönderir. Buraya kaydetmek için boş bırak.
-An interrupted settings change could not be recovered, so its record was set aside. Check your settings or restore a backup.	Yarıda kalan bir ayar değişikliği kurtarılamadı, bu yüzden kaydı bir kenara ayrıldı. Ayarlarını kontrol et veya bir yedeği geri yükle.
+An interrupted settings change couldn't be recovered, so its record was set aside. Check your settings or restore a backup.	Yarıda kalan bir ayar değişikliği kurtarılamadı, bu yüzden kaydı bir kenara ayrıldı. Ayarlarını kontrol et veya bir yedeği geri yükle.
 An operator code is five or six digits, like 310260	Operatör kodu beş veya altı hanelidir, örneğin 310260
 An override changes the value TikTok reads from this gate. It does not rewrite TikTok's cached value or prove the named feature changed.	Geçersiz kılma, TikTok'un bu kapıdan okuduğu değeri değiştirir. TikTok'un önbelleğe aldığı değeri yeniden yazmaz ve adı geçen özelliğin değiştiğini kanıtlamaz.
 Animated sticker format	Hareketli çıkartma biçimi
@@ -223,25 +223,25 @@ Copy quick report	Hızlı raporu kopyala
 Copy report	Raporu kopyala
 Copy the sound link	Ses bağlantısını kopyala
 Copy the video link	Video bağlantısını kopyala
-Could not change Lab settings.	Lab ayarları değiştirilemedi.
-Could not clear suggested accounts	Önerilen hesaplar temizlenemedi
-Could not copy report. Use Save JSON.	Rapor kopyalanamadı. JSON'u kaydet seçeneğini kullan.
-Could not open settings search	Ayarlar araması açılamadı
-Could not open settings section	Ayarlar bölümü açılamadı
-Could not open the export file picker	Dışa aktarma dosya seçicisi açılamadı
-Could not open the import file picker	İçe aktarma dosya seçicisi açılamadı
-Could not put back the diagnostic data. Try again.	Tanılama verileri geri konamadı. Tekrar dene.
-Could not read who posted this comment	Bu yorumu kimin yazdığı okunamadı
-Could not reset this override.	Bu geçersiz kılma sıfırlanamadı.
-Could not restore settings.	Ayarlar geri yüklenemedi.
-Could not save settings backup.	Ayar yedeği kaydedilemedi.
-Could not save this override.	Bu geçersiz kılma kaydedilemedi.
-Could not send the feedback. Try again shortly.	Geri bildirim gönderilemedi. Birazdan tekrar dene.
-Could not start the Lab change. Try again shortly.	Lab değişikliği başlatılamadı. Birazdan tekrar dene.
-Could not start the report export. Try again shortly.	Rapor dışa aktarımı başlatılamadı. Birazdan tekrar dene.
-Could not start the settings operation. Try again shortly.	Ayar işlemi başlatılamadı. Birazdan tekrar dene.
-Could not tell which folder to update. Choose it again.	Hangi klasörün güncelleneceği anlaşılamadı. Yeniden seç.
-Could not undo the clear. Try again.	Temizleme geri alınamadı. Tekrar dene.
+Couldn't change the Lab settings. Try again.	Lab ayarları değiştirilemedi. Tekrar dene.
+Couldn't clear the suggested accounts. Reopen the Inbox and try again.	Önerilen hesaplar temizlenemedi. Gelen Kutusu'nu yeniden açıp tekrar dene.
+Couldn't copy the report. Use Save JSON instead.	Rapor kopyalanamadı. Bunun yerine JSON'u kaydet seçeneğini kullan.
+Couldn't open settings search. Reopen settings and try again.	Ayarlar araması açılamadı. Ayarları yeniden açıp tekrar dene.
+Couldn't open that settings section. Reopen settings and try again.	O ayarlar bölümü açılamadı. Ayarları yeniden açıp tekrar dene.
+Couldn't open the file picker to export. Try again.	Dışa aktarma dosya seçicisi açılamadı. Tekrar dene.
+Couldn't open the file picker to import. Try again.	İçe aktarma dosya seçicisi açılamadı. Tekrar dene.
+Couldn't put back the diagnostic data. Try again.	Tanılama verileri geri konamadı. Tekrar dene.
+Couldn't read who posted this comment. Open their profile and block them there.	Bu yorumu kimin yazdığı okunamadı. Profilini açıp oradan engelle.
+Couldn't reset this override. Try again.	Bu geçersiz kılma sıfırlanamadı. Tekrar dene.
+Couldn't restore the settings. Try again.	Ayarlar geri yüklenemedi. Tekrar dene.
+Couldn't save the settings backup. Try again.	Ayar yedeği kaydedilemedi. Tekrar dene.
+Couldn't save this override. Try again.	Bu geçersiz kılma kaydedilemedi. Tekrar dene.
+Couldn't send the feedback. Try again shortly.	Geri bildirim gönderilemedi. Birazdan tekrar dene.
+Couldn't start the Lab change. Try again shortly.	Lab değişikliği başlatılamadı. Birazdan tekrar dene.
+Couldn't start the report export. Try again shortly.	Rapor dışa aktarımı başlatılamadı. Birazdan tekrar dene.
+Couldn't start the settings change. Try again shortly.	Ayar değişikliği başlatılamadı. Birazdan tekrar dene.
+Couldn't tell which folder to update. Choose it again.	Hangi klasörün güncelleneceği anlaşılamadı. Yeniden seç.
+Couldn't undo the clear. Try again.	Temizleme geri alınamadı. Tekrar dene.
 Couldn't confirm the block for %1$s. Open their profile to check.	%1$s için engelleme doğrulanamadı. Kontrol etmek için profilini aç.
 Couldn't confirm the unblock for %1$s. Open their profile to check.	%1$s için engelin kaldırıldığı doğrulanamadı. Kontrol etmek için profilini aç.
 Country and network preferences	Ülke ve ağ tercihleri
@@ -966,13 +966,13 @@ That settings backup is incomplete, so it may have been cut short. Nothing was a
 That settings change did not go through. Nothing was altered.	Bu ayar değişikliği uygulanamadı. Hiçbir şey değiştirilmedi.
 That sticker is in a format Hushfeed cannot read	Bu çıkartma Hushfeed'in okuyamadığı bir biçimde
 The Lab can't check this. TikTok gets it exactly as typed.	Lab bunu denetleyemiyor. TikTok bunu tam yazıldığı gibi alır.
-The Lab could not open. Go back and open it again.	Lab açılamadı. Geri dön ve yeniden aç.
+The Lab couldn't open. Go back and open it again.	Lab açılamadı. Geri dön ve yeniden aç.
 The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.	Lab en fazla %1$s kural tutar. Bu değişiklikle %2$s olacaktı, bu yüzden hiçbir şey değiştirilmedi.
 The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.	Kataloğa göre bu anahtar %1$s, bu geçersiz kılma ise %2$s. Geçersiz kılmayı sıfırla ve yenisini oluştur.
-The diagnostic report could not be saved yet. Try again in a moment.	Tanılama raporu henüz kaydedilemedi. Birazdan yeniden dene.
-The diagnostic report could not be saved. Try again.	Tanılama raporu kaydedilemedi. Yeniden dene.
+The diagnostic report couldn't be saved yet. Try again in a moment.	Tanılama raporu henüz kaydedilemedi. Birazdan yeniden dene.
+The diagnostic report couldn't be saved. Try again.	Tanılama raporu kaydedilemedi. Yeniden dene.
 The downloader app you chose isn't installed. Check Send links to another app under Downloads.	Seçtiğin indirme uygulaması yüklü değil. İndirmeler altındaki Bağlantıları başka bir uygulamaya gönder ayarını kontrol et.
-The export failed and the partial file could not be removed. Delete it from your Downloads folder.	Dışa aktarma başarısız oldu ve yarım kalan dosya kaldırılamadı. Dosyayı İndirilenler klasöründen sil.
+The export failed and the partial file couldn't be removed. Delete it from your Downloads folder.	Dışa aktarma başarısız oldu ve yarım kalan dosya kaldırılamadı. Dosyayı İndirilenler klasöründen sil.
 The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.	Akış, bekletmeden önceki son kırk beş saniye boyunca kararır, böylece bekletmeye birden çarpmak yerine yavaşça varırsın. Bir süre bütçesi ve varılacak bir bekletme gerekir.
 The feed does not end. This is a fine time to leave it.	Akışın sonu yok. Şimdi bırakmak için iyi bir an.
 The feed is open again	Akış yeniden açık
@@ -990,9 +990,9 @@ The override changes no fields. Edit the field values, or reset the override.	Ge
 The override couldn't be applied: %1$s. Edit the field values, or reset the override.	Geçersiz kılma uygulanamadı: %1$s. Alan değerlerini düzenle ya da geçersiz kılmayı sıfırla.
 The override doesn't say what list to return. Edit the field values, or reset the override.	Geçersiz kılma hangi listenin döndürüleceğini belirtmiyor. Alan değerlerini düzenle ya da geçersiz kılmayı sıfırla.
 The profile picture couldn't be saved. Try again.	Profil fotoğrafı kaydedilemedi. Yeniden dene.
-The record of an interrupted settings change could not be read, so it was set aside. Check your settings.	Yarıda kalan bir ayar değişikliğinin kaydı okunamadığı için bir kenara ayrıldı. Ayarlarını kontrol et.
+The record of an interrupted settings change couldn't be read, so it was set aside. Check your settings.	Yarıda kalan bir ayar değişikliğinin kaydı okunamadığı için bir kenara ayrıldı. Ayarlarını kontrol et.
 The report couldn't be saved. Try again.	Rapor kaydedilemedi. Yeniden dene.
-The selected loaded-values file could not be read. Try again.	Seçilen yüklenen değerler dosyası okunamadı. Yeniden dene.
+The loaded-values file you chose couldn't be read. Try again.	Seçtiğin yüklenen değerler dosyası okunamadı. Yeniden dene.
 The setting couldn't finish updating. Its saved value is shown.	Ayarın güncellenmesi tamamlanamadı. Kayıtlı değeri gösteriliyor.
 The settings backup was rejected. Nothing was altered.	Ayar yedeği reddedildi. Hiçbir şey değiştirilmedi.
 The smallest value is above the largest	En küçük değer en büyük değerden yüksek
@@ -1034,7 +1034,7 @@ TikTok did not unblock %1$s. Try again in a moment.	TikTok %1$s hesabının enge
 TikTok didn't accept the feedback. Try again later.	TikTok geri bildirimi kabul etmedi. Daha sonra yeniden dene.
 TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.	TikTok bu ayara henüz değiştirilecek bir nesne vermedi. Uygulamanın bunu kullanan bölümünü aç, sonra geri gel.
 TikTok read it	TikTok bunu okudu
-TikTok read it, but the override could not be applied. Reset it and save it again.	TikTok bunu okudu ama geçersiz kılma uygulanamadı. Sıfırla ve yeniden kaydet.
+TikTok read it, but the override couldn't be applied. Reset it and save it again.	TikTok bunu okudu ama geçersiz kılma uygulanamadı. Sıfırla ve yeniden kaydet.
 TikTok refused the follow: %1$s	TikTok takibi reddetti: %1$s
 TikTok's own value	TikTok'un kendi değeri
 TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.	TikTok'un sunucusu, bir hesabı profilindeki Favoriler sekmesini boşaltan bir deneye sokabilir. Sekmeyi ve kayıtlı videolarını koru.

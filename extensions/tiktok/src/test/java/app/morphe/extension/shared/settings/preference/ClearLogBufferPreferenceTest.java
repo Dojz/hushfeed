@@ -45,7 +45,7 @@ public class ClearLogBufferPreferenceTest {
         LogBufferManager.restoredMessage = "Diagnostic data put back";
         LogBufferManager.nothingToRestoreMessage = "There is no diagnostic data to put back";
         LogBufferManager.restoreFailedMessage =
-                "Could not put back the diagnostic data. Try again.";
+                "Couldn't put back the diagnostic data. Try again.";
         ShadowToast.reset();
     }
 

@@ -24,7 +24,7 @@ public final class ClearSeenVideoHistoryPreference extends Preference
     static final String CLEAR_TITLE = "Clear seen videos";
     static final String UNDO_TITLE = "Undo clearing seen videos";
     static final String NOT_READY = "Still reading the record. Tap again in a moment.";
-    static final String FAILED = "Could not undo the clear. Try again.";
+    static final String FAILED = "Couldn't undo the clear. Try again.";
 
     public ClearSeenVideoHistoryPreference(Context context) {
         super(context);

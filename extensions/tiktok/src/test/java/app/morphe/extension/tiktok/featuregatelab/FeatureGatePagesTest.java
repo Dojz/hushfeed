@@ -802,7 +802,7 @@ public class FeatureGatePagesTest {
             TextView reason = (TextView) detail.getView().findViewWithTag(
                     "feature_gate_status_reason");
             assertNotNull("the page has no line for the reason", reason);
-            assertEquals("TikTok read it, but the override could not be applied. Reset it and save it again.",
+            assertEquals("TikTok read it, but the override couldn't be applied. Reset it and save it again.",
                     status.getText().toString());
             assertEquals(View.VISIBLE, reason.getVisibility());
             assertEquals("Field missing_field can't be changed on this build. Take it out of"

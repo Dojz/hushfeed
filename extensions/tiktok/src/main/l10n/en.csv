@@ -57,7 +57,7 @@ source,target
 A Lab change is already running,A Lab change is already running
 A creator pattern is taking too long and was turned off: %1$s,A creator pattern is taking too long and was turned off: %1$s
 A diagnostic report is already being saved,A diagnostic report is already being saved
-A field value could not be read. Check the values and try again.,A field value could not be read. Check the values and try again.
+A field value couldn't be read. Check the values and try again.,A field value couldn't be read. Check the values and try again.
 A forced value applies to this copy of TikTok whichever account is signed in. It cannot get past a check the server makes.,A forced value applies to this copy of TikTok whichever account is signed in. It cannot get past a check the server makes.
 "A good place to stop, if you want one.","A good place to stop, if you want one."
 A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.,A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.
@@ -98,7 +98,7 @@ Also change the region TikTok reports internally. Keeps your interface language.
 Always show publish date,Always show publish date
 Always show the publish date in video author information. Restart TikTok to apply this.,Always show the publish date in video author information. Restart TikTok to apply this.
 "An app's package name, like com.dv.adm. The save button sends the video's link there instead of saving it here. Leave it empty to save here.","An app's package name, like com.dv.adm. The save button sends the video's link there instead of saving it here. Leave it empty to save here."
-"An interrupted settings change could not be recovered, so its record was set aside. Check your settings or restore a backup.","An interrupted settings change could not be recovered, so its record was set aside. Check your settings or restore a backup."
+"An interrupted settings change couldn't be recovered, so its record was set aside. Check your settings or restore a backup.","An interrupted settings change couldn't be recovered, so its record was set aside. Check your settings or restore a backup."
 "An operator code is five or six digits, like 310260","An operator code is five or six digits, like 310260"
 An override changes the value TikTok reads from this gate. It does not rewrite TikTok's cached value or prove the named feature changed.,An override changes the value TikTok reads from this gate. It does not rewrite TikTok's cached value or prove the named feature changed.
 Animated sticker format,Animated sticker format
@@ -227,27 +227,27 @@ Copy quick report,Copy quick report
 Copy report,Copy report
 Copy the sound link,Copy the sound link
 Copy the video link,Copy the video link
-Could not change Lab settings.,Could not change Lab settings.
-Could not clear suggested accounts,Could not clear suggested accounts
-Could not copy report. Use Save JSON.,Could not copy report. Use Save JSON.
-Could not open settings search,Could not open settings search
-Could not open settings section,Could not open settings section
-Could not open the export file picker,Could not open the export file picker
-Could not open the import file picker,Could not open the import file picker
-Could not put back the diagnostic data. Try again.,Could not put back the diagnostic data. Try again.
-Could not read who posted this comment,Could not read who posted this comment
-Could not reset this override.,Could not reset this override.
-Could not restore settings.,Could not restore settings.
-Could not save settings backup.,Could not save settings backup.
-Could not save this override.,Could not save this override.
-Could not send the feedback. Try again shortly.,Could not send the feedback. Try again shortly.
-Could not start the Lab change. Try again shortly.,Could not start the Lab change. Try again shortly.
-Could not start the report export. Try again shortly.,Could not start the report export. Try again shortly.
-Could not start the settings operation. Try again shortly.,Could not start the settings operation. Try again shortly.
-Could not tell which folder to update. Choose it again.,Could not tell which folder to update. Choose it again.
-Could not undo the clear. Try again.,Could not undo the clear. Try again.
+Couldn't change the Lab settings. Try again.,Couldn't change the Lab settings. Try again.
+Couldn't clear the suggested accounts. Reopen the Inbox and try again.,Couldn't clear the suggested accounts. Reopen the Inbox and try again.
 Couldn't confirm the block for %1$s. Open their profile to check.,Couldn't confirm the block for %1$s. Open their profile to check.
 Couldn't confirm the unblock for %1$s. Open their profile to check.,Couldn't confirm the unblock for %1$s. Open their profile to check.
+Couldn't copy the report. Use Save JSON instead.,Couldn't copy the report. Use Save JSON instead.
+Couldn't open settings search. Reopen settings and try again.,Couldn't open settings search. Reopen settings and try again.
+Couldn't open that settings section. Reopen settings and try again.,Couldn't open that settings section. Reopen settings and try again.
+Couldn't open the file picker to export. Try again.,Couldn't open the file picker to export. Try again.
+Couldn't open the file picker to import. Try again.,Couldn't open the file picker to import. Try again.
+Couldn't put back the diagnostic data. Try again.,Couldn't put back the diagnostic data. Try again.
+Couldn't read who posted this comment. Open their profile and block them there.,Couldn't read who posted this comment. Open their profile and block them there.
+Couldn't reset this override. Try again.,Couldn't reset this override. Try again.
+Couldn't restore the settings. Try again.,Couldn't restore the settings. Try again.
+Couldn't save the settings backup. Try again.,Couldn't save the settings backup. Try again.
+Couldn't save this override. Try again.,Couldn't save this override. Try again.
+Couldn't send the feedback. Try again shortly.,Couldn't send the feedback. Try again shortly.
+Couldn't start the Lab change. Try again shortly.,Couldn't start the Lab change. Try again shortly.
+Couldn't start the report export. Try again shortly.,Couldn't start the report export. Try again shortly.
+Couldn't start the settings change. Try again shortly.,Couldn't start the settings change. Try again shortly.
+Couldn't tell which folder to update. Choose it again.,Couldn't tell which folder to update. Choose it again.
+Couldn't undo the clear. Try again.,Couldn't undo the clear. Try again.
 Country and network preferences,Country and network preferences
 Country code,Country code
 Country filters,Country filters
@@ -967,7 +967,7 @@ That sticker is in a format Hushfeed cannot read,That sticker is in a format Hus
 The Activity row of likes and comments on your posts leaves the Inbox. Notifications about them still arrive.,The Activity row of likes and comments on your posts leaves the Inbox. Notifications about them still arrive.
 The Archive row leaves the Inbox. Archived chats are kept.,The Archive row leaves the Inbox. Archived chats are kept.
 The Lab can't check this. TikTok gets it exactly as typed.,The Lab can't check this. TikTok gets it exactly as typed.
-The Lab could not open. Go back and open it again.,The Lab could not open. Go back and open it again.
+The Lab couldn't open. Go back and open it again.,The Lab couldn't open. Go back and open it again.
 "The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.","The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed."
 The Message requests row leaves the Inbox. Requests keep arriving and wait there until you turn this off.,The Message requests row leaves the Inbox. Requests keep arriving and wait there until you turn this off.
 The New followers row leaves the top of the Inbox. The accounts still follow you.,The New followers row leaves the top of the Inbox. The accounts still follow you.
@@ -976,24 +976,24 @@ The accounts TikTok suggests you follow no longer take up rows in the Inbox.,The
 The activity status control leaves the Inbox header. Whether others see you as active is unchanged.,The activity status control leaves the Inbox header. Whether others see you as active is unchanged.
 "The add people icon leaves the Inbox header. Only the shortcut goes, so friend suggestions elsewhere are unchanged.","The add people icon leaves the Inbox header. Only the shortcut goes, so friend suggestions elsewhere are unchanged."
 The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.,The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.
-The diagnostic report could not be saved yet. Try again in a moment.,The diagnostic report could not be saved yet. Try again in a moment.
-The diagnostic report could not be saved. Try again.,The diagnostic report could not be saved. Try again.
+The diagnostic report couldn't be saved yet. Try again in a moment.,The diagnostic report couldn't be saved yet. Try again in a moment.
+The diagnostic report couldn't be saved. Try again.,The diagnostic report couldn't be saved. Try again.
 The downloader app you chose isn't installed. Check Send links to another app under Downloads.,The downloader app you chose isn't installed. Check Send links to another app under Downloads.
-The export failed and the partial file could not be removed. Delete it from your Downloads folder.,The export failed and the partial file could not be removed. Delete it from your Downloads folder.
+The export failed and the partial file couldn't be removed. Delete it from your Downloads folder.,The export failed and the partial file couldn't be removed. Delete it from your Downloads folder.
 "The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.","The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at."
 The feed does not end. This is a fine time to leave it.,The feed does not end. This is a fine time to leave it.
 The feed is open again,The feed is open again
 "The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.","The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away."
 "The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.","The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night."
+The loaded-values file you chose couldn't be read. Try again.,The loaded-values file you chose couldn't be read. Try again.
 "The original photos aren't available, so TikTok's own save runs instead","The original photos aren't available, so TikTok's own save runs instead"
 "The override changes no fields. Edit the field values, or reset the override.","The override changes no fields. Edit the field values, or reset the override."
 "The override couldn't be applied: %1$s. Edit the field values, or reset the override.","The override couldn't be applied: %1$s. Edit the field values, or reset the override."
 "The override doesn't say what list to return. Edit the field values, or reset the override.","The override doesn't say what list to return. Edit the field values, or reset the override."
 The profile picture couldn't be saved. Try again.,The profile picture couldn't be saved. Try again.
-"The record of an interrupted settings change could not be read, so it was set aside. Check your settings.","The record of an interrupted settings change could not be read, so it was set aside. Check your settings."
+"The record of an interrupted settings change couldn't be read, so it was set aside. Check your settings.","The record of an interrupted settings change couldn't be read, so it was set aside. Check your settings."
 The report couldn't be saved. Try again.,The report couldn't be saved. Try again.
 The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.,The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.
-The selected loaded-values file could not be read. Try again.,The selected loaded-values file could not be read. Try again.
 The setting couldn't finish updating. Its saved value is shown.,The setting couldn't finish updating. Its saved value is shown.
 The settings backup was rejected. Nothing was altered.,The settings backup was rejected. Nothing was altered.
 The smallest value is above the largest,The smallest value is above the largest
@@ -1036,7 +1036,7 @@ TikTok did not unblock %1$s. Try again in a moment.,TikTok did not unblock %1$s.
 TikTok didn't accept the feedback. Try again later.,TikTok didn't accept the feedback. Try again later.
 "TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.","TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back."
 TikTok read it,TikTok read it
-"TikTok read it, but the override could not be applied. Reset it and save it again.","TikTok read it, but the override could not be applied. Reset it and save it again."
+"TikTok read it, but the override couldn't be applied. Reset it and save it again.","TikTok read it, but the override couldn't be applied. Reset it and save it again."
 TikTok refused the follow: %1$s,TikTok refused the follow: %1$s
 TikTok's own value,TikTok's own value
 TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.,TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.

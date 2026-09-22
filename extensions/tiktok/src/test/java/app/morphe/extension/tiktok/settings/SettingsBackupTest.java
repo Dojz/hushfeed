@@ -1048,7 +1048,7 @@ public class SettingsBackupTest {
                 run.invoke(null, fragment, 7312, uri);
                 Shadows.shadowOf(Looper.getMainLooper()).idle();
 
-                assertEquals("Could not start the settings operation. Try again shortly.",
+                assertEquals("Couldn't start the settings change. Try again shortly.",
                         ShadowToast.getTextOfLatestToast());
                 assertEquals("a rejected restore changed settings", 73,
                         (int) Settings.MAX_VIDEO_SECONDS.get());
