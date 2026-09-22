@@ -354,11 +354,25 @@ public final class Probe extends Instrumentation {
                         // One log line per loaded video, so no line nears logcat's size limit.
                         String route = intent.getStringExtra("route");
                         if (route == null || !route.matches("[a-z-]{1,24}")) {
-                            throw new IllegalArgumentException("marker-corpus needs -e route <for-you|profile|following|search>");
+                            throw new IllegalArgumentException("marker-corpus needs a short route name");
                         }
                         List<String> lines = markerCorpus(route);
                         for (String line : lines) Log.i(TAG, "corpus\t" + route + "\t" + line);
                         Log.i(TAG, "ok marker-corpus " + route + " items=" + lines.size());
+                        break;
+                    }
+                    case "marker-token-selftest": {
+                        JSONObject tokens = new JSONObject();
+                        tokens.put("longNumeral", token("1234567"));
+                        tokens.put("leadingPlus", token("+1"));
+                        tokens.put("intOverflow", token(4_294_967_296L));
+                        tokens.put("doubleEpisode", token(1.0d));
+                        tokens.put("blankObject", token(new Object() {
+                            @Override public String toString() {
+                                return "  ";
+                            }
+                        }));
+                        Log.i(TAG, "ok marker-token-selftest " + tokens);
                         break;
                     }
                     case "commerce-evidence":
@@ -1262,13 +1276,12 @@ public final class Probe extends Instrumentation {
          * current screen, one line each: a key for dropping repeats, the verdicts of the live
          * filters, and the shape of every field they read.
          *
-         * <p>Only shapes leave the phone. Booleans stay; numbers stay below 10,000 and become
-         * plus or minus 10,000 above it, so a zero stays a zero and an id stays non-zero without
-         * being an id; text becomes its trimmed length, or a blank marker; a bare numeral stays
-         * as written up to six digits and becomes its digit count beyond that. The key is the
-         * first 12 hex digits of a SHA-256 of the video id, which the host drops before anything
-         * is committed. Every field is read through Hushfeed's own Reflect, getter first and
-         * field second, which is exactly the read the filters make.
+         * <p>Only shapes leave the phone. Booleans stay. Numbers record whether their int and
+         * long views are zero plus one of four text classes. Text and unknown objects record only
+         * blank, positive integer, non-positive integer or other. Collection and map sizes are
+         * capped. The key is the first 12 hex digits of a SHA-256 of the video id, which the host
+         * drops before anything is committed. Every field is read through Hushfeed's own Reflect,
+         * getter first and field second, which is exactly the read the filters make.
          */
         private List<String> markerCorpus(String route) throws Exception {
             android.app.Activity activity = (android.app.Activity) loader.loadClass(UTILS)
@@ -1409,6 +1422,8 @@ public final class Probe extends Instrumentation {
             shape.put("mPaidContentInfo", struct(read(property, video, "getMPaidContentInfo", "mPaidContentInfo"),
                     property, "getPaidCollectionId", "paidCollectionId", "getCollectionName", "collectionName",
                     "getEpisodeNumber", "episodeNumber", "isPaidCollectionIntro", "isPaidCollectionIntro"));
+            shape.put("playlist_info", struct(read(property, video, "getPlaylist_info", "playlist_info"),
+                    property, "getMixId", "mixId"));
             shape.put("mixInfo", struct(read(property, video, "getMixInfo", "mixInfo"), property,
                     "getMixId", "mixId", "getMixName", "mixName"));
             return shape;
@@ -1433,27 +1448,30 @@ public final class Probe extends Instrumentation {
             if (value instanceof Boolean) {
                 out.put("b", value);
             } else if (value instanceof Number) {
-                long number = ((Number) value).longValue();
-                out.put("n", Math.abs(number) >= 10_000L ? Long.signum(number) * 10_000L : number);
+                Number number = (Number) value;
+                out.put("num", "i" + (number.intValue() == 0 ? "0" : "1")
+                        + "l" + (number.longValue() == 0L ? "0" : "1") + textShape(value));
             } else if (value instanceof CharSequence) {
-                String text = value.toString().trim();
-                if (text.isEmpty()) {
-                    out.put("sblank", value.toString().length());
-                } else if (text.matches("-?[0-9]+")) {
-                    int digits = text.startsWith("-") ? text.length() - 1 : text.length();
-                    if (digits <= 6) out.put("s", text);
-                    else out.put("snum", text.startsWith("-") ? -digits : digits);
-                } else {
-                    out.put("slen", text.length());
-                }
+                out.put("txt", textShape(value));
             } else if (value instanceof Collection) {
-                out.put("c", ((Collection<?>) value).size());
+                out.put("c", Math.min(((Collection<?>) value).size(), 10_000));
             } else if (value instanceof Map) {
-                out.put("m", ((Map<?, ?>) value).size());
+                out.put("m", Math.min(((Map<?, ?>) value).size(), 10_000));
             } else {
-                out.put("o", 1);
+                out.put("obj", textShape(value));
             }
             return out;
+        }
+
+        /** What Reflect.string and SeriesFilter.isEpisode can learn without retaining the text. */
+        private static String textShape(Object value) {
+            String text = value.toString().trim();
+            if (text.isEmpty()) return "b";
+            try {
+                return Long.parseLong(text) > 0L ? "p" : "z";
+            } catch (NumberFormatException notALong) {
+                return "x";
+            }
         }
 
         /** Finds the fixed disclosure label and reports only its native view structure. */
