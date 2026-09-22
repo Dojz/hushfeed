@@ -497,6 +497,13 @@ val feedFilterPatch = bytecodePatch(
         // bridge base's canShow serves nine bridges (ads, shop, POI, search and the rest), so
         // that guard hands the service over and the extension answers only for the Tako one;
         // the class-name check below keeps that comparison honest against the build.
+        val takoBridge = TakoCommentTopBarBridgeFingerprint.originalClassDef
+        if (takoBridge.superclass != COMMENT_TOP_BAR_BRIDGE_BASE) {
+            throw PatchException(
+                "Feed filter: ${takoBridge.type} extends ${takoBridge.superclass}, not the bridge " +
+                    "base whose canShow is guarded, so the comments Tako bar would be left standing.",
+            )
+        }
         TakoCommentTopBarCanShowFingerprint.method.guardAtEntry(
             "Feed filter",
             "invoke-static {}, $TAKO_AI_FILTER_CLASS_DESCRIPTOR->shouldHideCommentTopBar()Z",
@@ -505,13 +512,6 @@ val feedFilterPatch = bytecodePatch(
                 return v0
             """,
         )
-        val takoBridge = TakoCommentTopBarBridgeFingerprint.originalClassDef
-        if (takoBridge.superclass != COMMENT_TOP_BAR_BRIDGE_BASE) {
-            throw PatchException(
-                "Feed filter: ${takoBridge.type} extends ${takoBridge.superclass}, not the bridge " +
-                    "base whose canShow is guarded, so the comments Tako bar would be left standing.",
-            )
-        }
         CommentTopBarBridgeCanShowFingerprint.method.guardAtEntry(
             "Feed filter",
             "invoke-static {p0}, $TAKO_AI_FILTER_CLASS_DESCRIPTOR->shouldHideBridgedCommentTopBar(Ljava/lang/Object;)Z",
