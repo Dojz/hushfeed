@@ -380,7 +380,7 @@ Hide Series	Serien ausblenden
 Hide the Tako bubble	Tako-Blase ausblenden
 Hide TikTok Shop	TikTok Shop ausblenden
 Hide TikTok Shop posts from the feed.	TikTok-Shop-Beiträge aus dem Feed ausblenden.
-Hide TikTok Shop updates and coupon messages.	TikTok-Shop-Updates und Gutschein-Nachrichten ausblenden.
+Shop order updates and coupon messages no longer take up rows in the Inbox. Your orders are unchanged.	Bestell-Updates und Gutschein-Nachrichten vom Shop belegen keine Zeilen mehr im Posteingang. Deine Bestellungen bleiben unverändert.
 Hide the Tako chat	Tako-Chat ausblenden
 Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.	Blende die Schnell-Emoji-Zeile und automatische Sticker-Vorschläge aus, die beim Tippen erscheinen. Die Emoji- und Sticker-Schaltflächen funktionieren weiterhin.
 Hide activity	Aktivität ausblenden
@@ -418,24 +418,24 @@ Hide suggestions on the search page	Vorschläge auf der Suchseite ausblenden
 Hide sharing apps	Apps zum Teilen ausblenden
 Hide stories tray	Story-Leiste ausblenden
 Hide stories	Storys ausblenden
-Hide suggested account rows.	Zeilen mit vorgeschlagenen Konten ausblenden.
+The accounts TikTok suggests you follow no longer take up rows in the Inbox.	Die Konten, die TikTok dir zum Folgen vorschlägt, belegen keine Zeilen mehr im Posteingang.
 Hide suggested accounts	Vorgeschlagene Konten ausblenden
 Hide surveys	Umfragen ausblenden
 Hide tabs TikTok adds later unless you allow them.	Tabs ausblenden, die TikTok später hinzufügt, sofern du sie nicht erlaubst.
 Hide the "Search this image" prompt shown over videos. The feed search button and suggestions above comments are separate settings.	Blende den Hinweis „Dieses Bild suchen“ über Videos aus. Die Suchschaltfläche im Feed und die Vorschläge über Kommentaren haben eigene Einstellungen.
-Hide the Activity row of likes and comments on your posts.	Die Zeile „Aktivität“ mit Likes und Kommentaren zu deinen Beiträgen ausblenden.
-Hide the Archive row.	Die Zeile „Archiv“ ausblenden.
+The Activity row of likes and comments on your posts leaves the Inbox. Notifications about them still arrive.	Die Zeile Aktivität mit Likes und Kommentaren zu deinen Beiträgen verschwindet aus dem Posteingang. Benachrichtigungen dazu kommen weiterhin an.
+The Archive row leaves the Inbox. Archived chats are kept.	Die Zeile Archiv verschwindet aus dem Posteingang. Archivierte Chats bleiben erhalten.
 Hide the LIVE button	LIVE-Knopf ausblenden
 Hide the LIVE button in the top left corner of the feed.	Den LIVE-Knopf in der linken oberen Ecke des Feeds ausblenden.
 Hide LIVE videos from the feed.	LIVE-Videos aus dem Feed ausblenden.
-Hide the Message requests row.	Die Zeile „Nachrichtenanfragen“ ausblenden.
-Hide the New followers row.	Die Zeile „Neue Follower“ ausblenden.
+The Message requests row leaves the Inbox. Requests keep arriving and wait there until you turn this off.	Die Zeile Nachrichtenanfragen verschwindet aus dem Posteingang. Anfragen kommen weiterhin an und warten dort, bis du das ausschaltest.
+The New followers row leaves the top of the Inbox. The accounts still follow you.	Die Zeile Neue Follower verschwindet oben aus dem Posteingang. Die Konten folgen dir weiterhin.
 Hide the Send to row	Zeile „Senden an“ ausblenden
 Hide the Tako AI bubble above the profile button, the Ask bar under videos, the Ask Tako button on the search page and the Tako bar above comments.	Die Tako-AI-Blase über der Profil-Schaltfläche, die Tako-Leiste unter Videos, die Schaltfläche „Tako fragen“ auf der Suchseite und die Tako-Leiste über den Kommentaren ausblenden.
-Hide the Tako assistant conversation in Inbox.	Die Unterhaltung mit dem Tako-Assistenten im Posteingang ausblenden.
-Hide the activity status control in the Inbox header.	Das Element für den Aktivitätsstatus in der Kopfzeile des Posteingangs ausblenden.
+The Tako assistant's conversation leaves the Inbox list. The Tako bubble on the feed has its own switch under Feed tabs.	Die Unterhaltung mit dem Tako-Assistenten verschwindet aus der Liste im Posteingang. Die Tako-Blase im Feed hat einen eigenen Schalter unter Feed-Tabs.
+The activity status control leaves the Inbox header. Whether others see you as active is unchanged.	Das Steuerelement für den Aktivitätsstatus verschwindet aus der Kopfzeile des Posteingangs. Ob andere dich als aktiv sehen, ändert sich nicht.
 Hide the add people icon	Symbol Personen hinzufügen ausblenden
-Hide the add people icon in the Inbox header.	Das Symbol zum Hinzufügen von Personen in der Kopfzeile des Posteingangs ausblenden.
+The add people icon leaves the Inbox header. Only the shortcut goes, so friend suggestions elsewhere are unchanged.	Das Symbol Personen hinzufügen verschwindet aus der Kopfzeile des Posteingangs. Nur die Verknüpfung geht weg, Freundesvorschläge an anderen Stellen bleiben unverändert.
 Hide the caption	Beschreibung ausblenden
 Hide the description under the creator's name on the feed.	Die Beschreibung unter dem Namen des Creators im Feed ausblenden.
 Hide the event badge	Event-Abzeichen ausblenden
@@ -558,11 +558,11 @@ Media	Medien
 Media config (VE)	Medienkonfiguration (VE)
 Messages, profiles and search still work.	Nachrichten, Profile und die Suche funktionieren weiterhin.
 Microphone in use	Mikrofon in Benutzung
-Min/Max comments	Min/Max Kommentare
-Min/Max favorites	Min./Max. Favoriten
-Min/Max likes	Min./Max. Likes
-Min/Max shares	Min./Max. geteilt
-Min/Max views	Min./Max. Aufrufe
+Comments range	Spanne der Kommentare
+Favorites range	Spanne der Favoriten
+Likes range	Spanne der Likes
+Shares range	Spanne der Teilungen
+Views range	Spanne der Aufrufe
 Minimum	Minimum
 More options	Weitere Optionen
 Move down	Nach unten verschieben
@@ -947,11 +947,11 @@ The feed waits for one tap before it starts playing again when you come back to 
 The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.	Die Stunde, zu der beide Limits zurückgesetzt werden, im 24-Stunden-Format. Standardmäßig vier Uhr morgens, denn wer um eins noch scrollt, hat immer noch gestern Abend.
 Last change put back. Restart TikTok to apply all changes.	Letzte Änderung wiederhergestellt. TikTok neu starten, um alle Änderungen zu übernehmen.
 Last change put back. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.	Letzte Änderung wiederhergestellt. Die Regeln des Feature Gate Labs galten für eine andere TikTok-Version und wurden ausgelassen. TikTok neu starten, um alle Änderungen zu übernehmen.
-The minimum or maximum comments on a video to show.	Mindest- oder Höchstzahl an Kommentaren, damit ein Video gezeigt wird.
-The minimum or maximum favorites of a video to show.	Das Minimum oder Maximum an Favoriten, das ein Video haben muss, um gezeigt zu werden.
-The minimum or maximum likes of a video to show.	Die Mindest- oder Höchstzahl an Likes, damit ein Video gezeigt wird.
-The minimum or maximum shares of a video to show.	Die Mindest- oder Höchstzahl, wie oft ein Video geteilt wurde, damit es gezeigt wird.
-The minimum or maximum views of a video to show.	Die Mindest- oder Höchstzahl an Aufrufen, damit ein Video gezeigt wird.
+Show only videos with this many comments.	Nur Videos mit so vielen Kommentaren zeigen.
+Show only videos with this many favorites.	Nur Videos mit so vielen Favoriten zeigen.
+Show only videos with this many likes.	Nur Videos mit so vielen Likes zeigen.
+Show only videos with this many shares.	Nur Videos zeigen, die so oft geteilt wurden.
+Show only videos with this many views.	Nur Videos mit so vielen Aufrufen zeigen.
 The original photos aren't available, so TikTok's own save runs instead	Die Originalfotos sind nicht verfügbar, also speichert TikTok selbst
 The override changes no fields. Edit the field values, or reset the override.	Die Überschreibung ändert keine Felder. Bearbeite die Feldwerte oder setze die Überschreibung zurück.
 The override couldn't be applied: %1$s. Edit the field values, or reset the override.	Die Überschreibung konnte nicht angewendet werden: %1$s. Bearbeite die Feldwerte oder setze die Überschreibung zurück.

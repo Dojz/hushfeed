@@ -147,27 +147,27 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
         addPreference(new NumberInputPreference(context, "Maximum views per comment", "Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.", Settings.MAX_VIEWS_PER_COMMENT, "view per comment", "views per comment").zeroMeansOff());
         addPreference(new RangeValuePreference(
                 context,
-                "Min/Max views", "The minimum or maximum views of a video to show.",
+                "Views range", "Show only videos with this many views.",
                 Settings.MIN_MAX_VIEWS
         ));
         addPreference(new RangeValuePreference(
                 context,
-                "Min/Max likes", "The minimum or maximum likes of a video to show.",
+                "Likes range", "Show only videos with this many likes.",
                 Settings.MIN_MAX_LIKES
         ));
         addPreference(new RangeValuePreference(
                 context,
-                "Min/Max comments", "The minimum or maximum comments on a video to show.",
+                "Comments range", "Show only videos with this many comments.",
                 Settings.MIN_MAX_COMMENTS
         ));
         addPreference(new RangeValuePreference(
                 context,
-                "Min/Max favorites", "The minimum or maximum favorites of a video to show.",
+                "Favorites range", "Show only videos with this many favorites.",
                 Settings.MIN_MAX_FAVOURITES
         ));
         addPreference(new RangeValuePreference(
                 context,
-                "Min/Max shares", "The minimum or maximum shares of a video to show.",
+                "Shares range", "Show only videos with this many shares.",
                 Settings.MIN_MAX_SHARES
         ));
     }

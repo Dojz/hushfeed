@@ -393,7 +393,7 @@ Hide Search this image prompts	Bu görseli ara istemlerini gizle
 Hide Series	Serileri gizle
 Hide TikTok Shop	TikTok Shop'u gizle
 Hide TikTok Shop posts from the feed.	TikTok Shop gönderilerini akıştan gizle.
-Hide TikTok Shop updates and coupon messages.	TikTok Shop güncellemelerini ve kupon mesajlarını gizle.
+Shop order updates and coupon messages no longer take up rows in the Inbox. Your orders are unchanged.	Mağaza sipariş güncellemeleri ve kupon mesajları artık Gelen Kutusu'nda satır kaplamaz. Siparişlerin değişmez.
 Hide TikTok's "Search: ..." banner above the comment count. This doesn't hide the comments or Hushfeed's comment-search box.	Yorum sayısının üzerindeki TikTok'un "Ara: ..." bandını gizle. Bu, yorumları veya Hushfeed'in yorum arama kutusunu gizlemez.
 Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.	Yazarken görünen hızlı emoji satırını ve otomatik çıkartma önerilerini gizle. Emoji ve çıkartma düğmeleri çalışmaya devam eder.
 Hide activity	Etkinliği gizle
@@ -436,30 +436,30 @@ Hide sharing apps	Paylaşım uygulamalarını gizle
 Hide stories	Hikayeleri gizle
 Hide stories from the feed.	Hikayeleri akıştan gizle.
 Hide stories tray	Hikaye şeridini gizle
-Hide suggested account rows.	Önerilen hesap satırlarını gizle.
+The accounts TikTok suggests you follow no longer take up rows in the Inbox.	TikTok'un takip etmen için önerdiği hesaplar artık Gelen Kutusu'nda satır kaplamaz.
 Hide suggested accounts	Önerilen hesapları gizle
 Hide suggestions on the search page	Arama sayfasındaki önerileri gizle
 Hide surveys	Anketleri gizle
 Hide tabs TikTok adds later unless you allow them.	TikTok'un sonradan eklediği sekmeleri, sen izin vermedikçe gizle.
 Hide the "Search this image" prompt shown over videos. The feed search button and suggestions above comments are separate settings.	Videoların üzerinde gösterilen "Bu görseli ara" istemini gizle. Akıştaki arama düğmesi ve yorumların üzerindeki öneriler ayrı ayarlardır.
-Hide the Activity row of likes and comments on your posts.	Gönderilerindeki beğeni ve yorumları gösteren Etkinlik satırını gizle.
-Hide the Archive row.	Arşiv satırını gizle.
+The Activity row of likes and comments on your posts leaves the Inbox. Notifications about them still arrive.	Gönderilerindeki beğeni ve yorumları gösteren Etkinlik satırı Gelen Kutusu'ndan kalkar. Bunlarla ilgili bildirimler gelmeye devam eder.
+The Archive row leaves the Inbox. Archived chats are kept.	Arşiv satırı Gelen Kutusu'ndan kalkar. Arşivlenen sohbetler korunur.
 Hide the Full screen button	Tam ekran düğmesini gizle
 Hide the Full screen button over videos. Playback and automatic rotation keep working as before.	Videoların üzerindeki Tam ekran düğmesini gizle. Oynatma ve otomatik döndürme eskisi gibi çalışmaya devam eder.
 Hide the Inbox search button	Gelen Kutusu arama düğmesini gizle
 Hide the LIVE button	CANLI düğmesini gizle
 Hide the LIVE button in the top left corner of the feed.	Akışın sol üst köşesindeki CANLI düğmesini gizle.
-Hide the Message requests row.	Mesaj istekleri satırını gizle.
-Hide the New followers row.	Yeni takipçiler satırını gizle.
+The Message requests row leaves the Inbox. Requests keep arriving and wait there until you turn this off.	Mesaj istekleri satırı Gelen Kutusu'ndan kalkar. İstekler gelmeye devam eder ve sen bunu kapatana kadar orada bekler.
+The New followers row leaves the top of the Inbox. The accounts still follow you.	Yeni takipçiler satırı Gelen Kutusu'nun üstünden kalkar. Hesaplar seni takip etmeye devam eder.
 Hide the Report button on videos	Videolardaki Bildir düğmesini gizle
 Hide the Send to row	Şuraya gönder satırını gizle
 Hide the Tako AI bubble above the profile button, the Ask bar under videos, the Ask Tako button on the search page and the Tako bar above comments.	Profil düğmesinin üzerindeki Tako AI balonunu, videoların altındaki Sor çubuğunu, arama sayfasındaki Tako'ya Sor düğmesini ve yorumların üstündeki Tako çubuğunu gizle.
-Hide the Tako assistant conversation in Inbox.	Gelen Kutusu'ndaki Tako asistan sohbetini gizle.
+The Tako assistant's conversation leaves the Inbox list. The Tako bubble on the feed has its own switch under Feed tabs.	Tako asistanıyla olan sohbet Gelen Kutusu listesinden kalkar. Akıştaki Tako balonunun Akış sekmeleri altında kendi anahtarı var.
 Hide the Tako bubble	Tako balonunu gizle
 Hide the Tako chat	Tako sohbetini gizle
-Hide the activity status control in the Inbox header.	Gelen Kutusu başlığındaki etkinlik durumu kontrolünü gizle.
+The activity status control leaves the Inbox header. Whether others see you as active is unchanged.	Etkinlik durumu denetimi Gelen Kutusu başlığından kalkar. Başkalarının seni aktif görüp görmemesi değişmez.
 Hide the add people icon	Kişi ekle simgesini gizle
-Hide the add people icon in the Inbox header.	Gelen Kutusu başlığındaki kişi ekle simgesini gizle.
+The add people icon leaves the Inbox header. Only the shortcut goes, so friend suggestions elsewhere are unchanged.	Kişi ekle simgesi Gelen Kutusu başlığından kalkar. Yalnızca kısayol gider, başka yerlerdeki arkadaş önerileri değişmez.
 Hide the caption	Açıklamayı gizle
 Hide the description under the creator's name on the feed.	Akışta içerik üreticisinin adının altındaki açıklamayı gizle.
 Hide the event badge	Etkinlik rozetini gizle
@@ -582,11 +582,11 @@ Media	Medya
 Media config (VE)	Medya yapılandırması (VE)
 Messages, profiles and search still work.	Mesajlar, profiller ve arama çalışmaya devam eder.
 Microphone in use	Mikrofon kullanımda
-Min/Max comments	Min/Maks yorum
-Min/Max favorites	Min/Maks favori
-Min/Max likes	Min/Maks beğeni
-Min/Max shares	Min/Maks paylaşım
-Min/Max views	Min/Maks görüntülenme
+Comments range	Yorum aralığı
+Favorites range	Favori aralığı
+Likes range	Beğeni aralığı
+Shares range	Paylaşım aralığı
+Views range	Görüntülenme aralığı
 Minimum	Minimum
 More options	Diğer seçenekler
 Move down	Aşağı taşı
@@ -980,11 +980,11 @@ The feed waits for one tap before it starts playing again when you come back to 
 The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.	İki bütçenin de sıfırlandığı saat, 24 saatlik düzende. Varsayılan sabahın dördüdür, çünkü saat birde hâlâ kaydıran biri dün geceyi yaşıyordur.
 Last change put back. Restart TikTok to apply all changes.	Son değişiklik geri kondu. Tüm değişiklikleri uygulamak için TikTok'u yeniden başlat.
 Last change put back. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.	Son değişiklik geri kondu. Feature Gate Lab kuralları başka bir TikTok sürümü içindi ve dışarıda bırakıldı. Tüm değişiklikleri uygulamak için TikTok'u yeniden başlat.
-The minimum or maximum comments on a video to show.	Bir videonun gösterilmesi için en az veya en fazla yorum sayısı.
-The minimum or maximum favorites of a video to show.	Bir videonun gösterilmesi için en az veya en fazla favori sayısı.
-The minimum or maximum likes of a video to show.	Bir videonun gösterilmesi için en az veya en fazla beğeni sayısı.
-The minimum or maximum shares of a video to show.	Bir videonun gösterilmesi için en az veya en fazla paylaşım sayısı.
-The minimum or maximum views of a video to show.	Bir videonun gösterilmesi için en az veya en fazla görüntülenme sayısı.
+Show only videos with this many comments.	Yalnızca bu kadar yorumu olan videoları göster.
+Show only videos with this many favorites.	Yalnızca bu kadar favorisi olan videoları göster.
+Show only videos with this many likes.	Yalnızca bu kadar beğenisi olan videoları göster.
+Show only videos with this many shares.	Yalnızca bu kadar paylaşımı olan videoları göster.
+Show only videos with this many views.	Yalnızca bu kadar görüntülenmesi olan videoları göster.
 The original photos aren't available, so TikTok's own save runs instead	Orijinal fotoğraflar kullanılamıyor, bu yüzden TikTok'un kendi kaydetme işlemi çalışıyor
 The override changes no fields. Edit the field values, or reset the override.	Geçersiz kılma hiçbir alanı değiştirmiyor. Alan değerlerini düzenle ya da geçersiz kılmayı sıfırla.
 The override couldn't be applied: %1$s. Edit the field values, or reset the override.	Geçersiz kılma uygulanamadı: %1$s. Alan değerlerini düzenle ya da geçersiz kılmayı sıfırla.

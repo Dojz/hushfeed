@@ -377,7 +377,7 @@ Hide Series	Ocultar Series
 Hide the Tako bubble	Ocultar la burbuja de Tako
 Hide TikTok Shop	Ocultar TikTok Shop
 Hide TikTok Shop posts from the feed.	Ocultar las publicaciones de TikTok Shop en el feed.
-Hide TikTok Shop updates and coupon messages.	Ocultar las novedades de TikTok Shop y los mensajes de cupones.
+Shop order updates and coupon messages no longer take up rows in the Inbox. Your orders are unchanged.	Las novedades de pedidos y los mensajes de cupones de la tienda ya no ocupan filas en la bandeja de entrada. Tus pedidos no cambian.
 Hide the Tako chat	Ocultar el chat de Tako
 Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.	Oculta la fila de emojis rápidos y las sugerencias automáticas de stickers que aparecen mientras escribes. Los botones de emojis y stickers siguen funcionando.
 Hide activity	Ocultar la actividad
@@ -415,24 +415,24 @@ Hide suggestions on the search page	Ocultar sugerencias en la página de búsque
 Hide sharing apps	Ocultar las apps para compartir
 Hide stories tray	Ocultar la bandeja de historias
 Hide stories	Ocultar las historias
-Hide suggested account rows.	Ocultar las filas de cuentas sugeridas.
+The accounts TikTok suggests you follow no longer take up rows in the Inbox.	Las cuentas que TikTok te sugiere seguir ya no ocupan filas en la bandeja de entrada.
 Hide suggested accounts	Ocultar las cuentas sugeridas
 Hide surveys	Ocultar las encuestas
 Hide tabs TikTok adds later unless you allow them.	Ocultar las pestañas que TikTok añada más adelante salvo que las permitas.
 Hide the "Search this image" prompt shown over videos. The feed search button and suggestions above comments are separate settings.	Oculta el aviso «Buscar esta imagen» que aparece sobre los videos. El botón de búsqueda del feed y las sugerencias sobre los comentarios tienen ajustes independientes.
-Hide the Activity row of likes and comments on your posts.	Ocultar la fila de Actividad con los me gusta y los comentarios en tus publicaciones.
-Hide the Archive row.	Ocultar la fila de Archivo.
+The Activity row of likes and comments on your posts leaves the Inbox. Notifications about them still arrive.	La fila Actividad, con los me gusta y comentarios en tus publicaciones, desaparece de la bandeja de entrada. Las notificaciones sobre ellos siguen llegando.
+The Archive row leaves the Inbox. Archived chats are kept.	La fila Archivo desaparece de la bandeja de entrada. Los chats archivados se conservan.
 Hide the LIVE button	Ocultar el botón de LIVE
 Hide the LIVE button in the top left corner of the feed.	Ocultar el botón de LIVE en la esquina superior izquierda del feed.
 Hide LIVE videos from the feed.	Ocultar vídeos LIVE del feed.
-Hide the Message requests row.	Ocultar la fila de Solicitudes de mensaje.
-Hide the New followers row.	Ocultar la fila de Nuevos seguidores.
+The Message requests row leaves the Inbox. Requests keep arriving and wait there until you turn this off.	La fila Solicitudes de mensaje desaparece de la bandeja de entrada. Las solicitudes siguen llegando y esperan ahí hasta que desactives esto.
+The New followers row leaves the top of the Inbox. The accounts still follow you.	La fila Nuevos seguidores desaparece de la parte superior de la bandeja de entrada. Las cuentas te siguen igual.
 Hide the Send to row	Ocultar la fila Enviar a
 Hide the Tako AI bubble above the profile button, the Ask bar under videos, the Ask Tako button on the search page and the Tako bar above comments.	Ocultar la burbuja de Tako AI encima del botón de perfil, la barra de Tako debajo de los videos, el botón Preguntar a Tako en la página de búsqueda y la barra de Tako encima de los comentarios.
-Hide the Tako assistant conversation in Inbox.	Ocultar la conversación del asistente Tako en Recibidos.
-Hide the activity status control in the Inbox header.	Ocultar el control de estado de actividad en la cabecera de la bandeja.
+The Tako assistant's conversation leaves the Inbox list. The Tako bubble on the feed has its own switch under Feed tabs.	La conversación con el asistente Tako desaparece de la lista de la bandeja de entrada. La burbuja de Tako en el feed tiene su propio interruptor en Pestañas del feed.
+The activity status control leaves the Inbox header. Whether others see you as active is unchanged.	El control del estado de actividad desaparece de la cabecera de la bandeja de entrada. Que otros te vean activo no cambia.
 Hide the add people icon	Ocultar el icono de añadir personas
-Hide the add people icon in the Inbox header.	Ocultar el icono de añadir personas en la cabecera de la bandeja.
+The add people icon leaves the Inbox header. Only the shortcut goes, so friend suggestions elsewhere are unchanged.	El icono de añadir personas desaparece de la cabecera de la bandeja de entrada. Solo se va el acceso directo, las sugerencias de amigos en otros sitios no cambian.
 Hide the caption	Ocultar la descripción
 Hide the description under the creator's name on the feed.	Ocultar la descripción bajo el nombre del creador en el feed.
 Hide the event badge	Ocultar la insignia de evento
@@ -555,11 +555,11 @@ Media	Contenido
 Media config (VE)	Configuración de medios (VE)
 Messages, profiles and search still work.	Los mensajes, los perfiles y la búsqueda siguen funcionando.
 Microphone in use	Micrófono en uso
-Min/Max comments	Comentarios mín./máx.
-Min/Max favorites	Favoritos mín./máx.
-Min/Max likes	Me gusta mín./máx.
-Min/Max shares	Veces compartido mín./máx.
-Min/Max views	Visualizaciones mín./máx.
+Comments range	Rango de comentarios
+Favorites range	Rango de favoritos
+Likes range	Rango de me gusta
+Shares range	Rango de veces compartido
+Views range	Rango de visualizaciones
 Minimum	Mínimo
 More options	Más opciones
 Move down	Mover hacia abajo
@@ -944,11 +944,11 @@ The feed waits for one tap before it starts playing again when you come back to 
 The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.	La hora a la que se reinician ambos límites, en formato de 24 horas. Las cuatro de la madrugada por defecto, porque quien sigue deslizando a la una todavía está en la noche anterior.
 Last change put back. Restart TikTok to apply all changes.	Se restauró el último cambio. Reinicia TikTok para aplicar todos los cambios.
 Last change put back. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.	Se restauró el último cambio. Las reglas del Laboratorio de interruptores eran de otra versión de TikTok y se dejaron fuera. Reinicia TikTok para aplicar todos los cambios.
-The minimum or maximum comments on a video to show.	El mínimo o el máximo de comentarios que ha de tener un vídeo para mostrarlo.
-The minimum or maximum favorites of a video to show.	El mínimo o el máximo de favoritos que ha de tener un vídeo para mostrarlo.
-The minimum or maximum likes of a video to show.	El mínimo o el máximo de me gusta que ha de tener un vídeo para mostrarlo.
-The minimum or maximum shares of a video to show.	El mínimo o el máximo de veces compartido que ha de tener un vídeo para mostrarlo.
-The minimum or maximum views of a video to show.	El mínimo o el máximo de visualizaciones que ha de tener un vídeo para mostrarlo.
+Show only videos with this many comments.	Mostrar solo vídeos con este número de comentarios.
+Show only videos with this many favorites.	Mostrar solo vídeos con este número de favoritos.
+Show only videos with this many likes.	Mostrar solo vídeos con este número de me gusta.
+Show only videos with this many shares.	Mostrar solo vídeos compartidos este número de veces.
+Show only videos with this many views.	Mostrar solo vídeos con este número de visualizaciones.
 The original photos aren't available, so TikTok's own save runs instead	Las fotos originales no están disponibles, así que se usa el guardado propio de TikTok
 The override changes no fields. Edit the field values, or reset the override.	La anulación no cambia ningún campo. Edita los valores de los campos o restablece la anulación.
 The override couldn't be applied: %1$s. Edit the field values, or reset the override.	No se pudo aplicar la anulación: %1$s. Edita los valores de los campos o restablece la anulación.

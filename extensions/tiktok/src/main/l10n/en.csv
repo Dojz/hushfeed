@@ -208,6 +208,7 @@ Comment media filename,Comment media filename
 Comments,Comments
 Comments aren't available for this video,Comments aren't available for this video
 Comments beside the video,Comments beside the video
+Comments range,Comments range
 Compact comment header,Compact comment header
 Compare gate reads with their previous values.,Compare gate reads with their previous values.
 Completed an interrupted settings change. Restart TikTok to apply this.,Completed an interrupted settings change. Restart TikTok to apply this.
@@ -324,6 +325,7 @@ Exported %1$d loaded values,Exported %1$d loaded values
 Exported 1 loaded value,Exported 1 loaded value
 "Extend the heart's touch area into nearby blank space. The icon and row spacing stay the same. Text, Reply and other controls keep their own space.","Extend the heart's touch area into nearby blank space. The icon and row spacing stay the same. Text, Reply and other controls keep their own space."
 Fade the feed out before the hold,Fade the feed out before the hold
+Favorites range,Favorites range
 Feature Gate Lab,Feature Gate Lab
 Feature gate override reset,Feature gate override reset
 Feature gate override saved,Feature gate override saved
@@ -390,7 +392,6 @@ Hide Search this image prompts,Hide Search this image prompts
 Hide Series,Hide Series
 Hide TikTok Shop,Hide TikTok Shop
 Hide TikTok Shop posts from the feed.,Hide TikTok Shop posts from the feed.
-Hide TikTok Shop updates and coupon messages.,Hide TikTok Shop updates and coupon messages.
 "Hide TikTok's ""Search: ..."" banner above the comment count. This doesn't hide the comments or Hushfeed's comment-search box.","Hide TikTok's ""Search: ..."" banner above the comment count. This doesn't hide the comments or Hushfeed's comment-search box."
 Hide activity,Hide activity
 Hide activity status,Hide activity status
@@ -432,30 +433,22 @@ Hide sharing apps,Hide sharing apps
 Hide stories,Hide stories
 Hide stories from the feed.,Hide stories from the feed.
 Hide stories tray,Hide stories tray
-Hide suggested account rows.,Hide suggested account rows.
 Hide suggested accounts,Hide suggested accounts
 Hide suggestions on the search page,Hide suggestions on the search page
 Hide surveys,Hide surveys
 Hide tabs TikTok adds later unless you allow them.,Hide tabs TikTok adds later unless you allow them.
 "Hide the ""Search this image"" prompt shown over videos. The feed search button and suggestions above comments are separate settings.","Hide the ""Search this image"" prompt shown over videos. The feed search button and suggestions above comments are separate settings."
-Hide the Activity row of likes and comments on your posts.,Hide the Activity row of likes and comments on your posts.
-Hide the Archive row.,Hide the Archive row.
 Hide the Full screen button,Hide the Full screen button
 Hide the Full screen button over videos. Playback and automatic rotation keep working as before.,Hide the Full screen button over videos. Playback and automatic rotation keep working as before.
 Hide the Inbox search button,Hide the Inbox search button
 Hide the LIVE button,Hide the LIVE button
 Hide the LIVE button in the top left corner of the feed.,Hide the LIVE button in the top left corner of the feed.
-Hide the Message requests row.,Hide the Message requests row.
-Hide the New followers row.,Hide the New followers row.
 Hide the Report button on videos,Hide the Report button on videos
 Hide the Send to row,Hide the Send to row
 "Hide the Tako AI bubble above the profile button, the Ask bar under videos, the Ask Tako button on the search page and the Tako bar above comments.","Hide the Tako AI bubble above the profile button, the Ask bar under videos, the Ask Tako button on the search page and the Tako bar above comments."
-Hide the Tako assistant conversation in Inbox.,Hide the Tako assistant conversation in Inbox.
 Hide the Tako bubble,Hide the Tako bubble
 Hide the Tako chat,Hide the Tako chat
-Hide the activity status control in the Inbox header.,Hide the activity status control in the Inbox header.
 Hide the add people icon,Hide the add people icon
-Hide the add people icon in the Inbox header.,Hide the add people icon in the Inbox header.
 Hide the caption,Hide the caption
 Hide the description under the creator's name on the feed.,Hide the description under the creator's name on the feed.
 Hide the event badge,Hide the event badge
@@ -557,6 +550,7 @@ Less than a minute left,Less than a minute left
 Let the Offline videos menu use your own limit instead of TikTok's fixed one. Restart TikTok to apply this.,Let the Offline videos menu use your own limit instead of TikTok's fixed one. Restart TikTok to apply this.
 Licenses,Licenses
 Like,Like
+Likes range,Likes range
 Limits,Limits
 Link copied,Link copied
 Links,Links
@@ -586,11 +580,6 @@ Media,Media
 Media config (VE),Media config (VE)
 "Messages, profiles and search still work.","Messages, profiles and search still work."
 Microphone in use,Microphone in use
-Min/Max comments,Min/Max comments
-Min/Max favorites,Min/Max favorites
-Min/Max likes,Min/Max likes
-Min/Max shares,Min/Max shares
-Min/Max views,Min/Max views
 Minimum,Minimum
 More options,More options
 Move down,Move down
@@ -857,7 +846,9 @@ Settings restored. The Feature Gate Lab rules were for another TikTok version an
 Share,Share
 Share links through another host,Share links through another host
 Share sheet,Share sheet
+Shares range,Shares range
 Shop,Shop
+Shop order updates and coupon messages no longer take up rows in the Inbox. Your orders are unchanged.,Shop order updates and coupon messages no longer take up rows in the Inbox. Your orders are unchanged.
 Shop posts,Shop posts
 Show,Show
 Show @username beside a video instead of the display name the creator chose.,Show @username beside a video instead of the display name the creator chose.
@@ -867,6 +858,11 @@ Show a video preview thumbnail while dragging the progress bar.,Show a video pre
 Show failures on screen,Show failures on screen
 Show gates,Show gates
 Show last report,Show last report
+Show only videos with this many comments.,Show only videos with this many comments.
+Show only videos with this many favorites.,Show only videos with this many favorites.
+Show only videos with this many likes.,Show only videos with this many likes.
+Show only videos with this many shares.,Show only videos with this many shares.
+Show only videos with this many views.,Show only videos with this many views.
 Show search in LIVE,Show search in LIVE
 Show the Not interested button,Show the Not interested button
 Show the block button on videos,Show the block button on videos
@@ -970,9 +966,17 @@ That settings backup is damaged or only partly downloaded. Nothing was altered.,
 "That settings backup is incomplete, so it may have been cut short. Nothing was altered.","That settings backup is incomplete, so it may have been cut short. Nothing was altered."
 That settings change did not go through. Nothing was altered.,That settings change did not go through. Nothing was altered.
 That sticker is in a format Hushfeed cannot read,That sticker is in a format Hushfeed cannot read
+The Activity row of likes and comments on your posts leaves the Inbox. Notifications about them still arrive.,The Activity row of likes and comments on your posts leaves the Inbox. Notifications about them still arrive.
+The Archive row leaves the Inbox. Archived chats are kept.,The Archive row leaves the Inbox. Archived chats are kept.
 The Lab can't check this. TikTok gets it exactly as typed.,The Lab can't check this. TikTok gets it exactly as typed.
 The Lab could not open. Go back and open it again.,The Lab could not open. Go back and open it again.
 "The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.","The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed."
+The Message requests row leaves the Inbox. Requests keep arriving and wait there until you turn this off.,The Message requests row leaves the Inbox. Requests keep arriving and wait there until you turn this off.
+The New followers row leaves the top of the Inbox. The accounts still follow you.,The New followers row leaves the top of the Inbox. The accounts still follow you.
+The Tako assistant's conversation leaves the Inbox list. The Tako bubble on the feed has its own switch under Feed tabs.,The Tako assistant's conversation leaves the Inbox list. The Tako bubble on the feed has its own switch under Feed tabs.
+The accounts TikTok suggests you follow no longer take up rows in the Inbox.,The accounts TikTok suggests you follow no longer take up rows in the Inbox.
+The activity status control leaves the Inbox header. Whether others see you as active is unchanged.,The activity status control leaves the Inbox header. Whether others see you as active is unchanged.
+"The add people icon leaves the Inbox header. Only the shortcut goes, so friend suggestions elsewhere are unchanged.","The add people icon leaves the Inbox header. Only the shortcut goes, so friend suggestions elsewhere are unchanged."
 The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.,The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.
 The diagnostic report could not be saved yet. Try again in a moment.,The diagnostic report could not be saved yet. Try again in a moment.
 The diagnostic report could not be saved. Try again.,The diagnostic report could not be saved. Try again.
@@ -983,11 +987,6 @@ The feed does not end. This is a fine time to leave it.,The feed does not end. T
 The feed is open again,The feed is open again
 "The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.","The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away."
 "The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.","The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night."
-The minimum or maximum comments on a video to show.,The minimum or maximum comments on a video to show.
-The minimum or maximum favorites of a video to show.,The minimum or maximum favorites of a video to show.
-The minimum or maximum likes of a video to show.,The minimum or maximum likes of a video to show.
-The minimum or maximum shares of a video to show.,The minimum or maximum shares of a video to show.
-The minimum or maximum views of a video to show.,The minimum or maximum views of a video to show.
 "The original photos aren't available, so TikTok's own save runs instead","The original photos aren't available, so TikTok's own save runs instead"
 "The override changes no fields. Edit the field values, or reset the override.","The override changes no fields. Edit the field values, or reset the override."
 "The override couldn't be applied: %1$s. Edit the field values, or reset the override.","The override couldn't be applied: %1$s. Edit the field values, or reset the override."
@@ -1113,6 +1112,7 @@ Video playback quality,Video playback quality
 Video saved,Video saved
 "Video saved in %1$s, but only %2$s of %3$s subtitles came with it","Video saved in %1$s, but only %2$s of %3$s subtitles came with it"
 Video saved with %1$s subtitles in %2$s,Video saved with %1$s subtitles in %2$s
+Views range,Views range
 Wait before hiding the controls.,Wait before hiding the controls.
 Watching and sharing,Watching and sharing
 "WebP, exactly as TikTok sent it","WebP, exactly as TikTok sent it"

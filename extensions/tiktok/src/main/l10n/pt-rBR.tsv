@@ -377,7 +377,7 @@ Hide Series	Esconder Séries
 Hide the Tako bubble	Esconder a bolha do Tako
 Hide TikTok Shop	Esconder o TikTok Shop
 Hide TikTok Shop posts from the feed.	Esconder as publicações do TikTok Shop no feed.
-Hide TikTok Shop updates and coupon messages.	Esconder as novidades do TikTok Shop e as mensagens de cupom.
+Shop order updates and coupon messages no longer take up rows in the Inbox. Your orders are unchanged.	As atualizações de pedidos e as mensagens de cupom da loja deixam de ocupar linhas na caixa de entrada. Seus pedidos não mudam.
 Hide the Tako chat	Esconder o chat do Tako
 Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.	Oculte a fileira de emojis rápidos e as sugestões automáticas de figurinhas que aparecem enquanto você digita. Os botões de emoji e figurinha continuam funcionando.
 Hide activity	Esconder a atividade
@@ -415,24 +415,24 @@ Hide suggestions on the search page	Ocultar sugestões na página de pesquisa
 Hide sharing apps	Esconder os apps de compartilhamento
 Hide stories tray	Esconder a bandeja de stories
 Hide stories	Esconder os stories
-Hide suggested account rows.	Esconder as linhas de contas sugeridas.
+The accounts TikTok suggests you follow no longer take up rows in the Inbox.	As contas que o TikTok sugere que você siga deixam de ocupar linhas na caixa de entrada.
 Hide suggested accounts	Esconder as contas sugeridas
 Hide surveys	Esconder as enquetes
 Hide tabs TikTok adds later unless you allow them.	Esconder as abas que o TikTok adicionar depois, a menos que você as permita.
 Hide the "Search this image" prompt shown over videos. The feed search button and suggestions above comments are separate settings.	Oculte o aviso "Pesquisar esta imagem" mostrado sobre os vídeos. O botão de pesquisa do feed e as sugestões acima dos comentários têm configurações separadas.
-Hide the Activity row of likes and comments on your posts.	Esconder a linha de Atividade com as curtidas e os comentários nas suas publicações.
-Hide the Archive row.	Esconder a linha de Arquivo.
+The Activity row of likes and comments on your posts leaves the Inbox. Notifications about them still arrive.	A linha Atividade, com curtidas e comentários nas suas publicações, some da caixa de entrada. As notificações sobre eles continuam chegando.
+The Archive row leaves the Inbox. Archived chats are kept.	A linha Arquivo some da caixa de entrada. As conversas arquivadas são mantidas.
 Hide the LIVE button	Esconder o botão de LIVE
 Hide the LIVE button in the top left corner of the feed.	Esconder o botão de LIVE no canto superior esquerdo do feed.
 Hide LIVE videos from the feed.	Esconder vídeos LIVE do feed.
-Hide the Message requests row.	Esconder a linha de Solicitações de mensagem.
-Hide the New followers row.	Esconder a linha de Novos seguidores.
+The Message requests row leaves the Inbox. Requests keep arriving and wait there until you turn this off.	A linha Solicitações de mensagem some da caixa de entrada. As solicitações continuam chegando e ficam esperando lá até você desligar isto.
+The New followers row leaves the top of the Inbox. The accounts still follow you.	A linha Novos seguidores some do topo da caixa de entrada. As contas continuam seguindo você.
 Hide the Send to row	Esconder a linha Enviar para
 Hide the Tako AI bubble above the profile button, the Ask bar under videos, the Ask Tako button on the search page and the Tako bar above comments.	Esconder a bolha do Tako AI acima do botão de perfil, a barra do Tako abaixo dos vídeos, o botão Perguntar ao Tako na página de busca e a barra do Tako acima dos comentários.
-Hide the Tako assistant conversation in Inbox.	Esconder a conversa com o assistente Tako na Caixa de entrada.
-Hide the activity status control in the Inbox header.	Esconder o controle de status de atividade no topo da caixa de entrada.
+The Tako assistant's conversation leaves the Inbox list. The Tako bubble on the feed has its own switch under Feed tabs.	A conversa com o assistente Tako some da lista da caixa de entrada. A bolha do Tako no feed tem um interruptor próprio em Abas do feed.
+The activity status control leaves the Inbox header. Whether others see you as active is unchanged.	O controle de status de atividade some do cabeçalho da caixa de entrada. Se os outros veem você como ativo não muda.
 Hide the add people icon	Esconder o ícone de adicionar pessoas
-Hide the add people icon in the Inbox header.	Esconder o ícone de adicionar pessoas no topo da caixa de entrada.
+The add people icon leaves the Inbox header. Only the shortcut goes, so friend suggestions elsewhere are unchanged.	O ícone de adicionar pessoas some do cabeçalho da caixa de entrada. Só o atalho vai embora, as sugestões de amigos em outros lugares não mudam.
 Hide the caption	Esconder a legenda
 Hide the description under the creator's name on the feed.	Esconder a descrição embaixo do nome do criador no feed.
 Hide the event badge	Esconder o selo de evento
@@ -555,11 +555,11 @@ Media	Mídia
 Media config (VE)	Configuração de mídia (VE)
 Messages, profiles and search still work.	As mensagens, os perfis e a busca continuam funcionando.
 Microphone in use	Microfone em uso
-Min/Max comments	Comentários mín./máx.
-Min/Max favorites	Favoritos mín./máx.
-Min/Max likes	Curtidas mín./máx.
-Min/Max shares	Compartilhamentos mín./máx.
-Min/Max views	Visualizações mín./máx.
+Comments range	Faixa de comentários
+Favorites range	Faixa de favoritos
+Likes range	Faixa de curtidas
+Shares range	Faixa de compartilhamentos
+Views range	Faixa de visualizações
 Minimum	Mínimo
 More options	Mais opções
 Move down	Mover para baixo
@@ -944,11 +944,11 @@ The feed waits for one tap before it starts playing again when you come back to 
 The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.	A hora em que os dois limites zeram, no relógio de 24 horas. Quatro da manhã por padrão, porque quem ainda está rolando à uma continua na noite anterior.
 Last change put back. Restart TikTok to apply all changes.	Última mudança restaurada. Reinicie o TikTok para aplicar todas as mudanças.
 Last change put back. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.	Última mudança restaurada. As regras do Laboratório de gates eram de outra versão do TikTok e ficaram de fora. Reinicie o TikTok para aplicar todas as mudanças.
-The minimum or maximum comments on a video to show.	O mínimo ou o máximo de comentários que um vídeo precisa ter para aparecer.
-The minimum or maximum favorites of a video to show.	O mínimo ou o máximo de favoritos que um vídeo precisa ter para aparecer.
-The minimum or maximum likes of a video to show.	O mínimo ou o máximo de curtidas que um vídeo precisa ter para aparecer.
-The minimum or maximum shares of a video to show.	O mínimo ou o máximo de compartilhamentos que um vídeo precisa ter para aparecer.
-The minimum or maximum views of a video to show.	O mínimo ou o máximo de visualizações que um vídeo precisa ter para aparecer.
+Show only videos with this many comments.	Mostrar só vídeos com essa quantidade de comentários.
+Show only videos with this many favorites.	Mostrar só vídeos com essa quantidade de favoritos.
+Show only videos with this many likes.	Mostrar só vídeos com essa quantidade de curtidas.
+Show only videos with this many shares.	Mostrar só vídeos com essa quantidade de compartilhamentos.
+Show only videos with this many views.	Mostrar só vídeos com essa quantidade de visualizações.
 The original photos aren't available, so TikTok's own save runs instead	As fotos originais não estão disponíveis, então o salvamento do próprio TikTok é usado
 The override changes no fields. Edit the field values, or reset the override.	A substituição não altera nenhum campo. Edite os valores dos campos ou redefina a substituição.
 The override couldn't be applied: %1$s. Edit the field values, or reset the override.	Não foi possível aplicar a substituição: %1$s. Edite os valores dos campos ou redefina a substituição.

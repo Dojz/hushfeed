@@ -378,7 +378,7 @@ Hide Series,Sembunyikan Series
 Hide the Tako bubble,Sembunyikan gelembung Tako
 Hide TikTok Shop,Sembunyikan TikTok Shop
 Hide TikTok Shop posts from the feed.,Sembunyikan kiriman TikTok Shop dari feed.
-Hide TikTok Shop updates and coupon messages.,Sembunyikan info terbaru TikTok Shop dan pesan kupon.
+Shop order updates and coupon messages no longer take up rows in the Inbox. Your orders are unchanged.,Kabar pesanan dan pesan kupon dari Shop tidak lagi memakai baris di Kotak Masuk. Pesananmu tidak berubah.
 Hide the Tako chat,Sembunyikan chat Tako
 Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.,Sembunyikan baris emoji cepat dan saran stiker otomatis yang muncul saat Anda mengetik. Tombol emoji dan stiker tetap berfungsi.
 Hide activity,Sembunyikan aktivitas
@@ -416,24 +416,24 @@ Hide suggestions on the search page,Sembunyikan saran di halaman pencarian
 Hide sharing apps,Sembunyikan aplikasi berbagi
 Hide stories tray,Sembunyikan deret Story
 Hide stories,Sembunyikan Story
-Hide suggested account rows.,Sembunyikan baris akun yang disarankan.
+The accounts TikTok suggests you follow no longer take up rows in the Inbox.,Akun yang disarankan TikTok untuk kamu ikuti tidak lagi memakai baris di Kotak Masuk.
 Hide suggested accounts,Sembunyikan akun yang disarankan
 Hide surveys,Sembunyikan survei
 Hide tabs TikTok adds later unless you allow them.,"Sembunyikan tab yang TikTok tambahkan kemudian, kecuali kamu mengizinkannya."
 "Hide the ""Search this image"" prompt shown over videos. The feed search button and suggestions above comments are separate settings.","Sembunyikan ajakan ""Cari gambar ini"" yang muncul di atas video. Tombol pencarian feed dan saran di atas komentar memiliki pengaturan terpisah."
-Hide the Activity row of likes and comments on your posts.,Sembunyikan baris Aktivitas berisi suka dan komentar pada unggahanmu.
-Hide the Archive row.,Sembunyikan baris Arsip.
+The Activity row of likes and comments on your posts leaves the Inbox. Notifications about them still arrive.,Baris Aktivitas berisi suka dan komentar di postinganmu hilang dari Kotak Masuk. Notifikasinya tetap masuk.
+The Archive row leaves the Inbox. Archived chats are kept.,Baris Arsip hilang dari Kotak Masuk. Obrolan yang diarsipkan tetap tersimpan.
 Hide the LIVE button,Sembunyikan tombol LIVE
 Hide the LIVE button in the top left corner of the feed.,Sembunyikan tombol LIVE di pojok kiri atas feed.
 Hide LIVE videos from the feed.,Sembunyikan video LIVE dari feed.
-Hide the Message requests row.,Sembunyikan baris Permintaan pesan.
-Hide the New followers row.,Sembunyikan baris Pengikut baru.
+The Message requests row leaves the Inbox. Requests keep arriving and wait there until you turn this off.,Baris Permintaan pesan hilang dari Kotak Masuk. Permintaan tetap masuk dan menunggu di sana sampai kamu mematikan ini.
+The New followers row leaves the top of the Inbox. The accounts still follow you.,Baris Pengikut baru hilang dari bagian atas Kotak Masuk. Akun-akun itu tetap mengikutimu.
 Hide the Send to row,Sembunyikan baris Kirim ke
 "Hide the Tako AI bubble above the profile button, the Ask bar under videos, the Ask Tako button on the search page and the Tako bar above comments.","Sembunyikan gelembung Tako AI di atas tombol profil, bilah Tako di bawah video, tombol Tanya Tako di halaman pencarian, dan bilah Tako di atas komentar."
-Hide the Tako assistant conversation in Inbox.,Sembunyikan percakapan asisten Tako di Kotak Masuk.
-Hide the activity status control in the Inbox header.,Sembunyikan kontrol status aktivitas di header Kotak Masuk.
+The Tako assistant's conversation leaves the Inbox list. The Tako bubble on the feed has its own switch under Feed tabs.,Percakapan dengan asisten Tako hilang dari daftar Kotak Masuk. Gelembung Tako di feed punya sakelar sendiri di Tab feed.
+The activity status control leaves the Inbox header. Whether others see you as active is unchanged.,Kontrol status aktivitas hilang dari bagian atas Kotak Masuk. Apakah orang lain melihatmu aktif tidak berubah.
 Hide the add people icon,Sembunyikan ikon tambah orang
-Hide the add people icon in the Inbox header.,Sembunyikan ikon tambah orang di header Kotak Masuk.
+"The add people icon leaves the Inbox header. Only the shortcut goes, so friend suggestions elsewhere are unchanged.","Ikon tambah orang hilang dari bagian atas Kotak Masuk. Hanya pintasannya yang hilang, saran teman di tempat lain tidak berubah."
 Hide the caption,Sembunyikan keterangan
 Hide the description under the creator's name on the feed.,Sembunyikan deskripsi di bawah nama kreator pada feed.
 Hide the event badge,Sembunyikan lencana acara
@@ -556,11 +556,11 @@ Media,Media
 Media config (VE),Konfigurasi media (VE)
 "Messages, profiles and search still work.","Pesan, profil dan pencarian masih berfungsi."
 Microphone in use,Mikrofon sedang dipakai
-Min/Max comments,Komentar min/maks
-Min/Max favorites,Min/Maks favorit
-Min/Max likes,Suka min/maks
-Min/Max shares,Bagikan min/maks
-Min/Max views,Tayangan min/maks
+Comments range,Rentang komentar
+Favorites range,Rentang favorit
+Likes range,Rentang suka
+Shares range,Rentang bagikan
+Views range,Rentang tayangan
 Minimum,Minimum
 More options,Opsi lainnya
 Move down,Pindahkan ke bawah
@@ -945,11 +945,11 @@ The feed is open again,Feed terbuka lagi
 "The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.","Jam saat kedua batas disetel ulang, dalam format 24 jam. Pukul empat pagi secara bawaan, karena orang yang masih menggulir pukul satu sebenarnya masih di malam sebelumnya."
 Last change put back. Restart TikTok to apply all changes.,Perubahan terakhir dikembalikan. Mulai ulang TikTok untuk menerapkan semua perubahan.
 Last change put back. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.,Perubahan terakhir dikembalikan. Aturan Feature Gate Lab dibuat untuk versi TikTok lain dan tidak disertakan. Mulai ulang TikTok untuk menerapkan semua perubahan.
-The minimum or maximum comments on a video to show.,Jumlah komentar minimum atau maksimum agar video ditampilkan.
-The minimum or maximum favorites of a video to show.,Jumlah favorit minimum atau maksimum yang harus dimiliki video agar tampil.
-The minimum or maximum likes of a video to show.,Jumlah suka minimum atau maksimum agar video ditampilkan.
-The minimum or maximum shares of a video to show.,Jumlah bagikan minimum atau maksimum agar video ditampilkan.
-The minimum or maximum views of a video to show.,Jumlah tayangan minimum atau maksimum agar video ditampilkan.
+Show only videos with this many comments.,Hanya tampilkan video dengan jumlah komentar sebanyak ini.
+Show only videos with this many favorites.,Hanya tampilkan video dengan jumlah favorit sebanyak ini.
+Show only videos with this many likes.,Hanya tampilkan video dengan jumlah suka sebanyak ini.
+Show only videos with this many shares.,Hanya tampilkan video dengan jumlah bagikan sebanyak ini.
+Show only videos with this many views.,Hanya tampilkan video dengan jumlah tayangan sebanyak ini.
 "The original photos aren't available, so TikTok's own save runs instead","Foto aslinya tidak tersedia, jadi TikTok yang menyimpannya"
 "The override changes no fields. Edit the field values, or reset the override.","Penimpaan tidak mengubah field apa pun. Ubah nilai field, atau setel ulang penimpaan."
 "The override couldn't be applied: %1$s. Edit the field values, or reset the override.","Penimpaan tidak bisa diterapkan: %1$s. Ubah nilai field, atau setel ulang penimpaan."
