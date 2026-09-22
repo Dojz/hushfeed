@@ -80,6 +80,11 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
         ));
         addPreference(new TogglePreference(
                 context,
+                "Hide TikTok Shop in search", "Hide the Products block and product cards in search results.",
+                Settings.HIDE_SEARCH_SHOP
+        ));
+        addPreference(new TogglePreference(
+                context,
                 "Hide LIVE videos", "Hide LIVE videos from the feed.",
                 Settings.HIDE_LIVE
         ));

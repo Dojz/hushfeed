@@ -1178,3 +1178,5 @@ Pause Hushfeed	Pausar Hushfeed
 From the next start TikTok runs as if it were not patched, so you can tell whether a problem comes from Hushfeed. Your settings stay as they are.	Desde el próximo inicio, TikTok funciona como si no tuviera parches, así sabes si un problema viene de Hushfeed. Tus ajustes se quedan como están.
 Hushfeed turns back on when TikTok restarts.	Hushfeed vuelve a activarse cuando TikTok se reinicie.
 The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.	No se pudo quitar el archivo hushfeed-safe-mode. Bórralo de la carpeta de TikTok dentro de Android/data para volver a activar Hushfeed.
+Hide TikTok Shop in search	Ocultar TikTok Shop en la búsqueda
+Hide the Products block and product cards in search results.	Ocultar el bloque de Productos y las tarjetas de producto en los resultados de búsqueda.

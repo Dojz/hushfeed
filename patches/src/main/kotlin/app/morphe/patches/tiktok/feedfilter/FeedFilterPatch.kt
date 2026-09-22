@@ -57,7 +57,8 @@ val feedFilterPatch = bytecodePatch(
         "counts. Sponsored cards are dropped from the profile video viewer, the search grids " +
         "and the Friends tab as well as the feed, and so are the mid-roll ads TikTok splices " +
         "into a video pager after the list has loaded and the ads a creator's video pager asks " +
-        "for on its own. The share prompt that appears after a like can also be hidden. " +
+        "for on its own. The share prompt that appears after a like can be hidden too, and so " +
+        "can TikTok Shop's Products block and product cards in search results. " +
         "Switch: Hushfeed settings > Feed filter.",
     default = true,
 ) {
