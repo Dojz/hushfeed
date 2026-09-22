@@ -251,9 +251,9 @@ public final class FeatureGateLabFragment extends Fragment {
         master.setChecked(FeatureGateLabStore.masterEnabled());
         SettingsUi.styleSwitch(master);
         // One row, one screen-reader stop: the row is the switch. It used to be two stops that
-        // both read "Enable overrides", and only the 44dp switch answered a tap.
+        // both read "Apply overrides", and only the 44dp switch answered a tap.
         LinearLayout masterRow = FeatureGateLabUi.switchRow(context,
-                L10n.t(context, "Enable overrides"),
+                L10n.t(context, "Apply overrides"),
                 L10n.t(context, "Replace values when TikTok asks for them"), master);
         controls.addView(masterRow, FeatureGateLabUi.matchWrap());
 
@@ -987,7 +987,7 @@ public final class FeatureGateLabFragment extends Fragment {
     private void syncMasterSwitch() {
         if (master == null) return;
         master.setChecked(FeatureGateLabStore.masterEnabled());
-        master.setContentDescription(L10n.t(getContext(), "Enable overrides"));
+        master.setContentDescription(L10n.t(getContext(), "Apply overrides"));
         SettingsUi.styleSwitch(master);
     }
 

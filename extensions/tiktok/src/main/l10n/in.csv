@@ -54,7 +54,7 @@ source,target
 1 result so far,1 hasil sejauh ini
 1 video left,Sisa 1 video
 A Lab change is already running,Perubahan Lab sedang berjalan
-A creator pattern is taking too long and was switched off: %1$s,"Ada pola kreator yang terlalu lama, jadi dimatikan: %1$s"
+A creator pattern is taking too long and was turned off: %1$s,"Ada pola kreator yang terlalu lama, jadi dimatikan: %1$s"
 A diagnostic report is already being saved,Laporan diagnostik sedang disimpan
 A field value could not be read. Check the values and try again.,Nilai kolom tidak dapat dibaca. Periksa nilainya lalu coba lagi.
 "A good place to stop, if you want one.","Tempat yang bagus untuk berhenti, kalau kamu mencarinya."
@@ -267,9 +267,9 @@ Diagnostic data put back,Data diagnostik dikembalikan
 Diagnostic report copied to the clipboard,Laporan diagnostik disalin ke papan klip
 Diagnostics,Diagnostik
 Disable,Matikan
-Disable analytics and tracking,Matikan analitik dan pelacakan
-Disable the long press quick share,Matikan bagikan cepat lewat tekan lama
-Disable the long press repost,Matikan repost lewat tekan lama
+Stop analytics and tracking,Hentikan analitik dan pelacakan
+Keep long press from quick sharing,Jangan biarkan tekan lama membagikan cepat
+Keep long press from reposting,Jangan biarkan tekan lama me-repost
 Disabled,Nonaktif
 Discard edits,Buang perubahan
 Dismissed %1$s suggested accounts,%1$s akun saran dihapus
@@ -289,9 +289,9 @@ Drama and Series,Drama dan Serial
 Empty,Kosong
 "Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.","Kosongkan menu yang terbuka saat ikon TikTok di layar beranda ditekan dan ditahan. Menonaktifkannya akan meminta TikTok membuatnya kembali. Mengetuk ikon tetap membuka aplikasi, dan pintasan yang Anda sematkan sendiri tetap berada di tempatnya."
 Enable,Hidupkan
-Enable diagnostic logging,Aktifkan pencatatan diagnostik
-Enable hold-and-slide 2x lock,Aktifkan kunci 2x tahan lalu geser
-Enable overrides,Aktifkan penggantian
+Log diagnostics,Catat diagnostik
+Lock 2x speed with hold and slide,Kunci kecepatan 2x dengan tahan lalu geser
+Apply overrides,Terapkan penggantian
 Enabled,Aktif
 Enter a JSON object or array.,Masukkan objek atau larik JSON.
 Enter a creator handle or id,Masukkan handle atau ID kreator
@@ -393,7 +393,7 @@ Hide comments made of an image or a sticker instead of words.,"Sembunyikan komen
 "Hide comments that contain any of the words below, or that come from the accounts below.","Sembunyikan komentar yang memuat salah satu kata di bawah, atau yang berasal dari akun di bawah."
 Hide controls after each video starts. Tap to restore them.,Sembunyikan kontrol setelah tiap video mulai. Ketuk untuk memunculkannya lagi.
 Hide conversations,Sembunyikan percakapan
-Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still switched on.,Sembunyikan semua percakapan pesan langsung. Kotak Masuk jadi kosong kecuali apa pun yang masih kamu aktifkan.
+Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still turned on.,Sembunyikan semua percakapan pesan langsung. Kotak Masuk jadi kosong kecuali apa pun yang masih kamu aktifkan.
 Hide the save button on the feed,Sembunyikan tombol simpan di feed
 Hide the search button on the feed,Sembunyikan tombol cari di feed
 "Hide floating promotion badges, coins, and timer banners on the feed.","Sembunyikan lencana promosi mengambang, koin, dan spanduk penghitung waktu di beranda."
@@ -629,7 +629,7 @@ One minute left,Satu menit lagi
 "One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out.","Salah satu tanda kutip dalam daftar itu tidak ditutup, sehingga sisa barisnya terbaca sebagai satu frasa. Tambahkan tanda kutip yang hilang atau hapus yang berlebih."
 One value per line,Satu nilai per baris
 Only bottom tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.,Hanya tab bawah yang sudah dimuat TikTok di perangkat ini yang muncul di sini. Ini tidak memaksa tab yang tidak tersedia untuk muncul.
-Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.,Aktifkan hanya saat merekam log untuk melaporkan masalah. Membiarkannya menyala terlalu lama bisa membuat TikTok terasa berat dan berpotensi mogok.
+"Turn this on while you record logs for a bug report, then turn it off again. While it is on, TikTok can feel slower and may crash.","Nyalakan saat merekam log untuk laporan masalah, lalu matikan lagi. Selama menyala, TikTok bisa terasa lebih lambat dan berpotensi mogok."
 Only fields that can be type-checked and applied to a copied configuration object are shown.,Hanya bidang yang tipenya bisa diperiksa dan diterapkan ke salinan objek konfigurasi yang ditampilkan.
 Only from these countries,Hanya dari negara ini
 Only tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.,Hanya tab yang sudah dimuat TikTok di perangkat ini yang muncul di sini. Ini tidak memaksa tab yang tidak tersedia untuk muncul.

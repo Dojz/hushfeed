@@ -53,7 +53,7 @@
 1 result so far	1 resultado hasta ahora
 1 video left	Queda 1 video
 A Lab change is already running	Ya se está ejecutando un cambio del Lab
-A creator pattern is taking too long and was switched off: %1$s	Un patrón de creador tarda demasiado y se ha desactivado: %1$s
+A creator pattern is taking too long and was turned off: %1$s	Un patrón de creador tarda demasiado y se ha desactivado: %1$s
 A diagnostic report is already being saved	Ya se está guardando un informe de diagnóstico
 A field value could not be read. Check the values and try again.	No se pudo leer el valor de un campo. Revisa los valores e inténtalo de nuevo.
 A good place to stop, if you want one.	Un buen momento para parar, si quieres uno.
@@ -266,9 +266,9 @@ Diagnostic data put back	Se restauraron los datos de diagnóstico
 Diagnostic report copied to the clipboard	Informe de diagnóstico copiado al portapapeles
 Diagnostics	Diagnóstico
 Disable	Desactivar
-Disable analytics and tracking	Desactivar la analítica y el seguimiento
-Disable the long press quick share	Desactivar el compartir rápido con pulsación larga
-Disable the long press repost	Desactivar el repost con pulsación larga
+Stop analytics and tracking	Detener la analítica y el seguimiento
+Keep long press from quick sharing	Que la pulsación larga no comparta rápido
+Keep long press from reposting	Que la pulsación larga no haga repost
 Disabled	Desactivados
 Discard edits	Descartar los cambios
 Dismissed %1$s suggested accounts	%1$s cuentas sugeridas descartadas
@@ -288,9 +288,9 @@ Each area, how many of the things it looks for are in this build and how many ar
 Empty	Vacío
 Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.	Vaciar el menú que se abre al mantener pulsado el icono de TikTok en la pantalla de inicio. Al desactivarlo se pide a TikTok que los vuelva a crear. Tocar el icono sigue abriendo la aplicación, y un acceso directo que hayas anclado permanece donde lo pusiste.
 Enable	Activar
-Enable diagnostic logging	Activar el registro de diagnóstico
-Enable hold-and-slide 2x lock	Activar el bloqueo a 2x manteniendo y deslizando
-Enable overrides	Activar las sustituciones
+Log diagnostics	Registrar diagnósticos
+Lock 2x speed with hold and slide	Fijar 2x manteniendo y deslizando
+Apply overrides	Aplicar las sustituciones
 Enabled	Activados
 Enter a JSON object or array.	Introduce un objeto o una matriz JSON.
 Enter a creator handle or id	Escribe un nombre de usuario o un id de creador
@@ -392,7 +392,7 @@ Hide comments made of an image or a sticker instead of words.	Ocultar los coment
 Hide comments that contain any of the words below, or that come from the accounts below.	Ocultar los comentarios que contengan cualquiera de las palabras de abajo, o que vengan de las cuentas de abajo.
 Hide controls after each video starts. Tap to restore them.	Ocultar los controles después de que empiece cada vído. Toca para recuperarlos.
 Hide conversations	Ocultar las conversaciones
-Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still switched on.	Ocultar todas las conversaciones de mensajes directos. Deja la bandeja vacía salvo por lo que sigas teniendo activado.
+Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still turned on.	Ocultar todas las conversaciones de mensajes directos. Deja la bandeja vacía salvo por lo que sigas teniendo activado.
 Hide the save button on the feed	Ocultar el botón de guardar del feed
 Hide the search button on the feed	Ocultar el botón de buscar del feed
 Hide floating promotion badges, coins, and timer banners on the feed.	Ocultar las insignias promocionales flotantes, las monedas y los banners con cuenta atrás de la página de inicio.
@@ -628,7 +628,7 @@ One minute left	Queda un minuto
 One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out.	Una de las comillas de esa lista no tiene con qué cerrarse, así que el resto de la línea se lee como una sola frase. Añade la comilla que falta o quita la que sobra.
 One value per line	Un valor por línea
 Only bottom tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.	Aquí solo están las pestañas inferiores que TikTok ha cargado en este dispositivo. Esto no hace aparecer las que no están disponibles.
-Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.	Actívalo solo cuando estés grabando registros para informar de un problema. Dejarlo activado mucho tiempo puede hacer que TikTok vaya lento y provocar fallos.
+Turn this on while you record logs for a bug report, then turn it off again. While it is on, TikTok can feel slower and may crash.	Actívalo mientras grabas registros para informar de un problema y luego vuelve a apagarlo. Mientras esté activado, TikTok puede ir más lento y fallar.
 Only fields that can be type-checked and applied to a copied configuration object are shown.	Solo se muestran los campos cuyo tipo se puede comprobar y aplicar a una copia de la configuración.
 Only from these countries	Solo desde estos países
 Only tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.	Aquí solo están las pestañas que TikTok ha cargado en este dispositivo. Esto no hace aparecer las que no están disponibles.

@@ -53,7 +53,7 @@
 1 result so far	Şimdiye kadar 1 sonuç
 1 video left	1 video kaldı
 A Lab change is already running	Bir Lab değişikliği zaten sürüyor
-A creator pattern is taking too long and was switched off: %1$s	Bir içerik üreticisi kalıbı çok uzun sürdüğü için kapatıldı: %1$s
+A creator pattern is taking too long and was turned off: %1$s	Bir içerik üreticisi kalıbı çok uzun sürdüğü için kapatıldı: %1$s
 A diagnostic report is already being saved	Bir tanılama raporu zaten kaydediliyor
 A field value could not be read. Check the values and try again.	Bir alan değeri okunamadı. Değerleri kontrol edip tekrar dene.
 A good place to stop, if you want one.	İstersen, durmak için iyi bir an.
@@ -278,9 +278,9 @@ Diagnostic data put back	Tanılama verileri geri kondu
 Diagnostic report copied to the clipboard	Tanılama raporu panoya kopyalandı
 Diagnostics	Tanılama
 Disable	Devre dışı bırak
-Disable analytics and tracking	Analitiği ve izlemeyi devre dışı bırak
-Disable the long press quick share	Uzun basma ile hızlı paylaşımı devre dışı bırak
-Disable the long press repost	Uzun basma ile yeniden yayınlamayı devre dışı bırak
+Stop analytics and tracking	Analitiği ve izlemeyi durdur
+Keep long press from quick sharing	Uzun basma hızlı paylaşmasın
+Keep long press from reposting	Uzun basma yeniden yayınlamasın
 Disabled	Devre dışı
 Discard edits	Düzenlemeleri iptal et
 Dismissed %1$s suggested accounts	%1$s önerilen hesap kaldırıldı
@@ -300,9 +300,9 @@ Easier comment likes	Daha kolay yorum beğenme
 Empty	Boş
 Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.	Ana ekranda TikTok simgesine basılı tuttuğunda açılan menüyü boşalt. Bunu kapatırsan TikTok'tan kısayolları yeniden oluşturması istenir. Simgeye dokunmak yine uygulamayı açar ve kendi sabitlediğin bir kısayol koyduğun yerde kalır.
 Enable	Etkinleştir
-Enable diagnostic logging	Tanılama günlüğünü etkinleştir
-Enable hold-and-slide 2x lock	Basılı tutup kaydırarak 2x kilidini etkinleştir
-Enable overrides	Geçersiz kılmaları etkinleştir
+Log diagnostics	Tanılamayı günlüğe kaydet
+Lock 2x speed with hold and slide	Basılı tutup kaydırarak 2x hızı kilitle
+Apply overrides	Geçersiz kılmaları uygula
 Enabled	Etkin
 Enter a JSON object or array.	Bir JSON nesnesi veya dizisi gir.
 Enter a creator handle or id	İçerik üreticisinin kullanıcı adını veya kimliğini gir
@@ -409,7 +409,7 @@ Hide comments made of an image or a sticker instead of words.	Kelimeler yerine b
 Hide comments that contain any of the words below, or that come from the accounts below.	Aşağıdaki kelimelerden herhangi birini içeren veya aşağıdaki hesaplardan gelen yorumları gizle.
 Hide controls after each video starts. Tap to restore them.	Her video başladıktan sonra kontrolleri gizle. Geri getirmek için dokun.
 Hide conversations	Sohbetleri gizle
-Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still switched on.	Tüm direkt mesaj sohbetlerini gizle. Hâlâ açık olan diğer şeyler dışında Gelen Kutusu boş kalır.
+Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still turned on.	Tüm direkt mesaj sohbetlerini gizle. Hâlâ açık olan diğer şeyler dışında Gelen Kutusu boş kalır.
 Hide floating promotion badges, coins, and timer banners on the feed.	Akıştaki yüzen promosyon rozetlerini, jetonları ve sayaç bantlarını gizle.
 Hide floating promotions	Yüzen promosyonları gizle
 Hide inserted cards	Araya eklenen kartları gizle
@@ -658,7 +658,7 @@ One minute left	Bir dakika kaldı
 One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out.	Bu listedeki tırnak işaretlerinden birinin kapanışı yok, bu yüzden satırın geri kalanı tek bir ifade olarak okunuyor. Eksik tırnağı ekle veya fazla olanı çıkar.
 One value per line	Her satıra bir değer
 Only bottom tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.	Burada yalnızca TikTok'un bu cihazda yüklediği alt sekmeler gösterilir. Bu, kullanılamayan sekmeleri görünmeye zorlamaz.
-Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.	Yalnızca bir sorunu bildirmek için günlük kaydederken etkinleştir. Çok uzun süre açık bırakmak TikTok'u yavaşlatabilir ve çökmelere yol açabilir.
+Turn this on while you record logs for a bug report, then turn it off again. While it is on, TikTok can feel slower and may crash.	Bunu bir sorunu bildirmek için günlük kaydederken aç, sonra yeniden kapat. Açıkken TikTok yavaşlayabilir ve çökebilir.
 Only fields that can be type-checked and applied to a copied configuration object are shown.	Yalnızca türü denetlenebilen ve kopyalanmış bir yapılandırma nesnesine uygulanabilen alanlar gösterilir.
 Only from these countries	Yalnızca bu ülkelerden
 Only tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.	Burada yalnızca TikTok'un bu cihazda yüklediği sekmeler gösterilir. Bu, kullanılamayan sekmeleri görünmeye zorlamaz.

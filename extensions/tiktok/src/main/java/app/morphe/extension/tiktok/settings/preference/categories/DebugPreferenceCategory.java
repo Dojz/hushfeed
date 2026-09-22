@@ -47,8 +47,8 @@ public class DebugPreferenceCategory extends ConditionalPreferenceCategory {
         if (SettingsStatus.diagnosticsEnabled) {
             addPreference(new TogglePreference(
                     context,
-                    "Enable diagnostic logging",
-                    "Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.",
+                    "Log diagnostics",
+                    "Turn this on while you record logs for a bug report, then turn it off again. While it is on, TikTok can feel slower and may crash.",
                     BaseSettings.DEBUG
             ));
 

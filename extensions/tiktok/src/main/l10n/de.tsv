@@ -56,7 +56,7 @@
 1 result so far	1 Ergebnis bisher
 1 video left	Noch 1 Video
 A Lab change is already running	Eine Lab-Änderung läuft bereits
-A creator pattern is taking too long and was switched off: %1$s	Ein Kreator-Muster braucht zu lange und wurde abgeschaltet: %1$s
+A creator pattern is taking too long and was turned off: %1$s	Ein Kreator-Muster braucht zu lange und wurde abgeschaltet: %1$s
 A diagnostic report is already being saved	Ein Diagnosebericht wird gerade gespeichert
 A field value could not be read. Check the values and try again.	Ein Feldwert konnte nicht gelesen werden. Prüfe die Werte und versuche es erneut.
 A good place to stop, if you want one.	Ein guter Moment zum Aufhören, falls du einen suchst.
@@ -269,9 +269,9 @@ Diagnostic data put back	Diagnosedaten wiederhergestellt
 Diagnostic report copied to the clipboard	Diagnosebericht in die Zwischenablage kopiert
 Diagnostics	Diagnose
 Disable	Ausschalten
-Disable analytics and tracking	Analyse und Tracking abschalten
-Disable the long press quick share	Schnelles Teilen per langem Drücken abschalten
-Disable the long press repost	Repost per langem Drücken abschalten
+Stop analytics and tracking	Analyse und Tracking stoppen
+Keep long press from quick sharing	Langes Drücken nicht schnell teilen lassen
+Keep long press from reposting	Langes Drücken nicht reposten lassen
 Disabled	Ausgeschaltet
 Discard edits	Änderungen verwerfen
 Dismissed %1$s suggested accounts	%1$s Kontovorschläge entfernt
@@ -291,9 +291,9 @@ Each area, how many of the things it looks for are in this build and how many ar
 Empty	Leer
 Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.	Das Menü leeren, das sich beim langen Drücken des TikTok-Symbols auf dem Startbildschirm öffnet. Wird dies ausgeschaltet, wird TikTok gebeten, sie wieder aufzubauen. Ein Tippen auf das Symbol öffnet die App weiterhin, und eine selbst angeheftete Verknüpfung bleibt dort, wo sie abgelegt wurde.
 Enable	Einschalten
-Enable diagnostic logging	Diagnoseprotokoll einschalten
-Enable hold-and-slide 2x lock	2x-Sperre per Halten und Wischen
-Enable overrides	Überschreibungen aktivieren
+Log diagnostics	Diagnose protokollieren
+Lock 2x speed with hold and slide	2x-Tempo per Halten und Wischen sperren
+Apply overrides	Überschreibungen anwenden
 Enabled	Eingeschaltet
 Enter a JSON object or array.	Gib ein JSON-Objekt oder -Array ein.
 Enter a creator handle or id	Gib einen Creator-Handle oder eine ID ein
@@ -395,7 +395,7 @@ Hide comments made of an image or a sticker instead of words.	Kommentare ausblen
 Hide comments that contain any of the words below, or that come from the accounts below.	Kommentare ausblenden, die eines der Wörter unten enthalten oder von den Konten unten stammen.
 Hide controls after each video starts. Tap to restore them.	Bedienelemente nach dem Start jedes Videos ausblenden. Tippe, um sie wieder einzublenden.
 Hide conversations	Unterhaltungen ausblenden
-Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still switched on.	Jede Direktnachrichten-Unterhaltung ausblenden. Der Posteingang bleibt leer, abgesehen von allem, was sonst noch eingeschaltet ist.
+Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still turned on.	Jede Direktnachrichten-Unterhaltung ausblenden. Der Posteingang bleibt leer, abgesehen von allem, was sonst noch eingeschaltet ist.
 Hide the save button on the feed	Speichern-Schaltfläche im Feed ausblenden
 Hide the search button on the feed	Suchschaltfläche im Feed ausblenden
 Hide floating promotion badges, coins, and timer banners on the feed.	Schwebende Werbe-Abzeichen, Münzen und Timer-Banner auf der Startseite ausblenden.
@@ -631,7 +631,7 @@ One minute left	Noch eine Minute
 One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out.	Eines der Anführungszeichen in dieser Liste wird nicht geschlossen, deshalb liest sich der Rest der Zeile als eine einzige Wendung. Ergänzen Sie das fehlende Anführungszeichen oder entfernen Sie das überzählige.
 One value per line	Ein Wert pro Zeile
 Only bottom tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.	Hier stehen nur die unteren Tabs, die TikTok auf diesem Gerät geladen hat. Nicht verfügbare Tabs erscheinen dadurch nicht.
-Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.	Nur einschalten, wenn du Protokolle für eine Fehlermeldung aufzeichnest. Bleibt es zu lange an, kann TikTok träge wirken und abstürzen.
+Turn this on while you record logs for a bug report, then turn it off again. While it is on, TikTok can feel slower and may crash.	Schalte das ein, während du Protokolle für eine Fehlermeldung aufzeichnest, und danach wieder aus. Solange es an ist, kann TikTok träge wirken und abstürzen.
 Only fields that can be type-checked and applied to a copied configuration object are shown.	Es werden nur Felder gezeigt, deren Typ geprüft und die auf eine kopierte Konfiguration angewendet werden können.
 Only from these countries	Nur aus diesen Ländern
 Only tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.	Hier stehen nur die Tabs, die TikTok auf diesem Gerät geladen hat. Nicht verfügbare Tabs erscheinen dadurch nicht.

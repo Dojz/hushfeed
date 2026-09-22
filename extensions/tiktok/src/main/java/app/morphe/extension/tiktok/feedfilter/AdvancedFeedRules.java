@@ -222,7 +222,7 @@ public final class AdvancedFeedRules {
         } catch (BudgetSpent spent) {
             if (RUNAWAY.putIfAbsent(pattern, Boolean.TRUE) == null) {
                 Utils.showToastLong(L10n.f(
-                        "A creator pattern is taking too long and was switched off: %1$s",
+                        "A creator pattern is taking too long and was turned off: %1$s",
                         pattern.pattern()));
             }
             return false;

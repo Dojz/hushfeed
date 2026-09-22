@@ -378,7 +378,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
         if (SettingsStatus.longPressSpeedLockEnabled) {
             addPreference(new TogglePreference(
                     context,
-                    "Enable hold-and-slide 2x lock",
+                    "Lock 2x speed with hold and slide",
                     "Use TikTok's native hold, slide down, and release gesture to lock 2x speed.",
                     Settings.ENABLE_LONG_PRESS_SPEED_LOCK
             ));
@@ -386,7 +386,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
         if (SettingsStatus.disableLongPressQuickShareEnabled) {
             addPreference(new TogglePreference(
                     context,
-                    "Disable the long press quick share",
+                    "Keep long press from quick sharing",
                     "Stop a long press on Share from opening TikTok's quick share action.",
                     Settings.DISABLE_LONG_PRESS_QUICK_SHARE
             ));
@@ -394,7 +394,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
         if (SettingsStatus.disableLongPressRepostEnabled) {
             addPreference(new TogglePreference(
                     context,
-                    "Disable the long press repost",
+                    "Keep long press from reposting",
                     "Stop a long press on Like from opening TikTok's repost action.",
                     Settings.DISABLE_LONG_PRESS_REPOST
             ));

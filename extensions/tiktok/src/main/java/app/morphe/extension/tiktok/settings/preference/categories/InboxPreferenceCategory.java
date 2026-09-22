@@ -80,7 +80,7 @@ public final class InboxPreferenceCategory extends ConditionalPreferenceCategory
                     context,
                     "Hide conversations",
                     "Hide every direct message conversation. Leaves the Inbox empty apart from "
-                            + "whatever else is still switched on.",
+                            + "whatever else is still turned on.",
                     Settings.HIDE_INBOX_CONVERSATIONS
             ));
             addPreference(new TogglePreference(

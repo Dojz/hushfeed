@@ -55,7 +55,7 @@ source,target
 1 result so far,1 result so far
 1 video left,1 video left
 A Lab change is already running,A Lab change is already running
-A creator pattern is taking too long and was switched off: %1$s,A creator pattern is taking too long and was switched off: %1$s
+A creator pattern is taking too long and was turned off: %1$s,A creator pattern is taking too long and was turned off: %1$s
 A diagnostic report is already being saved,A diagnostic report is already being saved
 A field value could not be read. Check the values and try again.,A field value could not be read. Check the values and try again.
 "A good place to stop, if you want one.","A good place to stop, if you want one."
@@ -111,6 +111,7 @@ App AB,App AB
 Appearance,Appearance
 Applies to both video and photo downloads.,Applies to both video and photo downloads.
 Apply,Apply
+Apply overrides,Apply overrides
 Applying Calm feed,Applying Calm feed
 Around the video,Around the video
 Arrange your feed and bottom tabs,Arrange your feed and bottom tabs
@@ -280,9 +281,6 @@ Diagnostic data put back,Diagnostic data put back
 Diagnostic report copied to the clipboard,Diagnostic report copied to the clipboard
 Diagnostics,Diagnostics
 Disable,Disable
-Disable analytics and tracking,Disable analytics and tracking
-Disable the long press quick share,Disable the long press quick share
-Disable the long press repost,Disable the long press repost
 Disabled,Disabled
 Discard edits,Discard edits
 Dismissed %1$s suggested accounts,Dismissed %1$s suggested accounts
@@ -302,9 +300,6 @@ Easier comment likes,Easier comment likes
 Empty,Empty
 "Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.","Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it."
 Enable,Enable
-Enable diagnostic logging,Enable diagnostic logging
-Enable hold-and-slide 2x lock,Enable hold-and-slide 2x lock
-Enable overrides,Enable overrides
 Enabled,Enabled
 Enter a JSON object or array.,Enter a JSON object or array.
 Enter a creator handle or id,Enter a creator handle or id
@@ -411,7 +406,7 @@ Hide comments made of an image or a sticker instead of words.,Hide comments made
 "Hide comments that contain any of the words below, or that come from the accounts below.","Hide comments that contain any of the words below, or that come from the accounts below."
 Hide controls after each video starts. Tap to restore them.,Hide controls after each video starts. Tap to restore them.
 Hide conversations,Hide conversations
-Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still switched on.,Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still switched on.
+Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still turned on.,Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still turned on.
 "Hide floating promotion badges, coins, and timer banners on the feed.","Hide floating promotion badges, coins, and timer banners on the feed."
 Hide floating promotions,Hide floating promotions
 Hide inserted cards,Hide inserted cards
@@ -527,6 +522,8 @@ Inserted cards,Inserted cards
 Keep a local record of what you have watched and drop those videos from later feed pages.,Keep a local record of what you have watched and drop those videos from later feed pages.
 Keep captions in clear display,Keep captions in clear display
 Keep going,Keep going
+Keep long press from quick sharing,Keep long press from quick sharing
+Keep long press from reposting,Keep long press from reposting
 Keep the Favorites tab,Keep the Favorites tab
 Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.,Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.
 Keep the screen's refresh rate,Keep the screen's refresh rate
@@ -570,7 +567,9 @@ Loaded-value file export failed,Loaded-value file export failed
 Loading gates...,Loading gates...
 Loading local catalog and current TikTok cache...,Loading local catalog and current TikTok cache...
 Location-tagged videos,Location-tagged videos
+Lock 2x speed with hold and slide,Lock 2x speed with hold and slide
 Lock today's budget,Lock today's budget
+Log diagnostics,Log diagnostics
 "Logging, hook status and reports","Logging, hook status and reports"
 Long press,Long press
 Lowest,Lowest
@@ -663,7 +662,6 @@ One minute left,One minute left
 "One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out.","One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out."
 One value per line,One value per line
 Only bottom tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.,Only bottom tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.
-Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.,Only enable when recording logs to report an issue. Leaving it on for too long can make TikTok feel laggy and may lead to crashes.
 Only fields that can be type-checked and applied to a copied configuration object are shown.,Only fields that can be type-checked and applied to a copied configuration object are shown.
 Only from these countries,Only from these countries
 Only tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.,Only tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.
@@ -923,6 +921,7 @@ Stop TikTok reading what you copied. Copying a link from TikTok still works.,Sto
 "Stop TikTok reporting that you viewed a story or a profile, or that you are typing. Online status is unchanged. It cannot undo what the server has already recorded.","Stop TikTok reporting that you viewed a story or a profile, or that you are typing. Online status is unchanged. It cannot undo what the server has already recorded."
 Stop a long press on Like from opening TikTok's repost action.,Stop a long press on Like from opening TikTok's repost action.
 Stop a long press on Share from opening TikTok's quick share action.,Stop a long press on Share from opening TikTok's quick share action.
+Stop analytics and tracking,Stop analytics and tracking
 Stop feature gate recording,Stop feature gate recording
 Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.,Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.
 Stop the bubble that asks you to share a video with friends after you like it.,Stop the bubble that asks you to share a video with friends after you like it.
@@ -1067,6 +1066,7 @@ Try a different word or clear the search.,Try a different word or clear the sear
 "Try again, or go back to TikTok.","Try again, or go back to TikTok."
 Turn on %1$s first.,Turn on %1$s first.
 Turn on overrides,Turn on overrides
+"Turn this on while you record logs for a bug report, then turn it off again. While it is on, TikTok can feel slower and may crash.","Turn this on while you record logs for a bug report, then turn it off again. While it is on, TikTok can feel slower and may crash."
 Turned off %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.,Turned off %1$d gates of %2$d; the rest do not take a true or false value. Restart TikTok to apply this.
 Turned off %1$d gates. Restart TikTok to apply this.,Turned off %1$d gates. Restart TikTok to apply this.
 Turned off 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.,Turned off 1 gate of %1$d; the rest do not take a true or false value. Restart TikTok to apply this.
