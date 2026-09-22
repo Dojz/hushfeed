@@ -172,6 +172,7 @@ val hideSearchSuggestionsPatch = bytecodePatch(
         "type, and stops the page asking for them. Your own search history is left alone. A separate switch hides the search rewards banner and coin counter some regions get. Switch: Hushfeed settings > App.",
     default = false,
 ) {
+    category("Search")
     dependsOn(settingsPatch, sharedExtensionPatch)
     compatibleWith(*AppCompatibilities.tiktok4703())
 

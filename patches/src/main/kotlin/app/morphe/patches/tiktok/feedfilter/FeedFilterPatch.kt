@@ -61,6 +61,7 @@ val feedFilterPatch = bytecodePatch(
         "Switch: Hushfeed settings > Feed filter.",
     default = true,
 ) {
+    category("Feed")
     dependsOn(settingsPatch, 
         sharedExtensionPatch,
     )
