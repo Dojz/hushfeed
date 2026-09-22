@@ -491,6 +491,26 @@ public final class Probe extends Instrumentation {
                                 + " hasDesc=" + (desc != null && String.valueOf(desc).trim().length() > 0));
                         break;
                     }
+                    case "textviews": {
+                        // Every shown TextView on screen, id or not, with its class chain, place,
+                        // size and text length. The caption renderer's text view may carry no id
+                        // on a given build, which the views action (ids only) cannot show. The
+                        // text itself never leaves the phone.
+                        android.app.Activity activity = (android.app.Activity) loader.loadClass(UTILS)
+                                .getMethod("getActivity").invoke(null);
+                        if (activity == null) throw new IllegalStateException("no current activity");
+                        StringBuilder out = new StringBuilder();
+                        for (android.view.View root : windowRoots()) {
+                            walkTextViews(root, 0, out, activity.getResources());
+                        }
+                        String text = out.toString();
+                        int pieces = 0;
+                        for (int at = 0; at < text.length(); at += 3000, pieces++) {
+                            Log.i(TAG, "textviews[" + pieces + "] " + text.substring(at, Math.min(text.length(), at + 3000)));
+                        }
+                        Log.i(TAG, "ok textviews " + text.length() + " chars in " + pieces + " pieces");
+                        break;
+                    }
                     case "doubletap": {
                         // Two taps on TikTok's own window, timed inside the double-tap window.
                         // "input tap" twice from adb spawns a process per tap and lands inside or
@@ -717,6 +737,40 @@ public final class Probe extends Instrumentation {
                 return resources.getResourceEntryName(id);
             } catch (android.content.res.Resources.NotFoundException missing) {
                 return "0x" + Integer.toHexString(id);
+            }
+        }
+
+        private static void walkTextViews(android.view.View view, int depth, StringBuilder out,
+                android.content.res.Resources resources) {
+            if (view instanceof android.widget.TextView && view.isShown()
+                    && ((android.widget.TextView) view).getText() != null
+                    && ((android.widget.TextView) view).getText().length() > 0) {
+                int[] where = new int[2];
+                view.getLocationOnScreen(where);
+                StringBuilder chain = new StringBuilder();
+                for (Class<?> c = view.getClass(); c != null && !c.getName().startsWith("android."); c = c.getSuperclass()) {
+                    if (chain.length() > 0) chain.append('>');
+                    chain.append(c.getSimpleName());
+                }
+                String id = idName(view, resources);
+                android.view.ViewParent parent = view.getParent();
+                String parentName = parent instanceof android.view.View
+                        ? String.valueOf(idName((android.view.View) parent, resources)) + '/' + parent.getClass().getSimpleName()
+                        : "none";
+                out.append(depth).append(' ').append(chain)
+                        .append(" id=").append(id)
+                        .append(" at=").append(where[0]).append(',').append(where[1])
+                        .append(" size=").append(view.getWidth()).append('x').append(view.getHeight())
+                        .append(" textLength=").append(((android.widget.TextView) view).getText().length())
+                        .append(" textSizePx=").append((int) ((android.widget.TextView) view).getTextSize())
+                        .append(" parent=").append(parentName)
+                        .append('\n');
+            }
+            if (view instanceof android.view.ViewGroup) {
+                android.view.ViewGroup group = (android.view.ViewGroup) view;
+                for (int i = 0, count = group.getChildCount(); i < count; i++) {
+                    walkTextViews(group.getChildAt(i), depth + 1, out, resources);
+                }
             }
         }
 
