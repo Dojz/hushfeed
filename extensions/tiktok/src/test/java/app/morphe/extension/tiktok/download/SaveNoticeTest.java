@@ -39,10 +39,13 @@ public class SaveNoticeTest {
 
     @Before public void setUp() {
         Utils.setContext(RuntimeEnvironment.getApplication());
+        // No other window: the banner falls to the activity's content root.
+        SaveNotice.windowRootsForTests = java.util.List.of();
     }
 
     @After public void tearDown() {
         Utils.setActivity(null);
+        SaveNotice.windowRootsForTests = null;
     }
 
     @Test public void aSaveWithARowShowsTheBannerAndOpenStartsAViewerOnIt() {
@@ -88,6 +91,34 @@ public class SaveNoticeTest {
             assertEquals("Sound saved to Music/TikTok", ShadowToast.getTextOfLatestToast());
             ViewGroup root = activity.findViewById(android.R.id.content);
             assertNull("a banner went up without a row to open", find(root, "Open"));
+        }
+    }
+
+    /**
+     * TikTok brings its share sheet back over the feed when a download finishes, and the sheet
+     * is a window of its own: a banner on the activity stood underneath it, where the old toast
+     * floated above. With another window up, the banner goes on that window.
+     */
+    @Test public void aSaveUnderAnotherWindowPutsTheBannerOnThatWindow() {
+        try (var owner = Robolectric.buildActivity(HostActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setActivity(activity);
+            android.app.Dialog sheet = new android.app.Dialog(activity);
+            sheet.setContentView(new android.widget.FrameLayout(activity));
+            sheet.show();
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            View activityDecor = activity.getWindow().getDecorView();
+            View sheetDecor = sheet.getWindow().getDecorView();
+            SaveNotice.windowRootsForTests = java.util.List.of(activityDecor, sheetDecor);
+
+            SaveNotice.saved("Story saved to DCIM/TikTok",
+                    new MediaFileWriter.Saved("a.mp4", Uri.parse("content://media/external/video/media/9")));
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+            assertNotNull("the banner missed the window on top", find(sheetDecor, "Open"));
+            assertNull("a second banner went on the activity underneath",
+                    find(activity.findViewById(android.R.id.content), "Open"));
+            sheet.dismiss();
         }
     }
 

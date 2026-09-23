@@ -8,6 +8,10 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
+import android.view.View;
+import android.view.ViewGroup;
+
+import java.util.List;
 
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
@@ -32,7 +36,63 @@ final class SaveNotice {
             Utils.showToastShort(message);
             return;
         }
-        BlockAuthorOverlay.showActionBanner(message, L10n.t("Open"), () -> open(uri));
+        Utils.runOnMainThread(() -> {
+            Activity activity = Utils.getActivity();
+            if (activity == null || activity.isFinishing() || activity.isDestroyed()) {
+                Utils.showToastShort(message);
+                return;
+            }
+            // TikTok brings its share sheet back over the feed when a download finishes, and the
+            // sheet is a window of its own: a banner on the activity stood underneath it, where
+            // the old toast would have floated above. The banner goes on the top window instead,
+            // which is the sheet while it is up and the activity's own decor otherwise.
+            ViewGroup root = topWindowRoot(activity);
+            if (root == null) root = activity.findViewById(android.R.id.content);
+            BlockAuthorOverlay.showActionBanner(root, message, L10n.t("Open"), () -> open(uri));
+        });
+    }
+
+    /** For the tests, which have no WindowManagerGlobal to read; null uses the real windows. */
+    static volatile List<View> windowRootsForTests;
+
+    /**
+     * The topmost attached window root, the way the verification probe reads them, or null when
+     * the host keeps its windows somewhere this Android does not expose.
+     */
+    private static ViewGroup topWindowRoot(Activity activity) {
+        try {
+            List<View> roots = windowRootsForTests;
+            if (roots == null) {
+                Class<?> globalClass = Class.forName("android.view.WindowManagerGlobal");
+                java.lang.reflect.Method getInstance = globalClass.getDeclaredMethod("getInstance");
+                getInstance.setAccessible(true);
+                Object global = getInstance.invoke(null);
+                Object value;
+                try {
+                    java.lang.reflect.Method getWindowViews = globalClass.getDeclaredMethod("getWindowViews");
+                    getWindowViews.setAccessible(true);
+                    value = getWindowViews.invoke(global);
+                } catch (NoSuchMethodException missingMethod) {
+                    java.lang.reflect.Field views = globalClass.getDeclaredField("mViews");
+                    views.setAccessible(true);
+                    value = views.get(global);
+                }
+                if (!(value instanceof List)) return null;
+                @SuppressWarnings("unchecked")
+                List<View> read = (List<View>) value;
+                roots = read;
+            }
+            for (int index = roots.size() - 1; index >= 0; index--) {
+                View root = roots.get(index);
+                if (root instanceof ViewGroup && root.isShown() && root.getWindowToken() != null) {
+                    return (ViewGroup) root;
+                }
+            }
+            return null;
+        } catch (Throwable unreadable) {
+            Logger.printDebug(() -> "The window list is not readable here");
+            return null;
+        }
     }
 
     private static void open(Uri uri) {
