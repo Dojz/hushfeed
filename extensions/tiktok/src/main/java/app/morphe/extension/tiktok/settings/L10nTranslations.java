@@ -1091,8 +1091,8 @@ public final class L10nTranslations {
                 "Die Fragekarten ausblenden, die TikTok gegen Ende eines Videos einblendet.");
         table.put("Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.",
                 "Blende die Schnell-Emoji-Zeile und automatische Sticker-Vorschläge aus, die beim Tippen erscheinen. Die Emoji- und Sticker-Schaltflächen funktionieren weiterhin.");
-        table.put("Hide the red counts and dots on the Inbox and Profile tabs. The inbox itself still shows what came in.",
-                "Blendet die roten Zähler und Punkte auf den Tabs Posteingang und Profil aus. Der Posteingang selbst zeigt weiterhin, was angekommen ist.");
+        table.put("Hide the red counts and dots on every bottom tab, Inbox and Profile included. The inbox itself still shows what came in.",
+                "Blendet die roten Zähler und Punkte auf allen unteren Tabs aus, Posteingang und Profil eingeschlossen. Der Posteingang selbst zeigt weiterhin, was angekommen ist.");
         table.put("Hide the rewards shortcut",
                 "Belohnungs-Schaltfläche ausblenden");
         table.put("Hide the right column",
@@ -3544,8 +3544,8 @@ public final class L10nTranslations {
                 "Ocultar las tarjetas con preguntas que TikTok desliza sobre un vídeo cerca del final.");
         table.put("Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.",
                 "Oculta la fila de emojis rápidos y las sugerencias automáticas de stickers que aparecen mientras escribes. Los botones de emojis y stickers siguen funcionando.");
-        table.put("Hide the red counts and dots on the Inbox and Profile tabs. The inbox itself still shows what came in.",
-                "Oculta los contadores y puntos rojos de las pestañas Bandeja de entrada y Perfil. La bandeja de entrada sigue mostrando lo que ha llegado.");
+        table.put("Hide the red counts and dots on every bottom tab, Inbox and Profile included. The inbox itself still shows what came in.",
+                "Oculta los contadores y puntos rojos de todas las pestañas inferiores, incluidas Bandeja de entrada y Perfil. La bandeja de entrada sigue mostrando lo que ha llegado.");
         table.put("Hide the rewards shortcut",
                 "Ocultar el acceso a recompensas");
         table.put("Hide the right column",
@@ -5997,8 +5997,8 @@ public final class L10nTranslations {
                 "Sembunyikan kartu pertanyaan yang TikTok munculkan menjelang akhir video.");
         table.put("Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.",
                 "Sembunyikan baris emoji cepat dan saran stiker otomatis yang muncul saat kamu mengetik. Tombol emoji dan stiker tetap berfungsi.");
-        table.put("Hide the red counts and dots on the Inbox and Profile tabs. The inbox itself still shows what came in.",
-                "Menyembunyikan angka dan titik merah di tab Kotak Masuk dan Profil. Kotak masuk sendiri tetap menampilkan yang masuk.");
+        table.put("Hide the red counts and dots on every bottom tab, Inbox and Profile included. The inbox itself still shows what came in.",
+                "Menyembunyikan angka dan titik merah di semua tab bawah, termasuk Kotak Masuk dan Profil. Kotak masuk sendiri tetap menampilkan yang masuk.");
         table.put("Hide the rewards shortcut",
                 "Sembunyikan pintasan hadiah");
         table.put("Hide the right column",
@@ -8450,8 +8450,8 @@ public final class L10nTranslations {
                 "Esconder os cards com perguntas que o TikTok desliza sobre o vídeo perto do fim.");
         table.put("Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.",
                 "Oculte a fileira de emojis rápidos e as sugestões automáticas de figurinhas que aparecem enquanto você digita. Os botões de emoji e figurinha continuam funcionando.");
-        table.put("Hide the red counts and dots on the Inbox and Profile tabs. The inbox itself still shows what came in.",
-                "Esconde os contadores e pontos vermelhos das abas Caixa de entrada e Perfil. A caixa de entrada continua mostrando o que chegou.");
+        table.put("Hide the red counts and dots on every bottom tab, Inbox and Profile included. The inbox itself still shows what came in.",
+                "Esconde os contadores e pontos vermelhos de todas as abas inferiores, incluindo Caixa de entrada e Perfil. A caixa de entrada continua mostrando o que chegou.");
         table.put("Hide the rewards shortcut",
                 "Ocultar o atalho de recompensas");
         table.put("Hide the right column",
@@ -10903,8 +10903,8 @@ public final class L10nTranslations {
                 "TikTok'un bir videonun sonuna doğru üzerine kaydırdığı soru kartlarını gizle.");
         table.put("Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.",
                 "Yazarken görünen hızlı emoji satırını ve otomatik çıkartma önerilerini gizle. Emoji ve çıkartma düğmeleri çalışmaya devam eder.");
-        table.put("Hide the red counts and dots on the Inbox and Profile tabs. The inbox itself still shows what came in.",
-                "Gelen Kutusu ve Profil sekmelerindeki kırmızı sayaçları ve noktaları gizler. Gelen kutusunun kendisi gelenleri göstermeye devam eder.");
+        table.put("Hide the red counts and dots on every bottom tab, Inbox and Profile included. The inbox itself still shows what came in.",
+                "Gelen Kutusu ve Profil dahil tüm alt sekmelerdeki kırmızı sayaçları ve noktaları gizler. Gelen kutusunun kendisi gelenleri göstermeye devam eder.");
         table.put("Hide the rewards shortcut",
                 "Ödül kısayolunu gizle");
         table.put("Hide the right column",
