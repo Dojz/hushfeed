@@ -172,34 +172,10 @@ final class VideoDownloads {
     }
 
     /** Every address the video itself can be fetched from, best first. */
-    /** Where a video's bytes can come from, for its sound: any container carries the audio. */
     static List<String> sourceUrls(Object video) {
-        return sourceUrls(video, false);
-    }
-
-    /**
-     * Where a saved video can come from. The plain play address is whatever TikTok's own player
-     * plays, which can be ByteVC2 that no other player opens, so it is taken only when the video
-     * doesn't report ByteVC2; the H.264 and ByteVC1 play addresses say what they are and come
-     * before it either way.
-     */
-    static List<String> playableSourceUrls(Object video) {
-        return sourceUrls(video, true);
-    }
-
-    /** The video says its plain play address may be ByteVC2 ({@code hasByteVC2}). */
-    static boolean playsByteVc2(Object video) {
-        return Boolean.TRUE.equals(Reflect.invoke(video, "hasByteVC2"));
-    }
-
-    private static List<String> sourceUrls(Object video, boolean playableOnly) {
         List<String> found = urls(Reflect.property(video, "getDownloadNoWatermarkAddr", "downloadNoWatermarkAddr"));
         if (found.isEmpty()) found = urls(Reflect.property(video, "getDownloadAddr", "downloadAddr"));
-        if (found.isEmpty()) found = urls(Reflect.property(video, "getPlayAddrH264", "h264PlayAddrValue"));
-        if (found.isEmpty()) found = urls(Reflect.property(video, "getPlayAddrBytevc1", "playAddrBytevc1Value"));
-        if (found.isEmpty() && !(playableOnly && playsByteVc2(video))) {
-            found = urls(Reflect.property(video, "getPlayAddr", "playAddr"));
-        }
+        if (found.isEmpty()) found = urls(Reflect.property(video, "getPlayAddr", "playAddr"));
         return found;
     }
 
