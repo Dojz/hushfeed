@@ -27,6 +27,18 @@ final class VideoDownloads {
     private static final Set<String> ACTIVE = Collections.newSetFromMap(new ConcurrentHashMap<String, Boolean>());
     private VideoDownloads() {}
 
+    /**
+     * The rendition a download takes: the chosen quality, or on Automatic the highest when
+     * captions need a file of our own; null leaves the save to TikTok. Read from every rendition
+     * TikTok received ({@link QualitySelector#rawGears}).
+     */
+    static Object selectedGear(Object video, String quality, boolean withCaptions) {
+        Object rates = QualitySelector.rawGears(video);
+        if (!(rates instanceof List<?>)) return null;
+        if (!"auto".equals(quality)) return QualitySelector.chooseForFile((List<?>) rates, quality);
+        return withCaptions ? QualitySelector.chooseForFile((List<?>) rates, "highest") : null;
+    }
+
     static boolean start(Object aweme, Context context) {
         if (context == null) return false;
         if (android.os.Build.VERSION.SDK_INT < 29
@@ -43,11 +55,7 @@ final class VideoDownloads {
         // to fetch a different file: on Automatic the source stays the one TikTok would have
         // used and only the sound is left out of it.
         if (captions.isEmpty() && automatic && !muted) return false;
-        Object rates = Reflect.readField(video, "bitRate");
-        Object selected = !automatic && rates instanceof List<?>
-                ? QualitySelector.choose((List<?>) rates, quality)
-                : (captions.isEmpty() || !(rates instanceof List<?>) ? null
-                        : QualitySelector.choose((List<?>) rates, "highest"));
+        Object selected = selectedGear(video, quality, !captions.isEmpty());
         if (selected == null && captions.isEmpty() && !muted) return false;
         List<String> selectedUrls = urls(Reflect.property(selected, "getPlayAddr", "playAddr"));
         if (selected == null) {

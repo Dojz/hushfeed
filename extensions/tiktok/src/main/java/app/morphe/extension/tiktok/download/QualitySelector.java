@@ -18,19 +18,46 @@ public final class QualitySelector {
     private static final Pattern HEIGHT = Pattern.compile("(?<![0-9])(2160|1440|1080|960|720|640|576|540|480|432|360|288|240)(?![0-9])");
     private QualitySelector() {}
 
+    /**
+     * Every rendition of the video as TikTok received it, never the playback getter, which
+     * Playback quality may narrow. getRawBitRate returns the backing list whole (Playback quality
+     * leaves it alone for exactly this); without it the field is read under both names it has
+     * had: bitRate on 46.2.3, bitRateList on 47.0.3. Reading bitRate alone found nothing on
+     * 47.0.3, so every chosen quality fell back to TikTok's own save (S22, 2026-09-23).
+     */
+    static Object rawGears(Object video) {
+        if (video == null) return null;
+        Object raw = Reflect.invoke(video, "getRawBitRate");
+        if (raw == null) raw = Reflect.readField(video, "bitRateList");
+        if (raw == null) raw = Reflect.readField(video, "bitRate");
+        return raw;
+    }
+
     public static UrlModel download(Object video) {
         String mode = Settings.DOWNLOAD_VIDEO_QUALITY.get();
         if ("auto".equals(mode)) return null;
         // Separate DASH tracks need the full download path and muxer, not a video-only URL.
         if (Boolean.TRUE.equals(Reflect.invoke(video, "hasDashBitrate"))) return null;
-        // Read the backing field: getBitRate may itself be patched for playback.
-        Object raw = Reflect.readField(video, "bitRate");
-        Object gear = raw instanceof List<?> ? choose((List<?>) raw, mode) : null;
+        Object raw = rawGears(video);
+        Object gear = raw instanceof List<?> ? chooseForFile((List<?>) raw, mode) : null;
         Object address = Reflect.property(gear, "getPlayAddr", "playAddr");
         return address instanceof UrlModel ? (UrlModel) address : null;
     }
 
+    /** The rendition TikTok's player is to play: any codec, since TikTok decodes them all. */
     public static Object choose(List<?> gears, String mode) {
+        return choose(gears, mode, false);
+    }
+
+    /**
+     * The rendition a saved file is made from: only one other players open ({@link #playable}),
+     * and at the same height H.264 over HEVC.
+     */
+    static Object chooseForFile(List<?> gears, String mode) {
+        return choose(gears, mode, true);
+    }
+
+    private static Object choose(List<?> gears, String mode, boolean forFile) {
         if (gears == null || "auto".equals(mode)) return null;
         int target;
         switch (mode == null ? "" : mode) {
@@ -41,18 +68,42 @@ public final class QualitySelector {
         Object best = null;
         for (Object gear : gears) {
             if (!usable(Reflect.property(gear, "getPlayAddr", "playAddr"))) continue;
+            if (forFile && !playable(gear)) continue;
             if (target > 0 && height(gear) == 0) continue;
-            if (best == null || better(gear, best, target, "lowest".equals(mode))) best = gear;
+            if (best == null || better(gear, best, target, "lowest".equals(mode), forFile)) best = gear;
         }
         return best;
     }
 
-    private static boolean better(Object candidate, Object current, int target, boolean lowest) {
+    /**
+     * TikTok's codec code for a rendition (is_bytevc1): 0 is H.264, 1 is ByteVC1, which is HEVC
+     * and plays on Android and in most players, and 2 is ByteVC2, which only TikTok's own player
+     * decodes. A rendition without the code reads as H.264.
+     */
+    static int codec(Object gear) {
+        Object code = Reflect.property(gear, "isBytevc1", "isBytevc1");
+        return code instanceof Number ? ((Number) code).intValue() : 0;
+    }
+
+    /**
+     * Whether a saved file of this rendition plays outside TikTok. 47.0.3 serves some heights only
+     * as ByteVC2 (gear names ending in _2): saved, those came out with a video track no player
+     * knew (codec tag bvc2, S22, 2026-09-23). None of them is chosen for a file; when nothing else
+     * is left, TikTok's own save, which is H.264, runs instead. Playback keeps them.
+     */
+    static boolean playable(Object gear) {
+        int code = codec(gear);
+        return code == 0 || code == 1;
+    }
+
+    private static boolean better(Object candidate, Object current, int target, boolean lowest, boolean forFile) {
         int a = height(candidate), b = height(current);
         if (target > 0) {
             if ((a <= target) != (b <= target)) return a <= target;
             if (a != b) return a <= target ? a > b : a < b;
         }
+        // At the same height, the file more players can open: H.264 over HEVC.
+        if (forFile && a == b && codec(candidate) != codec(current)) return codec(candidate) < codec(current);
         int compare = Integer.compare(a, b);
         if (compare == 0) compare = Long.compare(number(candidate, "getBitRate", "bitRate"), number(current, "getBitRate", "bitRate"));
         if (compare == 0) compare = Long.compare(size(candidate), size(current));

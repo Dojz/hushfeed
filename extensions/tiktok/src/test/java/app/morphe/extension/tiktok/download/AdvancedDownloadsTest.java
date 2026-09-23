@@ -49,7 +49,10 @@ public class AdvancedDownloadsTest {
         public final int bitRate;
         public final UrlModel playAddr;
         public String videoExtra;
+        /** TikTok's codec code: 0 H.264, 1 ByteVC1 (HEVC), 2 ByteVC2. */
+        public int isBytevc1;
         public Gear(String name, int rate, String url) { gearName = name; bitRate = rate; playAddr = new Address(url, rate * 10L); }
+        Gear codec(int code) { isBytevc1 = code; return this; }
     }
     public static final class VideoData {
         public final List<Gear> bitRate;
@@ -59,6 +62,24 @@ public class AdvancedDownloadsTest {
         VideoData(List<Gear> gears) { bitRate = gears; }
         public List<Gear> getBitRate() { throw new AssertionError("Must not recurse into playback getter"); }
         public boolean hasDashBitrate() { return dash; }
+    }
+    /**
+     * TikTok 47.0.3's Video: the list moved to the field bitRateList, and getRawBitRate returns
+     * it whole. The playback getter must still never be asked.
+     */
+    public static final class VideoData47 {
+        public final List<Gear> bitRateList;
+        VideoData47(List<Gear> gears) { bitRateList = gears; }
+        public List<Gear> getRawBitRate() { return bitRateList; }
+        public List<Gear> getBitRate() { throw new AssertionError("Must not recurse into playback getter"); }
+        public boolean hasDashBitrate() { return false; }
+    }
+    /** The renamed field with no raw getter: the field is read under its new name. */
+    public static final class VideoDataRenamedField {
+        public final List<Gear> bitRateList;
+        VideoDataRenamedField(List<Gear> gears) { bitRateList = gears; }
+        public List<Gear> getBitRate() { throw new AssertionError("Must not recurse into playback getter"); }
+        public boolean hasDashBitrate() { return false; }
     }
     public static final class Audio {
         public final AudioMeta audioMeta;
@@ -155,6 +176,55 @@ public class AdvancedDownloadsTest {
         Settings.DOWNLOAD_VIDEO_QUALITY.save("highest");
         assertSame(high.playAddr, QualitySelector.download(new VideoData(gears)));
         assertEquals(4, gears.size());
+    }
+
+    /**
+     * Each build's rendition list is found. 47.0.3 renamed the field to bitRateList; reading
+     * bitRate alone found nothing there and every chosen quality fell back to TikTok's own save
+     * (S22, 2026-09-23). The download's own choice and the address TikTok's save is handed both
+     * read it.
+     */
+    @Test public void everyBuildsRenditionListIsRead() {
+        Utils.setContext(RuntimeEnvironment.getApplication());
+        Gear low = new Gear("normal_360_0", 100, "https://example.com/low");
+        Gear medium = new Gear("normal_720_0", 200, "https://example.com/mid");
+        Gear high = new Gear("normal_1080_0", 400, "https://example.com/high");
+        List<Gear> gears = List.of(medium, high, low);
+        for (Object video : new Object[]{new VideoData(gears), new VideoData47(gears), new VideoDataRenamedField(gears)}) {
+            String shape = video.getClass().getSimpleName();
+            assertSame(shape + ": the chosen quality", medium, VideoDownloads.selectedGear(video, "720", false));
+            assertSame(shape + ": Automatic with captions takes the highest", high, VideoDownloads.selectedGear(video, "auto", true));
+            assertNull(shape + ": Automatic alone is TikTok's own save", VideoDownloads.selectedGear(video, "auto", false));
+            Settings.DOWNLOAD_VIDEO_QUALITY.save("720");
+            assertSame(shape + ": the address TikTok's save is handed", medium.playAddr, QualitySelector.download(video));
+        }
+    }
+
+    /**
+     * 47.0.3 serves some heights only as ByteVC2, which nothing but TikTok's own player decodes
+     * (a saved file's video track came out as codec tag bvc2 on the S22). Those are never chosen;
+     * at the same height H.264 is taken over HEVC; with nothing playable left the save is
+     * TikTok's own.
+     */
+    @Test public void onlyRenditionsOtherPlayersOpenAreChosen() {
+        Gear bvc2High = new Gear("adapt_lower_720_2", 500, "https://example.com/720-bvc2").codec(2);
+        Gear hevcHigh = new Gear("adapt_lowest_1080_1", 450, "https://example.com/1080-hevc").codec(1);
+        Gear bvc2Mid = new Gear("adapt_540_2", 300, "https://example.com/540-bvc2").codec(2);
+        Gear hevcMid = new Gear("lower_540_1", 200, "https://example.com/540-hevc").codec(1);
+        Gear h264Mid = new Gear("normal_540_0", 150, "https://example.com/540-h264").codec(0);
+        List<Gear> gears = List.of(bvc2High, hevcHigh, bvc2Mid, hevcMid, h264Mid);
+        assertSame("720: the ByteVC2 720 is skipped for the playable 540", h264Mid, QualitySelector.chooseForFile(gears, "720"));
+        assertSame("highest: the playable 1080", hevcHigh, QualitySelector.chooseForFile(gears, "highest"));
+        assertSame("540: H.264 over HEVC and ByteVC2 at the same height", h264Mid, QualitySelector.chooseForFile(gears, "540"));
+        assertSame("lowest: still H.264 at the same height", h264Mid, QualitySelector.chooseForFile(gears, "lowest"));
+        assertSame("without H.264, HEVC", hevcMid, QualitySelector.chooseForFile(List.of(bvc2Mid, hevcMid), "540"));
+        assertNull("nothing playable: TikTok's own save", QualitySelector.chooseForFile(List.of(bvc2High, bvc2Mid), "720"));
+        assertNull("and for the download's own choice too",
+                VideoDownloads.selectedGear(new VideoData47(List.of(bvc2High, bvc2Mid)), "720", false));
+        Settings.DOWNLOAD_VIDEO_QUALITY.save("720");
+        assertSame("and for the address TikTok's save is handed", h264Mid.playAddr, QualitySelector.download(new VideoData47(gears)));
+        // TikTok's own player decodes ByteVC2, so the choice for playback keeps it.
+        assertSame("playback still takes the ByteVC2 720", bvc2High, QualitySelector.choose(gears, "720"));
     }
 
     @Test public void photosUseOrderedSourceImagesAndNeverThumbnails() {
