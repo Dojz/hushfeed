@@ -593,7 +593,7 @@ Move right	Sağa taşı
 Move to the next video when the current one ends. Pauses, open dialogs and screen-time holds stop it. Restart TikTok after changing this.	Geçerli video bitince sonraki videoya geç. Duraklatmalar, açık iletişim kutuları ve ekran süresi bekletmeleri bunu durdurur. Bunu değiştirdikten sonra TikTok'u yeniden başlat.
 Move up	Yukarı taşı
 Music disc	Müzik diski
-Mutes the video behind the comment sheet while you read. Sound comes back when the sheet closes.	Sen okurken yorum panelinin arkasındaki videoyu sessize alır. Panel kapanınca ses geri gelir.
+Pauses the video behind the comment sheet while you read. It plays on from the same spot when the sheet closes.	Sen okurken yorum panelinin arkasındaki videoyu duraklatır. Panel kapanınca video kaldığı yerden devam eder.
 Nearby	Yakındakiler
 Never from these countries	Bu ülkelerden asla
 No	Hayır

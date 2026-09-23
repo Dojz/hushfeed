@@ -1367,8 +1367,6 @@ public final class L10nTranslations {
                 "Nach oben verschieben");
         table.put("Music disc",
                 "Musikscheibe");
-        table.put("Mutes the video behind the comment sheet while you read. Sound comes back when the sheet closes.",
-                "Schaltet das Video hinter dem Kommentarfeld stumm, während du liest. Der Ton kommt zurück, wenn das Feld geschlossen wird.");
         table.put("Nearby",
                 "In der Nähe");
         table.put("Never from these countries",
@@ -1425,11 +1423,11 @@ public final class L10nTranslations {
                 "Kein Video ausgewaehlt. Oeffne zuerst ein Video.");
         table.put("None of these gates had an override to reset.",
                 "Keiner dieser Schalter hatte eine Überschreibung zum Zurücksetzen.");
+        table.put("None of these gates takes a true or false value.",
+                "Keiner dieser Schalter nimmt einen true- oder false-Wert.");
     }
 
     private static void fillDe11(Map<String, String> table) {
-        table.put("None of these gates takes a true or false value.",
-                "Keiner dieser Schalter nimmt einen true- oder false-Wert.");
         table.put("None recorded",
                 "Nichts aufgezeichnet");
         table.put("Normal",
@@ -1548,11 +1546,11 @@ public final class L10nTranslations {
                 "Überschreibung gesetzt, noch nicht gelesen");
         table.put("Override store region (experimental)",
                 "Store-Region überschreiben (experimentell)");
+        table.put("Override this configuration",
+                "Diese Konfiguration überschreiben");
     }
 
     private static void fillDe12(Map<String, String> table) {
-        table.put("Override this configuration",
-                "Diese Konfiguration überschreiben");
         table.put("Override this gate",
                 "Diesen Schalter überschreiben");
         table.put("Overrides are disabled in the Feature Gate Lab.",
@@ -1565,6 +1563,8 @@ public final class L10nTranslations {
                 "Bezahlte Partnerschaften");
         table.put("Pause Hushfeed",
                 "Hushfeed pausieren");
+        table.put("Pauses the video behind the comment sheet while you read. It plays on from the same spot when the sheet closes.",
+                "Hält das Video hinter dem Kommentarfeld an, während du liest. Es läuft an derselben Stelle weiter, wenn das Feld geschlossen wird.");
         table.put("People, shortcuts and sending controls",
                 "Kontakte, Verknüpfungen und Versandoptionen");
         table.put("Photo",
@@ -3834,8 +3834,6 @@ public final class L10nTranslations {
                 "Mover hacia arriba");
         table.put("Music disc",
                 "Disco de música");
-        table.put("Mutes the video behind the comment sheet while you read. Sound comes back when the sheet closes.",
-                "Silencia el video detrás de los comentarios mientras lees. El sonido vuelve cuando se cierran.");
         table.put("Nearby",
                 "Cerca de ti");
         table.put("Never from these countries",
@@ -3892,11 +3890,11 @@ public final class L10nTranslations {
                 "No hay video seleccionado. Abre un video primero.");
         table.put("None of these gates had an override to reset.",
                 "Ninguno de estos interruptores tenía una sustitución que restablecer.");
+        table.put("None of these gates takes a true or false value.",
+                "Ninguno de estos interruptores acepta un valor true o false.");
     }
 
     private static void fillEs11(Map<String, String> table) {
-        table.put("None of these gates takes a true or false value.",
-                "Ninguno de estos interruptores acepta un valor true o false.");
         table.put("None recorded",
                 "Nada registrado");
         table.put("Normal",
@@ -4015,11 +4013,11 @@ public final class L10nTranslations {
                 "Sustitución fijada, aún sin leer");
         table.put("Override store region (experimental)",
                 "Sustituir la región de la tienda (experimental)");
+        table.put("Override this configuration",
+                "Sustituir esta configuración");
     }
 
     private static void fillEs12(Map<String, String> table) {
-        table.put("Override this configuration",
-                "Sustituir esta configuración");
         table.put("Override this gate",
                 "Sustituir este interruptor");
         table.put("Overrides are disabled in the Feature Gate Lab.",
@@ -4032,6 +4030,8 @@ public final class L10nTranslations {
                 "Colaboraciones pagadas");
         table.put("Pause Hushfeed",
                 "Pausar Hushfeed");
+        table.put("Pauses the video behind the comment sheet while you read. It plays on from the same spot when the sheet closes.",
+                "Pausa el video detrás de los comentarios mientras lees. Sigue desde el mismo punto cuando se cierran.");
         table.put("People, shortcuts and sending controls",
                 "Personas, atajos y controles de envío");
         table.put("Photo",
@@ -6301,8 +6301,6 @@ public final class L10nTranslations {
                 "Pindahkan ke atas");
         table.put("Music disc",
                 "Piringan musik");
-        table.put("Mutes the video behind the comment sheet while you read. Sound comes back when the sheet closes.",
-                "Membisukan video di balik komentar saat kamu membaca. Suara kembali saat komentar ditutup.");
         table.put("Nearby",
                 "Terdekat");
         table.put("Never from these countries",
@@ -6359,11 +6357,11 @@ public final class L10nTranslations {
                 "Tidak ada video yang dipilih. Buka video terlebih dahulu.");
         table.put("None of these gates had an override to reset.",
                 "Tidak satu pun gate ini punya penggantian untuk diatur ulang.");
+        table.put("None of these gates takes a true or false value.",
+                "Tidak satu pun gate ini menerima nilai true atau false.");
     }
 
     private static void fillIn11(Map<String, String> table) {
-        table.put("None of these gates takes a true or false value.",
-                "Tidak satu pun gate ini menerima nilai true atau false.");
         table.put("None recorded",
                 "Tidak ada yang tercatat");
         table.put("Normal",
@@ -6482,11 +6480,11 @@ public final class L10nTranslations {
                 "Penggantian diatur, belum dibaca");
         table.put("Override store region (experimental)",
                 "Timpa wilayah toko (eksperimental)");
+        table.put("Override this configuration",
+                "Ganti konfigurasi ini");
     }
 
     private static void fillIn12(Map<String, String> table) {
-        table.put("Override this configuration",
-                "Ganti konfigurasi ini");
         table.put("Override this gate",
                 "Ganti gate ini");
         table.put("Overrides are disabled in the Feature Gate Lab.",
@@ -6499,6 +6497,8 @@ public final class L10nTranslations {
                 "Kemitraan berbayar");
         table.put("Pause Hushfeed",
                 "Jeda Hushfeed");
+        table.put("Pauses the video behind the comment sheet while you read. It plays on from the same spot when the sheet closes.",
+                "Menjeda video di balik komentar saat kamu membaca. Video lanjut dari titik yang sama saat komentar ditutup.");
         table.put("People, shortcuts and sending controls",
                 "Orang, pintasan, dan kontrol pengiriman");
         table.put("Photo",
@@ -8768,8 +8768,6 @@ public final class L10nTranslations {
                 "Mover para cima");
         table.put("Music disc",
                 "Disco de música");
-        table.put("Mutes the video behind the comment sheet while you read. Sound comes back when the sheet closes.",
-                "Silencia o vídeo atrás dos comentários enquanto você lê. O som volta quando os comentários fecham.");
         table.put("Nearby",
                 "Por perto");
         table.put("Never from these countries",
@@ -8826,11 +8824,11 @@ public final class L10nTranslations {
                 "Nenhum video selecionado. Abra um video primeiro.");
         table.put("None of these gates had an override to reset.",
                 "Nenhum destes gates tinha uma substituição para redefinir.");
+        table.put("None of these gates takes a true or false value.",
+                "Nenhum destes gates aceita um valor true ou false.");
     }
 
     private static void fillPt_rBR11(Map<String, String> table) {
-        table.put("None of these gates takes a true or false value.",
-                "Nenhum destes gates aceita um valor true ou false.");
         table.put("None recorded",
                 "Nada registrado");
         table.put("Normal",
@@ -8949,11 +8947,11 @@ public final class L10nTranslations {
                 "Substituição definida, ainda não lido");
         table.put("Override store region (experimental)",
                 "Substituir a região da loja (experimental)");
+        table.put("Override this configuration",
+                "Substituir esta configuração");
     }
 
     private static void fillPt_rBR12(Map<String, String> table) {
-        table.put("Override this configuration",
-                "Substituir esta configuração");
         table.put("Override this gate",
                 "Substituir este gate");
         table.put("Overrides are disabled in the Feature Gate Lab.",
@@ -8966,6 +8964,8 @@ public final class L10nTranslations {
                 "Parcerias pagas");
         table.put("Pause Hushfeed",
                 "Pausar o Hushfeed");
+        table.put("Pauses the video behind the comment sheet while you read. It plays on from the same spot when the sheet closes.",
+                "Pausa o vídeo atrás dos comentários enquanto você lê. Ele continua do mesmo ponto quando os comentários fecham.");
         table.put("People, shortcuts and sending controls",
                 "Pessoas, atalhos e controles de envio");
         table.put("Photo",
@@ -11235,8 +11235,6 @@ public final class L10nTranslations {
                 "Yukarı taşı");
         table.put("Music disc",
                 "Müzik diski");
-        table.put("Mutes the video behind the comment sheet while you read. Sound comes back when the sheet closes.",
-                "Sen okurken yorum panelinin arkasındaki videoyu sessize alır. Panel kapanınca ses geri gelir.");
         table.put("Nearby",
                 "Yakındakiler");
         table.put("Never from these countries",
@@ -11293,11 +11291,11 @@ public final class L10nTranslations {
                 "Video seçilmedi. Önce bir video aç.");
         table.put("None of these gates had an override to reset.",
                 "Bu özellik kapılarının hiçbirinde sıfırlanacak bir geçersiz kılma yoktu.");
+        table.put("None of these gates takes a true or false value.",
+                "Bu özellik kapılarının hiçbiri true veya false değeri almıyor.");
     }
 
     private static void fillTr11(Map<String, String> table) {
-        table.put("None of these gates takes a true or false value.",
-                "Bu özellik kapılarının hiçbiri true veya false değeri almıyor.");
         table.put("None recorded",
                 "Kayıt yok");
         table.put("Normal",
@@ -11416,11 +11414,11 @@ public final class L10nTranslations {
                 "Geçersiz kılma ayarlandı, henüz okunmadı");
         table.put("Override store region (experimental)",
                 "Mağaza bölgesini geçersiz kıl (deneysel)");
+        table.put("Override this configuration",
+                "Bu yapılandırmayı geçersiz kıl");
     }
 
     private static void fillTr12(Map<String, String> table) {
-        table.put("Override this configuration",
-                "Bu yapılandırmayı geçersiz kıl");
         table.put("Override this gate",
                 "Bu özellik kapısını geçersiz kıl");
         table.put("Overrides are disabled in the Feature Gate Lab.",
@@ -11433,6 +11431,8 @@ public final class L10nTranslations {
                 "Ücretli ortaklıklar");
         table.put("Pause Hushfeed",
                 "Hushfeed'i duraklat");
+        table.put("Pauses the video behind the comment sheet while you read. It plays on from the same spot when the sheet closes.",
+                "Sen okurken yorum panelinin arkasındaki videoyu duraklatır. Panel kapanınca video kaldığı yerden devam eder.");
         table.put("People, shortcuts and sending controls",
                 "Kişiler, kısayollar ve gönderme kontrolleri");
         table.put("Photo",

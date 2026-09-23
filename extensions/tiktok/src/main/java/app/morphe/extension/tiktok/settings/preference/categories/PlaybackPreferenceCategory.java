@@ -59,8 +59,8 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
         }
         if (SettingsStatus.commentToolsEnabled) {
             addPreference(new TogglePreference(context, "Silence the feed while comments are open",
-                    "Mutes the video behind the comment sheet while you read. "
-                            + "Sound comes back when the sheet closes.",
+                    "Pauses the video behind the comment sheet while you read. "
+                            + "It plays on from the same spot when the sheet closes.",
                     Settings.PAUSE_ON_COMMENTS));
         }
 

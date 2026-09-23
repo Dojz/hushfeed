@@ -630,7 +630,6 @@ Move right,Move right
 "Move to the next video when the current one ends. Pauses, open dialogs and screen-time holds stop it. Restart TikTok after changing this.","Move to the next video when the current one ends. Pauses, open dialogs and screen-time holds stop it. Restart TikTok after changing this."
 Move up,Move up
 Music disc,Music disc
-Mutes the video behind the comment sheet while you read. Sound comes back when the sheet closes.,Mutes the video behind the comment sheet while you read. Sound comes back when the sheet closes.
 Nearby,Nearby
 Never from these countries,Never from these countries
 No,No
@@ -726,6 +725,7 @@ Overrides disabled. Restart TikTok to apply this.,Overrides disabled. Restart Ti
 Overrides enabled. Restart TikTok to apply this.,Overrides enabled. Restart TikTok to apply this.
 Paid partnerships,Paid partnerships
 Pause Hushfeed,Pause Hushfeed
+Pauses the video behind the comment sheet while you read. It plays on from the same spot when the sheet closes.,Pauses the video behind the comment sheet while you read. It plays on from the same spot when the sheet closes.
 "People, shortcuts and sending controls","People, shortcuts and sending controls"
 Photo,Photo
 Photo and image posts,Photo and image posts
