@@ -431,6 +431,8 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting HIDE_AI_GENERATED = new BooleanSetting("hide_ai_generated", FALSE, true);
     public static final BooleanSetting HIDE_VERIFIED = new BooleanSetting("hide_verified", FALSE, true);
     public static final BooleanSetting HIDE_SERIES = new BooleanSetting("hide_series", FALSE, true);
+    /** TikTok's short dramas and the cards that promote them (upstream #155). */
+    public static final BooleanSetting HIDE_MINI_DRAMAS = new BooleanSetting("hide_mini_dramas", FALSE, true);
     public static final BooleanSetting HIDE_SEEN_VIDEOS = new BooleanSetting("hide_seen_videos", FALSE, true);
     public static final IntegerSetting SEEN_VIDEO_RETENTION_DAYS =
             new IntegerSetting("seen_video_retention_days", 30).withRange(0, 3650);

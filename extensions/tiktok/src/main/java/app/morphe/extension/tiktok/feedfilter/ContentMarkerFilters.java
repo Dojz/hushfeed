@@ -143,6 +143,39 @@ public final class ContentMarkerFilters {
         }
     }
 
+    /**
+     * TikTok's short dramas: series sold by the episode after the first few free ones, and the
+     * cards in the feed that promote them. A drama episode is a paid Series item as well, so Hide
+     * Series takes it too; this switch takes the dramas and leaves other Series alone.
+     *
+     * <p>PaidContentInfo rides along on ordinary videos, so only the drama's own data counts: the
+     * drama description TikTok sends as text on every episode (mini_drama_info, 1,182 characters
+     * on one read on the S22), or a promotion card that names a card type or holds dramas.
+     */
+    public static class DramaFilter implements IFilter {
+        @Override
+        public boolean getEnabled() {
+            return Settings.HIDE_MINI_DRAMAS.get();
+        }
+
+        @Override
+        public boolean getFiltered(Aweme item) {
+            return isMiniDrama(item);
+        }
+    }
+
+    static boolean isMiniDrama(Aweme item) {
+        if (item == null) return false;
+        Object info = Reflect.property(item, "getMPaidContentInfo", "mPaidContentInfo");
+        if (info == null) return false;
+        if (Reflect.string(info, "getMiniDramaInfo", "miniDramaInfo") != null) return true;
+        Object card = Reflect.property(info, "getMiniDramaCardInfo", "miniDramaCardInfo");
+        if (card == null) return false;
+        Object dramas = Reflect.property(card, "getDramas", "dramas");
+        return Reflect.string(card, "getCardType", "cardType") != null
+                || (dramas instanceof Collection && !((Collection<?>) dramas).isEmpty());
+    }
+
     /** Videos posted as part of a playlist ("Part 3 of ..."). */
     public static class PlaylistFilter implements IFilter {
         @Override
