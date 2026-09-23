@@ -28,6 +28,8 @@ import org.junit.Test
  * at ?attr/a24 as well. The dark themes send a24 to the palette token aia, a dark literal
  * (#1E1E1E on the S22, 2026-09-23), and the light ones to axi, white. The names are the build's
  * own: 46.x reached the same sheets through agk and c3, which 47.0.3 keeps as unrelated tokens.
+ * a24 is what TikTok's own token table calls UISheetFlat1, the fill of its sheets, panels, modals
+ * and text cells as well, so all of those go black with it.
  */
 class AmoledSheetTokensTest {
     @Test
@@ -37,7 +39,7 @@ class AmoledSheetTokensTest {
 
         val sheetAttr = tuxSheetBackgroundAttr(apk)
         assertEquals("the Tux sheet background attribute", "b79", table.attrNames[sheetAttr])
-        val sheetValues = table.styleValues("b79").values.toSet()
+        val sheetValues = table.styleValues("b79").toSet()
         assertTrue("b79 reaches a24 in a Tux sheet style: $sheetValues", "?attr/a24" in sheetValues)
 
         listOf("af4", "af9").forEach { drawable ->
@@ -45,12 +47,12 @@ class AmoledSheetTokensTest {
         }
 
         val a24 = table.styleValues("a24")
-        assertEquals("what the themes point a24 at: $a24", setOf("?attr/aia", "?attr/axi"), a24.values.toSet())
-        val dark = table.styleValues("aia").values
-        val light = table.styleValues("axi").values
+        assertEquals("what the themes point a24 at: $a24", setOf("?attr/aia", "?attr/axi"), a24.toSet())
+        val dark = table.styleValues("aia")
+        val light = table.styleValues("axi")
         assertTrue("aia is a dark opaque literal wherever it is set: $dark", dark.isNotEmpty() && dark.all(::isDarkOpaqueLiteral))
         assertTrue("axi is light wherever it is set: $light", light.isNotEmpty() && light.none(::isDarkOpaqueLiteral))
-        assertTrue("the patch rewrites aia", "aia" in SHEET_STYLE_ITEMS)
+        assertTrue("the patch rewrites aia on 47.0.3", "aia" in sheetStyleItems("47.0.3", declaredVersions()))
     }
 
     /** R$styleable.TuxSheet[TuxSheet__tux_sheetBackgroundColor]: the int field and the array <clinit> fills. */
@@ -90,8 +92,11 @@ class AmoledSheetTokensTest {
         val attrNames = HashMap<Int, String>()
         private val attrIds = HashMap<String, Int>()
         private val drawableFiles = HashMap<String, String>()
-        /** attr id to style name to the value that style gives it: a colour literal or ?attr/name. */
-        private val styleItems = HashMap<Int, MutableMap<String, String>>()
+        /**
+         * attr id to every value a style gives it, each config of a style counted on its own: a
+         * colour literal or ?attr/name.
+         */
+        private val styleItems = HashMap<Int, MutableList<String>>()
         private var values: StringPool? = null
 
         init {
@@ -103,7 +108,7 @@ class AmoledSheetTokensTest {
             }
         }
 
-        fun styleValues(attr: String): Map<String, String> = styleItems[attrIds.getValue(attr)].orEmpty()
+        fun styleValues(attr: String): List<String> = styleItems[attrIds.getValue(attr)].orEmpty()
 
         /** Whether the drawable's compiled XML carries a ?attr/[attr] value anywhere. */
         fun drawableReferencesAttr(drawable: String, attr: String): Boolean {
@@ -154,7 +159,6 @@ class AmoledSheetTokensTest {
                 forEachEntry(chunk) { _, entry ->
                     val flags = u16(entry + 2)
                     if (flags and COMPLEX == 0 || flags and COMPACT != 0) return@forEachEntry
-                    val style = keys[keyOf(entry)]
                     var item = entry + u16(entry)
                     repeat(table.getInt(entry + 12)) {
                         val attr = table.getInt(item)
@@ -165,7 +169,7 @@ class AmoledSheetTokensTest {
                             in 0x1c..0x1f -> "#" + String.format("%08x", data)
                             else -> "0x" + Integer.toHexString(type) + ":" + Integer.toHexString(data)
                         }
-                        styleItems.getOrPut(attr) { LinkedHashMap() }[style] = shown
+                        styleItems.getOrPut(attr) { ArrayList() } += shown
                         item += 12
                     }
                 }

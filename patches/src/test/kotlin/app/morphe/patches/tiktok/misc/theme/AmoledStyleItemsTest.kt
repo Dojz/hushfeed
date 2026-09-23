@@ -53,6 +53,14 @@ class AmoledStyleItemsTest {
         assertRefused { checkSheetStyleItems(emptySet(), "46.9.3", setOf("47.0.3")) }
     }
 
+    /** The review of a02d0d67: on 46.7.3 to 46.9.3 aia is UISheetGrouped3's dark value, another tier. */
+    @Test
+    fun `aia is rewritten only on a declared build`() {
+        assertEquals(SHEET_STYLE_ITEMS, sheetStyleItems("47.0.3", setOf("47.0.3")))
+        assertEquals(setOf("agk", "c3"), sheetStyleItems("46.9.3", setOf("47.0.3")))
+        assertEquals(setOf("agk", "c3"), sheetStyleItems(null, setOf("47.0.3")))
+    }
+
     private fun assertRefused(check: () -> Unit) {
         try {
             check()
