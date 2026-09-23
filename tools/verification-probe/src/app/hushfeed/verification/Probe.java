@@ -622,6 +622,10 @@ public final class Probe extends Instrumentation {
                                 // the case a chosen-quality download muxes itself.
                                 + " dash=" + optional(video, "hasDashBitrate")
                                 + " gears=" + gearList(loader, video)
+                                // The frame TikTok's own download addresses say they are (clean,
+                                // then watermarked), which a chosen size can defer to.
+                                + " own=" + frame(optional(video, "getDownloadNoWatermarkAddr"))
+                                + "/" + frame(optional(video, "getDownloadAddr"))
                                 + " captions=" + captionList(loader, video)
                                 // The test account's own state on this video: liked, following.
                                 + " liked=" + optional(aweme, "isLike")
@@ -2711,6 +2715,12 @@ public final class Probe extends Instrumentation {
                 }
             }
             return null;
+        }
+
+        /** An address's frame as WxH from its getWidth and getHeight, or none. */
+        private static String frame(Object address) {
+            if (address == null) return "none";
+            return optional(address, "getWidth") + "x" + optional(address, "getHeight");
         }
 
         /** Its lines, width and how many lines end inside a word, never the text itself. */

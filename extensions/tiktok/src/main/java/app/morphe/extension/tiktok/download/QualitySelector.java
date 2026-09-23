@@ -39,7 +39,7 @@ public final class QualitySelector {
         // Separate DASH tracks need the full download path and muxer, not a video-only URL.
         if (Boolean.TRUE.equals(Reflect.invoke(video, "hasDashBitrate"))) return null;
         Object raw = rawGears(video);
-        Object gear = raw instanceof List<?> ? chooseForFile((List<?>) raw, mode) : null;
+        Object gear = raw instanceof List<?> ? chooseForFile(video, (List<?>) raw, mode) : null;
         Object address = Reflect.property(gear, "getPlayAddr", "playAddr");
         return address instanceof UrlModel ? (UrlModel) address : null;
     }
@@ -55,6 +55,34 @@ public final class QualitySelector {
      */
     static Object chooseForFile(List<?> gears, String mode) {
         return choose(gears, mode, true);
+    }
+
+    /**
+     * The rendition a saved file of this video is made from, or null for TikTok's own file. When
+     * the asked height is served only as ByteVC2 the playable choice is a shorter one, and
+     * TikTok's own download, which is H.264, can be the asked height: it wins when its address
+     * says it is taller than the choice and no taller than asked (refutation review of bd52abf1).
+     * An address that says nothing keeps the playable choice.
+     */
+    static Object chooseForFile(Object video, List<?> gears, String mode) {
+        Object chosen = chooseForFile(gears, mode);
+        if (chosen == null || "lowest".equals(mode)) return chosen;
+        int chosenHeight = height(chosen);
+        Object tallest = choose(gears, mode, false);
+        if (tallest == null || height(tallest) <= chosenHeight) return chosen;
+        int own = ownHeight(video);
+        int asked = "highest".equals(mode) ? 0 : Integer.parseInt(mode);
+        return own > chosenHeight && (asked == 0 || own <= asked) ? null : chosen;
+    }
+
+    /**
+     * How tall TikTok's own download is, by the address its save takes (the one without the
+     * watermark when there is one), as the shorter side the way gear names count; 0 when unknown.
+     */
+    static int ownHeight(Object video) {
+        Object address = Reflect.property(video, "getDownloadNoWatermarkAddr", "downloadNoWatermarkAddr");
+        if (!usable(address)) address = Reflect.property(video, "getDownloadAddr", "downloadAddr");
+        return usable(address) ? dimension(address) : 0;
     }
 
     private static Object choose(List<?> gears, String mode, boolean forFile) {
@@ -123,7 +151,11 @@ public final class QualitySelector {
             Matcher matcher = HEIGHT.matcher(name);
             if (matcher.find()) return Integer.parseInt(matcher.group(1));
         }
-        Object address = Reflect.property(gear, "getPlayAddr", "playAddr");
+        return dimension(Reflect.property(gear, "getPlayAddr", "playAddr"));
+    }
+
+    /** An address's size as the shorter side, or the one side it gives, or 0. */
+    private static int dimension(Object address) {
         long width = number(address, "getWidth", "width"), height = number(address, "getHeight", "height");
         return (int) (width > 0 && height > 0 ? Math.min(width, height) : Math.max(width, height));
     }

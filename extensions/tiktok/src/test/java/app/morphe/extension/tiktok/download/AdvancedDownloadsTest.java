@@ -40,9 +40,14 @@ public class AdvancedDownloadsTest {
     public static final class Address extends UrlModel {
         private final String url;
         private final long size;
+        private int width, height;
         Address(String url, long size) { this.url = url; this.size = size; }
+        /** The frame size 47.0.3's UrlModel carries (getWidth, getHeight); 0 is unknown. */
+        Address frame(int w, int h) { width = w; height = h; return this; }
         @Override public List<String> getUrlList() { return url == null ? List.of() : List.of(url); }
         @Override public long getSize() { return size; }
+        public int getWidth() { return width; }
+        public int getHeight() { return height; }
     }
     public static final class Gear {
         public final String gearName;
@@ -69,8 +74,11 @@ public class AdvancedDownloadsTest {
      */
     public static final class VideoData47 {
         public final List<Gear> bitRateList;
+        public Address downloadNoWatermarkAddr, downloadAddr;
         VideoData47(List<Gear> gears) { bitRateList = gears; }
         public List<Gear> getRawBitRate() { return bitRateList; }
+        public Address getDownloadNoWatermarkAddr() { return downloadNoWatermarkAddr; }
+        public Address getDownloadAddr() { return downloadAddr; }
         public List<Gear> getBitRate() { throw new AssertionError("Must not recurse into playback getter"); }
         public boolean hasDashBitrate() { return false; }
     }
@@ -232,6 +240,35 @@ public class AdvancedDownloadsTest {
         assertSame("and for the address TikTok's save is handed", h264Mid.playAddr, QualitySelector.download(new VideoData47(gears)));
         // TikTok's own player decodes ByteVC2, so the choice for playback keeps it.
         assertSame("playback still takes the ByteVC2 720", bvc2High, QualitySelector.choose(gears, "720"));
+    }
+
+    /**
+     * When the asked height is served only as ByteVC2 the playable choice is a shorter one, while
+     * TikTok's own download can be that height in H.264. TikTok's file wins then, but only when its
+     * address says so and it is no taller than asked (refutation review of bd52abf1).
+     */
+    @Test public void aTallerOwnDownloadWinsOverAShorterPlayableChoice() {
+        Gear bvc2High = new Gear("adapt_lower_720_2", 500, "https://example.com/720-bvc2").codec(2);
+        Gear h264Mid = new Gear("normal_540_0", 150, "https://example.com/540-h264").codec(0);
+        VideoData47 video = new VideoData47(List.of(bvc2High, h264Mid));
+        assertSame("an address that says nothing keeps the playable 540",
+                h264Mid, VideoDownloads.selectedGear(video, "720", false));
+
+        video.downloadAddr = new Address("https://example.com/own.mp4", 900).frame(720, 1280);
+        assertNull("TikTok's own 720 lost to the playable 540", VideoDownloads.selectedGear(video, "720", false));
+        assertNull("for Highest too", VideoDownloads.selectedGear(video, "highest", false));
+        assertNull("and for Automatic with captions", VideoDownloads.selectedGear(video, "auto", true));
+        Settings.DOWNLOAD_VIDEO_QUALITY.save("720");
+        assertNull("TikTok's own save was handed the 540", QualitySelector.download(video));
+        assertSame("asked for 540, the 540", h264Mid, VideoDownloads.selectedGear(video, "540", false));
+        assertSame("Lowest is left alone", h264Mid, VideoDownloads.selectedGear(video, "lowest", false));
+
+        video.downloadAddr = new Address("https://example.com/own.mp4", 900).frame(1080, 1920);
+        assertSame("taller than asked: the playable 540 stays", h264Mid, VideoDownloads.selectedGear(video, "720", false));
+        video.downloadAddr = new Address("https://example.com/own.mp4", 900).frame(540, 960);
+        assertSame("no taller than the choice: the playable 540 stays", h264Mid, VideoDownloads.selectedGear(video, "720", false));
+        video.downloadNoWatermarkAddr = new Address("https://example.com/clean.mp4", 900).frame(720, 1280);
+        assertNull("the address the save takes is the clean one", VideoDownloads.selectedGear(video, "720", false));
     }
 
     @Test public void photosUseOrderedSourceImagesAndNeverThumbnails() {

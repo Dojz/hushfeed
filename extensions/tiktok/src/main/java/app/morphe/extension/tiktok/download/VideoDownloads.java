@@ -35,8 +35,8 @@ final class VideoDownloads {
     static Object selectedGear(Object video, String quality, boolean withCaptions) {
         Object rates = QualitySelector.rawGears(video);
         if (!(rates instanceof List<?>)) return null;
-        if (!"auto".equals(quality)) return QualitySelector.chooseForFile((List<?>) rates, quality);
-        return withCaptions ? QualitySelector.chooseForFile((List<?>) rates, "highest") : null;
+        if (!"auto".equals(quality)) return QualitySelector.chooseForFile(video, (List<?>) rates, quality);
+        return withCaptions ? QualitySelector.chooseForFile(video, (List<?>) rates, "highest") : null;
     }
 
     static boolean start(Object aweme, Context context) {
