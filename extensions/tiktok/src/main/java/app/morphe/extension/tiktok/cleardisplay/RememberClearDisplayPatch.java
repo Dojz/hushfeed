@@ -119,20 +119,26 @@ public final class RememberClearDisplayPatch {
             Setting.preferences.preferences.registerOnSharedPreferenceChangeListener(PREFERENCES);
             observingPreferences = true;
         }
-        boolean noId = id == null || id.isEmpty();
+        if (id == null || id.isEmpty()) {
+            // Never cleared, and TikTok brings its controls back on a new item by itself, so the
+            // live state, which the tab strip hide reads, follows. Left standing it kept TikTok's
+            // top bar away on such an item after a remembered or automatic clear.
+            cancel();
+            currentId = null;
+            if (clearNow) emit(event, false);
+            return;
+        }
         if (!Settings.AUTOMATIC_CLEAR_DISPLAY.get()) {
             cancel();
             currentId = null;
-            // Not under the daily hold, whose panel needs TikTok's tabs back (leaveForHold). An
-            // item with no id (an ad, a LIVE card) is only ever given the controls back below.
-            if (!noId && Settings.CLEAR_DISPLAY.get() && !SessionBudget.isLocked()) emit(event, true);
+            // Not under the daily hold, whose panel needs TikTok's tabs back (leaveForHold).
+            if (Settings.CLEAR_DISPLAY.get() && !SessionBudget.isLocked()) emit(event, true);
             // Switched off while it had the controls hidden: TikTok brings them back on the next
             // video by itself, but the live state, which the tab strip hide reads, would say
             // hidden until TikTok's own clear display bar was used (S22, 2026-09-23).
             else if (automaticHidden) emit(event, false);
             return;
         }
-        if (noId) return;
         if (id.equals(currentId)) return;
         cancel();
         currentId = id;
