@@ -618,6 +618,10 @@ public final class Probe extends Instrumentation {
                                 + " photo=" + photo + " durationMs=" + duration
                                 + " verified=" + verified + " aiLabel=" + aiLabel + " authorFollowers=" + followers
                                 + " likes=" + likes
+                                // The test account's own state on this video: liked, following.
+                                + " liked=" + optional(aweme, "isLike")
+                                + " following=" + (optional(creator, "getFollowStatus") instanceof Number
+                                        ? ((Number) optional(creator, "getFollowStatus")).intValue() != 0 : "unknown")
                                 + " awemeType=" + awemeType
                                 + " live=" + (liveId instanceof Number && ((Number) liveId).longValue() > 0)
                                 + " originalSound=" + originalSound);
@@ -641,6 +645,24 @@ public final class Probe extends Instrumentation {
                             Log.i(TAG, "textviews[" + pieces + "] " + text.substring(at, Math.min(text.length(), at + 3000)));
                         }
                         Log.i(TAG, "ok textviews " + text.length() + " chars in " + pieces + " pieces");
+                        break;
+                    }
+                    case "opendetail": {
+                        // Asks TikTok's detail route (snssdk1233://aweme/detail/<id>) for the video on
+                        // screen, to check the detail page's pager away from the profile it would
+                        // come from. On 47.0.3 the route, like a www.tiktok.com video link, played
+                        // the video in the home feed rather than opening the detail page. The id
+                        // stays in the phone.
+                        Class<?> author = loader.loadClass("app.morphe.extension.tiktok.blockauthor.CurrentVideoAuthor");
+                        Object aweme = author.getMethod("getAweme").invoke(null);
+                        Object aid = optional(aweme, "getAid");
+                        if (blank(aid)) throw new IllegalStateException("no current video");
+                        android.content.Intent open = new android.content.Intent(android.content.Intent.ACTION_VIEW,
+                                android.net.Uri.parse("snssdk1233://aweme/detail/" + aid));
+                        open.setPackage(context.getPackageName());
+                        open.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(open);
+                        Log.i(TAG, "ok opendetail");
                         break;
                     }
                     case "profileviewgates": {
@@ -1115,11 +1137,13 @@ public final class Probe extends Instrumentation {
                         // TikTok's main pager: its current item, its adapter's page count, and each
                         // page laid out in it (left edge, width, class) with whether it holds the
                         // vertical feed pager, so which index is the feed can be read, not assumed.
+                        // The shown one: a video opened from a profile, search or a link sits in a
+                        // second pager of the same base on the detail page, over the home one.
                         android.view.View pager = null;
                         java.util.ArrayDeque<android.view.View> queue = new java.util.ArrayDeque<>(windowRoots());
                         while (!queue.isEmpty() && pager == null) {
                             android.view.View view = queue.removeFirst();
-                            for (Class<?> c = view.getClass(); c != null && pager == null; c = c.getSuperclass()) {
+                            for (Class<?> c = view.getClass(); c != null && pager == null && view.isShown(); c = c.getSuperclass()) {
                                 for (Method m : c.getDeclaredMethods()) {
                                     if (m.getName().equals("setPagingMainValve")) { pager = view; break; }
                                 }
@@ -1246,9 +1270,10 @@ public final class Probe extends Instrumentation {
                     }
                     case "call": {
                         // A public static method of one of Hushfeed's own classes that takes no
-                        // arguments, and what it returned: -e class app.morphe.extension.tiktok.
-                        // seen.SeenVideoHistory -e method size. For reading a count a check needs
-                        // and for undoing what a check left behind (that class's clear).
+                        // arguments, and what it returned when that is a number or a yes/no:
+                        // -e class app.morphe.extension.tiktok.seen.SeenVideoHistory -e method
+                        // size. For reading a count a check needs and for undoing what a check
+                        // left behind (that class's clear).
                         String className = required(intent, "class");
                         if (!className.startsWith("app.morphe.extension.")) {
                             throw new IllegalArgumentException("Hushfeed classes only: " + className);
@@ -1258,7 +1283,13 @@ public final class Probe extends Instrumentation {
                             throw new IllegalArgumentException("static methods only: " + target);
                         }
                         Object result = target.invoke(null);
-                        Log.i(TAG, "ok call " + target.getName() + " -> " + (target.getReturnType() == void.class ? "void" : result));
+                        // A number or a yes/no is shown; anything else only by its type, since an
+                        // object's own text can carry ids, names or a caption (an Aweme's does).
+                        String shown = target.getReturnType() == void.class ? "void"
+                                : result == null ? "null"
+                                : result instanceof Number || result instanceof Boolean ? String.valueOf(result)
+                                : "<" + result.getClass().getName() + ", value not shown>";
+                        Log.i(TAG, "ok call " + target.getName() + " -> " + shown);
                         break;
                     }
                     case "fieldswatch": {
