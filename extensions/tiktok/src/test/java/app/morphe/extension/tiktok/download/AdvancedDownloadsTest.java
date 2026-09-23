@@ -254,8 +254,13 @@ public class AdvancedDownloadsTest {
         assertSame("an address that says nothing keeps the playable 540",
                 h264Mid, VideoDownloads.selectedGear(video, "720", false));
 
-        video.downloadAddr = new Address("https://example.com/own.mp4", 900).frame(720, 1280);
-        assertNull("TikTok's own 720 lost to the playable 540", VideoDownloads.selectedGear(video, "720", false));
+        // Only the watermarked address says 720: a deferred save would fall to it and put the
+        // watermark on a save the rendition path kept clean, so the playable 540 stays.
+        video.downloadAddr = new Address("https://example.com/marked.mp4", 900).frame(720, 1280);
+        assertSame("a watermarked-only 720 took the save", h264Mid, VideoDownloads.selectedGear(video, "720", false));
+
+        video.downloadNoWatermarkAddr = new Address("https://example.com/clean.mp4", 900).frame(720, 1280);
+        assertNull("TikTok's own clean 720 lost to the playable 540", VideoDownloads.selectedGear(video, "720", false));
         assertNull("for Highest too", VideoDownloads.selectedGear(video, "highest", false));
         assertNull("and for Automatic with captions", VideoDownloads.selectedGear(video, "auto", true));
         Settings.DOWNLOAD_VIDEO_QUALITY.save("720");
@@ -263,12 +268,13 @@ public class AdvancedDownloadsTest {
         assertSame("asked for 540, the 540", h264Mid, VideoDownloads.selectedGear(video, "540", false));
         assertSame("Lowest is left alone", h264Mid, VideoDownloads.selectedGear(video, "lowest", false));
 
-        video.downloadAddr = new Address("https://example.com/own.mp4", 900).frame(1080, 1920);
+        video.downloadNoWatermarkAddr = new Address("https://example.com/clean.mp4", 900).frame(1080, 1920);
         assertSame("taller than asked: the playable 540 stays", h264Mid, VideoDownloads.selectedGear(video, "720", false));
-        video.downloadAddr = new Address("https://example.com/own.mp4", 900).frame(540, 960);
+        video.downloadNoWatermarkAddr = new Address("https://example.com/clean.mp4", 900).frame(540, 960);
         assertSame("no taller than the choice: the playable 540 stays", h264Mid, VideoDownloads.selectedGear(video, "720", false));
-        video.downloadNoWatermarkAddr = new Address("https://example.com/clean.mp4", 900).frame(720, 1280);
-        assertNull("the address the save takes is the clean one", VideoDownloads.selectedGear(video, "720", false));
+        video.downloadNoWatermarkAddr = new Address("https://example.com/clean.mp4", 900).frame(486, 864);
+        assertSame("shorter than the choice: the playable 540 stays", h264Mid, VideoDownloads.selectedGear(video, "720", false));
+        assertSame("and in Highest", h264Mid, VideoDownloads.selectedGear(video, "highest", false));
     }
 
     @Test public void photosUseOrderedSourceImagesAndNeverThumbnails() {

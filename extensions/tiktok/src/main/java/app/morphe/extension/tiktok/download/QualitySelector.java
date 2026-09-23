@@ -60,9 +60,9 @@ public final class QualitySelector {
     /**
      * The rendition a saved file of this video is made from, or null for TikTok's own file. When
      * the asked height is served only as ByteVC2 the playable choice is a shorter one, and
-     * TikTok's own download, which is H.264, can be the asked height: it wins when its address
-     * says it is taller than the choice and no taller than asked (refutation review of bd52abf1).
-     * An address that says nothing keeps the playable choice.
+     * TikTok's own watermark-free download, which is H.264, can be the asked height: it wins when
+     * its address says it is taller than the choice and no taller than asked (refutation review
+     * of bd52abf1). An address that says nothing keeps the playable choice.
      */
     static Object chooseForFile(Object video, List<?> gears, String mode) {
         Object chosen = chooseForFile(gears, mode);
@@ -76,12 +76,14 @@ public final class QualitySelector {
     }
 
     /**
-     * How tall TikTok's own download is, by the address its save takes (the one without the
-     * watermark when there is one), as the shorter side the way gear names count; 0 when unknown.
+     * How tall TikTok's own watermark-free download is, as the shorter side the way gear names
+     * count; 0 when unknown or when only the watermarked address exists. Only the clean address
+     * counts: a deferred save falls to the download addresses, and deferring onto a video with
+     * nothing but the watermarked one would put the watermark on a save the rendition path kept
+     * clean (refutation review of f792e71e).
      */
     static int ownHeight(Object video) {
         Object address = Reflect.property(video, "getDownloadNoWatermarkAddr", "downloadNoWatermarkAddr");
-        if (!usable(address)) address = Reflect.property(video, "getDownloadAddr", "downloadAddr");
         return usable(address) ? dimension(address) : 0;
     }
 
