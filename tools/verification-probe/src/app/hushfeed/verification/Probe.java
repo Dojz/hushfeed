@@ -618,6 +618,10 @@ public final class Probe extends Instrumentation {
                                 + " photo=" + photo + " durationMs=" + duration
                                 + " verified=" + verified + " aiLabel=" + aiLabel + " authorFollowers=" + followers
                                 + " likes=" + likes
+                                // Whether TikTok serves it as separate video and audio (DASH),
+                                // the case a chosen-quality download muxes itself.
+                                + " dash=" + optional(video, "hasDashBitrate")
+                                + " gears=" + gearList(loader, video)
                                 // The test account's own state on this video: liked, following.
                                 + " liked=" + optional(aweme, "isLike")
                                 + " following=" + (optional(creator, "getFollowStatus") instanceof Number
@@ -756,6 +760,43 @@ public final class Probe extends Instrumentation {
                         String clicked = "";
                         if (click && first != null) clicked = " clicked=" + first.performClick();
                         Log.i(TAG, "ok finddesc " + (first == null ? "none" : "found") + clicked + out);
+                        break;
+                    }
+                    case "findtext": {
+                        // A shown TextView whose text is exactly -e text (a UI label such as a share
+                        // sheet action's), with its bounds; -e click true performs a click on its
+                        // nearest clickable ancestor, the cell a tap would hit. Only bounds are
+                        // printed.
+                        String wanted = required(intent, "text");
+                        boolean click = "true".equals(intent.getStringExtra("click"));
+                        android.view.View found = null;
+                        java.util.ArrayDeque<android.view.View> queue = new java.util.ArrayDeque<>(windowRoots());
+                        while (!queue.isEmpty() && found == null) {
+                            android.view.View view = queue.removeFirst();
+                            if (view instanceof android.widget.TextView && view.isShown()
+                                    && wanted.contentEquals(String.valueOf(((android.widget.TextView) view).getText()))) {
+                                found = view;
+                            }
+                            if (view instanceof android.view.ViewGroup) {
+                                android.view.ViewGroup group = (android.view.ViewGroup) view;
+                                for (int i = 0; i < group.getChildCount(); i++) queue.add(group.getChildAt(i));
+                            }
+                        }
+                        if (found == null) {
+                            Log.i(TAG, "ok findtext none");
+                            break;
+                        }
+                        int[] at = new int[2];
+                        found.getLocationOnScreen(at);
+                        String clicked = "";
+                        if (click) {
+                            android.view.View target = found;
+                            while (target != null && !target.isClickable()) {
+                                target = target.getParent() instanceof android.view.View ? (android.view.View) target.getParent() : null;
+                            }
+                            clicked = target == null ? " clicked=no clickable ancestor" : " clicked=" + target.performClick();
+                        }
+                        Log.i(TAG, "ok findtext found at=" + at[0] + "," + at[1] + " size=" + found.getWidth() + "x" + found.getHeight() + clicked);
                         break;
                     }
                     case "textwords": {
@@ -2429,6 +2470,41 @@ public final class Probe extends Instrumentation {
                 }
             }
             return out;
+        }
+
+        /**
+         * The video's renditions as a chosen-quality download sees them: each entry of the backing
+         * bitRate field through Hushfeed's own QualitySelector.describe (gear name and height).
+         */
+        private static String gearList(ClassLoader loader, Object video) {
+            if (video == null) return "none";
+            try {
+                // The way a download reads them: getRawBitRate, else the field under either name.
+                Object rates = optional(video, "getRawBitRate");
+                for (String name : new String[]{"bitRateList", "bitRate"}) {
+                    if (rates != null) break;
+                    for (Class<?> c = video.getClass(); c != null && rates == null; c = c.getSuperclass()) {
+                        try {
+                            java.lang.reflect.Field field = c.getDeclaredField(name);
+                            field.setAccessible(true);
+                            rates = field.get(video);
+                        } catch (NoSuchFieldException next) { }
+                    }
+                }
+                if (!(rates instanceof java.util.List)) return "none";
+                Method describe = loader.loadClass("app.morphe.extension.tiktok.download.QualitySelector")
+                        .getMethod("describe", Object.class);
+                StringBuilder out = new StringBuilder("[");
+                for (Object gear : (java.util.List<?>) rates) {
+                    if (out.length() > 1) out.append(", ");
+                    // With TikTok's codec code (is_bytevc1) and its format string.
+                    out.append(describe.invoke(null, gear)).append(" codec ").append(optional(gear, "isBytevc1"))
+                            .append(' ').append(optional(gear, "getFormat"));
+                }
+                return out.append(']').toString().replace(' ', '_');
+            } catch (ReflectiveOperationException | RuntimeException failure) {
+                return "?(" + failure.getClass().getSimpleName() + ")";
+            }
         }
 
         /** A no-argument getter's value, or null when the target or the getter is missing. */
