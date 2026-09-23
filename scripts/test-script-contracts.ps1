@@ -942,17 +942,21 @@ try {
     # the 0.39.0 index). The copied index is written up to the catalog it sits beside, its
     # version strings and its patch count, so every case below still moves exactly one fact
     # and is judged on the strict path.
+    # A release hold is the same lag with the version standing still: patches join the catalog
+    # while the index keeps the published count (2026-09-23, 93 against 0.58.0's 91), so the count
+    # is synced even when the version already matches.
     function Sync-FixtureIndex {
         $fixtureVersion = ((Get-Content -LiteralPath (Join-Path $factsRoot 'gradle.properties')) `
             -match '^version\s*=' | Select-Object -First 1) -replace '^version\s*=\s*', ''
-        $index = Get-Content -LiteralPath (Join-Path $factsRoot 'patches-bundle.json') -Raw | ConvertFrom-Json
-        $indexVersion = "$($index.version)"
-        if ($indexVersion -eq $fixtureVersion) { return }
+        $indexPath = Join-Path $factsRoot 'patches-bundle.json'
+        $indexText = Get-Content -LiteralPath $indexPath -Raw
+        $indexVersion = "$(($indexText | ConvertFrom-Json).version)"
         $count = @((Get-Content -LiteralPath (Join-Path $factsRoot 'patches-list.json') -Raw | ConvertFrom-Json).patches).Count
-        Set-FactsFile 'patches-bundle.json' {
-            param($text)
-            ($text -replace [regex]::Escape($indexVersion), $fixtureVersion) -replace '\b\d+ patches\b', "$count patches"
-        }
+        $synced = $indexText
+        if ($indexVersion -ne $fixtureVersion) { $synced = $synced -replace [regex]::Escape($indexVersion), $fixtureVersion }
+        $synced = $synced -replace '\b\d+ patches\b', "$count patches"
+        if ($synced -ceq $indexText) { return }
+        Set-FactsFile 'patches-bundle.json' { param($text) $synced }
     }
 
     # The bug form names the published version, which the synced index above now names too.
