@@ -51,6 +51,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                 || SettingsStatus.screenCaptureEnabled
                 || SettingsStatus.automaticClearDisplayEnabled
                 || SettingsStatus.doubleTapEnabled
+                || SettingsStatus.swipeLeftEnabled
                 || SettingsStatus.longPressEnabled
                 || SettingsStatus.longPressSpeedLockEnabled
                 || SettingsStatus.disableLongPressQuickShareEnabled
@@ -353,6 +354,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
 
     private void addGestures(Context context) {
         boolean any = SettingsStatus.doubleTapEnabled || SettingsStatus.longPressEnabled
+                || SettingsStatus.swipeLeftEnabled
                 || SettingsStatus.longPressSpeedLockEnabled
                 || SettingsStatus.disableLongPressQuickShareEnabled
                 || SettingsStatus.disableLongPressRepostEnabled
@@ -362,6 +364,11 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
         if (SettingsStatus.doubleTapEnabled) {
             addPreference(new ChoicePreference(context, "Double tap", Settings.DOUBLE_TAP_ACTION,
                     new String[]{"TikTok default", "Do nothing", "Open comments"},
+                    new String[]{"default", "nothing", "comments"}));
+        }
+        if (SettingsStatus.swipeLeftEnabled) {
+            addPreference(new ChoicePreference(context, "Swipe left", Settings.SWIPE_LEFT_ACTION,
+                    new String[]{"TikTok default (open the creator's profile)", "Do nothing", "Open comments"},
                     new String[]{"default", "nothing", "comments"}));
         }
         if (SettingsStatus.longPressEnabled) {

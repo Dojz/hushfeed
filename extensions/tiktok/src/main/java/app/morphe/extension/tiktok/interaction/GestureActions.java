@@ -296,4 +296,141 @@ public final class GestureActions {
             return false;
         }
     }
+
+    /**
+     * Whether TikTok's main pager is on its feed page, the one a left swipe leaves for the creator's
+     * profile. The profile is the pager's last page and the feed the one before it: on 47.0.3 the
+     * adapter holds three pages, a side panel at 0, the feed at 1 and the profile at 2 (the probe's
+     * pagerstate on the S22, 2026-09-23). Unreadable reads as not the feed.
+     */
+    static boolean onFeedPage(Object pager) {
+        int page = currentPage(pager);
+        int count = pageCount(pager);
+        if (page < 0 || count < 2) return false;
+        if (!swipeBound) {
+            swipeBound = true;
+            HookStatus.bound(SWIPE_FAMILY, "main pager");
+        }
+        return page == count - 2;
+    }
+
+    /**
+     * Called as TikTok's main pager asks whether it may page, from its touch intercept and its
+     * drag alike. False keeps it where it is. Only the feed page is held, so from the profile the
+     * swipe back to the feed stays TikTok's, and a pager whose pages can't be read pages as usual.
+     */
+    public static boolean allowProfileSwipe(Object pager) {
+        if ("default".equals(Settings.SWIPE_LEFT_ACTION.get())) return true;
+        return !onFeedPage(pager);
+    }
+
+    /** The Hook status family the left swipe reports under. */
+    static final String SWIPE_FAMILY = "swipe left";
+
+    private static boolean swipeBound;
+    private static float swipeDownX;
+    private static float swipeDownY;
+    private static boolean swipeTracking;
+    private static boolean swipeFired;
+
+    /**
+     * Each touch TikTok's main pager handles, before it looks at it: from its intercept until it
+     * takes the gesture, and from its own onTouchEvent after. A child that takes the gesture for
+     * itself, a photo carousel for one, keeps the rest from both, so only a swipe nothing else
+     * wanted gets this far. With Swipe left set to comments, a clearly sideways move to the left
+     * from the feed page opens the video's comments, once a swipe.
+     */
+    public static void onMainPagerTouch(Object pager, MotionEvent event) {
+        if (event == null) return;
+        switch (event.getActionMasked()) {
+            case MotionEvent.ACTION_DOWN:
+                swipeDownX = event.getX();
+                swipeDownY = event.getY();
+                swipeTracking = "comments".equals(Settings.SWIPE_LEFT_ACTION.get()) && onFeedPage(pager);
+                swipeFired = false;
+                return;
+            case MotionEvent.ACTION_MOVE:
+                if (!swipeTracking || swipeFired) return;
+                float dx = event.getX() - swipeDownX;
+                float dy = event.getY() - swipeDownY;
+                if (dx > -swipeDistance() || Math.abs(dx) < 2 * Math.abs(dy)) return;
+                swipeFired = true;
+                swipeCommentsOpener.run();
+                return;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+                swipeTracking = false;
+                return;
+            default:
+        }
+    }
+
+    /** How far left counts as a swipe: an eighth of the screen's width. */
+    static float swipeDistance() {
+        Context context = Utils.getContext();
+        int width = context == null ? 0 : context.getResources().getDisplayMetrics().widthPixels;
+        return (width > 0 ? width : 1080) / 8f;
+    }
+
+    /** What a left swipe set to comments does; a test stands in its own. */
+    static Runnable swipeCommentsOpener = () -> {
+        if (!openComments(Reflect.string(CurrentVideoAuthor.getAweme(), "getAid", "aid"))) {
+            Utils.showToastShort(L10n.t("Comments aren't available for this video"));
+        }
+    };
+
+    private static Method currentItem;
+    private static Class<?> currentItemOwner;
+    private static Method adapterGetter;
+    private static Class<?> adapterOwner;
+    private static Method countGetter;
+    private static Class<?> countOwner;
+
+    /** The pager's current page, or -1 when it can't be read. Asked on every touch, so the lookup is kept. */
+    static int currentPage(Object pager) {
+        if (pager == null) return -1;
+        try {
+            Method getter = currentItem;
+            if (getter == null || currentItemOwner != pager.getClass()) {
+                getter = pager.getClass().getMethod("getCurrentItem");
+                getter.setAccessible(true);
+                currentItem = getter;
+                currentItemOwner = pager.getClass();
+            }
+            Object page = getter.invoke(pager);
+            return page instanceof Integer ? (Integer) page : -1;
+        } catch (ReflectiveOperationException | RuntimeException unreadable) {
+            HookStatus.missingMember(SWIPE_FAMILY, "method", pager.getClass().getName(), "getCurrentItem");
+            return -1;
+        }
+    }
+
+    /** How many pages the pager's adapter holds, or -1 when it can't be read. */
+    static int pageCount(Object pager) {
+        if (pager == null) return -1;
+        try {
+            Method getter = adapterGetter;
+            if (getter == null || adapterOwner != pager.getClass()) {
+                getter = pager.getClass().getMethod("getAdapter");
+                getter.setAccessible(true);
+                adapterGetter = getter;
+                adapterOwner = pager.getClass();
+            }
+            Object adapter = getter.invoke(pager);
+            if (adapter == null) return -1;
+            Method count = countGetter;
+            if (count == null || countOwner != adapter.getClass()) {
+                // Made accessible: the adapter's own class need not be public.
+                count = adapter.getClass().getMethod("getCount");
+                count.setAccessible(true);
+                countGetter = count;
+                countOwner = adapter.getClass();
+            }
+            Object pages = count.invoke(adapter);
+            return pages instanceof Integer ? (Integer) pages : -1;
+        } catch (ReflectiveOperationException | RuntimeException unreadable) {
+            HookStatus.missingMember(SWIPE_FAMILY, "method", pager.getClass().getName(), "getAdapter().getCount()");
+            return -1;
+        }
+    }
 }

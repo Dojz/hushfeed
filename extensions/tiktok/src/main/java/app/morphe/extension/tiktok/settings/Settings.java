@@ -118,6 +118,8 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting SAVE_STORY = new BooleanSetting("save_story", FALSE);
     public static final StringSetting DOUBLE_TAP_ACTION = new StringSetting("double_tap_action", "default");
     public static final StringSetting LONG_PRESS_ACTION = new StringSetting("long_press_action", "default");
+    /** What a left swipe on a feed video does: TikTok's creator profile, nothing, or the comments. */
+    public static final StringSetting SWIPE_LEFT_ACTION = new StringSetting("swipe_left_action", "default");
     public static final BooleanSetting EDGE_SEEK = new BooleanSetting("edge_seek", FALSE);
     public static final BooleanSetting FIT_VIDEO_TO_SCREEN =
             new BooleanSetting("fit_video_to_screen", FALSE);
