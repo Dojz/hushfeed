@@ -148,15 +148,15 @@ public final class FeedVisibility {
         if (homeTab == null) {
             return true;
         }
-        if ((homeTab.isShown() || onlyItsBarIsHidden(homeTab)) && !isScrolledAway(homeTab)) {
-            return homeTab.isSelected();
-        }
+        if (homeTab.isShown() && !isScrolledAway(homeTab)) return homeTab.isSelected();
+        if (cleared(activity, homeTab)) return true;
         return isDetailVisible() && !isStoryVisible(activity);
     }
 
     /**
      * @return true while TikTok's clear display has the feed's controls put away: the Home tab
-     *         selected and in place, hidden by nothing but its own bar.
+     *         selected and in place, hidden by nothing but its own bar, with no detail page or
+     *         story over it.
      *
      * <p>For Hushfeed's own controls over the feed, which go when TikTok's do. {@link #isOnFeed}
      * answers yes here, and has to for the hold and the kept caption, so a control that should
@@ -164,8 +164,17 @@ public final class FeedVisibility {
      */
     public static boolean isFeedCleared(Activity activity) {
         View homeTab = homeTab(activity);
-        return homeTab != null && onlyItsBarIsHidden(homeTab) && !isScrolledAway(homeTab)
-                && homeTab.isSelected();
+        return homeTab != null && cleared(activity, homeTab);
+    }
+
+    /**
+     * Only ever adds a yes, and only for the one shape clear display was seen to have. Anything
+     * else (another tab selected, a detail page or a story registered over the feed) answers as
+     * it did before: a detail page opened from a grid keeps its chips and its hold either way.
+     */
+    private static boolean cleared(Activity activity, View homeTab) {
+        return homeTab.isSelected() && onlyItsBarIsHidden(homeTab) && !isScrolledAway(homeTab)
+                && !isDetailVisible() && !isStoryVisible(activity);
     }
 
     /**

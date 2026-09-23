@@ -192,6 +192,25 @@ public class FeedVisibilityTest {
                 assertFalse(FeedVisibility.isOnFeed(activity));
                 homeTab.setVisibility(View.VISIBLE);
 
+                // A detail page registered over it answers as it always did: the page keeps
+                // its chips and its hold, whichever tab is selected, and nothing calls it cleared.
+                Object detailPage = new Object();
+                View detail = new View(activity);
+                ((FrameLayout) activity.findViewById(android.R.id.content)).addView(detail, new FrameLayout.LayoutParams(100, 100));
+                FeedVisibility.onDetailView(detailPage, detail);
+                FeedVisibility.onDetailResume(detailPage);
+                try {
+                    assertTrue("the fixture has no detail page", FeedVisibility.isDetailVisible());
+                    assertFalse("a detail page read as a cleared feed", FeedVisibility.isFeedCleared(activity));
+                    assertTrue(FeedVisibility.isOnFeed(activity));
+                    homeTab.setSelected(false);
+                    assertTrue("a detail page opened from another tab lost the feed's answer",
+                            FeedVisibility.isOnFeed(activity));
+                    homeTab.setSelected(true);
+                } finally {
+                    FeedVisibility.onDetailDestroyed(detailPage);
+                }
+
                 // The controls back.
                 bar.setVisibility(View.VISIBLE);
                 assertTrue(FeedVisibility.isOnFeed(activity));

@@ -26,6 +26,9 @@ import org.robolectric.annotation.GraphicsMode;
 public class AutomaticClearDisplayTest {
     @After public void tearDown() {
         SettingsStatus.automaticClearDisplayEnabled = false;
+        // The live state is static and outlived every test: one asserted "not cleared" first
+        // and passed only because JUnit ran it before the ones that clear.
+        RememberClearDisplayPatch.resetForTests();
     }
     public static class Event {
         public boolean LIZ;
@@ -34,12 +37,68 @@ public class AutomaticClearDisplayTest {
     }
     @Before public void setup() {
         Utils.setContext(RuntimeEnvironment.getApplication());
+        RememberClearDisplayPatch.resetForTests();
         Settings.AUTOMATIC_CLEAR_DISPLAY.save(false);
         Settings.CLEAR_DISPLAY.save(false);
         RememberClearDisplayPatch.firstFrame("reset", () -> true, value -> {});
         Settings.AUTOMATIC_CLEAR_DISPLAY.save(true);
         Settings.AUTOMATIC_CLEAR_DISPLAY_DELAY.save(1000);
     }
+    /**
+     * The daily hold's panel says messages, profiles and search still work, and clear display
+     * takes away the tabs that lead there. So a hold going up gives the controls back, and while
+     * it runs neither the automatic path nor a remembered clear display clears again. The choice
+     * stays saved for the videos after the hold.
+     */
+    @Test public void theDailyHoldBringsTheControlsBackAndNothingClearsUnderIt() {
+        org.robolectric.util.ReflectionHelpers.callStaticMethod(app.morphe.extension.tiktok.wellbeing.SessionBudget.class, "awaitWritesForTests");
+        try {
+            List<Boolean> events = new ArrayList<>();
+            RememberClearDisplayPatch.firstFrame("before", () -> true, events::add);
+            Shadows.shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(1000));
+            assertTrue("the fixture never cleared", RememberClearDisplayPatch.isClearDisplayNow());
+
+            lockTheDay();
+            RememberClearDisplayPatch.leaveForHold();
+            assertFalse("the hold left the controls hidden", RememberClearDisplayPatch.isClearDisplayNow());
+
+            events.clear();
+            RememberClearDisplayPatch.firstFrame("held", () -> true, events::add);
+            Shadows.shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(2000));
+            assertEquals("the automatic path cleared under the hold", List.of(false), events);
+            assertFalse(RememberClearDisplayPatch.isClearDisplayNow());
+
+            Settings.AUTOMATIC_CLEAR_DISPLAY.save(false);
+            Settings.CLEAR_DISPLAY.save(true);
+            events.clear();
+            RememberClearDisplayPatch.firstFrame("remembered", () -> true, events::add);
+            assertEquals("a remembered clear display cleared under the hold", List.of(), events);
+
+            unlockTheDay();
+            RememberClearDisplayPatch.firstFrame("after", () -> true, events::add);
+            assertEquals("the remembered choice didn't come back after the hold", List.of(true), events);
+        } finally {
+            unlockTheDay();
+        }
+    }
+
+    private static void lockTheDay() {
+        Settings.SESSION_BUDGET_VIDEOS.save(1);
+        Settings.SESSION_BUDGET_LOCK_MINUTES.save(5);
+        app.morphe.extension.tiktok.wellbeing.SessionBudget.noteVideo("clear-display-held");
+        assertTrue("the fixture's hold never started", app.morphe.extension.tiktok.wellbeing.SessionBudget.claimNotice());
+        assertTrue(app.morphe.extension.tiktok.wellbeing.SessionBudget.isLocked());
+    }
+
+    private static void unlockTheDay() {
+        Class<?> budget = app.morphe.extension.tiktok.wellbeing.SessionBudget.class;
+        org.robolectric.util.ReflectionHelpers.callStaticMethod(budget, "awaitWritesForTests");
+        Settings.SESSION_BUDGET_STATE.save("");
+        Settings.SESSION_BUDGET_VIDEOS.resetToDefault();
+        Settings.SESSION_BUDGET_LOCK_MINUTES.resetToDefault();
+        org.robolectric.util.ReflectionHelpers.callStaticMethod(budget, "resetForTests");
+    }
+
     @Test public void theAutomaticPathReportsClearDisplayEvenThoughItNeverWritesTheSetting() {
         // rememberClearDisplayEvent is the only writer of the setting, and it returns early
         // for anything posted from here, so the setting stays false through the whole

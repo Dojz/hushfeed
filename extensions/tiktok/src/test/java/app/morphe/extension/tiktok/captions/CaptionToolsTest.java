@@ -339,6 +339,27 @@ public class CaptionToolsTest {
                 assertEquals("The next cue", caption.getText().toString());
                 assertEquals(View.VISIBLE, caption.getVisibility());
 
+                // The line sits on the window's own view, above the daily hold's panel, so it
+                // goes while a hold runs and comes back after.
+                Class<?> budget = app.morphe.extension.tiktok.wellbeing.SessionBudget.class;
+                org.robolectric.util.ReflectionHelpers.callStaticMethod(budget, "awaitWritesForTests");
+                try {
+                    Settings.SESSION_BUDGET_VIDEOS.save(1);
+                    Settings.SESSION_BUDGET_LOCK_MINUTES.save(5);
+                    app.morphe.extension.tiktok.wellbeing.SessionBudget.noteVideo("caption-held");
+                    assertTrue(app.morphe.extension.tiktok.wellbeing.SessionBudget.claimNotice());
+                    decor.getViewTreeObserver().dispatchOnPreDraw();
+                    assertEquals("the kept caption drew over the daily hold", View.GONE, caption.getVisibility());
+                } finally {
+                    org.robolectric.util.ReflectionHelpers.callStaticMethod(budget, "awaitWritesForTests");
+                    Settings.SESSION_BUDGET_STATE.save("");
+                    Settings.SESSION_BUDGET_VIDEOS.resetToDefault();
+                    Settings.SESSION_BUDGET_LOCK_MINUTES.resetToDefault();
+                    org.robolectric.util.ReflectionHelpers.callStaticMethod(budget, "resetForTests");
+                }
+                decor.getViewTreeObserver().dispatchOnPreDraw();
+                assertEquals("the kept caption didn't come back after the hold", View.VISIBLE, caption.getVisibility());
+
                 // Another tab is not the feed, cleared or not.
                 home.setSelected(false);
                 decor.getViewTreeObserver().dispatchOnPreDraw();

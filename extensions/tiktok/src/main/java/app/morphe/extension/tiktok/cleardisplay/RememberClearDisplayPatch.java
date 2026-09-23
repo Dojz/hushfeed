@@ -15,6 +15,7 @@ import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.settings.Setting;
 import app.morphe.extension.tiktok.blockauthor.Reflect;
 import app.morphe.extension.tiktok.settings.Settings;
+import app.morphe.extension.tiktok.wellbeing.SessionBudget;
 import java.lang.ref.WeakReference;
 
 public final class RememberClearDisplayPatch {
@@ -47,7 +48,7 @@ public final class RememberClearDisplayPatch {
      * display the user chose (remembered or not, since a paused process doesn't remember it) is
      * theirs.
      */
-    private static boolean automaticHidden;
+    private static volatile boolean automaticHidden;
     private static boolean observingPreferences;
     private static WeakReference<View> window = new WeakReference<>(null);
     private static final SharedPreferences.OnSharedPreferenceChangeListener PREFERENCES = (preferences, key) -> {
@@ -122,7 +123,8 @@ public final class RememberClearDisplayPatch {
         if (!Settings.AUTOMATIC_CLEAR_DISPLAY.get()) {
             cancel();
             currentId = null;
-            if (Settings.CLEAR_DISPLAY.get()) emit(event, true);
+            // Not under the daily hold, whose panel needs TikTok's tabs back (leaveForHold).
+            if (Settings.CLEAR_DISPLAY.get() && !SessionBudget.isLocked()) emit(event, true);
             // Switched off while it had the controls hidden: TikTok brings them back on the next
             // video by itself, but the live state, which the tab strip hide reads, would say
             // hidden until TikTok's own clear display bar was used (S22, 2026-09-23).
@@ -135,12 +137,38 @@ public final class RememberClearDisplayPatch {
         emit(event, false);
         pending = () -> {
             pending = null;
-            if (Settings.AUTOMATIC_CLEAR_DISPLAY.get() && id.equals(currentId) && stillCurrent.holds()) {
+            if (Settings.AUTOMATIC_CLEAR_DISPLAY.get() && id.equals(currentId) && stillCurrent.holds()
+                    && !SessionBudget.isLocked()) {
                 emit(event, true);
                 automaticHidden = true;
             }
         };
         MAIN.postDelayed(pending, Math.max(0, Math.min(30000, Settings.AUTOMATIC_CLEAR_DISPLAY_DELAY.get())));
+    }
+
+    /**
+     * The daily hold went up over a cleared screen. Its panel says messages, profiles and search
+     * still work, and clear display has taken away the tabs that lead there, so TikTok's controls
+     * come back with it. Only a clear display this patch posted or saw TikTok post is undone, and
+     * neither the remembered nor the automatic path clears again while the hold runs. The choice
+     * itself stays saved, so the next video after the hold clears as before.
+     */
+    public static void leaveForHold() {
+        if (Looper.myLooper() != Looper.getMainLooper()) {
+            MAIN.post(RememberClearDisplayPatch::leaveForHold);
+            return;
+        }
+        cancel();
+        if (clearNow) emit(RememberClearDisplayPatch::postClear, false);
+    }
+
+    /** A fresh process's state, for the test classes that share this one's statics. */
+    static void resetForTests() {
+        cancel();
+        currentId = null;
+        clearNow = false;
+        automaticHidden = false;
+        posting = false;
     }
 
     /** Whether the controls are hidden right now, automatically or by the user. */
