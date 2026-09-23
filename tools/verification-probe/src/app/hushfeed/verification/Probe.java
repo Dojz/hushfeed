@@ -738,15 +738,18 @@ public final class Probe extends Instrumentation {
                         String desc = required(intent, "desc");
                         boolean click = "true".equals(intent.getStringExtra("click"));
                         // -e match prefix: descriptions that start with the text, for a control
-                        // whose description carries a count after its name.
+                        // whose description carries a count after its name; -e match contains: a
+                        // description with the text anywhere, for one whose count comes first.
                         boolean prefix = "prefix".equals(intent.getStringExtra("match"));
+                        boolean contains = "contains".equals(intent.getStringExtra("match"));
                         StringBuilder out = new StringBuilder();
                         android.view.View first = null;
                         java.util.ArrayDeque<android.view.View> queue = new java.util.ArrayDeque<>(windowRoots());
                         while (!queue.isEmpty()) {
                             android.view.View view = queue.removeFirst();
                             String described = String.valueOf(view.getContentDescription());
-                            if (view.isShown() && (prefix ? described.startsWith(desc) : desc.equals(described))) {
+                            if (view.isShown() && (contains ? described.contains(desc)
+                                    : prefix ? described.startsWith(desc) : desc.equals(described))) {
                                 int[] at = new int[2];
                                 view.getLocationOnScreen(at);
                                 out.append("\n  ").append(view.getClass().getName()).append(" at=").append(at[0]).append(',').append(at[1])
@@ -1273,6 +1276,8 @@ public final class Probe extends Instrumentation {
                                                 .append('/').append(idName(child, resources))
                                                 .append("/vis").append(child.getVisibility())
                                                 .append('/').append(child.getWidth()).append('x').append(child.getHeight());
+                                        android.text.Layout drawn = layoutOf(child);
+                                        if (drawn != null) out.append("/layout:").append(layoutReport(drawn));
                                     }
                                 }
                                 out.append(']');
@@ -1494,7 +1499,8 @@ public final class Probe extends Instrumentation {
                                 long moved = (Long) position.invoke(player) - startPosition;
                                 Log.i(TAG, "ok playerspeed speed=" + startSpeed + " then " + speed.invoke(player)
                                         + " moved=" + moved + "ms in " + elapsed + "ms rate="
-                                        + String.format(Locale.ROOT, "%.2f", moved / (double) elapsed));
+                                        + String.format(Locale.ROOT, "%.2f", moved / (double) elapsed)
+                                        + " from=" + startPosition + "ms");
                             } catch (ReflectiveOperationException error) {
                                 Log.e(TAG, "failed playerspeed", error);
                             }
@@ -2653,6 +2659,35 @@ public final class Probe extends Instrumentation {
                 }
             }
             return false;
+        }
+
+        /** A view's own text Layout, when it keeps one in a field (TikTok's caption view does). */
+        private static android.text.Layout layoutOf(android.view.View view) {
+            for (Class<?> type = view.getClass(); type != null && type != android.view.View.class; type = type.getSuperclass()) {
+                for (Field field : type.getDeclaredFields()) {
+                    if (!android.text.Layout.class.isAssignableFrom(field.getType())) continue;
+                    try {
+                        field.setAccessible(true);
+                        Object value = field.get(view);
+                        if (value instanceof android.text.Layout) return (android.text.Layout) value;
+                    } catch (ReflectiveOperationException | RuntimeException unreadable) {
+                        // The next field, or none.
+                    }
+                }
+            }
+            return null;
+        }
+
+        /** Its lines, width and how many lines end inside a word, never the text itself. */
+        private static String layoutReport(android.text.Layout layout) {
+            CharSequence text = layout.getText();
+            int inWords = 0;
+            for (int i = 0; i < layout.getLineCount() - 1; i++) {
+                int end = layout.getLineEnd(i);
+                if (end > 0 && end < text.length() && Character.isLetterOrDigit(text.charAt(end - 1))
+                        && Character.isLetterOrDigit(text.charAt(end))) inWords++;
+            }
+            return "lines" + layout.getLineCount() + "/w" + layout.getWidth() + "/inWords" + inWords;
         }
 
         private static Object staticField(Class<?> owner, String name) throws ReflectiveOperationException {
