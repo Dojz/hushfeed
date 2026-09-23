@@ -48,8 +48,9 @@ class FoldableSplitViewConfigurationTest {
         assertTrue("${method!!.definingClass} is not above the feed activity", method.definingClass in chain)
 
         val mutable = MutableMethod(method)
+        val body = mutable.implementation!!.instructions.map { it.opcode }
         mutable.handConfigurationChangesToSplitView()
-        assertHandsOverFirst(mutable)
+        assertHandsOverFirst(mutable, body)
     }
 
     @Test
@@ -64,8 +65,9 @@ class FoldableSplitViewConfigurationTest {
         assertEquals("LX/Base;", found?.definingClass)
 
         val mutable = MutableMethod(found!!)
+        val body = mutable.implementation!!.instructions.map { it.opcode }
         mutable.handConfigurationChangesToSplitView()
-        assertHandsOverFirst(mutable)
+        assertHandsOverFirst(mutable, body)
     }
 
     @Test
@@ -90,8 +92,11 @@ class FoldableSplitViewConfigurationTest {
                 source.indexOf(".addInstructions(", execute))
     }
 
-    private fun assertHandsOverFirst(method: MutableMethod) {
-        val first = method.implementation!!.instructions.first()
+    /** The call is a prefix: TikTok's own handler, `super` call included, still runs after it. */
+    private fun assertHandsOverFirst(method: MutableMethod, originalBody: List<Opcode>) {
+        val instructions = method.implementation!!.instructions.toList()
+        assertEquals("the hook changed TikTok's own handler", originalBody, instructions.drop(1).map { it.opcode })
+        val first = instructions.first()
         assertEquals(Opcode.INVOKE_STATIC_RANGE, first.opcode)
         val range = first as RegisterRangeInstruction
         assertEquals("the call does not take this and the configuration", 2, range.registerCount)

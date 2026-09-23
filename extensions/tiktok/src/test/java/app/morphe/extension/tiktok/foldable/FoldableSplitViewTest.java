@@ -112,6 +112,50 @@ public class FoldableSplitViewTest {
         }
     }
 
+    @Test public void aSwitchTurnedOnMidSessionAppliesAtTheNextStartNotTheNextResize() {
+        Settings.FOLDABLE_SPLIT_VIEW.save(false);
+        Settings.FOLDABLE_SPLIT_VIEW_MIN_WIDTH_DP.save(800);
+        java.util.List<android.app.Activity> rebuilt = new java.util.ArrayList<>();
+        FoldableSplitView.recreator = rebuilt::add;
+        try (var owner = Robolectric.buildActivity(TestActivity.class).setup()) {
+            TestActivity activity = owner.get();
+            Utils.setActivity(activity);
+            // TikTok built its containers with the switch off, which is no split decision.
+            assertFalse(FoldableSplitView.shouldForceContainer());
+
+            Settings.FOLDABLE_SPLIT_VIEW.save(true);
+            FoldableSplitView.onConfigurationChanged(activity, width(activity, 900));
+            assertEquals("the feed was built again for a switch that applies at the next start", 0, rebuilt.size());
+
+            // The control: asked again with the switch on, the 700 dp window is recorded as the
+            // narrow side of 800 dp, and the next crossing counts.
+            assertFalse(FoldableSplitView.shouldForceContainer());
+            FoldableSplitView.onConfigurationChanged(activity, width(activity, 900));
+            assertEquals(java.util.Collections.singletonList(activity), rebuilt);
+        }
+    }
+
+    @Test public void aThresholdEditedMidSessionAppliesAtTheNextStartNotTheNextResize() {
+        Settings.FOLDABLE_SPLIT_VIEW.save(true);
+        Settings.FOLDABLE_SPLIT_VIEW_MIN_WIDTH_DP.save(800);
+        java.util.List<android.app.Activity> rebuilt = new java.util.ArrayList<>();
+        FoldableSplitView.recreator = rebuilt::add;
+        try (var owner = Robolectric.buildActivity(TestActivity.class).setup()) {
+            TestActivity activity = owner.get();
+            Utils.setActivity(activity);
+            assertFalse(FoldableSplitView.shouldForceContainer());
+
+            // The containers were built for an 800 dp threshold; 760 dp crosses only the new one.
+            Settings.FOLDABLE_SPLIT_VIEW_MIN_WIDTH_DP.save(600);
+            FoldableSplitView.onConfigurationChanged(activity, width(activity, 760));
+            assertEquals("the feed was built again for a threshold that applies at the next start", 0, rebuilt.size());
+
+            // The control: a crossing of the recorded threshold still counts.
+            FoldableSplitView.onConfigurationChanged(activity, width(activity, 900));
+            assertEquals(java.util.Collections.singletonList(activity), rebuilt);
+        }
+    }
+
     @Test public void nothingIsBuiltAgainWithTheSwitchOffBesideOtherAppsOrForAnActivityThatNeverAsked() {
         Settings.FOLDABLE_SPLIT_VIEW.save(true);
         java.util.List<android.app.Activity> rebuilt = new java.util.ArrayList<>();
