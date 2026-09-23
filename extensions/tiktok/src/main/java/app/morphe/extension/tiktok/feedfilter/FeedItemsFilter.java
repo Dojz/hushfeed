@@ -429,10 +429,19 @@ public final class FeedItemsFilter {
         if (kept.size() == items.size()) return;
         if (kept.isEmpty()) {
             // Every card on the page matched. A whole page of them is far less likely than one
-            // of the card shapes being wrong, and an empty grid gives the user nothing to go on,
-            // so the page is left alone.
-            Logger.printException(() -> "Every search result looked like an advert or a Shop card, so none were removed");
-            return;
+            // of the card shapes being wrong, and an empty grid gives the user nothing to go on.
+            // When the adverts alone would have left cards, it is the Shop shapes that emptied
+            // the page, so only the adverts go, as they did before the Shop switch existed;
+            // otherwise the page is left alone.
+            if (adsRemoved == 0 || adsRemoved == items.size()) {
+                Logger.printException(() -> "Every search result looked like an advert or a Shop card, so none were removed");
+                return;
+            }
+            for (Object card : items) {
+                if (!isSearchAd(card)) kept.add(card);
+            }
+            shopRemoved = 0;
+            Logger.printException(() -> "Every search result looked like an advert or a Shop card, so only the adverts were removed");
         }
 
         Field field = Reflect.field(searchResult.getClass(), "mItems");

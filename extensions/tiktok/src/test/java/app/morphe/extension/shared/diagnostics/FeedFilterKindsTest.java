@@ -68,6 +68,50 @@ public class FeedFilterKindsTest {
         assertEquals("Route: 2 lists, 2 items, 0 removed. Kinds: type 96 product 2, type 1 video 1", lineFor("Route"));
     }
 
+    @Test public void anUndoWithNothingCountedBetweenGivesBackTheSameKindsLine() {
+        FeedFilterCounters.sawList("Route", 13);
+        for (int i = 0; i < FeedFilterCounters.MAX_KINDS; i++) {
+            for (int n = 0; n <= i; n++) FeedFilterCounters.sawKind("Route", "kind " + (char) ('a' + i));
+        }
+        FeedFilterCounters.sawKind("Route", "one too many");
+        String before = lineFor("Route");
+        assertTrue(before, before.contains(FeedFilterCounters.OTHER_KINDS + " 1"));
+
+        // Replayed in hash order, the overflow took a slot and the last named kind fell into it.
+        FeedFilterCounters.restore(FeedFilterCounters.snapshotAndClear());
+        assertEquals("undo changed the kinds", before, lineFor("Route"));
+    }
+
+    @Test public void parsersOnSeveralThreadsCannotPushTheNamedKindsPastTheCap() throws Exception {
+        for (int round = 0; round < 20; round++) {
+            int threads = 8;
+            java.util.concurrent.CyclicBarrier start = new java.util.concurrent.CyclicBarrier(threads);
+            List<Thread> workers = new java.util.ArrayList<>();
+            for (int t = 0; t < threads; t++) {
+                int thread = t;
+                Thread worker = new Thread(() -> {
+                    try {
+                        start.await();
+                    } catch (Exception interrupted) {
+                        throw new RuntimeException(interrupted);
+                    }
+                    for (int k = 0; k < 40; k++) FeedFilterCounters.sawKind("Race", "kind " + thread + "-" + k);
+                });
+                workers.add(worker);
+                worker.start();
+            }
+            for (Thread worker : workers) worker.join();
+
+            String line = lineFor("Race");
+            int named = 0;
+            for (String kind : line.substring(line.indexOf("Kinds: ") + "Kinds: ".length()).split(", ")) {
+                if (!kind.startsWith(FeedFilterCounters.OTHER_KINDS + " ")) named++;
+            }
+            assertTrue(line, named <= FeedFilterCounters.MAX_KINDS);
+            FeedFilterCounters.clear();
+        }
+    }
+
     @Test public void aRouteThatNamesNoKindsKeepsItsLine() {
         FeedFilterCounters.sawList("Plain", 3);
         FeedFilterCounters.removed("Plain", 1, "AdsFilter");

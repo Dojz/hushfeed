@@ -195,6 +195,26 @@ public class SearchShopFilterTest {
         FeedItemsFilter.filterSearchAds(result);
 
         assertSame(items, result.mItems);
+        // Counted only once a page was rewritten: a refused page removed nothing.
+        String line = searchLine();
+        assertTrue(line, line.startsWith(FeedItemsFilter.SEARCH_SOURCE + ": 1 lists, 2 items, 0 removed"));
+        assertFalse(line, line.contains("Last reason"));
+    }
+
+    @Test public void aPageOfOneAdvertAndOneShopBlockLosesOnlyTheAdvertWithBothSwitchesOn() {
+        Settings.REMOVE_ADS.save(true);
+        Card advert = video();
+        advert.adOrContainAd = true;
+        Card block = new Card();
+        block.dynamicPatch = new Patch(Boolean.TRUE);
+
+        Result result = new Result(new ArrayList<>(Arrays.asList(advert, block)));
+        FeedItemsFilter.filterSearchAds(result);
+
+        // Remove ads alone took the advert before the Shop switch existed, and a Shop switch
+        // that would empty the page must not give the advert back.
+        assertEquals(Arrays.asList(block), result.mItems);
+        assertTrue(searchLine(), searchLine().startsWith(FeedItemsFilter.SEARCH_SOURCE + ": 1 lists, 2 items, 1 removed. Last reason: searchAd"));
     }
 
     @Test public void theExportNamesTheShapeOfEveryCardAndNothingItSays() {

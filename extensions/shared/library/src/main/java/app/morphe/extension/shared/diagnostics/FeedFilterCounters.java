@@ -177,12 +177,22 @@ public final class FeedFilterCounters {
     private static void count(ConcurrentHashMap<String, AtomicLong> kinds, String kind, long add) {
         AtomicLong tally = kinds.get(kind);
         if (tally == null) {
-            if (kinds.size() >= MAX_KINDS) kind = OTHER_KINDS;
-            AtomicLong created = new AtomicLong();
-            // Declared as the class rather than Map: putIfAbsent on the Map interface is an
-            // API 24 default method, and ConcurrentHashMap has carried its own since API 1.
-            tally = kinds.putIfAbsent(kind, created);
-            if (tally == null) tally = created;
+            // A new kind takes the map's monitor: the bound is a check on the size followed by
+            // an insert, and two parser threads that both saw eleven kinds each added their own
+            // twelfth. A kind already counted never comes here.
+            synchronized (kinds) {
+                tally = kinds.get(kind);
+                if (tally == null) {
+                    if (kinds.size() >= MAX_KINDS && !OTHER_KINDS.equals(kind)) {
+                        kind = OTHER_KINDS;
+                        tally = kinds.get(kind);
+                    }
+                    if (tally == null) {
+                        tally = new AtomicLong();
+                        kinds.put(kind, tally);
+                    }
+                }
+            }
         }
         tally.addAndGet(add);
     }
@@ -301,7 +311,18 @@ public final class FeedFilterCounters {
                 counter.unreadable.addAndGet(saved.unreadable);
                 counter.emptied.addAndGet(saved.emptied);
                 if (counter.lastReason == null) counter.lastReason = saved.lastReason;
-                for (java.util.Map.Entry<String, Long> kind : saved.kinds.entrySet()) {
+                // The named kinds go back first, most counted first, and the overflow last, so
+                // an undo with nothing counted in between gives back the same Kinds line. In
+                // hash order, "other" could take a slot and push a named kind into it.
+                List<java.util.Map.Entry<String, Long>> savedKinds = new ArrayList<>(saved.kinds.entrySet());
+                java.util.Collections.sort(savedKinds, (a, b) -> {
+                    boolean otherA = OTHER_KINDS.equals(a.getKey());
+                    boolean otherB = OTHER_KINDS.equals(b.getKey());
+                    if (otherA != otherB) return otherA ? 1 : -1;
+                    int byCount = Long.compare(b.getValue(), a.getValue());
+                    return byCount != 0 ? byCount : a.getKey().compareTo(b.getKey());
+                });
+                for (java.util.Map.Entry<String, Long> kind : savedKinds) {
                     count(counter.kinds, kind.getKey(), kind.getValue());
                 }
                 // The longest run wins, whichever side of the clear it was on.
