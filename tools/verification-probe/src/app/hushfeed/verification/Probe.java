@@ -719,6 +719,77 @@ public final class Probe extends Instrumentation {
                         Log.i(TAG, "ok strings" + out);
                         break;
                     }
+                    case "fields": {
+                        // Static fields of one of Hushfeed's own classes, by name, for checking
+                        // what a hook recorded: -e class app.morphe.extension.tiktok.speed.
+                        // PlaybackSpeedPatch -e names manualSpeed,currentVideoId. Hushfeed's
+                        // classes only, and a field named like an id is shown as a short hash, so
+                        // two reads can be compared without a video id reaching the log.
+                        String className = required(intent, "class");
+                        if (!className.startsWith("app.morphe.extension.")) {
+                            throw new IllegalArgumentException("Hushfeed classes only: " + className);
+                        }
+                        Class<?> owner = loader.loadClass(className);
+                        StringBuilder out = new StringBuilder();
+                        for (String name : required(intent, "names").split(",")) {
+                            Field field = owner.getDeclaredField(name.trim());
+                            field.setAccessible(true);
+                            String shown = String.valueOf(field.get(null));
+                            if (name.trim().endsWith("Id") && !shown.isEmpty()) shown = "<id " + (shown.hashCode() & 0xffff) + ">";
+                            out.append(' ').append(name.trim()).append('=').append(shown);
+                        }
+                        Log.i(TAG, "ok fields" + out);
+                        break;
+                    }
+                    case "fieldswatch": {
+                        // The same static fields sampled every 40 ms for a few seconds, logging
+                        // each change with its time, so a value a hook writes and another wipes
+                        // within a second shows up. Hushfeed classes only, like "fields".
+                        String className = required(intent, "class");
+                        if (!className.startsWith("app.morphe.extension.")) {
+                            throw new IllegalArgumentException("Hushfeed classes only: " + className);
+                        }
+                        Class<?> owner = loader.loadClass(className);
+                        String[] names = required(intent, "names").split(",");
+                        String forText = intent.getStringExtra("for");
+                        long span = forText == null ? 4000L : Long.parseLong(forText);
+                        new Thread(() -> {
+                            try {
+                                long start = android.os.SystemClock.uptimeMillis();
+                                String last = null;
+                                StringBuilder out = new StringBuilder();
+                                while (android.os.SystemClock.uptimeMillis() - start < span) {
+                                    StringBuilder now = new StringBuilder();
+                                    for (String name : names) {
+                                        Field field = owner.getDeclaredField(name.trim());
+                                        field.setAccessible(true);
+                                        Object value = field.get(null);
+                                        String shown = String.valueOf(value);
+                                        if (name.trim().endsWith("Id") && !shown.isEmpty()) shown = "<id " + (shown.hashCode() & 0xffff) + ">";
+                                        now.append(' ').append(name.trim()).append('=').append(shown);
+                                    }
+                                    try {
+                                        Object onScreen = loader.loadClass("app.morphe.extension.tiktok.blockauthor.CurrentVideoAuthor")
+                                                .getMethod("getAweme").invoke(null);
+                                        Object aid = onScreen == null ? null : onScreen.getClass().getMethod("getAid").invoke(onScreen);
+                                        now.append(" onScreen=").append(aid == null ? "none" : "<id " + (String.valueOf(aid).hashCode() & 0xffff) + ">");
+                                    } catch (ReflectiveOperationException unreadable) {
+                                        now.append(" onScreen=?");
+                                    }
+                                    String state = now.toString();
+                                    if (!state.equals(last)) {
+                                        out.append("\n+").append(android.os.SystemClock.uptimeMillis() - start).append("ms").append(state);
+                                        last = state;
+                                    }
+                                    android.os.SystemClock.sleep(40);
+                                }
+                                Log.i(TAG, "ok fieldswatch" + out);
+                            } catch (ReflectiveOperationException error) {
+                                Log.e(TAG, "failed fieldswatch", error);
+                            }
+                        }, "hushfeed-probe-fieldswatch").start();
+                        break;
+                    }
                     case "playerspeed": {
                         // The feed player's own speed and how far its position moves over a gap,
                         // read through the player TikTok's static getter hands out. The holder
