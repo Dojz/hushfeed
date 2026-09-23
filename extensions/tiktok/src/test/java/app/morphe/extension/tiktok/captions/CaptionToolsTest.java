@@ -101,7 +101,7 @@ public class CaptionToolsTest {
         Settings.CAPTION_TEXT_SIZE.save(28);
         Layout styled = CaptionStyle.layout(original);
         assertEquals("the word was split across lines", 1, styled.getLineCount());
-        int cap = Math.round(Utils.getContext().getResources().getDisplayMetrics().widthPixels * 0.8f);
+        int cap = tiktokCap();
         assertTrue("wider than the strip may be: " + styled.getWidth(), styled.getWidth() <= cap);
 
         // TikTok lays a long caption out within its strip, so the column it hands over is never
@@ -118,6 +118,61 @@ public class CaptionToolsTest {
         }
         Settings.CAPTION_TEXT_SIZE.save(0);
         assertSame(original, CaptionStyle.layout(original));
+    }
+
+    /**
+     * TikTok's own limit on a caption is the screen less 100 dp (margins, the rail of buttons);
+     * four fifths of the screen, the first cap, went past it on the S22 (864 px against about
+     * 818), onto the rail (refutation review of ecf26b6c).
+     */
+    @Test public void aBiggerCaptionStaysWithinTikToksOwnWidth() {
+        assertEquals("grows with the text", 200, CaptionStyle.width(100, 40, 80, 700));
+        assertEquals("up to TikTok's limit", 700, CaptionStyle.width(600, 40, 80, 700));
+        assertEquals("never narrower than TikTok's own", 800, CaptionStyle.width(800, 40, 80, 700));
+        assertEquals("a smaller size keeps TikTok's width", 600, CaptionStyle.width(600, 40, 30, 700));
+
+        TextPaint paint = new TextPaint();
+        paint.setTextSize(16);
+        String sentence = "the weather conditions stay unsettled";
+        int cap = tiktokCap();
+        Layout original = new StaticLayout(sentence, paint, cap - 20, Layout.Alignment.ALIGN_NORMAL, 1, 0, true);
+        Settings.CAPTION_TEXT_SIZE.save(28);
+        try {
+            Layout styled = CaptionStyle.layout(original);
+            assertTrue("past TikTok's limit: " + styled.getWidth() + " > " + cap, styled.getWidth() <= cap);
+            assertTrue("the grown text did not wrap", styled.getLineCount() > 1);
+        } finally {
+            Settings.CAPTION_TEXT_SIZE.save(0);
+        }
+    }
+
+    /**
+     * TikTok sizes the caption view to its layout and builds that layout as wide as its longest
+     * line, so the strip behind it fits the text. A layout left wider than its text left an empty
+     * band beside it, bigger or smaller than TikTok's size (refutation review of ecf26b6c).
+     */
+    @Test public void aRestyledCaptionIsAsWideAsItsLongestLine() {
+        TextPaint paint = new TextPaint();
+        paint.setTextSize(16);
+        String cue = "A replay.";
+        Layout original = new StaticLayout(cue, paint, tiktokCap(), Layout.Alignment.ALIGN_NORMAL, 1, 0, true);
+        try {
+            for (int size : new int[] {28, 12}) {
+                Settings.CAPTION_TEXT_SIZE.save(size);
+                Layout styled = CaptionStyle.layout(original);
+                assertEquals("size " + size + " kept an empty edge beside the text",
+                        CaptionStyle.longestLine(styled), styled.getWidth());
+                assertEquals("size " + size + " changed the line breaks", 1, styled.getLineCount());
+            }
+        } finally {
+            Settings.CAPTION_TEXT_SIZE.save(0);
+        }
+    }
+
+    private static int tiktokCap() {
+        android.util.DisplayMetrics metrics = Utils.getContext().getResources().getDisplayMetrics();
+        return metrics.widthPixels - Math.round(android.util.TypedValue.applyDimension(
+                android.util.TypedValue.COMPLEX_UNIT_DIP, 100, metrics));
     }
 
     @Test public void aBuildWithoutTheCaptionIdsSaysSoOnTheHookStatusRow() {
