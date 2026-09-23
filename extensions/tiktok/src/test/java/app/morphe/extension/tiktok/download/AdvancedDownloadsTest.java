@@ -59,9 +59,13 @@ public class AdvancedDownloadsTest {
         public List<Audio> bitRateAudio = List.of();
         public boolean dash;
         public Address downloadNoWatermarkAddr, downloadAddr, playAddr;
+        /** TikTok's field names for the play addresses that say their codec. */
+        public Address h264PlayAddrValue, playAddrBytevc1Value;
+        public boolean byteVc2;
         VideoData(List<Gear> gears) { bitRate = gears; }
         public List<Gear> getBitRate() { throw new AssertionError("Must not recurse into playback getter"); }
         public boolean hasDashBitrate() { return dash; }
+        public boolean hasByteVC2() { return byteVc2; }
     }
     /**
      * TikTok 47.0.3's Video: the list moved to the field bitRateList, and getRawBitRate returns
@@ -614,6 +618,32 @@ public class AdvancedDownloadsTest {
         video.playAddr = null;
         assertTrue(VideoDownloads.sourceUrls(video).isEmpty());
         assertTrue(VideoDownloads.sourceUrls(new Object()).isEmpty());
+    }
+
+    /**
+     * A story falls back to its play address, which is whatever TikTok's own player plays and can
+     * be ByteVC2 that no other player opens. The H.264 and ByteVC1 play addresses come first, the
+     * plain one only when the video doesn't report ByteVC2, and the sound can still come from any.
+     */
+    @Test public void aStoryIsNeverSavedFromAByteVc2PlayAddress() {
+        VideoData video = new VideoData(List.of());
+        video.playAddr = new Address("https://example.com/play.mp4", 900);
+        video.byteVc2 = true;
+        assertTrue("a play address that may be ByteVC2 was saved", VideoDownloads.playableSourceUrls(video).isEmpty());
+        assertEquals("the sound can't come out of it any more",
+                List.of("https://example.com/play.mp4"), VideoDownloads.sourceUrls(video));
+        assertEquals("This story only comes in TikTok's own video format, which other players can't open",
+                StoryDownloads.unavailableReason(video));
+        video.h264PlayAddrValue = new Address("https://example.com/h264.mp4", 900);
+        assertEquals(List.of("https://example.com/h264.mp4"), VideoDownloads.playableSourceUrls(video));
+        video.h264PlayAddrValue = null;
+        video.playAddrBytevc1Value = new Address("https://example.com/hevc.mp4", 900);
+        assertEquals(List.of("https://example.com/hevc.mp4"), VideoDownloads.playableSourceUrls(video));
+        video.playAddrBytevc1Value = null;
+        video.byteVc2 = false;
+        assertEquals(List.of("https://example.com/play.mp4"), VideoDownloads.playableSourceUrls(video));
+        video.playAddr = null;
+        assertEquals("This story isn't available to save", StoryDownloads.unavailableReason(video));
     }
 
     @Test public void eachStoryStaysWithThePlayAreaThatBoundIt() {

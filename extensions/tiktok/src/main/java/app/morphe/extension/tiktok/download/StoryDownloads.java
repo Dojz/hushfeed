@@ -169,11 +169,10 @@ public final class StoryDownloads {
         if (VideoDownloads.start(aweme, context)) return true;
 
         List<List<String>> photos = OriginalPhotos.sources(aweme);
-        List<String> video = photos.isEmpty()
-                ? VideoDownloads.sourceUrls(Reflect.property(aweme, "getVideo", "video"))
-                : Collections.emptyList();
+        Object model = Reflect.property(aweme, "getVideo", "video");
+        List<String> video = photos.isEmpty() ? VideoDownloads.playableSourceUrls(model) : Collections.emptyList();
         if (photos.isEmpty() && video.isEmpty()) {
-            Utils.showToastShort(L10n.t("This story isn't available to save"));
+            Utils.showToastShort(unavailableReason(model));
             return true;
         }
 
@@ -219,6 +218,14 @@ public final class StoryDownloads {
             Utils.showToastLong(L10n.t("The story couldn't be saved. Try again."));
         }
         return true;
+    }
+
+    /** Why a story can't be saved: its only address is a ByteVC2 play address, or there is none. */
+    static String unavailableReason(Object video) {
+        if (!VideoDownloads.sourceUrls(video).isEmpty() && VideoDownloads.playableSourceUrls(video).isEmpty()) {
+            return L10n.t("This story only comes in TikTok's own video format, which other players can't open");
+        }
+        return L10n.t("This story isn't available to save");
     }
 
     private static void saveVideo(Context app, Object aweme, List<String> urls, String audioName) throws IOException {
