@@ -76,7 +76,11 @@ class RegisterLiveness private constructor(private val liveIn: Array<BitSet>) {
             val flow = ControlFlow.of(method)
             val instructions = flow.instructions
             val count = instructions.size
-            val successors = Array(count) { flow.normal[it] + flow.exceptional[it] }
+            // An instruction that throws never writes its destination, so the value its handlers
+            // read is the one the register held before it: their live-in joins after its own
+            // write is taken away, not before. One that can't throw keeps the handlers as plain
+            // successors, which can only make a register look more live.
+            val throwing = BooleanArray(count) { instructions[it].opcode.canThrow() }
 
             val use = Array(count) { BitSet() }
             val def = Array(count) { BitSet() }
@@ -109,8 +113,10 @@ class RegisterLiveness private constructor(private val liveIn: Array<BitSet>) {
                 changed = false
                 for (index in count - 1 downTo 0) {
                     val live = BitSet()
-                    successors[index].forEach { live.or(liveIn[it]) }
+                    flow.normal[index].forEach { live.or(liveIn[it]) }
+                    if (!throwing[index]) flow.exceptional[index].forEach { live.or(liveIn[it]) }
                     live.andNot(def[index])
+                    if (throwing[index]) flow.exceptional[index].forEach { live.or(liveIn[it]) }
                     live.or(use[index])
                     if (live != liveIn[index]) {
                         liveIn[index] = live

@@ -13,10 +13,12 @@ import com.android.tools.smali.dexlib2.immutable.instruction.ImmutableInstructio
 import com.android.tools.smali.dexlib2.immutable.instruction.ImmutableInstruction11n
 import com.android.tools.smali.dexlib2.immutable.instruction.ImmutableInstruction11x
 import com.android.tools.smali.dexlib2.immutable.instruction.ImmutableInstruction21ih
+import com.android.tools.smali.dexlib2.immutable.instruction.ImmutableInstruction22c
 import com.android.tools.smali.dexlib2.immutable.instruction.ImmutableInstruction31t
 import com.android.tools.smali.dexlib2.immutable.instruction.ImmutableInstruction35c
 import com.android.tools.smali.dexlib2.immutable.instruction.ImmutablePackedSwitchPayload
 import com.android.tools.smali.dexlib2.immutable.instruction.ImmutableSwitchElement
+import com.android.tools.smali.dexlib2.immutable.reference.ImmutableFieldReference
 import com.android.tools.smali.dexlib2.immutable.reference.ImmutableMethodReference
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -133,6 +135,37 @@ class RegisterLivenessTest {
         assertEquals(emptySet<Int>(), liveness.liveInto(2))
         assertEquals(setOf(2), liveness.liveInto(3))
         assertEquals(setOf(2), liveness.liveInto(4))
+    }
+
+    @Test
+    fun `a throwing write keeps the old value live for the handler that reads it`() {
+        val box = ImmutableFieldReference("Lcom/example/Box;", "value", "I")
+        val note = ImmutableMethodReference("Lcom/example/Log;", "note", listOf("I"), "V")
+        // 0: const/4 v1, 0          (1 code unit)  address 0
+        // 1: iget v2, v1, Box.value (2)            address 1, in the try: can throw, writes v2
+        // 2: return-void            (1)            address 3, in the try
+        // 3: move-exception v0      (1)            address 4, the handler
+        // 4: invoke-static {v2} note (3)           address 5, the handler reads v2
+        // 5: return-void                           address 8
+        val instructions = listOf(
+            ImmutableInstruction11n(Opcode.CONST_4, 1, 0),
+            ImmutableInstruction22c(Opcode.IGET, 2, 1, box),
+            ImmutableInstruction10x(Opcode.RETURN_VOID),
+            ImmutableInstruction11x(Opcode.MOVE_EXCEPTION, 0),
+            ImmutableInstruction35c(Opcode.INVOKE_STATIC, 1, 2, 0, 0, 0, 0, note),
+            ImmutableInstruction10x(Opcode.RETURN_VOID),
+        )
+        val tryBlock = ImmutableTryBlock(1, 3, listOf(ImmutableExceptionHandler("Ljava/lang/Exception;", 4)))
+        val method = MutableMethod(ImmutableMethod(
+            "Lcom/example/Host;", "run", emptyList(), "V",
+            AccessFlags.PUBLIC.value or AccessFlags.STATIC.value, null, null,
+            ImmutableMethodImplementation(3, instructions, listOf(tryBlock), null),
+        ))
+        val liveness = RegisterLiveness.of(method)
+        // When the iget throws, v2 was never written and the handler reads what it held before,
+        // so a hook must not take v2 as scratch in front of the iget.
+        assertEquals(setOf(1, 2), liveness.liveInto(1))
+        assertEquals(setOf(2), liveness.liveInto(0))
     }
 
     @Test
