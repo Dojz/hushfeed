@@ -778,6 +778,60 @@ public final class Probe extends Instrumentation {
                         Log.i(TAG, "ok hasids" + out);
                         break;
                     }
+                    case "commenteggs": {
+                        // The brand campaign data on the video on screen: how many commerce configs
+                        // it carries (Aweme.commerceConfigDataList), their types, and the comment and
+                        // like easter eggs in them. Hide comment popup ads can only be checked on a
+                        // video with a comment egg, and this finds one. -e triggers 1 adds each comment
+                        // egg's trigger regex, which is the advertiser's word or emoji, never the
+                        // viewer's; without it only counts are logged.
+                        Object aweme = loader.loadClass("app.morphe.extension.tiktok.blockauthor.CurrentVideoAuthor")
+                                .getMethod("getAweme").invoke(null);
+                        if (aweme == null) {
+                            Log.i(TAG, "ok commenteggs aweme=null");
+                            break;
+                        }
+                        Class<?> model = loader.loadClass("com.ss.android.ugc.aweme.feed.model.Aweme");
+                        Object raw = model.getMethod("getCommerceConfigDataList").invoke(aweme);
+                        List<?> configs = raw instanceof List ? (List<?>) raw : Collections.emptyList();
+                        boolean triggers = "1".equals(intent.getStringExtra("triggers"));
+                        StringBuilder out = new StringBuilder(" configs=").append(configs.size());
+                        int commentEggs = 0;
+                        int likeEggs = 0;
+                        for (Object config : configs) {
+                            if (config == null) continue;
+                            Class<?> type = config.getClass();
+                            out.append(" type=").append(type.getMethod("getType").invoke(config));
+                            if (type.getMethod("getItemLikeEggData").invoke(config) != null) likeEggs++;
+                            Object group = type.getMethod("getItemCommentEggGroup").invoke(config);
+                            Object eggs = group == null ? null : group.getClass().getMethod("getCommentEggData").invoke(group);
+                            if (!(eggs instanceof List)) continue;
+                            for (Object egg : (List<?>) eggs) {
+                                if (egg == null) continue;
+                                commentEggs++;
+                                if (triggers) {
+                                    out.append(" trigger=").append(egg.getClass().getMethod("getRegex").invoke(egg));
+                                }
+                            }
+                        }
+                        Log.i(TAG, "ok commenteggs" + out + " commentEggs=" + commentEggs + " likeEggs=" + likeEggs);
+                        break;
+                    }
+                    case "surprisestruct": {
+                        // Builds TikTok's CommentSurpriseStruct around a blank CommentSurprise, the
+                        // way TikTok wraps a brand surprise its server sent with a comment, and says
+                        // what the struct kept. With Hide comment popup ads on, the patched
+                        // constructor drops it, and every popup ad path reads the surprise from here.
+                        Class<?> surpriseType = loader.loadClass("com.ss.android.ugc.aweme.comment.model.CommentSurprise");
+                        Class<?> commentType = loader.loadClass("com.ss.android.ugc.aweme.comment.model.Comment");
+                        Class<?> structType = loader.loadClass("com.ss.android.ugc.aweme.comment.model.CommentSurpriseStruct");
+                        Object surprise = surpriseType.getConstructor().newInstance();
+                        Object struct = structType.getConstructor(commentType, surpriseType, boolean.class)
+                                .newInstance(null, surprise, false);
+                        Object kept = structType.getField("commentSurprise").get(struct);
+                        Log.i(TAG, "ok surprisestruct kept=" + (kept == surprise) + " dropped=" + (kept == null));
+                        break;
+                    }
                     case "fields": {
                         // Static fields of one of Hushfeed's own classes, by name, for checking
                         // what a hook recorded: -e class app.morphe.extension.tiktok.speed.
