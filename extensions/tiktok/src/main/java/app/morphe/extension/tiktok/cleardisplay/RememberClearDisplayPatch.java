@@ -49,6 +49,13 @@ public final class RememberClearDisplayPatch {
      * theirs.
      */
     private static volatile boolean automaticHidden;
+    /**
+     * Whether the live clear state was last set by this patch (remembered or automatic), as
+     * opposed to TikTok's own bar. Only a clear this patch made is undone on an item with no id:
+     * TikTok's own clear mode is the user's in-TikTok choice, and what TikTok does with it on
+     * such an item is TikTok's business.
+     */
+    private static volatile boolean hushfeedCleared;
     private static boolean observingPreferences;
     private static WeakReference<View> window = new WeakReference<>(null);
     private static final SharedPreferences.OnSharedPreferenceChangeListener PREFERENCES = (preferences, key) -> {
@@ -120,12 +127,14 @@ public final class RememberClearDisplayPatch {
             observingPreferences = true;
         }
         if (id == null || id.isEmpty()) {
-            // Never cleared, and TikTok brings its controls back on a new item by itself, so the
-            // live state, which the tab strip hide reads, follows. Left standing it kept TikTok's
-            // top bar away on such an item after a remembered or automatic clear.
+            // Never cleared by this patch, whose clears are per video id. TikTok brings its
+            // controls back on a new item by itself, so the live state, which the tab strip hide
+            // reads, follows; left standing it kept TikTok's top bar away on such an item after
+            // a remembered or automatic clear. A clear mode the user set through TikTok's own
+            // bar is theirs and is left alone here.
             cancel();
             currentId = null;
-            if (clearNow) emit(event, false);
+            if (clearNow && hushfeedCleared) emit(event, false);
             return;
         }
         if (!Settings.AUTOMATIC_CLEAR_DISPLAY.get()) {
@@ -175,6 +184,7 @@ public final class RememberClearDisplayPatch {
         cancel();
         currentId = null;
         clearNow = false;
+        hushfeedCleared = false;
         automaticHidden = false;
         posting = false;
     }
@@ -186,6 +196,7 @@ public final class RememberClearDisplayPatch {
 
     private static void emit(ClearEvent event, boolean clear) {
         clearNow = clear;
+        hushfeedCleared = clear;
         automaticHidden = false;
         posting = true;
         try { event.accept(clear); }
@@ -206,6 +217,8 @@ public final class RememberClearDisplayPatch {
         if ((Integer) type == 3 || (Integer) type == 9) return;
         clearNow = (Boolean) clear;
         if (posting) return;
+        // TikTok's own change: from here the state is the user's, not this patch's.
+        hushfeedCleared = false;
         // TikTok's own change: the state is TikTok's or the user's from here.
         automaticHidden = false;
         cancelOnMain();

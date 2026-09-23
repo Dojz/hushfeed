@@ -218,6 +218,21 @@ public class AutomaticClearDisplayTest {
         assertEquals("the next video lost the remembered choice", List.of(true, false, true), events);
     }
 
+    /**
+     * A clear mode the user set through TikTok's own bar is theirs: an item with no id must not
+     * undo it (refutation review of b5183ca7). Only the clears this patch makes are undone there.
+     */
+    @Test public void tikToksOwnClearModeStaysAcrossAnItemWithNoId() {
+        Settings.AUTOMATIC_CLEAR_DISPLAY.save(false);
+        List<Boolean> events = new ArrayList<>();
+        RememberClearDisplayPatch.rememberClearDisplayEvent(new Event(true, 0));
+        assertTrue(RememberClearDisplayPatch.isClearDisplayNow());
+
+        RememberClearDisplayPatch.firstFrame(null, () -> true, events::add);
+        assertEquals("an item with no id undid TikTok's own clear mode", List.of(), events);
+        assertTrue(RememberClearDisplayPatch.isClearDisplayNow());
+    }
+
     @Test public void theAutomaticPathGivesTheControlsBackOnAnItemWithNoId() {
         List<Boolean> events = new ArrayList<>();
         RememberClearDisplayPatch.firstFrame("one", () -> true, events::add);
