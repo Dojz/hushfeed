@@ -106,8 +106,8 @@ final class AudioDownloads {
             output = MediaCache.createTempFile(app, "sound-", ".m4a");
             TrackMuxer.audioOnly(source, output);
             String path = audioPath(DownloadsPatch.getVideoDownloadPath());
-            MediaFileWriter.publish(app, output, name, "audio/mp4", path, true);
-            Utils.showToastShort(L10n.f("Sound saved to %1$s", path));
+            MediaFileWriter.Saved saved = MediaFileWriter.publishForResult(app, output, name, "audio/mp4", path, true);
+            SaveNotice.saved(L10n.f("Sound saved to %1$s", path), saved);
         } catch (IOException | RuntimeException exception) {
             Logger.printException(() -> "Sound save failed", exception);
             Utils.showToastLong(L10n.t("The sound couldn't be saved. Try again."));
