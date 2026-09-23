@@ -719,6 +719,65 @@ public final class Probe extends Instrumentation {
                         Log.i(TAG, "ok strings" + out);
                         break;
                     }
+                    case "backgrounds": {
+                        // Every shown view under a screen point, outermost first, with its id name
+                        // and what its background paints: -e x 540 -e y 1600. A theme patch that
+                        // changes nothing on a surface needs to know which view draws that surface
+                        // and from what, and a screenshot only gives the colour.
+                        int x = Integer.parseInt(required(intent, "x"));
+                        int y = Integer.parseInt(required(intent, "y"));
+                        StringBuilder out = new StringBuilder();
+                        for (android.view.View root : windowRoots()) {
+                            describeBackgroundsAt(root, x, y, 0, out, root.getResources());
+                        }
+                        String text = out.toString();
+                        int pieces = 0;
+                        for (int at = 0; at < text.length(); at += 3000, pieces++) {
+                            Log.i(TAG, "backgrounds[" + pieces + "] " + text.substring(at, Math.min(text.length(), at + 3000)));
+                        }
+                        Log.i(TAG, "ok backgrounds " + text.length() + " chars in " + pieces + " pieces");
+                        break;
+                    }
+                    case "hasids": {
+                        // Whether views with the named ids are in the current windows and shown:
+                        // -e names f7u,fo,d4. Each name is looked up in TikTok's own package and
+                        // in the search module's (visual search lives there), and each id found
+                        // is reported as views/shown. One walk for all of them, so a scan over
+                        // hundreds of videos costs one round trip a video.
+                        android.app.Activity activity = (android.app.Activity) loader.loadClass(UTILS)
+                                .getMethod("getActivity").invoke(null);
+                        if (activity == null) throw new IllegalStateException("no current activity");
+                        android.content.res.Resources resources = activity.getResources();
+                        String app = activity.getPackageName();
+                        java.util.LinkedHashMap<Integer, String> wanted = new java.util.LinkedHashMap<>();
+                        for (String name : required(intent, "names").split(",")) {
+                            for (String pkg : new String[]{app, app + ".df_search_biz"}) {
+                                int id = resources.getIdentifier(name.trim(), "id", pkg);
+                                if (id != 0) wanted.put(id, name.trim() + (pkg.equals(app) ? "" : "@search"));
+                            }
+                        }
+                        java.util.Map<Integer, int[]> counts = new java.util.HashMap<>();
+                        java.util.ArrayDeque<android.view.View> pending = new java.util.ArrayDeque<>(windowRoots());
+                        while (!pending.isEmpty()) {
+                            android.view.View view = pending.removeFirst();
+                            if (wanted.containsKey(view.getId())) {
+                                int[] count = counts.computeIfAbsent(view.getId(), key -> new int[2]);
+                                count[0]++;
+                                if (view.isShown() && view.getWidth() > 0 && view.getHeight() > 0) count[1]++;
+                            }
+                            if (view instanceof android.view.ViewGroup) {
+                                android.view.ViewGroup group = (android.view.ViewGroup) view;
+                                for (int i = 0; i < group.getChildCount(); i++) pending.add(group.getChildAt(i));
+                            }
+                        }
+                        StringBuilder out = new StringBuilder();
+                        for (java.util.Map.Entry<Integer, String> entry : wanted.entrySet()) {
+                            int[] count = counts.getOrDefault(entry.getKey(), new int[2]);
+                            out.append(' ').append(entry.getValue()).append('=').append(count[0]).append('/').append(count[1]);
+                        }
+                        Log.i(TAG, "ok hasids" + out);
+                        break;
+                    }
                     case "fields": {
                         // Static fields of one of Hushfeed's own classes, by name, for checking
                         // what a hook recorded: -e class app.morphe.extension.tiktok.speed.
@@ -1021,6 +1080,69 @@ public final class Probe extends Instrumentation {
             String value = intent.getStringExtra(name);
             if (value == null) throw new IllegalArgumentException("-e " + name + " is required");
             return value;
+        }
+
+        /** One line for each shown view under x,y, from this view down: its class, id, bounds and background. */
+        private static void describeBackgroundsAt(android.view.View view, int x, int y, int depth,
+                StringBuilder out, android.content.res.Resources resources) {
+            if (!view.isShown()) return;
+            int[] where = new int[2];
+            view.getLocationOnScreen(where);
+            if (x < where[0] || y < where[1] || x >= where[0] + view.getWidth() || y >= where[1] + view.getHeight()) return;
+            android.graphics.drawable.Drawable background = view.getBackground();
+            out.append(depth).append(' ').append(view.getClass().getName())
+                    .append(" id=").append(idName(view, resources))
+                    .append(" at=").append(where[0]).append(',').append(where[1])
+                    .append(" size=").append(view.getWidth()).append('x').append(view.getHeight())
+                    .append(" bg=").append(describeDrawable(background, 0));
+            if (view.getBackgroundTintList() != null) {
+                out.append(" tint=").append(Integer.toHexString(view.getBackgroundTintList().getDefaultColor()));
+            }
+            out.append('\n');
+            if (view instanceof android.view.ViewGroup) {
+                android.view.ViewGroup group = (android.view.ViewGroup) view;
+                for (int i = 0; i < group.getChildCount(); i++) {
+                    describeBackgroundsAt(group.getChildAt(i), x, y, depth + 1, out, resources);
+                }
+            }
+        }
+
+        /** A drawable's class and whatever colour it will say, layers and states included. */
+        private static String describeDrawable(android.graphics.drawable.Drawable drawable, int depth) {
+            if (drawable == null) return "none";
+            StringBuilder out = new StringBuilder(drawable.getClass().getSimpleName());
+            if (drawable instanceof android.graphics.drawable.ColorDrawable) {
+                out.append('#').append(Integer.toHexString(((android.graphics.drawable.ColorDrawable) drawable).getColor()));
+            } else if (drawable instanceof android.graphics.drawable.GradientDrawable) {
+                android.content.res.ColorStateList colors = ((android.graphics.drawable.GradientDrawable) drawable).getColor();
+                out.append('#').append(colors == null ? "none" : Integer.toHexString(colors.getDefaultColor()));
+            } else if (drawable instanceof android.graphics.drawable.LayerDrawable && depth < 3) {
+                android.graphics.drawable.LayerDrawable layers = (android.graphics.drawable.LayerDrawable) drawable;
+                out.append('[');
+                for (int i = 0; i < layers.getNumberOfLayers(); i++) {
+                    out.append(i == 0 ? "" : ", ").append(describeDrawable(layers.getDrawable(i), depth + 1));
+                }
+                out.append(']');
+            } else if (drawable instanceof android.graphics.drawable.DrawableContainer && depth < 3) {
+                out.append('{').append(describeDrawable(drawable.getCurrent(), depth + 1)).append('}');
+            } else {
+                // Material and TikTok's own shape drawables keep the fill behind a getter.
+                for (String getter : new String[]{"getFillColor", "getColor", "getBackgroundColor"}) {
+                    try {
+                        Object value = drawable.getClass().getMethod(getter).invoke(drawable);
+                        if (value instanceof android.content.res.ColorStateList) {
+                            value = ((android.content.res.ColorStateList) value).getDefaultColor();
+                        }
+                        if (value instanceof Integer) {
+                            out.append(' ').append(getter).append("=#").append(Integer.toHexString((Integer) value));
+                            break;
+                        }
+                    } catch (ReflectiveOperationException | RuntimeException ignored) {
+                        // Not this getter.
+                    }
+                }
+            }
+            return out.toString();
         }
 
         /** The resource entry name of a view's id, the raw number for an id without one. */
