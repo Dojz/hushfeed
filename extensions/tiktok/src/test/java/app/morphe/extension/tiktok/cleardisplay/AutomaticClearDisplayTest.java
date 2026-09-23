@@ -178,6 +178,30 @@ public class AutomaticClearDisplayTest {
      * itself (S22, 2026-09-23), and the live state has to say so, or the tab strip hide keeps
      * TikTok's top strip away with the feature off. Once shown, later videos ask nothing more.
      */
+    /**
+     * The switch-off branch ran only for items with an id, so an ad or a LIVE card (no id) left
+     * the controls hidden and the tab strip hide kept TikTok's top bar away there. It gives the
+     * controls back to any item now; clearing still needs an id.
+     */
+    @Test public void switchingTheAutomaticPathOffGivesTheControlsBackOnAnItemWithNoId() {
+        List<Boolean> events = new ArrayList<>();
+        RememberClearDisplayPatch.firstFrame("one", () -> true, events::add);
+        Shadows.shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(1000));
+        assertTrue("the fixture never cleared", RememberClearDisplayPatch.isClearDisplayNow());
+
+        Settings.AUTOMATIC_CLEAR_DISPLAY.save(false);
+        events.clear();
+        RememberClearDisplayPatch.firstFrame(null, () -> true, events::add);
+        assertEquals("an item with no id kept the controls hidden", List.of(false), events);
+        assertFalse(RememberClearDisplayPatch.isClearDisplayNow());
+
+        // A remembered clear display still needs an id to clear.
+        Settings.CLEAR_DISPLAY.save(true);
+        events.clear();
+        RememberClearDisplayPatch.firstFrame("", () -> true, events::add);
+        assertEquals("an item with no id was cleared", List.of(), events);
+    }
+
     @Test public void switchingTheAutomaticPathOffShowsTheControlsOnTheNextVideo() {
         List<Boolean> events = new ArrayList<>();
         RememberClearDisplayPatch.firstFrame("one", () -> true, events::add);
