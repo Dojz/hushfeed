@@ -857,6 +857,9 @@ public final class Probe extends Instrumentation {
                                 for (int i = 0; i < group.getChildCount(); i++) pending.add(group.getChildAt(i));
                             }
                         }
+                        // An id this build lacks must not read the same as no caption on screen.
+                        if (strip == 0) out.append(" dlk=missing");
+                        if (text == 0) out.append(" dlr=missing");
                         Log.i(TAG, "ok captionstate" + (out.length() == 0 ? " none" : out.toString()));
                         break;
                     }
@@ -1886,10 +1889,19 @@ public final class Probe extends Instrumentation {
             shape.put("commercialVideoInfo", token(read(property, video, "getCommercialVideoInfo", "commercialVideoInfo")));
             shape.put("isPaidContent", token(read(property, video, "isPaidContent", "isPaidContent")));
             Object paidInfo = read(property, video, "getMPaidContentInfo", "mPaidContentInfo");
-            shape.put("mPaidContentInfo", struct(paidInfo,
+            Object paidShape = struct(paidInfo,
                     property, "getPaidCollectionId", "paidCollectionId", "getCollectionName", "collectionName",
                     "getEpisodeNumber", "episodeNumber", "isPaidCollectionIntro", "isPaidCollectionIntro",
-                    "isLimitedFreeShortDrama", "isLimitedFreeShortDrama", "getMiniDramaInfo", "miniDramaInfo"));
+                    "isLimitedFreeShortDrama", "isLimitedFreeShortDrama", "getMiniDramaInfo", "miniDramaInfo");
+            // The Series category is compared with one value (MINI_DRAMA, 1), so it is kept exactly.
+            if (paidShape instanceof JSONObject) {
+                ((JSONObject) paidShape).put("category", exact(read(property, paidInfo, "getCategory", "category")));
+            }
+            shape.put("mPaidContentInfo", paidShape);
+            // The inserted card's type is compared with one value too (92 is a drama card).
+            Object insert = read(property, video, "getCardInsertInfo", "cardInsertInfo");
+            shape.put("cardInsertInfo", insert == null ? JSONObject.NULL
+                    : new JSONObject().put("cardType", exact(read(property, insert, "getCardType", "cardType"))));
             // The drama card hangs off PaidContentInfo. It is recorded as a field of its own so a
             // shape stays one struct deep.
             shape.put("miniDramaCardInfo", struct(paidInfo == null ? null
@@ -1912,6 +1924,20 @@ public final class Probe extends Instrumentation {
             JSONObject out = new JSONObject();
             for (int i = 0; i < pairs.length; i += 2) out.put(pairs[i + 1], token(read(property, value, pairs[i], pairs[i + 1])));
             return out;
+        }
+
+        /**
+         * A small whole number kept as it is, for the enum-like values a filter compares with one
+         * value. Anything else falls back to the ordinary token.
+         */
+        private static Object exact(Object value) throws Exception {
+            if (value instanceof Number) {
+                Number number = (Number) value;
+                if (Math.abs(number.longValue()) <= 10_000L && number.doubleValue() == number.longValue()) {
+                    return new JSONObject().put("n", number.longValue());
+                }
+            }
+            return token(value);
         }
 
         /** One value as a typed token that keeps what the filters test and drops what identifies. */
