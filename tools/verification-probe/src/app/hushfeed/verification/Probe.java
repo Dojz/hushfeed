@@ -569,9 +569,18 @@ public final class Probe extends Instrumentation {
                         Object language = aweme.getClass().getMethod("getDescLanguage").invoke(aweme);
                         Object translatable = aweme.getClass().getMethod("isDescTranslatable").invoke(aweme);
                         Object desc = aweme.getClass().getMethod("getDesc").invoke(aweme);
+                        // A photo post the way Hushfeed's photo filter tells one, and the video's
+                        // length (TikTok draws a seek bar on long ones).
+                        Object images = aweme.getClass().getMethod("getImageInfos").invoke(aweme);
+                        boolean photo = (images instanceof java.util.Collection && !((java.util.Collection<?>) images).isEmpty())
+                                || aweme.getClass().getMethod("getPhotoModeImageInfo").invoke(aweme) != null
+                                || aweme.getClass().getMethod("getPhotoModeTextInfo").invoke(aweme) != null;
+                        Object video = aweme.getClass().getMethod("getVideo").invoke(aweme);
+                        Object duration = video == null ? null : video.getClass().getMethod("getDuration").invoke(video);
                         Log.i(TAG, "ok videoinfo descLanguage=" + language
                                 + " descTranslatable=" + translatable
-                                + " hasDesc=" + (desc != null && String.valueOf(desc).trim().length() > 0));
+                                + " hasDesc=" + (desc != null && String.valueOf(desc).trim().length() > 0)
+                                + " photo=" + photo + " durationMs=" + duration);
                         break;
                     }
                     case "textviews": {
@@ -808,6 +817,198 @@ public final class Probe extends Instrumentation {
                                 .newInstance(null, surprise, false);
                         Object kept = structType.getField("commentSurprise").get(struct);
                         Log.i(TAG, "ok surprisestruct kept=" + (kept == surprise) + " dropped=" + (kept == null));
+                        break;
+                    }
+                    case "pagerwatch": {
+                        // Watches TikTok's main pager (the one a left swipe slides to the creator's
+                        // profile: its class chain alone declares setPagingMainValve). Adds a page
+                        // change listener through the pager's own add method, never the setter that
+                        // would replace TikTok's, and logs each scroll state change and page
+                        // selection with the stack that caused it, so the path that moves the pager
+                        // can be read off a real swipe.
+                        android.view.View pager = null;
+                        java.util.ArrayDeque<android.view.View> queue = new java.util.ArrayDeque<>(windowRoots());
+                        while (!queue.isEmpty() && pager == null) {
+                            android.view.View view = queue.removeFirst();
+                            for (Class<?> c = view.getClass(); c != null && pager == null; c = c.getSuperclass()) {
+                                for (Method m : c.getDeclaredMethods()) {
+                                    if (m.getName().equals("setPagingMainValve")) { pager = view; break; }
+                                }
+                            }
+                            if (view instanceof android.view.ViewGroup) {
+                                android.view.ViewGroup group = (android.view.ViewGroup) view;
+                                for (int i = 0; i < group.getChildCount(); i++) queue.add(group.getChildAt(i));
+                            }
+                        }
+                        if (pager == null) throw new IllegalStateException("no main pager on screen");
+                        // The listener type is setOnPageChangeListener's parameter; the list the pager
+                        // tells every added listener from is its one CopyOnWriteArrayList field. Adding
+                        // to that list leaves TikTok's own listeners where they are.
+                        Class<?> listenerType = null;
+                        Field listeners = null;
+                        for (Class<?> c = pager.getClass(); c != null; c = c.getSuperclass()) {
+                            for (Method m : c.getDeclaredMethods()) {
+                                if (listenerType == null && m.getName().equals("setOnPageChangeListener")
+                                        && m.getParameterTypes().length == 1) {
+                                    listenerType = m.getParameterTypes()[0];
+                                }
+                            }
+                            for (Field f : c.getDeclaredFields()) {
+                                if (listeners == null && f.getType() == java.util.concurrent.CopyOnWriteArrayList.class) {
+                                    listeners = f;
+                                }
+                            }
+                        }
+                        if (listenerType == null || listeners == null) {
+                            throw new IllegalStateException("no listener type or list: " + listenerType + ", " + listeners);
+                        }
+                        final android.view.View watched = pager;
+                        Object proxy = java.lang.reflect.Proxy.newProxyInstance(listenerType.getClassLoader(),
+                                new Class<?>[]{listenerType}, (self, method, args) -> {
+                                    if (method.getDeclaringClass() == Object.class) {
+                                        return method.getName().equals("equals") ? self == args[0]
+                                                : method.getName().equals("hashCode") ? System.identityHashCode(self)
+                                                : "pagerwatch";
+                                    }
+                                    if (args != null && args.length == 1 && args[0] instanceof Integer) {
+                                        StringBuilder stack = new StringBuilder();
+                                        StackTraceElement[] frames = Thread.currentThread().getStackTrace();
+                                        for (int i = 3; i < Math.min(frames.length, 40); i++) {
+                                            stack.append("\n    ").append(frames[i].getClassName()).append('.')
+                                                    .append(frames[i].getMethodName());
+                                        }
+                                        Log.i(TAG, "pagerwatch " + method.getName() + "(" + args[0] + ") on "
+                                                + watched.getClass().getName() + stack);
+                                    }
+                                    return null;
+                                });
+                        listeners.setAccessible(true);
+                        @SuppressWarnings("unchecked")
+                        java.util.concurrent.CopyOnWriteArrayList<Object> list =
+                                (java.util.concurrent.CopyOnWriteArrayList<Object>) listeners.get(pager);
+                        if (list == null) {
+                            list = new java.util.concurrent.CopyOnWriteArrayList<>();
+                            listeners.set(pager, list);
+                        }
+                        list.add(proxy);
+                        Log.i(TAG, "ok pagerwatch on " + pager.getClass().getName() + " via " + listeners.getName()
+                                + " (" + list.size() + " listeners) for " + listenerType.getName());
+                        break;
+                    }
+                    case "pagertouch": {
+                        // Every touch TikTok's main pager dispatches, and every intercept check it
+                        // makes past touch slop, as its own listeners see them: adds a logging
+                        // listener to the list its getOnInterceptTouchEventListeners returns (the
+                        // pager calls that list's dispatchTouchEvent on each event and G2 on each
+                        // intercept check). One line an event: method, action, x, y.
+                        android.view.View pager = null;
+                        java.util.ArrayDeque<android.view.View> queue = new java.util.ArrayDeque<>(windowRoots());
+                        while (!queue.isEmpty() && pager == null) {
+                            android.view.View view = queue.removeFirst();
+                            for (Class<?> c = view.getClass(); c != null && pager == null; c = c.getSuperclass()) {
+                                for (Method m : c.getDeclaredMethods()) {
+                                    if (m.getName().equals("getOnInterceptTouchEventListeners")) { pager = view; break; }
+                                }
+                            }
+                            if (view instanceof android.view.ViewGroup) {
+                                android.view.ViewGroup group = (android.view.ViewGroup) view;
+                                for (int i = 0; i < group.getChildCount(); i++) queue.add(group.getChildAt(i));
+                            }
+                        }
+                        if (pager == null) throw new IllegalStateException("no main pager on screen");
+                        Method getter = null;
+                        for (Class<?> c = pager.getClass(); c != null && getter == null; c = c.getSuperclass()) {
+                            for (Method m : c.getDeclaredMethods()) {
+                                if (m.getName().equals("getOnInterceptTouchEventListeners")) getter = m;
+                            }
+                        }
+                        getter.setAccessible(true);
+                        @SuppressWarnings("unchecked")
+                        java.util.List<Object> touchListeners = (java.util.List<Object>) getter.invoke(pager);
+                        Class<?> touchType = null;
+                        for (Object existing : touchListeners) {
+                            for (Class<?> i : existing.getClass().getInterfaces()) {
+                                for (Method m : i.getDeclaredMethods()) {
+                                    if (m.getName().equals("dispatchTouchEvent")) touchType = i;
+                                }
+                            }
+                        }
+                        if (touchType == null) throw new IllegalStateException("no listener interface among " + touchListeners.size());
+                        Object touchProxy = java.lang.reflect.Proxy.newProxyInstance(touchType.getClassLoader(),
+                                new Class<?>[]{touchType}, (self, method, args) -> {
+                                    if (method.getDeclaringClass() == Object.class) {
+                                        return method.getName().equals("equals") ? self == args[0]
+                                                : method.getName().equals("hashCode") ? System.identityHashCode(self)
+                                                : "pagertouch";
+                                    }
+                                    if (args != null && args.length > 0 && args[0] instanceof android.view.MotionEvent) {
+                                        android.view.MotionEvent e = (android.view.MotionEvent) args[0];
+                                        Log.i(TAG, "pagertouch " + method.getName() + " action=" + e.getActionMasked()
+                                                + " x=" + (int) e.getX() + " y=" + (int) e.getY());
+                                    }
+                                    return method.getReturnType() == boolean.class ? Boolean.FALSE : null;
+                                });
+                        touchListeners.add(touchProxy);
+                        Log.i(TAG, "ok pagertouch on " + pager.getClass().getName() + " for " + touchType.getName()
+                                + " (" + touchListeners.size() + " listeners)");
+                        break;
+                    }
+                    case "pagerstate": {
+                        // TikTok's main pager: its current item, its adapter's page count, and each
+                        // page laid out in it (left edge, width, class) with whether it holds the
+                        // vertical feed pager, so which index is the feed can be read, not assumed.
+                        android.view.View pager = null;
+                        java.util.ArrayDeque<android.view.View> queue = new java.util.ArrayDeque<>(windowRoots());
+                        while (!queue.isEmpty() && pager == null) {
+                            android.view.View view = queue.removeFirst();
+                            for (Class<?> c = view.getClass(); c != null && pager == null; c = c.getSuperclass()) {
+                                for (Method m : c.getDeclaredMethods()) {
+                                    if (m.getName().equals("setPagingMainValve")) { pager = view; break; }
+                                }
+                            }
+                            if (view instanceof android.view.ViewGroup) {
+                                android.view.ViewGroup group = (android.view.ViewGroup) view;
+                                for (int i = 0; i < group.getChildCount(); i++) queue.add(group.getChildAt(i));
+                            }
+                        }
+                        if (pager == null) throw new IllegalStateException("no main pager on screen");
+                        Object current = pager.getClass().getMethod("getCurrentItem").invoke(pager);
+                        Object adapter = pager.getClass().getMethod("getAdapter").invoke(pager);
+                        Object count = adapter == null ? null : adapter.getClass().getMethod("getCount").invoke(adapter);
+                        StringBuilder out = new StringBuilder(" current=").append(current)
+                                .append(" count=").append(count)
+                                .append(" adapter=").append(adapter == null ? null : adapter.getClass().getName())
+                                .append(" width=").append(pager.getWidth()).append(" scrollX=").append(pager.getScrollX());
+                        // Every boolean the pager's own classes declare (its paging valve and the
+                        // flags its page-enabled check reads among them), class by class.
+                        for (Class<?> c = pager.getClass(); c != null && c != android.view.ViewGroup.class; c = c.getSuperclass()) {
+                            StringBuilder flags = new StringBuilder();
+                            for (Field field : c.getDeclaredFields()) {
+                                if (field.getType() != boolean.class || java.lang.reflect.Modifier.isStatic(field.getModifiers())) continue;
+                                field.setAccessible(true);
+                                flags.append(' ').append(field.getName()).append('=').append(field.getBoolean(pager));
+                            }
+                            if (flags.length() > 0) out.append("\n  flags ").append(c.getName()).append(':').append(flags);
+                        }
+                        android.view.ViewGroup group = (android.view.ViewGroup) pager;
+                        for (int i = 0; i < group.getChildCount(); i++) {
+                            android.view.View child = group.getChildAt(i);
+                            boolean feed = false;
+                            java.util.ArrayDeque<android.view.View> inside = new java.util.ArrayDeque<>();
+                            inside.add(child);
+                            while (!inside.isEmpty() && !feed) {
+                                android.view.View v = inside.removeFirst();
+                                feed = v.getClass().getName().endsWith("VerticalViewPager");
+                                if (v instanceof android.view.ViewGroup) {
+                                    android.view.ViewGroup g = (android.view.ViewGroup) v;
+                                    for (int j = 0; j < g.getChildCount(); j++) inside.add(g.getChildAt(j));
+                                }
+                            }
+                            out.append("\n  child ").append(i).append(' ').append(child.getClass().getName())
+                                    .append(" left=").append(child.getLeft()).append(" width=").append(child.getWidth())
+                                    .append(feed ? " holds the vertical feed" : "");
+                        }
+                        Log.i(TAG, "ok pagerstate" + out);
                         break;
                     }
                     case "captionstate": {
