@@ -64,10 +64,12 @@ val amoledThemePatch = resourcePatch(
                 }
             }
         }
-        // The comments sheet and the share sheet never touch colors.xml: the sheet shape's
-        // fill is attr/a1b, which the dark themes send to attr/agk, and every value agk has is
-        // a literal inside a <style>. The share panel's fill is attr/p7 -> attr/c3, the same
-        // way. Only a dark literal is rewritten, so a light style's white stays white.
+        // The comments sheet and the share sheet never touch colors.xml. On 47.0.3 both fill
+        // with attr/a24 (the comment page's af4/af9 shapes, and the Tux sheet's background
+        // attribute b79), which the dark themes send to attr/aia, and every value aia has is a
+        // literal inside a <style>. 46.x reached the same sheets through agk (comments) and c3
+        // (share), which 47.0.3 keeps as dark surface tokens of their own. Only a dark literal
+        // is rewritten, so a light style's white stays white.
         valuesDirectories.map { it.resolve("styles.xml") }.filter { it.exists() }.forEach { file ->
             document(file.relativeTo(get(".")).invariantSeparatorsPath).use { xml ->
                 styleItemsFound += rewriteDarkStyleItems(xml, SHEET_STYLE_ITEMS, color)
@@ -148,8 +150,12 @@ internal fun checkSheetStyleItems(found: Set<String>, versionName: String?, decl
     if (found.isEmpty()) throw PatchException("No dark sheet style item was found on $versionName")
 }
 
-/** The style items behind the comments sheet (agk) and share sheet (c3) through 47.0.3. */
-internal val SHEET_STYLE_ITEMS = setOf("agk", "c3")
+/**
+ * The dark tokens behind TikTok's sheets: aia, which both the comment panel and the share sheet
+ * reach on 47.0.3 through attr/a24 (AmoledSheetTokensTest), and agk and c3, which were the
+ * comments and share sheets' own through 46.x and are dark surfaces of their own on 47.0.3.
+ */
+internal val SHEET_STYLE_ITEMS = setOf("agk", "c3", "aia")
 
 /**
  * Sets every `<item name="...">` in the named set whose value is a dark opaque colour literal
