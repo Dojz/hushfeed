@@ -87,6 +87,39 @@ public class CaptionToolsTest {
         assertEquals(Color.BLUE, ((ColorDrawable) background.getBackground()).getColor());
         assertSame(original, CaptionStyle.layout(original));
     }
+    /**
+     * A bigger size kept TikTok's measured width and split words: "conditio" over "ns." at 28 on
+     * the S22. The layout grows with the text now, up to four fifths of the screen, and a line too
+     * long for that wraps at a space.
+     */
+    @Test public void aBiggerCaptionWrapsBetweenWordsNotInsideThem() {
+        TextPaint paint = new TextPaint();
+        paint.setTextSize(16);
+        String word = "conditions";
+        Layout original = new StaticLayout(word, paint, (int) Math.ceil(Layout.getDesiredWidth(word, paint)),
+                Layout.Alignment.ALIGN_CENTER, 1, 0, true);
+        Settings.CAPTION_TEXT_SIZE.save(28);
+        Layout styled = CaptionStyle.layout(original);
+        assertEquals("the word was split across lines", 1, styled.getLineCount());
+        int cap = Math.round(Utils.getContext().getResources().getDisplayMetrics().widthPixels * 0.8f);
+        assertTrue("wider than the strip may be: " + styled.getWidth(), styled.getWidth() <= cap);
+
+        // TikTok lays a long caption out within its strip, so the column it hands over is never
+        // wider than the strip may be; half the cap is a column like that.
+        String sentence = "the weather conditions stay unsettled through the weekend across the whole region";
+        Layout line = new StaticLayout(sentence, paint, cap / 2, Layout.Alignment.ALIGN_CENTER, 1, 0, true);
+        assertTrue("the fixture's column holds the sentence on one line", line.getLineCount() > 1);
+        Layout wrapped = CaptionStyle.layout(line);
+        assertTrue("the sentence stopped wrapping at the new size", wrapped.getLineCount() > 1);
+        assertTrue(wrapped.getWidth() <= cap);
+        for (int i = 0; i < wrapped.getLineCount() - 1; i++) {
+            int end = wrapped.getLineEnd(i);
+            assertEquals("line " + i + " broke inside a word", ' ', sentence.charAt(end - 1));
+        }
+        Settings.CAPTION_TEXT_SIZE.save(0);
+        assertSame(original, CaptionStyle.layout(original));
+    }
+
     @Test public void aBuildWithoutTheCaptionIdsSaysSoOnTheHookStatusRow() {
         HookStatus.clear();
         // What a reshuffled resource table looks like from here: the names resolve to nothing.

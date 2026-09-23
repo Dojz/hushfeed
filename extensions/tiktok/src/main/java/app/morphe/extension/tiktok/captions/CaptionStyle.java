@@ -74,9 +74,25 @@ public final class CaptionStyle {
         android.content.Context context = Utils.getContext();
         if (context == null) return original;
         TextPaint paint = new TextPaint(original.getPaint());
-        paint.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, size, context.getResources().getDisplayMetrics()));
-        return new StaticLayout(original.getText(), paint, Math.max(1, original.getWidth()),
+        android.util.DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        paint.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, size, metrics));
+        int width = width(original.getWidth(), original.getPaint().getTextSize(), paint.getTextSize(), metrics.widthPixels);
+        return new StaticLayout(original.getText(), paint, width,
                 original.getAlignment(), original.getSpacingMultiplier(), original.getSpacingAdd(), true);
+    }
+
+    /**
+     * The width a caption gets at the chosen size. TikTok hands over the width it measured for
+     * its own smaller text, and kept as it was, a bigger size wrapped into that narrow column and
+     * split words ("conditio" over "ns." at 28 on the S22). It grows with the text, so the lines
+     * break where TikTok's did, up to four fifths of the screen, which keeps the strip clear of
+     * the side rail; past that, lines wrap between words.
+     */
+    static int width(int measured, float from, float to, int screen) {
+        int base = Math.max(1, measured);
+        if (from <= 0 || to <= from) return base;
+        int grown = (int) Math.ceil(base * (double) to / from);
+        return Math.min(grown, Math.max(base, Math.round(screen * 0.8f)));
     }
 
     static void apply(View root) {
