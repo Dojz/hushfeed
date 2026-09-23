@@ -13,6 +13,7 @@ import app.morphe.extension.shared.settings.preference.LogBufferManager;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -102,9 +103,8 @@ public final class NetworkRequests implements LogBufferManager.ReportSection {
     /** The last two labels, or three where the second-to-last is a short second level (co.jp). */
     static String domain(String[] labels) {
         int n = labels.length;
-        if (n <= 2) return String.join(".", labels);
-        boolean secondLevel = labels[n - 1].length() == 2 && labels[n - 2].length() <= 3;
-        int keep = secondLevel ? 3 : 2;
+        boolean secondLevel = n > 2 && labels[n - 1].length() == 2 && labels[n - 2].length() <= 3;
+        int keep = Math.min(n, secondLevel ? 3 : 2);
         StringBuilder out = new StringBuilder();
         for (int i = n - keep; i < n; i++) {
             if (out.length() > 0) out.append('.');
@@ -140,7 +140,8 @@ public final class NetworkRequests implements LogBufferManager.ReportSection {
         }
         List<String> lines = new ArrayList<>();
         if (entries.isEmpty()) return lines;
-        entries.sort((a, b) -> Long.compare(b.getValue()[0], a.getValue()[0]));
+        // Collections.sort, not List.sort: the payload's floor is API 23.
+        Collections.sort(entries, (a, b) -> Long.compare(b.getValue()[0], a.getValue()[0]));
         lines.add("TikTok's own API client since this start; downloads and other companies' SDKs are not counted");
         for (Map.Entry<String, long[]> entry : entries) {
             long[] count = entry.getValue();
