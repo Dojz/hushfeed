@@ -577,10 +577,50 @@ public final class Probe extends Instrumentation {
                                 || aweme.getClass().getMethod("getPhotoModeTextInfo").invoke(aweme) != null;
                         Object video = aweme.getClass().getMethod("getVideo").invoke(aweme);
                         Object duration = video == null ? null : video.getClass().getMethod("getDuration").invoke(video);
+                        // The facts the feed filters decide by, read the way TikTok's model
+                        // offers them, as yes or no: a verified author, an AI label, a LIVE
+                        // item, a sound named "original sound". No names and no ids.
+                        Object creator = optional(aweme, "getAuthor");
+                        Object verificationType = optional(creator, "getVerificationType");
+                        boolean verified = (verificationType instanceof Number && ((Number) verificationType).intValue() != 0)
+                                || !blank(optional(creator, "getCustomVerify"))
+                                || !blank(optional(creator, "getEnterpriseVerifyReason"));
+                        Object aigc = optional(aweme, "getAigcInfo");
+                        Object aigcLabel = optional(aigc, "getAIGCLabelType");
+                        Object moderation = optional(aweme, "getModerationAigcInfo");
+                        Object moderationLabel = optional(moderation, "getModerationAigcLabelType");
+                        Object moderationStatus = optional(moderation, "getModerationUserLabelStatus");
+                        boolean aiLabel = (aigcLabel instanceof Number && ((Number) aigcLabel).intValue() != 0)
+                                || (moderationLabel instanceof Number && ((Number) moderationLabel).longValue() != 0)
+                                || (moderationStatus instanceof Number && ((Number) moderationStatus).longValue() != 0);
+                        // TikTok 47.0.3 reports a profile view only for an account of 5,000
+                        // followers or fewer: a bucket, not the count.
+                        Object followerCount = optional(creator, "getFollowerCount");
+                        String followers = !(followerCount instanceof Number) ? "unknown"
+                                : ((Number) followerCount).intValue() <= 0 ? "zero"
+                                : ((Number) followerCount).intValue() <= 5000 ? "5000orFewer" : "over5000";
+                        // The feed leaves the author's follower count at zero (only the profile
+                        // fills it), so the video's likes stand in for a small creator: a bucket.
+                        Object digg = optional(optional(aweme, "getStatistics"), "getDiggCount");
+                        String likes = !(digg instanceof Number) ? "unknown"
+                                : ((Number) digg).longValue() <= 100 ? "100orFewer"
+                                : ((Number) digg).longValue() <= 1000 ? "1000orFewer" : "over1000";
+                        Object awemeType = optional(aweme, "getAwemeType");
+                        Object liveId = optional(aweme, "getLiveId");
+                        Object music = optional(aweme, "getMusic");
+                        Object soundName = optional(music, "getMusicName");
+                        if (blank(soundName)) soundName = optional(music, "getTitle");
+                        boolean originalSound = !blank(soundName)
+                                && String.valueOf(soundName).toLowerCase(java.util.Locale.ROOT).contains("original sound");
                         Log.i(TAG, "ok videoinfo descLanguage=" + language
                                 + " descTranslatable=" + translatable
                                 + " hasDesc=" + (desc != null && String.valueOf(desc).trim().length() > 0)
-                                + " photo=" + photo + " durationMs=" + duration);
+                                + " photo=" + photo + " durationMs=" + duration
+                                + " verified=" + verified + " aiLabel=" + aiLabel + " authorFollowers=" + followers
+                                + " likes=" + likes
+                                + " awemeType=" + awemeType
+                                + " live=" + (liveId instanceof Number && ((Number) liveId).longValue() > 0)
+                                + " originalSound=" + originalSound);
                         break;
                     }
                     case "textviews": {
@@ -601,6 +641,124 @@ public final class Probe extends Instrumentation {
                             Log.i(TAG, "textviews[" + pieces + "] " + text.substring(at, Math.min(text.length(), at + 3000)));
                         }
                         Log.i(TAG, "ok textviews " + text.length() + " chars in " + pieces + " pieces");
+                        break;
+                    }
+                    case "profileviewgates": {
+                        // What TikTok 47.0.3 checks before it reports a profile view
+                        // (ProfilePlatformViewModel.a73 before ProfileViewerApiService.reportView),
+                        // read in this process: the feature gate X.0mpc.LIZ(), the under-16 flag,
+                        // the viewer's "profile_view_history" privacy value (1 reports), the
+                        // cooldown flag X.0mD8 and the follower cap it replaces. Names are this
+                        // build's; each read says what it found or why it could not.
+                        StringBuilder out = new StringBuilder();
+                        String[][] reads = {
+                                {"featureGate", "X.0mpc", "LIZ"},
+                        };
+                        for (String[] read : reads) {
+                            try {
+                                out.append(' ').append(read[0]).append('=')
+                                        .append(loader.loadClass(read[1]).getMethod(read[2]).invoke(null));
+                            } catch (Throwable failure) {
+                                out.append(' ').append(read[0]).append("=?(").append(failure.getClass().getSimpleName()).append(')');
+                            }
+                        }
+                        try {
+                            Object feature = loader.loadClass("X.07So").getMethod("LIZIZ").invoke(null);
+                            out.append(" under16=").append(feature.getClass().getMethod("LIZIZ").invoke(feature));
+                        } catch (Throwable failure) {
+                            out.append(" under16=?(").append(failure.getClass().getSimpleName()).append(')');
+                        }
+                        try {
+                            Class<?> managerType = loader.loadClass("com.ss.android.ugc.aweme.framework.services.ServiceManager");
+                            Object manager = managerType.getMethod("get").invoke(null);
+                            Class<?> privacyType = loader.loadClass("com.ss.android.ugc.aweme.compliance.api.services.privacy.IPrivacyService");
+                            Object privacy = managerType.getMethod("getService", Class.class).invoke(manager, privacyType);
+                            Object settings = privacyType.getMethod("LJIIJ").invoke(privacy);
+                            out.append(" privacySettings=").append(settings == null ? "null" : "present");
+                            if (settings != null) {
+                                for (String key : new String[]{"profile_view_history", "viewer_history", "post_view_history"}) {
+                                    out.append(' ').append(key).append('=')
+                                            .append(settings.getClass().getMethod("LIZ", String.class).invoke(settings, key));
+                                }
+                            }
+                        } catch (Throwable failure) {
+                            out.append(" privacy=?(").append(failure.getClass().getSimpleName()).append(": ").append(failure.getMessage()).append(')');
+                        }
+                        try {
+                            Object lazy = loader.loadClass("X.0mD8").getField("LIZ").get(null);
+                            out.append(" cooldownFlag=").append(lazy.getClass().getMethod("getValue").invoke(lazy));
+                        } catch (Throwable failure) {
+                            out.append(" cooldownFlag=?(").append(failure.getClass().getSimpleName()).append(')');
+                        }
+                        try {
+                            Object lazy = loader.loadClass("X.0mD7").getField("LIZIZ").get(null);
+                            Object config = lazy.getClass().getMethod("getValue").invoke(lazy);
+                            Object cap = config == null ? null : config.getClass().getField("enabledMaxFollowers").get(config);
+                            Object me = loader.loadClass("X.02y0").getMethod("LIZ").invoke(null);
+                            Object followers = me == null ? null : me.getClass().getField("historyMaxFollowerCount").get(me);
+                            out.append(" followerCap=").append(cap == null ? "5000 (default)" : cap).append(" myHistoryMaxFollowers=").append(followers);
+                        } catch (Throwable failure) {
+                            out.append(" followerCap=?(").append(failure.getClass().getSimpleName()).append(')');
+                        }
+                        Log.i(TAG, "ok profileviewgates" + out);
+                        break;
+                    }
+                    case "finddesc": {
+                        // Shown views whose content description is exactly -e desc, with class and
+                        // bounds; -e click true also performs a click on the first, the listener a
+                        // tap would run. For pressing one of Hushfeed's own overlay buttons (they
+                        // carry no ids) and never the one beside it.
+                        String desc = required(intent, "desc");
+                        boolean click = "true".equals(intent.getStringExtra("click"));
+                        // -e match prefix: descriptions that start with the text, for a control
+                        // whose description carries a count after its name.
+                        boolean prefix = "prefix".equals(intent.getStringExtra("match"));
+                        StringBuilder out = new StringBuilder();
+                        android.view.View first = null;
+                        java.util.ArrayDeque<android.view.View> queue = new java.util.ArrayDeque<>(windowRoots());
+                        while (!queue.isEmpty()) {
+                            android.view.View view = queue.removeFirst();
+                            String described = String.valueOf(view.getContentDescription());
+                            if (view.isShown() && (prefix ? described.startsWith(desc) : desc.equals(described))) {
+                                int[] at = new int[2];
+                                view.getLocationOnScreen(at);
+                                out.append("\n  ").append(view.getClass().getName()).append(" at=").append(at[0]).append(',').append(at[1])
+                                        .append(" size=").append(view.getWidth()).append('x').append(view.getHeight());
+                                if (first == null) first = view;
+                            }
+                            if (view instanceof android.view.ViewGroup) {
+                                android.view.ViewGroup group = (android.view.ViewGroup) view;
+                                for (int i = 0; i < group.getChildCount(); i++) queue.add(group.getChildAt(i));
+                            }
+                        }
+                        String clicked = "";
+                        if (click && first != null) clicked = " clicked=" + first.performClick();
+                        Log.i(TAG, "ok finddesc " + (first == null ? "none" : "found") + clicked + out);
+                        break;
+                    }
+                    case "textwords": {
+                        // How many shown TextViews carrying one id contain a phrase, compared the
+                        // way the keyword lists compare (lower-cased, anywhere in the text):
+                        // -e id f4t -e word the counts 47.0.3's comment bodies holding "the".
+                        // Counts only; the text never leaves the phone.
+                        String idName = required(intent, "id");
+                        String word = required(intent, "word").toLowerCase(java.util.Locale.ROOT);
+                        int[] counts = new int[2];
+                        java.util.ArrayDeque<android.view.View> queue = new java.util.ArrayDeque<>(windowRoots());
+                        while (!queue.isEmpty()) {
+                            android.view.View view = queue.removeFirst();
+                            if (view instanceof android.widget.TextView && view.isShown()
+                                    && safeResourceName(view).endsWith("/" + idName)) {
+                                counts[0]++;
+                                CharSequence text = ((android.widget.TextView) view).getText();
+                                if (text != null && text.toString().toLowerCase(java.util.Locale.ROOT).contains(word)) counts[1]++;
+                            }
+                            if (view instanceof android.view.ViewGroup) {
+                                android.view.ViewGroup group = (android.view.ViewGroup) view;
+                                for (int i = 0; i < group.getChildCount(); i++) queue.add(group.getChildAt(i));
+                            }
+                        }
+                        Log.i(TAG, "ok textwords id=" + idName + " shown=" + counts[0] + " containing=" + counts[1]);
                         break;
                     }
                     case "doubletap": {
@@ -1084,6 +1242,23 @@ public final class Probe extends Instrumentation {
                             out.append(' ').append(name.trim()).append('=').append(shown);
                         }
                         Log.i(TAG, "ok fields" + out);
+                        break;
+                    }
+                    case "call": {
+                        // A public static method of one of Hushfeed's own classes that takes no
+                        // arguments, and what it returned: -e class app.morphe.extension.tiktok.
+                        // seen.SeenVideoHistory -e method size. For reading a count a check needs
+                        // and for undoing what a check left behind (that class's clear).
+                        String className = required(intent, "class");
+                        if (!className.startsWith("app.morphe.extension.")) {
+                            throw new IllegalArgumentException("Hushfeed classes only: " + className);
+                        }
+                        Method target = loader.loadClass(className).getMethod(required(intent, "method"));
+                        if (!java.lang.reflect.Modifier.isStatic(target.getModifiers())) {
+                            throw new IllegalArgumentException("static methods only: " + target);
+                        }
+                        Object result = target.invoke(null);
+                        Log.i(TAG, "ok call " + target.getName() + " -> " + (target.getReturnType() == void.class ? "void" : result));
                         break;
                     }
                     case "fieldswatch": {
@@ -2223,6 +2398,20 @@ public final class Probe extends Instrumentation {
                 }
             }
             return out;
+        }
+
+        /** A no-argument getter's value, or null when the target or the getter is missing. */
+        private static Object optional(Object target, String getter) {
+            if (target == null) return null;
+            try {
+                return target.getClass().getMethod(getter).invoke(target);
+            } catch (ReflectiveOperationException | RuntimeException missing) {
+                return null;
+            }
+        }
+
+        private static boolean blank(Object value) {
+            return value == null || String.valueOf(value).trim().isEmpty();
         }
 
         private static String safeResourceName(android.view.View view) {
