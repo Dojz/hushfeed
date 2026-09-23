@@ -1785,12 +1785,18 @@ public final class Probe extends Instrumentation {
             } catch (Throwable unavailable) {
                 Log.w(TAG, "marker-corpus: recent binds unavailable, adapters only", unavailable);
             }
-            String[] filterNames = {"AiGeneratedFilter", "PaidPartnershipFilter", "SeriesFilter", "PlaylistFilter"};
-            String[] markerNames = {"ai", "paid", "series", "playlist"};
+            String[] filterNames = {"AiGeneratedFilter", "PaidPartnershipFilter", "SeriesFilter", "PlaylistFilter",
+                    "DramaFilter"};
+            String[] markerNames = {"ai", "paid", "series", "playlist", "drama"};
             Object[] filters = new Object[filterNames.length];
             for (int i = 0; i < filterNames.length; i++) {
-                filters[i] = loader.loadClass("app.morphe.extension.tiktok.feedfilter.ContentMarkerFilters$"
-                        + filterNames[i]).getConstructor().newInstance();
+                try {
+                    filters[i] = loader.loadClass("app.morphe.extension.tiktok.feedfilter.ContentMarkerFilters$"
+                            + filterNames[i]).getConstructor().newInstance();
+                } catch (ClassNotFoundException olderBuild) {
+                    // A Hushfeed build from before this filter: its verdict is left out, not guessed.
+                    Log.w(TAG, "marker-corpus: this build has no " + filterNames[i]);
+                }
             }
             Method property = loader.loadClass("app.morphe.extension.tiktok.blockauthor.Reflect")
                     .getMethod("property", Object.class, String.class, String.class);
@@ -1799,6 +1805,7 @@ public final class Probe extends Instrumentation {
             for (Object video : videos) {
                 JSONArray markers = new JSONArray();
                 for (int i = 0; i < filters.length; i++) {
+                    if (filters[i] == null) continue;
                     Object matched = filters[i].getClass().getMethod("getFiltered", model).invoke(filters[i], video);
                     if (Boolean.TRUE.equals(matched)) markers.put(markerNames[i]);
                 }
@@ -1878,9 +1885,16 @@ public final class Probe extends Instrumentation {
                     "getEcSearchBoBcLabelText", "ecSearchBoBcLabelText", "isCommerce", "isCommerce"));
             shape.put("commercialVideoInfo", token(read(property, video, "getCommercialVideoInfo", "commercialVideoInfo")));
             shape.put("isPaidContent", token(read(property, video, "isPaidContent", "isPaidContent")));
-            shape.put("mPaidContentInfo", struct(read(property, video, "getMPaidContentInfo", "mPaidContentInfo"),
+            Object paidInfo = read(property, video, "getMPaidContentInfo", "mPaidContentInfo");
+            shape.put("mPaidContentInfo", struct(paidInfo,
                     property, "getPaidCollectionId", "paidCollectionId", "getCollectionName", "collectionName",
-                    "getEpisodeNumber", "episodeNumber", "isPaidCollectionIntro", "isPaidCollectionIntro"));
+                    "getEpisodeNumber", "episodeNumber", "isPaidCollectionIntro", "isPaidCollectionIntro",
+                    "isLimitedFreeShortDrama", "isLimitedFreeShortDrama", "getMiniDramaInfo", "miniDramaInfo"));
+            // The drama card hangs off PaidContentInfo. It is recorded as a field of its own so a
+            // shape stays one struct deep.
+            shape.put("miniDramaCardInfo", struct(paidInfo == null ? null
+                    : read(property, paidInfo, "getMiniDramaCardInfo", "miniDramaCardInfo"),
+                    property, "getCardType", "cardType", "getDramas", "dramas"));
             shape.put("playlist_info", struct(read(property, video, "getPlaylist_info", "playlist_info"),
                     property, "getMixId", "mixId"));
             shape.put("mixInfo", struct(read(property, video, "getMixInfo", "mixInfo"), property,
