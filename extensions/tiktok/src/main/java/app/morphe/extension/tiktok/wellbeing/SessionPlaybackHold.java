@@ -15,7 +15,6 @@ import app.morphe.extension.tiktok.blockauthor.FeedVisibility;
 import app.morphe.extension.tiktok.blockauthor.Reflect;
 
 import java.lang.ref.WeakReference;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -117,9 +116,50 @@ public final class SessionPlaybackHold {
         }
 
         boolean isCurrentCell(Object controller) {
-            Object aweme = Reflect.invoke(controller, "LIZIZ");
+            Object aweme;
+            try {
+                aweme = currentAweme(controller);
+            } catch (RuntimeException notAController) {
+                return false;
+            }
             return awemeId.equals(Reflect.invoke(aweme, "getAid"));
         }
+    }
+
+    /**
+     * What the hold calls on TikTok's player: the video a PlayerController has on screen, and its
+     * player manager's pause and resume. TikTok renames all three with every build (the pause was
+     * LIZ on 46.2.3 and is LJJLIIIJJI on 47.0.3, where LIZ reads a number instead), and naming
+     * them here left the hold covering a video that played on. So nothing here names them: the
+     * Block author patch reads them off PlayerController.pauseVideo and the For You feed's
+     * space-key toggle and writes these three bodies. Unpatched, as in the tests, they go to
+     * {@link #nativeForTests}.
+     */
+    interface NativeControls {
+        Object currentAweme(Object controller);
+        void pause(Object manager);
+        void resume(Object manager);
+    }
+
+    static volatile NativeControls nativeForTests;
+
+    static Object currentAweme(Object controller) {
+        NativeControls controls = nativeForTests;
+        return controls == null ? null : controls.currentAweme(controller);
+    }
+
+    static boolean pauseNative(Object manager) {
+        NativeControls controls = nativeForTests;
+        if (controls == null) return false;
+        controls.pause(manager);
+        return true;
+    }
+
+    static boolean resumeNative(Object manager) {
+        NativeControls controls = nativeForTests;
+        if (controls == null) return false;
+        controls.resume(manager);
+        return true;
     }
 
     /** Called with p0 and p1 from PlayerController.onPlayProgressChange(String, long, long). */
@@ -169,7 +209,7 @@ public final class SessionPlaybackHold {
         if (!Boolean.TRUE.equals(Reflect.invoke(manager, "isPlaying"))) return;
         // TikTok's feed play/pause control uses this same manager pair. Pause is queued by the
         // native engine, so successful intent is owned without requiring an immediate state flip.
-        if (invoke(manager, "LIZ")) {
+        if (control(manager, true)) {
             held = target;
             heldManager = new WeakReference<>(manager);
             waitingForFocus = null;
@@ -226,20 +266,16 @@ public final class SessionPlaybackHold {
             return;
         }
         forgetHeld();
-        invoke(manager, "LJIILL");
+        control(manager, false);
     }
 
-    private static boolean invoke(Object manager, String name) {
+    private static boolean control(Object manager, boolean pause) {
         if (manager == null) return false;
-        Method method = Reflect.method(manager.getClass(), name);
-        if (method == null) {
-            Logger.printDebug(() -> "The session hold could not find native playback control " + name);
-            return false;
-        }
         try {
-            method.invoke(manager);
-            return true;
-        } catch (Exception failure) {
+            boolean done = pause ? pauseNative(manager) : resumeNative(manager);
+            if (!done) Logger.printDebug(() -> "The session hold has no native playback control");
+            return done;
+        } catch (RuntimeException failure) {
             Logger.printException(() -> "The session hold could not change native playback", failure);
             return false;
         }
