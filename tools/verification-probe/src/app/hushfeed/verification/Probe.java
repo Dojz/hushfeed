@@ -750,11 +750,16 @@ public final class Probe extends Instrumentation {
                         android.content.res.Resources resources = activity.getResources();
                         String app = activity.getPackageName();
                         java.util.LinkedHashMap<Integer, String> wanted = new java.util.LinkedHashMap<>();
+                        List<String> unknown = new ArrayList<>();
                         for (String name : required(intent, "names").split(",")) {
+                            boolean known = false;
                             for (String pkg : new String[]{app, app + ".df_search_biz"}) {
                                 int id = resources.getIdentifier(name.trim(), "id", pkg);
                                 if (id != 0) wanted.put(id, name.trim() + (pkg.equals(app) ? "" : "@search"));
+                                known |= id != 0;
                             }
+                            // A name this build lacks must not read the same as one that is not on screen.
+                            if (!known) unknown.add(name.trim());
                         }
                         java.util.Map<Integer, int[]> counts = new java.util.HashMap<>();
                         java.util.ArrayDeque<android.view.View> pending = new java.util.ArrayDeque<>(windowRoots());
@@ -775,57 +780,30 @@ public final class Probe extends Instrumentation {
                             int[] count = counts.getOrDefault(entry.getKey(), new int[2]);
                             out.append(' ').append(entry.getValue()).append('=').append(count[0]).append('/').append(count[1]);
                         }
+                        for (String name : unknown) out.append(' ').append(name).append("=missing");
                         Log.i(TAG, "ok hasids" + out);
                         break;
                     }
-                    case "commenteggs": {
-                        // The brand campaign data on the video on screen: how many commerce configs
-                        // it carries (Aweme.commerceConfigDataList), their types, and the comment and
-                        // like easter eggs in them. Hide comment popup ads can only be checked on a
-                        // video with a comment egg, and this finds one. -e triggers 1 adds each comment
-                        // egg's trigger regex, which is the advertiser's word or emoji, never the
-                        // viewer's; without it only counts are logged.
-                        Object aweme = loader.loadClass("app.morphe.extension.tiktok.blockauthor.CurrentVideoAuthor")
-                                .getMethod("getAweme").invoke(null);
-                        if (aweme == null) {
-                            Log.i(TAG, "ok commenteggs aweme=null");
-                            break;
-                        }
-                        Class<?> model = loader.loadClass("com.ss.android.ugc.aweme.feed.model.Aweme");
-                        Object raw = model.getMethod("getCommerceConfigDataList").invoke(aweme);
-                        List<?> configs = raw instanceof List ? (List<?>) raw : Collections.emptyList();
-                        boolean triggers = "1".equals(intent.getStringExtra("triggers"));
-                        StringBuilder out = new StringBuilder(" configs=").append(configs.size());
-                        int commentEggs = 0;
-                        int likeEggs = 0;
-                        for (Object config : configs) {
-                            if (config == null) continue;
-                            Class<?> type = config.getClass();
-                            out.append(" type=").append(type.getMethod("getType").invoke(config));
-                            if (type.getMethod("getItemLikeEggData").invoke(config) != null) likeEggs++;
-                            Object group = type.getMethod("getItemCommentEggGroup").invoke(config);
-                            Object eggs = group == null ? null : group.getClass().getMethod("getCommentEggData").invoke(group);
-                            if (!(eggs instanceof List)) continue;
-                            for (Object egg : (List<?>) eggs) {
-                                if (egg == null) continue;
-                                commentEggs++;
-                                if (triggers) {
-                                    out.append(" trigger=").append(egg.getClass().getMethod("getRegex").invoke(egg));
-                                }
-                            }
-                        }
-                        Log.i(TAG, "ok commenteggs" + out + " commentEggs=" + commentEggs + " likeEggs=" + likeEggs);
-                        break;
-                    }
                     case "surprisestruct": {
-                        // Builds TikTok's CommentSurpriseStruct around a blank CommentSurprise, the
-                        // way TikTok wraps a brand surprise its server sent with a comment, and says
-                        // what the struct kept. With Hide comment popup ads on, the patched
-                        // constructor drops it, and every popup ad path reads the surprise from here.
+                        // Builds TikTok's CommentSurpriseStruct around a CommentSurprise, the way
+                        // TikTok wraps a surprise its server sent with a comment, and says what the
+                        // struct kept. Every popup ad path reads the surprise from here. The surprise
+                        // carries -e keyword (default "probe") and -e type (default 3): with Hide
+                        // comment popup ads on, one a keyword set off is dropped, and type 1, TikTok's
+                        // own first-comment celebration, is kept. Building one marks the popup ads
+                        // hook as reached in Hook status, so read a diagnostic export before this.
                         Class<?> surpriseType = loader.loadClass("com.ss.android.ugc.aweme.comment.model.CommentSurprise");
                         Class<?> commentType = loader.loadClass("com.ss.android.ugc.aweme.comment.model.Comment");
                         Class<?> structType = loader.loadClass("com.ss.android.ugc.aweme.comment.model.CommentSurpriseStruct");
                         Object surprise = surpriseType.getConstructor().newInstance();
+                        String keyword = intent.getStringExtra("keyword");
+                        String kind = intent.getStringExtra("type");
+                        Field keywordField = surpriseType.getDeclaredField("keyword");
+                        keywordField.setAccessible(true);
+                        keywordField.set(surprise, keyword == null ? "probe" : keyword);
+                        Field typeField = surpriseType.getDeclaredField("surpriseType");
+                        typeField.setAccessible(true);
+                        typeField.set(surprise, Integer.valueOf(kind == null ? "3" : kind));
                         Object struct = structType.getConstructor(commentType, surpriseType, boolean.class)
                                 .newInstance(null, surprise, false);
                         Object kept = structType.getField("commentSurprise").get(struct);
