@@ -365,6 +365,45 @@ exit /b 19
     Assert-True ([System.IO.Path]::GetFullPath($resolvedJava).Equals(
         [System.IO.Path]::GetFullPath($pathJava), [System.StringComparison]::OrdinalIgnoreCase)) `
         'A valid explicit JDK directory did not resolve its bin/java executable.'
+
+    # A release bundle older than the sources it is built from. On 2026-09-23 a test run after a
+    # patch change left it behind the new hook and the phone got the old one; patch-for-device
+    # now stops on it. Build output beside a module's sources must not count.
+    $staleRoot = Join-Path $caseRoot 'stale-bundle'
+    $patchSource = Join-Path $staleRoot 'patches/src/main/kotlin/Hook.kt'
+    $extensionSource = Join-Path $staleRoot 'extensions/app/library/src/main/java/Hook.java'
+    $buildOutput = Join-Path $staleRoot 'extensions/app/build/intermediates/Hook.class'
+    $gradleFile = Join-Path $staleRoot 'extensions/app/build.gradle.kts'
+    $staleBundle = Join-Path $staleRoot 'patches/build/release/patches-1.0.0.mpp'
+    $staleFiles = @($patchSource, $extensionSource, $buildOutput, $gradleFile, $staleBundle)
+    foreach ($file in $staleFiles) {
+        New-Item -ItemType Directory -Force -Path (Split-Path -Parent $file) | Out-Null
+        [System.IO.File]::WriteAllText($file, 'x', [System.Text.Encoding]::ASCII)
+    }
+    $then = [DateTime]::UtcNow.AddHours(-1)
+    foreach ($file in $staleFiles) { [System.IO.File]::SetLastWriteTimeUtc($file, $then) }
+    [System.IO.File]::SetLastWriteTimeUtc($staleBundle, $then.AddMinutes(5))
+    Assert-True (@(Get-SourcesNewerThanBundle -Root $staleRoot -Bundle $staleBundle).Count -eq 0) `
+        'A bundle built after every source was called stale.'
+    [System.IO.File]::SetLastWriteTimeUtc($buildOutput, $then.AddMinutes(9))
+    Assert-True (@(Get-SourcesNewerThanBundle -Root $staleRoot -Bundle $staleBundle).Count -eq 0) `
+        'Build output written after the bundle was counted as a source.'
+    [System.IO.File]::SetLastWriteTimeUtc($extensionSource, $then.AddMinutes(8))
+    $newer = @(Get-SourcesNewerThanBundle -Root $staleRoot -Bundle $staleBundle)
+    Assert-True ($newer.Count -eq 1 -and $newer[0].FullName -eq (Get-Item -LiteralPath $extensionSource).FullName) `
+        "A submodule's source written after the bundle was missed: $(@($newer | ForEach-Object FullName) -join ', ')"
+    [System.IO.File]::SetLastWriteTimeUtc($patchSource, $then.AddMinutes(6))
+    [System.IO.File]::SetLastWriteTimeUtc($gradleFile, $then.AddMinutes(7))
+    $newer = @(Get-SourcesNewerThanBundle -Root $staleRoot -Bundle $staleBundle)
+    Assert-True ($newer.Count -eq 3 -and
+        $newer[0].FullName -eq (Get-Item -LiteralPath $extensionSource).FullName -and
+        $newer[1].FullName -eq (Get-Item -LiteralPath $gradleFile).FullName -and
+        $newer[2].FullName -eq (Get-Item -LiteralPath $patchSource).FullName) `
+        "Newer sources are not all listed, newest first: $(@($newer | ForEach-Object FullName) -join ', ')"
+    $deviceScript = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'patch-for-device.ps1') -Raw
+    Assert-True ($deviceScript -match 'Get-SourcesNewerThanBundle' -and
+        $deviceScript -match '\[switch\]\$AllowStaleBundle') `
+        'patch-for-device.ps1 patches with a bundle without asking whether its sources are newer.'
 } finally {
     if ($caseRoot.StartsWith($requiredPrefix, [System.StringComparison]::OrdinalIgnoreCase) -and
         (Test-Path -LiteralPath $caseRoot)) {

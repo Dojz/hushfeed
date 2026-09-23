@@ -101,6 +101,53 @@ function Get-ReleaseBundlePath {
     return Join-Path $Root "patches/build/release/patches-$Version.mpp"
 }
 
+function Get-SourcesNewerThanBundle {
+    <#
+    .SYNOPSIS
+        The source files written after the bundle was built, newest first.
+    .DESCRIPTION
+        Only :patches:buildAndroid writes the release bundle, and :patches:test rebuilds
+        build/libs without it, so a device build made after a patch change and a test run
+        patched with the previous hooks (2026-09-23, Swipe-left controls). Counted: the patch
+        sources, the sources of every extension module (extensions/<module>/src/main and
+        extensions/<module>/<submodule>/src/main), and the Gradle files that shape them. Build
+        output is never under src/main, so it is not walked.
+    #>
+    param(
+        [Parameter(Mandatory = $true)][string]$Root,
+        [Parameter(Mandatory = $true)][string]$Bundle
+    )
+
+    $built = (Get-Item -LiteralPath $Bundle).LastWriteTimeUtc
+    $sourceRoots = @(Join-Path $Root 'patches/src/main')
+    $gradleFiles = @('gradle.properties', 'settings.gradle.kts', 'build.gradle.kts', 'gradle/libs.versions.toml',
+        'patches/build.gradle.kts') | ForEach-Object { Join-Path $Root $_ }
+    $extensions = Join-Path $Root 'extensions'
+    if (Test-Path -LiteralPath $extensions -PathType Container) {
+        foreach ($module in Get-ChildItem -LiteralPath $extensions -Directory) {
+            $modules = @($module) + @(Get-ChildItem -LiteralPath $module.FullName -Directory |
+                Where-Object { $_.Name -notin @('src', 'build') })
+            foreach ($dir in $modules) {
+                $sourceRoots += Join-Path $dir.FullName 'src/main'
+                $gradleFiles += Join-Path $dir.FullName 'build.gradle.kts'
+            }
+        }
+    }
+    $newer = New-Object System.Collections.Generic.List[System.IO.FileInfo]
+    foreach ($sourceRoot in $sourceRoots) {
+        if (-not (Test-Path -LiteralPath $sourceRoot -PathType Container)) { continue }
+        foreach ($file in Get-ChildItem -LiteralPath $sourceRoot -File -Recurse) {
+            if ($file.LastWriteTimeUtc -gt $built) { $newer.Add($file) }
+        }
+    }
+    foreach ($path in $gradleFiles) {
+        if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { continue }
+        $file = Get-Item -LiteralPath $path
+        if ($file.LastWriteTimeUtc -gt $built) { $newer.Add($file) }
+    }
+    return @($newer | Sort-Object LastWriteTimeUtc -Descending)
+}
+
 function Resolve-DesktopCli {
     <#
     .SYNOPSIS
