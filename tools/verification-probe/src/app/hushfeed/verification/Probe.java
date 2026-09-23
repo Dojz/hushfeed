@@ -697,6 +697,44 @@ public final class Probe extends Instrumentation {
                         Log.i(TAG, "ok views " + text.length() + " chars in " + pieces + " pieces");
                         break;
                     }
+                    case "tabbadges": {
+                        // TikTok's bottom tab icons draw their unread badges through their own
+                        // setters (setCountDotText, setCountDotVisibility, setTabDotVisibility),
+                        // and the hide switch answers inside those setters. Nothing makes the
+                        // server send the test account an unread item on demand, so this calls
+                        // the setters the way TikTok does, on every tab icon on screen, and reads
+                        // the badge views back half a second later: with the switch off the count
+                        // and the dot are visible (0), with it on they stay GONE (8).
+                        android.app.Activity activity = (android.app.Activity) loader.loadClass(UTILS)
+                                .getMethod("getActivity").invoke(null);
+                        if (activity == null) throw new IllegalStateException("no current activity");
+                        List<android.view.View> icons = new ArrayList<>();
+                        collectTabIcons(activity.getWindow().getDecorView(), icons, new java.util.HashMap<>());
+                        if (icons.isEmpty()) throw new IllegalStateException("no tab icon with the badge setters on screen");
+                        android.os.Handler main = new android.os.Handler(android.os.Looper.getMainLooper());
+                        main.post(() -> {
+                            try {
+                                for (android.view.View icon : icons) {
+                                    Class<?> type = icon.getClass();
+                                    type.getMethod("setCountDotText", String.class).invoke(icon, "7");
+                                    type.getMethod("setCountDotVisibility", int.class).invoke(icon, android.view.View.VISIBLE);
+                                    type.getMethod("setTabDotVisibility", int.class).invoke(icon, android.view.View.VISIBLE);
+                                }
+                            } catch (Throwable error) {
+                                Log.e(TAG, "failed tabbadges", error);
+                                return;
+                            }
+                            main.postDelayed(() -> {
+                                StringBuilder out = new StringBuilder();
+                                for (android.view.View icon : icons) {
+                                    out.append(" [").append(badgeState(icon, "getCountDotView"))
+                                            .append(' ').append(badgeState(icon, "getRedDotVIew")).append(']');
+                                }
+                                Log.i(TAG, "ok tabbadges " + icons.size() + " icons:" + out);
+                            }, 500);
+                        });
+                        break;
+                    }
                     case "block-flow-test": {
                         BlockFlowProbe.run(loader, intent.getStringExtra("value"));
                         break;
@@ -854,6 +892,50 @@ public final class Probe extends Instrumentation {
                 for (int i = 0, count = group.getChildCount(); i < count; i++) {
                     walkTextViews(group.getChildAt(i), depth + 1, out, resources);
                 }
+            }
+        }
+
+        /**
+         * Every view in the tree whose class carries both badge setters, which on 46.2.3 and
+         * 47.0.3 is the bottom tab icon and nothing else. The answer is cached per class: the
+         * tree holds thousands of views and a failed getMethod is an exception each.
+         */
+        private static void collectTabIcons(android.view.View view, List<android.view.View> icons,
+                Map<Class<?>, Boolean> known) {
+            Class<?> type = view.getClass();
+            Boolean icon = known.get(type);
+            if (icon == null) {
+                try {
+                    type.getMethod("setCountDotVisibility", int.class);
+                    type.getMethod("setTabDotVisibility", int.class);
+                    icon = true;
+                } catch (NoSuchMethodException missing) {
+                    icon = false;
+                }
+                known.put(type, icon);
+            }
+            if (icon) icons.add(view);
+            if (view instanceof android.view.ViewGroup) {
+                android.view.ViewGroup group = (android.view.ViewGroup) view;
+                for (int i = 0, count = group.getChildCount(); i < count; i++) {
+                    collectTabIcons(group.getChildAt(i), icons, known);
+                }
+            }
+        }
+
+        /** "getter=visibility" for one badge view, with its text when it is a TextView. */
+        private static String badgeState(android.view.View icon, String getter) {
+            try {
+                Object badge = icon.getClass().getMethod(getter).invoke(icon);
+                if (!(badge instanceof android.view.View)) return getter + "=none";
+                android.view.View view = (android.view.View) badge;
+                String state = getter + "=" + view.getVisibility();
+                if (view instanceof android.widget.TextView) {
+                    state += "(" + ((android.widget.TextView) view).getText() + ")";
+                }
+                return state;
+            } catch (Exception error) {
+                return getter + "=" + error.getClass().getSimpleName();
             }
         }
 
