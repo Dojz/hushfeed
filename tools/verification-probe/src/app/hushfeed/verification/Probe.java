@@ -622,6 +622,7 @@ public final class Probe extends Instrumentation {
                                 // the case a chosen-quality download muxes itself.
                                 + " dash=" + optional(video, "hasDashBitrate")
                                 + " gears=" + gearList(loader, video)
+                                + " captions=" + captionList(loader, video)
                                 // The test account's own state on this video: liked, following.
                                 + " liked=" + optional(aweme, "isLike")
                                 + " following=" + (optional(creator, "getFollowStatus") instanceof Number
@@ -1281,10 +1282,97 @@ public final class Probe extends Instrumentation {
                                 for (int i = 0; i < group.getChildCount(); i++) pending.add(group.getChildAt(i));
                             }
                         }
+                        // Hushfeed's own caption line for clear display, which TikTok's strip gives
+                        // way to: shown or not, its size and how long its text is, never the text.
+                        // Then what the line waits on: cleared, a cue (its length), the cue's video
+                        // being the current one, and TikTok's caption view still in the window.
+                        try {
+                            Class<?> tools = loader.loadClass("app.morphe.extension.tiktok.captions.CaptionTools");
+                            Object line = staticField(tools, "overlay") instanceof java.lang.ref.Reference
+                                    ? ((java.lang.ref.Reference<?>) staticField(tools, "overlay")).get() : null;
+                            if (line instanceof android.widget.TextView) {
+                                android.widget.TextView label = (android.widget.TextView) line;
+                                out.append(" overlay[shown=").append(label.isShown())
+                                        .append(" vis=").append(label.getVisibility())
+                                        .append(" size=").append(label.getWidth()).append('x').append(label.getHeight())
+                                        .append(" chars=").append(label.getText().length()).append(']');
+                            } else {
+                                out.append(" overlay=none");
+                            }
+                            Object source = ((java.lang.ref.Reference<?>) staticField(tools, "captionSource")).get();
+                            out.append(" waits[clear=").append(staticField(tools, "clear"))
+                                    .append(" cue=").append(String.valueOf(staticField(tools, "cue")).length())
+                                    .append(" sameVideo=").append(java.util.Objects.equals(staticField(tools, "cueId"), staticField(tools, "currentId")))
+                                    .append(" source=").append(source == null ? "none"
+                                            : ((android.view.View) source).isAttachedToWindow() ? "attached" : "detached")
+                                    .append(" focus=").append(activity.hasWindowFocus()).append(']');
+                        } catch (ReflectiveOperationException missing) {
+                            out.append(" overlay=unreadable");
+                        }
                         // An id this build lacks must not read the same as no caption on screen.
                         if (strip == 0) out.append(" dlk=missing");
                         if (text == 0) out.append(" dlr=missing");
                         Log.i(TAG, "ok captionstate" + (out.length() == 0 ? " none" : out.toString()));
+                        break;
+                    }
+                    case "captionwatch": {
+                        // The caption views sampled every 100 ms on the phone for -e for ms (15000
+                        // by default) and reported once, so a short cue isn't lost between two adb
+                        // round trips. Counts: cleared (the controls hidden), strip (TikTok's own
+                        // caption drawn), line (Hushfeed's kept caption shown with text) and cue
+                        // (Hushfeed holds a cue for the video on screen). clearedCue is the control:
+                        // a line never seen while cleared means nothing without a cue to show.
+                        android.app.Activity activity = (android.app.Activity) loader.loadClass(UTILS)
+                                .getMethod("getActivity").invoke(null);
+                        if (activity == null) throw new IllegalStateException("no current activity");
+                        String forText = intent.getStringExtra("for");
+                        long span = forText == null ? 15000L : Long.parseLong(forText);
+                        Class<?> tools = loader.loadClass("app.morphe.extension.tiktok.captions.CaptionTools");
+                        Method clearNow = loader.loadClass("app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch")
+                                .getMethod("isClearDisplayNow");
+                        android.content.res.Resources resources = activity.getResources();
+                        int strip = resources.getIdentifier("dlk", "id", activity.getPackageName());
+                        int drawn = resources.getIdentifier("dls", "id", activity.getPackageName());
+                        int[] counts = new int[9];
+                        android.os.Handler main = new android.os.Handler(android.os.Looper.getMainLooper());
+                        long start = android.os.SystemClock.uptimeMillis();
+                        main.post(new Runnable() {
+                            @Override public void run() {
+                                try {
+                                    boolean cleared = Boolean.TRUE.equals(clearNow.invoke(null));
+                                    boolean stripDrawn = captionDrawn(strip, drawn);
+                                    Object held = staticField(tools, "overlay");
+                                    Object line = held instanceof java.lang.ref.Reference
+                                            ? ((java.lang.ref.Reference<?>) held).get() : null;
+                                    boolean lineShown = line instanceof android.widget.TextView
+                                            && ((android.view.View) line).isShown() && ((android.view.View) line).getHeight() > 0
+                                            && ((android.widget.TextView) line).getText().length() > 0;
+                                    boolean cue = String.valueOf(staticField(tools, "cue")).length() > 0
+                                            && java.util.Objects.equals(staticField(tools, "cueId"), staticField(tools, "currentId"));
+                                    counts[0]++;
+                                    if (cleared) counts[1]++;
+                                    if (stripDrawn) counts[2]++;
+                                    if (lineShown) counts[3]++;
+                                    if (cue) counts[4]++;
+                                    if (cleared && stripDrawn) counts[5]++;
+                                    if (cleared && lineShown) counts[6]++;
+                                    if (cleared && cue) counts[7]++;
+                                    if (!cleared && lineShown) counts[8]++;
+                                } catch (Exception error) {
+                                    Log.e(TAG, "failed captionwatch", error);
+                                    return;
+                                }
+                                if (android.os.SystemClock.uptimeMillis() - start < span) {
+                                    main.postDelayed(this, 100);
+                                    return;
+                                }
+                                Log.i(TAG, "ok captionwatch samples=" + counts[0] + " cleared=" + counts[1]
+                                        + " strip=" + counts[2] + " line=" + counts[3] + " cue=" + counts[4]
+                                        + " clearedStrip=" + counts[5] + " clearedLine=" + counts[6]
+                                        + " clearedCue=" + counts[7] + " lineWithControls=" + counts[8]
+                                        + (strip == 0 || drawn == 0 ? " dlk/dls=missing" : ""));
+                            }
+                        });
                         break;
                     }
                     case "fields": {
@@ -2507,6 +2595,33 @@ public final class Probe extends Instrumentation {
             }
         }
 
+        /**
+         * The video's caption entries (language/format, from captionModel.captionList) and how many
+         * subtitle tracks Hushfeed's own SubtitleDownloads.tracks makes of them for "all".
+         */
+        private static String captionList(ClassLoader loader, Object video) {
+            try {
+                Object model = optional(video, "getCaptionModel");
+                if (model == null) return "none";
+                java.lang.reflect.Field field = model.getClass().getDeclaredField("captionList");
+                field.setAccessible(true);
+                Object list = field.get(model);
+                if (!(list instanceof java.util.List)) return "empty";
+                StringBuilder out = new StringBuilder("[");
+                for (Object caption : (java.util.List<?>) list) {
+                    if (out.length() > 1) out.append(',');
+                    out.append(optional(caption, "getLanguageCode")).append('/').append(optional(caption, "getFormat"));
+                }
+                Method tracks = loader.loadClass("app.morphe.extension.tiktok.download.SubtitleDownloads")
+                        .getDeclaredMethod("tracks", Object.class, String.class, java.util.Locale.class);
+                tracks.setAccessible(true);
+                Object found = tracks.invoke(null, video, "all", java.util.Locale.getDefault());
+                return out.append("]tracks").append(found instanceof java.util.List ? ((java.util.List<?>) found).size() : -1).toString();
+            } catch (ReflectiveOperationException | RuntimeException failure) {
+                return "?(" + failure.getClass().getSimpleName() + ")";
+            }
+        }
+
         /** A no-argument getter's value, or null when the target or the getter is missing. */
         private static Object optional(Object target, String getter) {
             if (target == null) return null;
@@ -2519,6 +2634,31 @@ public final class Probe extends Instrumentation {
 
         private static boolean blank(Object value) {
             return value == null || String.valueOf(value).trim().isEmpty();
+        }
+
+        /** TikTok's caption strip shown, with the view that draws its cue visible at a height. */
+        private static boolean captionDrawn(int strip, int drawn) throws Exception {
+            if (strip == 0 || drawn == 0) return false;
+            java.util.ArrayDeque<android.view.View> pending = new java.util.ArrayDeque<>(windowRoots());
+            while (!pending.isEmpty()) {
+                android.view.View view = pending.removeFirst();
+                if (!(view instanceof android.view.ViewGroup)) continue;
+                android.view.ViewGroup group = (android.view.ViewGroup) view;
+                boolean isStrip = view.getId() == strip && view.isShown();
+                for (int i = 0; i < group.getChildCount(); i++) {
+                    android.view.View child = group.getChildAt(i);
+                    if (isStrip && child.getId() == drawn && child.getVisibility() == android.view.View.VISIBLE
+                            && child.getHeight() > 0) return true;
+                    pending.add(child);
+                }
+            }
+            return false;
+        }
+
+        private static Object staticField(Class<?> owner, String name) throws ReflectiveOperationException {
+            Field field = owner.getDeclaredField(name);
+            field.setAccessible(true);
+            return field.get(null);
         }
 
         private static String safeResourceName(android.view.View view) {
@@ -2811,13 +2951,30 @@ public final class Probe extends Instrumentation {
                             .append(" globalVisibleRect=").append(onScreen).append(' ').append(rect.toShortString())
                             .append(" locationOnScreen=").append(where[0]).append(',').append(where[1]);
                     android.view.ViewParent parent = tab.getParent();
+                    int depth = 0;
                     while (parent instanceof android.view.View) {
                         android.view.View view = (android.view.View) parent;
+                        depth++;
                         if (view.getScrollX() != 0 || view.getTranslationX() != 0f) {
                             out.append("\n  ancestor ").append(view.getClass().getName())
                                     .append(" scrollX=").append(view.getScrollX())
                                     .append(" translationX=").append(view.getTranslationX())
                                     .append(" left=").append(view.getLeft());
+                        }
+                        // What hides the tab when isShown says no: an ancestor that is not
+                        // VISIBLE, or one faded out, with its depth above the tab and its id.
+                        if (view.getVisibility() != android.view.View.VISIBLE || view.getAlpha() < 1f) {
+                            out.append("\n  hidden ancestor ").append(depth).append(' ')
+                                    .append(view.getClass().getName()).append('/')
+                                    .append(idName(view, activity.getResources()))
+                                    .append(" vis=").append(view.getVisibility())
+                                    .append(" alpha=").append(view.getAlpha())
+                                    .append(" translationY=").append(view.getTranslationY())
+                                    .append(" size=").append(view.getWidth()).append('x').append(view.getHeight())
+                                    .append(view.getId() == android.R.id.content ? " (content)" : "");
+                        }
+                        if (view.getId() == android.R.id.content) {
+                            out.append("\n  content at depth ").append(depth);
                         }
                         parent = view.getParent();
                     }
