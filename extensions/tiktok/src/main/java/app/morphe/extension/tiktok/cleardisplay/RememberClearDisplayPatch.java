@@ -41,6 +41,13 @@ public final class RememberClearDisplayPatch {
      * returns early for anything posted from here, which is the whole automatic path.
      */
     private static volatile boolean clearNow;
+    /**
+     * Whether the controls are hidden because the automatic path hid them, as opposed to TikTok
+     * or the user. Only these are brought back when the automatic path is switched off: a clear
+     * display the user chose (remembered or not, since a paused process doesn't remember it) is
+     * theirs.
+     */
+    private static boolean automaticHidden;
     private static boolean observingPreferences;
     private static WeakReference<View> window = new WeakReference<>(null);
     private static final SharedPreferences.OnSharedPreferenceChangeListener PREFERENCES = (preferences, key) -> {
@@ -116,6 +123,10 @@ public final class RememberClearDisplayPatch {
             cancel();
             currentId = null;
             if (Settings.CLEAR_DISPLAY.get()) emit(event, true);
+            // Switched off while it had the controls hidden: TikTok brings them back on the next
+            // video by itself, but the live state, which the tab strip hide reads, would say
+            // hidden until TikTok's own clear display bar was used (S22, 2026-09-23).
+            else if (automaticHidden) emit(event, false);
             return;
         }
         if (id.equals(currentId)) return;
@@ -126,6 +137,7 @@ public final class RememberClearDisplayPatch {
             pending = null;
             if (Settings.AUTOMATIC_CLEAR_DISPLAY.get() && id.equals(currentId) && stillCurrent.holds()) {
                 emit(event, true);
+                automaticHidden = true;
             }
         };
         MAIN.postDelayed(pending, Math.max(0, Math.min(30000, Settings.AUTOMATIC_CLEAR_DISPLAY_DELAY.get())));
@@ -138,6 +150,7 @@ public final class RememberClearDisplayPatch {
 
     private static void emit(ClearEvent event, boolean clear) {
         clearNow = clear;
+        automaticHidden = false;
         posting = true;
         try { event.accept(clear); }
         catch (RuntimeException error) { Logger.printException(() -> "Could not change clear display", error); }
@@ -157,6 +170,8 @@ public final class RememberClearDisplayPatch {
         if ((Integer) type == 3 || (Integer) type == 9) return;
         clearNow = (Boolean) clear;
         if (posting) return;
+        // TikTok's own change: the state is TikTok's or the user's from here.
+        automaticHidden = false;
         cancelOnMain();
         // Paused, TikTok's own clear mode is not remembered over the choice kept for later.
         if (Setting.isPaused()) return;

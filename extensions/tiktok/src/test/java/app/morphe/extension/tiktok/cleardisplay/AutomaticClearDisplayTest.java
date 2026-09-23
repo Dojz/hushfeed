@@ -114,6 +114,50 @@ public class AutomaticClearDisplayTest {
         RememberClearDisplayPatch.firstFrame("three", () -> true, events::add);
         assertEquals(List.of(false, false, true), events);
     }
+    /**
+     * Switched off while it had the controls hidden: TikTok shows them on the next video by
+     * itself (S22, 2026-09-23), and the live state has to say so, or the tab strip hide keeps
+     * TikTok's top strip away with the feature off. Once shown, later videos ask nothing more.
+     */
+    @Test public void switchingTheAutomaticPathOffShowsTheControlsOnTheNextVideo() {
+        List<Boolean> events = new ArrayList<>();
+        RememberClearDisplayPatch.firstFrame("one", () -> true, events::add);
+        Shadows.shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(1000));
+        assertTrue(RememberClearDisplayPatch.isClearDisplayNow());
+
+        Settings.AUTOMATIC_CLEAR_DISPLAY.save(false);
+        RememberClearDisplayPatch.firstFrame("two", () -> true, events::add);
+        assertEquals(List.of(false, true, false), events);
+        assertFalse(RememberClearDisplayPatch.isClearDisplayNow());
+
+        RememberClearDisplayPatch.firstFrame("three", () -> true, events::add);
+        assertEquals(List.of(false, true, false), events);
+    }
+
+    /**
+     * A clear display the user chose is theirs, even where it isn't remembered: while Hushfeed
+     * is paused TikTok's own clear mode is not saved, and switching nothing on or off must not
+     * bring the controls back over it.
+     */
+    @Test public void aClearDisplayTheUserChoseIsLeftAloneWhilePaused() {
+        List<Boolean> events = new ArrayList<>();
+        // The automatic path hides the controls and the user brings them back with TikTok's X,
+        RememberClearDisplayPatch.firstFrame("one", () -> true, events::add);
+        Shadows.shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(1000));
+        RememberClearDisplayPatch.rememberClearDisplayEvent(new Event(false, 0));
+        app.morphe.extension.shared.settings.PausedProcess.set(true);
+        try {
+            // then, paused, hides them with TikTok's own mode, which a paused process doesn't save.
+            RememberClearDisplayPatch.rememberClearDisplayEvent(new Event(true, 0));
+            assertTrue(RememberClearDisplayPatch.isClearDisplayNow());
+            RememberClearDisplayPatch.firstFrame("next", () -> true, events::add);
+            assertEquals("nothing asked of TikTok on the next video", List.of(false, true), events);
+            assertTrue(RememberClearDisplayPatch.isClearDisplayNow());
+        } finally {
+            app.morphe.extension.shared.settings.PausedProcess.set(false);
+        }
+    }
+
     @Test public void disablingAndReenablingBeforeTheDeadlineCancelsTheTimer() {
         List<Boolean> events = new ArrayList<>();
         RememberClearDisplayPatch.firstFrame("one", () -> true, events::add);
