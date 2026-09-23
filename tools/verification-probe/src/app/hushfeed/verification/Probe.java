@@ -652,6 +652,34 @@ public final class Probe extends Instrumentation {
                         Log.i(TAG, "ok textviews " + text.length() + " chars in " + pieces + " pieces");
                         break;
                     }
+                    case "layouts": {
+                        // Every shown, on-screen view that draws a Layout of its own rather than
+                        // being a TextView (TikTok's X.09F7 draws captions and descriptions this
+                        // way), with its class, place, size, text size in px and the layout's
+                        // lines and width. How the caption size was shown to stay off the other
+                        // text; the text itself never leaves the phone.
+                        StringBuilder out = new StringBuilder();
+                        java.util.ArrayDeque<android.view.View> queue = new java.util.ArrayDeque<>(windowRoots());
+                        while (!queue.isEmpty()) {
+                            android.view.View view = queue.removeFirst();
+                            if (view instanceof android.view.ViewGroup) {
+                                android.view.ViewGroup group = (android.view.ViewGroup) view;
+                                for (int i = 0; i < group.getChildCount(); i++) queue.add(group.getChildAt(i));
+                            }
+                            if (view instanceof android.widget.TextView || !view.isShown()
+                                    || !view.getGlobalVisibleRect(new android.graphics.Rect())) continue;
+                            android.text.Layout layout = layoutOf(view);
+                            if (layout == null) continue;
+                            int[] at = new int[2];
+                            view.getLocationOnScreen(at);
+                            out.append('\n').append(view.getClass().getName()).append(" at=").append(at[0]).append(',').append(at[1])
+                                    .append(" size=").append(view.getWidth()).append('x').append(view.getHeight())
+                                    .append(" textPx=").append(Math.round(layout.getPaint().getTextSize()))
+                                    .append(' ').append(layoutReport(layout));
+                        }
+                        Log.i(TAG, "ok layouts" + out);
+                        break;
+                    }
                     case "opendetail": {
                         // Asks TikTok's detail route (snssdk1233://aweme/detail/<id>) for the video on
                         // screen, to check the detail page's pager away from the profile it would
@@ -747,8 +775,15 @@ public final class Probe extends Instrumentation {
                         java.util.ArrayDeque<android.view.View> queue = new java.util.ArrayDeque<>(windowRoots());
                         while (!queue.isEmpty()) {
                             android.view.View view = queue.removeFirst();
-                            String described = String.valueOf(view.getContentDescription());
-                            if (view.isShown() && (contains ? described.contains(desc)
+                            // A view with no description is never a match (it read as "null", which
+                            // a contains match found), and neither is one entirely off the screen:
+                            // the feed keeps the cells either side of the current one laid out, and
+                            // the first match was the previous post's button.
+                            CharSequence raw = view.getContentDescription();
+                            String described = raw == null ? null : raw.toString();
+                            if (described != null && view.isShown()
+                                    && view.getGlobalVisibleRect(new android.graphics.Rect())
+                                    && (contains ? described.contains(desc)
                                     : prefix ? described.startsWith(desc) : desc.equals(described))) {
                                 int[] at = new int[2];
                                 view.getLocationOnScreen(at);
