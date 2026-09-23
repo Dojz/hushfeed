@@ -152,6 +152,13 @@ public class AdvancedDownloadsTest {
         public final Info photoModeImageInfo;
         Post(List<Photo> photos) { photoModeImageInfo = new Info(photos); }
     }
+    /** A photo post with an id, which is what a save is keyed on. */
+    public static final class PhotoPost {
+        public final Info photoModeImageInfo;
+        private final String aid;
+        PhotoPost(String aid, List<Photo> photos) { this.aid = aid; photoModeImageInfo = new Info(photos); }
+        public String getAid() { return aid; }
+    }
     public static final class TestActivity extends PreferenceActivity {
         @Override public void onCreate(android.os.Bundle state) {
             setTheme(android.R.style.Theme_Material_NoActionBar);
@@ -233,6 +240,46 @@ public class AdvancedDownloadsTest {
         post.photoModeImageInfo.imageList = List.of(new Photo(null));
         assertTrue(OriginalPhotos.sources(post).isEmpty());
         assertTrue(OriginalPhotos.sources(new Object()).isEmpty());
+    }
+
+    /**
+     * 47.0.3's photo save job says which photos it was asked for, counted from 0: the one photo
+     * for "Download image", the picked ones from TikTok's selection sheet. The older entry, the
+     * video download start, asks for all of them.
+     */
+    @Test public void aPhotoSaveTakesOnlyThePhotosItWasAskedFor() {
+        assertEquals(List.of(0, 1, 2), OriginalPhotos.positions(null, 3));
+        assertEquals(List.of(0), OriginalPhotos.positions(java.util.Set.of(0), 3));
+        assertEquals("in the post's order", List.of(0, 2), OriginalPhotos.positions(java.util.Set.of(2, 0), 3));
+        assertEquals("a Long index reads the same", List.of(1), OriginalPhotos.positions(java.util.Set.of(1L), 3));
+        assertEquals("a photo the post doesn't have", List.of(), OriginalPhotos.positions(java.util.Set.of(5), 3));
+        assertEquals(List.of(), OriginalPhotos.positions(java.util.Set.of(), 3));
+    }
+
+    /**
+     * The job's entry takes a save only with the switch on, never a live photo's video (the same
+     * job, flag set), and only for photos the post has. A save already running for the post
+     * answers "taken" before anything is fetched, which is what lets this reach the decision
+     * without the network.
+     */
+    @Test public void thePhotoSaveJobTakesOnlyTheSavesItShould() {
+        Utils.setContext(RuntimeEnvironment.getApplication());
+        org.robolectric.Shadows.shadowOf(RuntimeEnvironment.getApplication())
+                .grantPermissions(android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        PhotoPost post = new PhotoPost("busy-post", List.of(new Photo("https://example.com/one"), new Photo("https://example.com/two")));
+        java.util.Set<String> active = org.robolectric.util.ReflectionHelpers.getStaticField(OriginalPhotos.class, "ACTIVE");
+        active.add("busy-post");
+        try {
+            Settings.DOWNLOAD_ORIGINAL_PHOTOS.save(true);
+            assertTrue("the second photo, asked for", OriginalPhotos.startPhotos(post, java.util.Set.of(1), false));
+            assertFalse("a live photo's video stays TikTok's", OriginalPhotos.startPhotos(post, java.util.Set.of(0), true));
+            assertFalse("a photo the post doesn't have", OriginalPhotos.startPhotos(post, java.util.Set.of(2), false));
+            Settings.DOWNLOAD_ORIGINAL_PHOTOS.save(false);
+            assertFalse("the switch off", OriginalPhotos.startPhotos(post, java.util.Set.of(0), false));
+        } finally {
+            active.remove("busy-post");
+            Settings.DOWNLOAD_ORIGINAL_PHOTOS.resetToDefault();
+        }
     }
 
     @Test public void adaptiveDownloadsPairTheRequestedAudioAndNeverReturnSilentVideoUrl() {
