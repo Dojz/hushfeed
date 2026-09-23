@@ -486,6 +486,10 @@ public final class SessionLockOverlay {
             bar = parent;
             if (bar.getWidth() >= contentWidth && bar.getWidth() > 0) break;
         }
+        // A row that is not on screen has nothing to keep reachable. Clear display sets the bar
+        // GONE and leaves its last size and place behind, which measured as a strip along the
+        // bottom where the feed went on playing under the hold.
+        if (!bar.isShown()) return 0;
         int height = bar.getHeight();
         if (height <= 0 || height >= root.getHeight() / 3) return 0;
         View ancestor = bar;

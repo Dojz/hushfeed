@@ -298,6 +298,59 @@ public class CaptionToolsTest {
         }
     }
 
+    /**
+     * The line is for clear display, and on 47.0.3 clear display sets TikTok's tab bar GONE. The
+     * feed check read that as "not the feed", so the line hid itself as soon as it was wanted: on
+     * the S22 on 2026-09-23 it had been laid out with a cue, and stayed GONE through every later
+     * cue while the controls were cleared. The other tests here have no tab bar at all, which
+     * the feed check answers with "assume the feed".
+     */
+    @Test public void theKeptCaptionStaysWhileClearDisplayHasTheTabBarAway() {
+        try (var owner = Robolectric.buildActivity(CaptionActivity.class).setup().visible()) {
+            var activity = owner.get();
+            Utils.setContext(activity);
+            FrameLayout content = new FrameLayout(activity);
+            FrameLayout source = new FrameLayout(activity);
+            content.addView(source);
+            FrameLayout bar = new FrameLayout(activity);
+            View home = new View(activity);
+            home.setId(0x7f0a4b89);
+            home.setSelected(true);
+            bar.addView(home, new FrameLayout.LayoutParams(216, 138));
+            content.addView(bar, new FrameLayout.LayoutParams(-1, 138, android.view.Gravity.BOTTOM));
+            activity.setContentView(content);
+            owner.windowFocusChanged(true);
+            app.morphe.extension.tiktok.blockauthor.FeedVisibility.resolveForTests(
+                    activity.getPackageName(), "omq", home.getId());
+            try {
+                Settings.KEEP_CAPTIONS_CLEAR_DISPLAY.save(true);
+                CaptionTools.onVideoChanged("cleared-video");
+                CaptionTools.onCaption(source, "cleared-video", "EXPANDED", "Spoken while cleared");
+                CaptionTools.onClear(new Video("cleared-video"), true);
+                // TikTok puts its tab bar away as clear display starts.
+                bar.setVisibility(View.GONE);
+                View decor = activity.getWindow().getDecorView();
+                decor.getViewTreeObserver().dispatchOnPreDraw();
+                TextView caption = find(decor, "Spoken while cleared");
+                assertNotNull(caption);
+                assertEquals("the kept caption hid itself in clear display",
+                        View.VISIBLE, caption.getVisibility());
+                CaptionTools.onCaption(source, null, "EXPANDED", "The next cue");
+                assertEquals("The next cue", caption.getText().toString());
+                assertEquals(View.VISIBLE, caption.getVisibility());
+
+                // Another tab is not the feed, cleared or not.
+                home.setSelected(false);
+                decor.getViewTreeObserver().dispatchOnPreDraw();
+                assertEquals("the caption followed the reader off the feed",
+                        View.GONE, caption.getVisibility());
+            } finally {
+                app.morphe.extension.tiktok.blockauthor.FeedVisibility.resolveForTests(
+                        activity.getPackageName(), "omq", 0);
+            }
+        }
+    }
+
     @Test public void preDrawTracksFocusAndSourceAttachmentWithoutAnotherCaption() {
         try (var owner = Robolectric.buildActivity(CaptionActivity.class).setup().visible()) {
             var activity = owner.get();

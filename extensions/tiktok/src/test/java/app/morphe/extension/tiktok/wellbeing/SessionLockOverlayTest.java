@@ -232,6 +232,58 @@ public class SessionLockOverlayTest {
         }
     }
 
+    /**
+     * TikTok's clear display sets its tab bar GONE and nothing else (the S22, 2026-09-23). The
+     * hold read that as "not the feed", took its panel down and gave the sound back, so with a
+     * spent budget the feed went on playing in clear display, TikTok's own or the automatic
+     * one. With the bar away there is no row to keep reachable either, and the bar's last size
+     * left a strip of feed along the bottom.
+     */
+    @Test public void clearDisplayKeepsTheHoldOverTheWholeFeed() {
+        Settings.SESSION_BUDGET_VIDEOS.save(1);
+        Settings.SESSION_BUDGET_LOCK_MINUTES.save(5);
+        SessionBudget.noteVideo("cleared-video");
+        assertTrue(SessionBudget.claimNotice());
+
+        try (var owner = Robolectric.buildActivity(HostActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setActivity(activity);
+            ViewGroup root = activity.findViewById(android.R.id.content);
+            FrameLayout bar = new FrameLayout(activity);
+            root.addView(bar, new FrameLayout.LayoutParams(-1, 80, Gravity.BOTTOM));
+            View home = new View(activity);
+            home.setSelected(true);
+            bar.addView(home, new FrameLayout.LayoutParams(96, -1, Gravity.LEFT));
+            seedHomeTab(home);
+            layoutHoldRoot(root, false);
+
+            SessionLockOverlay.sync();
+            View panel = root.getChildAt(root.getChildCount() - 1);
+            assertEquals(View.VISIBLE, panel.getVisibility());
+            assertEquals("the fixture's hold does not stop above the bar",
+                    80, ((FrameLayout.LayoutParams) panel.getLayoutParams()).bottomMargin);
+
+            // Clear display: the bar goes, the page stays.
+            bar.setVisibility(View.GONE);
+            SessionLockOverlay.sync();
+            assertEquals("the hold came down in clear display", View.VISIBLE, panel.getVisibility());
+            assertEquals("the hold left the feed playing along the bottom",
+                    0, ((FrameLayout.LayoutParams) panel.getLayoutParams()).bottomMargin);
+            assertTrue(SessionBudget.isLocked());
+
+            // The controls back: the row is reachable again.
+            bar.setVisibility(View.VISIBLE);
+            layoutHoldRoot(root, false);
+            SessionLockOverlay.sync();
+            assertEquals(80, ((FrameLayout.LayoutParams) panel.getLayoutParams()).bottomMargin);
+        } finally {
+            seedHomeTab(null);
+            Utils.setActivity(null);
+            SessionBudget.releaseLock();
+            SessionLockOverlay.sync();
+        }
+    }
+
     private static void layoutHoldRoot(View root, boolean withSystemInset) {
         root.measure(View.MeasureSpec.makeMeasureSpec(480, View.MeasureSpec.EXACTLY),
                 View.MeasureSpec.makeMeasureSpec(960, View.MeasureSpec.EXACTLY));

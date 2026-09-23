@@ -133,14 +133,52 @@ public final class FeedVisibility {
     /**
      * @return true when the feed is showing. Unknown states report true so a TikTok build
      *         that renames the tab loses the hiding behaviour rather than the button.
+     *
+     * <p>Clear display is the feed. On 47.0.3 it sets the tab bar, the Home tab's own parent
+     * ({@code omy}), GONE and leaves everything else as it was, so the tab fails
+     * {@link View#isShown} while the feed plays under it. Read on the S22 on 2026-09-23 with
+     * the probe's feed report: with the controls cleared, that bar was the one hidden ancestor.
+     * This answered "not the feed" there, so the daily hold took its panel down and gave the
+     * sound back while its budget was spent, and the caption kept for clear display hid itself
+     * as soon as it was wanted. The search page, for contrast, hides {@code v4w}, the whole page
+     * six levels above the tab, and stays "not the feed".
      */
     public static boolean isOnFeed(Activity activity) {
         View homeTab = homeTab(activity);
         if (homeTab == null) {
             return true;
         }
-        if (homeTab.isShown() && !isScrolledAway(homeTab)) return homeTab.isSelected();
+        if ((homeTab.isShown() || onlyItsBarIsHidden(homeTab)) && !isScrolledAway(homeTab)) {
+            return homeTab.isSelected();
+        }
         return isDetailVisible() && !isStoryVisible(activity);
+    }
+
+    /**
+     * @return true while TikTok's clear display has the feed's controls put away: the Home tab
+     *         selected and in place, hidden by nothing but its own bar.
+     *
+     * <p>For Hushfeed's own controls over the feed, which go when TikTok's do. {@link #isOnFeed}
+     * answers yes here, and has to for the hold and the kept caption, so a control that should
+     * not sit over a cleared screen asks this as well.
+     */
+    public static boolean isFeedCleared(Activity activity) {
+        View homeTab = homeTab(activity);
+        return homeTab != null && onlyItsBarIsHidden(homeTab) && !isScrolledAway(homeTab)
+                && homeTab.isSelected();
+    }
+
+    /**
+     * Whether the tab is out of sight only because its bar is: the tab itself VISIBLE, the bar
+     * holding it not, and everything above the bar shown. A screen laid over the feed hides
+     * more than the bar, and a tab hidden in its own right is not this either.
+     */
+    private static boolean onlyItsBarIsHidden(View tab) {
+        if (tab.getVisibility() != View.VISIBLE) return false;
+        ViewParent bar = tab.getParent();
+        if (!(bar instanceof View) || ((View) bar).getVisibility() == View.VISIBLE) return false;
+        ViewParent page = bar.getParent();
+        return page instanceof View && ((View) page).isShown();
     }
 
     /**

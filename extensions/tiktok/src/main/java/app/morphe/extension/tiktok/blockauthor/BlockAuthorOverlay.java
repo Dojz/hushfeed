@@ -176,7 +176,9 @@ public final class BlockAuthorOverlay {
         if (activity == null) {
             return;
         }
+        // Clear display is the feed, but with TikTok's controls put away the chips go too.
         setFeedVisible(FeedVisibility.isOnFeed(activity)
+                && !FeedVisibility.isFeedCleared(activity)
                 && !FeedVisibility.isCommentSheetVisible(activity)
                 && CurrentVideoAuthor.get() != null);
     }
