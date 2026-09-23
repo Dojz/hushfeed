@@ -286,6 +286,13 @@ public class Settings extends BaseSettings {
     public static final IntegerSetting AUTO_ADVANCE_LIMIT = new IntegerSetting(
             "auto_advance_limit", 0, false, Setting.parent(AUTO_ADVANCE)).withRange(0, 1000);
     /**
+     * Takes TikTok's own Auto scroll action out of the video panel (upstream #116). The patch
+     * surfaces that action for accounts outside its rollout; a reader who only wants advance on
+     * end has no use for it, and it read as a second, unexplained switch.
+     */
+    public static final BooleanSetting AUTO_ADVANCE_HIDE_PANEL_ACTION = new BooleanSetting(
+            "auto_advance_hide_panel_action", FALSE, false, Setting.parent(AUTO_ADVANCE));
+    /**
      * Quietens the feed while a comment sheet is open, and gives the sound back when it closes.
      * Off by default.
      */

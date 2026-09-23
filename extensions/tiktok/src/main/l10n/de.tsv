@@ -1183,3 +1183,5 @@ Hushfeed turns back on when TikTok restarts.	Hushfeed ist wieder aktiv, sobald T
 The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.	Die Datei hushfeed-safe-mode konnte nicht entfernt werden. Lösche sie im TikTok-Ordner unter Android/data, um Hushfeed wieder einzuschalten.
 Hide TikTok Shop in search	TikTok Shop in der Suche ausblenden
 Hide the Products block and product cards in search results.	Den Produkte-Block und Produktkarten in den Suchergebnissen ausblenden.
+Hide TikTok's Auto scroll button	TikToks Auto-Scroll-Schaltfläche ausblenden
+Takes TikTok's own Auto scroll action out of the video panel. Auto-advance keeps working.	Entfernt TikToks eigene Auto-Scroll-Aktion aus dem Videomenü. Videos werden weiterhin automatisch weitergeschaltet.

@@ -52,6 +52,10 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
                             + "not the ones you swiped yourself, and starts again when the feed "
                             + "is rebuilt or you change this number.",
                     Settings.AUTO_ADVANCE_LIMIT, "%1$s video", "%1$s videos").zeroMeansOff());
+            addPreference(new TogglePreference(context, "Hide TikTok's Auto scroll button",
+                    "Takes TikTok's own Auto scroll action out of the video panel. "
+                            + "Auto-advance keeps working.",
+                    Settings.AUTO_ADVANCE_HIDE_PANEL_ACTION));
         }
         if (SettingsStatus.commentToolsEnabled) {
             addPreference(new TogglePreference(context, "Silence the feed while comments are open",
