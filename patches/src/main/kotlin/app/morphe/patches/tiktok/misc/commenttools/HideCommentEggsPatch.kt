@@ -25,7 +25,9 @@ private const val COMMENT_SURPRISE = "Lcom/ss/android/ugc/aweme/comment/model/Co
  * model and the list helper that start the animation, and the observer that plays it. The
  * struct's one constructor is the only writer of that field, and every read checks it for null
  * straight away (CommentSurpriseAnchorsTest), so a constructor handed null leaves nothing to
- * play. Both classes keep their real names on every fixture.
+ * play. The extension does that only for a surprise a keyword set off: TikTok's own first-comment
+ * celebration comes through the same struct and stays. Both classes keep their real names on
+ * every fixture.
  *
  * <p>Through 0.58.0 this hooked the method that names comment_easter_egg_trigger. That method
  * only reports the animation to analytics, and its callers start the animation after it

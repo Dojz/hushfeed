@@ -23,12 +23,26 @@ public class CommentPopupAdsTest {
         Settings.HIDE_COMMENT_EGGS.resetToDefault();
     }
 
-    @Test public void theSwitchOnDropsTheSurpriseAndOffKeepsIt() {
-        Object surprise = new Object();
+    @Test public void theSwitchOnDropsAKeywordSurpriseAndOffKeepsIt() {
+        Surprise brand = new Surprise(3, "#summerdrop");
         Settings.HIDE_COMMENT_EGGS.save(true);
-        assertNull(CommentTools.commentSurprise(surprise));
+        assertNull(CommentTools.commentSurprise(brand));
         Settings.HIDE_COMMENT_EGGS.save(false);
-        assertSame(surprise, CommentTools.commentSurprise(surprise));
+        assertSame(brand, CommentTools.commentSurprise(brand));
+    }
+
+    /** The review of 6346661c: nulling every surprise took TikTok's own first-comment celebration too. */
+    @Test public void tiktoksFirstCommentCelebrationStaysWithTheSwitchOn() {
+        Settings.HIDE_COMMENT_EGGS.save(true);
+        Surprise firstComment = new Surprise(CommentTools.FIRST_COMMENT_SURPRISE, null);
+        assertSame(firstComment, CommentTools.commentSurprise(firstComment));
+        Surprise firstCommentNamingAWord = new Surprise(CommentTools.FIRST_COMMENT_SURPRISE, "first");
+        assertSame("the first-comment type wins over a keyword",
+                firstCommentNamingAWord, CommentTools.commentSurprise(firstCommentNamingAWord));
+        Surprise noWord = new Surprise(2, "  ");
+        assertSame("nothing a comment typed set it off", noWord, CommentTools.commentSurprise(noWord));
+        Surprise noType = new Surprise(null, "#summerdrop");
+        assertNull("a keyword with no type is still set off by words", CommentTools.commentSurprise(noType));
     }
 
     @Test public void noSurpriseStaysNone() {
@@ -39,9 +53,20 @@ public class CommentPopupAdsTest {
     }
 
     @Test public void pausedTheSurpriseIsTikToks() {
-        Object surprise = new Object();
+        Surprise brand = new Surprise(3, "#summerdrop");
         Settings.HIDE_COMMENT_EGGS.save(true);
         PausedProcess.set(true);
-        assertSame(surprise, CommentTools.commentSurprise(surprise));
+        assertSame(brand, CommentTools.commentSurprise(brand));
+    }
+
+    /** TikTok's CommentSurprise, by the two fields the switch reads. */
+    private static final class Surprise {
+        public final Integer surpriseType;
+        public final String keyword;
+
+        Surprise(Integer surpriseType, String keyword) {
+            this.surpriseType = surpriseType;
+            this.keyword = keyword;
+        }
     }
 }
