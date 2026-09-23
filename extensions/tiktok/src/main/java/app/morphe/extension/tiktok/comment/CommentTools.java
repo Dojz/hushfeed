@@ -72,10 +72,15 @@ public final class CommentTools {
 
     /**
      * The brand animation TikTok plays over the comment sheet when a comment matches an
-     * advertiser's trigger. Called from the trigger itself, so returning true skips it.
+     * advertiser's trigger. TikTok's server sends it as a surprise with the published comment or
+     * the comment page, and every way the sheet shows it reads that surprise out of the struct
+     * whose constructor calls this. Null leaves them nothing to play: each one checks the
+     * surprise for null before it touches it.
      */
-    public static boolean shouldHideCommentEgg() {
-        return Settings.HIDE_COMMENT_EGGS.get();
+    public static Object commentSurprise(Object surprise) {
+        if (surprise == null) return null;
+        HookStatus.bound("comment popup ads", "CommentSurpriseStruct constructor");
+        return Settings.HIDE_COMMENT_EGGS.get() ? null : surprise;
     }
 
     private static final String APP_PACKAGE = "com.zhiliaoapp.musically";
