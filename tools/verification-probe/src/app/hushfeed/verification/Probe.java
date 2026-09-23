@@ -832,6 +832,56 @@ public final class Probe extends Instrumentation {
                         Log.i(TAG, "ok surprisestruct kept=" + (kept == surprise) + " dropped=" + (kept == null));
                         break;
                     }
+                    case "captionstate": {
+                        // The caption strip (dlk) and its text (dlr) in one read. A caption line is
+                        // on screen only while it is spoken, and separate reads kept landing after
+                        // it had gone. For each shown view with either id: place, size and
+                        // background, and for the text its size in pixels and its line count.
+                        android.app.Activity activity = (android.app.Activity) loader.loadClass(UTILS)
+                                .getMethod("getActivity").invoke(null);
+                        if (activity == null) throw new IllegalStateException("no current activity");
+                        android.content.res.Resources resources = activity.getResources();
+                        int strip = resources.getIdentifier("dlk", "id", activity.getPackageName());
+                        int text = resources.getIdentifier("dlr", "id", activity.getPackageName());
+                        StringBuilder out = new StringBuilder();
+                        java.util.ArrayDeque<android.view.View> pending = new java.util.ArrayDeque<>(windowRoots());
+                        while (!pending.isEmpty()) {
+                            android.view.View view = pending.removeFirst();
+                            int id = view.getId();
+                            if (id != 0 && (id == strip || id == text) && view.isShown()) {
+                                int[] where = new int[2];
+                                view.getLocationOnScreen(where);
+                                out.append(' ').append(id == strip ? "strip" : "text")
+                                        .append("[at=").append(where[0]).append(',').append(where[1])
+                                        .append(" size=").append(view.getWidth()).append('x').append(view.getHeight())
+                                        .append(" bg=").append(describeDrawable(view.getBackground(), 0));
+                                if (view instanceof android.widget.TextView) {
+                                    android.widget.TextView label = (android.widget.TextView) view;
+                                    out.append(" textPx=").append(label.getTextSize())
+                                            .append(" lines=").append(label.getLineCount());
+                                }
+                                if (id == strip && view instanceof android.view.ViewGroup) {
+                                    // On 47.0.3 the text view stays gone and a sibling draws the
+                                    // caption's layout, so the children say what is really shown.
+                                    android.view.ViewGroup group = (android.view.ViewGroup) view;
+                                    for (int i = 0; i < group.getChildCount(); i++) {
+                                        android.view.View child = group.getChildAt(i);
+                                        out.append(" child=").append(child.getClass().getName())
+                                                .append('/').append(idName(child, resources))
+                                                .append("/vis").append(child.getVisibility())
+                                                .append('/').append(child.getWidth()).append('x').append(child.getHeight());
+                                    }
+                                }
+                                out.append(']');
+                            }
+                            if (view instanceof android.view.ViewGroup) {
+                                android.view.ViewGroup group = (android.view.ViewGroup) view;
+                                for (int i = 0; i < group.getChildCount(); i++) pending.add(group.getChildAt(i));
+                            }
+                        }
+                        Log.i(TAG, "ok captionstate" + (out.length() == 0 ? " none" : out.toString()));
+                        break;
+                    }
                     case "fields": {
                         // Static fields of one of Hushfeed's own classes, by name, for checking
                         // what a hook recorded: -e class app.morphe.extension.tiktok.speed.
