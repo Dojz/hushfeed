@@ -70,6 +70,41 @@ public class PauseLiftsTheHoldTest {
         assertTrue(SessionBudget.lockRemainingMs() > 0);
     }
 
+    @Test public void aVideoChangeWhilePausedLeavesTheHoldInTheRecord() throws Exception {
+        Settings.SESSION_BUDGET_VIDEOS.save(1);
+        Settings.SESSION_BUDGET_LOCK_MINUTES.save(60);
+        SessionBudget.noteVideo("a");
+        assertTrue(SessionBudget.claimNotice());
+        SessionBudget.awaitWritesForTests();
+        String record = Settings.SESSION_BUDGET_STATE.savedValue();
+
+        // Every video change asks for the notice. Paused, both budgets read zero through get(),
+        // which looked like a raised budget, and the hold was wiped out of the saved record.
+        PausedProcess.set(true);
+        assertFalse(SessionBudget.claimNotice());
+        SessionBudget.awaitWritesForTests();
+        assertEquals("a paused video change rewrote the budget record", record, Settings.SESSION_BUDGET_STATE.savedValue());
+
+        PausedProcess.set(false);
+        assertTrue("the hold was gone when Hushfeed came back", SessionBudget.isLocked());
+        assertFalse("the notice came back for a budget already spent", SessionBudget.claimNotice());
+    }
+
+    @Test public void aLockTurnedOnWhilePausedTakesASpentDay() {
+        Settings.SESSION_BUDGET_VIDEOS.save(1);
+        SessionBudget.noteVideo("a");
+        assertTrue(SessionBudget.reachedLimit());
+
+        // The settings screen shows the reader's budgets while paused, so the lock it offers has
+        // to judge the day by them: read through get(), a budget of zero was never spent.
+        PausedProcess.set(true);
+        assertTrue("the lock did not take a day that was already spent", SessionBudget.lockIfSpent());
+        assertTrue(SessionBudget.lockedToday());
+
+        PausedProcess.set(false);
+        assertTrue(SessionBudget.isLocked());
+    }
+
     @Test public void thePausedBudgetStillKnowsWhichDayItIs() {
         // The day is worked out from the reader's reset hour. Read through get() while paused,
         // that hour would answer the default and a paused start between the two hours would

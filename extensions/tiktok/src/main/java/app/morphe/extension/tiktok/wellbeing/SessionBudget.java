@@ -269,9 +269,11 @@ public final class SessionBudget {
     }
 
     private static boolean spent() {
-        int videoBudget = Settings.SESSION_BUDGET_VIDEOS.get();
+        return spent(Settings.SESSION_BUDGET_VIDEOS.get(), Settings.SESSION_BUDGET_MINUTES.get());
+    }
+
+    private static boolean spent(int videoBudget, int minuteBudget) {
         if (videoBudget > 0 && videos >= videoBudget) return true;
-        int minuteBudget = Settings.SESSION_BUDGET_MINUTES.get();
         return minuteBudget > 0 && watchedMs >= minuteBudget * 60_000L;
     }
 
@@ -282,6 +284,10 @@ public final class SessionBudget {
      * a screen covered for no reason anyone can see.
      */
     public static boolean claimNotice() {
+        // Asked on every video change. Paused, both budgets read zero through get(), which looked
+        // like a raised budget and wiped a running hold out of the record. The budget is off with
+        // everything else, and the record waits for Hushfeed to come back, as lockRemainingMs has it.
+        if (Setting.isPaused()) return false;
         synchronized (LOCK) {
             load();
             rollOver(clock.now());
@@ -508,7 +514,10 @@ public final class SessionBudget {
             load();
             long now = clock.now();
             rollOver(now);
-            if (lockedToday || !spent()) return false;
+            // The settings screen's answer, so the reader's budgets: paused, get() reads both as
+            // zero, and a lock turned on then would never take a day that was already spent.
+            boolean spent = spent(Settings.SESSION_BUDGET_VIDEOS.savedValue(), Settings.SESSION_BUDGET_MINUTES.savedValue());
+            if (lockedToday || !spent) return false;
             lockedToday = true;
             long untilReset = dayEndAfter(now);
             if (untilReset > lockUntilMs) lockUntilMs = untilReset;

@@ -50,12 +50,13 @@ public class LaunchCrashCleanupTest {
 
     /**
      * A call that opens or names a preferences file: TikTok's cleanup deletes that file unless
-     * it's kept. Counted per call, so a second file opened from a class already on the list is
-     * noticed too.
+     * it's kept. Each call is held to the text of its first argument, so a second file opened
+     * from a class already on the list is noticed, and so is a name built from a kept constant
+     * ({@code PREFERENCES + "_v2"}), which a count per file let through.
      */
     private static final Pattern OPENS_BY_NAME = Pattern.compile(
-            "getSharedPreferences\\(\\s*[^)\\s]|new SharedPrefCategory\\(|getDefaultSharedPreferences\\("
-                    + "|getPreferences\\(\\s*[^)\\s]|setSharedPreferencesName\\(");
+            "(?:getSharedPreferences|new SharedPrefCategory|getDefaultSharedPreferences"
+                    + "|getPreferences|setSharedPreferencesName)\\s*\\(");
 
     @Test public void tiktoksListKeepsItsOrderAndGainsHushfeedsFiles() {
         String[] kept = LaunchCrashCleanup.keepHushfeedFiles(TIKTOK_KEEPS.clone());
@@ -67,13 +68,15 @@ public class LaunchCrashCleanupTest {
     }
 
     @Test public void everyPreferencesFileHushfeedOpensIsKept() throws Exception {
-        Map<String, Integer> expected = new TreeMap<>();
-        expected.put("diagnostics/JavaCrashCapture.java", 1);
-        expected.put("featuregatelab/FeatureGateLabStore.java", 1);
-        expected.put("settings/CalmFeedPreset.java", 1);
-        expected.put("shared/settings/Setting.java", 1);
-        expected.put("shared/settings/preference/AbstractPreferenceFragment.java", 1);
-        expected.put("shared/settings/preference/SharedPrefCategory.java", 1);
+        // The first argument of every opening call: a kept constant, or the one field that a
+        // kept constant is handed to. Anything else is a file TikTok's cleanup would delete.
+        Map<String, List<String>> expected = new TreeMap<>();
+        expected.put("diagnostics/JavaCrashCapture.java", Arrays.asList("PREFS_NAME"));
+        expected.put("featuregatelab/FeatureGateLabStore.java", Arrays.asList("PREFS_NAME"));
+        expected.put("settings/CalmFeedPreset.java", Arrays.asList("PREFERENCES"));
+        expected.put("shared/settings/Setting.java", Arrays.asList("PREFERENCES_NAME"));
+        expected.put("shared/settings/preference/AbstractPreferenceFragment.java", Arrays.asList("Setting.preferences.name"));
+        expected.put("shared/settings/preference/SharedPrefCategory.java", Arrays.asList("name"));
         assertEquals("a call opens preferences that TikTok's launch-crash cleanup would delete; "
                         + "add the file's name to LaunchCrashCleanup.HUSHFEED_FILES and the call to this list",
                 expected, openersByName());
@@ -91,17 +94,48 @@ public class LaunchCrashCleanupTest {
         return (String) field.get(null);
     }
 
-    /** Each source that opens preferences by name, with how many calls it makes. */
-    private static Map<String, Integer> openersByName() throws IOException {
-        Map<String, Integer> openers = new TreeMap<>();
+    /**
+     * Each source that opens preferences by name, with the text of every call's first argument.
+     * A call with no argument names no file (the preference manager's own
+     * {@code getSharedPreferences()} uses the name set through {@code setSharedPreferencesName})
+     * and is left out.
+     */
+    private static Map<String, List<String>> openersByName() throws IOException {
+        Map<String, List<String>> openers = new TreeMap<>();
         for (Path source : payloadSources()) {
             String text = new String(Files.readAllBytes(source), StandardCharsets.UTF_8);
             Matcher matcher = OPENS_BY_NAME.matcher(text);
-            int calls = 0;
-            while (matcher.find()) calls++;
-            if (calls > 0) openers.put(relativeName(source), calls);
+            List<String> arguments = new ArrayList<>();
+            while (matcher.find()) {
+                String argument = firstArgument(text, matcher.end());
+                if (!argument.isEmpty()) arguments.add(argument);
+            }
+            if (!arguments.isEmpty()) openers.put(relativeName(source), arguments);
         }
         return openers;
+    }
+
+    /** The text between the opening parenthesis at {@code from} and the first comma or closing parenthesis at its depth. */
+    private static String firstArgument(String text, int from) {
+        int depth = 0;
+        boolean quoted = false;
+        for (int at = from; at < text.length(); at++) {
+            char c = text.charAt(at);
+            if (quoted) {
+                if (c == '\\') at++;
+                else if (c == '"') quoted = false;
+                continue;
+            }
+            if (c == '"') quoted = true;
+            else if (c == '(' || c == '[' || c == '{') depth++;
+            else if (c == ')' || c == ']' || c == '}') {
+                if (depth == 0) return text.substring(from, at).trim();
+                depth--;
+            } else if (c == ',' && depth == 0) {
+                return text.substring(from, at).trim();
+            }
+        }
+        return text.substring(from).trim();
     }
 
     private static String relativeName(Path source) {

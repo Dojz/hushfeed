@@ -231,6 +231,35 @@ public class PauseAnswersUnpatchedTest {
         assertEquals(joined, Settings.FEED_NAVIGATION_TABS.savedValue());
     }
 
+    @Test public void thePausedBottomTabFilterKeepsTheReadersTabListTheirOwn() {
+        Settings.BOTTOM_NAVIGATION.save(true);
+        Settings.BOTTOM_NAVIGATION_TABS.save("HOME");
+        Settings.BOTTOM_NAVIGATION_OBSERVED_TABS.save("HOME");
+        Settings.BOTTOM_NAVIGATION_BLOCK_NEW_TABS.save(true);
+
+        // The bottom row has its own observer with the same trap as the top one: read through
+        // get(), the block answers off and the list answers the default, and a tab Hushfeed has
+        // no name for is written over the reader's list with every default tab beside it.
+        Setting.setPausedForProcess(true);
+        List<Tab> tabs = Arrays.asList(new Tab("home"), new Tab("brand_new"));
+        assertEquals("paused, TikTok keeps every bottom tab it sends", tabs, NavigationTabsFilter.filterBottomTabs(tabs));
+        assertEquals("a blocked new tab was written over the reader's bottom list", "HOME",
+                Settings.BOTTOM_NAVIGATION_TABS.savedValue());
+
+        Settings.BOTTOM_NAVIGATION_BLOCK_NEW_TABS.save(false);
+        Settings.BOTTOM_NAVIGATION_OBSERVED_TABS.save("HOME");
+        NavigationTabsFilter.filterBottomTabs(tabs);
+        String joined = Settings.BOTTOM_NAVIGATION_TABS.savedValue();
+        assertTrue(joined, joined.startsWith("HOME,") && joined.contains("RAW:") && !joined.contains("FRIENDS"));
+
+        // The control: running normally, the same tab joins the same way.
+        Setting.setPausedForProcess(false);
+        Settings.BOTTOM_NAVIGATION_TABS.save("HOME");
+        Settings.BOTTOM_NAVIGATION_OBSERVED_TABS.save("HOME");
+        NavigationTabsFilter.filterBottomTabs(tabs);
+        assertEquals(joined, Settings.BOTTOM_NAVIGATION_TABS.savedValue());
+    }
+
     @Test public void aClearModeToggleWhilePausedIsNotRememberedOverTheReadersChoice() {
         Settings.CLEAR_DISPLAY.save(false);
         Setting.setPausedForProcess(true);
