@@ -24,6 +24,7 @@ import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.DocumentsContract;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.view.Window;
 import android.widget.ListView;
 
@@ -623,6 +624,11 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
     }
 
     @Override public void onDestroyView() {
+        // The search page raises the keyboard for its field, and popping the page left it up
+        // over whatever page came next until Back was pressed once more. The system Back closes
+        // it because the field still has focus; taking it down with the view covers the header's
+        // Back and a tapped result alike, since both replace this view.
+        hideKeyboard();
         if (styledAdapter != null) {
             styledAdapter.dispose();
             styledAdapter = null;
@@ -1312,6 +1318,13 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         if (manager != null) {
             manager.popBackStack();
         }
+    }
+
+    private void hideKeyboard() {
+        View view = getView();
+        if (view == null) return;
+        InputMethodManager manager = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (manager != null) manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     private void closeSettings() {
