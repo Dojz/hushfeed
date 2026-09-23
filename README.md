@@ -89,7 +89,7 @@ The manager has run short of memory. Step 4 of [Install](#install) says which li
 
 ### The file from APKMirror ends in .apkm
 
-That's a split bundle. Morphe Manager merges it, with one catch for AMOLED dark theme, which [Why you have to fetch that APK yourself](#why-you-have-to-fetch-that-apk-yourself) explains.
+That's a split bundle. Morphe Manager merges it into one APK, and AMOLED dark theme works on that. The desktop CLI merges it differently, and the dark theme refuses the result, which [Why you have to fetch that APK yourself](#why-you-have-to-fetch-that-apk-yourself) explains.
 
 ### Can I select every patch at once?
 
@@ -448,7 +448,7 @@ A patched app inherits TikTok's target SDK, which is 36 today. Android 17 raises
 
 Google Play only ever serves the newest build it thinks your device can run, so the copy on your phone may not be 47.0.3, and there is no way to ask Play for a specific older build. Take the APK from [APKMirror](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-0-3-release/tiktok-47-0-3-3-android-apk-download/), which serves the exact version, then patch that file rather than the installed app.
 
-APKMirror also offers some TikTok releases as bundles, using an `.apkm` file. Morphe Manager merges one into a single APK. AMOLED dark theme refuses a merged bundle with a message saying why, because rebuilding those merged resources can lose entries and make TikTok crash at launch. Take the plain 47.0.3 APK if you want the dark theme.
+APKMirror also offers some TikTok releases as bundles, using an `.apkm` file. Morphe Manager merges one into a single APK and keeps TikTok's own file paths, so AMOLED dark theme can rebuild its resources without losing any. The desktop CLI's merge moves every resource file into a new folder, and rebuilding that loses about 1,400 files and makes TikTok crash at launch, so the dark theme refuses it with a message saying why. On a computer, patch the plain 47.0.3 APK if you want the dark theme.
 
 ### Why that version and not a newer one
 
