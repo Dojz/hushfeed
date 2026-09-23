@@ -50,7 +50,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildDe() {
-        Map<String, String> table = new HashMap<>(2366);
+        Map<String, String> table = new HashMap<>(2368);
         fillDe0(table);
         fillDe1(table);
         fillDe2(table);
@@ -1307,8 +1307,8 @@ public final class L10nTranslations {
     private static void fillDe10(Map<String, String> table) {
         table.put("Location-tagged videos",
                 "Videos mit Ortsangaben");
-        table.put("Lock 2x speed with hold and slide",
-                "2x-Tempo per Halten und Wischen sperren");
+        table.put("Lock the hold speed with a pull down",
+                "Halte-Geschwindigkeit per Herunterziehen sperren");
         table.put("Lock today's budget",
                 "Heutiges Budget sperren");
         table.put("Log diagnostics",
@@ -1974,6 +1974,8 @@ public final class L10nTranslations {
                 "Geschwindigkeit");
         table.put("Speed menu choices",
                 "Auswahl im Geschwindigkeitsmenü");
+        table.put("Speed while you hold the video",
+                "Geschwindigkeit, solange du das Video gedrückt hältst");
         table.put("Split comment minimum width",
                 "Mindestbreite für geteilte Kommentare");
         table.put("Start each new video at your default. A manual choice lasts until the video changes.",
@@ -2038,11 +2040,11 @@ public final class L10nTranslations {
                 "Story gespeichert unter %1$s");
         table.put("Structured value observed",
                 "Strukturierter Wert beobachtet");
-        table.put("Subtitle language",
-                "Untertitelsprache");
     }
 
     private static void fillDe16(Map<String, String> table) {
+        table.put("Subtitle language",
+                "Untertitelsprache");
         table.put("Subtitles",
                 "Untertitel");
         table.put("System",
@@ -2161,11 +2163,11 @@ public final class L10nTranslations {
                 "Die Stunde, zu der beide Limits zurückgesetzt werden, im 24-Stunden-Format. Standardmäßig vier Uhr morgens, denn wer um eins noch scrollt, hat immer noch gestern Abend.");
         table.put("The loaded-values file you chose couldn't be read. Try again.",
                 "Die gewählte Datei mit geladenen Werten ließ sich nicht lesen. Versuch es noch einmal.");
-        table.put("The original photos aren't available, so TikTok's own save runs instead",
-                "Die Originalfotos sind nicht verfügbar, also speichert TikTok selbst");
     }
 
     private static void fillDe17(Map<String, String> table) {
+        table.put("The original photos aren't available, so TikTok's own save runs instead",
+                "Die Originalfotos sind nicht verfügbar, also speichert TikTok selbst");
         table.put("The override changes no fields. Edit the field values, or reset the override.",
                 "Die Überschreibung ändert keine Felder. Bearbeite die Feldwerte oder setze die Überschreibung zurück.");
         table.put("The override couldn't be applied: %1$s. Edit the field values, or reset the override.",
@@ -2254,8 +2256,8 @@ public final class L10nTranslations {
                 "TikTok wurde dreimal innerhalb einer Minute nach dem Start beendet, deshalb hat sich Hushfeed selbst pausiert. Deine Einstellungen bleiben, wie sie sind.");
         table.put("TikTok default",
                 "TikTok-Standard");
-        table.put("TikTok default (2x hold, quick share)",
-                "TikTok-Standard (2x halten, schnelles Teilen)");
+        table.put("TikTok default (hold to speed up, quick share)",
+                "TikTok-Standard (halten zum Beschleunigen, schnelles Teilen)");
         table.put("TikTok did not block %1$s. Try again in a moment.",
                 "TikTok hat %1$s nicht blockiert. Versuch es gleich noch einmal.");
         table.put("TikTok did not unblock %1$s. Try again in a moment.",
@@ -2284,11 +2286,11 @@ public final class L10nTranslations {
                 "TikToks Server kann ein Konto in ein Experiment stecken, das den Favoriten-Tab im Profil leert. Behält den Tab und seine gespeicherten Videos.");
         table.put("TikTok's size",
                 "TikToks Groesse");
-        table.put("Times you can open the feed anyway",
-                "Wie oft du den Feed trotzdem öffnen kannst");
     }
 
     private static void fillDe18(Map<String, String> table) {
+        table.put("Times you can open the feed anyway",
+                "Wie oft du den Feed trotzdem öffnen kannst");
         table.put("Today has moved on, so there is nothing to put back",
                 "Der Tag ist weitergezogen, es gibt nichts zurückzuholen");
         table.put("Today is back where it was",
@@ -2379,8 +2381,8 @@ public final class L10nTranslations {
                 "„Ruhiger Feed“ verwenden");
         table.put("Use Save JSON for this large report",
                 "Nutze für diesen großen Bericht „JSON speichern“");
-        table.put("Use TikTok's own hold, slide down and release gesture to lock 2x speed.",
-                "TikToks eigene Geste „Halten, nach unten wischen, loslassen“ verwenden, um die 2x-Geschwindigkeit zu fixieren.");
+        table.put("Use TikTok's own hold, pull down and release gesture to keep playing at the hold speed, 2x unless Playback sets another.",
+                "TikToks eigene Geste „Halten, nach unten ziehen, loslassen“ verwenden, um bei der Geschwindigkeit zu bleiben, die beim Halten gilt. Das ist 2x, sofern unter Wiedergabe keine andere eingestellt ist.");
         table.put("Use a default playback speed",
                 "Standardgeschwindigkeit verwenden");
         table.put("Use non-personalized search",
@@ -2407,11 +2409,11 @@ public final class L10nTranslations {
                 "Zurückgegebener Wert");
         table.put("Verified accounts",
                 "Verifizierte Konten");
-        table.put("Version %1$s",
-                "Version %1$s");
     }
 
     private static void fillDe19(Map<String, String> table) {
+        table.put("Version %1$s",
+                "Version %1$s");
         table.put("Version %1$s for TikTok %2$s",
                 "Version %1$s für TikTok %2$s");
         table.put("Video",
@@ -2501,7 +2503,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildEs() {
-        Map<String, String> table = new HashMap<>(2366);
+        Map<String, String> table = new HashMap<>(2368);
         fillEs0(table);
         fillEs1(table);
         fillEs2(table);
@@ -3758,8 +3760,8 @@ public final class L10nTranslations {
     private static void fillEs10(Map<String, String> table) {
         table.put("Location-tagged videos",
                 "Videos con ubicación");
-        table.put("Lock 2x speed with hold and slide",
-                "Fijar 2x manteniendo y deslizando");
+        table.put("Lock the hold speed with a pull down",
+                "Fijar la velocidad al mantener pulsado deslizando hacia abajo");
         table.put("Lock today's budget",
                 "Bloquear el presupuesto de hoy");
         table.put("Log diagnostics",
@@ -4425,6 +4427,8 @@ public final class L10nTranslations {
                 "Velocidad");
         table.put("Speed menu choices",
                 "Opciones del menú de velocidad");
+        table.put("Speed while you hold the video",
+                "Velocidad mientras mantienes pulsado el vídeo");
         table.put("Split comment minimum width",
                 "Anchura mínima para los comentarios al lado");
         table.put("Start each new video at your default. A manual choice lasts until the video changes.",
@@ -4489,11 +4493,11 @@ public final class L10nTranslations {
                 "Historia guardada en %1$s");
         table.put("Structured value observed",
                 "Valor estructurado observado");
-        table.put("Subtitle language",
-                "Idioma de los subtítulos");
     }
 
     private static void fillEs16(Map<String, String> table) {
+        table.put("Subtitle language",
+                "Idioma de los subtítulos");
         table.put("Subtitles",
                 "Subtítulos");
         table.put("System",
@@ -4612,11 +4616,11 @@ public final class L10nTranslations {
                 "La hora a la que se reinician ambos límites, en formato de 24 horas. Las cuatro de la madrugada por defecto, porque quien sigue deslizando a la una todavía está en la noche anterior.");
         table.put("The loaded-values file you chose couldn't be read. Try again.",
                 "No se pudo leer el archivo de valores cargados que elegiste. Inténtalo de nuevo.");
-        table.put("The original photos aren't available, so TikTok's own save runs instead",
-                "Las fotos originales no están disponibles, así que se usa el guardado propio de TikTok");
     }
 
     private static void fillEs17(Map<String, String> table) {
+        table.put("The original photos aren't available, so TikTok's own save runs instead",
+                "Las fotos originales no están disponibles, así que se usa el guardado propio de TikTok");
         table.put("The override changes no fields. Edit the field values, or reset the override.",
                 "La anulación no cambia ningún campo. Edita los valores de los campos o restablece la anulación.");
         table.put("The override couldn't be applied: %1$s. Edit the field values, or reset the override.",
@@ -4705,8 +4709,8 @@ public final class L10nTranslations {
                 "TikTok se cerró tres veces en el primer minuto después de abrirse, así que Hushfeed se pausó solo. Tus ajustes se quedan como están.");
         table.put("TikTok default",
                 "Predeterminado de TikTok");
-        table.put("TikTok default (2x hold, quick share)",
-                "Predeterminado de TikTok (mantener para 2x, compartir rápido)");
+        table.put("TikTok default (hold to speed up, quick share)",
+                "Predeterminado de TikTok (mantener para acelerar, compartir rápido)");
         table.put("TikTok did not block %1$s. Try again in a moment.",
                 "TikTok no bloqueó a %1$s. Inténtalo de nuevo en un momento.");
         table.put("TikTok did not unblock %1$s. Try again in a moment.",
@@ -4735,11 +4739,11 @@ public final class L10nTranslations {
                 "El servidor de TikTok puede meter una cuenta en un experimento que vacía la pestaña Favoritos de tu perfil. Mantiene la pestaña y sus vídeos guardados.");
         table.put("TikTok's size",
                 "Tamano de TikTok");
-        table.put("Times you can open the feed anyway",
-                "Veces que puedes abrir el feed de todas formas");
     }
 
     private static void fillEs18(Map<String, String> table) {
+        table.put("Times you can open the feed anyway",
+                "Veces que puedes abrir el feed de todas formas");
         table.put("Today has moved on, so there is nothing to put back",
                 "El día ha avanzado, así que no hay nada que recuperar");
         table.put("Today is back where it was",
@@ -4830,8 +4834,8 @@ public final class L10nTranslations {
                 "Usar Feed tranquilo");
         table.put("Use Save JSON for this large report",
                 "Usa Guardar JSON para este informe tan grande");
-        table.put("Use TikTok's own hold, slide down and release gesture to lock 2x speed.",
-                "Usar el gesto propio de TikTok de mantener, deslizar hacia abajo y soltar para bloquear la velocidad 2x.");
+        table.put("Use TikTok's own hold, pull down and release gesture to keep playing at the hold speed, 2x unless Playback sets another.",
+                "Usar el gesto propio de TikTok de mantener, deslizar hacia abajo y soltar para seguir a la velocidad de mantener pulsado, que es 2x salvo que elijas otra en Reproducción.");
         table.put("Use a default playback speed",
                 "Usar una velocidad de reproducción predeterminada");
         table.put("Use non-personalized search",
@@ -4858,11 +4862,11 @@ public final class L10nTranslations {
                 "Valor que se devuelve");
         table.put("Verified accounts",
                 "Cuentas verificadas");
-        table.put("Version %1$s",
-                "Versión %1$s");
     }
 
     private static void fillEs19(Map<String, String> table) {
+        table.put("Version %1$s",
+                "Versión %1$s");
         table.put("Version %1$s for TikTok %2$s",
                 "Versión %1$s para TikTok %2$s");
         table.put("Video",
@@ -4952,7 +4956,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIn() {
-        Map<String, String> table = new HashMap<>(2366);
+        Map<String, String> table = new HashMap<>(2368);
         fillIn0(table);
         fillIn1(table);
         fillIn2(table);
@@ -6209,8 +6213,8 @@ public final class L10nTranslations {
     private static void fillIn10(Map<String, String> table) {
         table.put("Location-tagged videos",
                 "Video berlabel lokasi");
-        table.put("Lock 2x speed with hold and slide",
-                "Kunci kecepatan 2x dengan tahan lalu geser");
+        table.put("Lock the hold speed with a pull down",
+                "Kunci kecepatan tahan dengan tarik ke bawah");
         table.put("Lock today's budget",
                 "Kunci anggaran hari ini");
         table.put("Log diagnostics",
@@ -6876,6 +6880,8 @@ public final class L10nTranslations {
                 "Kecepatan");
         table.put("Speed menu choices",
                 "Pilihan di menu kecepatan");
+        table.put("Speed while you hold the video",
+                "Kecepatan saat video ditahan");
         table.put("Split comment minimum width",
                 "Lebar minimum tata letak terbagi");
         table.put("Start each new video at your default. A manual choice lasts until the video changes.",
@@ -6940,11 +6946,11 @@ public final class L10nTranslations {
                 "Story disimpan ke %1$s");
         table.put("Structured value observed",
                 "Nilai terstruktur teramati");
-        table.put("Subtitle language",
-                "Bahasa subtitle");
     }
 
     private static void fillIn16(Map<String, String> table) {
+        table.put("Subtitle language",
+                "Bahasa subtitle");
         table.put("Subtitles",
                 "Subtitel");
         table.put("System",
@@ -7063,11 +7069,11 @@ public final class L10nTranslations {
                 "Jam saat kedua batas disetel ulang, dalam format 24 jam. Pukul empat pagi secara bawaan, karena orang yang masih menggulir pukul satu sebenarnya masih di malam sebelumnya.");
         table.put("The loaded-values file you chose couldn't be read. Try again.",
                 "Berkas nilai yang dimuat yang kamu pilih tidak bisa dibaca. Coba lagi.");
-        table.put("The original photos aren't available, so TikTok's own save runs instead",
-                "Foto aslinya tidak tersedia, jadi TikTok yang menyimpannya");
     }
 
     private static void fillIn17(Map<String, String> table) {
+        table.put("The original photos aren't available, so TikTok's own save runs instead",
+                "Foto aslinya tidak tersedia, jadi TikTok yang menyimpannya");
         table.put("The override changes no fields. Edit the field values, or reset the override.",
                 "Penimpaan tidak mengubah field apa pun. Ubah nilai field, atau setel ulang penimpaan.");
         table.put("The override couldn't be applied: %1$s. Edit the field values, or reset the override.",
@@ -7156,8 +7162,8 @@ public final class L10nTranslations {
                 "TikTok tertutup tiga kali dalam satu menit setelah dibuka, jadi Hushfeed menjeda dirinya sendiri. Pengaturanmu tetap seperti semula.");
         table.put("TikTok default",
                 "Bawaan TikTok");
-        table.put("TikTok default (2x hold, quick share)",
-                "Bawaan TikTok (tahan 2x, bagikan cepat)");
+        table.put("TikTok default (hold to speed up, quick share)",
+                "Bawaan TikTok (tahan untuk mempercepat, bagikan cepat)");
         table.put("TikTok did not block %1$s. Try again in a moment.",
                 "TikTok tidak memblokir %1$s. Coba lagi sebentar lagi.");
         table.put("TikTok did not unblock %1$s. Try again in a moment.",
@@ -7186,11 +7192,11 @@ public final class L10nTranslations {
                 "Server TikTok bisa memasukkan akun ke eksperimen yang mengosongkan tab Favorit di profil kamu. Pertahankan tab itu beserta video yang tersimpan.");
         table.put("TikTok's size",
                 "Ukuran TikTok");
-        table.put("Times you can open the feed anyway",
-                "Berapa kali kamu bisa tetap membuka feed");
     }
 
     private static void fillIn18(Map<String, String> table) {
+        table.put("Times you can open the feed anyway",
+                "Berapa kali kamu bisa tetap membuka feed");
         table.put("Today has moved on, so there is nothing to put back",
                 "Hari sudah berganti, jadi tidak ada yang bisa dikembalikan");
         table.put("Today is back where it was",
@@ -7281,8 +7287,8 @@ public final class L10nTranslations {
                 "Gunakan Feed tenang");
         table.put("Use Save JSON for this large report",
                 "Pakai Simpan JSON untuk laporan sebesar ini");
-        table.put("Use TikTok's own hold, slide down and release gesture to lock 2x speed.",
-                "Pakai gestur bawaan TikTok, tahan lalu geser ke bawah dan lepas, untuk mengunci kecepatan 2x.");
+        table.put("Use TikTok's own hold, pull down and release gesture to keep playing at the hold speed, 2x unless Playback sets another.",
+                "Pakai gestur bawaan TikTok, tahan lalu tarik ke bawah dan lepas, untuk tetap di kecepatan tahan, yaitu 2x kecuali kamu memilih yang lain di Pemutaran.");
         table.put("Use a default playback speed",
                 "Pakai kecepatan pemutaran bawaan");
         table.put("Use non-personalized search",
@@ -7309,11 +7315,11 @@ public final class L10nTranslations {
                 "Nilai yang dikembalikan");
         table.put("Verified accounts",
                 "Akun terverifikasi");
-        table.put("Version %1$s",
-                "Versi %1$s");
     }
 
     private static void fillIn19(Map<String, String> table) {
+        table.put("Version %1$s",
+                "Versi %1$s");
         table.put("Version %1$s for TikTok %2$s",
                 "Versi %1$s untuk TikTok %2$s");
         table.put("Video",
@@ -7403,7 +7409,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildPt_rBR() {
-        Map<String, String> table = new HashMap<>(2366);
+        Map<String, String> table = new HashMap<>(2368);
         fillPt_rBR0(table);
         fillPt_rBR1(table);
         fillPt_rBR2(table);
@@ -8660,8 +8666,8 @@ public final class L10nTranslations {
     private static void fillPt_rBR10(Map<String, String> table) {
         table.put("Location-tagged videos",
                 "Vídeos com localização");
-        table.put("Lock 2x speed with hold and slide",
-                "Travar em 2x segurando e deslizando");
+        table.put("Lock the hold speed with a pull down",
+                "Travar a velocidade de segurar puxando para baixo");
         table.put("Lock today's budget",
                 "Travar o limite de hoje");
         table.put("Log diagnostics",
@@ -9327,6 +9333,8 @@ public final class L10nTranslations {
                 "Velocidade");
         table.put("Speed menu choices",
                 "Opções do menu de velocidade");
+        table.put("Speed while you hold the video",
+                "Velocidade enquanto você segura o vídeo");
         table.put("Split comment minimum width",
                 "Largura mínima para os comentários ao lado");
         table.put("Start each new video at your default. A manual choice lasts until the video changes.",
@@ -9391,11 +9399,11 @@ public final class L10nTranslations {
                 "Story salvo em %1$s");
         table.put("Structured value observed",
                 "Valor estruturado observado");
-        table.put("Subtitle language",
-                "Idioma das legendas");
     }
 
     private static void fillPt_rBR16(Map<String, String> table) {
+        table.put("Subtitle language",
+                "Idioma das legendas");
         table.put("Subtitles",
                 "Legendas");
         table.put("System",
@@ -9514,11 +9522,11 @@ public final class L10nTranslations {
                 "A hora em que os dois limites zeram, no relógio de 24 horas. Quatro da manhã por padrão, porque quem ainda está rolando à uma continua na noite anterior.");
         table.put("The loaded-values file you chose couldn't be read. Try again.",
                 "Não foi possível ler o arquivo de valores carregados que você escolheu. Tente de novo.");
-        table.put("The original photos aren't available, so TikTok's own save runs instead",
-                "As fotos originais não estão disponíveis, então o salvamento do próprio TikTok é usado");
     }
 
     private static void fillPt_rBR17(Map<String, String> table) {
+        table.put("The original photos aren't available, so TikTok's own save runs instead",
+                "As fotos originais não estão disponíveis, então o salvamento do próprio TikTok é usado");
         table.put("The override changes no fields. Edit the field values, or reset the override.",
                 "A substituição não altera nenhum campo. Edite os valores dos campos ou redefina a substituição.");
         table.put("The override couldn't be applied: %1$s. Edit the field values, or reset the override.",
@@ -9607,8 +9615,8 @@ public final class L10nTranslations {
                 "O TikTok fechou três vezes no primeiro minuto depois de abrir, então o Hushfeed se pausou sozinho. Suas configurações continuam como estão.");
         table.put("TikTok default",
                 "Padrão do TikTok");
-        table.put("TikTok default (2x hold, quick share)",
-                "Padrão do TikTok (segurar para 2x, compartilhamento rápido)");
+        table.put("TikTok default (hold to speed up, quick share)",
+                "Padrão do TikTok (segurar para acelerar, compartilhamento rápido)");
         table.put("TikTok did not block %1$s. Try again in a moment.",
                 "O TikTok não bloqueou %1$s. Tente de novo daqui a pouco.");
         table.put("TikTok did not unblock %1$s. Try again in a moment.",
@@ -9637,11 +9645,11 @@ public final class L10nTranslations {
                 "O servidor do TikTok pode colocar uma conta em um experimento que esvazia a aba Favoritos do seu perfil. Mantém a aba e os vídeos salvos nela.");
         table.put("TikTok's size",
                 "Tamanho do TikTok");
-        table.put("Times you can open the feed anyway",
-                "Vezes que você pode abrir o feed mesmo assim");
     }
 
     private static void fillPt_rBR18(Map<String, String> table) {
+        table.put("Times you can open the feed anyway",
+                "Vezes que você pode abrir o feed mesmo assim");
         table.put("Today has moved on, so there is nothing to put back",
                 "O dia já andou, então não há nada para trazer de volta");
         table.put("Today is back where it was",
@@ -9732,8 +9740,8 @@ public final class L10nTranslations {
                 "Usar Feed tranquilo");
         table.put("Use Save JSON for this large report",
                 "Use Salvar JSON para este relatório grande");
-        table.put("Use TikTok's own hold, slide down and release gesture to lock 2x speed.",
-                "Usar o gesto do próprio TikTok de segurar, deslizar para baixo e soltar para travar a velocidade 2x.");
+        table.put("Use TikTok's own hold, pull down and release gesture to keep playing at the hold speed, 2x unless Playback sets another.",
+                "Usar o gesto do próprio TikTok de segurar, puxar para baixo e soltar para continuar na velocidade de segurar, que é 2x a menos que você escolha outra em Reprodução.");
         table.put("Use a default playback speed",
                 "Usar uma velocidade de reprodução padrão");
         table.put("Use non-personalized search",
@@ -9760,11 +9768,11 @@ public final class L10nTranslations {
                 "Valor devolvido");
         table.put("Verified accounts",
                 "Contas verificadas");
-        table.put("Version %1$s",
-                "Versão %1$s");
     }
 
     private static void fillPt_rBR19(Map<String, String> table) {
+        table.put("Version %1$s",
+                "Versão %1$s");
         table.put("Version %1$s for TikTok %2$s",
                 "Versão %1$s para TikTok %2$s");
         table.put("Video",
@@ -9854,7 +9862,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildTr() {
-        Map<String, String> table = new HashMap<>(2366);
+        Map<String, String> table = new HashMap<>(2368);
         fillTr0(table);
         fillTr1(table);
         fillTr2(table);
@@ -11111,8 +11119,8 @@ public final class L10nTranslations {
     private static void fillTr10(Map<String, String> table) {
         table.put("Location-tagged videos",
                 "Konum etiketli videolar");
-        table.put("Lock 2x speed with hold and slide",
-                "Basılı tutup kaydırarak 2x hızı kilitle");
+        table.put("Lock the hold speed with a pull down",
+                "Basılı tutma hızını aşağı çekerek kilitle");
         table.put("Lock today's budget",
                 "Bugünün bütçesini kilitle");
         table.put("Log diagnostics",
@@ -11778,6 +11786,8 @@ public final class L10nTranslations {
                 "Hız");
         table.put("Speed menu choices",
                 "Hız menüsü seçenekleri");
+        table.put("Speed while you hold the video",
+                "Videoyu basılı tutarken hız");
         table.put("Split comment minimum width",
                 "Bölünmüş yorumlar için en düşük genişlik");
         table.put("Start each new video at your default. A manual choice lasts until the video changes.",
@@ -11842,11 +11852,11 @@ public final class L10nTranslations {
                 "Hikaye şuraya kaydedildi: %1$s");
         table.put("Structured value observed",
                 "Yapılandırılmış değer gözlemlendi");
-        table.put("Subtitle language",
-                "Altyazı dili");
     }
 
     private static void fillTr16(Map<String, String> table) {
+        table.put("Subtitle language",
+                "Altyazı dili");
         table.put("Subtitles",
                 "Altyazılar");
         table.put("System",
@@ -11965,11 +11975,11 @@ public final class L10nTranslations {
                 "İki bütçenin de sıfırlandığı saat, 24 saatlik düzende. Varsayılan sabahın dördüdür, çünkü saat birde hâlâ kaydıran biri dün geceyi yaşıyordur.");
         table.put("The loaded-values file you chose couldn't be read. Try again.",
                 "Seçtiğin yüklenen değerler dosyası okunamadı. Yeniden dene.");
-        table.put("The original photos aren't available, so TikTok's own save runs instead",
-                "Orijinal fotoğraflar kullanılamıyor, bu yüzden TikTok'un kendi kaydetme işlemi çalışıyor");
     }
 
     private static void fillTr17(Map<String, String> table) {
+        table.put("The original photos aren't available, so TikTok's own save runs instead",
+                "Orijinal fotoğraflar kullanılamıyor, bu yüzden TikTok'un kendi kaydetme işlemi çalışıyor");
         table.put("The override changes no fields. Edit the field values, or reset the override.",
                 "Geçersiz kılma hiçbir alanı değiştirmiyor. Alan değerlerini düzenle ya da geçersiz kılmayı sıfırla.");
         table.put("The override couldn't be applied: %1$s. Edit the field values, or reset the override.",
@@ -12058,8 +12068,8 @@ public final class L10nTranslations {
                 "TikTok açıldıktan sonraki bir dakika içinde üç kez kapandı, bu yüzden Hushfeed kendini duraklattı. Ayarların olduğu gibi kalır.");
         table.put("TikTok default",
                 "TikTok varsayılanı");
-        table.put("TikTok default (2x hold, quick share)",
-                "TikTok varsayılanı (basılı tutunca 2x, hızlı paylaşım)");
+        table.put("TikTok default (hold to speed up, quick share)",
+                "TikTok varsayılanı (hızlandırmak için basılı tut, hızlı paylaşım)");
         table.put("TikTok did not block %1$s. Try again in a moment.",
                 "TikTok %1$s hesabını engellemedi. Birazdan yeniden dene.");
         table.put("TikTok did not unblock %1$s. Try again in a moment.",
@@ -12088,11 +12098,11 @@ public final class L10nTranslations {
                 "TikTok'un sunucusu, bir hesabı profilindeki Favoriler sekmesini boşaltan bir deneye sokabilir. Sekmeyi ve kayıtlı videolarını koru.");
         table.put("TikTok's size",
                 "TikTok'un boyutu");
-        table.put("Times you can open the feed anyway",
-                "Akışı yine de açabileceğin sefer sayısı");
     }
 
     private static void fillTr18(Map<String, String> table) {
+        table.put("Times you can open the feed anyway",
+                "Akışı yine de açabileceğin sefer sayısı");
         table.put("Today has moved on, so there is nothing to put back",
                 "Bugün ilerledi, bu yüzden geri konacak bir şey yok");
         table.put("Today is back where it was",
@@ -12183,8 +12193,8 @@ public final class L10nTranslations {
                 "Sakin akışı kullan");
         table.put("Use Save JSON for this large report",
                 "Bu büyük rapor için JSON'u kaydet seçeneğini kullan");
-        table.put("Use TikTok's own hold, slide down and release gesture to lock 2x speed.",
-                "2x hızı kilitlemek için TikTok'un kendi basılı tut, aşağı kaydır ve bırak hareketini kullan.");
+        table.put("Use TikTok's own hold, pull down and release gesture to keep playing at the hold speed, 2x unless Playback sets another.",
+                "Basılı tutma hızında kalmak için TikTok'un kendi basılı tut, aşağı çek ve bırak hareketini kullan. Oynatma altında başka bir hız seçilmedikçe 2x'tir.");
         table.put("Use a default playback speed",
                 "Varsayılan bir oynatma hızı kullan");
         table.put("Use non-personalized search",
@@ -12211,11 +12221,11 @@ public final class L10nTranslations {
                 "Döndürülecek değer");
         table.put("Verified accounts",
                 "Doğrulanmış hesaplar");
-        table.put("Version %1$s",
-                "Sürüm %1$s");
     }
 
     private static void fillTr19(Map<String, String> table) {
+        table.put("Version %1$s",
+                "Sürüm %1$s");
         table.put("Version %1$s for TikTok %2$s",
                 "Sürüm %1$s, TikTok %2$s için");
         table.put("Video",

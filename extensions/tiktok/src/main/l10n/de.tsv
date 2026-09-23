@@ -290,7 +290,7 @@ Empty	Leer
 Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.	Das Menü leeren, das sich beim langen Drücken des TikTok-Symbols auf dem Startbildschirm öffnet. Wird dies ausgeschaltet, wird TikTok gebeten, sie wieder aufzubauen. Ein Tippen auf das Symbol öffnet die App weiterhin, und eine selbst angeheftete Verknüpfung bleibt dort, wo sie abgelegt wurde.
 Enable	Einschalten
 Log diagnostics	Diagnose protokollieren
-Lock 2x speed with hold and slide	2x-Tempo per Halten und Wischen sperren
+Lock the hold speed with a pull down	Halte-Geschwindigkeit per Herunterziehen sperren
 Apply overrides	Überschreibungen anwenden
 Enabled	Eingeschaltet
 Enter a JSON object or array.	Gib ein JSON-Objekt oder -Array ein.
@@ -993,7 +993,7 @@ This video has no original sound to save	Dieses Video hat keinen Originalsound z
 This video has no sound of its own	Dieses Video hat keinen eigenen Sound
 Thumbs down blocks the commenter	Daumen runter blockiert den Kommentierenden
 TikTok default	TikTok-Standard
-TikTok default (2x hold, quick share)	TikTok-Standard (2x halten, schnelles Teilen)
+TikTok default (hold to speed up, quick share)	TikTok-Standard (halten zum Beschleunigen, schnelles Teilen)
 TikTok did not block %1$s. Try again in a moment.	TikTok hat %1$s nicht blockiert. Versuch es gleich noch einmal.
 TikTok did not unblock %1$s. Try again in a moment.	TikTok hat die Blockierung von %1$s nicht aufgehoben. Versuch es gleich noch einmal.
 TikTok didn't accept the feedback. Try again later.	TikTok hat die Rückmeldung nicht angenommen. Versuche es später noch einmal.
@@ -1048,7 +1048,7 @@ Until you choose here, this sheet follows your choices under Hide share actions.
 Up to %1$d speeds from %2$s to %3$s, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.	Bis zu %1$d Geschwindigkeiten von %2$s bis %3$s, durch Kommas getrennt. Beispiel: 0.5, 1, 1.5, 2, 2.5, 3. Leer lassen für TikToks Liste. TikTok neu starten, damit das gilt.
 Use 0 for TikTok's size, or %1$d to %2$d. Applies to the next caption.	0 für TikToks Größe, sonst %1$d bis %2$d. Gilt ab dem nächsten Untertitel.
 Use Save JSON for this large report	Nutze für diesen großen Bericht „JSON speichern“
-Use TikTok's own hold, slide down and release gesture to lock 2x speed.	TikToks eigene Geste „Halten, nach unten wischen, loslassen“ verwenden, um die 2x-Geschwindigkeit zu fixieren.
+Use TikTok's own hold, pull down and release gesture to keep playing at the hold speed, 2x unless Playback sets another.	TikToks eigene Geste „Halten, nach unten ziehen, loslassen“ verwenden, um bei der Geschwindigkeit zu bleiben, die beim Halten gilt. Das ist 2x, sofern unter Wiedergabe keine andere eingestellt ist.
 Use a default playback speed	Standardgeschwindigkeit verwenden
 Use non-personalized search	Nicht personalisierte Suche verwenden
 Use system font	Systemschrift verwenden
@@ -1187,3 +1187,4 @@ Hide TikTok's Auto scroll button	TikToks Auto-Scroll-Schaltfläche ausblenden
 Takes TikTok's own Auto scroll action out of the video panel. Auto-advance keeps working.	Entfernt TikToks eigene Auto-Scroll-Aktion aus dem Videomenü. Videos werden weiterhin automatisch weitergeschaltet.
 Hide the unread badges on the bottom tabs	Ungelesen-Abzeichen auf den unteren Tabs ausblenden
 Hide the red counts and dots on the Inbox and Profile tabs. The inbox itself still shows what came in.	Blendet die roten Zähler und Punkte auf den Tabs Posteingang und Profil aus. Der Posteingang selbst zeigt weiterhin, was angekommen ist.
+Speed while you hold the video	Geschwindigkeit, solange du das Video gedrückt hältst

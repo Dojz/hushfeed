@@ -73,6 +73,7 @@ public class AutoAdvanceTest {
         Settings.DEFAULT_SPEED_ENABLED.resetToDefault();
         Settings.DEFAULT_SPEED.resetToDefault();
         Settings.CUSTOM_SPEEDS.resetToDefault();
+        Settings.HOLD_SPEED.resetToDefault();
         Settings.AUTO_ADVANCE.save(true);
         Settings.SESSION_BUDGET_VIDEOS.resetToDefault();
         Settings.SESSION_BUDGET_LOCK_MINUTES.resetToDefault();

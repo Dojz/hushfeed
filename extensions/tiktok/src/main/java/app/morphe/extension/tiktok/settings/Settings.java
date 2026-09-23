@@ -284,6 +284,8 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting DEFAULT_SPEED_ENABLED = new BooleanSetting("default_speed_enabled", FALSE);
     public static final StringSetting DEFAULT_SPEED = new StringSetting("default_speed", "1.5");
     public static final StringSetting CUSTOM_SPEEDS = new StringSetting("custom_speeds", "", true);
+    /** The speed the hold gesture plays at and its pull-down lock keeps; TikTok's own is 2x (upstream #52). */
+    public static final StringSetting HOLD_SPEED = new StringSetting("hold_speed", "2");
     public static final BooleanSetting AUTO_ADVANCE = new BooleanSetting("auto_advance", FALSE, true);
     public static final IntegerSetting AUTO_ADVANCE_LIMIT = new IntegerSetting(
             "auto_advance_limit", 0, false, Setting.parent(AUTO_ADVANCE)).withRange(0, 1000);

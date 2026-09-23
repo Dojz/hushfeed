@@ -697,6 +697,99 @@ public final class Probe extends Instrumentation {
                         Log.i(TAG, "ok views " + text.length() + " chars in " + pieces + " pieces");
                         break;
                     }
+                    case "strings": {
+                        // TikTok's own UI strings by resource id, resolved the way TikTok resolves
+                        // them. Most of 47.0.3's strings are not in the APK's resource table (its
+                        // string type holds 964 entries); TikTok serves them at run time, so the
+                        // phone is the only place to read what a given id says. UI text only.
+                        android.app.Activity activity = (android.app.Activity) loader.loadClass(UTILS)
+                                .getMethod("getActivity").invoke(null);
+                        if (activity == null) throw new IllegalStateException("no current activity");
+                        StringBuilder out = new StringBuilder();
+                        for (String id : required(intent, "ids").split(",")) {
+                            int value = Integer.decode(id.trim());
+                            String text;
+                            try {
+                                text = activity.getString(value);
+                            } catch (RuntimeException missing) {
+                                text = "<" + missing.getClass().getSimpleName() + ">";
+                            }
+                            out.append('\n').append(id.trim()).append('=').append(text);
+                        }
+                        Log.i(TAG, "ok strings" + out);
+                        break;
+                    }
+                    case "playerspeed": {
+                        // The feed player's own speed and how far its position moves over a gap,
+                        // read through the player TikTok's static getter hands out. The holder
+                        // class and getter are renamed on every build, so they come in as extras
+                        // (47.0.3: -e holder X.037m -e getter LJLJJLL); getSpeed and
+                        // getCurrentPosition keep their names. Nothing about the video leaves.
+                        Method getter = loader.loadClass(required(intent, "holder"))
+                                .getDeclaredMethod(required(intent, "getter"));
+                        getter.setAccessible(true);
+                        Object player = getter.invoke(null);
+                        if (player == null) throw new IllegalStateException("no player");
+                        Method speed = player.getClass().getMethod("getSpeed");
+                        Method position = player.getClass().getMethod("getCurrentPosition");
+                        String gapText = intent.getStringExtra("gap");
+                        long gap = gapText == null ? 1000L : Long.parseLong(gapText);
+                        long startedAt = android.os.SystemClock.uptimeMillis();
+                        long startPosition = (Long) position.invoke(player);
+                        float startSpeed = (Float) speed.invoke(player);
+                        new android.os.Handler(android.os.Looper.getMainLooper()).postDelayed(() -> {
+                            try {
+                                long elapsed = android.os.SystemClock.uptimeMillis() - startedAt;
+                                long moved = (Long) position.invoke(player) - startPosition;
+                                Log.i(TAG, "ok playerspeed speed=" + startSpeed + " then " + speed.invoke(player)
+                                        + " moved=" + moved + "ms in " + elapsed + "ms rate="
+                                        + String.format(Locale.ROOT, "%.2f", moved / (double) elapsed));
+                            } catch (ReflectiveOperationException error) {
+                                Log.e(TAG, "failed playerspeed", error);
+                            }
+                        }, gap);
+                        break;
+                    }
+                    case "holdslide": {
+                        // A press held still long enough for TikTok's hold gesture, then a slide
+                        // and a release. Injected through the input system like a finger (an app
+                        // may inject into its own windows), from a thread of its own because
+                        // each injection waits for the main thread to take it. Separate "input
+                        // motionevent" calls from adb arrive a process launch apart, and the
+                        // feed took that slow drag as a scroll.
+                        float x = Float.parseFloat(required(intent, "x"));
+                        float y = Float.parseFloat(required(intent, "y"));
+                        float dy = Float.parseFloat(required(intent, "dy"));
+                        String holdText = intent.getStringExtra("hold");
+                        long hold = holdText == null ? 1500L : Long.parseLong(holdText);
+                        String slideText = intent.getStringExtra("slide");
+                        long slide = slideText == null ? 600L : Long.parseLong(slideText);
+                        new Thread(() -> {
+                            try {
+                                Instrumentation input = new Instrumentation();
+                                long down = android.os.SystemClock.uptimeMillis();
+                                input.sendPointerSync(android.view.MotionEvent.obtain(
+                                        down, down, android.view.MotionEvent.ACTION_DOWN, x, y, 0));
+                                android.os.SystemClock.sleep(hold);
+                                int steps = 24;
+                                for (int step = 1; step <= steps; step++) {
+                                    input.sendPointerSync(android.view.MotionEvent.obtain(down,
+                                            android.os.SystemClock.uptimeMillis(),
+                                            android.view.MotionEvent.ACTION_MOVE, x, y + dy * step / steps, 0));
+                                    android.os.SystemClock.sleep(slide / steps);
+                                }
+                                android.os.SystemClock.sleep(300);
+                                input.sendPointerSync(android.view.MotionEvent.obtain(down,
+                                        android.os.SystemClock.uptimeMillis(),
+                                        android.view.MotionEvent.ACTION_UP, x, y + dy, 0));
+                                Log.i(TAG, "ok holdslide at " + x + "," + y + " by " + dy + " after "
+                                        + hold + "ms, sliding " + slide + "ms");
+                            } catch (RuntimeException error) {
+                                Log.e(TAG, "failed holdslide", error);
+                            }
+                        }, "hushfeed-probe-holdslide").start();
+                        break;
+                    }
                     case "tabbadges": {
                         // TikTok's bottom tab icons draw their unread badges through their own
                         // setters (setCountDotText, setCountDotVisibility, setTabDotVisibility),
@@ -829,6 +922,15 @@ public final class Probe extends Instrumentation {
         }
 
         /** One press and release at a point, delivered the way the window would get it. */
+        private static void dispatch(android.view.View decor, long down, long when, int action, float x, float y) {
+            android.view.MotionEvent event = android.view.MotionEvent.obtain(down, when, action, x, y, 0);
+            try {
+                decor.dispatchTouchEvent(event);
+            } finally {
+                event.recycle();
+            }
+        }
+
         private static void tap(android.view.View decor, float x, float y) {
             long down = android.os.SystemClock.uptimeMillis();
             android.view.MotionEvent press = android.view.MotionEvent.obtain(

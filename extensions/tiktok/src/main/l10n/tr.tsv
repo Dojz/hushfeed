@@ -299,7 +299,7 @@ Empty	Boş
 Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.	Ana ekranda TikTok simgesine basılı tuttuğunda açılan menüyü boşalt. Bunu kapatırsan TikTok'tan kısayolları yeniden oluşturması istenir. Simgeye dokunmak yine uygulamayı açar ve kendi sabitlediğin bir kısayol koyduğun yerde kalır.
 Enable	Etkinleştir
 Log diagnostics	Tanılamayı günlüğe kaydet
-Lock 2x speed with hold and slide	Basılı tutup kaydırarak 2x hızı kilitle
+Lock the hold speed with a pull down	Basılı tutma hızını aşağı çekerek kilitle
 Apply overrides	Geçersiz kılmaları uygula
 Enabled	Etkin
 Enter a JSON object or array.	Bir JSON nesnesi veya dizisi gir.
@@ -1026,7 +1026,7 @@ This video has no original sound to save	Bu videonun kaydedilecek orijinal sesi 
 This video has no sound of its own	Bu videonun kendine ait bir sesi yok
 Thumbs down blocks the commenter	Aşağı başparmak yorumu yazanı engeller
 TikTok default	TikTok varsayılanı
-TikTok default (2x hold, quick share)	TikTok varsayılanı (basılı tutunca 2x, hızlı paylaşım)
+TikTok default (hold to speed up, quick share)	TikTok varsayılanı (hızlandırmak için basılı tut, hızlı paylaşım)
 TikTok did not block %1$s. Try again in a moment.	TikTok %1$s hesabını engellemedi. Birazdan yeniden dene.
 TikTok did not unblock %1$s. Try again in a moment.	TikTok %1$s hesabının engelini kaldırmadı. Birazdan yeniden dene.
 TikTok didn't accept the feedback. Try again later.	TikTok geri bildirimi kabul etmedi. Daha sonra yeniden dene.
@@ -1081,7 +1081,7 @@ Up to %1$d speeds from %2$s to %3$s, separated by commas. Example: 0.5, 1, 1.5, 
 Use 0 for TikTok's size, or %1$d to %2$d. Applies to the next caption.	TikTok'un boyutu için 0, ya da %1$d ile %2$d arasında bir değer kullan. Bir sonraki altyazıya uygulanır.
 Use Calm feed	Sakin akışı kullan
 Use Save JSON for this large report	Bu büyük rapor için JSON'u kaydet seçeneğini kullan
-Use TikTok's own hold, slide down and release gesture to lock 2x speed.	2x hızı kilitlemek için TikTok'un kendi basılı tut, aşağı kaydır ve bırak hareketini kullan.
+Use TikTok's own hold, pull down and release gesture to keep playing at the hold speed, 2x unless Playback sets another.	Basılı tutma hızında kalmak için TikTok'un kendi basılı tut, aşağı çek ve bırak hareketini kullan. Oynatma altında başka bir hız seçilmedikçe 2x'tir.
 Use a default playback speed	Varsayılan bir oynatma hızı kullan
 Use non-personalized search	Kişiselleştirilmemiş aramayı kullan
 Use system font	Sistem yazı tipini kullan
@@ -1184,3 +1184,4 @@ Hide TikTok's Auto scroll button	TikTok'un Otomatik kaydırma düğmesini gizle
 Takes TikTok's own Auto scroll action out of the video panel. Auto-advance keeps working.	TikTok'un kendi Otomatik kaydırma eylemini video panelinden kaldırır. Videolar otomatik geçmeye devam eder.
 Hide the unread badges on the bottom tabs	Alt sekmelerdeki okunmamış rozetlerini gizle
 Hide the red counts and dots on the Inbox and Profile tabs. The inbox itself still shows what came in.	Gelen Kutusu ve Profil sekmelerindeki kırmızı sayaçları ve noktaları gizler. Gelen kutusunun kendisi gelenleri göstermeye devam eder.
+Speed while you hold the video	Videoyu basılı tutarken hız
