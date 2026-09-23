@@ -148,9 +148,12 @@ public final class ContentMarkerFilters {
      * cards in the feed that promote them. A drama episode is a paid Series item as well, so Hide
      * Series takes it too; this switch takes the dramas and leaves other Series alone.
      *
-     * <p>PaidContentInfo rides along on ordinary videos, so only the drama's own data counts: the
-     * drama description TikTok sends as text on every episode (mini_drama_info, 1,182 characters
-     * on one read on the S22), or a promotion card that names a card type or holds dramas.
+     * <p>TikTok tells a drama from another Series by the Series' category (SeriesCategory
+     * MINI_DRAMA, 1; DEFAULT is 0), so that is the test here. The drama text (mini_drama_info)
+     * is not: it carries panel data every paid Series' player reads. A promotion card is a feed
+     * item whose card type is 92, which is set when the item is parsed. TikTok only builds the
+     * card's drama data (MiniDramaCardInfo) later, in DramaCardResponseProcessor, after this
+     * filter's first pass over the list, so a built card with a card type or dramas also counts.
      */
     public static class DramaFilter implements IFilter {
         @Override
@@ -164,11 +167,22 @@ public final class ContentMarkerFilters {
         }
     }
 
+    /** SeriesCategory.MINI_DRAMA. */
+    static final long MINI_DRAMA_CATEGORY = 1L;
+    /** The CardInsertInfo card type DramaCardResponseProcessor turns into a drama card. */
+    static final int DRAMA_CARD_TYPE = 92;
+
     static boolean isMiniDrama(Aweme item) {
         if (item == null) return false;
+        Object insert = Reflect.property(item, "getCardInsertInfo", "cardInsertInfo");
+        if (insert != null) {
+            Object type = Reflect.property(insert, "getCardType", "cardType");
+            if (type instanceof Number && ((Number) type).intValue() == DRAMA_CARD_TYPE) return true;
+        }
         Object info = Reflect.property(item, "getMPaidContentInfo", "mPaidContentInfo");
         if (info == null) return false;
-        if (Reflect.string(info, "getMiniDramaInfo", "miniDramaInfo") != null) return true;
+        Object category = Reflect.property(info, "getCategory", "category");
+        if (category instanceof Number && ((Number) category).longValue() == MINI_DRAMA_CATEGORY) return true;
         Object card = Reflect.property(info, "getMiniDramaCardInfo", "miniDramaCardInfo");
         if (card == null) return false;
         Object dramas = Reflect.property(card, "getDramas", "dramas");
