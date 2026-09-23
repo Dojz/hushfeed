@@ -400,6 +400,24 @@ exit /b 19
         $newer[1].FullName -eq (Get-Item -LiteralPath $gradleFile).FullName -and
         $newer[2].FullName -eq (Get-Item -LiteralPath $patchSource).FullName) `
         "Newer sources are not all listed, newest first: $(@($newer | ForEach-Object FullName) -join ', ')"
+    # The R8 rules every extension's build reads, and a compile-only stub in a patches
+    # submodule (its constants can be inlined into patch code), count too.
+    $rules = Join-Path $staleRoot 'extensions/proguard-rules.pro'
+    $stub = Join-Path $staleRoot 'patches/stub/src/main/java/android/os/Build.java'
+    foreach ($file in @($rules, $stub)) {
+        New-Item -ItemType Directory -Force -Path (Split-Path -Parent $file) | Out-Null
+        [System.IO.File]::WriteAllText($file, 'x', [System.Text.Encoding]::ASCII)
+        [System.IO.File]::SetLastWriteTimeUtc($file, $then)
+    }
+    Assert-True (@(Get-SourcesNewerThanBundle -Root $staleRoot -Bundle $staleBundle).Count -eq 3) `
+        'An R8 rules file or a stub written before the bundle was counted.'
+    [System.IO.File]::SetLastWriteTimeUtc($rules, $then.AddMinutes(10))
+    [System.IO.File]::SetLastWriteTimeUtc($stub, $then.AddMinutes(11))
+    $newer = @(Get-SourcesNewerThanBundle -Root $staleRoot -Bundle $staleBundle)
+    Assert-True ($newer.Count -eq 5 -and
+        $newer[0].FullName -eq (Get-Item -LiteralPath $stub).FullName -and
+        $newer[1].FullName -eq (Get-Item -LiteralPath $rules).FullName) `
+        "The R8 rules or a patches submodule's stub was missed: $(@($newer | ForEach-Object FullName) -join ', ')"
     $deviceScript = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'patch-for-device.ps1') -Raw
     Assert-True ($deviceScript -match 'Get-SourcesNewerThanBundle' -and
         $deviceScript -match '\[switch\]\$AllowStaleBundle') `
