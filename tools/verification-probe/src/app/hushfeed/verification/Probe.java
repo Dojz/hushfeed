@@ -681,7 +681,15 @@ public final class Probe extends Instrumentation {
                                     .append(" textPx=").append(Math.round(layout.getPaint().getTextSize()))
                                     .append(' ').append(layoutReport(layout));
                         }
-                        Log.i(TAG, "ok layouts" + out);
+                        // In pieces like the other reports: one line truncates near 4 KB and a
+                        // busy screen's report is longer, which silently lost its tail.
+                        String report = out.toString();
+                        int pieces = 0;
+                        for (int at = 0; at < report.length(); at += 3000, pieces++) {
+                            Log.i(TAG, "layouts[" + pieces + "] "
+                                    + report.substring(at, Math.min(report.length(), at + 3000)));
+                        }
+                        Log.i(TAG, "ok layouts " + report.length() + " chars in " + pieces + " pieces");
                         break;
                     }
                     case "opendetail": {
