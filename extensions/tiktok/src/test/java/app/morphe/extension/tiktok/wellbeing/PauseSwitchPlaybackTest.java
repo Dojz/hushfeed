@@ -175,6 +175,37 @@ public class PauseSwitchPlaybackTest {
         }
     }
 
+    /**
+     * Turning the switch off while the comments still hold the video stops the feature, and that
+     * must not start the sound behind the open sheet: the video is left as it is, and closing the
+     * sheet afterwards changes nothing either, since the feature let go when it was switched off.
+     */
+    @Test public void switchingOffMidHoldLeavesTheVideoPausedBehindTheOpenComments() {
+        Settings.PAUSE_ON_COMMENTS.save(true);
+        try (var owner = Robolectric.buildActivity(HostActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setActivity(activity);
+            NativeController player = playing("first");
+            FrameLayout sheet = panelIn(activity, true);
+            PausePlayback.onCommentCellBound(sheet.getChildAt(1));
+            idle();
+            assertEquals(1, player.manager.pauses);
+            assertTrue(ReflectionHelpers.<Boolean>callStaticMethod(PausePlayback.class, "quietenedForTests"));
+
+            Settings.PAUSE_ON_COMMENTS.save(false);
+            idleFor(600);
+            assertEquals("switching off started the video behind the open comments",
+                    0, player.manager.resumes);
+            assertFalse("the sound was kept after the switch went off",
+                    ReflectionHelpers.<Boolean>callStaticMethod(PausePlayback.class, "quietenedForTests"));
+
+            park(sheet);
+            idleFor(600);
+            assertEquals("the sheet closing resumed a video the feature had let go",
+                    0, player.manager.resumes);
+        }
+    }
+
     @Test public void aVideoTheReaderPausedStaysPausedWhenTheCommentsClose() {
         Settings.PAUSE_ON_COMMENTS.save(true);
         try (var owner = Robolectric.buildActivity(HostActivity.class).setup().visible()) {

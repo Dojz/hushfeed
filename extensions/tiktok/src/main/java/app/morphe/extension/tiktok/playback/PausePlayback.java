@@ -195,14 +195,19 @@ public final class PausePlayback {
     /** Holds the feed while the sheet covers it, and hands it back once it has gone. */
     private static void syncPanel() {
         Activity activity = panelActivityReference.get();
-        boolean open = activity != null && Settings.PAUSE_ON_COMMENTS.get() && panelOpen(activity);
+        boolean wanted = Settings.PAUSE_ON_COMMENTS.get();
+        boolean open = activity != null && wanted && panelOpen(activity);
         if (open && !panelHeld && !SessionBudget.isLocked()) {
             panelHeld = true;
             quieten();
             checkPanelSoon();
         } else if (!open && panelHeld) {
             panelHeld = false;
-            unquieten();
+            // The switch turned off while the sheet is still up: the feature stops managing, and
+            // that must not start the sound behind the open comments. The video stays as it is,
+            // one tap from the reader; only the sheet going away hands it back playing.
+            if (!wanted) handBack(false);
+            else unquieten();
         }
     }
 
