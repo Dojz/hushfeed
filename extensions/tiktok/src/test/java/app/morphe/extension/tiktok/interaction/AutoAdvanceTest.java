@@ -274,6 +274,19 @@ public class AutoAdvanceTest {
         assertFalse(AutoAdvance.panelAvailable(false));
         assertTrue(AutoAdvance.panelAvailable(true));
     }
+    @Test public void theHideSwitchGreyedUnderAnOffAutoAdvanceHidesNothing() {
+        // The row is greyed out and says to turn Auto-advance on first; an account in TikTok's
+        // own rollout keeps TikTok's Auto scroll action rather than losing it to a switch whose
+        // row claims it is inactive.
+        Settings.AUTO_ADVANCE.save(false);
+        Settings.AUTO_ADVANCE_HIDE_PANEL_ACTION.save(true);
+        try {
+            assertTrue(AutoAdvance.panelAvailable(true));
+            assertFalse(AutoAdvance.panelAvailable(false));
+        } finally {
+            Settings.AUTO_ADVANCE_HIDE_PANEL_ACTION.resetToDefault();
+        }
+    }
     @Test public void aCollectedFeedViewEndsTheControlsWork() {
         FeedView view = new FeedView();
         var control = new AutoAdvance.Control(view.indicator);
