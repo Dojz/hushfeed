@@ -48,11 +48,25 @@ class DownloadGearsFixturesTest {
                 "${apk.name}: the audio renditions field",
                 video.fields.any { it.name == "bitRateAudio" && it.type == LIST },
             )
+            // QualitySelector.codec reads this and takes a missing one for H.264, so a rename
+            // would bring ByteVC2 files back with every test green (refutation review 2026-09-23).
+            val bitRate = container.dexEntryNames.flatMap { entry ->
+                container.getEntry(entry)!!.dexFile.classes.filter { it.type == BIT_RATE }
+            }.first()
+            assertTrue(
+                "${apk.name}: BitRate's int codec field isBytevc1",
+                bitRate.fields.any { it.name == "isBytevc1" && it.type == "I" },
+            )
+            assertTrue(
+                "${apk.name}: BitRate's isBytevc1() getter",
+                bitRate.methods.any { it.name == "isBytevc1" && it.parameterTypes.isEmpty() && it.returnType == "I" },
+            )
         }
     }
 
     private companion object {
         const val VIDEO = "Lcom/ss/android/ugc/aweme/feed/model/Video;"
+        const val BIT_RATE = "Lcom/ss/android/ugc/aweme/feed/model/BitRate;"
         const val LIST = "Ljava/util/List;"
     }
 }
