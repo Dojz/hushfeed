@@ -18,11 +18,14 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
+import java.util.Locale;
+
 /**
  * Swipe-left controls. TikTok's main pager slides a left swipe on the feed to the creator's
- * profile; the setting holds that pager on its feed page and, set to comments, opens the video's
- * comments instead, once a swipe. On 47.0.3 the pager holds three pages, a side panel, the feed
- * and the profile, and the feed is the one before the last (the probe's pagerstate on the S22).
+ * profile; the setting holds that pager on its feed page while a gesture heads for the profile
+ * and, set to comments, opens the video's comments instead, once a swipe. On 47.0.3 the pager
+ * holds three pages, a side panel, the feed and the profile, and the feed is the one before the
+ * last (the probe's pagerstate on the S22).
  */
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = Config.NONE, sdk = 28)
@@ -87,6 +90,8 @@ public class SwipeLeftTest {
             Settings.SWIPE_LEFT_ACTION.save(action);
             pager.pages = 3;
             pager.page = FEED;
+            // Every question below comes during a swipe heading left, for the profile.
+            heading(900, 600);
             assertFalse(action + ": the feed page stays put", GestureActions.allowProfileSwipe(pager));
             pager.page = PROFILE;
             assertTrue(action + ": the swipe back from the profile stays TikTok's", GestureActions.allowProfileSwipe(pager));
@@ -101,6 +106,50 @@ public class SwipeLeftTest {
             assertTrue(action + ": and the profile page 1", GestureActions.allowProfileSwipe(pager));
             pager.pages = 3;
             pager.page = FEED;
+        }
+    }
+
+    /**
+     * TikTok's pager asks after every event, so the hold follows the gesture: the touch down pages
+     * as usual (TikTok records where the gesture starts), a swipe to the right still opens the side
+     * panel, and one that turns back past where it started is let go.
+     */
+    @Test public void onlyAGestureHeadingForTheProfileIsHeld() {
+        for (String action : new String[]{"nothing", "comments"}) {
+            Settings.SWIPE_LEFT_ACTION.save(action);
+            pager.page = FEED;
+            long start = SystemClock.uptimeMillis();
+            send(MotionEvent.ACTION_DOWN, start, 500, 1000);
+            assertTrue(action + ": at the touch down", GestureActions.allowProfileSwipe(pager));
+            heading(200, 700);
+            assertTrue(action + ": a swipe to the right, for the side panel", GestureActions.allowProfileSwipe(pager));
+            heading(900, 600);
+            assertFalse(action + ": a swipe to the left, for the profile", GestureActions.allowProfileSwipe(pager));
+            send(MotionEvent.ACTION_MOVE, start, 950, 1000);
+            assertTrue(action + ": turned back past where it started", GestureActions.allowProfileSwipe(pager));
+            send(MotionEvent.ACTION_UP, start, 950, 1000);
+        }
+    }
+
+    /** In a right-to-left layout TikTok's pager runs the other way: the profile is to the right. */
+    @Test public void inARightToLeftLayoutTheProfileIsToTheRight() {
+        Locale before = Locale.getDefault();
+        Locale.setDefault(new Locale("ar"));
+        try {
+            // The hold under "do nothing", so the gestures that ask it open nothing themselves.
+            Settings.SWIPE_LEFT_ACTION.save("nothing");
+            pager.page = FEED;
+            heading(200, 700);
+            assertFalse("a swipe to the right is held", GestureActions.allowProfileSwipe(pager));
+            heading(900, 600);
+            assertTrue("a swipe to the left pages as usual", GestureActions.allowProfileSwipe(pager));
+            Settings.SWIPE_LEFT_ACTION.save("comments");
+            swipe(900, 1000, 200, 1000);
+            assertEquals("a swipe to the left opens nothing", 0, opened);
+            swipe(200, 1000, 900, 1000);
+            assertEquals("a swipe to the right opens the comments", 1, opened);
+        } finally {
+            Locale.setDefault(before);
         }
     }
 
@@ -140,6 +189,13 @@ public class SwipeLeftTest {
         swipe(900, 1000, 200, 1000);
         swipe(900, 1000, 200, 1000);
         assertEquals(2, opened);
+    }
+
+    /** A swipe in progress: DOWN at one x, a MOVE to the other, no UP yet. */
+    private void heading(float fromX, float toX) {
+        long start = SystemClock.uptimeMillis();
+        send(MotionEvent.ACTION_DOWN, start, fromX, 1000);
+        send(MotionEvent.ACTION_MOVE, start, toX, 1000);
     }
 
     /** DOWN at the first point, a MOVE at each point after it, then UP at the last. */

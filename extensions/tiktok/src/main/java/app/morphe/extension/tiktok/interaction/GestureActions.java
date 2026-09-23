@@ -8,6 +8,7 @@ package app.morphe.extension.tiktok.interaction;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import app.morphe.extension.shared.Logger;
@@ -23,6 +24,7 @@ import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.L10n;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
+import java.util.Locale;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -316,12 +318,28 @@ public final class GestureActions {
 
     /**
      * Called as TikTok's main pager asks whether it may page, from its touch intercept and its
-     * drag alike. False keeps it where it is. Only the feed page is held, so from the profile the
-     * swipe back to the feed stays TikTok's, and a pager whose pages can't be read pages as usual.
+     * drag alike, always after {@link #onMainPagerTouch} has seen the same event. False keeps it
+     * where it is. Only a gesture heading for the profile is held, and only on the feed page: at
+     * the touch down TikTok still records where the gesture starts, a swipe the other way still
+     * opens TikTok's side panel, from the profile the swipe back stays TikTok's, and a pager whose
+     * pages can't be read pages as usual.
      */
     public static boolean allowProfileSwipe(Object pager) {
         if ("default".equals(Settings.SWIPE_LEFT_ACTION.get())) return true;
+        if (towardProfile(pager, swipeLastX - swipeDownX) <= 0) return true;
         return !onFeedPage(pager);
+    }
+
+    /**
+     * How far a horizontal movement goes toward the profile page: to the left in a left-to-right
+     * layout, to the right in a right-to-left one, where TikTok's pager runs the other way (its
+     * intercept negates the movement there).
+     */
+    static float towardProfile(Object pager, float dx) {
+        boolean rtl = pager instanceof View
+                ? ((View) pager).getLayoutDirection() == View.LAYOUT_DIRECTION_RTL
+                : TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL;
+        return rtl ? dx : -dx;
     }
 
     /** The Hook status family the left swipe reports under. */
@@ -330,6 +348,8 @@ public final class GestureActions {
     private static boolean swipeBound;
     private static float swipeDownX;
     private static float swipeDownY;
+    /** Where the gesture is now, for the direction {@link #allowProfileSwipe} holds. */
+    private static float swipeLastX;
     private static boolean swipeTracking;
     private static boolean swipeFired;
 
@@ -342,6 +362,7 @@ public final class GestureActions {
      */
     public static void onMainPagerTouch(Object pager, MotionEvent event) {
         if (event == null) return;
+        swipeLastX = event.getX();
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
                 swipeDownX = event.getX();
@@ -353,7 +374,7 @@ public final class GestureActions {
                 if (!swipeTracking || swipeFired) return;
                 float dx = event.getX() - swipeDownX;
                 float dy = event.getY() - swipeDownY;
-                if (dx > -swipeDistance() || Math.abs(dx) < 2 * Math.abs(dy)) return;
+                if (towardProfile(pager, dx) < swipeDistance() || Math.abs(dx) < 2 * Math.abs(dy)) return;
                 swipeFired = true;
                 swipeCommentsOpener.run();
                 return;
