@@ -48,6 +48,10 @@ fun Instruction.namedRegisters(): List<Int> = when (this) {
  * register named by a wide, long or double instruction counts along with the one above it.
  * Over-counting reads can only make a register look live, never free, so a register this
  * says is dead is dead.
+ *
+ * <p>The question asked of it is which registers a hook put in front of an instruction must
+ * leave alone, so inside a try a handler's reads count before the instruction's own write, even
+ * where the instruction can't throw: the hook's code can.
  */
 class RegisterLiveness private constructor(private val liveIn: Array<BitSet>) {
     // The graph is built by [ControlFlow], which [literalReads] walks forwards over as well.
@@ -55,7 +59,10 @@ class RegisterLiveness private constructor(private val liveIn: Array<BitSet>) {
     /** How many instructions the method had when this was computed. */
     val size: Int get() = liveIn.size
 
-    /** Registers some path from the instruction at [index] reads before writing. */
+    /**
+     * Registers some path from the instruction at [index] reads before writing, a handler of a
+     * try it sits in counting as reachable before its write.
+     */
     fun liveInto(index: Int): Set<Int> {
         val bits = liveIn[index]
         val registers = mutableSetOf<Int>()
@@ -76,12 +83,6 @@ class RegisterLiveness private constructor(private val liveIn: Array<BitSet>) {
             val flow = ControlFlow.of(method)
             val instructions = flow.instructions
             val count = instructions.size
-            // An instruction that throws never writes its destination, so the value its handlers
-            // read is the one the register held before it: their live-in joins after its own
-            // write is taken away, not before. One that can't throw keeps the handlers as plain
-            // successors, which can only make a register look more live.
-            val throwing = BooleanArray(count) { instructions[it].opcode.canThrow() }
-
             val use = Array(count) { BitSet() }
             val def = Array(count) { BitSet() }
             for (index in 0 until count) {
@@ -114,9 +115,13 @@ class RegisterLiveness private constructor(private val liveIn: Array<BitSet>) {
                 for (index in count - 1 downTo 0) {
                     val live = BitSet()
                     flow.normal[index].forEach { live.or(liveIn[it]) }
-                    if (!throwing[index]) flow.exceptional[index].forEach { live.or(liveIn[it]) }
                     live.andNot(def[index])
-                    if (throwing[index]) flow.exceptional[index].forEach { live.or(liveIn[it]) }
+                    // What a handler reads is what the register held before this instruction:
+                    // a throw from the instruction never writes its destination, and a hook put
+                    // in front of it runs code that can throw whatever the instruction does. So
+                    // the handlers' live-in joins after this instruction's write is taken away,
+                    // for every instruction in a try (refutation review of 4fe7b503).
+                    flow.exceptional[index].forEach { live.or(liveIn[it]) }
                     live.or(use[index])
                     if (live != liveIn[index]) {
                         liveIn[index] = live

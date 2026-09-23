@@ -128,11 +128,13 @@ class RegisterLivenessTest {
         ))
         val liveness = RegisterLiveness.of(method)
         // The handler can be entered from the risky call before v2 is written, so v2 is live
-        // there and before the try; after its own write it is dead on the straight path but
-        // the return inside the try can still throw into the handler, so it stays live.
+        // there and before the try. In front of the const that writes it, it is live as well: a
+        // hook put there runs code that can throw into the handler before v2 is written (this
+        // said empty until the refutation review of 4fe7b503). After the write it is dead on the
+        // straight path, but the return inside the try can still throw into the handler.
         assertEquals(setOf(2), liveness.liveInto(0))
         assertEquals(setOf(2), liveness.liveInto(1))
-        assertEquals(emptySet<Int>(), liveness.liveInto(2))
+        assertEquals(setOf(2), liveness.liveInto(2))
         assertEquals(setOf(2), liveness.liveInto(3))
         assertEquals(setOf(2), liveness.liveInto(4))
     }
@@ -166,6 +168,35 @@ class RegisterLivenessTest {
         // so a hook must not take v2 as scratch in front of the iget.
         assertEquals(setOf(1, 2), liveness.liveInto(1))
         assertEquals(setOf(2), liveness.liveInto(0))
+    }
+
+    @Test
+    fun `a write that can't throw keeps the handler's value live for a hook put in front of it`() {
+        val note = ImmutableMethodReference("Lcom/example/Log;", "note", listOf("I"), "V")
+        // 0: const/4 v2, 1          address 0
+        // 1: const/4 v2, 0          address 1, in the try: can't throw, overwrites v2
+        // 2: return-void            address 2, in the try
+        // 3: move-exception v0      address 3, the handler
+        // 4: invoke-static {v2} note address 4, the handler reads v2
+        // 5: return-void            address 7
+        val instructions = listOf(
+            ImmutableInstruction11n(Opcode.CONST_4, 2, 1),
+            ImmutableInstruction11n(Opcode.CONST_4, 2, 0),
+            ImmutableInstruction10x(Opcode.RETURN_VOID),
+            ImmutableInstruction11x(Opcode.MOVE_EXCEPTION, 0),
+            ImmutableInstruction35c(Opcode.INVOKE_STATIC, 1, 2, 0, 0, 0, 0, note),
+            ImmutableInstruction10x(Opcode.RETURN_VOID),
+        )
+        val tryBlock = ImmutableTryBlock(1, 2, listOf(ImmutableExceptionHandler("Ljava/lang/Exception;", 3)))
+        val method = MutableMethod(ImmutableMethod(
+            "Lcom/example/Host;", "run", emptyList(), "V",
+            AccessFlags.PUBLIC.value or AccessFlags.STATIC.value, null, null,
+            ImmutableMethodImplementation(3, instructions, listOf(tryBlock), null),
+        ))
+        // The const itself can't throw, but a hook in front of it (LruCache.remove, sput-object)
+        // can, and the handler then reads v2 as it was: the hook must not take v2 as scratch
+        // (refutation review of 4fe7b503).
+        assertEquals(setOf(2), RegisterLiveness.of(method).liveInto(1))
     }
 
     @Test
