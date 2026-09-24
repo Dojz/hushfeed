@@ -12841,11 +12841,11 @@ public final class L10nTranslations {
         table.put("A file named hushfeed-safe-mode in TikTok's folder under Android/data paused Hushfeed. Your settings stay as they are.",
                 "Android/data 下 TikTok 文件夹中的 hushfeed-safe-mode 文件已暂停插件；设置不变.");
         table.put("A forced value applies to this copy of TikTok whichever account is signed in. It cannot get past a check the server makes.",
-                "强制值会应用于此 TikTok 安装，无论登录哪个账号。它无法绕过服务器端检查.");
+                "强制值对本机所有账号生效，但无法绕过服务器检查.");
         table.put("A good place to stop, if you want one.",
                 "如果想停一停，现在正合适.");
         table.put("A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.",
-                "TikTok 使用摄像头时，顶部角落显示绿点；录音时显示橙点。访问结束后指示点会消失.");
+                "TikTok 使用摄像头时顶部显示绿点，录音时显示橙点；停止访问后消失.");
         table.put("A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.",
                 "分享或复制链接时，用指定域名替换 tiktok.com，例如 vxtiktok.com。留空则保留 TikTok 原始链接。只会替换 TikTok 链接的域名，不会把内容发送到其他服务器.");
         table.put("A newer clear replaced that undo. Tap the row again to undo.",
@@ -12913,7 +12913,7 @@ public final class L10nTranslations {
         table.put("Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.",
                 "也将这些筛选规则应用于 TikTok 在信息流无法加载足够新内容时使用的已下载视频.");
         table.put("Also change the region TikTok reports internally. Keeps your interface language. Your IP address and your account's own rules still apply.",
-                "同时更改 TikTok 内部上报的地区。界面语言保持不变。你的 IP 地址以及账号自身的地区规则仍然有效.");
+                "同时修改 TikTok 内部上报地区，不改变界面语言；IP 和账号规则仍可能影响地区判断.");
         table.put("Also on a block list, so still hidden: %1$s",
                 "同时也在屏蔽列表中，因此仍会隐藏：%1$s");
     }
@@ -12934,19 +12934,19 @@ public final class L10nTranslations {
         table.put("An operator code is five or six digits, like 310260",
                 "运营商代码应为 5 或 6 位数字，例如 310260");
         table.put("An override changes the value TikTok reads from this gate. It does not rewrite TikTok's cached value or prove the named feature changed.",
-                "覆盖值会改变 TikTok 从此功能项读取到的值，但不会改写 TikTok 的缓存值，也不能证明对应功能一定发生了变化.");
+                "覆盖值只改变 TikTok 读取到的值，不会改写缓存，也不代表对应功能一定生效.");
         table.put("Animated sticker format",
                 "动态贴纸格式");
         table.put("Answer TikTok's location requests with nothing. The region settings change the locale and timezone; this stops the coordinates.",
-                "对 TikTok 的定位请求返回空值。地区设置会更改区域和时区；此选项会阻止提供坐标.");
+                "TikTok 请求定位时返回空值。地区设置只改区域和时区，此项则阻止提供坐标.");
         table.put("Answer TikTok's reads of your contacts with an empty list. Find Friends and People you may know lose access to your contact list.",
-                "当 TikTok 读取联系人时返回空列表。“查找好友”和“你可能认识的人”将无法访问你的联系人.");
+                "TikTok 读取联系人时返回空列表，使“查找好友”和“你可能认识的人”无法访问联系人.");
         table.put("Answer TikTok's scan of the apps on this phone with an empty list. A check for one named app, which TikTok also uses to open an app you tap, is left alone.",
                 "TikTok 扫描本机已安装应用时返回空列表。针对特定应用的单项检查会保留，因为 TikTok 还需要它来打开你点按的应用.");
         table.put("App",
                 "应用");
         table.put("App AB",
-                "A/B 实验");
+                "A/B 实验\nApp AB");
         table.put("Appearance",
                 "外观");
         table.put("Applies to both video and photo downloads.",
@@ -13008,7 +13008,7 @@ public final class L10nTranslations {
         table.put("Block new feed tabs",
                 "阻止新增信息流标签");
         table.put("Block the creator in one tap. Once TikTok confirms, skip to the next video. A small Unblock button appears at the top left for two seconds. You can also unblock later in TikTok's Privacy > Blocked accounts.",
-                "一键拉黑当前创作者。TikTok 确认后会跳到下一个视频，左上角会短暂显示 2 秒“解除拉黑”按钮。之后也可以在 TikTok 的“隐私 > 已屏蔽账号”中解除.");
+                "一键拉黑当前创作者。成功后跳到下一条视频，左上角会显示 2 秒“解除拉黑”；也可稍后在 TikTok“隐私 > 已屏蔽账号”中解除.");
         table.put("Block this commenter",
                 "拉黑此评论者");
         table.put("Block this creator",
@@ -13125,9 +13125,9 @@ public final class L10nTranslations {
         table.put("Close",
                 "关闭");
         table.put("Comma separated account handles or user ids. Their videos stay when only a filter on the kind of post, its labels, age, length or counts would hide them. Ads, blocked creators, words, sounds and countries, and seen videos still apply.",
-                "用英文逗号分隔账号用户名或用户 ID。若视频仅因帖子类型、标签、发布时间、时长或数据量筛选而被隐藏，这些账号的视频仍会保留。广告、已屏蔽创作者、关键词、声音、国家/地区以及已看视频等规则仍会生效.");
+                "用英文逗号分隔用户名或用户 ID。若视频只因内容类型、标签、发布时间、时长或数据量规则被筛掉，这些账号的视频仍会保留；广告、已屏蔽创作者、关键词、声音、国家/地区和已看视频规则仍生效.");
         table.put("Comma separated account handles or user ids. Videos from these accounts are always hidden. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.",
-                "用英文逗号分隔账号用户名或用户 ID。这些账号的视频将始终隐藏。用斜杠包围的条目（如 /^news_/）会作为匹配规则，同时匹配用户名和显示名称.");
+                "用英文逗号分隔用户名或用户 ID，这些账号的视频始终隐藏。用斜杠包围可写匹配规则，同时匹配用户名和显示名称，例如 /^news_/.");
         table.put("Comma separated country codes, like GB, IE. Videos posted from anywhere else are hidden. Leave empty for all countries.",
                 "用英文逗号分隔国家/地区代码，例如 GB、IE。其他地区发布的视频会被隐藏。留空表示允许所有地区.");
         table.put("Comma separated country codes. Videos posted from these are hidden, whatever the list above says.",
@@ -13135,7 +13135,7 @@ public final class L10nTranslations {
         table.put("Comma separated list of any other Inbox row titles to hide, matched exactly. Use this for anything not listed above.",
                 "用英文逗号分隔其他要隐藏的收件箱项目标题，需精确匹配。可用于上方未列出的项目.");
         table.put("Comma separated names exactly as the share sheet shows them: friends in the Send to row, share targets such as Facebook, and actions such as Create group or Repost. Stable keys such as copy, save and dislike also work before the sheet opens.",
-                "用英文逗号分隔名称，必须与分享面板中的显示完全一致，例如“发送给”一栏的好友、Facebook 等分享目标，以及“创建群聊”或“转发”等操作。copy、save、dislike 等稳定键名也可在面板打开前生效.");
+                "按分享面板显示名称填写，并用英文逗号分隔：包括“发送给”中的好友、Facebook 等分享目标，以及“创建群聊”“转发”等操作。copy、save、dislike 等稳定键名也可使用.");
         table.put("Comma separated sound ids recorded by the player's sound button. Remove one to unblock it.",
                 "用英文逗号分隔由播放器声音按钮记录的声音 ID。删除某项即可解除屏蔽.");
         table.put("Comma separated usernames or display names whose comments are hidden.",
@@ -13341,7 +13341,7 @@ public final class L10nTranslations {
         table.put("Empty",
                 "空");
         table.put("Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.",
-                "清空在主屏幕长按 TikTok 图标时出现的快捷菜单。关闭此选项后会让 TikTok 重新生成这些快捷项。点按图标仍可打开应用，你手动固定的快捷方式也会保留.");
+                "清空主屏幕长按 TikTok 图标时的快捷菜单。关闭此项后 TikTok 会重新生成；应用仍可正常打开，手动固定的快捷方式不受影响.");
         table.put("Enable",
                 "启用");
         table.put("Enabled",
@@ -13389,7 +13389,7 @@ public final class L10nTranslations {
         table.put("Exported 1 loaded value",
                 "已导出 1 个已加载值");
         table.put("Extend the heart's touch area into nearby blank space. The icon and row spacing stay the same. Text, Reply and other controls keep their own space.",
-                "将爱心按钮的触控区域扩展到附近空白处。图标和行间距保持不变，文字、“回复”和其他控件仍保留各自的触控区域.");
+                "扩大爱心按钮的可点击范围，但不改变图标和布局，也不会占用文字、“回复”等控件区域.");
         table.put("Fade the feed out before the hold",
                 "暂停信息流前逐渐淡出");
         table.put("Favorites range",
@@ -13537,7 +13537,7 @@ public final class L10nTranslations {
         table.put("Hide TikTok Shop posts from the feed.",
                 "从信息流中隐藏 TikTok Shop 内容.");
         table.put("Hide TikTok's \"Search: ...\" banner above the comment count. This doesn't hide the comments or Hushfeed's comment-search box.",
-                "隐藏评论数量上方 TikTok 的“搜索：...”横幅。不会隐藏评论，也不会隐藏 Hushfeed 的评论搜索框.");
+                "隐藏评论数上方 TikTok 的“搜索：...”横幅，不影响评论和插件的评论搜索框.");
         table.put("Hide TikTok's Auto scroll button",
                 "隐藏 TikTok 的自动滚动按钮");
         table.put("Hide TikTok's short drama episodes and the cards that promote them.",
@@ -13571,7 +13571,7 @@ public final class L10nTranslations {
         table.put("Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still turned on.",
                 "隐藏所有私信会话。除仍启用的其他收件箱项目外，收件箱会保持为空.");
         table.put("Hide feed videos with place badges, even when they aren't paid ads. To keep the video and hide only its badge, use Hide location labels in Feed screen.",
-                "隐藏带地点徽标的信息流视频，即使它们不是付费广告。若只想隐藏徽标并保留视频，请在“信息流界面”中启用“隐藏地点标签”.");
+                "隐藏带地点徽标的信息流视频，即使不是广告。若只想隐藏徽标并保留视频，请用“信息流界面 > 隐藏地点标签”.");
         table.put("Hide floating promotion badges, coins, and timer banners on the feed.",
                 "隐藏信息流中的浮动推广徽标、金币和计时横幅.");
         table.put("Hide floating promotions",
@@ -13607,7 +13607,7 @@ public final class L10nTranslations {
         table.put("Hide promotional music",
                 "隐藏推广音乐");
         table.put("Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.",
-                "在 TikTok 搜索页输入前隐藏推荐搜索。搜索历史仍会保留。此选项不会隐藏评论上方的搜索建议.");
+                "在 TikTok 搜索页输入前隐藏推荐搜索，不清除搜索历史，也不影响评论上方的搜索建议.");
         table.put("Hide recorded LIVE broadcasts from the feed.",
                 "从信息流中隐藏已录制的 LIVE 回放.");
         table.put("Hide rows by title",
@@ -13635,9 +13635,9 @@ public final class L10nTranslations {
         table.put("Hide tabs TikTok adds later unless you allow them.",
                 "隐藏 TikTok 后续新增的信息流标签，除非你明确允许.");
         table.put("Hide the \"Search this image\" prompt shown over videos. The feed search button and suggestions above comments are separate settings.",
-                "隐藏视频上方的“搜索此图片”提示。信息流搜索按钮和评论上方建议属于其他独立设置.");
+                "隐藏视频上的“搜索此图片”提示；信息流搜索按钮和评论上方建议需分别设置.");
         table.put("Hide the CAPTCHA dialogs raised while you browse or watch LIVE. Login, account verification and any CAPTCHA raised over a follow, like, comment or repost stay visible.",
-                "隐藏浏览内容或观看 LIVE 时出现的 CAPTCHA 对话框。登录、账号验证，以及关注、点赞、评论或转发时触发的 CAPTCHA 仍会显示.");
+                "隐藏浏览或观看 LIVE 时出现的 CAPTCHA。登录、账号验证，以及关注、点赞、评论或转发触发的 CAPTCHA 仍会显示.");
         table.put("Hide the Full screen button",
                 "隐藏全屏按钮");
         table.put("Hide the Full screen button over videos. Playback and automatic rotation keep working as before.",
@@ -13676,7 +13676,7 @@ public final class L10nTranslations {
         table.put("Hide the event badge",
                 "隐藏活动徽标");
         table.put("Hide the flag button TikTok puts above the creator's picture in some regions. You can still report a video from the share menu.",
-                "隐藏部分地区中 TikTok 放在创作者头像上方的旗帜举报按钮。你仍可通过分享菜单举报视频.");
+                "隐藏部分地区头像上方的旗帜举报按钮；仍可从分享菜单举报视频.");
         table.put("Hide the floating promotional badge over the feed.",
                 "隐藏信息流上方的浮动推广徽标.");
         table.put("Hide the follow button on the feed",
@@ -13698,7 +13698,7 @@ public final class L10nTranslations {
         table.put("Hide the playlist bar along the bottom of videos that belong to a series.",
                 "隐藏系列视频底部的播放列表栏.");
         table.put("Hide the plus button under the creator's picture in the right column. Ticking Avatar and follow button above hides the picture with it.",
-                "隐藏右侧栏中创作者头像下方的加号按钮。若同时勾选上方“头像和关注按钮”，头像也会一起隐藏.");
+                "隐藏右侧按钮栏中头像下的加号。若上方同时勾选“头像和关注按钮”，头像也会隐藏.");
         table.put("Hide the points banner under the search box and the coin counter floating over search results, which TikTok shows in some regions. Searching works as before.",
                 "隐藏部分地区中搜索框下方的积分横幅，以及搜索结果上方浮动的金币计数；搜索功能不受影响.");
         table.put("Hide the purple rewards button beside Add friends on your profile.",
@@ -13706,9 +13706,9 @@ public final class L10nTranslations {
         table.put("Hide the question cards TikTok slides over a video near its end.",
                 "隐藏 TikTok 在视频接近结束时滑入显示的问题卡片.");
         table.put("Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.",
-                "隐藏输入评论时出现的快捷表情栏和自动贴纸建议。表情与贴纸按钮仍可正常使用.");
+                "隐藏输入评论时的快捷表情和自动贴纸建议，表情和贴纸按钮仍可使用.");
         table.put("Hide the red counts and dots on every bottom tab, Inbox and Profile included. The inbox itself still shows what came in.",
-                "隐藏所有底部标签上的红色计数和红点，包括收件箱和个人资料。收件箱内部仍会显示收到的内容.");
+                "隐藏所有底部标签的红点和未读数，包括收件箱和个人资料；收件箱内容不受影响.");
         table.put("Hide the rewards shortcut",
                 "隐藏奖励快捷入口");
         table.put("Hide the right column",
@@ -13760,7 +13760,7 @@ public final class L10nTranslations {
         table.put("Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.",
                 "隐藏播放量高但评论少的视频。规则与“每个赞对应播放量”相同。设为 0 可关闭.");
         table.put("Hide videos with a lot of views and few likes. Lower numbers are stricter, zero turns the rule off, and one video is kept back if everything the feed just sent would go.",
-                "隐藏播放量高但点赞少的视频。数值越低越严格，设为 0 可关闭。如果规则会隐藏 TikTok 本次发来的全部视频，则会保留 1 个.");
+                "隐藏播放量高但点赞少的视频。数值越低越严格，0 为关闭。若本轮信息流会被全部筛掉，则保留 1 条.");
         table.put("Hide videos with blocked sounds",
                 "隐藏使用已屏蔽声音的视频");
         table.put("Hide videos you have already seen",
@@ -13799,7 +13799,7 @@ public final class L10nTranslations {
         table.put("Hushfeed turns back on when TikTok restarts.",
                 "TikTok 重启后 Hushfeed 会重新启用.");
         table.put("Ignore the creator's choice so the Duet and Stitch entries appear. Everything else the app checks still applies, and whether the upload is accepted is the server's decision.",
-                "忽略创作者的选择，让“合拍”和“拼接”入口显示出来。应用中的其他检查仍然有效，最终是否允许上传由服务器决定.");
+                "忽略创作者对合拍和拼接的限制并显示入口；其他客户端检查仍生效，服务器仍可能拒绝上传.");
         table.put("Import finished",
                 "导入完成");
         table.put("Import loaded values",
@@ -13843,7 +13843,7 @@ public final class L10nTranslations {
         table.put("Keep this structured value to %1$s KB or less.",
                 "此结构化数据必须不超过 %1$s KB.");
         table.put("Keep websites outside TikTok from using its connection back into the app. TikTok pages such as Activity center, Watch history, shop checkout and CAPTCHA keep working.",
-                "阻止 TikTok 以外的网站通过深度链接重新调用应用。TikTok 自己的“活动中心”“观看历史”“商城结算”和 CAPTCHA 等页面仍可正常工作.");
+                "阻止外部网站通过 TikTok 链接唤回应用。TikTok 自有页面，如活动中心、观看历史、商城结算和 CAPTCHA，仍可正常使用.");
         table.put("Kept to %1$s, the nearest value this row allows",
                 "已调整为此项允许的最接近值 %1$s");
         table.put("Kinds of post",
@@ -13871,7 +13871,7 @@ public final class L10nTranslations {
         table.put("Last change put back. Restart TikTok to apply all changes.",
                 "上次更改已恢复。重启 TikTok 以应用全部更改.");
         table.put("Last change put back. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.",
-                "上次更改已恢复。功能实验室规则属于另一个 TikTok 版本，因此未恢复。重启 TikTok 以应用全部更改.");
+                "已恢复上次更改，但未恢复属于其他 TikTok 版本的功能实验室规则。重启 TikTok 以应用全部更改.");
         table.put("Last original value",
                 "上次原始值");
         table.put("Last recording: %1$d gates.",
@@ -13978,7 +13978,7 @@ public final class L10nTranslations {
         table.put("Move right",
                 "右移");
         table.put("Move to the next video when the current one ends. Pauses, open dialogs and screen-time holds stop it. Restart TikTok after changing this.",
-                "当前视频结束时自动播放下一个视频。视频暂停、打开对话框或使用时间管理触发的信息流暂停时，自动连播也会暂停。更改后请重启 TikTok.");
+                "当前视频结束后自动播放下一条。视频暂停、弹窗打开或使用时间管理暂停信息流时，自动连播也会停止。更改后请重启 TikTok.");
         table.put("Move up",
                 "上移");
         table.put("Music disc",
@@ -14105,13 +14105,13 @@ public final class L10nTranslations {
         table.put("On. Restore puts back the feed setup you had before.",
                 "已开启。“恢复”会还原之前的信息流设置.");
         table.put("Once today's budget runs out, the hold stays and cannot be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out.",
-                "今天的使用上限达到后，信息流会持续暂停且无法手动关闭；每日使用上限设置也会锁定，直到下一次重置。在达到上限前可随时关闭此选项.");
+                "达到今日使用上限后，信息流将持续暂停且无法手动关闭；上限设置也会锁定到下次重置。达到上限前可随时关闭此项.");
         table.put("One area was checked and everything it needs is here.",
                 "已检查 1 个区域，所需内容均已就绪.");
         table.put("One minute left",
                 "剩余 1 分钟");
         table.put("One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out.",
-                "该列表中有一个引号没有配对，因此该行剩余内容会被视为同一个短语。请补上缺失的引号，或删除多余的引号.");
+                "列表中有未配对的引号，导致后面的内容被当成同一短语。请补上或删除多余引号.");
         table.put("One value per line",
                 "每行一个值");
         table.put("Only bottom tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.",
@@ -14202,7 +14202,7 @@ public final class L10nTranslations {
         table.put("Photos and stickers",
                 "图片与贴纸");
         table.put("Pick the actions to remove from the share sheet. Names you typed by hand that TikTok hasn't shown yet stay in the list above.",
-                "选择要从分享面板移除的操作。你手动输入、但 TikTok 尚未显示过的名称会继续保留在上方列表中.");
+                "选择要从分享面板隐藏的操作。手动输入但 TikTok 尚未显示过的名称会保留在列表中.");
         table.put("Pick the buttons to take off the column. The rest stay where they are.",
                 "选择要从右侧栏移除的按钮。其余按钮保持原位.");
         table.put("Play videos TikTok has classified without the overlay asking to be tapped through first.",
@@ -14226,7 +14226,7 @@ public final class L10nTranslations {
         table.put("Press and hold a profile picture to save the full size original to your photo destination.",
                 "长按头像可将完整尺寸原图保存到你的图片保存位置.");
         table.put("Press and hold a story to save it. Stories have no save button of their own, and holding one is how TikTok pauses it, so this takes that gesture over.",
-                "长按限时动态即可保存。限时动态本身没有保存按钮，而 TikTok 原本用长按来暂停播放，因此启用后会接管该手势.");
+                "长按限时动态即可保存。TikTok 原本用长按暂停播放，启用后该手势将改为保存.");
         table.put("Press and hold the left or right third of the screen to jump back or forward. The middle third keeps the Long press action.",
                 "长按屏幕左侧三分之一区域可后退，右侧三分之一区域可快进；中间三分之一区域仍执行“长按”动作.");
         table.put("Preview shortened. Save JSON includes the full report.",
@@ -14375,7 +14375,7 @@ public final class L10nTranslations {
         table.put("Save JSON",
                 "保存 JSON");
         table.put("Save SRT files with the video. Paired saves use Movies on Android 11+, Download on Android 10, and your video folder on older versions.",
-                "随视频一起保存 SRT 字幕文件。Android 11 及以上保存到 Movies，Android 10 保存到 Download，更旧版本则保存到你的视频文件夹.");
+                "随视频保存 SRT 字幕。Android 11+ 存到 Movies，Android 10 存到 Download，更旧版本存到视频文件夹.");
         table.put("Save a profile picture on a long press",
                 "长按保存头像");
         table.put("Save a story on a long press",
@@ -14474,7 +14474,7 @@ public final class L10nTranslations {
         table.put("Search within comments",
                 "在评论中搜索");
         table.put("Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed is not empty.",
-                "单位为秒。设为 0 表示不限制时长。如果规则会筛掉 TikTok 本次发来的全部视频，则会保留最接近你设定上限的一个，避免信息流为空.");
+                "单位：秒。0 表示不限制。若本轮视频会被全部筛掉，则保留最接近时长上限的一条，避免信息流为空.");
         table.put("Seek by",
                 "快进/后退秒数");
         table.put("Seek from the edges",
@@ -14519,7 +14519,7 @@ public final class L10nTranslations {
 
     private static void fillZh_rCN15(Map<String, String> table) {
         table.put("Settings restored. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.",
-                "设置已恢复。功能实验室规则属于另一个 TikTok 版本，因此未恢复。重启 TikTok 以应用全部更改.");
+                "设置已恢复，但未恢复属于其他 TikTok 版本的功能实验室规则。重启 TikTok 以应用全部更改.");
         table.put("Share",
                 "分享");
         table.put("Share links through another host",
@@ -14587,7 +14587,7 @@ public final class L10nTranslations {
         table.put("Show the whole Activity and New followers lists instead of stopping at a View all button.",
                 "完整显示“活动”和“新关注者”列表，不再停在“查看全部”按钮处.");
         table.put("Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off.",
-                "显示完整视频，而不是裁切以适应窗口。在本就能完整显示的长屏手机上不会有变化；在展开的折叠屏、更接近方形的屏幕或分屏模式下，可避免视频两侧或上下被裁掉.");
+                "完整显示视频，不再为窗口裁切。长屏手机通常无变化；折叠屏展开、较方屏幕或分屏时可避免边缘被裁掉.");
         table.put("Show what is left of the budget",
                 "显示今日剩余时间/视频数");
         table.put("Show when the camera or microphone is in use",
@@ -14633,7 +14633,7 @@ public final class L10nTranslations {
         table.put("Start typing",
                 "开始输入关键词");
         table.put("Start with comments. Hide the comment count, sort and close buttons, plus the suggestion area above them. Use Back or swipe down to close comments.",
-                "打开时直接进入评论。隐藏评论数量、排序和关闭按钮，以及其上方的建议区域。使用“返回”或向下滑动关闭评论.");
+                "打开评论时直接进入评论区，并隐藏评论数、排序、关闭按钮和上方建议区；按返回或下滑关闭评论.");
         table.put("Sticker",
                 "贴纸");
         table.put("Sticker destination",
@@ -14652,13 +14652,13 @@ public final class L10nTranslations {
         table.put("Stop ByteDance AppLog events, AppsFlyer attribution, explicit Firebase screen reports and crash reporting from being sent. TikTok's own diagnostics go quiet with them.",
                 "阻止发送 ByteDance AppLog 事件、AppsFlyer 归因、Firebase 页面上报和崩溃报告，同时停用 TikTok 对应的诊断上报.");
         table.put("Stop TikTok asking the screen to run at the frame rate of the video it is playing. On a 90 or 120 Hz phone that ask slows the whole app down to the video's rate, scrolling included.",
-                "阻止 TikTok 要求屏幕按当前视频帧率运行。在 90Hz 或 120Hz 手机上，这种请求会让整个应用（包括滚动）降到视频帧率.");
+                "阻止 TikTok 按视频帧率调整屏幕刷新率。在 90/120Hz 手机上可避免整个应用（包括滚动）被降到视频帧率.");
         table.put("Stop TikTok listening to the accelerometer, gyroscope, magnetometer and the other motion sensors it uses to fingerprint the phone. Saves the battery they wake.",
-                "阻止 TikTok 读取加速度计、陀螺仪、磁力计及其他用于设备指纹识别的运动传感器，也可减少这些传感器唤醒造成的耗电.");
+                "阻止 TikTok 读取加速度计、陀螺仪、磁力计等运动传感器用于设备指纹识别，并减少相关耗电.");
         table.put("Stop TikTok reading what you copied. Copying a link from TikTok still works.",
                 "阻止 TikTok 读取你的剪贴板内容。从 TikTok 复制链接仍可正常使用.");
         table.put("Stop TikTok reporting that you viewed a story or a profile, or that you are typing. Online status is unchanged. It cannot undo what the server has already recorded.",
-                "阻止 TikTok 上报你查看过限时动态、个人资料或正在输入。在线状态不受影响，也无法撤回服务器已经记录的信息.");
+                "阻止 TikTok 上报你查看限时动态、个人资料或正在输入；在线状态不受影响，已上报到服务器的记录无法撤回.");
         table.put("Stop a long press on Like from opening TikTok's repost action.",
                 "阻止长按点赞按钮打开 TikTok 的转发操作.");
         table.put("Stop a long press on Share from opening TikTok's quick share action.",
@@ -14781,7 +14781,7 @@ public final class L10nTranslations {
         table.put("The New followers row leaves the top of the Inbox. The accounts still follow you.",
                 "“新关注者”项目将从收件箱顶部隐藏，这些账号仍然会关注你.");
         table.put("The Tako assistant's conversation leaves the Inbox list. The Tako bubble on the feed has its own switch under Feed tabs.",
-                "Tako 助手会话将从收件箱列表中隐藏。信息流中的 Tako 气泡可在“信息流标签”中单独控制.");
+                "隐藏收件箱中的 Tako 助手会话。信息流 Tako 气泡需在“信息流标签”中单独设置.");
         table.put("The accounts TikTok suggests you follow no longer take up rows in the Inbox.",
                 "TikTok 推荐你关注的账号将不再占用收件箱项目.");
         table.put("The activity status control leaves the Inbox header. Whether others see you as active is unchanged.",
@@ -14799,7 +14799,7 @@ public final class L10nTranslations {
         table.put("The export failed and the partial file couldn't be removed. Delete it from your Downloads folder.",
                 "导出失败，且无法删除未完成的文件。请从 Downloads 文件夹中手动删除.");
         table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
-                "达到观看时长上限前的最后 45 秒，信息流会逐渐变暗，再进入暂停。需要同时设置每日观看时长上限和“达到上限后暂停信息流”.");
+                "达到观看时长上限前 45 秒，信息流会逐渐变暗后进入暂停。需同时设置每日观看时长上限和“达到上限后暂停信息流”.");
         table.put("The feed does not end. This is a fine time to leave it.",
                 "信息流永远刷不完，现在退出正合适.");
         table.put("The feed is open again",
@@ -14809,7 +14809,7 @@ public final class L10nTranslations {
         table.put("The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.",
                 "无法删除 hushfeed-safe-mode 文件。请到 Android/data 下的 TikTok 文件夹手动删除，以重新启用插件.");
         table.put("The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.",
-                "设置每日观看时长上限和每日视频数量上限的重置时间，使用 24 小时制。默认凌晨 4 点，避免凌晨仍在刷视频时过早重置.");
+                "设置两种每日使用上限的重置时间（24 小时制）。默认凌晨 4 点，避免跨过午夜后立即重置.");
         table.put("The live photo's clip couldn't be saved. Try again.",
                 "无法保存实况照片的视频片段。请重试.");
         table.put("The loaded-values file you chose couldn't be read. Try again.",
@@ -14843,7 +14843,7 @@ public final class L10nTranslations {
         table.put("The story couldn't be saved. Try again.",
                 "无法保存限时动态。请重试.");
         table.put("The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
-                "每条评论上的踩按钮将改为拉黑评论者，而不是点踩。评论会变暗，并显示可撤销横幅；再次点按可解除拉黑.");
+                "评论的踩按钮改为拉黑评论者。评论会变暗并显示撤销提示，再点一次可解除拉黑.");
         table.put("The video couldn't be saved. Try again, or choose Automatic.",
                 "无法保存视频。请重试，或选择“自动”.");
         table.put("There is no Lab change to undo.",
@@ -14877,7 +14877,7 @@ public final class L10nTranslations {
         table.put("This key touches account safety. Forcing it can change login, region, payment or security checks.",
                 "此键涉及账号安全。强制修改可能影响登录、地区、支付或安全检查.");
         table.put("This line opens a rule and does not finish it: %1$s. Write two phrases as \"a\" & \"b\" for both, or \"a\" !& \"b\" for the first without the second.",
-                "此行开始了一条规则但没有完成：%1$s。若要求两个短语同时出现，请写成 \"a\" & \"b\"；若要求出现前者且不出现后者，请写成 \"a\" !& \"b\".");
+                "规则未写完整：%1$s。两短语都需出现写 \"a\" & \"b\"；需要前者且排除后者写 \"a\" !& \"b\".");
         table.put("This phone has no file picker, so there is no way to choose a file here",
                 "此手机没有文件选择器，因此无法在这里选择文件");
         table.put("This phone has no folder picker. Type the folder into the row instead.",
@@ -14938,7 +14938,7 @@ public final class L10nTranslations {
         table.put("TikTok runs as if it were not patched. Your settings stay as they are.",
                 "TikTok 将按未修改状态运行；设置不变.");
         table.put("TikTok's own daily screen-time reminder sends the app to the background instead of waiting to be dismissed. Coming straight back leaves the reminder on screen, so the limit stays reachable. Needs a daily limit set under TikTok's Settings and privacy, under Time and well-being.",
-                "当 TikTok 自带的使用时间提醒出现时，自动将应用切到后台，而不是停在提醒页面等待关闭。立即返回应用时提醒仍会保留。需要先在 TikTok 的“设置和隐私 > 时间与健康”中设置每日使用时间上限.");
+                "TikTok 自带的使用时间提醒出现时，将应用切到后台而不自动关闭提醒；立即返回后提醒仍在。需先在 TikTok“设置和隐私 > 时间与健康”设置每日上限.");
         table.put("TikTok's own value",
                 "TikTok 原始值");
         table.put("TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.",
@@ -14970,7 +14970,7 @@ public final class L10nTranslations {
         table.put("Today: %1$d videos",
                 "今天：%1$d 个视频");
         table.put("Tokens: {creator}, {date}, {video_id}, {index}. {index} numbers the photos of a slideshow you save with Download original photos; anything saved through TikTok's own button is numbered by the folder instead. The file extension is kept automatically.",
-                "可用变量：{creator}、{date}、{video_id}、{index}。{index} 用于给通过“下载原始图片”保存的图文帖子图片编号；使用 TikTok 自带按钮保存的内容则由文件夹自动编号。文件扩展名会自动保留.");
+                "可用变量：{creator}、{date}、{video_id}、{index}。{index} 用于“下载原始图片”保存的图文图片编号；TikTok 自带保存则由文件夹编号。扩展名自动保留.");
         table.put("Tokens: {creator}, {date}, {video_id}. The file extension is kept automatically.",
                 "可用变量：{creator}、{date}、{video_id}。文件扩展名会自动保留.");
         table.put("Tokens: {date}, {media_id}. Works for image and video stickers.",
@@ -14996,7 +14996,7 @@ public final class L10nTranslations {
         table.put("Turn on overrides",
                 "开启覆盖功能");
         table.put("Turn this on while you record logs for a bug report, then turn it off again. While it is on, TikTok can feel slower and may crash.",
-                "录制用于错误报告的日志时开启此项，完成后请再次关闭。开启期间 TikTok 可能变慢，甚至发生崩溃.");
+                "记录错误报告日志时开启，用完即关；开启期间 TikTok 可能变慢或崩溃.");
         table.put("Turned off %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
                 "已关闭 %2$d 个功能项中的 %1$d 个。其余项目不是布尔值。重启 TikTok 后生效.");
         table.put("Turned off %1$d gates. Restart TikTok to apply this.",
@@ -15033,7 +15033,7 @@ public final class L10nTranslations {
         table.put("Until you choose here, this sheet follows your choices under Hide share actions.",
                 "在你于此处进行选择之前，此面板会沿用“隐藏分享操作”中的选择.");
         table.put("Up to %1$d speeds from %2$s to %3$s, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.",
-                "最多可设置 %1$d 个速度值，范围为 %2$s 到 %3$s，用英文逗号分隔。例如：0.5, 1, 1.5, 2, 2.5, 3。留空则使用 TikTok 自带列表。重启 TikTok 后生效.");
+                "最多设置 %1$d 个速度，范围 %2$s 到 %3$s，用英文逗号分隔，例如 0.5, 1, 1.5, 2, 2.5, 3。留空使用 TikTok 默认列表。重启 TikTok 后生效.");
         table.put("Use 0 for TikTok's size, or %1$d to %2$d. Applies to the next caption.",
                 "设为 0 使用 TikTok 默认大小，或输入 %1$d 到 %2$d。会从下一条字幕开始生效.");
         table.put("Use Calm feed",
@@ -15041,7 +15041,7 @@ public final class L10nTranslations {
         table.put("Use Save JSON for this large report",
                 "此报告较大，请使用“保存 JSON”");
         table.put("Use TikTok's own hold, pull down and release gesture to keep playing at the hold speed, 2x unless Playback sets another.",
-                "使用 TikTok 自带的长按、下拉并松开手势，将播放速度锁定为长按速度；默认为 2x，除非“播放”中设置了其他速度.");
+                "使用 TikTok 自带的长按后下拉松手手势锁定倍速；默认 2x，除非“播放”中另有设置.");
         table.put("Use a default playback speed",
                 "使用默认播放速度");
         table.put("Use non-personalized search",
@@ -15051,9 +15051,9 @@ public final class L10nTranslations {
         table.put("Use the preset for the region TikTok reports for your account and its shop too. May affect search.",
                 "使用预设同时覆盖 TikTok 为账号及商城上报的地区。可能影响搜索结果.");
         table.put("Use the selected country and operator values. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.",
-                "使用所选国家/地区和运营商值。此选项只改变 SIM 上报的信息，不会改变 IP 地址、账号历史或界面语言；其中任意一项都可能让 TikTok 继续沿用原先判断的地区。重启 TikTok 后生效.");
+                "仅修改 SIM 上报的国家/地区和运营商，不改变 IP、账号历史或界面语言；这些因素仍可能让 TikTok 沿用原地区。重启 TikTok 后生效.");
         table.put("Use the selected country. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.",
-                "使用所选国家/地区。此选项只改变 SIM 上报的信息，不会改变 IP 地址、账号历史或界面语言；其中任意一项都可能让 TikTok 继续沿用原先判断的地区。重启 TikTok 后生效.");
+                "仅修改 SIM 上报的国家/地区，不改变 IP、账号历史或界面语言；这些因素仍可能让 TikTok 沿用原地区。重启 TikTok 后生效.");
         table.put("Use the split layout on wider screens. Restart TikTok to apply this. If the old layout is still there, unfold again.",
                 "在较宽屏幕上使用分栏布局。重启 TikTok 后生效。如果仍显示旧布局，请再次折叠并展开设备.");
         table.put("Use value",
@@ -15146,17 +15146,17 @@ public final class L10nTranslations {
         table.put("Your previous feed setup is back. Restart TikTok to apply every change.",
                 "之前的信息流配置已恢复。重启 TikTok 以应用全部更改.");
         table.put("Zero leaves the way out of the hold there every time, which is what it has always done. Anything else is how many times a day it works, and once they are gone the hold stays up until the day starts over. Ignored while the budget is locked, which takes the way out away entirely.",
-                "设为 0 时，每次信息流暂停后都允许继续打开。其他数值表示每天允许绕过暂停的次数；次数用完后，信息流会保持暂停直到下一次重置。若已锁定今日使用上限，则不能绕过暂停.");
+                "0 表示每次暂停都可继续；其他数值是每天允许绕过暂停的次数，用完后暂停到下次重置。锁定今日使用上限时不能绕过.");
         table.put("Zero means no limit. Counts the videos Hushfeed advanced past for you, not the ones you swiped yourself, and starts again when the feed is rebuilt or you change this number.",
-                "设为 0 表示无限制。只统计 Hushfeed 自动切换过去的视频，不统计你手动滑过的视频。当信息流重建或你更改此数值时会重新计数.");
+                "0 表示无限制。只统计插件自动切换的视频，不统计手动滑动；信息流重建或修改此数值后重新计数.");
         table.put("Zero shows the notice and leaves the feed alone. Anything else covers the feed for that many minutes once a budget is reached. Messages, profiles and search keep working, and nothing in the feed is thrown away.",
-                "设为 0 时，达到每日使用上限后只显示提醒，不暂停信息流。设置其他数值后，达到上限时会暂停信息流相应分钟数。消息、个人资料和搜索仍可使用，已加载的信息流内容也不会被清除.");
+                "0 表示达到每日使用上限后只提醒，不暂停信息流。其他数值表示暂停的分钟数；消息、个人资料和搜索仍可使用，已加载内容不会清除.");
         table.put("Zero switches this off. A short reminder after that many minutes of watching, and again after the same again. Time on messages, a profile or search does not count, and nothing is shown while the feed is on hold.",
-                "设为 0 可关闭此功能。观看达到设定分钟数后会显示简短提醒，之后每隔相同时间再次提醒。消息、个人资料和搜索页面的时间不计入；信息流暂停期间也不会显示提醒.");
+                "0 表示关闭。观看达到设定分钟数后提醒，并按同样间隔重复；消息、个人资料和搜索时间不计，信息流暂停期间不提醒.");
         table.put("Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.",
-                "设为 0 可关闭此功能。无论通过何种方式进入视频，信息流中出现的每个视频都会计数，达到设定数量后会提醒。它与“播放”中的自动切换会话上限相互独立，后者只统计 Hushfeed 自动切换的视频.");
+                "0 表示关闭。统计信息流中出现的每条视频，达到数量后提醒。与“播放 > 自动连播数量上限”独立，后者只统计插件自动切换的视频.");
         table.put("Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.",
-                "设为 0 可关闭此功能。统计播放器在信息流中实际播放的分钟数；消息、个人资料和搜索页面的时间不计入.");
+                "0 表示关闭。只统计信息流播放器实际运行时间；消息、个人资料和搜索不计入.");
         table.put("collapsed",
                 "已折叠");
         table.put("expanded",
