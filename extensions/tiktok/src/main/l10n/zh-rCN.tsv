@@ -1,0 +1,180 @@
+%1$d already matched	已匹配 %1$d 项
+%1$d areas were checked and everything they need is here.	已检查 %1$d 个区域，所需内容均已就绪。
+%1$d fields overridden	已覆盖 %1$d 个字段
+%1$d fields will be overridden when requested	请求时将覆盖 %1$d 个字段
+%1$d gates selected	已选择 %1$d 个功能开关
+%1$d minutes left	剩余 %1$d 分钟
+%1$d rejected	已拒绝 %1$d 项
+%1$d results	%1$d 个结果
+%1$d results so far	目前有 %1$d 个结果
+%1$d results so far, and more not counted	目前有 %1$d 个结果，另有更多未计数
+%1$d results, filtered to %2$s	%1$d 个结果，已筛选为 %2$s
+%1$d setting was not in that file and was left as it is	有 %1$d 项设置不在该文件中，已保持原样
+%1$d settings were not in that file and were left as they are	有 %1$d 项设置不在该文件中，已保持原样
+%1$d unavailable	%1$d 项不可用
+%1$s (%2$s)	%1$s（%2$s）
+%1$s (TikTok value)	%1$s（TikTok 值）
+%1$s (custom, unverified)	%1$s（自定义，未验证）
+%1$s (override returned)	%1$s（已返回覆盖值）
+%1$s (will be returned when requested)	%1$s（请求时将返回）
+%1$s / current cache only	%1$s / 仅当前缓存
+%1$s / generated registry	%1$s / 已生成注册表
+%1$s / generated registry and current cache	%1$s / 已生成注册表和当前缓存
+%1$s / local catalog	%1$s / 本地目录
+%1$s and above	%1$s 及以上
+%1$s appears more than once in this file.	%1$s 在此文件中出现了多次。
+%1$s changed	%1$s 已更改
+%1$s day	%1$s 天
+%1$s days	%1$s 天
+%1$s destinations must start with %2$s	%1$s 的目标位置必须以 %2$s 开头
+%1$s dp	%1$s dp
+%1$s has an invalid value. %2$s	%1$s 的值无效。%2$s
+%1$s has type %2$s, but the file says %3$s.	%1$s 的类型是 %2$s，但文件中写的是 %3$s。
+%1$s hid everything TikTok sent, %2$d times in a row. Turn it off if that's not what you wanted.	%1$s 已连续 %2$d 次隐藏 TikTok 发来的全部内容。如果这不是你想要的效果，请将其关闭。
+%1$s is a kind of value the Lab cannot override.	%1$s 属于实验室无法覆盖的值类型。
+%1$s is already hidden	%1$s 已被隐藏
+%1$s is not a country code, so no video would ever match it. Use two letters, like GB, IE or US.	%1$s 不是国家代码，因此不会有视频匹配。请使用两个字母，例如 GB、IE 或 US。
+%1$s is not in this Lab catalog.	%1$s 不在此实验室目录中。
+%1$s isn't installed or doesn't take links	未安装 %1$s，或它不接受链接
+%1$s left	剩余 %1$s
+%1$s millisecond	%1$s 毫秒
+%1$s milliseconds	%1$s 毫秒
+%1$s min left	剩余 %1$s 分钟
+%1$s minute	%1$s 分钟
+%1$s minutes	%1$s 分钟
+%1$s point	%1$s 点
+%1$s points	%1$s 点
+%1$s s	%1$s 秒
+%1$s second	%1$s 秒
+%1$s seconds	%1$s 秒
+%1$s time	%1$s 次
+%1$s times	%1$s 次
+%1$s to %2$s	%1$s 到 %2$s
+%1$s video	%1$s 个视频
+%1$s videos	%1$s 个视频
+%1$s videos left	剩余 %1$s 个视频
+%1$s view per comment	每条评论 %1$s 次播放
+%1$s view per like	每个赞 %1$s 次播放
+%1$s views per comment	每条评论 %1$s 次播放
+%1$s views per like	每个赞 %1$s 次播放
+%1$s was rejected. %2$s	%1$s 被拒绝。%2$s
+%1$s, %2$s or %3$s	%1$s、%2$s 或 %3$s
+%1$s, %2$s, %3$s or %4$s	%1$s、%2$s、%3$s 或 %4$s
+%1$s, %2$s, %3$s, %4$s, %5$s	%1$s、%2$s、%3$s、%4$s、%5$s
+%1$s, selected	%1$s，已选择
+%1$s. %2$s	%1$s。%2$s
+%1$s: %2$d found, %3$d missing	%1$s：找到 %2$d 项，缺少 %3$d 项
+%1$s: %2$d found, %3$d missing, and more it stopped counting	%1$s：找到 %2$d 项，缺少 %3$d 项，另有更多未继续计数
+%1$s: %2$d found, %3$d missing, and more it stopped counting. First missing: %4$s	%1$s：找到 %2$d 项，缺少 %3$d 项，另有更多未继续计数。首个缺失项：%4$s
+%1$s: %2$d found, %3$d missing. First missing: %4$s	%1$s：找到 %2$d 项，缺少 %3$d 项。首个缺失项：%4$s
+%1$s: %2$s	%1$s：%2$s
+1 field overridden	已覆盖 1 个字段
+1 field will be overridden when requested	请求时将覆盖 1 个字段
+1 gate selected	已选择 1 个功能开关
+1 min left	剩余 1 分钟
+1 result	1 个结果
+1 result so far	目前有 1 个结果
+1 video left	剩余 1 个视频
+A Lab change is already running	已有一项实验室更改正在进行
+A creator pattern is taking too long and was turned off: %1$s	某个创作者匹配规则耗时过长，已自动关闭：%1$s
+A diagnostic report is already being saved	已有诊断报告正在保存
+A field value couldn't be read. Check the values and try again.	无法读取字段值。请检查各项数值后重试。
+A file named hushfeed-safe-mode in TikTok's folder under Android/data paused Hushfeed. Your settings stay as they are.	Android/data 下 TikTok 文件夹中的 hushfeed-safe-mode 文件已暂停 Hushfeed。你的设置会保持不变。
+A forced value applies to this copy of TikTok whichever account is signed in. It cannot get past a check the server makes.	强制值会应用于此 TikTok 安装，无论登录哪个账号。它无法绕过服务器端检查。
+A good place to stop, if you want one.	如果你想停下来，这里是个合适的位置。
+A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.	TikTok 使用摄像头时，顶部角落显示绿点；录音时显示橙点。访问结束后指示点会消失。
+A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.	分享或复制链接时，用于替换 tiktok.com 的域名，例如 vxtiktok.com。留空则使用 TikTok 原始链接。只会修改 TikTok 链接的域名，不会把任何内容发送到新的服务器。
+A newer clear replaced that undo. Tap the row again to undo.	更新的清除操作已取代该撤销记录。再次点按此项即可撤销。
+A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.	信息流上的小标签会显示今天剩余的分钟数或视频数，以更接近用尽的一项为准。
+A tap on a person in the Send to row only selects them. A second tap on the same person within %1$d seconds sends the video.	在“发送给”一栏点按某人只会先选中；在 %1$d 秒内再次点按同一人，才会发送视频。
+A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.	评论中的网址可以直接点按打开，无需手动复制。点按评论其他位置仍保持原有行为。
+AI-generated posts	AI 生成的帖子
+About	关于
+Activity	活动
+Activity center (PIA)	活动中心（PIA）
+Add	添加
+Add a button beside the block control to send feedback about the current video.	在屏蔽控件旁添加一个按钮，用于反馈当前视频。
+Add a button that hides the current creator on this phone without blocking them.	添加一个按钮，仅在本机隐藏当前创作者，而不将其拉黑。
+Add a creator	添加创作者
+Add a search box that filters comments already loaded on this video by text or username. It doesn't search all of TikTok or remove TikTok's suggested-search banner.	添加搜索框，可按文字或用户名筛选当前视频已加载的评论。它不会搜索整个 TikTok，也不会移除 TikTok 的推荐搜索横幅。
+Add a separate button that skips videos using the current sound.	添加一个单独按钮，用于跳过使用当前声音的视频。
+Add hidden creator	添加隐藏的创作者
+Added %1$s	已添加 %1$s
+Ads	广告
+Advanced	高级
+Advanced JSON value	高级 JSON 值
+All	全部
+All available languages	所有可用语言
+All events	所有事件
+All loaded tabs	所有已加载标签页
+Allow Duet and Stitch anyway	始终允许合拍与拼接
+Allow screenshots and Circle to Search	允许截图和“圈选搜索”
+Allow storage for TikTok in Android settings to save profile pictures	请在 Android 设置中允许 TikTok 使用存储空间，以保存头像
+Allow storage for TikTok in Android settings to save sounds	请在 Android 设置中允许 TikTok 使用存储空间，以保存声音
+Allow storage for TikTok in Android settings to save stories	请在 Android 设置中允许 TikTok 使用存储空间，以保存故事
+Allow storage for TikTok in Android settings to save the live photo's clip	请在 Android 设置中允许 TikTok 使用存储空间，以保存实况照片的视频片段
+Already active	已启用
+Already marked as not interested	已标记为不感兴趣
+Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.	也将这些筛选规则应用于 TikTok 在信息流无法加载足够新内容时使用的已下载视频。
+Also change the region TikTok reports internally. Keeps your interface language. Your IP address and your account's own rules still apply.	同时更改 TikTok 内部上报的地区。界面语言保持不变。你的 IP 地址以及账号自身的地区规则仍然有效。
+Also on a block list, so still hidden: %1$s	同时也在屏蔽列表中，因此仍会隐藏：%1$s
+Always show publish date	始终显示发布日期
+Always show the publish date in video author information. Restart TikTok to apply this.	始终在视频作者信息中显示发布日期。重启 TikTok 后生效。
+An app's package name, like com.dv.adm. The save button sends the video's link there instead of saving it here. Leave it empty to save here.	应用包名，例如 com.dv.adm。点击保存按钮时，会把视频链接发送给该应用，而不是在此处保存。留空则在本地保存。
+An exception names one creator, so a pattern can't be one: %1$s	例外项只能指定一个创作者，不能使用匹配规则：%1$s
+An exception takes a handle or id, not a display name: %1$s	例外项需要填写用户名或 ID，而不是显示名称：%1$s
+An interrupted settings change couldn't be recovered, so its record was set aside. Check your settings or restore a backup.	中断的设置更改无法恢复，其记录已被单独保留。请检查设置或恢复备份。
+An operator code is five or six digits, like 310260	运营商代码应为 5 或 6 位数字，例如 310260
+An override changes the value TikTok reads from this gate. It does not rewrite TikTok's cached value or prove the named feature changed.	覆盖值会改变 TikTok 从此功能开关读取到的值，但不会改写 TikTok 的缓存值，也不能证明对应功能一定发生了变化。
+Animated sticker format	动态贴纸格式
+Answer TikTok's location requests with nothing. The region settings change the locale and timezone; this stops the coordinates.	对 TikTok 的定位请求返回空值。地区设置会更改区域和时区；此选项会阻止提供坐标。
+Answer TikTok's reads of your contacts with an empty list. Find Friends and People you may know lose access to your contact list.	当 TikTok 读取联系人时返回空列表。“查找好友”和“你可能认识的人”将无法访问你的联系人。
+Answer TikTok's scan of the apps on this phone with an empty list. A check for one named app, which TikTok also uses to open an app you tap, is left alone.	当 TikTok 扫描本机已安装应用时返回空列表。针对某个指定应用的单独检查会保留，因为 TikTok 也用它来打开你点按的应用。
+App	应用
+App AB	应用 AB
+Appearance	外观
+Applies to both video and photo downloads.	同时适用于视频和图片下载。
+Apply	应用
+Apply overrides	应用覆盖值
+Applying Calm feed	正在应用“清爽信息流”
+Around the video	视频周围
+Arrange your feed and bottom tabs	排列信息流和底部标签
+Ask TikTok for search results that aren't personalized to your account. This changes results, not search buttons or suggestions.	让 TikTok 返回不针对你账号个性化的搜索结果。此选项只改变搜索结果，不改变搜索按钮或搜索建议。
+Attention	注意
+Audio	音频
+Auto translate comments	自动翻译评论
+Auto-advance	自动切换
+Auto-advance session limit	自动切换会话上限
+Auto-advance stopped after %1$d videos	自动切换已在 %1$d 个视频后停止
+Auto-advance stopped after one video	自动切换已在 1 个视频后停止
+Auto-advance videos	自动切换视频
+Automatic	自动
+Automatic clear display	自动清屏
+Avatar and follow button	头像和关注按钮
+Back	返回
+Back up settings	备份设置
+Backup and restore	备份与恢复
+Black	黑色
+Block clipboard reads	阻止读取剪贴板
+Block contact list access	阻止访问联系人列表
+Block installed app scanning	阻止扫描已安装应用
+Block location	阻止定位
+Block motion sensors	阻止访问运动传感器
+Block new bottom tabs	阻止新增底部标签
+Block new feed tabs	阻止新增信息流标签
+Block the creator in one tap. Once TikTok confirms, skip to the next video. A small Unblock button appears at the top left for two seconds. You can also unblock later in TikTok's Privacy > Blocked accounts.	一键拉黑当前创作者。TikTok 确认后会跳到下一个视频，左上角会短暂显示 2 秒“解除拉黑”按钮。之后也可以在 TikTok 的“隐私 > 已屏蔽账号”中解除。
+Block this commenter	拉黑此评论者
+Block this creator	拉黑此创作者
+Block this sound	屏蔽此声音
+Blocked	已屏蔽
+Blocked %1$s	已屏蔽 %1$s
+Blocked %1$s. Unblock	已屏蔽 %1$s。解除
+Blocked and hidden creators	已屏蔽和已隐藏的创作者
+Blocked caption words	已屏蔽的文案关键词
+Blocked comment words	已屏蔽的评论关键词
+Blocked creators	已屏蔽的创作者
+Blocked sound ids	已屏蔽的声音 ID
+Blocked sound names	已屏蔽的声音名称
+Blocked sounds	已屏蔽的声音
+Blocking	正在屏蔽
+Boolean	布尔值
