@@ -380,7 +380,7 @@ First rejection:	首次拒绝:
 Fit the video to the screen	使视频适应屏幕
 Focus	专注
 Follow probe	关注请求诊断\nFollow Probe
-Following	正在关注
+Following	关注中
 For You	为你推荐
 For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.	仅适用于 com.deniscerri.ytdl。将链接交给 YTDLnis 时，可选择下载音频或视频.
 For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.	仅适用于 com.deniscerri.ytdl。隐藏 YTDLnis 的下载卡片，并在后台开始下载任务.
@@ -411,9 +411,9 @@ Hidden: %1$s	已隐藏：%1$s
 Hide	隐藏
 Hide AI-generated videos	隐藏 AI 生成的视频
 Hide CAPTCHA popups	隐藏 CAPTCHA 弹窗
-Hide LIVE replays	隐藏 LIVE 回放
-Hide LIVE videos	隐藏 LIVE 视频
-Hide LIVE videos from the feed.	从信息流中隐藏 LIVE 视频.
+Hide LIVE replays	隐藏直播回放
+Hide LIVE videos	隐藏直播视频
+Hide LIVE videos from the feed.	从信息流中隐藏直播视频.
 Hide Search this image prompts	隐藏“搜索此图片”提示
 Hide Series	隐藏系列
 Hide TikTok Shop	隐藏 TikTok Shop
@@ -424,7 +424,7 @@ Hide TikTok's Auto scroll button	隐藏 TikTok 的自动滚动按钮
 Hide TikTok's short drama episodes and the cards that promote them.	隐藏 TikTok 短剧以及推广短剧的卡片.
 Hide activity	隐藏活动
 Hide activity status	隐藏活动状态
-Hide ads, Shop posts, LIVE videos and replays, promotional music, and paid partnerships.	隐藏广告、TikTok Shop 内容、LIVE 及回放、推广音乐和付费合作内容.
+Hide ads, Shop posts, LIVE videos and replays, promotional music, and paid partnerships.	隐藏广告、TikTok Shop 内容、直播及回放、推广音乐和付费合作内容.
 Hide archive	隐藏归档
 Hide bottom tabs TikTok adds later unless you allow them.	隐藏 TikTok 后续新增的底部标签，除非你明确允许.
 Hide buttons in the right column	隐藏右侧栏按钮
@@ -455,7 +455,7 @@ Hide place badges on videos, including cards with multiple places. Videos and yo
 Hide playlist videos	隐藏播放列表视频
 Hide promotional music	隐藏推广音乐
 Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.	在 TikTok 搜索页输入前隐藏推荐搜索，不清除搜索历史，也不影响评论上方的搜索建议.
-Hide recorded LIVE broadcasts from the feed.	从信息流中隐藏已录制的 LIVE 回放.
+Hide recorded LIVE broadcasts from the feed.	从信息流中隐藏已录制的直播回放.
 Hide rows by title	按标题隐藏项目
 Hide search rewards	隐藏搜索奖励
 Hide search suggestions above comments	隐藏评论上方的搜索建议
@@ -469,12 +469,12 @@ Hide suggestions on the search page	隐藏搜索页建议
 Hide surveys	隐藏问卷
 Hide tabs TikTok adds later unless you allow them.	隐藏 TikTok 后续新增的信息流标签，除非你明确允许.
 Hide the "Search this image" prompt shown over videos. The feed search button and suggestions above comments are separate settings.	隐藏视频上的“搜索此图片”提示；信息流搜索按钮和评论上方建议需分别设置.
-Hide the CAPTCHA dialogs raised while you browse or watch LIVE. Login, account verification and any CAPTCHA raised over a follow, like, comment or repost stay visible.	隐藏浏览或观看 LIVE 时出现的 CAPTCHA。登录、账号验证，以及关注、点赞、评论或转发触发的 CAPTCHA 仍会显示.
+Hide the CAPTCHA dialogs raised while you browse or watch LIVE. Login, account verification and any CAPTCHA raised over a follow, like, comment or repost stay visible.	隐藏浏览或观看直播时出现的 CAPTCHA。登录、账号验证，以及关注、点赞、评论或转发触发的 CAPTCHA 仍会显示.
 Hide the Full screen button	隐藏全屏按钮
 Hide the Full screen button over videos. Playback and automatic rotation keep working as before.	隐藏视频上的全屏按钮；播放和自动旋转不受影响.
 Hide the Inbox search button	隐藏收件箱搜索按钮
-Hide the LIVE button	隐藏 LIVE 按钮
-Hide the LIVE button in the top left corner of the feed.	隐藏信息流左上角的 LIVE 按钮.
+Hide the LIVE button	隐藏直播按钮
+Hide the LIVE button in the top left corner of the feed.	隐藏信息流左上角的直播按钮.
 Hide the Products block and product cards in search results.	隐藏搜索结果中的“商品”区域及商品卡片.
 Hide the Report button on videos	隐藏视频上的举报按钮
 Hide the Send to row	隐藏“发送给”一栏
@@ -572,11 +572,11 @@ Keep this structured value to %1$s KB or less.	此结构化数据必须不超过
 Keep websites outside TikTok from using its connection back into the app. TikTok pages such as Activity center, Watch history, shop checkout and CAPTCHA keep working.	阻止外部网站通过 TikTok 链接唤回应用。TikTok 自有页面，如活动中心、观看历史、商城结算和 CAPTCHA，仍可正常使用.
 Kept to %1$s, the nearest value this row allows	已调整为此项允许的最接近值 %1$s
 Kinds of post	帖子类型
-LIVE	LIVE
-LIVE replays	LIVE 回放
-LIVE settings	LIVE 设置
-LIVE share actions	LIVE 分享操作
-LIVE videos	LIVE 视频
+LIVE	直播
+LIVE replays	直播回放
+LIVE settings	直播设置
+LIVE share actions	直播分享操作
+LIVE videos	直播视频
 Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.	实验室数据已重置。可在菜单中使用“撤销上次实验室更改”。重启 TikTok 后生效.
 Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this.	实验室规则数量超限，数据已清除且无法撤销。重启 TikTok 后生效.
 Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok to apply this.	实验室覆盖值已重置。可在菜单中使用“撤销上次实验室更改”。重启 TikTok 后生效.
@@ -919,7 +919,7 @@ Show only videos with this many favorites.	仅显示收藏数在此范围内的�
 Show only videos with this many likes.	仅显示点赞数在此范围内的视频.
 Show only videos with this many shares.	仅显示分享数在此范围内的视频.
 Show only videos with this many views.	仅显示播放量在此范围内的视频.
-Show search in LIVE	在 LIVE 中显示搜索
+Show search in LIVE	在直播中显示搜索
 Show the Not interested button	显示“不感兴趣”按钮
 Show the block button on videos	在视频上显示拉黑按钮
 Show the block sound button	显示屏蔽声音按钮
@@ -929,9 +929,9 @@ Show the handle instead of the name	显示用户名而不是名称
 Show the hide button on videos	在视频上显示隐藏按钮
 Show the progress bar	显示进度条
 Show the progress bar thumbnail	显示进度条缩略图
-Show the search entry inside TikTok's LIVE drawer, where available. This doesn't add a search box to video comments.	在支持的情况下，于 TikTok 的 LIVE 抽屉中显示搜索入口。此选项不会在视频评论中添加搜索框.
+Show the search entry inside TikTok's LIVE drawer, where available. This doesn't add a search box to video comments.	在支持时，于 TikTok 直播面板中显示搜索入口；不会在视频评论中添加搜索框.
 Show the switch	显示开关
-Show the whole Activity and New followers lists instead of stopping at a View all button.	完整显示“活动”和“新关注者”列表，不在“查看全部”处截断.
+Show the whole Activity and New followers lists instead of stopping at a View all button.	完整显示“活动”和“新粉丝”列表，不在“查看全部”处截断.
 Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off.	完整显示视频，不再为窗口裁切。长屏手机通常无变化；折叠屏展开、较方屏幕或分屏时可避免边缘被裁掉.
 Show what is left of the budget	显示今日剩余时间/视频数
 Show when the camera or microphone is in use	显示摄像头或麦克风使用状态
@@ -1025,7 +1025,7 @@ The Lab can't check this. TikTok gets it exactly as typed.	实验室无法检查
 The Lab couldn't open. Go back and open it again.	无法打开实验室。请返回后重新进入.
 The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.	实验室最多保留 %1$s 条规则；本次更改会达到 %2$s 条，因此未应用.
 The Message requests row leaves the Inbox. Requests keep arriving and wait there until you turn this off.	隐藏“消息请求”项目；新请求仍会到达并保留，关闭此项后可见.
-The New followers row leaves the top of the Inbox. The accounts still follow you.	隐藏收件箱顶部的“新关注者”项目；关注关系不受影响.
+The New followers row leaves the top of the Inbox. The accounts still follow you.	隐藏收件箱顶部的“新粉丝”项目；关注关系不受影响.
 The Tako assistant's conversation leaves the Inbox list. The Tako bubble on the feed has its own switch under Feed tabs.	隐藏收件箱中的 Tako 助手会话。信息流 Tako 气泡需在“信息流标签”中单独设置.
 The accounts TikTok suggests you follow no longer take up rows in the Inbox.	TikTok 推荐你关注的账号将不再占用收件箱项目.
 The activity status control leaves the Inbox header. Whether others see you as active is unchanged.	隐藏收件箱顶部的活动状态控件；不会改变别人是否能看到你的在线状态.
