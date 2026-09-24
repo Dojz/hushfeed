@@ -1204,3 +1204,8 @@ Saved %1$s of %2$s, the rest need more free space	Se guardaron %1$s de %2$s, el 
 Saved %1$s of %2$s, the rest ran out of time	Se guardaron %1$s de %2$s, al resto se le acabó el tiempo
 Live photo clip saved to %1$s	Clip de la foto en vivo guardado en %1$s
 The live photo's clip couldn't be saved. Try again.	No se pudo guardar el clip de la foto en vivo. Inténtalo de nuevo.
+Creator exceptions	Excepciones de creadores
+Comma separated account handles or user ids. Their videos stay when only a filter on the kind of post, its labels, age, length or counts would hide them. Ads, blocked creators, words, sounds and countries, and seen videos still apply.	Nombres de cuenta o ids de usuario separados por comas. Sus videos se quedan cuando solo un filtro por tipo de publicación, etiquetas, antigüedad, duración o cifras los ocultaría. Los anuncios, los creadores, palabras, sonidos y países bloqueados y los videos ya vistos siguen aplicándose.
+An exception names one creator, so a pattern can't be one: %1$s	Una excepción nombra a un creador, así que un patrón no puede serlo: %1$s
+An exception takes a handle or id, not a display name: %1$s	Una excepción toma un nombre de cuenta o un id, no un nombre para mostrar: %1$s
+Also on a block list, so still hidden: %1$s	También está en una lista de bloqueo, así que sigue oculto: %1$s

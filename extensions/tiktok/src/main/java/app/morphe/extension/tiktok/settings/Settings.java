@@ -154,6 +154,8 @@ public class Settings extends BaseSettings {
             new FeedRuleStringSetting("blocked_creators", true);
     public static final StringSetting LOCAL_HIDDEN_CREATORS =
             new FeedRuleStringSetting("local_hidden_creators", true);
+    public static final StringSetting CREATOR_FILTER_EXCEPTIONS =
+            new FeedRuleStringSetting("creator_filter_exceptions", true);
     public static final StringSetting REGION_ONLY_FROM = new StringSetting("region_only_from", "", true);
     public static final StringSetting REGION_NEVER_FROM = new StringSetting("region_never_from", "", true);
     public static final IntegerSetting MAX_VIDEO_SECONDS =

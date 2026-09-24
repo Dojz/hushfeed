@@ -1205,3 +1205,8 @@ None of the photos could be saved. Try again.,Tidak ada foto yang bisa disimpan.
 "Saved %1$s of %2$s, the rest ran out of time","%1$s dari %2$s tersimpan, sisanya kehabisan waktu"
 Live photo clip saved to %1$s,Klip foto langsung disimpan ke %1$s
 The live photo's clip couldn't be saved. Try again.,Klip foto langsung tidak bisa disimpan. Coba lagi.
+Creator exceptions,Pengecualian kreator
+"Comma separated account handles or user ids. Their videos stay when only a filter on the kind of post, its labels, age, length or counts would hide them. Ads, blocked creators, words, sounds and countries, and seen videos still apply.","Nama akun atau id pengguna yang dipisahkan koma. Video mereka tetap ada bila hanya filter jenis postingan, label, umur, durasi, atau jumlahnya yang akan menyembunyikannya. Iklan, kreator, kata, suara, dan negara yang diblokir, serta video yang sudah ditonton tetap berlaku."
+"An exception names one creator, so a pattern can't be one: %1$s","Pengecualian menyebut satu kreator, jadi pola tidak bisa menjadi pengecualian: %1$s"
+"An exception takes a handle or id, not a display name: %1$s","Pengecualian memakai nama akun atau id, bukan nama tampilan: %1$s"
+"Also on a block list, so still hidden: %1$s","Juga ada di daftar blokir, jadi tetap disembunyikan: %1$s"

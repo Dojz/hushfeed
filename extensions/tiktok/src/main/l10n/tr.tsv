@@ -1204,3 +1204,8 @@ Saved %1$s of %2$s, the rest need more free space	%2$s dosyadan %1$s kaydedildi,
 Saved %1$s of %2$s, the rest ran out of time	%2$s dosyadan %1$s kaydedildi, kalanlar için süre doldu
 Live photo clip saved to %1$s	Canlı fotoğraf klibi %1$s konumuna kaydedildi
 The live photo's clip couldn't be saved. Try again.	Canlı fotoğrafın klibi kaydedilemedi. Tekrar deneyin.
+Creator exceptions	İçerik üretici istisnaları
+Comma separated account handles or user ids. Their videos stay when only a filter on the kind of post, its labels, age, length or counts would hide them. Ads, blocked creators, words, sounds and countries, and seen videos still apply.	Virgülle ayrılmış hesap adları veya kullanıcı kimlikleri. Videoları, yalnızca gönderi türü, etiketleri, yaşı, süresi veya sayılarıyla ilgili bir filtre onları gizleyecekse kalır. Reklamlar, engellenen içerik üreticiler, kelimeler, sesler ve ülkeler ile izlenmiş videolar geçerli olmaya devam eder.
+An exception names one creator, so a pattern can't be one: %1$s	Bir istisna tek bir içerik üreticiyi adlandırır, bu yüzden bir kalıp istisna olamaz: %1$s
+An exception takes a handle or id, not a display name: %1$s	Bir istisna hesap adı veya kimlik alır, görünen ad değil: %1$s
+Also on a block list, so still hidden: %1$s	Bir engelleme listesinde de var, bu yüzden gizli kalır: %1$s

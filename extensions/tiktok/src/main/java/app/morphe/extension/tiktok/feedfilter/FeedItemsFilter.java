@@ -1063,9 +1063,22 @@ public final class FeedItemsFilter {
     }
 
     private static String getFilterReason(List<IFilter> activeFilters, Aweme item) {
+        // Read once per item, and only once a filter it could answer for has matched.
+        Boolean excepted = null;
         for (IFilter filter : activeFilters) {
             try {
                 if (filter.getFiltered(item)) {
+                    if (CreatorExceptions.isSubjective(filter)) {
+                        if (excepted == null) excepted = CreatorExceptions.excepted(item);
+                        if (excepted) {
+                            if (BaseSettings.DEBUG.get()) {
+                                Logger.printInfo(() -> "[Morphe TikTok FeedFilter] "
+                                    + filter.getClass().getSimpleName() + " matched aid="
+                                    + item.getAid() + " but its creator is excepted");
+                            }
+                            continue;
+                        }
+                    }
                     return filter.getClass().getSimpleName();
                 }
             } catch (RuntimeException exception) {
@@ -1379,7 +1392,21 @@ public final class FeedItemsFilter {
         StringBuilder builder = new StringBuilder();
         appendFilterMask(builder, activeContentFilters);
         appendFilterMask(builder, activeRangeFilters);
+        // The exceptions decide what the same filters keep, so a changed list is a changed mask
+        // and a page the filter has already seen is read again.
+        String exceptions = CreatorExceptions.maskToken();
+        if (!exceptions.isEmpty()) {
+            if (builder.length() > 0) builder.append('|');
+            builder.append(exceptions);
+        }
         return builder.toString();
+    }
+
+    /** Every filter a feed response runs through, content then ranges, for the classification test. */
+    static List<IFilter> allFiltersForTests() {
+        List<IFilter> all = new ArrayList<>(CONTENT_FILTERS);
+        all.addAll(RANGE_FILTERS);
+        return all;
     }
 
     private static void appendFilterMask(StringBuilder builder, List<IFilter> activeFilters) {
