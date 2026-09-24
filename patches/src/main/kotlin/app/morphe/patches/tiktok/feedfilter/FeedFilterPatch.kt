@@ -26,7 +26,9 @@ import app.morphe.util.findInstructionIndicesReversedOrThrow
 import app.morphe.util.findMutableMethodOf
 import app.morphe.util.getFreeRegisterProvider
 import app.morphe.util.getReference
+import app.morphe.util.implementationOrPatchException
 import app.morphe.util.indexOfFirstInstructionOrThrow
+import app.morphe.util.singleOrPatchException
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.ClassDef
@@ -34,6 +36,7 @@ import com.android.tools.smali.dexlib2.iface.Method
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.Instruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.RegisterRangeInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
@@ -91,6 +94,54 @@ val feedFilterPatch = bytecodePatch(
                     "invoke-static/range { v$register .. v$register }, $EXTENSION_CLASS_DESCRIPTOR->filter(Lcom/ss/android/ugc/aweme/feed/model/FeedItemList;)V",
                 )
             }
+        }
+
+        // The cold-start TopView is the one community leak route no list filter reaches. The
+        // feed fetch hands the response's preload ads to the splash ad service before
+        // fetchFeedList returns, which is where filter(FeedItemList) runs, so upstream PR #166's
+        // reset of preloadAds at filter time reached nothing on 47.0.3. The list is rerouted
+        // through the extension on its way into the service: with Remove ads on the service gets
+        // an empty list, and the route is counted on a TopViewPreload line either way. The
+        // install marker at entry puts the family in the export on a cold start that was served
+        // no TopView, the way the mid-roll marker does. The marker goes in first, so the handoff
+        // index below is read from the shifted body.
+        FeedApiFetchFingerprint.method.apply {
+            addInstruction(0, "invoke-static {}, $EXTENSION_CLASS_DESCRIPTOR->topViewPreloadInstalled()V")
+            val (index, handoff) = implementationOrPatchException("Feed filter").instructions.withIndex()
+                .filter { it.value.isTopViewPreloadHandoff() }
+                .singleOrPatchException("Feed filter: the feed fetch's one TopView preload handoff to the splash ad service")
+            // The list is the first argument after the receiver, in either invoke shape.
+            val listRegister = when (handoff) {
+                is FiveRegisterInstruction -> handoff.registerD
+                is RegisterRangeInstruction -> handoff.startRegister + 1
+                else -> throw PatchException("Feed filter: unsupported TopView handoff invoke shape.")
+            }
+            if (listRegister > 15) {
+                throw PatchException("Feed filter: the TopView preload list sits in v$listRegister, past a short call.")
+            }
+            addInstructions(
+                index,
+                """
+                    invoke-static/range {v$listRegister .. v$listRegister}, $EXTENSION_CLASS_DESCRIPTOR->dropTopViewPreload(Ljava/util/List;)Ljava/util/List;
+                    move-result-object v$listRegister
+                """,
+            )
+            // The read of preloadAds runs on every non-null response, before TikTok's own
+            // "nothing to preload" check jumps past the handoff, so the route is counted here:
+            // a fetch served no TopView still leaves a line, or it would read the same as a build
+            // where the fetch was never patched. Inserted after the handoff hook above, so this
+            // earlier insert does not move that one; the field keeps its name and is read once.
+            val (readIndex, read) = implementationOrPatchException("Feed filter").instructions.withIndex()
+                .filter { it.value.isTopViewPreloadRead() }
+                .singleOrPatchException("Feed filter: the feed fetch's one read of preloadAds")
+            val readRegister = (read as TwoRegisterInstruction).registerA
+            if (readRegister > 15) {
+                throw PatchException("Feed filter: the preload list is read into v$readRegister, past a short call.")
+            }
+            addInstruction(
+                readIndex + 1,
+                "invoke-static/range {v$readRegister .. v$readRegister}, $EXTENSION_CLASS_DESCRIPTOR->countTopViewPreload(Ljava/util/List;)V",
+            )
         }
 
         // Some 47.0.3 main-feed lists are restored or filled after fetchFeedList has returned.

@@ -332,6 +332,66 @@ public final class FeedItemsFilter {
         return true;
     }
 
+    /** The counter line for the cold-start TopView preload, the one ad route no list filter sees. */
+    static final String TOP_VIEW_SOURCE = "TopViewPreload";
+    private static final String TOP_VIEW_HOOK_FAMILY = "topview preload";
+    private static final String TOP_VIEW_REASON = "TopViewFilter";
+
+    /**
+     * Called where the feed fetch hands its preload ads to the splash ad service, so the family
+     * is in the export on a cold start that was served no TopView. Without it a missing family
+     * reads as both "not patched" and "never served", which is the confusion the mid-roll
+     * marker exists to end.
+     */
+    public static void topViewPreloadInstalled() {
+        HookStatus.bound(TOP_VIEW_HOOK_FAMILY, "installed");
+    }
+
+    /**
+     * Called where the fetch reads the response's preload ads, before TikTok's own "nothing to
+     * preload" check jumps past the rest. Counts the route on every fetch, ads or none: a
+     * delivery of nothing has to leave a line too, or an account served no TopView reads the
+     * same as a build where the fetch was never patched. The list is not touched here; the
+     * handoff below does the emptying, so a fetch counts as one list however it ends.
+     */
+    public static void countTopViewPreload(List<?> preloads) {
+        HookStatus.bound(TOP_VIEW_HOOK_FAMILY, "read");
+        FeedFilterCounters.sawList(TOP_VIEW_SOURCE, preloads == null ? 0 : preloads.size());
+    }
+
+    /**
+     * The cold-start TopView is the one community leak route the list filters cannot reach. The
+     * feed fetch reads {@code preloadAds} off the response, stamps each ad with the request id and
+     * hands the list to the splash ad service, all before {@code fetchFeedList} returns, which is
+     * where {@link #filter(FeedItemList)} runs; so a reset of that field at filter time reaches
+     * nothing. Everything in the list is an ad by construction, so with Remove ads on the service
+     * is handed an empty list in its place and the whole list is counted removed. With the switch
+     * off the same list goes through untouched. The list was already counted at the read, so
+     * this counts nothing itself.
+     *
+     * @return the list to hand the service: a fresh empty one when the ads are dropped, else
+     *         {@code preloads} itself (null stays null, so the caller's own null handling holds).
+     */
+    public static List<?> dropTopViewPreload(List<?> preloads) {
+        HookStatus.bound(TOP_VIEW_HOOK_FAMILY, "handoff");
+        if (preloads == null || preloads.isEmpty()) return preloads;
+        int count = preloads.size();
+        boolean verbose = BaseSettings.DEBUG.get();
+        if (!ADS_FILTER.getEnabled()) {
+            for (Object ad : preloads) {
+                if (ad instanceof Aweme) logKeptItem(TOP_VIEW_SOURCE, (Aweme) ad, verbose);
+            }
+            return preloads;
+        }
+        FeedFilterCounters.removed(TOP_VIEW_SOURCE, count, TOP_VIEW_REASON);
+        for (Object ad : preloads) {
+            if (ad instanceof Aweme) logItem((Aweme) ad, TOP_VIEW_REASON, verbose);
+        }
+        // A fresh mutable list: the service builds its preload task from what it is handed, and
+        // an immutable empty list would throw the moment it tried to add to it.
+        return new ArrayList<>();
+    }
+
     /** The counter line for the profile pager's own ad request, so an export names the route. */
     static final String PROFILE_AD_SOURCE = "ProfileAdResponse";
     private static final String PROFILE_AD_HOOK_FAMILY = "profile ads";

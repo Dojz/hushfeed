@@ -2,6 +2,8 @@ package app.morphe.extension.tiktok.feedfilter;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import app.morphe.extension.shared.Utils;
@@ -136,6 +138,49 @@ public class FeedFilterCountersTest {
                 lineFor("MidAdInsert"));
 
         assertFalse("a null ad is nothing to refuse", FeedItemsFilter.dropMidAd(null));
+    }
+
+    @Test public void theTopViewPreloadIsCountedOnEveryFetchAndEmptiedOnHandoff() {
+        // The cold-start TopView never passes through a list the other hooks filter: the feed
+        // fetch hands the response's preload ads to the splash service before fetchFeedList
+        // returns. The read runs on every fetch, before TikTok's own "nothing to preload" check
+        // jumps past the handoff, so an account served no TopView still leaves a line; the
+        // handoff only ever sees ads, and empties them with the switch on.
+        FeedItemsFilter.countTopViewPreload(null);
+        assertEquals("TopViewPreload: 1 lists, 0 items, 0 removed", lineFor("TopViewPreload"));
+        FeedItemsFilter.countTopViewPreload(new ArrayList<>());
+        assertEquals("TopViewPreload: 2 lists, 0 items, 0 removed", lineFor("TopViewPreload"));
+
+        List<Object> preloads = profileList(0, 2);
+        FeedItemsFilter.countTopViewPreload(preloads);
+        List<?> handedOn = FeedItemsFilter.dropTopViewPreload(preloads);
+        assertTrue("the service was still handed the ads with Remove ads on", handedOn.isEmpty());
+        assertEquals("TopViewPreload: 3 lists, 2 items, 2 removed. Last reason: TopViewFilter",
+                lineFor("TopViewPreload"));
+        assertTrue(app.morphe.extension.shared.diagnostics.HookStatus.report().toString(),
+                app.morphe.extension.shared.diagnostics.HookStatus.report().toString().contains("topview preload"));
+
+        Settings.REMOVE_ADS.save(false);
+        List<Object> kept = profileList(0, 2);
+        FeedItemsFilter.countTopViewPreload(kept);
+        assertSame("the list goes through untouched with Remove ads off",
+                kept, FeedItemsFilter.dropTopViewPreload(kept));
+        assertEquals("nothing was taken out of it", 2, kept.size());
+        assertEquals("TopViewPreload: 4 lists, 4 items, 2 removed. Last reason: TopViewFilter",
+                lineFor("TopViewPreload"));
+
+        assertNull("nothing to hand on is nothing to empty", FeedItemsFilter.dropTopViewPreload(null));
+        assertEquals("the handoff alone counts no list; the read did",
+                "TopViewPreload: 4 lists, 4 items, 2 removed. Last reason: TopViewFilter",
+                lineFor("TopViewPreload"));
+    }
+
+    @Test public void theTopViewFamilyIsInTheExportBeforeAnyAdIsDue() {
+        // Three cold starts on the S22 were served no TopView; without this marker that run
+        // reads the same as a build where the fetch was never patched.
+        FeedItemsFilter.topViewPreloadInstalled();
+        String report = app.morphe.extension.shared.diagnostics.HookStatus.report().toString();
+        assertTrue(report, report.contains("topview preload"));
     }
 
     @Test public void theMidRollFamilyIsInTheExportBeforeAnyAdIsDue() {

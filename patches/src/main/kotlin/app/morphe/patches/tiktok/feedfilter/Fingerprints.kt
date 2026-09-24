@@ -30,6 +30,51 @@ internal object MainFeedResponseFingerprint : Fingerprint(
     },
 )
 
+private const val SPLASH_AD_SERVICE_DESCRIPTOR =
+    "Lcom/bytedance/ies/ugc/aweme/commercialize/splash/service/ISplashAdService;"
+
+/**
+ * Whether the instruction hands a List to the splash ad service: the cold-start TopView
+ * preload handoff. The service's method is R8's and returns the preload task, so the call is
+ * known by the service's real name and its one List parameter, in either invoke shape.
+ */
+internal fun com.android.tools.smali.dexlib2.iface.instruction.Instruction.isTopViewPreloadHandoff(): Boolean =
+    (opcode == com.android.tools.smali.dexlib2.Opcode.INVOKE_INTERFACE ||
+        opcode == com.android.tools.smali.dexlib2.Opcode.INVOKE_INTERFACE_RANGE) &&
+        getReference<MethodReference>()?.let { reference ->
+            reference.definingClass == SPLASH_AD_SERVICE_DESCRIPTOR &&
+                reference.parameterTypes == listOf("Ljava/util/List;")
+        } == true
+
+/**
+ * Whether the instruction reads the response's preload ads off the FeedItemList: the TopView
+ * preload read, which every non-null response reaches before TikTok's own "nothing to preload"
+ * check jumps past the handoff. The field keeps its name on every retained build.
+ */
+internal fun com.android.tools.smali.dexlib2.iface.instruction.Instruction.isTopViewPreloadRead(): Boolean =
+    opcode == com.android.tools.smali.dexlib2.Opcode.IGET_OBJECT &&
+        getReference<FieldReference>()?.let { field ->
+            field.definingClass == "Lcom/ss/android/ugc/aweme/feed/model/FeedItemList;" &&
+                field.name == "preloadAds" && field.type == "Ljava/util/List;"
+        } == true
+
+/**
+ * The feed fetch and its post-processing: it reads the response's preload ads, stamps each
+ * with the request id and log pb, hands the list to the splash ad service as a TopView
+ * preload task and writes hasAd into every item, all before fetchFeedList returns. The class
+ * keeps its name; the method and its parameter type are R8's, and FeedApi carries two methods
+ * of this exact shape (the other is the thin request), so the fetch is the one whose body
+ * makes the handoff, which is also the site the patch rewrites.
+ */
+internal object FeedApiFetchFingerprint : Fingerprint(
+    definingClass = "Lcom/ss/android/ugc/aweme/feed/api/FeedApi;",
+    returnType = "Lcom/ss/android/ugc/aweme/feed/model/FeedItemList;",
+    custom = { method, _ ->
+        method.parameterTypes.size == 1 &&
+            method.implementation?.instructions?.any { it.isTopViewPreloadHandoff() } == true
+    },
+)
+
 /**
  * The real-named model getter is the stable late boundary for main-feed lists. TikTok 47.0.3
  * has delivery paths that do not return through FeedApiService.fetchFeedList, but all retained
