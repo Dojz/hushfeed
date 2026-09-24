@@ -90,11 +90,11 @@ A tap on a person in the Send to row only selects them. A second tap on the same
 A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.	评论中的网址可以直接点开，不用再手动复制；评论其他位置的点击操作不受影响.
 AI-generated posts	AI 生成的帖子
 About	关于
-Activity	动态
+Activity	活动
 Activity center (PIA)	活动中心\nPIA
 Add	添加
-Add a button beside the block control to send feedback about the current video.	在屏蔽控件旁添加一个按钮，用于反馈当前视频.
-Add a button that hides the current creator on this phone without blocking them.	添加一个按钮，仅在本机隐藏当前创作者，而不将其拉黑.
+Add a button beside the block control to send feedback about the current video.	在屏蔽按钮旁添加反馈当前视频的按钮.
+Add a button that hides the current creator on this phone without blocking them.	添加按钮，仅在本机隐藏当前创作者，不拉黑账号.
 Add a creator	添加创作者
 Add a search box that filters comments already loaded on this video by text or username. It doesn't search all of TikTok or remove TikTok's suggested-search banner.	添加搜索框，可按文字或用户名筛选当前视频已加载的评论。它不会搜索整个 TikTok，也不会移除 TikTok 的推荐搜索横幅.
 Add a separate button that skips videos using the current sound.	添加一个单独按钮，用于跳过使用当前声音的视频.
@@ -109,13 +109,13 @@ All events	所有事件
 All loaded tabs	所有已加载标签页
 Allow Duet and Stitch anyway	始终允许合拍与拼接
 Allow screenshots and Circle to Search	允许截图和“圈选搜索”
-Allow storage for TikTok in Android settings to save profile pictures	请在 Android 设置中允许 TikTok 使用存储空间，以保存头像
+Allow storage for TikTok in Android settings to save profile pictures	请在 Android 设置中授予 TikTok 存储权限以保存头像
 Allow storage for TikTok in Android settings to save sounds	请在 Android 设置中允许 TikTok 使用存储空间，以保存声音
-Allow storage for TikTok in Android settings to save stories	请在 Android 设置中允许 TikTok 使用存储空间，以保存限时动态
+Allow storage for TikTok in Android settings to save stories	请在 Android 设置中授予 TikTok 存储权限以保存限时动态
 Allow storage for TikTok in Android settings to save the live photo's clip	请在 Android 设置中允许 TikTok 使用存储空间，以保存实况照片的视频片段
 Already active	已启用
 Already marked as not interested	已标记为不感兴趣
-Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.	也将这些筛选规则应用于 TikTok 在信息流无法加载足够新内容时使用的已下载视频.
+Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.	TikTok 新内容不足时会使用已下载视频；也对这些视频应用筛选规则.
 Also change the region TikTok reports internally. Keeps your interface language. Your IP address and your account's own rules still apply.	同时修改 TikTok 内部上报地区，不改变界面语言；IP 和账号规则仍可能影响地区判断.
 Also on a block list, so still hidden: %1$s	同时也在屏蔽列表中，因此仍会隐藏：%1$s
 Always show publish date	始终显示发布日期
@@ -200,8 +200,8 @@ Choose a folder on internal storage. SD cards are not supported.	请选择内部
 Choose a preset to fill the SIM details.	选择一个预设来填写 SIM 信息.
 Choose a subfolder under %1$s.	请选择 %1$s 下的子文件夹.
 Choose what reaches your feed	选择哪些内容进入你的信息流
-Choose which loaded TikTok bottom navigation tabs should stay visible.	选择已加载的 TikTok 底部导航标签中哪些保持显示.
-Choose which loaded TikTok feed tabs should stay visible. If only For You remains, its redundant header is hidden.	选择已加载的 TikTok 信息流标签中哪些保持显示。如果只保留“为你推荐”，其多余的顶部标题会被隐藏.
+Choose which loaded TikTok bottom navigation tabs should stay visible.	选择保留哪些 TikTok 已加载的底部导航标签.
+Choose which loaded TikTok feed tabs should stay visible. If only For You remains, its redundant header is hidden.	选择保留哪些 TikTok 已加载的信息流标签。若只保留“为你推荐”，会隐藏多余标题.
 Choose which rows and controls appear	选择显示哪些项目和控件
 Clear all	全部清除
 Clear all Lab data (overrides, switch, recordings)	清除实验室全部数据（覆盖值、总开关、记录）
@@ -282,7 +282,7 @@ Create	创建
 Creator exceptions	创作者例外名单
 Creators and sounds	创作者与声音
 Creators hidden on this phone	本机隐藏的创作者
-Creators you hid from a video. Search the list and remove one at a time.	你从视频中隐藏过的创作者。可搜索列表并逐个移除.
+Creators you hid from a video. Search the list and remove one at a time.	这里列出从视频中隐藏的创作者，可搜索并逐个移除.
 Current	当前值
 Current %1$s	当前 %1$s
 Current cache unavailable: %1$s	当前缓存不可用：%1$s
@@ -342,7 +342,7 @@ Enter valid JSON.	请输入有效的 JSON.
 Entry %1$d has a field with the wrong data type.	第 %1$d 项中有字段的数据类型错误.
 Entry %1$d is not an object.	第 %1$d 项不是对象.
 Errors	错误
-Expand activity list	展开动态通知列表
+Expand activity list	展开活动列表
 Explore	探索
 Export diagnostic report	导出诊断报告
 Export loaded values	导出已加载的值
@@ -422,9 +422,9 @@ Hide TikTok Shop posts from the feed.	从信息流中隐藏 TikTok Shop 内容.
 Hide TikTok's "Search: ..." banner above the comment count. This doesn't hide the comments or Hushfeed's comment-search box.	隐藏评论数上方 TikTok 的“搜索：...”横幅，不影响评论和插件的评论搜索框.
 Hide TikTok's Auto scroll button	隐藏 TikTok 的自动滚动按钮
 Hide TikTok's short drama episodes and the cards that promote them.	隐藏 TikTok 短剧剧集以及推广短剧的卡片.
-Hide activity	隐藏动态通知
+Hide activity	隐藏活动
 Hide activity status	隐藏活动状态
-Hide ads, Shop posts, LIVE videos and replays, promotional music, and paid partnerships.	隐藏广告、TikTok Shop 内容、LIVE 视频及回放、推广音乐和付费合作内容.
+Hide ads, Shop posts, LIVE videos and replays, promotional music, and paid partnerships.	隐藏广告、TikTok Shop 内容、LIVE 及回放、推广音乐和付费合作内容.
 Hide archive	隐藏归档
 Hide bottom tabs TikTok adds later unless you allow them.	隐藏 TikTok 后续新增的底部标签，除非你明确允许.
 Hide buttons in the right column	隐藏右侧栏按钮
@@ -435,7 +435,7 @@ Hide comments made of an image or a sticker instead of words.	隐藏只包含图
 Hide comments that contain any of the words below, or that come from the accounts below.	隐藏包含下方任意关键词的评论，或来自下方账号的评论.
 Hide controls after each video starts. Tap to restore them.	每个视频开始播放后隐藏控件。点按屏幕可恢复.
 Hide conversations	隐藏会话
-Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still turned on.	隐藏所有私信会话。除仍启用的其他收件箱项目外，收件箱会保持为空.
+Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still turned on.	隐藏所有私信会话；仍启用的其他收件箱项目会保留.
 Hide feed videos with place badges, even when they aren't paid ads. To keep the video and hide only its badge, use Hide location labels in Feed screen.	隐藏带地点徽标的信息流视频，即使不是广告。若只想隐藏徽标并保留视频，请用“信息流界面 > 隐藏地点标签”.
 Hide floating promotion badges, coins, and timer banners on the feed.	隐藏信息流中的浮动推广徽标、金币和计时横幅.
 Hide floating promotions	隐藏浮动推广
@@ -471,7 +471,7 @@ Hide tabs TikTok adds later unless you allow them.	隐藏 TikTok 后续新增的
 Hide the "Search this image" prompt shown over videos. The feed search button and suggestions above comments are separate settings.	隐藏视频上的“搜索此图片”提示；信息流搜索按钮和评论上方建议需分别设置.
 Hide the CAPTCHA dialogs raised while you browse or watch LIVE. Login, account verification and any CAPTCHA raised over a follow, like, comment or repost stay visible.	隐藏浏览或观看 LIVE 时出现的 CAPTCHA。登录、账号验证，以及关注、点赞、评论或转发触发的 CAPTCHA 仍会显示.
 Hide the Full screen button	隐藏全屏按钮
-Hide the Full screen button over videos. Playback and automatic rotation keep working as before.	隐藏视频上的全屏按钮。播放和自动旋转仍照常工作.
+Hide the Full screen button over videos. Playback and automatic rotation keep working as before.	隐藏视频上的全屏按钮；播放和自动旋转不受影响.
 Hide the Inbox search button	隐藏收件箱搜索按钮
 Hide the LIVE button	隐藏 LIVE 按钮
 Hide the LIVE button in the top left corner of the feed.	隐藏信息流左上角的 LIVE 按钮.
@@ -490,7 +490,7 @@ Hide the event badge	隐藏活动徽标
 Hide the flag button TikTok puts above the creator's picture in some regions. You can still report a video from the share menu.	隐藏部分地区头像上方的旗帜举报按钮；仍可从分享菜单举报视频.
 Hide the floating promotional badge over the feed.	隐藏信息流上方的浮动推广徽标.
 Hide the follow button on the feed	隐藏信息流中的关注按钮
-Hide the friend recommendation card and the other cards TikTok slots between videos.	隐藏好友推荐卡片以及 TikTok 插入在视频之间的其他卡片.
+Hide the friend recommendation card and the other cards TikTok slots between videos.	隐藏好友推荐卡及 TikTok 插入视频之间的其他卡片.
 Hide the launcher shortcuts	隐藏启动器快捷方式
 Hide the magnifying glass at the top of Inbox. Search on the feed and in comments is unchanged.	隐藏收件箱顶部的放大镜。信息流和评论中的搜索不受影响.
 Hide the magnifying glass at the top right of the feed. Search in Inbox and suggestions above comments stay unchanged.	隐藏信息流右上角的放大镜。收件箱搜索和评论上方建议不受影响.
@@ -501,23 +501,23 @@ Hide the playlist bar along the bottom of videos that belong to a series.	隐藏
 Hide the plus button under the creator's picture in the right column. Ticking Avatar and follow button above hides the picture with it.	隐藏右侧按钮栏中头像下的加号。若上方同时勾选“头像和关注按钮”，头像也会隐藏.
 Hide the points banner under the search box and the coin counter floating over search results, which TikTok shows in some regions. Searching works as before.	隐藏部分地区中搜索框下方的积分横幅，以及搜索结果上方浮动的金币计数；搜索功能不受影响.
 Hide the purple rewards button beside Add friends on your profile.	隐藏个人资料页“添加好友”旁边的紫色奖励按钮.
-Hide the question cards TikTok slides over a video near its end.	隐藏 TikTok 在视频接近结束时滑入显示的问题卡片.
+Hide the question cards TikTok slides over a video near its end.	隐藏 TikTok 在视频接近结束时显示的问题卡片.
 Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.	隐藏输入评论时的快捷表情和自动贴纸建议，表情和贴纸按钮仍可使用.
 Hide the red counts and dots on every bottom tab, Inbox and Profile included. The inbox itself still shows what came in.	隐藏所有底部标签的红点和未读数，包括收件箱和个人资料；收件箱内容不受影响.
 Hide the rewards shortcut	隐藏奖励快捷入口
 Hide the right column	隐藏右侧栏
 Hide the row of friends at the top of the share sheet.	隐藏分享面板顶部的好友一栏.
-Hide the save button in the right column. Ticking Save in the list above hides it too.	隐藏右侧栏的保存按钮。在上方列表勾选“保存”也会隐藏它.
+Hide the save button in the right column. Ticking Save in the list above hides it too.	隐藏右侧按钮栏中的保存按钮；在上方列表勾选“保存”也有同样效果.
 Hide the save button on the feed	隐藏信息流中的保存按钮
 Hide the search bar below videos	隐藏视频下方的搜索栏
 Hide the search button on the feed	隐藏信息流中的搜索按钮
 Hide the share prompt after a like	隐藏点赞后的分享提示
-Hide the spinning music cover and the track name beside the caption.	隐藏旋转的音乐封面以及文案旁的曲目名称.
+Hide the spinning music cover and the track name beside the caption.	隐藏旋转音乐封面和文案旁的曲目名称.
 Hide the status bar	隐藏状态栏
 Hide the streak button in a chat and the reminder message that goes with it.	隐藏聊天中的连续互动按钮及其对应提醒消息.
 Hide the suggested-search strip above the bottom tabs and let video details and side controls use its space. The top search button and comments stay unchanged.	隐藏底部标签上方的推荐搜索条，并让视频信息和侧边控件使用这块空间。顶部搜索按钮和评论不受影响.
 Hide the unread badges on the bottom tabs	隐藏底部标签上的未读徽标
-Hide the whole column on the right, from the avatar down to the music disc.	隐藏右侧整列控件，从头像一直到音乐唱片.
+Hide the whole column on the right, from the avatar down to the music disc.	隐藏整个右侧按钮栏（头像至音乐唱片）.
 Hide this creator on this phone	在本机隐藏此创作者
 Hide verified accounts	隐藏认证账号
 Hide video actions	隐藏视频操作
@@ -527,7 +527,7 @@ Hide videos marked as using promotional music.	隐藏标记为使用推广音乐
 Hide videos posted as part of a playlist.	隐藏作为播放列表一部分发布的视频.
 Hide videos posted by verified accounts.	隐藏认证账号发布的视频.
 Hide videos that belong to a paid Series.	隐藏属于付费系列的视频.
-Hide videos that use a sound blocked with the player's sound button, or named below.	隐藏使用已通过播放器声音按钮屏蔽、或名称在下方列表中的声音的视频.
+Hide videos that use a sound blocked with the player's sound button, or named below.	隐藏使用已屏蔽声音或名称与下方列表匹配的声音的视频.
 Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.	隐藏播放量高但评论少的视频。规则与“每个赞对应播放量”相同。设为 0 可关闭.
 Hide videos with a lot of views and few likes. Lower numbers are stricter, zero turns the rule off, and one video is kept back if everything the feed just sent would go.	隐藏播放量高但点赞少的视频。数值越低越严格，0 为关闭。若本轮信息流会被全部筛掉，则保留 1 条.
 Hide videos with blocked sounds	隐藏使用已屏蔽声音的视频
@@ -564,7 +564,7 @@ Keep going	继续
 Keep long press from quick sharing	阻止长按触发快捷分享
 Keep long press from reposting	阻止长按触发转发
 Keep the Favorites tab	保留收藏标签
-Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.	TikTok 打开时隐藏时钟和状态图标。从屏幕顶部下滑可临时查看.
+Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.	TikTok 打开时隐藏状态栏时钟和图标；从顶部下滑可临时查看.
 Keep the screen's refresh rate	保持屏幕刷新率
 Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only.	把当前选择的播放速度沿用到下一条视频。关闭后，每条新视频都从 1x 开始，手动调整只对当前视频有效.
 Keep this string to %1$s characters or fewer.	此字符串最多可包含 %1$s 个字符.
@@ -711,7 +711,7 @@ Open a share sheet once, then return here to choose its actions.	请先打开一
 Open comments	打开评论
 Open external links directly	直接打开外部链接
 Open messages	打开消息
-Open profile and story website links in your system browser instead of TikTok's in-app browser.	使用系统浏览器打开个人资料和限时动态中的网页链接，而不是 TikTok 内置浏览器.
+Open profile and story website links in your system browser instead of TikTok's in-app browser.	使用系统浏览器打开个人资料和限时动态中的网页链接，不使用 TikTok 内置浏览器.
 Open the feed anyway	仍然继续使用信息流
 Open the feed anyway, %1$d left today	仍然继续使用信息流，今天还可继续 %1$d 次
 Open the feed anyway, the last time today	仍然继续使用信息流，这是今天最后一次
@@ -737,7 +737,7 @@ Overrides disabled. Restart TikTok to apply this.	覆盖功能已禁用。重启
 Overrides enabled. Restart TikTok to apply this.	覆盖功能已启用。重启 TikTok 后生效.
 Paid partnerships	付费合作
 Pause Hushfeed	暂停 Hushfeed
-Pauses the video behind the comment sheet while you read. It plays on from the same spot when the sheet closes.	阅读评论时暂停评论面板后方的视频。关闭评论面板后会从同一位置继续播放.
+Pauses the video behind the comment sheet while you read. It plays on from the same spot when the sheet closes.	阅读评论时暂停背后的视频，关闭评论后从原位置继续播放.
 People, shortcuts and sending controls	联系人、快捷方式与发送控件
 Photo	图片
 Photo and image posts	图片和图文帖子
@@ -746,7 +746,7 @@ Photo filename	图片文件名
 Photos and stickers	图片与贴纸
 Pick the actions to remove from the share sheet. Names you typed by hand that TikTok hasn't shown yet stay in the list above.	选择要从分享面板隐藏的操作。手动输入但 TikTok 尚未显示过的名称会保留在列表中.
 Pick the buttons to take off the column. The rest stay where they are.	选择要从右侧栏移除的按钮。其余按钮保持原位.
-Play videos TikTok has classified without the overlay asking to be tapped through first.	播放被 TikTok 分类限制的视频时，不再先显示需要点按确认的覆盖层.
+Play videos TikTok has classified without the overlay asking to be tapped through first.	直接播放 TikTok 标记为需确认的内容，不再显示点击确认遮罩.
 Playback	播放
 Player	播放器
 Player config	播放器配置
@@ -755,7 +755,7 @@ Popular	热门
 Popups	弹窗
 Post age	发布时间
 Preset	预设
-Press and hold a profile picture to save the full size original to your photo destination.	长按头像可将完整尺寸原图保存到你的图片保存位置.
+Press and hold a profile picture to save the full size original to your photo destination.	长按头像，将完整尺寸原图保存到图片保存位置.
 Press and hold a story to save it. Stories have no save button of their own, and holding one is how TikTok pauses it, so this takes that gesture over.	长按限时动态即可保存。TikTok 原本用长按暂停播放，启用后该手势将改为保存.
 Press and hold the left or right third of the screen to jump back or forward. The middle third keeps the Long press action.	长按屏幕左侧三分之一区域可后退，右侧三分之一区域可快进；中间三分之一区域仍执行“长按”动作.
 Preview shortened. Save JSON includes the full report.	预览已缩短。“保存 JSON”会包含完整报告.
@@ -931,7 +931,7 @@ Show the progress bar	显示进度条
 Show the progress bar thumbnail	显示进度条缩略图
 Show the search entry inside TikTok's LIVE drawer, where available. This doesn't add a search box to video comments.	在支持的情况下，于 TikTok 的 LIVE 抽屉中显示搜索入口。此选项不会在视频评论中添加搜索框.
 Show the switch	显示开关
-Show the whole Activity and New followers lists instead of stopping at a View all button.	完整显示“活动”和“新关注者”列表，不再停在“查看全部”按钮处.
+Show the whole Activity and New followers lists instead of stopping at a View all button.	完整显示“活动”和“新关注者”列表，不在“查看全部”处截断.
 Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off.	完整显示视频，不再为窗口裁切。长屏手机通常无变化；折叠屏展开、较方屏幕或分屏时可避免边缘被裁掉.
 Show what is left of the budget	显示今日剩余时间/视频数
 Show when the camera or microphone is in use	显示摄像头或麦克风使用状态
@@ -940,7 +940,7 @@ Showing %1$s again	再次显示 %1$s
 Silence the feed while comments are open	打开评论时将信息流静音
 Skip content warnings	跳过内容警告
 Skipping videos with %1$s	正在跳过带有 %1$s 的视频
-Some Calm feed settings changed. Restore still puts back your earlier setup.	部分“清爽信息流”设置已发生变化。“恢复”仍会还原你之前的配置.
+Some Calm feed settings changed. Restore still puts back your earlier setup.	部分“清爽信息流”设置已改变；“恢复”仍会还原之前的配置.
 Something is missing from %1$s. Tap for the whole report.	%1$s 中缺少部分内容。点按可查看完整报告.
 Sound link copied	声音链接已复制
 Sound saved to %1$s	声音已保存到 %1$s
@@ -1019,18 +1019,18 @@ That settings backup is damaged or only partly downloaded. Nothing was altered.	
 That settings backup is incomplete, so it may have been cut short. Nothing was altered.	该设置备份不完整，可能被截断。未进行任何更改.
 That settings change did not go through. Nothing was altered.	该设置更改未能完成。未进行任何更改.
 That sticker is in a format Hushfeed cannot read	该贴纸的格式 Hushfeed 无法读取
-The Activity row of likes and comments on your posts leaves the Inbox. Notifications about them still arrive.	隐藏收件箱中与你帖子点赞和评论有关的“动态”项目，但相关通知仍会正常到达.
+The Activity row of likes and comments on your posts leaves the Inbox. Notifications about them still arrive.	隐藏收件箱中与你帖子点赞和评论有关的“活动”项目，但通知仍会正常到达.
 The Archive row leaves the Inbox. Archived chats are kept.	“归档”项目将从收件箱中隐藏，已归档聊天仍会保留.
 The Lab can't check this. TikTok gets it exactly as typed.	实验室无法检查此内容。TikTok 会按你输入的原样接收.
 The Lab couldn't open. Go back and open it again.	无法打开实验室。请返回后重新进入.
 The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.	实验室最多保留 %1$s 条规则。此次更改会使规则数达到 %2$s，因此未进行更改.
-The Message requests row leaves the Inbox. Requests keep arriving and wait there until you turn this off.	“消息请求”项目将从收件箱中隐藏。新的请求仍会到达并保留，直到你关闭此选项.
-The New followers row leaves the top of the Inbox. The accounts still follow you.	“新关注者”项目将从收件箱顶部隐藏，这些账号仍然会关注你.
+The Message requests row leaves the Inbox. Requests keep arriving and wait there until you turn this off.	隐藏“消息请求”项目；新请求仍会到达并保留，关闭此项后可见.
+The New followers row leaves the top of the Inbox. The accounts still follow you.	隐藏收件箱顶部的“新关注者”项目；关注关系不受影响.
 The Tako assistant's conversation leaves the Inbox list. The Tako bubble on the feed has its own switch under Feed tabs.	隐藏收件箱中的 Tako 助手会话。信息流 Tako 气泡需在“信息流标签”中单独设置.
 The accounts TikTok suggests you follow no longer take up rows in the Inbox.	TikTok 推荐你关注的账号将不再占用收件箱项目.
-The activity status control leaves the Inbox header. Whether others see you as active is unchanged.	活动状态控件将从收件箱顶部隐藏。其他人是否能看到你的在线状态不会改变.
+The activity status control leaves the Inbox header. Whether others see you as active is unchanged.	隐藏收件箱顶部的活动状态控件；不会改变别人是否能看到你的在线状态.
 The add people icon leaves the Inbox header. Only the shortcut goes, so friend suggestions elsewhere are unchanged.	隐藏收件箱顶部的“添加联系人”图标。只移除这个快捷入口，其他位置的好友推荐不受影响.
-The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.	目录显示此键类型为 %1$s，而当前覆盖值类型为 %2$s。请重置覆盖值并重新创建.
+The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.	功能清单显示此键类型为 %1$s，而当前覆盖值类型为 %2$s。请重置后重新创建覆盖值.
 The diagnostic report couldn't be saved yet. Try again in a moment.	诊断报告暂时无法保存。请稍后重试.
 The diagnostic report couldn't be saved. Try again.	无法保存诊断报告。请重试.
 The downloader app you chose isn't installed. Check Send links to another app under Downloads.	你选择的外部下载应用尚未安装。请检查“下载 > 将链接发送到其他应用”的设置.
@@ -1064,15 +1064,15 @@ There is no diagnostic data to clear	没有可清除的诊断数据
 There is no diagnostic data to put back	没有可恢复的诊断数据
 There was nothing to put back	没有可恢复的内容
 These loaded values are for a different TikTok version.	这些已加载值属于另一个 TikTok 版本.
-This catalog entry is no longer available. Refresh the Lab and try again.	此目录条目已不可用。请刷新实验室后重试.
+This catalog entry is no longer available. Refresh the Lab and try again.	此功能项已不在清单中。请刷新实验室后重试.
 This change couldn't be saved. Try again.	无法保存此更改。请重试.
-This configuration has no fields that can be copied and changed safely on this build.	此配置在当前版本中没有可安全复制和修改的字段.
+This configuration has no fields that can be copied and changed safely on this build.	当前版本没有可安全复制并修改的字段.
 This file has more loaded values than the Lab takes at once.	此文件包含的已加载值超过实验室单次可接受数量.
 This file has no loaded values in it.	此文件中没有已加载值.
 This file isn't a loaded-values export from the Feature Gate Lab.	此文件不是功能实验室导出的已加载值文件.
 This gate type is not supported.	不支持此功能项类型.
 This is the video's own sound, so YouTube Music won't have it	这是视频自己的原声，因此 YouTube Music 中不会有对应曲目
-This key isn't in the local catalog, so its type can't be checked. Reset the override.	此键不在本地目录中，因此无法检查其类型。请重置覆盖值.
+This key isn't in the local catalog, so its type can't be checked. Reset the override.	此键不在本地功能清单中，无法检查类型。请重置覆盖值.
 This key touches account safety. Forcing it can change login, region, payment or security checks.	此键涉及账号安全。强制修改可能影响登录、地区、支付或安全检查.
 This line opens a rule and does not finish it: %1$s. Write two phrases as "a" & "b" for both, or "a" !& "b" for the first without the second.	规则未写完整：%1$s。两短语都需出现写 "a" & "b"；需要前者且排除后者写 "a" !& "b".
 This phone has no file picker, so there is no way to choose a file here	此手机没有文件选择器，因此无法在这里选择文件
@@ -1157,7 +1157,7 @@ Use TikTok's own hold, pull down and release gesture to keep playing at the hold
 Use a default playback speed	使用默认播放速度
 Use non-personalized search	使用非个性化搜索
 Use system font	使用系统字体
-Use the preset for the region TikTok reports for your account and its shop too. May affect search.	使用预设同时覆盖 TikTok 为账号及商城上报的地区。可能影响搜索结果.
+Use the preset for the region TikTok reports for your account and its shop too. May affect search.	使用预设同时修改账号和 TikTok Shop 上报的地区，可能影响搜索结果.
 Use the selected country and operator values. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.	仅修改 SIM 上报的国家/地区和运营商，不改变 IP、账号历史或界面语言；这些因素仍可能让 TikTok 沿用原地区。重启 TikTok 后生效.
 Use the selected country. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.	仅修改 SIM 上报的国家/地区，不改变 IP、账号历史或界面语言；这些因素仍可能让 TikTok 沿用原地区。重启 TikTok 后生效.
 Use the split layout on wider screens. Restart TikTok to apply this. If the old layout is still there, unfold again.	在较宽屏幕上使用分栏布局。重启 TikTok 后生效。如果仍显示旧布局，请再次折叠并展开设备.
