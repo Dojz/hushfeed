@@ -1,0 +1,110 @@
+name: Temporary TikTok 47.0.3 l10n audit
+
+on:
+  push:
+    branches:
+      - zh-cn-l10n
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download the reviewed TikTok 47.0.3 APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          url='https://www.apkmirror.com/wp-content/themes/APKMirror/download.php?forcebaseapk=true&id=16085242&key=5c5d9a44b751ab52d379ee40e7f61c5810060a5b'
+          curl -L --fail --retry 3 --retry-delay 2 -A 'Mozilla/5.0' "$url" -o tiktok.apk
+          echo 'f4d853f6ccaf145a9b5f106b8e63767e2345e17ae829b6cc6b272fdf0161389c  tiktok.apk' | sha256sum -c -
+          ls -lh tiktok.apk
+
+      - name: Download apktool
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3             'https://github.com/iBotPeaches/Apktool/releases/download/v2.11.1/apktool_2.11.1.jar'             -o apktool.jar
+
+      - name: Decode resources only
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -Xmx4g -jar apktool.jar d -f -s tiktok.apk -o decoded >/tmp/apktool.log 2>&1 || {
+            cat /tmp/apktool.log
+            exit 1
+          }
+          echo 'Chinese resource directories:'
+          find decoded/res -maxdepth 1 -type d \( -name 'values-zh*' -o -name 'values-b+zh*' \) -print | sort
+
+      - name: Compare TikTok English and Chinese UI terms
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > /tmp/audit.py <<'PY'
+          from pathlib import Path
+          import re
+          import xml.etree.ElementTree as ET
+
+          root = Path("decoded/res")
+          dirs = [p for p in root.iterdir() if p.is_dir() and (p.name.startswith("values-zh") or p.name.startswith("values-b+zh"))]
+          print("ZH_DIRS:", ", ".join(sorted(p.name for p in dirs)) or "(none)")
+
+          def read_strings(d):
+              out = {}
+              for f in sorted(d.glob("*.xml")):
+                  try:
+                      tree = ET.parse(f)
+                  except Exception:
+                      continue
+                  for node in tree.getroot():
+                      name = node.attrib.get("name")
+                      if not name or node.tag not in {"string", "item"}:
+                          continue
+                      text = "".join(node.itertext()).strip()
+                      if text:
+                          out[name] = text
+              return out
+
+          default = read_strings(root / "values")
+          localized = {d.name: read_strings(d) for d in dirs}
+
+          needles = [
+              "For You", "Following", "Friends", "Nearby", "Story", "Stories",
+              "Duet", "Stitch", "Inbox", "Profile", "Repost", "Favorites",
+              "Activity", "Shop", "Series", "LIVE", "Search", "Comments",
+              "Not interested", "Save", "Share", "Download", "Block", "Unblock",
+              "Creator", "Sound", "Playlist", "Auto scroll", "Full screen"
+          ]
+          rx = re.compile("|".join(re.escape(x) for x in needles), re.I)
+
+          rows = []
+          for name, en in default.items():
+              if not rx.search(en):
+                  continue
+              vals = [(loc, table.get(name, "")) for loc, table in localized.items()]
+              if any(v for _, v in vals):
+                  rows.append((en, name, vals))
+
+          for en, name, vals in sorted(rows, key=lambda x: (x[0].lower(), x[1])):
+              print("\nEN:", en.replace("\n", "\\n"))
+              print("KEY:", name)
+              for loc, zh in vals:
+                  if zh:
+                      print(f"{loc}: {zh.replace(chr(10), r'\\n')}")
+
+          print("\n=== DIRECT CHINESE TERM HITS ===")
+          zh_terms = ["为你", "限时动态", "故事", "合拍", "拼接", "画面拼贴", "收件箱", "个人资料", "转发",
+                      "收藏", "活动", "商店", "商城", "系列", "不感兴趣", "自动滚动", "全屏"]
+          for loc, table in localized.items():
+              print("\n--", loc, "--")
+              for name, zh in sorted(table.items()):
+                  if any(t in zh for t in zh_terms):
+                      en = default.get(name, "")
+                      print(f"{name}\t{en}\t{zh}")
+          PY
+          python /tmp/audit.py
