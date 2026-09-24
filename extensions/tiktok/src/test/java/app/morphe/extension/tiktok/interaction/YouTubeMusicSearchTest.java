@@ -42,12 +42,14 @@ public class YouTubeMusicSearchTest {
     public static final class Sound {
         final String title;
         final String author;
+        boolean original;
         Sound(String title, String author) {
             this.title = title;
             this.author = author;
         }
         public String getMusicName() { return title; }
         public String getAuthorName() { return author; }
+        public boolean isOriginal() { return original; }
     }
 
     public static final class Video {
@@ -105,6 +107,28 @@ public class YouTubeMusicSearchTest {
             assertFalse(YouTubeMusicSearch.open(new Video(new Sound("Espresso", "Sabrina Carpenter")), activity));
             assertNull(Shadows.shadowOf(activity).getNextStartedActivity());
             assertEquals(L10n.t("YouTube Music isn't installed"), ShadowToast.getTextOfLatestToast());
+        }
+    }
+
+    @Test
+    public void theVideosOwnSoundIsSaidSoInsteadOfSearched() {
+        try (var controller = Robolectric.buildActivity(Activity.class).setup()) {
+            Activity activity = controller.get();
+            Utils.setContext(activity);
+            installYouTubeMusic(activity);
+            Sound flagged = new Sound("Espresso", "alice");
+            flagged.original = true;
+            for (Sound sound : new Sound[]{new Sound("original sound - alice", "alice"),
+                    new Sound("Original Sound - alice", null), flagged}) {
+                ShadowToast.reset();
+                assertFalse(sound.title, YouTubeMusicSearch.open(new Video(sound), activity));
+                assertNull(Shadows.shadowOf(activity).getNextStartedActivity());
+                assertEquals(L10n.t("This is the video's own sound, so YouTube Music won't have it"),
+                        ShadowToast.getTextOfLatestToast());
+            }
+            // A song whose title merely mentions the words is still searched.
+            assertTrue(YouTubeMusicSearch.open(new Video(new Sound("My Original Sound", "The Band")), activity));
+            assertNotNull(Shadows.shadowOf(activity).getNextStartedActivity());
         }
     }
 

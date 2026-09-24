@@ -74,7 +74,7 @@ public final class GestureActions {
         String action = Settings.LONG_PRESS_ACTION.get();
         return !"nothing".equals(action) && !"comments".equals(action)
                 && !"original_sound".equals(action) && !"copy_link".equals(action)
-                && !"copy_sound_link".equals(action);
+                && !"copy_sound_link".equals(action) && !"youtube_music".equals(action);
     }
 
     /**

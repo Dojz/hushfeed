@@ -35,9 +35,16 @@ public final class YouTubeMusicSearch {
     /** Opens YouTube Music's search for the sound of {@code aweme}. Says why when it cannot. */
     public static boolean open(Object aweme, Context context) {
         if (context == null) return false;
+        Object music = aweme == null ? null : Reflect.property(aweme, "getMusic", "music");
         String query = query(aweme);
         if (query == null) {
             Utils.showToastShort(L10n.t("This video's sound has no title to look for"));
+            return false;
+        }
+        if (isOriginal(music)) {
+            // "original sound - handle" is the video's own audio. Searched, it finds nothing or
+            // somebody else's song, so it is said instead of sent.
+            Utils.showToastShort(L10n.t("This is the video's own sound, so YouTube Music won't have it"));
             return false;
         }
         Intent view = new Intent(Intent.ACTION_VIEW, Uri.parse(SEARCH_URL + Uri.encode(query)));
@@ -54,6 +61,17 @@ public final class YouTubeMusicSearch {
             Utils.showToastLong(L10n.t("YouTube Music couldn't be opened. Open it yourself and search for the sound."));
             return false;
         }
+    }
+
+    /**
+     * Whether the sound is the video's own audio: the model's own flag, or the title TikTok
+     * gives such a sound in English, which is the one shape a reader outside a translation sees.
+     */
+    static boolean isOriginal(Object music) {
+        if (music == null) return false;
+        if (Boolean.TRUE.equals(Reflect.property(music, "isOriginal", "isOriginal"))) return true;
+        String title = SoundIdentity.nameOf(music);
+        return title != null && title.regionMatches(true, 0, "original sound", 0, "original sound".length());
     }
 
     /** "title artist", or the title alone, or null when the sound has no title to search by. */

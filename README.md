@@ -528,7 +528,7 @@ Hushfeed has no server of its own and collects nothing. Everything it adds runs 
 
 It goes online by itself for one job. When you save a video, a photo, a sound, subtitles, a sticker or a profile picture, it downloads that file over HTTPS from the address TikTok's own data holds for it. It won't fetch from an address on your own network, and it gives up after five redirects. Anything else Hushfeed does online, such as translating a comment or blocking a creator, goes through TikTok's own code to TikTok's servers, the way the app's own buttons do.
 
-The only web addresses written into Hushfeed's code are github.com for this project, gitlab.com and gnu.org for licence texts, and tiktok.com for the share links TikTok itself uses. A test fails the build if another one turns up, or if code outside that download path opens a connection.
+The only web addresses written into Hushfeed's code are github.com for this project, gitlab.com and gnu.org for licence texts, tiktok.com for the share links TikTok itself uses, and music.youtube.com for the search the Find the sound on YouTube Music long press hands to the YouTube Music app on your phone. A test fails the build if another one turns up, or if code outside that download path opens a connection.
 
 The diagnostic report stays on your phone until you copy or save it. It leaves out web addresses, login tokens and cookies, device ids, the ids of videos, comments and messages, and creator names and handles. Read it through before you share it anyway.
 
