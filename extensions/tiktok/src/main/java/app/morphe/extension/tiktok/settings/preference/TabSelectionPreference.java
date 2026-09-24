@@ -98,7 +98,7 @@ public class TabSelectionPreference extends Preference {
     private void refreshSummary() {
         Set<String> selected = parseEnabledKeys(value);
         List<OptionRow> observedOptions = getObservedOptions();
-        if (observedOptions.size() <= 1) {
+        if (nothingSeenYet(observedOptions)) {
             setSummary(bottomTabs ? "Open the feed once so Hushfeed can see which bottom tabs TikTok loaded." : "Open the feed once so Hushfeed can see which tabs TikTok loaded.");
             return;
         }
@@ -174,7 +174,7 @@ public class TabSelectionPreference extends Preference {
         int optionInset = Math.max(1, SettingsUi.dp(getContext(), 1));
         optionsContainer.setPadding(optionInset, optionInset, optionInset, optionInset);
 
-        boolean empty = observedOptions.size() <= 1;
+        boolean empty = nothingSeenYet(observedOptions);
         if (empty) {
             TextView emptyState = new TextView(context);
             emptyState.setText(L10n.t(context, bottomTabs
@@ -265,6 +265,18 @@ public class TabSelectionPreference extends Preference {
             }
         }
         return new java.util.ArrayList<>(rows);
+    }
+
+    /**
+     * True until TikTok has been seen loading a tab beyond the ones every install has.
+     *
+     * <p>Home and Profile are added to every bottom list and For You to every feed list, so
+     * a list of only those is one TikTok has not been watched loading yet. The bottom list
+     * was held to one row, which its two always-present rows never met, so its "open the
+     * feed once" state could not show and the row summary named tabs nothing had loaded.
+     */
+    private boolean nothingSeenYet(List<OptionRow> observedOptions) {
+        return observedOptions.size() <= (bottomTabs ? 2 : 1);
     }
 
     /** Puts every row's tick in step with the selection, without rebuilding the dialog. */
