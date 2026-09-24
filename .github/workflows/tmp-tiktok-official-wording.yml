@@ -113,13 +113,18 @@ jobs:
           PY
           ls -lh apktool.jar
 
-      - name: Decode resources
+      - name: Decode English and Chinese language splits
         shell: bash
         run: |
           set -euo pipefail
-          java -Xmx4g -jar apktool.jar d -f -s tiktok.apk -o decoded
-          echo "Chinese resource directories:"
-          find decoded/res -maxdepth 1 -type d \( -name 'values-zh*' -o -name 'values-b+zh*' \) -print | sort
+          test -f xapk/config.en.apk
+          test -f xapk/config.zh.apk
+          java -Xmx2g -jar apktool.jar d -f -s xapk/config.en.apk -o decoded-en
+          java -Xmx2g -jar apktool.jar d -f -s xapk/config.zh.apk -o decoded-zh
+          echo "English split value directories:"
+          find decoded-en/res -maxdepth 1 -type d -name 'values*' -print | sort
+          echo "Chinese split value directories:"
+          find decoded-zh/res -maxdepth 1 -type d -name 'values*' -print | sort
 
       - name: Print official Chinese UI wording
         shell: bash
@@ -130,76 +135,68 @@ jobs:
           import re
           import xml.etree.ElementTree as ET
 
-          root = Path("decoded/res")
-          zhdirs = sorted([p for p in root.iterdir() if p.is_dir() and (p.name.startswith("values-zh") or p.name.startswith("values-b+zh"))])
-          print("ZH_DIRS:", ", ".join(p.name for p in zhdirs) or "(none)")
-
-          def strings(directory):
+          def strings(root):
               out = {}
-              for f in sorted(directory.glob("*.xml")):
-                  try:
-                      tree = ET.parse(f)
-                  except Exception:
-                      continue
-                  for node in tree.getroot():
-                      if node.tag == "string":
-                          name = node.attrib.get("name")
-                      elif node.tag == "item" and node.attrib.get("type") == "string":
-                          name = node.attrib.get("name")
-                      else:
+              for directory in sorted(root.glob("values*")):
+                  for f in sorted(directory.glob("*.xml")):
+                      try:
+                          tree = ET.parse(f)
+                      except Exception:
                           continue
-                      if not name:
-                          continue
-                      text = "".join(node.itertext()).strip()
-                      if text:
-                          out[name] = text
+                      for node in tree.getroot():
+                          if node.tag == "string":
+                              name = node.attrib.get("name")
+                          elif node.tag == "item" and node.attrib.get("type") == "string":
+                              name = node.attrib.get("name")
+                          else:
+                              continue
+                          if not name:
+                              continue
+                          text = "".join(node.itertext()).strip()
+                          if text:
+                              out[name] = text
               return out
 
-          default = strings(root / "values")
-          zh = {d.name: strings(d) for d in zhdirs}
+          en = strings(Path("decoded-en/res"))
+          zh = strings(Path("decoded-zh/res"))
+          print("EN_STRINGS:", len(en))
+          print("ZH_STRINGS:", len(zh))
+          print("PAIRED_KEYS:", len(set(en) & set(zh)))
+
           targets = [
               "For You","Following","Friends","Nearby","Story","Stories","Duet","Stitch",
               "Inbox","Profile","Repost","Favorites","Activity","Shop","Series","LIVE",
               "Search","Comments","Not interested","Playlist","Auto scroll","Full screen",
               "Save","Share","Download","Block","Unblock","Creator","Sound","New followers",
               "Message requests","Watch history","Settings and privacy","Privacy","Language",
-              "App language"
+              "App language","Report","Follow","Like","Photo","Video"
           ]
 
-          print("\n=== ENGLISH-KEYED TERM PAIRS ===")
+          print("\n=== OFFICIAL 47.0.3 EN -> ZH PAIRS ===")
           for target in targets:
-              hits = []
               rx = re.compile(r"(?i)(^|\\b)" + re.escape(target) + r"($|\\b)")
-              for key, en in default.items():
-                  if rx.search(en):
-                      vals = [(loc, table.get(key, "")) for loc, table in zh.items()]
-                      if any(v for _, v in vals):
-                          hits.append((key, en, vals))
+              hits=[]
+              for key, english in en.items():
+                  chinese=zh.get(key)
+                  if chinese and rx.search(english):
+                      hits.append((english,key,chinese))
               if not hits:
                   continue
               print("\n###", target)
-              for key, en, vals in sorted(hits, key=lambda x:(len(x[1]),x[1],x[0]))[:40]:
-                  print("KEY:", key)
-                  print("EN :", en.replace("\n","\\n"))
-                  for loc, val in vals:
-                      if val:
-                          print(loc + ":", val.replace("\n","\\n"))
+              for english,key,chinese in sorted(hits,key=lambda x:(len(x[0]),x[0],x[1]))[:60]:
+                  print(key+"\t"+english.replace("\n","\\n")+"\t"+chinese.replace("\n","\\n"))
 
-          print("\n=== DIRECT SIMPLIFIED-CHINESE HITS ===")
-          cn = ["为你","推荐","关注","好友","附近","限时动态","故事","合拍","拼接","画面拼贴",
-                "收件箱","个人资料","转发","收藏","活动","商店","商城","系列","直播","不感兴趣",
-                "播放列表","自动滚动","全屏","新关注者","消息请求","观看历史"]
-          for loc, table in zh.items():
-              if "CN" not in loc and "Hans" not in loc and loc not in {"values-zh"}:
-                  continue
-              print("\n--", loc, "--")
-              count = 0
-              for key, val in sorted(table.items()):
-                  if any(x in val for x in cn):
-                      print(key + "\t" + default.get(key,"").replace("\n","\\n") + "\t" + val.replace("\n","\\n"))
-                      count += 1
-                      if count >= 350:
-                          print("... truncated after 350 hits")
-                          break
+          print("\n=== DIRECT CHINESE TERM HITS ===")
+          terms = ["为你","推荐","关注","好友","附近","限时动态","故事","合拍","拼接","画面拼贴",
+                   "收件箱","个人资料","转发","收藏","活动","商店","商城","系列","直播","不感兴趣",
+                   "播放列表","自动滚动","全屏","新关注者","消息请求","观看历史","保存","分享","下载"]
+          count=0
+          for key,chinese in sorted(zh.items()):
+              if any(t in chinese for t in terms):
+                  print(key+"\t"+en.get(key,"").replace("\n","\\n")+"\t"+chinese.replace("\n","\\n"))
+                  count += 1
+                  if count >= 500:
+                      print("... truncated after 500 direct hits")
+                      break
           PY
           python /tmp/terms.py
