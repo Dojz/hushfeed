@@ -34,7 +34,7 @@
 %1$s is a kind of value the Lab cannot override.	%1$s 属于实验室无法覆盖的值类型.
 %1$s is already hidden	%1$s 已被隐藏
 %1$s is not a country code, so no video would ever match it. Use two letters, like GB, IE or US.	%1$s 不是国家代码，因此不会有视频匹配。请使用两个字母，例如 GB、IE 或 US.
-%1$s is not in this Lab catalog.	%1$s 不在此实验室目录中.
+%1$s is not in this Lab catalog.	%1$s 不在实验室功能清单中.
 %1$s isn't installed or doesn't take links	未安装 %1$s，或它不接受链接
 %1$s left	剩余 %1$s
 %1$s millisecond	%1$s 毫秒
@@ -750,7 +750,7 @@ Play videos TikTok has classified without the overlay asking to be tapped throug
 Playback	播放
 Player	播放器
 Player config	播放器配置
-Playlist posts	播放列表帖子
+Playlist posts	播放列表内容
 Popular	热门
 Popups	弹窗
 Post age	发布时间
