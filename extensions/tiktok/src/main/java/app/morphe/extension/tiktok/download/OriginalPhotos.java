@@ -88,6 +88,8 @@ public final class OriginalPhotos {
                 "Saving one original photo", "Saving %1$s original photos"));
         boolean submitted = MediaJobScheduler.submit("original photos", () -> {
             int saved = 0;
+            // The banner's Open lands on the newest photo, which is where the gallery puts the rest.
+            MediaFileWriter.Saved last = null;
             try {
                 for (int i : chosen) {
                     MediaBudget.checkDiskSpace(app.getCacheDir(), -1L);
@@ -97,14 +99,14 @@ public final class OriginalPhotos {
                         String mime = "jpg".equals(extension) ? "image/jpeg" : "image/" + extension;
                         // Numbered by the photo's place in the post, also when only some are saved.
                         String name = DownloadFilenameFormatter.formatOriginalPhotoName(aweme, i + 1, extension);
-                        MediaFileWriter.publish(app, temp, name, mime, DownloadsPatch.getPhotoDownloadPath(), false);
+                        last = MediaFileWriter.publishForResult(app, temp, name, mime, DownloadsPatch.getPhotoDownloadPath(), false);
                         saved++;
                     } finally {
                         if (!MediaCache.delete(temp)) Logger.printInfo(() -> "Could not remove original photo temporary file");
                     }
                 }
-                Utils.showToastShort(L10n.quantity(Utils.getContext(), saved,
-                        "Saved one original photo", "Saved %1$s original photos"));
+                SaveNotice.saved(L10n.quantity(Utils.getContext(), saved,
+                        "Saved one original photo", "Saved %1$s original photos"), last);
             } catch (IOException | RuntimeException exception) {
                 int completed = saved;
                 Logger.printException(() -> "Original photo download failed after " + completed + " photos", exception);

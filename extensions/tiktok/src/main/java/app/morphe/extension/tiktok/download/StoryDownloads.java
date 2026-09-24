@@ -229,7 +229,9 @@ public final class StoryDownloads {
             String path = DownloadsPatch.getVideoDownloadPath();
             MediaFileWriter.Saved saved = MediaFileWriter.publishForResult(app, temp,
                     DownloadFilenameFormatter.formatSelectedVideoName(aweme), "video/mp4", path, true);
-            if (audioName != null) AudioDownloads.write(app, audioName, temp);
+            // The sound keeps to a toast: its banner went up first and the story's, a tick
+            // later, took it down before anyone saw it (refutation review of 3d5395f2).
+            if (audioName != null) AudioDownloads.write(app, audioName, temp, false);
             SaveNotice.saved(L10n.f("Story saved to %1$s", path), saved);
         } finally {
             if (!MediaCache.delete(temp)) Logger.printInfo(() -> "Could not remove story temporary file");

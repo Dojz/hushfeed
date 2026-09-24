@@ -100,6 +100,15 @@ final class AudioDownloads {
     }
 
     static void write(Context app, String name, File source) {
+        write(app, name, source, true);
+    }
+
+    /**
+     * {@code announce} false keeps this save's word to a plain toast: a video or story save that
+     * carries the sound shows one banner, its own, and a second banner a tick later would take
+     * the first one down before anyone saw it.
+     */
+    static void write(Context app, String name, File source, boolean announce) {
         if (!enabled()) return;
         File output = null;
         try {
@@ -107,7 +116,8 @@ final class AudioDownloads {
             TrackMuxer.audioOnly(source, output);
             String path = audioPath(DownloadsPatch.getVideoDownloadPath());
             MediaFileWriter.Saved saved = MediaFileWriter.publishForResult(app, output, name, "audio/mp4", path, true);
-            SaveNotice.saved(L10n.f("Sound saved to %1$s", path), saved);
+            if (announce) SaveNotice.saved(L10n.f("Sound saved to %1$s", path), saved);
+            else Utils.showToastShort(L10n.f("Sound saved to %1$s", path));
         } catch (IOException | RuntimeException exception) {
             Logger.printException(() -> "Sound save failed", exception);
             Utils.showToastLong(L10n.t("The sound couldn't be saved. Try again."));

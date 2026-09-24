@@ -122,6 +122,38 @@ public class SaveNoticeTest {
         }
     }
 
+    /**
+     * A toast or any other system-range window on top must not take the banner: it goes down
+     * with that window in a couple of seconds, Open never reachable.
+     */
+    @Test public void aSystemWindowOnTopIsSkippedForTheBanner() {
+        try (var owner = Robolectric.buildActivity(HostActivity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setActivity(activity);
+            android.app.Dialog sheet = new android.app.Dialog(activity);
+            sheet.setContentView(new android.widget.FrameLayout(activity));
+            sheet.show();
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            View sheetDecor = sheet.getWindow().getDecorView();
+            android.widget.FrameLayout toastRoot = new android.widget.FrameLayout(activity);
+            android.view.WindowManager.LayoutParams toastParams = new android.view.WindowManager.LayoutParams();
+            toastParams.type = android.view.WindowManager.LayoutParams.TYPE_TOAST;
+            toastRoot.setLayoutParams(toastParams);
+            activity.getWindowManager().addView(toastRoot, toastParams);
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            SaveNotice.windowRootsForTests = java.util.List.of(
+                    activity.getWindow().getDecorView(), sheetDecor, toastRoot);
+
+            SaveNotice.saved("Story saved to DCIM/TikTok",
+                    new MediaFileWriter.Saved("a.mp4", Uri.parse("content://media/external/video/media/10")));
+            idlePastTheSheetSettle();
+
+            assertNull("the banner landed on a toast window", find(toastRoot, "Open"));
+            assertNotNull("the banner missed the window under the toast", find(sheetDecor, "Open"));
+            sheet.dismiss();
+        }
+    }
+
     /** The banner waits out TikTok's share-sheet swap before it picks a window. */
     private static void idlePastTheSheetSettle() {
         Shadows.shadowOf(Looper.getMainLooper())

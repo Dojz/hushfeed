@@ -87,13 +87,24 @@ final class SaveNotice {
                 if (!(value instanceof List)) return null;
                 @SuppressWarnings("unchecked")
                 List<View> read = (List<View>) value;
-                roots = read;
+                // mViews is the live list, and windows are added and removed from other
+                // threads; a copy keeps the walk from tripping over a change mid-iteration.
+                roots = new java.util.ArrayList<>(read);
             }
             for (int index = roots.size() - 1; index >= 0; index--) {
                 View root = roots.get(index);
-                if (root instanceof ViewGroup && root.isShown() && root.getWindowToken() != null) {
-                    return (ViewGroup) root;
+                if (!(root instanceof ViewGroup) || !root.isShown() || root.getWindowToken() == null) {
+                    continue;
                 }
+                // Not a toast or another system-range window: a banner on one goes down with it
+                // in a couple of seconds, with Open never reachable.
+                android.view.ViewGroup.LayoutParams params = root.getLayoutParams();
+                if (params instanceof android.view.WindowManager.LayoutParams
+                        && ((android.view.WindowManager.LayoutParams) params).type
+                                >= android.view.WindowManager.LayoutParams.FIRST_SYSTEM_WINDOW) {
+                    continue;
+                }
+                return (ViewGroup) root;
             }
             return null;
         } catch (Throwable unreadable) {
@@ -113,7 +124,9 @@ final class SaveNotice {
             }
             view.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             Utils.getContext().startActivity(view);
-        } catch (ActivityNotFoundException nothingOpensIt) {
+        } catch (ActivityNotFoundException | SecurityException nothingOpensIt) {
+            // SecurityException is the row having gone away inside the banner's six seconds:
+            // to the reader, the same thing as nothing opening it.
             Utils.showToastShort(L10n.t("No app on this phone opens that file"));
         } catch (RuntimeException failure) {
             Logger.printException(() -> "Could not open the saved file", failure);

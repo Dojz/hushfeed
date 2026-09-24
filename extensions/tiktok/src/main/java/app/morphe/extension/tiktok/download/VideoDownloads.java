@@ -128,15 +128,17 @@ final class VideoDownloads {
                     result = temp(app, temporary);
                     TrackMuxer.videoOnly(picture, result);
                 }
-                String savedName = MediaFileWriter.publish(app, result, name, "video/mp4", path, true);
+                MediaFileWriter.Saved published = MediaFileWriter.publishForResult(app, result, name, "video/mp4", path, true);
+                String savedName = published.name;
                 // The sound is already on disk: the separate stream when the video has one,
                 // otherwise the video itself, which still carries it because the copy that
                 // dropped it went to a different file. Fetching it again would download twice.
+                // Its word keeps to a toast, so the video's banner below isn't taken down.
                 if (audioNameSnapshot != null) {
-                    AudioDownloads.write(app, audioNameSnapshot, sound == null ? picture : sound);
+                    AudioDownloads.write(app, audioNameSnapshot, sound == null ? picture : sound, false);
                 }
                 int saved = SubtitleDownloads.save(app, captionSnapshot, savedName, path);
-                Utils.showToastLong(subtitleResult(captionSnapshot.size(), saved, path));
+                SaveNotice.saved(subtitleResult(captionSnapshot.size(), saved, path), published);
             } catch (IOException | RuntimeException exception) {
                 Logger.printException(() -> "Selected-quality download failed", exception);
                 Utils.showToastLong(L10n.t("The video couldn't be saved. Try again, or choose Automatic."));
