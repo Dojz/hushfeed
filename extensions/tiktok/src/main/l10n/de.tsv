@@ -1205,3 +1205,5 @@ Saved %1$s of %2$s, %3$s skipped and the rest cancelled	%1$s von %2$s gespeicher
 None of the photos could be saved. Try again.	Keines der Fotos konnte gespeichert werden. Versuche es erneut.
 Saved %1$s of %2$s, the rest need more free space	%1$s von %2$s gespeichert, für den Rest fehlt freier Speicher
 Saved %1$s of %2$s, the rest ran out of time	%1$s von %2$s gespeichert, für den Rest reichte die Zeit nicht
+Live photo clip saved to %1$s	Live-Foto-Clip gespeichert in %1$s
+The live photo's clip couldn't be saved. Try again.	Der Clip des Live-Fotos konnte nicht gespeichert werden. Versuche es erneut.

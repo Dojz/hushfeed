@@ -597,6 +597,7 @@ Limits,Limits
 Link copied,Link copied
 Links,Links
 Links in comments open,Links in comments open
+Live photo clip saved to %1$s,Live photo clip saved to %1$s
 Loaded current values. Loading all known gates...,Loaded current values. Loading all known gates...
 Loaded values are still being read. Try again in a moment.,Loaded values are still being read. Try again in a moment.
 Loaded-value file export failed,Loaded-value file export failed
@@ -1033,6 +1034,7 @@ The feed is open again,The feed is open again
 "The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.","The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away."
 The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.,The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.
 "The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.","The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night."
+The live photo's clip couldn't be saved. Try again.,The live photo's clip couldn't be saved. Try again.
 The loaded-values file you chose couldn't be read. Try again.,The loaded-values file you chose couldn't be read. Try again.
 "The original photos aren't available, so TikTok's own save runs instead","The original photos aren't available, so TikTok's own save runs instead"
 "The override changes no fields. Edit the field values, or reset the override.","The override changes no fields. Edit the field values, or reset the override."

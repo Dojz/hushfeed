@@ -1202,3 +1202,5 @@ Saved %1$s of %2$s, %3$s skipped and the rest cancelled	%2$s dosyadan %1$s kayde
 None of the photos could be saved. Try again.	Fotoğrafların hiçbiri kaydedilemedi. Tekrar deneyin.
 Saved %1$s of %2$s, the rest need more free space	%2$s dosyadan %1$s kaydedildi, kalanlar için daha fazla boş alan gerekiyor
 Saved %1$s of %2$s, the rest ran out of time	%2$s dosyadan %1$s kaydedildi, kalanlar için süre doldu
+Live photo clip saved to %1$s	Canlı fotoğraf klibi %1$s konumuna kaydedildi
+The live photo's clip couldn't be saved. Try again.	Canlı fotoğrafın klibi kaydedilemedi. Tekrar deneyin.

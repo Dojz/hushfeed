@@ -1202,3 +1202,5 @@ Saved %1$s of %2$s, %3$s skipped and the rest cancelled	Se guardaron %1$s de %2$
 None of the photos could be saved. Try again.	No se pudo guardar ninguna de las fotos. Inténtalo de nuevo.
 Saved %1$s of %2$s, the rest need more free space	Se guardaron %1$s de %2$s, el resto necesita más espacio libre
 Saved %1$s of %2$s, the rest ran out of time	Se guardaron %1$s de %2$s, al resto se le acabó el tiempo
+Live photo clip saved to %1$s	Clip de la foto en vivo guardado en %1$s
+The live photo's clip couldn't be saved. Try again.	No se pudo guardar el clip de la foto en vivo. Inténtalo de nuevo.

@@ -1203,3 +1203,5 @@ Stopping after this file,Berhenti setelah berkas ini
 None of the photos could be saved. Try again.,Tidak ada foto yang bisa disimpan. Coba lagi.
 "Saved %1$s of %2$s, the rest need more free space","%1$s dari %2$s tersimpan, sisanya butuh ruang kosong lebih"
 "Saved %1$s of %2$s, the rest ran out of time","%1$s dari %2$s tersimpan, sisanya kehabisan waktu"
+Live photo clip saved to %1$s,Klip foto langsung disimpan ke %1$s
+The live photo's clip couldn't be saved. Try again.,Klip foto langsung tidak bisa disimpan. Coba lagi.
