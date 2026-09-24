@@ -178,3 +178,182 @@ Blocked sound names	已屏蔽的声音名称
 Blocked sounds	已屏蔽的声音
 Blocking	正在屏蔽
 Boolean	布尔值
+Bottom tabs to keep	保留的底部标签
+Browse	浏览
+Calm feed	清爽信息流
+Calm feed couldn't be applied. Nothing was changed.	无法应用“清爽信息流”。未进行任何更改。
+Calm feed couldn't start. Try again shortly.	无法启动“清爽信息流”。请稍后重试。
+Calm feed is on.	“清爽信息流”已开启。
+Calm feed is on. Restart TikTok to apply every change.	“清爽信息流”已开启。重启 TikTok 以应用全部更改。
+Camera and microphone in use	正在使用摄像头和麦克风
+Camera in use	正在使用摄像头
+Cancel	取消
+Caption background	字幕背景
+Caption text size	字幕文字大小
+Captions	字幕
+Captions, gestures and on-screen controls	字幕、手势与屏幕控件
+Capture crash reports locally	在本地保存崩溃报告
+Changed	已更改
+Choose %1$d to %2$d videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.	请选择 %1$d 到 %2$d 个视频。超出范围的值会使用最接近的有效上限。重启 TikTok 后生效。
+Choose a backup file. Your current settings are kept for Undo.	请选择备份文件。当前设置会保留，以便撤销。
+Choose a folder on internal storage. SD cards are not supported.	请选择内部存储中的文件夹。不支持 SD 卡。
+Choose a preset to fill the SIM details.	选择一个预设来填写 SIM 信息。
+Choose a subfolder under %1$s.	请选择 %1$s 下的子文件夹。
+Choose what reaches your feed	选择哪些内容进入你的信息流
+Choose which loaded TikTok bottom navigation tabs should stay visible.	选择已加载的 TikTok 底部导航标签中哪些保持显示。
+Choose which loaded TikTok feed tabs should stay visible. If only For You remains, its redundant header is hidden.	选择已加载的 TikTok 信息流标签中哪些保持显示。如果只保留“为你推荐”，其多余的顶部标题会被隐藏。
+Choose which rows and controls appear	选择显示哪些项目和控件
+Clear all	全部清除
+Clear all Lab data (overrides, switch, recordings)	清除实验室全部数据（覆盖值、开关、记录）
+Clear all suggested accounts	清除所有推荐账号
+Clear diagnostic data	清除诊断数据
+Clear display	清屏
+Clear display delay	清屏延迟
+Clear preset	清除预设
+Clear search	清除搜索
+Clear seen videos	清除已看视频
+Clear the recent events, saved crash reports and the hook status above.	清除最近事件、已保存的崩溃报告以及上方的 Hook 状态。
+Clear the search	清除搜索
+Cleared. Tap to undo before TikTok closes.	已清除。TikTok 关闭前可点按撤销。
+Clearing	正在清除
+Clearing suggested accounts	正在清除推荐账号
+Clearing, %1$d so far	正在清除，目前已处理 %1$d 项
+Close	关闭
+Comma separated account handles or user ids. Their videos stay when only a filter on the kind of post, its labels, age, length or counts would hide them. Ads, blocked creators, words, sounds and countries, and seen videos still apply.	用英文逗号分隔账号用户名或用户 ID。若视频仅因帖子类型、标签、发布时间、时长或数据量筛选而被隐藏，这些账号的视频仍会保留。广告、已屏蔽创作者、关键词、声音、国家/地区以及已看视频等规则仍会生效。
+Comma separated account handles or user ids. Videos from these accounts are always hidden. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.	用英文逗号分隔账号用户名或用户 ID。这些账号的视频将始终隐藏。用斜杠包围的条目（如 /^news_/）会作为匹配规则，同时匹配用户名和显示名称。
+Comma separated country codes, like GB, IE. Videos posted from anywhere else are hidden. Leave empty for all countries.	用英文逗号分隔国家/地区代码，例如 GB、IE。其他地区发布的视频会被隐藏。留空表示允许所有地区。
+Comma separated country codes. Videos posted from these are hidden, whatever the list above says.	用英文逗号分隔国家/地区代码。来自这些地区的视频将被隐藏，不受上方列表影响。
+Comma separated list of any other Inbox row titles to hide, matched exactly. Use this for anything not listed above.	用英文逗号分隔其他要隐藏的收件箱项目标题，需精确匹配。可用于上方未列出的项目。
+Comma separated names exactly as the share sheet shows them: friends in the Send to row, share targets such as Facebook, and actions such as Create group or Repost. Stable keys such as copy, save and dislike also work before the sheet opens.	用英文逗号分隔名称，必须与分享面板中的显示完全一致，例如“发送给”一栏的好友、Facebook 等分享目标，以及“创建群聊”或“转发”等操作。copy、save、dislike 等稳定键名也可在面板打开前生效。
+Comma separated sound ids recorded by the player's sound button. Remove one to unblock it.	用英文逗号分隔由播放器声音按钮记录的声音 ID。删除某项即可解除屏蔽。
+Comma separated usernames or display names whose comments are hidden.	用英文逗号分隔用户名或显示名称，这些用户的评论将被隐藏。
+Comma separated words or phrases. Videos whose caption matches are hidden. Case does not matter. Two phrases in quotes can be joined: "a" & "b" needs both, "a" !& "b" needs the first without the second.	用英文逗号分隔关键词或短语。文案匹配的视频会被隐藏，不区分大小写。两个带引号的短语可组合："a" & "b" 表示两者都需出现；"a" !& "b" 表示需要前者且不能有后者。
+Comma separated words to match against a sound's name, like saxophone. Case does not matter.	用英文逗号分隔用于匹配声音名称的关键词，例如 saxophone。不区分大小写。
+Comma separated. A comment is hidden if its text contains any of them. Case does not matter. Two phrases in quotes can be joined: "a" & "b" needs both, "a" !& "b" needs the first without the second.	用英文逗号分隔。评论文字只要包含任意一项就会被隐藏，不区分大小写。两个带引号的短语可组合："a" & "b" 表示两者都需出现；"a" !& "b" 表示需要前者且不能有后者。
+Comment media filename	评论媒体文件名
+Comments	评论
+Comments aren't available for this video	此视频没有可用评论
+Comments beside the video	在视频旁显示评论
+Comments range	评论数范围
+Compact comment header	紧凑评论标题栏
+Compare gate reads with their previous values.	将功能开关读取值与先前值进行比较。
+Completed an interrupted settings change. Restart TikTok to apply this.	已完成之前中断的设置更改。重启 TikTok 后生效。
+Config	配置
+Config (Settings Manager)	配置（设置管理器）
+Confirm before following	关注前确认
+Confirm before liking	点赞前确认
+Confirm before sending to a friend	发送给好友前确认
+Continue supported videos from where you stopped when you scroll back to them.	滚动返回支持的视频时，从上次停止的位置继续播放。
+Controls	控件
+Copied feature gate report	已复制功能开关报告
+Copy a quick report or save the full report as a file.	复制简要报告，或将完整报告保存为文件。
+Copy comments without username	复制评论时不带用户名
+Copy only the comment text when using TikTok's copy comment action.	使用 TikTok 的“复制评论”操作时，仅复制评论正文。
+Copy quick report	复制简要报告
+Copy report	复制报告
+Copy the sound link	复制声音链接
+Copy the video link	复制视频链接
+Couldn't change the Lab settings. Try again.	无法更改实验室设置。请重试。
+Couldn't clear the suggested accounts. Reopen the Inbox and try again.	无法清除推荐账号。请重新打开收件箱后重试。
+Couldn't confirm the block for %1$s. Open their profile to check.	无法确认是否已拉黑 %1$s。请打开其个人主页检查。
+Couldn't confirm the unblock for %1$s. Open their profile to check.	无法确认是否已解除对 %1$s 的拉黑。请打开其个人主页检查。
+Couldn't copy the report. Use Save JSON instead.	无法复制报告。请改用“保存 JSON”。
+Couldn't open settings search. Reopen settings and try again.	无法打开设置搜索。请重新打开设置后重试。
+Couldn't open that settings section. Reopen settings and try again.	无法打开该设置页面。请重新打开设置后重试。
+Couldn't open the file picker to export. Try again.	无法打开文件选择器进行导出。请重试。
+Couldn't open the file picker to import. Try again.	无法打开文件选择器进行导入。请重试。
+Couldn't put back the diagnostic data. Try again.	无法恢复诊断数据。请重试。
+Couldn't read who posted this comment. Open their profile and block them there.	无法识别此评论的发布者。请打开其个人主页并在那里拉黑。
+Couldn't reset this override. Try again.	无法重置此覆盖值。请重试。
+Couldn't restore the settings. Try again.	无法恢复设置。请重试。
+Couldn't save the settings backup. Try again.	无法保存设置备份。请重试。
+Couldn't save this override. Try again.	无法保存此覆盖值。请重试。
+Couldn't send the feedback. Try again shortly.	无法发送反馈。请稍后重试。
+Couldn't start the Lab change. Try again shortly.	无法开始实验室更改。请稍后重试。
+Couldn't start the report export. Try again shortly.	无法开始导出报告。请稍后重试。
+Couldn't start the settings change. Try again shortly.	无法开始更改设置。请稍后重试。
+Couldn't tell which folder to update. Choose it again.	无法确定要更新哪个文件夹。请重新选择。
+Couldn't undo the clear. Try again.	无法撤销清除操作。请重试。
+Country and network preferences	国家/地区与网络偏好
+Country code	国家/地区代码
+Country filters	国家/地区筛选
+Counts under the buttons	按钮下方显示计数
+Create	创建
+Creator exceptions	创作者例外
+Creators and sounds	创作者与声音
+Creators hidden on this phone	本机隐藏的创作者
+Creators you hid from a video. Search the list and remove one at a time.	你从视频中隐藏过的创作者。可搜索列表并逐个移除。
+Current	当前
+Current %1$s	当前 %1$s
+Current cache unavailable: %1$s	当前缓存不可用：%1$s
+Current state	当前状态
+Current: %1$s	当前：%1$s
+Custom SIM details	自定义 SIM 信息
+Custom value	自定义值
+Custom value...	自定义值...
+Daily budget	每日限额
+Daily budgets, reminders and the hold	每日限额、提醒与暂停
+Daily time budget	每日时长限额
+Daily video budget	每日视频数限额
+Dark	深色
+Days to remember a video. Zero removes the age limit. History keeps at most %1$s videos.	记住视频的天数。设为 0 表示不限制时间。历史记录最多保留 %1$s 个视频。
+Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible.	单位为天。设为 0 表示不限制发布时间。没有可用时间戳的帖子（包括未来时间的帖子）仍会显示。
+Default	默认
+Default playback speed	默认播放速度
+Destination updated	保存位置已更新
+Device access	设备访问
+Device language, then original	设备语言优先，其次原文
+Diagnostic data cleared. Tap again to put it back.	诊断数据已清除。再次点按可恢复。
+Diagnostic data put back	诊断数据已恢复
+Diagnostic report copied to the clipboard	诊断报告已复制到剪贴板
+Diagnostics	诊断
+Disable	禁用
+Disabled	已禁用
+Discard edits	放弃修改
+Dismissed %1$s suggested accounts	已移除 %1$s 个推荐账号
+Dismissed one suggested account	已移除 1 个推荐账号
+Do not start the feed on returning	返回时不要自动打开信息流
+Do nothing	不执行任何操作
+Done	完成
+Double tap	双击
+Download original photos	下载原始图片
+Downloads	下载
+Drag to move, release to place	拖动以移动，松开以放置
+Drama and Series	短剧与系列
+Draw TikTok's text in your device's font instead of TikTok Sans. Icons, gift animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this.	使用设备系统字体显示 TikTok 文字，而不是 TikTok Sans。图标、礼物动画以及 @ 和 # 字符仍使用各自字体。重启 TikTok 后生效。
+Each area, how many of the things it looks for are in this build and how many are not.	显示每个区域在当前版本中找到和未找到的目标数量。
+Easier comment likes	更容易点赞评论
+Empty	空
+Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.	清空在主屏幕长按 TikTok 图标时出现的快捷菜单。关闭此选项后会让 TikTok 重新生成这些快捷项。点按图标仍可打开应用，你手动固定的快捷方式也会保留。
+Enable	启用
+Enabled	已启用
+Enter a JSON object or array.	请输入 JSON 对象或数组。
+Enter a creator handle or id	请输入创作者用户名或 ID
+Enter a finite number.	请输入有限数值。
+Enter a number	输入数字
+Enter a number.	请输入数字。
+Enter a valid structured value.	请输入有效的结构化值。
+Enter a valid two-letter country code	请输入有效的两位国家/地区代码
+Enter a whole number, or one like 20K, 1.5M or 2B	请输入整数，或类似 20K、1.5M、2B 的数值
+Enter a whole number.	请输入整数。
+Enter true or false.	请输入 true 或 false。
+Enter up to %1$d comma-separated speeds from %2$s to %3$s	最多输入 %1$d 个用英文逗号分隔的速度值，范围为 %2$s 到 %3$s
+Enter valid JSON.	请输入有效的 JSON。
+Entry %1$d has a field with the wrong data type.	第 %1$d 项中有字段的数据类型错误。
+Entry %1$d is not an object.	第 %1$d 项不是对象。
+Errors	错误
+Expand activity list	展开活动列表
+Explore	探索
+Export diagnostic report	导出诊断报告
+Export loaded values	导出已加载的值
+Exported %1$d loaded values	已导出 %1$d 个已加载值
+Exported 1 loaded value	已导出 1 个已加载值
+Extend the heart's touch area into nearby blank space. The icon and row spacing stay the same. Text, Reply and other controls keep their own space.	将爱心按钮的触控区域扩展到附近空白处。图标和行间距保持不变，文字、“回复”和其他控件仍保留各自的触控区域。
+Fade the feed out before the hold	暂停前淡出信息流
+Favorites range	收藏数范围
+Feature Gate Lab	功能开关实验室
+Feature gate override reset	功能开关覆盖值已重置
+Feature gate override saved	功能开关覆盖值已保存
+Feed and navigation	信息流与导航
+Feed button size	信息流按钮大小
+Feed filter	信息流筛选
