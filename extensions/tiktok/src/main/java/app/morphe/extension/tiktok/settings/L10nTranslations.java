@@ -13456,7 +13456,7 @@ public final class L10nTranslations {
         table.put("Follow probe",
                 "关注请求诊断\nFollow Probe");
         table.put("Following",
-                "正在关注");
+                "关注中");
         table.put("For You",
                 "为你推荐");
         table.put("For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.",
@@ -13518,11 +13518,11 @@ public final class L10nTranslations {
         table.put("Hide CAPTCHA popups",
                 "隐藏 CAPTCHA 弹窗");
         table.put("Hide LIVE replays",
-                "隐藏 LIVE 回放");
+                "隐藏直播回放");
         table.put("Hide LIVE videos",
-                "隐藏 LIVE 视频");
+                "隐藏直播视频");
         table.put("Hide LIVE videos from the feed.",
-                "从信息流中隐藏 LIVE 视频.");
+                "从信息流中隐藏直播视频.");
         table.put("Hide Search this image prompts",
                 "隐藏“搜索此图片”提示");
         table.put("Hide Series",
@@ -13547,7 +13547,7 @@ public final class L10nTranslations {
         table.put("Hide activity status",
                 "隐藏活动状态");
         table.put("Hide ads, Shop posts, LIVE videos and replays, promotional music, and paid partnerships.",
-                "隐藏广告、TikTok Shop 内容、LIVE 及回放、推广音乐和付费合作内容.");
+                "隐藏广告、TikTok Shop 内容、直播及回放、推广音乐和付费合作内容.");
         table.put("Hide archive",
                 "隐藏归档");
         table.put("Hide bottom tabs TikTok adds later unless you allow them.",
@@ -13609,7 +13609,7 @@ public final class L10nTranslations {
         table.put("Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.",
                 "在 TikTok 搜索页输入前隐藏推荐搜索，不清除搜索历史，也不影响评论上方的搜索建议.");
         table.put("Hide recorded LIVE broadcasts from the feed.",
-                "从信息流中隐藏已录制的 LIVE 回放.");
+                "从信息流中隐藏已录制的直播回放.");
         table.put("Hide rows by title",
                 "按标题隐藏项目");
         table.put("Hide search rewards",
@@ -13637,7 +13637,7 @@ public final class L10nTranslations {
         table.put("Hide the \"Search this image\" prompt shown over videos. The feed search button and suggestions above comments are separate settings.",
                 "隐藏视频上的“搜索此图片”提示；信息流搜索按钮和评论上方建议需分别设置.");
         table.put("Hide the CAPTCHA dialogs raised while you browse or watch LIVE. Login, account verification and any CAPTCHA raised over a follow, like, comment or repost stay visible.",
-                "隐藏浏览或观看 LIVE 时出现的 CAPTCHA。登录、账号验证，以及关注、点赞、评论或转发触发的 CAPTCHA 仍会显示.");
+                "隐藏浏览或观看直播时出现的 CAPTCHA。登录、账号验证，以及关注、点赞、评论或转发触发的 CAPTCHA 仍会显示.");
         table.put("Hide the Full screen button",
                 "隐藏全屏按钮");
         table.put("Hide the Full screen button over videos. Playback and automatic rotation keep working as before.",
@@ -13645,9 +13645,9 @@ public final class L10nTranslations {
         table.put("Hide the Inbox search button",
                 "隐藏收件箱搜索按钮");
         table.put("Hide the LIVE button",
-                "隐藏 LIVE 按钮");
+                "隐藏直播按钮");
         table.put("Hide the LIVE button in the top left corner of the feed.",
-                "隐藏信息流左上角的 LIVE 按钮.");
+                "隐藏信息流左上角的直播按钮.");
         table.put("Hide the Products block and product cards in search results.",
                 "隐藏搜索结果中的“商品”区域及商品卡片.");
         table.put("Hide the Report button on videos",
@@ -13849,15 +13849,15 @@ public final class L10nTranslations {
         table.put("Kinds of post",
                 "帖子类型");
         table.put("LIVE",
-                "LIVE");
+                "直播");
         table.put("LIVE replays",
-                "LIVE 回放");
+                "直播回放");
         table.put("LIVE settings",
-                "LIVE 设置");
+                "直播设置");
         table.put("LIVE share actions",
-                "LIVE 分享操作");
+                "直播分享操作");
         table.put("LIVE videos",
-                "LIVE 视频");
+                "直播视频");
         table.put("Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.",
                 "实验室数据已重置。可在菜单中使用“撤销上次实验室更改”。重启 TikTok 后生效.");
         table.put("Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this.",
@@ -14561,7 +14561,7 @@ public final class L10nTranslations {
         table.put("Show only videos with this many views.",
                 "仅显示播放量在此范围内的视频.");
         table.put("Show search in LIVE",
-                "在 LIVE 中显示搜索");
+                "在直播中显示搜索");
         table.put("Show the Not interested button",
                 "显示“不感兴趣”按钮");
         table.put("Show the block button on videos",
@@ -14581,11 +14581,11 @@ public final class L10nTranslations {
         table.put("Show the progress bar thumbnail",
                 "显示进度条缩略图");
         table.put("Show the search entry inside TikTok's LIVE drawer, where available. This doesn't add a search box to video comments.",
-                "在支持的情况下，于 TikTok 的 LIVE 抽屉中显示搜索入口。此选项不会在视频评论中添加搜索框.");
+                "在支持时，于 TikTok 直播面板中显示搜索入口；不会在视频评论中添加搜索框.");
         table.put("Show the switch",
                 "显示开关");
         table.put("Show the whole Activity and New followers lists instead of stopping at a View all button.",
-                "完整显示“活动”和“新关注者”列表，不在“查看全部”处截断.");
+                "完整显示“活动”和“新粉丝”列表，不在“查看全部”处截断.");
         table.put("Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off.",
                 "完整显示视频，不再为窗口裁切。长屏手机通常无变化；折叠屏展开、较方屏幕或分屏时可避免边缘被裁掉.");
         table.put("Show what is left of the budget",
@@ -14779,7 +14779,7 @@ public final class L10nTranslations {
         table.put("The Message requests row leaves the Inbox. Requests keep arriving and wait there until you turn this off.",
                 "隐藏“消息请求”项目；新请求仍会到达并保留，关闭此项后可见.");
         table.put("The New followers row leaves the top of the Inbox. The accounts still follow you.",
-                "隐藏收件箱顶部的“新关注者”项目；关注关系不受影响.");
+                "隐藏收件箱顶部的“新粉丝”项目；关注关系不受影响.");
         table.put("The Tako assistant's conversation leaves the Inbox list. The Tako bubble on the feed has its own switch under Feed tabs.",
                 "隐藏收件箱中的 Tako 助手会话。信息流 Tako 气泡需在“信息流标签”中单独设置.");
         table.put("The accounts TikTok suggests you follow no longer take up rows in the Inbox.",
