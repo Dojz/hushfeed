@@ -79,7 +79,7 @@ A Lab change is already running	已有一项实验室更改正在进行
 A creator pattern is taking too long and was turned off: %1$s	某个创作者匹配规则耗时过长，已自动关闭：%1$s
 A diagnostic report is already being saved	已有诊断报告正在保存
 A field value couldn't be read. Check the values and try again.	无法读取字段值。请检查各项数值后重试.
-A file named hushfeed-safe-mode in TikTok's folder under Android/data paused Hushfeed. Your settings stay as they are.	Android/data 下 TikTok 文件夹中的 hushfeed-safe-mode 文件已暂停 Hushfeed。你的设置会保持不变.
+A file named hushfeed-safe-mode in TikTok's folder under Android/data paused Hushfeed. Your settings stay as they are.	Android/data 下 TikTok 文件夹中的 hushfeed-safe-mode 文件已暂停插件；设置不变.
 A forced value applies to this copy of TikTok whichever account is signed in. It cannot get past a check the server makes.	强制值会应用于此 TikTok 安装，无论登录哪个账号。它无法绕过服务器端检查.
 A good place to stop, if you want one.	如果想停一停，现在正合适.
 A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.	TikTok 使用摄像头时，顶部角落显示绿点；录音时显示橙点。访问结束后指示点会消失.
@@ -393,7 +393,7 @@ Forget seen videos after	在以下时间后忘记已看视频
 Forget the %1$s seen videos.	清除这 %1$s 个已看视频的记录.
 Forget what has been counted today and end any hold. The budgets themselves are left alone.	清除今天已经统计的使用量并结束信息流暂停，但不会更改你设置的每日使用上限.
 Friends	好友
-From the next start TikTok runs as if it were not patched, so you can tell whether a problem comes from Hushfeed. Your settings stay as they are.	下次启动时暂时停用 Hushfeed，让 TikTok 按原始状态运行，以判断问题是否由 Hushfeed 引起。你的设置不会改变.
+From the next start TikTok runs as if it were not patched, so you can tell whether a problem comes from Hushfeed. Your settings stay as they are.	下次启动时暂时停用插件，用于判断问题是否来自 Hushfeed；设置不变.
 Full comment sort options	完整评论排序选项
 Full license	完整许可证
 Full report saved to %1$s	完整报告已保存到 %1$s
@@ -985,7 +985,7 @@ Subtitle language	字幕语言
 Subtitles	字幕
 Swipe left	左滑
 System	系统
-Takes TikTok's own Auto scroll action out of the video panel. Auto-advance keeps working.	从视频面板中移除 TikTok 自带的“自动滚动”操作。Hushfeed 的自动切换仍可使用.
+Takes TikTok's own Auto scroll action out of the video panel. Auto-advance keeps working.	从视频面板中移除 TikTok 自带的“自动滚动”操作；自动连播仍可使用.
 Tap %1$s again to send	再次点按 %1$s 以发送
 Tap again to follow	再次点按以关注
 Tap again to like	再次点按以点赞
@@ -1039,7 +1039,7 @@ The feed dims over the last three quarters of a minute before the hold, so you a
 The feed does not end. This is a fine time to leave it.	信息流永远刷不完，现在退出正合适.
 The feed is open again	信息流已恢复
 The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.	返回应用后，信息流会等你点一下再继续播放。消息、个人资料和搜索仍可直接打开.
-The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.	无法删除 hushfeed-safe-mode 文件。请从 Android/data 下的 TikTok 文件夹中手动删除，以重新启用 Hushfeed.
+The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.	无法删除 hushfeed-safe-mode 文件。请到 Android/data 下的 TikTok 文件夹手动删除，以重新启用插件.
 The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.	设置每日观看时长上限和每日视频数量上限的重置时间，使用 24 小时制。默认凌晨 4 点，避免凌晨仍在刷视频时过早重置.
 The live photo's clip couldn't be saved. Try again.	无法保存实况照片的视频片段。请重试.
 The loaded-values file you chose couldn't be read. Try again.	无法读取你选择的已加载值文件。请重试.
@@ -1088,7 +1088,7 @@ This video has no original sound to save	此视频没有可保存的原声
 This video has no sound of its own	此视频没有自己的声音
 This video's sound has no title to look for	此视频的声音没有可供搜索的标题
 Thumbs down blocks the commenter	点踩将拉黑评论者
-TikTok closed three times within a minute of starting, so Hushfeed paused itself. Your settings stay as they are.	TikTok 启动后一分钟内连续关闭了三次，因此 Hushfeed 已自动暂停。你的设置会保持不变.
+TikTok closed three times within a minute of starting, so Hushfeed paused itself. Your settings stay as they are.	TikTok 启动后 1 分钟内连续关闭 3 次，插件已自动暂停；设置不变.
 TikTok default	TikTok 默认
 TikTok default (hold to speed up, quick share)	TikTok 默认（长按加速、快捷分享）
 TikTok default (open the creator's profile)	TikTok 默认（打开创作者个人资料）
@@ -1102,7 +1102,7 @@ TikTok refused the follow with code %1$s	TikTok 拒绝关注，代码 %1$s
 TikTok refused the follow with code %1$s. A hidden CAPTCHA may be the cause.	TikTok 拒绝关注，代码 %1$s。可能是被隐藏的 CAPTCHA 导致.
 TikTok refused the follow: %1$s	TikTok 拒绝关注：%1$s
 TikTok refused the follow: %1$s A hidden CAPTCHA may be the cause.	TikTok 拒绝关注：%1$s。可能是被隐藏的 CAPTCHA 导致.
-TikTok runs as if it were not patched. Your settings stay as they are.	TikTok 会像未打补丁一样运行。你的设置会保持不变.
+TikTok runs as if it were not patched. Your settings stay as they are.	TikTok 将按未修改状态运行；设置不变.
 TikTok's own daily screen-time reminder sends the app to the background instead of waiting to be dismissed. Coming straight back leaves the reminder on screen, so the limit stays reachable. Needs a daily limit set under TikTok's Settings and privacy, under Time and well-being.	当 TikTok 自带的使用时间提醒出现时，自动将应用切到后台，而不是停在提醒页面等待关闭。立即返回应用时提醒仍会保留。需要先在 TikTok 的“设置和隐私 > 时间与健康”中设置每日使用时间上限.
 TikTok's own value	TikTok 原始值
 TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.	TikTok 服务器可能会把账号加入某项实验，导致个人资料中的“收藏”标签变空。启用此项可保留该标签及已收藏的视频.
@@ -1129,7 +1129,7 @@ Translate comments as they load, using TikTok's own translator.	评论加载时�
 Transparent	透明
 Try a different word or clear the search.	请尝试其他关键词或清除搜索.
 Try again, or go back to TikTok.	请重试，或返回 TikTok.
-Turn Hushfeed back on	重新启用 Hushfeed
+Turn Hushfeed back on	重新启用插件
 Turn on %1$s first.	请先开启 %1$s.
 Turn on overrides	开启覆盖功能
 Turn this on while you record logs for a bug report, then turn it off again. While it is on, TikTok can feel slower and may crash.	录制用于错误报告的日志时开启此项，完成后请再次关闭。开启期间 TikTok 可能变慢，甚至发生崩溃.
