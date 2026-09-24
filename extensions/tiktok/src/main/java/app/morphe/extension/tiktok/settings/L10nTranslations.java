@@ -12861,15 +12861,15 @@ public final class L10nTranslations {
         table.put("About",
                 "关于");
         table.put("Activity",
-                "动态");
+                "活动");
         table.put("Activity center (PIA)",
                 "活动中心\nPIA");
         table.put("Add",
                 "添加");
         table.put("Add a button beside the block control to send feedback about the current video.",
-                "在屏蔽控件旁添加一个按钮，用于反馈当前视频.");
+                "在屏蔽按钮旁添加反馈当前视频的按钮.");
         table.put("Add a button that hides the current creator on this phone without blocking them.",
-                "添加一个按钮，仅在本机隐藏当前创作者，而不将其拉黑.");
+                "添加按钮，仅在本机隐藏当前创作者，不拉黑账号.");
         table.put("Add a creator",
                 "添加创作者");
         table.put("Add a search box that filters comments already loaded on this video by text or username. It doesn't search all of TikTok or remove TikTok's suggested-search banner.",
@@ -12899,11 +12899,11 @@ public final class L10nTranslations {
         table.put("Allow screenshots and Circle to Search",
                 "允许截图和“圈选搜索”");
         table.put("Allow storage for TikTok in Android settings to save profile pictures",
-                "请在 Android 设置中允许 TikTok 使用存储空间，以保存头像");
+                "请在 Android 设置中授予 TikTok 存储权限以保存头像");
         table.put("Allow storage for TikTok in Android settings to save sounds",
                 "请在 Android 设置中允许 TikTok 使用存储空间，以保存声音");
         table.put("Allow storage for TikTok in Android settings to save stories",
-                "请在 Android 设置中允许 TikTok 使用存储空间，以保存限时动态");
+                "请在 Android 设置中授予 TikTok 存储权限以保存限时动态");
         table.put("Allow storage for TikTok in Android settings to save the live photo's clip",
                 "请在 Android 设置中允许 TikTok 使用存储空间，以保存实况照片的视频片段");
         table.put("Already active",
@@ -12911,7 +12911,7 @@ public final class L10nTranslations {
         table.put("Already marked as not interested",
                 "已标记为不感兴趣");
         table.put("Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.",
-                "也将这些筛选规则应用于 TikTok 在信息流无法加载足够新内容时使用的已下载视频.");
+                "TikTok 新内容不足时会使用已下载视频；也对这些视频应用筛选规则.");
         table.put("Also change the region TikTok reports internally. Keeps your interface language. Your IP address and your account's own rules still apply.",
                 "同时修改 TikTok 内部上报地区，不改变界面语言；IP 和账号规则仍可能影响地区判断.");
         table.put("Also on a block list, so still hidden: %1$s",
@@ -13087,9 +13087,9 @@ public final class L10nTranslations {
         table.put("Choose what reaches your feed",
                 "选择哪些内容进入你的信息流");
         table.put("Choose which loaded TikTok bottom navigation tabs should stay visible.",
-                "选择已加载的 TikTok 底部导航标签中哪些保持显示.");
+                "选择保留哪些 TikTok 已加载的底部导航标签.");
         table.put("Choose which loaded TikTok feed tabs should stay visible. If only For You remains, its redundant header is hidden.",
-                "选择已加载的 TikTok 信息流标签中哪些保持显示。如果只保留“为你推荐”，其多余的顶部标题会被隐藏.");
+                "选择保留哪些 TikTok 已加载的信息流标签。若只保留“为你推荐”，会隐藏多余标题.");
         table.put("Choose which rows and controls appear",
                 "选择显示哪些项目和控件");
         table.put("Clear all",
@@ -13254,7 +13254,7 @@ public final class L10nTranslations {
         table.put("Creators hidden on this phone",
                 "本机隐藏的创作者");
         table.put("Creators you hid from a video. Search the list and remove one at a time.",
-                "你从视频中隐藏过的创作者。可搜索列表并逐个移除.");
+                "这里列出从视频中隐藏的创作者，可搜索并逐个移除.");
         table.put("Current",
                 "当前值");
         table.put("Current %1$s",
@@ -13377,7 +13377,7 @@ public final class L10nTranslations {
         table.put("Errors",
                 "错误");
         table.put("Expand activity list",
-                "展开动态通知列表");
+                "展开活动列表");
         table.put("Explore",
                 "探索");
         table.put("Export diagnostic report",
@@ -13543,11 +13543,11 @@ public final class L10nTranslations {
         table.put("Hide TikTok's short drama episodes and the cards that promote them.",
                 "隐藏 TikTok 短剧剧集以及推广短剧的卡片.");
         table.put("Hide activity",
-                "隐藏动态通知");
+                "隐藏活动");
         table.put("Hide activity status",
                 "隐藏活动状态");
         table.put("Hide ads, Shop posts, LIVE videos and replays, promotional music, and paid partnerships.",
-                "隐藏广告、TikTok Shop 内容、LIVE 视频及回放、推广音乐和付费合作内容.");
+                "隐藏广告、TikTok Shop 内容、LIVE 及回放、推广音乐和付费合作内容.");
         table.put("Hide archive",
                 "隐藏归档");
         table.put("Hide bottom tabs TikTok adds later unless you allow them.",
@@ -13569,7 +13569,7 @@ public final class L10nTranslations {
         table.put("Hide conversations",
                 "隐藏会话");
         table.put("Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still turned on.",
-                "隐藏所有私信会话。除仍启用的其他收件箱项目外，收件箱会保持为空.");
+                "隐藏所有私信会话；仍启用的其他收件箱项目会保留.");
         table.put("Hide feed videos with place badges, even when they aren't paid ads. To keep the video and hide only its badge, use Hide location labels in Feed screen.",
                 "隐藏带地点徽标的信息流视频，即使不是广告。若只想隐藏徽标并保留视频，请用“信息流界面 > 隐藏地点标签”.");
         table.put("Hide floating promotion badges, coins, and timer banners on the feed.",
@@ -13641,7 +13641,7 @@ public final class L10nTranslations {
         table.put("Hide the Full screen button",
                 "隐藏全屏按钮");
         table.put("Hide the Full screen button over videos. Playback and automatic rotation keep working as before.",
-                "隐藏视频上的全屏按钮。播放和自动旋转仍照常工作.");
+                "隐藏视频上的全屏按钮；播放和自动旋转不受影响.");
         table.put("Hide the Inbox search button",
                 "隐藏收件箱搜索按钮");
         table.put("Hide the LIVE button",
@@ -13682,7 +13682,7 @@ public final class L10nTranslations {
         table.put("Hide the follow button on the feed",
                 "隐藏信息流中的关注按钮");
         table.put("Hide the friend recommendation card and the other cards TikTok slots between videos.",
-                "隐藏好友推荐卡片以及 TikTok 插入在视频之间的其他卡片.");
+                "隐藏好友推荐卡及 TikTok 插入视频之间的其他卡片.");
         table.put("Hide the launcher shortcuts",
                 "隐藏启动器快捷方式");
         table.put("Hide the magnifying glass at the top of Inbox. Search on the feed and in comments is unchanged.",
@@ -13704,7 +13704,7 @@ public final class L10nTranslations {
         table.put("Hide the purple rewards button beside Add friends on your profile.",
                 "隐藏个人资料页“添加好友”旁边的紫色奖励按钮.");
         table.put("Hide the question cards TikTok slides over a video near its end.",
-                "隐藏 TikTok 在视频接近结束时滑入显示的问题卡片.");
+                "隐藏 TikTok 在视频接近结束时显示的问题卡片.");
         table.put("Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.",
                 "隐藏输入评论时的快捷表情和自动贴纸建议，表情和贴纸按钮仍可使用.");
         table.put("Hide the red counts and dots on every bottom tab, Inbox and Profile included. The inbox itself still shows what came in.",
@@ -13716,7 +13716,7 @@ public final class L10nTranslations {
         table.put("Hide the row of friends at the top of the share sheet.",
                 "隐藏分享面板顶部的好友一栏.");
         table.put("Hide the save button in the right column. Ticking Save in the list above hides it too.",
-                "隐藏右侧栏的保存按钮。在上方列表勾选“保存”也会隐藏它.");
+                "隐藏右侧按钮栏中的保存按钮；在上方列表勾选“保存”也有同样效果.");
         table.put("Hide the save button on the feed",
                 "隐藏信息流中的保存按钮");
         table.put("Hide the search bar below videos",
@@ -13726,7 +13726,7 @@ public final class L10nTranslations {
         table.put("Hide the share prompt after a like",
                 "隐藏点赞后的分享提示");
         table.put("Hide the spinning music cover and the track name beside the caption.",
-                "隐藏旋转的音乐封面以及文案旁的曲目名称.");
+                "隐藏旋转音乐封面和文案旁的曲目名称.");
         table.put("Hide the status bar",
                 "隐藏状态栏");
         table.put("Hide the streak button in a chat and the reminder message that goes with it.",
@@ -13736,7 +13736,7 @@ public final class L10nTranslations {
         table.put("Hide the unread badges on the bottom tabs",
                 "隐藏底部标签上的未读徽标");
         table.put("Hide the whole column on the right, from the avatar down to the music disc.",
-                "隐藏右侧整列控件，从头像一直到音乐唱片.");
+                "隐藏整个右侧按钮栏（头像至音乐唱片）.");
         table.put("Hide this creator on this phone",
                 "在本机隐藏此创作者");
         table.put("Hide verified accounts",
@@ -13756,7 +13756,7 @@ public final class L10nTranslations {
         table.put("Hide videos that belong to a paid Series.",
                 "隐藏属于付费系列的视频.");
         table.put("Hide videos that use a sound blocked with the player's sound button, or named below.",
-                "隐藏使用已通过播放器声音按钮屏蔽、或名称在下方列表中的声音的视频.");
+                "隐藏使用已屏蔽声音或名称与下方列表匹配的声音的视频.");
         table.put("Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.",
                 "隐藏播放量高但评论少的视频。规则与“每个赞对应播放量”相同。设为 0 可关闭.");
         table.put("Hide videos with a lot of views and few likes. Lower numbers are stricter, zero turns the rule off, and one video is kept back if everything the feed just sent would go.",
@@ -13833,7 +13833,7 @@ public final class L10nTranslations {
         table.put("Keep the Favorites tab",
                 "保留收藏标签");
         table.put("Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.",
-                "TikTok 打开时隐藏时钟和状态图标。从屏幕顶部下滑可临时查看.");
+                "TikTok 打开时隐藏状态栏时钟和图标；从顶部下滑可临时查看.");
         table.put("Keep the screen's refresh rate",
                 "保持屏幕刷新率");
         table.put("Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only.",
@@ -14133,7 +14133,7 @@ public final class L10nTranslations {
         table.put("Open messages",
                 "打开消息");
         table.put("Open profile and story website links in your system browser instead of TikTok's in-app browser.",
-                "使用系统浏览器打开个人资料和限时动态中的网页链接，而不是 TikTok 内置浏览器.");
+                "使用系统浏览器打开个人资料和限时动态中的网页链接，不使用 TikTok 内置浏览器.");
         table.put("Open the feed anyway",
                 "仍然继续使用信息流");
         table.put("Open the feed anyway, %1$d left today",
@@ -14188,7 +14188,7 @@ public final class L10nTranslations {
         table.put("Pause Hushfeed",
                 "暂停 Hushfeed");
         table.put("Pauses the video behind the comment sheet while you read. It plays on from the same spot when the sheet closes.",
-                "阅读评论时暂停评论面板后方的视频。关闭评论面板后会从同一位置继续播放.");
+                "阅读评论时暂停背后的视频，关闭评论后从原位置继续播放.");
         table.put("People, shortcuts and sending controls",
                 "联系人、快捷方式与发送控件");
         table.put("Photo",
@@ -14206,7 +14206,7 @@ public final class L10nTranslations {
         table.put("Pick the buttons to take off the column. The rest stay where they are.",
                 "选择要从右侧栏移除的按钮。其余按钮保持原位.");
         table.put("Play videos TikTok has classified without the overlay asking to be tapped through first.",
-                "播放被 TikTok 分类限制的视频时，不再先显示需要点按确认的覆盖层.");
+                "直接播放 TikTok 标记为需确认的内容，不再显示点击确认遮罩.");
         table.put("Playback",
                 "播放");
         table.put("Player",
@@ -14224,7 +14224,7 @@ public final class L10nTranslations {
         table.put("Preset",
                 "预设");
         table.put("Press and hold a profile picture to save the full size original to your photo destination.",
-                "长按头像可将完整尺寸原图保存到你的图片保存位置.");
+                "长按头像，将完整尺寸原图保存到图片保存位置.");
         table.put("Press and hold a story to save it. Stories have no save button of their own, and holding one is how TikTok pauses it, so this takes that gesture over.",
                 "长按限时动态即可保存。TikTok 原本用长按暂停播放，启用后该手势将改为保存.");
         table.put("Press and hold the left or right third of the screen to jump back or forward. The middle third keeps the Long press action.",
@@ -14585,7 +14585,7 @@ public final class L10nTranslations {
         table.put("Show the switch",
                 "显示开关");
         table.put("Show the whole Activity and New followers lists instead of stopping at a View all button.",
-                "完整显示“活动”和“新关注者”列表，不再停在“查看全部”按钮处.");
+                "完整显示“活动”和“新关注者”列表，不在“查看全部”处截断.");
         table.put("Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off.",
                 "完整显示视频，不再为窗口裁切。长屏手机通常无变化；折叠屏展开、较方屏幕或分屏时可避免边缘被裁掉.");
         table.put("Show what is left of the budget",
@@ -14603,7 +14603,7 @@ public final class L10nTranslations {
         table.put("Skipping videos with %1$s",
                 "正在跳过带有 %1$s 的视频");
         table.put("Some Calm feed settings changed. Restore still puts back your earlier setup.",
-                "部分“清爽信息流”设置已发生变化。“恢复”仍会还原你之前的配置.");
+                "部分“清爽信息流”设置已改变；“恢复”仍会还原之前的配置.");
         table.put("Something is missing from %1$s. Tap for the whole report.",
                 "%1$s 中缺少部分内容。点按可查看完整报告.");
         table.put("Sound link copied",
@@ -14767,7 +14767,7 @@ public final class L10nTranslations {
         table.put("That sticker is in a format Hushfeed cannot read",
                 "该贴纸的格式 Hushfeed 无法读取");
         table.put("The Activity row of likes and comments on your posts leaves the Inbox. Notifications about them still arrive.",
-                "隐藏收件箱中与你帖子点赞和评论有关的“动态”项目，但相关通知仍会正常到达.");
+                "隐藏收件箱中与你帖子点赞和评论有关的“活动”项目，但通知仍会正常到达.");
         table.put("The Archive row leaves the Inbox. Archived chats are kept.",
                 "“归档”项目将从收件箱中隐藏，已归档聊天仍会保留.");
         table.put("The Lab can't check this. TikTok gets it exactly as typed.",
@@ -14777,19 +14777,19 @@ public final class L10nTranslations {
         table.put("The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.",
                 "实验室最多保留 %1$s 条规则。此次更改会使规则数达到 %2$s，因此未进行更改.");
         table.put("The Message requests row leaves the Inbox. Requests keep arriving and wait there until you turn this off.",
-                "“消息请求”项目将从收件箱中隐藏。新的请求仍会到达并保留，直到你关闭此选项.");
+                "隐藏“消息请求”项目；新请求仍会到达并保留，关闭此项后可见.");
         table.put("The New followers row leaves the top of the Inbox. The accounts still follow you.",
-                "“新关注者”项目将从收件箱顶部隐藏，这些账号仍然会关注你.");
+                "隐藏收件箱顶部的“新关注者”项目；关注关系不受影响.");
         table.put("The Tako assistant's conversation leaves the Inbox list. The Tako bubble on the feed has its own switch under Feed tabs.",
                 "隐藏收件箱中的 Tako 助手会话。信息流 Tako 气泡需在“信息流标签”中单独设置.");
         table.put("The accounts TikTok suggests you follow no longer take up rows in the Inbox.",
                 "TikTok 推荐你关注的账号将不再占用收件箱项目.");
         table.put("The activity status control leaves the Inbox header. Whether others see you as active is unchanged.",
-                "活动状态控件将从收件箱顶部隐藏。其他人是否能看到你的在线状态不会改变.");
+                "隐藏收件箱顶部的活动状态控件；不会改变别人是否能看到你的在线状态.");
         table.put("The add people icon leaves the Inbox header. Only the shortcut goes, so friend suggestions elsewhere are unchanged.",
                 "隐藏收件箱顶部的“添加联系人”图标。只移除这个快捷入口，其他位置的好友推荐不受影响.");
         table.put("The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.",
-                "目录显示此键类型为 %1$s，而当前覆盖值类型为 %2$s。请重置覆盖值并重新创建.");
+                "功能清单显示此键类型为 %1$s，而当前覆盖值类型为 %2$s。请重置后重新创建覆盖值.");
         table.put("The diagnostic report couldn't be saved yet. Try again in a moment.",
                 "诊断报告暂时无法保存。请稍后重试.");
         table.put("The diagnostic report couldn't be saved. Try again.",
@@ -14857,11 +14857,11 @@ public final class L10nTranslations {
         table.put("These loaded values are for a different TikTok version.",
                 "这些已加载值属于另一个 TikTok 版本.");
         table.put("This catalog entry is no longer available. Refresh the Lab and try again.",
-                "此目录条目已不可用。请刷新实验室后重试.");
+                "此功能项已不在清单中。请刷新实验室后重试.");
         table.put("This change couldn't be saved. Try again.",
                 "无法保存此更改。请重试.");
         table.put("This configuration has no fields that can be copied and changed safely on this build.",
-                "此配置在当前版本中没有可安全复制和修改的字段.");
+                "当前版本没有可安全复制并修改的字段.");
         table.put("This file has more loaded values than the Lab takes at once.",
                 "此文件包含的已加载值超过实验室单次可接受数量.");
         table.put("This file has no loaded values in it.",
@@ -14873,7 +14873,7 @@ public final class L10nTranslations {
         table.put("This is the video's own sound, so YouTube Music won't have it",
                 "这是视频自己的原声，因此 YouTube Music 中不会有对应曲目");
         table.put("This key isn't in the local catalog, so its type can't be checked. Reset the override.",
-                "此键不在本地目录中，因此无法检查其类型。请重置覆盖值.");
+                "此键不在本地功能清单中，无法检查类型。请重置覆盖值.");
         table.put("This key touches account safety. Forcing it can change login, region, payment or security checks.",
                 "此键涉及账号安全。强制修改可能影响登录、地区、支付或安全检查.");
         table.put("This line opens a rule and does not finish it: %1$s. Write two phrases as \"a\" & \"b\" for both, or \"a\" !& \"b\" for the first without the second.",
@@ -15049,7 +15049,7 @@ public final class L10nTranslations {
         table.put("Use system font",
                 "使用系统字体");
         table.put("Use the preset for the region TikTok reports for your account and its shop too. May affect search.",
-                "使用预设同时覆盖 TikTok 为账号及商城上报的地区。可能影响搜索结果.");
+                "使用预设同时修改账号和 TikTok Shop 上报的地区，可能影响搜索结果.");
         table.put("Use the selected country and operator values. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.",
                 "仅修改 SIM 上报的国家/地区和运营商，不改变 IP、账号历史或界面语言；这些因素仍可能让 TikTok 沿用原地区。重启 TikTok 后生效.");
         table.put("Use the selected country. This changes what the SIM says and nothing else: your IP address, your account's history and the language you read in are all unchanged, and any one of them is enough for TikTok to keep the region it already chose. Restart TikTok to apply this.",
