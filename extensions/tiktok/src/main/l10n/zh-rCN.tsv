@@ -131,7 +131,7 @@ Answer TikTok's location requests with nothing. The region settings change the l
 Answer TikTok's reads of your contacts with an empty list. Find Friends and People you may know lose access to your contact list.	TikTok 读取联系人时返回空列表，使“查找好友”和“你可能认识的人”无法访问联系人.
 Answer TikTok's scan of the apps on this phone with an empty list. A check for one named app, which TikTok also uses to open an app you tap, is left alone.	TikTok 扫描本机已安装应用时返回空列表。针对特定应用的单项检查会保留，因为 TikTok 还需要它来打开你点按的应用.
 App	应用
-App AB	A/B 实验\nApp AB
+App AB	A/B 实验
 Appearance	外观
 Applies to both video and photo downloads.	同时适用于视频和图片下载.
 Apply	应用
