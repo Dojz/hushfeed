@@ -12946,7 +12946,7 @@ public final class L10nTranslations {
         table.put("App",
                 "应用");
         table.put("App AB",
-                "A/B 实验\nApp AB");
+                "A/B 实验");
         table.put("Appearance",
                 "外观");
         table.put("Applies to both video and photo downloads.",
