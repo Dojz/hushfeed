@@ -897,3 +897,183 @@ Settings are back to their defaults. Restart TikTok to apply all changes.	设置
 Settings backup saved	设置备份已保存
 Settings couldn't open	无法打开设置
 Settings couldn't refresh completely. Reopen settings and try again.	设置未能完整刷新。请重新打开设置后重试。
+Settings restored. Restart TikTok to apply all changes.	设置已恢复。重启 TikTok 以应用全部更改。
+Settings restored. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.	设置已恢复。功能开关实验室规则属于另一个 TikTok 版本，因此未恢复。重启 TikTok 以应用全部更改。
+Share	分享
+Share links through another host	通过其他域名分享链接
+Share sheet	分享面板
+Shares range	分享数范围
+Shop	商城
+Shop order updates and coupon messages no longer take up rows in the Inbox. Your orders are unchanged.	商城订单更新和优惠券消息不再占用收件箱中的项目。你的订单本身不会改变。
+Shop posts	商城帖子
+Show	显示
+Show @username beside a video instead of the display name the creator chose.	在视频旁显示 @用户名，而不是创作者设置的显示名称。
+Show TikTok's own progress bar on videos where it is normally hidden.	在 TikTok 通常隐藏进度条的视频上显示其原生进度条。
+Show TikTok's own sort sheet on every post, with its hot, newest, media and creator options, instead of whichever cut-down row your account was given. Restart TikTok to apply this. It reads the style once per run and remembers it.	在每个帖子上显示 TikTok 完整的原生排序面板，包括热门、最新、媒体和创作者选项，而不是账号被分配到的精简版本。重启 TikTok 后生效。每次运行只读取一次样式并记住。
+Show a video preview thumbnail while dragging the progress bar.	拖动进度条时显示视频预览缩略图。
+Show failures on screen	在屏幕上显示失败信息
+Show gates	显示功能开关
+Show last report	显示上次报告
+Show only videos with this many comments.	仅显示评论数在此范围内的视频。
+Show only videos with this many favorites.	仅显示收藏数在此范围内的视频。
+Show only videos with this many likes.	仅显示点赞数在此范围内的视频。
+Show only videos with this many shares.	仅显示分享数在此范围内的视频。
+Show only videos with this many views.	仅显示播放量在此范围内的视频。
+Show search in LIVE	在 LIVE 中显示搜索
+Show the Not interested button	显示“不感兴趣”按钮
+Show the block button on videos	在视频上显示拉黑按钮
+Show the block sound button	显示屏蔽声音按钮
+Show the country a video was posted from next to the creator's name.	在创作者名称旁显示视频发布国家/地区。
+Show the current spoken caption while the other controls are hidden.	隐藏其他控件时，仍显示当前语音字幕。
+Show the handle instead of the name	显示用户名而不是名称
+Show the hide button on videos	在视频上显示隐藏按钮
+Show the progress bar	显示进度条
+Show the progress bar thumbnail	显示进度条缩略图
+Show the search entry inside TikTok's LIVE drawer, where available. This doesn't add a search box to video comments.	在支持的情况下，于 TikTok 的 LIVE 抽屉中显示搜索入口。此选项不会在视频评论中添加搜索框。
+Show the switch	显示开关
+Show the whole Activity and New followers lists instead of stopping at a View all button.	完整显示“活动”和“新关注者”列表，不再停在“查看全部”按钮处。
+Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off.	显示完整视频，而不是裁切以适应窗口。在本就能完整显示的长屏手机上不会有变化；在展开的折叠屏、更接近方形的屏幕或分屏模式下，可避免视频两侧或上下被裁掉。
+Show what is left of the budget	显示剩余限额
+Show when the camera or microphone is in use	显示摄像头或麦克风使用状态
+Show where a video was posted	显示视频发布地区
+Showing %1$s again	再次显示 %1$s
+Silence the feed while comments are open	打开评论时将信息流静音
+Skip content warnings	跳过内容警告
+Skipping videos with %1$s	正在跳过带有 %1$s 的视频
+Some Calm feed settings changed. Restore still puts back your earlier setup.	部分“清爽信息流”设置已发生变化。“恢复”仍会还原你之前的配置。
+Something is missing from %1$s. Tap for the whole report.	%1$s 中缺少部分内容。点按可查看完整报告。
+Sound link copied	声音链接已复制
+Sound saved to %1$s	声音已保存到 %1$s
+Source	来源
+Speed	速度
+Speed menu choices	速度菜单选项
+Speed while you hold the video	长按视频时的播放速度
+Split comment minimum width	分栏评论最小宽度
+Start each new video at your default. A manual choice lasts until the video changes.	每个新视频都以你的默认速度开始。手动选择的速度会持续到切换视频为止。
+Start feature gate recording	开始记录功能开关
+Start recording	开始记录
+Start the day at	每日开始时间
+Start today over	重新开始今天
+Start typing	开始输入
+Start with comments. Hide the comment count, sort and close buttons, plus the suggestion area above them. Use Back or swipe down to close comments.	打开时直接进入评论。隐藏评论数量、排序和关闭按钮，以及其上方的建议区域。使用“返回”或向下滑动关闭评论。
+Sticker	贴纸
+Sticker destination	贴纸保存位置
+Sticker saved to %1$s	贴纸已保存到 %1$s
+Still here. Nothing is waiting.	仍在此处。当前没有待处理内容。
+Still reading the record. Tap again in a moment.	仍在读取记录。请稍后再次点按。
+Still saving the last one	仍在保存上一个文件
+Stop ByteDance AppLog events, AppsFlyer attribution, explicit Firebase screen reports and crash reporting from being sent. TikTok's own diagnostics go quiet with them.	阻止发送 ByteDance AppLog 事件、AppsFlyer 归因、明确的 Firebase 屏幕报告和崩溃报告。TikTok 自己的相关诊断上报也会一并停止。
+Stop TikTok asking the screen to run at the frame rate of the video it is playing. On a 90 or 120 Hz phone that ask slows the whole app down to the video's rate, scrolling included.	阻止 TikTok 要求屏幕按当前视频帧率运行。在 90Hz 或 120Hz 手机上，这种请求会让整个应用（包括滚动）降到视频帧率。
+Stop TikTok listening to the accelerometer, gyroscope, magnetometer and the other motion sensors it uses to fingerprint the phone. Saves the battery they wake.	阻止 TikTok 读取加速度计、陀螺仪、磁力计及其他用于设备指纹识别的运动传感器，也可减少这些传感器唤醒造成的耗电。
+Stop TikTok reading what you copied. Copying a link from TikTok still works.	阻止 TikTok 读取你的剪贴板内容。从 TikTok 复制链接仍可正常使用。
+Stop TikTok reporting that you viewed a story or a profile, or that you are typing. Online status is unchanged. It cannot undo what the server has already recorded.	阻止 TikTok 上报你查看过故事、个人资料或正在输入。在线状态不受影响，也无法撤回服务器已经记录的信息。
+Stop a long press on Like from opening TikTok's repost action.	阻止长按点赞按钮打开 TikTok 的转发操作。
+Stop a long press on Share from opening TikTok's quick share action.	阻止长按分享按钮打开 TikTok 的快捷分享操作。
+Stop analytics and tracking	停止分析与跟踪
+Stop feature gate recording	停止记录功能开关
+Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.	阻止当评论内容匹配广告商触发条件时，在评论上方播放品牌动画。
+Stop the bubble that asks you to share a video with friends after you like it.	阻止点赞后弹出提示你向好友分享视频的气泡。
+Stop video looping	停止视频循环
+Stop videos at the end instead of replaying them.	视频播放结束后停止，而不是重新播放。
+Stopped after dismissing %1$s suggested accounts	移除 %1$s 个推荐账号后已停止
+Stopped after dismissing one suggested account	移除 1 个推荐账号后已停止
+Stopping after this file	将在当前文件完成后停止
+Stories	故事
+Story saved to %1$s	故事已保存到 %1$s
+Structured value observed	已观察到结构化值
+Subtitle language	字幕语言
+Subtitles	字幕
+Swipe left	左滑
+System	系统
+Takes TikTok's own Auto scroll action out of the video panel. Auto-advance keeps working.	从视频面板中移除 TikTok 自带的“自动滚动”操作。Hushfeed 的自动切换仍可使用。
+Tap %1$s again to send	再次点按 %1$s 以发送
+Tap again to follow	再次点按以关注
+Tap again to like	再次点按以点赞
+Tap again to send	再次点按以发送
+Tap the feed Follow button twice within %1$d seconds.	在 %1$d 秒内连续点按两次信息流中的“关注”按钮。
+Tap the like heart twice within %1$d seconds. Removing a like stays immediate.	在 %1$d 秒内连续点按两次爱心以点赞。取消点赞仍会立即执行。
+Tap to start the feed	点按以开始信息流
+Technical details	技术详情
+Technical details, %1$s	技术详情，%1$s
+That backup was written by a newer Hushfeed than this one. Nothing was altered.	该备份由比当前版本更新的 Hushfeed 创建。未进行任何更改。
+That creator is already in the list	该创作者已在列表中
+That creator pattern is too long to use, so it was skipped: %1$s	该创作者匹配规则过长，无法使用，已跳过：%1$s
+That creator pattern is too long, so it was not added: %1$s	该创作者匹配规则过长，因此未添加：%1$s
+That file is not a loaded-values export, or it is larger than the Lab accepts	该文件不是已加载值导出文件，或文件大小超过实验室允许范围
+That file is not readable text, so it may have been damaged in transit. Nothing was altered.	该文件不是可读取的文本，可能在传输过程中损坏。未进行任何更改。
+That file is too large to be a settings backup. Nothing was altered.	该文件过大，不可能是有效的设置备份。未进行任何更改。
+That folder name has a character Android does not allow. Use letters, numbers, spaces or dashes.	该文件夹名称包含 Android 不允许的字符。请使用字母、数字、空格或连字符。
+That is %1$d minutes today	今天已使用 %1$d 分钟
+That is %1$d videos today	今天已观看 %1$d 个视频
+That is not a Hushfeed settings backup. Nothing was altered.	这不是 Hushfeed 设置备份。未进行任何更改。
+That is not an app name. Try something like com.example.downloader, or leave the box empty to keep saving in TikTok.	这不是有效的应用包名。可尝试 com.example.downloader 这样的格式，或留空以继续在 TikTok 中保存。
+That is one minute today	今天已使用 1 分钟
+That is one video today	今天已观看 1 个视频
+That list has too many entries. Keep it to %1$s or fewer.	该列表条目过多。请保持在 %1$s 项以内。
+That list is too large. Keep it to %1$s KB or less.	该列表过大。请保持在 %1$s KB 以内。
+That preset is not recognized. Choose another.	无法识别该预设。请选择其他预设。
+That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.	该设置备份中的信息流规则列表超过 Hushfeed 可接受的大小。未进行任何更改。
+That settings backup holds a value Hushfeed cannot read. Nothing was altered.	该设置备份包含 Hushfeed 无法读取的值。未进行任何更改。
+That settings backup holds more Feature Gate Lab rules than the Lab takes. Nothing was altered.	该设置备份包含的功能开关实验室规则超过允许数量。未进行任何更改。
+That settings backup is damaged or only partly downloaded. Nothing was altered.	该设置备份已损坏或仅下载了一部分。未进行任何更改。
+That settings backup is incomplete, so it may have been cut short. Nothing was altered.	该设置备份不完整，可能被截断。未进行任何更改。
+That settings change did not go through. Nothing was altered.	该设置更改未能完成。未进行任何更改。
+That sticker is in a format Hushfeed cannot read	该贴纸的格式 Hushfeed 无法读取
+The Activity row of likes and comments on your posts leaves the Inbox. Notifications about them still arrive.	收件箱中关于你帖子点赞和评论的“活动”项目将被隐藏，但相关通知仍会正常到达。
+The Archive row leaves the Inbox. Archived chats are kept.	“归档”项目将从收件箱中隐藏，已归档聊天仍会保留。
+The Lab can't check this. TikTok gets it exactly as typed.	实验室无法检查此内容。TikTok 会按你输入的原样接收。
+The Lab couldn't open. Go back and open it again.	无法打开实验室。请返回后重新进入。
+The Lab keeps at most %1$s rules. This change would make %2$s, so nothing was changed.	实验室最多保留 %1$s 条规则。此次更改会使规则数达到 %2$s，因此未进行更改。
+The Message requests row leaves the Inbox. Requests keep arriving and wait there until you turn this off.	“消息请求”项目将从收件箱中隐藏。新的请求仍会到达并保留，直到你关闭此选项。
+The New followers row leaves the top of the Inbox. The accounts still follow you.	“新关注者”项目将从收件箱顶部隐藏，这些账号仍然会关注你。
+The Tako assistant's conversation leaves the Inbox list. The Tako bubble on the feed has its own switch under Feed tabs.	Tako 助手会话将从收件箱列表中隐藏。信息流中的 Tako 气泡可在“信息流标签”中单独控制。
+The accounts TikTok suggests you follow no longer take up rows in the Inbox.	TikTok 推荐你关注的账号将不再占用收件箱项目。
+The activity status control leaves the Inbox header. Whether others see you as active is unchanged.	活动状态控件将从收件箱顶部隐藏。其他人是否能看到你的在线状态不会改变。
+The add people icon leaves the Inbox header. Only the shortcut goes, so friend suggestions elsewhere are unchanged.	添加联系人图标将从收件箱顶部隐藏。只会移除该快捷入口，其他位置的好友推荐不受影响。
+The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.	目录显示此键类型为 %1$s，而当前覆盖值类型为 %2$s。请重置覆盖值并重新创建。
+The diagnostic report couldn't be saved yet. Try again in a moment.	诊断报告暂时无法保存。请稍后重试。
+The diagnostic report couldn't be saved. Try again.	无法保存诊断报告。请重试。
+The downloader app you chose isn't installed. Check Send links to another app under Downloads.	你选择的下载器应用未安装。请检查“下载”中的“将链接发送到其他应用”。
+The export failed and the partial file couldn't be removed. Delete it from your Downloads folder.	导出失败，且无法删除未完成的文件。请从 Downloads 文件夹中手动删除。
+The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.	在暂停前最后 45 秒逐渐调暗信息流，让你平缓进入暂停状态，而不是突然中断。需要同时设置时长限额和达到限额后的暂停。
+The feed does not end. This is a fine time to leave it.	信息流不会结束。现在是离开的好时机。
+The feed is open again	信息流已重新开放
+The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.	返回应用时，信息流会等待你点按一次后才继续播放。消息、个人资料和搜索仍可正常打开。
+The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.	无法删除 hushfeed-safe-mode 文件。请从 Android/data 下的 TikTok 文件夹中手动删除，以重新启用 Hushfeed。
+The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.	两个每日限额重置的时间，使用 24 小时制。默认凌晨 4 点，因为凌晨 1 点还在刷的人通常仍把它算作前一天晚上。
+The live photo's clip couldn't be saved. Try again.	无法保存实况照片的视频片段。请重试。
+The loaded-values file you chose couldn't be read. Try again.	无法读取你选择的已加载值文件。请重试。
+The original photos aren't available, so TikTok's own save runs instead	原始图片不可用，因此改用 TikTok 自带的保存功能
+The override changes no fields. Edit the field values, or reset the override.	该覆盖值没有更改任何字段。请修改字段值，或重置覆盖值。
+The override couldn't be applied: %1$s. Edit the field values, or reset the override.	无法应用覆盖值：%1$s。请修改字段值，或重置覆盖值。
+The override doesn't say what list to return. Edit the field values, or reset the override.	该覆盖值没有指定要返回的列表。请修改字段值，或重置覆盖值。
+The profile picture couldn't be saved. Try again.	无法保存头像。请重试。
+The record of an interrupted settings change couldn't be read, so it was set aside. Check your settings.	无法读取中断的设置更改记录，因此已将其单独保留。请检查你的设置。
+The report couldn't be saved. Try again.	无法保存报告。请重试。
+The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.	收件箱顶部的一排故事头像将被隐藏。仍可从信息流和个人资料中观看故事。
+The setting couldn't finish updating. Its saved value is shown.	该设置未能完成更新。当前显示的是已保存的值。
+The settings backup was rejected. Nothing was altered.	设置备份被拒绝。未进行任何更改。
+The smallest value is above the largest	最小值大于最大值
+The sound couldn't be saved. Try again.	无法保存声音。请重试。
+The sticker couldn't be saved. Try again.	无法保存贴纸。请重试。
+The story couldn't be saved. Try again.	无法保存故事。请重试。
+The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.	每条评论上的踩按钮将改为拉黑评论者，而不是点踩。评论会变暗，并显示可撤销横幅；再次点按可解除拉黑。
+The video couldn't be saved. Try again, or choose Automatic.	无法保存视频。请重试，或选择“自动”。
+There is no Lab change to undo.	没有可撤销的实验室更改。
+There is no diagnostic data to clear	没有可清除的诊断数据
+There is no diagnostic data to put back	没有可恢复的诊断数据
+There was nothing to put back	没有可恢复的内容
+These loaded values are for a different TikTok version.	这些已加载值属于另一个 TikTok 版本。
+This catalog entry is no longer available. Refresh the Lab and try again.	此目录条目已不可用。请刷新实验室后重试。
+This change couldn't be saved. Try again.	无法保存此更改。请重试。
+This configuration has no fields that can be copied and changed safely on this build.	此配置在当前版本中没有可安全复制和修改的字段。
+This file has more loaded values than the Lab takes at once.	此文件包含的已加载值超过实验室单次可接受数量。
+This file has no loaded values in it.	此文件中没有已加载值。
+This file isn't a loaded-values export from the Feature Gate Lab.	此文件不是功能开关实验室导出的已加载值文件。
+This gate type is not supported.	不支持此功能开关类型。
+This is the video's own sound, so YouTube Music won't have it	这是视频自己的原声，因此 YouTube Music 中不会有对应曲目
+This key isn't in the local catalog, so its type can't be checked. Reset the override.	此键不在本地目录中，因此无法检查其类型。请重置覆盖值。
+This key touches account safety. Forcing it can change login, region, payment or security checks.	此键涉及账号安全。强制修改可能影响登录、地区、支付或安全检查。
+This line opens a rule and does not finish it: %1$s. Write two phrases as "a" & "b" for both, or "a" !& "b" for the first without the second.	此行开始了一条规则但没有完成：%1$s。若要求两个短语同时出现，请写成 "a" & "b"；若要求出现前者且不出现后者，请写成 "a" !& "b"。
+This phone has no file picker, so there is no way to choose a file here	此手机没有文件选择器，因此无法在这里选择文件
+This phone has no folder picker. Type the folder into the row instead.	此手机没有文件夹选择器。请直接在此项中输入文件夹路径。
