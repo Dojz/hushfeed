@@ -717,3 +717,183 @@ Open the feed anyway, %1$d left today	仍然打开信息流，今天还可用 %1
 Open the feed anyway, the last time today	仍然打开信息流，这是今天最后一次
 Open the feed once so Hushfeed can see which bottom tabs TikTok loaded.	请先打开一次信息流，以便 Hushfeed 识别 TikTok 已加载的底部标签。
 Open the feed once so Hushfeed can see which tabs TikTok loaded.	请先打开一次信息流，以便 Hushfeed 识别 TikTok 已加载的信息流标签。
+Open the profile again and try once more	请重新打开个人资料页后再试一次
+Open the story again and try once more	请重新打开故事后再试一次
+Opens github.com in your browser	在浏览器中打开 github.com
+Operator code	运营商代码
+Operator name	运营商名称
+Original language	原始语言
+Other	其他
+Other feed filters	其他信息流筛选
+Overridden	已覆盖
+Override	覆盖
+Override SIM details	覆盖 SIM 信息
+Override set, not read yet	已设置覆盖值，尚未读取
+Override store region (experimental)	覆盖商店地区（实验性）
+Override this configuration	覆盖此配置
+Override this gate	覆盖此功能开关
+Overrides are disabled in the Feature Gate Lab.	功能开关实验室中的覆盖功能已禁用。
+Overrides disabled. Restart TikTok to apply this.	覆盖功能已禁用。重启 TikTok 后生效。
+Overrides enabled. Restart TikTok to apply this.	覆盖功能已启用。重启 TikTok 后生效。
+Paid partnerships	付费合作
+Pause Hushfeed	暂停 Hushfeed
+Pauses the video behind the comment sheet while you read. It plays on from the same spot when the sheet closes.	阅读评论时暂停评论面板后方的视频。关闭评论面板后会从同一位置继续播放。
+People, shortcuts and sending controls	联系人、快捷方式与发送控件
+Photo	图片
+Photo and image posts	图片和图文帖子
+Photo destination	图片保存位置
+Photo filename	图片文件名
+Photos and stickers	图片与贴纸
+Pick the actions to remove from the share sheet. Names you typed by hand that TikTok hasn't shown yet stay in the list above.	选择要从分享面板移除的操作。你手动输入、但 TikTok 尚未显示过的名称会继续保留在上方列表中。
+Pick the buttons to take off the column. The rest stay where they are.	选择要从右侧栏移除的按钮。其余按钮保持原位。
+Play videos TikTok has classified without the overlay asking to be tapped through first.	播放被 TikTok 分类限制的视频时，不再先显示需要点按确认的覆盖层。
+Playback	播放
+Player	播放器
+Player config	播放器配置
+Playlist posts	播放列表帖子
+Popular	热门
+Popups	弹窗
+Post age	发布时间
+Preset	预设
+Press and hold a profile picture to save the full size original to your photo destination.	长按头像可将完整尺寸原图保存到你的图片保存位置。
+Press and hold a story to save it. Stories have no save button of their own, and holding one is how TikTok pauses it, so this takes that gesture over.	长按故事即可保存。故事本身没有保存按钮，而 TikTok 原本用长按来暂停，因此启用后会接管该手势。
+Press and hold the left or right third of the screen to jump back or forward. The middle third keeps the Long press action.	长按屏幕左侧或右侧三分之一区域可后退或前进；中间三分之一区域继续使用“长按”动作。
+Preview shortened. Save JSON includes the full report.	预览已缩短。“保存 JSON”会包含完整报告。
+Privacy	隐私
+Privacy and system	隐私与系统
+Profile	个人资料
+Profile picture saved to %1$s	头像已保存到 %1$s
+Profile share actions	个人资料分享操作
+Promotional music	推广音乐
+Proof	验证
+Protect external pages in TikTok's browser	保护 TikTok 浏览器中的外部页面
+Put back the settings saved before the last restore or reset.	恢复上次“恢复”或“重置”操作之前保存的设置。
+Put every setting back to its default straight away. Your current settings are kept for Undo.	立即将所有设置恢复为默认值。当前设置会保留，以便撤销。
+Putting the settings back to their defaults	正在将设置恢复为默认值
+Quality	画质
+Quality, files, subtitles and hand-off	画质、文件、字幕与交接
+Quality, speed and auto-advance	画质、速度与自动切换
+Quick setup	快速设置
+Reading	正在读取
+Recorded gate reads (%1$d)	已记录的功能开关读取（%1$d）
+Recording gate reads. Use a feature, then return here to stop.	正在记录功能开关读取。请使用某项功能，然后返回此处停止记录。
+Recovered an interrupted settings change. Restart TikTok to apply this.	已恢复之前中断的设置更改。重启 TikTok 后生效。
+Refresh values	刷新数值
+Refreshing current TikTok cache...	正在刷新当前 TikTok 缓存...
+Region	地区
+Remember the last speed	记住上次播放速度
+Remind me every	每隔以下时间提醒我
+Remove	移除
+Remove %1$s	移除 %1$s
+Remove all overrides	移除全部覆盖值
+Remove feed ads	移除信息流广告
+Remove feed ads, creator commission posts, paid partnerships, and branded content.	移除信息流广告、创作者佣金推广、付费合作和品牌内容。
+Remove tracking parameters from shared links.	移除分享链接中的跟踪参数。
+Remove watermark	去除水印
+Removed %1$s	已移除 %1$s
+Replace values when TikTok asks for them	TikTok 请求时替换数值
+Report saved to %1$s	报告已保存到 %1$s
+Required	必填
+Researched	已研究
+Researched values	研究所得值
+Reset	重置
+Reset %1$d gates of %2$d. Restart TikTok to apply this.	已重置 %2$d 个功能开关中的 %1$d 个。重启 TikTok 后生效。
+Reset %1$d gates. Restart TikTok to apply this.	已重置 %1$d 个功能开关。重启 TikTok 后生效。
+Reset 1 gate of %2$d. Restart TikTok to apply this.	已重置 %2$d 个功能开关中的 1 个。重启 TikTok 后生效。
+Reset 1 gate. Restart TikTok to apply this.	已重置 1 个功能开关。重启 TikTok 后生效。
+Reset override	重置覆盖值
+Reset position	重置位置
+Reset settings	重置设置
+Restart TikTok to apply %1$d changes	重启 TikTok 以应用 %1$d 项更改
+Restart TikTok to apply this	重启 TikTok 后生效
+Restart TikTok to apply this change	重启 TikTok 以应用此更改
+Restart TikTok to apply this.	重启 TikTok 后生效。
+Restart now	立即重启
+Restart pending	等待重启
+Restore failed. Some settings may still be changed.	恢复失败。部分设置可能已经发生更改。
+Restore failed. Some settings may still be changed. Use Undo to put them back.	恢复失败。部分设置可能已经发生更改。请使用“撤销”恢复。
+Restore settings	恢复设置
+Restore setup	恢复配置
+Restoring setup	正在恢复配置
+Restoring your settings	正在恢复你的设置
+Resume videos after scrolling	滚动返回后继续播放视频
+Retry	重试
+Return a copy with the fields below changed	返回一份已修改下列字段的副本
+Return after using a TikTok feature to see every gate read during the recording.	使用某项 TikTok 功能后返回此处，即可查看记录期间读取过的所有功能开关。
+Returns %1$s	返回 %1$s
+Right column	右侧栏
+Rows	项目
+SIM country preset	SIM 国家/地区预设
+STEM	STEM
+Sanitize sharing links	清理分享链接
+Save	保存
+Save Hushfeed settings and Feature Gate Lab rules to a JSON file.	将 Hushfeed 设置和功能开关实验室规则保存到 JSON 文件。
+Save JSON	保存 JSON
+Save SRT files with the video. Paired saves use Movies on Android 11+, Download on Android 10, and your video folder on older versions.	随视频一起保存 SRT 字幕文件。Android 11 及以上保存到 Movies，Android 10 保存到 Download，更旧版本则保存到你的视频文件夹。
+Save a profile picture on a long press	长按保存头像
+Save a story on a long press	长按保存故事
+Save every photo in the post as TikTok received it, not as the screen shows it.	按 TikTok 接收到的原始内容保存帖子中的每张图片，而不是按屏幕显示效果保存。
+Save field values	保存字段值
+Save full report	保存完整报告
+Save media	保存媒体
+Save subtitles beside videos	在视频旁保存字幕
+Save the latest available TikTok crash report for diagnostic export.	保存最新可用的 TikTok 崩溃报告，以便导出诊断信息。
+Save the original sound	保存原始声音
+Save the sound as well	同时保存声音
+Save videos without sound	保存无声视频
+Save, restore, reset and undo your settings	保存、恢复、重置和撤销设置
+Saved	已保存
+Saved %1$s	已保存 %1$s
+Saved %1$s of %2$s photos before the story failed	故事保存失败前，已保存 %2$s 张图片中的 %1$s 张
+Saved %1$s of %2$s, %3$s skipped	已保存 %2$s 项中的 %1$s 项，跳过 %3$s 项
+Saved %1$s of %2$s, %3$s skipped and the rest cancelled	已保存 %2$s 项中的 %1$s 项，跳过 %3$s 项，其余已取消
+Saved %1$s of %2$s, the rest cancelled	已保存 %2$s 项中的 %1$s 项，其余已取消
+Saved %1$s of %2$s, the rest need more free space	已保存 %2$s 项中的 %1$s 项，其余项目需要更多可用空间
+Saved %1$s of %2$s, the rest ran out of time	已保存 %2$s 项中的 %1$s 项，其余项目因超时未完成
+Saved %1$s original photos	已保存 %1$s 张原始图片
+Saved one original photo	已保存 1 张原始图片
+Saved, override off	已保存，覆盖功能关闭
+Saved. Restart TikTok to apply this.	已保存。重启 TikTok 后生效。
+Saving	正在保存
+Saving %1$s of %2$s	正在保存第 %1$s / %2$s 项
+Saving %1$s original photos	正在保存 %1$s 张原始图片
+Saving one original photo	正在保存 1 张原始图片
+Saving settings backup	正在保存设置备份
+Saving sticker	正在保存贴纸
+Saving the selected video quality	正在保存所选画质的视频
+Saving the selected video quality without sound	正在保存所选画质的无声视频
+Saving the story	正在保存故事
+Saving video and subtitles to %1$s	正在将视频和字幕保存到 %1$s
+Screen	屏幕
+Screen time	屏幕时间
+Search	搜索
+Search and override gates	搜索并覆盖功能开关
+Search by name or gate key	按名称或功能开关键搜索
+Search by name, description or category.	按名称、说明或分类搜索。
+Search countries or operators	搜索国家/地区或运营商
+Search hidden creators	搜索已隐藏的创作者
+Search settings	搜索设置
+Search share actions	搜索分享操作
+Search these comments	搜索这些评论
+Search translated titles and descriptions, then open the original setting.	搜索已翻译的标题和说明，然后打开对应的原始设置项。
+Search within comments	在评论中搜索
+Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed is not empty.	单位为秒。设为 0 表示不限制时长。如果规则会筛掉 TikTok 本次发来的全部视频，则会保留最接近你设定上限的一个，避免信息流为空。
+Seek by	跳转幅度
+Seek from the edges	从屏幕边缘跳转
+Seen	已看
+Seen this session	本次会话已看
+Seen videos	已看视频
+Seen videos cleared. You can undo until TikTok closes.	已看视频记录已清除。在 TikTok 关闭前可以撤销。
+Seen videos put back	已看视频记录已恢复
+Select	选择
+Select at least one field.	请至少选择一个字段。
+Select every tab	选择全部标签
+Selected	已选择
+Send links to another app	将链接发送到其他应用
+Sending feedback	正在发送反馈
+Series posts	Series 帖子
+Settings	设置
+Settings are back to their defaults. Restart TikTok to apply all changes.	设置已恢复为默认值。重启 TikTok 以应用全部更改。
+Settings backup saved	设置备份已保存
+Settings couldn't open	无法打开设置
+Settings couldn't refresh completely. Reopen settings and try again.	设置未能完整刷新。请重新打开设置后重试。
