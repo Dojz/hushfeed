@@ -537,6 +537,50 @@ val feedFilterPatch = bytecodePatch(
             )
         }
 
+        // The search results tab strip is served as a list of dynamic tab infos whose only
+        // consumer is the strip's view model, reading through two real-named getters that each
+        // open with one read of the field. The list is filtered at both reads, the guard for a
+        // build that serves an Ask Tako tab as data; on 47.0.3 none does (the pill below is a
+        // view of its own), and the extension records the keys it meets.
+        listOf(
+            SearchDynamicTabListGetTabListFingerprint,
+            SearchDynamicTabListGetSearchTabListFingerprint,
+        ).forEach { fingerprint ->
+            fingerprint.method.apply {
+                val (index, read) = implementationOrPatchException("Feed filter").instructions.withIndex()
+                    .filter { it.value.isSearchTabListRead() }
+                    .singleOrPatchException("Feed filter: one read of the search tab list in $name")
+                val register = (read as TwoRegisterInstruction).registerA
+                addInstructions(
+                    index + 1,
+                    """
+                        invoke-static/range {v$register .. v$register}, $TAKO_AI_FILTER_CLASS_DESCRIPTOR->filterSearchTabs(Ljava/util/List;)Ljava/util/List;
+                        move-result-object v$register
+                    """,
+                )
+            }
+        }
+
+        // The Ask Tako pill at the head of every search results page, the one Tako surface the
+        // switch left standing (issue #21's screenshots). It is not a served tab but a view the
+        // fragment inflates with the strip and styles before it returns, so the extension is
+        // handed the fragment's view at every return and hides the pill's column by the real id
+        // name its text view keeps.
+        SearchContainerFragmentOnViewCreatedFingerprint.method.let { method ->
+            val returnIndices = method.implementationOrPatchException("Feed filter").instructions.withIndex()
+                .filter { it.value.opcode == Opcode.RETURN_VOID }
+                .map { it.index }
+            if (returnIndices.isEmpty()) {
+                throw PatchException("Feed filter: SearchContainerFragment.onViewCreated has no return to hook")
+            }
+            returnIndices.asReversed().forEach { returnIndex ->
+                method.addInstructionsAtControlFlowLabel(
+                    returnIndex,
+                    "invoke-static/range {p1 .. p1}, $TAKO_AI_FILTER_CLASS_DESCRIPTOR->hideSearchTabEntrance(Landroid/view/View;)V",
+                )
+            }
+        }
+
         // The Tako bar inside the comments sheet, the "related words" strip above the comment
         // list. It is a server-driven top bar component of biz type SEARCH_TAKO (the service in
         // the Tako package) or SEARCH_TAKO_BG (the commentv2 bridge to the same Tako service).

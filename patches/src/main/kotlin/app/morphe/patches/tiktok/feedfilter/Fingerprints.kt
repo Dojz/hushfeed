@@ -694,6 +694,55 @@ internal object TakoCommentTopBarBridgeFingerprint : Fingerprint(
     parameters = emptyList(),
 )
 
+internal const val SEARCH_DYNAMIC_TAB_LIST_DESCRIPTOR =
+    "Lcom/ss/android/ugc/aweme/search/pages/result/common/tabs/core/model/SearchDynamicTabList;"
+
+/** Whether the instruction reads the served tab list off the response: the field both getters open with. */
+internal fun com.android.tools.smali.dexlib2.iface.instruction.Instruction.isSearchTabListRead(): Boolean =
+    opcode == com.android.tools.smali.dexlib2.Opcode.IGET_OBJECT &&
+        getReference<FieldReference>()?.let { field ->
+            field.definingClass == SEARCH_DYNAMIC_TAB_LIST_DESCRIPTOR &&
+                field.name == "tabList" && field.type == "Ljava/util/List;"
+        } == true
+
+/**
+ * The search results tab strip (Ask Tako, Top, Users, Videos, ...) is served as a list of dynamic
+ * tab infos on this response, and the strip's view model is its only consumer, reading it through
+ * these two getters: the plain one, and the one that keeps the keys the app's tab registry knows.
+ * Both are real names on a real-named class, and each opens with one read of the field, where a
+ * Tako tab would be dropped from what every consumer sees. On 47.0.3 the Ask Tako pill is not in
+ * this list (the strip's keys are general, user, video, shop, live, music, place, photos and
+ * hashtag) but a view of its own, hidden through the fragment below; the filter at these reads is
+ * the guard for a build that serves it as data, and the extension records the keys it meets.
+ */
+internal object SearchDynamicTabListGetTabListFingerprint : Fingerprint(
+    definingClass = SEARCH_DYNAMIC_TAB_LIST_DESCRIPTOR,
+    name = "getTabList",
+    returnType = "Ljava/util/List;",
+    parameters = emptyList(),
+)
+
+internal object SearchDynamicTabListGetSearchTabListFingerprint : Fingerprint(
+    definingClass = SEARCH_DYNAMIC_TAB_LIST_DESCRIPTOR,
+    name = "getSearchTabList",
+    returnType = "Ljava/util/List;",
+    parameters = emptyList(),
+)
+
+/**
+ * The fragment that inflates the search results tab strip, with the Ask Tako pill at its head when
+ * TikTok's own Tako gate allows it: a text view keeping the real id name tv_tab_tako_entrance, in a
+ * clickable pill, in a frame, in a column beside the tab row, all styled by an R8-named helper the
+ * fragment calls before it returns. Real-named class and method, so the extension is handed the
+ * view at every return and finds the pill by that id name.
+ */
+internal object SearchContainerFragmentOnViewCreatedFingerprint : Fingerprint(
+    definingClass = "Lcom/ss/android/ugc/aweme/search/pages/core/ui/fragment/SearchContainerFragment;",
+    name = "onViewCreated",
+    returnType = "V",
+    parameters = listOf("Landroid/view/View;", "Landroid/os/Bundle;"),
+)
+
 internal object FollowFeedPresenterPostProcessFingerprint : Fingerprint(
     returnType = "V",
     parameters = listOf("Lcom/ss/android/ugc/aweme/follow/presenter/FollowFeedList;"),
