@@ -102,7 +102,7 @@ public class RestReminderTest {
         assertEquals(List.of(true, true), activity.movedBack);
     }
 
-    /** The gate runs inside the post, so a slot rebuilt twice in one frame leaves once. */
+    /** The cooldown guard collapses a slot rebuilt twice in one frame to one leave. */
     @Test public void twoShowsInOneFrameLeaveOnce() {
         Settings.LEAVE_ON_REST_REMINDER.save(true);
         HostActivity activity = host();
