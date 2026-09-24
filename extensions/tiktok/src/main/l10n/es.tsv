@@ -772,7 +772,6 @@ Saved	Guardado
 Saved %1$s	Guardado: %1$s
 Saved %1$s of %2$s photos before the story failed	Se guardaron %1$s de %2$s fotos antes de que la historia fallara
 Saved %1$s original photos	%1$s fotos originales guardadas
-Saved %1$s photos. The rest failed, so try again.	%1$s fotos guardadas. Las demás fallaron, inténtalo otra vez.
 Saved one original photo	Se guardó una foto original
 Saved, override off	Guardado, sustitución desactivada
 Saved. Restart TikTok to apply this.	Guardado. Reinicia TikTok para que se aplique.
@@ -1195,3 +1194,11 @@ Hide TikTok's short drama episodes and the cards that promote them.	Ocultar los 
 Mini dramas	Minidramas
 Swipe left	Deslizar a la izquierda
 TikTok default (open the creator's profile)	Predeterminado de TikTok (abrir el perfil del creador)
+Saving %1$s of %2$s	Guardando %1$s de %2$s
+Stopping after this file	Se detendrá después de este archivo
+Saved %1$s of %2$s, the rest cancelled	Se guardaron %1$s de %2$s, el resto se canceló
+Saved %1$s of %2$s, %3$s skipped	Se guardaron %1$s de %2$s, %3$s omitidos
+Saved %1$s of %2$s, %3$s skipped and the rest cancelled	Se guardaron %1$s de %2$s, %3$s omitidos y el resto cancelado
+None of the photos could be saved. Try again.	No se pudo guardar ninguna de las fotos. Inténtalo de nuevo.
+Saved %1$s of %2$s, the rest need more free space	Se guardaron %1$s de %2$s, el resto necesita más espacio libre
+Saved %1$s of %2$s, the rest ran out of time	Se guardaron %1$s de %2$s, al resto se le acabó el tiempo

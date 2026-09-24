@@ -772,7 +772,6 @@ Saved,Tersimpan
 Saved %1$s,Tersimpan: %1$s
 Saved %1$s of %2$s photos before the story failed,%1$s dari %2$s foto tersimpan sebelum Story gagal
 Saved %1$s original photos,%1$s foto asli tersimpan
-"Saved %1$s photos. The rest failed, so try again.","%1$s foto tersimpan. Sisanya gagal, coba lagi."
 Saved one original photo,Satu foto asli disimpan
 "Saved, override off","Disimpan, penggantian mati"
 Saved. Restart TikTok to apply this.,Tersimpan. Mulai ulang TikTok agar berlaku.
@@ -1196,3 +1195,11 @@ Hide TikTok's short drama episodes and the cards that promote them.,Sembunyikan 
 Mini dramas,Drama mini
 Swipe left,Geser ke kiri
 TikTok default (open the creator's profile),Bawaan TikTok (buka profil kreator)
+Saving %1$s of %2$s,Menyimpan %1$s dari %2$s
+Stopping after this file,Berhenti setelah berkas ini
+"Saved %1$s of %2$s, the rest cancelled","%1$s dari %2$s tersimpan, sisanya dibatalkan"
+"Saved %1$s of %2$s, %3$s skipped","%1$s dari %2$s tersimpan, %3$s dilewati"
+"Saved %1$s of %2$s, %3$s skipped and the rest cancelled","%1$s dari %2$s tersimpan, %3$s dilewati, dan sisanya dibatalkan"
+None of the photos could be saved. Try again.,Tidak ada foto yang bisa disimpan. Coba lagi.
+"Saved %1$s of %2$s, the rest need more free space","%1$s dari %2$s tersimpan, sisanya butuh ruang kosong lebih"
+"Saved %1$s of %2$s, the rest ran out of time","%1$s dari %2$s tersimpan, sisanya kehabisan waktu"

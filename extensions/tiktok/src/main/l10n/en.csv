@@ -659,6 +659,7 @@ No share actions match this search,No share actions match this search
 No sound to block on this video,No sound to block on this video
 No suggested accounts to clear,No suggested accounts to clear
 No video selected. Open a video first.,No video selected. Open a video first.
+None of the photos could be saved. Try again.,None of the photos could be saved. Try again.
 None of these gates had an override to reset.,None of these gates had an override to reset.
 None of these gates takes a true or false value.,None of these gates takes a true or false value.
 None recorded,None recorded
@@ -836,12 +837,17 @@ Save videos without sound,Save videos without sound
 Saved,Saved
 Saved %1$s,Saved %1$s
 Saved %1$s of %2$s photos before the story failed,Saved %1$s of %2$s photos before the story failed
+"Saved %1$s of %2$s, %3$s skipped","Saved %1$s of %2$s, %3$s skipped"
+"Saved %1$s of %2$s, %3$s skipped and the rest cancelled","Saved %1$s of %2$s, %3$s skipped and the rest cancelled"
+"Saved %1$s of %2$s, the rest cancelled","Saved %1$s of %2$s, the rest cancelled"
+"Saved %1$s of %2$s, the rest need more free space","Saved %1$s of %2$s, the rest need more free space"
+"Saved %1$s of %2$s, the rest ran out of time","Saved %1$s of %2$s, the rest ran out of time"
 Saved %1$s original photos,Saved %1$s original photos
-"Saved %1$s photos. The rest failed, so try again.","Saved %1$s photos. The rest failed, so try again."
 Saved one original photo,Saved one original photo
 "Saved, override off","Saved, override off"
 Saved. Restart TikTok to apply this.,Saved. Restart TikTok to apply this.
 Saving,Saving
+Saving %1$s of %2$s,Saving %1$s of %2$s
 Saving %1$s original photos,Saving %1$s original photos
 Saving one original photo,Saving one original photo
 Saving settings backup,Saving settings backup
@@ -963,6 +969,7 @@ Stop video looping,Stop video looping
 Stop videos at the end instead of replaying them.,Stop videos at the end instead of replaying them.
 Stopped after dismissing %1$s suggested accounts,Stopped after dismissing %1$s suggested accounts
 Stopped after dismissing one suggested account,Stopped after dismissing one suggested account
+Stopping after this file,Stopping after this file
 Stories,Stories
 Story saved to %1$s,Story saved to %1$s
 Structured value observed,Structured value observed

@@ -775,7 +775,6 @@ Saved	Gespeichert
 Saved %1$s	Gespeichert: %1$s
 Saved %1$s of %2$s photos before the story failed	%1$s von %2$s Fotos gespeichert, dann ist die Story fehlgeschlagen
 Saved %1$s original photos	%1$s Originalfotos gespeichert
-Saved %1$s photos. The rest failed, so try again.	%1$s Fotos gespeichert. Der Rest hat nicht geklappt, versuche es noch einmal.
 Saved one original photo	Ein Originalfoto gespeichert
 Saved, override off	Gespeichert, Überschreibung aus
 Saved. Restart TikTok to apply this.	Gespeichert. TikTok neu starten, damit das gilt.
@@ -1198,3 +1197,11 @@ Hide TikTok's short drama episodes and the cards that promote them.	TikToks kurz
 Mini dramas	Mini-Dramen
 Swipe left	Nach links wischen
 TikTok default (open the creator's profile)	TikTok-Standard (Profil des Creators öffnen)
+Saving %1$s of %2$s	Datei %1$s von %2$s wird gespeichert
+Stopping after this file	Wird nach dieser Datei beendet
+Saved %1$s of %2$s, the rest cancelled	%1$s von %2$s gespeichert, der Rest abgebrochen
+Saved %1$s of %2$s, %3$s skipped	%1$s von %2$s gespeichert, %3$s übersprungen
+Saved %1$s of %2$s, %3$s skipped and the rest cancelled	%1$s von %2$s gespeichert, %3$s übersprungen und der Rest abgebrochen
+None of the photos could be saved. Try again.	Keines der Fotos konnte gespeichert werden. Versuche es erneut.
+Saved %1$s of %2$s, the rest need more free space	%1$s von %2$s gespeichert, für den Rest fehlt freier Speicher
+Saved %1$s of %2$s, the rest ran out of time	%1$s von %2$s gespeichert, für den Rest reichte die Zeit nicht

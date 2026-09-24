@@ -806,7 +806,6 @@ Saved	Kaydedildi
 Saved %1$s	%1$s kaydedildi
 Saved %1$s of %2$s photos before the story failed	Hikaye başarısız olmadan önce %1$s / %2$s fotoğraf kaydedildi
 Saved %1$s original photos	%1$s orijinal fotoğraf kaydedildi
-Saved %1$s photos. The rest failed, so try again.	%1$s fotoğraf kaydedildi. Geri kalanı başarısız oldu, yeniden dene.
 Saved one original photo	Bir orijinal fotoğraf kaydedildi
 Saved, override off	Kaydedildi, geçersiz kılma kapalı
 Saved. Restart TikTok to apply this.	Kaydedildi. Bunu uygulamak için TikTok'u yeniden başlat.
@@ -1195,3 +1194,11 @@ Hide TikTok's short drama episodes and the cards that promote them.	TikTok'un k�
 Mini dramas	Mini diziler
 Swipe left	Sola kaydır
 TikTok default (open the creator's profile)	TikTok varsayılanı (içerik üreticisinin profilini aç)
+Saving %1$s of %2$s	%2$s dosyadan %1$s. kaydediliyor
+Stopping after this file	Bu dosyadan sonra durduruluyor
+Saved %1$s of %2$s, the rest cancelled	%2$s dosyadan %1$s kaydedildi, kalanlar iptal edildi
+Saved %1$s of %2$s, %3$s skipped	%2$s dosyadan %1$s kaydedildi, %3$s atlandı
+Saved %1$s of %2$s, %3$s skipped and the rest cancelled	%2$s dosyadan %1$s kaydedildi, %3$s atlandı ve kalanlar iptal edildi
+None of the photos could be saved. Try again.	Fotoğrafların hiçbiri kaydedilemedi. Tekrar deneyin.
+Saved %1$s of %2$s, the rest need more free space	%2$s dosyadan %1$s kaydedildi, kalanlar için daha fazla boş alan gerekiyor
+Saved %1$s of %2$s, the rest ran out of time	%2$s dosyadan %1$s kaydedildi, kalanlar için süre doldu
