@@ -312,6 +312,14 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting NO_RESUME_ON_FOREGROUND = new BooleanSetting(
             "no_resume_on_foreground", FALSE, true);
     /**
+     * Sends TikTok to the background when TikTok's own daily screen-time reminder comes up,
+     * instead of leaving the reminder there to be dismissed. Off by default, read at show
+     * time, and it needs a daily limit set under TikTok's own Time and well-being settings
+     * to have anything to react to.
+     */
+    public static final BooleanSetting LEAVE_ON_REST_REMINDER = new BooleanSetting(
+            "leave_on_rest_reminder", FALSE);
+    /**
      * A daily budget for the feed, off at zero. The two counts are independent of
      * {@link #AUTO_ADVANCE_LIMIT}, which only ever counted videos Hushfeed itself advanced past.
      */
