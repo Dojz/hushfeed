@@ -1209,3 +1209,7 @@ Comma separated account handles or user ids. Their videos stay when only a filte
 An exception names one creator, so a pattern can't be one: %1$s	Uma exceção nomeia um criador, então um padrão não pode ser uma: %1$s
 An exception takes a handle or id, not a display name: %1$s	Uma exceção recebe um nome de conta ou id, não um nome de exibição: %1$s
 Also on a block list, so still hidden: %1$s	Também está numa lista de bloqueio, então continua escondido: %1$s
+Find the sound on YouTube Music	Procurar o som no YouTube Music
+YouTube Music isn't installed	O YouTube Music não está instalado
+This video's sound has no title to look for	O som deste vídeo não tem título para procurar
+YouTube Music couldn't be opened. Open it yourself and search for the sound.	O YouTube Music não pôde ser aberto. Abra você mesmo e procure o som.

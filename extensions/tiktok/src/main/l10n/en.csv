@@ -374,6 +374,7 @@ Filter the list,Filter the list
 Filter: %1$s,Filter: %1$s
 "Filters, translation and copy options","Filters, translation and copy options"
 Find a setting by name or description,Find a setting by name or description
+Find the sound on YouTube Music,Find the sound on YouTube Music
 First caller,First caller
 First rejection:,First rejection:
 Fit the video to the screen,Fit the video to the screen
@@ -1083,6 +1084,7 @@ This video has no link to copy,This video has no link to copy
 "This video has no link to send, so TikTok's own save runs instead","This video has no link to send, so TikTok's own save runs instead"
 This video has no original sound to save,This video has no original sound to save
 This video has no sound of its own,This video has no sound of its own
+This video's sound has no title to look for,This video's sound has no title to look for
 Thumbs down blocks the commenter,Thumbs down blocks the commenter
 "TikTok closed three times within a minute of starting, so Hushfeed paused itself. Your settings stay as they are.","TikTok closed three times within a minute of starting, so Hushfeed paused itself. Your settings stay as they are."
 TikTok default,TikTok default
@@ -1189,6 +1191,8 @@ Working,Working
 YTDLnis background mode,YTDLnis background mode
 YTDLnis download type,YTDLnis download type
 Yes,Yes
+YouTube Music couldn't be opened. Open it yourself and search for the sound.,YouTube Music couldn't be opened. Open it yourself and search for the sound.
+YouTube Music isn't installed,YouTube Music isn't installed
 Your current settings already match Calm feed.,Your current settings already match Calm feed.
 Your feed,Your feed
 Your filters hid everything TikTok just sent. Most were %1$s.,Your filters hid everything TikTok just sent. Most were %1$s.

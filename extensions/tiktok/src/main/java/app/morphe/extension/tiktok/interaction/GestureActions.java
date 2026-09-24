@@ -168,6 +168,12 @@ public final class GestureActions {
             OriginalSoundDownloads.start(CurrentVideoAuthor.getAweme(), Utils.getActivity());
             return true;
         }
+        if ("youtube_music".equals(action)) {
+            Context context = Utils.getActivity();
+            YouTubeMusicSearch.open(CurrentVideoAuthor.getAweme(),
+                    context != null ? context : Utils.getContext());
+            return true;
+        }
         if (!"comments".equals(action)) return false;
         if (!openComments(Reflect.string(CurrentVideoAuthor.getAweme(), "getAid", "aid"))) {
             Utils.showToastShort(L10n.t("Comments aren't available for this video"));
