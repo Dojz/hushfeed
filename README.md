@@ -43,7 +43,7 @@ If one of the marker switches (Hide Series, say, or Hide playlist videos) emptie
 
 Some regions get extras the rest never see. **Hide the Report button on videos**, under Feed screen, removes the flag button above the creator's picture. **Hide search rewards**, under App, removes the points banner under the search box and the coin counter floating over results. Both are off by default, and neither could be tried on our own phones, so reports on how they behave are welcome.
 
-The settings screen comes in English, German, Spanish, Indonesian, Brazilian Portuguese and Turkish. It follows the language TikTok runs in, which is your phone's language unless you've picked another one for the app.
+The settings screen comes in English, German, Spanish, Indonesian, Brazilian Portuguese, Turkish and Simplified Chinese. It follows the language TikTok runs in, which is your phone's language unless you've picked another one for the app.
 
 One-tap blocking skips to the next video as soon as TikTok confirms the block. A compact **Unblock** button appears at the top left for two seconds. You can also unblock later in TikTok's **Privacy > Blocked accounts**. A delayed response won't skip another video if you've already moved on.
 
