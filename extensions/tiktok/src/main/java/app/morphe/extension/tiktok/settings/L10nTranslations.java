@@ -12861,7 +12861,7 @@ public final class L10nTranslations {
         table.put("About",
                 "关于");
         table.put("Activity",
-                "活动");
+                "动态");
         table.put("Activity center (PIA)",
                 "活动中心\nPIA");
         table.put("Add",
@@ -13256,7 +13256,7 @@ public final class L10nTranslations {
         table.put("Creators you hid from a video. Search the list and remove one at a time.",
                 "你从视频中隐藏过的创作者。可搜索列表并逐个移除.");
         table.put("Current",
-                "当前");
+                "当前值");
         table.put("Current %1$s",
                 "当前 %1$s");
         table.put("Current cache unavailable: %1$s",
@@ -13289,7 +13289,7 @@ public final class L10nTranslations {
 
     private static void fillZh_rCN5(Map<String, String> table) {
         table.put("Default",
-                "默认");
+                "默认值");
         table.put("Default playback speed",
                 "默认播放速度");
         table.put("Destination updated",
@@ -13377,7 +13377,7 @@ public final class L10nTranslations {
         table.put("Errors",
                 "错误");
         table.put("Expand activity list",
-                "展开活动列表");
+                "展开动态通知列表");
         table.put("Explore",
                 "探索");
         table.put("Export diagnostic report",
@@ -13454,7 +13454,7 @@ public final class L10nTranslations {
         table.put("Focus",
                 "专注");
         table.put("Follow probe",
-                "关注请求诊断（Follow Probe）");
+                "关注请求诊断\nFollow Probe");
         table.put("Following",
                 "正在关注");
         table.put("For You",
@@ -13543,7 +13543,7 @@ public final class L10nTranslations {
         table.put("Hide TikTok's short drama episodes and the cards that promote them.",
                 "隐藏 TikTok 短剧剧集以及推广短剧的卡片.");
         table.put("Hide activity",
-                "隐藏活动");
+                "隐藏动态通知");
         table.put("Hide activity status",
                 "隐藏活动状态");
         table.put("Hide ads, Shop posts, LIVE videos and replays, promotional music, and paid partnerships.",
@@ -13772,7 +13772,7 @@ public final class L10nTranslations {
         table.put("Highest",
                 "最高");
         table.put("Historical",
-                "历史记录（Historical）");
+                "历史值");
         table.put("Historical values",
                 "历史值\nHistorical values");
         table.put("Hold a gate to choose several",
@@ -13942,7 +13942,7 @@ public final class L10nTranslations {
         table.put("Make TikTok yours.",
                 "让 TikTok 更合你的心意.");
         table.put("Manager",
-                "管理器");
+                "来源模块");
         table.put("Marked as not interested",
                 "已标记为不感兴趣");
         table.put("Match locale and timezone to country",
@@ -14135,11 +14135,11 @@ public final class L10nTranslations {
         table.put("Open profile and story website links in your system browser instead of TikTok's in-app browser.",
                 "使用系统浏览器打开个人资料和限时动态中的网页链接，而不是 TikTok 内置浏览器.");
         table.put("Open the feed anyway",
-                "仍然打开信息流");
+                "仍然继续使用信息流");
         table.put("Open the feed anyway, %1$d left today",
-                "仍然打开信息流，今天还可用 %1$d 次");
+                "仍然继续使用信息流，今天还可继续 %1$d 次");
         table.put("Open the feed anyway, the last time today",
-                "仍然打开信息流，这是今天最后一次");
+                "仍然继续使用信息流，这是今天最后一次");
         table.put("Open the feed once so Hushfeed can see which bottom tabs TikTok loaded.",
                 "请先打开一次信息流，以便 Hushfeed 识别 TikTok 已加载的底部标签.");
         table.put("Open the feed once so Hushfeed can see which tabs TikTok loaded.",
@@ -14710,7 +14710,7 @@ public final class L10nTranslations {
         table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
                 "在 %1$d 秒内连续点按两次爱心以点赞。取消点赞仍会立即执行.");
         table.put("Tap to start the feed",
-                "点按以开始信息流");
+                "点按开始播放信息流");
         table.put("Technical details",
                 "技术详情");
         table.put("Technical details, %1$s",
