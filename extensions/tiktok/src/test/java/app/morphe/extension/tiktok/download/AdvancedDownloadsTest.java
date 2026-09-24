@@ -106,7 +106,13 @@ public class AdvancedDownloadsTest {
     public static final class Photo {
         public final Address displayImageNoWatermark;
         public final Address thumbnail = new Address("https://example.com/thumb", 50);
+        /** 47.0.3's live photo: the struct whose videoModel is what the flag saves as video. */
+        public LivePhoto livePhotoStruct;
         Photo(String url) { displayImageNoWatermark = new Address(url, 100); }
+        Photo live() { livePhotoStruct = new LivePhoto(); return this; }
+    }
+    public static final class LivePhoto {
+        public final Object videoModel = new Object();
     }
     public static final class Info {
         public List<Photo> imageList;
@@ -300,8 +306,12 @@ public class AdvancedDownloadsTest {
     }
 
     /**
-     * The job's entry takes a save only with the switch on, never a live photo's video (the same
-     * job, flag set), and only for photos the post has. A save already running for the post
+     * The job's entry takes a save only with the switch on, and only for photos the post has.
+     * The flag is not "this is a video save": the picker sets it for every save, stills
+     * included (the job reads it per item, picking livePhotoStruct.videoModel where one
+     * exists), so the entry stands aside only when a chosen photo really is a live photo. The
+     * old assertion here, "flag set means TikTok's", was that wrong premise: it made every
+     * picker save fall to TikTok's own .webp on the S22. A save already running for the post
      * answers "taken" before anything is fetched, which is what lets this reach the decision
      * without the network.
      */
@@ -315,12 +325,38 @@ public class AdvancedDownloadsTest {
         try {
             Settings.DOWNLOAD_ORIGINAL_PHOTOS.save(true);
             assertTrue("the second photo, asked for", OriginalPhotos.startPhotos(post, java.util.Set.of(1), false));
-            assertFalse("a live photo's video stays TikTok's", OriginalPhotos.startPhotos(post, java.util.Set.of(0), true));
+            assertTrue("the picker's flag on plain stills is not a video save",
+                    OriginalPhotos.startPhotos(post, java.util.Set.of(0, 1), true));
             assertFalse("a photo the post doesn't have", OriginalPhotos.startPhotos(post, java.util.Set.of(2), false));
             Settings.DOWNLOAD_ORIGINAL_PHOTOS.save(false);
             assertFalse("the switch off", OriginalPhotos.startPhotos(post, java.util.Set.of(0), false));
         } finally {
             active.remove("busy-post");
+            Settings.DOWNLOAD_ORIGINAL_PHOTOS.resetToDefault();
+        }
+    }
+
+    /** A chosen live photo would come down as a video with the flag set: that save is TikTok's. */
+    @Test public void aChosenLivePhotoLeavesTheSaveToTikTok() {
+        Utils.setContext(RuntimeEnvironment.getApplication());
+        org.robolectric.Shadows.shadowOf(RuntimeEnvironment.getApplication())
+                .grantPermissions(android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        Photo still = new Photo("https://example.com/one");
+        Photo live = new Photo("https://example.com/two").live();
+        PhotoPost post = new PhotoPost("live-post", List.of(still, live));
+        java.util.Set<String> active = org.robolectric.util.ReflectionHelpers.getStaticField(OriginalPhotos.class, "ACTIVE");
+        active.add("live-post");
+        try {
+            Settings.DOWNLOAD_ORIGINAL_PHOTOS.save(true);
+            assertFalse("the chosen live photo was taken from TikTok",
+                    OriginalPhotos.startPhotos(post, java.util.Set.of(0, 1), true));
+            assertTrue("the still alone is not a video save", OriginalPhotos.startPhotos(post, java.util.Set.of(0), true));
+            assertTrue("without the flag the live photo saves as its still",
+                    OriginalPhotos.startPhotos(post, java.util.Set.of(0, 1), false));
+            assertFalse("an unreadable post with the flag set stays TikTok's",
+                    OriginalPhotos.startPhotos(new Object(), java.util.Set.of(0), true));
+        } finally {
+            active.remove("live-post");
             Settings.DOWNLOAD_ORIGINAL_PHOTOS.resetToDefault();
         }
     }

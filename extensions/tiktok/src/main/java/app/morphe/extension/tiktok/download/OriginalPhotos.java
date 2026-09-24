@@ -38,14 +38,36 @@ public final class OriginalPhotos {
      * TikTok's own photo save job, which every photo save on 47.0.3 runs and the start above
      * never sees: "Download image" in the sheet a single photo asks with, a single photo saved
      * without asking, the photos picked in TikTok's selection sheet, and a TikTok Now save.
-     * {@code indices} are the photos it was asked for, counted from 0. "Download video" on a
-     * live photo comes through here too, with {@code video} set, and stays TikTok's.
+     * {@code indices} are the photos it was asked for, counted from 0.
+     *
+     * <p>{@code video} is not "this is a video save": inside the job it picks the live-photo
+     * video over the still for the items that have one ({@code livePhotoStruct.videoModel}),
+     * and the picker's Download sets it for every save, plain stills included, which is how
+     * two picked stills came out as TikTok's own files with the switch on (S22, 2026-09-23).
+     * So it only stands aside where it matters: a chosen photo that really is a live photo
+     * would come down as a video, and that save stays TikTok's whole.
      *
      * @return true when Hushfeed took the save, so TikTok's own must not run.
      */
     public static boolean startPhotos(Object aweme, Set<?> indices, boolean video) {
-        if (video) return false;
+        if (video && anyChosenIsLive(aweme, indices)) return false;
         return savePhotos(aweme, Utils.getContext(), indices);
+    }
+
+    /**
+     * Whether any photo the save was asked for carries a live-photo video. An unreadable post
+     * answers yes: with the flag set, guessing "all stills" could swallow a video save.
+     */
+    static boolean anyChosenIsLive(Object aweme, Set<?> indices) {
+        Object info = Reflect.property(aweme, "getPhotoModeImageInfo", "photoModeImageInfo");
+        Object raw = Reflect.property(info, "getImageList", "imageList");
+        if (!(raw instanceof List<?>)) return true;
+        List<?> photos = (List<?>) raw;
+        for (int position : positions(indices, photos.size())) {
+            Object live = Reflect.property(photos.get(position), "getLivePhotoStruct", "livePhotoStruct");
+            if (live != null && Reflect.property(live, "getVideoModel", "videoModel") != null) return true;
+        }
+        return false;
     }
 
     /** The positions to save, in the post's order: all of them for null, else the ones asked for. */
