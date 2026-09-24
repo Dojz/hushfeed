@@ -55,7 +55,7 @@ public class SaveNoticeTest {
             Uri row = Uri.parse("content://media/external/audio/media/77");
 
             SaveNotice.saved("Sound saved to Music/TikTok", new MediaFileWriter.Saved("a.m4a", row));
-            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            idlePastTheSheetSettle();
 
             ViewGroup root = activity.findViewById(android.R.id.content);
             TextView open = find(root, "Open");
@@ -86,7 +86,7 @@ public class SaveNoticeTest {
             Utils.setActivity(activity);
 
             SaveNotice.saved("Sound saved to Music/TikTok", new MediaFileWriter.Saved("a.m4a", null));
-            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            idlePastTheSheetSettle();
 
             assertEquals("Sound saved to Music/TikTok", ShadowToast.getTextOfLatestToast());
             ViewGroup root = activity.findViewById(android.R.id.content);
@@ -113,13 +113,19 @@ public class SaveNoticeTest {
 
             SaveNotice.saved("Story saved to DCIM/TikTok",
                     new MediaFileWriter.Saved("a.mp4", Uri.parse("content://media/external/video/media/9")));
-            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            idlePastTheSheetSettle();
 
             assertNotNull("the banner missed the window on top", find(sheetDecor, "Open"));
             assertNull("a second banner went on the activity underneath",
                     find(activity.findViewById(android.R.id.content), "Open"));
             sheet.dismiss();
         }
+    }
+
+    /** The banner waits out TikTok's share-sheet swap before it picks a window. */
+    private static void idlePastTheSheetSettle() {
+        Shadows.shadowOf(Looper.getMainLooper())
+                .idleFor(java.time.Duration.ofMillis(SaveNotice.SHEET_SETTLE_MS + 100));
     }
 
     private static TextView find(View view, String text) {

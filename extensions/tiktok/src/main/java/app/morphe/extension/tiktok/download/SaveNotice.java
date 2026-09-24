@@ -36,7 +36,11 @@ final class SaveNotice {
             Utils.showToastShort(message);
             return;
         }
-        Utils.runOnMainThread(() -> {
+        // Not at once: a download finishing is exactly when TikTok swaps its share sheet for a
+        // fresh one, and a banner put on whichever window was top at that instant landed on the
+        // dying sheet, under the new one (found by the view walk, invisible on the S22, top and
+        // bottom placement alike). The swap settles well inside this wait.
+        Utils.runOnMainThreadDelayed(() -> {
             Activity activity = Utils.getActivity();
             if (activity == null || activity.isFinishing() || activity.isDestroyed()) {
                 Utils.showToastShort(message);
@@ -49,8 +53,11 @@ final class SaveNotice {
             ViewGroup root = topWindowRoot(activity);
             if (root == null) root = activity.findViewById(android.R.id.content);
             BlockAuthorOverlay.showActionBanner(root, message, L10n.t("Open"), () -> open(uri));
-        });
+        }, SHEET_SETTLE_MS);
     }
+
+    /** How long TikTok gets to finish swapping its share sheet before the banner picks a window. */
+    static final long SHEET_SETTLE_MS = 800;
 
     /** For the tests, which have no WindowManagerGlobal to read; null uses the real windows. */
     static volatile List<View> windowRootsForTests;
