@@ -585,6 +585,7 @@ Layout,Layout
 "Layout, player, search and system","Layout, player, search and system"
 Leave maximum empty to keep it unlimited.,Leave maximum empty to keep it unlimited.
 Leave the sound out of the saved video. Save the sound as well still writes the .m4a beside it if you want both.,Leave the sound out of the saved video. Save the sound as well still writes the .m4a beside it if you want both.
+Leave when TikTok says time is up,Leave when TikTok says time is up
 Length and views per like,Length and views per like
 Less than a minute left,Less than a minute left
 "Let screenshots, screen recording and Circle to Search work on TikTok again. Restart TikTok to apply this.","Let screenshots, screen recording and Circle to Search work on TikTok again. Restart TikTok to apply this."
@@ -1084,6 +1085,7 @@ TikTok refused the follow with code %1$s. A hidden CAPTCHA may be the cause.,Tik
 TikTok refused the follow: %1$s,TikTok refused the follow: %1$s
 TikTok refused the follow: %1$s A hidden CAPTCHA may be the cause.,TikTok refused the follow: %1$s A hidden CAPTCHA may be the cause.
 TikTok runs as if it were not patched. Your settings stay as they are.,TikTok runs as if it were not patched. Your settings stay as they are.
+"TikTok's own daily screen-time reminder sends the app to the background instead of waiting to be dismissed. Coming straight back leaves the reminder on screen, so the limit stays reachable. Needs a daily limit set under TikTok's Settings and privacy, under Time and well-being.","TikTok's own daily screen-time reminder sends the app to the background instead of waiting to be dismissed. Coming straight back leaves the reminder on screen, so the limit stays reachable. Needs a daily limit set under TikTok's Settings and privacy, under Time and well-being."
 TikTok's own value,TikTok's own value
 TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.,TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.
 TikTok's size,TikTok's size

@@ -66,6 +66,7 @@ A web address someone left in a comment can be tapped instead of copied out by h
 AI-generated posts	Yapay zeka ile üretilmiş gönderiler
 About	Hakkında
 A forced value applies to this copy of TikTok whichever account is signed in. It cannot get past a check the server makes.	Zorlanan bir değer, hangi hesap oturum açmış olursa olsun bu TikTok kopyası için geçerlidir. Sunucunun yaptığı bir denetimi aşamaz.
+Leave when TikTok says time is up	TikTok süre doldu deyince uygulamadan çık
 No app on this phone opens that file	Bu telefonda o dosyayı açan bir uygulama yok
 Open	Aç
 This key touches account safety. Forcing it can change login, region, payment or security checks.	Bu anahtar hesap güvenliğine dokunur. Zorlamak giriş, bölge, ödeme veya güvenlik denetimlerini değiştirebilir.
@@ -586,6 +587,7 @@ Comments range	Yorum aralığı
 Favorites range	Favori aralığı
 Likes range	Beğeni aralığı
 Shares range	Paylaşım aralığı
+TikTok's own daily screen-time reminder sends the app to the background instead of waiting to be dismissed. Coming straight back leaves the reminder on screen, so the limit stays reachable. Needs a daily limit set under TikTok's Settings and privacy, under Time and well-being.	TikTok'un kendi günlük ekran süresi hatırlatması, kapatılmayı beklemek yerine uygulamayı arka plana gönderir. Hemen geri dönersen hatırlatma ekranda kalır, böylece limit ulaşılabilir kalır. TikTok'un Ayarlar ve gizlilik bölümünde, Süre ve esenlik altında günlük bir limit ister.
 Views range	Görüntülenme aralığı
 Minimum	Minimum
 More options	Diğer seçenekler
