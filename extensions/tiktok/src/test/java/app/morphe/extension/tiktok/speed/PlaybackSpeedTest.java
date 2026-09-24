@@ -156,6 +156,11 @@ public class PlaybackSpeedTest {
         assertEquals("2.5x", PlaybackSpeedPatch.menuSpeedText("2x", 2.5f));
         assertEquals("0.75x", PlaybackSpeedPatch.menuSpeedText("2x", 0.75f));
         assertEquals("1.25x", PlaybackSpeedPatch.menuSpeedText("2x", 1.25f));
+        // A menu speed off the 0.25 grid: the label must read the float's shortest decimal, not
+        // the widened double ("1.100000023841858"). Menu speeds are free text, so this is reachable.
+        assertEquals("1.1x", PlaybackSpeedPatch.menuSpeedText("2x", 1.1f));
+        assertEquals("0.7x", PlaybackSpeedPatch.menuSpeedText("2x", 0.7f));
+        assertEquals("2.9x", PlaybackSpeedPatch.menuSpeedText("2x", 2.9f));
         // A language that writes the multiplier first, same "2x" label.
         assertEquals("x2.5", PlaybackSpeedPatch.menuSpeedText("x2", 2.5f));
         // TikTok's own values already read right: 2x is left alone, and 0.5, 1.5 and 3 carry a

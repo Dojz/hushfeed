@@ -53,8 +53,10 @@ public final class PlaybackSpeedPatch {
 
     /** A speed the way the row writes it: 0.5, 1.25, 3. No trailing zero, no locale comma. */
     public static String speedLabel(float speed) {
-        String text = java.math.BigDecimal.valueOf(speed).stripTrailingZeros().toPlainString();
-        return text;
+        // Float.toString gives the shortest decimal that round-trips the float. BigDecimal.valueOf
+        // has no float overload, so it would widen to double first and render 1.1f as the double's
+        // "1.100000023841858": harmless for the hold's fixed values, wrong for a free-text menu speed.
+        return new java.math.BigDecimal(Float.toString(speed)).stripTrailingZeros().toPlainString();
     }
 
     public static synchronized void beginVideo(Aweme aweme) {
