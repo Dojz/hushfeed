@@ -357,3 +357,183 @@ Feature gate override saved	功能开关覆盖值已保存
 Feed and navigation	信息流与导航
 Feed button size	信息流按钮大小
 Feed filter	信息流筛选
+Feed screen	信息流界面
+Feed tabs	信息流标签
+Feed tabs to keep	保留的信息流标签
+Field %1$s can't be changed on this build. Take it out of the override, or reset the override.	当前版本无法更改字段 %1$s。请从覆盖值中移除它，或重置该覆盖值。
+Field edits were discarded	字段修改已丢弃
+Field edits were not saved	字段修改未保存
+Files	文件
+Filter TikTok's offline videos	筛选 TikTok 离线视频
+Filter bottom tabs	筛选底部标签
+Filter comments by keyword	按关键词筛选评论
+Filter feed tabs	筛选信息流标签
+Filter location-tagged videos	筛选带地点标签的视频
+Filter settings	筛选设置
+Filter the list	筛选列表
+Filter: %1$s	筛选：%1$s
+Filters, translation and copy options	筛选、翻译与复制选项
+Find a setting by name or description	按名称或说明查找设置
+Find the sound on YouTube Music	在 YouTube Music 中查找此声音
+First caller	首次调用方
+First rejection:	首次拒绝：
+Fit the video to the screen	使视频适应屏幕
+Focus	焦点
+Follow probe	关注探测
+Following	正在关注
+For You	为你推荐
+For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.	仅适用于 com.deniscerri.ytdl。保存按钮将链接交给 YTDLnis 时，可指定下载音频或视频。
+For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.	仅适用于 com.deniscerri.ytdl。隐藏其下载卡片，并在后台开始传递任务。
+Forced %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.	已强制设置 %2$d 个功能开关中的 %1$d 个。其余项目不是布尔值。重启 TikTok 后生效。
+Forced %1$d gates. Restart TikTok to apply this.	已强制设置 %1$d 个功能开关。重启 TikTok 后生效。
+Forced 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.	已强制设置 %2$d 个功能开关中的 1 个。其余项目不是布尔值。重启 TikTok 后生效。
+Forced 1 gate. Restart TikTok to apply this.	已强制设置 1 个功能开关。重启 TikTok 后生效。
+Forced result	强制结果
+Forget seen videos after	在以下时间后忘记已看视频
+Forget the %1$s seen videos.	清除这 %1$s 个已看视频的记录。
+Forget what has been counted today and end any hold. The budgets themselves are left alone.	清除今天已经统计的使用量并结束任何暂停状态。每日限额本身不会改变。
+Friends	好友
+From the next start TikTok runs as if it were not patched, so you can tell whether a problem comes from Hushfeed. Your settings stay as they are.	从下次启动起，TikTok 会像未打补丁一样运行，以便判断问题是否来自 Hushfeed。你的设置会保持不变。
+Full comment sort options	完整评论排序选项
+Full license	完整许可证
+Full report saved to %1$s	完整报告已保存到 %1$s
+GIF	GIF
+Gate data unavailable	功能开关数据不可用
+Gate details	功能开关详情
+Generated defaults	生成的默认值
+Gestures	手势
+Ghost mode	隐身模式
+Hand-off	交接
+Handle or id	用户名或 ID
+Hidden %1$s on this phone	已在本机隐藏 %1$s
+Hidden commenters	已隐藏的评论者
+Hidden: %1$s	已隐藏：%1$s
+Hide	隐藏
+Hide AI-generated videos	隐藏 AI 生成的视频
+Hide CAPTCHA popups	隐藏 CAPTCHA 弹窗
+Hide LIVE replays	隐藏 LIVE 回放
+Hide LIVE videos	隐藏 LIVE 视频
+Hide LIVE videos from the feed.	从信息流中隐藏 LIVE 视频。
+Hide Search this image prompts	隐藏“搜索此图片”提示
+Hide Series	隐藏 Series
+Hide TikTok Shop	隐藏 TikTok Shop
+Hide TikTok Shop in search	在搜索中隐藏 TikTok Shop
+Hide TikTok Shop posts from the feed.	从信息流中隐藏 TikTok Shop 帖子。
+Hide TikTok's "Search: ..." banner above the comment count. This doesn't hide the comments or Hushfeed's comment-search box.	隐藏评论数量上方 TikTok 的“搜索：...”横幅。不会隐藏评论，也不会隐藏 Hushfeed 的评论搜索框。
+Hide TikTok's Auto scroll button	隐藏 TikTok 的自动滚动按钮
+Hide TikTok's short drama episodes and the cards that promote them.	隐藏 TikTok 短剧剧集以及推广短剧的卡片。
+Hide activity	隐藏活动
+Hide activity status	隐藏活动状态
+Hide ads, Shop posts, LIVE videos and replays, promotional music, and paid partnerships.	隐藏广告、Shop 帖子、LIVE 视频及回放、推广音乐和付费合作内容。
+Hide archive	隐藏归档
+Hide bottom tabs TikTok adds later unless you allow them.	隐藏 TikTok 后续新增的底部标签，除非你明确允许。
+Hide buttons in the right column	隐藏右侧栏按钮
+Hide comment polls	隐藏评论投票
+Hide comment popup ads	隐藏评论区弹出广告
+Hide comment typing suggestions	隐藏评论输入建议
+Hide comments made of an image or a sticker instead of words.	隐藏只包含图片或贴纸、没有文字的评论。
+Hide comments that contain any of the words below, or that come from the accounts below.	隐藏包含下方任意关键词的评论，或来自下方账号的评论。
+Hide controls after each video starts. Tap to restore them.	每个视频开始播放后隐藏控件。点按屏幕可恢复。
+Hide conversations	隐藏会话
+Hide every direct message conversation. Leaves the Inbox empty apart from whatever else is still turned on.	隐藏所有私信会话。除仍启用的其他收件箱项目外，收件箱会保持为空。
+Hide feed videos with place badges, even when they aren't paid ads. To keep the video and hide only its badge, use Hide location labels in Feed screen.	隐藏带地点徽标的信息流视频，即使它们不是付费广告。若只想隐藏徽标并保留视频，请在“信息流界面”中启用“隐藏地点标签”。
+Hide floating promotion badges, coins, and timer banners on the feed.	隐藏信息流中的浮动推广徽标、金币和计时横幅。
+Hide floating promotions	隐藏浮动推广
+Hide inserted cards	隐藏插入卡片
+Hide location labels	隐藏地点标签
+Hide message requests	隐藏消息请求
+Hide message streaks	隐藏聊天连续互动
+Hide mini dramas	隐藏短剧
+Hide new follower notifications	隐藏新关注者通知
+Hide new followers	隐藏新关注者
+Hide paid partnerships	隐藏付费合作内容
+Hide people and options by name	按名称隐藏联系人和选项
+Hide photo posts	隐藏图文帖子
+Hide photo posts from the feed.	从信息流中隐藏图文帖子。
+Hide picture comments	隐藏图片评论
+Hide place badges on videos, including cards with multiple places. Videos and your location permissions stay unchanged.	隐藏视频上的地点徽标，包括含多个地点的卡片。视频本身及你的定位权限不会改变。
+Hide playlist videos	隐藏播放列表视频
+Hide promotional music	隐藏推广音乐
+Hide recommended searches before you type on TikTok's search page. Your search history stays. This doesn't hide suggestions above comments.	在 TikTok 搜索页输入前隐藏推荐搜索。搜索历史仍会保留。此选项不会隐藏评论上方的搜索建议。
+Hide recorded LIVE broadcasts from the feed.	从信息流中隐藏已录制的 LIVE 回放。
+Hide rows by title	按标题隐藏项目
+Hide search rewards	隐藏搜索奖励
+Hide search suggestions above comments	隐藏评论上方的搜索建议
+Hide share actions	隐藏分享操作
+Hide sharing apps	隐藏分享应用
+Hide stories	隐藏故事
+Hide stories from the feed.	从信息流中隐藏故事。
+Hide stories tray	隐藏故事栏
+Hide suggested accounts	隐藏推荐账号
+Hide suggestions on the search page	隐藏搜索页建议
+Hide surveys	隐藏问卷
+Hide tabs TikTok adds later unless you allow them.	隐藏 TikTok 后续新增的信息流标签，除非你明确允许。
+Hide the "Search this image" prompt shown over videos. The feed search button and suggestions above comments are separate settings.	隐藏视频上方的“搜索此图片”提示。信息流搜索按钮和评论上方建议属于其他独立设置。
+Hide the CAPTCHA dialogs raised while you browse or watch LIVE. Login, account verification and any CAPTCHA raised over a follow, like, comment or repost stay visible.	隐藏浏览内容或观看 LIVE 时出现的 CAPTCHA 对话框。登录、账号验证，以及关注、点赞、评论或转发时触发的 CAPTCHA 仍会显示。
+Hide the Full screen button	隐藏全屏按钮
+Hide the Full screen button over videos. Playback and automatic rotation keep working as before.	隐藏视频上的全屏按钮。播放和自动旋转仍照常工作。
+Hide the Inbox search button	隐藏收件箱搜索按钮
+Hide the LIVE button	隐藏 LIVE 按钮
+Hide the LIVE button in the top left corner of the feed.	隐藏信息流左上角的 LIVE 按钮。
+Hide the Products block and product cards in search results.	隐藏搜索结果中的“商品”区域和商品卡片。
+Hide the Report button on videos	隐藏视频上的举报按钮
+Hide the Send to row	隐藏“发送给”一栏
+Hide the Share via row.	隐藏“通过...分享”一栏。
+Hide the Tako AI bubble above the profile button, the Ask bar under videos, the Ask Tako button on the search page, the Ask Tako tab on search results and the Tako bar above comments.	隐藏个人资料按钮上方的 Tako AI 气泡、视频下方的 Ask 栏、搜索页的 Ask Tako 按钮、搜索结果中的 Ask Tako 标签，以及评论上方的 Tako 栏。
+Hide the Tako bubble	隐藏 Tako 气泡
+Hide the Tako chat	隐藏 Tako 聊天
+Hide the actions row of the share sheet.	隐藏分享面板中的操作栏。
+Hide the add people icon	隐藏添加联系人图标
+Hide the caption	隐藏视频文案
+Hide the description under the creator's name on the feed.	隐藏信息流中创作者名称下方的描述文字。
+Hide the event badge	隐藏活动徽标
+Hide the flag button TikTok puts above the creator's picture in some regions. You can still report a video from the share menu.	隐藏部分地区中 TikTok 放在创作者头像上方的旗帜举报按钮。你仍可通过分享菜单举报视频。
+Hide the floating promotional badge over the feed.	隐藏信息流上方的浮动推广徽标。
+Hide the follow button on the feed	隐藏信息流中的关注按钮
+Hide the friend recommendation card and the other cards TikTok slots between videos.	隐藏好友推荐卡片以及 TikTok 插入在视频之间的其他卡片。
+Hide the launcher shortcuts	隐藏启动器快捷方式
+Hide the magnifying glass at the top of Inbox. Search on the feed and in comments is unchanged.	隐藏收件箱顶部的放大镜。信息流和评论中的搜索不受影响。
+Hide the magnifying glass at the top right of the feed. Search in Inbox and suggestions above comments stay unchanged.	隐藏信息流右上角的放大镜。收件箱搜索和评论上方建议不受影响。
+Hide the music line	隐藏音乐信息行
+Hide the notification saying somebody new followed you before it reaches the drawer. Every other notification is left alone, and the follower still appears in the Inbox.	在新关注者通知进入通知栏前将其隐藏。其他通知不受影响，新关注者仍会出现在收件箱中。
+Hide the playlist bar	隐藏播放列表栏
+Hide the playlist bar along the bottom of videos that belong to a series.	隐藏系列视频底部的播放列表栏。
+Hide the plus button under the creator's picture in the right column. Ticking Avatar and follow button above hides the picture with it.	隐藏右侧栏中创作者头像下方的加号按钮。若同时勾选上方“头像和关注按钮”，头像也会一起隐藏。
+Hide the points banner under the search box and the coin counter floating over search results, which TikTok shows in some regions. Searching works as before.	隐藏部分地区中搜索框下方的积分横幅，以及搜索结果上方浮动的金币计数。搜索功能本身不受影响。
+Hide the purple rewards button beside Add friends on your profile.	隐藏个人资料页“添加好友”旁边的紫色奖励按钮。
+Hide the question cards TikTok slides over a video near its end.	隐藏 TikTok 在视频接近结束时滑入显示的问题卡片。
+Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.	隐藏输入评论时出现的快捷表情栏和自动贴纸建议。表情与贴纸按钮仍可正常使用。
+Hide the red counts and dots on every bottom tab, Inbox and Profile included. The inbox itself still shows what came in.	隐藏所有底部标签上的红色计数和红点，包括收件箱和个人资料。收件箱内部仍会显示收到的内容。
+Hide the rewards shortcut	隐藏奖励快捷入口
+Hide the right column	隐藏右侧栏
+Hide the row of friends at the top of the share sheet.	隐藏分享面板顶部的好友一栏。
+Hide the save button in the right column. Ticking Save in the list above hides it too.	隐藏右侧栏的保存按钮。在上方列表勾选“保存”也会隐藏它。
+Hide the save button on the feed	隐藏信息流中的保存按钮
+Hide the search bar below videos	隐藏视频下方的搜索栏
+Hide the search button on the feed	隐藏信息流中的搜索按钮
+Hide the share prompt after a like	隐藏点赞后的分享提示
+Hide the spinning music cover and the track name beside the caption.	隐藏旋转的音乐封面以及文案旁的曲目名称。
+Hide the status bar	隐藏状态栏
+Hide the streak button in a chat and the reminder message that goes with it.	隐藏聊天中的连续互动按钮及其对应提醒消息。
+Hide the suggested-search strip above the bottom tabs and let video details and side controls use its space. The top search button and comments stay unchanged.	隐藏底部标签上方的推荐搜索条，让视频详情和侧边控件使用这块空间。顶部搜索按钮和评论不受影响。
+Hide the unread badges on the bottom tabs	隐藏底部标签上的未读徽标
+Hide the whole column on the right, from the avatar down to the music disc.	隐藏右侧整列控件，从头像一直到音乐唱片。
+Hide this creator on this phone	在本机隐藏此创作者
+Hide verified accounts	隐藏认证账号
+Hide video actions	隐藏视频操作
+Hide videos carrying TikTok's AI-generated label.	隐藏带有 TikTok“AI 生成”标签的视频。
+Hide videos marked as paid partnership or branded content.	隐藏标记为付费合作或品牌内容的视频。
+Hide videos marked as using promotional music.	隐藏标记为使用推广音乐的视频。
+Hide videos posted as part of a playlist.	隐藏作为播放列表一部分发布的视频。
+Hide videos posted by verified accounts.	隐藏认证账号发布的视频。
+Hide videos that belong to a paid Series.	隐藏属于付费 Series 的视频。
+Hide videos that use a sound blocked with the player's sound button, or named below.	隐藏使用已通过播放器声音按钮屏蔽、或名称在下方列表中的声音的视频。
+Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.	隐藏播放量高但评论少的视频。规则与“每个赞对应播放量”相同。设为 0 可关闭。
+Hide videos with a lot of views and few likes. Lower numbers are stricter, zero turns the rule off, and one video is kept back if everything the feed just sent would go.	隐藏播放量高但点赞少的视频。数值越低越严格，设为 0 可关闭。如果规则会隐藏 TikTok 本次发来的全部视频，则会保留 1 个。
+Hide videos with blocked sounds	隐藏使用已屏蔽声音的视频
+Hide videos you have already seen	隐藏你已经看过的视频
+Hide voting cards and poll results above the comments, including polls that have ended.	隐藏评论上方的投票卡片和投票结果，包括已结束的投票。
+Hiding	正在隐藏
+Highest	最高
+Historical	历史
+Historical values	历史值
