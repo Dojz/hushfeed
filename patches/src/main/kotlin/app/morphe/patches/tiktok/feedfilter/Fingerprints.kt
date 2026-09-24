@@ -70,8 +70,9 @@ internal object FeedApiFetchFingerprint : Fingerprint(
     definingClass = "Lcom/ss/android/ugc/aweme/feed/api/FeedApi;",
     returnType = "Lcom/ss/android/ugc/aweme/feed/model/FeedItemList;",
     custom = { method, _ ->
-        method.parameterTypes.size == 1 &&
-            method.implementation?.instructions?.any { it.isTopViewPreloadHandoff() } == true
+        method.parameterTypes.size == 1 && method.implementation?.instructions?.let { instructions ->
+            instructions.any { it.isTopViewPreloadRead() } && instructions.any { it.isTopViewPreloadHandoff() }
+        } == true
     },
 )
 

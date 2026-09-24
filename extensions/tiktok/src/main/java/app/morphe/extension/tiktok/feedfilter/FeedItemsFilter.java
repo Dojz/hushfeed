@@ -348,48 +348,47 @@ public final class FeedItemsFilter {
     }
 
     /**
-     * Called where the fetch reads the response's preload ads, before TikTok's own "nothing to
-     * preload" check jumps past the rest. Counts the route on every fetch, ads or none: a
-     * delivery of nothing has to leave a line too, or an account served no TopView reads the
-     * same as a build where the fetch was never patched. The list is not touched here; the
-     * handoff below does the emptying, so a fetch counts as one list however it ends.
-     */
-    public static void countTopViewPreload(List<?> preloads) {
-        HookStatus.bound(TOP_VIEW_HOOK_FAMILY, "read");
-        FeedFilterCounters.sawList(TOP_VIEW_SOURCE, preloads == null ? 0 : preloads.size());
-    }
-
-    /**
      * The cold-start TopView is the one community leak route the list filters cannot reach. The
      * feed fetch reads {@code preloadAds} off the response, stamps each ad with the request id and
      * hands the list to the splash ad service, all before {@code fetchFeedList} returns, which is
      * where {@link #filter(FeedItemList)} runs; so a reset of that field at filter time reaches
-     * nothing. Everything in the list is an ad by construction, so with Remove ads on the service
-     * is handed an empty list in its place and the whole list is counted removed. With the switch
-     * off the same list goes through untouched. The list was already counted at the read, so
-     * this counts nothing itself.
+     * nothing. Called as the fetch reads the field, before TikTok's own "nothing to preload"
+     * check: the route is counted on every fetch, ads or none (a delivery of nothing has to
+     * leave a line too, or an account served no TopView reads the same as a build where the
+     * fetch was never patched), and with Remove ads on a list of ads is replaced by an empty
+     * one, so that check then sends TikTok down the path it takes on every fetch served no ads,
+     * past the stamping, the handoff and the preload task. Emptying at the handoff instead would
+     * hand the service an empty list it never sees in stock TikTok and run its task on the
+     * result. With the switch off the list goes through untouched. Fails open: this runs inside
+     * the cold-start fetch, and a failure here must never keep the feed from loading.
      *
-     * @return the list to hand the service: a fresh empty one when the ads are dropped, else
-     *         {@code preloads} itself (null stays null, so the caller's own null handling holds).
+     * @return the list to carry on with: a fresh empty one when the ads are dropped, else
+     *         {@code preloads} itself (null stays null, so TikTok's own null handling holds).
      */
     public static List<?> dropTopViewPreload(List<?> preloads) {
-        HookStatus.bound(TOP_VIEW_HOOK_FAMILY, "handoff");
-        if (preloads == null || preloads.isEmpty()) return preloads;
-        int count = preloads.size();
-        boolean verbose = BaseSettings.DEBUG.get();
-        if (!ADS_FILTER.getEnabled()) {
-            for (Object ad : preloads) {
-                if (ad instanceof Aweme) logKeptItem(TOP_VIEW_SOURCE, (Aweme) ad, verbose);
+        try {
+            HookStatus.bound(TOP_VIEW_HOOK_FAMILY, "read");
+            int count = preloads == null ? 0 : preloads.size();
+            FeedFilterCounters.sawList(TOP_VIEW_SOURCE, count);
+            if (count == 0) return preloads;
+            boolean verbose = BaseSettings.DEBUG.get();
+            if (!ADS_FILTER.getEnabled()) {
+                for (Object ad : preloads) {
+                    if (ad instanceof Aweme) logKeptItem(TOP_VIEW_SOURCE, (Aweme) ad, verbose);
+                }
+                return preloads;
             }
+            FeedFilterCounters.removed(TOP_VIEW_SOURCE, count, TOP_VIEW_REASON);
+            for (Object ad : preloads) {
+                if (ad instanceof Aweme) logItem((Aweme) ad, TOP_VIEW_REASON, verbose);
+            }
+            // A fresh mutable list, in case anything of TikTok's adds to it before the check.
+            return new ArrayList<>();
+        } catch (Throwable ex) {
+            HookStatus.threw(TOP_VIEW_HOOK_FAMILY, "read", ex);
+            Logger.printException(() -> "Could not empty the TopView preload while the feed fetched it", ex);
             return preloads;
         }
-        FeedFilterCounters.removed(TOP_VIEW_SOURCE, count, TOP_VIEW_REASON);
-        for (Object ad : preloads) {
-            if (ad instanceof Aweme) logItem((Aweme) ad, TOP_VIEW_REASON, verbose);
-        }
-        // A fresh mutable list: the service builds its preload task from what it is handed, and
-        // an immutable empty list would throw the moment it tried to add to it.
-        return new ArrayList<>();
     }
 
     /** The counter line for the profile pager's own ad request, so an export names the route. */

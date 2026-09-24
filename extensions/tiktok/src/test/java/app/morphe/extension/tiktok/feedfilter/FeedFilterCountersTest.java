@@ -140,21 +140,22 @@ public class FeedFilterCountersTest {
         assertFalse("a null ad is nothing to refuse", FeedItemsFilter.dropMidAd(null));
     }
 
-    @Test public void theTopViewPreloadIsCountedOnEveryFetchAndEmptiedOnHandoff() {
+    @Test public void theTopViewPreloadIsCountedOnEveryFetchAndEmptiedAsItIsRead() {
         // The cold-start TopView never passes through a list the other hooks filter: the feed
         // fetch hands the response's preload ads to the splash service before fetchFeedList
-        // returns. The read runs on every fetch, before TikTok's own "nothing to preload" check
-        // jumps past the handoff, so an account served no TopView still leaves a line; the
-        // handoff only ever sees ads, and empties them with the switch on.
-        FeedItemsFilter.countTopViewPreload(null);
+        // returns. The hook sits where the fetch reads the list, before TikTok's own "nothing to
+        // preload" check, so an account served no TopView still leaves a line, and an emptied
+        // list sends TikTok down that same no-ads path rather than into a handoff it never makes
+        // with an empty list in stock.
+        assertNull("nothing read is nothing to empty", FeedItemsFilter.dropTopViewPreload(null));
         assertEquals("TopViewPreload: 1 lists, 0 items, 0 removed", lineFor("TopViewPreload"));
-        FeedItemsFilter.countTopViewPreload(new ArrayList<>());
+        List<Object> none = new ArrayList<>();
+        assertSame("an empty list goes through as itself", none, FeedItemsFilter.dropTopViewPreload(none));
         assertEquals("TopViewPreload: 2 lists, 0 items, 0 removed", lineFor("TopViewPreload"));
 
         List<Object> preloads = profileList(0, 2);
-        FeedItemsFilter.countTopViewPreload(preloads);
-        List<?> handedOn = FeedItemsFilter.dropTopViewPreload(preloads);
-        assertTrue("the service was still handed the ads with Remove ads on", handedOn.isEmpty());
+        List<?> carriedOn = FeedItemsFilter.dropTopViewPreload(preloads);
+        assertTrue("the ads were still there with Remove ads on", carriedOn.isEmpty());
         assertEquals("TopViewPreload: 3 lists, 2 items, 2 removed. Last reason: TopViewFilter",
                 lineFor("TopViewPreload"));
         assertTrue(app.morphe.extension.shared.diagnostics.HookStatus.report().toString(),
@@ -162,17 +163,22 @@ public class FeedFilterCountersTest {
 
         Settings.REMOVE_ADS.save(false);
         List<Object> kept = profileList(0, 2);
-        FeedItemsFilter.countTopViewPreload(kept);
         assertSame("the list goes through untouched with Remove ads off",
                 kept, FeedItemsFilter.dropTopViewPreload(kept));
         assertEquals("nothing was taken out of it", 2, kept.size());
         assertEquals("TopViewPreload: 4 lists, 4 items, 2 removed. Last reason: TopViewFilter",
                 lineFor("TopViewPreload"));
+    }
 
-        assertNull("nothing to hand on is nothing to empty", FeedItemsFilter.dropTopViewPreload(null));
-        assertEquals("the handoff alone counts no list; the read did",
-                "TopViewPreload: 4 lists, 4 items, 2 removed. Last reason: TopViewFilter",
-                lineFor("TopViewPreload"));
+    @Test public void aFailingTopViewReadNeverReachesTheFetch() {
+        // This runs inside TikTok's cold-start fetch. Whatever goes wrong in it, the fetch must
+        // get its own list back and carry on, the way filterOnRead fails open inside the getter.
+        List<Object> hostile = new ArrayList<Object>() {
+            @Override public int size() { throw new IllegalStateException("host list refused"); }
+        };
+        assertSame("the fetch got its own list back", hostile, FeedItemsFilter.dropTopViewPreload(hostile));
+        String report = app.morphe.extension.shared.diagnostics.HookStatus.report().toString();
+        assertTrue(report, report.contains("topview preload"));
     }
 
     @Test public void theTopViewFamilyIsInTheExportBeforeAnyAdIsDue() {

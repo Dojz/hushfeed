@@ -51,6 +51,9 @@ class TopViewPreloadAnchorsTest {
             assertEquals("${apk.name}: reads of preloadAds in the fetch", 1, reads.size)
             val readRegister = (reads.single() as TwoRegisterInstruction).registerA
             assertTrue("${apk.name}: the preload list register v$readRegister fits a short call", readRegister < 16)
+            // The emptied list is written back with an iput-object, whose registers are four bits.
+            val holderRegister = (reads.single() as TwoRegisterInstruction).registerB
+            assertTrue("${apk.name}: the FeedItemList register v$holderRegister fits an iput-object", holderRegister < 16)
         }
     }
 

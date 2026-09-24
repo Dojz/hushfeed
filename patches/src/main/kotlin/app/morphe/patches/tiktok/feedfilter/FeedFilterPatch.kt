@@ -47,6 +47,7 @@ private const val PROFILE_DETAIL_PANEL_DESCRIPTOR =
     "Lcom/ss/android/ugc/aweme/detail/panel/ProfileDetailFragmentPanel;"
 private const val TAKO_AI_FILTER_CLASS_DESCRIPTOR = "Lapp/morphe/extension/tiktok/feedfilter/TakoAiFilter;"
 private const val CARD_FILTERS_CLASS_DESCRIPTOR = "Lapp/morphe/extension/tiktok/feedfilter/CardFilters;"
+private const val FEED_ITEM_LIST_DESCRIPTOR = "Lcom/ss/android/ugc/aweme/feed/model/FeedItemList;"
 
 @Suppress("unused")
 val feedFilterPatch = bytecodePatch(
@@ -107,40 +108,35 @@ val feedFilterPatch = bytecodePatch(
         // index below is read from the shifted body.
         FeedApiFetchFingerprint.method.apply {
             addInstruction(0, "invoke-static {}, $EXTENSION_CLASS_DESCRIPTOR->topViewPreloadInstalled()V")
-            val (index, handoff) = implementationOrPatchException("Feed filter").instructions.withIndex()
-                .filter { it.value.isTopViewPreloadHandoff() }
-                .singleOrPatchException("Feed filter: the feed fetch's one TopView preload handoff to the splash ad service")
-            // The list is the first argument after the receiver, in either invoke shape.
-            val listRegister = when (handoff) {
-                is FiveRegisterInstruction -> handoff.registerD
-                is RegisterRangeInstruction -> handoff.startRegister + 1
-                else -> throw PatchException("Feed filter: unsupported TopView handoff invoke shape.")
-            }
-            if (listRegister > 15) {
-                throw PatchException("Feed filter: the TopView preload list sits in v$listRegister, past a short call.")
-            }
-            addInstructions(
-                index,
-                """
-                    invoke-static/range {v$listRegister .. v$listRegister}, $EXTENSION_CLASS_DESCRIPTOR->dropTopViewPreload(Ljava/util/List;)Ljava/util/List;
-                    move-result-object v$listRegister
-                """,
-            )
-            // The read of preloadAds runs on every non-null response, before TikTok's own
-            // "nothing to preload" check jumps past the handoff, so the route is counted here:
-            // a fetch served no TopView still leaves a line, or it would read the same as a build
-            // where the fetch was never patched. Inserted after the handoff hook above, so this
-            // earlier insert does not move that one; the field keeps its name and is read once.
+            // One hook, at the read of preloadAds, which every non-null response reaches and
+            // which comes before TikTok's own "nothing to preload" check. The list is counted
+            // and, with Remove ads on, replaced by an empty one right there, so that check then
+            // takes TikTok down the path it takes on every fetch served no ads: past the
+            // stamping loop, the handoff and the preload task. Emptying at the handoff instead
+            // would have handed the service an empty list it never sees in stock TikTok and run
+            // its task on the result, a path nothing had ever executed. The emptied list is also
+            // written back into the field, so the later readers of preloadAds (the list's clone,
+            // the commerce preload) see it too. The field keeps its name and is read once; the
+            // handoff is still required of the fetch so the thin request beside it cannot match.
             val (readIndex, read) = implementationOrPatchException("Feed filter").instructions.withIndex()
                 .filter { it.value.isTopViewPreloadRead() }
                 .singleOrPatchException("Feed filter: the feed fetch's one read of preloadAds")
-            val readRegister = (read as TwoRegisterInstruction).registerA
-            if (readRegister > 15) {
-                throw PatchException("Feed filter: the preload list is read into v$readRegister, past a short call.")
+            val listRegister = (read as TwoRegisterInstruction).registerA
+            val holderRegister = read.registerB
+            // The write-back is an iput-object, whose registers are four bits wide.
+            if (listRegister > 15 || holderRegister > 15) {
+                throw PatchException(
+                    "Feed filter: preloadAds is read into v$listRegister from v$holderRegister, past what " +
+                        "the write-back can name.",
+                )
             }
-            addInstruction(
+            addInstructions(
                 readIndex + 1,
-                "invoke-static/range {v$readRegister .. v$readRegister}, $EXTENSION_CLASS_DESCRIPTOR->countTopViewPreload(Ljava/util/List;)V",
+                """
+                    invoke-static/range {v$listRegister .. v$listRegister}, $EXTENSION_CLASS_DESCRIPTOR->dropTopViewPreload(Ljava/util/List;)Ljava/util/List;
+                    move-result-object v$listRegister
+                    iput-object v$listRegister, v$holderRegister, $FEED_ITEM_LIST_DESCRIPTOR->preloadAds:Ljava/util/List;
+                """,
             )
         }
 
