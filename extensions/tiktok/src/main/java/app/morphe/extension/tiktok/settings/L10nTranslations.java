@@ -12839,7 +12839,7 @@ public final class L10nTranslations {
         table.put("A field value couldn't be read. Check the values and try again.",
                 "无法读取字段值。请检查各项数值后重试.");
         table.put("A file named hushfeed-safe-mode in TikTok's folder under Android/data paused Hushfeed. Your settings stay as they are.",
-                "Android/data 下 TikTok 文件夹中的 hushfeed-safe-mode 文件已暂停 Hushfeed。你的设置会保持不变.");
+                "Android/data 下 TikTok 文件夹中的 hushfeed-safe-mode 文件已暂停插件；设置不变.");
         table.put("A forced value applies to this copy of TikTok whichever account is signed in. It cannot get past a check the server makes.",
                 "强制值会应用于此 TikTok 安装，无论登录哪个账号。它无法绕过服务器端检查.");
         table.put("A good place to stop, if you want one.",
@@ -13482,7 +13482,7 @@ public final class L10nTranslations {
         table.put("Friends",
                 "好友");
         table.put("From the next start TikTok runs as if it were not patched, so you can tell whether a problem comes from Hushfeed. Your settings stay as they are.",
-                "下次启动时暂时停用 Hushfeed，让 TikTok 按原始状态运行，以判断问题是否由 Hushfeed 引起。你的设置不会改变.");
+                "下次启动时暂时停用插件，用于判断问题是否来自 Hushfeed；设置不变.");
         table.put("Full comment sort options",
                 "完整评论排序选项");
         table.put("Full license",
@@ -14696,7 +14696,7 @@ public final class L10nTranslations {
         table.put("System",
                 "系统");
         table.put("Takes TikTok's own Auto scroll action out of the video panel. Auto-advance keeps working.",
-                "从视频面板中移除 TikTok 自带的“自动滚动”操作。Hushfeed 的自动切换仍可使用.");
+                "从视频面板中移除 TikTok 自带的“自动滚动”操作；自动连播仍可使用.");
         table.put("Tap %1$s again to send",
                 "再次点按 %1$s 以发送");
         table.put("Tap again to follow",
@@ -14807,7 +14807,7 @@ public final class L10nTranslations {
         table.put("The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.",
                 "返回应用后，信息流会等你点一下再继续播放。消息、个人资料和搜索仍可直接打开.");
         table.put("The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.",
-                "无法删除 hushfeed-safe-mode 文件。请从 Android/data 下的 TikTok 文件夹中手动删除，以重新启用 Hushfeed.");
+                "无法删除 hushfeed-safe-mode 文件。请到 Android/data 下的 TikTok 文件夹手动删除，以重新启用插件.");
         table.put("The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.",
                 "设置每日观看时长上限和每日视频数量上限的重置时间，使用 24 小时制。默认凌晨 4 点，避免凌晨仍在刷视频时过早重置.");
         table.put("The live photo's clip couldn't be saved. Try again.",
@@ -14908,7 +14908,7 @@ public final class L10nTranslations {
         table.put("Thumbs down blocks the commenter",
                 "点踩将拉黑评论者");
         table.put("TikTok closed three times within a minute of starting, so Hushfeed paused itself. Your settings stay as they are.",
-                "TikTok 启动后一分钟内连续关闭了三次，因此 Hushfeed 已自动暂停。你的设置会保持不变.");
+                "TikTok 启动后 1 分钟内连续关闭 3 次，插件已自动暂停；设置不变.");
         table.put("TikTok default",
                 "TikTok 默认");
         table.put("TikTok default (hold to speed up, quick share)",
@@ -14936,7 +14936,7 @@ public final class L10nTranslations {
         table.put("TikTok refused the follow: %1$s A hidden CAPTCHA may be the cause.",
                 "TikTok 拒绝关注：%1$s。可能是被隐藏的 CAPTCHA 导致.");
         table.put("TikTok runs as if it were not patched. Your settings stay as they are.",
-                "TikTok 会像未打补丁一样运行。你的设置会保持不变.");
+                "TikTok 将按未修改状态运行；设置不变.");
         table.put("TikTok's own daily screen-time reminder sends the app to the background instead of waiting to be dismissed. Coming straight back leaves the reminder on screen, so the limit stays reachable. Needs a daily limit set under TikTok's Settings and privacy, under Time and well-being.",
                 "当 TikTok 自带的使用时间提醒出现时，自动将应用切到后台，而不是停在提醒页面等待关闭。立即返回应用时提醒仍会保留。需要先在 TikTok 的“设置和隐私 > 时间与健康”中设置每日使用时间上限.");
         table.put("TikTok's own value",
@@ -14990,7 +14990,7 @@ public final class L10nTranslations {
         table.put("Try again, or go back to TikTok.",
                 "请重试，或返回 TikTok.");
         table.put("Turn Hushfeed back on",
-                "重新启用 Hushfeed");
+                "重新启用插件");
         table.put("Turn on %1$s first.",
                 "请先开启 %1$s.");
         table.put("Turn on overrides",
