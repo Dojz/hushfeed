@@ -113,6 +113,7 @@ Allow screenshots and Circle to Search,Allow screenshots and Circle to Search
 Allow storage for TikTok in Android settings to save profile pictures,Allow storage for TikTok in Android settings to save profile pictures
 Allow storage for TikTok in Android settings to save sounds,Allow storage for TikTok in Android settings to save sounds
 Allow storage for TikTok in Android settings to save stories,Allow storage for TikTok in Android settings to save stories
+Allow storage for TikTok in Android settings to save the live photo's clip,Allow storage for TikTok in Android settings to save the live photo's clip
 Already active,Already active
 Already marked as not interested,Already marked as not interested
 Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.,Also apply these filters to downloaded videos TikTok uses when the feed cannot load enough new items.
@@ -671,6 +672,7 @@ None of these gates had an override to reset.,None of these gates had an overrid
 None of these gates takes a true or false value.,None of these gates takes a true or false value.
 None recorded,None recorded
 Normal,Normal
+"Not a handle or id, so ignored: %1$s","Not a handle or id, so ignored: %1$s"
 Not blocked,Not blocked
 Not interested in this video,Not interested in this video
 Not read yet,Not read yet
@@ -1070,6 +1072,7 @@ This file has more loaded values than the Lab takes at once.,This file has more 
 This file has no loaded values in it.,This file has no loaded values in it.
 This file isn't a loaded-values export from the Feature Gate Lab.,This file isn't a loaded-values export from the Feature Gate Lab.
 This gate type is not supported.,This gate type is not supported.
+"This is the video's own sound, so YouTube Music won't have it","This is the video's own sound, so YouTube Music won't have it"
 "This key isn't in the local catalog, so its type can't be checked. Reset the override.","This key isn't in the local catalog, so its type can't be checked. Reset the override."
 "This key touches account safety. Forcing it can change login, region, payment or security checks.","This key touches account safety. Forcing it can change login, region, payment or security checks."
 "This line opens a rule and does not finish it: %1$s. Write two phrases as ""a"" & ""b"" for both, or ""a"" !& ""b"" for the first without the second.","This line opens a rule and does not finish it: %1$s. Write two phrases as ""a"" & ""b"" for both, or ""a"" !& ""b"" for the first without the second."

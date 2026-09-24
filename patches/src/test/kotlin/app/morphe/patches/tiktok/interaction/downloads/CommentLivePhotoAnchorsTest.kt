@@ -68,8 +68,19 @@ class CommentLivePhotoAnchorsTest {
                 val indexRegister = (instructions[indexCall + 1] as OneRegisterInstruction).registerA
                 assertTrue("${apk.name}: the index sits in v$indexRegister, past a plain invoke", indexRegister < 16)
                 assertTrue("${apk.name}: the comment and the index sit in different registers", commentRegister != indexRegister)
+                // The hook reads the index register right after the comment lands, so nothing
+                // between the unboxing and the comment call may write that register.
+                val rewritten = instructions.subList(indexCall + 2, commentCall).filter {
+                    it.opcode.setsRegister() && (it as? OneRegisterInstruction)?.registerA == indexRegister
+                }
+                assertTrue("${apk.name}: v$indexRegister is rewritten before the comment call: $rewritten", rewritten.isEmpty())
             }
 
+            // The three reads the extension makes, each pinned: a renamed one reads as "no
+            // clip" on every photo, so the fixture has to say when a name moves.
+            val commentModel = app[COMMENT_MODEL_DESCRIPTOR] ?: error("${apk.name}: no $COMMENT_MODEL_DESCRIPTOR")
+            assertEquals("${apk.name}: the image list getter on the comment", 1,
+                commentModel.methods.count { it.name == "getImageList" && it.returnType == "Ljava/util/List;" && it.parameterTypes.isEmpty() })
             val image = app[imageStruct] ?: error("${apk.name}: no $imageStruct")
             assertEquals("${apk.name}: the live-photo field on the comment image", 1,
                 image.fields.count { it.name == "livePhotoInfoModel" && it.type == liveModel })
