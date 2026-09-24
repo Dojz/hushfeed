@@ -81,7 +81,7 @@ A diagnostic report is already being saved	已有诊断报告正在保存
 A field value couldn't be read. Check the values and try again.	无法读取字段值。请检查各项数值后重试.
 A file named hushfeed-safe-mode in TikTok's folder under Android/data paused Hushfeed. Your settings stay as they are.	Android/data 下 TikTok 文件夹中的 hushfeed-safe-mode 文件已暂停 Hushfeed。你的设置会保持不变.
 A forced value applies to this copy of TikTok whichever account is signed in. It cannot get past a check the server makes.	强制值会应用于此 TikTok 安装，无论登录哪个账号。它无法绕过服务器端检查.
-A good place to stop, if you want one.	如果你想停下来，这里是个合适的位置.
+A good place to stop, if you want one.	如果想停一停，现在正合适.
 A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.	TikTok 使用摄像头时，顶部角落显示绿点；录音时显示橙点。访问结束后指示点会消失.
 A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.	分享或复制链接时，用于替换 tiktok.com 的域名，例如 vxtiktok.com。留空则使用 TikTok 原始链接。只会修改 TikTok 链接的域名，不会把任何内容发送到新的服务器.
 A newer clear replaced that undo. Tap the row again to undo.	更新的清除操作已取代该撤销记录。再次点按此项即可撤销.
@@ -91,7 +91,7 @@ A web address someone left in a comment can be tapped instead of copied out by h
 AI-generated posts	AI 生成的帖子
 About	关于
 Activity	活动
-Activity center (PIA)	活动中心（PIA）
+Activity center (PIA)	活动中心\nPIA
 Add	添加
 Add a button beside the block control to send feedback about the current video.	在屏蔽控件旁添加一个按钮，用于反馈当前视频.
 Add a button that hides the current creator on this phone without blocking them.	添加一个按钮，仅在本机隐藏当前创作者，而不将其拉黑.
@@ -120,7 +120,7 @@ Also change the region TikTok reports internally. Keeps your interface language.
 Also on a block list, so still hidden: %1$s	同时也在屏蔽列表中，因此仍会隐藏：%1$s
 Always show publish date	始终显示发布日期
 Always show the publish date in video author information. Restart TikTok to apply this.	始终在视频作者信息中显示发布日期。重启 TikTok 后生效.
-An app's package name, like com.dv.adm. The save button sends the video's link there instead of saving it here. Leave it empty to save here.	应用包名，例如 com.dv.adm。点击保存按钮时，会把视频链接发送给该应用，而不是在此处保存。留空则在本地保存.
+An app's package name, like com.dv.adm. The save button sends the video's link there instead of saving it here. Leave it empty to save here.	填写外部下载应用的包名，例如 com.dv.adm。点击保存时会把视频链接发送给该应用，而不是由 TikTok 保存；留空则仍在 TikTok 中保存.
 An exception names one creator, so a pattern can't be one: %1$s	例外项只能指定一个创作者，不能使用匹配规则：%1$s
 An exception takes a handle or id, not a display name: %1$s	例外项需要填写用户名或 ID，而不是显示名称：%1$s
 An interrupted settings change couldn't be recovered, so its record was set aside. Check your settings or restore a backup.	中断的设置更改无法恢复，其记录已被单独保留。请检查设置或恢复备份.
@@ -131,7 +131,7 @@ Answer TikTok's location requests with nothing. The region settings change the l
 Answer TikTok's reads of your contacts with an empty list. Find Friends and People you may know lose access to your contact list.	当 TikTok 读取联系人时返回空列表。“查找好友”和“你可能认识的人”将无法访问你的联系人.
 Answer TikTok's scan of the apps on this phone with an empty list. A check for one named app, which TikTok also uses to open an app you tap, is left alone.	当 TikTok 扫描本机已安装应用时返回空列表。针对某个指定应用的单独检查会保留，因为 TikTok 也用它来打开你点按的应用.
 App	应用
-App AB	应用 AB
+App AB	A/B 实验
 Appearance	外观
 Applies to both video and photo downloads.	同时适用于视频和图片下载.
 Apply	应用
@@ -239,7 +239,7 @@ Compact comment header	紧凑评论标题栏
 Compare gate reads with their previous values.	将功能项读取值与先前值进行比较.
 Completed an interrupted settings change. Restart TikTok to apply this.	已完成之前中断的设置更改。重启 TikTok 后生效.
 Config	配置
-Config (Settings Manager)	配置（设置管理器）
+Config (Settings Manager)	配置管理器\nSettings Manager
 Confirm before following	关注前确认
 Confirm before liking	点赞前确认
 Confirm before sending to a friend	发送给好友前确认
@@ -313,7 +313,7 @@ Discard edits	放弃修改
 Dismissed %1$s suggested accounts	已移除 %1$s 个推荐账号
 Dismissed one suggested account	已移除 1 个推荐账号
 Do not start the feed on returning	返回应用时不要自动播放信息流
-Do nothing	不执行任何操作
+Do nothing	不执行操作
 Done	完成
 Double tap	双击
 Download original photos	下载原始图片
@@ -375,15 +375,15 @@ Filter: %1$s	筛选：%1$s
 Filters, translation and copy options	筛选、翻译与复制选项
 Find a setting by name or description	按名称或说明查找设置
 Find the sound on YouTube Music	在 YouTube Music 中查找此声音
-First caller	首次调用位置（First caller）
+First caller	首次调用位置\nFirst caller
 First rejection:	首次拒绝:
 Fit the video to the screen	使视频适应屏幕
 Focus	专注
 Follow probe	关注请求诊断（Follow Probe）
 Following	正在关注
 For You	为你推荐
-For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.	仅适用于 com.deniscerri.ytdl。保存按钮将链接交给 YTDLnis 时，可指定下载音频或视频.
-For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.	仅适用于 com.deniscerri.ytdl。隐藏其下载卡片，并在后台开始传递任务.
+For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.	仅适用于 com.deniscerri.ytdl。将链接交给 YTDLnis 时，可选择下载音频或视频.
+For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.	仅适用于 com.deniscerri.ytdl。隐藏 YTDLnis 的下载卡片，并在后台开始下载任务.
 Forced %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.	已强制设置 %2$d 个功能项中的 %1$d 个。其余项目不是布尔值。重启 TikTok 后生效.
 Forced %1$d gates. Restart TikTok to apply this.	已强制设置 %1$d 个功能项。重启 TikTok 后生效.
 Forced 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.	已强制设置 %2$d 个功能项中的 1 个。其余项目不是布尔值。重启 TikTok 后生效.
@@ -400,7 +400,7 @@ Full report saved to %1$s	完整报告已保存到 %1$s
 GIF	GIF
 Gate data unavailable	功能项数据不可用
 Gate details	功能项详情
-Generated defaults	生成的默认值（Generated defaults）
+Generated defaults	生成的默认值\nGenerated defaults
 Gestures	手势
 Ghost mode	隐身模式
 Hand-off	外部下载
@@ -536,12 +536,12 @@ Hide voting cards and poll results above the comments, including polls that have
 Hiding	正在隐藏
 Highest	最高
 Historical	历史记录（Historical）
-Historical values	历史值（Historical values）
+Historical values	历史值\nHistorical values
 Hold a gate to choose several	长按功能项可多选
 Hold the feed after the budget	达到上限后暂停信息流
 Home	首页
 Hook status	Hook 状态
-How far each edge press moves the video.	设置每次长按屏幕边缘快进或快退的秒数.
+How far each edge press moves the video.	设置每次长按屏幕边缘快进或后退的秒数.
 Hushfeed cannot read the creator pattern %1$s	Hushfeed 无法解析创作者匹配规则 %1$s
 Hushfeed hid a TikTok CAPTCHA. Turn off Hide CAPTCHA popups if something stops working.	Hushfeed 已隐藏一个 TikTok CAPTCHA。如果有功能停止工作，请关闭“隐藏 CAPTCHA 弹窗”.
 Hushfeed is active	Hushfeed 已启用
@@ -626,7 +626,7 @@ Maximum video length	最大视频时长
 Maximum views per comment	每条评论对应的最大播放量
 Maximum views per like	每个赞对应的最大播放量
 Media	媒体
-Media config (VE)	媒体配置（VE）
+Media config (VE)	媒体配置\nVE
 Messages, profiles and search still work.	消息、个人资料和搜索仍可使用.
 Microphone in use	正在使用麦克风
 Mini dramas	短剧
@@ -682,7 +682,7 @@ Not seen yet	尚未出现
 Nothing has been checked yet, so there is nothing to report.	尚未进行任何检查，因此没有可报告的内容.
 Nothing has been looked up yet. Use the app for a moment, then come back.	尚未查询任何内容。请先使用应用一会儿，然后再回来.
 Nothing hidden.	没有隐藏任何内容.
-Nothing is playing to seek	当前没有可快进/快退的视频
+Nothing is playing to seek	当前没有可快进/后退的视频
 Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected.	没有导入新内容。%1$d 项已匹配，%2$d 项不可用，%3$d 项被拒绝.
 Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected. First rejection: %4$s	没有导入新内容。%1$d 项已匹配，%2$d 项不可用，%3$d 项被拒绝。首次拒绝：%4$s
 Nothing on this page changes what TikTok does until they are on.	此页面中的设置只有开启后才会改变 TikTok 的行为.
@@ -757,7 +757,7 @@ Post age	发布时间
 Preset	预设
 Press and hold a profile picture to save the full size original to your photo destination.	长按头像可将完整尺寸原图保存到你的图片保存位置.
 Press and hold a story to save it. Stories have no save button of their own, and holding one is how TikTok pauses it, so this takes that gesture over.	长按限时动态即可保存。限时动态本身没有保存按钮，而 TikTok 原本用长按来暂停播放，因此启用后会接管该手势.
-Press and hold the left or right third of the screen to jump back or forward. The middle third keeps the Long press action.	长按屏幕左侧三分之一区域可快退，右侧三分之一区域可快进；中间三分之一区域仍执行“长按”动作.
+Press and hold the left or right third of the screen to jump back or forward. The middle third keeps the Long press action.	长按屏幕左侧三分之一区域可后退，右侧三分之一区域可快进；中间三分之一区域仍执行“长按”动作.
 Preview shortened. Save JSON includes the full report.	预览已缩短。“保存 JSON”会包含完整报告.
 Privacy	隐私
 Privacy and system	隐私与系统
@@ -765,7 +765,7 @@ Profile	个人资料
 Profile picture saved to %1$s	头像已保存到 %1$s
 Profile share actions	个人资料分享操作
 Promotional music	推广音乐
-Proof	识别依据（Proof）
+Proof	识别依据\nProof
 Protect external pages in TikTok's browser	保护 TikTok 浏览器中的外部页面
 Put back the settings saved before the last restore or reset.	恢复上次“恢复”或“重置”操作之前保存的设置.
 Put every setting back to its default straight away. Your current settings are kept for Undo.	立即将所有设置恢复为默认值。当前设置会保留，以便撤销.
@@ -794,8 +794,8 @@ Removed %1$s	已移除 %1$s
 Replace values when TikTok asks for them	TikTok 请求时替换数值
 Report saved to %1$s	报告已保存到 %1$s
 Required	必填
-Researched	人工整理（Researched）
-Researched values	人工整理值（Researched values）
+Researched	候选值
+Researched values	候选值\nResearched values
 Reset	重置
 Reset %1$d gates of %2$d. Restart TikTok to apply this.	已重置 %2$d 个功能项中的 %1$d 个。重启 TikTok 后生效.
 Reset %1$d gates. Restart TikTok to apply this.	已重置 %1$d 个功能项。重启 TikTok 后生效.
@@ -875,11 +875,11 @@ Search hidden creators	搜索已隐藏的创作者
 Search settings	搜索设置
 Search share actions	搜索分享操作
 Search these comments	搜索这些评论
-Search translated titles and descriptions, then open the original setting.	搜索已翻译的标题和说明，然后打开对应的原始设置项.
+Search translated titles and descriptions, then open the original setting.	搜索中文标题和说明，并直接打开对应设置.
 Search within comments	在评论中搜索
 Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed is not empty.	单位为秒。设为 0 表示不限制时长。如果规则会筛掉 TikTok 本次发来的全部视频，则会保留最接近你设定上限的一个，避免信息流为空.
-Seek by	每次快进/快退秒数
-Seek from the edges	长按屏幕边缘快进/快退
+Seek by	快进/后退秒数
+Seek from the edges	长按屏幕边缘快进/后退
 Seen	已看
 Seen this session	本次会话已看
 Seen videos	已看视频
@@ -954,12 +954,12 @@ Start feature gate recording	开始记录功能项
 Start recording	开始记录
 Start the day at	每日上限重置时间
 Start today over	重新开始今天
-Start typing	开始输入
+Start typing	开始输入关键词
 Start with comments. Hide the comment count, sort and close buttons, plus the suggestion area above them. Use Back or swipe down to close comments.	打开时直接进入评论。隐藏评论数量、排序和关闭按钮，以及其上方的建议区域。使用“返回”或向下滑动关闭评论.
 Sticker	贴纸
 Sticker destination	贴纸保存位置
 Sticker saved to %1$s	贴纸已保存到 %1$s
-Still here. Nothing is waiting.	仍在此处。当前没有待处理内容.
+Still here. Nothing is waiting.	暂时没有待处理内容.
 Still reading the record. Tap again in a moment.	仍在读取记录。请稍后再次点按.
 Still saving the last one	仍在保存上一个文件
 Stop ByteDance AppLog events, AppsFlyer attribution, explicit Firebase screen reports and crash reporting from being sent. TikTok's own diagnostics go quiet with them.	阻止发送 ByteDance AppLog 事件、AppsFlyer 归因、明确的 Firebase 屏幕报告和崩溃报告。TikTok 自己的相关诊断上报也会一并停止.
@@ -1033,12 +1033,12 @@ The add people icon leaves the Inbox header. Only the shortcut goes, so friend s
 The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.	目录显示此键类型为 %1$s，而当前覆盖值类型为 %2$s。请重置覆盖值并重新创建.
 The diagnostic report couldn't be saved yet. Try again in a moment.	诊断报告暂时无法保存。请稍后重试.
 The diagnostic report couldn't be saved. Try again.	无法保存诊断报告。请重试.
-The downloader app you chose isn't installed. Check Send links to another app under Downloads.	你选择的下载器应用未安装。请检查“下载”中的“将链接发送到其他应用”.
+The downloader app you chose isn't installed. Check Send links to another app under Downloads.	你选择的外部下载应用尚未安装。请检查“下载 > 将链接发送到其他应用”的设置.
 The export failed and the partial file couldn't be removed. Delete it from your Downloads folder.	导出失败，且无法删除未完成的文件。请从 Downloads 文件夹中手动删除.
 The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.	达到观看时长上限前的最后 45 秒，信息流会逐渐变暗，再进入暂停。需要同时设置每日观看时长上限和“达到上限后暂停信息流”.
-The feed does not end. This is a fine time to leave it.	信息流不会结束。现在是离开的好时机.
-The feed is open again	信息流已重新开放
-The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.	返回应用时，信息流会等待你点按一次后才继续播放。消息、个人资料和搜索仍可正常打开.
+The feed does not end. This is a fine time to leave it.	信息流永远刷不完，现在退出正合适.
+The feed is open again	信息流已恢复
+The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.	返回应用后，信息流会等你点一下再继续播放。消息、个人资料和搜索仍可直接打开.
 The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.	无法删除 hushfeed-safe-mode 文件。请从 Android/data 下的 TikTok 文件夹中手动删除，以重新启用 Hushfeed.
 The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.	设置每日观看时长上限和每日视频数量上限的重置时间，使用 24 小时制。默认凌晨 4 点，避免凌晨仍在刷视频时过早重置.
 The live photo's clip couldn't be saved. Try again.	无法保存实况照片的视频片段。请重试.
@@ -1190,7 +1190,7 @@ Window width needed to enable the layout. Restart TikTok to apply this.	启用�
 Words and countries	关键词与国家/地区
 Working	处理中
 Write the video's sound beside it as an .m4a. Android 10 and later file audio separately, so it lands in Music under the same folder name as your videos.	将视频声音另存为旁边的 .m4a 文件。Android 10 及以上会将音频单独归档，因此它会保存到 Music 中与视频文件夹同名的文件夹.
-YTDLnis background mode	YTDLnis 后台模式
+YTDLnis background mode	YTDLnis 后台下载
 YTDLnis download type	YTDLnis 下载类型
 Yes	是
 YouTube Music couldn't be opened. Open it yourself and search for the sound.	无法打开 YouTube Music。请手动打开并搜索此声音.
