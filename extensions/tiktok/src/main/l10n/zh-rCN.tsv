@@ -537,3 +537,183 @@ Hiding	正在隐藏
 Highest	最高
 Historical	历史
 Historical values	历史值
+Hold a gate to choose several	长按功能开关可多选
+Hold the feed after the budget	达到限额后暂停信息流
+Home	首页
+Hook status	Hook 状态
+How far each edge press moves the video.	每次按下边缘时视频跳转的距离。
+Hushfeed cannot read the creator pattern %1$s	Hushfeed 无法解析创作者匹配规则 %1$s
+Hushfeed hid a TikTok CAPTCHA. Turn off Hide CAPTCHA popups if something stops working.	Hushfeed 已隐藏一个 TikTok CAPTCHA。如果有功能停止工作，请关闭“隐藏 CAPTCHA 弹窗”。
+Hushfeed is active	Hushfeed 已启用
+Hushfeed is paused	Hushfeed 已暂停
+Hushfeed turns back on when TikTok restarts.	TikTok 重启后 Hushfeed 会重新启用。
+Ignore the creator's choice so the Duet and Stitch entries appear. Everything else the app checks still applies, and whether the upload is accepted is the server's decision.	忽略创作者的选择，让“合拍”和“拼接”入口显示出来。应用中的其他检查仍然有效，最终是否允许上传由服务器决定。
+Import finished	导入完成
+Import loaded values	导入已加载值
+Imported %1$d values	已导入 %1$d 个值
+Imported %1$d values. Undo last Lab change is in the menu.	已导入 %1$d 个值。可在菜单中使用“撤销上次实验室更改”。
+Inbox	收件箱
+Include diagnostic events	包含诊断事件
+Included diagnostics	已包含的诊断信息
+Includes all diagnostic events.	包含所有诊断事件。
+Includes these events: %1$s	包含这些事件：%1$s
+Inserted cards	插入卡片
+Keep a local record of what you have watched and hide those videos when the feed sends them again.	在本地记录你看过的视频，当信息流再次推送这些视频时将其隐藏。
+Keep captions in clear display	清屏时保留字幕
+Keep going	继续
+Keep long press from quick sharing	阻止长按触发快捷分享
+Keep long press from reposting	阻止长按触发转发
+Keep the Favorites tab	保留收藏标签
+Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.	TikTok 打开时隐藏时钟和状态图标。从屏幕顶部下滑可临时查看。
+Keep the screen's refresh rate	保持屏幕刷新率
+Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only.	将你选择的播放速度沿用到下一个视频。关闭后，每个新视频都从 1x 开始，手动选择的速度仅对当前视频有效。
+Keep this string to %1$s characters or fewer.	此字符串最多可包含 %1$s 个字符。
+Keep this structured value to %1$s KB or less.	此结构化值必须不超过 %1$s KB。
+Keep websites outside TikTok from using its connection back into the app. TikTok pages such as Activity center, Watch history, shop checkout and CAPTCHA keep working.	阻止 TikTok 以外的网站通过深度链接重新调用应用。TikTok 自己的“活动中心”“观看历史”“商城结算”和 CAPTCHA 等页面仍可正常工作。
+Kept to %1$s, the nearest value this row allows	已调整为此项允许的最接近值 %1$s
+Kinds of post	帖子类型
+LIVE	LIVE
+LIVE replays	LIVE 回放
+LIVE settings	LIVE 设置
+LIVE share actions	LIVE 分享操作
+LIVE videos	LIVE 视频
+Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply this.	实验室数据已重置。可在菜单中使用“撤销上次实验室更改”。重启 TikTok 后生效。
+Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this.	实验室数据超过规则上限，因此已清除且未保留可撤销副本。重启 TikTok 后生效。
+Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok to apply this.	实验室覆盖值已重置。可在菜单中使用“撤销上次实验室更改”。重启 TikTok 后生效。
+Lab settings put back. Restart TikTok to apply this.	实验室设置已恢复。重启 TikTok 后生效。
+Larger (1.25x)	较大（1.25x）
+Last change put back. Restart TikTok to apply all changes.	上次更改已恢复。重启 TikTok 以应用全部更改。
+Last change put back. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.	上次更改已恢复。功能开关实验室规则属于另一个 TikTok 版本，因此未恢复。重启 TikTok 以应用全部更改。
+Last original value	上次原始值
+Last recording: %1$d gates.	上次记录：%1$d 个功能开关。
+Last recording: 1 gate.	上次记录：1 个功能开关。
+Layout	布局
+Layout, player, search and system	布局、播放器、搜索与系统
+Leave maximum empty to keep it unlimited.	最大值留空表示不限制。
+Leave the sound out of the saved video. Save the sound as well still writes the .m4a beside it if you want both.	保存视频时不包含声音。如果同时启用“也保存声音”，仍会在旁边另存一个 .m4a 文件。
+Leave when TikTok says time is up	TikTok 提示时间已到时退出
+Length and views per like	时长与每赞播放量
+Less than a minute left	剩余不到一分钟
+Let screenshots, screen recording and Circle to Search work on TikTok again. Restart TikTok to apply this.	重新允许在 TikTok 中使用截图、录屏和“圈选搜索”。重启 TikTok 后生效。
+Let the Offline videos menu use your own limit instead of TikTok's fixed one. Restart TikTok to apply this.	让“离线视频”菜单使用你自定义的上限，而不是 TikTok 的固定限制。重启 TikTok 后生效。
+Licenses	许可证
+Like	点赞
+Likes range	点赞数范围
+Limits	限制
+Link copied	链接已复制
+Links	链接
+Links in comments open	可打开评论中的链接
+Live photo clip saved to %1$s	实况照片视频片段已保存到 %1$s
+Loaded current values. Loading all known gates...	已加载当前值。正在加载所有已知功能开关...
+Loaded values are still being read. Try again in a moment.	仍在读取已加载的值。请稍后重试。
+Loaded-value file export failed	导出已加载值文件失败
+Loading gates...	正在加载功能开关...
+Loading local catalog and current TikTok cache...	正在加载本地目录和当前 TikTok 缓存...
+Location-tagged videos	带地点标签的视频
+Lock the hold speed with a pull down	下拉锁定长按倍速
+Lock today's budget	锁定今日限额
+Log diagnostics	记录诊断日志
+Logging, hook status and reports	日志、Hook 状态与报告
+Long press	长按
+Lowest	最低
+Make TikTok yours.	让 TikTok 更合你的心意。
+Manager	管理器
+Marked as not interested	已标记为不感兴趣
+Match locale and timezone to country	让区域设置和时区匹配国家/地区
+Maximum	最大值
+Maximum post age	最大发布天数
+Maximum video length	最大视频时长
+Maximum views per comment	每条评论对应的最大播放量
+Maximum views per like	每个赞对应的最大播放量
+Media	媒体
+Media config (VE)	媒体配置（VE）
+Messages, profiles and search still work.	消息、个人资料和搜索仍可使用。
+Microphone in use	正在使用麦克风
+Mini dramas	短剧
+Minimum	最小值
+More options	更多选项
+Move down	下移
+Move left	左移
+Move right	右移
+Move to the next video when the current one ends. Pauses, open dialogs and screen-time holds stop it. Restart TikTok after changing this.	当前视频结束时自动切换到下一个。暂停、打开的对话框以及屏幕时间暂停会阻止自动切换。更改后请重启 TikTok。
+Move up	上移
+Music disc	音乐唱片
+Nearby	附近
+Never from these countries	始终隐藏这些国家/地区
+No	否
+No app on this phone opens that file	本机没有应用可以打开该文件
+No creator to block on this video	此视频没有可拉黑的创作者
+No creator to hide on this video	此视频没有可隐藏的创作者
+No creators are hidden yet. Hide one from a video, or add a handle above.	还没有隐藏任何创作者。可从视频中隐藏，或在上方添加用户名。
+No current value	没有当前值
+No current value and no active override	没有当前值，也没有启用中的覆盖值
+No delay	无延迟
+No gate data is available. Refresh values from the menu to try again.	没有可用的功能开关数据。请从菜单刷新数值后重试。
+No gate reads were recorded. Use a TikTok feature while recording.	未记录到功能开关读取。请在记录期间使用某个 TikTok 功能。
+No gates match this filter.	没有功能开关符合此筛选条件。
+No gates match this search and filter.	没有功能开关符合当前搜索和筛选条件。
+No hidden creators match this search. Clear the search to see them all.	没有隐藏的创作者符合当前搜索。清除搜索即可查看全部。
+No limit	无限制
+No matching comments. Try a different word, or clear the search with the X in the box.	没有匹配的评论。请尝试其他关键词，或点按搜索框中的 X 清除搜索。
+No matching countries. Try a country name or a two-letter code.	没有匹配的国家/地区。请尝试输入名称或两位代码。
+No matching diagnostics found	没有找到匹配的诊断信息
+No matching settings	没有匹配的设置
+No preset selected. Choose a preset above.	尚未选择预设。请在上方选择一个预设。
+No recording yet. Start one, use a feature, then return here.	还没有记录。请开始记录、使用某项功能，然后返回此处。
+No seen videos recorded yet.	尚未记录已看视频。
+No share actions have been seen yet	尚未检测到分享操作
+No share actions match this search	没有分享操作符合当前搜索
+No sound to block on this video	此视频没有可屏蔽的声音
+No suggested accounts to clear	没有可清除的推荐账号
+No video selected. Open a video first.	未选择视频。请先打开一个视频。
+None of the photos could be saved. Try again.	所有图片都保存失败。请重试。
+None of these gates had an override to reset.	这些功能开关都没有可重置的覆盖值。
+None of these gates takes a true or false value.	这些功能开关都不是布尔值。
+None recorded	无记录
+Normal	正常
+Not a handle or id, so ignored: %1$s	不是有效的用户名或 ID，已忽略：%1$s
+Not blocked	未屏蔽
+Not interested in this video	对这个视频不感兴趣
+Not read yet	尚未读取
+Not requested in this process yet	当前进程中尚未请求
+Not saved yet	尚未保存
+Not seen	未看过
+Not seen yet	尚未出现
+Nothing has been checked yet, so there is nothing to report.	尚未进行任何检查，因此没有可报告的内容。
+Nothing has been looked up yet. Use the app for a moment, then come back.	尚未查询任何内容。请先使用应用一会儿，然后再回来。
+Nothing hidden.	没有隐藏任何内容。
+Nothing is playing to seek	当前没有可跳转的视频
+Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected.	没有导入新内容。%1$d 项已匹配，%2$d 项不可用，%3$d 项被拒绝。
+Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected. First rejection: %4$s	没有导入新内容。%1$d 项已匹配，%2$d 项不可用，%3$d 项被拒绝。首次拒绝：%4$s
+Nothing on this page changes what TikTok does until they are on.	此页面中的设置只有开启后才会改变 TikTok 的行为。
+Nothing to undo yet.	目前没有可撤销的操作。
+Notices from this project and the ones it is built on	本项目及其上游项目的声明
+OK	确定
+Off	关闭
+Off forces false, on forces true. Reset hands the choice back to TikTok.	关闭会强制返回 false，开启会强制返回 true。重置后由 TikTok 自行决定。
+Offline videos	离线视频
+Offline videos limit	离线视频数量上限
+Older overrides were kept disabled. Review their values before enabling them on TikTok %1$s.	旧版覆盖值仍保持禁用。请检查其数值后，再在 TikTok %1$s 上启用。
+On	开启
+On mobile data	使用移动数据时
+On. Restore puts back the feed setup you had before.	已开启。“恢复”会还原之前的信息流设置。
+Once today's budget runs out, the hold stays and cannot be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out.	今日限额用尽后，暂停状态将持续且无法关闭；限额设置也会锁定，直到新的一天开始。你可以在限额用尽前随时关闭此选项。
+One area was checked and everything it needs is here.	已检查 1 个区域，所需内容均已就绪。
+One minute left	剩余 1 分钟
+One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out.	该列表中有一个引号没有配对，因此该行剩余内容会被视为同一个短语。请补上缺失的引号，或删除多余的引号。
+One value per line	每行一个值
+Only bottom tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.	这里只显示 TikTok 已在本设备加载的底部标签，不会强制显示不可用标签。
+Only fields the Lab can check and copy safely are shown.	这里只显示实验室能够安全检查和复制的字段。
+Only from these countries	仅显示这些国家/地区
+Only tabs TikTok has loaded on this device are shown here. This does not force unavailable tabs to appear.	这里只显示 TikTok 已在本设备加载的标签，不会强制显示不可用标签。
+Open	打开
+Open a share sheet once, then return here to choose its actions.	请先打开一次分享面板，然后返回此处选择其中的操作。
+Open comments	打开评论
+Open external links directly	直接打开外部链接
+Open messages	打开消息
+Open profile and story website links in your system browser instead of TikTok's in-app browser.	使用系统浏览器打开个人资料和故事中的网页链接，而不是 TikTok 内置浏览器。
+Open the feed anyway	仍然打开信息流
+Open the feed anyway, %1$d left today	仍然打开信息流，今天还可用 %1$d 次
+Open the feed anyway, the last time today	仍然打开信息流，这是今天最后一次
+Open the feed once so Hushfeed can see which bottom tabs TikTok loaded.	请先打开一次信息流，以便 Hushfeed 识别 TikTok 已加载的底部标签。
+Open the feed once so Hushfeed can see which tabs TikTok loaded.	请先打开一次信息流，以便 Hushfeed 识别 TikTok 已加载的信息流标签。
