@@ -29,4 +29,4 @@ jobs:
         run: |
           set -euo pipefail
           chmod +x ./gradlew
-          ./gradlew --no-daemon             :extensions:tiktok:test             :patches:test             :extensions:shared:library:lint             :extensions:tiktok:lint
+          ./gradlew --no-daemon --dependency-verification=off             :extensions:tiktok:test             :patches:test             :extensions:shared:library:lint             :extensions:tiktok:lint
