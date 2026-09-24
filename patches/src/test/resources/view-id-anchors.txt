@@ -74,3 +74,4 @@ comment/CommentTools.java|DISLIKE_BUTTON_IDS|k0k|app|class-method:setHateVisibil
 comment/CommentTools.java|DISLIKE_ICON_IDS|mmt|app|class-method:setHateVisibility
 captions/CaptionStyle.java|TEXT_ID|dlr|app|method-string:caption_balancer
 captions/CaptionStyle.java|BACKGROUND_ID|dlk|app|com.ss.android.ugc.aweme.autocaption.refactor.CLACaptionAssemV2
+feedfilter/TakoAiFilter.java|SEARCH_TAB_ENTRANCE_ID|tv_tab_tako_entrance|app|layout:com.ss.android.ugc.aweme.search.pages.core.ui.fragment.SearchContainerFragment
