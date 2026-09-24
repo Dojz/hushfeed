@@ -757,28 +757,48 @@ class RuntimeViewIdAnchorsTest {
         return anchors
     }
 
-    /** `source|group|names` for every id the extension looks up by a name written into its code. */
-    private fun lookups(): Set<String> {
+    /**
+     * `source|group|names` for every id the extension looks up by a name written into its code,
+     * traced from each lookup call by [LookupScan]. A lookup the scan cannot trace to its
+     * literals fails here, since a name that reaches the phone untraced has no table line and
+     * no owner. Lookups under the platform's own package (`android`) are not TikTok's views and
+     * take no table line; they are held to [FRAMEWORK_IDS] instead.
+     */
+    private fun lookups(): Set<String> = lookupScan().lookups.map { it.key }.toSortedSet()
+
+    private fun lookupScan(): LookupScan.Result {
         val repo = if (File("src/main/kotlin").isDirectory) File("..") else File(".")
         val root = File(repo, EXTENSION)
         assertTrue("could not find the extension sources from ${File(".").absolutePath}", root.isDirectory)
-        val found = sortedSetOf<String>()
-        root.walkTopDown().filter { it.extension == "java" }.forEach { file ->
-            val text = file.readText()
-            if (!LOOKS_UP_IDS.containsMatchIn(text)) return@forEach
-            val source = file.relativeTo(root).invariantSeparatorsPath
-            DECLARATION.findAll(text).forEach { match ->
-                val (group, value) = match.destructured
-                val names = LITERAL.findAll(value).map { it.groupValues[1] }.toList()
-                assertTrue(
-                    "$source declares $group as something other than plain string literals: $value",
-                    names.isNotEmpty() && value.replace(LITERAL, "").trim('{', '}', ' ', ',', '\n', '\r', '\t').isEmpty(),
-                )
-                found += "$source|$group|${names.joinToString(",")}"
-            }
-            INLINE.findAll(text).forEach { found += "$source|inline|${it.groups[1]?.value ?: it.groups[2]!!.value}" }
+        val result = LookupScan.scan(root)
+        assertEquals("lookups whose name or package could not be traced to a literal:\n" +
+            result.untraced.joinToString("\n") { "${it.site}: ${it.why}" }, 0, result.untraced.size)
+        assertTrue("the scan found too few lookups to mean anything: ${result.lookups.size}", result.lookups.size > 40)
+        return result
+    }
+
+    @Test
+    fun `every lookup's package is the one its table line says`() {
+        val byKey = anchors().associateBy { it.lookup }
+        val wrong = lookupScan().lookups.mapNotNull { lookup ->
+            val line = byKey[lookup.key] ?: return@mapNotNull null
+            if (line.packageSuffix == lookup.packageSuffix) null
+            else "${lookup.key}: the code resolves it under ${lookup.packageSuffix} (${lookup.site}), the table says ${line.packageSuffix}"
         }
-        return found
+        assertEquals(emptyList<String>(), wrong)
+    }
+
+    /**
+     * The five panels of the platform's own alert dialog, looked up under `android` to make them
+     * transparent. They belong to Android, not to TikTok's build, so they have no owner to hold
+     * and no table line; the rule is that nothing else is looked up under that package.
+     */
+    @Test
+    fun `only the dialog panels are looked up under the platform's own package`() {
+        val framework = lookupScan().framework
+        assertEquals(FRAMEWORK_IDS, framework.map { it.second }.toSortedSet())
+        assertTrue("framework ids are looked up from more than one place: $framework",
+            framework.map { it.first.substringBefore(':') }.toSet().size == 1)
     }
 
     private fun syntheticTable(flags: Int, compact: Boolean, layouts: Boolean): ByteBuffer {
@@ -853,25 +873,11 @@ class RuntimeViewIdAnchorsTest {
 
     private companion object {
         const val EXTENSION = "extensions/tiktok/src/main/java/app/morphe/extension/tiktok"
+        /** The platform dialog panels SettingsUi makes transparent: Android's, not TikTok's. */
+        val FRAMEWORK_IDS = sortedSetOf("buttonPanel", "contentPanel", "customPanel", "parentPanel", "topPanel")
         const val SPARSE = 0x01
         const val OFFSET16 = 0x02
 
-        /** A file that looks views up by resource name. */
-        val LOOKS_UP_IDS = Regex("""ResourceIdCache|getIdentifier\([^;]*"id"""")
-
-        /** A constant holding one or more names: `LIKE_BUTTON_IDS = {"g6r", "fws"}`, `NAME_ID = "title"`. */
-        val DECLARATION = Regex(
-            """static\s+final\s+String(?:\[])?\s+([A-Z][A-Z0-9_]*(?:_IDS?|_RESOURCE_NAMES?))\s*=\s*""" +
-                """(?:new\s+String\[]\s*)?(\{[^}]*}|"[^"]*")\s*;"""
-        )
-
-        /** A name written straight into a lookup: `resolve(resources, PACKAGE, "view_rootview", false)`. */
-        val INLINE = Regex(
-            """\.resolve\(\s*(?:[^,;()]|\([^()]*\))+,\s*(?:[^,;()]|\([^()]*\))+,\s*"([^"]+)"|""" +
-                """getIdentifier\(\s*"([^"]+)"\s*,\s*"id""""
-        )
-
-        val LITERAL = Regex(""""([^"]*)"""")
         val CLASS_NAME = Regex("""[a-z][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_$]*)+""")
         val METHOD_NAME = Regex("""[A-Za-z_$][A-Za-z0-9_$]*""")
         /** A type in a tell: a dotted class name, or a bare framework tag such as LinearLayout. */
