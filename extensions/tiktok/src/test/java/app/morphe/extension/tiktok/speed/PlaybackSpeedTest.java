@@ -150,6 +150,25 @@ public class PlaybackSpeedTest {
         assertEquals("a speed the player refuses keeps TikTok's words",
                 "Speed: 2x", PlaybackSpeedPatch.holdSpeedText("Speed: 2x"));
     }
+    @Test public void theMenuToastNamesTheChosenSpeedNotTikToksNearest() {
+        // TikTok labels a custom speed with its nearest built-in ("2x") and formats it in; the
+        // reword turns that label into the speed actually chosen.
+        assertEquals("2.5x", PlaybackSpeedPatch.menuSpeedText("2x", 2.5f));
+        assertEquals("0.75x", PlaybackSpeedPatch.menuSpeedText("2x", 0.75f));
+        assertEquals("1.25x", PlaybackSpeedPatch.menuSpeedText("2x", 1.25f));
+        // A language that writes the multiplier first, same "2x" label.
+        assertEquals("x2.5", PlaybackSpeedPatch.menuSpeedText("x2", 2.5f));
+        // TikTok's own values already read right: 2x is left alone, and 0.5, 1.5 and 3 carry a
+        // different number the standalone-2 reword never touches.
+        assertEquals("2x", PlaybackSpeedPatch.menuSpeedText("2x", 2f));
+        assertEquals("0.5x", PlaybackSpeedPatch.menuSpeedText("0.5x", 0.5f));
+        assertEquals("1.5x", PlaybackSpeedPatch.menuSpeedText("1.5x", 1.5f));
+        assertEquals("3x", PlaybackSpeedPatch.menuSpeedText("3x", 3f));
+        assertNull(PlaybackSpeedPatch.menuSpeedText(null, 2.5f));
+        // NaN speed and a label with no lone 2 both keep TikTok's label.
+        assertEquals("2x", PlaybackSpeedPatch.menuSpeedText("2x", Float.NaN));
+        assertEquals("3x", PlaybackSpeedPatch.menuSpeedText("3x", 2.5f));
+    }
     @Test public void pausedTiktoksWordsForTheHoldStand() {
         Settings.HOLD_SPEED.save("3");
         PausedProcess.set(true);

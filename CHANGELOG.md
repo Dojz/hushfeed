@@ -4,6 +4,7 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** The speed menu's toast now names the speed you picked. Choosing a custom speed such as 2.5x played at 2.5x but the toast said "Playing at 2x speed", because TikTok labels a custom speed with its nearest built-in and only 0.5, 1.5, 2 and 3 have their own. It reads "Playing at 2.5x speed" now, and TikTok's own speeds are unchanged.
 * **TikTok:** New switch under Screen time, Leave when TikTok says time is up. TikTok's own daily screen-time reminder (the full-screen card once the limit under TikTok's Time and well-being settings is spent) sends the app to the background instead of waiting to be dismissed. Coming straight back within a few minutes leaves the reminder on screen, so the limit and the switch itself stay reachable. (upstream #2)
 * **Compatibility:** Every runtime view ID Hushfeed uses is now tied to TikTok 47.0.3 code, including share actions, comment dislike controls and caption text.
 * **TikTok:** In-app browser privacy guard now protects external websites without breaking Activity center, Watch history, shop checkout or CAPTCHA. Its Privacy switch has clearer wording and still starts off.
