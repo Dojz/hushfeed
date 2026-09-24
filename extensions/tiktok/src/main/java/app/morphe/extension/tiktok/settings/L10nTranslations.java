@@ -12682,7 +12682,7 @@ public final class L10nTranslations {
         table.put("%1$d fields will be overridden when requested",
                 "请求时将覆盖 %1$d 个字段");
         table.put("%1$d gates selected",
-                "已选择 %1$d 个功能开关");
+                "已选择 %1$d 个功能项");
         table.put("%1$d minutes left",
                 "剩余 %1$d 分钟");
         table.put("%1$d rejected",
@@ -12714,11 +12714,11 @@ public final class L10nTranslations {
         table.put("%1$s / current cache only",
                 "%1$s / 仅当前缓存");
         table.put("%1$s / generated registry",
-                "%1$s / 已生成注册表");
+                "%1$s / 自动生成索引");
         table.put("%1$s / generated registry and current cache",
-                "%1$s / 已生成注册表和当前缓存");
+                "%1$s / 自动生成索引和当前缓存");
         table.put("%1$s / local catalog",
-                "%1$s / 本地目录");
+                "%1$s / 本地功能清单");
         table.put("%1$s and above",
                 "%1$s 及以上");
         table.put("%1$s appears more than once in this file.",
@@ -12821,7 +12821,7 @@ public final class L10nTranslations {
         table.put("1 field will be overridden when requested",
                 "请求时将覆盖 1 个字段");
         table.put("1 gate selected",
-                "已选择 1 个功能开关");
+                "已选择 1 个功能项");
         table.put("1 min left",
                 "剩余 1 分钟");
         table.put("1 result",
@@ -12851,7 +12851,7 @@ public final class L10nTranslations {
         table.put("A newer clear replaced that undo. Tap the row again to undo.",
                 "更新的清除操作已取代该撤销记录。再次点按此项即可撤销.");
         table.put("A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.",
-                "信息流上的小标签会显示今天剩余的分钟数或视频数，以更接近用尽的一项为准.");
+                "信息流上的小标签会显示今天剩余的观看时间或视频数量，以更接近用完的一项为准.");
         table.put("A tap on a person in the Send to row only selects them. A second tap on the same person within %1$d seconds sends the video.",
                 "在“发送给”一栏点按某人只会先选中；在 %1$d 秒内再次点按同一人，才会发送视频.");
         table.put("A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.",
@@ -12903,7 +12903,7 @@ public final class L10nTranslations {
         table.put("Allow storage for TikTok in Android settings to save sounds",
                 "请在 Android 设置中允许 TikTok 使用存储空间，以保存声音");
         table.put("Allow storage for TikTok in Android settings to save stories",
-                "请在 Android 设置中允许 TikTok 使用存储空间，以保存故事");
+                "请在 Android 设置中允许 TikTok 使用存储空间，以保存限时动态");
         table.put("Allow storage for TikTok in Android settings to save the live photo's clip",
                 "请在 Android 设置中允许 TikTok 使用存储空间，以保存实况照片的视频片段");
         table.put("Already active",
@@ -12934,7 +12934,7 @@ public final class L10nTranslations {
         table.put("An operator code is five or six digits, like 310260",
                 "运营商代码应为 5 或 6 位数字，例如 310260");
         table.put("An override changes the value TikTok reads from this gate. It does not rewrite TikTok's cached value or prove the named feature changed.",
-                "覆盖值会改变 TikTok 从此功能开关读取到的值，但不会改写 TikTok 的缓存值，也不能证明对应功能一定发生了变化.");
+                "覆盖值会改变 TikTok 从此功能项读取到的值，但不会改写 TikTok 的缓存值，也不能证明对应功能一定发生了变化.");
         table.put("Animated sticker format",
                 "动态贴纸格式");
         table.put("Answer TikTok's location requests with nothing. The region settings change the locale and timezone; this stops the coordinates.",
@@ -12958,9 +12958,9 @@ public final class L10nTranslations {
         table.put("Applying Calm feed",
                 "正在应用“清爽信息流”");
         table.put("Around the video",
-                "视频周围");
+                "视频界面控件");
         table.put("Arrange your feed and bottom tabs",
-                "排列信息流和底部标签");
+                "调整信息流和底部标签");
         table.put("Ask TikTok for search results that aren't personalized to your account. This changes results, not search buttons or suggestions.",
                 "让 TikTok 返回不针对你账号个性化的搜索结果。此选项只改变搜索结果，不改变搜索按钮或搜索建议.");
         table.put("Attention",
@@ -12970,15 +12970,15 @@ public final class L10nTranslations {
         table.put("Auto translate comments",
                 "自动翻译评论");
         table.put("Auto-advance",
-                "自动切换");
+                "自动连播");
         table.put("Auto-advance session limit",
-                "自动切换会话上限");
+                "自动连播数量上限");
         table.put("Auto-advance stopped after %1$d videos",
-                "自动切换已在 %1$d 个视频后停止");
+                "自动连播已在 %1$d 个视频后停止");
         table.put("Auto-advance stopped after one video",
-                "自动切换已在 1 个视频后停止");
+                "自动连播已在 1 个视频后停止");
         table.put("Auto-advance videos",
-                "自动切换视频");
+                "自动播放下一个视频");
         table.put("Automatic",
                 "自动");
         table.put("Automatic clear display",
@@ -13095,7 +13095,7 @@ public final class L10nTranslations {
         table.put("Clear all",
                 "全部清除");
         table.put("Clear all Lab data (overrides, switch, recordings)",
-                "清除实验室全部数据（覆盖值、开关、记录）");
+                "清除实验室全部数据（覆盖值、总开关、记录）");
         table.put("Clear all suggested accounts",
                 "清除所有推荐账号");
         table.put("Clear diagnostic data",
@@ -13159,7 +13159,7 @@ public final class L10nTranslations {
         table.put("Compact comment header",
                 "紧凑评论标题栏");
         table.put("Compare gate reads with their previous values.",
-                "将功能开关读取值与先前值进行比较.");
+                "将功能项读取值与先前值进行比较.");
         table.put("Completed an interrupted settings change. Restart TikTok to apply this.",
                 "已完成之前中断的设置更改。重启 TikTok 后生效.");
     }
@@ -13180,7 +13180,7 @@ public final class L10nTranslations {
         table.put("Controls",
                 "控件");
         table.put("Copied feature gate report",
-                "已复制功能开关报告");
+                "已复制功能项报告");
         table.put("Copy a quick report or save the full report as a file.",
                 "复制简要报告，或将完整报告保存为文件.");
         table.put("Copy comments without username",
@@ -13244,11 +13244,11 @@ public final class L10nTranslations {
         table.put("Country filters",
                 "国家/地区筛选");
         table.put("Counts under the buttons",
-                "按钮下方显示计数");
+                "按钮下方的数量");
         table.put("Create",
                 "创建");
         table.put("Creator exceptions",
-                "创作者例外");
+                "创作者例外名单");
         table.put("Creators and sounds",
                 "创作者与声音");
         table.put("Creators hidden on this phone",
@@ -13272,13 +13272,13 @@ public final class L10nTranslations {
         table.put("Custom value...",
                 "自定义值...");
         table.put("Daily budget",
-                "每日限额");
+                "自定义每日使用上限");
         table.put("Daily budgets, reminders and the hold",
-                "每日限额、提醒与暂停");
+                "每日使用上限、提醒与暂停");
         table.put("Daily time budget",
-                "每日时长限额");
+                "每日观看时长上限");
         table.put("Daily video budget",
-                "每日视频数限额");
+                "每日视频数量上限");
         table.put("Dark",
                 "深色");
         table.put("Days to remember a video. Zero removes the age limit. History keeps at most %1$s videos.",
@@ -13317,7 +13317,7 @@ public final class L10nTranslations {
         table.put("Dismissed one suggested account",
                 "已移除 1 个推荐账号");
         table.put("Do not start the feed on returning",
-                "返回时不要自动打开信息流");
+                "返回应用时不要自动播放信息流");
         table.put("Do nothing",
                 "不执行任何操作");
         table.put("Done",
@@ -13337,7 +13337,7 @@ public final class L10nTranslations {
         table.put("Each area, how many of the things it looks for are in this build and how many are not.",
                 "显示每个区域在当前版本中找到和未找到的目标数量.");
         table.put("Easier comment likes",
-                "更容易点赞评论");
+                "扩大评论点赞触控范围");
         table.put("Empty",
                 "空");
         table.put("Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.",
@@ -13357,7 +13357,7 @@ public final class L10nTranslations {
         table.put("Enter a number.",
                 "请输入数字.");
         table.put("Enter a valid structured value.",
-                "请输入有效的结构化值.");
+                "请输入有效的结构化数据.");
         table.put("Enter a valid two-letter country code",
                 "请输入有效的两位国家/地区代码");
         table.put("Enter a whole number, or one like 20K, 1.5M or 2B",
@@ -13391,15 +13391,15 @@ public final class L10nTranslations {
         table.put("Extend the heart's touch area into nearby blank space. The icon and row spacing stay the same. Text, Reply and other controls keep their own space.",
                 "将爱心按钮的触控区域扩展到附近空白处。图标和行间距保持不变，文字、“回复”和其他控件仍保留各自的触控区域.");
         table.put("Fade the feed out before the hold",
-                "暂停前淡出信息流");
+                "暂停信息流前逐渐淡出");
         table.put("Favorites range",
                 "收藏数范围");
         table.put("Feature Gate Lab",
-                "功能开关实验室");
+                "功能实验室");
         table.put("Feature gate override reset",
-                "功能开关覆盖值已重置");
+                "功能项覆盖值已重置");
         table.put("Feature gate override saved",
-                "功能开关覆盖值已保存");
+                "功能项覆盖值已保存");
         table.put("Feed and navigation",
                 "信息流与导航");
         table.put("Feed button size",
@@ -13426,11 +13426,11 @@ public final class L10nTranslations {
         table.put("Filter TikTok's offline videos",
                 "筛选 TikTok 离线视频");
         table.put("Filter bottom tabs",
-                "筛选底部标签");
+                "选择底部标签");
         table.put("Filter comments by keyword",
                 "按关键词筛选评论");
         table.put("Filter feed tabs",
-                "筛选信息流标签");
+                "选择信息流标签");
         table.put("Filter location-tagged videos",
                 "筛选带地点标签的视频");
         table.put("Filter settings",
@@ -13446,15 +13446,15 @@ public final class L10nTranslations {
         table.put("Find the sound on YouTube Music",
                 "在 YouTube Music 中查找此声音");
         table.put("First caller",
-                "首次调用方");
+                "首次调用位置（First caller）");
         table.put("First rejection:",
                 "首次拒绝:");
         table.put("Fit the video to the screen",
                 "使视频适应屏幕");
         table.put("Focus",
-                "焦点");
+                "专注");
         table.put("Follow probe",
-                "关注探测");
+                "关注请求诊断（Follow Probe）");
         table.put("Following",
                 "正在关注");
         table.put("For You",
@@ -13464,13 +13464,13 @@ public final class L10nTranslations {
         table.put("For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.",
                 "仅适用于 com.deniscerri.ytdl。隐藏其下载卡片，并在后台开始传递任务.");
         table.put("Forced %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
-                "已强制设置 %2$d 个功能开关中的 %1$d 个。其余项目不是布尔值。重启 TikTok 后生效.");
+                "已强制设置 %2$d 个功能项中的 %1$d 个。其余项目不是布尔值。重启 TikTok 后生效.");
         table.put("Forced %1$d gates. Restart TikTok to apply this.",
-                "已强制设置 %1$d 个功能开关。重启 TikTok 后生效.");
+                "已强制设置 %1$d 个功能项。重启 TikTok 后生效.");
         table.put("Forced 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
-                "已强制设置 %2$d 个功能开关中的 1 个。其余项目不是布尔值。重启 TikTok 后生效.");
+                "已强制设置 %2$d 个功能项中的 1 个。其余项目不是布尔值。重启 TikTok 后生效.");
         table.put("Forced 1 gate. Restart TikTok to apply this.",
-                "已强制设置 1 个功能开关。重启 TikTok 后生效.");
+                "已强制设置 1 个功能项。重启 TikTok 后生效.");
         table.put("Forced result",
                 "强制结果");
         table.put("Forget seen videos after",
@@ -13478,7 +13478,7 @@ public final class L10nTranslations {
         table.put("Forget the %1$s seen videos.",
                 "清除这 %1$s 个已看视频的记录.");
         table.put("Forget what has been counted today and end any hold. The budgets themselves are left alone.",
-                "清除今天已经统计的使用量并结束任何暂停状态。每日限额本身不会改变.");
+                "清除今天已经统计的使用量并结束信息流暂停，但不会更改你设置的每日使用上限.");
         table.put("Friends",
                 "好友");
         table.put("From the next start TikTok runs as if it were not patched, so you can tell whether a problem comes from Hushfeed. Your settings stay as they are.",
@@ -13492,17 +13492,17 @@ public final class L10nTranslations {
         table.put("GIF",
                 "GIF");
         table.put("Gate data unavailable",
-                "功能开关数据不可用");
+                "功能项数据不可用");
         table.put("Gate details",
-                "功能开关详情");
+                "功能项详情");
         table.put("Generated defaults",
-                "生成的默认值");
+                "生成的默认值（Generated defaults）");
         table.put("Gestures",
                 "手势");
         table.put("Ghost mode",
                 "隐身模式");
         table.put("Hand-off",
-                "交接");
+                "外部下载");
         table.put("Handle or id",
                 "用户名或 ID");
         table.put("Hidden %1$s on this phone",
@@ -13526,7 +13526,7 @@ public final class L10nTranslations {
         table.put("Hide Search this image prompts",
                 "隐藏“搜索此图片”提示");
         table.put("Hide Series",
-                "隐藏 Series");
+                "隐藏系列");
         table.put("Hide TikTok Shop",
                 "隐藏 TikTok Shop");
         table.put("Hide TikTok Shop in search",
@@ -13535,7 +13535,7 @@ public final class L10nTranslations {
 
     private static void fillZh_rCN7(Map<String, String> table) {
         table.put("Hide TikTok Shop posts from the feed.",
-                "从信息流中隐藏 TikTok Shop 帖子.");
+                "从信息流中隐藏 TikTok Shop 内容.");
         table.put("Hide TikTok's \"Search: ...\" banner above the comment count. This doesn't hide the comments or Hushfeed's comment-search box.",
                 "隐藏评论数量上方 TikTok 的“搜索：...”横幅。不会隐藏评论，也不会隐藏 Hushfeed 的评论搜索框.");
         table.put("Hide TikTok's Auto scroll button",
@@ -13547,7 +13547,7 @@ public final class L10nTranslations {
         table.put("Hide activity status",
                 "隐藏活动状态");
         table.put("Hide ads, Shop posts, LIVE videos and replays, promotional music, and paid partnerships.",
-                "隐藏广告、Shop 帖子、LIVE 视频及回放、推广音乐和付费合作内容.");
+                "隐藏广告、TikTok Shop 内容、LIVE 视频及回放、推广音乐和付费合作内容.");
         table.put("Hide archive",
                 "隐藏归档");
         table.put("Hide bottom tabs TikTok adds later unless you allow them.",
@@ -13621,11 +13621,11 @@ public final class L10nTranslations {
         table.put("Hide sharing apps",
                 "隐藏分享应用");
         table.put("Hide stories",
-                "隐藏故事");
+                "隐藏限时动态");
         table.put("Hide stories from the feed.",
-                "从信息流中隐藏故事.");
+                "从信息流中隐藏限时动态.");
         table.put("Hide stories tray",
-                "隐藏故事栏");
+                "隐藏限时动态栏");
         table.put("Hide suggested accounts",
                 "隐藏推荐账号");
         table.put("Hide suggestions on the search page",
@@ -13754,7 +13754,7 @@ public final class L10nTranslations {
         table.put("Hide videos posted by verified accounts.",
                 "隐藏认证账号发布的视频.");
         table.put("Hide videos that belong to a paid Series.",
-                "隐藏属于付费 Series 的视频.");
+                "隐藏属于付费系列的视频.");
         table.put("Hide videos that use a sound blocked with the player's sound button, or named below.",
                 "隐藏使用已通过播放器声音按钮屏蔽、或名称在下方列表中的声音的视频.");
         table.put("Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.",
@@ -13772,22 +13772,22 @@ public final class L10nTranslations {
         table.put("Highest",
                 "最高");
         table.put("Historical",
-                "历史");
+                "历史记录（Historical）");
         table.put("Historical values",
-                "历史值");
+                "历史值（Historical values）");
         table.put("Hold a gate to choose several",
-                "长按功能开关可多选");
+                "长按功能项可多选");
     }
 
     private static void fillZh_rCN9(Map<String, String> table) {
         table.put("Hold the feed after the budget",
-                "达到限额后暂停信息流");
+                "达到上限后暂停信息流");
         table.put("Home",
                 "首页");
         table.put("Hook status",
                 "Hook 状态");
         table.put("How far each edge press moves the video.",
-                "每次按下边缘时视频跳转的距离.");
+                "设置每次长按屏幕边缘快进或快退的秒数.");
         table.put("Hushfeed cannot read the creator pattern %1$s",
                 "Hushfeed 无法解析创作者匹配规则 %1$s");
         table.put("Hushfeed hid a TikTok CAPTCHA. Turn off Hide CAPTCHA popups if something stops working.",
@@ -13841,7 +13841,7 @@ public final class L10nTranslations {
         table.put("Keep this string to %1$s characters or fewer.",
                 "此字符串最多可包含 %1$s 个字符.");
         table.put("Keep this structured value to %1$s KB or less.",
-                "此结构化值必须不超过 %1$s KB.");
+                "此结构化数据必须不超过 %1$s KB.");
         table.put("Keep websites outside TikTok from using its connection back into the app. TikTok pages such as Activity center, Watch history, shop checkout and CAPTCHA keep working.",
                 "阻止 TikTok 以外的网站通过深度链接重新调用应用。TikTok 自己的“活动中心”“观看历史”“商城结算”和 CAPTCHA 等页面仍可正常工作.");
         table.put("Kept to %1$s, the nearest value this row allows",
@@ -13871,13 +13871,13 @@ public final class L10nTranslations {
         table.put("Last change put back. Restart TikTok to apply all changes.",
                 "上次更改已恢复。重启 TikTok 以应用全部更改.");
         table.put("Last change put back. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.",
-                "上次更改已恢复。功能开关实验室规则属于另一个 TikTok 版本，因此未恢复。重启 TikTok 以应用全部更改.");
+                "上次更改已恢复。功能实验室规则属于另一个 TikTok 版本，因此未恢复。重启 TikTok 以应用全部更改.");
         table.put("Last original value",
                 "上次原始值");
         table.put("Last recording: %1$d gates.",
-                "上次记录：%1$d 个功能开关.");
+                "上次记录：%1$d 个功能项.");
         table.put("Last recording: 1 gate.",
-                "上次记录：1 个功能开关.");
+                "上次记录：1 个功能项.");
         table.put("Layout",
                 "布局");
         table.put("Layout, player, search and system",
@@ -13916,21 +13916,21 @@ public final class L10nTranslations {
         table.put("Live photo clip saved to %1$s",
                 "实况照片视频片段已保存到 %1$s");
         table.put("Loaded current values. Loading all known gates...",
-                "已加载当前值。正在加载所有已知功能开关...");
+                "已加载当前值。正在加载所有已知功能项...");
         table.put("Loaded values are still being read. Try again in a moment.",
                 "仍在读取已加载的值。请稍后重试.");
         table.put("Loaded-value file export failed",
                 "导出已加载值文件失败");
         table.put("Loading gates...",
-                "正在加载功能开关...");
+                "正在加载功能项...");
         table.put("Loading local catalog and current TikTok cache...",
-                "正在加载本地目录和当前 TikTok 缓存...");
+                "正在加载本地功能清单和当前 TikTok 缓存...");
         table.put("Location-tagged videos",
                 "带地点标签的视频");
         table.put("Lock the hold speed with a pull down",
                 "下拉锁定长按倍速");
         table.put("Lock today's budget",
-                "锁定今日限额");
+                "锁定今日使用上限");
         table.put("Log diagnostics",
                 "记录诊断日志");
         table.put("Logging, hook status and reports",
@@ -13978,7 +13978,7 @@ public final class L10nTranslations {
         table.put("Move right",
                 "右移");
         table.put("Move to the next video when the current one ends. Pauses, open dialogs and screen-time holds stop it. Restart TikTok after changing this.",
-                "当前视频结束时自动切换到下一个。暂停、打开的对话框以及屏幕时间暂停会阻止自动切换。更改后请重启 TikTok.");
+                "当前视频结束时自动播放下一个视频。视频暂停、打开对话框或使用时间管理触发的信息流暂停时，自动连播也会暂停。更改后请重启 TikTok.");
         table.put("Move up",
                 "上移");
         table.put("Music disc",
@@ -14004,13 +14004,13 @@ public final class L10nTranslations {
         table.put("No delay",
                 "无延迟");
         table.put("No gate data is available. Refresh values from the menu to try again.",
-                "没有可用的功能开关数据。请从菜单刷新数值后重试.");
+                "没有可用的功能项数据。请从菜单刷新数值后重试.");
         table.put("No gate reads were recorded. Use a TikTok feature while recording.",
-                "未记录到功能开关读取。请在记录期间使用某个 TikTok 功能.");
+                "未记录到功能项读取。请在记录期间使用某个 TikTok 功能.");
         table.put("No gates match this filter.",
-                "没有功能开关符合此筛选条件.");
+                "没有功能项符合此筛选条件.");
         table.put("No gates match this search and filter.",
-                "没有功能开关符合当前搜索和筛选条件.");
+                "没有功能项符合当前搜索和筛选条件.");
         table.put("No hidden creators match this search. Clear the search to see them all.",
                 "没有隐藏的创作者符合当前搜索。清除搜索即可查看全部.");
         table.put("No limit",
@@ -14045,9 +14045,9 @@ public final class L10nTranslations {
         table.put("None of the photos could be saved. Try again.",
                 "所有图片都保存失败。请重试.");
         table.put("None of these gates had an override to reset.",
-                "这些功能开关都没有可重置的覆盖值.");
+                "这些功能项都没有可重置的覆盖值.");
         table.put("None of these gates takes a true or false value.",
-                "这些功能开关都不是布尔值.");
+                "这些功能项都不是布尔值.");
         table.put("None recorded",
                 "无记录");
         table.put("Normal",
@@ -14075,7 +14075,7 @@ public final class L10nTranslations {
         table.put("Nothing hidden.",
                 "没有隐藏任何内容.");
         table.put("Nothing is playing to seek",
-                "当前没有可跳转的视频");
+                "当前没有可快进/快退的视频");
         table.put("Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected.",
                 "没有导入新内容。%1$d 项已匹配，%2$d 项不可用，%3$d 项被拒绝.");
         table.put("Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected. First rejection: %4$s",
@@ -14105,7 +14105,7 @@ public final class L10nTranslations {
         table.put("On. Restore puts back the feed setup you had before.",
                 "已开启。“恢复”会还原之前的信息流设置.");
         table.put("Once today's budget runs out, the hold stays and cannot be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out.",
-                "今日限额用尽后，暂停状态将持续且无法关闭；限额设置也会锁定，直到新的一天开始。你可以在限额用尽前随时关闭此选项.");
+                "今天的使用上限达到后，信息流会持续暂停且无法手动关闭；每日使用上限设置也会锁定，直到下一次重置。在达到上限前可随时关闭此选项.");
         table.put("One area was checked and everything it needs is here.",
                 "已检查 1 个区域，所需内容均已就绪.");
         table.put("One minute left",
@@ -14133,7 +14133,7 @@ public final class L10nTranslations {
         table.put("Open messages",
                 "打开消息");
         table.put("Open profile and story website links in your system browser instead of TikTok's in-app browser.",
-                "使用系统浏览器打开个人资料和故事中的网页链接，而不是 TikTok 内置浏览器.");
+                "使用系统浏览器打开个人资料和限时动态中的网页链接，而不是 TikTok 内置浏览器.");
         table.put("Open the feed anyway",
                 "仍然打开信息流");
         table.put("Open the feed anyway, %1$d left today",
@@ -14150,7 +14150,7 @@ public final class L10nTranslations {
 
     private static void fillZh_rCN12(Map<String, String> table) {
         table.put("Open the story again and try once more",
-                "请重新打开故事后再试一次");
+                "请重新打开限时动态后再试一次");
         table.put("Opens github.com in your browser",
                 "在浏览器中打开 github.com");
         table.put("Operator code",
@@ -14176,9 +14176,9 @@ public final class L10nTranslations {
         table.put("Override this configuration",
                 "覆盖此配置");
         table.put("Override this gate",
-                "覆盖此功能开关");
+                "覆盖此功能项");
         table.put("Overrides are disabled in the Feature Gate Lab.",
-                "功能开关实验室中的覆盖功能已禁用.");
+                "功能实验室中的覆盖功能已禁用.");
         table.put("Overrides disabled. Restart TikTok to apply this.",
                 "覆盖功能已禁用。重启 TikTok 后生效.");
         table.put("Overrides enabled. Restart TikTok to apply this.",
@@ -14226,9 +14226,9 @@ public final class L10nTranslations {
         table.put("Press and hold a profile picture to save the full size original to your photo destination.",
                 "长按头像可将完整尺寸原图保存到你的图片保存位置.");
         table.put("Press and hold a story to save it. Stories have no save button of their own, and holding one is how TikTok pauses it, so this takes that gesture over.",
-                "长按故事即可保存。故事本身没有保存按钮，而 TikTok 原本用长按来暂停，因此启用后会接管该手势.");
+                "长按限时动态即可保存。限时动态本身没有保存按钮，而 TikTok 原本用长按来暂停播放，因此启用后会接管该手势.");
         table.put("Press and hold the left or right third of the screen to jump back or forward. The middle third keeps the Long press action.",
-                "长按屏幕左侧或右侧三分之一区域可后退或前进；中间三分之一区域继续使用“长按”动作.");
+                "长按屏幕左侧三分之一区域可快退，右侧三分之一区域可快进；中间三分之一区域仍执行“长按”动作.");
         table.put("Preview shortened. Save JSON includes the full report.",
                 "预览已缩短。“保存 JSON”会包含完整报告.");
         table.put("Privacy",
@@ -14244,7 +14244,7 @@ public final class L10nTranslations {
         table.put("Promotional music",
                 "推广音乐");
         table.put("Proof",
-                "验证");
+                "识别依据（Proof）");
         table.put("Protect external pages in TikTok's browser",
                 "保护 TikTok 浏览器中的外部页面");
         table.put("Put back the settings saved before the last restore or reset.",
@@ -14256,17 +14256,17 @@ public final class L10nTranslations {
         table.put("Quality",
                 "画质");
         table.put("Quality, files, subtitles and hand-off",
-                "画质、文件、字幕与交接");
+                "画质、文件、字幕与外部下载");
         table.put("Quality, speed and auto-advance",
-                "画质、速度与自动切换");
+                "画质、速度与自动连播");
         table.put("Quick setup",
                 "快速设置");
         table.put("Reading",
                 "正在读取");
         table.put("Recorded gate reads (%1$d)",
-                "已记录的功能开关读取（%1$d）");
+                "已记录的功能项读取（%1$d）");
         table.put("Recording gate reads. Use a feature, then return here to stop.",
-                "正在记录功能开关读取。请使用某项功能，然后返回此处停止记录.");
+                "正在记录功能项读取。请使用某项功能，然后返回此处停止记录.");
         table.put("Recovered an interrupted settings change. Restart TikTok to apply this.",
                 "已恢复之前中断的设置更改。重启 TikTok 后生效.");
     }
@@ -14305,19 +14305,19 @@ public final class L10nTranslations {
         table.put("Required",
                 "必填");
         table.put("Researched",
-                "已研究");
+                "人工整理（Researched）");
         table.put("Researched values",
-                "研究所得值");
+                "人工整理值（Researched values）");
         table.put("Reset",
                 "重置");
         table.put("Reset %1$d gates of %2$d. Restart TikTok to apply this.",
-                "已重置 %2$d 个功能开关中的 %1$d 个。重启 TikTok 后生效.");
+                "已重置 %2$d 个功能项中的 %1$d 个。重启 TikTok 后生效.");
         table.put("Reset %1$d gates. Restart TikTok to apply this.",
-                "已重置 %1$d 个功能开关。重启 TikTok 后生效.");
+                "已重置 %1$d 个功能项。重启 TikTok 后生效.");
         table.put("Reset 1 gate of %2$d. Restart TikTok to apply this.",
-                "已重置 %2$d 个功能开关中的 1 个。重启 TikTok 后生效.");
+                "已重置 %2$d 个功能项中的 1 个。重启 TikTok 后生效.");
         table.put("Reset 1 gate. Restart TikTok to apply this.",
-                "已重置 1 个功能开关。重启 TikTok 后生效.");
+                "已重置 1 个功能项。重启 TikTok 后生效.");
         table.put("Reset override",
                 "重置覆盖值");
         table.put("Reset position",
@@ -14355,11 +14355,11 @@ public final class L10nTranslations {
         table.put("Return a copy with the fields below changed",
                 "返回一份已修改下列字段的副本");
         table.put("Return after using a TikTok feature to see every gate read during the recording.",
-                "使用某项 TikTok 功能后返回此处，即可查看记录期间读取过的所有功能开关.");
+                "使用某项 TikTok 功能后返回此处，即可查看记录期间读取过的所有功能项.");
         table.put("Returns %1$s",
                 "返回 %1$s");
         table.put("Right column",
-                "右侧栏");
+                "右侧按钮栏");
         table.put("Rows",
                 "项目");
         table.put("SIM country preset",
@@ -14371,7 +14371,7 @@ public final class L10nTranslations {
         table.put("Save",
                 "保存");
         table.put("Save Hushfeed settings and Feature Gate Lab rules to a JSON file.",
-                "将 Hushfeed 设置和功能开关实验室规则保存到 JSON 文件.");
+                "将 Hushfeed 设置和功能实验室规则保存到 JSON 文件.");
         table.put("Save JSON",
                 "保存 JSON");
         table.put("Save SRT files with the video. Paired saves use Movies on Android 11+, Download on Android 10, and your video folder on older versions.",
@@ -14379,7 +14379,7 @@ public final class L10nTranslations {
         table.put("Save a profile picture on a long press",
                 "长按保存头像");
         table.put("Save a story on a long press",
-                "长按保存故事");
+                "长按保存限时动态");
         table.put("Save every photo in the post as TikTok received it, not as the screen shows it.",
                 "按 TikTok 接收到的原始内容保存帖子中的每张图片，而不是按屏幕显示效果保存.");
         table.put("Save field values",
@@ -14408,7 +14408,7 @@ public final class L10nTranslations {
         table.put("Saved %1$s",
                 "已保存 %1$s");
         table.put("Saved %1$s of %2$s photos before the story failed",
-                "故事保存失败前，已保存 %2$s 张图片中的 %1$s 张");
+                "限时动态保存失败前，已保存 %2$s 张图片中的 %1$s 张");
         table.put("Saved %1$s of %2$s, %3$s skipped",
                 "已保存 %2$s 项中的 %1$s 项，跳过 %3$s 项");
         table.put("Saved %1$s of %2$s, %3$s skipped and the rest cancelled",
@@ -14444,19 +14444,19 @@ public final class L10nTranslations {
         table.put("Saving the selected video quality without sound",
                 "正在保存所选画质的无声视频");
         table.put("Saving the story",
-                "正在保存故事");
+                "正在保存限时动态");
         table.put("Saving video and subtitles to %1$s",
                 "正在将视频和字幕保存到 %1$s");
         table.put("Screen",
                 "屏幕");
         table.put("Screen time",
-                "屏幕时间");
+                "使用时间管理");
         table.put("Search",
                 "搜索");
         table.put("Search and override gates",
-                "搜索并覆盖功能开关");
+                "搜索并覆盖功能项");
         table.put("Search by name or gate key",
-                "按名称或功能开关键搜索");
+                "按名称或功能项键搜索");
         table.put("Search by name, description or category.",
                 "按名称、说明或分类搜索.");
         table.put("Search countries or operators",
@@ -14476,9 +14476,9 @@ public final class L10nTranslations {
         table.put("Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed is not empty.",
                 "单位为秒。设为 0 表示不限制时长。如果规则会筛掉 TikTok 本次发来的全部视频，则会保留最接近你设定上限的一个，避免信息流为空.");
         table.put("Seek by",
-                "跳转幅度");
+                "每次快进/快退秒数");
         table.put("Seek from the edges",
-                "从屏幕边缘跳转");
+                "长按屏幕边缘快进/快退");
         table.put("Seen",
                 "已看");
         table.put("Seen this session",
@@ -14502,7 +14502,7 @@ public final class L10nTranslations {
         table.put("Sending feedback",
                 "正在发送反馈");
         table.put("Series posts",
-                "Series 帖子");
+                "系列内容");
         table.put("Settings",
                 "设置");
         table.put("Settings are back to their defaults. Restart TikTok to apply all changes.",
@@ -14519,7 +14519,7 @@ public final class L10nTranslations {
 
     private static void fillZh_rCN15(Map<String, String> table) {
         table.put("Settings restored. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.",
-                "设置已恢复。功能开关实验室规则属于另一个 TikTok 版本，因此未恢复。重启 TikTok 以应用全部更改.");
+                "设置已恢复。功能实验室规则属于另一个 TikTok 版本，因此未恢复。重启 TikTok 以应用全部更改.");
         table.put("Share",
                 "分享");
         table.put("Share links through another host",
@@ -14529,11 +14529,11 @@ public final class L10nTranslations {
         table.put("Shares range",
                 "分享数范围");
         table.put("Shop",
-                "商城");
+                "TikTok Shop");
         table.put("Shop order updates and coupon messages no longer take up rows in the Inbox. Your orders are unchanged.",
                 "商城订单更新和优惠券消息不再占用收件箱中的项目。你的订单本身不会改变.");
         table.put("Shop posts",
-                "商城帖子");
+                "TikTok Shop 内容");
         table.put("Show",
                 "显示");
         table.put("Show @username beside a video instead of the display name the creator chose.",
@@ -14547,7 +14547,7 @@ public final class L10nTranslations {
         table.put("Show failures on screen",
                 "在屏幕上显示失败信息");
         table.put("Show gates",
-                "显示功能开关");
+                "显示功能项");
         table.put("Show last report",
                 "显示上次报告");
         table.put("Show only videos with this many comments.",
@@ -14589,7 +14589,7 @@ public final class L10nTranslations {
         table.put("Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off.",
                 "显示完整视频，而不是裁切以适应窗口。在本就能完整显示的长屏手机上不会有变化；在展开的折叠屏、更接近方形的屏幕或分屏模式下，可避免视频两侧或上下被裁掉.");
         table.put("Show what is left of the budget",
-                "显示剩余限额");
+                "显示今日剩余时间/视频数");
         table.put("Show when the camera or microphone is in use",
                 "显示摄像头或麦克风使用状态");
         table.put("Show where a video was posted",
@@ -14623,11 +14623,11 @@ public final class L10nTranslations {
         table.put("Start each new video at your default. A manual choice lasts until the video changes.",
                 "每个新视频都以你的默认速度开始。手动选择的速度会持续到切换视频为止.");
         table.put("Start feature gate recording",
-                "开始记录功能开关");
+                "开始记录功能项");
         table.put("Start recording",
                 "开始记录");
         table.put("Start the day at",
-                "每日开始时间");
+                "每日上限重置时间");
         table.put("Start today over",
                 "重新开始今天");
         table.put("Start typing",
@@ -14658,7 +14658,7 @@ public final class L10nTranslations {
         table.put("Stop TikTok reading what you copied. Copying a link from TikTok still works.",
                 "阻止 TikTok 读取你的剪贴板内容。从 TikTok 复制链接仍可正常使用.");
         table.put("Stop TikTok reporting that you viewed a story or a profile, or that you are typing. Online status is unchanged. It cannot undo what the server has already recorded.",
-                "阻止 TikTok 上报你查看过故事、个人资料或正在输入。在线状态不受影响，也无法撤回服务器已经记录的信息.");
+                "阻止 TikTok 上报你查看过限时动态、个人资料或正在输入。在线状态不受影响，也无法撤回服务器已经记录的信息.");
         table.put("Stop a long press on Like from opening TikTok's repost action.",
                 "阻止长按点赞按钮打开 TikTok 的转发操作.");
         table.put("Stop a long press on Share from opening TikTok's quick share action.",
@@ -14666,7 +14666,7 @@ public final class L10nTranslations {
         table.put("Stop analytics and tracking",
                 "停止分析与跟踪");
         table.put("Stop feature gate recording",
-                "停止记录功能开关");
+                "停止记录功能项");
         table.put("Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.",
                 "阻止当评论内容匹配广告商触发条件时，在评论上方播放品牌动画.");
         table.put("Stop the bubble that asks you to share a video with friends after you like it.",
@@ -14682,11 +14682,11 @@ public final class L10nTranslations {
         table.put("Stopping after this file",
                 "将在当前文件完成后停止");
         table.put("Stories",
-                "故事");
+                "限时动态");
         table.put("Story saved to %1$s",
-                "故事已保存到 %1$s");
+                "限时动态已保存到 %1$s");
         table.put("Structured value observed",
-                "已观察到结构化值");
+                "已检测到结构化数据");
         table.put("Subtitle language",
                 "字幕语言");
         table.put("Subtitles",
@@ -14754,7 +14754,7 @@ public final class L10nTranslations {
         table.put("That settings backup holds a value Hushfeed cannot read. Nothing was altered.",
                 "该设置备份包含 Hushfeed 无法读取的值。未进行任何更改.");
         table.put("That settings backup holds more Feature Gate Lab rules than the Lab takes. Nothing was altered.",
-                "该设置备份包含的功能开关实验室规则超过允许数量。未进行任何更改.");
+                "该设置备份包含的功能实验室规则超过允许数量。未进行任何更改.");
         table.put("That settings backup is damaged or only partly downloaded. Nothing was altered.",
                 "该设置备份已损坏或仅下载了一部分。未进行任何更改.");
         table.put("That settings backup is incomplete, so it may have been cut short. Nothing was altered.",
@@ -14799,7 +14799,7 @@ public final class L10nTranslations {
         table.put("The export failed and the partial file couldn't be removed. Delete it from your Downloads folder.",
                 "导出失败，且无法删除未完成的文件。请从 Downloads 文件夹中手动删除.");
         table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
-                "在暂停前最后 45 秒逐渐调暗信息流，让你平缓进入暂停状态，而不是突然中断。需要同时设置时长限额和达到限额后的暂停.");
+                "达到观看时长上限前的最后 45 秒，信息流会逐渐变暗，再进入暂停。需要同时设置每日观看时长上限和“达到上限后暂停信息流”.");
         table.put("The feed does not end. This is a fine time to leave it.",
                 "信息流不会结束。现在是离开的好时机.");
         table.put("The feed is open again",
@@ -14809,7 +14809,7 @@ public final class L10nTranslations {
         table.put("The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.",
                 "无法删除 hushfeed-safe-mode 文件。请从 Android/data 下的 TikTok 文件夹中手动删除，以重新启用 Hushfeed.");
         table.put("The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.",
-                "两个每日限额重置的时间，使用 24 小时制。默认凌晨 4 点，因为凌晨 1 点还在刷的人通常仍把它算作前一天晚上.");
+                "设置每日观看时长上限和每日视频数量上限的重置时间，使用 24 小时制。默认凌晨 4 点，避免凌晨仍在刷视频时过早重置.");
         table.put("The live photo's clip couldn't be saved. Try again.",
                 "无法保存实况照片的视频片段。请重试.");
         table.put("The loaded-values file you chose couldn't be read. Try again.",
@@ -14829,7 +14829,7 @@ public final class L10nTranslations {
         table.put("The report couldn't be saved. Try again.",
                 "无法保存报告。请重试.");
         table.put("The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.",
-                "收件箱顶部的一排故事头像将被隐藏。仍可从信息流和个人资料中观看故事.");
+                "隐藏收件箱顶部的一排限时动态头像。仍可从信息流和个人资料中查看限时动态.");
         table.put("The setting couldn't finish updating. Its saved value is shown.",
                 "该设置未能完成更新。当前显示的是已保存的值.");
         table.put("The settings backup was rejected. Nothing was altered.",
@@ -14841,7 +14841,7 @@ public final class L10nTranslations {
         table.put("The sticker couldn't be saved. Try again.",
                 "无法保存贴纸。请重试.");
         table.put("The story couldn't be saved. Try again.",
-                "无法保存故事。请重试.");
+                "无法保存限时动态。请重试.");
         table.put("The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.",
                 "每条评论上的踩按钮将改为拉黑评论者，而不是点踩。评论会变暗，并显示可撤销横幅；再次点按可解除拉黑.");
         table.put("The video couldn't be saved. Try again, or choose Automatic.",
@@ -14867,9 +14867,9 @@ public final class L10nTranslations {
         table.put("This file has no loaded values in it.",
                 "此文件中没有已加载值.");
         table.put("This file isn't a loaded-values export from the Feature Gate Lab.",
-                "此文件不是功能开关实验室导出的已加载值文件.");
+                "此文件不是功能实验室导出的已加载值文件.");
         table.put("This gate type is not supported.",
-                "不支持此功能开关类型.");
+                "不支持此功能项类型.");
         table.put("This is the video's own sound, so YouTube Music won't have it",
                 "这是视频自己的原声，因此 YouTube Music 中不会有对应曲目");
         table.put("This key isn't in the local catalog, so its type can't be checked. Reset the override.",
@@ -14892,7 +14892,7 @@ public final class L10nTranslations {
         table.put("This setting's value can't be copied on this build, so it can't be overridden. Reset the override.",
                 "当前版本无法复制此设置的值，因此不能覆盖。请重置覆盖值.");
         table.put("This story isn't available to save",
-                "此故事不可保存");
+                "此限时动态不可保存");
         table.put("This value is required.",
                 "此项为必填.");
         table.put("This video has no link to copy",
@@ -14938,7 +14938,7 @@ public final class L10nTranslations {
         table.put("TikTok runs as if it were not patched. Your settings stay as they are.",
                 "TikTok 会像未打补丁一样运行。你的设置会保持不变.");
         table.put("TikTok's own daily screen-time reminder sends the app to the background instead of waiting to be dismissed. Coming straight back leaves the reminder on screen, so the limit stays reachable. Needs a daily limit set under TikTok's Settings and privacy, under Time and well-being.",
-                "TikTok 自带的每日屏幕时间提醒会把应用送到后台，而不是等待你关闭提醒。立即返回应用时提醒仍会留在屏幕上，因此限额仍然有效。需要先在 TikTok“设置和隐私 > 时间与健康”中设置每日限额.");
+                "当 TikTok 自带的使用时间提醒出现时，自动将应用切到后台，而不是停在提醒页面等待关闭。立即返回应用时提醒仍会保留。需要先在 TikTok 的“设置和隐私 > 时间与健康”中设置每日使用时间上限.");
         table.put("TikTok's own value",
                 "TikTok 原始值");
         table.put("TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.",
@@ -14946,7 +14946,7 @@ public final class L10nTranslations {
         table.put("TikTok's size",
                 "TikTok 默认大小");
         table.put("Times you can open the feed anyway",
-                "仍可强行打开信息流的次数");
+                "达到上限后可继续打开的次数");
         table.put("Today has moved on, so there is nothing to put back",
                 "日期已经变化，因此没有可恢复的今日数据");
         table.put("Today is back where it was",
@@ -14956,11 +14956,11 @@ public final class L10nTranslations {
         table.put("Today starts again",
                 "重新开始今天");
         table.put("Today's budget is locked. The day starts over at %1$s.",
-                "今日限额已锁定。将在 %1$s 重新开始新的一天.");
+                "今日使用上限已锁定。将在 %1$s 重置.");
         table.put("Today's budget is locked. The feed opens again at %1$s. Messages, profiles and search still work.",
-                "今日限额已锁定。信息流将在 %1$s 重新开放。消息、个人资料和搜索仍可使用.");
+                "今日使用上限已锁定。信息流将在 %1$s 重新开放；消息、个人资料和搜索仍可使用.");
         table.put("Today's budget is locked. This can be changed again at %1$s.",
-                "今日限额已锁定。可在 %1$s 后再次更改.");
+                "今日使用上限已锁定。可在 %1$s 后再次更改.");
         table.put("Today: %1$d minute",
                 "今天：%1$d 分钟");
         table.put("Today: %1$d minutes",
@@ -14998,13 +14998,13 @@ public final class L10nTranslations {
         table.put("Turn this on while you record logs for a bug report, then turn it off again. While it is on, TikTok can feel slower and may crash.",
                 "录制用于错误报告的日志时开启此项，完成后请再次关闭。开启期间 TikTok 可能变慢，甚至发生崩溃.");
         table.put("Turned off %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
-                "已关闭 %2$d 个功能开关中的 %1$d 个。其余项目不是布尔值。重启 TikTok 后生效.");
+                "已关闭 %2$d 个功能项中的 %1$d 个。其余项目不是布尔值。重启 TikTok 后生效.");
         table.put("Turned off %1$d gates. Restart TikTok to apply this.",
-                "已关闭 %1$d 个功能开关。重启 TikTok 后生效.");
+                "已关闭 %1$d 个功能项。重启 TikTok 后生效.");
         table.put("Turned off 1 gate of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
-                "已关闭 %2$d 个功能开关中的 1 个。其余项目不是布尔值。重启 TikTok 后生效.");
+                "已关闭 %2$d 个功能项中的 1 个。其余项目不是布尔值。重启 TikTok 后生效.");
         table.put("Turned off 1 gate. Restart TikTok to apply this.",
-                "已关闭 1 个功能开关。重启 TikTok 后生效.");
+                "已关闭 1 个功能项。重启 TikTok 后生效.");
         table.put("Two letters, like us, gb or jp.",
                 "两个字母，例如 us、gb 或 jp.");
     }
@@ -15146,11 +15146,11 @@ public final class L10nTranslations {
         table.put("Your previous feed setup is back. Restart TikTok to apply every change.",
                 "之前的信息流配置已恢复。重启 TikTok 以应用全部更改.");
         table.put("Zero leaves the way out of the hold there every time, which is what it has always done. Anything else is how many times a day it works, and once they are gone the hold stays up until the day starts over. Ignored while the budget is locked, which takes the way out away entirely.",
-                "设为 0 时，每次进入暂停状态都可以退出，与原先行为相同。其他数值表示每天允许退出的次数；次数用完后，暂停会持续到新的一天开始。锁定限额时此设置会被忽略，因为锁定状态下完全不允许退出.");
+                "设为 0 时，每次信息流暂停后都允许继续打开。其他数值表示每天允许绕过暂停的次数；次数用完后，信息流会保持暂停直到下一次重置。若已锁定今日使用上限，则不能绕过暂停.");
         table.put("Zero means no limit. Counts the videos Hushfeed advanced past for you, not the ones you swiped yourself, and starts again when the feed is rebuilt or you change this number.",
                 "设为 0 表示无限制。只统计 Hushfeed 自动切换过去的视频，不统计你手动滑过的视频。当信息流重建或你更改此数值时会重新计数.");
         table.put("Zero shows the notice and leaves the feed alone. Anything else covers the feed for that many minutes once a budget is reached. Messages, profiles and search keep working, and nothing in the feed is thrown away.",
-                "设为 0 时只显示提示，不遮挡信息流。其他数值表示达到限额后遮住信息流的分钟数。消息、个人资料和搜索仍可使用，信息流中的内容也不会被丢弃.");
+                "设为 0 时，达到每日使用上限后只显示提醒，不暂停信息流。设置其他数值后，达到上限时会暂停信息流相应分钟数。消息、个人资料和搜索仍可使用，已加载的信息流内容也不会被清除.");
         table.put("Zero switches this off. A short reminder after that many minutes of watching, and again after the same again. Time on messages, a profile or search does not count, and nothing is shown while the feed is on hold.",
                 "设为 0 可关闭此功能。观看达到设定分钟数后会显示简短提醒，之后每隔相同时间再次提醒。消息、个人资料和搜索页面的时间不计入；信息流暂停期间也不会显示提醒.");
         table.put("Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.",
