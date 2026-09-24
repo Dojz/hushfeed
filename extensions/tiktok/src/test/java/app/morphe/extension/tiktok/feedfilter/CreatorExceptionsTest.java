@@ -331,8 +331,11 @@ public class CreatorExceptionsTest {
             quiet();
             which.enable.run();
             Settings.CREATOR_FILTER_EXCEPTIONS.save("@" + HANDLE.toUpperCase());
+            // A plain post rides along so the page is never emptied: a page the quality filter
+            // alone empties gets its nearest post back by design, exception or not, and the
+            // QualityFilter case would pass on that alone.
             assertEquals(which.filter + " hid a post the exception should have kept",
-                    List.of("kept"), survivors(page(tripped("kept", which))));
+                    List.of("kept", "plain"), survivors(page(tripped("kept", which), new Item("plain"))));
         }
     }
 
@@ -512,5 +515,26 @@ public class CreatorExceptionsTest {
         Settings.BLOCKED_CREATORS.save("");
         Settings.LOCAL_HIDDEN_CREATORS.save("");
         assertNull(CreatorExceptions.conflictNote("alice, bob, " + UID + ", news_daily"));
+    }
+
+    @Test
+    public void theRowNamesTheEntriesThatArrivedUnusable() {
+        // A backup carries the list as typed elsewhere; the editor's refusal never saw it.
+        Settings.BLOCKED_CREATORS.save("bob");
+        String list = "alice, /^news_/, Poster Person, bob";
+        assertEquals(List.of("/^news_/", "Poster Person"), CreatorExceptions.inertEntries(list));
+        String note = CreatorExceptions.conflictNote(list);
+        assertNotNull(note);
+        String[] lines = note.split("\n");
+        assertEquals(2, lines.length);
+        assertTrue(lines[0], lines[0].startsWith("Also on a block list, so still hidden: ") && lines[0].contains("bob"));
+        assertTrue(lines[1], lines[1].startsWith("Not a handle or id, so ignored: ")
+                && lines[1].contains("/^news_/, Poster Person"));
+        Settings.BLOCKED_CREATORS.save("");
+        String alone = CreatorExceptions.conflictNote(list);
+        assertNotNull(alone);
+        assertTrue(alone, alone.startsWith("Not a handle or id, so ignored: ") && !alone.contains("\n"));
+        // And they match nobody on the feed: the names parsed out of the list leave them out.
+        assertEquals(java.util.Set.of("alice", "bob"), CreatorExceptions.names(list));
     }
 }

@@ -75,14 +75,31 @@ public final class CreatorExceptions {
             AdvancedFeedRules.LiveReplayFilter.class,
             RegionFilter.class);
 
-    /** One list's exact names, kept while the list reads the same. */
+    /** One list's exact names and its mask token, kept while the list reads the same. */
     private static final class Names {
         final String source;
         final Set<String> exact;
+        /** Empty for no exceptions; otherwise the count and a 64-bit print of the names. */
+        final String token;
 
         Names(String source, Set<String> exact) {
             this.source = source;
             this.exact = exact;
+            token = exact.isEmpty() ? "" : "CreatorExceptions#" + exact.size() + '.' + Long.toHexString(fingerprint(exact));
+        }
+
+        /** FNV-1a over the names in order. A 32-bit set hash summed String hashes, which two lists can share. */
+        private static long fingerprint(Set<String> names) {
+            long hash = 0xcbf29ce484222325L;
+            for (String name : names) {
+                for (int index = 0; index < name.length(); index++) {
+                    hash ^= name.charAt(index);
+                    hash *= 0x100000001b3L;
+                }
+                hash ^= '\n';
+                hash *= 0x100000001b3L;
+            }
+            return hash;
         }
     }
 
@@ -119,21 +136,24 @@ public final class CreatorExceptions {
      * Empty while there are no exceptions, which keeps every mask as it was.
      */
     static String maskToken() {
-        Set<String> names = names(Settings.CREATOR_FILTER_EXCEPTIONS.get());
-        return names.isEmpty() ? "" : "CreatorExceptions#" + Integer.toHexString(names.hashCode());
+        return current(Settings.CREATOR_FILTER_EXCEPTIONS.get()).token;
     }
 
     /** The exact, normalized names in {@code source}. Patterns and display names are left out. */
     static Set<String> names(String source) {
+        return current(source).exact;
+    }
+
+    private static Names current(String source) {
         Names found = current;
-        if (found != null && found.source.equals(source)) return found.exact;
+        if (found != null && found.source.equals(source)) return found;
         synchronized (LOCK) {
             found = current;
             if (found == null || !found.source.equals(source)) {
                 found = new Names(source, parse(source));
                 current = found;
             }
-            return found.exact;
+            return found;
         }
     }
 
@@ -194,12 +214,38 @@ public final class CreatorExceptions {
         return found;
     }
 
-    /** The line under the settings row naming the conflicts, or null when there are none. */
+    /**
+     * The entries of {@code list} that are not a handle or an id: a pattern between slashes or
+     * anything with a space in it. The editor refuses them, but a settings backup carries the
+     * list as it was typed elsewhere, and one that arrives that way matches nobody.
+     */
+    public static List<String> inertEntries(String list) {
+        List<String> found = new ArrayList<>();
+        for (String entry : AdvancedFeedRules.creatorEntries(list)) {
+            if (AdvancedFeedRules.isPattern(entry) || hasSpace(entry)) found.add(entry);
+        }
+        return found;
+    }
+
+    /**
+     * The lines under the settings row: the entries a block list also holds, and the entries
+     * the list cannot use. Null when there is nothing to say.
+     */
     @Nullable
     public static String conflictNote(String list) {
-        List<String> names = alsoBlocked(list);
-        if (names.isEmpty()) return null;
-        String joined = String.join(", ", names);
-        return L10n.f("Also on a block list, so still hidden: %1$s", L10n.isolate(joined));
+        List<String> blocked = alsoBlocked(list);
+        List<String> inert = inertEntries(list);
+        if (blocked.isEmpty() && inert.isEmpty()) return null;
+        StringBuilder note = new StringBuilder();
+        if (!blocked.isEmpty()) {
+            String joined = String.join(", ", blocked);
+            note.append(L10n.f("Also on a block list, so still hidden: %1$s", L10n.isolate(joined)));
+        }
+        if (!inert.isEmpty()) {
+            if (note.length() > 0) note.append('\n');
+            String joined = String.join(", ", inert);
+            note.append(L10n.f("Not a handle or id, so ignored: %1$s", L10n.isolate(joined)));
+        }
+        return note.toString();
     }
 }

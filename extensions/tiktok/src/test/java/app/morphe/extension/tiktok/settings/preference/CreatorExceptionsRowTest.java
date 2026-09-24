@@ -92,6 +92,13 @@ public class CreatorExceptionsRowTest {
             row.getView(null, null);
             summary = String.valueOf(row.getSummary());
             assertTrue(summary, summary.endsWith("\nCurrent: alice, bob"));
+
+            // A list a backup brought in, with an entry the editor would have refused.
+            Settings.CREATOR_FILTER_EXCEPTIONS.save("alice, /^news_/");
+            row.setText("alice, /^news_/");
+            summary = String.valueOf(row.getSummary());
+            assertTrue(summary, summary.endsWith(
+                    "Not a handle or id, so ignored: " + L10n.isolate("/^news_/")));
         }
     }
 
