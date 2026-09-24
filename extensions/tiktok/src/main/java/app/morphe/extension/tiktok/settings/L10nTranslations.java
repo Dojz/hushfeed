@@ -12746,7 +12746,7 @@ public final class L10nTranslations {
         table.put("%1$s is not a country code, so no video would ever match it. Use two letters, like GB, IE or US.",
                 "%1$s 不是国家代码，因此不会有视频匹配。请使用两个字母，例如 GB、IE 或 US.");
         table.put("%1$s is not in this Lab catalog.",
-                "%1$s 不在此实验室目录中.");
+                "%1$s 不在实验室功能清单中.");
         table.put("%1$s isn't installed or doesn't take links",
                 "未安装 %1$s，或它不接受链接");
         table.put("%1$s left",
@@ -14214,7 +14214,7 @@ public final class L10nTranslations {
         table.put("Player config",
                 "播放器配置");
         table.put("Playlist posts",
-                "播放列表帖子");
+                "播放列表内容");
         table.put("Popular",
                 "热门");
         table.put("Popups",
