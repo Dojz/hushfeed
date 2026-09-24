@@ -12843,7 +12843,7 @@ public final class L10nTranslations {
         table.put("A forced value applies to this copy of TikTok whichever account is signed in. It cannot get past a check the server makes.",
                 "强制值会应用于此 TikTok 安装，无论登录哪个账号。它无法绕过服务器端检查.");
         table.put("A good place to stop, if you want one.",
-                "如果你想停下来，这里是个合适的位置.");
+                "如果想停一停，现在正合适.");
         table.put("A green dot in the top corner while TikTok has the camera open and an orange one while it records sound. They go when the access ends.",
                 "TikTok 使用摄像头时，顶部角落显示绿点；录音时显示橙点。访问结束后指示点会消失.");
         table.put("A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.",
@@ -12863,7 +12863,7 @@ public final class L10nTranslations {
         table.put("Activity",
                 "活动");
         table.put("Activity center (PIA)",
-                "活动中心（PIA）");
+                "活动中心\nPIA");
         table.put("Add",
                 "添加");
         table.put("Add a button beside the block control to send feedback about the current video.",
@@ -12924,7 +12924,7 @@ public final class L10nTranslations {
         table.put("Always show the publish date in video author information. Restart TikTok to apply this.",
                 "始终在视频作者信息中显示发布日期。重启 TikTok 后生效.");
         table.put("An app's package name, like com.dv.adm. The save button sends the video's link there instead of saving it here. Leave it empty to save here.",
-                "应用包名，例如 com.dv.adm。点击保存按钮时，会把视频链接发送给该应用，而不是在此处保存。留空则在本地保存.");
+                "填写外部下载应用的包名，例如 com.dv.adm。点击保存时会把视频链接发送给该应用，而不是由 TikTok 保存；留空则仍在 TikTok 中保存.");
         table.put("An exception names one creator, so a pattern can't be one: %1$s",
                 "例外项只能指定一个创作者，不能使用匹配规则：%1$s");
         table.put("An exception takes a handle or id, not a display name: %1$s",
@@ -12946,7 +12946,7 @@ public final class L10nTranslations {
         table.put("App",
                 "应用");
         table.put("App AB",
-                "应用 AB");
+                "A/B 实验");
         table.put("Appearance",
                 "外观");
         table.put("Applies to both video and photo downloads.",
@@ -13168,7 +13168,7 @@ public final class L10nTranslations {
         table.put("Config",
                 "配置");
         table.put("Config (Settings Manager)",
-                "配置（设置管理器）");
+                "配置管理器\nSettings Manager");
         table.put("Confirm before following",
                 "关注前确认");
         table.put("Confirm before liking",
@@ -13319,7 +13319,7 @@ public final class L10nTranslations {
         table.put("Do not start the feed on returning",
                 "返回应用时不要自动播放信息流");
         table.put("Do nothing",
-                "不执行任何操作");
+                "不执行操作");
         table.put("Done",
                 "完成");
         table.put("Double tap",
@@ -13446,7 +13446,7 @@ public final class L10nTranslations {
         table.put("Find the sound on YouTube Music",
                 "在 YouTube Music 中查找此声音");
         table.put("First caller",
-                "首次调用位置（First caller）");
+                "首次调用位置\nFirst caller");
         table.put("First rejection:",
                 "首次拒绝:");
         table.put("Fit the video to the screen",
@@ -13460,9 +13460,9 @@ public final class L10nTranslations {
         table.put("For You",
                 "为你推荐");
         table.put("For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.",
-                "仅适用于 com.deniscerri.ytdl。保存按钮将链接交给 YTDLnis 时，可指定下载音频或视频.");
+                "仅适用于 com.deniscerri.ytdl。将链接交给 YTDLnis 时，可选择下载音频或视频.");
         table.put("For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.",
-                "仅适用于 com.deniscerri.ytdl。隐藏其下载卡片，并在后台开始传递任务.");
+                "仅适用于 com.deniscerri.ytdl。隐藏 YTDLnis 的下载卡片，并在后台开始下载任务.");
         table.put("Forced %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.",
                 "已强制设置 %2$d 个功能项中的 %1$d 个。其余项目不是布尔值。重启 TikTok 后生效.");
         table.put("Forced %1$d gates. Restart TikTok to apply this.",
@@ -13496,7 +13496,7 @@ public final class L10nTranslations {
         table.put("Gate details",
                 "功能项详情");
         table.put("Generated defaults",
-                "生成的默认值（Generated defaults）");
+                "生成的默认值\nGenerated defaults");
         table.put("Gestures",
                 "手势");
         table.put("Ghost mode",
@@ -13774,7 +13774,7 @@ public final class L10nTranslations {
         table.put("Historical",
                 "历史记录（Historical）");
         table.put("Historical values",
-                "历史值（Historical values）");
+                "历史值\nHistorical values");
         table.put("Hold a gate to choose several",
                 "长按功能项可多选");
     }
@@ -13787,7 +13787,7 @@ public final class L10nTranslations {
         table.put("Hook status",
                 "Hook 状态");
         table.put("How far each edge press moves the video.",
-                "设置每次长按屏幕边缘快进或快退的秒数.");
+                "设置每次长按屏幕边缘快进或后退的秒数.");
         table.put("Hushfeed cannot read the creator pattern %1$s",
                 "Hushfeed 无法解析创作者匹配规则 %1$s");
         table.put("Hushfeed hid a TikTok CAPTCHA. Turn off Hide CAPTCHA popups if something stops working.",
@@ -13960,7 +13960,7 @@ public final class L10nTranslations {
         table.put("Media",
                 "媒体");
         table.put("Media config (VE)",
-                "媒体配置（VE）");
+                "媒体配置\nVE");
         table.put("Messages, profiles and search still work.",
                 "消息、个人资料和搜索仍可使用.");
         table.put("Microphone in use",
@@ -14075,7 +14075,7 @@ public final class L10nTranslations {
         table.put("Nothing hidden.",
                 "没有隐藏任何内容.");
         table.put("Nothing is playing to seek",
-                "当前没有可快进/快退的视频");
+                "当前没有可快进/后退的视频");
         table.put("Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected.",
                 "没有导入新内容。%1$d 项已匹配，%2$d 项不可用，%3$d 项被拒绝.");
         table.put("Nothing new was imported. %1$d already matched, %2$d unavailable, %3$d rejected. First rejection: %4$s",
@@ -14228,7 +14228,7 @@ public final class L10nTranslations {
         table.put("Press and hold a story to save it. Stories have no save button of their own, and holding one is how TikTok pauses it, so this takes that gesture over.",
                 "长按限时动态即可保存。限时动态本身没有保存按钮，而 TikTok 原本用长按来暂停播放，因此启用后会接管该手势.");
         table.put("Press and hold the left or right third of the screen to jump back or forward. The middle third keeps the Long press action.",
-                "长按屏幕左侧三分之一区域可快退，右侧三分之一区域可快进；中间三分之一区域仍执行“长按”动作.");
+                "长按屏幕左侧三分之一区域可后退，右侧三分之一区域可快进；中间三分之一区域仍执行“长按”动作.");
         table.put("Preview shortened. Save JSON includes the full report.",
                 "预览已缩短。“保存 JSON”会包含完整报告.");
         table.put("Privacy",
@@ -14244,7 +14244,7 @@ public final class L10nTranslations {
         table.put("Promotional music",
                 "推广音乐");
         table.put("Proof",
-                "识别依据（Proof）");
+                "识别依据\nProof");
         table.put("Protect external pages in TikTok's browser",
                 "保护 TikTok 浏览器中的外部页面");
         table.put("Put back the settings saved before the last restore or reset.",
@@ -14305,9 +14305,9 @@ public final class L10nTranslations {
         table.put("Required",
                 "必填");
         table.put("Researched",
-                "人工整理（Researched）");
+                "候选值");
         table.put("Researched values",
-                "人工整理值（Researched values）");
+                "候选值\nResearched values");
         table.put("Reset",
                 "重置");
         table.put("Reset %1$d gates of %2$d. Restart TikTok to apply this.",
@@ -14470,15 +14470,15 @@ public final class L10nTranslations {
         table.put("Search these comments",
                 "搜索这些评论");
         table.put("Search translated titles and descriptions, then open the original setting.",
-                "搜索已翻译的标题和说明，然后打开对应的原始设置项.");
+                "搜索中文标题和说明，并直接打开对应设置.");
         table.put("Search within comments",
                 "在评论中搜索");
         table.put("Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed is not empty.",
                 "单位为秒。设为 0 表示不限制时长。如果规则会筛掉 TikTok 本次发来的全部视频，则会保留最接近你设定上限的一个，避免信息流为空.");
         table.put("Seek by",
-                "每次快进/快退秒数");
+                "快进/后退秒数");
         table.put("Seek from the edges",
-                "长按屏幕边缘快进/快退");
+                "长按屏幕边缘快进/后退");
         table.put("Seen",
                 "已看");
         table.put("Seen this session",
@@ -14631,7 +14631,7 @@ public final class L10nTranslations {
         table.put("Start today over",
                 "重新开始今天");
         table.put("Start typing",
-                "开始输入");
+                "开始输入关键词");
         table.put("Start with comments. Hide the comment count, sort and close buttons, plus the suggestion area above them. Use Back or swipe down to close comments.",
                 "打开时直接进入评论。隐藏评论数量、排序和关闭按钮，以及其上方的建议区域。使用“返回”或向下滑动关闭评论.");
         table.put("Sticker",
@@ -14644,7 +14644,7 @@ public final class L10nTranslations {
         table.put("Sticker saved to %1$s",
                 "贴纸已保存到 %1$s");
         table.put("Still here. Nothing is waiting.",
-                "仍在此处。当前没有待处理内容.");
+                "暂时没有待处理内容.");
         table.put("Still reading the record. Tap again in a moment.",
                 "仍在读取记录。请稍后再次点按.");
         table.put("Still saving the last one",
@@ -14795,17 +14795,17 @@ public final class L10nTranslations {
         table.put("The diagnostic report couldn't be saved. Try again.",
                 "无法保存诊断报告。请重试.");
         table.put("The downloader app you chose isn't installed. Check Send links to another app under Downloads.",
-                "你选择的下载器应用未安装。请检查“下载”中的“将链接发送到其他应用”.");
+                "你选择的外部下载应用尚未安装。请检查“下载 > 将链接发送到其他应用”的设置.");
         table.put("The export failed and the partial file couldn't be removed. Delete it from your Downloads folder.",
                 "导出失败，且无法删除未完成的文件。请从 Downloads 文件夹中手动删除.");
         table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
                 "达到观看时长上限前的最后 45 秒，信息流会逐渐变暗，再进入暂停。需要同时设置每日观看时长上限和“达到上限后暂停信息流”.");
         table.put("The feed does not end. This is a fine time to leave it.",
-                "信息流不会结束。现在是离开的好时机.");
+                "信息流永远刷不完，现在退出正合适.");
         table.put("The feed is open again",
-                "信息流已重新开放");
+                "信息流已恢复");
         table.put("The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.",
-                "返回应用时，信息流会等待你点按一次后才继续播放。消息、个人资料和搜索仍可正常打开.");
+                "返回应用后，信息流会等你点一下再继续播放。消息、个人资料和搜索仍可直接打开.");
         table.put("The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.",
                 "无法删除 hushfeed-safe-mode 文件。请从 Android/data 下的 TikTok 文件夹中手动删除，以重新启用 Hushfeed.");
         table.put("The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.",
@@ -15115,7 +15115,7 @@ public final class L10nTranslations {
         table.put("Write the video's sound beside it as an .m4a. Android 10 and later file audio separately, so it lands in Music under the same folder name as your videos.",
                 "将视频声音另存为旁边的 .m4a 文件。Android 10 及以上会将音频单独归档，因此它会保存到 Music 中与视频文件夹同名的文件夹.");
         table.put("YTDLnis background mode",
-                "YTDLnis 后台模式");
+                "YTDLnis 后台下载");
         table.put("YTDLnis download type",
                 "YTDLnis 下载类型");
         table.put("Yes",
