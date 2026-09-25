@@ -12875,7 +12875,7 @@ public final class L10nTranslations {
         table.put("Add a search box that filters comments already loaded on this video by text or username. It doesn't search all of TikTok or remove TikTok's suggested-search banner.",
                 "添加搜索框，可按文字或用户名筛选当前视频已加载的评论。它不会搜索整个 TikTok，也不会移除 TikTok 的推荐搜索横幅.");
         table.put("Add a separate button that skips videos using the current sound.",
-                "添加独立按钮，跳过使用当前声音的视频.");
+                "添加独立按钮，跳过使用当前音乐的视频.");
         table.put("Add hidden creator",
                 "添加隐藏的创作者");
         table.put("Added %1$s",
@@ -12901,7 +12901,7 @@ public final class L10nTranslations {
         table.put("Allow storage for TikTok in Android settings to save profile pictures",
                 "请在 Android 设置中授予 TikTok 存储权限以保存头像");
         table.put("Allow storage for TikTok in Android settings to save sounds",
-                "请在 Android 设置中允许 TikTok 使用存储空间，以保存声音");
+                "请在 Android 设置中授予 TikTok 存储权限以保存音乐");
         table.put("Allow storage for TikTok in Android settings to save stories",
                 "请在 Android 设置中授予 TikTok 存储权限以保存限时动态");
         table.put("Allow storage for TikTok in Android settings to save the live photo's clip",
@@ -13014,7 +13014,7 @@ public final class L10nTranslations {
         table.put("Block this creator",
                 "屏蔽此创作者");
         table.put("Block this sound",
-                "屏蔽此声音");
+                "屏蔽此音乐");
         table.put("Blocked",
                 "已屏蔽");
         table.put("Blocked %1$s",
@@ -13030,11 +13030,11 @@ public final class L10nTranslations {
         table.put("Blocked creators",
                 "已屏蔽的创作者");
         table.put("Blocked sound ids",
-                "已屏蔽的声音 ID");
+                "已屏蔽的音乐 ID");
         table.put("Blocked sound names",
-                "已屏蔽的声音名称");
+                "已屏蔽的音乐名称");
         table.put("Blocked sounds",
-                "已屏蔽的声音");
+                "已屏蔽的音乐");
         table.put("Blocking",
                 "正在屏蔽");
         table.put("Boolean",
@@ -13137,13 +13137,13 @@ public final class L10nTranslations {
         table.put("Comma separated names exactly as the share sheet shows them: friends in the Send to row, share targets such as Facebook, and actions such as Create group or Repost. Stable keys such as copy, save and dislike also work before the sheet opens.",
                 "按分享面板显示名称填写，并用英文逗号分隔：包括“发送给”中的好友、Facebook 等分享目标，以及“创建群聊”“转发”等操作。copy、save、dislike 等稳定键名也可使用.");
         table.put("Comma separated sound ids recorded by the player's sound button. Remove one to unblock it.",
-                "用英文逗号分隔由播放器声音按钮记录的声音 ID。删除某项即可解除屏蔽.");
+                "用英文逗号分隔播放器音乐按钮记录的音乐 ID。删除某项即可取消屏蔽.");
         table.put("Comma separated usernames or display names whose comments are hidden.",
                 "用英文逗号分隔用户名或显示名称，这些用户的评论将被隐藏.");
         table.put("Comma separated words or phrases. Videos whose caption matches are hidden. Case does not matter. Two phrases in quotes can be joined: \"a\" & \"b\" needs both, \"a\" !& \"b\" needs the first without the second.",
                 "用英文逗号分隔关键词或短语。文案匹配的视频会被隐藏，不区分大小写。两个带引号的短语可组合：\"a\" & \"b\" 表示两者都需出现；\"a\" !& \"b\" 表示需要前者且不能有后者.");
         table.put("Comma separated words to match against a sound's name, like saxophone. Case does not matter.",
-                "用英文逗号分隔用于匹配声音名称的关键词，例如 saxophone。不区分大小写.");
+                "用英文逗号分隔用于匹配音乐名称的关键词，例如 saxophone。不区分大小写.");
         table.put("Comma separated. A comment is hidden if its text contains any of them. Case does not matter. Two phrases in quotes can be joined: \"a\" & \"b\" needs both, \"a\" !& \"b\" needs the first without the second.",
                 "用英文逗号分隔。评论文字只要包含任意一项就会被隐藏，不区分大小写。两个带引号的短语可组合：\"a\" & \"b\" 表示两者都需出现；\"a\" !& \"b\" 表示需要前者且不能有后者.");
         table.put("Comment media filename",
@@ -13250,7 +13250,7 @@ public final class L10nTranslations {
         table.put("Creator exceptions",
                 "创作者例外名单");
         table.put("Creators and sounds",
-                "创作者与声音");
+                "创作者与音乐");
         table.put("Creators hidden on this phone",
                 "本机隐藏的创作者");
         table.put("Creators you hid from a video. Search the list and remove one at a time.",
@@ -13444,7 +13444,7 @@ public final class L10nTranslations {
         table.put("Find a setting by name or description",
                 "按名称或说明查找设置");
         table.put("Find the sound on YouTube Music",
-                "在 YouTube Music 中查找此声音");
+                "在 YouTube Music 中查找此音乐");
         table.put("First caller",
                 "首次调用位置\nFirst caller");
         table.put("First rejection:",
@@ -13756,13 +13756,13 @@ public final class L10nTranslations {
         table.put("Hide videos that belong to a paid Series.",
                 "隐藏属于付费系列的视频.");
         table.put("Hide videos that use a sound blocked with the player's sound button, or named below.",
-                "隐藏使用已屏蔽声音，或声音名称与下方列表匹配的视频.");
+                "隐藏使用已屏蔽音乐，或音乐名称与下方列表匹配的视频.");
         table.put("Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.",
                 "隐藏播放量高但评论少的视频。规则与“每赞播放量”相同，0 表示关闭.");
         table.put("Hide videos with a lot of views and few likes. Lower numbers are stricter, zero turns the rule off, and one video is kept back if everything the feed just sent would go.",
                 "隐藏播放量高但点赞少的视频。数值越低越严格，0 为关闭。若本轮信息流会被全部筛掉，则保留 1 条.");
         table.put("Hide videos with blocked sounds",
-                "隐藏使用已屏蔽声音的视频");
+                "隐藏使用已屏蔽音乐的视频");
         table.put("Hide videos you have already seen",
                 "隐藏你已经看过的视频");
         table.put("Hide voting cards and poll results above the comments, including polls that have ended.",
@@ -14037,7 +14037,7 @@ public final class L10nTranslations {
         table.put("No share actions match this search",
                 "没有分享操作符合当前搜索");
         table.put("No sound to block on this video",
-                "此视频没有可屏蔽的声音");
+                "此视频没有可屏蔽的音乐");
         table.put("No suggested accounts to clear",
                 "没有可清除的推荐账号");
         table.put("No video selected. Open a video first.",
@@ -14567,7 +14567,7 @@ public final class L10nTranslations {
         table.put("Show the block button on videos",
                 "在视频上显示屏蔽按钮");
         table.put("Show the block sound button",
-                "显示屏蔽声音按钮");
+                "显示屏蔽音乐按钮");
         table.put("Show the country a video was posted from next to the creator's name.",
                 "在创作者名称旁显示视频发布国家/地区.");
         table.put("Show the current spoken caption while the other controls are hidden.",
@@ -14607,9 +14607,9 @@ public final class L10nTranslations {
         table.put("Something is missing from %1$s. Tap for the whole report.",
                 "%1$s 中缺少部分内容。点按可查看完整报告.");
         table.put("Sound link copied",
-                "声音链接复制成功");
+                "音乐链接复制成功");
         table.put("Sound saved to %1$s",
-                "声音已保存到 %1$s");
+                "音乐已保存到 %1$s");
         table.put("Source",
                 "来源");
         table.put("Speed",
@@ -14904,7 +14904,7 @@ public final class L10nTranslations {
         table.put("This video has no sound of its own",
                 "此视频没有自己的声音");
         table.put("This video's sound has no title to look for",
-                "此视频的声音没有可供搜索的标题");
+                "此视频的音乐没有可搜索的标题");
         table.put("Thumbs down blocks the commenter",
                 "点踩将屏蔽评论者");
         table.put("TikTok closed three times within a minute of starting, so Hushfeed paused itself. Your settings stay as they are.",
@@ -15121,7 +15121,7 @@ public final class L10nTranslations {
         table.put("Yes",
                 "是");
         table.put("YouTube Music couldn't be opened. Open it yourself and search for the sound.",
-                "无法打开 YouTube Music。请手动打开后搜索此声音.");
+                "无法打开 YouTube Music。请手动打开后搜索此音乐.");
         table.put("YouTube Music isn't installed",
                 "未安装 YouTube Music");
         table.put("Your current settings already match Calm feed.",
@@ -15164,4 +15164,5 @@ public final class L10nTranslations {
         table.put("this creator",
                 "此创作者");
     }
+
 }
