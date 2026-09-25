@@ -94,7 +94,7 @@ Activity	活动
 Activity center (PIA)	活动中心\nPIA
 Add	添加
 Add a button beside the block control to send feedback about the current video.	在屏蔽按钮旁添加反馈当前视频的按钮.
-Add a button that hides the current creator on this phone without blocking them.	添加按钮，仅在本机隐藏当前创作者，不拉黑账号.
+Add a button that hides the current creator on this phone without blocking them.	添加按钮，仅在本机隐藏当前创作者，不屏蔽账号.
 Add a creator	添加创作者
 Add a search box that filters comments already loaded on this video by text or username. It doesn't search all of TikTok or remove TikTok's suggested-search banner.	添加搜索框，可按文字或用户名筛选当前视频已加载的评论。它不会搜索整个 TikTok，也不会移除 TikTok 的推荐搜索横幅.
 Add a separate button that skips videos using the current sound.	添加独立按钮，跳过使用当前声音的视频.
@@ -128,7 +128,7 @@ An operator code is five or six digits, like 310260	运营商代码应为 5 或 
 An override changes the value TikTok reads from this gate. It does not rewrite TikTok's cached value or prove the named feature changed.	覆盖值只改变 TikTok 读取到的值，不会改写缓存，也不代表对应功能一定生效.
 Animated sticker format	动态贴纸格式
 Answer TikTok's location requests with nothing. The region settings change the locale and timezone; this stops the coordinates.	TikTok 请求定位时返回空值。地区设置只改区域和时区，此项则阻止提供坐标.
-Answer TikTok's reads of your contacts with an empty list. Find Friends and People you may know lose access to your contact list.	TikTok 读取联系人时返回空列表，使“查找好友”和“你可能认识的人”无法访问联系人.
+Answer TikTok's reads of your contacts with an empty list. Find Friends and People you may know lose access to your contact list.	TikTok 读取联系人时返回空列表，使“发现好友”和“你可能认识的人”无法访问联系人.
 Answer TikTok's scan of the apps on this phone with an empty list. A check for one named app, which TikTok also uses to open an app you tap, is left alone.	TikTok 扫描本机已安装应用时返回空列表。针对特定应用的单项检查会保留，因为 TikTok 还需要它来打开你点按的应用.
 App	应用
 App AB	A/B 实验
@@ -162,13 +162,13 @@ Block location	阻止定位
 Block motion sensors	阻止访问运动传感器
 Block new bottom tabs	阻止新增底部标签
 Block new feed tabs	阻止新增信息流标签
-Block the creator in one tap. Once TikTok confirms, skip to the next video. A small Unblock button appears at the top left for two seconds. You can also unblock later in TikTok's Privacy > Blocked accounts.	一键拉黑当前创作者。成功后跳到下一条视频，左上角会显示 2 秒“解除拉黑”；也可稍后在 TikTok“隐私 > 已屏蔽账号”中解除.
-Block this commenter	拉黑此评论者
-Block this creator	拉黑此创作者
+Block the creator in one tap. Once TikTok confirms, skip to the next video. A small Unblock button appears at the top left for two seconds. You can also unblock later in TikTok's Privacy > Blocked accounts.	一键屏蔽当前创作者。成功后跳到下一条视频，左上角会显示 2 秒“取消屏蔽”；也可稍后在 TikTok“隐私 > 已屏蔽账号”中取消.
+Block this commenter	屏蔽此评论者
+Block this creator	屏蔽此创作者
 Block this sound	屏蔽此声音
 Blocked	已屏蔽
 Blocked %1$s	已屏蔽 %1$s
-Blocked %1$s. Unblock	已屏蔽 %1$s。解除
+Blocked %1$s. Unblock	已屏蔽 %1$s。取消屏蔽
 Blocked and hidden creators	已屏蔽和已隐藏的创作者
 Blocked caption words	已屏蔽的文案关键词
 Blocked comment words	已屏蔽的评论关键词
@@ -255,15 +255,15 @@ Copy the sound link	复制声音链接
 Copy the video link	复制视频链接
 Couldn't change the Lab settings. Try again.	无法更改实验室设置。请重试.
 Couldn't clear the suggested accounts. Reopen the Inbox and try again.	无法清除推荐账号。请重新打开收件箱后重试.
-Couldn't confirm the block for %1$s. Open their profile to check.	无法确认是否已拉黑 %1$s。请打开其个人资料检查.
-Couldn't confirm the unblock for %1$s. Open their profile to check.	无法确认是否已解除对 %1$s 的拉黑。请打开其个人资料检查.
+Couldn't confirm the block for %1$s. Open their profile to check.	无法确认是否已屏蔽 %1$s。请打开其主页检查.
+Couldn't confirm the unblock for %1$s. Open their profile to check.	无法确认是否已取消屏蔽 %1$s。请打开其主页检查.
 Couldn't copy the report. Use Save JSON instead.	无法复制报告。请改用“保存 JSON”.
 Couldn't open settings search. Reopen settings and try again.	无法打开设置搜索。请重新打开设置后重试.
 Couldn't open that settings section. Reopen settings and try again.	无法打开该设置页面。请重新打开设置后重试.
 Couldn't open the file picker to export. Try again.	无法打开文件选择器进行导出。请重试.
 Couldn't open the file picker to import. Try again.	无法打开文件选择器进行导入。请重试.
 Couldn't put back the diagnostic data. Try again.	无法恢复诊断数据。请重试.
-Couldn't read who posted this comment. Open their profile and block them there.	无法识别此评论的发布者。请打开其个人资料并在那里拉黑.
+Couldn't read who posted this comment. Open their profile and block them there.	无法识别此评论的发布者。请打开其主页并在那里屏蔽.
 Couldn't reset this override. Try again.	无法重置此覆盖值。请重试.
 Couldn't restore the settings. Try again.	无法恢复设置。请重试.
 Couldn't save the settings backup. Try again.	无法保存设置备份。请重试.
@@ -299,7 +299,7 @@ Dark	深色
 Days to remember a video. Zero removes the age limit. History keeps at most %1$s videos.	记住视频的天数。设为 0 表示不限制时间。历史记录最多保留 %1$s 个视频.
 Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible.	单位：天。0 表示不限制发布时间。没有有效时间戳的帖子（包括未来时间）不会被隐藏.
 Default	默认值
-Default playback speed	默认播放速度
+Default playback speed	默认播放倍速
 Destination updated	保存位置已更新
 Device access	设备访问
 Device language, then original	设备语言优先，其次原文
@@ -337,7 +337,7 @@ Enter a valid two-letter country code	请输入有效的两位国家/地区代�
 Enter a whole number, or one like 20K, 1.5M or 2B	请输入整数，或类似 20K、1.5M、2B 的数值
 Enter a whole number.	请输入整数.
 Enter true or false.	请输入 true 或 false.
-Enter up to %1$d comma-separated speeds from %2$s to %3$s	最多输入 %1$d 个用英文逗号分隔的速度值，范围为 %2$s 到 %3$s
+Enter up to %1$d comma-separated speeds from %2$s to %3$s	最多输入 %1$d 个用英文逗号分隔的倍速值，范围为 %2$s 到 %3$s
 Enter valid JSON.	请输入有效的 JSON.
 Entry %1$d has a field with the wrong data type.	第 %1$d 项中有字段的数据类型错误.
 Entry %1$d is not an object.	第 %1$d 项不是对象.
@@ -380,7 +380,7 @@ First rejection:	首次拒绝:
 Fit the video to the screen	使视频适应屏幕
 Focus	专注
 Follow probe	关注请求诊断\nFollow Probe
-Following	关注中
+Following	关注
 For You	为你推荐
 For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.	仅适用于 com.deniscerri.ytdl。将链接交给 YTDLnis 时，可选择下载音频或视频.
 For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.	仅适用于 com.deniscerri.ytdl。隐藏 YTDLnis 的下载卡片，并在后台开始下载任务.
@@ -444,8 +444,8 @@ Hide location labels	隐藏地点标签
 Hide message requests	隐藏消息请求
 Hide message streaks	隐藏聊天连续互动
 Hide mini dramas	隐藏短剧
-Hide new follower notifications	隐藏新关注者通知
-Hide new followers	隐藏新关注者
+Hide new follower notifications	隐藏新粉丝通知
+Hide new followers	隐藏新粉丝
 Hide paid partnerships	隐藏付费合作内容
 Hide people and options by name	按名称隐藏联系人和选项
 Hide photo posts	隐藏图文帖子
@@ -479,7 +479,7 @@ Hide the Products block and product cards in search results.	隐藏搜索结果�
 Hide the Report button on videos	隐藏视频上的举报按钮
 Hide the Send to row	隐藏“发送给”一栏
 Hide the Share via row.	隐藏“通过...分享”一栏.
-Hide the Tako AI bubble above the profile button, the Ask bar under videos, the Ask Tako button on the search page, the Ask Tako tab on search results and the Tako bar above comments.	隐藏个人资料按钮上方的 Tako AI 气泡、视频下方的 Ask 栏、搜索页的 Ask Tako 按钮、搜索结果中的 Ask Tako 标签，以及评论上方的 Tako 栏.
+Hide the Tako AI bubble above the profile button, the Ask bar under videos, the Ask Tako button on the search page, the Ask Tako tab on search results and the Tako bar above comments.	隐藏主页按钮上方的 Tako AI 气泡、视频下方的 Ask 栏、搜索页的 Ask Tako 按钮、搜索结果中的 Ask Tako 标签，以及评论上方的 Tako 栏.
 Hide the Tako bubble	隐藏 Tako 气泡
 Hide the Tako chat	隐藏 Tako 聊天
 Hide the actions row of the share sheet.	隐藏分享面板中的操作栏.
@@ -500,10 +500,10 @@ Hide the playlist bar	隐藏播放列表栏
 Hide the playlist bar along the bottom of videos that belong to a series.	隐藏系列视频底部的播放列表栏.
 Hide the plus button under the creator's picture in the right column. Ticking Avatar and follow button above hides the picture with it.	隐藏右侧按钮栏中头像下的加号。若上方同时勾选“头像和关注按钮”，头像也会隐藏.
 Hide the points banner under the search box and the coin counter floating over search results, which TikTok shows in some regions. Searching works as before.	隐藏部分地区中搜索框下方的积分横幅，以及搜索结果上方浮动的金币计数；搜索功能不受影响.
-Hide the purple rewards button beside Add friends on your profile.	隐藏个人资料页“添加好友”旁边的紫色奖励按钮.
+Hide the purple rewards button beside Add friends on your profile.	隐藏主页“添加好友”旁边的紫色奖励按钮.
 Hide the question cards TikTok slides over a video near its end.	隐藏 TikTok 在视频接近结束时显示的问题卡片.
 Hide the quick emoji row and automatic sticker suggestions that appear while you type. The emoji and sticker buttons still work.	隐藏输入评论时的快捷表情和自动贴纸建议，表情和贴纸按钮仍可使用.
-Hide the red counts and dots on every bottom tab, Inbox and Profile included. The inbox itself still shows what came in.	隐藏所有底部标签的红点和未读数，包括收件箱和个人资料；收件箱内容不受影响.
+Hide the red counts and dots on every bottom tab, Inbox and Profile included. The inbox itself still shows what came in.	隐藏所有底部标签的红点和未读数，包括收件箱和主页；收件箱内容不受影响.
 Hide the rewards shortcut	隐藏奖励快捷入口
 Hide the right column	隐藏右侧栏
 Hide the row of friends at the top of the share sheet.	隐藏分享面板顶部的好友一栏.
@@ -566,7 +566,7 @@ Keep long press from reposting	阻止长按触发转发
 Keep the Favorites tab	保留收藏标签
 Keep the clock and status icons off the screen while TikTok is open. Swipe down from the top to peek at them.	TikTok 打开时隐藏状态栏时钟和图标；从顶部下滑可临时查看.
 Keep the screen's refresh rate	保持屏幕刷新率
-Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only.	把当前选择的播放速度沿用到下一条视频。关闭后，每条新视频都从 1x 开始，手动调整只对当前视频有效.
+Keep the speed you chose for the next video. Off, each new video starts at 1x and a manual choice lasts for that video only.	把当前选择的播放倍速沿用到下一条视频。关闭后，每条新视频都从 1x 开始，手动调整只对当前视频有效.
 Keep this string to %1$s characters or fewer.	此字符串最多可包含 %1$s 个字符.
 Keep this structured value to %1$s KB or less.	此结构化数据必须不超过 %1$s KB.
 Keep websites outside TikTok from using its connection back into the app. TikTok pages such as Activity center, Watch history, shop checkout and CAPTCHA keep working.	阻止外部网站通过 TikTok 链接唤回应用。TikTok 自有页面，如活动中心、观看历史、商城结算和 CAPTCHA，仍可正常使用.
@@ -597,10 +597,10 @@ Less than a minute left	剩余不到一分钟
 Let screenshots, screen recording and Circle to Search work on TikTok again. Restart TikTok to apply this.	重新允许在 TikTok 中使用截图、录屏和“圈选搜索”。重启 TikTok 后生效.
 Let the Offline videos menu use your own limit instead of TikTok's fixed one. Restart TikTok to apply this.	让“离线视频”菜单使用你自定义的上限，而不是 TikTok 的固定限制。重启 TikTok 后生效.
 Licenses	许可证
-Like	点赞
-Likes range	点赞数范围
+Like	赞
+Likes range	赞数范围
 Limits	限制
-Link copied	链接已复制
+Link copied	链接复制成功
 Links	链接
 Links in comments open	可打开评论中的链接
 Live photo clip saved to %1$s	实况照片视频片段已保存到 %1$s
@@ -627,7 +627,7 @@ Maximum views per comment	每条评论对应的最大播放量
 Maximum views per like	每个赞对应的最大播放量
 Media	媒体
 Media config (VE)	媒体配置\nVE
-Messages, profiles and search still work.	消息、个人资料和搜索仍可使用.
+Messages, profiles and search still work.	消息、主页和搜索仍可使用.
 Microphone in use	正在使用麦克风
 Mini dramas	短剧
 Minimum	最小值
@@ -642,7 +642,7 @@ Nearby	附近
 Never from these countries	始终隐藏这些国家/地区
 No	否
 No app on this phone opens that file	本机没有应用可以打开该文件
-No creator to block on this video	此视频没有可拉黑的创作者
+No creator to block on this video	此视频没有可屏蔽的创作者
 No creator to hide on this video	此视频没有可隐藏的创作者
 No creators are hidden yet. Hide one from a video, or add a handle above.	还没有隐藏任何创作者。可从视频中隐藏，或在上方添加用户名.
 No current value	没有当前值
@@ -711,13 +711,13 @@ Open a share sheet once, then return here to choose its actions.	先打开一次
 Open comments	打开评论
 Open external links directly	直接打开外部链接
 Open messages	打开消息
-Open profile and story website links in your system browser instead of TikTok's in-app browser.	使用系统浏览器打开个人资料和限时动态中的网页链接，不使用 TikTok 内置浏览器.
+Open profile and story website links in your system browser instead of TikTok's in-app browser.	使用系统浏览器打开主页和限时动态中的网页链接，不使用 TikTok 内置浏览器.
 Open the feed anyway	仍然继续使用信息流
 Open the feed anyway, %1$d left today	仍然继续使用信息流，今天还可继续 %1$d 次
 Open the feed anyway, the last time today	仍然继续使用信息流，这是今天最后一次
 Open the feed once so Hushfeed can see which bottom tabs TikTok loaded.	请先打开一次信息流，以便 Hushfeed 识别 TikTok 已加载的底部标签.
 Open the feed once so Hushfeed can see which tabs TikTok loaded.	请先打开一次信息流，以便 Hushfeed 识别 TikTok 已加载的信息流标签.
-Open the profile again and try once more	请重新打开个人资料页后再试一次
+Open the profile again and try once more	请重新打开主页后再试一次
 Open the story again and try once more	请重新打开限时动态后再试一次
 Opens github.com in your browser	在浏览器中打开 github.com
 Operator code	运营商代码
@@ -761,9 +761,9 @@ Press and hold the left or right third of the screen to jump back or forward. Th
 Preview shortened. Save JSON includes the full report.	预览已缩短。“保存 JSON”会包含完整报告.
 Privacy	隐私
 Privacy and system	隐私与系统
-Profile	个人资料
+Profile	主页
 Profile picture saved to %1$s	头像已保存到 %1$s
-Profile share actions	个人资料分享操作
+Profile share actions	主页分享操作
 Promotional music	推广音乐
 Proof	识别依据\nProof
 Protect external pages in TikTok's browser	保护 TikTok 浏览器中的外部页面
@@ -772,7 +772,7 @@ Put every setting back to its default straight away. Your current settings are k
 Putting the settings back to their defaults	正在将设置恢复为默认值
 Quality	画质
 Quality, files, subtitles and hand-off	画质、文件、字幕与外部下载
-Quality, speed and auto-advance	画质、速度与自动连播
+Quality, speed and auto-advance	画质、倍速与自动连播
 Quick setup	快速设置
 Reading	正在读取
 Recorded gate reads (%1$d)	已记录的功能项读取（%1$d）
@@ -781,7 +781,7 @@ Recovered an interrupted settings change. Restart TikTok to apply this.	已恢�
 Refresh values	刷新数值
 Refreshing current TikTok cache...	正在刷新当前 TikTok 缓存...
 Region	地区
-Remember the last speed	记住上次播放速度
+Remember the last speed	记住上次倍速
 Remind me every	每隔以下时间提醒我
 Remove	移除
 Remove %1$s	移除 %1$s
@@ -838,7 +838,7 @@ Save full report	保存完整报告
 Save media	保存媒体
 Save subtitles beside videos	在视频旁保存字幕
 Save the latest available TikTok crash report for diagnostic export.	保存最新可用的 TikTok 崩溃报告，以便导出诊断信息.
-Save the original sound	保存原始声音
+Save the original sound	保存原声
 Save the sound as well	同时保存声音
 Save videos without sound	保存无声视频
 Save, restore, reset and undo your settings	保存、恢复、重置和撤销设置
@@ -916,12 +916,12 @@ Show gates	显示功能项
 Show last report	显示上次报告
 Show only videos with this many comments.	仅显示评论数在此范围内的视频.
 Show only videos with this many favorites.	仅显示收藏数在此范围内的视频.
-Show only videos with this many likes.	仅显示点赞数在此范围内的视频.
+Show only videos with this many likes.	仅显示赞数在此范围内的视频.
 Show only videos with this many shares.	仅显示分享数在此范围内的视频.
 Show only videos with this many views.	仅显示播放量在此范围内的视频.
 Show search in LIVE	在直播中显示搜索
 Show the Not interested button	显示“不感兴趣”按钮
-Show the block button on videos	在视频上显示拉黑按钮
+Show the block button on videos	在视频上显示屏蔽按钮
 Show the block sound button	显示屏蔽声音按钮
 Show the country a video was posted from next to the creator's name.	在创作者名称旁显示视频发布国家/地区.
 Show the current spoken caption while the other controls are hidden.	隐藏其他控件时仍显示当前语音字幕.
@@ -942,12 +942,12 @@ Skip content warnings	跳过内容警告
 Skipping videos with %1$s	正在跳过带有 %1$s 的视频
 Some Calm feed settings changed. Restore still puts back your earlier setup.	部分“清爽信息流”设置已改变；“恢复”仍会还原之前的配置.
 Something is missing from %1$s. Tap for the whole report.	%1$s 中缺少部分内容。点按可查看完整报告.
-Sound link copied	声音链接已复制
+Sound link copied	声音链接复制成功
 Sound saved to %1$s	声音已保存到 %1$s
 Source	来源
-Speed	速度
-Speed menu choices	速度菜单选项
-Speed while you hold the video	长按视频时的播放速度
+Speed	倍速
+Speed menu choices	倍速菜单选项
+Speed while you hold the video	长按视频时的倍速
 Split comment minimum width	分栏评论最小宽度
 Start each new video at your default. A manual choice lasts until the video changes.	每个新视频都以你的默认速度开始。手动选择的速度会持续到切换视频为止.
 Start feature gate recording	开始记录功能项
@@ -966,7 +966,7 @@ Stop ByteDance AppLog events, AppsFlyer attribution, explicit Firebase screen re
 Stop TikTok asking the screen to run at the frame rate of the video it is playing. On a 90 or 120 Hz phone that ask slows the whole app down to the video's rate, scrolling included.	阻止 TikTok 按视频帧率调整屏幕刷新率。在 90/120Hz 手机上可避免整个应用（包括滚动）被降到视频帧率.
 Stop TikTok listening to the accelerometer, gyroscope, magnetometer and the other motion sensors it uses to fingerprint the phone. Saves the battery they wake.	阻止 TikTok 读取加速度计、陀螺仪、磁力计等运动传感器用于设备指纹识别，并减少相关耗电.
 Stop TikTok reading what you copied. Copying a link from TikTok still works.	阻止 TikTok 读取你的剪贴板内容。从 TikTok 复制链接仍可正常使用.
-Stop TikTok reporting that you viewed a story or a profile, or that you are typing. Online status is unchanged. It cannot undo what the server has already recorded.	阻止 TikTok 上报你查看限时动态、个人资料或正在输入；在线状态不受影响，已上报到服务器的记录无法撤回.
+Stop TikTok reporting that you viewed a story or a profile, or that you are typing. Online status is unchanged. It cannot undo what the server has already recorded.	阻止 TikTok 上报你查看限时动态、主页或正在输入；在线状态不受影响，已上报到服务器的记录无法撤回.
 Stop a long press on Like from opening TikTok's repost action.	阻止长按点赞按钮打开 TikTok 的转发操作.
 Stop a long press on Share from opening TikTok's quick share action.	阻止长按分享按钮打开 TikTok 的快捷分享操作.
 Stop analytics and tracking	停止分析与跟踪
@@ -1050,14 +1050,14 @@ The override doesn't say what list to return. Edit the field values, or reset th
 The profile picture couldn't be saved. Try again.	无法保存头像。请重试.
 The record of an interrupted settings change couldn't be read, so it was set aside. Check your settings.	无法读取未完成设置更改的记录，已另行保存；请检查设置.
 The report couldn't be saved. Try again.	无法保存报告。请重试.
-The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.	隐藏收件箱顶部的限时动态头像栏；仍可从信息流和个人资料查看限时动态.
+The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.	隐藏收件箱顶部的限时动态头像栏；仍可从信息流和主页查看限时动态.
 The setting couldn't finish updating. Its saved value is shown.	设置更新未完成，当前显示已保存值.
 The settings backup was rejected. Nothing was altered.	设置备份被拒绝。未进行任何更改.
 The smallest value is above the largest	最小值大于最大值
 The sound couldn't be saved. Try again.	无法保存声音。请重试.
 The sticker couldn't be saved. Try again.	无法保存贴纸。请重试.
 The story couldn't be saved. Try again.	无法保存限时动态。请重试.
-The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.	评论的踩按钮改为拉黑评论者。评论会变暗并显示撤销提示，再点一次可解除拉黑.
+The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.	评论的踩按钮改为屏蔽评论者。评论会变暗并显示撤销提示，再点一次可取消屏蔽.
 The video couldn't be saved. Try again, or choose Automatic.	无法保存视频。请重试，或选择“自动”.
 There is no Lab change to undo.	没有可撤销的实验室更改.
 There is no diagnostic data to clear	没有可清除的诊断数据
@@ -1087,13 +1087,13 @@ This video has no link to send, so TikTok's own save runs instead	此视频没�
 This video has no original sound to save	此视频没有可保存的原声
 This video has no sound of its own	此视频没有自己的声音
 This video's sound has no title to look for	此视频的声音没有可供搜索的标题
-Thumbs down blocks the commenter	点踩将拉黑评论者
+Thumbs down blocks the commenter	点踩将屏蔽评论者
 TikTok closed three times within a minute of starting, so Hushfeed paused itself. Your settings stay as they are.	TikTok 启动后 1 分钟内连续关闭 3 次，插件已自动暂停；设置不变.
 TikTok default	TikTok 默认
 TikTok default (hold to speed up, quick share)	TikTok 默认（长按加速、快捷分享）
-TikTok default (open the creator's profile)	TikTok 默认（打开创作者个人资料）
-TikTok did not block %1$s. Try again in a moment.	TikTok 未能拉黑 %1$s。请稍后重试.
-TikTok did not unblock %1$s. Try again in a moment.	TikTok 未能解除对 %1$s 的拉黑。请稍后重试.
+TikTok default (open the creator's profile)	TikTok 默认（打开创作者主页）
+TikTok did not block %1$s. Try again in a moment.	TikTok 未能屏蔽 %1$s。请稍后重试.
+TikTok did not unblock %1$s. Try again in a moment.	TikTok 未能取消屏蔽 %1$s。请稍后重试.
 TikTok didn't accept the feedback. Try again later.	TikTok 未接受反馈。请稍后再试.
 TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.	TikTok 尚未向此设置提供可修改对象。请先打开使用此设置的页面，再返回.
 TikTok read it	TikTok 已读取
@@ -1105,7 +1105,7 @@ TikTok refused the follow: %1$s A hidden CAPTCHA may be the cause.	TikTok 拒绝
 TikTok runs as if it were not patched. Your settings stay as they are.	TikTok 将按未修改状态运行；设置不变.
 TikTok's own daily screen-time reminder sends the app to the background instead of waiting to be dismissed. Coming straight back leaves the reminder on screen, so the limit stays reachable. Needs a daily limit set under TikTok's Settings and privacy, under Time and well-being.	TikTok 自带的使用时间提醒出现时，将应用切到后台而不自动关闭提醒；立即返回后提醒仍在。需先在 TikTok“设置和隐私 > 时间与健康”设置每日上限.
 TikTok's own value	TikTok 原始值
-TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.	TikTok 服务器可能会把账号加入某项实验，导致个人资料中的“收藏”标签变空。启用此项可保留该标签及已收藏的视频.
+TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.	TikTok 服务器可能会把账号加入某项实验，导致主页中的“收藏”标签变空。启用此项可保留该标签及已收藏的视频.
 TikTok's size	TikTok 默认大小
 Times you can open the feed anyway	达到上限后可继续打开的次数
 Today has moved on, so there is nothing to put back	日期已经变化，因此没有可恢复的今日数据
@@ -1113,7 +1113,7 @@ Today is back where it was	今天的数据已恢复
 Today started over. Tap again to put the counts back.	今天已重新开始。再次点按可恢复原先计数.
 Today starts again	重新开始今天
 Today's budget is locked. The day starts over at %1$s.	今日使用上限已锁定。将在 %1$s 重置.
-Today's budget is locked. The feed opens again at %1$s. Messages, profiles and search still work.	今日使用上限已锁定。信息流将在 %1$s 重新开放；消息、个人资料和搜索仍可使用.
+Today's budget is locked. The feed opens again at %1$s. Messages, profiles and search still work.	今日使用上限已锁定。信息流将在 %1$s 重新开放；消息、主页和搜索仍可使用.
 Today's budget is locked. This can be changed again at %1$s.	今日使用上限已锁定。可在 %1$s 后再次更改.
 Today: %1$d minute	今天：%1$d 分钟
 Today: %1$d minutes	今天：%1$d 分钟
@@ -1140,21 +1140,21 @@ Turned off 1 gate. Restart TikTok to apply this.	已关闭 1 个功能项。重�
 Two letters, like us, gb or jp.	两个字母，例如 us、gb 或 jp.
 Type	类型
 Unavailable	不可用
-Unblock	解除拉黑
-Unblock this commenter	解除拉黑此评论者
-Unblocked %1$s	已解除拉黑 %1$s
+Unblock	取消屏蔽
+Unblock this commenter	取消屏蔽此评论者
+Unblocked %1$s	已取消屏蔽 %1$s
 Undo	撤销
 Undo clearing seen videos	撤销清除已看视频
 Undo last Lab change	撤销上次实验室更改
 Undo last restore or reset	撤销上次恢复或重置
 Undoing the last change	正在撤销上次更改
 Until you choose here, this sheet follows your choices under Hide share actions.	在这里做出选择前，此面板沿用“隐藏分享操作”设置.
-Up to %1$d speeds from %2$s to %3$s, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.	最多设置 %1$d 个速度，范围 %2$s 到 %3$s，用英文逗号分隔，例如 0.5, 1, 1.5, 2, 2.5, 3。留空使用 TikTok 默认列表。重启 TikTok 后生效.
+Up to %1$d speeds from %2$s to %3$s, separated by commas. Example: 0.5, 1, 1.5, 2, 2.5, 3. Leave empty for TikTok's list. Restart TikTok to apply this.	最多设置 %1$d 个倍速值，范围 %2$s 到 %3$s，用英文逗号分隔，例如 0.5, 1, 1.5, 2, 2.5, 3。留空使用 TikTok 默认列表。重启 TikTok 后生效.
 Use 0 for TikTok's size, or %1$d to %2$d. Applies to the next caption.	设为 0 使用 TikTok 默认大小，或输入 %1$d 到 %2$d。会从下一条字幕开始生效.
 Use Calm feed	使用“清爽信息流”
 Use Save JSON for this large report	此报告较大，请使用“保存 JSON”
 Use TikTok's own hold, pull down and release gesture to keep playing at the hold speed, 2x unless Playback sets another.	使用 TikTok 自带的长按后下拉松手手势锁定倍速；默认 2x，除非“播放”中另有设置.
-Use a default playback speed	使用默认播放速度
+Use a default playback speed	使用默认播放倍速
 Use non-personalized search	使用非个性化搜索
 Use system font	使用系统字体
 Use the preset for the region TikTok reports for your account and its shop too. May affect search.	使用预设同时修改账号和 TikTok Shop 上报的地区，可能影响搜索结果.
@@ -1206,10 +1206,10 @@ Your previous feed setup is back.	之前的信息流配置已恢复.
 Your previous feed setup is back. Restart TikTok to apply every change.	之前的信息流配置已恢复。重启 TikTok 以应用全部更改.
 Zero leaves the way out of the hold there every time, which is what it has always done. Anything else is how many times a day it works, and once they are gone the hold stays up until the day starts over. Ignored while the budget is locked, which takes the way out away entirely.	0 表示每次暂停都可继续；其他数值是每天允许绕过暂停的次数，用完后暂停到下次重置。锁定今日使用上限时不能绕过.
 Zero means no limit. Counts the videos Hushfeed advanced past for you, not the ones you swiped yourself, and starts again when the feed is rebuilt or you change this number.	0 表示无限制。只统计插件自动切换的视频，不统计手动滑动；信息流重建或修改此数值后重新计数.
-Zero shows the notice and leaves the feed alone. Anything else covers the feed for that many minutes once a budget is reached. Messages, profiles and search keep working, and nothing in the feed is thrown away.	0 表示达到每日使用上限后只提醒，不暂停信息流。其他数值表示暂停的分钟数；消息、个人资料和搜索仍可使用，已加载内容不会清除.
-Zero switches this off. A short reminder after that many minutes of watching, and again after the same again. Time on messages, a profile or search does not count, and nothing is shown while the feed is on hold.	0 表示关闭。观看达到设定分钟数后提醒，并按同样间隔重复；消息、个人资料和搜索时间不计，信息流暂停期间不提醒.
+Zero shows the notice and leaves the feed alone. Anything else covers the feed for that many minutes once a budget is reached. Messages, profiles and search keep working, and nothing in the feed is thrown away.	0 表示达到每日使用上限后只提醒，不暂停信息流。其他数值表示暂停的分钟数；消息、主页和搜索仍可使用，已加载内容不会清除.
+Zero switches this off. A short reminder after that many minutes of watching, and again after the same again. Time on messages, a profile or search does not count, and nothing is shown while the feed is on hold.	0 表示关闭。观看达到设定分钟数后提醒，并按同样间隔重复；消息、主页和搜索时间不计，信息流暂停期间不提醒.
 Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.	0 表示关闭。统计信息流中出现的每条视频，达到数量后提醒。与“播放 > 自动连播数量上限”独立，后者只统计插件自动切换的视频.
-Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.	0 表示关闭。只统计信息流播放器实际运行时间；消息、个人资料和搜索不计入.
+Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search does not count.	0 表示关闭。只统计信息流播放器实际运行时间；消息、主页和搜索不计入.
 collapsed	已折叠
 expanded	已展开
 this creator	此创作者
