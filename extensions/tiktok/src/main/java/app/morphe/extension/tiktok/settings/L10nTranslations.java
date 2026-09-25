@@ -14398,7 +14398,7 @@ public final class L10nTranslations {
         table.put("Save the original sound",
                 "保存原声");
         table.put("Save the sound as well",
-                "同时保存声音");
+                "也保存声音");
         table.put("Save videos without sound",
                 "保存无声视频");
         table.put("Save, restore, reset and undo your settings",
@@ -15164,4 +15164,5 @@ public final class L10nTranslations {
         table.put("this creator",
                 "此创作者");
     }
+
 }
