@@ -14805,7 +14805,7 @@ public final class L10nTranslations {
         table.put("The feed is open again",
                 "信息流已恢复");
         table.put("The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.",
-                "返回应用后，信息流会等你点一下再继续播放。消息、个人资料和搜索仍可直接打开.");
+                "返回应用后，信息流会等你点一下再继续播放。消息、主页和搜索仍可直接打开.");
         table.put("The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.",
                 "无法删除 hushfeed-safe-mode 文件。请到 Android/data 下的 TikTok 文件夹手动删除，以重新启用插件.");
         table.put("The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.",
@@ -15164,4 +15164,5 @@ public final class L10nTranslations {
         table.put("this creator",
                 "此创作者");
     }
+
 }
