@@ -13089,7 +13089,7 @@ public final class L10nTranslations {
         table.put("Choose which loaded TikTok bottom navigation tabs should stay visible.",
                 "选择保留哪些 TikTok 已加载的底部导航标签.");
         table.put("Choose which loaded TikTok feed tabs should stay visible. If only For You remains, its redundant header is hidden.",
-                "选择保留哪些 TikTok 已加载的信息流标签。若只保留“为你推荐”，会隐藏多余标题.");
+                "选择保留哪些 TikTok 已加载的信息流标签。若只保留“推荐”，会隐藏多余标题.");
         table.put("Choose which rows and controls appear",
                 "选择显示哪些项目和控件");
         table.put("Clear all",
@@ -13458,7 +13458,7 @@ public final class L10nTranslations {
         table.put("Following",
                 "关注");
         table.put("For You",
-                "为你推荐");
+                "推荐");
         table.put("For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.",
                 "仅适用于 com.deniscerri.ytdl。将链接交给 YTDLnis 时，可选择下载音频或视频.");
         table.put("For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.",
@@ -14625,7 +14625,7 @@ public final class L10nTranslations {
         table.put("Start feature gate recording",
                 "开始记录功能项");
         table.put("Start recording",
-                "开始记录");
+                "开始录制");
         table.put("Start the day at",
                 "每日上限重置时间");
         table.put("Start today over",
@@ -15164,4 +15164,5 @@ public final class L10nTranslations {
         table.put("this creator",
                 "此创作者");
     }
+
 }
