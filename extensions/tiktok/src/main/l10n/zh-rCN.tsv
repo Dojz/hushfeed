@@ -1038,7 +1038,7 @@ The export failed and the partial file couldn't be removed. Delete it from your 
 The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.	达到观看时长上限前 45 秒，信息流会逐渐变暗后进入暂停。需同时设置每日观看时长上限和“达到上限后暂停信息流”.
 The feed does not end. This is a fine time to leave it.	信息流永远刷不完，现在退出正合适.
 The feed is open again	信息流已恢复
-The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.	返回应用后，信息流会等你点一下再继续播放。消息、个人资料和搜索仍可直接打开.
+The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.	返回应用后，信息流会等你点一下再继续播放。消息、主页和搜索仍可直接打开.
 The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.	无法删除 hushfeed-safe-mode 文件。请到 Android/data 下的 TikTok 文件夹手动删除，以重新启用插件.
 The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.	设置两种每日使用上限的重置时间（24 小时制）。默认凌晨 4 点，避免跨过午夜后立即重置.
 The live photo's clip couldn't be saved. Try again.	无法保存实况照片的视频片段。请重试.
