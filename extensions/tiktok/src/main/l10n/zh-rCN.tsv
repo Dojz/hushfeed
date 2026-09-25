@@ -201,7 +201,7 @@ Choose a preset to fill the SIM details.	选择一个预设来填写 SIM 信息.
 Choose a subfolder under %1$s.	请选择 %1$s 下的子文件夹.
 Choose what reaches your feed	选择哪些内容进入你的信息流
 Choose which loaded TikTok bottom navigation tabs should stay visible.	选择保留哪些 TikTok 已加载的底部导航标签.
-Choose which loaded TikTok feed tabs should stay visible. If only For You remains, its redundant header is hidden.	选择保留哪些 TikTok 已加载的信息流标签。若只保留“为你推荐”，会隐藏多余标题.
+Choose which loaded TikTok feed tabs should stay visible. If only For You remains, its redundant header is hidden.	选择保留哪些 TikTok 已加载的信息流标签。若只保留“推荐”，会隐藏多余标题.
 Choose which rows and controls appear	选择显示哪些项目和控件
 Clear all	全部清除
 Clear all Lab data (overrides, switch, recordings)	清除实验室全部数据（覆盖值、总开关、记录）
@@ -381,7 +381,7 @@ Fit the video to the screen	使视频适应屏幕
 Focus	专注
 Follow probe	关注请求诊断\nFollow Probe
 Following	关注
-For You	为你推荐
+For You	推荐
 For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.	仅适用于 com.deniscerri.ytdl。将链接交给 YTDLnis 时，可选择下载音频或视频.
 For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.	仅适用于 com.deniscerri.ytdl。隐藏 YTDLnis 的下载卡片，并在后台开始下载任务.
 Forced %1$d gates of %2$d. The rest do not take a true or false value. Restart TikTok to apply this.	已强制设置 %2$d 个功能项中的 %1$d 个。其余项目不是布尔值。重启 TikTok 后生效.
@@ -951,7 +951,7 @@ Speed while you hold the video	长按视频时的倍速
 Split comment minimum width	分栏评论最小宽度
 Start each new video at your default. A manual choice lasts until the video changes.	每个新视频都以你的默认速度开始。手动选择的速度会持续到切换视频为止.
 Start feature gate recording	开始记录功能项
-Start recording	开始记录
+Start recording	开始录制
 Start the day at	每日上限重置时间
 Start today over	重新开始今天
 Start typing	开始输入关键词
