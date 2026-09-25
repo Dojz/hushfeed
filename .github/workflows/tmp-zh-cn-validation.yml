@@ -50,3 +50,22 @@ jobs:
             :patches:test \
             :extensions:shared:library:lint \
             :extensions:tiktok:lint
+
+      - name: Build Morphe patch bundle
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ./gradlew --no-daemon --dependency-verification=off :patches:buildAndroid
+
+      - name: Upload test bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: hushfeed-zh-cn-test-bundle
+          path: |
+            patches/build/release/*.mpp
+            patches/build/release/bundle.sha256
+          if-no-files-found: error
+          retention-days: 7
