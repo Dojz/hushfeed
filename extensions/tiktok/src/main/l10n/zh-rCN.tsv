@@ -97,7 +97,7 @@ Add a button beside the block control to send feedback about the current video.	
 Add a button that hides the current creator on this phone without blocking them.	添加按钮，仅在本机隐藏当前创作者，不屏蔽账号.
 Add a creator	添加创作者
 Add a search box that filters comments already loaded on this video by text or username. It doesn't search all of TikTok or remove TikTok's suggested-search banner.	添加搜索框，可按文字或用户名筛选当前视频已加载的评论。它不会搜索整个 TikTok，也不会移除 TikTok 的推荐搜索横幅.
-Add a separate button that skips videos using the current sound.	添加独立按钮，跳过使用当前声音的视频.
+Add a separate button that skips videos using the current sound.	添加独立按钮，跳过使用当前音乐的视频.
 Add hidden creator	添加隐藏的创作者
 Added %1$s	已添加 %1$s
 Ads	广告
@@ -110,7 +110,7 @@ All loaded tabs	所有已加载标签页
 Allow Duet and Stitch anyway	始终允许合拍与拼接
 Allow screenshots and Circle to Search	允许截图和“圈选搜索”
 Allow storage for TikTok in Android settings to save profile pictures	请在 Android 设置中授予 TikTok 存储权限以保存头像
-Allow storage for TikTok in Android settings to save sounds	请在 Android 设置中允许 TikTok 使用存储空间，以保存声音
+Allow storage for TikTok in Android settings to save sounds	请在 Android 设置中授予 TikTok 存储权限以保存音乐
 Allow storage for TikTok in Android settings to save stories	请在 Android 设置中授予 TikTok 存储权限以保存限时动态
 Allow storage for TikTok in Android settings to save the live photo's clip	请在 Android 设置中允许 TikTok 使用存储空间，以保存实况照片的视频片段
 Already active	已启用
@@ -165,7 +165,7 @@ Block new feed tabs	阻止新增信息流标签
 Block the creator in one tap. Once TikTok confirms, skip to the next video. A small Unblock button appears at the top left for two seconds. You can also unblock later in TikTok's Privacy > Blocked accounts.	一键屏蔽当前创作者。成功后跳到下一条视频，左上角会显示 2 秒“取消屏蔽”；也可稍后在 TikTok“隐私 > 已屏蔽账号”中取消.
 Block this commenter	屏蔽此评论者
 Block this creator	屏蔽此创作者
-Block this sound	屏蔽此声音
+Block this sound	屏蔽此音乐
 Blocked	已屏蔽
 Blocked %1$s	已屏蔽 %1$s
 Blocked %1$s. Unblock	已屏蔽 %1$s。取消屏蔽
@@ -173,9 +173,9 @@ Blocked and hidden creators	已屏蔽和已隐藏的创作者
 Blocked caption words	已屏蔽的文案关键词
 Blocked comment words	已屏蔽的评论关键词
 Blocked creators	已屏蔽的创作者
-Blocked sound ids	已屏蔽的声音 ID
-Blocked sound names	已屏蔽的声音名称
-Blocked sounds	已屏蔽的声音
+Blocked sound ids	已屏蔽的音乐 ID
+Blocked sound names	已屏蔽的音乐名称
+Blocked sounds	已屏蔽的音乐
 Blocking	正在屏蔽
 Boolean	布尔值
 Bottom tabs to keep	保留的底部标签
@@ -225,10 +225,10 @@ Comma separated country codes, like GB, IE. Videos posted from anywhere else are
 Comma separated country codes. Videos posted from these are hidden, whatever the list above says.	用英文逗号分隔国家/地区代码。无论上方如何设置，这些地区发布的视频都会隐藏.
 Comma separated list of any other Inbox row titles to hide, matched exactly. Use this for anything not listed above.	用英文逗号分隔其他要隐藏的收件箱项目标题，需精确匹配。可用于上方未列出的项目.
 Comma separated names exactly as the share sheet shows them: friends in the Send to row, share targets such as Facebook, and actions such as Create group or Repost. Stable keys such as copy, save and dislike also work before the sheet opens.	按分享面板显示名称填写，并用英文逗号分隔：包括“发送给”中的好友、Facebook 等分享目标，以及“创建群聊”“转发”等操作。copy、save、dislike 等稳定键名也可使用.
-Comma separated sound ids recorded by the player's sound button. Remove one to unblock it.	用英文逗号分隔由播放器声音按钮记录的声音 ID。删除某项即可解除屏蔽.
+Comma separated sound ids recorded by the player's sound button. Remove one to unblock it.	用英文逗号分隔播放器音乐按钮记录的音乐 ID。删除某项即可取消屏蔽.
 Comma separated usernames or display names whose comments are hidden.	用英文逗号分隔用户名或显示名称，这些用户的评论将被隐藏.
 Comma separated words or phrases. Videos whose caption matches are hidden. Case does not matter. Two phrases in quotes can be joined: "a" & "b" needs both, "a" !& "b" needs the first without the second.	用英文逗号分隔关键词或短语。文案匹配的视频会被隐藏，不区分大小写。两个带引号的短语可组合："a" & "b" 表示两者都需出现；"a" !& "b" 表示需要前者且不能有后者.
-Comma separated words to match against a sound's name, like saxophone. Case does not matter.	用英文逗号分隔用于匹配声音名称的关键词，例如 saxophone。不区分大小写.
+Comma separated words to match against a sound's name, like saxophone. Case does not matter.	用英文逗号分隔用于匹配音乐名称的关键词，例如 saxophone。不区分大小写.
 Comma separated. A comment is hidden if its text contains any of them. Case does not matter. Two phrases in quotes can be joined: "a" & "b" needs both, "a" !& "b" needs the first without the second.	用英文逗号分隔。评论文字只要包含任意一项就会被隐藏，不区分大小写。两个带引号的短语可组合："a" & "b" 表示两者都需出现；"a" !& "b" 表示需要前者且不能有后者.
 Comment media filename	评论媒体文件名
 Comments	评论
@@ -280,7 +280,7 @@ Country filters	国家/地区筛选
 Counts under the buttons	按钮下方的数量
 Create	创建
 Creator exceptions	创作者例外名单
-Creators and sounds	创作者与声音
+Creators and sounds	创作者与音乐
 Creators hidden on this phone	本机隐藏的创作者
 Creators you hid from a video. Search the list and remove one at a time.	这里列出从视频中隐藏的创作者，可搜索并逐个移除.
 Current	当前值
@@ -374,7 +374,7 @@ Filter the list	筛选列表
 Filter: %1$s	筛选：%1$s
 Filters, translation and copy options	筛选、翻译与复制选项
 Find a setting by name or description	按名称或说明查找设置
-Find the sound on YouTube Music	在 YouTube Music 中查找此声音
+Find the sound on YouTube Music	在 YouTube Music 中查找此音乐
 First caller	首次调用位置\nFirst caller
 First rejection:	首次拒绝:
 Fit the video to the screen	使视频适应屏幕
@@ -527,10 +527,10 @@ Hide videos marked as using promotional music.	隐藏标记为使用推广音乐
 Hide videos posted as part of a playlist.	隐藏作为播放列表一部分发布的视频.
 Hide videos posted by verified accounts.	隐藏认证账号发布的视频.
 Hide videos that belong to a paid Series.	隐藏属于付费系列的视频.
-Hide videos that use a sound blocked with the player's sound button, or named below.	隐藏使用已屏蔽声音，或声音名称与下方列表匹配的视频.
+Hide videos that use a sound blocked with the player's sound button, or named below.	隐藏使用已屏蔽音乐，或音乐名称与下方列表匹配的视频.
 Hide videos with a lot of views and few comments. Works the same way as views per like. Zero turns it off.	隐藏播放量高但评论少的视频。规则与“每赞播放量”相同，0 表示关闭.
 Hide videos with a lot of views and few likes. Lower numbers are stricter, zero turns the rule off, and one video is kept back if everything the feed just sent would go.	隐藏播放量高但点赞少的视频。数值越低越严格，0 为关闭。若本轮信息流会被全部筛掉，则保留 1 条.
-Hide videos with blocked sounds	隐藏使用已屏蔽声音的视频
+Hide videos with blocked sounds	隐藏使用已屏蔽音乐的视频
 Hide videos you have already seen	隐藏你已经看过的视频
 Hide voting cards and poll results above the comments, including polls that have ended.	隐藏评论上方的投票卡片和投票结果，包括已结束的投票.
 Hiding	正在隐藏
@@ -663,7 +663,7 @@ No recording yet. Start one, use a feature, then return here.	尚无记录。开
 No seen videos recorded yet.	尚未记录已看视频.
 No share actions have been seen yet	尚未检测到分享操作
 No share actions match this search	没有分享操作符合当前搜索
-No sound to block on this video	此视频没有可屏蔽的声音
+No sound to block on this video	此视频没有可屏蔽的音乐
 No suggested accounts to clear	没有可清除的推荐账号
 No video selected. Open a video first.	未选择视频。请先打开一个视频.
 None of the photos could be saved. Try again.	所有图片都保存失败。请重试.
@@ -922,7 +922,7 @@ Show only videos with this many views.	仅显示播放量在此范围内的视�
 Show search in LIVE	在直播中显示搜索
 Show the Not interested button	显示“不感兴趣”按钮
 Show the block button on videos	在视频上显示屏蔽按钮
-Show the block sound button	显示屏蔽声音按钮
+Show the block sound button	显示屏蔽音乐按钮
 Show the country a video was posted from next to the creator's name.	在创作者名称旁显示视频发布国家/地区.
 Show the current spoken caption while the other controls are hidden.	隐藏其他控件时仍显示当前语音字幕.
 Show the handle instead of the name	显示用户名而不是名称
@@ -942,8 +942,8 @@ Skip content warnings	跳过内容警告
 Skipping videos with %1$s	正在跳过带有 %1$s 的视频
 Some Calm feed settings changed. Restore still puts back your earlier setup.	部分“清爽信息流”设置已改变；“恢复”仍会还原之前的配置.
 Something is missing from %1$s. Tap for the whole report.	%1$s 中缺少部分内容。点按可查看完整报告.
-Sound link copied	声音链接复制成功
-Sound saved to %1$s	声音已保存到 %1$s
+Sound link copied	音乐链接复制成功
+Sound saved to %1$s	音乐已保存到 %1$s
 Source	来源
 Speed	倍速
 Speed menu choices	倍速菜单选项
@@ -1086,7 +1086,7 @@ This video has no link to copy	此视频没有可复制的链接
 This video has no link to send, so TikTok's own save runs instead	此视频没有可发送的链接，因此改用 TikTok 自带的保存功能
 This video has no original sound to save	此视频没有可保存的原声
 This video has no sound of its own	此视频没有自己的声音
-This video's sound has no title to look for	此视频的声音没有可供搜索的标题
+This video's sound has no title to look for	此视频的音乐没有可搜索的标题
 Thumbs down blocks the commenter	点踩将屏蔽评论者
 TikTok closed three times within a minute of starting, so Hushfeed paused itself. Your settings stay as they are.	TikTok 启动后 1 分钟内连续关闭 3 次，插件已自动暂停；设置不变.
 TikTok default	TikTok 默认
@@ -1193,7 +1193,7 @@ Write the video's sound beside it as an .m4a. Android 10 and later file audio se
 YTDLnis background mode	YTDLnis 后台下载
 YTDLnis download type	YTDLnis 下载类型
 Yes	是
-YouTube Music couldn't be opened. Open it yourself and search for the sound.	无法打开 YouTube Music。请手动打开后搜索此声音.
+YouTube Music couldn't be opened. Open it yourself and search for the sound.	无法打开 YouTube Music。请手动打开后搜索此音乐.
 YouTube Music isn't installed	未安装 YouTube Music
 Your current settings already match Calm feed.	当前设置已经符合“清爽信息流”配置.
 Your feed	你的信息流
